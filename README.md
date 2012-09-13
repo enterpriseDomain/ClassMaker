@@ -7,11 +7,9 @@ Currently it generates Java and, more specific, Ecore.
 You can use it like that:  
 
     EPackage sourceEPackage = EcoreFactory.eINSTANCE.createEPackage();    
-    // ... fill dynamic EPackage
-      
-    ClassMaker.getDefault().addEPackage(sourceEPackage);
-	
-    EPackage resultingEPackage = ClassMaker.getDefault().getEPackage(
+    // ... fill dynamic EPackage        
+    ClassMaker.getDefault().addEPackage(sourceEPackage);  
+    EPackage resultEPackage = ClassMaker.getDefault().getEPackage(
     				sourceEPackage.getNsURI());    
     // ... use real EPackage  
   
