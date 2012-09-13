@@ -2,7 +2,7 @@ Class-Maker
 ===========
 
 This project is about creating classes in runtime. 
-It is currently Java and, to be more specific, Ecore.
+Currently it generates Java and, more specific, Ecore.
 
 You can use it like that:  
 
@@ -13,7 +13,7 @@ You can use it like that:
 	
     EPackage resultingEPackage = ClassMaker.getDefault().getEPackage(
     				sourceEPackage.getNsURI());    
-    // ... use the real EPackage  
+    // ... use real EPackage  
   
 That's all for now!
 
