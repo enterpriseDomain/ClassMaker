@@ -1,7 +1,7 @@
 Class-Maker
 ===========
 
-This project is about creating classes in runtime. 
+This project is about creating classes in runtime.  
 Currently it generates Java and, more specific, Ecore.
 
 You can use it like that:  
