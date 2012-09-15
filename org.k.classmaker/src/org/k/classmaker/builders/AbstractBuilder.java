@@ -9,12 +9,12 @@ import org.k.classmaker.NameLookup;
 
 public abstract class AbstractBuilder extends IncrementalProjectBuilder {
 
-	private NameLookup names = ClassMaker.getDefault().names();
+	private NameLookup names = ClassMaker.getInstance().names();
 	
 	protected final ResourceSet resourceSet = new ResourceSetImpl();;
 
 	protected Bundle getBundle(String projectName) {
-		return ClassMaker.getDefault().getBundle(projectName);
+		return ClassMaker.getInstance().getBundle(projectName);
 	}
 
 	protected NameLookup names() {

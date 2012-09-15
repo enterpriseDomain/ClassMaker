@@ -22,12 +22,12 @@ public class GeneratorBuilder extends AbstractBuilder {
 			IProgressMonitor monitor) throws CoreException {
 		if (kind != FULL_BUILD)
 			return null;
-		IProgressMonitor oldMonitor = ClassMaker.getDefault().monitor();
-		ClassMaker.getDefault().setMonitor(monitor);
+		IProgressMonitor oldMonitor = ClassMaker.getInstance().monitor();
+		ClassMaker.getInstance().setMonitor(monitor);
 		Bundle bundle = getBundle(getProject().getName());
 		generator.setResourceSet(resourceSet);
 		generator.generate(bundle, getProject(), getRule(kind, args));
-		ClassMaker.getDefault().setMonitor(oldMonitor);
+		ClassMaker.getInstance().setMonitor(oldMonitor);
 		return null;
 	}
 

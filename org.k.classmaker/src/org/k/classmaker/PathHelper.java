@@ -5,7 +5,7 @@ import org.eclipse.core.runtime.IPath;
 
 public class PathHelper {
 
-	private static NameLookup naming = ClassMaker.getDefault().names();
+	private static NameLookup naming = ClassMaker.getInstance().names();
 
 	public static IPath getResourcePath(IProject project) {
 		String name = naming.getName(project.getName());

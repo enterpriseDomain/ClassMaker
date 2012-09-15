@@ -53,9 +53,9 @@ public class ExportingBuilder extends AbstractBuilder {
 			IProgressMonitor monitor) throws CoreException {
 		if (kind != FULL_BUILD)
 			return null;
-		IProgressMonitor oldMonitor = ClassMaker.getDefault().monitor();
-		ClassMaker.getDefault().setMonitor(monitor);
-		exporter.setDestination(ClassMaker.getDefault().getStateLocation());
+		IProgressMonitor oldMonitor = ClassMaker.getInstance().monitor();
+		ClassMaker.getInstance().setMonitor(monitor);
+		exporter.setDestination(ClassMaker.getInstance().getStateLocation());
 		if (exporter.getQualifier() == null) {
 			Version version = names().getVersion(getProject().getName());
 			exporter.setQualifier(version.getQualifier());
@@ -71,7 +71,7 @@ public class ExportingBuilder extends AbstractBuilder {
 		} catch (InterruptedException e) {
 			return null;
 		}
-		ClassMaker.getDefault().setMonitor(oldMonitor);
+		ClassMaker.getInstance().setMonitor(oldMonitor);
 		return null;
 	}
 }

@@ -23,7 +23,7 @@ public class ClassMaker extends Plugin {
 
 	private static ClassMaker instance;
 
-	public static ClassMaker getDefault() {
+	public static ClassMaker getInstance() {
 		return instance;
 	}
 

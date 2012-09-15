@@ -146,10 +146,10 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 
 	protected void make() {
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
-		NameLookup names = ClassMaker.getDefault().names();
+		NameLookup names = ClassMaker.getInstance().names();
 		String projectName = names.getProjectName(getName());
 		IProject project = workspace.getRoot().getProject(projectName);
-		IProgressMonitor monitor = ClassMaker.getDefault().monitor();
+		IProgressMonitor monitor = ClassMaker.getInstance().monitor();
 		try {
 			project.create(monitor);
 			project.open(monitor);
@@ -164,9 +164,9 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 	}
 
 	private void load(IProject project, IProgressMonitor monitor) {
-		Version version = ClassMaker.getDefault().names()
+		Version version = ClassMaker.getInstance().names()
 				.getVersion(project.getName());
-		IPath path = ClassMaker.getDefault().getStateLocation()
+		IPath path = ClassMaker.getInstance().getStateLocation()
 				.append("plugins/")
 				.append(project.getName() + '_' + version.full())
 				.addFileExtension("jar");

@@ -47,7 +47,7 @@ public class PDEExporter implements Exporter {
 		AntRunner runner = new AntRunner();
 		runner.setBuildFileLocation(scriptPath.toString());
 		runner.addBuildLogger("org.apache.tools.ant.DefaultLogger");
-		IProgressMonitor monitor = ClassMaker.getDefault().monitor();
+		IProgressMonitor monitor = ClassMaker.getInstance().monitor();
 		runner.run(monitor);
 	}
 

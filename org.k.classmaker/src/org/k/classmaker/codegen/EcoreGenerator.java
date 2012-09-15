@@ -33,7 +33,7 @@ public class EcoreGenerator implements org.k.classmaker.codegen.Generator {
 
 	public static final String GENMODEL_EXT = "genmodel";
 
-	protected NameLookup names = ClassMaker.getDefault().names();
+	protected NameLookup names = ClassMaker.getInstance().names();
 
 	private GenModelSetupRunnable genModelSetupRunnable;
 
@@ -115,7 +115,7 @@ public class EcoreGenerator implements org.k.classmaker.codegen.Generator {
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		final IPath path = root.getRawLocation().append(modelPath);
 		final org.eclipse.emf.codegen.ecore.Generator generator = new Generator();
-		final IProgressMonitor monitor = ClassMaker.getDefault().monitor();
+		final IProgressMonitor monitor = ClassMaker.getInstance().monitor();
 		IPath genModelPath = getGenModelResourcePath(modelPath);
 		project.getWorkspace().run(new IWorkspaceRunnable() {
 
@@ -150,7 +150,7 @@ public class EcoreGenerator implements org.k.classmaker.codegen.Generator {
 
 	private IPath ensureModelResourcePath(IProject project, String name)
 			throws CoreException {
-		IProgressMonitor monitor = ClassMaker.getDefault().monitor();
+		IProgressMonitor monitor = ClassMaker.getInstance().monitor();
 		if (!project.exists())
 			throw new CoreException(
 					new Status(

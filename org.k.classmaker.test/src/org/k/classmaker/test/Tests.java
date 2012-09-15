@@ -48,10 +48,10 @@ public class Tests {
 		clazz.getEOperations().add(op);
 		ePackage.getEClassifiers().add(clazz);
 
-		ClassMaker.getDefault().setMonitor(
+		ClassMaker.getInstance().setMonitor(
 				new StreamProgressMonitor(System.out));
-		ClassMaker.getDefault().addEPackage(ePackage);
-		EPackage thePackage = ClassMaker.getDefault().getEPackage(
+		ClassMaker.getInstance().addEPackage(ePackage);
+		EPackage thePackage = ClassMaker.getInstance().getEPackage(
 				ePackage.getNsURI());
 		assertNotNull(thePackage);
 		assertEquals(ePackage.getName(), thePackage.getName());
