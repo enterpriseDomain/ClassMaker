@@ -2,9 +2,9 @@ Class-Maker
 ===========
 
 This project is about creating classes in runtime.  
-Currently it generates Java and, more specific, Ecore.
+It generates Java, Ecore metamodel-based classes with operations capable to be invoked.
 
-You can use it like that:  
+You can use it like:  
 
     EPackage sourceEPackage = EcoreFactory.eINSTANCE.createEPackage();    
     // ... fill dynamic EPackage        
@@ -13,7 +13,8 @@ You can use it like that:
     				sourceEPackage.getNsURI());    
     // ... use real EPackage  
   
-More elaborated sample [here](https://github.com/kirillzotkin/Class-Maker/blob/master/org.k.classmaker.test/src/org/k/classmaker/test/Tests.java).
+[Here](https://github.com/kirillzotkin/Class-Maker/blob/master/org.k.classmaker.test/src/org/k/classmaker/test/Tests.java)
+is the more elaborated sample.
 
 
 Contributions are welcome!
