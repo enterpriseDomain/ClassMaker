@@ -13,6 +13,7 @@ You can use it like that:
     				sourceEPackage.getNsURI());    
     // ... use real EPackage  
   
-That's all for now!
+More elaborated sample [here](https://github.com/kirillzotkin/Class-Maker/blob/master/org.k.classmaker.test/src/org/k/classmaker/test/Tests.java).
 
-Contributors are welcome!
+
+Contributions are welcome!
