@@ -13,7 +13,7 @@ You can use it like:
     				sourceEPackage.getNsURI());    
     // ... use real EPackage  
   
-[Here](https://github.com/kirillzotkin/Class-Maker/blob/master/org.k.classmaker.test/src/org/k/classmaker/test/Tests.java)
+[Here](/kirillzotkin/Class-Maker/blob/master/org.k.classmaker.test/src/org/k/classmaker/test/Tests.java)
 is the more elaborated sample.
 
 
