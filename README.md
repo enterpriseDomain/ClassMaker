@@ -8,8 +8,8 @@ You can use it like:
 
     EPackage sourceEPackage = EcoreFactory.eINSTANCE.createEPackage();    
     // ... fill dynamic EPackage        
-    ClassMaker.getDefault().addEPackage(sourceEPackage);  
-    EPackage resultEPackage = ClassMaker.getDefault().getEPackage(
+    ClassMaker.getInstance().addEPackage(sourceEPackage);  
+    EPackage resultEPackage = ClassMaker.getInstance().getEPackage(
     				sourceEPackage.getNsURI());    
     // ... use real EPackage  
   
