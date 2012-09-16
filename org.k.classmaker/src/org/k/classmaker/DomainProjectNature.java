@@ -5,6 +5,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IProjectNature;
 import org.eclipse.core.runtime.CoreException;
+import org.k.classmaker.builders.BundleBuilder;
 import org.k.classmaker.builders.ExportingBuilder;
 import org.k.classmaker.builders.GeneratorBuilder;
 import org.k.classmaker.builders.ResourceBuilder;
@@ -15,6 +16,7 @@ public class DomainProjectNature implements IProjectNature {
 
 	@Override
 	public void configure() throws CoreException {
+		addToBuildSpec(BundleBuilder.BUILDER_ID);
 		addToBuildSpec(ExportingBuilder.BUILDER_ID);
 		addToBuildSpec(GeneratorBuilder.BUILDER_ID);
 		addToBuildSpec(ResourceBuilder.BUILDER_ID);
@@ -25,6 +27,7 @@ public class DomainProjectNature implements IProjectNature {
 		removeFromBuildSpec(ResourceBuilder.BUILDER_ID);
 		removeFromBuildSpec(GeneratorBuilder.BUILDER_ID);
 		removeFromBuildSpec(ExportingBuilder.BUILDER_ID);
+		removeFromBuildSpec(BundleBuilder.BUILDER_ID);
 	}
 
 	@Override

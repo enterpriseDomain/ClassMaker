@@ -51,5 +51,15 @@
                class="org.k.classmaker.builders.ExportingBuilder">
          </run></builder>
    </extension>
+   <extension
+         id="bundleBuilder"
+         name="Bundle Load Builder"
+         point="org.eclipse.core.resources.builders">
+      <builder>
+         <run
+               class="org.k.classmaker.builders.BundleBuilder">
+         </run>
+      </builder>
+   </extension>
 
 </plugin>

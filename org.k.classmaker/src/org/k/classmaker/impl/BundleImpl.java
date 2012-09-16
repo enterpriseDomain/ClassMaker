@@ -2,22 +2,17 @@
  */
 package org.k.classmaker.impl;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -27,12 +22,6 @@ import org.k.classmaker.Bundle;
 import org.k.classmaker.ClassMaker;
 import org.k.classmaker.ClassMakerPackage;
 import org.k.classmaker.NameLookup;
-import org.k.classmaker.Version;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.BundleException;
-import org.osgi.framework.FrameworkListener;
-import org.osgi.framework.FrameworkUtil;
-import org.osgi.framework.wiring.FrameworkWiring;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -155,54 +144,11 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 			project.open(monitor);
 			addNature(project, ClassMaker.NATURE_ID, monitor);
 			project.build(IncrementalProjectBuilder.FULL_BUILD, monitor);
-			load(project, monitor);
 		} catch (CoreException e) {
 			// if (e.getStatus().getSeverity() == IStatus.ERROR)
 			e.printStackTrace();
 		}
 		setNeedRefresh(false);
-	}
-
-	private void load(IProject project, IProgressMonitor monitor) {
-		Version version = ClassMaker.getInstance().names()
-				.getVersion(project.getName());
-		IPath path = ClassMaker.getInstance().getStateLocation()
-				.append("plugins/")
-				.append(project.getName() + '_' + version.full())
-				.addFileExtension("jar");
-		try {
-			BundleContext context = FrameworkUtil.getBundle(this.getClass())
-					.getBundleContext();
-			org.osgi.framework.Bundle osgiBundle = context.installBundle(URI
-					.createFileURI(path.toString()).toString());
-			Collection<org.osgi.framework.Bundle> bundles = new ArrayList<org.osgi.framework.Bundle>();
-			FrameworkWiring frameworkWiring = context.getBundle(0).adapt(
-					FrameworkWiring.class);
-			frameworkWiring.refreshBundles(bundles, new FrameworkListener[0]);
-			if (frameworkWiring.resolveBundles(bundles)) {
-				String packageClassName = getDynamicEPackage().getName() + "."
-						+ getName() + "Package";
-
-				Class<?> packageClass = osgiBundle.loadClass(packageClassName);
-				EPackage ePackage = (EPackage) packageClass.getField(
-						"eINSTANCE").get(packageClass);
-
-				setEPackage(ePackage);
-			}
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (NoSuchFieldException e) {
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (BundleException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-
 	}
 
 	/**
