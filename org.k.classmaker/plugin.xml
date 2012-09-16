@@ -52,12 +52,12 @@
          </run></builder>
    </extension>
    <extension
-         id="bundleBuilder"
+         id="loadBuilder"
          name="Bundle Load Builder"
          point="org.eclipse.core.resources.builders">
       <builder>
          <run
-               class="org.k.classmaker.builders.BundleBuilder">
+               class="org.k.classmaker.builders.LoadBuilder">
          </run>
       </builder>
    </extension>

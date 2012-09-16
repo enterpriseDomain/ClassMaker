@@ -22,10 +22,10 @@ import org.osgi.framework.FrameworkListener;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.wiring.FrameworkWiring;
 
-public class BundleBuilder extends AbstractBuilder {
+public class LoadBuilder extends AbstractBuilder {
 
 	public static final String BUILDER_ID = ClassMaker.PLUGIN_ID + '.'
-			+ "bundleBuilder";
+			+ "loadBuilder";
 
 	@Override
 	protected IProject[] build(int kind, Map<String, String> args,
