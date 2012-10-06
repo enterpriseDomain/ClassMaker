@@ -20,10 +20,10 @@ You can use it like this:
     eClass.getEStructuralFeatures().add(attr);
     sourceEPackage.getEClassifiers().add(eClass);
     
-    // Then, provide it to ClasssMaker,
+    // Then, provide it to ClasssMaker and wait,
     ClassMaker.getInstance().addEPackage(sourceEPackage);
 
-    // get the real produced EPacakge
+    // get the real produced EPackage
     EPackage nativeEPackage = ClassMaker.getInstance().getEPackage(
     	            sourceEPackage.getNsURI());
 
