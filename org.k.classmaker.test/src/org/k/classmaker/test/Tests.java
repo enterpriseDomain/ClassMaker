@@ -22,42 +22,56 @@ import org.k.classmaker.ClassMaker;
 public class Tests {
 
 	@Test
-	public void createClass() {
+	public void theClassCreation() {
 		EcoreFactory ecoreFactory = EcoreFactory.eINSTANCE;
 		EPackage ePackage = ecoreFactory.createEPackage();
-		ePackage.setName("reader");
-		ePackage.setNsPrefix("reader");
-		ePackage.setNsURI("http://reader/1.0");
-		EClass clazz = ecoreFactory.createEClass();
-		clazz.setName("Book");
+		ePackage.setName("bookReader");
+		ePackage.setNsPrefix("bookreader");
+		ePackage.setNsURI("http://bookreader/1.0");
+		EClass eClass = ecoreFactory.createEClass();
+		eClass.setName("Book");
+		EAttribute pagesAttr = ecoreFactory.createEAttribute();
+		pagesAttr.setName("pages");
+		pagesAttr.setEType(EcorePackage.Literals.EINT);
+		eClass.getEStructuralFeatures().add(pagesAttr);
+
 		EAttribute attr = ecoreFactory.createEAttribute();
 		attr.setName("pagesRead");
 		attr.setEType(EcorePackage.Literals.EINT);
-		clazz.getEStructuralFeatures().add(attr);
+		eClass.getEStructuralFeatures().add(attr);
 		EOperation op = ecoreFactory.createEOperation();
 		op.setName("read");
 		EParameter p = ecoreFactory.createEParameter();
 		p.setEType(EcorePackage.Literals.EINT);
-		p.setName("pages");
+		p.setName("pagesIncrement");
 		op.getEParameters().add(p);
 		EAnnotation an = ecoreFactory.createEAnnotation();
 		an.setSource("http://www.eclipse.org/emf/2002/GenModel");
 		an.getDetails().put("body",
-				"this.setPagesRead(this.getPagesRead() + pages);");
+				"setPagesRead(getPagesRead() + pagesIncrement);");
 		op.getEAnnotations().add(an);
-		clazz.getEOperations().add(op);
-		ePackage.getEClassifiers().add(clazz);
+		eClass.getEOperations().add(op);
+		ePackage.getEClassifiers().add(eClass);
 
 		ClassMaker.getInstance().setMonitor(
 				new StreamProgressMonitor(System.out));
 		ClassMaker.getInstance().addEPackage(ePackage);
-		EPackage thePackage = ClassMaker.getInstance().getEPackage(
+
+		EPackage nativePackage = ClassMaker.getInstance().getEPackage(
 				ePackage.getNsURI());
-		assertNotNull(thePackage);
-		assertEquals(ePackage.getName(), thePackage.getName());
-		EClass theClass = (EClass) thePackage.getEClassifier(clazz.getName());
-		EObject theObject = thePackage.getEFactoryInstance().create(theClass);
-		assertEquals(clazz.getName(), theObject.getClass().getSimpleName());
+		assertNotNull(nativePackage);
+		assertEquals(ePackage.getName(), nativePackage.getName());
+		EClass theClass = (EClass) nativePackage.getEClassifier(eClass
+				.getName());
+		EObject theObject = nativePackage.getEFactoryInstance()
+				.create(theClass);
+		assertEquals(eClass.getName(), theObject.getClass().getSimpleName());
+
+		int pages = 500;
+		pagesAttr = (EAttribute) theClass.getEStructuralFeature(pagesAttr.getName());
+		theObject.eSet(pagesAttr, pages);
+		assertEquals(pages, theObject.eGet(pagesAttr));
+
 		int pagesRead = 6;
 		try {
 			Method objectMethod = theObject.getClass().getMethod(op.getName(),
@@ -65,11 +79,11 @@ public class Tests {
 			objectMethod.invoke(theObject, pagesRead);
 
 		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
+			fail(e.getLocalizedMessage());
 		}
-		EStructuralFeature state = (EStructuralFeature) theClass
-				.getEStructuralFeature(attr.getName());
+		EStructuralFeature state = theClass.getEStructuralFeature(attr
+				.getName());
 		assertEquals(pagesRead, theObject.eGet(state));
+
 	}
 }
