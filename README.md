@@ -1,7 +1,7 @@
 Class-Maker
 ===========
 
-This project is all about creating the classes in runtime.  
+This project is all about creating classes in runtime.  
 It generates Java, Ecore metamodel-based classes, with operations capable to be invoked.
 
 
