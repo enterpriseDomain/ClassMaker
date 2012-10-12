@@ -5,9 +5,9 @@ This project is all about creating classes in runtime.
 It generates Java, Ecore metamodel-based classes, with operations capable to be invoked.
 
 
-You can use it like this:  
+You can use it like:  
 
-    // First, fill the source dynamic EPackage (or, here you may get the existing one)
+    // Fill the sample dynamic EPackage (or, get the existing one)
     EcoreFactory ecoreFactory = EcoreFactory.eINSTANCE;
     EPackage sourceEPackage = ecoreFactory.createEPackage();
     // ... 
@@ -20,14 +20,14 @@ You can use it like this:
     eClass.getEStructuralFeatures().add(attr);
     sourceEPackage.getEClassifiers().add(eClass);
     
-    // Then, provide it to ClasssMaker and wait,
+    // Provide it to ClassMaker,
     ClassMaker.getInstance().addEPackage(sourceEPackage);
-
-    // get the real produced EPackage
+    // wait...
+    // Now you've got the real produced EPackage...
     EPackage nativeEPackage = ClassMaker.getInstance().getEPackage(
     	            sourceEPackage.getNsURI());
 
-    // ...and use it!
+    // ... to use.
     EClass theClass = (EClass) nativeEPackage.getEClassifier(eClass.getName());
     EObject theObject = nativeEPackage.getEFactoryInstance().create(theClass);
     assertEquals(eClass.getName(), theObject.getClass().getSimpleName());
@@ -38,7 +38,7 @@ You can use it like this:
     theObject.eSet(pagesAttr, pages);
     assertEquals(pages, theObject.eGet(pagesAttr));  
   
-Example with the operation call is [here](/kirillzotkin/Class-Maker/blob/master/org.k.classmaker.test/src/org/k/classmaker/test/Tests.java).
+The operation call sample [is here](/kirillzotkin/Class-Maker/blob/master/org.k.classmaker.test/src/org/k/classmaker/test/Tests.java).
 
 
-All contributors are welcome!
+You're welcome to use!
