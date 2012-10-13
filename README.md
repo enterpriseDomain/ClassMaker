@@ -38,7 +38,7 @@ You can use it like:
     theObject.eSet(pagesAttr, pages);
     assertEquals(pages, theObject.eGet(pagesAttr));  
   
-The operation call sample [is here](/kirillzotkin/Class-Maker/blob/master/org.k.classmaker.test/src/org/k/classmaker/test/Tests.java).
+The operation invocation example [is here](/kirillzotkin/Class-Maker/blob/master/org.k.classmaker.test/src/org/k/classmaker/test/Tests.java).
 
 
-You're welcome to use and contribute!
+You're welcome to use it!
