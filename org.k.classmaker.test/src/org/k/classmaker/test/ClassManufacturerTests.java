@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.junit.Test;
 import org.k.classmaker.ClassMaker;
 
-public class Tests {
+public class ClassManufacturerTests {
 
 	@Test
 	public void theClassCreation() {
@@ -30,10 +30,10 @@ public class Tests {
 		ePackage.setNsURI("http://bookreader/1.0");
 		EClass eClass = ecoreFactory.createEClass();
 		eClass.setName("Book");
-		EAttribute pagesAttr = ecoreFactory.createEAttribute();
-		pagesAttr.setName("pages");
-		pagesAttr.setEType(EcorePackage.Literals.EINT);
-		eClass.getEStructuralFeatures().add(pagesAttr);
+		EAttribute pageAttr = ecoreFactory.createEAttribute();
+		pageAttr.setName("pages");
+		pageAttr.setEType(EcorePackage.Literals.EINT);
+		eClass.getEStructuralFeatures().add(pageAttr);
 
 		EAttribute attr = ecoreFactory.createEAttribute();
 		attr.setName("pagesRead");
@@ -68,22 +68,22 @@ public class Tests {
 		assertEquals(eClass.getName(), theObject.getClass().getSimpleName());
 
 		int pages = 500;
-		pagesAttr = (EAttribute) theClass.getEStructuralFeature(pagesAttr.getName());
-		theObject.eSet(pagesAttr, pages);
-		assertEquals(pages, theObject.eGet(pagesAttr));
+		pageAttr = (EAttribute) theClass.getEStructuralFeature(pageAttr.getName());
+		theObject.eSet(pageAttr, pages);
+		assertEquals(pages, theObject.eGet(pageAttr));
 
-		int pagesRead = 6;
+		int pagesReadCount = 9;
 		try {
 			Method objectMethod = theObject.getClass().getMethod(op.getName(),
 					int.class);
-			objectMethod.invoke(theObject, pagesRead);
+			objectMethod.invoke(theObject, pagesReadCount);
 
 		} catch (Exception e) {
 			fail(e.getLocalizedMessage());
 		}
 		EStructuralFeature state = theClass.getEStructuralFeature(attr
 				.getName());
-		assertEquals(pagesRead, theObject.eGet(state));
+		assertEquals(pagesReadCount, theObject.eGet(state));
 
 	}
 }
