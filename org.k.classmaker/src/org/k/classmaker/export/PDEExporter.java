@@ -48,7 +48,7 @@ public class PDEExporter implements Exporter {
 		runner.addBuildLogger("org.apache.tools.ant.DefaultLogger");
 		IProgressMonitor monitor = ClassMaker.getInstance().monitor();
 		runner.run(monitor);
-		monitor.subTask("It's not now, please wait a few seconds.");
+		monitor.subTask("Please wait a few seconds more...");
 		monitor.done();
 	}
 
