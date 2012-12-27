@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import org.eclipse.emf.ecore.EAnnotation;
@@ -36,19 +37,19 @@ public class ClassManufacturerTests {
 		eClass.getEStructuralFeatures().add(pageAttr);
 
 		EAttribute attr = ecoreFactory.createEAttribute();
-		attr.setName("pagesRead");
+		attr.setName("readPages");
 		attr.setEType(EcorePackage.Literals.EINT);
 		eClass.getEStructuralFeatures().add(attr);
 		EOperation op = ecoreFactory.createEOperation();
 		op.setName("read");
 		EParameter p = ecoreFactory.createEParameter();
 		p.setEType(EcorePackage.Literals.EINT);
-		p.setName("pagesIncrement");
+		p.setName("pagesAugment");
 		op.getEParameters().add(p);
 		EAnnotation an = ecoreFactory.createEAnnotation();
 		an.setSource("http://www.eclipse.org/emf/2002/GenModel");
 		an.getDetails().put("body",
-				"setPagesRead(getPagesRead() + pagesIncrement);");
+				"setReadPages(getReadPages() + pagesAugment);");
 		op.getEAnnotations().add(an);
 		eClass.getEOperations().add(op);
 		ePackage.getEClassifiers().add(eClass);
@@ -68,22 +69,30 @@ public class ClassManufacturerTests {
 		assertEquals(eClass.getName(), theObject.getClass().getSimpleName());
 
 		int pages = 500;
-		pageAttr = (EAttribute) theClass.getEStructuralFeature(pageAttr.getName());
+		pageAttr = (EAttribute) theClass.getEStructuralFeature(pageAttr
+				.getName());
 		theObject.eSet(pageAttr, pages);
 		assertEquals(pages, theObject.eGet(pageAttr));
 
-		int pagesReadCount = 9;
+		int readPagesCount = 9;
 		try {
 			Method objectMethod = theObject.getClass().getMethod(op.getName(),
 					int.class);
-			objectMethod.invoke(theObject, pagesReadCount);
+			objectMethod.invoke(theObject, readPagesCount);
 
-		} catch (Exception e) {
+		} catch (NoSuchMethodException e) {
 			fail(e.getLocalizedMessage());
+		} catch (IllegalAccessException e) {
+			fail(e.getLocalizedMessage());
+		} catch (IllegalArgumentException e) {
+			fail(e.getLocalizedMessage());
+		} catch (InvocationTargetException e) {
+			fail(e.getTargetException().getLocalizedMessage());
 		}
+
 		EStructuralFeature state = theClass.getEStructuralFeature(attr
 				.getName());
-		assertEquals(pagesReadCount, theObject.eGet(state));
+		assertEquals(readPagesCount, theObject.eGet(state));
 
 	}
 }

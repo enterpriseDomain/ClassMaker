@@ -1,13 +1,13 @@
 Class-Manufacturer
 ============
 
-This project is about creating the classes in runtime.  
-It generates the Java classes with invocable operations, based on Ecore metamodel.
+This library is for creating the classes at runtime.  
+It produces the generated Java classes based on metamodel (defined in Ecore) with invocable operations.
 
 
 Usage:  
 
-    // Fill the source dynamic EPackage (or get the existing)
+    // Build the model dynamic EPackage (or acquire an existing one)
     EcoreFactory ecoreFactory = EcoreFactory.eINSTANCE;
     EPackage sourceEPackage = ecoreFactory.createEPackage();
     // ... 
@@ -22,11 +22,12 @@ Usage:
     
     // Provide it to ClassManufacturer
     ClassMaker.getInstance().addEPackage(sourceEPackage);
-    // And you've got real produced EPackage
+
+    // Get the produced generated EPackage
     EPackage nativeEPackage = ClassMaker.getInstance().getEPackage(
     	            sourceEPackage.getNsURI());
 
-    // Use
+    // Use it
     EClass theClass = (EClass) nativeEPackage.getEClassifier(eClass.getName());
     EObject theObject = nativeEPackage.getEFactoryInstance().create(theClass);
     assertEquals(eClass.getName(), theObject.getClass().getSimpleName());
@@ -37,6 +38,6 @@ Usage:
     theObject.eSet(pagesAttr, pages);
     assertEquals(pages, theObject.eGet(pagesAttr));  
   
-[Operation invocation example](/kirillzotkin/Class-Manufacturer/blob/master/org.k.classmaker.test/src/org/k/classmaker/test/ClassManufacturerTests.java).
+[Example with operation invocation](/kirillzotkin/Class-Manufacturer/blob/master/org.k.classmaker.test/src/org/k/classmaker/test/ClassManufacturerTests.java).
 
 
