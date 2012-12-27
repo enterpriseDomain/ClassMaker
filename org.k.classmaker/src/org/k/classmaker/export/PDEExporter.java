@@ -14,15 +14,14 @@ import org.eclipse.core.runtime.Status;
 import org.k.classmaker.ClassMaker;
 
 public class PDEExporter implements Exporter {
-	
+
 	private IPath scriptPath;
 
 	private IPath destination;
 
 	private String qualifier;
 
-	private void createBuildFile(String projectName)
-			throws CoreException {
+	private void createBuildFile(String projectName) throws CoreException {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
 		sb.append("<project default=\"plugin_export\" name=\"build\">\n");
@@ -49,6 +48,8 @@ public class PDEExporter implements Exporter {
 		runner.addBuildLogger("org.apache.tools.ant.DefaultLogger");
 		IProgressMonitor monitor = ClassMaker.getInstance().monitor();
 		runner.run(monitor);
+		monitor.subTask("It's not now, please wait a few seconds.");
+		monitor.done();
 	}
 
 	@Override
@@ -82,13 +83,16 @@ public class PDEExporter implements Exporter {
 			writer.append(contents);
 			writer.flush();
 		} catch (IOException e) {
-			throw new CoreException(new Status(IStatus.ERROR, ClassMaker.PLUGIN_ID, 0, e.getLocalizedMessage(),e));
+			throw new CoreException(new Status(IStatus.ERROR,
+					ClassMaker.PLUGIN_ID, 0, e.getLocalizedMessage(), e));
 		} finally {
 			if (writer != null)
 				try {
 					writer.close();
 				} catch (IOException e) {
-					throw new CoreException(new Status(IStatus.ERROR, ClassMaker.PLUGIN_ID, 0, e.getLocalizedMessage(),e));
+					throw new CoreException(
+							new Status(IStatus.ERROR, ClassMaker.PLUGIN_ID, 0,
+									e.getLocalizedMessage(), e));
 				}
 		}
 
