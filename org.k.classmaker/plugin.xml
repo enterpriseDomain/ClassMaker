@@ -9,7 +9,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://classmaker/0.1"
-            class="org.k.classmaker.ClassMakerPackage"
+            class="org.classmaker.ClassMakerPackage"
             genModel="model/ClassMaker.genmodel"/>
    </extension>
    <extension
@@ -18,7 +18,7 @@
          point="org.eclipse.core.resources.natures">
       <runtime>
          <run
-               class="org.k.classmaker.DomainProjectNature">
+               class="org.classmaker.DomainProjectNature">
          </run>
       </runtime>
    </extension>
@@ -28,7 +28,7 @@
          point="org.eclipse.core.resources.builders">
       <builder>
          <run
-               class="org.k.classmaker.builders.ResourceBuilder">
+               class="org.classmaker.builders.ResourceBuilder">
          </run>
       </builder>
    </extension>
@@ -38,7 +38,7 @@
          point="org.eclipse.core.resources.builders">
       <builder>
          <run
-               class="org.k.classmaker.builders.GeneratorBuilder">
+               class="org.classmaker.builders.GeneratorBuilder">
          </run>
       </builder>
    </extension>
@@ -48,7 +48,7 @@
          point="org.eclipse.core.resources.builders">
       <builder>
          <run
-               class="org.k.classmaker.builders.ExportingBuilder">
+               class="org.classmaker.builders.ExportingBuilder">
          </run></builder>
    </extension>
    <extension
@@ -57,7 +57,7 @@
          point="org.eclipse.core.resources.builders">
       <builder>
          <run
-               class="org.k.classmaker.builders.LoadBuilder">
+               class="org.classmaker.builders.LoadBuilder">
          </run>
       </builder>
    </extension>
