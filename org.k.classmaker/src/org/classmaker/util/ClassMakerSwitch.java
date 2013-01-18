@@ -72,6 +72,12 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ClassMakerPackage.MODEL_WORKSPACE: {
+				ModelWorkspace modelWorkspace = (ModelWorkspace)theEObject;
+				T result = caseModelWorkspace(modelWorkspace);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -88,6 +94,21 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseBundle(Bundle object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Model Workspace</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Model Workspace</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseModelWorkspace(ModelWorkspace object) {
 		return null;
 	}
 

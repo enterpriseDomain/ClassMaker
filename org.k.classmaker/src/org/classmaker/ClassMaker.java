@@ -11,7 +11,7 @@ import org.osgi.framework.BundleContext;
 
 public class ClassMaker extends Plugin {
 
-	public static final String PLUGIN_ID = "org.k.classmaker";
+	public static final String PLUGIN_ID = "org.classmaker";
 
 	public static final String NATURE_ID = PLUGIN_ID + '.' + "domainNature";
 
@@ -68,10 +68,17 @@ public class ClassMaker extends Plugin {
 
 	protected Map<EPackage, Bundle> models = new HashMap<EPackage, Bundle>();
 
+	protected ModelWorkspace workspace = ClassMakerFactory.eINSTANCE
+			.createModelWorkspace();
+
 	protected NameLookup names = new NameLookup();
 
 	public NameLookup names() {
 		return names;
+	}
+
+	public ModelWorkspace getWorkspace() {
+		return workspace;
 	}
 
 	public Bundle getBundle(String projectName) {
@@ -89,11 +96,16 @@ public class ClassMaker extends Plugin {
 	 *            the blueprint for making
 	 */
 	public void addEPackage(EPackage value) {
+		if (models.containsKey(value)) {
+			models.get(value).setDynamicEPackage(value);
+			return;
+		}
 		Bundle bundle = ClassMakerFactory.eINSTANCE.createBundle();
-		bundle.setDynamicEPackage(value);
 		models.put(value, bundle);
-		bundle.setNeedRefresh(true);		
+		bundle.setDynamicEPackage(value);
+		workspace.getContents().add(bundle);
 	}
+	
 
 	/**
 	 * Returns the product of making. Please call {@code}

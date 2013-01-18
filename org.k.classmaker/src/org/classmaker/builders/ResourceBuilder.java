@@ -7,6 +7,7 @@ import java.util.Map;
 import org.classmaker.Bundle;
 import org.classmaker.ClassMaker;
 import org.classmaker.PathHelper;
+import org.classmaker.State;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRunnable;
@@ -59,7 +60,8 @@ public class ResourceBuilder extends AbstractBuilder {
 			Resource resource = resourceSet.getResource(modelURI, false);
 			if (resource == null)
 				resource = resourceSet.createResource(modelURI);
-			if (bundle.isNeedRefresh()) {
+			if (bundle.getState() == State.DYNAMIC
+					|| bundle.getState() == State.REFRESHING) {
 				resource.getContents().clear();
 				resource.getContents().add(
 						EcoreUtil.copy(bundle.getDynamicEPackage()));

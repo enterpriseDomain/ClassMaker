@@ -5,8 +5,15 @@ package org.classmaker.impl;
 import org.classmaker.Bundle;
 import org.classmaker.ClassMakerFactory;
 import org.classmaker.ClassMakerPackage;
+import org.classmaker.ModelWorkspace;
+import org.classmaker.State;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -27,6 +34,31 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	private EClass bundleEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass modelWorkspaceEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum stateEEnum = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType adapterEDataType = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType iStatusEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -133,8 +165,62 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getBundle_NeedRefresh() {
+	public EAttribute getBundle_State() {
 		return (EAttribute)bundleEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBundle_Status() {
+		return (EAttribute)bundleEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getModelWorkspace() {
+		return modelWorkspaceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getModelWorkspace_Contents() {
+		return (EReference)modelWorkspaceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getState() {
+		return stateEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getAdapter() {
+		return adapterEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getIStatus() {
+		return iStatusEDataType;
 	}
 
 	/**
@@ -169,7 +255,18 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		createEAttribute(bundleEClass, BUNDLE__NAME);
 		createEReference(bundleEClass, BUNDLE__EPACKAGE);
 		createEReference(bundleEClass, BUNDLE__DYNAMIC_EPACKAGE);
-		createEAttribute(bundleEClass, BUNDLE__NEED_REFRESH);
+		createEAttribute(bundleEClass, BUNDLE__STATE);
+		createEAttribute(bundleEClass, BUNDLE__STATUS);
+
+		modelWorkspaceEClass = createEClass(MODEL_WORKSPACE);
+		createEReference(modelWorkspaceEClass, MODEL_WORKSPACE__CONTENTS);
+
+		// Create enums
+		stateEEnum = createEEnum(STATE);
+
+		// Create data types
+		adapterEDataType = createEDataType(ADAPTER);
+		iStatusEDataType = createEDataType(ISTATUS);
 	}
 
 	/**
@@ -208,8 +305,29 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEClass(bundleEClass, Bundle.class, "Bundle", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBundle_Name(), ecorePackage.getEString(), "name", null, 0, 1, Bundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBundle_EPackage(), theEcorePackage.getEPackage(), null, "ePackage", null, 0, 1, Bundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBundle_DynamicEPackage(), theEcorePackage.getEPackage(), null, "dynamicEPackage", null, 0, 1, Bundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getBundle_NeedRefresh(), ecorePackage.getEBoolean(), "needRefresh", null, 0, 1, Bundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBundle_DynamicEPackage(), theEcorePackage.getEPackage(), null, "dynamicEPackage", null, 0, 1, Bundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBundle_State(), this.getState(), "state", null, 0, 1, Bundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBundle_Status(), this.getIStatus(), "status", null, 0, 1, Bundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(modelWorkspaceEClass, ModelWorkspace.class, "ModelWorkspace", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getModelWorkspace_Contents(), this.getBundle(), null, "contents", null, 0, -1, ModelWorkspace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		EOperation op = addEOperation(modelWorkspaceEClass, null, "addRefreshListener", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getAdapter(), "listener", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(modelWorkspaceEClass, null, "removeRefreshListener", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getAdapter(), "listener", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		// Initialize enums and add enum literals
+		initEEnum(stateEEnum, State.class, "State");
+		addEEnumLiteral(stateEEnum, State.CREATED);
+		addEEnumLiteral(stateEEnum, State.DYNAMIC);
+		addEEnumLiteral(stateEEnum, State.REFRESHING);
+		addEEnumLiteral(stateEEnum, State.GENERATED);
+
+		// Initialize data types
+		initEDataType(adapterEDataType, Adapter.class, "Adapter", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(iStatusEDataType, IStatus.class, "IStatus", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

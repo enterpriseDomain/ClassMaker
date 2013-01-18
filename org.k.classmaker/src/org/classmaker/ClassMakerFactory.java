@@ -31,6 +31,15 @@ public interface ClassMakerFactory extends EFactory {
 	Bundle createBundle();
 
 	/**
+	 * Returns a new object of class '<em>Model Workspace</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Model Workspace</em>'.
+	 * @generated
+	 */
+	ModelWorkspace createModelWorkspace();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
