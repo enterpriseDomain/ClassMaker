@@ -38,6 +38,6 @@ Usage sample:
     theObject.eSet(attrPages, pages);
     assertEquals(pages, theObject.eGet(attrPages));  
   
-[Sample of the method invocation](/kirillzotkin/Class-Manufacturer/blob/master/org.k.classmaker.test/src/org/k/classmaker/test/ClassManufacturerTests.java)
+[Sample of the method invocation](/kirillzotkin/Class-Manufacturer/blob/master/org.classmaker.test/src/org/classmaker/test/ClassManufacturerTests.java)
 
 
