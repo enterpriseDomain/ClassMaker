@@ -1,13 +1,13 @@
 Class-Manufacturer
 ============
 
-This library is for creating a classes at runtime.  
-It produces generated Java classes based on metamodel defined in Ecore. The methods of these classes can be invoked through Java reflection.
+This is a library for creating Java classes at runtime.  
+It generates classes based on Ecore-based metamodel. The methods of those classes could be invoked through reflection.
 
 
-Usage:  
+Usage sample:  
 
-    // Build source dynamic EPackage (or acquire the existing one)
+    // Build source dynamic EPackage (or acquire an existing one)
     EcoreFactory ecoreFactory = EcoreFactory.eINSTANCE;
     EPackage sourceEPackage = ecoreFactory.createEPackage();
     // ... 
@@ -38,6 +38,6 @@ Usage:
     theObject.eSet(attrPages, pages);
     assertEquals(pages, theObject.eGet(attrPages));  
   
-[Method invocation sample](/kirillzotkin/Class-Manufacturer/blob/master/org.k.classmaker.test/src/org/k/classmaker/test/ClassManufacturerTests.java)
+[Sample with the method invocation](/kirillzotkin/Class-Manufacturer/blob/master/org.k.classmaker.test/src/org/k/classmaker/test/ClassManufacturerTests.java)
 
 
