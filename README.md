@@ -23,11 +23,11 @@ Usage sample:
     // Provide it to ClassManufacturer
     ClassMaker.getInstance().addEPackage(sourceEPackage);
 
-    // Get the produced EPackage
+    // Collect the produced EPackage
     EPackage nativeEPackage = ClassMaker.getInstance().getEPackage(
     	            sourceEPackage.getNsURI());
 
-    // Use it anyhow
+    // And use it
     EClass theClass = (EClass) nativeEPackage.getEClassifier(eClass.getName());
     EObject theObject = nativeEPackage.getEFactoryInstance().create(theClass);
     assertEquals(eClass.getName(), theObject.getClass().getSimpleName());
