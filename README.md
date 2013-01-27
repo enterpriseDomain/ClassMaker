@@ -27,7 +27,7 @@ Usage sample:
     EPackage nativeEPackage = ClassMaker.getInstance().getEPackage(
     	            sourceEPackage.getNsURI());
 
-    // And use it
+    // Use it
     EClass theClass = (EClass) nativeEPackage.getEClassifier(eClass.getName());
     EObject theObject = nativeEPackage.getEFactoryInstance().create(theClass);
     assertEquals(eClass.getName(), theObject.getClass().getSimpleName());
