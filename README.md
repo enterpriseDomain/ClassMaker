@@ -2,7 +2,7 @@ Class-Manufacturer
 ============
 
 This is a library for creating Java classes at runtime.  
-It generates classes based on Ecore-based metamodel. The methods of those classes could be invoked through reflection.
+It generates classes based on Ecore-based metamodel. Methods of those classes could be invoked through the reflection.
 
 
 Usage sample:  
@@ -20,14 +20,14 @@ Usage sample:
     eClass.getEStructuralFeatures().add(attr);
     sourceEPackage.getEClassifiers().add(eClass);
     
-    // Provide to ClassManufacturer
+    // Provide it to ClassManufacturer
     ClassMaker.getInstance().addEPackage(sourceEPackage);
 
-    // Get the produced generated EPackage
+    // Get the produced EPackage
     EPackage nativeEPackage = ClassMaker.getInstance().getEPackage(
     	            sourceEPackage.getNsURI());
 
-    // Use it
+    // Use it anyhow
     EClass theClass = (EClass) nativeEPackage.getEClassifier(eClass.getName());
     EObject theObject = nativeEPackage.getEFactoryInstance().create(theClass);
     assertEquals(eClass.getName(), theObject.getClass().getSimpleName());
