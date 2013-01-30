@@ -2,7 +2,7 @@ Class-Manufacturer
 ============
 
 This is a library for creating exploitable in-place Java classes at runtime.  
-It generates the classes, based on Ecore-based metamodel. Methods of these classes could be invoked through the reflection.
+It generates the classes, based on Ecore-based metamodel. Methods of these classes can be invoked through the reflection.
 
 
 Usage sample:  
