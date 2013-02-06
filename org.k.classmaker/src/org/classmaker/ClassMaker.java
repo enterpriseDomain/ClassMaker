@@ -90,6 +90,10 @@ public class ClassMaker extends Plugin {
 		return null;
 	}
 
+	public Bundle getBundle(EPackage ePackage) {
+		return models.get(ePackage);
+	}
+
 	/**
 	 * 
 	 * @param value
@@ -105,7 +109,6 @@ public class ClassMaker extends Plugin {
 		bundle.setDynamicEPackage(value);
 		workspace.getContents().add(bundle);
 	}
-	
 
 	/**
 	 * Returns the product of making. Please call {@code}
