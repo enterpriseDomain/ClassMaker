@@ -149,7 +149,8 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 
 		@Override
 		public void notifyChanged(Notification msg) {
-			if (msg.getFeatureID(getClass()) == ClassMakerPackage.BUNDLE__DYNAMIC_EPACKAGE) {
+			if (msg.getFeatureID(getClass()) == ClassMakerPackage.BUNDLE__DYNAMIC_EPACKAGE
+					&& msg.getNewValue() != null) {
 				setStatus(STATUS_EDEFAULT);
 				setState(State.DYNAMIC);
 			}
@@ -174,14 +175,15 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 			addNature(project, ClassMaker.NATURE_ID, monitor);
 			project.build(IncrementalProjectBuilder.FULL_BUILD, monitor);
 		} catch (CoreException e) {
-			if (e.getStatus().getSeverity() == IStatus.ERROR){
+			if (e.getStatus().getSeverity() == IStatus.ERROR) {
 				setStatus(e.getStatus());
 				setState(State.DYNAMIC);
-				}
+				setEPackage(getDynamicEPackage());
+			}
 			e.printStackTrace();
 			return;
 		}
-		setStatus(new Status(IStatus.OK, ClassMaker.PLUGIN_ID, "Bundle ready"));		
+		setStatus(new Status(IStatus.OK, ClassMaker.PLUGIN_ID, "Bundle ready"));
 		setState(State.GENERATED);
 	}
 
