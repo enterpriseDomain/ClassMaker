@@ -1,8 +1,8 @@
 Class-Manufacturer
 ============
 
-This is a library for creating exploitable in-place Java classes in runtime. 
-It generates the classes, based on Ecore-based metamodel. Methods of those can be invoked through reflection.
+This is a library for creation in runtime of exploitable in-place Java classes, based on Ecore metamodel.  
+These classes are immediately available to library's client program through reflective interface.
 
 
 Usage sample:  
@@ -38,6 +38,4 @@ Usage sample:
     theObject.eSet(attrPages, pages);
     assertEquals(pages, theObject.eGet(attrPages));  
   
-[Sample with method invocation](/kirillzotkin/Class-Manufacturer/blob/master/org.classmaker.test/src/org/classmaker/test/ClassManufacturerTests.java)
-
-
+[Sample with method invocation](/org.classmaker.test/src/org/classmaker/test/ClassManufacturerTests.java)
