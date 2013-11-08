@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://org/classsupplier/0.7.1"
+            class="org.classsupplier.ClassSupplierPackage"
+            genModel="model/ClassSupplier.genmodel"/>
+   </extension>
+   <extension
+         id="domainNature"
+         name="Domain Project Nature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="org.classsupplier.DomainProjectNature">
+         </run>
+      </runtime>
+   </extension>
+   <extension
+         id="resourceBuilder"
+         name="Model Resource Builder"
+         point="org.eclipse.core.resources.builders">
+      <builder>
+         <run
+               class="org.classsupplier.builders.ResourceBuilder">
+         </run>
+      </builder>
+   </extension>
+   <extension
+         id="generatorBuilder"
+         name="Code Generation Builder"
+         point="org.eclipse.core.resources.builders">
+      <builder>
+         <run
+               class="org.classsupplier.builders.GeneratorBuilder">
+         </run>
+      </builder>
+   </extension>
+   <extension
+         id="exportBuilder"
+         name="Plug-in Export Builder"
+         point="org.eclipse.core.resources.builders">
+      <builder>
+         <run
+               class="org.classsupplier.builders.ExportingBuilder">
+         </run></builder>
+   </extension>
+   <extension
+         id="loadBuilder"
+         name="Bundle Load Builder"
+         point="org.eclipse.core.resources.builders">
+      <builder>
+         <run
+               class="org.classsupplier.builders.LoadBuilder">
+         </run>
+      </builder>
+   </extension>
+
+</plugin>
