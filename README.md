@@ -30,4 +30,4 @@ Example:
     assertEquals(pages, jObject.eGet(jAttr));  
   
 [A more complete example](/org.classsupplier.test/src/org/classsupplier/test/ClassSupplierTests.java).  
-To run it see the project [wiki](/wiki/Home).  
+To run it see the project [wiki](http://github.com/kirillzotkin/ClassSupplier/wiki).  
