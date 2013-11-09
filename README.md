@@ -22,11 +22,10 @@ Example:
     EClass jClass = (EClass) nativeEPackage.getEClassifier(eClass.getName()); // ...that you can use
     EObject jObject = nativeEPackage.getEFactoryInstance().create(jClass);
     assertEquals(eClass.getName(), jObject.getClass().getSimpleName());
-
     int pages = 500;
     EStructuralFeature jAttr = jClass.getEStructuralFeature(eAttr
                 .getName());
-    theObject.eSet(jAttr, pages);
+    jObject.eSet(jAttr, pages);
     assertEquals(pages, jObject.eGet(jAttr));  
   
 [A more complete example](/org.classsupplier.test/src/org/classsupplier/test/ClassSupplierTests.java).  
