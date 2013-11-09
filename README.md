@@ -21,7 +21,7 @@ Example:
     EPackage nativeEPackage = service.supply(blueprintEPackage, progressMonitor); // Create the EPackage
     EClass jClass = (EClass) nativeEPackage.getEClassifier(eClass.getName()); // ... that you can use
     EObject jObject = nativeEPackage.getEFactoryInstance().create(jClass);
-    assertEquals(eClass.getName(), jObject.getClass().getSimpleName()); // *Note this*
+    assertEquals(eClass.getName(), jObject.getClass().getSimpleName()); // * Note this *
     
     int pages = 500;
     EStructuralFeature jAttr = jClass.getEStructuralFeature(eAttr
@@ -29,5 +29,5 @@ Example:
     jObject.eSet(jAttr, pages);
     assertEquals(pages, jObject.eGet(jAttr));  
   
-A more complete [example](/org.classsupplier.test/src/org/classsupplier/test/ClassSupplierTests.java).  
+A more [complete example](/org.classsupplier.test/src/org/classsupplier/test/ClassSupplierTests.java).  
 To run it see the project [wiki](https://github.com/kirillzotkin/ClassSupplier/wiki).  
