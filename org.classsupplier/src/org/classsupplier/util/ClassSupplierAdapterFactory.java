@@ -65,12 +65,12 @@ public class ClassSupplierAdapterFactory extends AdapterFactoryImpl {
 	protected ClassSupplierSwitch<Adapter> modelSwitch =
 		new ClassSupplierSwitch<Adapter>() {
 			@Override
-			public Adapter caseBundle(Bundle object) {
-				return createBundleAdapter();
+			public Adapter caseArtifact(Artifact object) {
+				return createArtifactAdapter();
 			}
 			@Override
-			public Adapter caseModelWorkspace(ModelWorkspace object) {
-				return createModelWorkspaceAdapter();
+			public Adapter caseMWorkspace(MWorkspace object) {
+				return createMWorkspaceAdapter();
 			}
 			@Override
 			public Adapter caseClassSupplier(ClassSupplier object) {
@@ -97,30 +97,30 @@ public class ClassSupplierAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.classsupplier.Bundle <em>Bundle</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.classsupplier.Artifact <em>Artifact</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.classsupplier.Bundle
+	 * @see org.classsupplier.Artifact
 	 * @generated
 	 */
-	public Adapter createBundleAdapter() {
+	public Adapter createArtifactAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.classsupplier.ModelWorkspace <em>Model Workspace</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.classsupplier.MWorkspace <em>MWorkspace</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.classsupplier.ModelWorkspace
+	 * @see org.classsupplier.MWorkspace
 	 * @generated
 	 */
-	public Adapter createModelWorkspaceAdapter() {
+	public Adapter createMWorkspaceAdapter() {
 		return null;
 	}
 

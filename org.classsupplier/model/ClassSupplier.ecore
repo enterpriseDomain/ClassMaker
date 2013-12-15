@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="classsupplier" nsURI="http://org/classsupplier/0.7.1" nsPrefix="classsupplier">
-  <eClassifiers xsi:type="ecore:EClass" name="Bundle">
+  <eClassifiers xsi:type="ecore:EClass" name="Artifact">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ePackage" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"
         containment="true"/>
@@ -18,28 +18,28 @@
     <eLiterals name="REFRESHING" value="2"/>
     <eLiterals name="GENERATED" value="3"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ModelWorkspace">
+  <eClassifiers xsi:type="ecore:EClass" name="MWorkspace">
     <eOperations name="addRefreshListener">
       <eParameters name="listener" eType="#//Adapter"/>
     </eOperations>
     <eOperations name="removeRefreshListener">
       <eParameters name="listener" eType="#//Adapter"/>
     </eOperations>
-    <eOperations name="registerBundle">
+    <eOperations name="registerArtifact">
       <eParameters name="model" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
-      <eParameters name="bundle" eType="#//Bundle"/>
+      <eParameters name="artifact" eType="#//Artifact"/>
     </eOperations>
-    <eOperations name="containsBundle" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+    <eOperations name="containsArtifact" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eParameters name="model" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
     </eOperations>
-    <eOperations name="getBundle" eType="#//Bundle">
+    <eOperations name="getArtifact" eType="#//Artifact">
       <eParameters name="projectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
-    <eOperations name="getBundle" eType="#//Bundle">
+    <eOperations name="getArtifact" eType="#//Artifact">
       <eParameters name="ePackage" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="contents" upperBound="-1"
-        eType="#//Bundle" containment="true"/>
+        eType="#//Artifact" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourceSet" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EResourceSet"
         transient="true"/>
   </eClassifiers>
@@ -51,7 +51,7 @@
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="workspace" lowerBound="1"
-        eType="#//ModelWorkspace" changeable="false"/>
+        eType="#//MWorkspace" changeable="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="IProgressMonitor" instanceClassName="org.eclipse.core.runtime.IProgressMonitor"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Version" instanceClassName="org.classsupplier.Version"/>

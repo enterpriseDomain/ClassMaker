@@ -6,9 +6,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.classsupplier.Bundle;
+import org.classsupplier.Artifact;
 import org.classsupplier.ClassSupplierPackage;
-import org.classsupplier.ModelWorkspace;
+import org.classsupplier.MWorkspace;
 import org.classsupplier.State;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
@@ -29,19 +29,18 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Model Workspace</b></em>'. <!-- end-user-doc -->
+ * <em><b>MWorkspace</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.classsupplier.impl.ModelWorkspaceImpl#getContents <em>Contents</em>}</li>
- *   <li>{@link org.classsupplier.impl.ModelWorkspaceImpl#getResourceSet <em>Resource Set</em>}</li>
+ *   <li>{@link org.classsupplier.impl.MWorkspaceImpl#getContents <em>Contents</em>}</li>
+ *   <li>{@link org.classsupplier.impl.MWorkspaceImpl#getResourceSet <em>Resource Set</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ModelWorkspaceImpl extends EObjectImpl implements ModelWorkspace {
-
+public class MWorkspaceImpl extends EObjectImpl implements MWorkspace {
 	/**
 	 * The cached value of the '{@link #getContents() <em>Contents</em>}' containment reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -49,7 +48,7 @@ public class ModelWorkspaceImpl extends EObjectImpl implements ModelWorkspace {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Bundle> contents;
+	protected EList<Artifact> contents;
 
 	/**
 	 * The default value of the '{@link #getResourceSet() <em>Resource Set</em>}
@@ -59,25 +58,26 @@ public class ModelWorkspaceImpl extends EObjectImpl implements ModelWorkspace {
 	 * @generated NOT
 	 * @ordered
 	 */
-	protected static final ResourceSet RESOURCE_SET_EDEFAULT = new ResourceSetImpl();
+	protected static final ResourceSet RESOURCE_SET_EDEFAULT = new ResourceSetImpl();;
 
 	/**
 	 * The cached value of the '{@link #getResourceSet() <em>Resource Set</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getResourceSet()
 	 * @generated
 	 * @ordered
 	 */
 	protected ResourceSet resourceSet = RESOURCE_SET_EDEFAULT;
 
-	protected Map<EPackage, Bundle> models = new HashMap<EPackage, Bundle>();
+	protected Map<EPackage, Artifact> models = new HashMap<EPackage, Artifact>();
+
+	private EAdapterList<Adapter> listeners = new EAdapterList<Adapter>(this);
 
 	private Adapter listeningAdapter = new AdapterImpl() {
 
 		@Override
 		public void notifyChanged(Notification msg) {
-			if (msg.getFeatureID(Bundle.class) == ClassSupplierPackage.BUNDLE__STATE
+			if (msg.getFeatureID(Artifact.class) == ClassSupplierPackage.ARTIFACT__STATE
 					&& msg.getNewValue() == State.DYNAMIC)
 				notifyListeners(new NotificationImpl(msg.getEventType(), null,
 						msg.getNotifier()));
@@ -90,7 +90,7 @@ public class ModelWorkspaceImpl extends EObjectImpl implements ModelWorkspace {
 
 		@Override
 		public void notifyChanged(Notification msg) {
-			if (msg.getFeatureID(getClass()) == ClassSupplierPackage.MODEL_WORKSPACE__CONTENTS)
+			if (msg.getFeatureID(getClass()) == ClassSupplierPackage.MWORKSPACE__CONTENTS)
 				switch (msg.getEventType()) {
 				case Notification.ADD:
 					((EObject) msg.getNewValue()).eAdapters().add(
@@ -110,7 +110,7 @@ public class ModelWorkspaceImpl extends EObjectImpl implements ModelWorkspace {
 	 * 
 	 * @generated NOT
 	 */
-	protected ModelWorkspaceImpl() {
+	protected MWorkspaceImpl() {
 		super();
 		eAdapters().add(attachingAdapter);
 	}
@@ -121,30 +121,38 @@ public class ModelWorkspaceImpl extends EObjectImpl implements ModelWorkspace {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ClassSupplierPackage.Literals.MODEL_WORKSPACE;
+		return ClassSupplierPackage.Literals.MWORKSPACE;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Bundle> getContents() {
+	public EList<Artifact> getContents() {
 		if (contents == null) {
-			contents = new EObjectContainmentEList<Bundle>(Bundle.class, this, ClassSupplierPackage.MODEL_WORKSPACE__CONTENTS);
+			contents = new EObjectContainmentEList<Artifact>(Artifact.class, this, ClassSupplierPackage.MWORKSPACE__CONTENTS);
 		}
 		return contents;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public ResourceSet getResourceSet() {
 		return resourceSet;
 	}
 
-	private EAdapterList<Adapter> listeners = new EAdapterList<Adapter>(this);
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setResourceSet(ResourceSet newResourceSet) {
+		ResourceSet oldResourceSet = resourceSet;
+		resourceSet = newResourceSet;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.MWORKSPACE__RESOURCE_SET, oldResourceSet, resourceSet));
+	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -169,8 +177,8 @@ public class ModelWorkspaceImpl extends EObjectImpl implements ModelWorkspace {
 	 * 
 	 * @generated NOT
 	 */
-	public void registerBundle(EPackage model, Bundle bundle) {
-		models.put(model, bundle);
+	public void registerArtifact(EPackage model, Artifact artifact) {
+		models.put(model, artifact);
 	}
 
 	/**
@@ -178,7 +186,7 @@ public class ModelWorkspaceImpl extends EObjectImpl implements ModelWorkspace {
 	 * 
 	 * @generated NOT
 	 */
-	public boolean containsBundle(EPackage model) {
+	public boolean containsArtifact(EPackage model) {
 		return models.containsKey(model);
 	}
 
@@ -187,10 +195,10 @@ public class ModelWorkspaceImpl extends EObjectImpl implements ModelWorkspace {
 	 * 
 	 * @generated NOT
 	 */
-	public Bundle getBundle(String projectName) {
-		for (Bundle bundle : models.values()) {
-			if (bundle.getProjectName().equals(projectName))
-				return bundle;
+	public Artifact getArtifact(String projectName) {
+		for (Artifact artifact : models.values()) {
+			if (artifact.getProjectName().equals(projectName))
+				return artifact;
 		}
 		return null;
 	}
@@ -200,22 +208,8 @@ public class ModelWorkspaceImpl extends EObjectImpl implements ModelWorkspace {
 	 * 
 	 * @generated NOT
 	 */
-	public Bundle getBundle(EPackage ePackage) {
+	public Artifact getArtifact(EPackage ePackage) {
 		return models.get(ePackage);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case ClassSupplierPackage.MODEL_WORKSPACE__CONTENTS:
-				return ((InternalEList<?>)getContents()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	private void notifyListeners(Notification notification) {
@@ -228,11 +222,25 @@ public class ModelWorkspaceImpl extends EObjectImpl implements ModelWorkspace {
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case ClassSupplierPackage.MWORKSPACE__CONTENTS:
+				return ((InternalEList<?>)getContents()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClassSupplierPackage.MODEL_WORKSPACE__CONTENTS:
+			case ClassSupplierPackage.MWORKSPACE__CONTENTS:
 				return getContents();
-			case ClassSupplierPackage.MODEL_WORKSPACE__RESOURCE_SET:
+			case ClassSupplierPackage.MWORKSPACE__RESOURCE_SET:
 				return getResourceSet();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -246,11 +254,11 @@ public class ModelWorkspaceImpl extends EObjectImpl implements ModelWorkspace {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClassSupplierPackage.MODEL_WORKSPACE__CONTENTS:
+			case ClassSupplierPackage.MWORKSPACE__CONTENTS:
 				getContents().clear();
-				getContents().addAll((Collection<? extends Bundle>)newValue);
+				getContents().addAll((Collection<? extends Artifact>)newValue);
 				return;
-			case ClassSupplierPackage.MODEL_WORKSPACE__RESOURCE_SET:
+			case ClassSupplierPackage.MWORKSPACE__RESOURCE_SET:
 				setResourceSet((ResourceSet)newValue);
 				return;
 		}
@@ -264,10 +272,10 @@ public class ModelWorkspaceImpl extends EObjectImpl implements ModelWorkspace {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClassSupplierPackage.MODEL_WORKSPACE__CONTENTS:
+			case ClassSupplierPackage.MWORKSPACE__CONTENTS:
 				getContents().clear();
 				return;
-			case ClassSupplierPackage.MODEL_WORKSPACE__RESOURCE_SET:
+			case ClassSupplierPackage.MWORKSPACE__RESOURCE_SET:
 				setResourceSet(RESOURCE_SET_EDEFAULT);
 				return;
 		}
@@ -281,9 +289,9 @@ public class ModelWorkspaceImpl extends EObjectImpl implements ModelWorkspace {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClassSupplierPackage.MODEL_WORKSPACE__CONTENTS:
+			case ClassSupplierPackage.MWORKSPACE__CONTENTS:
 				return contents != null && !contents.isEmpty();
-			case ClassSupplierPackage.MODEL_WORKSPACE__RESOURCE_SET:
+			case ClassSupplierPackage.MWORKSPACE__RESOURCE_SET:
 				return RESOURCE_SET_EDEFAULT == null ? resourceSet != null : !RESOURCE_SET_EDEFAULT.equals(resourceSet);
 		}
 		return super.eIsSet(featureID);
@@ -304,15 +312,4 @@ public class ModelWorkspaceImpl extends EObjectImpl implements ModelWorkspace {
 		return result.toString();
 	}
 
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setResourceSet(ResourceSet newResourceSet) {
-		ResourceSet oldResourceSet = resourceSet;
-		resourceSet = newResourceSet;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.MODEL_WORKSPACE__RESOURCE_SET, oldResourceSet, resourceSet));
-	}
-
-} // ModelWorkspaceImpl
+} // MWorkspaceImpl

@@ -57,8 +57,8 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case ClassSupplierPackage.BUNDLE: return createBundle();
-			case ClassSupplierPackage.MODEL_WORKSPACE: return createModelWorkspace();
+			case ClassSupplierPackage.ARTIFACT: return createArtifact();
+			case ClassSupplierPackage.MWORKSPACE: return createMWorkspace();
 			case ClassSupplierPackage.CLASS_SUPPLIER: return createClassSupplier();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -116,9 +116,9 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Bundle createBundle() {
-		BundleImpl bundle = new BundleImpl();
-		return bundle;
+	public Artifact createArtifact() {
+		ArtifactImpl artifact = new ArtifactImpl();
+		return artifact;
 	}
 
 	/**
@@ -126,9 +126,9 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ModelWorkspace createModelWorkspace() {
-		ModelWorkspaceImpl modelWorkspace = new ModelWorkspaceImpl();
-		return modelWorkspace;
+	public MWorkspace createMWorkspace() {
+		MWorkspaceImpl mWorkspace = new MWorkspaceImpl();
+		return mWorkspace;
 	}
 
 	/**

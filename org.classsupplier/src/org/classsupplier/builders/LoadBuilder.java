@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
-import org.classsupplier.Bundle;
+import org.classsupplier.Artifact;
 import org.classsupplier.Version;
 import org.classsupplier.impl.OSGi;
 import org.eclipse.core.resources.IProject;
@@ -31,9 +31,9 @@ public class LoadBuilder extends IncrementalProjectBuilder {
 	@Override
 	protected IProject[] build(int kind, Map<String, String> args,
 			IProgressMonitor monitor) throws CoreException {
-		Bundle bundle = OSGi.getClassSupplier().getWorkspace()
-				.getBundle(getProject().getName());
-		Version version = bundle.getVersion();
+		Artifact artifact = OSGi.getClassSupplier().getWorkspace()
+				.getArtifact(getProject().getName());
+		Version version = artifact.getVersion();
 		IPath path = getProject().getLocation().append("target")
 				.append(getProject().getName() + '-' + version.full())
 				.addFileExtension("jar");
@@ -47,14 +47,14 @@ public class LoadBuilder extends IncrementalProjectBuilder {
 					FrameworkWiring.class);
 			frameworkWiring.refreshBundles(bundles, new FrameworkListener[0]);
 			if (frameworkWiring.resolveBundles(bundles)) {
-				String packageClassName = bundle.getDynamicEPackage().getName()
-						+ "." + bundle.getName() + "Package";
+				String packageClassName = artifact.getDynamicEPackage().getName()
+						+ "." + artifact.getName() + "Package";
 
 				Class<?> packageClass = osgiBundle.loadClass(packageClassName);
 				EPackage ePackage = (EPackage) packageClass.getField(
 						"eINSTANCE").get(packageClass);
 
-				bundle.setEPackage(ePackage);
+				artifact.setEPackage(ePackage);
 			}
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();

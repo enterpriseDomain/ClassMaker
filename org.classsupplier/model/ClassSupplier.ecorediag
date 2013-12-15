@@ -4,23 +4,23 @@
     <children xmi:type="notation:Node" xmi:id="_4E_boOaOEeGHd_MbCVfMRQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_4FB34OaOEeGHd_MbCVfMRQ" type="5001">
       <children xmi:type="notation:Node" xmi:id="_a3UyIOaPEeGHd_MbCVfMRQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="ClassSupplier.ecore#//Bundle/name"/>
+        <element xmi:type="ecore:EAttribute" href="ClassSupplier.ecore#//Artifact/name"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_a3UyIeaPEeGHd_MbCVfMRQ"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_b-27UDgQEeOD5f07UP2EOA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="ClassSupplier.ecore#//Bundle/version"/>
+        <element xmi:type="ecore:EAttribute" href="ClassSupplier.ecore#//Artifact/version"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_b-27UTgQEeOD5f07UP2EOA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_YuTUEDgREeOD5f07UP2EOA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="ClassSupplier.ecore#//Bundle/projectName"/>
+        <element xmi:type="ecore:EAttribute" href="ClassSupplier.ecore#//Artifact/projectName"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_YuTUETgREeOD5f07UP2EOA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_qWI7YGFjEeKjf_OKI_SsYg" type="2001">
-        <element xmi:type="ecore:EAttribute" href="ClassSupplier.ecore#//Bundle/state"/>
+        <element xmi:type="ecore:EAttribute" href="ClassSupplier.ecore#//Artifact/state"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_qWI7YWFjEeKjf_OKI_SsYg"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_Kd_BkGFkEeKjf_OKI_SsYg" type="2001">
-        <element xmi:type="ecore:EAttribute" href="ClassSupplier.ecore#//Bundle/status"/>
+        <element xmi:type="ecore:EAttribute" href="ClassSupplier.ecore#//Artifact/status"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Kd_BkWFkEeKjf_OKI_SsYg"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_4FB34eaOEeGHd_MbCVfMRQ"/>
@@ -33,7 +33,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_4FDGA-aOEeGHd_MbCVfMRQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_4E58EeaOEeGHd_MbCVfMRQ" fontColor="4210752" fontName="Lucida Grande" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="ClassSupplier.ecore#//Bundle"/>
+    <element xmi:type="ecore:EClass" href="ClassSupplier.ecore#//Artifact"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4E58EuaOEeGHd_MbCVfMRQ" x="160" y="155"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_TSfuwOaPEeGHd_MbCVfMRQ" type="1001">
@@ -53,7 +53,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_TSfuweaPEeGHd_MbCVfMRQ" fontColor="4210752" fontName="Lucida Grande" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TSfuwuaPEeGHd_MbCVfMRQ" x="347" y="180"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TSfuwuaPEeGHd_MbCVfMRQ" x="345" y="200"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_hYJssGFjEeKjf_OKI_SsYg" type="1005">
     <children xmi:type="notation:Node" xmi:id="_hYNXEGFjEeKjf_OKI_SsYg" type="4010"/>
@@ -86,7 +86,7 @@
     <children xmi:type="notation:Node" xmi:id="_t6vqkGFjEeKjf_OKI_SsYg" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_t6w4sGFjEeKjf_OKI_SsYg" type="5001">
       <children xmi:type="notation:Node" xmi:id="_neTycDgWEeOD5f07UP2EOA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="ClassSupplier.ecore#//ModelWorkspace/resourceSet"/>
+        <element xmi:type="ecore:EAttribute" href="ClassSupplier.ecore#//MWorkspace/resourceSet"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_neTycTgWEeOD5f07UP2EOA"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_t6w4sWFjEeKjf_OKI_SsYg"/>
@@ -95,27 +95,27 @@
     </children>
     <children xmi:type="notation:Node" xmi:id="_t6xfwGFjEeKjf_OKI_SsYg" type="5002">
       <children xmi:type="notation:Node" xmi:id="_wVTBcGFjEeKjf_OKI_SsYg" type="2002">
-        <element xmi:type="ecore:EOperation" href="ClassSupplier.ecore#//ModelWorkspace/addRefreshListener"/>
+        <element xmi:type="ecore:EOperation" href="ClassSupplier.ecore#//MWorkspace/addRefreshListener"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_wVTBcWFjEeKjf_OKI_SsYg"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_yWTP4GFjEeKjf_OKI_SsYg" type="2002">
-        <element xmi:type="ecore:EOperation" href="ClassSupplier.ecore#//ModelWorkspace/removeRefreshListener"/>
+        <element xmi:type="ecore:EOperation" href="ClassSupplier.ecore#//MWorkspace/removeRefreshListener"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_yWTP4WFjEeKjf_OKI_SsYg"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_mJ7O4DgVEeOD5f07UP2EOA" type="2002">
-        <element xmi:type="ecore:EOperation" href="ClassSupplier.ecore#//ModelWorkspace/registerBundle"/>
+        <element xmi:type="ecore:EOperation" href="ClassSupplier.ecore#//MWorkspace/registerArtifact"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_mJ7O4TgVEeOD5f07UP2EOA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_YUgXMDgVEeOD5f07UP2EOA" type="2002">
-        <element xmi:type="ecore:EOperation" href="ClassSupplier.ecore#//ModelWorkspace/containsBundle"/>
+        <element xmi:type="ecore:EOperation" href="ClassSupplier.ecore#//MWorkspace/containsArtifact"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_YUgXMTgVEeOD5f07UP2EOA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_Q-5tgDgTEeOD5f07UP2EOA" type="2002">
-        <element xmi:type="ecore:EOperation" href="ClassSupplier.ecore#//ModelWorkspace/getBundle"/>
+        <element xmi:type="ecore:EOperation" href="ClassSupplier.ecore#//MWorkspace/getArtifact"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Q-5tgTgTEeOD5f07UP2EOA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_QUjTgDgUEeOD5f07UP2EOA" type="2002">
-        <element xmi:type="ecore:EOperation" href="ClassSupplier.ecore#//ModelWorkspace/getBundle.1"/>
+        <element xmi:type="ecore:EOperation" href="ClassSupplier.ecore#//MWorkspace/getArtifact.1"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_QUjTgTgUEeOD5f07UP2EOA"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_t6xfwWFjEeKjf_OKI_SsYg"/>
@@ -123,7 +123,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_t6xfw2FjEeKjf_OKI_SsYg"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_t6uccWFjEeKjf_OKI_SsYg" fontColor="4210752" fontName="Cantarell" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="ClassSupplier.ecore#//ModelWorkspace"/>
+    <element xmi:type="ecore:EClass" href="ClassSupplier.ecore#//MWorkspace"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_t6uccmFjEeKjf_OKI_SsYg" x="355" y="50"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_3pmVgGFjEeKjf_OKI_SsYg" type="1004">
@@ -209,7 +209,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_T_diceaPEeGHd_MbCVfMRQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_T_dicuaPEeGHd_MbCVfMRQ" fontColor="4210752" fontName="Lucida Grande" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="ClassSupplier.ecore#//Bundle/ePackage"/>
+    <element xmi:type="ecore:EReference" href="ClassSupplier.ecore#//Artifact/ePackage"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_T_dic-aPEeGHd_MbCVfMRQ" points="[53, 6, -100, 1]$[154, -12, 1, -17]"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_T_jCAOaPEeGHd_MbCVfMRQ" id="(0.1065989847715736,0.21428571428571427)"/>
   </edges>
@@ -222,7 +222,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="__kDJIeeJEeG1a5vlsMpKaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="__kDJIueJEeG1a5vlsMpKaQ" fontColor="4210752" fontName="Lucida Grande" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="ClassSupplier.ecore#//Bundle/dynamicEPackage"/>
+    <element xmi:type="ecore:EReference" href="ClassSupplier.ecore#//Artifact/dynamicEPackage"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="__kDJI-eJEeG1a5vlsMpKaQ" points="[14, 1, -121, 1]$[136, 0, 1, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__kQkgOeJEeG1a5vlsMpKaQ" id="(0.8627450980392157,0.1836734693877551)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="__kQkgeeJEeG1a5vlsMpKaQ" id="(0.35294117647058826,0.018518518518518517)"/>
@@ -236,7 +236,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_GQoQUWFkEeKjf_OKI_SsYg" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_GQoQUmFkEeKjf_OKI_SsYg" fontColor="4210752" fontName="Cantarell" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="ClassSupplier.ecore#//ModelWorkspace/contents"/>
+    <element xmi:type="ecore:EReference" href="ClassSupplier.ecore#//MWorkspace/contents"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_GQoQU2FkEeKjf_OKI_SsYg" points="[-28, 36, 38, -48]$[-65, 74, 1, -10]"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_GQyoYGFkEeKjf_OKI_SsYg" id="(0.38095238095238093,0.16923076923076924)"/>
   </edges>

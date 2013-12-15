@@ -2,7 +2,7 @@
  */
 package org.classsupplier.impl;
 
-import org.classsupplier.Bundle;
+import org.classsupplier.Artifact;
 import org.classsupplier.ClassSupplierPackage;
 import org.classsupplier.State;
 import org.classsupplier.Version;
@@ -27,23 +27,23 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Bundle</b></em>'. <!-- end-user-doc -->
+ * <em><b>Artifact</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.classsupplier.impl.BundleImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.classsupplier.impl.BundleImpl#getEPackage <em>EPackage</em>}</li>
- *   <li>{@link org.classsupplier.impl.BundleImpl#getDynamicEPackage <em>Dynamic EPackage</em>}</li>
- *   <li>{@link org.classsupplier.impl.BundleImpl#getVersion <em>Version</em>}</li>
- *   <li>{@link org.classsupplier.impl.BundleImpl#getProjectName <em>Project Name</em>}</li>
- *   <li>{@link org.classsupplier.impl.BundleImpl#getState <em>State</em>}</li>
- *   <li>{@link org.classsupplier.impl.BundleImpl#getStatus <em>Status</em>}</li>
+ *   <li>{@link org.classsupplier.impl.ArtifactImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.classsupplier.impl.ArtifactImpl#getEPackage <em>EPackage</em>}</li>
+ *   <li>{@link org.classsupplier.impl.ArtifactImpl#getDynamicEPackage <em>Dynamic EPackage</em>}</li>
+ *   <li>{@link org.classsupplier.impl.ArtifactImpl#getVersion <em>Version</em>}</li>
+ *   <li>{@link org.classsupplier.impl.ArtifactImpl#getProjectName <em>Project Name</em>}</li>
+ *   <li>{@link org.classsupplier.impl.ArtifactImpl#getState <em>State</em>}</li>
+ *   <li>{@link org.classsupplier.impl.ArtifactImpl#getStatus <em>Status</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class BundleImpl extends EObjectImpl implements Bundle {
+public class ArtifactImpl extends EObjectImpl implements Artifact {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -153,12 +153,32 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 	 */
 	protected IStatus status = STATUS_EDEFAULT;
 
+	private Adapter adapter = new AdapterImpl() {
+
+		@Override
+		public void notifyChanged(Notification msg) {
+			if (msg.getFeatureID(getClass()) == ClassSupplierPackage.ARTIFACT__NAME
+					&& msg.getEventType() == Notification.SET)
+				setProjectName(msg.getNewStringValue().toLowerCase());
+			if (msg.getFeatureID(getClass()) == ClassSupplierPackage.ARTIFACT__DYNAMIC_EPACKAGE
+					&& msg.getNewValue() != null) {
+				setStatus(STATUS_EDEFAULT);
+				setState(State.DYNAMIC);
+			}
+			if (msg.getFeatureID(getClass()) == ClassSupplierPackage.ARTIFACT__STATE
+					&& msg.getNewValue() == State.DYNAMIC
+					&& (getStatus() == null || getStatus().isOK()))
+				make();
+		}
+
+	};
+
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
 	 */
-	protected BundleImpl() {
+	protected ArtifactImpl() {
 		super();
 		eAdapters().add(adapter);
 	}
@@ -169,28 +189,8 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ClassSupplierPackage.Literals.BUNDLE;
+		return ClassSupplierPackage.Literals.ARTIFACT;
 	}
-
-	private Adapter adapter = new AdapterImpl() {
-
-		@Override
-		public void notifyChanged(Notification msg) {
-			if (msg.getFeatureID(getClass()) == ClassSupplierPackage.BUNDLE__NAME
-					&& msg.getEventType() == Notification.SET)
-				setProjectName(msg.getNewStringValue().toLowerCase());
-			if (msg.getFeatureID(getClass()) == ClassSupplierPackage.BUNDLE__DYNAMIC_EPACKAGE
-					&& msg.getNewValue() != null) {
-				setStatus(STATUS_EDEFAULT);
-				setState(State.DYNAMIC);
-			}
-			if (msg.getFeatureID(getClass()) == ClassSupplierPackage.BUNDLE__STATE
-					&& msg.getNewValue() == State.DYNAMIC
-					&& (getStatus() == null || getStatus().isOK()))
-				make();
-		}
-
-	};
 
 	protected void make() {
 		setState(State.REFRESHING);
@@ -214,7 +214,7 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 			e.printStackTrace();
 			return;
 		}
-		setStatus(new Status(IStatus.OK, OSGi.PLUGIN_ID, "Bundle ready."));
+		setStatus(new Status(IStatus.OK, OSGi.PLUGIN_ID, "Artifact is ready."));
 		setState(State.GENERATED);
 	}
 
@@ -243,14 +243,14 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 	 * @generated NOT
 	 */
 	public String getName() {
-		if (eIsSet(ClassSupplierPackage.BUNDLE__NAME))
+		if (eIsSet(ClassSupplierPackage.ARTIFACT__NAME))
 			return name;
 		if ((getState() == State.DYNAMIC || getState() == State.REFRESHING)
-				&& eIsSet(ClassSupplierPackage.BUNDLE__DYNAMIC_EPACKAGE))
+				&& eIsSet(ClassSupplierPackage.ARTIFACT__DYNAMIC_EPACKAGE))
 			return getDynamicEPackage().getName();
 		if (getState() == State.GENERATED)
 			return getEPackage().getName();
-		return null;
+		return name;
 	}
 
 	/**
@@ -261,7 +261,7 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.BUNDLE__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.ARTIFACT__NAME, oldName, name));
 	}
 
 	/**
@@ -281,7 +281,7 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 		EPackage oldEPackage = ePackage;
 		ePackage = newEPackage;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.BUNDLE__EPACKAGE, oldEPackage, newEPackage);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.ARTIFACT__EPACKAGE, oldEPackage, newEPackage);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -295,14 +295,14 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 		if (newEPackage != ePackage) {
 			NotificationChain msgs = null;
 			if (ePackage != null)
-				msgs = ((InternalEObject)ePackage).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ClassSupplierPackage.BUNDLE__EPACKAGE, null, msgs);
+				msgs = ((InternalEObject)ePackage).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ClassSupplierPackage.ARTIFACT__EPACKAGE, null, msgs);
 			if (newEPackage != null)
-				msgs = ((InternalEObject)newEPackage).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ClassSupplierPackage.BUNDLE__EPACKAGE, null, msgs);
+				msgs = ((InternalEObject)newEPackage).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ClassSupplierPackage.ARTIFACT__EPACKAGE, null, msgs);
 			msgs = basicSetEPackage(newEPackage, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.BUNDLE__EPACKAGE, newEPackage, newEPackage));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.ARTIFACT__EPACKAGE, newEPackage, newEPackage));
 	}
 
 	/**
@@ -322,7 +322,7 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 		EPackage oldDynamicEPackage = dynamicEPackage;
 		dynamicEPackage = newDynamicEPackage;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.BUNDLE__DYNAMIC_EPACKAGE, oldDynamicEPackage, newDynamicEPackage);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.ARTIFACT__DYNAMIC_EPACKAGE, oldDynamicEPackage, newDynamicEPackage);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -336,14 +336,14 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 		if (newDynamicEPackage != dynamicEPackage) {
 			NotificationChain msgs = null;
 			if (dynamicEPackage != null)
-				msgs = ((InternalEObject)dynamicEPackage).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ClassSupplierPackage.BUNDLE__DYNAMIC_EPACKAGE, null, msgs);
+				msgs = ((InternalEObject)dynamicEPackage).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ClassSupplierPackage.ARTIFACT__DYNAMIC_EPACKAGE, null, msgs);
 			if (newDynamicEPackage != null)
-				msgs = ((InternalEObject)newDynamicEPackage).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ClassSupplierPackage.BUNDLE__DYNAMIC_EPACKAGE, null, msgs);
+				msgs = ((InternalEObject)newDynamicEPackage).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ClassSupplierPackage.ARTIFACT__DYNAMIC_EPACKAGE, null, msgs);
 			msgs = basicSetDynamicEPackage(newDynamicEPackage, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.BUNDLE__DYNAMIC_EPACKAGE, newDynamicEPackage, newDynamicEPackage));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.ARTIFACT__DYNAMIC_EPACKAGE, newDynamicEPackage, newDynamicEPackage));
 	}
 
 	/**
@@ -365,7 +365,7 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 		Version oldVersion = version;
 		version = newVersion;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.BUNDLE__VERSION, oldVersion, version));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.ARTIFACT__VERSION, oldVersion, version));
 	}
 
 	/**
@@ -384,7 +384,7 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 		String oldProjectName = projectName;
 		projectName = newProjectName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.BUNDLE__PROJECT_NAME, oldProjectName, projectName));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.ARTIFACT__PROJECT_NAME, oldProjectName, projectName));
 	}
 
 	/**
@@ -403,7 +403,7 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 		State oldState = state;
 		state = newState == null ? STATE_EDEFAULT : newState;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.BUNDLE__STATE, oldState, state));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.ARTIFACT__STATE, oldState, state));
 	}
 
 	/**
@@ -422,7 +422,7 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 		IStatus oldStatus = status;
 		status = newStatus;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.BUNDLE__STATUS, oldStatus, status));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.ARTIFACT__STATUS, oldStatus, status));
 	}
 
 	/**
@@ -433,9 +433,9 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ClassSupplierPackage.BUNDLE__EPACKAGE:
+			case ClassSupplierPackage.ARTIFACT__EPACKAGE:
 				return basicSetEPackage(null, msgs);
-			case ClassSupplierPackage.BUNDLE__DYNAMIC_EPACKAGE:
+			case ClassSupplierPackage.ARTIFACT__DYNAMIC_EPACKAGE:
 				return basicSetDynamicEPackage(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -448,19 +448,19 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClassSupplierPackage.BUNDLE__NAME:
+			case ClassSupplierPackage.ARTIFACT__NAME:
 				return getName();
-			case ClassSupplierPackage.BUNDLE__EPACKAGE:
+			case ClassSupplierPackage.ARTIFACT__EPACKAGE:
 				return getEPackage();
-			case ClassSupplierPackage.BUNDLE__DYNAMIC_EPACKAGE:
+			case ClassSupplierPackage.ARTIFACT__DYNAMIC_EPACKAGE:
 				return getDynamicEPackage();
-			case ClassSupplierPackage.BUNDLE__VERSION:
+			case ClassSupplierPackage.ARTIFACT__VERSION:
 				return getVersion();
-			case ClassSupplierPackage.BUNDLE__PROJECT_NAME:
+			case ClassSupplierPackage.ARTIFACT__PROJECT_NAME:
 				return getProjectName();
-			case ClassSupplierPackage.BUNDLE__STATE:
+			case ClassSupplierPackage.ARTIFACT__STATE:
 				return getState();
-			case ClassSupplierPackage.BUNDLE__STATUS:
+			case ClassSupplierPackage.ARTIFACT__STATUS:
 				return getStatus();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -473,25 +473,25 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClassSupplierPackage.BUNDLE__NAME:
+			case ClassSupplierPackage.ARTIFACT__NAME:
 				setName((String)newValue);
 				return;
-			case ClassSupplierPackage.BUNDLE__EPACKAGE:
+			case ClassSupplierPackage.ARTIFACT__EPACKAGE:
 				setEPackage((EPackage)newValue);
 				return;
-			case ClassSupplierPackage.BUNDLE__DYNAMIC_EPACKAGE:
+			case ClassSupplierPackage.ARTIFACT__DYNAMIC_EPACKAGE:
 				setDynamicEPackage((EPackage)newValue);
 				return;
-			case ClassSupplierPackage.BUNDLE__VERSION:
+			case ClassSupplierPackage.ARTIFACT__VERSION:
 				setVersion((Version)newValue);
 				return;
-			case ClassSupplierPackage.BUNDLE__PROJECT_NAME:
+			case ClassSupplierPackage.ARTIFACT__PROJECT_NAME:
 				setProjectName((String)newValue);
 				return;
-			case ClassSupplierPackage.BUNDLE__STATE:
+			case ClassSupplierPackage.ARTIFACT__STATE:
 				setState((State)newValue);
 				return;
-			case ClassSupplierPackage.BUNDLE__STATUS:
+			case ClassSupplierPackage.ARTIFACT__STATUS:
 				setStatus((IStatus)newValue);
 				return;
 		}
@@ -505,25 +505,25 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClassSupplierPackage.BUNDLE__NAME:
+			case ClassSupplierPackage.ARTIFACT__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case ClassSupplierPackage.BUNDLE__EPACKAGE:
+			case ClassSupplierPackage.ARTIFACT__EPACKAGE:
 				setEPackage((EPackage)null);
 				return;
-			case ClassSupplierPackage.BUNDLE__DYNAMIC_EPACKAGE:
+			case ClassSupplierPackage.ARTIFACT__DYNAMIC_EPACKAGE:
 				setDynamicEPackage((EPackage)null);
 				return;
-			case ClassSupplierPackage.BUNDLE__VERSION:
+			case ClassSupplierPackage.ARTIFACT__VERSION:
 				setVersion(VERSION_EDEFAULT);
 				return;
-			case ClassSupplierPackage.BUNDLE__PROJECT_NAME:
+			case ClassSupplierPackage.ARTIFACT__PROJECT_NAME:
 				setProjectName(PROJECT_NAME_EDEFAULT);
 				return;
-			case ClassSupplierPackage.BUNDLE__STATE:
+			case ClassSupplierPackage.ARTIFACT__STATE:
 				setState(STATE_EDEFAULT);
 				return;
-			case ClassSupplierPackage.BUNDLE__STATUS:
+			case ClassSupplierPackage.ARTIFACT__STATUS:
 				setStatus(STATUS_EDEFAULT);
 				return;
 		}
@@ -537,19 +537,19 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClassSupplierPackage.BUNDLE__NAME:
+			case ClassSupplierPackage.ARTIFACT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case ClassSupplierPackage.BUNDLE__EPACKAGE:
+			case ClassSupplierPackage.ARTIFACT__EPACKAGE:
 				return ePackage != null;
-			case ClassSupplierPackage.BUNDLE__DYNAMIC_EPACKAGE:
+			case ClassSupplierPackage.ARTIFACT__DYNAMIC_EPACKAGE:
 				return dynamicEPackage != null;
-			case ClassSupplierPackage.BUNDLE__VERSION:
+			case ClassSupplierPackage.ARTIFACT__VERSION:
 				return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
-			case ClassSupplierPackage.BUNDLE__PROJECT_NAME:
+			case ClassSupplierPackage.ARTIFACT__PROJECT_NAME:
 				return PROJECT_NAME_EDEFAULT == null ? projectName != null : !PROJECT_NAME_EDEFAULT.equals(projectName);
-			case ClassSupplierPackage.BUNDLE__STATE:
+			case ClassSupplierPackage.ARTIFACT__STATE:
 				return state != STATE_EDEFAULT;
-			case ClassSupplierPackage.BUNDLE__STATUS:
+			case ClassSupplierPackage.ARTIFACT__STATUS:
 				return STATUS_EDEFAULT == null ? status != null : !STATUS_EDEFAULT.equals(status);
 		}
 		return super.eIsSet(featureID);
@@ -578,4 +578,4 @@ public class BundleImpl extends EObjectImpl implements Bundle {
 		return result.toString();
 	}
 
-} // BundleImpl
+} // ArtifactImpl

@@ -64,15 +64,15 @@ public class ClassSupplierSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case ClassSupplierPackage.BUNDLE: {
-				Bundle bundle = (Bundle)theEObject;
-				T result = caseBundle(bundle);
+			case ClassSupplierPackage.ARTIFACT: {
+				Artifact artifact = (Artifact)theEObject;
+				T result = caseArtifact(artifact);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ClassSupplierPackage.MODEL_WORKSPACE: {
-				ModelWorkspace modelWorkspace = (ModelWorkspace)theEObject;
-				T result = caseModelWorkspace(modelWorkspace);
+			case ClassSupplierPackage.MWORKSPACE: {
+				MWorkspace mWorkspace = (MWorkspace)theEObject;
+				T result = caseMWorkspace(mWorkspace);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -87,32 +87,32 @@ public class ClassSupplierSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Bundle</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Artifact</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Bundle</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Artifact</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseBundle(Bundle object) {
+	public T caseArtifact(Artifact object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Model Workspace</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>MWorkspace</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Model Workspace</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>MWorkspace</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseModelWorkspace(ModelWorkspace object) {
+	public T caseMWorkspace(MWorkspace object) {
 		return null;
 	}
 

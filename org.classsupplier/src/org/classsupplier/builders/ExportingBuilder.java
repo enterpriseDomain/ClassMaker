@@ -2,7 +2,7 @@ package org.classsupplier.builders;
 
 import java.util.Map;
 
-import org.classsupplier.Bundle;
+import org.classsupplier.Artifact;
 import org.classsupplier.PathHelper;
 import org.classsupplier.Version;
 import org.classsupplier.export.Exporter;
@@ -32,9 +32,9 @@ public class ExportingBuilder extends IncrementalProjectBuilder {
 		OSGi.getClassSupplier().setMonitor(monitor);
 		exporter.setDestination(PathHelper.getDefaultDestination());
 		if (exporter.getQualifier() == null) {
-			Bundle bundle = OSGi.getClassSupplier().getWorkspace()
-					.getBundle(getProject().getName());
-			Version version = bundle.getVersion();
+			Artifact artifact = OSGi.getClassSupplier().getWorkspace()
+					.getArtifact(getProject().getName());
+			Version version = artifact.getVersion();
 			exporter.setQualifier(version.getQualifier());
 		}
 		exporter.export(getProject());

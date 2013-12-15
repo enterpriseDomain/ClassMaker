@@ -20,7 +20,7 @@ public class PathHelper {
 
 	public static IPath getResourcePath(IProject project) {
 		String name = OSGi.getClassSupplier().getWorkspace()
-				.getBundle(project.getName()).getName();
+				.getArtifact(project.getName()).getName();
 		return project.getFullPath().append(getModelFolderName())
 				.append(getFileName(name));
 	}

@@ -4,7 +4,8 @@
     editDirectory="/org.classsupplier.edit/src" editorDirectory="/org.classsupplier.editor/src"
     modelPluginID="org.classsupplier" modelName="ClassSupplier" modelPluginClass=""
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false"
-    editPluginID="org.classsupplier.edit" editorPluginID="org.classsupplier.editor" usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore"
+    editPluginID="org.classsupplier.edit" editorPluginID="org.classsupplier.editor"
+    usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore"
     runtimePlatform="RCP" pluginKey="ClassSupplier">
   <foreignModel>ClassSupplier.ecore</foreignModel>
   <genPackages prefix="ClassSupplier" basePackage="org" disposableProviderFactory="true"
@@ -18,20 +19,20 @@
     <genDataTypes ecoreDataType="ClassSupplier.ecore#//Adapter"/>
     <genDataTypes ecoreDataType="ClassSupplier.ecore#//IStatus"/>
     <genDataTypes ecoreDataType="ClassSupplier.ecore#//IProgressMonitor"/>
-    <genClasses ecoreClass="ClassSupplier.ecore#//Bundle">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//Bundle/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//Bundle/ePackage"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//Bundle/dynamicEPackage"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//Bundle/state"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//Bundle/status"/>
+    <genClasses ecoreClass="ClassSupplier.ecore#//Artifact">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//Artifact/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//Artifact/ePackage"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//Artifact/dynamicEPackage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//Artifact/state"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//Artifact/status"/>
     </genClasses>
-    <genClasses ecoreClass="ClassSupplier.ecore#//ModelWorkspace">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//ModelWorkspace/contents"/>
-      <genOperations ecoreOperation="ClassSupplier.ecore#//ModelWorkspace/addRefreshListener">
-        <genParameters ecoreParameter="ClassSupplier.ecore#//ModelWorkspace/addRefreshListener/listener"/>
+    <genClasses ecoreClass="ClassSupplier.ecore#//MWorkspace">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//MWorkspace/contents"/>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//MWorkspace/addRefreshListener">
+        <genParameters ecoreParameter="ClassSupplier.ecore#//MWorkspace/addRefreshListener/listener"/>
       </genOperations>
-      <genOperations ecoreOperation="ClassSupplier.ecore#//ModelWorkspace/removeRefreshListener">
-        <genParameters ecoreParameter="ClassSupplier.ecore#//ModelWorkspace/removeRefreshListener/listener"/>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//MWorkspace/removeRefreshListener">
+        <genParameters ecoreParameter="ClassSupplier.ecore#//MWorkspace/removeRefreshListener/listener"/>
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="ClassSupplier.ecore#//ClassSupplier">

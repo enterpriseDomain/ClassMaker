@@ -36,7 +36,7 @@ public interface ClassSupplier extends EObject {
 	 * @model required="true" changeable="false"
 	 * @generated
 	 */
-	ModelWorkspace getWorkspace();
+	MWorkspace getWorkspace();
 
 	/**
 	 * <!-- begin-user-doc -->

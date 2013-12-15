@@ -22,22 +22,22 @@ public interface ClassSupplierFactory extends EFactory {
 	ClassSupplierFactory eINSTANCE = org.classsupplier.impl.ClassSupplierFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Bundle</em>'.
+	 * Returns a new object of class '<em>Artifact</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Bundle</em>'.
+	 * @return a new object of class '<em>Artifact</em>'.
 	 * @generated
 	 */
-	Bundle createBundle();
+	Artifact createArtifact();
 
 	/**
-	 * Returns a new object of class '<em>Model Workspace</em>'.
+	 * Returns a new object of class '<em>MWorkspace</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Model Workspace</em>'.
+	 * @return a new object of class '<em>MWorkspace</em>'.
 	 * @generated
 	 */
-	ModelWorkspace createModelWorkspace();
+	MWorkspace createMWorkspace();
 
 	/**
 	 * Returns a new object of class '<em>Class Supplier</em>'.

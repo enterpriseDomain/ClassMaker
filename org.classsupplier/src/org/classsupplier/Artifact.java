@@ -3,32 +3,33 @@
 package org.classsupplier;
 
 import org.eclipse.core.runtime.IStatus;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Bundle</b></em>'.
+ * A representation of the model object '<em><b>Artifact</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.classsupplier.Bundle#getName <em>Name</em>}</li>
- *   <li>{@link org.classsupplier.Bundle#getEPackage <em>EPackage</em>}</li>
- *   <li>{@link org.classsupplier.Bundle#getDynamicEPackage <em>Dynamic EPackage</em>}</li>
- *   <li>{@link org.classsupplier.Bundle#getVersion <em>Version</em>}</li>
- *   <li>{@link org.classsupplier.Bundle#getProjectName <em>Project Name</em>}</li>
- *   <li>{@link org.classsupplier.Bundle#getState <em>State</em>}</li>
- *   <li>{@link org.classsupplier.Bundle#getStatus <em>Status</em>}</li>
+ *   <li>{@link org.classsupplier.Artifact#getName <em>Name</em>}</li>
+ *   <li>{@link org.classsupplier.Artifact#getEPackage <em>EPackage</em>}</li>
+ *   <li>{@link org.classsupplier.Artifact#getDynamicEPackage <em>Dynamic EPackage</em>}</li>
+ *   <li>{@link org.classsupplier.Artifact#getVersion <em>Version</em>}</li>
+ *   <li>{@link org.classsupplier.Artifact#getProjectName <em>Project Name</em>}</li>
+ *   <li>{@link org.classsupplier.Artifact#getState <em>State</em>}</li>
+ *   <li>{@link org.classsupplier.Artifact#getStatus <em>Status</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.classsupplier.ClassSupplierPackage#getBundle()
+ * @see org.classsupplier.ClassSupplierPackage#getArtifact()
  * @model
  * @generated
  */
-public interface Bundle extends EObject {
+public interface Artifact extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -39,14 +40,14 @@ public interface Bundle extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see org.classsupplier.ClassSupplierPackage#getBundle_Name()
+	 * @see org.classsupplier.ClassSupplierPackage#getArtifact_Name()
 	 * @model
 	 * @generated
 	 */
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link org.classsupplier.Bundle#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link org.classsupplier.Artifact#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Name</em>' attribute.
@@ -65,14 +66,14 @@ public interface Bundle extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>EPackage</em>' containment reference.
 	 * @see #setEPackage(EPackage)
-	 * @see org.classsupplier.ClassSupplierPackage#getBundle_EPackage()
+	 * @see org.classsupplier.ClassSupplierPackage#getArtifact_EPackage()
 	 * @model containment="true"
 	 * @generated
 	 */
 	EPackage getEPackage();
 
 	/**
-	 * Sets the value of the '{@link org.classsupplier.Bundle#getEPackage <em>EPackage</em>}' containment reference.
+	 * Sets the value of the '{@link org.classsupplier.Artifact#getEPackage <em>EPackage</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>EPackage</em>' containment reference.
@@ -85,20 +86,20 @@ public interface Bundle extends EObject {
 	 * Returns the value of the '<em><b>Dynamic EPackage</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Dynamic EPackage</em>' reference isn't clear,
+	 * If the meaning of the '<em>Dynamic EPackage</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Dynamic EPackage</em>' containment reference.
 	 * @see #setDynamicEPackage(EPackage)
-	 * @see org.classsupplier.ClassSupplierPackage#getBundle_DynamicEPackage()
+	 * @see org.classsupplier.ClassSupplierPackage#getArtifact_DynamicEPackage()
 	 * @model containment="true"
 	 * @generated
 	 */
 	EPackage getDynamicEPackage();
 
 	/**
-	 * Sets the value of the '{@link org.classsupplier.Bundle#getDynamicEPackage <em>Dynamic EPackage</em>}' containment reference.
+	 * Sets the value of the '{@link org.classsupplier.Artifact#getDynamicEPackage <em>Dynamic EPackage</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Dynamic EPackage</em>' containment reference.
@@ -117,14 +118,14 @@ public interface Bundle extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Version</em>' attribute.
 	 * @see #setVersion(Version)
-	 * @see org.classsupplier.ClassSupplierPackage#getBundle_Version()
+	 * @see org.classsupplier.ClassSupplierPackage#getArtifact_Version()
 	 * @model dataType="org.classsupplier.Version"
 	 * @generated
 	 */
 	Version getVersion();
 
 	/**
-	 * Sets the value of the '{@link org.classsupplier.Bundle#getVersion <em>Version</em>}' attribute.
+	 * Sets the value of the '{@link org.classsupplier.Artifact#getVersion <em>Version</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Version</em>' attribute.
@@ -143,14 +144,14 @@ public interface Bundle extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Project Name</em>' attribute.
 	 * @see #setProjectName(String)
-	 * @see org.classsupplier.ClassSupplierPackage#getBundle_ProjectName()
+	 * @see org.classsupplier.ClassSupplierPackage#getArtifact_ProjectName()
 	 * @model
 	 * @generated
 	 */
 	String getProjectName();
 
 	/**
-	 * Sets the value of the '{@link org.classsupplier.Bundle#getProjectName <em>Project Name</em>}' attribute.
+	 * Sets the value of the '{@link org.classsupplier.Artifact#getProjectName <em>Project Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Project Name</em>' attribute.
@@ -171,14 +172,14 @@ public interface Bundle extends EObject {
 	 * @return the value of the '<em>State</em>' attribute.
 	 * @see org.classsupplier.State
 	 * @see #setState(State)
-	 * @see org.classsupplier.ClassSupplierPackage#getBundle_State()
+	 * @see org.classsupplier.ClassSupplierPackage#getArtifact_State()
 	 * @model
 	 * @generated
 	 */
 	State getState();
 
 	/**
-	 * Sets the value of the '{@link org.classsupplier.Bundle#getState <em>State</em>}' attribute.
+	 * Sets the value of the '{@link org.classsupplier.Artifact#getState <em>State</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>State</em>' attribute.
@@ -198,14 +199,14 @@ public interface Bundle extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Status</em>' attribute.
 	 * @see #setStatus(IStatus)
-	 * @see org.classsupplier.ClassSupplierPackage#getBundle_Status()
+	 * @see org.classsupplier.ClassSupplierPackage#getArtifact_Status()
 	 * @model dataType="org.classsupplier.IStatus"
 	 * @generated
 	 */
 	IStatus getStatus();
 
 	/**
-	 * Sets the value of the '{@link org.classsupplier.Bundle#getStatus <em>Status</em>}' attribute.
+	 * Sets the value of the '{@link org.classsupplier.Artifact#getStatus <em>Status</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Status</em>' attribute.
@@ -214,4 +215,4 @@ public interface Bundle extends EObject {
 	 */
 	void setStatus(IStatus value);
 
-} // Bundle
+} // Artifact

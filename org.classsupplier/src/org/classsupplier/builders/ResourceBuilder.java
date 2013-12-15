@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
 
-import org.classsupplier.Bundle;
+import org.classsupplier.Artifact;
 import org.classsupplier.PathHelper;
 import org.classsupplier.State;
 import org.classsupplier.impl.OSGi;
@@ -41,19 +41,19 @@ public class ResourceBuilder extends IncrementalProjectBuilder {
 		if (!folder.exists())
 			folder.create(true, true, monitor);
 		ISchedulingRule rule = getRule(kind, args);
-		Bundle bundle = OSGi.getClassSupplier().getWorkspace()
-				.getBundle(getProject().getName());
-		getProject().getWorkspace().run(new ResourceRunnable(bundle), rule, 0,
-				monitor);
+		Artifact artifact = OSGi.getClassSupplier().getWorkspace()
+				.getArtifact(getProject().getName());
+		getProject().getWorkspace().run(new ResourceRunnable(artifact), rule,
+				0, monitor);
 		return null;
 	}
 
 	private class ResourceRunnable implements IWorkspaceRunnable {
 
-		private Bundle bundle;
+		private Artifact artifact;
 
-		public ResourceRunnable(Bundle bundle) {
-			this.bundle = bundle;
+		public ResourceRunnable(Artifact artifact) {
+			this.artifact = artifact;
 		}
 
 		@Override
@@ -66,11 +66,11 @@ public class ResourceBuilder extends IncrementalProjectBuilder {
 			Resource resource = resourceSet.getResource(modelURI, false);
 			if (resource == null)
 				resource = resourceSet.createResource(modelURI);
-			if (bundle.getState() == State.DYNAMIC
-					|| bundle.getState() == State.REFRESHING) {
+			if (artifact.getState() == State.DYNAMIC
+					|| artifact.getState() == State.REFRESHING) {
 				resource.getContents().clear();
 				resource.getContents().add(
-						EcoreUtil.copy(bundle.getDynamicEPackage()));
+						EcoreUtil.copy(artifact.getDynamicEPackage()));
 			}
 			try {
 				resource.save(Collections.emptyMap());

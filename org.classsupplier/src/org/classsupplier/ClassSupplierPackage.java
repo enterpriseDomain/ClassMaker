@@ -58,14 +58,14 @@ public interface ClassSupplierPackage extends EPackage {
 	ClassSupplierPackage eINSTANCE = org.classsupplier.impl.ClassSupplierPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.classsupplier.impl.BundleImpl <em>Bundle</em>}' class.
+	 * The meta object id for the '{@link org.classsupplier.impl.ArtifactImpl <em>Artifact</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.classsupplier.impl.BundleImpl
-	 * @see org.classsupplier.impl.ClassSupplierPackageImpl#getBundle()
+	 * @see org.classsupplier.impl.ArtifactImpl
+	 * @see org.classsupplier.impl.ClassSupplierPackageImpl#getArtifact()
 	 * @generated
 	 */
-	int BUNDLE = 0;
+	int ARTIFACT = 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -74,7 +74,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BUNDLE__NAME = 0;
+	int ARTIFACT__NAME = 0;
 
 	/**
 	 * The feature id for the '<em><b>EPackage</b></em>' containment reference.
@@ -83,7 +83,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BUNDLE__EPACKAGE = 1;
+	int ARTIFACT__EPACKAGE = 1;
 
 	/**
 	 * The feature id for the '<em><b>Dynamic EPackage</b></em>' containment reference.
@@ -92,7 +92,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BUNDLE__DYNAMIC_EPACKAGE = 2;
+	int ARTIFACT__DYNAMIC_EPACKAGE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Version</b></em>' attribute.
@@ -101,7 +101,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BUNDLE__VERSION = 3;
+	int ARTIFACT__VERSION = 3;
 
 	/**
 	 * The feature id for the '<em><b>Project Name</b></em>' attribute.
@@ -110,7 +110,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BUNDLE__PROJECT_NAME = 4;
+	int ARTIFACT__PROJECT_NAME = 4;
 
 	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
@@ -119,7 +119,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BUNDLE__STATE = 5;
+	int ARTIFACT__STATE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -128,26 +128,26 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BUNDLE__STATUS = 6;
+	int ARTIFACT__STATUS = 6;
 
 	/**
-	 * The number of structural features of the '<em>Bundle</em>' class.
+	 * The number of structural features of the '<em>Artifact</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BUNDLE_FEATURE_COUNT = 7;
+	int ARTIFACT_FEATURE_COUNT = 7;
 
 	/**
-	 * The meta object id for the '{@link org.classsupplier.impl.ModelWorkspaceImpl <em>Model Workspace</em>}' class.
+	 * The meta object id for the '{@link org.classsupplier.impl.MWorkspaceImpl <em>MWorkspace</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.classsupplier.impl.ModelWorkspaceImpl
-	 * @see org.classsupplier.impl.ClassSupplierPackageImpl#getModelWorkspace()
+	 * @see org.classsupplier.impl.MWorkspaceImpl
+	 * @see org.classsupplier.impl.ClassSupplierPackageImpl#getMWorkspace()
 	 * @generated
 	 */
-	int MODEL_WORKSPACE = 1;
+	int MWORKSPACE = 1;
 
 	/**
 	 * The feature id for the '<em><b>Contents</b></em>' containment reference list.
@@ -156,7 +156,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_WORKSPACE__CONTENTS = 0;
+	int MWORKSPACE__CONTENTS = 0;
 
 	/**
 	 * The feature id for the '<em><b>Resource Set</b></em>' attribute.
@@ -165,16 +165,16 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_WORKSPACE__RESOURCE_SET = 1;
+	int MWORKSPACE__RESOURCE_SET = 1;
 
 	/**
-	 * The number of structural features of the '<em>Model Workspace</em>' class.
+	 * The number of structural features of the '<em>MWorkspace</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_WORKSPACE_FEATURE_COUNT = 2;
+	int MWORKSPACE_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.classsupplier.impl.ClassSupplierImpl <em>Class Supplier</em>}' class.
@@ -257,123 +257,123 @@ public interface ClassSupplierPackage extends EPackage {
 
 
 	/**
-	 * Returns the meta object for class '{@link org.classsupplier.Bundle <em>Bundle</em>}'.
+	 * Returns the meta object for class '{@link org.classsupplier.Artifact <em>Artifact</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Bundle</em>'.
-	 * @see org.classsupplier.Bundle
+	 * @return the meta object for class '<em>Artifact</em>'.
+	 * @see org.classsupplier.Artifact
 	 * @generated
 	 */
-	EClass getBundle();
+	EClass getArtifact();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.classsupplier.Bundle#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.classsupplier.Artifact#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.classsupplier.Bundle#getName()
-	 * @see #getBundle()
+	 * @see org.classsupplier.Artifact#getName()
+	 * @see #getArtifact()
 	 * @generated
 	 */
-	EAttribute getBundle_Name();
+	EAttribute getArtifact_Name();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.classsupplier.Bundle#getEPackage <em>EPackage</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.classsupplier.Artifact#getEPackage <em>EPackage</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>EPackage</em>'.
-	 * @see org.classsupplier.Bundle#getEPackage()
-	 * @see #getBundle()
+	 * @see org.classsupplier.Artifact#getEPackage()
+	 * @see #getArtifact()
 	 * @generated
 	 */
-	EReference getBundle_EPackage();
+	EReference getArtifact_EPackage();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.classsupplier.Bundle#getDynamicEPackage <em>Dynamic EPackage</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.classsupplier.Artifact#getDynamicEPackage <em>Dynamic EPackage</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Dynamic EPackage</em>'.
-	 * @see org.classsupplier.Bundle#getDynamicEPackage()
-	 * @see #getBundle()
+	 * @see org.classsupplier.Artifact#getDynamicEPackage()
+	 * @see #getArtifact()
 	 * @generated
 	 */
-	EReference getBundle_DynamicEPackage();
+	EReference getArtifact_DynamicEPackage();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.classsupplier.Bundle#getVersion <em>Version</em>}'.
+	 * Returns the meta object for the attribute '{@link org.classsupplier.Artifact#getVersion <em>Version</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Version</em>'.
-	 * @see org.classsupplier.Bundle#getVersion()
-	 * @see #getBundle()
+	 * @see org.classsupplier.Artifact#getVersion()
+	 * @see #getArtifact()
 	 * @generated
 	 */
-	EAttribute getBundle_Version();
+	EAttribute getArtifact_Version();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.classsupplier.Bundle#getProjectName <em>Project Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.classsupplier.Artifact#getProjectName <em>Project Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Project Name</em>'.
-	 * @see org.classsupplier.Bundle#getProjectName()
-	 * @see #getBundle()
+	 * @see org.classsupplier.Artifact#getProjectName()
+	 * @see #getArtifact()
 	 * @generated
 	 */
-	EAttribute getBundle_ProjectName();
+	EAttribute getArtifact_ProjectName();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.classsupplier.Bundle#getState <em>State</em>}'.
+	 * Returns the meta object for the attribute '{@link org.classsupplier.Artifact#getState <em>State</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>State</em>'.
-	 * @see org.classsupplier.Bundle#getState()
-	 * @see #getBundle()
+	 * @see org.classsupplier.Artifact#getState()
+	 * @see #getArtifact()
 	 * @generated
 	 */
-	EAttribute getBundle_State();
+	EAttribute getArtifact_State();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.classsupplier.Bundle#getStatus <em>Status</em>}'.
+	 * Returns the meta object for the attribute '{@link org.classsupplier.Artifact#getStatus <em>Status</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Status</em>'.
-	 * @see org.classsupplier.Bundle#getStatus()
-	 * @see #getBundle()
+	 * @see org.classsupplier.Artifact#getStatus()
+	 * @see #getArtifact()
 	 * @generated
 	 */
-	EAttribute getBundle_Status();
+	EAttribute getArtifact_Status();
 
 	/**
-	 * Returns the meta object for class '{@link org.classsupplier.ModelWorkspace <em>Model Workspace</em>}'.
+	 * Returns the meta object for class '{@link org.classsupplier.MWorkspace <em>MWorkspace</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Model Workspace</em>'.
-	 * @see org.classsupplier.ModelWorkspace
+	 * @return the meta object for class '<em>MWorkspace</em>'.
+	 * @see org.classsupplier.MWorkspace
 	 * @generated
 	 */
-	EClass getModelWorkspace();
+	EClass getMWorkspace();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.classsupplier.ModelWorkspace#getContents <em>Contents</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.classsupplier.MWorkspace#getContents <em>Contents</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Contents</em>'.
-	 * @see org.classsupplier.ModelWorkspace#getContents()
-	 * @see #getModelWorkspace()
+	 * @see org.classsupplier.MWorkspace#getContents()
+	 * @see #getMWorkspace()
 	 * @generated
 	 */
-	EReference getModelWorkspace_Contents();
+	EReference getMWorkspace_Contents();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.classsupplier.ModelWorkspace#getResourceSet <em>Resource Set</em>}'.
+	 * Returns the meta object for the attribute '{@link org.classsupplier.MWorkspace#getResourceSet <em>Resource Set</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Resource Set</em>'.
-	 * @see org.classsupplier.ModelWorkspace#getResourceSet()
-	 * @see #getModelWorkspace()
+	 * @see org.classsupplier.MWorkspace#getResourceSet()
+	 * @see #getMWorkspace()
 	 * @generated
 	 */
-	EAttribute getModelWorkspace_ResourceSet();
+	EAttribute getMWorkspace_ResourceSet();
 
 	/**
 	 * Returns the meta object for class '{@link org.classsupplier.ClassSupplier <em>Class Supplier</em>}'.
@@ -473,14 +473,14 @@ public interface ClassSupplierPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.classsupplier.impl.BundleImpl <em>Bundle</em>}' class.
+		 * The meta object literal for the '{@link org.classsupplier.impl.ArtifactImpl <em>Artifact</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.classsupplier.impl.BundleImpl
-		 * @see org.classsupplier.impl.ClassSupplierPackageImpl#getBundle()
+		 * @see org.classsupplier.impl.ArtifactImpl
+		 * @see org.classsupplier.impl.ClassSupplierPackageImpl#getArtifact()
 		 * @generated
 		 */
-		EClass BUNDLE = eINSTANCE.getBundle();
+		EClass ARTIFACT = eINSTANCE.getArtifact();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -488,7 +488,7 @@ public interface ClassSupplierPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute BUNDLE__NAME = eINSTANCE.getBundle_Name();
+		EAttribute ARTIFACT__NAME = eINSTANCE.getArtifact_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>EPackage</b></em>' containment reference feature.
@@ -496,7 +496,7 @@ public interface ClassSupplierPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference BUNDLE__EPACKAGE = eINSTANCE.getBundle_EPackage();
+		EReference ARTIFACT__EPACKAGE = eINSTANCE.getArtifact_EPackage();
 
 		/**
 		 * The meta object literal for the '<em><b>Dynamic EPackage</b></em>' containment reference feature.
@@ -504,7 +504,7 @@ public interface ClassSupplierPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference BUNDLE__DYNAMIC_EPACKAGE = eINSTANCE.getBundle_DynamicEPackage();
+		EReference ARTIFACT__DYNAMIC_EPACKAGE = eINSTANCE.getArtifact_DynamicEPackage();
 
 		/**
 		 * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
@@ -512,7 +512,7 @@ public interface ClassSupplierPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute BUNDLE__VERSION = eINSTANCE.getBundle_Version();
+		EAttribute ARTIFACT__VERSION = eINSTANCE.getArtifact_Version();
 
 		/**
 		 * The meta object literal for the '<em><b>Project Name</b></em>' attribute feature.
@@ -520,7 +520,7 @@ public interface ClassSupplierPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute BUNDLE__PROJECT_NAME = eINSTANCE.getBundle_ProjectName();
+		EAttribute ARTIFACT__PROJECT_NAME = eINSTANCE.getArtifact_ProjectName();
 
 		/**
 		 * The meta object literal for the '<em><b>State</b></em>' attribute feature.
@@ -528,7 +528,7 @@ public interface ClassSupplierPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute BUNDLE__STATE = eINSTANCE.getBundle_State();
+		EAttribute ARTIFACT__STATE = eINSTANCE.getArtifact_State();
 
 		/**
 		 * The meta object literal for the '<em><b>Status</b></em>' attribute feature.
@@ -536,17 +536,17 @@ public interface ClassSupplierPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute BUNDLE__STATUS = eINSTANCE.getBundle_Status();
+		EAttribute ARTIFACT__STATUS = eINSTANCE.getArtifact_Status();
 
 		/**
-		 * The meta object literal for the '{@link org.classsupplier.impl.ModelWorkspaceImpl <em>Model Workspace</em>}' class.
+		 * The meta object literal for the '{@link org.classsupplier.impl.MWorkspaceImpl <em>MWorkspace</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.classsupplier.impl.ModelWorkspaceImpl
-		 * @see org.classsupplier.impl.ClassSupplierPackageImpl#getModelWorkspace()
+		 * @see org.classsupplier.impl.MWorkspaceImpl
+		 * @see org.classsupplier.impl.ClassSupplierPackageImpl#getMWorkspace()
 		 * @generated
 		 */
-		EClass MODEL_WORKSPACE = eINSTANCE.getModelWorkspace();
+		EClass MWORKSPACE = eINSTANCE.getMWorkspace();
 
 		/**
 		 * The meta object literal for the '<em><b>Contents</b></em>' containment reference list feature.
@@ -554,7 +554,7 @@ public interface ClassSupplierPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MODEL_WORKSPACE__CONTENTS = eINSTANCE.getModelWorkspace_Contents();
+		EReference MWORKSPACE__CONTENTS = eINSTANCE.getMWorkspace_Contents();
 
 		/**
 		 * The meta object literal for the '<em><b>Resource Set</b></em>' attribute feature.
@@ -562,7 +562,7 @@ public interface ClassSupplierPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute MODEL_WORKSPACE__RESOURCE_SET = eINSTANCE.getModelWorkspace_ResourceSet();
+		EAttribute MWORKSPACE__RESOURCE_SET = eINSTANCE.getMWorkspace_ResourceSet();
 
 		/**
 		 * The meta object literal for the '{@link org.classsupplier.impl.ClassSupplierImpl <em>Class Supplier</em>}' class.

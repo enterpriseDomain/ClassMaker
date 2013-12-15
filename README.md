@@ -1,7 +1,7 @@
 ClassSupplier
 ============
 
-ClassSupplier is a Java library for creating the code immediately available to call. The code is created according to EMF model-based blueprint and is loaded by the OSGi .  
+ClassSupplier is a Java library for creating the code that is immediately available to call. The code is created according to EMF model-based blueprint and is loaded by the OSGi.  
 
 
 Example:  
