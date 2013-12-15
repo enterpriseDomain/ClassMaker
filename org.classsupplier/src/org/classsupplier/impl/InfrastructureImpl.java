@@ -8,7 +8,7 @@ import java.util.Map;
 
 import org.classsupplier.Artifact;
 import org.classsupplier.ClassSupplierPackage;
-import org.classsupplier.MWorkspace;
+import org.classsupplier.Infrastructure;
 import org.classsupplier.State;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
@@ -29,18 +29,18 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>MWorkspace</b></em>'. <!-- end-user-doc -->
+ * <em><b>Infrastructure</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.classsupplier.impl.MWorkspaceImpl#getContents <em>Contents</em>}</li>
- *   <li>{@link org.classsupplier.impl.MWorkspaceImpl#getResourceSet <em>Resource Set</em>}</li>
+ *   <li>{@link org.classsupplier.impl.InfrastructureImpl#getContents <em>Contents</em>}</li>
+ *   <li>{@link org.classsupplier.impl.InfrastructureImpl#getResourceSet <em>Resource Set</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class MWorkspaceImpl extends EObjectImpl implements MWorkspace {
+public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 	/**
 	 * The cached value of the '{@link #getContents() <em>Contents</em>}' containment reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -51,14 +51,13 @@ public class MWorkspaceImpl extends EObjectImpl implements MWorkspace {
 	protected EList<Artifact> contents;
 
 	/**
-	 * The default value of the '{@link #getResourceSet() <em>Resource Set</em>}
-	 * ' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getResourceSet() <em>Resource Set</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getResourceSet()
 	 * @generated NOT
 	 * @ordered
 	 */
-	protected static final ResourceSet RESOURCE_SET_EDEFAULT = new ResourceSetImpl();;
+	protected static final ResourceSet RESOURCE_SET_EDEFAULT = new ResourceSetImpl();
 
 	/**
 	 * The cached value of the '{@link #getResourceSet() <em>Resource Set</em>}' attribute.
@@ -78,7 +77,7 @@ public class MWorkspaceImpl extends EObjectImpl implements MWorkspace {
 		@Override
 		public void notifyChanged(Notification msg) {
 			if (msg.getFeatureID(Artifact.class) == ClassSupplierPackage.ARTIFACT__STATE
-					&& msg.getNewValue() == State.DYNAMIC)
+					&& msg.getNewValue() == State.PROTOTYPE)
 				notifyListeners(new NotificationImpl(msg.getEventType(), null,
 						msg.getNotifier()));
 
@@ -90,7 +89,7 @@ public class MWorkspaceImpl extends EObjectImpl implements MWorkspace {
 
 		@Override
 		public void notifyChanged(Notification msg) {
-			if (msg.getFeatureID(getClass()) == ClassSupplierPackage.MWORKSPACE__CONTENTS)
+			if (msg.getFeatureID(getClass()) == ClassSupplierPackage.INFRASTRUCTURE__CONTENTS)
 				switch (msg.getEventType()) {
 				case Notification.ADD:
 					((EObject) msg.getNewValue()).eAdapters().add(
@@ -110,7 +109,7 @@ public class MWorkspaceImpl extends EObjectImpl implements MWorkspace {
 	 * 
 	 * @generated NOT
 	 */
-	protected MWorkspaceImpl() {
+	protected InfrastructureImpl() {
 		super();
 		eAdapters().add(attachingAdapter);
 	}
@@ -121,7 +120,7 @@ public class MWorkspaceImpl extends EObjectImpl implements MWorkspace {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ClassSupplierPackage.Literals.MWORKSPACE;
+		return ClassSupplierPackage.Literals.INFRASTRUCTURE;
 	}
 
 	/**
@@ -130,7 +129,7 @@ public class MWorkspaceImpl extends EObjectImpl implements MWorkspace {
 	 */
 	public EList<Artifact> getContents() {
 		if (contents == null) {
-			contents = new EObjectContainmentEList<Artifact>(Artifact.class, this, ClassSupplierPackage.MWORKSPACE__CONTENTS);
+			contents = new EObjectContainmentEList<Artifact>(Artifact.class, this, ClassSupplierPackage.INFRASTRUCTURE__CONTENTS);
 		}
 		return contents;
 	}
@@ -151,7 +150,7 @@ public class MWorkspaceImpl extends EObjectImpl implements MWorkspace {
 		ResourceSet oldResourceSet = resourceSet;
 		resourceSet = newResourceSet;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.MWORKSPACE__RESOURCE_SET, oldResourceSet, resourceSet));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.INFRASTRUCTURE__RESOURCE_SET, oldResourceSet, resourceSet));
 	}
 
 	/**
@@ -225,7 +224,7 @@ public class MWorkspaceImpl extends EObjectImpl implements MWorkspace {
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ClassSupplierPackage.MWORKSPACE__CONTENTS:
+			case ClassSupplierPackage.INFRASTRUCTURE__CONTENTS:
 				return ((InternalEList<?>)getContents()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -238,9 +237,9 @@ public class MWorkspaceImpl extends EObjectImpl implements MWorkspace {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClassSupplierPackage.MWORKSPACE__CONTENTS:
+			case ClassSupplierPackage.INFRASTRUCTURE__CONTENTS:
 				return getContents();
-			case ClassSupplierPackage.MWORKSPACE__RESOURCE_SET:
+			case ClassSupplierPackage.INFRASTRUCTURE__RESOURCE_SET:
 				return getResourceSet();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -254,11 +253,11 @@ public class MWorkspaceImpl extends EObjectImpl implements MWorkspace {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClassSupplierPackage.MWORKSPACE__CONTENTS:
+			case ClassSupplierPackage.INFRASTRUCTURE__CONTENTS:
 				getContents().clear();
 				getContents().addAll((Collection<? extends Artifact>)newValue);
 				return;
-			case ClassSupplierPackage.MWORKSPACE__RESOURCE_SET:
+			case ClassSupplierPackage.INFRASTRUCTURE__RESOURCE_SET:
 				setResourceSet((ResourceSet)newValue);
 				return;
 		}
@@ -272,10 +271,10 @@ public class MWorkspaceImpl extends EObjectImpl implements MWorkspace {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClassSupplierPackage.MWORKSPACE__CONTENTS:
+			case ClassSupplierPackage.INFRASTRUCTURE__CONTENTS:
 				getContents().clear();
 				return;
-			case ClassSupplierPackage.MWORKSPACE__RESOURCE_SET:
+			case ClassSupplierPackage.INFRASTRUCTURE__RESOURCE_SET:
 				setResourceSet(RESOURCE_SET_EDEFAULT);
 				return;
 		}
@@ -289,9 +288,9 @@ public class MWorkspaceImpl extends EObjectImpl implements MWorkspace {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClassSupplierPackage.MWORKSPACE__CONTENTS:
+			case ClassSupplierPackage.INFRASTRUCTURE__CONTENTS:
 				return contents != null && !contents.isEmpty();
-			case ClassSupplierPackage.MWORKSPACE__RESOURCE_SET:
+			case ClassSupplierPackage.INFRASTRUCTURE__RESOURCE_SET:
 				return RESOURCE_SET_EDEFAULT == null ? resourceSet != null : !RESOURCE_SET_EDEFAULT.equals(resourceSet);
 		}
 		return super.eIsSet(featureID);
@@ -312,4 +311,4 @@ public class MWorkspaceImpl extends EObjectImpl implements MWorkspace {
 		return result.toString();
 	}
 
-} // MWorkspaceImpl
+} // InfrastructureImpl

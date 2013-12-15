@@ -66,11 +66,11 @@ public class ResourceBuilder extends IncrementalProjectBuilder {
 			Resource resource = resourceSet.getResource(modelURI, false);
 			if (resource == null)
 				resource = resourceSet.createResource(modelURI);
-			if (artifact.getState() == State.DYNAMIC
-					|| artifact.getState() == State.REFRESHING) {
+			if (artifact.getState() == State.PROTOTYPE
+					|| artifact.getState() == State.PROCESSING) {
 				resource.getContents().clear();
 				resource.getContents().add(
-						EcoreUtil.copy(artifact.getDynamicEPackage()));
+						EcoreUtil.copy(artifact.getPrototypeEPackage()));
 			}
 			try {
 				resource.save(Collections.emptyMap());

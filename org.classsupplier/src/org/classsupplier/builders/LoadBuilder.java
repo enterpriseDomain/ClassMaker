@@ -47,7 +47,7 @@ public class LoadBuilder extends IncrementalProjectBuilder {
 					FrameworkWiring.class);
 			frameworkWiring.refreshBundles(bundles, new FrameworkListener[0]);
 			if (frameworkWiring.resolveBundles(bundles)) {
-				String packageClassName = artifact.getDynamicEPackage().getName()
+				String packageClassName = artifact.getPrototypeEPackage().getName()
 						+ "." + artifact.getName() + "Package";
 
 				Class<?> packageClass = osgiBundle.loadClass(packageClassName);

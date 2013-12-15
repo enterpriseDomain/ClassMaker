@@ -6,7 +6,7 @@ import org.classsupplier.Artifact;
 import org.classsupplier.ClassSupplier;
 import org.classsupplier.ClassSupplierFactory;
 import org.classsupplier.ClassSupplierPackage;
-import org.classsupplier.MWorkspace;
+import org.classsupplier.Infrastructure;
 import org.classsupplier.State;
 import org.classsupplier.Version;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -36,10 +36,11 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 	private EClass artifactEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass mWorkspaceEClass = null;
+	private EClass infrastructureEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -168,10 +169,11 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getArtifact_DynamicEPackage() {
+	public EReference getArtifact_PrototypeEPackage() {
 		return (EReference)artifactEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -208,27 +210,30 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getMWorkspace() {
-		return mWorkspaceEClass;
+	public EClass getInfrastructure() {
+		return infrastructureEClass;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMWorkspace_Contents() {
-		return (EReference)mWorkspaceEClass.getEStructuralFeatures().get(0);
+	public EReference getInfrastructure_Contents() {
+		return (EReference)infrastructureEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMWorkspace_ResourceSet() {
-		return (EAttribute)mWorkspaceEClass.getEStructuralFeatures().get(1);
+	public EAttribute getInfrastructure_ResourceSet() {
+		return (EAttribute)infrastructureEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -316,15 +321,15 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 		artifactEClass = createEClass(ARTIFACT);
 		createEAttribute(artifactEClass, ARTIFACT__NAME);
 		createEReference(artifactEClass, ARTIFACT__EPACKAGE);
-		createEReference(artifactEClass, ARTIFACT__DYNAMIC_EPACKAGE);
+		createEReference(artifactEClass, ARTIFACT__PROTOTYPE_EPACKAGE);
 		createEAttribute(artifactEClass, ARTIFACT__VERSION);
 		createEAttribute(artifactEClass, ARTIFACT__PROJECT_NAME);
 		createEAttribute(artifactEClass, ARTIFACT__STATE);
 		createEAttribute(artifactEClass, ARTIFACT__STATUS);
 
-		mWorkspaceEClass = createEClass(MWORKSPACE);
-		createEReference(mWorkspaceEClass, MWORKSPACE__CONTENTS);
-		createEAttribute(mWorkspaceEClass, MWORKSPACE__RESOURCE_SET);
+		infrastructureEClass = createEClass(INFRASTRUCTURE);
+		createEReference(infrastructureEClass, INFRASTRUCTURE__CONTENTS);
+		createEAttribute(infrastructureEClass, INFRASTRUCTURE__RESOURCE_SET);
 
 		classSupplierEClass = createEClass(CLASS_SUPPLIER);
 		createEReference(classSupplierEClass, CLASS_SUPPLIER__WORKSPACE);
@@ -374,37 +379,37 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 		initEClass(artifactEClass, Artifact.class, "Artifact", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getArtifact_Name(), ecorePackage.getEString(), "name", null, 0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getArtifact_EPackage(), theEcorePackage.getEPackage(), null, "ePackage", null, 0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getArtifact_DynamicEPackage(), theEcorePackage.getEPackage(), null, "dynamicEPackage", null, 0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getArtifact_PrototypeEPackage(), theEcorePackage.getEPackage(), null, "prototypeEPackage", null, 0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getArtifact_Version(), this.getVersion(), "version", null, 0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getArtifact_ProjectName(), ecorePackage.getEString(), "projectName", null, 0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getArtifact_State(), this.getState(), "state", null, 0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getArtifact_Status(), this.getIStatus(), "status", null, 0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(mWorkspaceEClass, MWorkspace.class, "MWorkspace", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMWorkspace_Contents(), this.getArtifact(), null, "contents", null, 0, -1, MWorkspace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMWorkspace_ResourceSet(), ecorePackage.getEResourceSet(), "resourceSet", null, 0, 1, MWorkspace.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(infrastructureEClass, Infrastructure.class, "Infrastructure", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getInfrastructure_Contents(), this.getArtifact(), null, "contents", null, 0, -1, Infrastructure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getInfrastructure_ResourceSet(), ecorePackage.getEResourceSet(), "resourceSet", null, 0, 1, Infrastructure.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = addEOperation(mWorkspaceEClass, null, "addRefreshListener", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EOperation op = addEOperation(infrastructureEClass, null, "addRefreshListener", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getAdapter(), "listener", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(mWorkspaceEClass, null, "removeRefreshListener", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(infrastructureEClass, null, "removeRefreshListener", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getAdapter(), "listener", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(mWorkspaceEClass, null, "registerArtifact", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(infrastructureEClass, null, "registerArtifact", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEPackage(), "model", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getArtifact(), "artifact", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(mWorkspaceEClass, ecorePackage.getEBoolean(), "containsArtifact", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(infrastructureEClass, ecorePackage.getEBoolean(), "containsArtifact", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEPackage(), "model", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(mWorkspaceEClass, this.getArtifact(), "getArtifact", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(infrastructureEClass, this.getArtifact(), "getArtifact", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "projectName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(mWorkspaceEClass, this.getArtifact(), "getArtifact", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(infrastructureEClass, this.getArtifact(), "getArtifact", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEPackage(), "ePackage", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(classSupplierEClass, ClassSupplier.class, "ClassSupplier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getClassSupplier_Workspace(), this.getMWorkspace(), null, "workspace", null, 1, 1, ClassSupplier.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClassSupplier_Workspace(), this.getInfrastructure(), null, "workspace", null, 1, 1, ClassSupplier.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(classSupplierEClass, theEcorePackage.getEPackage(), "supply", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEPackage(), "model", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -413,9 +418,9 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 		// Initialize enums and add enum literals
 		initEEnum(stateEEnum, State.class, "State");
 		addEEnumLiteral(stateEEnum, State.CREATED);
-		addEEnumLiteral(stateEEnum, State.DYNAMIC);
-		addEEnumLiteral(stateEEnum, State.REFRESHING);
-		addEEnumLiteral(stateEEnum, State.GENERATED);
+		addEEnumLiteral(stateEEnum, State.PROTOTYPE);
+		addEEnumLiteral(stateEEnum, State.PROCESSING);
+		addEEnumLiteral(stateEEnum, State.COMPLETE);
 
 		// Initialize data types
 		initEDataType(adapterEDataType, Adapter.class, "Adapter", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

@@ -13,22 +13,22 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>MWorkspace</b></em>'.
+ * A representation of the model object '<em><b>Infrastructure</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.classsupplier.MWorkspace#getContents <em>Contents</em>}</li>
- *   <li>{@link org.classsupplier.MWorkspace#getResourceSet <em>Resource Set</em>}</li>
+ *   <li>{@link org.classsupplier.Infrastructure#getContents <em>Contents</em>}</li>
+ *   <li>{@link org.classsupplier.Infrastructure#getResourceSet <em>Resource Set</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.classsupplier.ClassSupplierPackage#getMWorkspace()
+ * @see org.classsupplier.ClassSupplierPackage#getInfrastructure()
  * @model
  * @generated
  */
-public interface MWorkspace extends EObject {
+public interface Infrastructure extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Contents</b></em>' containment reference list.
 	 * The list contents are of type {@link org.classsupplier.Artifact}.
@@ -39,7 +39,7 @@ public interface MWorkspace extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Contents</em>' containment reference list.
-	 * @see org.classsupplier.ClassSupplierPackage#getMWorkspace_Contents()
+	 * @see org.classsupplier.ClassSupplierPackage#getInfrastructure_Contents()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -55,14 +55,14 @@ public interface MWorkspace extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Resource Set</em>' attribute.
 	 * @see #setResourceSet(ResourceSet)
-	 * @see org.classsupplier.ClassSupplierPackage#getMWorkspace_ResourceSet()
+	 * @see org.classsupplier.ClassSupplierPackage#getInfrastructure_ResourceSet()
 	 * @model transient="true"
 	 * @generated
 	 */
 	ResourceSet getResourceSet();
 
 	/**
-	 * Sets the value of the '{@link org.classsupplier.MWorkspace#getResourceSet <em>Resource Set</em>}' attribute.
+	 * Sets the value of the '{@link org.classsupplier.Infrastructure#getResourceSet <em>Resource Set</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Resource Set</em>' attribute.
@@ -119,4 +119,4 @@ public interface MWorkspace extends EObject {
 	 */
 	Artifact getArtifact(EPackage ePackage);
 
-} // MWorkspace
+} // Infrastructure

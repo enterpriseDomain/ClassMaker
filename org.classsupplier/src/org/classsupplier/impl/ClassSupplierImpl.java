@@ -6,11 +6,14 @@ import org.classsupplier.Artifact;
 import org.classsupplier.ClassSupplier;
 import org.classsupplier.ClassSupplierFactory;
 import org.classsupplier.ClassSupplierPackage;
-import org.classsupplier.MWorkspace;
+import org.classsupplier.Infrastructure;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
@@ -19,17 +22,16 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.classsupplier.impl.ClassSupplierImpl#getWorkspace <em>
- * Workspace</em>}</li>
+ *   <li>{@link org.classsupplier.impl.ClassSupplierImpl#getWorkspace <em>Workspace</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class ClassSupplierImpl extends EObjectImpl implements ClassSupplier {
 
-	protected MWorkspace workspace = ClassSupplierFactory.eINSTANCE
-			.createMWorkspace();
+	protected Infrastructure workspace = ClassSupplierFactory.eINSTANCE
+			.createInfrastructure();
 
 	private IProgressMonitor progressMonitor;
 
@@ -44,7 +46,6 @@ public class ClassSupplierImpl extends EObjectImpl implements ClassSupplier {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -52,16 +53,27 @@ public class ClassSupplierImpl extends EObjectImpl implements ClassSupplier {
 		return ClassSupplierPackage.Literals.CLASS_SUPPLIER;
 	}
 
-	public MWorkspace getWorkspace() {
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Infrastructure getWorkspace() {
+		if (workspace != null && workspace.eIsProxy()) {
+			InternalEObject oldWorkspace = (InternalEObject)workspace;
+			workspace = (Infrastructure)eResolveProxy(oldWorkspace);
+			if (workspace != oldWorkspace) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassSupplierPackage.CLASS_SUPPLIER__WORKSPACE, oldWorkspace, workspace));
+			}
+		}
 		return workspace;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
-	public MWorkspace basicGetWorkspace() {
+	public Infrastructure basicGetWorkspace() {
 		return workspace;
 	}
 
@@ -85,43 +97,40 @@ public class ClassSupplierImpl extends EObjectImpl implements ClassSupplier {
 		setMonitor(monitor);
 		if (getWorkspace().containsArtifact(model)) {
 			result = getWorkspace().getArtifact(model);
-			result.setDynamicEPackage(model);
+			result.setPrototypeEPackage(model);
 			return result.getEPackage();
 		}
 		result = ClassSupplierFactory.eINSTANCE.createArtifact();
 		result.setName(model.getName());
 		getWorkspace().registerArtifact(model, result);
-		result.setDynamicEPackage(model);
+		result.setPrototypeEPackage(model);
 		workspace.getContents().add(result);
 		return result.getEPackage();
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case ClassSupplierPackage.CLASS_SUPPLIER__WORKSPACE:
-			if (resolve)
-				return getWorkspace();
-			return basicGetWorkspace();
+			case ClassSupplierPackage.CLASS_SUPPLIER__WORKSPACE:
+				if (resolve) return getWorkspace();
+				return basicGetWorkspace();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case ClassSupplierPackage.CLASS_SUPPLIER__WORKSPACE:
-			return workspace != null;
+			case ClassSupplierPackage.CLASS_SUPPLIER__WORKSPACE:
+				return workspace != null;
 		}
 		return super.eIsSet(featureID);
 	}

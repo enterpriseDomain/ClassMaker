@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EPackage;
  * <ul>
  *   <li>{@link org.classsupplier.Artifact#getName <em>Name</em>}</li>
  *   <li>{@link org.classsupplier.Artifact#getEPackage <em>EPackage</em>}</li>
- *   <li>{@link org.classsupplier.Artifact#getDynamicEPackage <em>Dynamic EPackage</em>}</li>
+ *   <li>{@link org.classsupplier.Artifact#getPrototypeEPackage <em>Prototype EPackage</em>}</li>
  *   <li>{@link org.classsupplier.Artifact#getVersion <em>Version</em>}</li>
  *   <li>{@link org.classsupplier.Artifact#getProjectName <em>Project Name</em>}</li>
  *   <li>{@link org.classsupplier.Artifact#getState <em>State</em>}</li>
@@ -83,30 +83,30 @@ public interface Artifact extends EObject {
 	void setEPackage(EPackage value);
 
 	/**
-	 * Returns the value of the '<em><b>Dynamic EPackage</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Prototype EPackage</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Dynamic EPackage</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Prototype EPackage</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Dynamic EPackage</em>' containment reference.
-	 * @see #setDynamicEPackage(EPackage)
-	 * @see org.classsupplier.ClassSupplierPackage#getArtifact_DynamicEPackage()
+	 * @return the value of the '<em>Prototype EPackage</em>' containment reference.
+	 * @see #setPrototypeEPackage(EPackage)
+	 * @see org.classsupplier.ClassSupplierPackage#getArtifact_PrototypeEPackage()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EPackage getDynamicEPackage();
+	EPackage getPrototypeEPackage();
 
 	/**
-	 * Sets the value of the '{@link org.classsupplier.Artifact#getDynamicEPackage <em>Dynamic EPackage</em>}' containment reference.
+	 * Sets the value of the '{@link org.classsupplier.Artifact#getPrototypeEPackage <em>Prototype EPackage</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Dynamic EPackage</em>' containment reference.
-	 * @see #getDynamicEPackage()
+	 * @param value the new value of the '<em>Prototype EPackage</em>' containment reference.
+	 * @see #getPrototypeEPackage()
 	 * @generated
 	 */
-	void setDynamicEPackage(EPackage value);
+	void setPrototypeEPackage(EPackage value);
 
 	/**
 	 * Returns the value of the '<em><b>Version</b></em>' attribute.

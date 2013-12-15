@@ -8,7 +8,7 @@
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://org/classsupplier/0.7.1"
+            uri="http://org/classsupplier/0.7.2"
             class="org.classsupplier.ClassSupplierPackage"
             genModel="model/ClassSupplier.genmodel"/>
    </extension>

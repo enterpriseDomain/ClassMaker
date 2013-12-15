@@ -33,7 +33,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <ul>
  *   <li>{@link org.classsupplier.impl.ArtifactImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.classsupplier.impl.ArtifactImpl#getEPackage <em>EPackage</em>}</li>
- *   <li>{@link org.classsupplier.impl.ArtifactImpl#getDynamicEPackage <em>Dynamic EPackage</em>}</li>
+ *   <li>{@link org.classsupplier.impl.ArtifactImpl#getPrototypeEPackage <em>Prototype EPackage</em>}</li>
  *   <li>{@link org.classsupplier.impl.ArtifactImpl#getVersion <em>Version</em>}</li>
  *   <li>{@link org.classsupplier.impl.ArtifactImpl#getProjectName <em>Project Name</em>}</li>
  *   <li>{@link org.classsupplier.impl.ArtifactImpl#getState <em>State</em>}</li>
@@ -72,14 +72,14 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	protected EPackage ePackage;
 
 	/**
-	 * The cached value of the '{@link #getDynamicEPackage() <em>Dynamic EPackage</em>}' containment reference.
-	 * <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
-	 * @see #getDynamicEPackage()
+	 * The cached value of the '{@link #getPrototypeEPackage() <em>Prototype EPackage</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPrototypeEPackage()
 	 * @generated
 	 * @ordered
 	 */
-	protected EPackage dynamicEPackage;
+	protected EPackage prototypeEPackage;
 
 	/**
 	 * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
@@ -160,13 +160,13 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 			if (msg.getFeatureID(getClass()) == ClassSupplierPackage.ARTIFACT__NAME
 					&& msg.getEventType() == Notification.SET)
 				setProjectName(msg.getNewStringValue().toLowerCase());
-			if (msg.getFeatureID(getClass()) == ClassSupplierPackage.ARTIFACT__DYNAMIC_EPACKAGE
+			if (msg.getFeatureID(getClass()) == ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE
 					&& msg.getNewValue() != null) {
 				setStatus(STATUS_EDEFAULT);
-				setState(State.DYNAMIC);
+				setState(State.PROTOTYPE);
 			}
 			if (msg.getFeatureID(getClass()) == ClassSupplierPackage.ARTIFACT__STATE
-					&& msg.getNewValue() == State.DYNAMIC
+					&& msg.getNewValue() == State.PROTOTYPE
 					&& (getStatus() == null || getStatus().isOK()))
 				make();
 		}
@@ -193,7 +193,7 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	}
 
 	protected void make() {
-		setState(State.REFRESHING);
+		setState(State.PROCESSING);
 		IProgressMonitor monitor = OSGi.getClassSupplier().monitor();
 		try {
 			IWorkspace workspace = ResourcesPlugin.getWorkspace();
@@ -208,14 +208,14 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 		} catch (CoreException e) {
 			if (e.getStatus().getSeverity() == IStatus.ERROR) {
 				setStatus(e.getStatus());
-				setState(State.DYNAMIC);
-				setEPackage(getDynamicEPackage());
+				setState(State.PROTOTYPE);
+				setEPackage(getPrototypeEPackage());
 			}
 			e.printStackTrace();
 			return;
 		}
 		setStatus(new Status(IStatus.OK, OSGi.PLUGIN_ID, "Artifact is ready."));
-		setState(State.GENERATED);
+		setState(State.COMPLETE);
 	}
 
 	/**
@@ -245,10 +245,10 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	public String getName() {
 		if (eIsSet(ClassSupplierPackage.ARTIFACT__NAME))
 			return name;
-		if ((getState() == State.DYNAMIC || getState() == State.REFRESHING)
-				&& eIsSet(ClassSupplierPackage.ARTIFACT__DYNAMIC_EPACKAGE))
-			return getDynamicEPackage().getName();
-		if (getState() == State.GENERATED)
+		if ((getState() == State.PROTOTYPE || getState() == State.PROCESSING)
+				&& eIsSet(ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE))
+			return getPrototypeEPackage().getName();
+		if (getState() == State.COMPLETE)
 			return getEPackage().getName();
 		return name;
 	}
@@ -306,44 +306,46 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EPackage getDynamicEPackage() {
-		return dynamicEPackage;
+	public EPackage getPrototypeEPackage() {
+		return prototypeEPackage;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetDynamicEPackage(
-			EPackage newDynamicEPackage, NotificationChain msgs) {
-		EPackage oldDynamicEPackage = dynamicEPackage;
-		dynamicEPackage = newDynamicEPackage;
+	public NotificationChain basicSetPrototypeEPackage(EPackage newPrototypeEPackage, NotificationChain msgs) {
+		EPackage oldPrototypeEPackage = prototypeEPackage;
+		prototypeEPackage = newPrototypeEPackage;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.ARTIFACT__DYNAMIC_EPACKAGE, oldDynamicEPackage, newDynamicEPackage);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE, oldPrototypeEPackage, newPrototypeEPackage);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDynamicEPackage(EPackage newDynamicEPackage) {
-		if (newDynamicEPackage != dynamicEPackage) {
+	public void setPrototypeEPackage(EPackage newPrototypeEPackage) {
+		if (newPrototypeEPackage != prototypeEPackage) {
 			NotificationChain msgs = null;
-			if (dynamicEPackage != null)
-				msgs = ((InternalEObject)dynamicEPackage).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ClassSupplierPackage.ARTIFACT__DYNAMIC_EPACKAGE, null, msgs);
-			if (newDynamicEPackage != null)
-				msgs = ((InternalEObject)newDynamicEPackage).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ClassSupplierPackage.ARTIFACT__DYNAMIC_EPACKAGE, null, msgs);
-			msgs = basicSetDynamicEPackage(newDynamicEPackage, msgs);
+			if (prototypeEPackage != null)
+				msgs = ((InternalEObject)prototypeEPackage).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE, null, msgs);
+			if (newPrototypeEPackage != null)
+				msgs = ((InternalEObject)newPrototypeEPackage).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE, null, msgs);
+			msgs = basicSetPrototypeEPackage(newPrototypeEPackage, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.ARTIFACT__DYNAMIC_EPACKAGE, newDynamicEPackage, newDynamicEPackage));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE, newPrototypeEPackage, newPrototypeEPackage));
 	}
 
 	/**
@@ -435,8 +437,8 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 		switch (featureID) {
 			case ClassSupplierPackage.ARTIFACT__EPACKAGE:
 				return basicSetEPackage(null, msgs);
-			case ClassSupplierPackage.ARTIFACT__DYNAMIC_EPACKAGE:
-				return basicSetDynamicEPackage(null, msgs);
+			case ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE:
+				return basicSetPrototypeEPackage(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -452,8 +454,8 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 				return getName();
 			case ClassSupplierPackage.ARTIFACT__EPACKAGE:
 				return getEPackage();
-			case ClassSupplierPackage.ARTIFACT__DYNAMIC_EPACKAGE:
-				return getDynamicEPackage();
+			case ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE:
+				return getPrototypeEPackage();
 			case ClassSupplierPackage.ARTIFACT__VERSION:
 				return getVersion();
 			case ClassSupplierPackage.ARTIFACT__PROJECT_NAME:
@@ -479,8 +481,8 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 			case ClassSupplierPackage.ARTIFACT__EPACKAGE:
 				setEPackage((EPackage)newValue);
 				return;
-			case ClassSupplierPackage.ARTIFACT__DYNAMIC_EPACKAGE:
-				setDynamicEPackage((EPackage)newValue);
+			case ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE:
+				setPrototypeEPackage((EPackage)newValue);
 				return;
 			case ClassSupplierPackage.ARTIFACT__VERSION:
 				setVersion((Version)newValue);
@@ -511,8 +513,8 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 			case ClassSupplierPackage.ARTIFACT__EPACKAGE:
 				setEPackage((EPackage)null);
 				return;
-			case ClassSupplierPackage.ARTIFACT__DYNAMIC_EPACKAGE:
-				setDynamicEPackage((EPackage)null);
+			case ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE:
+				setPrototypeEPackage((EPackage)null);
 				return;
 			case ClassSupplierPackage.ARTIFACT__VERSION:
 				setVersion(VERSION_EDEFAULT);
@@ -541,8 +543,8 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ClassSupplierPackage.ARTIFACT__EPACKAGE:
 				return ePackage != null;
-			case ClassSupplierPackage.ARTIFACT__DYNAMIC_EPACKAGE:
-				return dynamicEPackage != null;
+			case ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE:
+				return prototypeEPackage != null;
 			case ClassSupplierPackage.ARTIFACT__VERSION:
 				return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
 			case ClassSupplierPackage.ARTIFACT__PROJECT_NAME:

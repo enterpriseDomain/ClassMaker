@@ -69,8 +69,8 @@ public class ClassSupplierAdapterFactory extends AdapterFactoryImpl {
 				return createArtifactAdapter();
 			}
 			@Override
-			public Adapter caseMWorkspace(MWorkspace object) {
-				return createMWorkspaceAdapter();
+			public Adapter caseInfrastructure(Infrastructure object) {
+				return createInfrastructureAdapter();
 			}
 			@Override
 			public Adapter caseClassSupplier(ClassSupplier object) {
@@ -111,16 +111,16 @@ public class ClassSupplierAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.classsupplier.MWorkspace <em>MWorkspace</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.classsupplier.Infrastructure <em>Infrastructure</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.classsupplier.MWorkspace
+	 * @see org.classsupplier.Infrastructure
 	 * @generated
 	 */
-	public Adapter createMWorkspaceAdapter() {
+	public Adapter createInfrastructureAdapter() {
 		return null;
 	}
 

@@ -31,13 +31,13 @@ public interface ClassSupplierFactory extends EFactory {
 	Artifact createArtifact();
 
 	/**
-	 * Returns a new object of class '<em>MWorkspace</em>'.
+	 * Returns a new object of class '<em>Infrastructure</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>MWorkspace</em>'.
+	 * @return a new object of class '<em>Infrastructure</em>'.
 	 * @generated
 	 */
-	MWorkspace createMWorkspace();
+	Infrastructure createInfrastructure();
 
 	/**
 	 * Returns a new object of class '<em>Class Supplier</em>'.

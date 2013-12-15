@@ -39,7 +39,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://org/classsupplier/0.7.1";
+	String eNS_URI = "http://org/classsupplier/0.7.2";
 
 	/**
 	 * The package namespace name.
@@ -86,13 +86,13 @@ public interface ClassSupplierPackage extends EPackage {
 	int ARTIFACT__EPACKAGE = 1;
 
 	/**
-	 * The feature id for the '<em><b>Dynamic EPackage</b></em>' containment reference.
+	 * The feature id for the '<em><b>Prototype EPackage</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ARTIFACT__DYNAMIC_EPACKAGE = 2;
+	int ARTIFACT__PROTOTYPE_EPACKAGE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Version</b></em>' attribute.
@@ -140,14 +140,14 @@ public interface ClassSupplierPackage extends EPackage {
 	int ARTIFACT_FEATURE_COUNT = 7;
 
 	/**
-	 * The meta object id for the '{@link org.classsupplier.impl.MWorkspaceImpl <em>MWorkspace</em>}' class.
+	 * The meta object id for the '{@link org.classsupplier.impl.InfrastructureImpl <em>Infrastructure</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.classsupplier.impl.MWorkspaceImpl
-	 * @see org.classsupplier.impl.ClassSupplierPackageImpl#getMWorkspace()
+	 * @see org.classsupplier.impl.InfrastructureImpl
+	 * @see org.classsupplier.impl.ClassSupplierPackageImpl#getInfrastructure()
 	 * @generated
 	 */
-	int MWORKSPACE = 1;
+	int INFRASTRUCTURE = 1;
 
 	/**
 	 * The feature id for the '<em><b>Contents</b></em>' containment reference list.
@@ -156,7 +156,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MWORKSPACE__CONTENTS = 0;
+	int INFRASTRUCTURE__CONTENTS = 0;
 
 	/**
 	 * The feature id for the '<em><b>Resource Set</b></em>' attribute.
@@ -165,16 +165,16 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MWORKSPACE__RESOURCE_SET = 1;
+	int INFRASTRUCTURE__RESOURCE_SET = 1;
 
 	/**
-	 * The number of structural features of the '<em>MWorkspace</em>' class.
+	 * The number of structural features of the '<em>Infrastructure</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MWORKSPACE_FEATURE_COUNT = 2;
+	int INFRASTRUCTURE_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.classsupplier.impl.ClassSupplierImpl <em>Class Supplier</em>}' class.
@@ -289,15 +289,15 @@ public interface ClassSupplierPackage extends EPackage {
 	EReference getArtifact_EPackage();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.classsupplier.Artifact#getDynamicEPackage <em>Dynamic EPackage</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.classsupplier.Artifact#getPrototypeEPackage <em>Prototype EPackage</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Dynamic EPackage</em>'.
-	 * @see org.classsupplier.Artifact#getDynamicEPackage()
+	 * @return the meta object for the containment reference '<em>Prototype EPackage</em>'.
+	 * @see org.classsupplier.Artifact#getPrototypeEPackage()
 	 * @see #getArtifact()
 	 * @generated
 	 */
-	EReference getArtifact_DynamicEPackage();
+	EReference getArtifact_PrototypeEPackage();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.classsupplier.Artifact#getVersion <em>Version</em>}'.
@@ -344,36 +344,36 @@ public interface ClassSupplierPackage extends EPackage {
 	EAttribute getArtifact_Status();
 
 	/**
-	 * Returns the meta object for class '{@link org.classsupplier.MWorkspace <em>MWorkspace</em>}'.
+	 * Returns the meta object for class '{@link org.classsupplier.Infrastructure <em>Infrastructure</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>MWorkspace</em>'.
-	 * @see org.classsupplier.MWorkspace
+	 * @return the meta object for class '<em>Infrastructure</em>'.
+	 * @see org.classsupplier.Infrastructure
 	 * @generated
 	 */
-	EClass getMWorkspace();
+	EClass getInfrastructure();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.classsupplier.MWorkspace#getContents <em>Contents</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.classsupplier.Infrastructure#getContents <em>Contents</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Contents</em>'.
-	 * @see org.classsupplier.MWorkspace#getContents()
-	 * @see #getMWorkspace()
+	 * @see org.classsupplier.Infrastructure#getContents()
+	 * @see #getInfrastructure()
 	 * @generated
 	 */
-	EReference getMWorkspace_Contents();
+	EReference getInfrastructure_Contents();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.classsupplier.MWorkspace#getResourceSet <em>Resource Set</em>}'.
+	 * Returns the meta object for the attribute '{@link org.classsupplier.Infrastructure#getResourceSet <em>Resource Set</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Resource Set</em>'.
-	 * @see org.classsupplier.MWorkspace#getResourceSet()
-	 * @see #getMWorkspace()
+	 * @see org.classsupplier.Infrastructure#getResourceSet()
+	 * @see #getInfrastructure()
 	 * @generated
 	 */
-	EAttribute getMWorkspace_ResourceSet();
+	EAttribute getInfrastructure_ResourceSet();
 
 	/**
 	 * Returns the meta object for class '{@link org.classsupplier.ClassSupplier <em>Class Supplier</em>}'.
@@ -499,12 +499,12 @@ public interface ClassSupplierPackage extends EPackage {
 		EReference ARTIFACT__EPACKAGE = eINSTANCE.getArtifact_EPackage();
 
 		/**
-		 * The meta object literal for the '<em><b>Dynamic EPackage</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Prototype EPackage</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ARTIFACT__DYNAMIC_EPACKAGE = eINSTANCE.getArtifact_DynamicEPackage();
+		EReference ARTIFACT__PROTOTYPE_EPACKAGE = eINSTANCE.getArtifact_PrototypeEPackage();
 
 		/**
 		 * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
@@ -539,14 +539,14 @@ public interface ClassSupplierPackage extends EPackage {
 		EAttribute ARTIFACT__STATUS = eINSTANCE.getArtifact_Status();
 
 		/**
-		 * The meta object literal for the '{@link org.classsupplier.impl.MWorkspaceImpl <em>MWorkspace</em>}' class.
+		 * The meta object literal for the '{@link org.classsupplier.impl.InfrastructureImpl <em>Infrastructure</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.classsupplier.impl.MWorkspaceImpl
-		 * @see org.classsupplier.impl.ClassSupplierPackageImpl#getMWorkspace()
+		 * @see org.classsupplier.impl.InfrastructureImpl
+		 * @see org.classsupplier.impl.ClassSupplierPackageImpl#getInfrastructure()
 		 * @generated
 		 */
-		EClass MWORKSPACE = eINSTANCE.getMWorkspace();
+		EClass INFRASTRUCTURE = eINSTANCE.getInfrastructure();
 
 		/**
 		 * The meta object literal for the '<em><b>Contents</b></em>' containment reference list feature.
@@ -554,7 +554,7 @@ public interface ClassSupplierPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MWORKSPACE__CONTENTS = eINSTANCE.getMWorkspace_Contents();
+		EReference INFRASTRUCTURE__CONTENTS = eINSTANCE.getInfrastructure_Contents();
 
 		/**
 		 * The meta object literal for the '<em><b>Resource Set</b></em>' attribute feature.
@@ -562,7 +562,7 @@ public interface ClassSupplierPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute MWORKSPACE__RESOURCE_SET = eINSTANCE.getMWorkspace_ResourceSet();
+		EAttribute INFRASTRUCTURE__RESOURCE_SET = eINSTANCE.getInfrastructure_ResourceSet();
 
 		/**
 		 * The meta object literal for the '{@link org.classsupplier.impl.ClassSupplierImpl <em>Class Supplier</em>}' class.

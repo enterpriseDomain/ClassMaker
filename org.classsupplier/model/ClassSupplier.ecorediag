@@ -63,15 +63,15 @@
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ixNxYWFjEeKjf_OKI_SsYg"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_mVaQ4GFjEeKjf_OKI_SsYg" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="ClassSupplier.ecore#//State/DYNAMIC"/>
+        <element xmi:type="ecore:EEnumLiteral" href="ClassSupplier.ecore#//State/PROTOTYPE"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_mVaQ4WFjEeKjf_OKI_SsYg"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_nawIUGFjEeKjf_OKI_SsYg" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="ClassSupplier.ecore#//State/REFRESHING"/>
+        <element xmi:type="ecore:EEnumLiteral" href="ClassSupplier.ecore#//State/PROCESSING"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_nawIUWFjEeKjf_OKI_SsYg"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_oWG9UGFjEeKjf_OKI_SsYg" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="ClassSupplier.ecore#//State/GENERATED"/>
+        <element xmi:type="ecore:EEnumLiteral" href="ClassSupplier.ecore#//State/COMPLETE"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_oWG9UWFjEeKjf_OKI_SsYg"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_hYN-IWFjEeKjf_OKI_SsYg"/>
@@ -86,7 +86,7 @@
     <children xmi:type="notation:Node" xmi:id="_t6vqkGFjEeKjf_OKI_SsYg" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_t6w4sGFjEeKjf_OKI_SsYg" type="5001">
       <children xmi:type="notation:Node" xmi:id="_neTycDgWEeOD5f07UP2EOA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="ClassSupplier.ecore#//MWorkspace/resourceSet"/>
+        <element xmi:type="ecore:EAttribute" href="ClassSupplier.ecore#//Infrastructure/resourceSet"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_neTycTgWEeOD5f07UP2EOA"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_t6w4sWFjEeKjf_OKI_SsYg"/>
@@ -95,27 +95,27 @@
     </children>
     <children xmi:type="notation:Node" xmi:id="_t6xfwGFjEeKjf_OKI_SsYg" type="5002">
       <children xmi:type="notation:Node" xmi:id="_wVTBcGFjEeKjf_OKI_SsYg" type="2002">
-        <element xmi:type="ecore:EOperation" href="ClassSupplier.ecore#//MWorkspace/addRefreshListener"/>
+        <element xmi:type="ecore:EOperation" href="ClassSupplier.ecore#//Infrastructure/addRefreshListener"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_wVTBcWFjEeKjf_OKI_SsYg"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_yWTP4GFjEeKjf_OKI_SsYg" type="2002">
-        <element xmi:type="ecore:EOperation" href="ClassSupplier.ecore#//MWorkspace/removeRefreshListener"/>
+        <element xmi:type="ecore:EOperation" href="ClassSupplier.ecore#//Infrastructure/removeRefreshListener"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_yWTP4WFjEeKjf_OKI_SsYg"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_mJ7O4DgVEeOD5f07UP2EOA" type="2002">
-        <element xmi:type="ecore:EOperation" href="ClassSupplier.ecore#//MWorkspace/registerArtifact"/>
+        <element xmi:type="ecore:EOperation" href="ClassSupplier.ecore#//Infrastructure/registerArtifact"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_mJ7O4TgVEeOD5f07UP2EOA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_YUgXMDgVEeOD5f07UP2EOA" type="2002">
-        <element xmi:type="ecore:EOperation" href="ClassSupplier.ecore#//MWorkspace/containsArtifact"/>
+        <element xmi:type="ecore:EOperation" href="ClassSupplier.ecore#//Infrastructure/containsArtifact"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_YUgXMTgVEeOD5f07UP2EOA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_Q-5tgDgTEeOD5f07UP2EOA" type="2002">
-        <element xmi:type="ecore:EOperation" href="ClassSupplier.ecore#//MWorkspace/getArtifact"/>
+        <element xmi:type="ecore:EOperation" href="ClassSupplier.ecore#//Infrastructure/getArtifact"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Q-5tgTgTEeOD5f07UP2EOA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_QUjTgDgUEeOD5f07UP2EOA" type="2002">
-        <element xmi:type="ecore:EOperation" href="ClassSupplier.ecore#//MWorkspace/getArtifact.1"/>
+        <element xmi:type="ecore:EOperation" href="ClassSupplier.ecore#//Infrastructure/getArtifact.1"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_QUjTgTgUEeOD5f07UP2EOA"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_t6xfwWFjEeKjf_OKI_SsYg"/>
@@ -123,7 +123,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_t6xfw2FjEeKjf_OKI_SsYg"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_t6uccWFjEeKjf_OKI_SsYg" fontColor="4210752" fontName="Cantarell" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="ClassSupplier.ecore#//MWorkspace"/>
+    <element xmi:type="ecore:EClass" href="ClassSupplier.ecore#//Infrastructure"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_t6uccmFjEeKjf_OKI_SsYg" x="355" y="50"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_3pmVgGFjEeKjf_OKI_SsYg" type="1004">
@@ -222,7 +222,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="__kDJIeeJEeG1a5vlsMpKaQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="__kDJIueJEeG1a5vlsMpKaQ" fontColor="4210752" fontName="Lucida Grande" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="ClassSupplier.ecore#//Artifact/dynamicEPackage"/>
+    <element xmi:type="ecore:EReference" href="ClassSupplier.ecore#//Artifact/prototypeEPackage"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="__kDJI-eJEeG1a5vlsMpKaQ" points="[14, 1, -121, 1]$[136, 0, 1, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__kQkgOeJEeG1a5vlsMpKaQ" id="(0.8627450980392157,0.1836734693877551)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="__kQkgeeJEeG1a5vlsMpKaQ" id="(0.35294117647058826,0.018518518518518517)"/>
@@ -236,7 +236,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_GQoQUWFkEeKjf_OKI_SsYg" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_GQoQUmFkEeKjf_OKI_SsYg" fontColor="4210752" fontName="Cantarell" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="ClassSupplier.ecore#//MWorkspace/contents"/>
+    <element xmi:type="ecore:EReference" href="ClassSupplier.ecore#//Infrastructure/contents"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_GQoQU2FkEeKjf_OKI_SsYg" points="[-28, 36, 38, -48]$[-65, 74, 1, -10]"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_GQyoYGFkEeKjf_OKI_SsYg" id="(0.38095238095238093,0.16923076923076924)"/>
   </edges>

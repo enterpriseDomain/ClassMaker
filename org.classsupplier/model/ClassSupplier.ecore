@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="classsupplier" nsURI="http://org/classsupplier/0.7.1" nsPrefix="classsupplier">
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="classsupplier" nsURI="http://org/classsupplier/0.7.2" nsPrefix="classsupplier">
   <eClassifiers xsi:type="ecore:EClass" name="Artifact">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ePackage" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dynamicEPackage" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="prototypeEPackage" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="#//Version"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="projectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -14,11 +14,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="State">
     <eLiterals name="CREATED"/>
-    <eLiterals name="DYNAMIC" value="1"/>
-    <eLiterals name="REFRESHING" value="2"/>
-    <eLiterals name="GENERATED" value="3"/>
+    <eLiterals name="PROTOTYPE" value="1"/>
+    <eLiterals name="PROCESSING" value="2"/>
+    <eLiterals name="COMPLETE" value="3"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MWorkspace">
+  <eClassifiers xsi:type="ecore:EClass" name="Infrastructure">
     <eOperations name="addRefreshListener">
       <eParameters name="listener" eType="#//Adapter"/>
     </eOperations>
@@ -51,7 +51,7 @@
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="workspace" lowerBound="1"
-        eType="#//MWorkspace" changeable="false"/>
+        eType="#//Infrastructure" changeable="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="IProgressMonitor" instanceClassName="org.eclipse.core.runtime.IProgressMonitor"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Version" instanceClassName="org.classsupplier.Version"/>

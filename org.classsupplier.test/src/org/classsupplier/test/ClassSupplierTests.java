@@ -38,7 +38,7 @@ public class ClassSupplierTests {
 	@Before
 	public void dependencyCheck() {
 		try {
-			latch.await(1, TimeUnit.SECONDS);
+			latch.await(10, TimeUnit.SECONDS);
 		} catch (InterruptedException e) {
 			fail(e.getLocalizedMessage());
 		}
@@ -113,5 +113,26 @@ public class ClassSupplierTests {
 				.getName());
 		assertEquals(readPagesCount, theObject.eGet(state));
 
+	}
+
+//	@Test
+	public void experiment() {
+		EcoreFactory factory = EcoreFactory.eINSTANCE;
+		EPackage _package = factory.createEPackage();
+		_package.setName("inputmodel");
+		EClass data = factory.createEClass();
+		data.setName("Data");
+		EAttribute attribute = factory.createEAttribute();
+		attribute.setName("Input");
+		attribute.setEType(EcorePackage.Literals.EJAVA_OBJECT);
+		data.getEStructuralFeatures().add(attribute);
+		_package.getEClassifiers().add(data);
+		EPackage result = service.supply(_package, new CodeGenUtil.EclipseUtil.StreamProgressMonitor(System.out));
+		EClass resultData = (EClass) result.getEClassifier(data.getName());
+		EAttribute resultAttribute = (EAttribute) resultData
+				.getEStructuralFeature(attribute.getName());
+		EObject someData = result.getEFactoryInstance().create(resultData);
+		someData.eSet(resultAttribute, "Help");
+		assertEquals("Help", someData.eGet(resultAttribute));
 	}
 }

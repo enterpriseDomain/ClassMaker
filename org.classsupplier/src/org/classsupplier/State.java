@@ -29,34 +29,30 @@ public enum State implements Enumerator {
 	CREATED(0, "CREATED", "CREATED"),
 
 	/**
-	 * The '<em><b>DYNAMIC</b></em>' literal object.
+	 * The '<em><b>PROTOTYPE</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #DYNAMIC_VALUE
+	 * @see #PROTOTYPE_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	DYNAMIC(1, "DYNAMIC", "DYNAMIC"),
-
-	/**
-	 * The '<em><b>REFRESHING</b></em>' literal object.
+	PROTOTYPE(1, "PROTOTYPE", "PROTOTYPE"), /**
+	 * The '<em><b>PROCESSING</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #REFRESHING_VALUE
+	 * @see #PROCESSING_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	REFRESHING(2, "REFRESHING", "REFRESHING"),
-
-	/**
-	 * The '<em><b>GENERATED</b></em>' literal object.
+	PROCESSING(2, "PROCESSING", "PROCESSING"), /**
+	 * The '<em><b>COMPLETE</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #GENERATED_VALUE
+	 * @see #COMPLETE_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	GENERATED(3, "GENERATED", "GENERATED");
+	COMPLETE(3, "COMPLETE", "COMPLETE");
 
 	/**
 	 * The '<em><b>CREATED</b></em>' literal value.
@@ -74,49 +70,49 @@ public enum State implements Enumerator {
 	public static final int CREATED_VALUE = 0;
 
 	/**
-	 * The '<em><b>DYNAMIC</b></em>' literal value.
+	 * The '<em><b>PROTOTYPE</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>DYNAMIC</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>PROTOTYPE</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #DYNAMIC
+	 * @see #PROTOTYPE
 	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int DYNAMIC_VALUE = 1;
+	public static final int PROTOTYPE_VALUE = 1;
 
 	/**
-	 * The '<em><b>REFRESHING</b></em>' literal value.
+	 * The '<em><b>PROCESSING</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>REFRESHING</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>PROCESSING</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #REFRESHING
+	 * @see #PROCESSING
 	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int REFRESHING_VALUE = 2;
+	public static final int PROCESSING_VALUE = 2;
 
 	/**
-	 * The '<em><b>GENERATED</b></em>' literal value.
+	 * The '<em><b>COMPLETE</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>GENERATED</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>COMPLETE</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #GENERATED
+	 * @see #COMPLETE
 	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int GENERATED_VALUE = 3;
+	public static final int COMPLETE_VALUE = 3;
 
 	/**
 	 * An array of all the '<em><b>State</b></em>' enumerators.
@@ -127,9 +123,9 @@ public enum State implements Enumerator {
 	private static final State[] VALUES_ARRAY =
 		new State[] {
 			CREATED,
-			DYNAMIC,
-			REFRESHING,
-			GENERATED,
+			PROTOTYPE,
+			PROCESSING,
+			COMPLETE,
 		};
 
 	/**
@@ -181,9 +177,9 @@ public enum State implements Enumerator {
 	public static State get(int value) {
 		switch (value) {
 			case CREATED_VALUE: return CREATED;
-			case DYNAMIC_VALUE: return DYNAMIC;
-			case REFRESHING_VALUE: return REFRESHING;
-			case GENERATED_VALUE: return GENERATED;
+			case PROTOTYPE_VALUE: return PROTOTYPE;
+			case PROCESSING_VALUE: return PROCESSING;
+			case COMPLETE_VALUE: return COMPLETE;
 		}
 		return null;
 	}

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="org.classsupplier.test">
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" enabled="true" name="org.classsupplier.test">
    <implementation class="org.classsupplier.test.ClassSupplierTests"/>
    <reference bind="setReference" cardinality="1..1" interface="org.classsupplier.ClassSupplier" name="ClassSupplier" policy="static"/>
 </scr:component>
