@@ -18,7 +18,7 @@ Example:
     eClass.getEStructuralFeatures().add(eAttr);
     blueprintEPackage.getEClassifiers().add(eClass);
     ClassSupplier service = ... // acquire the ClassSupplier OSGi service
-    EPackage nativeEPackage = service.supply(blueprintEPackage, progressMonitor); // Provide it  to ClassSupplier to create the EPackage
+    EPackage nativeEPackage = service.supply(blueprintEPackage, progressMonitor); // Provide it to ClassSupplier to create the EPackage
     EClass jClass = (EClass) nativeEPackage.getEClassifier(eClass.getName()); // ... that you can use
     EObject jObject = nativeEPackage.getEFactoryInstance().create(jClass);
     int pages = 500;
@@ -28,5 +28,5 @@ Example:
     assertEquals(pages, jObject.eGet(jAttr));  
     assertEquals(eClass.getName(), jObject.getClass().getSimpleName()); // * Note this *
   
-A more [complete example](/org.classsupplier.test/src/org/classsupplier/test/ClassSupplierTests.java).  
-To run it see the project's [wiki](https://github.com/kirillzotkin/ClassSupplier/wiki).  
+A more [complete example here](/org.classsupplier.test/src/org/classsupplier/test/ClassSupplierTests.java).  
+To use it, import to the Eclipse plugin's dependencies with satisfying subsequent.
