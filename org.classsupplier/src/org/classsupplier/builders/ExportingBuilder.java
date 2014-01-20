@@ -3,11 +3,11 @@ package org.classsupplier.builders;
 import java.util.Map;
 
 import org.classsupplier.Artifact;
-import org.classsupplier.PathHelper;
 import org.classsupplier.Version;
 import org.classsupplier.export.Exporter;
 import org.classsupplier.export.MavenExporter;
 import org.classsupplier.impl.OSGi;
+import org.classsupplier.impl.PathHelper;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;

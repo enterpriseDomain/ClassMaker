@@ -1,8 +1,14 @@
 package org.classsupplier.impl;
 
+import java.util.Dictionary;
+import java.util.Hashtable;
+
 import org.classsupplier.ClassSupplier;
+import org.classsupplier.ClassSupplierFactory;
 import org.eclipse.core.runtime.Plugin;
+import org.eclipse.e4.core.contexts.IContextFunction;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceRegistration;
 import org.osgi.util.tracker.ServiceTracker;
 
 public class OSGi extends Plugin {
@@ -18,6 +24,8 @@ public class OSGi extends Plugin {
 	private static OSGi instance;
 
 	private static ServiceTracker<ClassSupplier, ClassSupplierImpl> service;
+
+	private ServiceRegistration<ClassSupplier> reg;
 
 	public static OSGi getInstance() {
 		return instance;
@@ -36,6 +44,13 @@ public class OSGi extends Plugin {
 	 */
 	public void start(BundleContext context) throws Exception {
 		instance = this;
+		reg = context.registerService(ClassSupplier.class,
+				ClassSupplierFactory.eINSTANCE.createClassSupplier(), null);
+		Dictionary<String, String> properties = new Hashtable<String, String>();
+		properties.put(IContextFunction.SERVICE_CONTEXT_KEY,
+				ClassSupplier.class.getName());
+		context.registerService(IContextFunction.SERVICE_NAME,
+				new ServiceFactory(), properties);
 		service = new ServiceTracker<ClassSupplier, ClassSupplierImpl>(context,
 				ClassSupplier.class, null);
 		service.open();
@@ -49,7 +64,9 @@ public class OSGi extends Plugin {
 	 */
 	public void stop(BundleContext context) throws Exception {
 		service.close();
+		reg.unregister();
 		instance = null;
+
 	}
 
 }

@@ -413,6 +413,9 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 
 		op = addEOperation(classSupplierEClass, theEcorePackage.getEPackage(), "supply", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEPackage(), "model", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(classSupplierEClass, theEcorePackage.getEPackage(), "supply", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEPackage(), "model", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Initialize enums and add enum literals

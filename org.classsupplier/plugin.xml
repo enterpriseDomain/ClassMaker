@@ -18,7 +18,7 @@
          point="org.eclipse.core.resources.natures">
       <runtime>
          <run
-               class="org.classsupplier.DomainProjectNature">
+               class="org.classsupplier.impl.DomainProjectNature">
          </run>
       </runtime>
    </extension>

@@ -1,4 +1,4 @@
-package org.classsupplier;
+package org.classsupplier.impl;
 
 import org.classsupplier.builders.ExportingBuilder;
 import org.classsupplier.builders.GeneratorBuilder;

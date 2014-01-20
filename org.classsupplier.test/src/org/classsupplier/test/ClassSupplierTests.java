@@ -38,7 +38,7 @@ public class ClassSupplierTests {
 	@Before
 	public void dependencyCheck() {
 		try {
-			latch.await(10, TimeUnit.SECONDS);
+			latch.await(1, TimeUnit.SECONDS);
 		} catch (InterruptedException e) {
 			fail(e.getLocalizedMessage());
 		}
@@ -77,16 +77,14 @@ public class ClassSupplierTests {
 		ePackage.getEClassifiers().add(eClass);
 
 		assertNotNull(service);
-		EPackage nativePackage = service.supply(ePackage,
-				new CodeGenUtil.EclipseUtil.StreamProgressMonitor(System.out));
+		EPackage nativePackage = service.supply(ePackage);
 		assertNotNull(nativePackage);
 		assertEquals(ePackage.getName(), nativePackage.getName());
 		EClass theClass = (EClass) nativePackage.getEClassifier(eClass
 				.getName());
 		EObject theObject = nativePackage.getEFactoryInstance()
 				.create(theClass);
-		assertEquals(eClass.getName(), theObject.getClass().getSimpleName());
-
+		
 		int pages = 704;
 		pageAttr = (EAttribute) theClass.getEStructuralFeature(pageAttr
 				.getName());
@@ -112,10 +110,10 @@ public class ClassSupplierTests {
 		EStructuralFeature state = theClass.getEStructuralFeature(attr
 				.getName());
 		assertEquals(readPagesCount, theObject.eGet(state));
-
+		assertEquals(eClass.getName(), theObject.getClass().getSimpleName());
 	}
 
-//	@Test
+	// @Test
 	public void experiment() {
 		EcoreFactory factory = EcoreFactory.eINSTANCE;
 		EPackage _package = factory.createEPackage();
@@ -127,7 +125,8 @@ public class ClassSupplierTests {
 		attribute.setEType(EcorePackage.Literals.EJAVA_OBJECT);
 		data.getEStructuralFeatures().add(attribute);
 		_package.getEClassifiers().add(data);
-		EPackage result = service.supply(_package, new CodeGenUtil.EclipseUtil.StreamProgressMonitor(System.out));
+		EPackage result = service.supply(_package,
+				new CodeGenUtil.EclipseUtil.StreamProgressMonitor(System.out));
 		EClass resultData = (EClass) result.getEClassifier(data.getName());
 		EAttribute resultAttribute = (EAttribute) resultData
 				.getEStructuralFeature(attribute.getName());

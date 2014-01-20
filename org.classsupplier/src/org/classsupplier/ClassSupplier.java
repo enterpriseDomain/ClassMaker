@@ -40,6 +40,14 @@ public interface ClassSupplier extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	EPackage supply(EPackage model);
+
+	/**
+	 * <!-- begin-user-doc -->
 	 *  
 	 *  @param  model    a blueprint
 	 *  @param 	 monitor  progress reporting for such is a long-running operation

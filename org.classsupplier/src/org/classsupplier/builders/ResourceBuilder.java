@@ -5,9 +5,9 @@ import java.util.Collections;
 import java.util.Map;
 
 import org.classsupplier.Artifact;
-import org.classsupplier.PathHelper;
 import org.classsupplier.State;
 import org.classsupplier.impl.OSGi;
+import org.classsupplier.impl.PathHelper;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRunnable;

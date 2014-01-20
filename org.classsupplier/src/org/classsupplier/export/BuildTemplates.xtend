@@ -104,7 +104,7 @@ class BuildTemplates {
 				<relativePath>../</relativePath>
 			</parent>
 			
-			<groupId>org.classsupplier.dynamic</groupId>
+			<groupId>org.classsupplier.artifact</groupId>
 			<artifactId>«projectName»</artifactId>
 			<version>1.0.0.qualifier</version>
 			<packaging>eclipse-plugin</packaging>

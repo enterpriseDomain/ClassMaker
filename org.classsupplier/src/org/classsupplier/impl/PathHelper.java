@@ -1,6 +1,5 @@
-package org.classsupplier;
+package org.classsupplier.impl;
 
-import org.classsupplier.impl.OSGi;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;

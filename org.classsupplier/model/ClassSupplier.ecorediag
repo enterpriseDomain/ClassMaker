@@ -148,8 +148,12 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_oKzQEwrnEeO4eKcvGHPRbg"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_oKz3IArnEeO4eKcvGHPRbg" type="5002">
-      <children xmi:type="notation:Node" xmi:id="_uVTDcArnEeO4eKcvGHPRbg" type="2002">
+      <children xmi:type="notation:Node" xmi:id="_LWic0IEPEeOMWZHll-BcZA" type="2002">
         <element xmi:type="ecore:EOperation" href="ClassSupplier.ecore#//ClassSupplier/supply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_LWic0YEPEeOMWZHll-BcZA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uVTDcArnEeO4eKcvGHPRbg" type="2002">
+        <element xmi:type="ecore:EOperation" href="ClassSupplier.ecore#//ClassSupplier/supply.1"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_uVTqgArnEeO4eKcvGHPRbg"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_oKz3IQrnEeO4eKcvGHPRbg"/>
