@@ -77,7 +77,7 @@ public interface ClassSupplierPackage extends EPackage {
 	int ARTIFACT__NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>EPackage</b></em>' containment reference.
+	 * The feature id for the '<em><b>EPackage</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -86,7 +86,7 @@ public interface ClassSupplierPackage extends EPackage {
 	int ARTIFACT__EPACKAGE = 1;
 
 	/**
-	 * The feature id for the '<em><b>Prototype EPackage</b></em>' containment reference.
+	 * The feature id for the '<em><b>Prototype EPackage</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -131,13 +131,22 @@ public interface ClassSupplierPackage extends EPackage {
 	int ARTIFACT__STATUS = 6;
 
 	/**
+	 * The feature id for the '<em><b>Loaded EPackage</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARTIFACT__LOADED_EPACKAGE = 7;
+
+	/**
 	 * The number of structural features of the '<em>Artifact</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ARTIFACT_FEATURE_COUNT = 7;
+	int ARTIFACT_FEATURE_COUNT = 8;
 
 	/**
 	 * The meta object id for the '{@link org.classsupplier.impl.InfrastructureImpl <em>Infrastructure</em>}' class.
@@ -278,10 +287,10 @@ public interface ClassSupplierPackage extends EPackage {
 	EAttribute getArtifact_Name();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.classsupplier.Artifact#getEPackage <em>EPackage</em>}'.
+	 * Returns the meta object for the reference '{@link org.classsupplier.Artifact#getEPackage <em>EPackage</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>EPackage</em>'.
+	 * @return the meta object for the reference '<em>EPackage</em>'.
 	 * @see org.classsupplier.Artifact#getEPackage()
 	 * @see #getArtifact()
 	 * @generated
@@ -289,10 +298,10 @@ public interface ClassSupplierPackage extends EPackage {
 	EReference getArtifact_EPackage();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.classsupplier.Artifact#getPrototypeEPackage <em>Prototype EPackage</em>}'.
+	 * Returns the meta object for the reference '{@link org.classsupplier.Artifact#getPrototypeEPackage <em>Prototype EPackage</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Prototype EPackage</em>'.
+	 * @return the meta object for the reference '<em>Prototype EPackage</em>'.
 	 * @see org.classsupplier.Artifact#getPrototypeEPackage()
 	 * @see #getArtifact()
 	 * @generated
@@ -342,6 +351,17 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getArtifact_Status();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.classsupplier.Artifact#getLoadedEPackage <em>Loaded EPackage</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Loaded EPackage</em>'.
+	 * @see org.classsupplier.Artifact#getLoadedEPackage()
+	 * @see #getArtifact()
+	 * @generated
+	 */
+	EReference getArtifact_LoadedEPackage();
 
 	/**
 	 * Returns the meta object for class '{@link org.classsupplier.Infrastructure <em>Infrastructure</em>}'.
@@ -491,7 +511,7 @@ public interface ClassSupplierPackage extends EPackage {
 		EAttribute ARTIFACT__NAME = eINSTANCE.getArtifact_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>EPackage</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>EPackage</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -499,7 +519,7 @@ public interface ClassSupplierPackage extends EPackage {
 		EReference ARTIFACT__EPACKAGE = eINSTANCE.getArtifact_EPackage();
 
 		/**
-		 * The meta object literal for the '<em><b>Prototype EPackage</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Prototype EPackage</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -537,6 +557,14 @@ public interface ClassSupplierPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ARTIFACT__STATUS = eINSTANCE.getArtifact_Status();
+
+		/**
+		 * The meta object literal for the '<em><b>Loaded EPackage</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ARTIFACT__LOADED_EPACKAGE = eINSTANCE.getArtifact_LoadedEPackage();
 
 		/**
 		 * The meta object literal for the '{@link org.classsupplier.impl.InfrastructureImpl <em>Infrastructure</em>}' class.

@@ -58,7 +58,8 @@ public class ResourceBuilder extends IncrementalProjectBuilder {
 
 		@Override
 		public void run(IProgressMonitor monitor) throws CoreException {
-			IPath modelPath = PathHelper.getResourcePath(getProject());
+			IPath modelPath = PathHelper.getModelResourcePath(getProject(), OSGi
+					.getClassSupplier().getWorkspace());
 			URI modelURI = URI.createPlatformResourceURI(modelPath.toString(),
 					true);
 			ResourceSet resourceSet = OSGi.getClassSupplier().getWorkspace()

@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EPackage;
  *   <li>{@link org.classsupplier.Artifact#getProjectName <em>Project Name</em>}</li>
  *   <li>{@link org.classsupplier.Artifact#getState <em>State</em>}</li>
  *   <li>{@link org.classsupplier.Artifact#getStatus <em>Status</em>}</li>
+ *   <li>{@link org.classsupplier.Artifact#getLoadedEPackage <em>Loaded EPackage</em>}</li>
  * </ul>
  * </p>
  *
@@ -57,52 +58,41 @@ public interface Artifact extends EObject {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>EPackage</b></em>' containment reference.
+	 * Returns the value of the '<em><b>EPackage</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>EPackage</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>EPackage</em>' containment reference.
-	 * @see #setEPackage(EPackage)
+	 * @return the value of the '<em>EPackage</em>' reference.
 	 * @see org.classsupplier.ClassSupplierPackage#getArtifact_EPackage()
-	 * @model containment="true"
+	 * @model changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	EPackage getEPackage();
 
 	/**
-	 * Sets the value of the '{@link org.classsupplier.Artifact#getEPackage <em>EPackage</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>EPackage</em>' containment reference.
-	 * @see #getEPackage()
-	 * @generated
-	 */
-	void setEPackage(EPackage value);
-
-	/**
-	 * Returns the value of the '<em><b>Prototype EPackage</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Prototype EPackage</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Prototype EPackage</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Prototype EPackage</em>' containment reference.
+	 * @return the value of the '<em>Prototype EPackage</em>' reference.
 	 * @see #setPrototypeEPackage(EPackage)
 	 * @see org.classsupplier.ClassSupplierPackage#getArtifact_PrototypeEPackage()
-	 * @model containment="true"
+	 * @model
 	 * @generated
 	 */
 	EPackage getPrototypeEPackage();
 
 	/**
-	 * Sets the value of the '{@link org.classsupplier.Artifact#getPrototypeEPackage <em>Prototype EPackage</em>}' containment reference.
+	 * Sets the value of the '{@link org.classsupplier.Artifact#getPrototypeEPackage <em>Prototype EPackage</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Prototype EPackage</em>' containment reference.
+	 * @param value the new value of the '<em>Prototype EPackage</em>' reference.
 	 * @see #getPrototypeEPackage()
 	 * @generated
 	 */
@@ -214,5 +204,39 @@ public interface Artifact extends EObject {
 	 * @generated
 	 */
 	void setStatus(IStatus value);
+
+	/**
+	 * Returns the value of the '<em><b>Loaded EPackage</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Loaded EPackage</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Loaded EPackage</em>' reference.
+	 * @see #setLoadedEPackage(EPackage)
+	 * @see org.classsupplier.ClassSupplierPackage#getArtifact_LoadedEPackage()
+	 * @model
+	 * @generated
+	 */
+	EPackage getLoadedEPackage();
+
+	/**
+	 * Sets the value of the '{@link org.classsupplier.Artifact#getLoadedEPackage <em>Loaded EPackage</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Loaded EPackage</em>' reference.
+	 * @see #getLoadedEPackage()
+	 * @generated
+	 */
+	void setLoadedEPackage(EPackage value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void make();
 
 } // Artifact

@@ -1,5 +1,6 @@
 package org.classsupplier.impl;
 
+import org.classsupplier.Infrastructure;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
@@ -17,9 +18,11 @@ public class PathHelper {
 	private static String fileExt = preferencesService.getString(
 			OSGi.PLUGIN_ID, OSGi.RESOURCE_EXT_PREF_KEY, "xmi", null);;
 
-	public static IPath getResourcePath(IProject project) {
-		String name = OSGi.getClassSupplier().getWorkspace()
-				.getArtifact(project.getName()).getName();
+	public static IPath getModelResourcePath(IProject project,
+			Infrastructure workspace) {
+		if (workspace == null)
+			workspace = OSGi.getClassSupplier().getWorkspace();
+		String name = workspace.getArtifact(project.getName()).getName();
 		return project.getFullPath().append(getModelFolderName())
 				.append(getFileName(name));
 	}

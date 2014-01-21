@@ -3,6 +3,7 @@ package org.classsupplier.builders;
 import java.util.Map;
 
 import org.classsupplier.Artifact;
+import org.classsupplier.State;
 import org.classsupplier.Version;
 import org.classsupplier.export.Exporter;
 import org.classsupplier.export.MavenExporter;
@@ -21,19 +22,22 @@ public class ExportingBuilder extends IncrementalProjectBuilder {
 	public static final String BUILDER_ID = OSGi.PLUGIN_ID + '.'
 			+ "exportBuilder";
 
-	protected Exporter exporter = new MavenExporter(); // new PDEExporter();
+	protected Exporter exporter = new MavenExporter();
 
 	@Override
 	protected IProject[] build(int kind, Map<String, String> args,
 			IProgressMonitor monitor) throws CoreException {
 		if (kind != FULL_BUILD)
 			return null;
-		IProgressMonitor oldMonitor = OSGi.getClassSupplier().monitor();
+		IProgressMonitor oldMonitor =  OSGi.getClassSupplier().monitor();
 		OSGi.getClassSupplier().setMonitor(monitor);
 		exporter.setDestination(PathHelper.getDefaultDestination());
 		if (exporter.getQualifier() == null) {
 			Artifact artifact = OSGi.getClassSupplier().getWorkspace()
 					.getArtifact(getProject().getName());
+			if (artifact.getState().equals(State.CREATED)
+					|| !artifact.getState().equals(State.PROCESSING))
+				return null;
 			Version version = artifact.getVersion();
 			exporter.setQualifier(version.getQualifier());
 		}

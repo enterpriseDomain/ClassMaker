@@ -32,8 +32,15 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  */
 public class ClassSupplierImpl extends EObjectImpl implements ClassSupplier {
 
-	protected Infrastructure workspace = ClassSupplierFactory.eINSTANCE
-			.createInfrastructure();
+	/**
+	 * The cached value of the '{@link #getWorkspace() <em>Workspace</em>}'
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getWorkspace()
+	 * @generated
+	 * @ordered
+	 */
+	protected Infrastructure workspace;
 
 	private IProgressMonitor progressMonitor;
 
@@ -44,6 +51,7 @@ public class ClassSupplierImpl extends EObjectImpl implements ClassSupplier {
 	 */
 	public ClassSupplierImpl() {
 		super();
+		workspace = ClassSupplierFactory.eINSTANCE.createInfrastructure();
 	}
 
 	/**
@@ -85,6 +93,20 @@ public class ClassSupplierImpl extends EObjectImpl implements ClassSupplier {
 	}
 
 	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public void setWorkspace(Infrastructure newWorkspace) {
+		Infrastructure oldWorkspace = workspace;
+		workspace = newWorkspace;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ClassSupplierPackage.CLASS_SUPPLIER__WORKSPACE,
+					oldWorkspace, workspace));
+	}
+
+	/**
 	 * <!-- begin-user-doc -->With output of progress to System.out<!--
 	 * end-user-doc -->
 	 * 
@@ -113,16 +135,28 @@ public class ClassSupplierImpl extends EObjectImpl implements ClassSupplier {
 	public EPackage supply(EPackage model, IProgressMonitor monitor) {
 		Artifact result = null;
 		setMonitor(monitor);
-		if (getWorkspace().containsArtifact(model)) {
+		switch (getWorkspace().containsArtifact(model)) {
+		case Infrastructure.CONTAINS_PROTOTYPE:
 			result = getWorkspace().getArtifact(model);
-			result.setPrototypeEPackage(model);
+			return makePrototype(model, result);
+		case Infrastructure.CONTAINS_LOADED:
+			result = getWorkspace().getArtifact(model);
+			if (result != null)
+				if (result.getEPackage() != null)
+					return result.getEPackage();
+				else
+					return makePrototype(model, result);
+		case Infrastructure.DOESNT_CONTAIN:
+		default:
+			result = getWorkspace().createArtifact(model);
+			result.make();
 			return result.getEPackage();
 		}
-		result = ClassSupplierFactory.eINSTANCE.createArtifact();
-		result.setName(model.getName());
-		getWorkspace().registerArtifact(model, result);
+	}
+
+	private EPackage makePrototype(EPackage model, Artifact result) {
 		result.setPrototypeEPackage(model);
-		workspace.getContents().add(result);
+		result.make();
 		return result.getEPackage();
 	}
 
@@ -140,6 +174,36 @@ public class ClassSupplierImpl extends EObjectImpl implements ClassSupplier {
 			return basicGetWorkspace();
 		}
 		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+		case ClassSupplierPackage.CLASS_SUPPLIER__WORKSPACE:
+			setWorkspace((Infrastructure) newValue);
+			return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+		case ClassSupplierPackage.CLASS_SUPPLIER__WORKSPACE:
+			setWorkspace((Infrastructure) null);
+			return;
+		}
+		super.eUnset(featureID);
 	}
 
 	/**

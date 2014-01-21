@@ -31,7 +31,7 @@ public class LoadBuilder extends IncrementalProjectBuilder {
 	@Override
 	protected IProject[] build(int kind, Map<String, String> args,
 			IProgressMonitor monitor) throws CoreException {
-		Artifact artifact = OSGi.getClassSupplier().getWorkspace()
+		Artifact artifact =  OSGi.getClassSupplier().getWorkspace()
 				.getArtifact(getProject().getName());
 		Version version = artifact.getVersion();
 		IPath path = getProject().getLocation().append("target")
@@ -47,14 +47,14 @@ public class LoadBuilder extends IncrementalProjectBuilder {
 					FrameworkWiring.class);
 			frameworkWiring.refreshBundles(bundles, new FrameworkListener[0]);
 			if (frameworkWiring.resolveBundles(bundles)) {
-				String packageClassName = artifact.getPrototypeEPackage().getName()
-						+ "." + artifact.getName() + "Package";
+				String packageClassName = artifact.getPrototypeEPackage()
+						.getName() + "." + artifact.getName() + "Package";
 
 				Class<?> packageClass = osgiBundle.loadClass(packageClassName);
 				EPackage ePackage = (EPackage) packageClass.getField(
 						"eINSTANCE").get(packageClass);
 
-				artifact.setEPackage(ePackage);
+				artifact.setLoadedEPackage(ePackage);
 			}
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();

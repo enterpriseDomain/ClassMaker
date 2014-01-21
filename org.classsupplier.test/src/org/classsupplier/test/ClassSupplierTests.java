@@ -84,7 +84,7 @@ public class ClassSupplierTests {
 				.getName());
 		EObject theObject = nativePackage.getEFactoryInstance()
 				.create(theClass);
-		
+
 		int pages = 704;
 		pageAttr = (EAttribute) theClass.getEStructuralFeature(pageAttr
 				.getName());
@@ -97,19 +97,15 @@ public class ClassSupplierTests {
 					int.class);
 			objectMethod.invoke(theObject, readPagesCount);
 
-		} catch (NoSuchMethodException e) {
-			fail(e.getLocalizedMessage());
-		} catch (IllegalAccessException e) {
-			fail(e.getLocalizedMessage());
-		} catch (IllegalArgumentException e) {
-			fail(e.getLocalizedMessage());
 		} catch (InvocationTargetException e) {
 			fail(e.getTargetException().getLocalizedMessage());
+		} catch (Exception e) {
+			fail(e.getLocalizedMessage());
 		}
-
 		EStructuralFeature state = theClass.getEStructuralFeature(attr
 				.getName());
 		assertEquals(readPagesCount, theObject.eGet(state));
+
 		assertEquals(eClass.getName(), theObject.getClass().getSimpleName());
 	}
 

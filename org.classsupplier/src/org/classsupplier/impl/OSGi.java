@@ -68,5 +68,4 @@ public class OSGi extends Plugin {
 		instance = null;
 
 	}
-
 }

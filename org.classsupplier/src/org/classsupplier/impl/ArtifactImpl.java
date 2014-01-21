@@ -17,7 +17,6 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
@@ -31,22 +30,28 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.classsupplier.impl.ArtifactImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.classsupplier.impl.ArtifactImpl#getEPackage <em>EPackage</em>}</li>
- *   <li>{@link org.classsupplier.impl.ArtifactImpl#getPrototypeEPackage <em>Prototype EPackage</em>}</li>
- *   <li>{@link org.classsupplier.impl.ArtifactImpl#getVersion <em>Version</em>}</li>
- *   <li>{@link org.classsupplier.impl.ArtifactImpl#getProjectName <em>Project Name</em>}</li>
- *   <li>{@link org.classsupplier.impl.ArtifactImpl#getState <em>State</em>}</li>
- *   <li>{@link org.classsupplier.impl.ArtifactImpl#getStatus <em>Status</em>}</li>
+ * <li>{@link org.classsupplier.impl.ArtifactImpl#getName <em>Name</em>}</li>
+ * <li>{@link org.classsupplier.impl.ArtifactImpl#getEPackage <em>EPackage</em>}
+ * </li>
+ * <li>{@link org.classsupplier.impl.ArtifactImpl#getPrototypeEPackage <em>
+ * Prototype EPackage</em>}</li>
+ * <li>{@link org.classsupplier.impl.ArtifactImpl#getVersion <em>Version</em>}</li>
+ * <li>{@link org.classsupplier.impl.ArtifactImpl#getProjectName <em>Project
+ * Name</em>}</li>
+ * <li>{@link org.classsupplier.impl.ArtifactImpl#getState <em>State</em>}</li>
+ * <li>{@link org.classsupplier.impl.ArtifactImpl#getStatus <em>Status</em>}</li>
+ * <li>{@link org.classsupplier.impl.ArtifactImpl#getLoadedEPackage <em>Loaded
+ * EPackage</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class ArtifactImpl extends EObjectImpl implements Artifact {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -56,6 +61,7 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	/**
 	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -63,18 +69,10 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getEPackage() <em>EPackage</em>}' containment reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #getEPackage()
-	 * @generated
-	 * @ordered
-	 */
-	protected EPackage ePackage;
-
-	/**
-	 * The cached value of the '{@link #getPrototypeEPackage() <em>Prototype EPackage</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getPrototypeEPackage()
+	 * <em>Prototype EPackage</em>}' reference. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @see #getPrototypeEPackage()
 	 * @generated
 	 * @ordered
@@ -82,8 +80,9 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	protected EPackage prototypeEPackage;
 
 	/**
-	 * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getVersion() <em>Version</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getVersion()
 	 * @generated
 	 * @ordered
@@ -91,8 +90,9 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	protected static final Version VERSION_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getVersion() <em>Version</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getVersion()
 	 * @generated
 	 * @ordered
@@ -100,8 +100,9 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	protected Version version = VERSION_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}
+	 * ' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getProjectName()
 	 * @generated
 	 * @ordered
@@ -109,8 +110,9 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	protected static final String PROJECT_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getProjectName() <em>Project Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getProjectName() <em>Project Name</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getProjectName()
 	 * @generated
 	 * @ordered
@@ -120,6 +122,7 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	/**
 	 * The default value of the '{@link #getState() <em>State</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getState()
 	 * @generated
 	 * @ordered
@@ -129,6 +132,7 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	/**
 	 * The cached value of the '{@link #getState() <em>State</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getState()
 	 * @generated
 	 * @ordered
@@ -136,8 +140,9 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	protected State state = STATE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getStatus() <em>Status</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getStatus()
 	 * @generated
 	 * @ordered
@@ -147,28 +152,47 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	/**
 	 * The cached value of the '{@link #getStatus() <em>Status</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getStatus()
 	 * @generated
 	 * @ordered
 	 */
 	protected IStatus status = STATUS_EDEFAULT;
 
+	/**
+	 * The cached value of the '{@link #getLoadedEPackage()
+	 * <em>Loaded EPackage</em>}' reference. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @see #getLoadedEPackage()
+	 * @generated
+	 * @ordered
+	 */
+	protected EPackage loadedEPackage;
+
 	private Adapter adapter = new AdapterImpl() {
 
 		@Override
 		public void notifyChanged(Notification msg) {
 			if (msg.getFeatureID(getClass()) == ClassSupplierPackage.ARTIFACT__NAME
-					&& msg.getEventType() == Notification.SET)
+					&& msg.getEventType() == Notification.SET
+					&& msg.getNewStringValue() != null)
 				setProjectName(msg.getNewStringValue().toLowerCase());
 			if (msg.getFeatureID(getClass()) == ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE
 					&& msg.getNewValue() != null) {
 				setStatus(STATUS_EDEFAULT);
 				setState(State.PROTOTYPE);
 			}
-			if (msg.getFeatureID(getClass()) == ClassSupplierPackage.ARTIFACT__STATE
-					&& msg.getNewValue() == State.PROTOTYPE
-					&& (getStatus() == null || getStatus().isOK()))
-				make();
+			if ((msg.getFeatureID(getClass()) == ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE
+					|| msg.getFeatureID(getClass()) == ClassSupplierPackage.ARTIFACT__LOADED_EPACKAGE)
+					&& msg.getEventType() == Notification.SET)
+				((InfrastructureImpl) eContainer())
+						.notifyEPackageAdd((Artifact) msg.getNotifier());
+			if ((msg.getFeatureID(getClass()) == ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE
+					|| msg.getFeatureID(getClass()) == ClassSupplierPackage.ARTIFACT__LOADED_EPACKAGE)
+					&& msg.getEventType() == Notification.UNSET)
+				((InfrastructureImpl) eContainer())
+						.notifyEPackageRemove((Artifact) msg.getNotifier());
 		}
 
 	};
@@ -185,37 +209,12 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	protected EClass eStaticClass() {
 		return ClassSupplierPackage.Literals.ARTIFACT;
-	}
-
-	protected void make() {
-		setState(State.PROCESSING);
-		IProgressMonitor monitor = OSGi.getClassSupplier().monitor();
-		try {
-			IWorkspace workspace = ResourcesPlugin.getWorkspace();
-			// workspace.getRoot().refreshLocal(IResource.DEPTH_ZERO, monitor);
-			String projectName = getProjectName();
-			IProject project = workspace.getRoot().getProject(projectName);
-			if (!project.exists())
-				project.create(monitor);
-			project.open(monitor);
-			addNature(project, OSGi.NATURE_ID, monitor);
-			project.build(IncrementalProjectBuilder.FULL_BUILD, monitor);
-		} catch (CoreException e) {
-			if (e.getStatus().getSeverity() == IStatus.ERROR) {
-				setStatus(e.getStatus());
-				setState(State.PROTOTYPE);
-				setEPackage(getPrototypeEPackage());
-			}
-			e.printStackTrace();
-			return;
-		}
-		setStatus(new Status(IStatus.OK, OSGi.PLUGIN_ID, "Artifact is ready."));
-		setState(State.COMPLETE);
 	}
 
 	/**
@@ -255,97 +254,84 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.ARTIFACT__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ClassSupplierPackage.ARTIFACT__NAME, oldName, name));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EPackage getEPackage() {
-		return ePackage;
+		EPackage ePackage = basicGetEPackage();
+		return ePackage != null && ePackage.eIsProxy() ? (EPackage) eResolveProxy((InternalEObject) ePackage)
+				: ePackage;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
+	 * 
+	 * @generated NOT
 	 */
-	public NotificationChain basicSetEPackage(EPackage newEPackage,
-			NotificationChain msgs) {
-		EPackage oldEPackage = ePackage;
-		ePackage = newEPackage;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.ARTIFACT__EPACKAGE, oldEPackage, newEPackage);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+	public EPackage basicGetEPackage() {
+		switch (getState().getValue()) {
+		case State.PROTOTYPE_VALUE:
+			return getPrototypeEPackage();
+		case State.COMPLETE_VALUE:
+			return getLoadedEPackage();
+		default:
+			return null;
 		}
-		return msgs;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setEPackage(EPackage newEPackage) {
-		if (newEPackage != ePackage) {
-			NotificationChain msgs = null;
-			if (ePackage != null)
-				msgs = ((InternalEObject)ePackage).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ClassSupplierPackage.ARTIFACT__EPACKAGE, null, msgs);
-			if (newEPackage != null)
-				msgs = ((InternalEObject)newEPackage).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ClassSupplierPackage.ARTIFACT__EPACKAGE, null, msgs);
-			msgs = basicSetEPackage(newEPackage, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.ARTIFACT__EPACKAGE, newEPackage, newEPackage));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EPackage getPrototypeEPackage() {
+		if (prototypeEPackage != null && prototypeEPackage.eIsProxy()) {
+			InternalEObject oldPrototypeEPackage = (InternalEObject) prototypeEPackage;
+			prototypeEPackage = (EPackage) eResolveProxy(oldPrototypeEPackage);
+			if (prototypeEPackage != oldPrototypeEPackage) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE,
+							oldPrototypeEPackage, prototypeEPackage));
+			}
+		}
 		return prototypeEPackage;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public NotificationChain basicSetPrototypeEPackage(EPackage newPrototypeEPackage, NotificationChain msgs) {
-		EPackage oldPrototypeEPackage = prototypeEPackage;
-		prototypeEPackage = newPrototypeEPackage;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE, oldPrototypeEPackage, newPrototypeEPackage);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public EPackage basicGetPrototypeEPackage() {
+		return prototypeEPackage;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setPrototypeEPackage(EPackage newPrototypeEPackage) {
-		if (newPrototypeEPackage != prototypeEPackage) {
-			NotificationChain msgs = null;
-			if (prototypeEPackage != null)
-				msgs = ((InternalEObject)prototypeEPackage).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE, null, msgs);
-			if (newPrototypeEPackage != null)
-				msgs = ((InternalEObject)newPrototypeEPackage).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE, null, msgs);
-			msgs = basicSetPrototypeEPackage(newPrototypeEPackage, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE, newPrototypeEPackage, newPrototypeEPackage));
+		EPackage oldPrototypeEPackage = prototypeEPackage;
+		prototypeEPackage = newPrototypeEPackage;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE,
+					oldPrototypeEPackage, prototypeEPackage));
 	}
 
 	/**
@@ -361,17 +347,20 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setVersion(Version newVersion) {
 		Version oldVersion = version;
 		version = newVersion;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.ARTIFACT__VERSION, oldVersion, version));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ClassSupplierPackage.ARTIFACT__VERSION, oldVersion, version));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String getProjectName() {
@@ -380,17 +369,21 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setProjectName(String newProjectName) {
 		String oldProjectName = projectName;
 		projectName = newProjectName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.ARTIFACT__PROJECT_NAME, oldProjectName, projectName));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ClassSupplierPackage.ARTIFACT__PROJECT_NAME,
+					oldProjectName, projectName));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public State getState() {
@@ -399,17 +392,20 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setState(State newState) {
 		State oldState = state;
 		state = newState == null ? STATE_EDEFAULT : newState;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.ARTIFACT__STATE, oldState, state));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ClassSupplierPackage.ARTIFACT__STATE, oldState, state));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public IStatus getStatus() {
@@ -418,152 +414,237 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setStatus(IStatus newStatus) {
 		IStatus oldStatus = status;
 		status = newStatus;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.ARTIFACT__STATUS, oldStatus, status));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ClassSupplierPackage.ARTIFACT__STATUS, oldStatus, status));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case ClassSupplierPackage.ARTIFACT__EPACKAGE:
-				return basicSetEPackage(null, msgs);
-			case ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE:
-				return basicSetPrototypeEPackage(null, msgs);
+	public EPackage getLoadedEPackage() {
+		if (loadedEPackage != null && loadedEPackage.eIsProxy()) {
+			InternalEObject oldLoadedEPackage = (InternalEObject) loadedEPackage;
+			loadedEPackage = (EPackage) eResolveProxy(oldLoadedEPackage);
+			if (loadedEPackage != oldLoadedEPackage) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							ClassSupplierPackage.ARTIFACT__LOADED_EPACKAGE,
+							oldLoadedEPackage, loadedEPackage));
+			}
 		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
+		return loadedEPackage;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EPackage basicGetLoadedEPackage() {
+		return loadedEPackage;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public void setLoadedEPackage(EPackage newLoadedEPackage) {
+		EPackage oldLoadedEPackage = loadedEPackage;
+		loadedEPackage = newLoadedEPackage;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ClassSupplierPackage.ARTIFACT__LOADED_EPACKAGE,
+					oldLoadedEPackage, loadedEPackage));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public void make() {
+		if (getState().equals(State.PROCESSING))
+			return;
+		if (getStatus() != STATUS_EDEFAULT && !getStatus().isOK()) {
+			getStatus().getException().printStackTrace();
+			return;
+		}
+		setState(State.PROCESSING);
+		IProgressMonitor monitor = OSGi.getClassSupplier().monitor();
+		try {
+			IWorkspace workspace = ResourcesPlugin.getWorkspace();
+			// workspace.getRoot().refreshLocal(IResource.DEPTH_ZERO, monitor);
+			String projectName = getProjectName();
+			IProject project = workspace.getRoot().getProject(projectName);
+			if (!project.exists())
+				project.create(monitor);
+			project.open(monitor);
+			addNature(project, OSGi.NATURE_ID, monitor);
+			project.build(IncrementalProjectBuilder.FULL_BUILD, monitor);
+		} catch (CoreException e) {
+			if (e.getStatus().getSeverity() == IStatus.ERROR) {
+				setStatus(e.getStatus());
+				setState(State.PROTOTYPE);
+				setLoadedEPackage(null);
+			}
+			e.printStackTrace();
+			return;
+		}
+		setStatus(new Status(IStatus.OK, OSGi.PLUGIN_ID, "Artifact is ready."));
+		setState(State.COMPLETE);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClassSupplierPackage.ARTIFACT__NAME:
-				return getName();
-			case ClassSupplierPackage.ARTIFACT__EPACKAGE:
+		case ClassSupplierPackage.ARTIFACT__NAME:
+			return getName();
+		case ClassSupplierPackage.ARTIFACT__EPACKAGE:
+			if (resolve)
 				return getEPackage();
-			case ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE:
+			return basicGetEPackage();
+		case ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE:
+			if (resolve)
 				return getPrototypeEPackage();
-			case ClassSupplierPackage.ARTIFACT__VERSION:
-				return getVersion();
-			case ClassSupplierPackage.ARTIFACT__PROJECT_NAME:
-				return getProjectName();
-			case ClassSupplierPackage.ARTIFACT__STATE:
-				return getState();
-			case ClassSupplierPackage.ARTIFACT__STATUS:
-				return getStatus();
+			return basicGetPrototypeEPackage();
+		case ClassSupplierPackage.ARTIFACT__VERSION:
+			return getVersion();
+		case ClassSupplierPackage.ARTIFACT__PROJECT_NAME:
+			return getProjectName();
+		case ClassSupplierPackage.ARTIFACT__STATE:
+			return getState();
+		case ClassSupplierPackage.ARTIFACT__STATUS:
+			return getStatus();
+		case ClassSupplierPackage.ARTIFACT__LOADED_EPACKAGE:
+			if (resolve)
+				return getLoadedEPackage();
+			return basicGetLoadedEPackage();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClassSupplierPackage.ARTIFACT__NAME:
-				setName((String)newValue);
-				return;
-			case ClassSupplierPackage.ARTIFACT__EPACKAGE:
-				setEPackage((EPackage)newValue);
-				return;
-			case ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE:
-				setPrototypeEPackage((EPackage)newValue);
-				return;
-			case ClassSupplierPackage.ARTIFACT__VERSION:
-				setVersion((Version)newValue);
-				return;
-			case ClassSupplierPackage.ARTIFACT__PROJECT_NAME:
-				setProjectName((String)newValue);
-				return;
-			case ClassSupplierPackage.ARTIFACT__STATE:
-				setState((State)newValue);
-				return;
-			case ClassSupplierPackage.ARTIFACT__STATUS:
-				setStatus((IStatus)newValue);
-				return;
+		case ClassSupplierPackage.ARTIFACT__NAME:
+			setName((String) newValue);
+			return;
+		case ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE:
+			setPrototypeEPackage((EPackage) newValue);
+			return;
+		case ClassSupplierPackage.ARTIFACT__VERSION:
+			setVersion((Version) newValue);
+			return;
+		case ClassSupplierPackage.ARTIFACT__PROJECT_NAME:
+			setProjectName((String) newValue);
+			return;
+		case ClassSupplierPackage.ARTIFACT__STATE:
+			setState((State) newValue);
+			return;
+		case ClassSupplierPackage.ARTIFACT__STATUS:
+			setStatus((IStatus) newValue);
+			return;
+		case ClassSupplierPackage.ARTIFACT__LOADED_EPACKAGE:
+			setLoadedEPackage((EPackage) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClassSupplierPackage.ARTIFACT__NAME:
-				setName(NAME_EDEFAULT);
-				return;
-			case ClassSupplierPackage.ARTIFACT__EPACKAGE:
-				setEPackage((EPackage)null);
-				return;
-			case ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE:
-				setPrototypeEPackage((EPackage)null);
-				return;
-			case ClassSupplierPackage.ARTIFACT__VERSION:
-				setVersion(VERSION_EDEFAULT);
-				return;
-			case ClassSupplierPackage.ARTIFACT__PROJECT_NAME:
-				setProjectName(PROJECT_NAME_EDEFAULT);
-				return;
-			case ClassSupplierPackage.ARTIFACT__STATE:
-				setState(STATE_EDEFAULT);
-				return;
-			case ClassSupplierPackage.ARTIFACT__STATUS:
-				setStatus(STATUS_EDEFAULT);
-				return;
+		case ClassSupplierPackage.ARTIFACT__NAME:
+			setName(NAME_EDEFAULT);
+			return;
+		case ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE:
+			setPrototypeEPackage((EPackage) null);
+			return;
+		case ClassSupplierPackage.ARTIFACT__VERSION:
+			setVersion(VERSION_EDEFAULT);
+			return;
+		case ClassSupplierPackage.ARTIFACT__PROJECT_NAME:
+			setProjectName(PROJECT_NAME_EDEFAULT);
+			return;
+		case ClassSupplierPackage.ARTIFACT__STATE:
+			setState(STATE_EDEFAULT);
+			return;
+		case ClassSupplierPackage.ARTIFACT__STATUS:
+			setStatus(STATUS_EDEFAULT);
+			return;
+		case ClassSupplierPackage.ARTIFACT__LOADED_EPACKAGE:
+			setLoadedEPackage((EPackage) null);
+			return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClassSupplierPackage.ARTIFACT__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case ClassSupplierPackage.ARTIFACT__EPACKAGE:
-				return ePackage != null;
-			case ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE:
-				return prototypeEPackage != null;
-			case ClassSupplierPackage.ARTIFACT__VERSION:
-				return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
-			case ClassSupplierPackage.ARTIFACT__PROJECT_NAME:
-				return PROJECT_NAME_EDEFAULT == null ? projectName != null : !PROJECT_NAME_EDEFAULT.equals(projectName);
-			case ClassSupplierPackage.ARTIFACT__STATE:
-				return state != STATE_EDEFAULT;
-			case ClassSupplierPackage.ARTIFACT__STATUS:
-				return STATUS_EDEFAULT == null ? status != null : !STATUS_EDEFAULT.equals(status);
+		case ClassSupplierPackage.ARTIFACT__NAME:
+			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT
+					.equals(name);
+		case ClassSupplierPackage.ARTIFACT__EPACKAGE:
+			return basicGetEPackage() != null;
+		case ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE:
+			return prototypeEPackage != null;
+		case ClassSupplierPackage.ARTIFACT__VERSION:
+			return VERSION_EDEFAULT == null ? version != null
+					: !VERSION_EDEFAULT.equals(version);
+		case ClassSupplierPackage.ARTIFACT__PROJECT_NAME:
+			return PROJECT_NAME_EDEFAULT == null ? projectName != null
+					: !PROJECT_NAME_EDEFAULT.equals(projectName);
+		case ClassSupplierPackage.ARTIFACT__STATE:
+			return state != STATE_EDEFAULT;
+		case ClassSupplierPackage.ARTIFACT__STATUS:
+			return STATUS_EDEFAULT == null ? status != null : !STATUS_EDEFAULT
+					.equals(status);
+		case ClassSupplierPackage.ARTIFACT__LOADED_EPACKAGE:
+			return loadedEPackage != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy())
+			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");

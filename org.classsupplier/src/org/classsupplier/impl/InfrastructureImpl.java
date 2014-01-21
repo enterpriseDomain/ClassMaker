@@ -7,9 +7,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.classsupplier.Artifact;
+import org.classsupplier.ClassSupplierFactory;
 import org.classsupplier.ClassSupplierPackage;
 import org.classsupplier.Infrastructure;
 import org.classsupplier.State;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -33,17 +38,21 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.classsupplier.impl.InfrastructureImpl#getContents <em>Contents</em>}</li>
- *   <li>{@link org.classsupplier.impl.InfrastructureImpl#getResourceSet <em>Resource Set</em>}</li>
+ * <li>{@link org.classsupplier.impl.InfrastructureImpl#getContents <em>Contents
+ * </em>}</li>
+ * <li>{@link org.classsupplier.impl.InfrastructureImpl#getResourceSet <em>
+ * Resource Set</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
+
 	/**
-	 * The cached value of the '{@link #getContents() <em>Contents</em>}' containment reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getContents() <em>Contents</em>}'
+	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getContents()
 	 * @generated
 	 * @ordered
@@ -51,8 +60,9 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 	protected EList<Artifact> contents;
 
 	/**
-	 * The default value of the '{@link #getResourceSet() <em>Resource Set</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getResourceSet() <em>Resource Set</em>}
+	 * ' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getResourceSet()
 	 * @generated NOT
 	 * @ordered
@@ -60,15 +70,18 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 	protected static final ResourceSet RESOURCE_SET_EDEFAULT = new ResourceSetImpl();
 
 	/**
-	 * The cached value of the '{@link #getResourceSet() <em>Resource Set</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getResourceSet() <em>Resource Set</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getResourceSet()
 	 * @generated
 	 * @ordered
 	 */
 	protected ResourceSet resourceSet = RESOURCE_SET_EDEFAULT;
 
-	protected Map<EPackage, Artifact> models = new HashMap<EPackage, Artifact>();
+	protected Map<EPackage, Artifact> prototypeModelsToArtifaсts = new HashMap<EPackage, Artifact>();
+
+	protected Map<EPackage, Artifact> loadedModelsToArtifaсts = new HashMap<EPackage, Artifact>();
 
 	private EAdapterList<Adapter> listeners = new EAdapterList<Adapter>(this);
 
@@ -80,26 +93,28 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 					&& msg.getNewValue() == State.PROTOTYPE)
 				notifyListeners(new NotificationImpl(msg.getEventType(), null,
 						msg.getNotifier()));
-
 		}
 
 	};
 
-	private Adapter attachingAdapter = new AdapterImpl() {
+	private Adapter contentsAdapter = new AdapterImpl() {
 
 		@Override
 		public void notifyChanged(Notification msg) {
-			if (msg.getFeatureID(getClass()) == ClassSupplierPackage.INFRASTRUCTURE__CONTENTS)
+			if (msg.getFeatureID(getClass()) == ClassSupplierPackage.INFRASTRUCTURE__CONTENTS) {
 				switch (msg.getEventType()) {
 				case Notification.ADD:
+					notifyEPackageAdd((Artifact) msg.getNewValue());
 					((EObject) msg.getNewValue()).eAdapters().add(
 							listeningAdapter);
 					break;
 				case Notification.REMOVE:
 					((EObject) msg.getOldValue()).eAdapters().remove(
 							listeningAdapter);
+					notifyEPackageRemove((Artifact) msg.getOldValue());
 					break;
 				}
+			}
 		}
 
 	};
@@ -111,11 +126,30 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 	 */
 	protected InfrastructureImpl() {
 		super();
-		eAdapters().add(attachingAdapter);
+		eAdapters().add(contentsAdapter);
+		init();
+	}
+
+	private void init() {
+		// IProgressMonitor monitor = OSGi.getClassSupplier().monitor();
+		IWorkspace workspace = ResourcesPlugin.getWorkspace();
+		for (IProject project : workspace.getRoot().getProjects())
+			try {
+				if (project.hasNature(OSGi.NATURE_ID)) {
+					Artifact art = ClassSupplierFactory.eINSTANCE
+							.createArtifact();
+					art.setProjectName(project.getName());
+					registerArtifact(art);
+					workspace.run(new Initializer(project, art, this), null);
+				}
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -125,17 +159,20 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EList<Artifact> getContents() {
 		if (contents == null) {
-			contents = new EObjectContainmentEList<Artifact>(Artifact.class, this, ClassSupplierPackage.INFRASTRUCTURE__CONTENTS);
+			contents = new EObjectContainmentEList<Artifact>(Artifact.class,
+					this, ClassSupplierPackage.INFRASTRUCTURE__CONTENTS);
 		}
 		return contents;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ResourceSet getResourceSet() {
@@ -144,13 +181,16 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setResourceSet(ResourceSet newResourceSet) {
 		ResourceSet oldResourceSet = resourceSet;
 		resourceSet = newResourceSet;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.INFRASTRUCTURE__RESOURCE_SET, oldResourceSet, resourceSet));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ClassSupplierPackage.INFRASTRUCTURE__RESOURCE_SET,
+					oldResourceSet, resourceSet));
 	}
 
 	/**
@@ -176,8 +216,8 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 	 * 
 	 * @generated NOT
 	 */
-	public void registerArtifact(EPackage model, Artifact artifact) {
-		models.put(model, artifact);
+	public void registerArtifact(Artifact artifact) {
+		getContents().add(artifact);
 	}
 
 	/**
@@ -185,18 +225,34 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 	 * 
 	 * @generated NOT
 	 */
-	public boolean containsArtifact(EPackage model) {
-		return models.containsKey(model);
+	public void unregisterArtifact(Artifact artifact) {
+		getContents().remove(artifact);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public int containsArtifact(EPackage blueprint) {
+		for (EPackage ePackage : loadedModelsToArtifaсts.keySet())
+			if (ePackage.getNsURI().equals(blueprint.getNsURI()))
+				return CONTAINS_LOADED;
+		for (EPackage ePackage : prototypeModelsToArtifaсts.keySet())
+			if (ePackage.getNsURI().equals(blueprint.getNsURI()))
+				return CONTAINS_PROTOTYPE;
+		return DOESNT_CONTAIN;
+	}
+
+	/**
+	 * a <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
 	 */
 	public Artifact getArtifact(String projectName) {
-		for (Artifact artifact : models.values()) {
-			if (artifact.getProjectName().equals(projectName))
+		for (Artifact artifact : getContents()) {
+			if (artifact.getProjectName() != null
+					&& artifact.getProjectName().equals(projectName))
 				return artifact;
 		}
 		return null;
@@ -208,7 +264,32 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 	 * @generated NOT
 	 */
 	public Artifact getArtifact(EPackage ePackage) {
-		return models.get(ePackage);
+		switch (containsArtifact(ePackage)) {
+		case CONTAINS_LOADED:
+			for (EPackage loaded : loadedModelsToArtifaсts.keySet())
+				if (loaded.getNsURI().equals(ePackage.getNsURI()))
+					return loadedModelsToArtifaсts.get(loaded);
+		case CONTAINS_PROTOTYPE:
+			for (EPackage prototype : prototypeModelsToArtifaсts.keySet())
+				if (prototype.getNsURI().equals(ePackage.getNsURI()))
+					return prototypeModelsToArtifaсts.get(prototype);
+		case DOESNT_CONTAIN:
+		default:
+			return null;
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Artifact createArtifact(EPackage blueprint) {
+		Artifact result = ClassSupplierFactory.eINSTANCE.createArtifact();
+		result.setName(blueprint.getName());
+		result.setPrototypeEPackage(blueprint);
+		registerArtifact(result);
+		return result;
 	}
 
 	private void notifyListeners(Notification notification) {
@@ -218,97 +299,125 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
+	 * 
+	 * @generated)
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ClassSupplierPackage.INFRASTRUCTURE__CONTENTS:
-				return ((InternalEList<?>)getContents()).basicRemove(otherEnd, msgs);
+		case ClassSupplierPackage.INFRASTRUCTURE__CONTENTS:
+			return ((InternalEList<?>) getContents()).basicRemove(otherEnd,
+					msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClassSupplierPackage.INFRASTRUCTURE__CONTENTS:
-				return getContents();
-			case ClassSupplierPackage.INFRASTRUCTURE__RESOURCE_SET:
-				return getResourceSet();
+		case ClassSupplierPackage.INFRASTRUCTURE__CONTENTS:
+			return getContents();
+		case ClassSupplierPackage.INFRASTRUCTURE__RESOURCE_SET:
+			return getResourceSet();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClassSupplierPackage.INFRASTRUCTURE__CONTENTS:
-				getContents().clear();
-				getContents().addAll((Collection<? extends Artifact>)newValue);
-				return;
-			case ClassSupplierPackage.INFRASTRUCTURE__RESOURCE_SET:
-				setResourceSet((ResourceSet)newValue);
-				return;
+		case ClassSupplierPackage.INFRASTRUCTURE__CONTENTS:
+			getContents().clear();
+			getContents().addAll((Collection<? extends Artifact>) newValue);
+			return;
+		case ClassSupplierPackage.INFRASTRUCTURE__RESOURCE_SET:
+			setResourceSet((ResourceSet) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClassSupplierPackage.INFRASTRUCTURE__CONTENTS:
-				getContents().clear();
-				return;
-			case ClassSupplierPackage.INFRASTRUCTURE__RESOURCE_SET:
-				setResourceSet(RESOURCE_SET_EDEFAULT);
-				return;
+		case ClassSupplierPackage.INFRASTRUCTURE__CONTENTS:
+			getContents().clear();
+			return;
+		case ClassSupplierPackage.INFRASTRUCTURE__RESOURCE_SET:
+			setResourceSet(RESOURCE_SET_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClassSupplierPackage.INFRASTRUCTURE__CONTENTS:
-				return contents != null && !contents.isEmpty();
-			case ClassSupplierPackage.INFRASTRUCTURE__RESOURCE_SET:
-				return RESOURCE_SET_EDEFAULT == null ? resourceSet != null : !RESOURCE_SET_EDEFAULT.equals(resourceSet);
+		case ClassSupplierPackage.INFRASTRUCTURE__CONTENTS:
+			return contents != null && !contents.isEmpty();
+		case ClassSupplierPackage.INFRASTRUCTURE__RESOURCE_SET:
+			return RESOURCE_SET_EDEFAULT == null ? resourceSet != null
+					: !RESOURCE_SET_EDEFAULT.equals(resourceSet);
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy())
+			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (resourceSet: ");
 		result.append(resourceSet);
 		result.append(')');
 		return result.toString();
+	}
+
+	protected void notifyEPackageAdd(Artifact artifact) {
+		if (artifact
+				.eIsSet(ClassSupplierPackage.Literals.ARTIFACT__PROTOTYPE_EPACKAGE))
+			prototypeModelsToArtifaсts.put(artifact.getPrototypeEPackage(),
+					artifact);
+		if (artifact
+				.eIsSet(ClassSupplierPackage.Literals.ARTIFACT__LOADED_EPACKAGE))
+			loadedModelsToArtifaсts.put(artifact.getLoadedEPackage(), artifact);
+	}
+
+	protected void notifyEPackageRemove(Artifact artifact) {
+		if (artifact
+				.eIsSet(ClassSupplierPackage.Literals.ARTIFACT__PROTOTYPE_EPACKAGE))
+			prototypeModelsToArtifaсts.remove(artifact.getPrototypeEPackage());
+		if (artifact
+				.eIsSet(ClassSupplierPackage.Literals.ARTIFACT__LOADED_EPACKAGE))
+			loadedModelsToArtifaсts.remove(artifact.getLoadedEPackage());
 	}
 
 } // InfrastructureImpl

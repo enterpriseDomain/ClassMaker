@@ -3,6 +3,7 @@ package org.classsupplier.builders;
 import java.util.Map;
 
 import org.classsupplier.Artifact;
+import org.classsupplier.State;
 import org.classsupplier.codegen.EcoreGenerator;
 import org.classsupplier.codegen.Generator;
 import org.classsupplier.impl.OSGi;
@@ -27,8 +28,10 @@ public class GeneratorBuilder extends IncrementalProjectBuilder {
 		OSGi.getClassSupplier().setMonitor(monitor);
 		Artifact artifact = OSGi.getClassSupplier().getWorkspace()
 				.getArtifact(getProject().getName());
-		generator.setResourceSet(OSGi.getClassSupplier().getWorkspace()
-				.getResourceSet());
+		if (artifact.getState().equals(State.CREATED)
+				|| !artifact.getState().equals(State.PROCESSING))
+			return null;
+		generator.setResourceSet( OSGi.getClassSupplier().getWorkspace().getResourceSet());
 		generator.generate(artifact, getRule(kind, args));
 		OSGi.getClassSupplier().setMonitor(oldMonitor);
 		return null;
