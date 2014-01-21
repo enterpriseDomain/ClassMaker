@@ -20,6 +20,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
@@ -183,14 +184,16 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 				setStatus(STATUS_EDEFAULT);
 				setState(State.PROTOTYPE);
 			}
-			if ((msg.getFeatureID(getClass()) == ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE
-					|| msg.getFeatureID(getClass()) == ClassSupplierPackage.ARTIFACT__LOADED_EPACKAGE)
-					&& msg.getEventType() == Notification.SET)
+			if ((msg.getFeatureID(getClass()) == ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE || msg
+					.getFeatureID(getClass()) == ClassSupplierPackage.ARTIFACT__LOADED_EPACKAGE)
+					&& msg.getEventType() == Notification.SET
+					&& eIsSet(EcorePackage.EOBJECT___ECONTAINER))
 				((InfrastructureImpl) eContainer())
 						.notifyEPackageAdd((Artifact) msg.getNotifier());
-			if ((msg.getFeatureID(getClass()) == ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE
-					|| msg.getFeatureID(getClass()) == ClassSupplierPackage.ARTIFACT__LOADED_EPACKAGE)
-					&& msg.getEventType() == Notification.UNSET)
+			if ((msg.getFeatureID(getClass()) == ClassSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE || msg
+					.getFeatureID(getClass()) == ClassSupplierPackage.ARTIFACT__LOADED_EPACKAGE)
+					&& msg.getEventType() == Notification.UNSET
+					&& eIsSet(EcorePackage.EOBJECT___ECONTAINER))
 				((InfrastructureImpl) eContainer())
 						.notifyEPackageRemove((Artifact) msg.getNotifier());
 		}
