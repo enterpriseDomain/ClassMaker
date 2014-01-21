@@ -236,12 +236,17 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 	 */
 	public int containsArtifact(EPackage blueprint) {
 		for (EPackage ePackage : loadedModelsToArtifaсts.keySet())
-			if (ePackage.getNsURI().equals(blueprint.getNsURI()))
+			if (packagesAreEqual(ePackage, blueprint))
 				return CONTAINS_LOADED;
 		for (EPackage ePackage : prototypeModelsToArtifaсts.keySet())
-			if (ePackage.getNsURI().equals(blueprint.getNsURI()))
+			if (packagesAreEqual(ePackage, blueprint))
 				return CONTAINS_PROTOTYPE;
 		return DOESNT_CONTAIN;
+	}
+
+	private boolean packagesAreEqual(EPackage first, EPackage second) {
+		return first.getNsURI().equals(second.getNsURI())
+				|| first.getName().equals(second.getName());
 	}
 
 	/**
@@ -267,11 +272,11 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 		switch (containsArtifact(ePackage)) {
 		case CONTAINS_LOADED:
 			for (EPackage loaded : loadedModelsToArtifaсts.keySet())
-				if (loaded.getNsURI().equals(ePackage.getNsURI()))
+				if (packagesAreEqual(loaded, ePackage))
 					return loadedModelsToArtifaсts.get(loaded);
 		case CONTAINS_PROTOTYPE:
 			for (EPackage prototype : prototypeModelsToArtifaсts.keySet())
-				if (prototype.getNsURI().equals(ePackage.getNsURI()))
+				if (packagesAreEqual(prototype, ePackage))
 					return prototypeModelsToArtifaсts.get(prototype);
 		case DOESNT_CONTAIN:
 		default:

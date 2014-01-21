@@ -136,9 +136,6 @@ public class ClassSupplierImpl extends EObjectImpl implements ClassSupplier {
 		Artifact result = null;
 		setMonitor(monitor);
 		switch (getWorkspace().containsArtifact(model)) {
-		case Infrastructure.CONTAINS_PROTOTYPE:
-			result = getWorkspace().getArtifact(model);
-			return makePrototype(model, result);
 		case Infrastructure.CONTAINS_LOADED:
 			result = getWorkspace().getArtifact(model);
 			if (result != null)
@@ -146,6 +143,9 @@ public class ClassSupplierImpl extends EObjectImpl implements ClassSupplier {
 					return result.getEPackage();
 				else
 					return makePrototype(model, result);
+		case Infrastructure.CONTAINS_PROTOTYPE:
+			result = getWorkspace().getArtifact(model);
+			return makePrototype(model, result);
 		case Infrastructure.DOESNT_CONTAIN:
 		default:
 			result = getWorkspace().createArtifact(model);
