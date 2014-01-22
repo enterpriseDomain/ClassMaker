@@ -44,6 +44,7 @@
     <eOperations name="getArtifact" eType="#//Artifact">
       <eParameters name="ePackage" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
     </eOperations>
+    <eOperations name="save"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="contents" upperBound="-1"
         eType="#//Artifact" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourceSet" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EResourceSet"

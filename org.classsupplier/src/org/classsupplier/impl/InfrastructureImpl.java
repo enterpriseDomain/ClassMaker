@@ -15,6 +15,8 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -131,20 +133,25 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 	}
 
 	private void init() {
-		// IProgressMonitor monitor = OSGi.getClassSupplier().monitor();
+		IProgressMonitor monitor = new NullProgressMonitor();
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
-		for (IProject project : workspace.getRoot().getProjects())
+		for (IProject project : workspace.getRoot().getProjects()) {
+			Artifact artifact = null;
 			try {
+				if (!project.isOpen())
+					project.open(monitor);
 				if (project.hasNature(OSGi.NATURE_ID)) {
-					Artifact art = ClassSupplierFactory.eINSTANCE
-							.createArtifact();
-					art.setProjectName(project.getName());
-					registerArtifact(art);
-					workspace.run(new Initializer(project, art, this), null);
+					artifact = ClassSupplierFactory.eINSTANCE.createArtifact();
+					artifact.setProjectName(project.getName());
+					registerArtifact(artifact);
+					workspace.run(new Initializer(project, artifact, this),
+							monitor);
 				}
 			} catch (CoreException e) {
-				e.printStackTrace();
+				if (artifact != null)
+					artifact.setStatus(e.getStatus());
 			}
+		}
 	}
 
 	/**
@@ -281,6 +288,23 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 		case DOESNT_CONTAIN:
 		default:
 			return null;
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public void save() {
+		IProgressMonitor monitor = null;
+		if (OSGi.getClassSupplier() != null)
+			monitor = OSGi.getClassSupplier().monitor();
+		else
+			monitor = new NullProgressMonitor();
+		try {
+			ResourcesPlugin.getWorkspace().save(true, monitor);
+		} catch (CoreException e) {
 		}
 	}
 

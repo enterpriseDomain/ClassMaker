@@ -18,7 +18,7 @@ Usage example:
     eClass.getEStructuralFeatures().add(eAttr);
     blueprintEPackage.getEClassifiers().add(eClass);
     ClassSupplier service = ... // acquire the ClassSupplier OSGi service
-    EPackage nativeEPackage = service.supply(blueprintEPackage); // Provide it to ClassSupplier to create the EPackage...
+    EPackage nativeEPackage = service.supply(blueprintEPackage); // Provide it to ClassSupplier to generate the EPackage...
     EClass jClass = (EClass) nativeEPackage.getEClassifier(eClass.getName()); // ... that you can use
     EObject jObject = nativeEPackage.getEFactoryInstance().create(jClass);
     int pages = 500;

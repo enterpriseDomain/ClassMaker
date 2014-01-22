@@ -128,6 +128,14 @@ public interface Infrastructure extends EObject {
 	Artifact getArtifact(EPackage ePackage);
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void save();
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @model
 	 * @generated

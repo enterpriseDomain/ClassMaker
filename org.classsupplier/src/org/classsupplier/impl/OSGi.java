@@ -63,6 +63,7 @@ public class OSGi extends Plugin {
 	 * org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
+		getClassSupplier().getWorkspace().save();
 		service.close();
 		reg.unregister();
 		instance = null;

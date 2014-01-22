@@ -130,6 +130,10 @@
         <element xmi:type="ecore:EOperation" href="ClassSupplier.ecore#//Infrastructure/getArtifact.1"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_QUjTgTgUEeOD5f07UP2EOA"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_jGOCAIMvEeOEapi-7VAffw" type="2002">
+        <element xmi:type="ecore:EOperation" href="ClassSupplier.ecore#//Infrastructure/save"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_jGOCAYMvEeOEapi-7VAffw"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_t6xfwWFjEeKjf_OKI_SsYg"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_t6xfwmFjEeKjf_OKI_SsYg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_t6xfw2FjEeKjf_OKI_SsYg"/>
