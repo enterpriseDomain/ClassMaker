@@ -106,16 +106,16 @@ public class EcoreGenerator implements org.classsupplier.codegen.Generator {
 	}
 
 	@Override
-	public void generate(final Artifact artifact, ISchedulingRule rule)
-			throws CoreException {
+	public void generate(final Artifact artifact, ISchedulingRule rule,
+			final IProgressMonitor monitor) throws CoreException {
 		final IProject project = ResourcesPlugin.getWorkspace().getRoot()
 				.getProject(artifact.getProjectName());
-		IPath modelPath = ensureModelResourcePath(project, artifact.getName());
+		IPath modelPath = ensureModelResourcePath(project, artifact.getName(),
+				monitor);
 
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		final IPath path = root.getRawLocation().append(modelPath);
 		final org.eclipse.emf.codegen.ecore.Generator generator = new Generator();
-		final IProgressMonitor monitor = OSGi.getClassSupplier().monitor();
 		IPath genModelPath = getGenModelResourcePath(modelPath);
 		if (!genModelPath.toFile().exists()) {
 			monitor.beginTask("Generating GenModel '" + genModelPath.toString()
@@ -153,9 +153,8 @@ public class EcoreGenerator implements org.classsupplier.codegen.Generator {
 		}
 	}
 
-	private IPath ensureModelResourcePath(IProject project, String name)
-			throws CoreException {
-		IProgressMonitor monitor = OSGi.getClassSupplier().monitor();
+	private IPath ensureModelResourcePath(IProject project, String name,
+			IProgressMonitor monitor) throws CoreException {
 		if (!project.exists())
 			throw new CoreException(
 					new Status(

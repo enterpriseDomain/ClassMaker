@@ -2,6 +2,7 @@
  */
 package org.classsupplier;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.notify.Adapter;
 
 import org.eclipse.emf.common.util.EList;
@@ -130,10 +131,10 @@ public interface Infrastructure extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
+	 * @model monitorDataType="org.classsupplier.IProgressMonitor"
 	 * @generated
 	 */
-	void save();
+	void save(IProgressMonitor monitor);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

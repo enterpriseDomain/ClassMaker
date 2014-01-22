@@ -2,7 +2,9 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="classsupplier" nsURI="http://org/classsupplier/0.7.2" nsPrefix="classsupplier">
   <eClassifiers xsi:type="ecore:EClass" name="Artifact">
-    <eOperations name="make"/>
+    <eOperations name="make">
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ePackage" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"
         changeable="false" volatile="true" derived="true"/>
@@ -44,7 +46,9 @@
     <eOperations name="getArtifact" eType="#//Artifact">
       <eParameters name="ePackage" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
     </eOperations>
-    <eOperations name="save"/>
+    <eOperations name="save">
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="contents" upperBound="-1"
         eType="#//Artifact" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourceSet" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EResourceSet"

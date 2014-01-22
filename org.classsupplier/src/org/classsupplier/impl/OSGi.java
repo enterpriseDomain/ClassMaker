@@ -5,6 +5,7 @@ import java.util.Hashtable;
 
 import org.classsupplier.ClassSupplier;
 import org.classsupplier.ClassSupplierFactory;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.e4.core.contexts.IContextFunction;
 import org.osgi.framework.BundleContext;
@@ -63,7 +64,7 @@ public class OSGi extends Plugin {
 	 * org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
-		getClassSupplier().getWorkspace().save();
+		getClassSupplier().getWorkspace().save(new NullProgressMonitor());
 		service.close();
 		reg.unregister();
 		instance = null;
