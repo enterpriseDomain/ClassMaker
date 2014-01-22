@@ -3,12 +3,14 @@ package org.classsupplier.export;
 import org.apache.maven.cli.MavenCli;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 
 public class MavenExporter extends AbstractExporter {
 
 	@Override
-	public void export(IProject project) throws CoreException {
+	public void export(IProject project, IProgressMonitor monitor)
+			throws CoreException {
 		setBuildConfigPath(project.getLocation());
 		createBuildFiles(project.getName());
 

@@ -397,13 +397,14 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 		initEAttribute(getArtifact_Status(), this.getIStatus(), "status", null, 0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getArtifact_LoadedEPackage(), theEcorePackage.getEPackage(), null, "loadedEPackage", null, 0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(artifactEClass, null, "make", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EOperation op = addEOperation(artifactEClass, null, "make", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(infrastructureEClass, Infrastructure.class, "Infrastructure", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getInfrastructure_Contents(), this.getArtifact(), null, "contents", null, 0, -1, Infrastructure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getInfrastructure_ResourceSet(), ecorePackage.getEResourceSet(), "resourceSet", null, 0, 1, Infrastructure.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = addEOperation(infrastructureEClass, null, "addRefreshListener", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(infrastructureEClass, null, "addRefreshListener", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getAdapter(), "listener", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(infrastructureEClass, null, "removeRefreshListener", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -427,7 +428,8 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 		op = addEOperation(infrastructureEClass, this.getArtifact(), "getArtifact", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEPackage(), "ePackage", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(infrastructureEClass, null, "save", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(infrastructureEClass, null, "save", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(classSupplierEClass, ClassSupplier.class, "ClassSupplier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getClassSupplier_Workspace(), this.getInfrastructure(), null, "workspace", null, 0, 1, ClassSupplier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

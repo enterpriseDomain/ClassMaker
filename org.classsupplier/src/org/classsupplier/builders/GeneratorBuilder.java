@@ -24,16 +24,13 @@ public class GeneratorBuilder extends IncrementalProjectBuilder {
 			IProgressMonitor monitor) throws CoreException {
 		if (kind != FULL_BUILD)
 			return null;
-		IProgressMonitor oldMonitor = OSGi.getClassSupplier().monitor();
-		OSGi.getClassSupplier().setMonitor(monitor);
 		Artifact artifact = OSGi.getClassSupplier().getWorkspace()
 				.getArtifact(getProject().getName());
 		if (artifact.getState().equals(State.CREATED)
 				|| !artifact.getState().equals(State.PROCESSING))
 			return null;
 		generator.setResourceSet( OSGi.getClassSupplier().getWorkspace().getResourceSet());
-		generator.generate(artifact, getRule(kind, args));
-		OSGi.getClassSupplier().setMonitor(oldMonitor);
+		generator.generate(artifact, getRule(kind, args),monitor);
 		return null;
 	}
 

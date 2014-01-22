@@ -29,4 +29,7 @@ Usage example:
     assertEquals(eClass.getName(), jObject.getClass().getSimpleName()); // * Note this *
   
 A more [complete example is here](/org.classsupplier.test/src/org/classsupplier/test/ClassSupplierTests.java).  
+
 To use the library, import it to the Eclipse plugin's dependencies with satisfying subsequent. E4 DI is supported. 
+
+See also [wiki](https://github.com/kirillzotkin/ClassSupplier/wiki).

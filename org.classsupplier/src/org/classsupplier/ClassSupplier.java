@@ -69,8 +69,4 @@ public interface ClassSupplier extends EObject {
 	 */
 	EPackage supply(EPackage model, IProgressMonitor monitor);
 
-	IProgressMonitor monitor();
-
-	void setMonitor(IProgressMonitor monitor);
-
 } // ClassSupplier

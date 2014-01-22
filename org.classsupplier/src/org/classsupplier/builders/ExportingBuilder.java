@@ -29,8 +29,6 @@ public class ExportingBuilder extends IncrementalProjectBuilder {
 			IProgressMonitor monitor) throws CoreException {
 		if (kind != FULL_BUILD)
 			return null;
-		IProgressMonitor oldMonitor =  OSGi.getClassSupplier().monitor();
-		OSGi.getClassSupplier().setMonitor(monitor);
 		exporter.setDestination(PathHelper.getDefaultDestination());
 		if (exporter.getQualifier() == null) {
 			Artifact artifact = OSGi.getClassSupplier().getWorkspace()
@@ -41,7 +39,7 @@ public class ExportingBuilder extends IncrementalProjectBuilder {
 			Version version = artifact.getVersion();
 			exporter.setQualifier(version.getQualifier());
 		}
-		exporter.export(getProject());
+		exporter.export(getProject(), monitor);
 		try {
 			Job.getJobManager().join(ResourcesPlugin.FAMILY_MANUAL_BUILD,
 					monitor);
@@ -50,7 +48,6 @@ public class ExportingBuilder extends IncrementalProjectBuilder {
 		} catch (InterruptedException e) {
 			return null;
 		}
-		OSGi.getClassSupplier().setMonitor(oldMonitor);
 		return null;
 	}
 }

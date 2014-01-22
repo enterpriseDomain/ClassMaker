@@ -2,6 +2,7 @@
  */
 package org.classsupplier;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 
 import org.eclipse.emf.ecore.EObject;
@@ -234,9 +235,9 @@ public interface Artifact extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
+	 * @model monitorDataType="org.classsupplier.IProgressMonitor"
 	 * @generated
 	 */
-	void make();
+	void make(IProgressMonitor monitor);
 
 } // Artifact
