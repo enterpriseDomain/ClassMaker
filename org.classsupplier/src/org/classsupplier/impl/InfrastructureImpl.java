@@ -40,26 +40,24 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.classsupplier.impl.InfrastructureImpl#getContents <em>Contents
- * </em>}</li>
- * <li>{@link org.classsupplier.impl.InfrastructureImpl#getResourceSet <em>
- * Resource Set</em>}</li>
+ *   <li>{@link org.classsupplier.impl.InfrastructureImpl#getArtifacts <em>Artifacts</em>}</li>
+ *   <li>{@link org.classsupplier.impl.InfrastructureImpl#getResourceSet <em>Resource Set</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 
 	/**
-	 * The cached value of the '{@link #getContents() <em>Contents</em>}'
-	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #getContents()
+	 * The cached value of the '{@link #getArtifacts() <em>Artifacts</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getArtifacts()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Artifact> contents;
+	protected EList<Artifact> artifacts;
 
 	/**
 	 * The default value of the '{@link #getResourceSet() <em>Resource Set</em>}
@@ -72,9 +70,8 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 	protected static final ResourceSet RESOURCE_SET_EDEFAULT = new ResourceSetImpl();
 
 	/**
-	 * The cached value of the '{@link #getResourceSet() <em>Resource Set</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getResourceSet() <em>Resource Set</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getResourceSet()
 	 * @generated
 	 * @ordered
@@ -103,7 +100,7 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 
 		@Override
 		public void notifyChanged(Notification msg) {
-			if (msg.getFeatureID(getClass()) == ClassSupplierPackage.INFRASTRUCTURE__CONTENTS) {
+			if (msg.getFeatureID(getClass()) == ClassSupplierPackage.INFRASTRUCTURE__ARTIFACTS) {
 				switch (msg.getEventType()) {
 				case Notification.ADD:
 					notifyEPackageAdd((Artifact) msg.getNewValue());
@@ -156,7 +153,6 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -165,21 +161,19 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Artifact> getContents() {
-		if (contents == null) {
-			contents = new EObjectContainmentEList<Artifact>(Artifact.class,
-					this, ClassSupplierPackage.INFRASTRUCTURE__CONTENTS);
+	public EList<Artifact> getArtifacts() {
+		if (artifacts == null) {
+			artifacts = new EObjectContainmentEList<Artifact>(Artifact.class, this, ClassSupplierPackage.INFRASTRUCTURE__ARTIFACTS);
 		}
-		return contents;
+		return artifacts;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ResourceSet getResourceSet() {
@@ -188,16 +182,13 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setResourceSet(ResourceSet newResourceSet) {
 		ResourceSet oldResourceSet = resourceSet;
 		resourceSet = newResourceSet;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ClassSupplierPackage.INFRASTRUCTURE__RESOURCE_SET,
-					oldResourceSet, resourceSet));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.INFRASTRUCTURE__RESOURCE_SET, oldResourceSet, resourceSet));
 	}
 
 	/**
@@ -224,7 +215,7 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 	 * @generated NOT
 	 */
 	public void registerArtifact(Artifact artifact) {
-		getContents().add(artifact);
+		getArtifacts().add(artifact);
 	}
 
 	/**
@@ -233,7 +224,7 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 	 * @generated NOT
 	 */
 	public void unregisterArtifact(Artifact artifact) {
-		getContents().remove(artifact);
+		getArtifacts().remove(artifact);
 	}
 
 	/**
@@ -262,7 +253,7 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 	 * @generated NOT
 	 */
 	public Artifact getArtifact(String projectName) {
-		for (Artifact artifact : getContents()) {
+		for (Artifact artifact : getArtifacts()) {
 			if (artifact.getProjectName() != null
 					&& artifact.getProjectName().equals(projectName))
 				return artifact;
@@ -330,8 +321,8 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case ClassSupplierPackage.INFRASTRUCTURE__CONTENTS:
-			return ((InternalEList<?>) getContents()).basicRemove(otherEnd,
+		case ClassSupplierPackage.INFRASTRUCTURE__ARTIFACTS:
+			return ((InternalEList<?>) getArtifacts()).basicRemove(otherEnd,
 					msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -339,84 +330,77 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case ClassSupplierPackage.INFRASTRUCTURE__CONTENTS:
-			return getContents();
-		case ClassSupplierPackage.INFRASTRUCTURE__RESOURCE_SET:
-			return getResourceSet();
+			case ClassSupplierPackage.INFRASTRUCTURE__ARTIFACTS:
+				return getArtifacts();
+			case ClassSupplierPackage.INFRASTRUCTURE__RESOURCE_SET:
+				return getResourceSet();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case ClassSupplierPackage.INFRASTRUCTURE__CONTENTS:
-			getContents().clear();
-			getContents().addAll((Collection<? extends Artifact>) newValue);
-			return;
-		case ClassSupplierPackage.INFRASTRUCTURE__RESOURCE_SET:
-			setResourceSet((ResourceSet) newValue);
-			return;
+			case ClassSupplierPackage.INFRASTRUCTURE__ARTIFACTS:
+				getArtifacts().clear();
+				getArtifacts().addAll((Collection<? extends Artifact>)newValue);
+				return;
+			case ClassSupplierPackage.INFRASTRUCTURE__RESOURCE_SET:
+				setResourceSet((ResourceSet)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case ClassSupplierPackage.INFRASTRUCTURE__CONTENTS:
-			getContents().clear();
-			return;
-		case ClassSupplierPackage.INFRASTRUCTURE__RESOURCE_SET:
-			setResourceSet(RESOURCE_SET_EDEFAULT);
-			return;
+			case ClassSupplierPackage.INFRASTRUCTURE__ARTIFACTS:
+				getArtifacts().clear();
+				return;
+			case ClassSupplierPackage.INFRASTRUCTURE__RESOURCE_SET:
+				setResourceSet(RESOURCE_SET_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case ClassSupplierPackage.INFRASTRUCTURE__CONTENTS:
-			return contents != null && !contents.isEmpty();
-		case ClassSupplierPackage.INFRASTRUCTURE__RESOURCE_SET:
-			return RESOURCE_SET_EDEFAULT == null ? resourceSet != null
-					: !RESOURCE_SET_EDEFAULT.equals(resourceSet);
+			case ClassSupplierPackage.INFRASTRUCTURE__ARTIFACTS:
+				return artifacts != null && !artifacts.isEmpty();
+			case ClassSupplierPackage.INFRASTRUCTURE__RESOURCE_SET:
+				return RESOURCE_SET_EDEFAULT == null ? resourceSet != null : !RESOURCE_SET_EDEFAULT.equals(resourceSet);
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy())
-			return super.toString();
+		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (resourceSet: ");

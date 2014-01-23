@@ -20,67 +20,59 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Package</b>. <!--
  * end-user-doc -->
- * 
  * @generated
  */
 public class ClassSupplierPackageImpl extends EPackageImpl implements
 		ClassSupplierPackage {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass artifactEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass infrastructureEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass classSupplierEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EEnum stateEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EDataType adapterEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EDataType iStatusEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EDataType iProgressMonitorEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EDataType versionEDataType = null;
@@ -106,7 +98,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private static boolean isInited = false;
@@ -127,14 +118,10 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	public static ClassSupplierPackage init() {
-		if (isInited)
-			return (ClassSupplierPackage) EPackage.Registry.INSTANCE
-					.getEPackage(ClassSupplierPackage.eNS_URI);
+		if (isInited) return (ClassSupplierPackage)EPackage.Registry.INSTANCE.getEPackage(ClassSupplierPackage.eNS_URI);
 
 		// Obtain or create and register package
-		ClassSupplierPackageImpl theClassSupplierPackage = (ClassSupplierPackageImpl) (EPackage.Registry.INSTANCE
-				.get(eNS_URI) instanceof ClassSupplierPackageImpl ? EPackage.Registry.INSTANCE
-				.get(eNS_URI) : new ClassSupplierPackageImpl());
+		ClassSupplierPackageImpl theClassSupplierPackage = (ClassSupplierPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ClassSupplierPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ClassSupplierPackageImpl());
 
 		isInited = true;
 
@@ -150,15 +137,14 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 		// Mark meta-data to indicate it can't be changed
 		theClassSupplierPackage.freeze();
 
+  
 		// Update the registry and return the package
-		EPackage.Registry.INSTANCE.put(ClassSupplierPackage.eNS_URI,
-				theClassSupplierPackage);
+		EPackage.Registry.INSTANCE.put(ClassSupplierPackage.eNS_URI, theClassSupplierPackage);
 		return theClassSupplierPackage;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getArtifact() {
@@ -167,79 +153,70 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getArtifact_Name() {
-		return (EAttribute) artifactEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)artifactEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getArtifact_EPackage() {
-		return (EReference) artifactEClass.getEStructuralFeatures().get(1);
+		return (EReference)artifactEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getArtifact_PrototypeEPackage() {
-		return (EReference) artifactEClass.getEStructuralFeatures().get(2);
+		return (EReference)artifactEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getArtifact_Version() {
-		return (EAttribute) artifactEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)artifactEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getArtifact_ProjectName() {
-		return (EAttribute) artifactEClass.getEStructuralFeatures().get(4);
+		return (EAttribute)artifactEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getArtifact_State() {
-		return (EAttribute) artifactEClass.getEStructuralFeatures().get(5);
+		return (EAttribute)artifactEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getArtifact_Status() {
-		return (EAttribute) artifactEClass.getEStructuralFeatures().get(6);
+		return (EAttribute)artifactEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getArtifact_LoadedEPackage() {
-		return (EReference) artifactEClass.getEStructuralFeatures().get(7);
+		return (EReference)artifactEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getInfrastructure() {
@@ -247,28 +224,24 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getInfrastructure_Contents() {
-		return (EReference) infrastructureEClass.getEStructuralFeatures()
-				.get(0);
+	public EReference getInfrastructure_Artifacts() {
+		return (EReference)infrastructureEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getInfrastructure_ResourceSet() {
-		return (EAttribute) infrastructureEClass.getEStructuralFeatures()
-				.get(1);
+		return (EAttribute)infrastructureEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getClassSupplier() {
@@ -277,16 +250,14 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getClassSupplier_Workspace() {
-		return (EReference) classSupplierEClass.getEStructuralFeatures().get(0);
+		return (EReference)classSupplierEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EEnum getState() {
@@ -295,7 +266,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EDataType getAdapter() {
@@ -304,7 +274,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EDataType getIStatus() {
@@ -313,7 +282,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EDataType getIProgressMonitor() {
@@ -322,7 +290,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EDataType getVersion() {
@@ -331,30 +298,27 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ClassSupplierFactory getClassSupplierFactory() {
-		return (ClassSupplierFactory) getEFactoryInstance();
+		return (ClassSupplierFactory)getEFactoryInstance();
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private boolean isCreated = false;
 
 	/**
-	 * Creates the meta-model objects for the package. This method is guarded to
-	 * have no affect on any invocation but its first. <!-- begin-user-doc -->
+	 * Creates the meta-model objects for the package.  This method is
+	 * guarded to have no affect on any invocation but its first.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void createPackageContents() {
-		if (isCreated)
-			return;
+		if (isCreated) return;
 		isCreated = true;
 
 		// Create classes and their features
@@ -369,7 +333,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 		createEReference(artifactEClass, ARTIFACT__LOADED_EPACKAGE);
 
 		infrastructureEClass = createEClass(INFRASTRUCTURE);
-		createEReference(infrastructureEClass, INFRASTRUCTURE__CONTENTS);
+		createEReference(infrastructureEClass, INFRASTRUCTURE__ARTIFACTS);
 		createEAttribute(infrastructureEClass, INFRASTRUCTURE__RESOURCE_SET);
 
 		classSupplierEClass = createEClass(CLASS_SUPPLIER);
@@ -387,7 +351,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private boolean isInitialized = false;
@@ -400,8 +363,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	public void initializePackageContents() {
-		if (isInitialized)
-			return;
+		if (isInitialized) return;
 		isInitialized = true;
 
 		// Initialize package
@@ -410,8 +372,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		EcorePackage theEcorePackage = (EcorePackage) EPackage.Registry.INSTANCE
-				.getEPackage(EcorePackage.eNS_URI);
+		EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
 
 		// Create type parameters
 
@@ -420,124 +381,59 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 		// Add supertypes to classes
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(artifactEClass, Artifact.class, "Artifact", !IS_ABSTRACT,
-				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getArtifact_Name(), ecorePackage.getEString(), "name",
-				null, 0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEReference(getArtifact_EPackage(), theEcorePackage.getEPackage(),
-				null, "ePackage", null, 0, 1, Artifact.class, !IS_TRANSIENT,
-				IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getArtifact_PrototypeEPackage(),
-				theEcorePackage.getEPackage(), null, "prototypeEPackage", null,
-				0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getArtifact_Version(), this.getVersion(), "version",
-				null, 0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEAttribute(getArtifact_ProjectName(), ecorePackage.getEString(),
-				"projectName", null, 0, 1, Artifact.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getArtifact_State(), this.getState(), "state", null, 0,
-				1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getArtifact_Status(), this.getIStatus(), "status", null,
-				0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEReference(getArtifact_LoadedEPackage(),
-				theEcorePackage.getEPackage(), null, "loadedEPackage", null, 0,
-				1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
+		initEClass(artifactEClass, Artifact.class, "Artifact", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getArtifact_Name(), ecorePackage.getEString(), "name", null, 0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getArtifact_EPackage(), theEcorePackage.getEPackage(), null, "ePackage", null, 0, 1, Artifact.class, !IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getArtifact_PrototypeEPackage(), theEcorePackage.getEPackage(), null, "prototypeEPackage", null, 0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getArtifact_Version(), this.getVersion(), "version", null, 0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getArtifact_ProjectName(), ecorePackage.getEString(), "projectName", null, 0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getArtifact_State(), this.getState(), "state", null, 0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getArtifact_Status(), this.getIStatus(), "status", null, 0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getArtifact_LoadedEPackage(), theEcorePackage.getEPackage(), null, "loadedEPackage", null, 0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = addEOperation(artifactEClass, null, "make", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
+		EOperation op = addEOperation(artifactEClass, null, "make", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(infrastructureEClass, Infrastructure.class,
-				"Infrastructure", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getInfrastructure_Contents(), this.getArtifact(), null,
-				"contents", null, 0, -1, Infrastructure.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getInfrastructure_ResourceSet(),
-				ecorePackage.getEResourceSet(), "resourceSet", null, 0, 1,
-				Infrastructure.class, IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
+		initEClass(infrastructureEClass, Infrastructure.class, "Infrastructure", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getInfrastructure_Artifacts(), this.getArtifact(), null, "artifacts", null, 0, -1, Infrastructure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getInfrastructure_ResourceSet(), ecorePackage.getEResourceSet(), "resourceSet", null, 0, 1, Infrastructure.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = addEOperation(infrastructureEClass, null, "addRefreshListener", 0,
-				1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getAdapter(), "listener", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
+		op = addEOperation(infrastructureEClass, null, "addRefreshListener", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getAdapter(), "listener", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(infrastructureEClass, null, "removeRefreshListener",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getAdapter(), "listener", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
+		op = addEOperation(infrastructureEClass, null, "removeRefreshListener", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getAdapter(), "listener", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(infrastructureEClass, this.getArtifact(),
-				"createArtifact", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theEcorePackage.getEPackage(), "blueprint", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(infrastructureEClass, this.getArtifact(), "createArtifact", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEPackage(), "blueprint", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(infrastructureEClass, null, "registerArtifact", 0,
-				1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getArtifact(), "artifact", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
+		op = addEOperation(infrastructureEClass, null, "registerArtifact", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getArtifact(), "artifact", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(infrastructureEClass, null, "unregisterArtifact", 0,
-				1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getArtifact(), "artifact", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
+		op = addEOperation(infrastructureEClass, null, "unregisterArtifact", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getArtifact(), "artifact", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(infrastructureEClass, ecorePackage.getEInt(),
-				"containsArtifact", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theEcorePackage.getEPackage(), "blueprint", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(infrastructureEClass, ecorePackage.getEInt(), "containsArtifact", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEPackage(), "blueprint", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(infrastructureEClass, this.getArtifact(),
-				"getArtifact", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "projectName", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(infrastructureEClass, this.getArtifact(), "getArtifact", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "projectName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(infrastructureEClass, this.getArtifact(),
-				"getArtifact", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theEcorePackage.getEPackage(), "ePackage", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(infrastructureEClass, this.getArtifact(), "getArtifact", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEPackage(), "ePackage", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(infrastructureEClass, null, "save", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(infrastructureEClass, null, "save", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(classSupplierEClass, ClassSupplier.class, "ClassSupplier",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getClassSupplier_Workspace(), this.getInfrastructure(),
-				null, "workspace", null, 0, 1, ClassSupplier.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
+		initEClass(classSupplierEClass, ClassSupplier.class, "ClassSupplier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getClassSupplier_Workspace(), this.getInfrastructure(), null, "workspace", null, 0, 1, ClassSupplier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = addEOperation(classSupplierEClass, theEcorePackage.getEPackage(),
-				"supply", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theEcorePackage.getEPackage(), "model", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(classSupplierEClass, theEcorePackage.getEPackage(), "supply", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEPackage(), "model", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(classSupplierEClass, theEcorePackage.getEPackage(),
-				"supply", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theEcorePackage.getEPackage(), "model", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(classSupplierEClass, theEcorePackage.getEPackage(), "supply", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEPackage(), "model", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(stateEEnum, State.class, "State");
@@ -547,15 +443,10 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 		addEEnumLiteral(stateEEnum, State.COMPLETE);
 
 		// Initialize data types
-		initEDataType(adapterEDataType, Adapter.class, "Adapter",
-				IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(iStatusEDataType, IStatus.class, "IStatus",
-				IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(iProgressMonitorEDataType, IProgressMonitor.class,
-				"IProgressMonitor", IS_SERIALIZABLE,
-				!IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(versionEDataType, org.osgi.framework.Version.class,
-				"Version", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(adapterEDataType, Adapter.class, "Adapter", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(iStatusEDataType, IStatus.class, "IStatus", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(iProgressMonitorEDataType, IProgressMonitor.class, "IProgressMonitor", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(versionEDataType, Version.class, "Version", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.classsupplier.Infrastructure#getContents <em>Contents</em>}</li>
+ *   <li>{@link org.classsupplier.Infrastructure#getArtifacts <em>Artifacts</em>}</li>
  *   <li>{@link org.classsupplier.Infrastructure#getResourceSet <em>Resource Set</em>}</li>
  * </ul>
  * </p>
@@ -30,27 +30,27 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
  */
 public interface Infrastructure extends EObject {
 
+	/**
+	 * Returns the value of the '<em><b>Artifacts</b></em>' containment reference list.
+	 * The list contents are of type {@link org.classsupplier.Artifact}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Artifacts</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Artifacts</em>' containment reference list.
+	 * @see org.classsupplier.ClassSupplierPackage#getInfrastructure_Artifacts()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Artifact> getArtifacts();
+
 	public static final int CONTAINS_PROTOTYPE = 0;
 
 	public static final int CONTAINS_LOADED = 1;
 
 	public static final int DOESNT_CONTAIN = -1;
-
-	/**
-	 * Returns the value of the '<em><b>Contents</b></em>' containment reference list.
-	 * The list contents are of type {@link org.classsupplier.Artifact}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Contents</em>' containment reference list
-	 * isn't clear, there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Contents</em>' containment reference list.
-	 * @see org.classsupplier.ClassSupplierPackage#getInfrastructure_Contents()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Artifact> getContents();
 
 	/**
 	 * Returns the value of the '<em><b>Resource Set</b></em>' attribute. <!--

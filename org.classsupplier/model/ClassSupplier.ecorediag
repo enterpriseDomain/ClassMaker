@@ -256,7 +256,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_GQoQUWFkEeKjf_OKI_SsYg" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_GQoQUmFkEeKjf_OKI_SsYg" fontColor="4210752" fontName="Cantarell" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="ClassSupplier.ecore#//Infrastructure/contents"/>
+    <element xmi:type="ecore:EReference" href="ClassSupplier.ecore#//Infrastructure/artifacts"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_GQoQU2FkEeKjf_OKI_SsYg" points="[-28, 36, 38, -48]$[-65, 74, 1, -10]"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_GQyoYGFkEeKjf_OKI_SsYg" id="(0.38095238095238093,0.16923076923076924)"/>
   </edges>
