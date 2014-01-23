@@ -13,8 +13,8 @@ public interface Exporter {
 
 	void setDestination(IPath path);
 
-	String getQualifier();
+	String getVersion();
 
-	void setQualifier(String qualifier);
+	void setVersion(String version);
 
 }

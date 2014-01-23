@@ -10,57 +10,55 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 /**
- * <!-- begin-user-doc -->
- * The <b>Package</b> for the model.
- * It contains accessors for the meta objects to represent
+ * <!-- begin-user-doc --> The <b>Package</b> for the model. It contains
+ * accessors for the meta objects to represent
  * <ul>
- *   <li>each class,</li>
- *   <li>each feature of each class,</li>
- *   <li>each enum,</li>
- *   <li>and each data type</li>
+ * <li>each class,</li>
+ * <li>each feature of each class,</li>
+ * <li>each enum,</li>
+ * <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
+ * 
  * @see org.classsupplier.ClassSupplierFactory
  * @model kind="package"
  * @generated
  */
 public interface ClassSupplierPackage extends EPackage {
 	/**
-	 * The package name.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The package name. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	String eNAME = "classsupplier";
 
 	/**
-	 * The package namespace URI.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The package namespace URI. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	String eNS_URI = "http://org/classsupplier/0.7.2";
 
 	/**
-	 * The package namespace name.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The package namespace name. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	String eNS_PREFIX = "classsupplier";
 
 	/**
-	 * The singleton instance of the package.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The singleton instance of the package. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	ClassSupplierPackage eINSTANCE = org.classsupplier.impl.ClassSupplierPackageImpl.init();
+	ClassSupplierPackage eINSTANCE = org.classsupplier.impl.ClassSupplierPackageImpl
+			.init();
 
 	/**
-	 * The meta object id for the '{@link org.classsupplier.impl.ArtifactImpl <em>Artifact</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The meta object id for the '{@link org.classsupplier.impl.ArtifactImpl
+	 * <em>Artifact</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see org.classsupplier.impl.ArtifactImpl
 	 * @see org.classsupplier.impl.ClassSupplierPackageImpl#getArtifact()
 	 * @generated
@@ -68,18 +66,18 @@ public interface ClassSupplierPackage extends EPackage {
 	int ARTIFACT = 0;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Name</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int ARTIFACT__NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>EPackage</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The feature id for the '<em><b>EPackage</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -87,71 +85,72 @@ public interface ClassSupplierPackage extends EPackage {
 
 	/**
 	 * The feature id for the '<em><b>Prototype EPackage</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int ARTIFACT__PROTOTYPE_EPACKAGE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Version</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Version</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int ARTIFACT__VERSION = 3;
 
 	/**
-	 * The feature id for the '<em><b>Project Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Project Name</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int ARTIFACT__PROJECT_NAME = 4;
 
 	/**
-	 * The feature id for the '<em><b>State</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The feature id for the '<em><b>State</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int ARTIFACT__STATE = 5;
 
 	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Status</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int ARTIFACT__STATUS = 6;
 
 	/**
-	 * The feature id for the '<em><b>Loaded EPackage</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Loaded EPackage</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int ARTIFACT__LOADED_EPACKAGE = 7;
 
 	/**
-	 * The number of structural features of the '<em>Artifact</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The number of structural features of the '<em>Artifact</em>' class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int ARTIFACT_FEATURE_COUNT = 8;
 
 	/**
-	 * The meta object id for the '{@link org.classsupplier.impl.InfrastructureImpl <em>Infrastructure</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The meta object id for the '
+	 * {@link org.classsupplier.impl.InfrastructureImpl <em>Infrastructure</em>}
+	 * ' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see org.classsupplier.impl.InfrastructureImpl
 	 * @see org.classsupplier.impl.ClassSupplierPackageImpl#getInfrastructure()
 	 * @generated
@@ -159,18 +158,18 @@ public interface ClassSupplierPackage extends EPackage {
 	int INFRASTRUCTURE = 1;
 
 	/**
-	 * The feature id for the '<em><b>Contents</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Contents</b></em>' containment reference
+	 * list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int INFRASTRUCTURE__CONTENTS = 0;
 
 	/**
-	 * The feature id for the '<em><b>Resource Set</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Resource Set</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -178,17 +177,18 @@ public interface ClassSupplierPackage extends EPackage {
 
 	/**
 	 * The number of structural features of the '<em>Infrastructure</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int INFRASTRUCTURE_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link org.classsupplier.impl.ClassSupplierImpl <em>Class Supplier</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The meta object id for the '
+	 * {@link org.classsupplier.impl.ClassSupplierImpl <em>Class Supplier</em>}'
+	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see org.classsupplier.impl.ClassSupplierImpl
 	 * @see org.classsupplier.impl.ClassSupplierPackageImpl#getClassSupplier()
 	 * @generated
@@ -196,9 +196,9 @@ public interface ClassSupplierPackage extends EPackage {
 	int CLASS_SUPPLIER = 2;
 
 	/**
-	 * The feature id for the '<em><b>Workspace</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Workspace</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -206,17 +206,17 @@ public interface ClassSupplierPackage extends EPackage {
 
 	/**
 	 * The number of structural features of the '<em>Class Supplier</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int CLASS_SUPPLIER_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '{@link org.classsupplier.State <em>State</em>}' enum.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The meta object id for the '{@link org.classsupplier.State
+	 * <em>State</em>}' enum. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see org.classsupplier.State
 	 * @see org.classsupplier.impl.ClassSupplierPackageImpl#getState()
 	 * @generated
@@ -224,9 +224,9 @@ public interface ClassSupplierPackage extends EPackage {
 	int STATE = 3;
 
 	/**
-	 * The meta object id for the '<em>Adapter</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The meta object id for the '<em>Adapter</em>' data type. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see org.eclipse.emf.common.notify.Adapter
 	 * @see org.classsupplier.impl.ClassSupplierPackageImpl#getAdapter()
 	 * @generated
@@ -234,9 +234,9 @@ public interface ClassSupplierPackage extends EPackage {
 	int ADAPTER = 4;
 
 	/**
-	 * The meta object id for the '<em>IStatus</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The meta object id for the '<em>IStatus</em>' data type. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see org.eclipse.core.runtime.IStatus
 	 * @see org.classsupplier.impl.ClassSupplierPackageImpl#getIStatus()
 	 * @generated
@@ -244,31 +244,29 @@ public interface ClassSupplierPackage extends EPackage {
 	int ISTATUS = 5;
 
 	/**
-	 * The meta object id for the '<em>IProgress Monitor</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The meta object id for the '<em>IProgress Monitor</em>' data type. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see org.eclipse.core.runtime.IProgressMonitor
 	 * @see org.classsupplier.impl.ClassSupplierPackageImpl#getIProgressMonitor()
 	 * @generated
 	 */
 	int IPROGRESS_MONITOR = 6;
 
-
 	/**
-	 * The meta object id for the '<em>Version</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.classsupplier.Version
+	 * The meta object id for the '<em>Version</em>' data type. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see org.osgi.framework.Version
 	 * @see org.classsupplier.impl.ClassSupplierPackageImpl#getVersion()
 	 * @generated
 	 */
 	int VERSION = 7;
 
-
 	/**
-	 * Returns the meta object for class '{@link org.classsupplier.Artifact <em>Artifact</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the meta object for class '{@link org.classsupplier.Artifact
+	 * <em>Artifact</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for class '<em>Artifact</em>'.
 	 * @see org.classsupplier.Artifact
 	 * @generated
@@ -276,9 +274,10 @@ public interface ClassSupplierPackage extends EPackage {
 	EClass getArtifact();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.classsupplier.Artifact#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the meta object for the attribute '
+	 * {@link org.classsupplier.Artifact#getName <em>Name</em>}'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for the attribute '<em>Name</em>'.
 	 * @see org.classsupplier.Artifact#getName()
 	 * @see #getArtifact()
@@ -287,9 +286,10 @@ public interface ClassSupplierPackage extends EPackage {
 	EAttribute getArtifact_Name();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.classsupplier.Artifact#getEPackage <em>EPackage</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the meta object for the reference '
+	 * {@link org.classsupplier.Artifact#getEPackage <em>EPackage</em>}'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for the reference '<em>EPackage</em>'.
 	 * @see org.classsupplier.Artifact#getEPackage()
 	 * @see #getArtifact()
@@ -298,9 +298,11 @@ public interface ClassSupplierPackage extends EPackage {
 	EReference getArtifact_EPackage();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.classsupplier.Artifact#getPrototypeEPackage <em>Prototype EPackage</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the meta object for the reference '
+	 * {@link org.classsupplier.Artifact#getPrototypeEPackage
+	 * <em>Prototype EPackage</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
 	 * @return the meta object for the reference '<em>Prototype EPackage</em>'.
 	 * @see org.classsupplier.Artifact#getPrototypeEPackage()
 	 * @see #getArtifact()
@@ -309,9 +311,10 @@ public interface ClassSupplierPackage extends EPackage {
 	EReference getArtifact_PrototypeEPackage();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.classsupplier.Artifact#getVersion <em>Version</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the meta object for the attribute '
+	 * {@link org.classsupplier.Artifact#getVersion <em>Version</em>}'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for the attribute '<em>Version</em>'.
 	 * @see org.classsupplier.Artifact#getVersion()
 	 * @see #getArtifact()
@@ -320,9 +323,10 @@ public interface ClassSupplierPackage extends EPackage {
 	EAttribute getArtifact_Version();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.classsupplier.Artifact#getProjectName <em>Project Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the meta object for the attribute '
+	 * {@link org.classsupplier.Artifact#getProjectName <em>Project Name</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for the attribute '<em>Project Name</em>'.
 	 * @see org.classsupplier.Artifact#getProjectName()
 	 * @see #getArtifact()
@@ -331,9 +335,10 @@ public interface ClassSupplierPackage extends EPackage {
 	EAttribute getArtifact_ProjectName();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.classsupplier.Artifact#getState <em>State</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the meta object for the attribute '
+	 * {@link org.classsupplier.Artifact#getState <em>State</em>}'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for the attribute '<em>State</em>'.
 	 * @see org.classsupplier.Artifact#getState()
 	 * @see #getArtifact()
@@ -342,9 +347,10 @@ public interface ClassSupplierPackage extends EPackage {
 	EAttribute getArtifact_State();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.classsupplier.Artifact#getStatus <em>Status</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the meta object for the attribute '
+	 * {@link org.classsupplier.Artifact#getStatus <em>Status</em>}'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for the attribute '<em>Status</em>'.
 	 * @see org.classsupplier.Artifact#getStatus()
 	 * @see #getArtifact()
@@ -353,9 +359,10 @@ public interface ClassSupplierPackage extends EPackage {
 	EAttribute getArtifact_Status();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.classsupplier.Artifact#getLoadedEPackage <em>Loaded EPackage</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the meta object for the reference '
+	 * {@link org.classsupplier.Artifact#getLoadedEPackage
+	 * <em>Loaded EPackage</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for the reference '<em>Loaded EPackage</em>'.
 	 * @see org.classsupplier.Artifact#getLoadedEPackage()
 	 * @see #getArtifact()
@@ -364,9 +371,10 @@ public interface ClassSupplierPackage extends EPackage {
 	EReference getArtifact_LoadedEPackage();
 
 	/**
-	 * Returns the meta object for class '{@link org.classsupplier.Infrastructure <em>Infrastructure</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the meta object for class '
+	 * {@link org.classsupplier.Infrastructure <em>Infrastructure</em>}'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for class '<em>Infrastructure</em>'.
 	 * @see org.classsupplier.Infrastructure
 	 * @generated
@@ -374,10 +382,12 @@ public interface ClassSupplierPackage extends EPackage {
 	EClass getInfrastructure();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.classsupplier.Infrastructure#getContents <em>Contents</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Contents</em>'.
+	 * Returns the meta object for the containment reference list '
+	 * {@link org.classsupplier.Infrastructure#getContents <em>Contents</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the containment reference list '
+	 *         <em>Contents</em>'.
 	 * @see org.classsupplier.Infrastructure#getContents()
 	 * @see #getInfrastructure()
 	 * @generated
@@ -385,9 +395,10 @@ public interface ClassSupplierPackage extends EPackage {
 	EReference getInfrastructure_Contents();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.classsupplier.Infrastructure#getResourceSet <em>Resource Set</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the meta object for the attribute '
+	 * {@link org.classsupplier.Infrastructure#getResourceSet
+	 * <em>Resource Set</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for the attribute '<em>Resource Set</em>'.
 	 * @see org.classsupplier.Infrastructure#getResourceSet()
 	 * @see #getInfrastructure()
@@ -396,9 +407,10 @@ public interface ClassSupplierPackage extends EPackage {
 	EAttribute getInfrastructure_ResourceSet();
 
 	/**
-	 * Returns the meta object for class '{@link org.classsupplier.ClassSupplier <em>Class Supplier</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the meta object for class '
+	 * {@link org.classsupplier.ClassSupplier <em>Class Supplier</em>}'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for class '<em>Class Supplier</em>'.
 	 * @see org.classsupplier.ClassSupplier
 	 * @generated
@@ -406,9 +418,10 @@ public interface ClassSupplierPackage extends EPackage {
 	EClass getClassSupplier();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.classsupplier.ClassSupplier#getWorkspace <em>Workspace</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the meta object for the reference '
+	 * {@link org.classsupplier.ClassSupplier#getWorkspace <em>Workspace</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for the reference '<em>Workspace</em>'.
 	 * @see org.classsupplier.ClassSupplier#getWorkspace()
 	 * @see #getClassSupplier()
@@ -417,9 +430,9 @@ public interface ClassSupplierPackage extends EPackage {
 	EReference getClassSupplier_Workspace();
 
 	/**
-	 * Returns the meta object for enum '{@link org.classsupplier.State <em>State</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the meta object for enum '{@link org.classsupplier.State
+	 * <em>State</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for enum '<em>State</em>'.
 	 * @see org.classsupplier.State
 	 * @generated
@@ -427,9 +440,10 @@ public interface ClassSupplierPackage extends EPackage {
 	EEnum getState();
 
 	/**
-	 * Returns the meta object for data type '{@link org.eclipse.emf.common.notify.Adapter <em>Adapter</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the meta object for data type '
+	 * {@link org.eclipse.emf.common.notify.Adapter <em>Adapter</em>}'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for data type '<em>Adapter</em>'.
 	 * @see org.eclipse.emf.common.notify.Adapter
 	 * @model instanceClass="org.eclipse.emf.common.notify.Adapter"
@@ -438,9 +452,10 @@ public interface ClassSupplierPackage extends EPackage {
 	EDataType getAdapter();
 
 	/**
-	 * Returns the meta object for data type '{@link org.eclipse.core.runtime.IStatus <em>IStatus</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the meta object for data type '
+	 * {@link org.eclipse.core.runtime.IStatus <em>IStatus</em>}'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for data type '<em>IStatus</em>'.
 	 * @see org.eclipse.core.runtime.IStatus
 	 * @model instanceClass="org.eclipse.core.runtime.IStatus"
@@ -449,9 +464,11 @@ public interface ClassSupplierPackage extends EPackage {
 	EDataType getIStatus();
 
 	/**
-	 * Returns the meta object for data type '{@link org.eclipse.core.runtime.IProgressMonitor <em>IProgress Monitor</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the meta object for data type '
+	 * {@link org.eclipse.core.runtime.IProgressMonitor
+	 * <em>IProgress Monitor</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
 	 * @return the meta object for data type '<em>IProgress Monitor</em>'.
 	 * @see org.eclipse.core.runtime.IProgressMonitor
 	 * @model instanceClass="org.eclipse.core.runtime.IProgressMonitor"
@@ -460,42 +477,44 @@ public interface ClassSupplierPackage extends EPackage {
 	EDataType getIProgressMonitor();
 
 	/**
-	 * Returns the meta object for data type '{@link org.classsupplier.Version <em>Version</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the meta object for data type '{@link org.osgi.framework.Version
+	 * <em>Version</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for data type '<em>Version</em>'.
-	 * @see org.classsupplier.Version
-	 * @model instanceClass="org.classsupplier.Version"
+	 * @see org.osgi.framework.Version
+	 * @model instanceClass="org.osgi.framework.Version"
 	 * @generated
 	 */
 	EDataType getVersion();
 
 	/**
-	 * Returns the factory that creates the instances of the model.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the factory that creates the instances of the model. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the factory that creates the instances of the model.
 	 * @generated
 	 */
 	ClassSupplierFactory getClassSupplierFactory();
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * Defines literals for the meta objects that represent
+	 * <!-- begin-user-doc --> Defines literals for the meta objects that
+	 * represent
 	 * <ul>
-	 *   <li>each class,</li>
-	 *   <li>each feature of each class,</li>
-	 *   <li>each enum,</li>
-	 *   <li>and each data type</li>
+	 * <li>each class,</li>
+	 * <li>each feature of each class,</li>
+	 * <li>each enum,</li>
+	 * <li>and each data type</li>
 	 * </ul>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.classsupplier.impl.ArtifactImpl <em>Artifact</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * The meta object literal for the '
+		 * {@link org.classsupplier.impl.ArtifactImpl <em>Artifact</em>}' class.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @see org.classsupplier.impl.ArtifactImpl
 		 * @see org.classsupplier.impl.ClassSupplierPackageImpl#getArtifact()
 		 * @generated
@@ -503,73 +522,77 @@ public interface ClassSupplierPackage extends EPackage {
 		EClass ARTIFACT = eINSTANCE.getArtifact();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EAttribute ARTIFACT__NAME = eINSTANCE.getArtifact_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>EPackage</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>EPackage</b></em>' reference
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EReference ARTIFACT__EPACKAGE = eINSTANCE.getArtifact_EPackage();
 
 		/**
-		 * The meta object literal for the '<em><b>Prototype EPackage</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Prototype EPackage</b></em>'
+		 * reference feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
-		EReference ARTIFACT__PROTOTYPE_EPACKAGE = eINSTANCE.getArtifact_PrototypeEPackage();
+		EReference ARTIFACT__PROTOTYPE_EPACKAGE = eINSTANCE
+				.getArtifact_PrototypeEPackage();
 
 		/**
-		 * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Version</b></em>' attribute
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EAttribute ARTIFACT__VERSION = eINSTANCE.getArtifact_Version();
 
 		/**
-		 * The meta object literal for the '<em><b>Project Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Project Name</b></em>'
+		 * attribute feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EAttribute ARTIFACT__PROJECT_NAME = eINSTANCE.getArtifact_ProjectName();
 
 		/**
-		 * The meta object literal for the '<em><b>State</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>State</b></em>' attribute
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EAttribute ARTIFACT__STATE = eINSTANCE.getArtifact_State();
 
 		/**
-		 * The meta object literal for the '<em><b>Status</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Status</b></em>' attribute
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EAttribute ARTIFACT__STATUS = eINSTANCE.getArtifact_Status();
 
 		/**
-		 * The meta object literal for the '<em><b>Loaded EPackage</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Loaded EPackage</b></em>'
+		 * reference feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
-		EReference ARTIFACT__LOADED_EPACKAGE = eINSTANCE.getArtifact_LoadedEPackage();
+		EReference ARTIFACT__LOADED_EPACKAGE = eINSTANCE
+				.getArtifact_LoadedEPackage();
 
 		/**
-		 * The meta object literal for the '{@link org.classsupplier.impl.InfrastructureImpl <em>Infrastructure</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * The meta object literal for the '
+		 * {@link org.classsupplier.impl.InfrastructureImpl
+		 * <em>Infrastructure</em>}' class. <!-- begin-user-doc --> <!--
+		 * end-user-doc -->
+		 * 
 		 * @see org.classsupplier.impl.InfrastructureImpl
 		 * @see org.classsupplier.impl.ClassSupplierPackageImpl#getInfrastructure()
 		 * @generated
@@ -577,25 +600,30 @@ public interface ClassSupplierPackage extends EPackage {
 		EClass INFRASTRUCTURE = eINSTANCE.getInfrastructure();
 
 		/**
-		 * The meta object literal for the '<em><b>Contents</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Contents</b></em>'
+		 * containment reference list feature. <!-- begin-user-doc --> <!--
+		 * end-user-doc -->
+		 * 
 		 * @generated
 		 */
-		EReference INFRASTRUCTURE__CONTENTS = eINSTANCE.getInfrastructure_Contents();
+		EReference INFRASTRUCTURE__CONTENTS = eINSTANCE
+				.getInfrastructure_Contents();
 
 		/**
-		 * The meta object literal for the '<em><b>Resource Set</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Resource Set</b></em>'
+		 * attribute feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
-		EAttribute INFRASTRUCTURE__RESOURCE_SET = eINSTANCE.getInfrastructure_ResourceSet();
+		EAttribute INFRASTRUCTURE__RESOURCE_SET = eINSTANCE
+				.getInfrastructure_ResourceSet();
 
 		/**
-		 * The meta object literal for the '{@link org.classsupplier.impl.ClassSupplierImpl <em>Class Supplier</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * The meta object literal for the '
+		 * {@link org.classsupplier.impl.ClassSupplierImpl
+		 * <em>Class Supplier</em>}' class. <!-- begin-user-doc --> <!--
+		 * end-user-doc -->
+		 * 
 		 * @see org.classsupplier.impl.ClassSupplierImpl
 		 * @see org.classsupplier.impl.ClassSupplierPackageImpl#getClassSupplier()
 		 * @generated
@@ -603,17 +631,18 @@ public interface ClassSupplierPackage extends EPackage {
 		EClass CLASS_SUPPLIER = eINSTANCE.getClassSupplier();
 
 		/**
-		 * The meta object literal for the '<em><b>Workspace</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Workspace</b></em>' reference
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
-		EReference CLASS_SUPPLIER__WORKSPACE = eINSTANCE.getClassSupplier_Workspace();
+		EReference CLASS_SUPPLIER__WORKSPACE = eINSTANCE
+				.getClassSupplier_Workspace();
 
 		/**
-		 * The meta object literal for the '{@link org.classsupplier.State <em>State</em>}' enum.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * The meta object literal for the '{@link org.classsupplier.State
+		 * <em>State</em>}' enum. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @see org.classsupplier.State
 		 * @see org.classsupplier.impl.ClassSupplierPackageImpl#getState()
 		 * @generated
@@ -621,9 +650,9 @@ public interface ClassSupplierPackage extends EPackage {
 		EEnum STATE = eINSTANCE.getState();
 
 		/**
-		 * The meta object literal for the '<em>Adapter</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * The meta object literal for the '<em>Adapter</em>' data type. <!--
+		 * begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @see org.eclipse.emf.common.notify.Adapter
 		 * @see org.classsupplier.impl.ClassSupplierPackageImpl#getAdapter()
 		 * @generated
@@ -631,9 +660,9 @@ public interface ClassSupplierPackage extends EPackage {
 		EDataType ADAPTER = eINSTANCE.getAdapter();
 
 		/**
-		 * The meta object literal for the '<em>IStatus</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * The meta object literal for the '<em>IStatus</em>' data type. <!--
+		 * begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @see org.eclipse.core.runtime.IStatus
 		 * @see org.classsupplier.impl.ClassSupplierPackageImpl#getIStatus()
 		 * @generated
@@ -641,9 +670,9 @@ public interface ClassSupplierPackage extends EPackage {
 		EDataType ISTATUS = eINSTANCE.getIStatus();
 
 		/**
-		 * The meta object literal for the '<em>IProgress Monitor</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * The meta object literal for the '<em>IProgress Monitor</em>' data
+		 * type. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @see org.eclipse.core.runtime.IProgressMonitor
 		 * @see org.classsupplier.impl.ClassSupplierPackageImpl#getIProgressMonitor()
 		 * @generated
@@ -651,10 +680,10 @@ public interface ClassSupplierPackage extends EPackage {
 		EDataType IPROGRESS_MONITOR = eINSTANCE.getIProgressMonitor();
 
 		/**
-		 * The meta object literal for the '<em>Version</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.classsupplier.Version
+		 * The meta object literal for the '<em>Version</em>' data type. <!--
+		 * begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @see org.osgi.framework.Version
 		 * @see org.classsupplier.impl.ClassSupplierPackageImpl#getVersion()
 		 * @generated
 		 */
@@ -662,4 +691,4 @@ public interface ClassSupplierPackage extends EPackage {
 
 	}
 
-} //ClassSupplierPackage
+} // ClassSupplierPackage

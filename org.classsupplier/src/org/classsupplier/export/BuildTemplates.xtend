@@ -91,7 +91,7 @@ class BuildTemplates {
 		</project>
 	'''
 
-	def pom(String projectName, String qualifier) '''
+	def pom(String projectName, String version) '''
 		<?xml version="1.0" encoding="UTF-8"?>
 		<project
 			xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
@@ -106,7 +106,7 @@ class BuildTemplates {
 			
 			<groupId>org.classsupplier.artifact</groupId>
 			<artifactId>«projectName»</artifactId>
-			<version>1.0.0.qualifier</version>
+			<version>«version»</version>
 			<packaging>eclipse-plugin</packaging>
 		</project>
 	'''

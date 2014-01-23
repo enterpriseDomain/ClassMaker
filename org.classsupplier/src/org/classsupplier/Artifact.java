@@ -7,6 +7,7 @@ import org.eclipse.core.runtime.IStatus;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc -->

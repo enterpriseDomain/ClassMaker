@@ -14,7 +14,7 @@ public abstract class AbstractExporter implements Exporter {
 
 	private IPath destination;
 
-	private String qualifier;
+	private String version;
 
 	private IPath buildConfigPath;
 
@@ -37,13 +37,13 @@ public abstract class AbstractExporter implements Exporter {
 	}
 
 	@Override
-	public String getQualifier() {
-		return qualifier;
+	public String getVersion() {
+		return version;
 	}
 
 	@Override
-	public void setQualifier(String qualifier) {
-		this.qualifier = qualifier;
+	public void setVersion(String version) {
+		this.version = version;
 	}
 
 	public void writeFile(IPath location, CharSequence contents)

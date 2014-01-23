@@ -5,7 +5,6 @@ package org.classsupplier.impl;
 import org.classsupplier.Artifact;
 import org.classsupplier.ClassSupplierPackage;
 import org.classsupplier.State;
-import org.classsupplier.Version;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IWorkspace;
@@ -24,6 +23,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -343,8 +343,8 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	 * @generated NOT
 	 */
 	public Version getVersion() {
-		if (version == null)
-			version = Version.newVersion();
+		if(!eIsSet(ClassSupplierPackage.Literals.ARTIFACT__VERSION))
+			setVersion(Version.emptyVersion);
 		return version;
 	}
 

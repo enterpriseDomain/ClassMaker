@@ -33,6 +33,6 @@ public class MavenExporter extends AbstractExporter {
 		writeFile(getBuildConfigPath().removeLastSegments(1).append("pom")
 				.addFileExtension("xml"), templates.parentPom());
 		writeFile(getBuildConfigPath().append("pom").addFileExtension("xml"),
-				templates.pom(projectName, getQualifier()));
+				templates.pom(projectName, getVersion()));
 	}
 }

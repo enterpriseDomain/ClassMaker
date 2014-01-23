@@ -22,19 +22,17 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.classsupplier.impl.ClassSupplierImpl#getWorkspace <em>
- * Workspace</em>}</li>
+ *   <li>{@link org.classsupplier.impl.ClassSupplierImpl#getWorkspace <em>Workspace</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class ClassSupplierImpl extends EObjectImpl implements ClassSupplier {
 
 	/**
-	 * The cached value of the '{@link #getWorkspace() <em>Workspace</em>}'
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getWorkspace() <em>Workspace</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getWorkspace()
 	 * @generated
 	 * @ordered
@@ -53,7 +51,6 @@ public class ClassSupplierImpl extends EObjectImpl implements ClassSupplier {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -63,18 +60,15 @@ public class ClassSupplierImpl extends EObjectImpl implements ClassSupplier {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Infrastructure getWorkspace() {
 		if (workspace != null && workspace.eIsProxy()) {
-			InternalEObject oldWorkspace = (InternalEObject) workspace;
-			workspace = (Infrastructure) eResolveProxy(oldWorkspace);
+			InternalEObject oldWorkspace = (InternalEObject)workspace;
+			workspace = (Infrastructure)eResolveProxy(oldWorkspace);
 			if (workspace != oldWorkspace) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							ClassSupplierPackage.CLASS_SUPPLIER__WORKSPACE,
-							oldWorkspace, workspace));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassSupplierPackage.CLASS_SUPPLIER__WORKSPACE, oldWorkspace, workspace));
 			}
 		}
 		return workspace;
@@ -82,7 +76,6 @@ public class ClassSupplierImpl extends EObjectImpl implements ClassSupplier {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Infrastructure basicGetWorkspace() {
@@ -91,16 +84,13 @@ public class ClassSupplierImpl extends EObjectImpl implements ClassSupplier {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setWorkspace(Infrastructure newWorkspace) {
 		Infrastructure oldWorkspace = workspace;
 		workspace = newWorkspace;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ClassSupplierPackage.CLASS_SUPPLIER__WORKSPACE,
-					oldWorkspace, workspace));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.CLASS_SUPPLIER__WORKSPACE, oldWorkspace, workspace));
 	}
 
 	/**
@@ -149,60 +139,55 @@ public class ClassSupplierImpl extends EObjectImpl implements ClassSupplier {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case ClassSupplierPackage.CLASS_SUPPLIER__WORKSPACE:
-			if (resolve)
-				return getWorkspace();
-			return basicGetWorkspace();
+			case ClassSupplierPackage.CLASS_SUPPLIER__WORKSPACE:
+				if (resolve) return getWorkspace();
+				return basicGetWorkspace();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case ClassSupplierPackage.CLASS_SUPPLIER__WORKSPACE:
-			setWorkspace((Infrastructure) newValue);
-			return;
+			case ClassSupplierPackage.CLASS_SUPPLIER__WORKSPACE:
+				setWorkspace((Infrastructure)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case ClassSupplierPackage.CLASS_SUPPLIER__WORKSPACE:
-			setWorkspace((Infrastructure) null);
-			return;
+			case ClassSupplierPackage.CLASS_SUPPLIER__WORKSPACE:
+				setWorkspace((Infrastructure)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case ClassSupplierPackage.CLASS_SUPPLIER__WORKSPACE:
-			return workspace != null;
+			case ClassSupplierPackage.CLASS_SUPPLIER__WORKSPACE:
+				return workspace != null;
 		}
 		return super.eIsSet(featureID);
 	}

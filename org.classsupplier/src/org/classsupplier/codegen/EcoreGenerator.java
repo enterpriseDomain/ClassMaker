@@ -26,6 +26,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.osgi.util.NLS;
+import org.osgi.framework.Version;
 
 public class EcoreGenerator implements org.classsupplier.codegen.Generator {
 
@@ -108,14 +109,16 @@ public class EcoreGenerator implements org.classsupplier.codegen.Generator {
 	@Override
 	public void generate(final Artifact artifact, ISchedulingRule rule,
 			final IProgressMonitor monitor) throws CoreException {
+		artifact.setVersion(Version.parseVersion("1.0.0.qualifier"));
+		
 		final IProject project = ResourcesPlugin.getWorkspace().getRoot()
 				.getProject(artifact.getProjectName());
 		IPath modelPath = ensureModelResourcePath(project, artifact.getName(),
 				monitor);
-
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		final IPath path = root.getRawLocation().append(modelPath);
 		final org.eclipse.emf.codegen.ecore.Generator generator = new Generator();
+
 		IPath genModelPath = getGenModelResourcePath(modelPath);
 		if (!genModelPath.toFile().exists()) {
 			monitor.beginTask("Generating GenModel '" + genModelPath.toString()

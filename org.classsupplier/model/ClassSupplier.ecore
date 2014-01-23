@@ -67,5 +67,5 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="workspace" eType="#//Infrastructure"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="IProgressMonitor" instanceClassName="org.eclipse.core.runtime.IProgressMonitor"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="Version" instanceClassName="org.classsupplier.Version"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Version" instanceClassName="org.osgi.framework.Version"/>
 </ecore:EPackage>

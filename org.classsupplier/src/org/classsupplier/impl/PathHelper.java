@@ -1,11 +1,13 @@
 package org.classsupplier.impl;
 
+import org.classsupplier.Artifact;
 import org.classsupplier.Infrastructure;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.preferences.IPreferencesService;
+import org.osgi.framework.Version;
 
 public class PathHelper {
 
@@ -45,6 +47,17 @@ public class PathHelper {
 
 	public static IPath getWorkspace() {
 		return ResourcesPlugin.getWorkspace().getRoot().getLocation();
+	}
+
+	public static String getJarName(Artifact artifact) {
+		String jarName;
+		Version version = artifact.getVersion();
+		if (version.equals(Version.emptyVersion))
+			jarName = artifact.getProjectName() + '-'
+					+ Version.parseVersion("1.0.0.qualifier").toString();
+		else
+			jarName = artifact.getProjectName() + '-' + version;
+		return jarName;
 	}
 
 }

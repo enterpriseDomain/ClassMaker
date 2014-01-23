@@ -4,7 +4,6 @@ import java.util.Map;
 
 import org.classsupplier.Artifact;
 import org.classsupplier.State;
-import org.classsupplier.Version;
 import org.classsupplier.export.Exporter;
 import org.classsupplier.export.MavenExporter;
 import org.classsupplier.impl.OSGi;
@@ -16,6 +15,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.jobs.Job;
+import org.osgi.framework.Version;
 
 public class ExportingBuilder extends IncrementalProjectBuilder {
 
@@ -30,15 +30,23 @@ public class ExportingBuilder extends IncrementalProjectBuilder {
 		if (kind != FULL_BUILD)
 			return null;
 		exporter.setDestination(PathHelper.getDefaultDestination());
-		if (exporter.getQualifier() == null) {
-			Artifact artifact = OSGi.getClassSupplier().getWorkspace()
+		Artifact artifact = null;
+		if (exporter.getVersion() == null) {
+			artifact = OSGi.getClassSupplier().getWorkspace()
 					.getArtifact(getProject().getName());
+			Version version = artifact.getVersion();
 			if (artifact.getState().equals(State.CREATED)
 					|| !artifact.getState().equals(State.PROCESSING))
 				return null;
-			Version version = artifact.getVersion();
-			exporter.setQualifier(version.getQualifier());
+			if (artifact.getPrototypeEPackage().getEClassifiers().isEmpty())
+				return null;
+			exporter.setVersion(version.toString());
 		}
+		if (artifact != null
+				&& (artifact.getState().equals(State.CREATED) || !artifact
+						.getState().equals(State.PROCESSING)))
+			return null;
+
 		exporter.export(getProject(), monitor);
 		try {
 			Job.getJobManager().join(ResourcesPlugin.FAMILY_MANUAL_BUILD,

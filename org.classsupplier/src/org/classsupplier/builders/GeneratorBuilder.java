@@ -29,8 +29,11 @@ public class GeneratorBuilder extends IncrementalProjectBuilder {
 		if (artifact.getState().equals(State.CREATED)
 				|| !artifact.getState().equals(State.PROCESSING))
 			return null;
-		generator.setResourceSet( OSGi.getClassSupplier().getWorkspace().getResourceSet());
-		generator.generate(artifact, getRule(kind, args),monitor);
+		if (artifact.getPrototypeEPackage().getEClassifiers().isEmpty())
+			return null;
+		generator.setResourceSet(OSGi.getClassSupplier().getWorkspace()
+				.getResourceSet());
+		generator.generate(artifact, getRule(kind, args), monitor);
 		return null;
 	}
 

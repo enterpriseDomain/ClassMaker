@@ -5,8 +5,8 @@ import java.util.Collection;
 import java.util.Map;
 
 import org.classsupplier.Artifact;
-import org.classsupplier.Version;
 import org.classsupplier.impl.OSGi;
+import org.classsupplier.impl.PathHelper;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -31,11 +31,10 @@ public class LoadBuilder extends IncrementalProjectBuilder {
 	@Override
 	protected IProject[] build(int kind, Map<String, String> args,
 			IProgressMonitor monitor) throws CoreException {
-		Artifact artifact =  OSGi.getClassSupplier().getWorkspace()
+		Artifact artifact = OSGi.getClassSupplier().getWorkspace()
 				.getArtifact(getProject().getName());
-		Version version = artifact.getVersion();
 		IPath path = getProject().getLocation().append("target")
-				.append(getProject().getName() + '-' + version.full())
+				.append(PathHelper.getJarName(artifact))
 				.addFileExtension("jar");
 		try {
 			BundleContext context = FrameworkUtil.getBundle(this.getClass())

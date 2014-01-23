@@ -6,7 +6,6 @@ import java.util.Collection;
 import org.classsupplier.Artifact;
 import org.classsupplier.Infrastructure;
 import org.classsupplier.State;
-import org.classsupplier.Version;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -22,8 +21,10 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.osgi.util.NLS;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.Constants;
 import org.osgi.framework.FrameworkListener;
 import org.osgi.framework.FrameworkUtil;
+import org.osgi.framework.Version;
 import org.osgi.framework.wiring.FrameworkWiring;
 
 public class Initializer implements IWorkspaceRunnable {
@@ -70,10 +71,8 @@ public class Initializer implements IWorkspaceRunnable {
 			artifact.setPrototypeEPackage(value);
 			artifact.setState(State.PROTOTYPE);
 		}
-		Version version = artifact.getVersion();
 		IPath path = project.getLocation().append("target")
-				.append(project.getName() + '-' + version.full())
-				.addFileExtension("jar");
+				.append(PathHelper.getJarName(artifact)).addFileExtension("jar");
 		if (!path.toFile().exists())
 			return;
 		try {
@@ -86,6 +85,10 @@ public class Initializer implements IWorkspaceRunnable {
 					FrameworkWiring.class);
 			frameworkWiring.refreshBundles(bundles, new FrameworkListener[0]);
 			if (frameworkWiring.resolveBundles(bundles)) {
+				Version version = new Version(osgiBundle.getHeaders().get(
+						Constants.BUNDLE_VERSION));
+				artifact.setVersion(version);
+
 				String packageClassName = artifact.getPrototypeEPackage()
 						.getName() + "." + artifact.getName() + "Package";
 
