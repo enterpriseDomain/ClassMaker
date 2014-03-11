@@ -1,7 +1,9 @@
-ClassSupplier
+ClasSupplier
 ===========
 
-ClassSupplier is a Java library for creating the code that is immediately available to invoke. That is created according to a blueprint model of EMF metamodel and is loaded in runtime by the OSGi framework.  
+ClasSupplier is a Java library for creating the code that is available to invoke in-place, with achieving such behavour through the actual generation and loading (synchroniously or TBD asynchroniously) of native Java code. I am planning to add to API the ability to extend the generation template to mean more complicated behavour behind the model's set of classes.  
+
+It is also will be possible to switch from EMF's Ecore to your own supplied self-reflective or non-self-reflective meta-model, and switch the deployment and loading facility from OSGi to, for instance, JEE container.  
 
 
 Usage example:  
@@ -17,8 +19,8 @@ Usage example:
     eAttr.setEType(EcorePackage.Literals.EINT);
     eClass.getEStructuralFeatures().add(eAttr);
     blueprintEPackage.getEClassifiers().add(eClass);
-    ClassSupplier service = ... // acquire the ClassSupplier OSGi service
-    EPackage nativeEPackage = service.supply(blueprintEPackage); // Provide it to ClassSupplier to generate the EPackage...
+    ClassSupplier service = ... // acquire the ClasSupplier OSGi service
+    EPackage nativeEPackage = service.supply(blueprintEPackage); // Provide it to ClasSupplier to generate the EPackage...
     EClass jClass = (EClass) nativeEPackage.getEClassifier(eClass.getName()); // ... that you can use
     EObject jObject = nativeEPackage.getEFactoryInstance().create(jClass);
     int pages = 500;
@@ -28,8 +30,8 @@ Usage example:
     assertEquals(pages, jObject.eGet(jAttr));  
     assertEquals(eClass.getName(), jObject.getClass().getSimpleName()); // * Note this *
   
-A more [complete example is here](/org.classsupplier.test/src/org/classsupplier/test/ClassSupplierTests.java).  
+A more [complete example is here](/org.classupplier.test/src/org/classupplier/test/ClasSupplierTests.java).  
 
 To use the library, import it to the Eclipse plugin's dependencies with satisfying subsequent. E4 DI is supported. 
 
-See also [wiki](https://github.com/kirillzotkin/ClassSupplier/wiki).
+See also [wiki](https://github.com/kirillzotkin/ClasSupplier/wiki).

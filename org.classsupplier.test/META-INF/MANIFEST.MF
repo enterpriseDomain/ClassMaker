@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: ClassSupplier Test
-Bundle-SymbolicName: org.classsupplier.test
+Bundle-Name: ClasSupplier Test
+Bundle-SymbolicName: org.classupplier.test
 Bundle-Version: 0.0.2.qualifier
 Bundle-Vendor: Kirill Zotkin
-Fragment-Host: org.classsupplier;bundle-version="0.7.2"
+Fragment-Host: org.classupplier;bundle-version="0.7.2"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: org.junit,
  org.eclipse.equinox.ds

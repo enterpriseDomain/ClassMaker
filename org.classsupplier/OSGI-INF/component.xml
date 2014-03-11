@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" enabled="true" immediate="false" name="org.classsupplier.service">
-   <implementation class="org.classsupplier.impl.ClassSupplierImpl"/>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" enabled="true" immediate="false" name="org.classupplier.service">
+   <implementation class="org.classupplier.impl.ClasSupplierImpl"/>
    <service>
-      <provide interface="org.classsupplier.ClassSupplier"/>
+      <provide interface="org.classupplier.ClasSupplier"/>
    </service>
 </scr:component>

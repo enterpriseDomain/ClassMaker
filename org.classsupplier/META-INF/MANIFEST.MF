@@ -1,16 +1,16 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
-Bundle-SymbolicName: org.classsupplier;singleton:=true
-Bundle-Version: 0.7.2.qualifier
-Bundle-Activator: org.classsupplier.impl.OSGi
+Bundle-SymbolicName: org.classupplier;singleton:=true
+Bundle-Version: 0.7.3.qualifier
+Bundle-Activator: org.classupplier.impl.OSGi
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Export-Package: org.classsupplier,
- org.classsupplier.impl,
- org.classsupplier.util
+Export-Package: org.classupplier,
+ org.classupplier.impl,
+ org.classupplier.util
 Require-Bundle: org.eclipse.core.runtime;visibility:=reexport,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.codegen.ecore;visibility:=reexport,

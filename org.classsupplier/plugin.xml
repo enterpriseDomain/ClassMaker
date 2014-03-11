@@ -8,9 +8,9 @@
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://org/classsupplier/0.7.2"
-            class="org.classsupplier.ClassSupplierPackage"
-            genModel="model/ClassSupplier.genmodel"/>
+            uri="http://org/classupplier/0.7.2"
+            class="org.classupplier.ClasSupplierPackage"
+            genModel="model/ClasSupplier.genmodel"/>
    </extension>
    <extension
          id="domainNature"
@@ -18,7 +18,7 @@
          point="org.eclipse.core.resources.natures">
       <runtime>
          <run
-               class="org.classsupplier.impl.DomainProjectNature">
+               class="org.classupplier.impl.DomainProjectNature">
          </run>
       </runtime>
    </extension>
@@ -28,7 +28,7 @@
          point="org.eclipse.core.resources.builders">
       <builder>
          <run
-               class="org.classsupplier.builders.ResourceBuilder">
+               class="org.classupplier.builders.ResourceBuilder">
          </run>
       </builder>
    </extension>
@@ -38,7 +38,7 @@
          point="org.eclipse.core.resources.builders">
       <builder>
          <run
-               class="org.classsupplier.builders.GeneratorBuilder">
+               class="org.classupplier.builders.GeneratorBuilder">
          </run>
       </builder>
    </extension>
@@ -48,7 +48,7 @@
          point="org.eclipse.core.resources.builders">
       <builder>
          <run
-               class="org.classsupplier.builders.ExportingBuilder">
+               class="org.classupplier.builders.ExportingBuilder">
          </run></builder>
    </extension>
    <extension
@@ -57,9 +57,10 @@
          point="org.eclipse.core.resources.builders">
       <builder>
          <run
-               class="org.classsupplier.builders.LoadBuilder">
+               class="org.classupplier.builders.LoadBuilder">
          </run>
       </builder>
    </extension>
 
+null
 </plugin>
