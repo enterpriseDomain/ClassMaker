@@ -1,10 +1,7 @@
 ClasSupplier
 ===========
 
-ClasSupplier is a Java library for creating the code that is available to invoke in-place, achieving this behavour through the actual generation and loading (synchroniously only for a while) of native Java code. I am also planning to add the generation templates extendability to allow more complicated behavour around the model's set of classes.  
-
-It will be possible to switch from EMF Ecore to your own self-reflective or non-self-reflective meta-model, 
-and switch from OSGi as a deployment and loading facility to, for instance, JEE container, also.  
+ClasSupplier is a Java library for creating the code that is available to invoke in-place, achieving this behavour through the actual generation and loading (synchroniously only, for a while) of native Java code.  
 
 
 Usage example:  
