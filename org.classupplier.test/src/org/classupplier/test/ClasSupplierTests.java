@@ -107,11 +107,10 @@ public class ClasSupplierTests {
 		assertEquals(readPagesCount, theObject.eGet(state));
 
 		assertEquals(eClass.getName(), theObject.getClass().getSimpleName());
-		
+
 	}
 
-
-	// @Test
+	@Test
 	public void metaModel() {
 		EcoreFactory factory = EcoreFactory.eINSTANCE;
 		EPackage _package = factory.createEPackage();
@@ -131,6 +130,6 @@ public class ClasSupplierTests {
 		EObject book = result.getEFactoryInstance().create(resultThing);
 		book.eSet(resultAttribute, "Text");
 		assertEquals("Text", book.eGet(resultAttribute));
-		
+
 	}
 }

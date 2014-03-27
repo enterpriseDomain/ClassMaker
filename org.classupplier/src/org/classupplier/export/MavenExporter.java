@@ -1,8 +1,10 @@
 package org.classupplier.export;
 
 import org.apache.maven.cli.MavenCli;
+import org.codehaus.plexus.classworlds.ClassWorld;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 
@@ -14,25 +16,33 @@ public class MavenExporter extends AbstractExporter {
 		setBuildConfigPath(project.getLocation());
 		createBuildFiles(project.getName());
 
-		MavenCli maven = new MavenCli();
-
-		maven.doMain(new String[] {
+		ClassWorld classWorld = new ClassWorld("plexus.core", getClass()
+				.getClassLoader());
+		MavenCli.doMain(new String[] {
 				"-e",
 				"clean",
 				"package",
+				"-f" + pomPath().toString(),
 				"-X",
 				"-Dtycho.targetPlatform="
 						+ Platform.getInstallLocation().getURL().getPath()
-								.toString() },
-				project.getLocation().toString(), System.out, System.err);
+								.toString() }, classWorld);
 
 	}
 
 	private void createBuildFiles(String projectName) throws CoreException {
 		BuildTemplates templates = new BuildTemplates();
-		writeFile(getBuildConfigPath().removeLastSegments(1).append("pom")
-				.addFileExtension("xml"), templates.parentPom());
-		writeFile(getBuildConfigPath().append("pom").addFileExtension("xml"),
-				templates.pom(projectName, getVersion()));
+		writeFile(parentPomPath(), templates.parentPom());
+		writeFile(pomPath(), templates.pom(projectName, getVersion()));
 	}
+
+	private IPath parentPomPath() {
+		return getBuildConfigPath().removeLastSegments(1).append("pom")
+				.addFileExtension("xml");
+	}
+
+	private IPath pomPath() {
+		return getBuildConfigPath().append("pom").addFileExtension("xml");
+	}
+
 }
