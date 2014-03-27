@@ -17,7 +17,7 @@ Usage example:
     eAttr.setEType(EcorePackage.Literals.EINT);
     eClass.getEStructuralFeatures().add(eAttr);
     blueprintEPackage.getEClassifiers().add(eClass);
-    ClassSupplier service = ... // acquire the ClasSupplier OSGi service
+    ClasSupplier service = ... // acquire the ClasSupplier OSGi service
     EPackage nativeEPackage = service.supply(blueprintEPackage); // Provide it to ClasSupplier to generate the EPackage...
     EClass jClass = (EClass) nativeEPackage.getEClassifier(eClass.getName()); // ... that you can use
     EObject jObject = nativeEPackage.getEFactoryInstance().create(jClass);
@@ -30,6 +30,6 @@ Usage example:
   
 A more [complete example is here](/org.classupplier.test/src/org/classupplier/test/ClasSupplierTests.java).  
 
-To use the library, import it to the Eclipse plugin's dependencies with satisfying subsequent. E4 DI is supported. 
+To use the library, [download it](https://github.com/kirillzotkin/ClasSupplier/releases) and add to the target platform, then Import to the Eclipse plugin's dependencies with satisfying subsequent. E4 DI is supported.
 
 See also [wiki](https://github.com/kirillzotkin/ClasSupplier/wiki).
