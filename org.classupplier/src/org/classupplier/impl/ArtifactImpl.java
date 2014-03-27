@@ -240,7 +240,7 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void setName(String newName) {
 		String oldName = name;
@@ -300,7 +300,7 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void setPrototypeEPackage(EPackage newPrototypeEPackage) {
 		EPackage oldPrototypeEPackage = prototypeEPackage;
@@ -322,7 +322,7 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void setVersion(Version newVersion) {
 		Version oldVersion = version;
@@ -341,7 +341,7 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void setProjectName(String newProjectName) {
 		String oldProjectName = projectName;
@@ -360,7 +360,7 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void setState(State newState) {
 		State oldState = state;
@@ -379,7 +379,7 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void setStatus(IStatus newStatus) {
 		IStatus oldStatus = status;
@@ -414,7 +414,7 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void setLoadedEPackage(EPackage newLoadedEPackage) {
 		EPackage oldLoadedEPackage = loadedEPackage;
@@ -491,7 +491,7 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
@@ -523,7 +523,7 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public void eUnset(int featureID) {

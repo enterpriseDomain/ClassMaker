@@ -36,7 +36,7 @@ public interface ClasSupplierPackage extends EPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://org/classupplier/0.7.3";
+	String eNS_URI = "http://org/classupplier/0.7.4";
 
 	/**
 	 * The package namespace name.

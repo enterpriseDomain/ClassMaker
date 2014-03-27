@@ -133,12 +133,12 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 		IProgressMonitor monitor = new NullProgressMonitor();
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		for (IProject project : workspace.getRoot().getProjects()) {
-			Artifact artifact = null;
+			ArtifactImpl artifact = null;
 			try {
 				if (!project.isOpen())
 					project.open(monitor);
 				if (project.hasNature(OSGi.NATURE_ID)) {
-					artifact = ClasSupplierFactory.eINSTANCE.createArtifact();
+					artifact = (ArtifactImpl) ClasSupplierFactory.eINSTANCE.createArtifact();
 					artifact.setProjectName(project.getName());
 					registerArtifact(artifact);
 					workspace.run(new Initializer(project, artifact, this),
@@ -182,7 +182,7 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void setResourceSet(ResourceSet newResourceSet) {
 		ResourceSet oldResourceSet = resourceSet;
@@ -300,7 +300,7 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 	 * @generated NOT
 	 */
 	public Artifact createArtifact(EPackage blueprint) {
-		Artifact result = ClasSupplierFactory.eINSTANCE.createArtifact();
+		ArtifactImpl result = (ArtifactImpl) ClasSupplierFactory.eINSTANCE.createArtifact();
 		result.setName(blueprint.getName());
 		result.setPrototypeEPackage(blueprint);
 		registerArtifact(result);
@@ -345,7 +345,7 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -364,7 +364,7 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public void eUnset(int featureID) {

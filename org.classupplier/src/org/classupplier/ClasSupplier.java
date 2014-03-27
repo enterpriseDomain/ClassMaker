@@ -32,22 +32,11 @@ public interface ClasSupplier extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Workspace</em>' reference.
-	 * @see #setWorkspace(Infrastructure)
 	 * @see org.classupplier.ClasSupplierPackage#getClasSupplier_Workspace()
-	 * @model
+	 * @model changeable="false"
 	 * @generated
 	 */
 	Infrastructure getWorkspace();
-
-	/**
-	 * Sets the value of the '{@link org.classupplier.ClasSupplier#getWorkspace <em>Workspace</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Workspace</em>' reference.
-	 * @see #getWorkspace()
-	 * @generated
-	 */
-	void setWorkspace(Infrastructure value);
 
 	/**
 	 * <!-- begin-user-doc -->

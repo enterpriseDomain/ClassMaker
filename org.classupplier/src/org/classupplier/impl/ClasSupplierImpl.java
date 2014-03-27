@@ -2,7 +2,6 @@
  */
 package org.classupplier.impl;
 
-import org.classupplier.Artifact;
 import org.classupplier.ClasSupplier;
 import org.classupplier.ClasSupplierFactory;
 import org.classupplier.ClasSupplierPackage;
@@ -85,7 +84,7 @@ public class ClasSupplierImpl extends EObjectImpl implements ClasSupplier {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void setWorkspace(Infrastructure newWorkspace) {
 		Infrastructure oldWorkspace = workspace;
@@ -111,27 +110,27 @@ public class ClasSupplierImpl extends EObjectImpl implements ClasSupplier {
 	 * @generated NOT
 	 */
 	public EPackage supply(EPackage model, IProgressMonitor monitor) {
-		Artifact result = null;
+		ArtifactImpl result = null;
 		switch (getWorkspace().containsArtifact(model)) {
 		case Infrastructure.CONTAINS_LOADED:
-			result = getWorkspace().getArtifact(model);
+			result = (ArtifactImpl) getWorkspace().getArtifact(model);
 			if (result != null)
 				if (result.getEPackage() != null)
 					return result.getEPackage();
 				else
 					return makePrototype(model, result, monitor);
 		case Infrastructure.CONTAINS_PROTOTYPE:
-			result = getWorkspace().getArtifact(model);
+			result = (ArtifactImpl) getWorkspace().getArtifact(model);
 			return makePrototype(model, result, monitor);
 		case Infrastructure.DOESNT_CONTAIN:
 		default:
-			result = getWorkspace().createArtifact(model);
+			result = (ArtifactImpl) getWorkspace().createArtifact(model);
 			result.make(monitor);
 			return result.getEPackage();
 		}
 	}
 
-	private EPackage makePrototype(EPackage model, Artifact result,
+	private EPackage makePrototype(EPackage model, ArtifactImpl result,
 			IProgressMonitor monitor) {
 		result.setPrototypeEPackage(model);
 		result.make(monitor);
@@ -154,7 +153,7 @@ public class ClasSupplierImpl extends EObjectImpl implements ClasSupplier {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
@@ -168,7 +167,7 @@ public class ClasSupplierImpl extends EObjectImpl implements ClasSupplier {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public void eUnset(int featureID) {

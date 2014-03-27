@@ -5,14 +5,20 @@
     <eOperations name="make">
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ePackage" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"
         changeable="false" volatile="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="prototypeEPackage" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="#//Version"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="projectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" eType="#//State"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="#//IStatus"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="prototypeEPackage" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"
+        changeable="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="#//Version"
+        changeable="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="projectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" eType="#//State"
+        changeable="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="#//IStatus"
+        changeable="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="loadedEPackage" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="State">
@@ -52,7 +58,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="artifacts" upperBound="-1"
         eType="#//Artifact" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourceSet" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EResourceSet"
-        transient="true"/>
+        changeable="false" transient="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Adapter" instanceClassName="org.eclipse.emf.common.notify.Adapter"/>
   <eClassifiers xsi:type="ecore:EDataType" name="IStatus" instanceClassName="org.eclipse.core.runtime.IStatus"/>
@@ -70,7 +76,8 @@
       <eParameters name="model" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="workspace" eType="#//Infrastructure"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="workspace" eType="#//Infrastructure"
+        changeable="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="IProgressMonitor" instanceClassName="org.eclipse.core.runtime.IProgressMonitor"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Version" instanceClassName="org.osgi.framework.Version"/>

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Collections;
 
 import org.classupplier.Artifact;
+import org.classupplier.impl.ArtifactImpl;
 import org.classupplier.impl.OSGi;
 import org.classupplier.impl.PathHelper;
 import org.eclipse.core.resources.IFile;
@@ -107,13 +108,14 @@ public class EcoreGenerator implements org.classupplier.codegen.Generator {
 	}
 
 	@Override
-	public void generate(final Artifact artifact, ISchedulingRule rule,
+	public void generate(Artifact artifact, ISchedulingRule rule,
 			final IProgressMonitor monitor) throws CoreException {
-		artifact.setVersion(Version.parseVersion("1.0.0.qualifier"));
+		final ArtifactImpl artifactImpl = (ArtifactImpl) artifact;
+		artifactImpl.setVersion(Version.parseVersion("1.0.0.qualifier"));
 		
 		final IProject project = ResourcesPlugin.getWorkspace().getRoot()
-				.getProject(artifact.getProjectName());
-		IPath modelPath = ensureModelResourcePath(project, artifact.getName(),
+				.getProject(artifactImpl.getProjectName());
+		IPath modelPath = ensureModelResourcePath(project, artifactImpl.getName(),
 				monitor);
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		final IPath path = root.getRawLocation().append(modelPath);
@@ -128,7 +130,7 @@ public class EcoreGenerator implements org.classupplier.codegen.Generator {
 				@Override
 				public void run(IProgressMonitor monitor) throws CoreException {
 					generator.run(new String[] { "-ecore2GenModel",
-							path.toString(), "", artifact.getName() });
+							path.toString(), "", artifactImpl.getName() });
 					monitor.worked(1);
 				}
 			}, monitor);
@@ -136,11 +138,11 @@ public class EcoreGenerator implements org.classupplier.codegen.Generator {
 
 		if (genModelSetupRunnable == null)
 			genModelSetupRunnable = new GenModelSetupRunnable(genModelPath,
-					project, artifact);
+					project, artifactImpl);
 		else {
 			genModelSetupRunnable.setPath(genModelPath);
 			genModelSetupRunnable.setProject(project);
-			genModelSetupRunnable.setArtifact(artifact);
+			genModelSetupRunnable.setArtifact(artifactImpl);
 		}
 		project.getWorkspace().run(genModelSetupRunnable, rule, 0, monitor);
 

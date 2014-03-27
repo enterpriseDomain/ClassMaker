@@ -31,14 +31,14 @@ public class Initializer implements IWorkspaceRunnable {
 
 	private IProject project;
 
-	private Artifact artifact;
+	private ArtifactImpl artifact;
 
 	private Infrastructure workspace;
 
 	public Initializer(IProject project, Artifact artifact,
 			Infrastructure workspace) {
 		this.project = project;
-		this.artifact = artifact;
+		this.artifact = (ArtifactImpl) artifact;
 		this.workspace = workspace;
 	}
 

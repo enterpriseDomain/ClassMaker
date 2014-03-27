@@ -70,16 +70,6 @@ public interface Infrastructure extends EObject {
 	ResourceSet getResourceSet();
 
 	/**
-	 * Sets the value of the '{@link org.classupplier.Infrastructure#getResourceSet <em>Resource Set</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * @param value the new value of the '<em>Resource Set</em>' attribute.
-	 * @see #getResourceSet()
-	 * @generated
-	 */
-	void setResourceSet(ResourceSet value);
-
-	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @model listenerDataType="org.classupplier.Adapter"
 	 * @generated
