@@ -110,7 +110,7 @@ public class ClasSupplierTests {
 	}
 
 	// @Test
-	public void experiment() {
+	public void metaModel() {
 		EcoreFactory factory = EcoreFactory.eINSTANCE;
 		EPackage _package = factory.createEPackage();
 		_package.setName("inputmodel");
