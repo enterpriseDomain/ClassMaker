@@ -107,27 +107,30 @@ public class ClasSupplierTests {
 		assertEquals(readPagesCount, theObject.eGet(state));
 
 		assertEquals(eClass.getName(), theObject.getClass().getSimpleName());
+		
 	}
+
 
 	// @Test
 	public void metaModel() {
 		EcoreFactory factory = EcoreFactory.eINSTANCE;
 		EPackage _package = factory.createEPackage();
-		_package.setName("inputmodel");
-		EClass data = factory.createEClass();
-		data.setName("Data");
+		_package.setName("metamodel");
+		EClass thing = factory.createEClass();
+		thing.setName("Thing");
 		EAttribute attribute = factory.createEAttribute();
-		attribute.setName("Input");
+		attribute.setName("Value");
 		attribute.setEType(EcorePackage.Literals.EJAVA_OBJECT);
-		data.getEStructuralFeatures().add(attribute);
-		_package.getEClassifiers().add(data);
+		thing.getEStructuralFeatures().add(attribute);
+		_package.getEClassifiers().add(thing);
 		EPackage result = service.supply(_package,
 				new CodeGenUtil.EclipseUtil.StreamProgressMonitor(System.out));
-		EClass resultData = (EClass) result.getEClassifier(data.getName());
-		EAttribute resultAttribute = (EAttribute) resultData
+		EClass resultThing = (EClass) result.getEClassifier(thing.getName());
+		EAttribute resultAttribute = (EAttribute) resultThing
 				.getEStructuralFeature(attribute.getName());
-		EObject someData = result.getEFactoryInstance().create(resultData);
-		someData.eSet(resultAttribute, "Help");
-		assertEquals("Help", someData.eGet(resultAttribute));
+		EObject book = result.getEFactoryInstance().create(resultThing);
+		book.eSet(resultAttribute, "Text");
+		assertEquals("Text", book.eGet(resultAttribute));
+		
 	}
 }
