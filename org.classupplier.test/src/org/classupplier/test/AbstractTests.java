@@ -1,0 +1,31 @@
+package org.classupplier.test;
+
+import static org.junit.Assert.fail;
+
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+
+import org.classupplier.ClasSupplier;
+import org.junit.Before;
+
+public abstract class AbstractTests {
+
+	protected static ClasSupplier service;
+
+	private static CountDownLatch latch = new CountDownLatch(1);
+
+	public void setReference(ClasSupplier dependency) {
+		service = dependency;
+		latch.countDown();
+	}
+
+	@Before
+	public void dependencyCheck() {
+		try {
+			latch.await(1, TimeUnit.SECONDS);
+		} catch (InterruptedException e) {
+			fail(e.getLocalizedMessage());
+		}
+	}
+	
+}

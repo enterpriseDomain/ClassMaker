@@ -6,11 +6,7 @@ import static org.junit.Assert.fail;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 
-import org.classupplier.ClasSupplier;
-import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -21,28 +17,9 @@ import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.junit.Before;
 import org.junit.Test;
 
-public class ClasSupplierTests {
-
-	private static ClasSupplier service;
-
-	private static CountDownLatch latch = new CountDownLatch(1);
-
-	public void setReference(ClasSupplier dependency) {
-		service = dependency;
-		latch.countDown();
-	}
-
-	@Before
-	public void dependencyCheck() {
-		try {
-			latch.await(1, TimeUnit.SECONDS);
-		} catch (InterruptedException e) {
-			fail(e.getLocalizedMessage());
-		}
-	}
+public class ClasSupplierTests extends AbstractTests {
 
 	@Test
 	public void theClassCreation() {
@@ -110,26 +87,4 @@ public class ClasSupplierTests {
 
 	}
 
-	@Test
-	public void metaModel() {
-		EcoreFactory factory = EcoreFactory.eINSTANCE;
-		EPackage _package = factory.createEPackage();
-		_package.setName("metamodel");
-		EClass thing = factory.createEClass();
-		thing.setName("Thing");
-		EAttribute attribute = factory.createEAttribute();
-		attribute.setName("Value");
-		attribute.setEType(EcorePackage.Literals.EJAVA_OBJECT);
-		thing.getEStructuralFeatures().add(attribute);
-		_package.getEClassifiers().add(thing);
-		EPackage result = service.supply(_package,
-				new CodeGenUtil.EclipseUtil.StreamProgressMonitor(System.out));
-		EClass resultThing = (EClass) result.getEClassifier(thing.getName());
-		EAttribute resultAttribute = (EAttribute) resultThing
-				.getEStructuralFeature(attribute.getName());
-		EObject book = result.getEFactoryInstance().create(resultThing);
-		book.eSet(resultAttribute, "Text");
-		assertEquals("Text", book.eGet(resultAttribute));
-
-	}
 }
