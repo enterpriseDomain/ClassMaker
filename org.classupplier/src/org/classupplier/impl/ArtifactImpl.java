@@ -453,10 +453,12 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 				setLoadedEPackage(null);
 			}
 			e.printStackTrace();
+			monitor.setCanceled(true);
 			return;
 		}
 		setStatus(new Status(IStatus.OK, OSGi.PLUGIN_ID, "Artifact is ready."));
 		setState(State.COMPLETE);
+		monitor.done();
 	}
 
 	/**
