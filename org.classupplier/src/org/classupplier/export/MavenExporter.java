@@ -31,7 +31,7 @@ public class MavenExporter extends AbstractExporter {
 	}
 
 	private void createBuildFiles(String projectName) throws CoreException {
-		BuildTemplates templates = new BuildTemplates();
+		POMTemplates templates = new POMTemplates();
 		writeFile(parentPomPath(), templates.parentPom());
 		writeFile(pomPath(), templates.pom(projectName, getVersion()));
 	}

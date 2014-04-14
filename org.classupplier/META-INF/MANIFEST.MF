@@ -24,4 +24,3 @@ Require-Bundle: org.eclipse.core.runtime;visibility:=reexport,
 Service-Component: OSGI-INF/component.xml
 Bundle-ActivationPolicy: lazy
 
-
