@@ -6,7 +6,6 @@ import org.classupplier.Artifact;
 import org.classupplier.ClasSupplierPackage;
 import org.classupplier.State;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -23,6 +22,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.osgi.framework.Version;
 
 /**
@@ -39,6 +39,7 @@ import org.osgi.framework.Version;
  *   <li>{@link org.classupplier.impl.ArtifactImpl#getState <em>State</em>}</li>
  *   <li>{@link org.classupplier.impl.ArtifactImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link org.classupplier.impl.ArtifactImpl#getLoadedEPackage <em>Loaded EPackage</em>}</li>
+ *   <li>{@link org.classupplier.impl.ArtifactImpl#getResource <em>Resource</em>}</li>
  * </ul>
  * </p>
  *
@@ -155,6 +156,26 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	 */
 	protected EPackage loadedEPackage;
 
+	/**
+	 * The default value of the '{@link #getResource() <em>Resource</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getResource()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Resource RESOURCE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getResource() <em>Resource</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getResource()
+	 * @generated
+	 * @ordered
+	 */
+	protected Resource resource = RESOURCE_EDEFAULT;
+
 	private Adapter adapter = new AdapterImpl() {
 
 		@Override
@@ -204,25 +225,6 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	}
 
 	/**
-	 * Adds the project nature to supplied project.
-	 * 
-	 * @param project
-	 * @param natureId
-	 * @param monitor
-	 * @throws CoreException
-	 */
-	private void addNature(IProject project, String natureId,
-			IProgressMonitor monitor) throws CoreException {
-		IProjectDescription description = project.getDescription();
-		String[] prevNatures = description.getNatureIds();
-		String[] newNatures = new String[prevNatures.length + 1];
-		System.arraycopy(prevNatures, 0, newNatures, 0, prevNatures.length);
-		newNatures[prevNatures.length] = natureId;
-		description.setNatureIds(newNatures);
-		project.setDescription(description, monitor);
-	}
-
-	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
@@ -240,13 +242,15 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClasSupplierPackage.ARTIFACT__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ClasSupplierPackage.ARTIFACT__NAME, oldName, name));
 	}
 
 	/**
@@ -300,13 +304,16 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	public void setPrototypeEPackage(EPackage newPrototypeEPackage) {
 		EPackage oldPrototypeEPackage = prototypeEPackage;
 		prototypeEPackage = newPrototypeEPackage;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClasSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE, oldPrototypeEPackage, prototypeEPackage));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ClasSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE,
+					oldPrototypeEPackage, prototypeEPackage));
 	}
 
 	/**
@@ -315,20 +322,22 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	 * @generated NOT
 	 */
 	public Version getVersion() {
-		if(!eIsSet(ClasSupplierPackage.Literals.ARTIFACT__VERSION))
+		if (!eIsSet(ClasSupplierPackage.Literals.ARTIFACT__VERSION))
 			setVersion(Version.emptyVersion);
 		return version;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	public void setVersion(Version newVersion) {
 		Version oldVersion = version;
 		version = newVersion;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClasSupplierPackage.ARTIFACT__VERSION, oldVersion, version));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ClasSupplierPackage.ARTIFACT__VERSION, oldVersion, version));
 	}
 
 	/**
@@ -341,13 +350,16 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	public void setProjectName(String newProjectName) {
 		String oldProjectName = projectName;
 		projectName = newProjectName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClasSupplierPackage.ARTIFACT__PROJECT_NAME, oldProjectName, projectName));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ClasSupplierPackage.ARTIFACT__PROJECT_NAME, oldProjectName,
+					projectName));
 	}
 
 	/**
@@ -360,13 +372,15 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	public void setState(State newState) {
 		State oldState = state;
 		state = newState == null ? STATE_EDEFAULT : newState;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClasSupplierPackage.ARTIFACT__STATE, oldState, state));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ClasSupplierPackage.ARTIFACT__STATE, oldState, state));
 	}
 
 	/**
@@ -379,13 +393,15 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	public void setStatus(IStatus newStatus) {
 		IStatus oldStatus = status;
 		status = newStatus;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClasSupplierPackage.ARTIFACT__STATUS, oldStatus, status));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ClasSupplierPackage.ARTIFACT__STATUS, oldStatus, status));
 	}
 
 	/**
@@ -414,13 +430,37 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	public void setLoadedEPackage(EPackage newLoadedEPackage) {
 		EPackage oldLoadedEPackage = loadedEPackage;
 		loadedEPackage = newLoadedEPackage;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClasSupplierPackage.ARTIFACT__LOADED_EPACKAGE, oldLoadedEPackage, loadedEPackage));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ClasSupplierPackage.ARTIFACT__LOADED_EPACKAGE,
+					oldLoadedEPackage, loadedEPackage));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Resource getResource() {
+		return resource;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setResource(Resource newResource) {
+		Resource oldResource = resource;
+		resource = newResource;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClasSupplierPackage.ARTIFACT__RESOURCE, oldResource, resource));
 	}
 
 	/**
@@ -444,7 +484,7 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 			if (!project.exists())
 				project.create(monitor);
 			project.open(monitor);
-			addNature(project, OSGi.NATURE_ID, monitor);
+			ResourceHelper.addNature(project, OSGi.NATURE_ID, monitor);
 			project.build(IncrementalProjectBuilder.FULL_BUILD, monitor);
 		} catch (CoreException e) {
 			if (e.getStatus().getSeverity() == IStatus.ERROR) {
@@ -487,70 +527,74 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 			case ClasSupplierPackage.ARTIFACT__LOADED_EPACKAGE:
 				if (resolve) return getLoadedEPackage();
 				return basicGetLoadedEPackage();
+			case ClasSupplierPackage.ARTIFACT__RESOURCE:
+				return getResource();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClasSupplierPackage.ARTIFACT__NAME:
-				setName((String)newValue);
-				return;
-			case ClasSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE:
-				setPrototypeEPackage((EPackage)newValue);
-				return;
-			case ClasSupplierPackage.ARTIFACT__VERSION:
-				setVersion((Version)newValue);
-				return;
-			case ClasSupplierPackage.ARTIFACT__PROJECT_NAME:
-				setProjectName((String)newValue);
-				return;
-			case ClasSupplierPackage.ARTIFACT__STATE:
-				setState((State)newValue);
-				return;
-			case ClasSupplierPackage.ARTIFACT__STATUS:
-				setStatus((IStatus)newValue);
-				return;
-			case ClasSupplierPackage.ARTIFACT__LOADED_EPACKAGE:
-				setLoadedEPackage((EPackage)newValue);
-				return;
+		case ClasSupplierPackage.ARTIFACT__NAME:
+			setName((String) newValue);
+			return;
+		case ClasSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE:
+			setPrototypeEPackage((EPackage) newValue);
+			return;
+		case ClasSupplierPackage.ARTIFACT__VERSION:
+			setVersion((Version) newValue);
+			return;
+		case ClasSupplierPackage.ARTIFACT__PROJECT_NAME:
+			setProjectName((String) newValue);
+			return;
+		case ClasSupplierPackage.ARTIFACT__STATE:
+			setState((State) newValue);
+			return;
+		case ClasSupplierPackage.ARTIFACT__STATUS:
+			setStatus((IStatus) newValue);
+			return;
+		case ClasSupplierPackage.ARTIFACT__LOADED_EPACKAGE:
+			setLoadedEPackage((EPackage) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClasSupplierPackage.ARTIFACT__NAME:
-				setName(NAME_EDEFAULT);
-				return;
-			case ClasSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE:
-				setPrototypeEPackage((EPackage)null);
-				return;
-			case ClasSupplierPackage.ARTIFACT__VERSION:
-				setVersion(VERSION_EDEFAULT);
-				return;
-			case ClasSupplierPackage.ARTIFACT__PROJECT_NAME:
-				setProjectName(PROJECT_NAME_EDEFAULT);
-				return;
-			case ClasSupplierPackage.ARTIFACT__STATE:
-				setState(STATE_EDEFAULT);
-				return;
-			case ClasSupplierPackage.ARTIFACT__STATUS:
-				setStatus(STATUS_EDEFAULT);
-				return;
-			case ClasSupplierPackage.ARTIFACT__LOADED_EPACKAGE:
-				setLoadedEPackage((EPackage)null);
-				return;
+		case ClasSupplierPackage.ARTIFACT__NAME:
+			setName(NAME_EDEFAULT);
+			return;
+		case ClasSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE:
+			setPrototypeEPackage((EPackage) null);
+			return;
+		case ClasSupplierPackage.ARTIFACT__VERSION:
+			setVersion(VERSION_EDEFAULT);
+			return;
+		case ClasSupplierPackage.ARTIFACT__PROJECT_NAME:
+			setProjectName(PROJECT_NAME_EDEFAULT);
+			return;
+		case ClasSupplierPackage.ARTIFACT__STATE:
+			setState(STATE_EDEFAULT);
+			return;
+		case ClasSupplierPackage.ARTIFACT__STATUS:
+			setStatus(STATUS_EDEFAULT);
+			return;
+		case ClasSupplierPackage.ARTIFACT__LOADED_EPACKAGE:
+			setLoadedEPackage((EPackage) null);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -578,6 +622,8 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 				return STATUS_EDEFAULT == null ? status != null : !STATUS_EDEFAULT.equals(status);
 			case ClasSupplierPackage.ARTIFACT__LOADED_EPACKAGE:
 				return loadedEPackage != null;
+			case ClasSupplierPackage.ARTIFACT__RESOURCE:
+				return RESOURCE_EDEFAULT == null ? resource != null : !RESOURCE_EDEFAULT.equals(resource);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -601,6 +647,8 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 		result.append(state);
 		result.append(", status: ");
 		result.append(status);
+		result.append(", resource: ");
+		result.append(resource);
 		result.append(')');
 		return result.toString();
 	}

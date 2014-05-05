@@ -7,7 +7,7 @@ import org.classupplier.State;
 import org.classupplier.export.Exporter;
 import org.classupplier.export.MavenExporter;
 import org.classupplier.impl.OSGi;
-import org.classupplier.impl.PathHelper;
+import org.classupplier.impl.ResourceHelper;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -29,7 +29,7 @@ public class ExportingBuilder extends IncrementalProjectBuilder {
 			IProgressMonitor monitor) throws CoreException {
 		if (kind != FULL_BUILD)
 			return null;
-		exporter.setDestination(PathHelper.getDefaultDestination());
+		exporter.setDestination(ResourceHelper.getDefaultDestination());
 		Artifact artifact = null;
 		if (exporter.getVersion() == null) {
 			artifact = OSGi.getClasSupplier().getWorkspace()

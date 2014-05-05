@@ -3,13 +3,16 @@ package org.classupplier.impl;
 import org.classupplier.Artifact;
 import org.classupplier.Infrastructure;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.preferences.IPreferencesService;
 import org.osgi.framework.Version;
 
-public class PathHelper {
+public class ResourceHelper {
 
 	private static final IPreferencesService preferencesService = Platform
 			.getPreferencesService();
@@ -49,6 +52,26 @@ public class PathHelper {
 		return ResourcesPlugin.getWorkspace().getRoot().getLocation();
 	}
 
+	/**
+	 * Adds the project nature to supplied project.
+	 * 
+	 * @param project
+	 * @param natureId
+	 * @param monitor
+	 * @throws CoreException
+	 */
+	public static void addNature(IProject project, String natureId,
+			IProgressMonitor monitor) throws CoreException {
+		IProjectDescription description = project.getDescription();
+		String[] prevNatures = description.getNatureIds();
+		String[] newNatures = new String[prevNatures.length + 1];
+		System.arraycopy(prevNatures, 0, newNatures, 0, prevNatures.length);
+		newNatures[prevNatures.length] = natureId;
+		description.setNatureIds(newNatures);
+		project.setDescription(description, monitor);
+	}
+
+	
 	public static String getJarName(Artifact artifact) {
 		String jarName;
 		Version version = artifact.getVersion();

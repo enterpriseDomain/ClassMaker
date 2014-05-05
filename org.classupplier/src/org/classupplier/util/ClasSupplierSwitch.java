@@ -2,7 +2,11 @@
  */
 package org.classupplier.util;
 
-import org.classupplier.*;
+import org.classupplier.Artifact;
+import org.classupplier.ClasSupplier;
+import org.classupplier.ClasSupplierPackage;
+import org.classupplier.Infrastructure;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
@@ -79,6 +83,13 @@ public class ClasSupplierSwitch<T> extends Switch<T> {
 			case ClasSupplierPackage.CLAS_SUPPLIER: {
 				ClasSupplier clasSupplier = (ClasSupplier)theEObject;
 				T result = caseClasSupplier(clasSupplier);
+				if (result == null) result = caseIAdaptable(clasSupplier);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ClasSupplierPackage.IADAPTABLE: {
+				IAdaptable iAdaptable = (IAdaptable)theEObject;
+				T result = caseIAdaptable(iAdaptable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -128,6 +139,21 @@ public class ClasSupplierSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseClasSupplier(ClasSupplier object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>IAdaptable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>IAdaptable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIAdaptable(IAdaptable object) {
 		return null;
 	}
 

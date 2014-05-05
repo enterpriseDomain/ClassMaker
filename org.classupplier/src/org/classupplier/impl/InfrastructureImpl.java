@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.classupplier.Artifact;
-import org.classupplier.ClasSupplierPackage;
 import org.classupplier.ClasSupplierFactory;
+import org.classupplier.ClasSupplierPackage;
 import org.classupplier.Infrastructure;
 import org.classupplier.State;
 import org.eclipse.core.resources.IProject;

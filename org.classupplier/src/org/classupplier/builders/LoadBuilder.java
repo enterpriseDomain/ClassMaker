@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.classupplier.Artifact;
 import org.classupplier.impl.OSGi;
-import org.classupplier.impl.PathHelper;
+import org.classupplier.impl.ResourceHelper;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -34,7 +34,7 @@ public class LoadBuilder extends IncrementalProjectBuilder {
 		Artifact artifact = OSGi.getClasSupplier().getWorkspace()
 				.getArtifact(getProject().getName());
 		IPath path = getProject().getLocation().append("target")
-				.append(PathHelper.getJarName(artifact))
+				.append(ResourceHelper.getJarName(artifact))
 				.addFileExtension("jar");
 		try {
 			BundleContext context = FrameworkUtil.getBundle(this.getClass())

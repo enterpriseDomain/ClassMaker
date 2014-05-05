@@ -2,7 +2,12 @@
  */
 package org.classupplier.impl;
 
-import org.classupplier.*;
+import org.classupplier.Artifact;
+import org.classupplier.ClasSupplier;
+import org.classupplier.ClasSupplierFactory;
+import org.classupplier.ClasSupplierPackage;
+import org.classupplier.Infrastructure;
+import org.classupplier.State;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.notify.Adapter;

@@ -7,6 +7,7 @@ Bundle-Vendor: Kirill Zotkin
 Fragment-Host: org.classupplier;bundle-version="0.7.4"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.junit,
- org.eclipse.equinox.ds
+ org.eclipse.equinox.ds,
+ org.eclipse.emf.query
 Service-Component: OSGI-INF/component.xml
 Bundle-ActivationPolicy: lazy

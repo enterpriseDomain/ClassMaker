@@ -8,6 +8,7 @@ import org.classupplier.ClasSupplierFactory;
 import org.classupplier.ClasSupplierPackage;
 import org.classupplier.Infrastructure;
 import org.classupplier.State;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.notify.Adapter;
@@ -47,6 +48,13 @@ public class ClasSupplierPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	private EClass clasSupplierEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass iAdaptableEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -217,6 +225,15 @@ public class ClasSupplierPackageImpl extends EPackageImpl implements
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getArtifact_Resource() {
+		return (EAttribute)artifactEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -257,6 +274,15 @@ public class ClasSupplierPackageImpl extends EPackageImpl implements
 	 */
 	public EReference getClasSupplier_Workspace() {
 		return (EReference)clasSupplierEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getIAdaptable() {
+		return iAdaptableEClass;
 	}
 
 	/**
@@ -335,6 +361,7 @@ public class ClasSupplierPackageImpl extends EPackageImpl implements
 		createEAttribute(artifactEClass, ARTIFACT__STATE);
 		createEAttribute(artifactEClass, ARTIFACT__STATUS);
 		createEReference(artifactEClass, ARTIFACT__LOADED_EPACKAGE);
+		createEAttribute(artifactEClass, ARTIFACT__RESOURCE);
 
 		infrastructureEClass = createEClass(INFRASTRUCTURE);
 		createEReference(infrastructureEClass, INFRASTRUCTURE__ARTIFACTS);
@@ -342,6 +369,8 @@ public class ClasSupplierPackageImpl extends EPackageImpl implements
 
 		clasSupplierEClass = createEClass(CLAS_SUPPLIER);
 		createEReference(clasSupplierEClass, CLAS_SUPPLIER__WORKSPACE);
+
+		iAdaptableEClass = createEClass(IADAPTABLE);
 
 		// Create enums
 		stateEEnum = createEEnum(STATE);
@@ -383,6 +412,7 @@ public class ClasSupplierPackageImpl extends EPackageImpl implements
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		clasSupplierEClass.getESuperTypes().add(this.getIAdaptable());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(artifactEClass, Artifact.class, "Artifact", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -394,6 +424,7 @@ public class ClasSupplierPackageImpl extends EPackageImpl implements
 		initEAttribute(getArtifact_State(), this.getState(), "state", null, 0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getArtifact_Status(), this.getIStatus(), "status", null, 0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getArtifact_LoadedEPackage(), theEcorePackage.getEPackage(), null, "loadedEPackage", null, 0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getArtifact_Resource(), theEcorePackage.getEResource(), "resource", null, 0, 1, Artifact.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(artifactEClass, null, "make", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -438,6 +469,8 @@ public class ClasSupplierPackageImpl extends EPackageImpl implements
 		op = addEOperation(clasSupplierEClass, theEcorePackage.getEPackage(), "supply", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEPackage(), "model", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(iAdaptableEClass, IAdaptable.class, "IAdaptable", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(stateEEnum, State.class, "State");

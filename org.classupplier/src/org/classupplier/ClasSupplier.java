@@ -2,6 +2,7 @@
  */
 package org.classupplier;
 
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -18,10 +19,10 @@ import org.eclipse.emf.ecore.EPackage;
  * </p>
  *
  * @see org.classupplier.ClasSupplierPackage#getClasSupplier()
- * @model
+ * @model superTypes="org.classupplier.IAdaptable"
  * @generated
  */
-public interface ClasSupplier extends EObject {
+public interface ClasSupplier extends EObject, IAdaptable {
 	
 	/**
 	 * Returns the value of the '<em><b>Workspace</b></em>' reference.

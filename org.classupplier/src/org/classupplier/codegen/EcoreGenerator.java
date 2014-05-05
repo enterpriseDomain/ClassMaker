@@ -6,7 +6,7 @@ import java.util.Collections;
 import org.classupplier.Artifact;
 import org.classupplier.impl.ArtifactImpl;
 import org.classupplier.impl.OSGi;
-import org.classupplier.impl.PathHelper;
+import org.classupplier.impl.ResourceHelper;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -169,10 +169,10 @@ public class EcoreGenerator implements org.classupplier.codegen.Generator {
 									"The project {0} was not created before generation.",
 									project)));
 		project.open(monitor);
-		IFolder folder = project.getFolder(PathHelper.getModelFolderName());
+		IFolder folder = project.getFolder(ResourceHelper.getModelFolderName());
 		if (!folder.exists())
 			folder.create(true, true, monitor);
-		IFile file = folder.getFile(PathHelper.getFileName(name));
+		IFile file = folder.getFile(ResourceHelper.getFileName(name));
 		return file.getFullPath();
 	}
 

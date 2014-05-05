@@ -6,6 +6,7 @@ import static org.junit.Assert.fail;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
@@ -17,12 +18,18 @@ import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.query.conditions.eobjects.EObjectCondition;
+import org.eclipse.emf.query.conditions.eobjects.IEObjectSource;
+import org.eclipse.emf.query.statements.FROM;
+import org.eclipse.emf.query.statements.IQueryResult;
+import org.eclipse.emf.query.statements.SELECT;
+import org.eclipse.emf.query.statements.WHERE;
 import org.junit.Test;
 
 public class ClasSupplierTests extends AbstractTests {
 
 	@Test
-	public void theClassCreation() {
+	public void creationOfClass() {
 		EcoreFactory ecoreFactory = EcoreFactory.eINSTANCE;
 		EPackage ePackage = ecoreFactory.createEPackage();
 		ePackage.setName("reader");
@@ -85,6 +92,37 @@ public class ClasSupplierTests extends AbstractTests {
 
 		assertEquals(eClass.getName(), theObject.getClass().getSimpleName());
 
+	}
+
+	@Test
+	public void query() {
+		EcoreFactory ecoreFactory = EcoreFactory.eINSTANCE;
+		EPackage model = ecoreFactory.createEPackage();
+		model.setName("some");
+		model.setNsPrefix("some");
+		String nsURI = "http://some/1.0";
+		model.setNsURI(nsURI);
+		EClass theClass = ecoreFactory.createEClass();
+		theClass.setName("Item");
+		model.getEClassifiers().add(theClass);
+		service.supply(model);
+		IEObjectSource source = (IEObjectSource) service
+				.getAdapter(IEObjectSource.class);
+
+		SELECT select = new SELECT(new FROM(source), new WHERE(
+				EObjectCondition.E_TRUE));
+		IQueryResult result;
+		result = select.execute();
+		Iterator<? extends EObject> i = result.getEObjects().iterator();
+		while (i.hasNext()) {
+			EObject o = i.next();
+			if (o instanceof EPackage) {
+				EPackage p = (EPackage) o;
+				if (p.getNsURI().equals(nsURI))
+					assertEquals(theClass.getName(),
+							p.getEClassifier(theClass.getName()).getName());
+			}
+		}
 	}
 
 }

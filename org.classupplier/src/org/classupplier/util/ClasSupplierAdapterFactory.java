@@ -2,7 +2,11 @@
  */
 package org.classupplier.util;
 
-import org.classupplier.*;
+import org.classupplier.Artifact;
+import org.classupplier.ClasSupplier;
+import org.classupplier.ClasSupplierPackage;
+import org.classupplier.Infrastructure;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
@@ -77,6 +81,10 @@ public class ClasSupplierAdapterFactory extends AdapterFactoryImpl {
 				return createClasSupplierAdapter();
 			}
 			@Override
+			public Adapter caseIAdaptable(IAdaptable object) {
+				return createIAdaptableAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -135,6 +143,20 @@ public class ClasSupplierAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createClasSupplierAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.core.runtime.IAdaptable <em>IAdaptable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.core.runtime.IAdaptable
+	 * @generated
+	 */
+	public Adapter createIAdaptableAdapter() {
 		return null;
 	}
 

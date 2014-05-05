@@ -4,9 +4,9 @@ package org.classupplier;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.osgi.framework.Version;
 
 /**
@@ -25,6 +25,7 @@ import org.osgi.framework.Version;
  *   <li>{@link org.classupplier.Artifact#getState <em>State</em>}</li>
  *   <li>{@link org.classupplier.Artifact#getStatus <em>Status</em>}</li>
  *   <li>{@link org.classupplier.Artifact#getLoadedEPackage <em>Loaded EPackage</em>}</li>
+ *   <li>{@link org.classupplier.Artifact#getResource <em>Resource</em>}</li>
  * </ul>
  * </p>
  *
@@ -165,6 +166,32 @@ public interface Artifact extends EObject {
 	 * @generated
 	 */
 	void setLoadedEPackage(EPackage value);
+
+	/**
+	 * Returns the value of the '<em><b>Resource</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Resource</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Resource</em>' attribute.
+	 * @see #setResource(Resource)
+	 * @see org.classupplier.ClasSupplierPackage#getArtifact_Resource()
+	 * @model transient="true"
+	 * @generated
+	 */
+	Resource getResource();
+
+	/**
+	 * Sets the value of the '{@link org.classupplier.Artifact#getResource <em>Resource</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Resource</em>' attribute.
+	 * @see #getResource()
+	 * @generated
+	 */
+	void setResource(Resource value);
 
 	/**
 	 * <!-- begin-user-doc -->

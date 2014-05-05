@@ -7,7 +7,7 @@ import java.util.Map;
 import org.classupplier.Artifact;
 import org.classupplier.State;
 import org.classupplier.impl.OSGi;
-import org.classupplier.impl.PathHelper;
+import org.classupplier.impl.ResourceHelper;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRunnable;
@@ -37,7 +37,7 @@ public class ResourceBuilder extends IncrementalProjectBuilder {
 		if (kind != FULL_BUILD)
 			return null;
 		IFolder folder = getProject()
-				.getFolder(PathHelper.getModelFolderName());
+				.getFolder(ResourceHelper.getModelFolderName());
 		if (!folder.exists())
 			folder.create(true, true, monitor);
 		ISchedulingRule rule = getRule(kind, args);
@@ -58,8 +58,8 @@ public class ResourceBuilder extends IncrementalProjectBuilder {
 
 		@Override
 		public void run(IProgressMonitor monitor) throws CoreException {
-			IPath modelPath = PathHelper.getModelResourcePath(getProject(), OSGi
-					.getClasSupplier().getWorkspace());
+			IPath modelPath = ResourceHelper.getModelResourcePath(getProject(),
+					OSGi.getClasSupplier().getWorkspace());
 			URI modelURI = URI.createPlatformResourceURI(modelPath.toString(),
 					true);
 			ResourceSet resourceSet = OSGi.getClasSupplier().getWorkspace()
@@ -67,11 +67,26 @@ public class ResourceBuilder extends IncrementalProjectBuilder {
 			Resource resource = resourceSet.getResource(modelURI, false);
 			if (resource == null)
 				resource = resourceSet.createResource(modelURI);
+			else
+				try {
+					resource.load(Collections.emptyMap());
+				} catch (IOException e) {
+					throw new CoreException(new Status(IStatus.WARNING,
+							OSGi.PLUGIN_ID, e.getLocalizedMessage(), e));
+				}
 			if (artifact.getState() == State.PROTOTYPE
 					|| artifact.getState() == State.PROCESSING) {
-				resource.getContents().clear();
-				resource.getContents().add(
-						EcoreUtil.copy(artifact.getPrototypeEPackage()));
+				if (!resource.getContents().isEmpty()
+						&& resource.getContents().contains(
+								artifact.getPrototypeEPackage())) {
+					int index = resource.getContents().lastIndexOf(
+							artifact.getPrototypeEPackage());
+					resource.getContents().set(index,
+							EcoreUtil.copy(artifact.getPrototypeEPackage()));
+				} else {
+					resource.getContents().add(
+							EcoreUtil.copy(artifact.getPrototypeEPackage()));
+				}
 			}
 			try {
 				resource.save(Collections.emptyMap());

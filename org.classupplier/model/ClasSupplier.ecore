@@ -20,6 +20,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="#//IStatus"
         changeable="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="loadedEPackage" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resource" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EResource"
+        transient="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="State">
     <eLiterals name="CREATED"/>
@@ -62,7 +64,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Adapter" instanceClassName="org.eclipse.emf.common.notify.Adapter"/>
   <eClassifiers xsi:type="ecore:EDataType" name="IStatus" instanceClassName="org.eclipse.core.runtime.IStatus"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ClasSupplier">
+  <eClassifiers xsi:type="ecore:EClass" name="ClasSupplier" eSuperTypes="#//IAdaptable">
     <eOperations name="supply" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Same as &lt;code>org.classupplier.ClasSupplier#supply(EPackage,IProgressMonitor)&lt;/code> but with &lt;code>NullProgressMonitor&lt;/code> as default."/>
@@ -81,4 +83,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="IProgressMonitor" instanceClassName="org.eclipse.core.runtime.IProgressMonitor"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Version" instanceClassName="org.osgi.framework.Version"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IAdaptable" instanceClassName="org.eclipse.core.runtime.IAdaptable"
+      abstract="true" interface="true"/>
 </ecore:EPackage>

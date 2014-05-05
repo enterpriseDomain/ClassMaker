@@ -63,6 +63,35 @@ public interface ClasSupplierPackage extends EPackage {
 	int ARTIFACT = 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.core.runtime.IAdaptable <em>IAdaptable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.core.runtime.IAdaptable
+	 * @see org.classupplier.impl.ClasSupplierPackageImpl#getIAdaptable()
+	 * @generated
+	 */
+	int IADAPTABLE = 3;
+
+	/**
+	 * The meta object id for the '{@link org.classupplier.impl.InfrastructureImpl <em>Infrastructure</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see org.classupplier.impl.InfrastructureImpl
+	 * @see org.classupplier.impl.ClasSupplierPackageImpl#getInfrastructure()
+	 * @generated
+	 */
+	int INFRASTRUCTURE = 1;
+
+	/**
+	 * The meta object id for the '{@link org.classupplier.impl.ClasSupplierImpl <em>Clas Supplier</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.classupplier.impl.ClasSupplierImpl
+	 * @see org.classupplier.impl.ClasSupplierPackageImpl#getClasSupplier()
+	 * @generated
+	 */
+	int CLAS_SUPPLIER = 2;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -134,22 +163,22 @@ public interface ClasSupplierPackage extends EPackage {
 	int ARTIFACT__LOADED_EPACKAGE = 7;
 
 	/**
+	 * The feature id for the '<em><b>Resource</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARTIFACT__RESOURCE = 8;
+
+	/**
 	 * The number of structural features of the '<em>Artifact</em>' class. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int ARTIFACT_FEATURE_COUNT = 8;
-
-	/**
-	 * The meta object id for the '{@link org.classupplier.impl.InfrastructureImpl <em>Infrastructure</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see org.classupplier.impl.InfrastructureImpl
-	 * @see org.classupplier.impl.ClasSupplierPackageImpl#getInfrastructure()
-	 * @generated
-	 */
-	int INFRASTRUCTURE = 1;
+	int ARTIFACT_FEATURE_COUNT = 9;
 
 	/**
 	 * The feature id for the '<em><b>Artifacts</b></em>' containment reference list.
@@ -178,14 +207,13 @@ public interface ClasSupplierPackage extends EPackage {
 	int INFRASTRUCTURE_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link org.classupplier.impl.ClasSupplierImpl <em>Clas Supplier</em>}' class.
+	 * The number of structural features of the '<em>IAdaptable</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.classupplier.impl.ClasSupplierImpl
-	 * @see org.classupplier.impl.ClasSupplierPackageImpl#getClasSupplier()
 	 * @generated
+	 * @ordered
 	 */
-	int CLAS_SUPPLIER = 2;
+	int IADAPTABLE_FEATURE_COUNT = 0;
 
 	/**
 	 * The feature id for the '<em><b>Workspace</b></em>' reference.
@@ -194,7 +222,7 @@ public interface ClasSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLAS_SUPPLIER__WORKSPACE = 0;
+	int CLAS_SUPPLIER__WORKSPACE = IADAPTABLE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Clas Supplier</em>' class.
@@ -203,7 +231,7 @@ public interface ClasSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLAS_SUPPLIER_FEATURE_COUNT = 1;
+	int CLAS_SUPPLIER_FEATURE_COUNT = IADAPTABLE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.classupplier.State <em>State</em>}' enum.
@@ -212,7 +240,7 @@ public interface ClasSupplierPackage extends EPackage {
 	 * @see org.classupplier.impl.ClasSupplierPackageImpl#getState()
 	 * @generated
 	 */
-	int STATE = 3;
+	int STATE = 4;
 
 	/**
 	 * The meta object id for the '<em>Adapter</em>' data type. <!--
@@ -222,7 +250,7 @@ public interface ClasSupplierPackage extends EPackage {
 	 * @see org.classupplier.impl.ClasSupplierPackageImpl#getAdapter()
 	 * @generated
 	 */
-	int ADAPTER = 4;
+	int ADAPTER = 5;
 
 	/**
 	 * The meta object id for the '<em>IStatus</em>' data type. <!--
@@ -232,7 +260,7 @@ public interface ClasSupplierPackage extends EPackage {
 	 * @see org.classupplier.impl.ClasSupplierPackageImpl#getIStatus()
 	 * @generated
 	 */
-	int ISTATUS = 5;
+	int ISTATUS = 6;
 
 	/**
 	 * The meta object id for the '<em>IProgress Monitor</em>' data type. <!--
@@ -242,7 +270,7 @@ public interface ClasSupplierPackage extends EPackage {
 	 * @see org.classupplier.impl.ClasSupplierPackageImpl#getIProgressMonitor()
 	 * @generated
 	 */
-	int IPROGRESS_MONITOR = 6;
+	int IPROGRESS_MONITOR = 7;
 
 	/**
 	 * The meta object id for the '<em>Version</em>' data type. <!--
@@ -252,7 +280,7 @@ public interface ClasSupplierPackage extends EPackage {
 	 * @see org.classupplier.impl.ClasSupplierPackageImpl#getVersion()
 	 * @generated
 	 */
-	int VERSION = 7;
+	int VERSION = 8;
 
 	/**
 	 * Returns the meta object for class '{@link org.classupplier.Artifact <em>Artifact</em>}'.
@@ -357,6 +385,17 @@ public interface ClasSupplierPackage extends EPackage {
 	EReference getArtifact_LoadedEPackage();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.classupplier.Artifact#getResource <em>Resource</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Resource</em>'.
+	 * @see org.classupplier.Artifact#getResource()
+	 * @see #getArtifact()
+	 * @generated
+	 */
+	EAttribute getArtifact_Resource();
+
+	/**
 	 * Returns the meta object for class '
 	 * {@link org.classupplier.Infrastructure <em>Infrastructure</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -408,6 +447,17 @@ public interface ClasSupplierPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getClasSupplier_Workspace();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.core.runtime.IAdaptable <em>IAdaptable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>IAdaptable</em>'.
+	 * @see org.eclipse.core.runtime.IAdaptable
+	 * @model instanceClass="org.eclipse.core.runtime.IAdaptable"
+	 * @generated
+	 */
+	EClass getIAdaptable();
 
 	/**
 	 * Returns the meta object for enum '{@link org.classupplier.State <em>State</em>}'.
@@ -553,6 +603,14 @@ public interface ClasSupplierPackage extends EPackage {
 		EReference ARTIFACT__LOADED_EPACKAGE = eINSTANCE.getArtifact_LoadedEPackage();
 
 		/**
+		 * The meta object literal for the '<em><b>Resource</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ARTIFACT__RESOURCE = eINSTANCE.getArtifact_Resource();
+
+		/**
 		 * The meta object literal for the '{@link org.classupplier.impl.InfrastructureImpl <em>Infrastructure</em>}' class.
 		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
@@ -594,6 +652,16 @@ public interface ClasSupplierPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CLAS_SUPPLIER__WORKSPACE = eINSTANCE.getClasSupplier_Workspace();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.core.runtime.IAdaptable <em>IAdaptable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.core.runtime.IAdaptable
+		 * @see org.classupplier.impl.ClasSupplierPackageImpl#getIAdaptable()
+		 * @generated
+		 */
+		EClass IADAPTABLE = eINSTANCE.getIAdaptable();
 
 		/**
 		 * The meta object literal for the '{@link org.classupplier.State <em>State</em>}' enum.

@@ -19,7 +19,8 @@ Require-Bundle: org.eclipse.core.runtime;visibility:=reexport,
  org.eclipse.equinox.ds,
  org.eclipse.e4.core.contexts,
  org.eclipse.e4.core.di,
- org.eclipse.e4.core.services
+ org.eclipse.e4.core.services,
+ org.eclipse.emf.query;resolution:=optional
 Service-Component: OSGI-INF/component.xml
 Bundle-ActivationPolicy: lazy
 

@@ -44,27 +44,32 @@ public class Initializer implements IWorkspaceRunnable {
 
 	@Override
 	public void run(IProgressMonitor monitor) throws CoreException {
-		IFolder folder = project.getFolder(PathHelper.getModelFolderName());
+		IFolder folder = project.getFolder(ResourceHelper.getModelFolderName());
 		if (!folder.exists())
 			throw new CoreException(
 					new Status(Status.WARNING, OSGi.PLUGIN_ID, NLS.bind(
 							"Domain project {0} has no model folder.", project)));
 		try {
 			for (IResource resource : project.getFolder(
-					PathHelper.getModelFolderName()).members())
-				if (resource.getFileExtension().equals(PathHelper.getFileExt()))
+					ResourceHelper.getModelFolderName()).members())
+				if (resource.getFileExtension().equals(ResourceHelper.getFileExt()))
 					artifact.setName(resource.getLocation()
 							.removeFileExtension().lastSegment());
 		} catch (CoreException e) {
 			throw new CoreException(new Status(Status.WARNING, OSGi.PLUGIN_ID,
 					NLS.bind("Model for project {0} doesn't exist.", project)));
 		}
-		IPath modelPath = PathHelper.getModelResourcePath(project, workspace);
+		IPath modelPath = ResourceHelper.getModelResourcePath(project, workspace);
 		URI modelURI = URI
 				.createPlatformResourceURI(modelPath.toString(), true);
 		ResourceSet resourceSet = workspace.getResourceSet();
 		Resource resource = resourceSet.getResource(modelURI, true);
 		if (resource != null && artifact.getState().equals(State.CREATED)) {
+			if (resource.getContents().isEmpty()) {
+				artifact.setState(State.CREATED);
+				return;
+			}
+
 			EPackage value = (EPackage) EcoreUtil.copy(resource.getContents()
 					.get(0));
 			artifact.setName(modelURI.trimFileExtension().lastSegment());
@@ -72,7 +77,8 @@ public class Initializer implements IWorkspaceRunnable {
 			artifact.setState(State.PROTOTYPE);
 		}
 		IPath path = project.getLocation().append("target")
-				.append(PathHelper.getJarName(artifact)).addFileExtension("jar");
+				.append(ResourceHelper.getJarName(artifact))
+				.addFileExtension("jar");
 		if (!path.toFile().exists())
 			return;
 		try {

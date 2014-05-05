@@ -61,6 +61,16 @@
          </run>
       </builder>
    </extension>
+   <extension
+         point="org.eclipse.core.runtime.adapters">
+      <factory
+            adaptableType="org.classupplier.ClasSupplier"
+            class="org.classupplier.query.ClasSupplierAdapterFactory">
+         <adapter
+               type="org.eclipse.emf.query.conditions.eobjects.IEObjectSource">
+         </adapter>
+      </factory>
+   </extension>
 
 null
 </plugin>
