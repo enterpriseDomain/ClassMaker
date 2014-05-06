@@ -30,6 +30,6 @@ Usage example:
   
 A more [complete example is here](/org.classupplier.test/src/org/classupplier/test/ClasSupplierTests.java).  
 
-To use the library, [download it](https://github.com/kirillzotkin/ClasSupplier/releases) and add to the target platform, then import to the Eclipse plugin's dependencies with satisfying subsequent. E4 DI is supported.
+To use the library, [download](https://github.com/kirillzotkin/ClasSupplier/releases) and add it to the target platform  satisfying subsequent dependencies (p2 TBD). E4 DI is supported.
 
 See also [wiki](https://github.com/kirillzotkin/ClasSupplier/wiki).
