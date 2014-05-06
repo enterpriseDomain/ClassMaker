@@ -1,7 +1,9 @@
 ClasSupplier
 ===========
 
-ClasSupplier is a Java library for creating the code that is available to invoke in-place, achieving such behavour through the actual generation and loading of Java code.  
+ClasSupplier is a Java library for producing the code that is available to be invoked programmatically.  
+
+Creation is achieved through the generation of Java source code and loading it to OSGi framework.  
 
 
 Usage example:  
