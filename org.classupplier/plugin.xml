@@ -2,6 +2,10 @@
 <?eclipse version="3.0"?>
 
 <!--
+ <copyright>
+ </copyright>
+
+ $Id$
 -->
 
 <plugin>
@@ -72,5 +76,4 @@
       </factory>
    </extension>
 
-null
 </plugin>

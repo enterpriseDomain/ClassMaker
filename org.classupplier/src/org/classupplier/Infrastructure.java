@@ -28,19 +28,19 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 public interface Infrastructure extends EObject {
 
 	/**
-	 * Returns the value of the '<em><b>Artifacts</b></em>' containment reference list.
-	 * The list contents are of type {@link org.classupplier.Artifact}.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Artifacts</b></em>' containment reference list.
+   * The list contents are of type {@link org.classupplier.Artifact}.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Artifacts</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Artifacts</em>' containment reference list.
-	 * @see org.classupplier.ClasSupplierPackage#getInfrastructure_Artifacts()
-	 * @model containment="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Artifacts</em>' containment reference list.
+   * @see org.classupplier.ClasSupplierPackage#getInfrastructure_Artifacts()
+   * @model containment="true"
+   * @generated
+   */
 	EList<Artifact> getArtifacts();
 
 	public static final int CONTAINS_PROTOTYPE = 0;
@@ -67,67 +67,67 @@ public interface Infrastructure extends EObject {
 	ResourceSet getResourceSet();
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model listenerDataType="org.classupplier.Adapter"
-	 * @generated
-	 */
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @model listenerDataType="org.classupplier.Adapter"
+   * @generated
+   */
 	void addRefreshListener(Adapter listener);
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model listenerDataType="org.classupplier.Adapter"
-	 * @generated
-	 */
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @model listenerDataType="org.classupplier.Adapter"
+   * @generated
+   */
 	void removeRefreshListener(Adapter listener);
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @model
+   * @generated
+   */
 	void registerArtifact(Artifact artifact);
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @model
+   * @generated
+   */
 	void unregisterArtifact(Artifact artifact);
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @model
+   * @generated
+   */
 	int containsArtifact(EPackage blueprint);
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @model
+   * @generated
+   */
 	Artifact getArtifact(String projectName);
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @model
+   * @generated
+   */
 	Artifact getArtifact(EPackage ePackage);
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model monitorDataType="org.classupplier.IProgressMonitor"
-	 * @generated
-	 */
+   * @model monitorDataType="org.classupplier.IProgressMonitor"
+   * @generated
+   */
 	void save(IProgressMonitor monitor);
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @model
+   * @generated
+   */
 	Artifact createArtifact(EPackage blueprint);
 
 } // Infrastructure

@@ -31,6 +31,8 @@ public class LoadBuilder extends IncrementalProjectBuilder {
 	@Override
 	protected IProject[] build(int kind, Map<String, String> args,
 			IProgressMonitor monitor) throws CoreException {
+		if (kind != FULL_BUILD)
+			return null;
 		Artifact artifact = OSGi.getClasSupplier().getWorkspace()
 				.getArtifact(getProject().getName());
 		IPath path = getProject().getLocation().append("target")

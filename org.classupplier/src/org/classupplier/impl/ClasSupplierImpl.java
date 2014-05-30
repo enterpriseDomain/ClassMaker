@@ -22,23 +22,21 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.classupplier.impl.ClasSupplierImpl#getWorkspace <em>Workspace
- * </em>}</li>
+ *   <li>{@link org.classupplier.impl.ClasSupplierImpl#getWorkspace <em>Workspace</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class ClasSupplierImpl extends EObjectImpl implements ClasSupplier {
 
 	/**
-	 * The cached value of the '{@link #getWorkspace() <em>Workspace</em>}'
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #getWorkspace()
-	 * @generated
-	 * @ordered
-	 */
+   * The cached value of the '{@link #getWorkspace() <em>Workspace</em>}' reference.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @see #getWorkspace()
+   * @generated
+   * @ordered
+   */
 	protected Infrastructure workspace;
 
 	/**
@@ -52,42 +50,37 @@ public class ClasSupplierImpl extends EObjectImpl implements ClasSupplier {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return ClasSupplierPackage.Literals.CLAS_SUPPLIER;
-	}
+    return ClasSupplierPackage.Literals.CLAS_SUPPLIER;
+  }
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @generated
+   */
 	public Infrastructure getWorkspace() {
-		if (workspace != null && workspace.eIsProxy()) {
-			InternalEObject oldWorkspace = (InternalEObject) workspace;
-			workspace = (Infrastructure) eResolveProxy(oldWorkspace);
-			if (workspace != oldWorkspace) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							ClasSupplierPackage.CLAS_SUPPLIER__WORKSPACE,
-							oldWorkspace, workspace));
-			}
-		}
-		return workspace;
-	}
+    if (workspace != null && workspace.eIsProxy()) {
+      InternalEObject oldWorkspace = (InternalEObject)workspace;
+      workspace = (Infrastructure)eResolveProxy(oldWorkspace);
+      if (workspace != oldWorkspace) {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClasSupplierPackage.CLAS_SUPPLIER__WORKSPACE, oldWorkspace, workspace));
+      }
+    }
+    return workspace;
+  }
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @generated
+   */
 	public Infrastructure basicGetWorkspace() {
-		return workspace;
-	}
+    return workspace;
+  }
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -128,40 +121,38 @@ public class ClasSupplierImpl extends EObjectImpl implements ClasSupplier {
 				if (result.getEPackage() != null)
 					return result.getEPackage();
 				else
-					return makePrototype(model, result, monitor);
+					return producePrototype(model, result, monitor);
 		case Infrastructure.CONTAINS_PROTOTYPE:
 			result = (ArtifactImpl) getWorkspace().getArtifact(model);
-			return makePrototype(model, result, monitor);
+			return producePrototype(model, result, monitor);
 		case Infrastructure.DOESNT_CONTAIN:
 		default:
 			result = (ArtifactImpl) getWorkspace().createArtifact(model);
-			result.make(monitor);
+			result.produce(monitor);
 			return result.getEPackage();
 		}
 	}
 
-	private EPackage makePrototype(EPackage model, ArtifactImpl result,
+	private EPackage producePrototype(EPackage model, ArtifactImpl result,
 			IProgressMonitor monitor) {
 		result.setPrototypeEPackage(model);
-		result.make(monitor);
+		result.produce(monitor);
 		return result.getEPackage();
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @generated
+   */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-		case ClasSupplierPackage.CLAS_SUPPLIER__WORKSPACE:
-			if (resolve)
-				return getWorkspace();
-			return basicGetWorkspace();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID) {
+      case ClasSupplierPackage.CLAS_SUPPLIER__WORKSPACE:
+        if (resolve) return getWorkspace();
+        return basicGetWorkspace();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -194,18 +185,17 @@ public class ClasSupplierImpl extends EObjectImpl implements ClasSupplier {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @generated
+   */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-		case ClasSupplierPackage.CLAS_SUPPLIER__WORKSPACE:
-			return workspace != null;
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID) {
+      case ClasSupplierPackage.CLAS_SUPPLIER__WORKSPACE:
+        return workspace != null;
+    }
+    return super.eIsSet(featureID);
+  }
 
 	@SuppressWarnings("rawtypes")
 	@Override

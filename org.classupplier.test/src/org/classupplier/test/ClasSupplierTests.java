@@ -64,6 +64,8 @@ public class ClasSupplierTests extends AbstractTests {
 		EPackage nativePackage = service.supply(ePackage);
 		assertNotNull(nativePackage);
 		assertEquals(ePackage.getName(), nativePackage.getName());
+		assertEquals(ePackage.getNsPrefix(), nativePackage.getNsPrefix());
+		assertEquals(ePackage.getNsURI(), nativePackage.getNsURI());
 		EClass theClass = (EClass) nativePackage.getEClassifier(eClass
 				.getName());
 		EObject theObject = nativePackage.getEFactoryInstance()

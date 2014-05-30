@@ -3,7 +3,6 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.classupplier;singleton:=true
 Bundle-Version: 0.7.4.qualifier
-Bundle-Activator: org.classupplier.impl.OSGi
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
@@ -15,12 +14,11 @@ Require-Bundle: org.eclipse.core.runtime;visibility:=reexport,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.codegen.ecore;visibility:=reexport,
  org.eclipse.core.resources;visibility:=reexport,
- org.eclipse.m2e.maven.runtime,
  org.eclipse.equinox.ds,
+ org.eclipse.m2e.maven.runtime,
  org.eclipse.e4.core.contexts,
- org.eclipse.e4.core.di,
  org.eclipse.e4.core.services,
  org.eclipse.emf.query;resolution:=optional
 Service-Component: OSGI-INF/component.xml
 Bundle-ActivationPolicy: lazy
-
+Bundle-Activator: org.classupplier.impl.OSGi

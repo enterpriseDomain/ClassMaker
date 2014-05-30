@@ -34,7 +34,7 @@
       </children>
       <children xmi:type="notation:Node" xmi:id="_4FDGAOaOEeGHd_MbCVfMRQ" type="5002">
         <children xmi:type="notation:Node" xmi:id="_Y1hkoIKHEeOdlJRFVR-41Q" type="2002">
-          <element xmi:type="ecore:EOperation" href="ClasSupplier.ecore#//Artifact/make"/>
+          <element xmi:type="ecore:EOperation" href="ClasSupplier.ecore#//Artifact/produce"/>
           <layoutConstraint xmi:type="notation:Location" xmi:id="_Y1iLsIKHEeOdlJRFVR-41Q"/>
         </children>
         <styles xmi:type="notation:DrawerStyle" xmi:id="_4FDGAeaOEeGHd_MbCVfMRQ"/>

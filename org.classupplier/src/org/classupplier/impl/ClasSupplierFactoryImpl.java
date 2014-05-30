@@ -27,236 +27,235 @@ import org.osgi.framework.Version;
  */
 public class ClasSupplierFactoryImpl extends EFactoryImpl implements ClasSupplierFactory {
 	/**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc -->
+   * Creates the default factory implementation.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public static ClasSupplierFactory init() {
-		try {
-			ClasSupplierFactory theClasSupplierFactory = (ClasSupplierFactory)EPackage.Registry.INSTANCE.getEFactory(ClasSupplierPackage.eNS_URI);
-			if (theClasSupplierFactory != null) {
-				return theClasSupplierFactory;
-			}
-		}
-		catch (Exception exception) {
-			EcorePlugin.INSTANCE.log(exception);
-		}
-		return new ClasSupplierFactoryImpl();
-	}
+    try {
+      ClasSupplierFactory theClasSupplierFactory = (ClasSupplierFactory)EPackage.Registry.INSTANCE.getEFactory("http://org/classupplier/0.7.4"); 
+      if (theClasSupplierFactory != null) {
+        return theClasSupplierFactory;
+      }
+    } catch (Exception exception) {
+      EcorePlugin.INSTANCE.log(exception);
+    }
+    return new ClasSupplierFactoryImpl();
+  }
 
 	/**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc -->
+   * Creates an instance of the factory.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public ClasSupplierFactoryImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
-			case ClasSupplierPackage.ARTIFACT: return createArtifact();
-			case ClasSupplierPackage.INFRASTRUCTURE: return createInfrastructure();
-			case ClasSupplierPackage.CLAS_SUPPLIER: return createClasSupplier();
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-		}
-	}
+    switch (eClass.getClassifierID()) {
+      case ClasSupplierPackage.ARTIFACT: return createArtifact();
+      case ClasSupplierPackage.INFRASTRUCTURE: return createInfrastructure();
+      case ClasSupplierPackage.CLAS_SUPPLIER: return createClasSupplier();
+      default:
+        throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+    }
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
-		switch (eDataType.getClassifierID()) {
-			case ClasSupplierPackage.STATE:
-				return createStateFromString(eDataType, initialValue);
-			case ClasSupplierPackage.ADAPTER:
-				return createAdapterFromString(eDataType, initialValue);
-			case ClasSupplierPackage.ISTATUS:
-				return createIStatusFromString(eDataType, initialValue);
-			case ClasSupplierPackage.IPROGRESS_MONITOR:
-				return createIProgressMonitorFromString(eDataType, initialValue);
-			case ClasSupplierPackage.VERSION:
-				return createVersionFromString(eDataType, initialValue);
-			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-		}
-	}
+    switch (eDataType.getClassifierID()) {
+      case ClasSupplierPackage.STATE:
+        return createStateFromString(eDataType, initialValue);
+      case ClasSupplierPackage.ADAPTER:
+        return createAdapterFromString(eDataType, initialValue);
+      case ClasSupplierPackage.ISTATUS:
+        return createIStatusFromString(eDataType, initialValue);
+      case ClasSupplierPackage.IPROGRESS_MONITOR:
+        return createIProgressMonitorFromString(eDataType, initialValue);
+      case ClasSupplierPackage.VERSION:
+        return createVersionFromString(eDataType, initialValue);
+      default:
+        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+    }
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
-		switch (eDataType.getClassifierID()) {
-			case ClasSupplierPackage.STATE:
-				return convertStateToString(eDataType, instanceValue);
-			case ClasSupplierPackage.ADAPTER:
-				return convertAdapterToString(eDataType, instanceValue);
-			case ClasSupplierPackage.ISTATUS:
-				return convertIStatusToString(eDataType, instanceValue);
-			case ClasSupplierPackage.IPROGRESS_MONITOR:
-				return convertIProgressMonitorToString(eDataType, instanceValue);
-			case ClasSupplierPackage.VERSION:
-				return convertVersionToString(eDataType, instanceValue);
-			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-		}
-	}
+    switch (eDataType.getClassifierID()) {
+      case ClasSupplierPackage.STATE:
+        return convertStateToString(eDataType, instanceValue);
+      case ClasSupplierPackage.ADAPTER:
+        return convertAdapterToString(eDataType, instanceValue);
+      case ClasSupplierPackage.ISTATUS:
+        return convertIStatusToString(eDataType, instanceValue);
+      case ClasSupplierPackage.IPROGRESS_MONITOR:
+        return convertIProgressMonitorToString(eDataType, instanceValue);
+      case ClasSupplierPackage.VERSION:
+        return convertVersionToString(eDataType, instanceValue);
+      default:
+        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+    }
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public Artifact createArtifact() {
-		ArtifactImpl artifact = new ArtifactImpl();
-		return artifact;
-	}
+    ArtifactImpl artifact = new ArtifactImpl();
+    return artifact;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public Infrastructure createInfrastructure() {
-		InfrastructureImpl infrastructure = new InfrastructureImpl();
-		return infrastructure;
-	}
+    InfrastructureImpl infrastructure = new InfrastructureImpl();
+    return infrastructure;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public ClasSupplier createClasSupplier() {
-		ClasSupplierImpl clasSupplier = new ClasSupplierImpl();
-		return clasSupplier;
-	}
+    ClasSupplierImpl clasSupplier = new ClasSupplierImpl();
+    return clasSupplier;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public State createStateFromString(EDataType eDataType, String initialValue) {
-		State result = State.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
+    State result = State.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public String convertStateToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
-	}
+    return instanceValue == null ? null : instanceValue.toString();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public Adapter createAdapterFromString(EDataType eDataType, String initialValue) {
-		return (Adapter)super.createFromString(eDataType, initialValue);
-	}
+    return (Adapter)super.createFromString(eDataType, initialValue);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public String convertAdapterToString(EDataType eDataType, Object instanceValue) {
-		return super.convertToString(eDataType, instanceValue);
-	}
+    return super.convertToString(eDataType, instanceValue);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public IStatus createIStatusFromString(EDataType eDataType, String initialValue) {
-		return (IStatus)super.createFromString(eDataType, initialValue);
-	}
+    return (IStatus)super.createFromString(eDataType, initialValue);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public String convertIStatusToString(EDataType eDataType, Object instanceValue) {
-		return super.convertToString(eDataType, instanceValue);
-	}
+    return super.convertToString(eDataType, instanceValue);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public IProgressMonitor createIProgressMonitorFromString(EDataType eDataType, String initialValue) {
-		return (IProgressMonitor)super.createFromString(eDataType, initialValue);
-	}
+    return (IProgressMonitor)super.createFromString(eDataType, initialValue);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public String convertIProgressMonitorToString(EDataType eDataType, Object instanceValue) {
-		return super.convertToString(eDataType, instanceValue);
-	}
+    return super.convertToString(eDataType, instanceValue);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public Version createVersionFromString(EDataType eDataType, String initialValue) {
-		return (Version)super.createFromString(eDataType, initialValue);
-	}
+    return (Version)super.createFromString(eDataType, initialValue);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public String convertVersionToString(EDataType eDataType, Object instanceValue) {
-		return super.convertToString(eDataType, instanceValue);
-	}
+    return super.convertToString(eDataType, instanceValue);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public ClasSupplierPackage getClasSupplierPackage() {
-		return (ClasSupplierPackage)getEPackage();
-	}
+    return (ClasSupplierPackage)getEPackage();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @deprecated
-	 * @generated
-	 */
+   * @deprecated
+   * @generated
+   */
 	@Deprecated
 	public static ClasSupplierPackage getPackage() {
-		return ClasSupplierPackage.eINSTANCE;
-	}
+    return ClasSupplierPackage.eINSTANCE;
+  }
 
 } //ClasSupplierFactoryImpl

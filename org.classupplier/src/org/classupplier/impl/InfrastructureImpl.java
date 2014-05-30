@@ -50,13 +50,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
 public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 
 	/**
-	 * The cached value of the '{@link #getArtifacts() <em>Artifacts</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getArtifacts() <em>Artifacts</em>}' containment reference list.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getArtifacts()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getArtifacts()
+   * @generated
+   * @ordered
+   */
 	protected EList<Artifact> artifacts;
 
 	/**
@@ -70,12 +70,12 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 	protected static final ResourceSet RESOURCE_SET_EDEFAULT = new ResourceSetImpl();
 
 	/**
-	 * The cached value of the '{@link #getResourceSet() <em>Resource Set</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #getResourceSet()
-	 * @generated
-	 * @ordered
-	 */
+   * The cached value of the '{@link #getResourceSet() <em>Resource Set</em>}' attribute.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @see #getResourceSet()
+   * @generated
+   * @ordered
+   */
 	protected ResourceSet resourceSet = RESOURCE_SET_EDEFAULT;
 
 	protected Map<EPackage, Artifact> prototypeModelsToArtifaсts = new HashMap<EPackage, Artifact>();
@@ -152,33 +152,33 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return ClasSupplierPackage.Literals.INFRASTRUCTURE;
-	}
+    return ClasSupplierPackage.Literals.INFRASTRUCTURE;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public EList<Artifact> getArtifacts() {
-		if (artifacts == null) {
-			artifacts = new EObjectContainmentEList<Artifact>(Artifact.class, this, ClasSupplierPackage.INFRASTRUCTURE__ARTIFACTS);
-		}
-		return artifacts;
-	}
+    if (artifacts == null) {
+      artifacts = new EObjectContainmentEList<Artifact>(Artifact.class, this, ClasSupplierPackage.INFRASTRUCTURE__ARTIFACTS);
+    }
+    return artifacts;
+  }
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @generated
+   */
 	public ResourceSet getResourceSet() {
-		return resourceSet;
-	}
+    return resourceSet;
+  }
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -329,19 +329,19 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @generated
+   */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case ClasSupplierPackage.INFRASTRUCTURE__ARTIFACTS:
-				return getArtifacts();
-			case ClasSupplierPackage.INFRASTRUCTURE__RESOURCE_SET:
-				return getResourceSet();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID) {
+      case ClasSupplierPackage.INFRASTRUCTURE__ARTIFACTS:
+        return getArtifacts();
+      case ClasSupplierPackage.INFRASTRUCTURE__RESOURCE_SET:
+        return getResourceSet();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -380,34 +380,34 @@ public class InfrastructureImpl extends EObjectImpl implements Infrastructure {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @generated
+   */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case ClasSupplierPackage.INFRASTRUCTURE__ARTIFACTS:
-				return artifacts != null && !artifacts.isEmpty();
-			case ClasSupplierPackage.INFRASTRUCTURE__RESOURCE_SET:
-				return RESOURCE_SET_EDEFAULT == null ? resourceSet != null : !RESOURCE_SET_EDEFAULT.equals(resourceSet);
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID) {
+      case ClasSupplierPackage.INFRASTRUCTURE__ARTIFACTS:
+        return artifacts != null && !artifacts.isEmpty();
+      case ClasSupplierPackage.INFRASTRUCTURE__RESOURCE_SET:
+        return RESOURCE_SET_EDEFAULT == null ? resourceSet != null : !RESOURCE_SET_EDEFAULT.equals(resourceSet);
+    }
+    return super.eIsSet(featureID);
+  }
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @generated
+   */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+    if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (resourceSet: ");
-		result.append(resourceSet);
-		result.append(')');
-		return result.toString();
-	}
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (resourceSet: ");
+    result.append(resourceSet);
+    result.append(')');
+    return result.toString();
+  }
 
 	protected void notifyEPackageAdd(Artifact artifact) {
 		if (artifact

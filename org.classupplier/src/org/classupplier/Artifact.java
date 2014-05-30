@@ -35,170 +35,170 @@ import org.osgi.framework.Version;
  */
 public interface Artifact extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see org.classupplier.ClasSupplierPackage#getArtifact_Name()
-	 * @model changeable="false"
-	 * @generated
-	 */
+   * @return the value of the '<em>Name</em>' attribute.
+   * @see org.classupplier.ClasSupplierPackage#getArtifact_Name()
+   * @model changeable="false"
+   * @generated
+   */
 	String getName();
 
 	/**
-	 * Returns the value of the '<em><b>EPackage</b></em>' reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>EPackage</b></em>' reference.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>EPackage</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>EPackage</em>' reference.
-	 * @see org.classupplier.ClasSupplierPackage#getArtifact_EPackage()
-	 * @model changeable="false" volatile="true" derived="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>EPackage</em>' reference.
+   * @see org.classupplier.ClasSupplierPackage#getArtifact_EPackage()
+   * @model changeable="false" volatile="true" derived="true"
+   * @generated
+   */
 	EPackage getEPackage();
 
 	/**
-	 * Returns the value of the '<em><b>Prototype EPackage</b></em>' reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Prototype EPackage</b></em>' reference.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Prototype EPackage</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Prototype EPackage</em>' reference.
-	 * @see org.classupplier.ClasSupplierPackage#getArtifact_PrototypeEPackage()
-	 * @model changeable="false"
-	 * @generated
-	 */
+   * @return the value of the '<em>Prototype EPackage</em>' reference.
+   * @see org.classupplier.ClasSupplierPackage#getArtifact_PrototypeEPackage()
+   * @model changeable="false"
+   * @generated
+   */
 	EPackage getPrototypeEPackage();
 
 	/**
-	 * Returns the value of the '<em><b>Version</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Version</b></em>' attribute.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Version</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Version</em>' attribute.
-	 * @see org.classupplier.ClasSupplierPackage#getArtifact_Version()
-	 * @model dataType="org.classupplier.Version" changeable="false"
-	 * @generated
-	 */
+   * @return the value of the '<em>Version</em>' attribute.
+   * @see org.classupplier.ClasSupplierPackage#getArtifact_Version()
+   * @model dataType="org.classupplier.Version" changeable="false"
+   * @generated
+   */
 	Version getVersion();
 
 	/**
-	 * Returns the value of the '<em><b>Project Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Project Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Project Name</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Project Name</em>' attribute.
-	 * @see org.classupplier.ClasSupplierPackage#getArtifact_ProjectName()
-	 * @model changeable="false"
-	 * @generated
-	 */
+   * @return the value of the '<em>Project Name</em>' attribute.
+   * @see org.classupplier.ClasSupplierPackage#getArtifact_ProjectName()
+   * @model changeable="false"
+   * @generated
+   */
 	String getProjectName();
 
 	/**
-	 * Returns the value of the '<em><b>State</b></em>' attribute.
-	 * The literals are from the enumeration {@link org.classupplier.State}.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>State</b></em>' attribute.
+   * The literals are from the enumeration {@link org.classupplier.State}.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>State</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>State</em>' attribute.
-	 * @see org.classupplier.State
-	 * @see org.classupplier.ClasSupplierPackage#getArtifact_State()
-	 * @model changeable="false"
-	 * @generated
-	 */
+   * @return the value of the '<em>State</em>' attribute.
+   * @see org.classupplier.State
+   * @see org.classupplier.ClasSupplierPackage#getArtifact_State()
+   * @model changeable="false"
+   * @generated
+   */
 	State getState();
 
 	/**
-	 * Returns the value of the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Status</b></em>' attribute.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Status</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Status</em>' attribute.
-	 * @see org.classupplier.ClasSupplierPackage#getArtifact_Status()
-	 * @model dataType="org.classupplier.IStatus" changeable="false"
-	 * @generated
-	 */
+   * @return the value of the '<em>Status</em>' attribute.
+   * @see org.classupplier.ClasSupplierPackage#getArtifact_Status()
+   * @model dataType="org.classupplier.IStatus" changeable="false"
+   * @generated
+   */
 	IStatus getStatus();
 
 	/**
-	 * Returns the value of the '<em><b>Loaded EPackage</b></em>' reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Loaded EPackage</b></em>' reference.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Loaded EPackage</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Loaded EPackage</em>' reference.
-	 * @see #setLoadedEPackage(EPackage)
-	 * @see org.classupplier.ClasSupplierPackage#getArtifact_LoadedEPackage()
-	 * @model
-	 * @generated
-	 */
+   * @return the value of the '<em>Loaded EPackage</em>' reference.
+   * @see #setLoadedEPackage(EPackage)
+   * @see org.classupplier.ClasSupplierPackage#getArtifact_LoadedEPackage()
+   * @model
+   * @generated
+   */
 	EPackage getLoadedEPackage();
 
 	/**
-	 * Sets the value of the '{@link org.classupplier.Artifact#getLoadedEPackage <em>Loaded EPackage</em>}' reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.classupplier.Artifact#getLoadedEPackage <em>Loaded EPackage</em>}' reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Loaded EPackage</em>' reference.
-	 * @see #getLoadedEPackage()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Loaded EPackage</em>' reference.
+   * @see #getLoadedEPackage()
+   * @generated
+   */
 	void setLoadedEPackage(EPackage value);
 
 	/**
-	 * Returns the value of the '<em><b>Resource</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Resource</b></em>' attribute.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Resource</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Resource</em>' attribute.
-	 * @see #setResource(Resource)
-	 * @see org.classupplier.ClasSupplierPackage#getArtifact_Resource()
-	 * @model transient="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Resource</em>' attribute.
+   * @see #setResource(Resource)
+   * @see org.classupplier.ClasSupplierPackage#getArtifact_Resource()
+   * @model transient="true"
+   * @generated
+   */
 	Resource getResource();
 
 	/**
-	 * Sets the value of the '{@link org.classupplier.Artifact#getResource <em>Resource</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.classupplier.Artifact#getResource <em>Resource</em>}' attribute.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Resource</em>' attribute.
-	 * @see #getResource()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Resource</em>' attribute.
+   * @see #getResource()
+   * @generated
+   */
 	void setResource(Resource value);
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model monitorDataType="org.classupplier.IProgressMonitor"
-	 * @generated
-	 */
-	void make(IProgressMonitor monitor);
+   * @model monitorDataType="org.classupplier.IProgressMonitor"
+   * @generated
+   */
+	void produce(IProgressMonitor monitor);
 
 } // Artifact

@@ -7,6 +7,7 @@ import org.classupplier.ClasSupplierPackage;
 import org.classupplier.State;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceDescription;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -31,24 +32,28 @@ import org.osgi.framework.Version;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.classupplier.impl.ArtifactImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.classupplier.impl.ArtifactImpl#getEPackage <em>EPackage</em>}</li>
- *   <li>{@link org.classupplier.impl.ArtifactImpl#getPrototypeEPackage <em>Prototype EPackage</em>}</li>
- *   <li>{@link org.classupplier.impl.ArtifactImpl#getVersion <em>Version</em>}</li>
- *   <li>{@link org.classupplier.impl.ArtifactImpl#getProjectName <em>Project Name</em>}</li>
- *   <li>{@link org.classupplier.impl.ArtifactImpl#getState <em>State</em>}</li>
- *   <li>{@link org.classupplier.impl.ArtifactImpl#getStatus <em>Status</em>}</li>
- *   <li>{@link org.classupplier.impl.ArtifactImpl#getLoadedEPackage <em>Loaded EPackage</em>}</li>
- *   <li>{@link org.classupplier.impl.ArtifactImpl#getResource <em>Resource</em>}</li>
+ * <li>{@link org.classupplier.impl.ArtifactImpl#getName <em>Name</em>}</li>
+ * <li>{@link org.classupplier.impl.ArtifactImpl#getEPackage <em>EPackage</em>}</li>
+ * <li>{@link org.classupplier.impl.ArtifactImpl#getPrototypeEPackage <em>
+ * Prototype EPackage</em>}</li>
+ * <li>{@link org.classupplier.impl.ArtifactImpl#getVersion <em>Version</em>}</li>
+ * <li>{@link org.classupplier.impl.ArtifactImpl#getProjectName <em>Project Name
+ * </em>}</li>
+ * <li>{@link org.classupplier.impl.ArtifactImpl#getState <em>State</em>}</li>
+ * <li>{@link org.classupplier.impl.ArtifactImpl#getStatus <em>Status</em>}</li>
+ * <li>{@link org.classupplier.impl.ArtifactImpl#getLoadedEPackage <em>Loaded
+ * EPackage</em>}</li>
+ * <li>{@link org.classupplier.impl.ArtifactImpl#getResource <em>Resource</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class ArtifactImpl extends EObjectImpl implements Artifact {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -58,6 +63,7 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	/**
 	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -65,9 +71,10 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getPrototypeEPackage() <em>Prototype EPackage</em>}' reference.
-	 * <!-- begin-user-doc --> <!--
+	 * The cached value of the '{@link #getPrototypeEPackage()
+	 * <em>Prototype EPackage</em>}' reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @see #getPrototypeEPackage()
 	 * @generated
 	 * @ordered
@@ -75,8 +82,9 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	protected EPackage prototypeEPackage;
 
 	/**
-	 * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getVersion() <em>Version</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getVersion()
 	 * @generated
 	 * @ordered
@@ -84,8 +92,9 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	protected static final Version VERSION_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getVersion() <em>Version</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getVersion()
 	 * @generated
 	 * @ordered
@@ -93,8 +102,9 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	protected Version version = VERSION_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}
+	 * ' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getProjectName()
 	 * @generated
 	 * @ordered
@@ -102,8 +112,9 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	protected static final String PROJECT_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getProjectName() <em>Project Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getProjectName() <em>Project Name</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getProjectName()
 	 * @generated
 	 * @ordered
@@ -113,6 +124,7 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	/**
 	 * The default value of the '{@link #getState() <em>State</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getState()
 	 * @generated
 	 * @ordered
@@ -122,6 +134,7 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	/**
 	 * The cached value of the '{@link #getState() <em>State</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getState()
 	 * @generated
 	 * @ordered
@@ -129,8 +142,9 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	protected State state = STATE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getStatus() <em>Status</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getStatus()
 	 * @generated
 	 * @ordered
@@ -140,6 +154,7 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	/**
 	 * The cached value of the '{@link #getStatus() <em>Status</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getStatus()
 	 * @generated
 	 * @ordered
@@ -147,9 +162,10 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	protected IStatus status = STATUS_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getLoadedEPackage() <em>Loaded EPackage</em>}' reference.
-	 * <!-- begin-user-doc --> <!--
+	 * The cached value of the '{@link #getLoadedEPackage()
+	 * <em>Loaded EPackage</em>}' reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @see #getLoadedEPackage()
 	 * @generated
 	 * @ordered
@@ -157,9 +173,9 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	protected EPackage loadedEPackage;
 
 	/**
-	 * The default value of the '{@link #getResource() <em>Resource</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The default value of the '{@link #getResource() <em>Resource</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getResource()
 	 * @generated
 	 * @ordered
@@ -167,9 +183,9 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	protected static final Resource RESOURCE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getResource() <em>Resource</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getResource() <em>Resource</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getResource()
 	 * @generated
 	 * @ordered
@@ -217,6 +233,7 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -255,11 +272,13 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EPackage getEPackage() {
 		EPackage ePackage = basicGetEPackage();
-		return ePackage != null && ePackage.eIsProxy() ? (EPackage)eResolveProxy((InternalEObject)ePackage) : ePackage;
+		return ePackage != null && ePackage.eIsProxy() ? (EPackage) eResolveProxy((InternalEObject) ePackage)
+				: ePackage;
 	}
 
 	/**
@@ -280,15 +299,18 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EPackage getPrototypeEPackage() {
 		if (prototypeEPackage != null && prototypeEPackage.eIsProxy()) {
-			InternalEObject oldPrototypeEPackage = (InternalEObject)prototypeEPackage;
-			prototypeEPackage = (EPackage)eResolveProxy(oldPrototypeEPackage);
+			InternalEObject oldPrototypeEPackage = (InternalEObject) prototypeEPackage;
+			prototypeEPackage = (EPackage) eResolveProxy(oldPrototypeEPackage);
 			if (prototypeEPackage != oldPrototypeEPackage) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClasSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE, oldPrototypeEPackage, prototypeEPackage));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							ClasSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE,
+							oldPrototypeEPackage, prototypeEPackage));
 			}
 		}
 		return prototypeEPackage;
@@ -296,6 +318,7 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EPackage basicGetPrototypeEPackage() {
@@ -342,6 +365,7 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String getProjectName() {
@@ -364,6 +388,7 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public State getState() {
@@ -385,6 +410,7 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public IStatus getStatus() {
@@ -406,15 +432,18 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EPackage getLoadedEPackage() {
 		if (loadedEPackage != null && loadedEPackage.eIsProxy()) {
-			InternalEObject oldLoadedEPackage = (InternalEObject)loadedEPackage;
-			loadedEPackage = (EPackage)eResolveProxy(oldLoadedEPackage);
+			InternalEObject oldLoadedEPackage = (InternalEObject) loadedEPackage;
+			loadedEPackage = (EPackage) eResolveProxy(oldLoadedEPackage);
 			if (loadedEPackage != oldLoadedEPackage) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClasSupplierPackage.ARTIFACT__LOADED_EPACKAGE, oldLoadedEPackage, loadedEPackage));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							ClasSupplierPackage.ARTIFACT__LOADED_EPACKAGE,
+							oldLoadedEPackage, loadedEPackage));
 			}
 		}
 		return loadedEPackage;
@@ -422,6 +451,7 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EPackage basicGetLoadedEPackage() {
@@ -443,8 +473,8 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Resource getResource() {
@@ -452,15 +482,17 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setResource(Resource newResource) {
 		Resource oldResource = resource;
 		resource = newResource;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClasSupplierPackage.ARTIFACT__RESOURCE, oldResource, resource));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ClasSupplierPackage.ARTIFACT__RESOURCE, oldResource,
+					resource));
 	}
 
 	/**
@@ -468,7 +500,7 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 	 * 
 	 * @generated NOT
 	 */
-	public void make(IProgressMonitor monitor) {
+	public void produce(IProgressMonitor monitor) {
 		if (getState().equals(State.PROCESSING))
 			return;
 		if (getStatus() != STATUS_EDEFAULT && !getStatus().isOK()) {
@@ -484,8 +516,11 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 			if (!project.exists())
 				project.create(monitor);
 			project.open(monitor);
+			boolean autoBuild = workspace.isAutoBuilding();
+			setAutoBuilding(workspace, false);
 			ResourceHelper.addNature(project, OSGi.NATURE_ID, monitor);
 			project.build(IncrementalProjectBuilder.FULL_BUILD, monitor);
+			setAutoBuilding(workspace, autoBuild);
 		} catch (CoreException e) {
 			if (e.getStatus().getSeverity() == IStatus.ERROR) {
 				setStatus(e.getStatus());
@@ -501,34 +536,45 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 		monitor.done();
 	}
 
+	private void setAutoBuilding(IWorkspace workspace, boolean value)
+			throws CoreException {
+		IWorkspaceDescription d = workspace.getDescription();
+		d.setAutoBuilding(value);
+		workspace.setDescription(d);
+	}
+
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClasSupplierPackage.ARTIFACT__NAME:
-				return getName();
-			case ClasSupplierPackage.ARTIFACT__EPACKAGE:
-				if (resolve) return getEPackage();
-				return basicGetEPackage();
-			case ClasSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE:
-				if (resolve) return getPrototypeEPackage();
-				return basicGetPrototypeEPackage();
-			case ClasSupplierPackage.ARTIFACT__VERSION:
-				return getVersion();
-			case ClasSupplierPackage.ARTIFACT__PROJECT_NAME:
-				return getProjectName();
-			case ClasSupplierPackage.ARTIFACT__STATE:
-				return getState();
-			case ClasSupplierPackage.ARTIFACT__STATUS:
-				return getStatus();
-			case ClasSupplierPackage.ARTIFACT__LOADED_EPACKAGE:
-				if (resolve) return getLoadedEPackage();
-				return basicGetLoadedEPackage();
-			case ClasSupplierPackage.ARTIFACT__RESOURCE:
-				return getResource();
+		case ClasSupplierPackage.ARTIFACT__NAME:
+			return getName();
+		case ClasSupplierPackage.ARTIFACT__EPACKAGE:
+			if (resolve)
+				return getEPackage();
+			return basicGetEPackage();
+		case ClasSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE:
+			if (resolve)
+				return getPrototypeEPackage();
+			return basicGetPrototypeEPackage();
+		case ClasSupplierPackage.ARTIFACT__VERSION:
+			return getVersion();
+		case ClasSupplierPackage.ARTIFACT__PROJECT_NAME:
+			return getProjectName();
+		case ClasSupplierPackage.ARTIFACT__STATE:
+			return getState();
+		case ClasSupplierPackage.ARTIFACT__STATUS:
+			return getStatus();
+		case ClasSupplierPackage.ARTIFACT__LOADED_EPACKAGE:
+			if (resolve)
+				return getLoadedEPackage();
+			return basicGetLoadedEPackage();
+		case ClasSupplierPackage.ARTIFACT__RESOURCE:
+			return getResource();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -601,40 +647,48 @@ public class ArtifactImpl extends EObjectImpl implements Artifact {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClasSupplierPackage.ARTIFACT__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case ClasSupplierPackage.ARTIFACT__EPACKAGE:
-				return basicGetEPackage() != null;
-			case ClasSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE:
-				return prototypeEPackage != null;
-			case ClasSupplierPackage.ARTIFACT__VERSION:
-				return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
-			case ClasSupplierPackage.ARTIFACT__PROJECT_NAME:
-				return PROJECT_NAME_EDEFAULT == null ? projectName != null : !PROJECT_NAME_EDEFAULT.equals(projectName);
-			case ClasSupplierPackage.ARTIFACT__STATE:
-				return state != STATE_EDEFAULT;
-			case ClasSupplierPackage.ARTIFACT__STATUS:
-				return STATUS_EDEFAULT == null ? status != null : !STATUS_EDEFAULT.equals(status);
-			case ClasSupplierPackage.ARTIFACT__LOADED_EPACKAGE:
-				return loadedEPackage != null;
-			case ClasSupplierPackage.ARTIFACT__RESOURCE:
-				return RESOURCE_EDEFAULT == null ? resource != null : !RESOURCE_EDEFAULT.equals(resource);
+		case ClasSupplierPackage.ARTIFACT__NAME:
+			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT
+					.equals(name);
+		case ClasSupplierPackage.ARTIFACT__EPACKAGE:
+			return basicGetEPackage() != null;
+		case ClasSupplierPackage.ARTIFACT__PROTOTYPE_EPACKAGE:
+			return prototypeEPackage != null;
+		case ClasSupplierPackage.ARTIFACT__VERSION:
+			return VERSION_EDEFAULT == null ? version != null
+					: !VERSION_EDEFAULT.equals(version);
+		case ClasSupplierPackage.ARTIFACT__PROJECT_NAME:
+			return PROJECT_NAME_EDEFAULT == null ? projectName != null
+					: !PROJECT_NAME_EDEFAULT.equals(projectName);
+		case ClasSupplierPackage.ARTIFACT__STATE:
+			return state != STATE_EDEFAULT;
+		case ClasSupplierPackage.ARTIFACT__STATUS:
+			return STATUS_EDEFAULT == null ? status != null : !STATUS_EDEFAULT
+					.equals(status);
+		case ClasSupplierPackage.ARTIFACT__LOADED_EPACKAGE:
+			return loadedEPackage != null;
+		case ClasSupplierPackage.ARTIFACT__RESOURCE:
+			return RESOURCE_EDEFAULT == null ? resource != null
+					: !RESOURCE_EDEFAULT.equals(resource);
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy())
+			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
