@@ -1,17 +1,17 @@
 ClasSupplier
 ===========
 
-ClasSupplier is a Java library for producing the code that is available to be invoked programmatically.  
+ClasSupplier is a Java library for producing the code that is available for programmatical invocation.  
 
-Creation is achieved by the generation of Java source code, compiling, and loading it through OSGi framework.  
+The production occurs through the generation, and compiling of Java source code and loading it through OSGi framework.  
 
 
-Usage example:  
+Example:  
 
-    // Populate the model dynamic EPackage
-    EPackage blueprintEPackage = EcoreFactory.eINSTANCE.createEPackage();
+    // Fill the modeled dynamic EPackage
+    EPackage modelEPackage = EcoreFactory.eINSTANCE.createEPackage();
     ...
-    blueprintEPackage.setNsURI("http://library/1.0");
+    modelEPackage.setNsURI("http://library/1.0");
     EClass eClass = EcoreFactory.eINSTANCE.createEClass();
     eClass.setName("Book");
     EAttribute eAttr = EcoreFactory.eINSTANCE.createEAttribute();
@@ -20,7 +20,7 @@ Usage example:
     eClass.getEStructuralFeatures().add(eAttr);
     blueprintEPackage.getEClassifiers().add(eClass);
     ClasSupplier service = ... // acquire the ClasSupplier OSGi service
-    EPackage nativeEPackage = service.supply(blueprintEPackage); // Provide it to ClasSupplier to generate the EPackage...
+    EPackage nativeEPackage = service.supply(modelEPackage); // Provide it to ClasSupplier to generate the runtime EPackage...
     EClass jClass = (EClass) nativeEPackage.getEClassifier(eClass.getName()); // ... that you can use
     EObject jObject = nativeEPackage.getEFactoryInstance().create(jClass);
     int pages = 500;
