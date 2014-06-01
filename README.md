@@ -3,7 +3,7 @@ ClasSupplier
 
 ClasSupplier is a Java library for producing the code that is available for programmatical invocation.  
 
-The production occurs through the generation, and compiling of Java source code and loading it through OSGi framework.  
+The production performs the generation, and compiling of Java source code and loading it through OSGi framework.  
 
 
 Example:  
