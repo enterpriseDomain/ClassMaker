@@ -344,12 +344,12 @@ public class MavenExporter extends AbstractExporter {
 			newLine(builder);
 			builder.append("\t");
 			builder.append("<artifactId>");
-			builder.append(projectName + "\t");
+			builder.append(projectName);
 			builder.append("</artifactId>");
 			newLine(builder);
 			builder.append("\t");
 			builder.append("<version>");
-			builder.append(version + "\t");
+			builder.append(version);
 			builder.append("</version>");
 			newLine(builder);
 			builder.append("\t");

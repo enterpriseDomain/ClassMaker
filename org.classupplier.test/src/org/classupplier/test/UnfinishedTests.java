@@ -27,13 +27,14 @@ public class UnfinishedTests extends AbstractTests {
 		_package.getEClassifiers().add(metaClass);
 		EPackage result = service.supply(_package,
 				new CodeGenUtil.EclipseUtil.StreamProgressMonitor(System.out));
-		EClass resultClass = (EClass) result.getEClassifier(metaClass.getName());
+		EClass resultClass = (EClass) result
+				.getEClassifier(metaClass.getName());
+		EObject book = result.getEFactoryInstance().create(resultClass);
 		EAttribute resultAttribute = (EAttribute) resultClass
 				.getEStructuralFeature(attribute.getName());
-		EObject book = result.getEFactoryInstance().create(resultClass);
 		book.eSet(resultAttribute, "Text");
 		assertEquals("Text", book.eGet(resultAttribute));
 
 	}
-	
+
 }

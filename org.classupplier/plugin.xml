@@ -12,7 +12,7 @@
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://org/classupplier/0.7.4"
+            uri="http://org/classupplier/0.7.5"
             class="org.classupplier.ClasSupplierPackage"
             genModel="model/ClasSupplier.genmodel"/>
    </extension>

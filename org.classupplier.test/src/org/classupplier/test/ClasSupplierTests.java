@@ -100,12 +100,16 @@ public class ClasSupplierTests extends AbstractTests {
 	public void query() {
 		EcoreFactory ecoreFactory = EcoreFactory.eINSTANCE;
 		EPackage model = ecoreFactory.createEPackage();
-		model.setName("some");
-		model.setNsPrefix("some");
-		String nsURI = "http://some/1.0";
+		model.setName("something");
+		model.setNsPrefix("something");
+		String nsURI = "http://something/2.0";
 		model.setNsURI(nsURI);
 		EClass theClass = ecoreFactory.createEClass();
 		theClass.setName("Item");
+		EAttribute attr = ecoreFactory.createEAttribute();
+		attr.setName("name");
+		attr.setEType(EcorePackage.Literals.ESTRING);
+		theClass.getEStructuralFeatures().add(attr);
 		model.getEClassifiers().add(theClass);
 		service.supply(model);
 		IEObjectSource source = (IEObjectSource) service

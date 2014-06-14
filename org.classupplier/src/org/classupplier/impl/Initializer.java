@@ -37,47 +37,53 @@ public class Initializer implements IWorkspaceRunnable {
 
 	public Initializer(IProject project, Artifact artifact,
 			Infrastructure workspace) {
-		this.project = project;
-		this.artifact = (ArtifactImpl) artifact;
-		this.workspace = workspace;
+		this.setProject(project);
+		this.setArtifact((ArtifactImpl) artifact);
+		this.setWorkspace(workspace);
+
 	}
 
 	@Override
 	public void run(IProgressMonitor monitor) throws CoreException {
-		IFolder folder = project.getFolder(ResourceHelper.getModelFolderName());
+		IFolder folder = getProject().getFolder(
+				ResourceHelper.getModelFolderName());
 		if (!folder.exists())
-			throw new CoreException(
-					new Status(Status.WARNING, OSGi.PLUGIN_ID, NLS.bind(
-							"Domain project {0} has no model folder.", project)));
+			throw new CoreException(new Status(Status.WARNING, OSGi.PLUGIN_ID,
+					NLS.bind("Domain project {0} has no model folder.",
+							getProject())));
 		try {
-			for (IResource resource : project.getFolder(
+			for (IResource resource : getProject().getFolder(
 					ResourceHelper.getModelFolderName()).members())
-				if (resource.getFileExtension().equals(ResourceHelper.getFileExt()))
-					artifact.setName(resource.getLocation()
-							.removeFileExtension().lastSegment());
+				if (resource.getFileExtension().equals(
+						ResourceHelper.getFileExt()))
+					getArtifact().setName(
+							resource.getLocation().removeFileExtension()
+									.lastSegment());
 		} catch (CoreException e) {
 			throw new CoreException(new Status(Status.WARNING, OSGi.PLUGIN_ID,
-					NLS.bind("Model for project {0} doesn't exist.", project)));
+					NLS.bind("Model for project {0} doesn't exist.",
+							getProject())));
 		}
-		IPath modelPath = ResourceHelper.getModelResourcePath(project, workspace);
+		IPath modelPath = ResourceHelper.getModelResourcePath(getProject(),
+				getWorkspace());
 		URI modelURI = URI
 				.createPlatformResourceURI(modelPath.toString(), true);
-		ResourceSet resourceSet = workspace.getResourceSet();
+		ResourceSet resourceSet = getWorkspace().getResourceSet();
 		Resource resource = resourceSet.getResource(modelURI, true);
-		if (resource != null && artifact.getState().equals(State.CREATED)) {
+		if (resource != null && getArtifact().getState().equals(State.CREATED)) {
 			if (resource.getContents().isEmpty()) {
-				artifact.setState(State.CREATED);
+				getArtifact().setState(State.CREATED);
 				return;
 			}
 
 			EPackage value = (EPackage) EcoreUtil.copy(resource.getContents()
 					.get(0));
-			artifact.setName(modelURI.trimFileExtension().lastSegment());
-			artifact.setPrototypeEPackage(value);
-			artifact.setState(State.PROTOTYPE);
+			getArtifact().setName(modelURI.trimFileExtension().lastSegment());
+			getArtifact().setPrototypeEPackage(value);
+			getArtifact().setState(State.PROTOTYPE);
 		}
-		IPath path = project.getLocation().append("target")
-				.append(ResourceHelper.getJarName(artifact))
+		IPath path = getProject().getLocation().append("target")
+				.append(ResourceHelper.getJarName(getArtifact()))
 				.addFileExtension("jar");
 		if (!path.toFile().exists())
 			return;
@@ -93,19 +99,44 @@ public class Initializer implements IWorkspaceRunnable {
 			if (frameworkWiring.resolveBundles(bundles)) {
 				Version version = new Version(osgiBundle.getHeaders().get(
 						Constants.BUNDLE_VERSION));
-				artifact.setVersion(version);
+				getArtifact().setVersion(version);
 
-				String packageClassName = artifact.getPrototypeEPackage()
-						.getName() + "." + artifact.getName() + "Package";
+				String packageClassName = getArtifact().getPrototypeEPackage()
+						.getName() + "." + getArtifact().getName() + "Package";
 
 				Class<?> packageClass = osgiBundle.loadClass(packageClassName);
 				EPackage ePackage = (EPackage) packageClass.getField(
 						"eINSTANCE").get(packageClass);
 
-				artifact.setLoadedEPackage(ePackage);
-				artifact.setState(State.COMPLETE);
+				getArtifact().setLoadedEPackage(ePackage);
+				getArtifact().setState(State.COMPLETE);
 			}
 		} catch (Exception e) {
 		}
 	}
+
+	public IProject getProject() {
+		return project;
+	}
+
+	public void setProject(IProject project) {
+		this.project = project;
+	}
+
+	public ArtifactImpl getArtifact() {
+		return artifact;
+	}
+
+	public void setArtifact(ArtifactImpl artifact) {
+		this.artifact = artifact;
+	}
+
+	public Infrastructure getWorkspace() {
+		return workspace;
+	}
+
+	public void setWorkspace(Infrastructure workspace) {
+		this.workspace = workspace;
+	}
+
 }
