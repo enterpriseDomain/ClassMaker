@@ -18,7 +18,7 @@ Example:
     eAttr.setName("pages");
     eAttr.setEType(EcorePackage.Literals.EINT);
     eClass.getEStructuralFeatures().add(eAttr);
-    blueprintEPackage.getEClassifiers().add(eClass);
+    modelEPackage.getEClassifiers().add(eClass);
     ClasSupplier service = ... // acquire the ClasSupplier OSGi service
     EPackage nativeEPackage = service.supply(modelEPackage); // Provide it to ClasSupplier to generate the runtime EPackage...
     EClass jClass = (EClass) nativeEPackage.getEClassifier(eClass.getName()); // ... that you can use
