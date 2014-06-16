@@ -29,11 +29,11 @@ public class Invoker implements Runnable {
 	}
 
 	public void run() {
-		for (Object o : EPackage.Registry.INSTANCE.values()) {
-			if (o instanceof EPackage.Descriptor)
-				System.out.println(((EPackage.Descriptor) o).getEPackage()
-						.toString());
-		}
+//		for (Object o : EPackage.Registry.INSTANCE.values()) {
+//			if (o instanceof EPackage.Descriptor)
+//				System.out.println(((EPackage.Descriptor) o).getEPackage()
+//						.toString());
+//		}
 		EPackage p = EcoreFactory.eINSTANCE.createEPackage();
 		// one letter 'h' doesn't work
 		p.setName("ho");
