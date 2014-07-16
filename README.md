@@ -21,7 +21,7 @@ Example:
     eClass.getEStructuralFeatures().add(eAttr);
     modelEPackage.getEClassifiers().add(eClass);
 
-    // acquire the ClasSupplier OSGi service
+    // Acquire the ClasSupplier OSGi service
     BundleContext bundleContext = FrameworkUtil.getBundle(this.getClass())
                                 .getBundleContext();
     ServiceReference<?> serviceReference = bundleContext
