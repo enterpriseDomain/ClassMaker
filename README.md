@@ -20,7 +20,7 @@ Example:
     eClass.getEStructuralFeatures().add(eAttr);
     modelEPackage.getEClassifiers().add(eClass);
     ClasSupplier service = ... // acquire the ClasSupplier OSGi service
-    EPackage nativeEPackage = service.supply(modelEPackage); // Provide it to ClasSupplier to generate the runtime EPackage...
+    EPackage nativeEPackage = service.supply(modelEPackage); // Provide it to ClasSupplier to generate the runtime...
     EClass jClass = (EClass) nativeEPackage.getEClassifier(eClass.getName()); // ... that you can use
     EObject jObject = nativeEPackage.getEFactoryInstance().create(jClass);
     int pages = 500;
