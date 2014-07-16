@@ -30,7 +30,7 @@ Example:
                                  .getService(serviceReference);
     // Provide EPackage to ClasSupplier service to generate the runtime
     EPackage nativeEPackage = service.supply(modelEPackage); 
-
+    // And use it
     EClass jClass = (EClass) nativeEPackage.getEClassifier(eClass.getName());
     EObject jObject = nativeEPackage.getEFactoryInstance().create(jClass); 
     int pages = 500;
