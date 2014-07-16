@@ -3,7 +3,7 @@ ClasSupplier
 
 ClasSupplier is a Java library for producing the code programmatically.  
 
-Production means generation, building and loading client-defined classes.  
+'Producing' means generation, building and loading client-defined classes.  
 
 
 Example:  
@@ -42,6 +42,6 @@ Example:
   
 [Full example here](/org.classupplier.test/src/org/classupplier/test/ClasSupplierTests.java).  
 
-To use the library, [download it](https://github.com/kirillzotkin/ClasSupplier/releases), add to the target platform  satisfying subsequent dependencies (p2 TBD), and to your plug-in's dependencies. E4 DI is supported.
+To use the library, [download](https://github.com/kirillzotkin/ClasSupplier/releases) it, add to the target platform  satisfying subsequent dependencies (p2 TBD), and add to your plug-in's dependencies. E4 DI is supported.
 
 See also [wiki](https://github.com/kirillzotkin/ClasSupplier/wiki).
