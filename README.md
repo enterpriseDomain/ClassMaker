@@ -8,7 +8,7 @@ ClasSupplier is a Java library for producing the code programmatically.
 
 Example:  
 
-    // Fill the modeled dynamic EPackage
+    // Fill the modeled EPackage
     EPackage modelEPackage = EcoreFactory.eINSTANCE.createEPackage();
     modelEPackage.setName("library");
     modelEPackage.setNsPrefix("library");
@@ -28,9 +28,9 @@ Example:
                               .getServiceReference(ClasSupplier.class.getName());
     ClasSupplier service = (ClasSupplier) bundleContext
                                  .getService(serviceReference);
-    // Provide EPackage to ClasSupplier service to generate the runtime
+    // Provide EPackage to ClasSupplier to generate the runtime
     EPackage nativeEPackage = service.supply(modelEPackage); 
-    // And use it
+    // That you can use 
     EClass jClass = (EClass) nativeEPackage.getEClassifier(eClass.getName());
     EObject jObject = nativeEPackage.getEFactoryInstance().create(jClass); 
     int pages = 500;
@@ -42,6 +42,11 @@ Example:
   
 [Full example here](/org.classupplier.test/src/org/classupplier/test/ClasSupplierTests.java).  
 
-To use the library, [download](https://github.com/kirillzotkin/ClasSupplier/releases) it, add to the target platform  satisfying subsequent dependencies (p2 TBD), and add to your plug-in's dependencies. E4 DI is supported.
+To make use of ClasSupplier 
+
+1.  [Download](https://github.com/kirillzotkin/ClasSupplier/releases) it
+2.  Add it to the target platform satisfying subsequent dependencies (p2 TBD :-)
+3.  Add it to your plug-in's dependencies
+4.  write code similar to above. E4 DI is supported.
 
 See also [wiki](https://github.com/kirillzotkin/ClasSupplier/wiki).
