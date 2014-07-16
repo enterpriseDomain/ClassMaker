@@ -42,7 +42,7 @@ Example:
   
 [Full example here](/org.classupplier.test/src/org/classupplier/test/ClasSupplierTests.java).  
 
-To make use of ClasSupplier 
+To make use of ClasSupplier
 
 1.  [Download](https://github.com/kirillzotkin/ClasSupplier/releases) it
 2.  Add it to the target platform satisfying subsequent dependencies (p2 TBD ;-)
