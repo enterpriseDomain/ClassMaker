@@ -47,6 +47,6 @@ To make use of ClasSupplier
 1.  [Download](https://github.com/kirillzotkin/ClasSupplier/releases) it
 2.  Add it to the target platform satisfying subsequent dependencies (p2 TBD ;-)
 3.  Add it to your plug-in's dependencies
-4.  write code similar to above. E4 DI is supported.
+4.  Write code similar to above. E4 DI is supported.
 
 See also [wiki](https://github.com/kirillzotkin/ClasSupplier/wiki).
