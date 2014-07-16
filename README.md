@@ -10,7 +10,8 @@ Example:
 
     // Fill the modeled dynamic EPackage
     EPackage modelEPackage = EcoreFactory.eINSTANCE.createEPackage();
-    ...
+    ePackage.setName("library");
+    ePackage.setNsPrefix("library");
     modelEPackage.setNsURI("http://library/1.0");
     EClass eClass = EcoreFactory.eINSTANCE.createEClass();
     eClass.setName("Book");
