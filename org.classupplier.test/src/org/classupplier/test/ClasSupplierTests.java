@@ -8,6 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Iterator;
 
+import org.classupplier.ClasSupplier;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -25,16 +26,16 @@ import org.eclipse.emf.query.statements.IQueryResult;
 import org.eclipse.emf.query.statements.SELECT;
 import org.eclipse.emf.query.statements.WHERE;
 import org.junit.Test;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.FrameworkUtil;
+import org.osgi.framework.ServiceReference;
 
 public class ClasSupplierTests extends AbstractTests {
 
 	@Test
-	public void creationOfClass() {
+	public void creationOfTheClass() {
 		EcoreFactory ecoreFactory = EcoreFactory.eINSTANCE;
-		EPackage ePackage = ecoreFactory.createEPackage();
-		ePackage.setName("reader");
-		ePackage.setNsPrefix("reader");
-		ePackage.setNsURI("http://reader/1.0");
+		EPackage ePackage = createEPackage("reader", "1.0");
 		EClass eClass = ecoreFactory.createEClass();
 		eClass.setName("Book");
 		EAttribute pageAttr = ecoreFactory.createEAttribute();
@@ -99,11 +100,8 @@ public class ClasSupplierTests extends AbstractTests {
 	@Test
 	public void query() {
 		EcoreFactory ecoreFactory = EcoreFactory.eINSTANCE;
-		EPackage model = ecoreFactory.createEPackage();
-		model.setName("something");
-		model.setNsPrefix("something");
-		String nsURI = "http://something/2.0";
-		model.setNsURI(nsURI);
+		EPackage model = createEPackage("something", "2.0");
+		String nsURI = model.getNsURI();
 		EClass theClass = ecoreFactory.createEClass();
 		theClass.setName("Item");
 		EAttribute attr = ecoreFactory.createEAttribute();
@@ -131,4 +129,23 @@ public class ClasSupplierTests extends AbstractTests {
 		}
 	}
 
+	@Test
+	public void osgiService() {
+		BundleContext bundleContext = FrameworkUtil.getBundle(this.getClass())
+				.getBundleContext();
+		ServiceReference<?> serviceReference = bundleContext
+				.getServiceReference(ClasSupplier.class.getName());
+		ClasSupplier tested = (ClasSupplier) bundleContext
+				.getService(serviceReference);
+		assertNotNull(tested);
+		EPackage ePackage = createEPackage("anything", "0.0");
+		EClass eClass = EcoreFactory.eINSTANCE.createEClass();
+		String className = "Being";
+		eClass.setName(className);
+		ePackage.getEClassifiers().add(eClass);
+		EPackage resultPackage = tested.supply(ePackage);
+		EObject result = resultPackage.getEFactoryInstance().create(
+				(EClass) resultPackage.getEClassifier(className));
+		assertEquals(className, result.getClass().getSimpleName());
+	}
 }

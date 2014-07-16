@@ -16,8 +16,7 @@ public class UnfinishedTests extends AbstractTests {
 	@Test
 	public void metaModel() {
 		EcoreFactory factory = EcoreFactory.eINSTANCE;
-		EPackage _package = factory.createEPackage();
-		_package.setName("meta");
+		EPackage _package = createEPackage("meta", "");
 		EClass metaClass = factory.createEClass();
 		metaClass.setName("MetaObject");
 		EAttribute attribute = factory.createEAttribute();
