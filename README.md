@@ -3,7 +3,7 @@ ClasSupplier
 
 ClasSupplier is a Java library for producing the code programmatically.  
 
-'Producing' means generation, building and loading client-defined classes.  
+It calls generation, building and loading of classes defined by client's model.  
 
 
 Example:  
@@ -20,7 +20,6 @@ Example:
     eAttr.setEType(EcorePackage.Literals.EINT);
     eClass.getEStructuralFeatures().add(eAttr);
     modelEPackage.getEClassifiers().add(eClass);
-
     // Acquire the ClasSupplier OSGi service
     BundleContext bundleContext = FrameworkUtil.getBundle(this.getClass())
                                 .getBundleContext();
@@ -30,7 +29,7 @@ Example:
                                  .getService(serviceReference);
     // Provide EPackage to ClasSupplier to generate the runtime
     EPackage nativeEPackage = service.supply(modelEPackage); 
-    // That you can use 
+    // Use it
     EClass jClass = (EClass) nativeEPackage.getEClassifier(eClass.getName());
     EObject jObject = nativeEPackage.getEFactoryInstance().create(jClass); 
     int pages = 500;
