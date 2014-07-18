@@ -140,10 +140,19 @@ public class ClasSupplierTests extends AbstractTests {
 		assertNotNull(tested);
 		EPackage ePackage = createEPackage("anything", "0.0");
 		EClass eClass = EcoreFactory.eINSTANCE.createEClass();
-		String className = "Being";
-		eClass.setName(className);
+		String className0 = "Being";
+		eClass.setName(className0);
+		String className1 = "Nothing";
+		ePackage.getEClassifiers().add(eClass);
+		eClass = EcoreFactory.eINSTANCE.createEClass();
+		eClass.setName(className1);
 		ePackage.getEClassifiers().add(eClass);
 		EPackage resultPackage = tested.supply(ePackage);
+		assertObjectClass(className0, resultPackage);
+		assertObjectClass(className1, resultPackage);		
+	}
+
+	private void assertObjectClass(String className, EPackage resultPackage) {
 		EObject result = resultPackage.getEFactoryInstance().create(
 				(EClass) resultPackage.getEClassifier(className));
 		assertEquals(className, result.getClass().getSimpleName());
