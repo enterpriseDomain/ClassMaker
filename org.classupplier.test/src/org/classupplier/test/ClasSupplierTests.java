@@ -122,9 +122,13 @@ public class ClasSupplierTests extends AbstractTests {
 			EObject o = i.next();
 			if (o instanceof EPackage) {
 				EPackage p = (EPackage) o;
-				if (p.getNsURI().equals(nsURI))
-					assertEquals(theClass.getName(),
-							p.getEClassifier(theClass.getName()).getName());
+				if (p.getNsURI().equals(nsURI)) {
+					EClass jClass = (EClass) p.getEClassifier(theClass
+							.getName());
+					EObject obj = p.getEFactoryInstance().create(jClass);
+					assertEquals(theClass.getName(), obj.getClass()
+							.getSimpleName());
+				}
 			}
 		}
 	}
@@ -149,7 +153,7 @@ public class ClasSupplierTests extends AbstractTests {
 		ePackage.getEClassifiers().add(eClass);
 		EPackage resultPackage = tested.supply(ePackage);
 		assertObjectClass(className0, resultPackage);
-		assertObjectClass(className1, resultPackage);		
+		assertObjectClass(className1, resultPackage);
 	}
 
 	private void assertObjectClass(String className, EPackage resultPackage) {
