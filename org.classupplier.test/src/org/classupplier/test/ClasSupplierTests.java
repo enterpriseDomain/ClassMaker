@@ -19,8 +19,9 @@ import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.query.conditions.eobjects.EObjectCondition;
 import org.eclipse.emf.query.conditions.eobjects.IEObjectSource;
+import org.eclipse.emf.query.conditions.eobjects.structuralfeatures.EObjectAttributeValueCondition;
+import org.eclipse.emf.query.conditions.strings.StringValue;
 import org.eclipse.emf.query.statements.FROM;
 import org.eclipse.emf.query.statements.IQueryResult;
 import org.eclipse.emf.query.statements.SELECT;
@@ -114,7 +115,9 @@ public class ClasSupplierTests extends AbstractTests {
 				.getAdapter(IEObjectSource.class);
 
 		SELECT select = new SELECT(new FROM(source), new WHERE(
-				EObjectCondition.E_TRUE));
+				new EObjectAttributeValueCondition(
+						EcorePackage.Literals.EPACKAGE__NS_URI,
+						new StringValue(nsURI))));
 		IQueryResult result;
 		result = select.execute();
 		Iterator<? extends EObject> i = result.getEObjects().iterator();
