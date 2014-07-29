@@ -124,14 +124,10 @@ public class ClasSupplierTests extends AbstractTests {
 		while (i.hasNext()) {
 			EObject o = i.next();
 			if (o instanceof EPackage) {
-				EPackage p = (EPackage) o;
-				if (p.getNsURI().equals(nsURI)) {
-					EClass jClass = (EClass) p.getEClassifier(theClass
-							.getName());
-					EObject obj = p.getEFactoryInstance().create(jClass);
-					assertEquals(theClass.getName(), obj.getClass()
-							.getSimpleName());
-				}
+				EPackage jPackage = (EPackage) o;
+				EClass jClass = (EClass) jPackage.getEClassifier(theClass.getName());
+				EObject obj = jPackage.getEFactoryInstance().create(jClass);
+				assertEquals(theClass.getName(), obj.getClass().getSimpleName());
 			}
 		}
 	}
