@@ -2,7 +2,7 @@ package org.classupplier.incore;
 
 import javax.inject.Inject;
 
-import org.classupplier.ClasSupplier;
+import org.classupplier.ClassSupplier;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.EclipseContextFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
@@ -16,11 +16,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 public class Invoker implements Runnable {
 
 	@Inject
-	private ClasSupplier supplier;
-
-	public Invoker() {
-		prepare();
-	}
+	private ClassSupplier supplier;
 
 	private void prepare() {
 		IEclipseContext context = EclipseContextFactory
@@ -29,13 +25,9 @@ public class Invoker implements Runnable {
 	}
 
 	public void run() {
-//		for (Object o : EPackage.Registry.INSTANCE.values()) {
-//			if (o instanceof EPackage.Descriptor)
-//				System.out.println(((EPackage.Descriptor) o).getEPackage()
-//						.toString());
-//		}
+		prepare();
 		EPackage p = EcoreFactory.eINSTANCE.createEPackage();
-		// one letter 'h' doesn't work
+		// XXX one letter 'h' doesn't work
 		p.setName("ho");
 		p.setNsPrefix("ho");
 		p.setNsURI("http://ho/0.1");
