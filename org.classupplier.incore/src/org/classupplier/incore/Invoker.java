@@ -2,7 +2,7 @@ package org.classupplier.incore;
 
 import javax.inject.Inject;
 
-import org.classupplier.ClassSupplier;
+import org.classupplier.ClasSupplier;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.EclipseContextFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
