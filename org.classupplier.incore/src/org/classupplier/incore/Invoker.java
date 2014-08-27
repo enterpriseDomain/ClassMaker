@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 public class Invoker implements Runnable {
 
 	@Inject
-	private ClassSupplier supplier;
+	private ClasSupplier supplier;
 
 	private void prepare() {
 		IEclipseContext context = EclipseContextFactory
