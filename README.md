@@ -1,14 +1,14 @@
-ClasSupplier
+ClassSupplier
 ===========
 
-ClasSupplier is a Java library for producing code programmatically.  
+ClassSupplier is a Java library for making code programmatically.  
 
-It invokes generation, building and loading of classes defined by client-provided model.  
+It invokes generator, builds and loads Java classes that defined in user-provided EMF model.  
 
 
 Example:  
 
-    // Fill the modeled EPackage
+    // Model EPackage
     EPackage modelEPackage = EcoreFactory.eINSTANCE.createEPackage();
     modelEPackage.setName("library");
     modelEPackage.setNsPrefix("library");
@@ -20,16 +20,16 @@ Example:
     eAttr.setEType(EcorePackage.Literals.EINT);
     eClass.getEStructuralFeatures().add(eAttr);
     modelEPackage.getEClassifiers().add(eClass);
-    // Acquire the ClasSupplier OSGi service
+    // Acquire ClassSupplier service
     BundleContext bundleContext = FrameworkUtil.getBundle(this.getClass())
                                 .getBundleContext();
     ServiceReference<?> serviceReference = bundleContext
-                              .getServiceReference(ClasSupplier.class.getName());
-    ClasSupplier service = (ClasSupplier) bundleContext
+                              .getServiceReference(ClassSupplier.class);
+    ClassSupplier classSupplier = (ClassSupplier) bundleContext
                                  .getService(serviceReference);
-    // Provide EPackage to ClasSupplier to generate the runtime
-    EPackage nativeEPackage = service.supply(modelEPackage); 
-    // Use it
+    // Combine them
+    EPackage nativeEPackage = classSupplier.supply(modelEPackage); 
+    // Use the runtime
     EClass jClass = (EClass) nativeEPackage.getEClassifier(eClass.getName());
     EObject jObject = nativeEPackage.getEFactoryInstance().create(jClass); 
     int pages = 500;
@@ -37,15 +37,15 @@ Example:
                 .getName());
     jObject.eSet(jAttr, pages);
     assertEquals(pages, jObject.eGet(jAttr));
-    assertEquals(eClass.getName(), jObject.getClass().getSimpleName());
-  
-[Full example here](/org.classupplier.test/src/org/classupplier/test/ClasSupplierTests.java).  
+    assertEquals(eClass.getName(), jObject.getClass().getSimpleName());  
 
-To make use of ClasSupplier
+Example is [here](/org.classupplier.test/src/org/classupplier/test/ClassSupplierTests.java).  
 
-1.  [Download](https://github.com/kirillzotkin/ClasSupplier/releases) it
-2.  Add it to the target platform satisfying subsequent dependencies (p2 TBD ;-)
+To make use of ClassSupplier
+
+1.  [Download](https://github.com/kirillzotkin/ClassSupplier/releases) it
+2.  Add it to the target platform satisfying subsequent dependencies
 3.  Add it to your plug-in's dependencies
 4.  Write code similar to the above. E4 DI is supported.
 
-See also [wiki](https://github.com/kirillzotkin/ClasSupplier/wiki).
+See [wiki](https://github.com/kirillzotkin/ClassSupplier/wiki) also.

@@ -4,17 +4,19 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.osgi.framework.Version;
 
 public interface Exporter {
 
-	void export(IProject project, IProgressMonitor monitor) throws CoreException;
+	void export(IProject project, IProgressMonitor monitor)
+			throws CoreException;
 
-	IPath getDestination();
+	IPath getExportDestination();
 
-	void setDestination(IPath path);
+	void setExportDestination(IPath path);
 
-	String getVersion();
+	Version getVersion();
 
-	void setVersion(String version);
+	void setVersion(Version version);
 
 }

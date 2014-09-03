@@ -18,22 +18,22 @@ public class MavenExporter extends AbstractExporter {
 
 		ClassWorld classWorld = new ClassWorld("plexus.core", getClass()
 				.getClassLoader());
-		MavenCli.doMain(new String[] {
-				"-e",
+		MavenCli.doMain(new String[] { "-e",
 				"clean",
 				"package",
 				"-f" + pomPath().toString(),
 				"-X",
+				// "-DforceContextQualifier=" + getVersion().getQualifier(),
 				"-Dtycho.targetPlatform="
 						+ Platform.getInstallLocation().getURL().getPath()
 								.toString() }, classWorld);
-
 	}
 
 	private void createBuildFiles(String projectName) throws CoreException {
 		POMTemplates templates = new POMTemplates();
 		writeFile(parentPomPath(), templates.parentPom());
-		writeFile(pomPath(), templates.pom(projectName, getVersion()));
+		writeFile(pomPath(),
+				templates.pom(projectName, getVersion().toString()));
 	}
 
 	private IPath parentPomPath() {
@@ -152,6 +152,13 @@ public class MavenExporter extends AbstractExporter {
 			builder.append("\t\t\t\t");
 			builder.append("<version>${tycho-version}</version>");
 			newLine(builder);
+			/*
+			 * builder.append("\t\t\t\t"); builder.append("<configuration>");
+			 * newLine(builder); builder.append("\t\t\t\t\t");
+			 * builder.append("<format>yyyyMMddHHmm</format>");
+			 * newLine(builder); builder.append("\t\t\t\t");
+			 * builder.append("</configuration>"); newLine(builder);
+			 */
 			builder.append("\t\t\t\t");
 			builder.append("<extensions>true</extensions>");
 			newLine(builder);

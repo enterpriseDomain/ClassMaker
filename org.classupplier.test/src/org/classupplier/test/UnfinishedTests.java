@@ -1,6 +1,7 @@
 package org.classupplier.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.ecore.EAttribute;
@@ -26,6 +27,7 @@ public class UnfinishedTests extends AbstractTests {
 		_package.getEClassifiers().add(metaClass);
 		EPackage result = service.supply(_package,
 				new CodeGenUtil.EclipseUtil.StreamProgressMonitor(System.out));
+		assertNotNull(result);
 		EClass resultClass = (EClass) result
 				.getEClassifier(metaClass.getName());
 		EObject book = result.getEFactoryInstance().create(resultClass);

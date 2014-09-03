@@ -1,18 +1,18 @@
 package org.classupplier.query;
 
-import org.classupplier.ClasSupplier;
+import org.classupplier.ClassSupplier;
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.emf.query.conditions.eobjects.IEObjectSource;
 
-public class ClasSupplierAdapterFactory implements IAdapterFactory {
+public class ClassSupplierAdapterFactory implements IAdapterFactory {
 
 	@SuppressWarnings("rawtypes")
 	@Override
 	public Object getAdapter(Object adaptableObject, Class adapterType) {
 		if (IEObjectSource.class.isAssignableFrom(adapterType)
-				&& adaptableObject instanceof ClasSupplier)
+				&& adaptableObject instanceof ClassSupplier)
 			return new LoadedObjectSource(
-					((ClasSupplier) adaptableObject).getWorkspace());
+					((ClassSupplier) adaptableObject).getWorkspace());
 		return null;
 	}
 

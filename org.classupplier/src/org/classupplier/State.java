@@ -2,257 +2,251 @@
  */
 package org.classupplier;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.Date;
 
-import org.eclipse.emf.common.util.Enumerator;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.util.FeatureMap;
+import org.osgi.framework.Version;
 
 /**
- * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>State</b></em>',
- * and utility methods for working with them.
- * <!-- end-user-doc -->
- * @see org.classupplier.ClasSupplierPackage#getState()
+ * <!-- begin-user-doc --> A representation of the model object '
+ * <em><b>State</b></em>'. <!-- end-user-doc -->
+ *
+ * <p>
+ * The following features are supported:
+ * <ul>
+ *   <li>{@link org.classupplier.State#getName <em>Name</em>}</li>
+ *   <li>{@link org.classupplier.State#getTime <em>Time</em>}</li>
+ *   <li>{@link org.classupplier.State#getVersion <em>Version</em>}</li>
+ *   <li>{@link org.classupplier.State#getStage <em>Stage</em>}</li>
+ *   <li>{@link org.classupplier.State#getPrototypeEPackage <em>Prototype EPackage</em>}</li>
+ *   <li>{@link org.classupplier.State#getLoadedEPackage <em>Loaded EPackage</em>}</li>
+ *   <li>{@link org.classupplier.State#getProjectName <em>Project Name</em>}</li>
+ *   <li>{@link org.classupplier.State#getEPackage <em>EPackage</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @see org.classupplier.ClassSupplierPackage#getState()
  * @model
  * @generated
  */
-public enum State implements Enumerator {
+public interface State extends EObject {
 	/**
-   * The '<em><b>CREATED</b></em>' literal object.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @see #CREATED_VALUE
-   * @generated
-   * @ordered
-   */
-	CREATED(0, "CREATED", "CREATED"),
-
-	/**
-   * The '<em><b>PROTOTYPE</b></em>' literal object.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @see #PROTOTYPE_VALUE
-   * @generated
-   * @ordered
-   */
-	PROTOTYPE(1, "PROTOTYPE", "PROTOTYPE"), /**
-   * The '<em><b>PROCESSING</b></em>' literal object.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @see #PROCESSING_VALUE
-   * @generated
-   * @ordered
-   */
-	PROCESSING(2, "PROCESSING", "PROCESSING"), /**
-   * The '<em><b>COMPLETE</b></em>' literal object.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @see #COMPLETE_VALUE
-   * @generated
-   * @ordered
-   */
-	COMPLETE(3, "COMPLETE", "COMPLETE");
-
-	/**
-   * The '<em><b>CREATED</b></em>' literal value.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Name</b></em>' attribute. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>CREATED</b></em>' literal object isn't clear,
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear, there really
+	 * should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see org.classupplier.ClassSupplierPackage#getState_Name()
+	 * @model
+	 * @generated
+	 */
+	String getName();
+
+	/**
+	 * Sets the value of the '{@link org.classupplier.State#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
+	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Time</b></em>' attribute. <!--
+	 * begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Time</em>' attribute isn't clear, there really
+	 * should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Time</em>' attribute.
+	 * @see #setTime(Date)
+	 * @see org.classupplier.ClassSupplierPackage#getState_Time()
+	 * @model
+	 * @generated
+	 */
+	Date getTime();
+
+	/**
+	 * Sets the value of the '{@link org.classupplier.State#getTime <em>Time</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Time</em>' attribute.
+	 * @see #getTime()
+	 * @generated
+	 */
+	void setTime(Date value);
+
+	/**
+	 * Returns the value of the '<em><b>Version</b></em>' attribute. <!--
+	 * begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Version</em>' attribute isn't clear, there
+	 * really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Version</em>' attribute.
+	 * @see #setVersion(Version)
+	 * @see org.classupplier.ClassSupplierPackage#getState_Version()
+	 * @model dataType="org.classupplier.Version"
+	 * @generated
+	 */
+	Version getVersion();
+
+	/**
+	 * Sets the value of the '{@link org.classupplier.State#getVersion
+	 * <em>Version</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Version</em>' attribute.
+	 * @see #getVersion()
+	 * @generated
+	 */
+	void setVersion(Version value);
+
+	/**
+	 * Returns the value of the '<em><b>Prototype EPackage</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Prototype EPackage</em>' reference isn't
+	 * clear, there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Prototype EPackage</em>' containment reference.
+	 * @see #setPrototypeEPackage(EPackage)
+	 * @see org.classupplier.ClassSupplierPackage#getState_PrototypeEPackage()
+	 * @model containment="true" transient="true" volatile="true" derived="true"
+	 *        extendedMetaData="group='#ePackage'"
+	 * @generated
+	 */
+	EPackage getPrototypeEPackage();
+
+	/**
+	 * Sets the value of the '{@link org.classupplier.State#getPrototypeEPackage <em>Prototype EPackage</em>}' containment reference.
+	 * <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Prototype EPackage</em>' containment reference.
+	 * @see #getPrototypeEPackage()
+	 * @generated
+	 */
+	void setPrototypeEPackage(EPackage value);
+
+	/**
+	 * Returns the value of the '<em><b>Loaded EPackage</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Loaded EPackage</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-   * @see #CREATED
-   * @model
-   * @generated
-   * @ordered
-   */
-	public static final int CREATED_VALUE = 0;
+	 * @return the value of the '<em>Loaded EPackage</em>' containment reference.
+	 * @see #setLoadedEPackage(EPackage)
+	 * @see org.classupplier.ClassSupplierPackage#getState_LoadedEPackage()
+	 * @model containment="true" transient="true" volatile="true" derived="true"
+	 *        extendedMetaData="group='#ePackage'"
+	 * @generated
+	 */
+	EPackage getLoadedEPackage();
 
 	/**
-   * The '<em><b>PROTOTYPE</b></em>' literal value.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.classupplier.State#getLoadedEPackage <em>Loaded EPackage</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Loaded EPackage</em>' containment reference.
+	 * @see #getLoadedEPackage()
+	 * @generated
+	 */
+	void setLoadedEPackage(EPackage value);
+
+	/**
+	 * Returns the value of the '<em><b>Project Name</b></em>' attribute.
+	 * The default value is <code>""</code>.
+	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>PROTOTYPE</b></em>' literal object isn't clear,
+	 * If the meaning of the '<em>Project Name</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-   * @see #PROTOTYPE
-   * @model
-   * @generated
-   * @ordered
-   */
-	public static final int PROTOTYPE_VALUE = 1;
+	 * @return the value of the '<em>Project Name</em>' attribute.
+	 * @see #setProjectName(String)
+	 * @see org.classupplier.ClassSupplierPackage#getState_ProjectName()
+	 * @model default=""
+	 * @generated
+	 */
+	String getProjectName();
 
 	/**
-   * The '<em><b>PROCESSING</b></em>' literal value.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.classupplier.State#getProjectName <em>Project Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @param value the new value of the '<em>Project Name</em>' attribute.
+	 * @see #getProjectName()
+	 * @generated
+	 */
+	void setProjectName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>EPackage</b></em>' attribute list.
+	 * The list contents are of type {@link org.eclipse.emf.ecore.util.FeatureMap.Entry}.
+	 * <!-- begin-user-doc
+	 * -->
 	 * <p>
-	 * If the meaning of '<em><b>PROCESSING</b></em>' literal object isn't clear,
+	 * If the meaning of the '<em>EPackage</em>' attribute list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-   * @see #PROCESSING
-   * @model
-   * @generated
-   * @ordered
-   */
-	public static final int PROCESSING_VALUE = 2;
+	 * @return the value of the '<em>EPackage</em>' attribute list.
+	 * @see org.classupplier.ClassSupplierPackage#getState_EPackage()
+	 * @model dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="false" transient="true"
+	 *        extendedMetaData="kind='group'"
+	 * @generated
+	 */
+	FeatureMap getEPackage();
 
 	/**
-   * The '<em><b>COMPLETE</b></em>' literal value.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Stage</b></em>' attribute.
+	 * The default value is <code>""</code>.
+	 * The literals are from the enumeration {@link org.classupplier.Phase}.
+	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>COMPLETE</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Stage</em>' attribute isn't clear, there
+	 * really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-   * @see #COMPLETE
-   * @model
-   * @generated
-   * @ordered
-   */
-	public static final int COMPLETE_VALUE = 3;
+	 * @return the value of the '<em>Stage</em>' attribute.
+	 * @see org.classupplier.Phase
+	 * @see #setStage(Phase)
+	 * @see org.classupplier.ClassSupplierPackage#getState_Stage()
+	 * @model default=""
+	 * @generated
+	 */
+	Phase getStage();
 
 	/**
-   * An array of all the '<em><b>State</b></em>' enumerators.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	private static final State[] VALUES_ARRAY =
-		new State[] {
-      CREATED,
-      PROTOTYPE,
-      PROCESSING,
-      COMPLETE,
-    };
+	 * Sets the value of the '{@link org.classupplier.State#getStage <em>Stage</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Stage</em>' attribute.
+	 * @see org.classupplier.Phase
+	 * @see #getStage()
+	 * @generated
+	 */
+	void setStage(Phase value);
 
 	/**
-   * A public read-only list of all the '<em><b>State</b></em>' enumerators.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public static final List<State> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @model monitorDataType="org.classupplier.IProgressMonitor"
+	 * @generated
+	 */
+	void produce(IProgressMonitor monitor);
 
-	/**
-   * Returns the '<em><b>State</b></em>' literal with the specified literal value.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public static State get(String literal) {
-    for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-      State result = VALUES_ARRAY[i];
-      if (result.toString().equals(literal)) {
-        return result;
-      }
-    }
-    return null;
-  }
-
-	/**
-   * Returns the '<em><b>State</b></em>' literal with the specified name.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public static State getByName(String name) {
-    for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-      State result = VALUES_ARRAY[i];
-      if (result.getName().equals(name)) {
-        return result;
-      }
-    }
-    return null;
-  }
-
-	/**
-   * Returns the '<em><b>State</b></em>' literal with the specified integer value.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public static State get(int value) {
-    switch (value) {
-      case CREATED_VALUE: return CREATED;
-      case PROTOTYPE_VALUE: return PROTOTYPE;
-      case PROCESSING_VALUE: return PROCESSING;
-      case COMPLETE_VALUE: return COMPLETE;
-    }
-    return null;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	private final int value;
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	private final String name;
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	private final String literal;
-
-	/**
-   * Only this class can construct instances.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	private State(int value, String name, String literal) {
-    this.value = value;
-    this.name = name;
-    this.literal = literal;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public int getValue() {
-    return value;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public String getName() {
-    return name;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public String getLiteral() {
-    return literal;
-  }
-
-	/**
-   * Returns the literal value of the enumerator, which is its string representation.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	@Override
-	public String toString() {
-    return literal;
-  }
-	
-} //State
+} // State

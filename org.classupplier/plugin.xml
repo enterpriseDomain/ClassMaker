@@ -12,23 +12,23 @@
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://org/classupplier/0.7.5"
-            class="org.classupplier.ClasSupplierPackage"
-            genModel="model/ClasSupplier.genmodel"/>
+            uri="http://org/classupplier/0.7.6"
+            class="org.classupplier.ClassSupplierPackage"
+            genModel="model/ClassSupplier.genmodel"/>
    </extension>
    <extension
-         id="domainNature"
-         name="Domain Project Nature"
+         id="userDomainNature"
+         name="User Domain Nature"
          point="org.eclipse.core.resources.natures">
       <runtime>
          <run
-               class="org.classupplier.impl.DomainProjectNature">
+               class="org.classupplier.impl.UserDomainProjectNature">
          </run>
       </runtime>
    </extension>
    <extension
          id="resourceBuilder"
-         name="Model Resource Builder"
+         name="Model Resource Persistence"
          point="org.eclipse.core.resources.builders">
       <builder>
          <run
@@ -38,7 +38,7 @@
    </extension>
    <extension
          id="generatorBuilder"
-         name="Code Generation Builder"
+         name="Code Generator"
          point="org.eclipse.core.resources.builders">
       <builder>
          <run
@@ -57,7 +57,7 @@
    </extension>
    <extension
          id="loadBuilder"
-         name="Bundle Load Builder"
+         name="Bundle Loader"
          point="org.eclipse.core.resources.builders">
       <builder>
          <run
@@ -68,12 +68,11 @@
    <extension
          point="org.eclipse.core.runtime.adapters">
       <factory
-            adaptableType="org.classupplier.ClasSupplier"
-            class="org.classupplier.query.ClasSupplierAdapterFactory">
+            adaptableType="org.classupplier.ClassSupplier"
+            class="org.classupplier.query.ClassSupplierAdapterFactory">
          <adapter
                type="org.eclipse.emf.query.conditions.eobjects.IEObjectSource">
          </adapter>
       </factory>
    </extension>
-
 </plugin>

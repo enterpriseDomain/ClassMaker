@@ -1,6 +1,7 @@
-package org.classupplier.impl;
+package org.classupplier.di;
 
 import org.classupplier.ClassSupplier;
+import org.classupplier.impl.ClassSupplierOSGi;
 import org.eclipse.e4.core.contexts.ContextFunction;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 

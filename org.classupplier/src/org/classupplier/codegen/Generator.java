@@ -1,6 +1,6 @@
 package org.classupplier.codegen;
 
-import org.classupplier.Artifact;
+import org.classupplier.State;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
@@ -10,6 +10,7 @@ public interface Generator {
 
 	void setResourceSet(ResourceSet resourceSet);
 
-	void generate(Artifact artifact, ISchedulingRule rule, IProgressMonitor monitor) throws CoreException;
+	void generate(State state, ISchedulingRule rule, IProgressMonitor monitor)
+			throws CoreException;
 
 }

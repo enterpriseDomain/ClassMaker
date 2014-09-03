@@ -8,7 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Iterator;
 
-import org.classupplier.ClasSupplier;
+import org.classupplier.ClassSupplier;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -31,7 +31,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceReference;
 
-public class ClasSupplierTests extends AbstractTests {
+public class ClassSupplierTests extends AbstractTests {
 
 	@Test
 	public void creationOfTheClass() {
@@ -114,21 +114,31 @@ public class ClasSupplierTests extends AbstractTests {
 		IEObjectSource source = (IEObjectSource) service
 				.getAdapter(IEObjectSource.class);
 
-		SELECT select = new SELECT(new FROM(source), new WHERE(
-				new EObjectAttributeValueCondition(
-						EcorePackage.Literals.EPACKAGE__NS_URI,
-						new StringValue(nsURI))));
-		IQueryResult result;
-		result = select.execute();
-		Iterator<? extends EObject> i = result.getEObjects().iterator();
-		while (i.hasNext()) {
-			EObject o = i.next();
-			if (o instanceof EPackage) {
-				EPackage jPackage = (EPackage) o;
-				EClass jClass = (EClass) jPackage.getEClassifier(theClass.getName());
-				EObject obj = jPackage.getEFactoryInstance().create(jClass);
-				assertEquals(theClass.getName(), obj.getClass().getSimpleName());
+		try {
+			SELECT select = new SELECT(new FROM(source), new WHERE(
+					new EObjectAttributeValueCondition(
+							EcorePackage.Literals.EPACKAGE__NS_URI,
+							new StringValue(nsURI))));
+			IQueryResult result;
+			result = select.execute();
+
+			Iterator<? extends EObject> i = result.getEObjects().iterator();
+			while (i.hasNext()) {
+				EObject o = i.next();
+				if (o instanceof EPackage) {
+					EPackage jPackage = (EPackage) o;
+					EClass jClass = (EClass) jPackage.getEClassifier(theClass
+							.getName());
+					EObject obj = jPackage.getEFactoryInstance().create(jClass);
+					assertEquals(theClass.getName(), obj.getClass()
+							.getSimpleName());
+					obj.eSet(jClass.getEStructuralFeature("name"), "Work");
+					assertEquals("Work",
+							obj.eGet(jClass.getEStructuralFeature("name")));
+				}
 			}
+		} catch (NullPointerException e) {
+			fail(e.getLocalizedMessage());
 		}
 	}
 
@@ -137,20 +147,21 @@ public class ClasSupplierTests extends AbstractTests {
 		BundleContext bundleContext = FrameworkUtil.getBundle(this.getClass())
 				.getBundleContext();
 		ServiceReference<?> serviceReference = bundleContext
-				.getServiceReference(ClasSupplier.class.getName());
-		ClasSupplier tested = (ClasSupplier) bundleContext
+				.getServiceReference(ClassSupplier.class);
+		ClassSupplier tested = (ClassSupplier) bundleContext
 				.getService(serviceReference);
 		assertNotNull(tested);
-		EPackage ePackage = createEPackage("anything", "0.0");
+		EPackage ePackage = createEPackage("anything", "0.1");
 		EClass eClass = EcoreFactory.eINSTANCE.createEClass();
-		String className0 = "Being";
+		String className0 = "Hobby";
 		eClass.setName(className0);
-		String className1 = "Nothing";
+		String className1 = "Working";
 		ePackage.getEClassifiers().add(eClass);
 		eClass = EcoreFactory.eINSTANCE.createEClass();
 		eClass.setName(className1);
 		ePackage.getEClassifiers().add(eClass);
 		EPackage resultPackage = tested.supply(ePackage);
+		assertNotNull(resultPackage);
 		assertObjectClass(className0, resultPackage);
 		assertObjectClass(className1, resultPackage);
 	}

@@ -4,17 +4,18 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import org.classupplier.impl.OSGi;
+import org.classupplier.impl.ClassSupplierOSGi;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.osgi.framework.Version;
 
 public abstract class AbstractExporter implements Exporter {
 
 	private IPath destination;
 
-	private String version;
+	private Version version;
 
 	private IPath buildConfigPath;
 
@@ -27,22 +28,22 @@ public abstract class AbstractExporter implements Exporter {
 	}
 
 	@Override
-	public IPath getDestination() {
+	public IPath getExportDestination() {
 		return destination;
 	}
 
 	@Override
-	public void setDestination(IPath path) {
+	public void setExportDestination(IPath path) {
 		this.destination = path;
 	}
 
 	@Override
-	public String getVersion() {
+	public Version getVersion() {
 		return version;
 	}
 
 	@Override
-	public void setVersion(String version) {
+	public void setVersion(Version version) {
 		this.version = version;
 	}
 
@@ -62,7 +63,7 @@ public abstract class AbstractExporter implements Exporter {
 					writer.close();
 			}
 		} catch (IOException e) {
-			throw new CoreException(new Status(IStatus.ERROR, OSGi.PLUGIN_ID,
+			throw new CoreException(new Status(IStatus.ERROR, ClassSupplierOSGi.PLUGIN_ID,
 					0, e.getLocalizedMessage(), e));
 		}
 	}

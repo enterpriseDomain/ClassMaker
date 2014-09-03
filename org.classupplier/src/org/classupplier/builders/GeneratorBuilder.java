@@ -2,11 +2,11 @@ package org.classupplier.builders;
 
 import java.util.Map;
 
-import org.classupplier.Artifact;
+import org.classupplier.Phase;
 import org.classupplier.State;
 import org.classupplier.codegen.EcoreGenerator;
 import org.classupplier.codegen.Generator;
-import org.classupplier.impl.OSGi;
+import org.classupplier.impl.ClassSupplierOSGi;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
@@ -14,7 +14,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 
 public class GeneratorBuilder extends IncrementalProjectBuilder {
 
-	public static final String BUILDER_ID = OSGi.PLUGIN_ID + '.'
+	public static final String BUILDER_ID = ClassSupplierOSGi.PLUGIN_ID + '.'
 			+ "generatorBuilder";
 
 	protected Generator generator = new EcoreGenerator();
@@ -24,16 +24,16 @@ public class GeneratorBuilder extends IncrementalProjectBuilder {
 			IProgressMonitor monitor) throws CoreException {
 		if (kind != FULL_BUILD)
 			return null;
-		Artifact artifact = OSGi.getClasSupplier().getWorkspace()
-				.getArtifact(getProject().getName());
-		if (artifact.getState().equals(State.CREATED)
-				|| !artifact.getState().equals(State.PROCESSING))
+		State state = ClassSupplierOSGi.getClassSupplier().getWorkspace()
+				.getArtifact(getProject().getName()).getState();
+		if (state.getStage().equals(Phase.NEW)
+				|| !state.getStage().equals(Phase.PROCESSING))
 			return null;
-		if (artifact.getPrototypeEPackage().getEClassifiers().isEmpty())
+		if (state.getPrototypeEPackage().getEClassifiers().isEmpty())
 			return null;
-		generator.setResourceSet(OSGi.getClasSupplier().getWorkspace()
+		generator.setResourceSet(ClassSupplierOSGi.getClassSupplier().getWorkspace()
 				.getResourceSet());
-		generator.generate(artifact, getRule(kind, args), monitor);
+		generator.generate(state, getRule(kind, args), monitor);
 		return null;
 	}
 

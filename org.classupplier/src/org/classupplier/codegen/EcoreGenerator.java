@@ -3,10 +3,9 @@ package org.classupplier.codegen;
 import java.io.IOException;
 import java.util.Collections;
 
-import org.classupplier.Artifact;
-import org.classupplier.impl.ArtifactImpl;
-import org.classupplier.impl.OSGi;
-import org.classupplier.impl.ResourceHelper;
+import org.classupplier.State;
+import org.classupplier.impl.ClassSupplierOSGi;
+import org.classupplier.util.ResourceUtil;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -45,13 +44,13 @@ public class EcoreGenerator implements org.classupplier.codegen.Generator {
 
 		private IProject project;
 
-		private Artifact artifact;
+		private State state;
 
 		public GenModelSetupRunnable(IPath genModelPath, IProject project,
-				Artifact artifact) {
+				State state) {
 			this.setPath(genModelPath);
 			this.setProject(project);
-			this.setArtifact(artifact);
+			this.setState(state);
 		}
 
 		@Override
@@ -61,13 +60,15 @@ public class EcoreGenerator implements org.classupplier.codegen.Generator {
 					.append(getPath()).toString());
 			Resource resource = resourceSet.getResource(genModelURI, true);
 			GenModel genModel = (GenModel) resource.getContents().get(0);
-			setupGenModel(getArtifact(), getPath().removeFileExtension()
+			setupGenModel(getState(), getPath().removeFileExtension()
 					.removeLastSegments(2), genModel);
 			try {
 				resource.save(Collections.EMPTY_MAP);
 			} catch (IOException e) {
-				throw new CoreException(new Status(IStatus.WARNING,
-						OSGi.PLUGIN_ID, e.getLocalizedMessage(), e));
+				throw new CoreException(
+						new Status(IStatus.WARNING,
+								ClassSupplierOSGi.PLUGIN_ID,
+								e.getLocalizedMessage(), e));
 			} finally {
 				monitor.done();
 			}
@@ -97,25 +98,24 @@ public class EcoreGenerator implements org.classupplier.codegen.Generator {
 			this.project = project;
 		}
 
-		public Artifact getArtifact() {
-			return artifact;
+		public State getState() {
+			return state;
 		}
 
-		public void setArtifact(Artifact artifact) {
-			this.artifact = artifact;
+		public void setState(State state) {
+			this.state = state;
 		}
 
 	}
 
 	@Override
-	public void generate(Artifact artifact, ISchedulingRule rule,
+	public void generate(final State state, ISchedulingRule rule,
 			final IProgressMonitor monitor) throws CoreException {
-		final ArtifactImpl artifactImpl = (ArtifactImpl) artifact;
-		artifactImpl.setVersion(Version.parseVersion("1.0.0.qualifier"));
-		
+		state.setVersion(Version.parseVersion("1.0.0.qualifier"));
+
 		final IProject project = ResourcesPlugin.getWorkspace().getRoot()
-				.getProject(artifactImpl.getProjectName());
-		IPath modelPath = ensureModelResourcePath(project, artifactImpl.getName(),
+				.getProject(state.getProjectName());
+		IPath modelPath = ensureModelResourcePath(project, state.getName(),
 				monitor);
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		final IPath path = root.getRawLocation().append(modelPath);
@@ -130,7 +130,7 @@ public class EcoreGenerator implements org.classupplier.codegen.Generator {
 				@Override
 				public void run(IProgressMonitor monitor) throws CoreException {
 					generator.run(new String[] { "-ecore2GenModel",
-							path.toString(), "", artifactImpl.getName() });
+							path.toString(), "", state.getName() });
 					monitor.worked(1);
 				}
 			}, monitor);
@@ -138,11 +138,11 @@ public class EcoreGenerator implements org.classupplier.codegen.Generator {
 
 		if (genModelSetupRunnable == null)
 			genModelSetupRunnable = new GenModelSetupRunnable(genModelPath,
-					project, artifactImpl);
+					project, state);
 		else {
 			genModelSetupRunnable.setPath(genModelPath);
 			genModelSetupRunnable.setProject(project);
-			genModelSetupRunnable.setArtifact(artifactImpl);
+			genModelSetupRunnable.setState(state);
 		}
 		project.getWorkspace().run(genModelSetupRunnable, rule, 0, monitor);
 
@@ -164,15 +164,15 @@ public class EcoreGenerator implements org.classupplier.codegen.Generator {
 			throw new CoreException(
 					new Status(
 							IStatus.ERROR,
-							OSGi.PLUGIN_ID,
+							ClassSupplierOSGi.PLUGIN_ID,
 							NLS.bind(
 									"The project {0} was not created before generation.",
 									project)));
 		project.open(monitor);
-		IFolder folder = project.getFolder(ResourceHelper.getModelFolderName());
+		IFolder folder = project.getFolder(ResourceUtil.getModelFolderName());
 		if (!folder.exists())
 			folder.create(true, true, monitor);
-		IFile file = folder.getFile(ResourceHelper.getFileName(name));
+		IFile file = folder.getFile(ResourceUtil.getFileName(name));
 		return file.getFullPath();
 	}
 
@@ -180,13 +180,13 @@ public class EcoreGenerator implements org.classupplier.codegen.Generator {
 		return path.removeFileExtension().addFileExtension(GENMODEL_EXT);
 	}
 
-	protected void setupGenModel(Artifact artifact, IPath projectPath,
+	protected void setupGenModel(State state, IPath projectPath,
 			org.eclipse.emf.codegen.ecore.genmodel.GenModel ecoreGenModel) {
-		ecoreGenModel.setModelName(artifact.getName());
+		ecoreGenModel.setModelName(state.getName());
 		ecoreGenModel.setSuppressInterfaces(true);
 		ecoreGenModel.setModelDirectory(projectPath.append(SOURCE_FOLDER_NAME)
 				.toString());
-		ecoreGenModel.setModelPluginID(artifact.getProjectName());
+		ecoreGenModel.setModelPluginID(state.getProjectName());
 	}
 
 	@Override

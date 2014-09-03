@@ -10,7 +10,7 @@ import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IProjectNature;
 import org.eclipse.core.runtime.CoreException;
 
-public class DomainProjectNature implements IProjectNature {
+public class UserDomainProjectNature implements IProjectNature {
 
 	private IProject project;
 
