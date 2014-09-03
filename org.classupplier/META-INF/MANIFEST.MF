@@ -6,21 +6,20 @@ Bundle-Version: 0.7.6.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: org.classupplier,
  org.classupplier.impl,
  org.classupplier.util
 Require-Bundle: org.eclipse.core.runtime;visibility:=reexport,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.codegen.ecore;visibility:=reexport,
- org.eclipse.core.filesystem;bundle-version="1.4.100",
  org.eclipse.m2e.maven.runtime;visibility:=reexport,
  org.eclipse.osgi;visibility:=reexport,
  org.eclipse.equinox.ds;visibility:=reexport,
  org.eclipse.e4.core.contexts,
  org.eclipse.e4.core.services,
  org.eclipse.emf.query;resolution:=optional,
- org.eclipse.core.resources;bundle-version="3.9.0"
+ org.eclipse.core.resources
 Service-Component: OSGI-INF/component.xml
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.classupplier.impl.ClassSupplierOSGi
