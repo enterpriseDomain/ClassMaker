@@ -53,6 +53,7 @@ public class Initializer implements IWorkspaceRunnable {
 			break;
 		}
 		ResourceUtil.setAutoBuilding(workspace, autoBuild);
+		Job.getJobManager().cancel(ResourcesPlugin.FAMILY_AUTO_BUILD);
 	}
 
 	private void loadJar(IProgressMonitor monitor) {
