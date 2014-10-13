@@ -3,43 +3,96 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.classupplier/src" creationSubmenus="true"
     editDirectory="/org.classupplier.edit/src" editorDirectory="/org.classupplier.editor/src"
     modelPluginID="org.classupplier" modelName="ClassSupplier" modelPluginClass=""
-    importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false"
-    editPluginID="org.classupplier.edit" editorPluginID="org.classupplier.editor"
+    codeFormatting="true" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    copyrightFields="false" editPluginID="org.classupplier.edit" editorPluginID="org.classupplier.editor"
     usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore"
     runtimePlatform="RCP" pluginKey="ClassSupplier">
   <foreignModel>ClassSupplier.ecore</foreignModel>
   <genPackages prefix="ClassSupplier" basePackage="org" disposableProviderFactory="true"
       ecorePackage="ClassSupplier.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="ClassSupplier.ecore#//State">
-      <genEnumLiterals ecoreEnumLiteral="ClassSupplier.ecore#//State/CREATED"/>
-      <genEnumLiterals ecoreEnumLiteral="ClassSupplier.ecore#//State/DYNAMIC"/>
-      <genEnumLiterals ecoreEnumLiteral="ClassSupplier.ecore#//State/REFRESHING"/>
-      <genEnumLiterals ecoreEnumLiteral="ClassSupplier.ecore#//State/GENERATED"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="ClassSupplier.ecore#//Phase">
+      <genEnumLiterals ecoreEnumLiteral="ClassSupplier.ecore#//Phase/PROCESSING"/>
+      <genEnumLiterals ecoreEnumLiteral="ClassSupplier.ecore#//Phase/NEW"/>
+      <genEnumLiterals ecoreEnumLiteral="ClassSupplier.ecore#//Phase/MODELED"/>
+      <genEnumLiterals ecoreEnumLiteral="ClassSupplier.ecore#//Phase/GENERATED"/>
+      <genEnumLiterals ecoreEnumLiteral="ClassSupplier.ecore#//Phase/EXPORTED"/>
+      <genEnumLiterals ecoreEnumLiteral="ClassSupplier.ecore#//Phase/LOADED"/>
     </genEnums>
-    <genDataTypes ecoreDataType="ClassSupplier.ecore#//Adapter"/>
-    <genDataTypes ecoreDataType="ClassSupplier.ecore#//IStatus"/>
     <genDataTypes ecoreDataType="ClassSupplier.ecore#//IProgressMonitor"/>
+    <genDataTypes ecoreDataType="ClassSupplier.ecore#//Version"/>
     <genClasses ecoreClass="ClassSupplier.ecore#//Artifact">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//Artifact/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//Artifact/ePackage"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//Artifact/dynamicEPackage"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//Artifact/state"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//Artifact/status"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//Artifact/snapshots"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference ClassSupplier.ecore#//Artifact/state"/>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//Artifact/apply">
+        <genParameters ecoreParameter="ClassSupplier.ecore#//Artifact/apply/version"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//Artifact/newState"/>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//Artifact/getName"/>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//Artifact/setName">
+        <genParameters ecoreParameter="ClassSupplier.ecore#//Artifact/setName/newName"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//Artifact/getVersion"/>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//Artifact/setVersion">
+        <genParameters ecoreParameter="ClassSupplier.ecore#//Artifact/setVersion/version"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//Artifact/getStage"/>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//Artifact/setStage">
+        <genParameters ecoreParameter="ClassSupplier.ecore#//Artifact/setStage/newStage"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//Artifact/getProjectName"/>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//Artifact/setProjectName">
+        <genParameters ecoreParameter="ClassSupplier.ecore#//Artifact/setProjectName/newProjectName"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//Artifact/getOrCreateState"/>
     </genClasses>
-    <genClasses ecoreClass="ClassSupplier.ecore#//MWorkspace">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//MWorkspace/contents"/>
-      <genOperations ecoreOperation="ClassSupplier.ecore#//MWorkspace/addRefreshListener">
-        <genParameters ecoreParameter="ClassSupplier.ecore#//MWorkspace/addRefreshListener/listener"/>
+    <genClasses ecoreClass="ClassSupplier.ecore#//State">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//State/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//State/time"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//State/version"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//State/stage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//State/projectName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//State/ePackage"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ClassSupplier.ecore#//State/dynamicEPackage"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ClassSupplier.ecore#//State/runtimeEPackage"/>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//State/produce">
+        <genParameters ecoreParameter="ClassSupplier.ecore#//State/produce/monitor"/>
       </genOperations>
-      <genOperations ecoreOperation="ClassSupplier.ecore#//MWorkspace/removeRefreshListener">
-        <genParameters ecoreParameter="ClassSupplier.ecore#//MWorkspace/removeRefreshListener/listener"/>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//State/getAppropriateEPackage"/>
+    </genClasses>
+    <genClasses ecoreClass="ClassSupplier.ecore#//Workspace">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//Workspace/artifacts"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//Workspace/resourceSet"/>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//Workspace/init">
+        <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/init/oldWorkspace"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//Workspace/createArtifact">
+        <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/createArtifact/blueprint"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//Workspace/getArtifact">
+        <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/getArtifact/eObject"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//Workspace/getArtifact.1">
+        <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/getArtifact.1/ePackage"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//Workspace/getArtifact.2">
+        <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/getArtifact.2/projectName"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//Workspace/registerArtifact">
+        <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/registerArtifact/artifact"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//Workspace/unregisterArtifact">
+        <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/unregisterArtifact/artifact"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//Workspace/contains">
+        <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/contains/blueprint"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//Workspace/save">
+        <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/save/monitor"/>
       </genOperations>
     </genClasses>
-    <genClasses ecoreClass="ClassSupplier.ecore#//ClassSupplier">
-      <genOperations ecoreOperation="ClassSupplier.ecore#//ClassSupplier/create">
-        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassSupplier/create/model"/>
-        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassSupplier/create/monitor"/>
-      </genOperations>
+    <genClasses ecoreClass="ClassSupplier.ecore#//DateToStateMapEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//DateToStateMapEntry/key"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//DateToStateMapEntry/value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * @generated
  */
 public class DateToStateMapEntryImpl extends EObjectImpl implements
-		BasicEMap.Entry<Date,State> {
+		BasicEMap.Entry<Date, State> {
 	/**
 	 * The default value of the '{@link #getTypedKey() <em>Key</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -91,7 +91,9 @@ public class DateToStateMapEntryImpl extends EObjectImpl implements
 		Date oldKey = key;
 		key = newKey;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__KEY, oldKey, key));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__KEY, oldKey,
+					key));
 	}
 
 	/**
@@ -111,8 +113,14 @@ public class DateToStateMapEntryImpl extends EObjectImpl implements
 		State oldValue = value;
 		value = newValue;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__VALUE, oldValue, newValue);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+			ENotificationImpl notification = new ENotificationImpl(this,
+					Notification.SET,
+					ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__VALUE,
+					oldValue, newValue);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -125,14 +133,26 @@ public class DateToStateMapEntryImpl extends EObjectImpl implements
 		if (newValue != value) {
 			NotificationChain msgs = null;
 			if (value != null)
-				msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__VALUE, null, msgs);
+				msgs = ((InternalEObject) value)
+						.eInverseRemove(
+								this,
+								EOPPOSITE_FEATURE_BASE
+										- ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__VALUE,
+								null, msgs);
 			if (newValue != null)
-				msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__VALUE, null, msgs);
+				msgs = ((InternalEObject) newValue)
+						.eInverseAdd(
+								this,
+								EOPPOSITE_FEATURE_BASE
+										- ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__VALUE,
+								null, msgs);
 			msgs = basicSetTypedValue(newValue, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__VALUE, newValue, newValue));
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__VALUE,
+					newValue, newValue));
 	}
 
 	/**
@@ -143,8 +163,8 @@ public class DateToStateMapEntryImpl extends EObjectImpl implements
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__VALUE:
-				return basicSetTypedValue(null, msgs);
+		case ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__VALUE:
+			return basicSetTypedValue(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -156,10 +176,10 @@ public class DateToStateMapEntryImpl extends EObjectImpl implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__KEY:
-				return getTypedKey();
-			case ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__VALUE:
-				return getTypedValue();
+		case ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__KEY:
+			return getTypedKey();
+		case ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__VALUE:
+			return getTypedValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -171,12 +191,12 @@ public class DateToStateMapEntryImpl extends EObjectImpl implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__KEY:
-				setTypedKey((Date)newValue);
-				return;
-			case ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__VALUE:
-				setTypedValue((State)newValue);
-				return;
+		case ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__KEY:
+			setTypedKey((Date) newValue);
+			return;
+		case ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__VALUE:
+			setTypedValue((State) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -188,12 +208,12 @@ public class DateToStateMapEntryImpl extends EObjectImpl implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__KEY:
-				setTypedKey(KEY_EDEFAULT);
-				return;
-			case ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__VALUE:
-				setTypedValue((State)null);
-				return;
+		case ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__KEY:
+			setTypedKey(KEY_EDEFAULT);
+			return;
+		case ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__VALUE:
+			setTypedValue((State) null);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -205,10 +225,11 @@ public class DateToStateMapEntryImpl extends EObjectImpl implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__KEY:
-				return KEY_EDEFAULT == null ? key != null : !KEY_EDEFAULT.equals(key);
-			case ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__VALUE:
-				return value != null;
+		case ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__KEY:
+			return KEY_EDEFAULT == null ? key != null : !KEY_EDEFAULT
+					.equals(key);
+		case ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__VALUE:
+			return value != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -219,7 +240,8 @@ public class DateToStateMapEntryImpl extends EObjectImpl implements
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy())
+			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (key: ");
@@ -295,7 +317,8 @@ public class DateToStateMapEntryImpl extends EObjectImpl implements
 	@SuppressWarnings("unchecked")
 	public EMap<Date, State> getEMap() {
 		EObject container = eContainer();
-		return container == null ? null : (EMap<Date, State>)container.eGet(eContainmentFeature());
+		return container == null ? null : (EMap<Date, State>) container
+				.eGet(eContainmentFeature());
 	}
 
 } // DateToStateMapEntryImpl

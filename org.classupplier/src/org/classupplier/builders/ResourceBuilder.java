@@ -79,14 +79,14 @@ public class ResourceBuilder extends IncrementalProjectBuilder {
 					|| state.getStage() == Phase.PROCESSING) {
 				if (!resource.getContents().isEmpty()
 						&& resource.getContents().contains(
-								state.getPrototypeEPackage())) {
+								state.getDynamicEPackage())) {
 					int index = resource.getContents().lastIndexOf(
-							state.getPrototypeEPackage());
+							state.getDynamicEPackage());
 					resource.getContents().set(index,
-							EcoreUtil.copy(state.getPrototypeEPackage()));
+							EcoreUtil.copy(state.getDynamicEPackage()));
 				} else {
 					resource.getContents().add(
-							EcoreUtil.copy(state.getPrototypeEPackage()));
+							EcoreUtil.copy(state.getDynamicEPackage()));
 				}
 			}
 			try {

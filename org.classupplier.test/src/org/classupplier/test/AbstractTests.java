@@ -5,7 +5,9 @@ import static org.junit.Assert.fail;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import org.classupplier.Artifact;
 import org.classupplier.ClassSupplier;
+import org.classupplier.Phase;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.junit.Before;
@@ -28,6 +30,11 @@ public abstract class AbstractTests {
 		} catch (InterruptedException e) {
 			fail(e.getLocalizedMessage());
 		}
+	}
+
+	protected void waitLoad(Artifact artifact) {
+		while (!artifact.getStage().equals(Phase.LOADED))
+			Thread.yield();		
 	}
 
 	protected EPackage createEPackage(String name, String version) {

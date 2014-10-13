@@ -2,6 +2,7 @@ package org.classupplier.codegen;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Date;
 
 import org.classupplier.State;
 import org.classupplier.impl.ClassSupplierOSGi;
@@ -111,7 +112,8 @@ public class EcoreGenerator implements org.classupplier.codegen.Generator {
 	@Override
 	public void generate(final State state, ISchedulingRule rule,
 			final IProgressMonitor monitor) throws CoreException {
-		state.setVersion(Version.parseVersion("1.0.0.qualifier"));
+		state.setVersion(Version.parseVersion("1.0.0" + '.'
+				+ ResourceUtil.formatQualifier(new Date())));
 
 		final IProject project = ResourcesPlugin.getWorkspace().getRoot()
 				.getProject(state.getProjectName());

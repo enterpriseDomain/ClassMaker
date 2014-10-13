@@ -4,17 +4,18 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 
 import org.classupplier.ClassSupplier;
-import org.classupplier.ClassSupplierFactory;
-import org.classupplier.Infrastructure;
+import org.classupplier.Workspace;
 import org.classupplier.di.ServiceFactory;
 import org.classupplier.util.ResourceUtil;
 import org.eclipse.core.resources.ISaveParticipant;
 import org.eclipse.core.resources.ISavedState;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Plugin;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.contexts.IContextFunction;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.osgi.framework.BundleContext;
@@ -29,11 +30,9 @@ public class ClassSupplierOSGi extends Plugin {
 
 	public static final String MODEL_FOLDER_PREF_KEY = "modelFolder";
 
-	public static final String TARGET_FOLDER_PREF_KEY = "targetFolder";
-	
 	public static final String MODEL_RESOURCE_EXT_PREF_KEY = "resourceExt";
-	
-	public static final String WORKSPACE_SAVE_FILE = "definition";	
+
+	public static final String WORKSPACE_SAVE_FILE = "definition";
 
 	private static ClassSupplierOSGi instance;
 
@@ -45,6 +44,11 @@ public class ClassSupplierOSGi extends Plugin {
 		return instance;
 	}
 
+	/**
+	 * Only for internal use.
+	 * 
+	 * @return ClassSupplier service instance
+	 */
 	public static ClassSupplier getClassSupplier() {
 		return tracker.getService();
 	}
@@ -59,7 +63,7 @@ public class ClassSupplierOSGi extends Plugin {
 	public void start(BundleContext context) throws Exception {
 		instance = this;
 		reg = context.registerService(ClassSupplier.class,
-				ClassSupplierFactory.eINSTANCE.createClassSupplier(), null);
+				new ClassSupplierImpl(), null);
 		Dictionary<String, String> properties = new Hashtable<String, String>();
 		properties.put(IContextFunction.SERVICE_CONTEXT_KEY,
 				ClassSupplier.class.getName());
@@ -68,7 +72,7 @@ public class ClassSupplierOSGi extends Plugin {
 		tracker = new ServiceTracker<ClassSupplier, ClassSupplierImpl>(context,
 				ClassSupplier.class, null);
 		tracker.open();
-		ISaveParticipant saveParticipant = new InfrastractureSaveParticipant();
+		ISaveParticipant saveParticipant = new WorkspaceSaveParticipant();
 		ISavedState lastState = ResourcesPlugin.getWorkspace()
 				.addSaveParticipant(PLUGIN_ID, saveParticipant);
 		if (lastState == null)
@@ -84,7 +88,7 @@ public class ClassSupplierOSGi extends Plugin {
 						true);
 		if (!resource.getContents().isEmpty())
 			getClassSupplier().getWorkspace().init(
-					(Infrastructure) resource.getContents().get(0));
+					(Workspace) resource.getContents().get(0));
 	}
 
 	/*
@@ -94,7 +98,9 @@ public class ClassSupplierOSGi extends Plugin {
 	 * org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
-		getClassSupplier().getWorkspace().save(new NullProgressMonitor());
+		IProgressMonitor monitor = new NullProgressMonitor();
+		Job.getJobManager().join(ResourcesPlugin.FAMILY_MANUAL_BUILD, monitor);
+		getClassSupplier().getWorkspace().save(monitor);
 		tracker.close();
 		reg.unregister();
 		instance = null;

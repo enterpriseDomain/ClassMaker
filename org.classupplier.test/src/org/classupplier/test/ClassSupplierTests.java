@@ -6,9 +6,11 @@ import static org.junit.Assert.fail;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Iterator;
 
+import org.classupplier.Artifact;
 import org.classupplier.ClassSupplier;
+import org.classupplier.SupplyNotifier;
+import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -19,13 +21,6 @@ import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.query.conditions.eobjects.IEObjectSource;
-import org.eclipse.emf.query.conditions.eobjects.structuralfeatures.EObjectAttributeValueCondition;
-import org.eclipse.emf.query.conditions.strings.StringValue;
-import org.eclipse.emf.query.statements.FROM;
-import org.eclipse.emf.query.statements.IQueryResult;
-import org.eclipse.emf.query.statements.SELECT;
-import org.eclipse.emf.query.statements.WHERE;
 import org.junit.Test;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
@@ -36,19 +31,19 @@ public class ClassSupplierTests extends AbstractTests {
 	@Test
 	public void creationOfTheClass() {
 		EcoreFactory ecoreFactory = EcoreFactory.eINSTANCE;
-		EPackage ePackage = createEPackage("reader", "1.0");
-		EClass eClass = ecoreFactory.createEClass();
+		final EPackage readerEPackage = createEPackage("reader", "1.0");
+		final EClass eClass = ecoreFactory.createEClass();
 		eClass.setName("Book");
-		EAttribute pageAttr = ecoreFactory.createEAttribute();
+		final EAttribute pageAttr = ecoreFactory.createEAttribute();
 		pageAttr.setName("pages");
 		pageAttr.setEType(EcorePackage.Literals.EINT);
 		eClass.getEStructuralFeatures().add(pageAttr);
 
-		EAttribute attr = ecoreFactory.createEAttribute();
+		final EAttribute attr = ecoreFactory.createEAttribute();
 		attr.setName("readPages");
 		attr.setEType(EcorePackage.Literals.EINT);
 		eClass.getEStructuralFeatures().add(attr);
-		EOperation op = ecoreFactory.createEOperation();
+		final EOperation op = ecoreFactory.createEOperation();
 		op.setName("read");
 		EParameter p = ecoreFactory.createEParameter();
 		p.setEType(EcorePackage.Literals.EINT);
@@ -60,86 +55,62 @@ public class ClassSupplierTests extends AbstractTests {
 				.put("body", "setReadPages(getReadPages() + pagesRead);");
 		op.getEAnnotations().add(an);
 		eClass.getEOperations().add(op);
-		ePackage.getEClassifiers().add(eClass);
+		readerEPackage.getEClassifiers().add(eClass);
 
 		assertNotNull(service);
-		EPackage nativePackage = service.supply(ePackage);
-		assertNotNull(nativePackage);
-		assertEquals(ePackage.getName(), nativePackage.getName());
-		assertEquals(ePackage.getNsPrefix(), nativePackage.getNsPrefix());
-		assertEquals(ePackage.getNsURI(), nativePackage.getNsURI());
-		EClass theClass = (EClass) nativePackage.getEClassifier(eClass
-				.getName());
-		EObject theObject = nativePackage.getEFactoryInstance()
-				.create(theClass);
+		final Artifact artifact = service.getWorkspace().createArtifact(
+				readerEPackage);
+		artifact.eAdapters().add(new SupplyNotifier() {
 
-		int pages = 704;
-		pageAttr = (EAttribute) theClass.getEStructuralFeature(pageAttr
-				.getName());
-		theObject.eSet(pageAttr, pages);
-		assertEquals(pages, theObject.eGet(pageAttr));
+			private int runCount = 0;
 
-		int readPagesCount = 9;
-		try {
-			Method objectMethod = theObject.getClass().getMethod(op.getName(),
-					int.class);
-			objectMethod.invoke(theObject, readPagesCount);
+			@Override
+			protected void supplyCompleted(EPackage ePackage) {
+				runCount = runCount++;
+				if (runCount > 1
+						|| !ePackage.getNsURI().equals(
+								readerEPackage.getNsURI())
+						|| !artifact.getAppropriateEPackage().getNsURI()
+								.equals(ePackage.getNsURI()))
+					fail();
+				assertNotNull(ePackage);
+				assertEquals(readerEPackage.getName(), ePackage.getName());
+				assertEquals(readerEPackage.getNsPrefix(),
+						ePackage.getNsPrefix());
+				assertEquals(readerEPackage.getNsURI(), ePackage.getNsURI());
+				EClass theClass = (EClass) ePackage.getEClassifier(eClass
+						.getName());
+				EObject theObject = ePackage.getEFactoryInstance().create(
+						theClass);
 
-		} catch (InvocationTargetException e) {
-			fail(e.getTargetException().getLocalizedMessage());
-		} catch (Exception e) {
-			fail(e.getLocalizedMessage());
-		}
-		EStructuralFeature state = theClass.getEStructuralFeature(attr
-				.getName());
-		assertEquals(readPagesCount, theObject.eGet(state));
+				int pages = 22;
+				EAttribute objectPageAttr = (EAttribute) theClass
+						.getEStructuralFeature(pageAttr.getName());
+				theObject.eSet(objectPageAttr, pages);
+				assertEquals(pages, theObject.eGet(objectPageAttr));
 
-		assertEquals(eClass.getName(), theObject.getClass().getSimpleName());
+				int readPagesCount = 11;
+				try {
+					Method objectMethod = theObject.getClass().getMethod(
+							op.getName(), int.class);
+					objectMethod.invoke(theObject, readPagesCount);
 
-	}
-
-	@Test
-	public void query() {
-		EcoreFactory ecoreFactory = EcoreFactory.eINSTANCE;
-		EPackage model = createEPackage("something", "2.0");
-		String nsURI = model.getNsURI();
-		EClass theClass = ecoreFactory.createEClass();
-		theClass.setName("Item");
-		EAttribute attr = ecoreFactory.createEAttribute();
-		attr.setName("name");
-		attr.setEType(EcorePackage.Literals.ESTRING);
-		theClass.getEStructuralFeatures().add(attr);
-		model.getEClassifiers().add(theClass);
-		service.supply(model);
-		IEObjectSource source = (IEObjectSource) service
-				.getAdapter(IEObjectSource.class);
-
-		try {
-			SELECT select = new SELECT(new FROM(source), new WHERE(
-					new EObjectAttributeValueCondition(
-							EcorePackage.Literals.EPACKAGE__NS_URI,
-							new StringValue(nsURI))));
-			IQueryResult result;
-			result = select.execute();
-
-			Iterator<? extends EObject> i = result.getEObjects().iterator();
-			while (i.hasNext()) {
-				EObject o = i.next();
-				if (o instanceof EPackage) {
-					EPackage jPackage = (EPackage) o;
-					EClass jClass = (EClass) jPackage.getEClassifier(theClass
-							.getName());
-					EObject obj = jPackage.getEFactoryInstance().create(jClass);
-					assertEquals(theClass.getName(), obj.getClass()
-							.getSimpleName());
-					obj.eSet(jClass.getEStructuralFeature("name"), "Work");
-					assertEquals("Work",
-							obj.eGet(jClass.getEStructuralFeature("name")));
+				} catch (InvocationTargetException e) {
+					fail(e.getTargetException().getLocalizedMessage());
+				} catch (Exception e) {
+					fail(e.getLocalizedMessage());
 				}
+				EStructuralFeature state = theClass.getEStructuralFeature(attr
+						.getName());
+				assertEquals(readPagesCount, theObject.eGet(state));
+
+				assertEquals(eClass.getName(), theObject.getClass()
+						.getSimpleName());
+
 			}
-		} catch (NullPointerException e) {
-			fail(e.getLocalizedMessage());
-		}
+		});
+		artifact.produce(new CodeGenUtil.EclipseUtil.StreamProgressMonitor(
+				System.out));
 	}
 
 	@Test
@@ -153,17 +124,27 @@ public class ClassSupplierTests extends AbstractTests {
 		assertNotNull(tested);
 		EPackage ePackage = createEPackage("anything", "0.1");
 		EClass eClass = EcoreFactory.eINSTANCE.createEClass();
-		String className0 = "Hobby";
+		final String className0 = "Hobby";
 		eClass.setName(className0);
-		String className1 = "Working";
+		final String className1 = "Working";
 		ePackage.getEClassifiers().add(eClass);
 		eClass = EcoreFactory.eINSTANCE.createEClass();
 		eClass.setName(className1);
 		ePackage.getEClassifiers().add(eClass);
-		EPackage resultPackage = tested.supply(ePackage);
-		assertNotNull(resultPackage);
-		assertObjectClass(className0, resultPackage);
-		assertObjectClass(className1, resultPackage);
+		Artifact artifact = tested.getWorkspace().createArtifact(ePackage);
+		artifact.eAdapters().add(new SupplyNotifier() {
+
+			@Override
+			protected void supplyCompleted(EPackage ePackage) {
+				assertNotNull(ePackage);
+				assertObjectClass(className0, ePackage);
+				assertObjectClass(className1, ePackage);
+			}
+
+		});
+		artifact.produce(new CodeGenUtil.EclipseUtil.StreamProgressMonitor(
+				System.out));
+
 	}
 
 	private void assertObjectClass(String className, EPackage resultPackage) {

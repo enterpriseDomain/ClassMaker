@@ -55,7 +55,8 @@ public interface ClassSupplierPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	ClassSupplierPackage eINSTANCE = org.classupplier.impl.ClassSupplierPackageImpl.init();
+	ClassSupplierPackage eINSTANCE = org.classupplier.impl.ClassSupplierPackageImpl
+			.init();
 
 	/**
 	 * The meta object id for the '{@link org.classupplier.impl.StateImpl <em>State</em>}' class.
@@ -104,31 +105,13 @@ public interface ClassSupplierPackage extends EPackage {
 	int STATE__STAGE = 3;
 
 	/**
-	 * The feature id for the '<em><b>Prototype EPackage</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATE__PROTOTYPE_EPACKAGE = 4;
-
-	/**
-	 * The feature id for the '<em><b>Loaded EPackage</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATE__LOADED_EPACKAGE = 5;
-
-	/**
 	 * The feature id for the '<em><b>Project Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__PROJECT_NAME = 6;
+	int STATE__PROJECT_NAME = 4;
 
 	/**
 	 * The feature id for the '<em><b>EPackage</b></em>' attribute list.
@@ -137,7 +120,25 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__EPACKAGE = 7;
+	int STATE__EPACKAGE = 5;
+
+	/**
+	 * The feature id for the '<em><b>Dynamic EPackage</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__DYNAMIC_EPACKAGE = 6;
+
+	/**
+	 * The feature id for the '<em><b>Runtime EPackage</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__RUNTIME_EPACKAGE = 7;
 
 	/**
 	 * The number of structural features of the '<em>State</em>' class.
@@ -195,24 +196,6 @@ public interface ClassSupplierPackage extends EPackage {
 	int ARTIFACT__STAGE = STATE__STAGE;
 
 	/**
-	 * The feature id for the '<em><b>Prototype EPackage</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARTIFACT__PROTOTYPE_EPACKAGE = STATE__PROTOTYPE_EPACKAGE;
-
-	/**
-	 * The feature id for the '<em><b>Loaded EPackage</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARTIFACT__LOADED_EPACKAGE = STATE__LOADED_EPACKAGE;
-
-	/**
 	 * The feature id for the '<em><b>Project Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -231,13 +214,22 @@ public interface ClassSupplierPackage extends EPackage {
 	int ARTIFACT__EPACKAGE = STATE__EPACKAGE;
 
 	/**
-	 * The feature id for the '<em><b>Resource</b></em>' attribute.
+	 * The feature id for the '<em><b>Dynamic EPackage</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ARTIFACT__RESOURCE = STATE_FEATURE_COUNT + 0;
+	int ARTIFACT__DYNAMIC_EPACKAGE = STATE__DYNAMIC_EPACKAGE;
+
+	/**
+	 * The feature id for the '<em><b>Runtime EPackage</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARTIFACT__RUNTIME_EPACKAGE = STATE__RUNTIME_EPACKAGE;
 
 	/**
 	 * The feature id for the '<em><b>Snapshots</b></em>' map.
@@ -246,7 +238,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARTIFACT__SNAPSHOTS = STATE_FEATURE_COUNT + 1;
+	int ARTIFACT__SNAPSHOTS = STATE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>State</b></em>' reference.
@@ -255,7 +247,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARTIFACT__STATE = STATE_FEATURE_COUNT + 2;
+	int ARTIFACT__STATE = STATE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Artifact</em>' class.
@@ -264,17 +256,36 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARTIFACT_FEATURE_COUNT = STATE_FEATURE_COUNT + 3;
+	int ARTIFACT_FEATURE_COUNT = STATE_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.classupplier.impl.InfrastructureImpl <em>Infrastructure</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.core.runtime.jobs.ISchedulingRule <em>IScheduling Rule</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.classupplier.impl.InfrastructureImpl
-	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getInfrastructure()
+	 * @see org.eclipse.core.runtime.jobs.ISchedulingRule
+	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getISchedulingRule()
 	 * @generated
 	 */
-	int INFRASTRUCTURE = 2;
+	int ISCHEDULING_RULE = 4;
+
+	/**
+	 * The number of structural features of the '<em>IScheduling Rule</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ISCHEDULING_RULE_FEATURE_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.classupplier.impl.WorkspaceImpl <em>Workspace</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.classupplier.impl.WorkspaceImpl
+	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getWorkspace()
+	 * @generated
+	 */
+	int WORKSPACE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Artifacts</b></em>' containment reference list.
@@ -283,7 +294,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INFRASTRUCTURE__ARTIFACTS = 0;
+	int WORKSPACE__ARTIFACTS = ISCHEDULING_RULE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Resource Set</b></em>' attribute.
@@ -292,63 +303,16 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INFRASTRUCTURE__RESOURCE_SET = 1;
+	int WORKSPACE__RESOURCE_SET = ISCHEDULING_RULE_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the '<em>Infrastructure</em>' class.
+	 * The number of structural features of the '<em>Workspace</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INFRASTRUCTURE_FEATURE_COUNT = 2;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.core.runtime.IAdaptable <em>IAdaptable</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.core.runtime.IAdaptable
-	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getIAdaptable()
-	 * @generated
-	 */
-	int IADAPTABLE = 4;
-
-	/**
-	 * The number of structural features of the '<em>IAdaptable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IADAPTABLE_FEATURE_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link org.classupplier.impl.ClassSupplierImpl <em>Class Supplier</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.classupplier.impl.ClassSupplierImpl
-	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getClassSupplier()
-	 * @generated
-	 */
-	int CLASS_SUPPLIER = 3;
-
-	/**
-	 * The feature id for the '<em><b>Workspace</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_SUPPLIER__WORKSPACE = IADAPTABLE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Class Supplier</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_SUPPLIER_FEATURE_COUNT = IADAPTABLE_FEATURE_COUNT + 1;
+	int WORKSPACE_FEATURE_COUNT = ISCHEDULING_RULE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.classupplier.impl.DateToStateMapEntryImpl <em>Date To State Map Entry</em>}' class.
@@ -358,7 +322,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getDateToStateMapEntry()
 	 * @generated
 	 */
-	int DATE_TO_STATE_MAP_ENTRY = 5;
+	int DATE_TO_STATE_MAP_ENTRY = 3;
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -395,27 +359,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getPhase()
 	 * @generated
 	 */
-	int PHASE = 6;
-
-	/**
-	 * The meta object id for the '<em>Adapter</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.emf.common.notify.Adapter
-	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getAdapter()
-	 * @generated
-	 */
-	int ADAPTER = 7;
-
-	/**
-	 * The meta object id for the '<em>IStatus</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.core.runtime.IStatus
-	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getIStatus()
-	 * @generated
-	 */
-	int ISTATUS = 8;
+	int PHASE = 5;
 
 	/**
 	 * The meta object id for the '<em>IProgress Monitor</em>' data type.
@@ -425,7 +369,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getIProgressMonitor()
 	 * @generated
 	 */
-	int IPROGRESS_MONITOR = 9;
+	int IPROGRESS_MONITOR = 6;
 
 	/**
 	 * The meta object id for the '<em>Version</em>' data type.
@@ -435,8 +379,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getVersion()
 	 * @generated
 	 */
-	int VERSION = 10;
-
+	int VERSION = 7;
 
 	/**
 	 * Returns the meta object for class '{@link org.classupplier.Artifact <em>Artifact</em>}'.
@@ -447,17 +390,6 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getArtifact();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.classupplier.Artifact#getResource <em>Resource</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Resource</em>'.
-	 * @see org.classupplier.Artifact#getResource()
-	 * @see #getArtifact()
-	 * @generated
-	 */
-	EAttribute getArtifact_Resource();
 
 	/**
 	 * Returns the meta object for the map '{@link org.classupplier.Artifact#getSnapshots <em>Snapshots</em>}'.
@@ -536,28 +468,6 @@ public interface ClassSupplierPackage extends EPackage {
 	EAttribute getState_Stage();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.classupplier.State#getPrototypeEPackage <em>Prototype EPackage</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Prototype EPackage</em>'.
-	 * @see org.classupplier.State#getPrototypeEPackage()
-	 * @see #getState()
-	 * @generated
-	 */
-	EReference getState_PrototypeEPackage();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.classupplier.State#getLoadedEPackage <em>Loaded EPackage</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Loaded EPackage</em>'.
-	 * @see org.classupplier.State#getLoadedEPackage()
-	 * @see #getState()
-	 * @generated
-	 */
-	EReference getState_LoadedEPackage();
-
-	/**
 	 * Returns the meta object for the attribute '{@link org.classupplier.State#getProjectName <em>Project Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -580,68 +490,58 @@ public interface ClassSupplierPackage extends EPackage {
 	EAttribute getState_EPackage();
 
 	/**
-	 * Returns the meta object for class '{@link org.classupplier.Infrastructure <em>Infrastructure</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.classupplier.State#getDynamicEPackage <em>Dynamic EPackage</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Infrastructure</em>'.
-	 * @see org.classupplier.Infrastructure
+	 * @return the meta object for the containment reference '<em>Dynamic EPackage</em>'.
+	 * @see org.classupplier.State#getDynamicEPackage()
+	 * @see #getState()
 	 * @generated
 	 */
-	EClass getInfrastructure();
+	EReference getState_DynamicEPackage();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.classupplier.Infrastructure#getArtifacts <em>Artifacts</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.classupplier.State#getRuntimeEPackage <em>Runtime EPackage</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Runtime EPackage</em>'.
+	 * @see org.classupplier.State#getRuntimeEPackage()
+	 * @see #getState()
+	 * @generated
+	 */
+	EReference getState_RuntimeEPackage();
+
+	/**
+	 * Returns the meta object for class '{@link org.classupplier.Workspace <em>Workspace</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Workspace</em>'.
+	 * @see org.classupplier.Workspace
+	 * @generated
+	 */
+	EClass getWorkspace();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.classupplier.Workspace#getArtifacts <em>Artifacts</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Artifacts</em>'.
-	 * @see org.classupplier.Infrastructure#getArtifacts()
-	 * @see #getInfrastructure()
+	 * @see org.classupplier.Workspace#getArtifacts()
+	 * @see #getWorkspace()
 	 * @generated
 	 */
-	EReference getInfrastructure_Artifacts();
+	EReference getWorkspace_Artifacts();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.classupplier.Infrastructure#getResourceSet <em>Resource Set</em>}'.
+	 * Returns the meta object for the attribute '{@link org.classupplier.Workspace#getResourceSet <em>Resource Set</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Resource Set</em>'.
-	 * @see org.classupplier.Infrastructure#getResourceSet()
-	 * @see #getInfrastructure()
+	 * @see org.classupplier.Workspace#getResourceSet()
+	 * @see #getWorkspace()
 	 * @generated
 	 */
-	EAttribute getInfrastructure_ResourceSet();
-
-	/**
-	 * Returns the meta object for class '{@link org.classupplier.ClassSupplier <em>Class Supplier</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Class Supplier</em>'.
-	 * @see org.classupplier.ClassSupplier
-	 * @generated
-	 */
-	EClass getClassSupplier();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.classupplier.ClassSupplier#getWorkspace <em>Workspace</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Workspace</em>'.
-	 * @see org.classupplier.ClassSupplier#getWorkspace()
-	 * @see #getClassSupplier()
-	 * @generated
-	 */
-	EReference getClassSupplier_Workspace();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.core.runtime.IAdaptable <em>IAdaptable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>IAdaptable</em>'.
-	 * @see org.eclipse.core.runtime.IAdaptable
-	 * @model instanceClass="org.eclipse.core.runtime.IAdaptable"
-	 * @generated
-	 */
-	EClass getIAdaptable();
+	EAttribute getWorkspace_ResourceSet();
 
 	/**
 	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Date To State Map Entry</em>}'.
@@ -678,6 +578,17 @@ public interface ClassSupplierPackage extends EPackage {
 	EReference getDateToStateMapEntry_Value();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.core.runtime.jobs.ISchedulingRule <em>IScheduling Rule</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>IScheduling Rule</em>'.
+	 * @see org.eclipse.core.runtime.jobs.ISchedulingRule
+	 * @model instanceClass="org.eclipse.core.runtime.jobs.ISchedulingRule"
+	 * @generated
+	 */
+	EClass getISchedulingRule();
+
+	/**
 	 * Returns the meta object for enum '{@link org.classupplier.Phase <em>Phase</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -686,28 +597,6 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getPhase();
-
-	/**
-	 * Returns the meta object for data type '{@link org.eclipse.emf.common.notify.Adapter <em>Adapter</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Adapter</em>'.
-	 * @see org.eclipse.emf.common.notify.Adapter
-	 * @model instanceClass="org.eclipse.emf.common.notify.Adapter"
-	 * @generated
-	 */
-	EDataType getAdapter();
-
-	/**
-	 * Returns the meta object for data type '{@link org.eclipse.core.runtime.IStatus <em>IStatus</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>IStatus</em>'.
-	 * @see org.eclipse.core.runtime.IStatus
-	 * @model instanceClass="org.eclipse.core.runtime.IStatus"
-	 * @generated
-	 */
-	EDataType getIStatus();
 
 	/**
 	 * Returns the meta object for data type '{@link org.eclipse.core.runtime.IProgressMonitor <em>IProgress Monitor</em>}'.
@@ -762,14 +651,6 @@ public interface ClassSupplierPackage extends EPackage {
 		 * @generated
 		 */
 		EClass ARTIFACT = eINSTANCE.getArtifact();
-
-		/**
-		 * The meta object literal for the '<em><b>Resource</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ARTIFACT__RESOURCE = eINSTANCE.getArtifact_Resource();
 
 		/**
 		 * The meta object literal for the '<em><b>Snapshots</b></em>' map feature.
@@ -830,22 +711,6 @@ public interface ClassSupplierPackage extends EPackage {
 		EAttribute STATE__STAGE = eINSTANCE.getState_Stage();
 
 		/**
-		 * The meta object literal for the '<em><b>Prototype EPackage</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference STATE__PROTOTYPE_EPACKAGE = eINSTANCE.getState_PrototypeEPackage();
-
-		/**
-		 * The meta object literal for the '<em><b>Loaded EPackage</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference STATE__LOADED_EPACKAGE = eINSTANCE.getState_LoadedEPackage();
-
-		/**
 		 * The meta object literal for the '<em><b>Project Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -862,14 +727,32 @@ public interface ClassSupplierPackage extends EPackage {
 		EAttribute STATE__EPACKAGE = eINSTANCE.getState_EPackage();
 
 		/**
-		 * The meta object literal for the '{@link org.classupplier.impl.InfrastructureImpl <em>Infrastructure</em>}' class.
+		 * The meta object literal for the '<em><b>Dynamic EPackage</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.classupplier.impl.InfrastructureImpl
-		 * @see org.classupplier.impl.ClassSupplierPackageImpl#getInfrastructure()
 		 * @generated
 		 */
-		EClass INFRASTRUCTURE = eINSTANCE.getInfrastructure();
+		EReference STATE__DYNAMIC_EPACKAGE = eINSTANCE
+				.getState_DynamicEPackage();
+
+		/**
+		 * The meta object literal for the '<em><b>Runtime EPackage</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATE__RUNTIME_EPACKAGE = eINSTANCE
+				.getState_RuntimeEPackage();
+
+		/**
+		 * The meta object literal for the '{@link org.classupplier.impl.WorkspaceImpl <em>Workspace</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.classupplier.impl.WorkspaceImpl
+		 * @see org.classupplier.impl.ClassSupplierPackageImpl#getWorkspace()
+		 * @generated
+		 */
+		EClass WORKSPACE = eINSTANCE.getWorkspace();
 
 		/**
 		 * The meta object literal for the '<em><b>Artifacts</b></em>' containment reference list feature.
@@ -877,7 +760,7 @@ public interface ClassSupplierPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference INFRASTRUCTURE__ARTIFACTS = eINSTANCE.getInfrastructure_Artifacts();
+		EReference WORKSPACE__ARTIFACTS = eINSTANCE.getWorkspace_Artifacts();
 
 		/**
 		 * The meta object literal for the '<em><b>Resource Set</b></em>' attribute feature.
@@ -885,35 +768,8 @@ public interface ClassSupplierPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute INFRASTRUCTURE__RESOURCE_SET = eINSTANCE.getInfrastructure_ResourceSet();
-
-		/**
-		 * The meta object literal for the '{@link org.classupplier.impl.ClassSupplierImpl <em>Class Supplier</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.classupplier.impl.ClassSupplierImpl
-		 * @see org.classupplier.impl.ClassSupplierPackageImpl#getClassSupplier()
-		 * @generated
-		 */
-		EClass CLASS_SUPPLIER = eINSTANCE.getClassSupplier();
-
-		/**
-		 * The meta object literal for the '<em><b>Workspace</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CLASS_SUPPLIER__WORKSPACE = eINSTANCE.getClassSupplier_Workspace();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.core.runtime.IAdaptable <em>IAdaptable</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.core.runtime.IAdaptable
-		 * @see org.classupplier.impl.ClassSupplierPackageImpl#getIAdaptable()
-		 * @generated
-		 */
-		EClass IADAPTABLE = eINSTANCE.getIAdaptable();
+		EAttribute WORKSPACE__RESOURCE_SET = eINSTANCE
+				.getWorkspace_ResourceSet();
 
 		/**
 		 * The meta object literal for the '{@link org.classupplier.impl.DateToStateMapEntryImpl <em>Date To State Map Entry</em>}' class.
@@ -931,7 +787,8 @@ public interface ClassSupplierPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute DATE_TO_STATE_MAP_ENTRY__KEY = eINSTANCE.getDateToStateMapEntry_Key();
+		EAttribute DATE_TO_STATE_MAP_ENTRY__KEY = eINSTANCE
+				.getDateToStateMapEntry_Key();
 
 		/**
 		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
@@ -939,7 +796,18 @@ public interface ClassSupplierPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DATE_TO_STATE_MAP_ENTRY__VALUE = eINSTANCE.getDateToStateMapEntry_Value();
+		EReference DATE_TO_STATE_MAP_ENTRY__VALUE = eINSTANCE
+				.getDateToStateMapEntry_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.core.runtime.jobs.ISchedulingRule <em>IScheduling Rule</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.core.runtime.jobs.ISchedulingRule
+		 * @see org.classupplier.impl.ClassSupplierPackageImpl#getISchedulingRule()
+		 * @generated
+		 */
+		EClass ISCHEDULING_RULE = eINSTANCE.getISchedulingRule();
 
 		/**
 		 * The meta object literal for the '{@link org.classupplier.Phase <em>Phase</em>}' enum.
@@ -950,26 +818,6 @@ public interface ClassSupplierPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum PHASE = eINSTANCE.getPhase();
-
-		/**
-		 * The meta object literal for the '<em>Adapter</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.emf.common.notify.Adapter
-		 * @see org.classupplier.impl.ClassSupplierPackageImpl#getAdapter()
-		 * @generated
-		 */
-		EDataType ADAPTER = eINSTANCE.getAdapter();
-
-		/**
-		 * The meta object literal for the '<em>IStatus</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.core.runtime.IStatus
-		 * @see org.classupplier.impl.ClassSupplierPackageImpl#getIStatus()
-		 * @generated
-		 */
-		EDataType ISTATUS = eINSTANCE.getIStatus();
 
 		/**
 		 * The meta object literal for the '<em>IProgress Monitor</em>' data type.

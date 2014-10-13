@@ -5,8 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-import org.classupplier.Infrastructure;
 import org.classupplier.State;
+import org.classupplier.Workspace;
 import org.classupplier.impl.ClassSupplierOSGi;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
@@ -31,11 +31,9 @@ public class ResourceUtil {
 
 	private static String fileExt = preferencesService.getString(
 			ClassSupplierOSGi.PLUGIN_ID,
-			ClassSupplierOSGi.MODEL_RESOURCE_EXT_PREF_KEY, "xmi", null);;
+			ClassSupplierOSGi.MODEL_RESOURCE_EXT_PREF_KEY, "xmi", null);
 
-	private static String targetFolderName = preferencesService.getString(
-			ClassSupplierOSGi.PLUGIN_ID,
-			ClassSupplierOSGi.TARGET_FOLDER_PREF_KEY, "target", null);
+	private static final String targetFolderName = "target";
 
 	private static final DateFormat qualifierFormat = new SimpleDateFormat(
 			"yyyyMMddHHmm");
@@ -45,7 +43,7 @@ public class ResourceUtil {
 	}
 
 	public static IPath getModelResourcePath(IProject project,
-			Infrastructure workspace) {
+			Workspace workspace) {
 		if (workspace == null)
 			workspace = ClassSupplierOSGi.getClassSupplier().getWorkspace();
 		String name = workspace.getArtifact(project.getName()).getName();
@@ -53,9 +51,14 @@ public class ResourceUtil {
 				.append(getFileName(name));
 	}
 
+	public static IPath getExportDestination(IProject project) {
+		return project.getLocation().append(getTargetFolderName());
+	}
+
 	public static IPath getTargetResourcePath(IProject project, State state) {
-		return project.getLocation().append(getTargetFolderName())
-				.append(getJarName(state)).addFileExtension("jar");
+		return getExportDestination(project).append("plugins")
+				.addTrailingSeparator().append(getJarName(state))
+				.addFileExtension("jar");
 	}
 
 	/**
@@ -78,10 +81,6 @@ public class ResourceUtil {
 
 	public static String getFileName(String name) {
 		return name + '.' + getModelFileExt();
-	}
-
-	public static IPath getDefaultExportDestination() {
-		return getWorkspace().removeLastSegments(1);
 	}
 
 	public static IPath getWorkspace() {
@@ -113,10 +112,10 @@ public class ResourceUtil {
 		String jarName;
 		Version version = state.getVersion();
 		if (version.equals(Version.emptyVersion))
-			jarName = state.getProjectName() + '-'
+			jarName = state.getProjectName() + '_'
 					+ Version.parseVersion("1.0.0.qualifier").toString();
 		else
-			jarName = state.getProjectName() + '-' + version;
+			jarName = state.getProjectName() + '_' + version;
 		return jarName;
 	}
 

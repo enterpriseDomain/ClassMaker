@@ -1,8 +1,7 @@
 package org.classupplier.impl;
 
-import org.classupplier.builders.ExportingBuilder;
 import org.classupplier.builders.GeneratorBuilder;
-import org.classupplier.builders.LoadBuilder;
+import org.classupplier.builders.MaterialisingBuilder;
 import org.classupplier.builders.ResourceBuilder;
 import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IProject;
@@ -16,8 +15,7 @@ public class UserDomainProjectNature implements IProjectNature {
 
 	@Override
 	public void configure() throws CoreException {
-		addToBuildSpec(LoadBuilder.BUILDER_ID);
-		addToBuildSpec(ExportingBuilder.BUILDER_ID);
+		addToBuildSpec(MaterialisingBuilder.BUILDER_ID);
 		addToBuildSpec(GeneratorBuilder.BUILDER_ID);
 		addToBuildSpec(ResourceBuilder.BUILDER_ID);
 	}
@@ -26,8 +24,7 @@ public class UserDomainProjectNature implements IProjectNature {
 	public void deconfigure() throws CoreException {
 		removeFromBuildSpec(ResourceBuilder.BUILDER_ID);
 		removeFromBuildSpec(GeneratorBuilder.BUILDER_ID);
-		removeFromBuildSpec(ExportingBuilder.BUILDER_ID);
-		removeFromBuildSpec(LoadBuilder.BUILDER_ID);
+		removeFromBuildSpec(MaterialisingBuilder.BUILDER_ID);
 	}
 
 	@Override
@@ -43,16 +40,17 @@ public class UserDomainProjectNature implements IProjectNature {
 	protected void addToBuildSpec(String builderID) throws CoreException {
 
 		IProjectDescription description = this.project.getDescription();
-		int commandIndex = getCommandIndex(description.getBuildSpec(), builderID);
+		int commandIndex = getCommandIndex(description.getBuildSpec(),
+				builderID);
 
 		if (commandIndex == -1) {
-			
+
 			ICommand command = description.newCommand();
 			command.setBuilderName(builderID);
 			setCommand(description, command);
 		}
 	}
-	
+
 	protected void removeFromBuildSpec(String builderID) throws CoreException {
 		IProjectDescription description = this.project.getDescription();
 		ICommand[] commands = description.getBuildSpec();
@@ -73,7 +71,8 @@ public class UserDomainProjectNature implements IProjectNature {
 			throws CoreException {
 
 		ICommand[] oldBuildSpec = description.getBuildSpec();
-		int oldBuilderCommandIndex = getCommandIndex(oldBuildSpec, newCommand.getBuilderName());
+		int oldBuilderCommandIndex = getCommandIndex(oldBuildSpec,
+				newCommand.getBuilderName());
 		ICommand[] newCommands;
 
 		if (oldBuilderCommandIndex == -1) {
@@ -89,8 +88,7 @@ public class UserDomainProjectNature implements IProjectNature {
 		description.setBuildSpec(newCommands);
 		this.project.setDescription(description, null);
 	}
-	
-	
+
 	private int getCommandIndex(ICommand[] buildSpec, String builderID) {
 
 		for (int i = 0; i < buildSpec.length; ++i) {
@@ -100,5 +98,5 @@ public class UserDomainProjectNature implements IProjectNature {
 		}
 		return -1;
 	}
-	
+
 }

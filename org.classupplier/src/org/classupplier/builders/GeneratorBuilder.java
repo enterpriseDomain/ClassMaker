@@ -29,10 +29,10 @@ public class GeneratorBuilder extends IncrementalProjectBuilder {
 		if (state.getStage().equals(Phase.NEW)
 				|| !state.getStage().equals(Phase.PROCESSING))
 			return null;
-		if (state.getPrototypeEPackage().getEClassifiers().isEmpty())
+		if (state.getDynamicEPackage().getEClassifiers().isEmpty())
 			return null;
-		generator.setResourceSet(ClassSupplierOSGi.getClassSupplier().getWorkspace()
-				.getResourceSet());
+		generator.setResourceSet(ClassSupplierOSGi.getClassSupplier()
+				.getWorkspace().getResourceSet());
 		generator.generate(state, getRule(kind, args), monitor);
 		return null;
 	}

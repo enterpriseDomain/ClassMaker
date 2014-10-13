@@ -1,9 +1,9 @@
 ClassSupplier
 ===========
 
-ClassSupplier is a Java library for making code programmatically.  
+ClassSupplier is a Java library allowing to make code programmatically.  
 
-It invokes generator, builds and loads Java classes that defined in user-provided EMF model.  
+It generates, builds and loads the Java classes that conform the dynamic EMF model provided.  
 
 
 Example:  
@@ -13,9 +13,9 @@ Example:
     modelEPackage.setName("library");
     modelEPackage.setNsPrefix("library");
     modelEPackage.setNsURI("http://library/1.0");
-    EClass eClass = EcoreFactory.eINSTANCE.createEClass();
+    final EClass eClass = EcoreFactory.eINSTANCE.createEClass();
     eClass.setName("Book");
-    EAttribute eAttr = EcoreFactory.eINSTANCE.createEAttribute();
+    final EAttribute eAttr = EcoreFactory.eINSTANCE.createEAttribute();
     eAttr.setName("pages");
     eAttr.setEType(EcorePackage.Literals.EINT);
     eClass.getEStructuralFeatures().add(eAttr);
@@ -28,24 +28,29 @@ Example:
     ClassSupplier classSupplier = (ClassSupplier) bundleContext
                                  .getService(serviceReference);
     // Combine them
-    EPackage nativeEPackage = classSupplier.supply(modelEPackage); 
-    // Use the runtime
-    EClass jClass = (EClass) nativeEPackage.getEClassifier(eClass.getName());
-    EObject jObject = nativeEPackage.getEFactoryInstance().create(jClass); 
-    int pages = 500;
-    EStructuralFeature jAttr = jClass.getEStructuralFeature(eAttr
-                .getName());
-    jObject.eSet(jAttr, pages);
-    assertEquals(pages, jObject.eGet(jAttr));
-    assertEquals(eClass.getName(), jObject.getClass().getSimpleName());  
+    Artifact artifact = classSupplier.getWorkspace().createArtifact(modelEPackage);
+    artifact.eAdapters().add(new SupplyNotifier() {
 
-Example is [here](/org.classupplier.test/src/org/classupplier/test/ClassSupplierTests.java).  
+            @Override
+            protected void supplyCompleted(EPackage ePackage) {
+                EPackage nativeEPackage = ePackage); 
+                // Use the runtime
+                EClass jClass = (EClass) ePackage.getEClassifier(eClass.getName());
+                EObject jObject = ePackage.getEFactoryInstance().create(jClass); 
+                int pages = 500;
+                EStructuralFeature jAttr = jClass.getEStructuralFeature(eAttr
+                    .getName());
+                jObject.eSet(jAttr, pages);
+                assertEquals(pages, jObject.eGet(jAttr));
+                assertEquals(eClass.getName(), jObject.getClass().getSimpleName());  
+            }
 
-To make use of ClassSupplier
+        });
+    artifact.produce(new CodeGenUtil.EclipseUtil.StreamProgressMonitor(
+                System.out));	
+    
+[Here](/org.classupplier.test/src/org/classupplier/test/ClassSupplierTests.java) is the example.  
 
-1.  [Download](https://github.com/kirillzotkin/ClassSupplier/releases) it
-2.  Add it to the target platform satisfying subsequent dependencies
-3.  Add it to your plug-in's dependencies
-4.  Write code similar to the above. E4 DI is supported.
+[Download](https://github.com/kirillzotkin/ClassSupplier/releases)
 
-See [wiki](https://github.com/kirillzotkin/ClassSupplier/wiki) also.
+See [wiki](https://github.com/kirillzotkin/ClassSupplier/wiki) for further.

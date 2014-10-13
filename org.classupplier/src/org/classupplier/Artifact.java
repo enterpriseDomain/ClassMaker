@@ -5,8 +5,6 @@ package org.classupplier;
 import java.util.Date;
 
 import org.eclipse.emf.common.util.EMap;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.osgi.framework.Version;
 
 /**
@@ -16,7 +14,6 @@ import org.osgi.framework.Version;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.classupplier.Artifact#getResource <em>Resource</em>}</li>
  *   <li>{@link org.classupplier.Artifact#getSnapshots <em>Snapshots</em>}</li>
  *   <li>{@link org.classupplier.Artifact#getState <em>State</em>}</li>
  * </ul>
@@ -27,34 +24,6 @@ import org.osgi.framework.Version;
  * @generated
  */
 public interface Artifact extends State {
-	/**
-	 * Returns the value of the '<em><b>Resource</b></em>' attribute. <!--
-	 * begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Resource</em>' attribute isn't clear, there
-	 * really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Resource</em>' attribute.
-	 * @see #setResource(Resource)
-	 * @see org.classupplier.ClasSupplierPackage#getArtifact_Resource()
-	 * @model transient="true"
-	 * @generated
-	 */
-	Resource getResource();
-
-	/**
-	 * Sets the value of the '{@link org.classupplier.Artifact#getResource
-	 * <em>Resource</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Resource</em>' attribute.
-	 * @see #getResource()
-	 * @generated
-	 */
-	void setResource(Resource value);
 
 	/**
 	 * Returns the value of the '<em><b>Snapshots</b></em>' map.
@@ -62,8 +31,8 @@ public interface Artifact extends State {
 	 * and the value is of type {@link org.classupplier.State},
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Snapshots</em>' map isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Snapshots</em>' map isn't clear, there really
+	 * should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Snapshots</em>' map.
@@ -97,8 +66,7 @@ public interface Artifact extends State {
 	void apply(Date version);
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @model
 	 * @generated
 	 */
@@ -106,10 +74,17 @@ public interface Artifact extends State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	String getName();
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @model
 	 * @generated
 	 */
-	void initState();
+	void setName(String newName);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -119,8 +94,7 @@ public interface Artifact extends State {
 	Version getVersion();
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @model versionDataType="org.classupplier.Version"
 	 * @generated
 	 */
@@ -134,27 +108,31 @@ public interface Artifact extends State {
 	String getProjectName();
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @model
 	 * @generated
 	 */
 	void setProjectName(String newProjectName);
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated
 	 */
-	EPackage getActualEPackage();
+	State getOrCreateState();
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated
 	 */
 	Phase getStage();
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void setStage(Phase newStage);
 
 } // Artifact

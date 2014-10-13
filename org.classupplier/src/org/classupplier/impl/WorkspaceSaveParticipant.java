@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 
-import org.classupplier.Infrastructure;
+import org.classupplier.Workspace;
 import org.classupplier.util.ResourceUtil;
 import org.eclipse.core.resources.ISaveContext;
 import org.eclipse.core.resources.ISaveParticipant;
@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 
-public class InfrastractureSaveParticipant implements ISaveParticipant {
+public class WorkspaceSaveParticipant implements ISaveParticipant {
 
 	@Override
 	public void doneSaving(ISaveContext context) {
@@ -66,7 +66,7 @@ public class InfrastractureSaveParticipant implements ISaveParticipant {
 			int saveNumber = context.getSaveNumber();
 			String saveFileName = ClassSupplierOSGi.WORKSPACE_SAVE_FILE + "-"
 					+ Integer.toString(saveNumber) + ".xmi";
-			Infrastructure workspace = ClassSupplierOSGi.getClassSupplier()
+			Workspace workspace = ClassSupplierOSGi.getClassSupplier()
 					.getWorkspace();
 			Resource resource = workspace.getResourceSet().createResource(
 					ResourceUtil.workspaceResourceURI(saveFileName));

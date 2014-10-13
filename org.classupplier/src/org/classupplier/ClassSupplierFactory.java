@@ -19,7 +19,8 @@ public interface ClassSupplierFactory extends EFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	ClassSupplierFactory eINSTANCE = org.classupplier.impl.ClassSupplierFactoryImpl.init();
+	ClassSupplierFactory eINSTANCE = org.classupplier.impl.ClassSupplierFactoryImpl
+			.init();
 
 	/**
 	 * Returns a new object of class '<em>Artifact</em>'.
@@ -40,22 +41,13 @@ public interface ClassSupplierFactory extends EFactory {
 	State createState();
 
 	/**
-	 * Returns a new object of class '<em>Infrastructure</em>'.
+	 * Returns a new object of class '<em>Workspace</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Infrastructure</em>'.
+	 * @return a new object of class '<em>Workspace</em>'.
 	 * @generated
 	 */
-	Infrastructure createInfrastructure();
-
-	/**
-	 * Returns a new object of class '<em>Class Supplier</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Class Supplier</em>'.
-	 * @generated
-	 */
-	ClassSupplier createClassSupplier();
+	Workspace createWorkspace();
 
 	/**
 	 * Returns the package supported by this factory.

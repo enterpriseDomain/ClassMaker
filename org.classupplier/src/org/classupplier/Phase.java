@@ -27,45 +27,45 @@ public enum Phase implements Enumerator {
 	 * @ordered
 	 */
 	PROCESSING(-1, "PROCESSING", "PROCESSING"), /**
-	 * The '<em><b>NEW</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #NEW_VALUE
-	 * @generated
-	 * @ordered
-	 */
+												 * The '<em><b>NEW</b></em>' literal object.
+												 * <!-- begin-user-doc -->
+												 * <!-- end-user-doc -->
+												 * @see #NEW_VALUE
+												 * @generated
+												 * @ordered
+												 */
 	NEW(0, "NEW", "NEW"), /**
-	 * The '<em><b>MODELED</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #MODELED_VALUE
-	 * @generated
-	 * @ordered
-	 */
+							 * The '<em><b>MODELED</b></em>' literal object.
+							 * <!-- begin-user-doc -->
+							 * <!-- end-user-doc -->
+							 * @see #MODELED_VALUE
+							 * @generated
+							 * @ordered
+							 */
 	MODELED(1, "MODELED", "MODELED"), /**
-	 * The '<em><b>GENERATED</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #GENERATED_VALUE
-	 * @generated
-	 * @ordered
-	 */
+										 * The '<em><b>GENERATED</b></em>' literal object.
+										 * <!-- begin-user-doc -->
+										 * <!-- end-user-doc -->
+										 * @see #GENERATED_VALUE
+										 * @generated
+										 * @ordered
+										 */
 	GENERATED(2, "GENERATED", ""), /**
-	 * The '<em><b>EXPORTED</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #EXPORTED_VALUE
-	 * @generated
-	 * @ordered
-	 */
+									 * The '<em><b>EXPORTED</b></em>' literal object.
+									 * <!-- begin-user-doc -->
+									 * <!-- end-user-doc -->
+									 * @see #EXPORTED_VALUE
+									 * @generated
+									 * @ordered
+									 */
 	EXPORTED(3, "EXPORTED", "EXPORTED"), /**
-	 * The '<em><b>LOADED</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #LOADED_VALUE
-	 * @generated
-	 * @ordered
-	 */
+											 * The '<em><b>LOADED</b></em>' literal object.
+											 * <!-- begin-user-doc -->
+											 * <!-- end-user-doc -->
+											 * @see #LOADED_VALUE
+											 * @generated
+											 * @ordered
+											 */
 	LOADED(4, "LOADED", "LOADED");
 
 	/**
@@ -164,15 +164,8 @@ public enum Phase implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final Phase[] VALUES_ARRAY =
-		new Phase[] {
-			PROCESSING,
-			NEW,
-			MODELED,
-			GENERATED,
-			EXPORTED,
-			LOADED,
-		};
+	private static final Phase[] VALUES_ARRAY = new Phase[] { PROCESSING, NEW,
+			MODELED, GENERATED, EXPORTED, LOADED, };
 
 	/**
 	 * A public read-only list of all the '<em><b>Phase</b></em>' enumerators.
@@ -180,7 +173,8 @@ public enum Phase implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<Phase> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<Phase> VALUES = Collections
+			.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
 	 * Returns the '<em><b>Phase</b></em>' literal with the specified literal value.
@@ -222,12 +216,18 @@ public enum Phase implements Enumerator {
 	 */
 	public static Phase get(int value) {
 		switch (value) {
-			case PROCESSING_VALUE: return PROCESSING;
-			case NEW_VALUE: return NEW;
-			case MODELED_VALUE: return MODELED;
-			case GENERATED_VALUE: return GENERATED;
-			case EXPORTED_VALUE: return EXPORTED;
-			case LOADED_VALUE: return LOADED;
+		case PROCESSING_VALUE:
+			return PROCESSING;
+		case NEW_VALUE:
+			return NEW;
+		case MODELED_VALUE:
+			return MODELED;
+		case GENERATED_VALUE:
+			return GENERATED;
+		case EXPORTED_VALUE:
+			return EXPORTED;
+		case LOADED_VALUE:
+			return LOADED;
 		}
 		return null;
 	}
@@ -271,7 +271,7 @@ public enum Phase implements Enumerator {
 	 * @generated
 	 */
 	public int getValue() {
-	  return value;
+		return value;
 	}
 
 	/**
@@ -280,7 +280,7 @@ public enum Phase implements Enumerator {
 	 * @generated
 	 */
 	public String getName() {
-	  return name;
+		return name;
 	}
 
 	/**
@@ -289,7 +289,7 @@ public enum Phase implements Enumerator {
 	 * @generated
 	 */
 	public String getLiteral() {
-	  return literal;
+		return literal;
 	}
 
 	/**
@@ -302,5 +302,5 @@ public enum Phase implements Enumerator {
 	public String toString() {
 		return literal;
 	}
-	
+
 } //Phase

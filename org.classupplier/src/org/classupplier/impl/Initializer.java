@@ -1,19 +1,22 @@
 package org.classupplier.impl;
 
 import org.classupplier.Artifact;
-import org.classupplier.Infrastructure;
 import org.classupplier.Phase;
 import org.classupplier.State;
+import org.classupplier.Workspace;
 import org.classupplier.load.BundleEPackageLoader;
 import org.classupplier.util.ResourceUtil;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRunnable;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -25,9 +28,9 @@ public class Initializer implements IWorkspaceRunnable {
 
 	private IProject project;
 
-	private Infrastructure workspace;
+	private Workspace workspace;
 
-	public Initializer(IProject project, Infrastructure workspace) {
+	public Initializer(IProject project, Workspace workspace) {
 		this.setProject(project);
 		this.setWorkspace(workspace);
 
@@ -35,6 +38,9 @@ public class Initializer implements IWorkspaceRunnable {
 
 	@Override
 	public void run(IProgressMonitor monitor) throws CoreException {
+		IWorkspace workspace = ResourcesPlugin.getWorkspace();
+		boolean autoBuild = workspace.isAutoBuilding();
+		ResourceUtil.setAutoBuilding(workspace, false);
 		switch (getState().getStage().getValue()) {
 		case Phase.NEW_VALUE:
 			break;
@@ -43,13 +49,17 @@ public class Initializer implements IWorkspaceRunnable {
 			break;
 		case Phase.LOADED_VALUE:
 			loadModel();
-			loadJar();
+			loadJar(monitor);
 			break;
 		}
+		ResourceUtil.setAutoBuilding(workspace, autoBuild);
 	}
 
-	private void loadJar() {
-		new BundleEPackageLoader(getProject()).load(false);
+	private void loadJar(IProgressMonitor monitor) {
+		BundleEPackageLoader loaderJob = new BundleEPackageLoader(getProject());
+		loaderJob.setPriority(Job.SHORT);
+		loaderJob.setRule(ResourcesPlugin.getWorkspace().getRoot());
+		loaderJob.schedule();
 	}
 
 	private void loadModel() throws CoreException {
@@ -88,7 +98,7 @@ public class Initializer implements IWorkspaceRunnable {
 			EPackage value = (EPackage) EcoreUtil.copy(resource.getContents()
 					.get(0));
 			getState().setName(modelURI.trimFileExtension().lastSegment());
-			getState().setPrototypeEPackage(value);
+			getState().setDynamicEPackage(value);
 		}
 	}
 
@@ -100,11 +110,11 @@ public class Initializer implements IWorkspaceRunnable {
 		this.project = project;
 	}
 
-	public Infrastructure getWorkspace() {
+	public Workspace getWorkspace() {
 		return workspace;
 	}
 
-	public void setWorkspace(Infrastructure workspace) {
+	public void setWorkspace(Workspace workspace) {
 		this.workspace = workspace;
 	}
 

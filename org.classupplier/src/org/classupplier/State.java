@@ -21,10 +21,10 @@ import org.osgi.framework.Version;
  *   <li>{@link org.classupplier.State#getTime <em>Time</em>}</li>
  *   <li>{@link org.classupplier.State#getVersion <em>Version</em>}</li>
  *   <li>{@link org.classupplier.State#getStage <em>Stage</em>}</li>
- *   <li>{@link org.classupplier.State#getPrototypeEPackage <em>Prototype EPackage</em>}</li>
- *   <li>{@link org.classupplier.State#getLoadedEPackage <em>Loaded EPackage</em>}</li>
  *   <li>{@link org.classupplier.State#getProjectName <em>Project Name</em>}</li>
  *   <li>{@link org.classupplier.State#getEPackage <em>EPackage</em>}</li>
+ *   <li>{@link org.classupplier.State#getDynamicEPackage <em>Dynamic EPackage</em>}</li>
+ *   <li>{@link org.classupplier.State#getRuntimeEPackage <em>Runtime EPackage</em>}</li>
  * </ul>
  * </p>
  *
@@ -115,60 +115,6 @@ public interface State extends EObject {
 	void setVersion(Version value);
 
 	/**
-	 * Returns the value of the '<em><b>Prototype EPackage</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Prototype EPackage</em>' reference isn't
-	 * clear, there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Prototype EPackage</em>' containment reference.
-	 * @see #setPrototypeEPackage(EPackage)
-	 * @see org.classupplier.ClassSupplierPackage#getState_PrototypeEPackage()
-	 * @model containment="true" transient="true" volatile="true" derived="true"
-	 *        extendedMetaData="group='#ePackage'"
-	 * @generated
-	 */
-	EPackage getPrototypeEPackage();
-
-	/**
-	 * Sets the value of the '{@link org.classupplier.State#getPrototypeEPackage <em>Prototype EPackage</em>}' containment reference.
-	 * <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Prototype EPackage</em>' containment reference.
-	 * @see #getPrototypeEPackage()
-	 * @generated
-	 */
-	void setPrototypeEPackage(EPackage value);
-
-	/**
-	 * Returns the value of the '<em><b>Loaded EPackage</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Loaded EPackage</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Loaded EPackage</em>' containment reference.
-	 * @see #setLoadedEPackage(EPackage)
-	 * @see org.classupplier.ClassSupplierPackage#getState_LoadedEPackage()
-	 * @model containment="true" transient="true" volatile="true" derived="true"
-	 *        extendedMetaData="group='#ePackage'"
-	 * @generated
-	 */
-	EPackage getLoadedEPackage();
-
-	/**
-	 * Sets the value of the '{@link org.classupplier.State#getLoadedEPackage <em>Loaded EPackage</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Loaded EPackage</em>' containment reference.
-	 * @see #getLoadedEPackage()
-	 * @generated
-	 */
-	void setLoadedEPackage(EPackage value);
-
-	/**
 	 * Returns the value of the '<em><b>Project Name</b></em>' attribute.
 	 * The default value is <code>""</code>.
 	 * <!-- begin-user-doc -->
@@ -214,6 +160,60 @@ public interface State extends EObject {
 	FeatureMap getEPackage();
 
 	/**
+	 * Returns the value of the '<em><b>Dynamic EPackage</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Dynamic EPackage</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Dynamic EPackage</em>' containment reference.
+	 * @see #setDynamicEPackage(EPackage)
+	 * @see org.classupplier.ClassSupplierPackage#getState_DynamicEPackage()
+	 * @model containment="true" transient="true" volatile="true" derived="true"
+	 *        extendedMetaData="group='#ePackage'"
+	 * @generated
+	 */
+	EPackage getDynamicEPackage();
+
+	/**
+	 * Sets the value of the '{@link org.classupplier.State#getDynamicEPackage <em>Dynamic EPackage</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Dynamic EPackage</em>' containment reference.
+	 * @see #getDynamicEPackage()
+	 * @generated
+	 */
+	void setDynamicEPackage(EPackage value);
+
+	/**
+	 * Returns the value of the '<em><b>Runtime EPackage</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Runtime EPackage</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Runtime EPackage</em>' containment reference.
+	 * @see #setRuntimeEPackage(EPackage)
+	 * @see org.classupplier.ClassSupplierPackage#getState_RuntimeEPackage()
+	 * @model containment="true" transient="true" volatile="true" derived="true"
+	 *        extendedMetaData="group='#ePackage'"
+	 * @generated
+	 */
+	EPackage getRuntimeEPackage();
+
+	/**
+	 * Sets the value of the '{@link org.classupplier.State#getRuntimeEPackage <em>Runtime EPackage</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Runtime EPackage</em>' containment reference.
+	 * @see #getRuntimeEPackage()
+	 * @generated
+	 */
+	void setRuntimeEPackage(EPackage value);
+
+	/**
 	 * Returns the value of the '<em><b>Stage</b></em>' attribute.
 	 * The default value is <code>""</code>.
 	 * The literals are from the enumeration {@link org.classupplier.Phase}.
@@ -248,5 +248,13 @@ public interface State extends EObject {
 	 * @generated
 	 */
 	void produce(IProgressMonitor monitor);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	EPackage getAppropriateEPackage();
 
 } // State

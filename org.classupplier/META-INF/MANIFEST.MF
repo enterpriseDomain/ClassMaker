@@ -6,20 +6,26 @@ Bundle-Version: 0.7.6.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7,
+ JavaSE-1.6
 Export-Package: org.classupplier,
  org.classupplier.impl,
  org.classupplier.util
 Require-Bundle: org.eclipse.core.runtime;visibility:=reexport,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.codegen.ecore;visibility:=reexport,
- org.eclipse.m2e.maven.runtime;visibility:=reexport,
  org.eclipse.osgi;visibility:=reexport,
  org.eclipse.equinox.ds;visibility:=reexport,
- org.eclipse.e4.core.contexts,
- org.eclipse.e4.core.services,
- org.eclipse.emf.query;resolution:=optional,
- org.eclipse.core.resources
+ org.eclipse.osgi.services;visibility:=reexport,
+ org.eclipse.e4.core.services;visibility:=reexport,
+ org.eclipse.e4.core.contexts;visibility:=reexport,
+ org.eclipse.core.resources,
+ org.eclipse.core.filesystem,
+ org.eclipse.pde.core,
+ org.apache.ant,
+ org.eclipse.equinox.launcher,
+ org.eclipse.pde.api.tools,
+ org.eclipse.jdt.core
 Service-Component: OSGI-INF/component.xml
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.classupplier.impl.ClassSupplierOSGi

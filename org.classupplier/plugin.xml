@@ -47,32 +47,12 @@
       </builder>
    </extension>
    <extension
-         id="exportBuilder"
-         name="Plug-in Export Builder"
+         id="materializer"
+         name="Materializer"
          point="org.eclipse.core.resources.builders">
       <builder>
          <run
-               class="org.classupplier.builders.ExportingBuilder">
+               class="org.classupplier.builders.MaterialisingBuilder">
          </run></builder>
-   </extension>
-   <extension
-         id="loadBuilder"
-         name="Bundle Loader"
-         point="org.eclipse.core.resources.builders">
-      <builder>
-         <run
-               class="org.classupplier.builders.LoadBuilder">
-         </run>
-      </builder>
-   </extension>
-   <extension
-         point="org.eclipse.core.runtime.adapters">
-      <factory
-            adaptableType="org.classupplier.ClassSupplier"
-            class="org.classupplier.query.ClassSupplierAdapterFactory">
-         <adapter
-               type="org.eclipse.emf.query.conditions.eobjects.IEObjectSource">
-         </adapter>
-      </factory>
    </extension>
 </plugin>
