@@ -51,6 +51,6 @@ Example:
     
 [Here](/org.classupplier.test/src/org/classupplier/test/ClassSupplierTests.java) is the example.  
 
-[Download](https://github.com/kirillzotkin/ClassSupplier/releases).
+Clone this repo ```https://github.com/kirillzotkin/ClassSupplier.git```.
 
 See [wiki](https://github.com/kirillzotkin/ClassSupplier/wiki) for further.
