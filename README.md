@@ -53,4 +53,4 @@ Example:
 
 Clone this repo ```https://github.com/kirillzotkin/ClassSupplier.git```.
 
-See [wiki](https://github.com/kirillzotkin/ClassSupplier/wiki) for further.
+See [wiki](https://github.com/kirillzotkin/ClassSupplier/wiki) for further details.
