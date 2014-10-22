@@ -46,10 +46,9 @@ Example:
             }
 
         });
-    artifact.produce(new CodeGenUtil.EclipseUtil.StreamProgressMonitor(
-                System.out));	
+    artifact.produce(new NullProgressMonitor());	
     
-[Here](/org.classupplier.test/src/org/classupplier/test/ClassSupplierTests.java) is the example.  
+[Here](/org.classupplier.test/src/org/classupplier/test/ClassSupplierTests.java) is an example.  
 
 Clone this repo ```https://github.com/kirillzotkin/ClassSupplier.git```.
 
