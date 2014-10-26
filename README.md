@@ -20,7 +20,7 @@ Example:
     eAttr.setEType(EcorePackage.Literals.EINT);
     eClass.getEStructuralFeatures().add(eAttr);
     modelEPackage.getEClassifiers().add(eClass);
-    // Acquire ClassSupplier service
+    // Acquire ClassSupplier OSGi service
     BundleContext bundleContext = FrameworkUtil.getBundle(this.getClass())
                                 .getBundleContext();
     ServiceReference<?> serviceReference = bundleContext
