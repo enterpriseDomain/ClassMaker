@@ -33,7 +33,6 @@ Example:
 
             @Override
             protected void supplyCompleted(EPackage ePackage) {
-                EPackage nativeEPackage = ePackage; 
                 // Use the runtime
                 EClass jClass = (EClass) ePackage.getEClassifier(eClass.getName());
                 EObject jObject = ePackage.getEFactoryInstance().create(jClass); 
