@@ -3,12 +3,12 @@ ClassSupplier
 
 ClassSupplier is a Java library allowing to make code programmatically.  
 
-It generates, builds and loads the Java classes that conform the dynamic EMF model provided.  
+It generates, builds and loads the Java classes that conform the model provided.  
 
 
 Example:  
 
-    // Model EPackage
+    // Model EMF EPackage
     EPackage modelEPackage = EcoreFactory.eINSTANCE.createEPackage();
     modelEPackage.setName("library");
     modelEPackage.setNsPrefix("library");
