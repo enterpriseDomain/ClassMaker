@@ -9,9 +9,7 @@ import org.classupplier.util.ResourceUtil;
 import org.eclipse.core.resources.ISaveContext;
 import org.eclipse.core.resources.ISaveParticipant;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
@@ -78,9 +76,7 @@ public class WorkspaceSaveParticipant implements ISaveParticipant {
 				resource.save(Collections.EMPTY_MAP);
 			} catch (IOException e) {
 				throw new CoreException(
-						new Status(IStatus.WARNING,
-								ClassSupplierOSGi.PLUGIN_ID,
-								e.getLocalizedMessage(), e));
+						ClassSupplierOSGi.createWarningStatus(e));
 			}
 			context.map(new Path(ClassSupplierOSGi.WORKSPACE_SAVE_FILE),
 					new Path(saveFileName));

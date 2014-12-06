@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.classupplier.Workspace#getArtifacts <em>Artifacts</em>}</li>
+ *   <li>{@link org.classupplier.Workspace#getContributions <em>Contributions</em>}</li>
  *   <li>{@link org.classupplier.Workspace#getResourceSet <em>Resource Set</em>}</li>
  * </ul>
  * </p>
@@ -28,20 +28,20 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
  */
 public interface Workspace extends EObject, ISchedulingRule {
 	/**
-	 * Returns the value of the '<em><b>Artifacts</b></em>' containment reference list.
-	 * The list contents are of type {@link org.classupplier.Artifact}.
+	 * Returns the value of the '<em><b>Contributions</b></em>' containment reference list.
+	 * The list contents are of type {@link org.classupplier.Contribution}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Artifacts</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Contributions</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Artifacts</em>' containment reference list.
-	 * @see org.classupplier.ClassSupplierPackage#getWorkspace_Artifacts()
+	 * @return the value of the '<em>Contributions</em>' containment reference list.
+	 * @see org.classupplier.ClassSupplierPackage#getWorkspace_Contributions()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Artifact> getArtifacts();
+	EList<Contribution> getContributions();
 
 	/**
 	 * Returns the value of the '<em><b>Resource Set</b></em>' attribute.
@@ -72,7 +72,7 @@ public interface Workspace extends EObject, ISchedulingRule {
 	 * @model
 	 * @generated
 	 */
-	Artifact createArtifact(EPackage blueprint);
+	Contribution createContribution(EPackage blueprint);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -80,7 +80,7 @@ public interface Workspace extends EObject, ISchedulingRule {
 	 * @model
 	 * @generated
 	 */
-	Artifact getArtifact(EObject eObject);
+	Contribution getContribution(EObject eObject);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -88,7 +88,7 @@ public interface Workspace extends EObject, ISchedulingRule {
 	 * @model
 	 * @generated
 	 */
-	Artifact getArtifact(EPackage ePackage);
+	Contribution getContribution(EPackage ePackage);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -96,7 +96,7 @@ public interface Workspace extends EObject, ISchedulingRule {
 	 * @model
 	 * @generated
 	 */
-	Artifact getArtifact(String projectName);
+	Contribution findContribution(String projectName);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -104,7 +104,7 @@ public interface Workspace extends EObject, ISchedulingRule {
 	 * @model
 	 * @generated
 	 */
-	void registerArtifact(Artifact artifact);
+	void registerContribution(Contribution contribution);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -112,7 +112,7 @@ public interface Workspace extends EObject, ISchedulingRule {
 	 * @model
 	 * @generated
 	 */
-	void unregisterArtifact(Artifact artifact);
+	void unregisterContribution(Contribution contribution);
 
 	/**
 	 * <!-- begin-user-doc -->

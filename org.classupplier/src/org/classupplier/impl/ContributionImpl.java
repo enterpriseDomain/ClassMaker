@@ -4,9 +4,9 @@ package org.classupplier.impl;
 
 import java.util.Date;
 
-import org.classupplier.Artifact;
 import org.classupplier.ClassSupplierFactory;
 import org.classupplier.ClassSupplierPackage;
+import org.classupplier.Contribution;
 import org.classupplier.Phase;
 import org.classupplier.State;
 import org.classupplier.Workspace;
@@ -19,24 +19,23 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.osgi.framework.Version;
+import org.eclipse.equinox.p2.metadata.Version;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Artifact</b></em>'. <!-- end-user-doc -->
+ * <em><b>Contribution</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.classupplier.impl.ArtifactImpl#getSnapshots <em>Snapshots
+ * <li>{@link org.classupplier.impl.ContributionImpl#getSnapshots <em>Snapshots
  * </em>}</li>
- * <li>{@link org.classupplier.impl.ArtifactImpl#getState <em>State</em>}</li>
+ * <li>{@link org.classupplier.impl.ContributionImpl#getState <em>State</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ArtifactImpl extends StateImpl implements Artifact {
-
+public class ContributionImpl extends StateImpl implements Contribution {
 	/**
 	 * The cached value of the '{@link #getSnapshots() <em>Snapshots</em>}' map.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -52,7 +51,7 @@ public class ArtifactImpl extends StateImpl implements Artifact {
 	 * 
 	 * @generated
 	 */
-	protected ArtifactImpl() {
+	protected ContributionImpl() {
 		super();
 	}
 
@@ -63,74 +62,7 @@ public class ArtifactImpl extends StateImpl implements Artifact {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ClassSupplierPackage.Literals.ARTIFACT;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public String getName() {
-		if (eIsSet(ClassSupplierPackage.ARTIFACT__NAME))
-			return super.getName();
-		if (eIsSet(ClassSupplierPackage.ARTIFACT__STATE))
-			return getState().getName();
-		return super.getName();
-	}
-
-	@Override
-	public void setName(String newName) {
-		super.setName(newName);
-		if (eIsSet(ClassSupplierPackage.ARTIFACT__SNAPSHOTS))
-			getState().setName(newName);
-	}
-
-	@Override
-	public Version getVersion() {
-		if (eIsSet(ClassSupplierPackage.ARTIFACT__VERSION))
-			return super.getVersion();
-		if (eIsSet(ClassSupplierPackage.ARTIFACT__SNAPSHOTS))
-			return getState().getVersion();
-		return VERSION_EDEFAULT;
-	}
-
-	@Override
-	public void setVersion(Version newVersion) {
-		super.setVersion(newVersion);
-		if (eIsSet(ClassSupplierPackage.ARTIFACT__SNAPSHOTS))
-			getState().setVersion(newVersion);
-	}
-
-	@Override
-	public String getProjectName() {
-		if (eIsSet(ClassSupplierPackage.ARTIFACT__PROJECT_NAME))
-			return super.getProjectName();
-		if (eIsSet(ClassSupplierPackage.ARTIFACT__SNAPSHOTS))
-			return getState().getProjectName();
-		return PROJECT_NAME_EDEFAULT;
-	}
-
-	@Override
-	public void setProjectName(String newProjectName) {
-		super.setProjectName(newProjectName);
-		if (eIsSet(ClassSupplierPackage.ARTIFACT__STATE))
-			getState().setProjectName(newProjectName);
-	}
-
-	@Override
-	public Phase getStage() {
-		if (eIsSet(ClassSupplierPackage.ARTIFACT__STAGE))
-			return super.getStage();
-		if (eIsSet(ClassSupplierPackage.ARTIFACT__STATE))
-			return getState().getStage();
-		return Phase.NEW;
-	}
-
-	@Override
-	public void setStage(Phase newStage) {
-		super.setStage(newStage);
-		getState().setStage(newStage);
+		return ClassSupplierPackage.Literals.CONTRIBUTION;
 	}
 
 	/**
@@ -143,7 +75,7 @@ public class ArtifactImpl extends StateImpl implements Artifact {
 			snapshots = new EcoreEMap<Date, State>(
 					ClassSupplierPackage.Literals.DATE_TO_STATE_MAP_ENTRY,
 					DateToStateMapEntryImpl.class, this,
-					ClassSupplierPackage.ARTIFACT__SNAPSHOTS);
+					ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS);
 		}
 		return snapshots;
 	}
@@ -165,11 +97,100 @@ public class ArtifactImpl extends StateImpl implements Artifact {
 	 * @generated NOT
 	 */
 	public State basicGetState() {
-		if (eIsSet(ClassSupplierPackage.ARTIFACT__TIME)
-				&& eIsSet(ClassSupplierPackage.ARTIFACT__SNAPSHOTS)
+		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__TIME)
+				&& eIsSet(ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS)
 				&& getSnapshots().containsKey(getTime()))
 			return getSnapshots().get(getTime());
 		return null;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public String getName() {
+		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__NAME))
+			return super.getName();
+		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__STATE))
+			return getState().getName();
+		return super.getName();
+	}
+
+	@Override
+	public void setName(String newName) {
+		super.setName(newName);
+		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS))
+			getState().setName(newName);
+	}
+
+	@Override
+	public Version getVersion() {
+		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__VERSION))
+			return super.getVersion();
+		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS))
+			return getState().getVersion();
+		return VERSION_EDEFAULT;
+	}
+
+	@Override
+	public void setVersion(Version newVersion) {
+		super.setVersion(newVersion);
+		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS))
+			getState().setVersion(newVersion);
+	}
+
+	@Override
+	public String getProjectName() {
+		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__PROJECT_NAME))
+			return super.getProjectName();
+		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS))
+			return getState().getProjectName();
+		return PROJECT_NAME_EDEFAULT;
+	}
+
+	@Override
+	public void setProjectName(String newProjectName) {
+		super.setProjectName(newProjectName);
+		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__STATE))
+			getState().setProjectName(newProjectName);
+	}
+
+	@Override
+	public Phase getStage() {
+		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__STAGE))
+			return super.getStage();
+		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__STATE))
+			return getState().getStage();
+		return Phase.DEFINED;
+	}
+
+	@Override
+	public void setStage(Phase newStage) {
+		super.setStage(newStage);
+		if (eIsSet(ClassSupplierPackage.Literals.CONTRIBUTION__STATE))
+			getState().setStage(newStage);
+	}
+
+	@Override
+	public EPackage getDynamicEPackage() {
+		return getState().getDynamicEPackage();
+	}
+
+	@Override
+	public void setDynamicEPackage(EPackage newDynamicEPackage) {
+		getState().setDynamicEPackage(newDynamicEPackage);
+	}
+
+	@Override
+	public EPackage getRuntimeEPackage() {
+		return getState().getRuntimeEPackage();
+	}
+
+	@Override
+	public void setRuntimeEPackage(EPackage newRuntimeEPackage) {
+		getState().setRuntimeEPackage(newRuntimeEPackage);
 	}
 
 	/**
@@ -179,6 +200,7 @@ public class ArtifactImpl extends StateImpl implements Artifact {
 	 */
 	public void apply(Date version) {
 		setTime(version);
+
 	}
 
 	/**
@@ -197,49 +219,13 @@ public class ArtifactImpl extends StateImpl implements Artifact {
 		return newState;
 	}
 
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public State getOrCreateState() {
-		if (!eIsSet(ClassSupplierPackage.ARTIFACT__STATE))
-			return newState();
-		return getState();
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public void produce(IProgressMonitor monitor) {
-		if (eIsSet(ClassSupplierPackage.ARTIFACT__RUNTIME_EPACKAGE)) {
-			setRuntimeEPackage(getRuntimeEPackage());
-			return;
-		}
-		getState().produce(monitor);
+	@Override
+	public EPackage doConstruct(IProgressMonitor monitor) throws Exception {
+		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__RUNTIME_EPACKAGE))
+			return getRuntimeEPackage();
+		EPackage result = ((InternalState) getState()).doConstruct(monitor);
 		((Workspace) eContainer()).save(monitor);
-	}
-
-	@Override
-	public void setDynamicEPackage(EPackage newDynamicEPackage) {
-		getState().setDynamicEPackage(newDynamicEPackage);
-	}
-
-	@Override
-	public void setRuntimeEPackage(EPackage newRuntimeEPackage) {
-		getState().setRuntimeEPackage(newRuntimeEPackage);
-	}
-
-	@Override
-	public EPackage getDynamicEPackage() {
-		return getState().getDynamicEPackage();
-	}
-
-	@Override
-	public EPackage getRuntimeEPackage() {
-		return getState().getRuntimeEPackage();
+		return result;
 	}
 
 	/**
@@ -251,7 +237,7 @@ public class ArtifactImpl extends StateImpl implements Artifact {
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case ClassSupplierPackage.ARTIFACT__SNAPSHOTS:
+		case ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS:
 			return ((InternalEList<?>) getSnapshots()).basicRemove(otherEnd,
 					msgs);
 		}
@@ -266,12 +252,12 @@ public class ArtifactImpl extends StateImpl implements Artifact {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case ClassSupplierPackage.ARTIFACT__SNAPSHOTS:
+		case ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS:
 			if (coreType)
 				return getSnapshots();
 			else
 				return getSnapshots().map();
-		case ClassSupplierPackage.ARTIFACT__STATE:
+		case ClassSupplierPackage.CONTRIBUTION__STATE:
 			if (resolve)
 				return getState();
 			return basicGetState();
@@ -287,7 +273,7 @@ public class ArtifactImpl extends StateImpl implements Artifact {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case ClassSupplierPackage.ARTIFACT__SNAPSHOTS:
+		case ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS:
 			((EStructuralFeature.Setting) getSnapshots()).set(newValue);
 			return;
 		}
@@ -302,7 +288,7 @@ public class ArtifactImpl extends StateImpl implements Artifact {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case ClassSupplierPackage.ARTIFACT__SNAPSHOTS:
+		case ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS:
 			getSnapshots().clear();
 			return;
 		}
@@ -317,12 +303,12 @@ public class ArtifactImpl extends StateImpl implements Artifact {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case ClassSupplierPackage.ARTIFACT__SNAPSHOTS:
+		case ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS:
 			return snapshots != null && !snapshots.isEmpty();
-		case ClassSupplierPackage.ARTIFACT__STATE:
+		case ClassSupplierPackage.CONTRIBUTION__STATE:
 			return basicGetState() != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} // ArtifactImpl
+} // ContributionImpl

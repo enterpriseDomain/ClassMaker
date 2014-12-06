@@ -1,15 +1,15 @@
 package org.classupplier.export;
 
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.osgi.framework.Version;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.equinox.p2.metadata.Version;
 
-public interface Exporter {
+public interface Exporter extends IAdaptable {
 
-	void export(IProject project, IProgressMonitor monitor)
-			throws CoreException;
+	IStatus export(IProgressMonitor monitor) throws CoreException;
 
 	IPath getExportDestination();
 

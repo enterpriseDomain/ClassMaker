@@ -4,12 +4,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.concurrent.Future;
 
-import org.classupplier.Artifact;
+import org.classupplier.Contribution;
 import org.classupplier.ClassSupplier;
-import org.classupplier.SupplyNotifier;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
@@ -58,59 +57,45 @@ public class ClassSupplierTests extends AbstractTests {
 		readerEPackage.getEClassifiers().add(eClass);
 
 		assertNotNull(service);
-		final Artifact artifact = service.getWorkspace().createArtifact(
+		Contribution contribution = service.getWorkspace().createContribution(
 				readerEPackage);
-		artifact.eAdapters().add(new SupplyNotifier() {
+		Future<? extends EPackage> result = contribution
+				.construct(new CodeGenUtil.EclipseUtil.StreamProgressMonitor(
+						System.out));
+		EPackage ePackage;
+		try {
+			ePackage = result.get();
+			assertNotNull(ePackage);
+			assertEquals(contribution.getAppropriateEPackage().getNsURI(),
+					ePackage.getNsURI());
+			assertEquals(readerEPackage.getName(), ePackage.getName());
+			assertEquals(readerEPackage.getNsPrefix(), ePackage.getNsPrefix());
+			assertEquals(readerEPackage.getNsURI(), ePackage.getNsURI());
+			EClass theClass = (EClass) ePackage
+					.getEClassifier(eClass.getName());
+			EObject theObject = ePackage.getEFactoryInstance().create(theClass);
 
-			private int runCount = 0;
+			int pages = 22;
+			EAttribute objectPageAttr = (EAttribute) theClass
+					.getEStructuralFeature(pageAttr.getName());
+			theObject.eSet(objectPageAttr, pages);
+			assertEquals(pages, theObject.eGet(objectPageAttr));
 
-			@Override
-			protected void supplyCompleted(EPackage ePackage) {
-				runCount = runCount++;
-				if (runCount > 1
-						|| !ePackage.getNsURI().equals(
-								readerEPackage.getNsURI())
-						|| !artifact.getAppropriateEPackage().getNsURI()
-								.equals(ePackage.getNsURI()))
-					fail();
-				assertNotNull(ePackage);
-				assertEquals(readerEPackage.getName(), ePackage.getName());
-				assertEquals(readerEPackage.getNsPrefix(),
-						ePackage.getNsPrefix());
-				assertEquals(readerEPackage.getNsURI(), ePackage.getNsURI());
-				EClass theClass = (EClass) ePackage.getEClassifier(eClass
-						.getName());
-				EObject theObject = ePackage.getEFactoryInstance().create(
-						theClass);
+			int readPagesCount = 11;
+			Method objectMethod = theObject.getClass().getMethod(op.getName(),
+					int.class);
+			objectMethod.invoke(theObject, readPagesCount);
 
-				int pages = 22;
-				EAttribute objectPageAttr = (EAttribute) theClass
-						.getEStructuralFeature(pageAttr.getName());
-				theObject.eSet(objectPageAttr, pages);
-				assertEquals(pages, theObject.eGet(objectPageAttr));
+			EStructuralFeature state = theClass.getEStructuralFeature(attr
+					.getName());
+			assertEquals(readPagesCount, theObject.eGet(state));
 
-				int readPagesCount = 11;
-				try {
-					Method objectMethod = theObject.getClass().getMethod(
-							op.getName(), int.class);
-					objectMethod.invoke(theObject, readPagesCount);
+			assertEquals(eClass.getName(), theObject.getClass().getSimpleName());
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e.getLocalizedMessage());
+		}
 
-				} catch (InvocationTargetException e) {
-					fail(e.getTargetException().getLocalizedMessage());
-				} catch (Exception e) {
-					fail(e.getLocalizedMessage());
-				}
-				EStructuralFeature state = theClass.getEStructuralFeature(attr
-						.getName());
-				assertEquals(readPagesCount, theObject.eGet(state));
-
-				assertEquals(eClass.getName(), theObject.getClass()
-						.getSimpleName());
-
-			}
-		});
-		artifact.produce(new CodeGenUtil.EclipseUtil.StreamProgressMonitor(
-				System.out));
 	}
 
 	@Test
@@ -131,20 +116,20 @@ public class ClassSupplierTests extends AbstractTests {
 		eClass = EcoreFactory.eINSTANCE.createEClass();
 		eClass.setName(className1);
 		ePackage.getEClassifiers().add(eClass);
-		Artifact artifact = tested.getWorkspace().createArtifact(ePackage);
-		artifact.eAdapters().add(new SupplyNotifier() {
 
-			@Override
-			protected void supplyCompleted(EPackage ePackage) {
-				assertNotNull(ePackage);
-				assertObjectClass(className0, ePackage);
-				assertObjectClass(className1, ePackage);
-			}
-
-		});
-		artifact.produce(new CodeGenUtil.EclipseUtil.StreamProgressMonitor(
-				System.out));
-
+		Contribution contribution = tested.getWorkspace().createContribution(ePackage);
+		EPackage resultEPackage;
+		try {
+			resultEPackage = contribution.construct(
+					new CodeGenUtil.EclipseUtil.StreamProgressMonitor(
+							System.out)).get();
+			assertNotNull(resultEPackage);
+			assertObjectClass(className0, resultEPackage);
+			assertObjectClass(className1, resultEPackage);
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e.getLocalizedMessage());
+		}
 	}
 
 	private void assertObjectClass(String className, EPackage resultPackage) {

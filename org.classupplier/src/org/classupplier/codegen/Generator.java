@@ -1,16 +1,15 @@
 package org.classupplier.codegen;
 
-import org.classupplier.State;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.jobs.ISchedulingRule;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 
-public interface Generator {
+public interface Generator extends IAdaptable {
 
 	void setResourceSet(ResourceSet resourceSet);
 
-	void generate(State state, ISchedulingRule rule, IProgressMonitor monitor)
-			throws CoreException;
+	IStatus generate(IProgressMonitor monitor) throws CoreException;
 
 }

@@ -16,6 +16,13 @@
             class="org.classupplier.ClassSupplierPackage"
             genModel="model/ClassSupplier.genmodel"/>
    </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated ClassSupplier -->
+      <parser
+            type="classupplier"
+            class="org.classupplier.util.ClassSupplierResourceFactoryImpl"/>
+   </extension>
    <extension
          id="userDomainNature"
          name="User Domain Nature"
@@ -33,16 +40,6 @@
       <builder>
          <run
                class="org.classupplier.builders.ResourceBuilder">
-         </run>
-      </builder>
-   </extension>
-   <extension
-         id="generatorBuilder"
-         name="Code Generator"
-         point="org.eclipse.core.resources.builders">
-      <builder>
-         <run
-               class="org.classupplier.builders.GeneratorBuilder">
          </run>
       </builder>
    </extension>

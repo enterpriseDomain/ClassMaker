@@ -23,13 +23,13 @@ public interface ClassSupplierFactory extends EFactory {
 			.init();
 
 	/**
-	 * Returns a new object of class '<em>Artifact</em>'.
+	 * Returns a new object of class '<em>Contribution</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Artifact</em>'.
+	 * @return a new object of class '<em>Contribution</em>'.
 	 * @generated
 	 */
-	Artifact createArtifact();
+	Contribution createContribution();
 
 	/**
 	 * Returns a new object of class '<em>State</em>'.

@@ -5,7 +5,7 @@ import static org.junit.Assert.fail;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import org.classupplier.Artifact;
+import org.classupplier.Contribution;
 import org.classupplier.ClassSupplier;
 import org.classupplier.Phase;
 import org.eclipse.emf.ecore.EPackage;
@@ -32,8 +32,8 @@ public abstract class AbstractTests {
 		}
 	}
 
-	protected void waitLoad(Artifact artifact) {
-		while (!artifact.getStage().equals(Phase.LOADED))
+	protected void waitLoad(Contribution contribution) {
+		while (!contribution.getStage().equals(Phase.LOADED))
 			Thread.yield();		
 	}
 

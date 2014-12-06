@@ -1,4 +1,4 @@
-package org.classupplier.incore;
+package org.classupplier.sample;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;

@@ -4,9 +4,10 @@ package org.classupplier.util;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.concurrent.Future;
 
-import org.classupplier.Artifact;
 import org.classupplier.ClassSupplierPackage;
+import org.classupplier.Contribution;
 import org.classupplier.State;
 import org.classupplier.Workspace;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
@@ -69,8 +70,8 @@ public class ClassSupplierAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected ClassSupplierSwitch<Adapter> modelSwitch = new ClassSupplierSwitch<Adapter>() {
 		@Override
-		public Adapter caseArtifact(Artifact object) {
-			return createArtifactAdapter();
+		public Adapter caseContribution(Contribution object) {
+			return createContributionAdapter();
 		}
 
 		@Override
@@ -94,6 +95,11 @@ public class ClassSupplierAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public <V> Adapter caseFuture(Future<V> object) {
+			return createFutureAdapter();
+		}
+
+		@Override
 		public Adapter defaultCase(EObject object) {
 			return createEObjectAdapter();
 		}
@@ -113,16 +119,17 @@ public class ClassSupplierAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.classupplier.Artifact <em>Artifact</em>}'.
-	 * <!-- begin-user-doc
-	 * --> This default implementation returns null so that we can easily ignore
-	 * cases; it's useful to ignore a case when inheritance will catch all the
-	 * cases anyway. <!-- end-user-doc -->
+	 * Creates a new adapter for an object of class '
+	 * {@link org.classupplier.Contribution <em>Contribution</em>}'. <!--
+	 * begin-user-doc --> This default implementation returns null so that we
+	 * can easily ignore cases; it's useful to ignore a case when inheritance
+	 * will catch all the cases anyway. <!-- end-user-doc -->
+	 * 
 	 * @return the new adapter.
-	 * @see org.classupplier.Artifact
+	 * @see org.classupplier.Contribution
 	 * @generated
 	 */
-	public Adapter createArtifactAdapter() {
+	public Adapter createContributionAdapter() {
 		return null;
 	}
 
@@ -171,15 +178,29 @@ public class ClassSupplierAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.core.runtime.jobs.ISchedulingRule <em>IScheduling Rule</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- begin-user-doc --> This default
+	 * implementation returns null so that we can easily ignore cases; it's
+	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.core.runtime.jobs.ISchedulingRule
 	 * @generated
 	 */
 	public Adapter createISchedulingRuleAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link java.util.concurrent.Future <em>Future</em>}'.
+	 * <!-- begin-user-doc
+	 * --> This default implementation returns null so that we can easily ignore
+	 * cases; it's useful to ignore a case when inheritance will catch all the
+	 * cases anyway. <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see java.util.concurrent.Future
+	 * @generated
+	 */
+	public Adapter createFutureAdapter() {
 		return null;
 	}
 

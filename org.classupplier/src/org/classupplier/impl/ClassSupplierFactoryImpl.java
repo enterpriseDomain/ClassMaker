@@ -5,9 +5,9 @@ package org.classupplier.impl;
 import java.util.Date;
 import java.util.Map;
 
-import org.classupplier.Artifact;
 import org.classupplier.ClassSupplierFactory;
 import org.classupplier.ClassSupplierPackage;
+import org.classupplier.Contribution;
 import org.classupplier.Phase;
 import org.classupplier.State;
 import org.classupplier.Workspace;
@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.osgi.framework.Version;
+import org.eclipse.equinox.p2.metadata.Version;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
@@ -63,8 +63,8 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-		case ClassSupplierPackage.ARTIFACT:
-			return createArtifact();
+		case ClassSupplierPackage.CONTRIBUTION:
+			return createContribution();
 		case ClassSupplierPackage.STATE:
 			return createState();
 		case ClassSupplierPackage.WORKSPACE:
@@ -116,12 +116,13 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Artifact createArtifact() {
-		ArtifactImpl artifact = new ArtifactImpl();
-		return artifact;
+	public Contribution createContribution() {
+		ContributionImpl contribution = new ContributionImpl();
+		return contribution;
 	}
 
 	/**
@@ -193,11 +194,12 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
+	 * 
+	 * @generated NOT
 	 */
 	public Version createVersionFromString(EDataType eDataType,
 			String initialValue) {
-		return (Version) super.createFromString(eDataType, initialValue);
+		return Version.parseVersion(initialValue);
 	}
 
 	/**

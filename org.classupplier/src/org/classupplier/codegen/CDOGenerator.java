@@ -1,15 +1,14 @@
 package org.classupplier.codegen;
 
-import org.classupplier.State;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.codegen.ecore.genmodel.GenDelegationKind;
 
 public class CDOGenerator extends EcoreGenerator {
 
 	@Override
-	protected void setupGenModel(State state, IPath projectPath,
+	protected void setupGenModel(IPath projectPath,
 			org.eclipse.emf.codegen.ecore.genmodel.GenModel ecoreGenModel) {
-		super.setupGenModel(state, projectPath, ecoreGenModel);
+		super.setupGenModel(projectPath, ecoreGenModel);
 		ecoreGenModel.setSuppressInterfaces(false);
 		ecoreGenModel
 				.setFeatureDelegation(GenDelegationKind.REFLECTIVE_LITERAL);

@@ -1,6 +1,5 @@
 package org.classupplier.impl;
 
-import org.classupplier.builders.GeneratorBuilder;
 import org.classupplier.builders.MaterialisingBuilder;
 import org.classupplier.builders.ResourceBuilder;
 import org.eclipse.core.resources.ICommand;
@@ -16,14 +15,12 @@ public class UserDomainProjectNature implements IProjectNature {
 	@Override
 	public void configure() throws CoreException {
 		addToBuildSpec(MaterialisingBuilder.BUILDER_ID);
-		addToBuildSpec(GeneratorBuilder.BUILDER_ID);
 		addToBuildSpec(ResourceBuilder.BUILDER_ID);
 	}
 
 	@Override
 	public void deconfigure() throws CoreException {
 		removeFromBuildSpec(ResourceBuilder.BUILDER_ID);
-		removeFromBuildSpec(GeneratorBuilder.BUILDER_ID);
 		removeFromBuildSpec(MaterialisingBuilder.BUILDER_ID);
 	}
 

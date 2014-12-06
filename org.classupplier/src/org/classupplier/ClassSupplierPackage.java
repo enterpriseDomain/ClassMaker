@@ -150,14 +150,14 @@ public interface ClassSupplierPackage extends EPackage {
 	int STATE_FEATURE_COUNT = 8;
 
 	/**
-	 * The meta object id for the '{@link org.classupplier.impl.ArtifactImpl <em>Artifact</em>}' class.
+	 * The meta object id for the '{@link org.classupplier.impl.ContributionImpl <em>Contribution</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.classupplier.impl.ArtifactImpl
-	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getArtifact()
+	 * @see org.classupplier.impl.ContributionImpl
+	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getContribution()
 	 * @generated
 	 */
-	int ARTIFACT = 0;
+	int CONTRIBUTION = 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -166,7 +166,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARTIFACT__NAME = STATE__NAME;
+	int CONTRIBUTION__NAME = STATE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Time</b></em>' attribute.
@@ -175,7 +175,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARTIFACT__TIME = STATE__TIME;
+	int CONTRIBUTION__TIME = STATE__TIME;
 
 	/**
 	 * The feature id for the '<em><b>Version</b></em>' attribute.
@@ -184,7 +184,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARTIFACT__VERSION = STATE__VERSION;
+	int CONTRIBUTION__VERSION = STATE__VERSION;
 
 	/**
 	 * The feature id for the '<em><b>Stage</b></em>' attribute.
@@ -193,7 +193,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARTIFACT__STAGE = STATE__STAGE;
+	int CONTRIBUTION__STAGE = STATE__STAGE;
 
 	/**
 	 * The feature id for the '<em><b>Project Name</b></em>' attribute.
@@ -202,7 +202,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARTIFACT__PROJECT_NAME = STATE__PROJECT_NAME;
+	int CONTRIBUTION__PROJECT_NAME = STATE__PROJECT_NAME;
 
 	/**
 	 * The feature id for the '<em><b>EPackage</b></em>' attribute list.
@@ -211,7 +211,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARTIFACT__EPACKAGE = STATE__EPACKAGE;
+	int CONTRIBUTION__EPACKAGE = STATE__EPACKAGE;
 
 	/**
 	 * The feature id for the '<em><b>Dynamic EPackage</b></em>' containment reference.
@@ -220,7 +220,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARTIFACT__DYNAMIC_EPACKAGE = STATE__DYNAMIC_EPACKAGE;
+	int CONTRIBUTION__DYNAMIC_EPACKAGE = STATE__DYNAMIC_EPACKAGE;
 
 	/**
 	 * The feature id for the '<em><b>Runtime EPackage</b></em>' containment reference.
@@ -229,7 +229,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARTIFACT__RUNTIME_EPACKAGE = STATE__RUNTIME_EPACKAGE;
+	int CONTRIBUTION__RUNTIME_EPACKAGE = STATE__RUNTIME_EPACKAGE;
 
 	/**
 	 * The feature id for the '<em><b>Snapshots</b></em>' map.
@@ -238,7 +238,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARTIFACT__SNAPSHOTS = STATE_FEATURE_COUNT + 0;
+	int CONTRIBUTION__SNAPSHOTS = STATE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>State</b></em>' reference.
@@ -247,16 +247,16 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARTIFACT__STATE = STATE_FEATURE_COUNT + 1;
+	int CONTRIBUTION__STATE = STATE_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the '<em>Artifact</em>' class.
+	 * The number of structural features of the '<em>Contribution</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ARTIFACT_FEATURE_COUNT = STATE_FEATURE_COUNT + 2;
+	int CONTRIBUTION_FEATURE_COUNT = STATE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.core.runtime.jobs.ISchedulingRule <em>IScheduling Rule</em>}' class.
@@ -288,13 +288,13 @@ public interface ClassSupplierPackage extends EPackage {
 	int WORKSPACE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Artifacts</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Contributions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WORKSPACE__ARTIFACTS = ISCHEDULING_RULE_FEATURE_COUNT + 0;
+	int WORKSPACE__CONTRIBUTIONS = ISCHEDULING_RULE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Resource Set</b></em>' attribute.
@@ -352,6 +352,25 @@ public interface ClassSupplierPackage extends EPackage {
 	int DATE_TO_STATE_MAP_ENTRY_FEATURE_COUNT = 2;
 
 	/**
+	 * The meta object id for the '{@link java.util.concurrent.Future <em>Future</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.util.concurrent.Future
+	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getFuture()
+	 * @generated
+	 */
+	int FUTURE = 5;
+
+	/**
+	 * The number of structural features of the '<em>Future</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUTURE_FEATURE_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.classupplier.Phase <em>Phase</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -359,7 +378,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getPhase()
 	 * @generated
 	 */
-	int PHASE = 5;
+	int PHASE = 6;
 
 	/**
 	 * The meta object id for the '<em>IProgress Monitor</em>' data type.
@@ -369,49 +388,49 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getIProgressMonitor()
 	 * @generated
 	 */
-	int IPROGRESS_MONITOR = 6;
+	int IPROGRESS_MONITOR = 7;
 
 	/**
 	 * The meta object id for the '<em>Version</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.osgi.framework.Version
+	 * @see org.eclipse.equinox.p2.metadata.Version
 	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getVersion()
 	 * @generated
 	 */
-	int VERSION = 7;
+	int VERSION = 8;
 
 	/**
-	 * Returns the meta object for class '{@link org.classupplier.Artifact <em>Artifact</em>}'.
+	 * Returns the meta object for class '{@link org.classupplier.Contribution <em>Contribution</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Artifact</em>'.
-	 * @see org.classupplier.Artifact
+	 * @return the meta object for class '<em>Contribution</em>'.
+	 * @see org.classupplier.Contribution
 	 * @generated
 	 */
-	EClass getArtifact();
+	EClass getContribution();
 
 	/**
-	 * Returns the meta object for the map '{@link org.classupplier.Artifact#getSnapshots <em>Snapshots</em>}'.
+	 * Returns the meta object for the map '{@link org.classupplier.Contribution#getSnapshots <em>Snapshots</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the map '<em>Snapshots</em>'.
-	 * @see org.classupplier.Artifact#getSnapshots()
-	 * @see #getArtifact()
+	 * @see org.classupplier.Contribution#getSnapshots()
+	 * @see #getContribution()
 	 * @generated
 	 */
-	EReference getArtifact_Snapshots();
+	EReference getContribution_Snapshots();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.classupplier.Artifact#getState <em>State</em>}'.
+	 * Returns the meta object for the reference '{@link org.classupplier.Contribution#getState <em>State</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>State</em>'.
-	 * @see org.classupplier.Artifact#getState()
-	 * @see #getArtifact()
+	 * @see org.classupplier.Contribution#getState()
+	 * @see #getContribution()
 	 * @generated
 	 */
-	EReference getArtifact_State();
+	EReference getContribution_State();
 
 	/**
 	 * Returns the meta object for class '{@link org.classupplier.State <em>State</em>}'.
@@ -522,15 +541,15 @@ public interface ClassSupplierPackage extends EPackage {
 	EClass getWorkspace();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.classupplier.Workspace#getArtifacts <em>Artifacts</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.classupplier.Workspace#getContributions <em>Contributions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Artifacts</em>'.
-	 * @see org.classupplier.Workspace#getArtifacts()
+	 * @return the meta object for the containment reference list '<em>Contributions</em>'.
+	 * @see org.classupplier.Workspace#getContributions()
 	 * @see #getWorkspace()
 	 * @generated
 	 */
-	EReference getWorkspace_Artifacts();
+	EReference getWorkspace_Contributions();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.classupplier.Workspace#getResourceSet <em>Resource Set</em>}'.
@@ -589,6 +608,17 @@ public interface ClassSupplierPackage extends EPackage {
 	EClass getISchedulingRule();
 
 	/**
+	 * Returns the meta object for class '{@link java.util.concurrent.Future <em>Future</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Future</em>'.
+	 * @see java.util.concurrent.Future
+	 * @model instanceClass="java.util.concurrent.Future" typeParameters="V"
+	 * @generated
+	 */
+	EClass getFuture();
+
+	/**
 	 * Returns the meta object for enum '{@link org.classupplier.Phase <em>Phase</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -610,12 +640,12 @@ public interface ClassSupplierPackage extends EPackage {
 	EDataType getIProgressMonitor();
 
 	/**
-	 * Returns the meta object for data type '{@link org.osgi.framework.Version <em>Version</em>}'.
+	 * Returns the meta object for data type '{@link org.eclipse.equinox.p2.metadata.Version <em>Version</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Version</em>'.
-	 * @see org.osgi.framework.Version
-	 * @model instanceClass="org.osgi.framework.Version"
+	 * @see org.eclipse.equinox.p2.metadata.Version
+	 * @model instanceClass="org.eclipse.equinox.p2.metadata.Version"
 	 * @generated
 	 */
 	EDataType getVersion();
@@ -643,14 +673,14 @@ public interface ClassSupplierPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.classupplier.impl.ArtifactImpl <em>Artifact</em>}' class.
+		 * The meta object literal for the '{@link org.classupplier.impl.ContributionImpl <em>Contribution</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.classupplier.impl.ArtifactImpl
-		 * @see org.classupplier.impl.ClassSupplierPackageImpl#getArtifact()
+		 * @see org.classupplier.impl.ContributionImpl
+		 * @see org.classupplier.impl.ClassSupplierPackageImpl#getContribution()
 		 * @generated
 		 */
-		EClass ARTIFACT = eINSTANCE.getArtifact();
+		EClass CONTRIBUTION = eINSTANCE.getContribution();
 
 		/**
 		 * The meta object literal for the '<em><b>Snapshots</b></em>' map feature.
@@ -658,7 +688,8 @@ public interface ClassSupplierPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ARTIFACT__SNAPSHOTS = eINSTANCE.getArtifact_Snapshots();
+		EReference CONTRIBUTION__SNAPSHOTS = eINSTANCE
+				.getContribution_Snapshots();
 
 		/**
 		 * The meta object literal for the '<em><b>State</b></em>' reference feature.
@@ -666,7 +697,7 @@ public interface ClassSupplierPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ARTIFACT__STATE = eINSTANCE.getArtifact_State();
+		EReference CONTRIBUTION__STATE = eINSTANCE.getContribution_State();
 
 		/**
 		 * The meta object literal for the '{@link org.classupplier.impl.StateImpl <em>State</em>}' class.
@@ -755,12 +786,13 @@ public interface ClassSupplierPackage extends EPackage {
 		EClass WORKSPACE = eINSTANCE.getWorkspace();
 
 		/**
-		 * The meta object literal for the '<em><b>Artifacts</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Contributions</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference WORKSPACE__ARTIFACTS = eINSTANCE.getWorkspace_Artifacts();
+		EReference WORKSPACE__CONTRIBUTIONS = eINSTANCE
+				.getWorkspace_Contributions();
 
 		/**
 		 * The meta object literal for the '<em><b>Resource Set</b></em>' attribute feature.
@@ -810,6 +842,16 @@ public interface ClassSupplierPackage extends EPackage {
 		EClass ISCHEDULING_RULE = eINSTANCE.getISchedulingRule();
 
 		/**
+		 * The meta object literal for the '{@link java.util.concurrent.Future <em>Future</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.util.concurrent.Future
+		 * @see org.classupplier.impl.ClassSupplierPackageImpl#getFuture()
+		 * @generated
+		 */
+		EClass FUTURE = eINSTANCE.getFuture();
+
+		/**
 		 * The meta object literal for the '{@link org.classupplier.Phase <em>Phase</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -833,7 +875,7 @@ public interface ClassSupplierPackage extends EPackage {
 		 * The meta object literal for the '<em>Version</em>' data type.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.osgi.framework.Version
+		 * @see org.eclipse.equinox.p2.metadata.Version
 		 * @see org.classupplier.impl.ClassSupplierPackageImpl#getVersion()
 		 * @generated
 		 */

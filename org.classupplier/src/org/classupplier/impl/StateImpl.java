@@ -3,6 +3,10 @@
 package org.classupplier.impl;
 
 import java.util.Date;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import org.classupplier.ClassSupplierPackage;
 import org.classupplier.Phase;
@@ -27,7 +31,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.BasicFeatureMap;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.osgi.framework.Version;
+import org.eclipse.equinox.p2.metadata.Version;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -35,20 +39,43 @@ import org.osgi.framework.Version;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.classupplier.impl.StateImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.classupplier.impl.StateImpl#getTime <em>Time</em>}</li>
- *   <li>{@link org.classupplier.impl.StateImpl#getVersion <em>Version</em>}</li>
- *   <li>{@link org.classupplier.impl.StateImpl#getStage <em>Stage</em>}</li>
- *   <li>{@link org.classupplier.impl.StateImpl#getProjectName <em>Project Name</em>}</li>
- *   <li>{@link org.classupplier.impl.StateImpl#getEPackage <em>EPackage</em>}</li>
- *   <li>{@link org.classupplier.impl.StateImpl#getDynamicEPackage <em>Dynamic EPackage</em>}</li>
- *   <li>{@link org.classupplier.impl.StateImpl#getRuntimeEPackage <em>Runtime EPackage</em>}</li>
+ * <li>{@link org.classupplier.impl.StateImpl#getName <em>Name</em>}</li>
+ * <li>{@link org.classupplier.impl.StateImpl#getTime <em>Time</em>}</li>
+ * <li>{@link org.classupplier.impl.StateImpl#getVersion <em>Version</em>}</li>
+ * <li>{@link org.classupplier.impl.StateImpl#getStage <em>Stage</em>}</li>
+ * <li>{@link org.classupplier.impl.StateImpl#getProjectName <em>Project Name
+ * </em>}</li>
+ * <li>{@link org.classupplier.impl.StateImpl#getEPackage <em>EPackage</em>}</li>
+ * <li>{@link org.classupplier.impl.StateImpl#getDynamicEPackage <em>Dynamic
+ * EPackage</em>}</li>
+ * <li>{@link org.classupplier.impl.StateImpl#getRuntimeEPackage <em>Runtime
+ * EPackage</em>}</li>
  * </ul>
  * </p>
  *
- * @generated
+ * @generated NOT
  */
-public class StateImpl extends EObjectImpl implements State {
+public class StateImpl extends EObjectImpl implements State, InternalState {
+	private final class ResultAdapter extends AdapterImpl {
+		private EPackage result;
+
+		@Override
+		public void notifyChanged(Notification msg) {
+			if (msg.getEventType() == Notification.SET
+					&& msg.getFeatureID(State.class) == ClassSupplierPackage.CONTRIBUTION__STAGE
+					&& msg.getNewValue().equals(Phase.LOADED))
+				setResult(getRuntimeEPackage());
+		}
+
+		public EPackage getResult() {
+			return result;
+		}
+
+		public void setResult(EPackage result) {
+			this.result = result;
+		}
+	}
+
 	public class StageAdapter extends AdapterImpl {
 
 		@Override
@@ -72,6 +99,7 @@ public class StateImpl extends EObjectImpl implements State {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -81,6 +109,7 @@ public class StateImpl extends EObjectImpl implements State {
 	/**
 	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -90,6 +119,7 @@ public class StateImpl extends EObjectImpl implements State {
 	/**
 	 * The default value of the '{@link #getTime() <em>Time</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getTime()
 	 * @generated
 	 * @ordered
@@ -99,6 +129,7 @@ public class StateImpl extends EObjectImpl implements State {
 	/**
 	 * The cached value of the '{@link #getTime() <em>Time</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getTime()
 	 * @generated
 	 * @ordered
@@ -116,8 +147,9 @@ public class StateImpl extends EObjectImpl implements State {
 	protected static final Version VERSION_EDEFAULT = Version.emptyVersion;
 
 	/**
-	 * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getVersion() <em>Version</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getVersion()
 	 * @generated
 	 * @ordered
@@ -127,6 +159,7 @@ public class StateImpl extends EObjectImpl implements State {
 	/**
 	 * The default value of the '{@link #getStage() <em>Stage</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getStage()
 	 * @generated
 	 * @ordered
@@ -136,6 +169,7 @@ public class StateImpl extends EObjectImpl implements State {
 	/**
 	 * The cached value of the '{@link #getStage() <em>Stage</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getStage()
 	 * @generated
 	 * @ordered
@@ -143,8 +177,9 @@ public class StateImpl extends EObjectImpl implements State {
 	protected Phase stage = STAGE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}
+	 * ' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getProjectName()
 	 * @generated
 	 * @ordered
@@ -152,8 +187,9 @@ public class StateImpl extends EObjectImpl implements State {
 	protected static final String PROJECT_NAME_EDEFAULT = "";
 
 	/**
-	 * The cached value of the '{@link #getProjectName() <em>Project Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getProjectName() <em>Project Name</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getProjectName()
 	 * @generated
 	 * @ordered
@@ -161,13 +197,16 @@ public class StateImpl extends EObjectImpl implements State {
 	protected String projectName = PROJECT_NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getEPackage() <em>EPackage</em>}' attribute list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getEPackage() <em>EPackage</em>}'
+	 * attribute list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getEPackage()
 	 * @generated
 	 * @ordered
 	 */
 	protected FeatureMap ePackage;
+
+	private ResultAdapter results = new ResultAdapter();;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -177,10 +216,12 @@ public class StateImpl extends EObjectImpl implements State {
 	protected StateImpl() {
 		super();
 		eAdapters().add(new StageAdapter());
+		eAdapters().add(results);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -201,6 +242,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setName(String newName) {
@@ -235,6 +277,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String getProjectName() {
@@ -243,6 +286,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setProjectName(String newProjectName) {
@@ -256,6 +300,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public FeatureMap getEPackage() {
@@ -268,6 +313,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EPackage getDynamicEPackage() {
@@ -277,6 +323,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetDynamicEPackage(
@@ -288,6 +335,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setDynamicEPackage(EPackage newDynamicEPackage) {
@@ -298,6 +346,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EPackage getRuntimeEPackage() {
@@ -307,6 +356,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetRuntimeEPackage(
@@ -318,6 +368,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setRuntimeEPackage(EPackage newRuntimeEPackage) {
@@ -328,32 +379,18 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Phase getStage() {
-		return stage;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setStage(Phase newStage) {
-		Phase oldStage = stage;
-		stage = newStage == null ? STAGE_EDEFAULT : newStage;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ClassSupplierPackage.STATE__STAGE, oldStage, stage));
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
 	 */
-	public void produce(IProgressMonitor monitor) {
-		if (getStage().equals(Phase.PROCESSING))
-			return;
+	public synchronized Future<? extends EPackage> construct(
+			IProgressMonitor monitor) {
+		ExecutorService executorService = Executors.newSingleThreadExecutor();
+		Future<? extends EPackage> result = executorService
+				.submit(new ConstructCallable(monitor));
+		return result;
+	}
+
+	public EPackage doConstruct(IProgressMonitor monitor) throws Exception {
 		Phase oldStage = getStage();
 		setStage(Phase.PROCESSING);
 		try {
@@ -380,14 +417,56 @@ public class StateImpl extends EObjectImpl implements State {
 			}
 			ClassSupplierOSGi.getInstance().getLog().log(e.getStatus());
 			monitor.setCanceled(true);
-			return;
+			throw e;
 		} catch (Exception e) {
 			setStage(oldStage);
 			monitor.setCanceled(true);
-			e.printStackTrace();
+			throw e;
+		} finally {
+			monitor.done();
 		}
-		monitor.done();
 
+		while (!eIsSet(ClassSupplierPackage.CONTRIBUTION__RUNTIME_EPACKAGE)) {
+			Thread.yield();
+		}
+		return results.getResult();
+	}
+
+	protected class ConstructCallable implements Callable<EPackage> {
+
+		protected IProgressMonitor monitor;
+
+		public ConstructCallable(IProgressMonitor monitor) {
+			this.monitor = monitor;
+
+		}
+
+		@Override
+		public EPackage call() throws Exception {
+			return doConstruct(monitor);
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public Phase getStage() {
+		return stage;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public void setStage(Phase newStage) {
+		Phase oldStage = stage;
+		stage = newStage == null ? STAGE_EDEFAULT : newStage;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ClassSupplierPackage.STATE__STAGE, oldStage, stage));
 	}
 
 	/**
@@ -410,6 +489,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -429,6 +509,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Version getVersion() {
@@ -437,6 +518,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setVersion(Version newVersion) {
@@ -449,6 +531,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -478,6 +561,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -513,6 +597,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -548,6 +633,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -579,6 +665,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

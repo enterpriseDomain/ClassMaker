@@ -7,7 +7,6 @@ Bundle-Vendor: Kirill Zotkin
 Require-Bundle: org.eclipse.core.runtime,
  org.classupplier;bundle-version="0.7.6",
  org.eclipse.equinox.ds,
- org.eclipse.emf.query,
  org.junit
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7,
  JavaSE-1.6

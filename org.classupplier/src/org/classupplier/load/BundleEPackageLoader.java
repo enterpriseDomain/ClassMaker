@@ -1,125 +1,81 @@
 package org.classupplier.load;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-import org.classupplier.Artifact;
 import org.classupplier.Phase;
 import org.classupplier.State;
+import org.classupplier.builders.SupplementaryJob;
 import org.classupplier.impl.ClassSupplierOSGi;
-import org.classupplier.util.ResourceUtil;
-import org.eclipse.core.resources.IProject;
+import org.classupplier.util.ClassSupplierUtil;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.resources.WorkspaceJob;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.osgi.util.NLS;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.BundleException;
 import org.osgi.framework.Constants;
-import org.osgi.framework.FrameworkListener;
 import org.osgi.framework.FrameworkUtil;
-import org.osgi.framework.wiring.FrameworkWiring;
 
-public class BundleEPackageLoader extends WorkspaceJob {
+public class BundleEPackageLoader extends SupplementaryJob {
 
-	private IProject project;
-
-	private boolean enforceReplace = false;
-
-	public BundleEPackageLoader(IProject project) {
-		super("Install and load");
-		this.project = project;
+	public BundleEPackageLoader() {
+		super("Load");
 	}
 
 	public IStatus load(IProgressMonitor monitor) throws CoreException {
-		if (getArtifactState().getStage() == Phase.NEW)
-			return new Status(IStatus.ERROR, ClassSupplierOSGi.PLUGIN_ID,
-					"Model not specified.");
-		IPath jarPath = ResourceUtil.getTargetResourcePath(getProject(),
-				getArtifactState());
+		State state = ClassSupplierUtil.getState(getProject());
+		if (state.getStage() == Phase.DEFINED)
+			return ClassSupplierOSGi.createErrorStatus("Model not specified.");
 		try {
-			BundleContext context = getContext();
-			Bundle osgiBundle = null;
-			for (Bundle bundle : getExistingBundles())
-				if (isEnforceReplace())
-					bundle.uninstall();
-				else
-					osgiBundle = bundle;
-			if (isEnforceReplace()
-					|| (!isEnforceReplace() && osgiBundle == null))
-				osgiBundle = context.installBundle(URI.createFileURI(
-						jarPath.toString()).toString());
-			Collection<Bundle> bundles = new ArrayList<Bundle>();
-			FrameworkWiring frameworkWiring = context.getBundle(0).adapt(
-					FrameworkWiring.class);
-			frameworkWiring.refreshBundles(bundles, new FrameworkListener[0]);
-			if (frameworkWiring.resolveBundles(bundles)) {
-				String packageClassName = getArtifactState()
-						.getDynamicEPackage().getName()
-						+ "."
-						+ getArtifactState().getName() + "Package";
-				Class<?> packageClass = osgiBundle.loadClass(packageClassName);
-				EPackage ePackage = (EPackage) packageClass.getField(
-						"eINSTANCE").get(packageClass);
-				Assert.isNotNull(ePackage);
-				getArtifactState().setRuntimeEPackage(ePackage);
-				return new Status(IStatus.OK, ClassSupplierOSGi.PLUGIN_ID,
-						"Bundle '"
-								+ osgiBundle.getSymbolicName()
-								+ '-'
-								+ osgiBundle.getHeaders().get(
-										Constants.BUNDLE_VERSION)
-								+ "' with EPackage '" + ePackage.getNsURI()
-								+ "' has been loaded successfully.");
-
+			Bundle osgiBundle = getBundle(getProject().getName());
+			if (osgiBundle == null)
+				return ClassSupplierOSGi.createErrorStatus(NLS.bind(
+						"Bundle {0} not found in plug-in registry.",
+						getProject().getName()));
+			String packageClassName = state.getDynamicEPackage().getName()
+					+ "." + state.getName() + "Package";
+			Class<?> packageClass = osgiBundle.loadClass(packageClassName);
+			EPackage ePackage = (EPackage) packageClass.getField("eINSTANCE")
+					.get(packageClass);
+			Assert.isNotNull(ePackage);
+			state.setRuntimeEPackage(ePackage);
+			
+			if (monitor.isCanceled()) {
+				return Status.CANCEL_STATUS;
 			}
+			return ClassSupplierOSGi
+					.createOKStatus(NLS
+							.bind("Bundle {0}-{1} with EPackage {2} has been successfully loaded.",
+									new Object[] {
+											osgiBundle.getSymbolicName(),
+											osgiBundle.getHeaders().get(
+													Constants.BUNDLE_VERSION),
+											ePackage.getNsURI() }));
 		} catch (IllegalArgumentException e) {
-			throw new CoreException(new Status(IStatus.ERROR,
-					ClassSupplierOSGi.PLUGIN_ID, e.getLocalizedMessage(), e));
+			throw new CoreException(ClassSupplierOSGi.createErrorStatus(e));
 		} catch (ReflectiveOperationException e) {
-			throw new CoreException(new Status(IStatus.ERROR,
-					ClassSupplierOSGi.PLUGIN_ID, e.getLocalizedMessage(), e));
+			throw new CoreException(ClassSupplierOSGi.createErrorStatus(e));
 		} catch (SecurityException e) {
-			throw new CoreException(new Status(IStatus.ERROR,
-					ClassSupplierOSGi.PLUGIN_ID, e.getLocalizedMessage(), e));
-		} catch (BundleException e) {
-			throw new CoreException(new Status(IStatus.ERROR,
-					ClassSupplierOSGi.PLUGIN_ID, e.getLocalizedMessage(), e));
+			throw new CoreException(ClassSupplierOSGi.createErrorStatus(e));
 		} catch (Error e) {
-			throw new CoreException(new Status(IStatus.ERROR,
-					ClassSupplierOSGi.PLUGIN_ID, e.getLocalizedMessage(), e));
+			throw new CoreException(ClassSupplierOSGi.createErrorStatus(e));
 		} finally {
 			monitor.done();
 		}
-		return new Status(IStatus.ERROR, ClassSupplierOSGi.PLUGIN_ID,
-				"EPackage not loaded.");
+	}
+
+	private Bundle getBundle(String name) {
+		BundleContext context = getContext();
+		for (Bundle bundle : context.getBundles())
+			if (bundle.getSymbolicName().equals(name))
+				return bundle;
+		return null;
 	}
 
 	private BundleContext getContext() {
 		return FrameworkUtil.getBundle(this.getClass()).getBundleContext();
-	}
-
-	@Override
-	public IStatus runInWorkspace(IProgressMonitor monitor)
-			throws CoreException {
-		IStatus result = load(monitor);
-		return result;
-	}
-
-	private State getArtifactState() {
-		Artifact artifact = ClassSupplierOSGi.getClassSupplier().getWorkspace()
-				.getArtifact(getProject().getName());
-
-		State state = artifact.getState();
-		return state;
 	}
 
 	@Override
@@ -128,31 +84,9 @@ public class BundleEPackageLoader extends WorkspaceJob {
 				|| family == ResourcesPlugin.FAMILY_MANUAL_BUILD;
 	}
 
-	public IProject getProject() {
-		return project;
-	}
-
-	private Collection<Bundle> getExistingBundles() {
-		State state = getArtifactState();
-		BundleContext context = getContext();
-		List<Bundle> results = new ArrayList<Bundle>();
-		for (Bundle bundle : context.getBundles())
-			if (bundle.getSymbolicName().equals(state.getProjectName())
-					&& bundle.getVersion().equals(state.getVersion()))
-				results.add(bundle);
-		return results;
-	}
-
-	public boolean bundleExists() {
-		return !getExistingBundles().isEmpty();
-	}
-
-	public boolean isEnforceReplace() {
-		return enforceReplace;
-	}
-
-	public void setEnforceReplace(boolean enforceReplace) {
-		this.enforceReplace = enforceReplace;
+	@Override
+	public IStatus work(IProgressMonitor monitor) throws CoreException {
+		return load(monitor);
 	}
 
 }

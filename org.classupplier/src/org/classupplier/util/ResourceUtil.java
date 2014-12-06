@@ -1,11 +1,13 @@
 package org.classupplier.util;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-import org.classupplier.State;
 import org.classupplier.Workspace;
 import org.classupplier.impl.ClassSupplierOSGi;
 import org.eclipse.core.resources.IProject;
@@ -18,7 +20,6 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.preferences.IPreferencesService;
 import org.eclipse.emf.common.util.URI;
-import org.osgi.framework.Version;
 
 public class ResourceUtil {
 
@@ -46,19 +47,13 @@ public class ResourceUtil {
 			Workspace workspace) {
 		if (workspace == null)
 			workspace = ClassSupplierOSGi.getClassSupplier().getWorkspace();
-		String name = workspace.getArtifact(project.getName()).getName();
+		String name = ClassSupplierUtil.getState(workspace, project).getName();
 		return project.getFullPath().append(getModelFolderName())
 				.append(getFileName(name));
 	}
 
 	public static IPath getExportDestination(IProject project) {
 		return project.getLocation().append(getTargetFolderName());
-	}
-
-	public static IPath getTargetResourcePath(IProject project, State state) {
-		return getExportDestination(project).append("plugins")
-				.addTrailingSeparator().append(getJarName(state))
-				.addFileExtension("jar");
 	}
 
 	/**
@@ -108,17 +103,6 @@ public class ResourceUtil {
 		workspace.setDescription(d);
 	}
 
-	public static String getJarName(State state) {
-		String jarName;
-		Version version = state.getVersion();
-		if (version.equals(Version.emptyVersion))
-			jarName = state.getProjectName() + '_'
-					+ Version.parseVersion("1.0.0.qualifier").toString();
-		else
-			jarName = state.getProjectName() + '_' + version;
-		return jarName;
-	}
-
 	public static String formatQualifier(Date timestamp) {
 		return qualifierFormat.format(timestamp);
 	}
@@ -133,4 +117,24 @@ public class ResourceUtil {
 				.append(fileName).toString();
 	}
 
+	public static void writeFile(IPath location, CharSequence contents)
+			throws CoreException {
+		location.uptoSegment(location.segmentCount() - 1).toFile().mkdirs();
+		File file = location.toFile();
+		try {
+			file.createNewFile();
+			FileWriter writer = null;
+			try {
+				writer = new FileWriter(file);
+				writer.append(contents);
+				writer.flush();
+			} finally {
+				if (writer != null)
+					writer.close();
+			}
+		} catch (IOException e) {
+			throw new CoreException(ClassSupplierOSGi.createErrorStatus(e));
+		}
+	}
+	
 }

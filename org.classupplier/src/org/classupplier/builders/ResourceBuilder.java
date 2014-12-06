@@ -7,20 +7,16 @@ import java.util.Map;
 import org.classupplier.Phase;
 import org.classupplier.State;
 import org.classupplier.impl.ClassSupplierOSGi;
+import org.classupplier.util.ClassSupplierUtil;
 import org.classupplier.util.ResourceUtil;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.ISchedulingRule;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -40,24 +36,22 @@ public class ResourceBuilder extends IncrementalProjectBuilder {
 				ResourceUtil.getModelFolderName());
 		if (!folder.exists())
 			folder.create(true, true, monitor);
-		ISchedulingRule rule = getRule(kind, args);
-		State state = ClassSupplierOSGi.getClassSupplier().getWorkspace()
-				.getArtifact(getProject().getName()).getState();
-		getProject().getWorkspace().run(new ResourceRunnable(state), rule, 0,
-				monitor);
+
+		ResourcesJob job = new ResourcesJob();
+		job.setProject(getProject());
+		job.setProgressGroup(monitor, 1);
+		job.schedule();
 		return null;
 	}
 
-	private class ResourceRunnable implements IWorkspaceRunnable {
+	private class ResourcesJob extends SupplementaryJob {
 
-		private State state;
-
-		public ResourceRunnable(State state) {
-			this.state = state;
+		public ResourcesJob() {
+			super("Resource Persistence");
 		}
 
 		@Override
-		public void run(IProgressMonitor monitor) throws CoreException {
+		public IStatus work(IProgressMonitor monitor) throws CoreException {
 			IPath modelPath = ResourceUtil.getModelResourcePath(getProject(),
 					ClassSupplierOSGi.getClassSupplier().getWorkspace());
 			URI modelURI = URI.createPlatformResourceURI(modelPath.toString(),
@@ -71,10 +65,9 @@ public class ResourceBuilder extends IncrementalProjectBuilder {
 				try {
 					resource.load(Collections.emptyMap());
 				} catch (IOException e) {
-					throw new CoreException(new Status(IStatus.WARNING,
-							ClassSupplierOSGi.PLUGIN_ID,
-							e.getLocalizedMessage(), e));
+					return ClassSupplierOSGi.createWarningStatus(e);
 				}
+			State state = ClassSupplierUtil.getState(getProject());
 			if (state.getStage() == Phase.MODELED
 					|| state.getStage() == Phase.PROCESSING) {
 				if (!resource.getContents().isEmpty()
@@ -92,20 +85,11 @@ public class ResourceBuilder extends IncrementalProjectBuilder {
 			try {
 				resource.save(Collections.emptyMap());
 			} catch (IOException e) {
-				throw new CoreException(
-						new Status(IStatus.WARNING,
-								ClassSupplierOSGi.PLUGIN_ID,
-								e.getLocalizedMessage(), e));
+				return ClassSupplierOSGi.createWarningStatus(e);
 			}
-			try {
-				Job.getJobManager().join(ResourcesPlugin.FAMILY_MANUAL_BUILD,
-						monitor);
-			} catch (OperationCanceledException e) {
-				return;
-			} catch (InterruptedException e) {
-				return;
-			}
+			return Status.OK_STATUS;
 		}
+
 	}
 
 }

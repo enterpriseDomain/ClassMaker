@@ -3,6 +3,7 @@
 package org.classupplier;
 
 import java.util.Date;
+import java.util.concurrent.Future;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
@@ -100,19 +101,17 @@ public interface State extends EObject {
 	 * @model dataType="org.classupplier.Version"
 	 * @generated
 	 */
-	Version getVersion();
+	org.eclipse.equinox.p2.metadata.Version getVersion();
 
 	/**
-	 * Sets the value of the '{@link org.classupplier.State#getVersion
-	 * <em>Version</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Version</em>' attribute.
+	 * Sets the value of the '{@link org.classupplier.State#getVersion <em>Version</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Version</em>' attribute.
 	 * @see #getVersion()
 	 * @generated
 	 */
-	void setVersion(Version value);
+	void setVersion(org.eclipse.equinox.p2.metadata.Version value);
 
 	/**
 	 * Returns the value of the '<em><b>Project Name</b></em>' attribute.
@@ -214,6 +213,14 @@ public interface State extends EObject {
 	void setRuntimeEPackage(EPackage value);
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model type="org.classupplier.Future<? extends org.eclipse.emf.ecore.EPackage>" monitorDataType="org.classupplier.IProgressMonitor"
+	 * @generated
+	 */
+	Future<? extends EPackage> construct(IProgressMonitor monitor);
+
+	/**
 	 * Returns the value of the '<em><b>Stage</b></em>' attribute.
 	 * The default value is <code>""</code>.
 	 * The literals are from the enumeration {@link org.classupplier.Phase}.
@@ -241,13 +248,6 @@ public interface State extends EObject {
 	 * @generated
 	 */
 	void setStage(Phase value);
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model monitorDataType="org.classupplier.IProgressMonitor"
-	 * @generated
-	 */
-	void produce(IProgressMonitor monitor);
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -4,9 +4,10 @@ package org.classupplier.util;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.concurrent.Future;
 
-import org.classupplier.Artifact;
 import org.classupplier.ClassSupplierPackage;
+import org.classupplier.Contribution;
 import org.classupplier.State;
 import org.classupplier.Workspace;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
@@ -67,11 +68,11 @@ public class ClassSupplierSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-		case ClassSupplierPackage.ARTIFACT: {
-			Artifact artifact = (Artifact) theEObject;
-			T result = caseArtifact(artifact);
+		case ClassSupplierPackage.CONTRIBUTION: {
+			Contribution contribution = (Contribution) theEObject;
+			T result = caseContribution(contribution);
 			if (result == null)
-				result = caseState(artifact);
+				result = caseState(contribution);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -107,22 +108,29 @@ public class ClassSupplierSwitch<T> extends Switch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
+		case ClassSupplierPackage.FUTURE: {
+			Future<?> future = (Future<?>) theEObject;
+			T result = caseFuture(future);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		default:
 			return defaultCase(theEObject);
 		}
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Artifact</em>'.
-	 * <!-- begin-user-doc --> This implementation returns
-	 * null; returning a non-null result will terminate the switch. <!--
+	 * Returns the result of interpreting the object as an instance of '<em>Contribution</em>'.
+	 * <!-- begin-user-doc --> This implementation
+	 * returns null; returning a non-null result will terminate the switch. <!--
 	 * end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Artifact</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Contribution</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseArtifact(Artifact object) {
+	public T caseContribution(Contribution object) {
 		return null;
 	}
 
@@ -142,10 +150,9 @@ public class ClassSupplierSwitch<T> extends Switch<T> {
 
 	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Workspace</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> This implementation returns
+	 * null; returning a non-null result will terminate the switch. <!--
+	 * end-user-doc -->
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>Workspace</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
@@ -171,16 +178,29 @@ public class ClassSupplierSwitch<T> extends Switch<T> {
 
 	/**
 	 * Returns the result of interpreting the object as an instance of '<em>IScheduling Rule</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> This implementation
+	 * returns null; returning a non-null result will terminate the switch. <!--
+	 * end-user-doc -->
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>IScheduling Rule</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
 	public T caseISchedulingRule(ISchedulingRule object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Future</em>'.
+	 * <!-- begin-user-doc --> This implementation returns
+	 * null; returning a non-null result will terminate the switch. <!--
+	 * end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Future</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <V> T caseFuture(Future<V> object) {
 		return null;
 	}
 

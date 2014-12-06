@@ -4,9 +4,9 @@ package org.classupplier.impl;
 
 import java.util.Collection;
 
-import org.classupplier.Artifact;
 import org.classupplier.ClassSupplierFactory;
 import org.classupplier.ClassSupplierPackage;
+import org.classupplier.Contribution;
 import org.classupplier.Phase;
 import org.classupplier.State;
 import org.classupplier.Workspace;
@@ -18,6 +18,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
+import org.eclipse.core.runtime.jobs.MultiRule;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -40,8 +41,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.classupplier.impl.WorkspaceImpl#getArtifacts <em>Artifacts
- * </em>}</li>
+ * <li>{@link org.classupplier.impl.WorkspaceImpl#getContributions <em>
+ * Contributions</em>}</li>
  * <li>{@link org.classupplier.impl.WorkspaceImpl#getResourceSet <em>Resource
  * Set</em>}</li>
  * </ul>
@@ -51,14 +52,15 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	/**
-	 * The cached value of the '{@link #getArtifacts() <em>Artifacts</em>}'
-	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getContributions()
+	 * <em>Contributions</em>}' containment reference list. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
 	 * 
-	 * @see #getArtifacts()
+	 * @see #getContributions()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Artifact> artifacts;
+	protected EList<Contribution> contributions;
 
 	/**
 	 * The default value of the '{@link #getResourceSet() <em>Resource Set</em>}
@@ -104,12 +106,13 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * 
 	 * @generated
 	 */
-	public EList<Artifact> getArtifacts() {
-		if (artifacts == null) {
-			artifacts = new EObjectContainmentEList<Artifact>(Artifact.class,
-					this, ClassSupplierPackage.WORKSPACE__ARTIFACTS);
+	public EList<Contribution> getContributions() {
+		if (contributions == null) {
+			contributions = new EObjectContainmentEList<Contribution>(
+					Contribution.class, this,
+					ClassSupplierPackage.WORKSPACE__CONTRIBUTIONS);
 		}
-		return artifacts;
+		return contributions;
 	}
 
 	/**
@@ -130,19 +133,20 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		IProgressMonitor monitor = new NullProgressMonitor();
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		for (IProject project : workspace.getRoot().getProjects()) {
-			Artifact artifact = null;
+			Contribution contribution = null;
 			try {
 				if (!project.isOpen())
 					project.open(monitor);
 				if (project.hasNature(ClassSupplierOSGi.NATURE_ID)) {
 					if (oldWorkspace != null)
-						artifact = oldWorkspace.getArtifact(project.getName());
-					if (artifact == null) {
-						artifact = (ArtifactImpl) ClassSupplierFactory.eINSTANCE
-								.createArtifact();
-						artifact.setProjectName(project.getName());
+						contribution = oldWorkspace.findContribution(project
+								.getName());
+					if (contribution == null) {
+						contribution = (ContributionImpl) ClassSupplierFactory.eINSTANCE
+								.createContribution();
+						contribution.setProjectName(project.getName());
 					}
-					registerArtifact(artifact);
+					registerContribution(contribution);
 					workspace.run(new Initializer(project, this), monitor);
 				}
 			} catch (CoreException e) {
@@ -156,15 +160,16 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * 
 	 * @generated NOT
 	 */
-	public Artifact createArtifact(EPackage blueprint) {
-		Artifact result = getArtifact(blueprint);
+	public Contribution createContribution(EPackage blueprint) {
+		Contribution result = getContribution(blueprint);
 		if (result != null)
 			return result;
-		result = (ArtifactImpl) ClassSupplierFactory.eINSTANCE.createArtifact();
+		result = (ContributionImpl) ClassSupplierFactory.eINSTANCE
+				.createContribution();
 		result.newState();
 		result.setName(blueprint.getName());
 		result.setDynamicEPackage(blueprint);
-		registerArtifact(result);
+		registerContribution(result);
 		return result;
 	}
 
@@ -173,38 +178,38 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * 
 	 * @generated NOT
 	 */
-	public Artifact getArtifact(EObject eObject) {
-		ClassSupplierSwitch<Artifact> getSwitch = new ClassSupplierSwitch<Artifact>() {
+	public Contribution getContribution(EObject eObject) {
+		ClassSupplierSwitch<Contribution> getSwitch = new ClassSupplierSwitch<Contribution>() {
 
 			@Override
-			public Artifact caseArtifact(Artifact object) {
+			public Contribution caseContribution(Contribution object) {
 				return object;
 			}
 
 			@Override
-			public Artifact caseState(State object) {
-				return (Artifact) object.eContainer();
+			public Contribution caseState(State object) {
+				return (Contribution) object.eContainer();
 			}
 
 			@Override
-			public Artifact caseWorkspace(Workspace object) {
+			public Contribution caseWorkspace(Workspace object) {
 				throw new IllegalArgumentException();
 			}
 
 			@Override
-			public Artifact defaultCase(EObject object) {
+			public Contribution defaultCase(EObject object) {
 				switch (object.eClass().getClassifierID()) {
 				case EcorePackage.EPACKAGE:
-					return getArtifact((EPackage) object);
+					return getContribution((EPackage) object);
 				case EcorePackage.ECLASSIFIER:
-					return getArtifact(((EClassifier) object).getEPackage());
+					return getContribution(((EClassifier) object).getEPackage());
 				case EcorePackage.EOBJECT:
-					getArtifact(((EObject) object).eClass().getEPackage());
+					getContribution(((EObject) object).eClass().getEPackage());
 				case EcorePackage.ETYPED_ELEMENT:
-					getArtifact(((ETypedElement) object).getEType()
+					getContribution(((ETypedElement) object).getEType()
 							.getEPackage());
 				case EcorePackage.EFACTORY:
-					return getArtifact(((EFactory) object).getEPackage());
+					return getContribution(((EFactory) object).getEPackage());
 				}
 				return super.defaultCase(object);
 			}
@@ -218,8 +223,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * 
 	 * @generated NOT
 	 */
-	public Artifact getArtifact(EPackage ePackage) {
-		for (Artifact a : getArtifacts())
+	public Contribution getContribution(EPackage ePackage) {
+		for (Contribution a : getContributions())
 			switch (a.getStage()) {
 			case MODELED:
 				if (packagesAreEqual(ePackage, a.getAppropriateEPackage()))
@@ -238,11 +243,29 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * 
 	 * @generated NOT
 	 */
-	public Artifact getArtifact(String projectName) {
-		for (Artifact artifact : getArtifacts()) {
-			if (artifact.getProjectName() != null
-					&& artifact.getProjectName().equals(projectName))
-				return artifact;
+	public void registerContribution(Contribution contribution) {
+		getContributions().add(contribution);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public void unregisterContribution(Contribution contribution) {
+		getContributions().remove(contribution);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Contribution findContribution(String projectName) {
+		for (Contribution contribution : getContributions()) {
+			if (contribution.getProjectName() != null
+					&& contribution.getProjectName().equals(projectName))
+				return contribution;
 		}
 		return null;
 	}
@@ -252,29 +275,11 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * 
 	 * @generated NOT
 	 */
-	public void registerArtifact(Artifact artifact) {
-		getArtifacts().add(artifact);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public void unregisterArtifact(Artifact artifact) {
-		getArtifacts().remove(artifact);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
 	public Phase contains(EPackage blueprint) {
-		for (Artifact a : getArtifacts())
-			if (packagesAreEqual(blueprint, a.getAppropriateEPackage()))
-				return a.getStage();
-		return Phase.NEW;
+		for (Contribution c : getContributions())
+			if (packagesAreEqual(blueprint, c.getAppropriateEPackage()))
+				return c.getStage();
+		return Phase.DEFINED;
 	}
 
 	/**
@@ -306,9 +311,9 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case ClassSupplierPackage.WORKSPACE__ARTIFACTS:
-			return ((InternalEList<?>) getArtifacts()).basicRemove(otherEnd,
-					msgs);
+		case ClassSupplierPackage.WORKSPACE__CONTRIBUTIONS:
+			return ((InternalEList<?>) getContributions()).basicRemove(
+					otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -321,8 +326,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case ClassSupplierPackage.WORKSPACE__ARTIFACTS:
-			return getArtifacts();
+		case ClassSupplierPackage.WORKSPACE__CONTRIBUTIONS:
+			return getContributions();
 		case ClassSupplierPackage.WORKSPACE__RESOURCE_SET:
 			return getResourceSet();
 		}
@@ -338,9 +343,10 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case ClassSupplierPackage.WORKSPACE__ARTIFACTS:
-			getArtifacts().clear();
-			getArtifacts().addAll((Collection<? extends Artifact>) newValue);
+		case ClassSupplierPackage.WORKSPACE__CONTRIBUTIONS:
+			getContributions().clear();
+			getContributions().addAll(
+					(Collection<? extends Contribution>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -354,8 +360,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case ClassSupplierPackage.WORKSPACE__ARTIFACTS:
-			getArtifacts().clear();
+		case ClassSupplierPackage.WORKSPACE__CONTRIBUTIONS:
+			getContributions().clear();
 			return;
 		}
 		super.eUnset(featureID);
@@ -369,8 +375,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case ClassSupplierPackage.WORKSPACE__ARTIFACTS:
-			return artifacts != null && !artifacts.isEmpty();
+		case ClassSupplierPackage.WORKSPACE__CONTRIBUTIONS:
+			return contributions != null && !contributions.isEmpty();
 		case ClassSupplierPackage.WORKSPACE__RESOURCE_SET:
 			return RESOURCE_SET_EDEFAULT == null ? resourceSet != null
 					: !RESOURCE_SET_EDEFAULT.equals(resourceSet);
@@ -399,6 +405,14 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	public boolean contains(ISchedulingRule rule) {
 		if (this == rule)
 			return true;
+		if (rule instanceof MultiRule) {
+			MultiRule multi = (MultiRule) rule;
+			ISchedulingRule[] children = multi.getChildren();
+			for (int i = 0; i < children.length; i++)
+				if (!contains(children[i]))
+					return false;
+			return true;
+		}
 		return ResourcesPlugin.getWorkspace().getRoot().contains(rule);
 	}
 

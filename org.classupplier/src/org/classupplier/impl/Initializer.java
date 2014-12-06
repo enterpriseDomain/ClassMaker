@@ -1,10 +1,9 @@
 package org.classupplier.impl;
 
-import org.classupplier.Artifact;
 import org.classupplier.Phase;
-import org.classupplier.State;
 import org.classupplier.Workspace;
 import org.classupplier.load.BundleEPackageLoader;
+import org.classupplier.util.ClassSupplierUtil;
 import org.classupplier.util.ResourceUtil;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -15,7 +14,6 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
@@ -41,8 +39,8 @@ public class Initializer implements IWorkspaceRunnable {
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		boolean autoBuild = workspace.isAutoBuilding();
 		ResourceUtil.setAutoBuilding(workspace, false);
-		switch (getState().getStage().getValue()) {
-		case Phase.NEW_VALUE:
+		switch (ClassSupplierUtil.getState(project).getStage().getValue()) {
+		case Phase.DEFINED_VALUE:
 			break;
 		case Phase.MODELED_VALUE:
 			loadModel();
@@ -57,8 +55,8 @@ public class Initializer implements IWorkspaceRunnable {
 	}
 
 	private void loadJar(IProgressMonitor monitor) {
-		BundleEPackageLoader loaderJob = new BundleEPackageLoader(getProject());
-		loaderJob.setPriority(Job.SHORT);
+		BundleEPackageLoader loaderJob = new BundleEPackageLoader();
+		loaderJob.setProject(getProject());
 		loaderJob.setRule(ResourcesPlugin.getWorkspace().getRoot());
 		loaderJob.schedule();
 	}
@@ -67,21 +65,20 @@ public class Initializer implements IWorkspaceRunnable {
 		IFolder folder = getProject().getFolder(
 				ResourceUtil.getModelFolderName());
 		if (!folder.exists())
-			throw new CoreException(new Status(Status.WARNING,
-					ClassSupplierOSGi.PLUGIN_ID, NLS.bind(
-							"Domain project {0} has no model folder.",
+			throw new CoreException(ClassSupplierOSGi.createWarningStatus(NLS
+					.bind("Domain project {0} has no model folder.",
 							getProject())));
 		try {
 			for (IResource resource : getProject().getFolder(
 					ResourceUtil.getModelFolderName()).members())
 				if (resource.getFileExtension().equals(
 						ResourceUtil.getModelFileExt()))
-					getState().setName(
+					ClassSupplierUtil.getState(project).setName(
 							resource.getLocation().removeFileExtension()
 									.lastSegment());
 		} catch (CoreException e) {
-			throw new CoreException(new Status(Status.WARNING,
-					ClassSupplierOSGi.PLUGIN_ID, NLS.bind(
+			throw new CoreException(
+					ClassSupplierOSGi.createWarningStatus(NLS.bind(
 							"Model for project {0} doesn't exist.",
 							getProject())));
 		}
@@ -98,8 +95,9 @@ public class Initializer implements IWorkspaceRunnable {
 
 			EPackage value = (EPackage) EcoreUtil.copy(resource.getContents()
 					.get(0));
-			getState().setName(modelURI.trimFileExtension().lastSegment());
-			getState().setDynamicEPackage(value);
+			ClassSupplierUtil.getState(project).setName(
+					modelURI.trimFileExtension().lastSegment());
+			ClassSupplierUtil.getState(project).setDynamicEPackage(value);
 		}
 	}
 
@@ -119,8 +117,4 @@ public class Initializer implements IWorkspaceRunnable {
 		this.workspace = workspace;
 	}
 
-	private State getState() {
-		Artifact artifact = getWorkspace().getArtifact(getProject().getName());
-		return artifact.getState();
-	}
 }

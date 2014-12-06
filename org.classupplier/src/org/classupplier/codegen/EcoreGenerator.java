@@ -2,85 +2,112 @@ package org.classupplier.codegen;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Date;
 
-import org.classupplier.State;
+import org.classupplier.builders.SupplementaryJob;
 import org.classupplier.impl.ClassSupplierOSGi;
+import org.classupplier.util.ClassSupplierUtil;
 import org.classupplier.util.ResourceUtil;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
-import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.ISchedulingRule;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.codegen.ecore.Generator;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.osgi.util.NLS;
-import org.osgi.framework.Version;
 
-public class EcoreGenerator implements org.classupplier.codegen.Generator {
+public class EcoreGenerator extends SupplementaryJob implements
+		org.classupplier.codegen.Generator {
+
+	public EcoreGenerator() {
+		super("Generate Code");
+		// setRule(EcorePlugin.getWorkspaceRoot());
+		// setPriority(BUILD);
+	}
 
 	protected static final String SOURCE_FOLDER_NAME = "src/main/java";
 
 	public static final String GENMODEL_EXT = "genmodel";
 
-	private GenModelSetupRunnable genModelSetupRunnable;
+	private GenModelSetupJob genModelSetup = new GenModelSetupJob();
+
+	private GenModelGenerationJob genModelGeneration = new GenModelGenerationJob();
+
+	private CodeGenerationJob codeGeneration = new CodeGenerationJob();
 
 	protected ResourceSet resourceSet;
 
-	protected class GenModelSetupRunnable implements IWorkspaceRunnable {
+	protected class GenModelSetupJob extends SupplementaryJob {
+
+		public GenModelSetupJob() {
+			super("Setup GenModel");
+		}
 
 		private IPath path;
 
-		private IProject project;
-
-		private State state;
-
-		public GenModelSetupRunnable(IPath genModelPath, IProject project,
-				State state) {
-			this.setPath(genModelPath);
-			this.setProject(project);
-			this.setState(state);
-		}
-
 		@Override
-		public void run(IProgressMonitor monitor) throws CoreException {
+		public IStatus work(IProgressMonitor monitor) throws CoreException {
 			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 			URI genModelURI = URI.createFileURI(root.getRawLocation()
-					.append(getPath()).toString());
+					.append(getGenModelPath()).toString());
 			Resource resource = resourceSet.getResource(genModelURI, true);
 			GenModel genModel = (GenModel) resource.getContents().get(0);
-			setupGenModel(getState(), getPath().removeFileExtension()
+			setupGenModel(getGenModelPath().removeFileExtension()
 					.removeLastSegments(2), genModel);
 			try {
 				resource.save(Collections.EMPTY_MAP);
 			} catch (IOException e) {
 				throw new CoreException(
-						new Status(IStatus.WARNING,
-								ClassSupplierOSGi.PLUGIN_ID,
-								e.getLocalizedMessage(), e));
-			} finally {
-				monitor.done();
+						ClassSupplierOSGi.createWarningStatus(e));
 			}
-			try {
-				Job.getJobManager().join(ResourcesPlugin.FAMILY_MANUAL_BUILD,
-						monitor);
-			} catch (OperationCanceledException e) {
-				return;
-			} catch (InterruptedException e) {
-				return;
-			}
+			return Status.OK_STATUS;
+		}
+
+		public IPath getGenModelPath() {
+			return path;
+		}
+
+		public void setGenModelPath(IPath path) {
+			this.path = path;
+		}
+
+	}
+
+	protected class GenModelGenerationJob extends SupplementaryJob {
+
+		private org.eclipse.emf.codegen.ecore.Generator generator;
+
+		private IPath path;
+
+		public GenModelGenerationJob() {
+			super("GenModel Generation");
+		}
+
+		@Override
+		public IStatus work(IProgressMonitor monitor) throws CoreException {
+			getGenerator()
+					.run(new String[] { "-ecore2GenModel",
+							getPath().toString(), "",
+							ClassSupplierUtil.getState(getProject()).getName() });
+			return Status.OK_STATUS;
+		}
+
+		public org.eclipse.emf.codegen.ecore.Generator getGenerator() {
+			return generator;
+		}
+
+		public void setGenerator(
+				org.eclipse.emf.codegen.ecore.Generator generator) {
+			this.generator = generator;
 		}
 
 		public IPath getPath() {
@@ -91,85 +118,84 @@ public class EcoreGenerator implements org.classupplier.codegen.Generator {
 			this.path = path;
 		}
 
-		public IProject getProject() {
-			return project;
+	}
+
+	protected class CodeGenerationJob extends SupplementaryJob {
+
+		public CodeGenerationJob() {
+			super("Code Generation");
 		}
 
-		public void setProject(IProject project) {
-			this.project = project;
+		private org.eclipse.emf.codegen.ecore.Generator generator;
+
+		private IPath path;
+
+		@Override
+		public IStatus work(IProgressMonitor monitor) throws CoreException {
+			getGenerator().run(
+					new String[] {
+							"-model",
+							EcorePlugin.getWorkspaceRoot().getRawLocation()
+									.append(getGenModelPath()).toString() });
+			return Status.OK_STATUS;
 		}
 
-		public State getState() {
-			return state;
+		public org.eclipse.emf.codegen.ecore.Generator getGenerator() {
+			return generator;
 		}
 
-		public void setState(State state) {
-			this.state = state;
+		public void setGenerator(
+				org.eclipse.emf.codegen.ecore.Generator generator) {
+			this.generator = generator;
+		}
+
+		public IPath getGenModelPath() {
+			return path;
+		}
+
+		public void setGenModelPath(IPath path) {
+			this.path = path;
 		}
 
 	}
 
 	@Override
-	public void generate(final State state, ISchedulingRule rule,
-			final IProgressMonitor monitor) throws CoreException {
-		state.setVersion(Version.parseVersion("1.0.0" + '.'
-				+ ResourceUtil.formatQualifier(new Date())));
-
-		final IProject project = ResourcesPlugin.getWorkspace().getRoot()
-				.getProject(state.getProjectName());
-		IPath modelPath = ensureModelResourcePath(project, state.getName(),
-				monitor);
+	public IStatus generate(IProgressMonitor monitor) throws CoreException {
+		IPath modelPath = ensureModelResourcePathExists(getProject(),
+				ClassSupplierUtil.getState(getProject()).getName(), monitor);
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		final IPath path = root.getRawLocation().append(modelPath);
 		final org.eclipse.emf.codegen.ecore.Generator generator = new Generator();
 
 		IPath genModelPath = getGenModelResourcePath(modelPath);
+		codeGeneration.setProject(getProject());
+		codeGeneration.setGenerator(generator);
+		codeGeneration.setGenModelPath(genModelPath);
+		codeGeneration.setNextJob(getNextJob());
+		setNextJob(null);
+
+		genModelSetup.setProject(getProject());
+		genModelSetup.setGenModelPath(genModelPath);
+		genModelSetup.setNextJob(codeGeneration);
+
 		if (!genModelPath.toFile().exists()) {
-			monitor.beginTask("Generating GenModel '" + genModelPath.toString()
-					+ "'.", 1);
-			project.getWorkspace().run(new IWorkspaceRunnable() {
+			genModelGeneration.setProject(getProject());
+			genModelGeneration.setGenerator(generator);
+			genModelGeneration.setPath(path);
+			genModelGeneration.setNextJob(genModelSetup);
+			genModelGeneration.schedule();
+		} else
+			genModelSetup.schedule();
 
-				@Override
-				public void run(IProgressMonitor monitor) throws CoreException {
-					generator.run(new String[] { "-ecore2GenModel",
-							path.toString(), "", state.getName() });
-					monitor.worked(1);
-				}
-			}, monitor);
-		}
-
-		if (genModelSetupRunnable == null)
-			genModelSetupRunnable = new GenModelSetupRunnable(genModelPath,
-					project, state);
-		else {
-			genModelSetupRunnable.setPath(genModelPath);
-			genModelSetupRunnable.setProject(project);
-			genModelSetupRunnable.setState(state);
-		}
-		project.getWorkspace().run(genModelSetupRunnable, rule, 0, monitor);
-
-		generator.run(new String[] { "-model",
-				root.getRawLocation().append(genModelPath).toString() });
-		try {
-			Job.getJobManager().join(ResourcesPlugin.FAMILY_MANUAL_BUILD,
-					monitor);
-		} catch (OperationCanceledException e) {
-			return;
-		} catch (InterruptedException e) {
-			return;
-		}
+		return Status.OK_STATUS;
 	}
 
-	private IPath ensureModelResourcePath(IProject project, String name,
+	private IPath ensureModelResourcePathExists(IProject project, String name,
 			IProgressMonitor monitor) throws CoreException {
 		if (!project.exists())
-			throw new CoreException(
-					new Status(
-							IStatus.ERROR,
-							ClassSupplierOSGi.PLUGIN_ID,
-							NLS.bind(
-									"The project {0} was not created before generation.",
-									project)));
+			throw new CoreException(ClassSupplierOSGi.createErrorStatus(NLS
+					.bind("The project {0} was not created before generation.",
+							project)));
 		project.open(monitor);
 		IFolder folder = project.getFolder(ResourceUtil.getModelFolderName());
 		if (!folder.exists())
@@ -182,18 +208,24 @@ public class EcoreGenerator implements org.classupplier.codegen.Generator {
 		return path.removeFileExtension().addFileExtension(GENMODEL_EXT);
 	}
 
-	protected void setupGenModel(State state, IPath projectPath,
+	protected void setupGenModel(IPath projectPath,
 			org.eclipse.emf.codegen.ecore.genmodel.GenModel ecoreGenModel) {
-		ecoreGenModel.setModelName(state.getName());
+		ecoreGenModel.setModelName(ClassSupplierUtil.getState(getProject())
+				.getName());
 		ecoreGenModel.setSuppressInterfaces(true);
 		ecoreGenModel.setModelDirectory(projectPath.append(SOURCE_FOLDER_NAME)
 				.toString());
-		ecoreGenModel.setModelPluginID(state.getProjectName());
+		ecoreGenModel.setModelPluginID(getProject().getName());
 	}
 
 	@Override
 	public void setResourceSet(ResourceSet resourceSet) {
 		this.resourceSet = resourceSet;
+	}
+
+	@Override
+	public IStatus work(IProgressMonitor monitor) throws CoreException {
+		return generate(monitor);
 	}
 
 }

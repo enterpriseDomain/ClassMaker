@@ -10,7 +10,7 @@
             thread="main"
             visible="true">
          <run
-               class="org.classupplier.incore.App">
+               class="org.classupplier.sample.App">
          </run>
       </application>
    </extension>

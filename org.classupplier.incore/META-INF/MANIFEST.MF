@@ -1,14 +1,13 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: InCore Sample App
-Bundle-SymbolicName: org.classupplier.incore;singleton:=true
+Bundle-SymbolicName: org.classupplier.sample;singleton:=true
 Bundle-Version: 0.0.2.qualifier
-Bundle-Activator: org.classupplier.incore.Activator
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7,
  JavaSE-1.6
-Bundle-ActivationPolicy: lazy
-Require-Bundle: org.classupplier;bundle-version="0.7.6",
+Require-Bundle: org.classupplier,
  javax.inject,
  org.eclipse.core.runtime,
  org.eclipse.e4.core.di
+Bundle-ActivationPolicy: lazy
 

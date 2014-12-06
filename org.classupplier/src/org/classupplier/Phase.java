@@ -27,21 +27,21 @@ public enum Phase implements Enumerator {
 	 * @ordered
 	 */
 	PROCESSING(-1, "PROCESSING", "PROCESSING"), /**
-												 * The '<em><b>NEW</b></em>' literal object.
+												 * The '<em><b>DEFINED</b></em>' literal object.
 												 * <!-- begin-user-doc -->
 												 * <!-- end-user-doc -->
-												 * @see #NEW_VALUE
+												 * @see #DEFINED_VALUE
 												 * @generated
 												 * @ordered
 												 */
-	NEW(0, "NEW", "NEW"), /**
-							 * The '<em><b>MODELED</b></em>' literal object.
-							 * <!-- begin-user-doc -->
-							 * <!-- end-user-doc -->
-							 * @see #MODELED_VALUE
-							 * @generated
-							 * @ordered
-							 */
+	DEFINED(0, "DEFINED", "DEFINED"), /**
+										 * The '<em><b>MODELED</b></em>' literal object.
+										 * <!-- begin-user-doc -->
+										 * <!-- end-user-doc -->
+										 * @see #MODELED_VALUE
+										 * @generated
+										 * @ordered
+										 */
 	MODELED(1, "MODELED", "MODELED"), /**
 										 * The '<em><b>GENERATED</b></em>' literal object.
 										 * <!-- begin-user-doc -->
@@ -84,19 +84,19 @@ public enum Phase implements Enumerator {
 	public static final int PROCESSING_VALUE = -1;
 
 	/**
-	 * The '<em><b>NEW</b></em>' literal value.
+	 * The '<em><b>DEFINED</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>NEW</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>DEFINED</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #NEW
+	 * @see #DEFINED
 	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int NEW_VALUE = 0;
+	public static final int DEFINED_VALUE = 0;
 
 	/**
 	 * The '<em><b>MODELED</b></em>' literal value.
@@ -164,8 +164,8 @@ public enum Phase implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final Phase[] VALUES_ARRAY = new Phase[] { PROCESSING, NEW,
-			MODELED, GENERATED, EXPORTED, LOADED, };
+	private static final Phase[] VALUES_ARRAY = new Phase[] { PROCESSING,
+			DEFINED, MODELED, GENERATED, EXPORTED, LOADED, };
 
 	/**
 	 * A public read-only list of all the '<em><b>Phase</b></em>' enumerators.
@@ -218,8 +218,8 @@ public enum Phase implements Enumerator {
 		switch (value) {
 		case PROCESSING_VALUE:
 			return PROCESSING;
-		case NEW_VALUE:
-			return NEW;
+		case DEFINED_VALUE:
+			return DEFINED;
 		case MODELED_VALUE:
 			return MODELED;
 		case GENERATED_VALUE:

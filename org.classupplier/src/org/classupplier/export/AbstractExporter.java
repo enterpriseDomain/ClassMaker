@@ -1,30 +1,26 @@
 package org.classupplier.export;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import org.classupplier.impl.ClassSupplierOSGi;
+import org.classupplier.builders.SupplementaryJob;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.osgi.framework.Version;
+import org.eclipse.equinox.p2.metadata.Version;
 
-public abstract class AbstractExporter implements Exporter {
+public abstract class AbstractExporter extends SupplementaryJob implements
+		Exporter {
+
+	public AbstractExporter() {
+		super("Plug-in Export");
+	}
 
 	private IPath destination;
 
 	private Version version;
 
-	private IPath buildConfigPath;
-
-	protected IPath getBuildConfigPath() {
-		return buildConfigPath;
-	}
-
-	protected void setBuildConfigPath(IPath buildConfigPath) {
-		this.buildConfigPath = buildConfigPath;
+	@Override
+	public IStatus work(IProgressMonitor monitor) throws CoreException {
+		return export(monitor);
 	}
 
 	@Override
@@ -45,27 +41,6 @@ public abstract class AbstractExporter implements Exporter {
 	@Override
 	public void setVersion(Version version) {
 		this.version = version;
-	}
-
-	public void writeFile(IPath location, CharSequence contents)
-			throws CoreException {
-		location.uptoSegment(location.segmentCount() - 1).toFile().mkdirs();
-		File file = location.toFile();
-		try {
-			file.createNewFile();
-			FileWriter writer = null;
-			try {
-				writer = new FileWriter(file);
-				writer.append(contents);
-				writer.flush();
-			} finally {
-				if (writer != null)
-					writer.close();
-			}
-		} catch (IOException e) {
-			throw new CoreException(new Status(IStatus.ERROR, ClassSupplierOSGi.PLUGIN_ID,
-					0, e.getLocalizedMessage(), e));
-		}
 	}
 
 }

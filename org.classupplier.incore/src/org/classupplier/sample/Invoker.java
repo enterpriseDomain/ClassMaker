@@ -1,10 +1,11 @@
-package org.classupplier.incore;
+package org.classupplier.sample;
+
+import java.util.concurrent.ExecutionException;
 
 import javax.inject.Inject;
 
-import org.classupplier.Artifact;
 import org.classupplier.ClassSupplier;
-import org.classupplier.SupplyNotifier;
+import org.classupplier.Contribution;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.EclipseContextFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
@@ -15,20 +16,22 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.osgi.framework.FrameworkUtil;
 
 public class Invoker implements Runnable {
 
 	@Inject
 	private ClassSupplier supplier;
 
-	private void prepare() {
+	private void inject() {
 		IEclipseContext context = EclipseContextFactory
-				.getServiceContext(Activator.getContext());
+				.getServiceContext(FrameworkUtil.getBundle(getClass())
+						.getBundleContext());
 		ContextInjectionFactory.inject(this, context);
 	}
 
 	public void run() {
-		prepare();
+		inject();
 		EPackage p = EcoreFactory.eINSTANCE.createEPackage();
 		p.setName("ho");
 		p.setNsPrefix("ho");
@@ -40,22 +43,24 @@ public class Invoker implements Runnable {
 		a.setEType(EcorePackage.Literals.ESTRING);
 		c.getEStructuralFeatures().add(a);
 		p.getEClassifiers().add(c);
-		Artifact artifact = supplier.getWorkspace().createArtifact(p);
-		artifact.eAdapters().add(new SupplyNotifier() {
+		Contribution contribution = supplier.getWorkspace().createContribution(p);
+		EPackage ePackage;
+		try {
+			ePackage = contribution.construct(
+					new CodeGenUtil.EclipseUtil.StreamProgressMonitor(
+							System.out)).get();
+			EClass e = (EClass) ePackage.getEClassifier(c.getName());
+			System.out.println(e.getName());
+			EObject o = ePackage.getEFactoryInstance().create(e);
+			EAttribute ea = (EAttribute) e.getEStructuralFeature(a.getName());
+			o.eSet(ea, "Lorem ipsum");
+			Object v = o.eGet(ea);
+			System.out.println(v);
 
-			@Override
-			protected void supplyCompleted(EPackage ePackage) {
-				EClass e = (EClass) ePackage.getEClassifier(c.getName());
-				System.out.println(e.getName());
-				EObject o = ePackage.getEFactoryInstance().create(e);
-				EAttribute ea = (EAttribute) e.getEStructuralFeature(a
-						.getName());
-				o.eSet(ea, "Lorem ipsum");
-				Object v = o.eGet(ea);
-				System.out.println(v);
-			}
-		});
-		artifact.produce(new CodeGenUtil.EclipseUtil.StreamProgressMonitor(
-				System.out));
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
 	}
 }

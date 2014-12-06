@@ -2,9 +2,9 @@
  */
 package org.classupplier.impl;
 
-import org.classupplier.Artifact;
 import org.classupplier.ClassSupplier;
 import org.classupplier.ClassSupplierFactory;
+import org.classupplier.Contribution;
 import org.classupplier.Phase;
 import org.classupplier.Workspace;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -80,35 +80,35 @@ public class ClassSupplierImpl implements ClassSupplier {
 	 * @generated NOT
 	 */
 	public void supply(EPackage model, IProgressMonitor monitor) {
-		Artifact result = null;
+		Contribution result = null;
 		switch (getWorkspace().contains(model).getValue()) {
 		case Phase.MODELED_VALUE:
-			result = getWorkspace().getArtifact(model);
+			result = getWorkspace().getContribution(model);
 			if (result == null)
-				result = getWorkspace().createArtifact(model);
-			producePrototype(model, result, monitor);
+				result = getWorkspace().createContribution(model);
+			constructPrototype(model, result, monitor);
 			break;
 		case Phase.LOADED_VALUE:
-			result = getWorkspace().getArtifact(model);
+			result = getWorkspace().getContribution(model);
 			if (result != null)
 				if (result.getAppropriateEPackage() != null
 						&& result.getAppropriateEPackage().getNsURI()
 								.equals(model.getNsURI()))
 					break;
 				else {
-					producePrototype(model, result, monitor);
+					constructPrototype(model, result, monitor);
 					break;
 				}
 		default:
-			result = getWorkspace().createArtifact(model);
-			result.produce(monitor);
+			result = getWorkspace().createContribution(model);
+			result.construct(monitor);
 		}
 	}
 
-	private void producePrototype(EPackage model, Artifact result,
+	private void constructPrototype(EPackage model, Contribution contribution,
 			IProgressMonitor monitor) {
-		result.setDynamicEPackage(model);
-		result.produce(monitor);
+		contribution.setDynamicEPackage(model);
+		contribution.construct(monitor);
 	}
 
 } // ClassSupplierImpl

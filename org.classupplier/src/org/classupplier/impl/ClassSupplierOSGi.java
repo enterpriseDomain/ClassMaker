@@ -12,13 +12,16 @@ import org.eclipse.core.resources.ISavedState;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Plugin;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.contexts.IContextFunction;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.util.tracker.ServiceTracker;
 
@@ -51,6 +54,19 @@ public class ClassSupplierOSGi extends Plugin {
 	 */
 	public static ClassSupplier getClassSupplier() {
 		return tracker.getService();
+	}
+
+	public static Object getService(String serviceClass) {
+		if (getInstance() == null)
+			return null;
+		BundleContext context = getInstance().getBundle().getBundleContext();
+		ServiceReference<?> reference = context
+				.getServiceReference(serviceClass);
+		if (reference == null)
+			return null;
+		Object result = context.getService(reference);
+		context.ungetService(reference);
+		return result;
 	}
 
 	/*
@@ -106,4 +122,27 @@ public class ClassSupplierOSGi extends Plugin {
 		instance = null;
 
 	}
+
+	public static IStatus createOKStatus(String message) {
+		return new Status(IStatus.OK, ClassSupplierOSGi.PLUGIN_ID, message);
+	}
+
+	public static IStatus createWarningStatus(String message) {
+		return new Status(IStatus.WARNING, ClassSupplierOSGi.PLUGIN_ID, message);
+	}
+
+	public static IStatus createWarningStatus(Throwable exception) {
+		return new Status(IStatus.WARNING, ClassSupplierOSGi.PLUGIN_ID,
+				exception.getLocalizedMessage(), exception);
+	}
+
+	public static IStatus createErrorStatus(String message) {
+		return new Status(IStatus.ERROR, ClassSupplierOSGi.PLUGIN_ID, message);
+	}
+
+	public static IStatus createErrorStatus(Throwable exception) {
+		return new Status(IStatus.ERROR, ClassSupplierOSGi.PLUGIN_ID,
+				exception.getLocalizedMessage(), exception);
+	}
+
 }
