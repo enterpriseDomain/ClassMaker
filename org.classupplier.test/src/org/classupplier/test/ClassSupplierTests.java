@@ -66,7 +66,7 @@ public class ClassSupplierTests extends AbstractTests {
 		try {
 			ePackage = result.get();
 			assertNotNull(ePackage);
-			assertEquals(contribution.getAppropriateEPackage().getNsURI(),
+			assertEquals(contribution.getEPackage().getNsURI(),
 					ePackage.getNsURI());
 			assertEquals(readerEPackage.getName(), ePackage.getName());
 			assertEquals(readerEPackage.getNsPrefix(), ePackage.getNsPrefix());
@@ -117,7 +117,8 @@ public class ClassSupplierTests extends AbstractTests {
 		eClass.setName(className1);
 		ePackage.getEClassifiers().add(eClass);
 
-		Contribution contribution = tested.getWorkspace().createContribution(ePackage);
+		Contribution contribution = tested.getWorkspace().createContribution(
+				ePackage);
 		EPackage resultEPackage;
 		try {
 			resultEPackage = contribution.construct(

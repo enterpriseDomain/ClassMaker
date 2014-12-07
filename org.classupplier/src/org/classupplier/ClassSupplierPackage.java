@@ -69,6 +69,97 @@ public interface ClassSupplierPackage extends EPackage {
 	int STATE = 1;
 
 	/**
+	 * The meta object id for the '{@link org.classupplier.impl.ContributionImpl <em>Contribution</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.classupplier.impl.ContributionImpl
+	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getContribution()
+	 * @generated
+	 */
+	int CONTRIBUTION = 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTRIBUTION__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTRIBUTION__TIME = 1;
+
+	/**
+	 * The feature id for the '<em><b>Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTRIBUTION__VERSION = 2;
+
+	/**
+	 * The feature id for the '<em><b>Stage</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTRIBUTION__STAGE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Project Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTRIBUTION__PROJECT_NAME = 4;
+
+	/**
+	 * The feature id for the '<em><b>Snapshots</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTRIBUTION__SNAPSHOTS = 5;
+
+	/**
+	 * The feature id for the '<em><b>State</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTRIBUTION__STATE = 6;
+
+	/**
+	 * The feature id for the '<em><b>EPackage</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTRIBUTION__EPACKAGE = 7;
+
+	/**
+	 * The number of structural features of the '<em>Contribution</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTRIBUTION_FEATURE_COUNT = 8;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -148,115 +239,6 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @ordered
 	 */
 	int STATE_FEATURE_COUNT = 8;
-
-	/**
-	 * The meta object id for the '{@link org.classupplier.impl.ContributionImpl <em>Contribution</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.classupplier.impl.ContributionImpl
-	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getContribution()
-	 * @generated
-	 */
-	int CONTRIBUTION = 0;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTRIBUTION__NAME = STATE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Time</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTRIBUTION__TIME = STATE__TIME;
-
-	/**
-	 * The feature id for the '<em><b>Version</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTRIBUTION__VERSION = STATE__VERSION;
-
-	/**
-	 * The feature id for the '<em><b>Stage</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTRIBUTION__STAGE = STATE__STAGE;
-
-	/**
-	 * The feature id for the '<em><b>Project Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTRIBUTION__PROJECT_NAME = STATE__PROJECT_NAME;
-
-	/**
-	 * The feature id for the '<em><b>EPackage</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTRIBUTION__EPACKAGE = STATE__EPACKAGE;
-
-	/**
-	 * The feature id for the '<em><b>Dynamic EPackage</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTRIBUTION__DYNAMIC_EPACKAGE = STATE__DYNAMIC_EPACKAGE;
-
-	/**
-	 * The feature id for the '<em><b>Runtime EPackage</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTRIBUTION__RUNTIME_EPACKAGE = STATE__RUNTIME_EPACKAGE;
-
-	/**
-	 * The feature id for the '<em><b>Snapshots</b></em>' map.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTRIBUTION__SNAPSHOTS = STATE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>State</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTRIBUTION__STATE = STATE_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Contribution</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTRIBUTION_FEATURE_COUNT = STATE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.core.runtime.jobs.ISchedulingRule <em>IScheduling Rule</em>}' class.
@@ -411,6 +393,61 @@ public interface ClassSupplierPackage extends EPackage {
 	EClass getContribution();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.classupplier.Contribution#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.classupplier.Contribution#getName()
+	 * @see #getContribution()
+	 * @generated
+	 */
+	EAttribute getContribution_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.classupplier.Contribution#getTime <em>Time</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Time</em>'.
+	 * @see org.classupplier.Contribution#getTime()
+	 * @see #getContribution()
+	 * @generated
+	 */
+	EAttribute getContribution_Time();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.classupplier.Contribution#getVersion <em>Version</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Version</em>'.
+	 * @see org.classupplier.Contribution#getVersion()
+	 * @see #getContribution()
+	 * @generated
+	 */
+	EAttribute getContribution_Version();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.classupplier.Contribution#getStage <em>Stage</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Stage</em>'.
+	 * @see org.classupplier.Contribution#getStage()
+	 * @see #getContribution()
+	 * @generated
+	 */
+	EAttribute getContribution_Stage();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.classupplier.Contribution#getProjectName <em>Project Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Project Name</em>'.
+	 * @see org.classupplier.Contribution#getProjectName()
+	 * @see #getContribution()
+	 * @generated
+	 */
+	EAttribute getContribution_ProjectName();
+
+	/**
 	 * Returns the meta object for the map '{@link org.classupplier.Contribution#getSnapshots <em>Snapshots</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -431,6 +468,17 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getContribution_State();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.classupplier.Contribution#getEPackage <em>EPackage</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>EPackage</em>'.
+	 * @see org.classupplier.Contribution#getEPackage()
+	 * @see #getContribution()
+	 * @generated
+	 */
+	EReference getContribution_EPackage();
 
 	/**
 	 * Returns the meta object for class '{@link org.classupplier.State <em>State</em>}'.
@@ -683,6 +731,47 @@ public interface ClassSupplierPackage extends EPackage {
 		EClass CONTRIBUTION = eINSTANCE.getContribution();
 
 		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONTRIBUTION__NAME = eINSTANCE.getContribution_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Time</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONTRIBUTION__TIME = eINSTANCE.getContribution_Time();
+
+		/**
+		 * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONTRIBUTION__VERSION = eINSTANCE.getContribution_Version();
+
+		/**
+		 * The meta object literal for the '<em><b>Stage</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONTRIBUTION__STAGE = eINSTANCE.getContribution_Stage();
+
+		/**
+		 * The meta object literal for the '<em><b>Project Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONTRIBUTION__PROJECT_NAME = eINSTANCE
+				.getContribution_ProjectName();
+
+		/**
 		 * The meta object literal for the '<em><b>Snapshots</b></em>' map feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -698,6 +787,15 @@ public interface ClassSupplierPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CONTRIBUTION__STATE = eINSTANCE.getContribution_State();
+
+		/**
+		 * The meta object literal for the '<em><b>EPackage</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONTRIBUTION__EPACKAGE = eINSTANCE
+				.getContribution_EPackage();
 
 		/**
 		 * The meta object literal for the '{@link org.classupplier.impl.StateImpl <em>State</em>}' class.

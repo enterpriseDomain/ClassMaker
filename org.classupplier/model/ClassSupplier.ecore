@@ -1,33 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="classupplier" nsURI="http://org/classupplier/0.7.6" nsPrefix="classupplier">
-  <eClassifiers xsi:type="ecore:EClass" name="Contribution" eSuperTypes="#//State">
-    <eOperations name="apply">
-      <eParameters name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
-    </eOperations>
-    <eOperations name="newState" eType="#//State"/>
-    <eOperations name="getName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
-    <eOperations name="setName">
-      <eParameters name="newName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
-    </eOperations>
-    <eOperations name="getVersion" eType="#//Version"/>
-    <eOperations name="setVersion">
-      <eParameters name="version" eType="#//Version"/>
-    </eOperations>
-    <eOperations name="getStage" eType="#//Phase"/>
-    <eOperations name="setStage">
-      <eParameters name="newStage" eType="#//Phase"/>
-    </eOperations>
-    <eOperations name="getProjectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eOperations name="setProjectName">
-      <eParameters name="newProjectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="snapshots" upperBound="-1"
-        eType="#//DateToStateMapEntry" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//State"
-        changeable="false" volatile="true" transient="true" derived="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="State">
+  <eClassifiers xsi:type="ecore:EClass" name="Contribution">
     <eOperations name="construct">
       <eGenericType eClassifier="#//Future">
         <eTypeArguments>
@@ -36,6 +10,31 @@
       </eGenericType>
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
+    <eOperations name="apply">
+      <eParameters name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    </eOperations>
+    <eOperations name="newState" eType="#//State"/>
+    <eOperations name="setModelEPackage">
+      <eParameters name="blueprint" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="time" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="#//Version"
+        volatile="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stage" eType="#//Phase"
+        volatile="true" defaultValueLiteral="" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="projectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        volatile="true" defaultValueLiteral="" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="snapshots" upperBound="-1"
+        eType="#//DateToStateMapEntry" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//State"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ePackage" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="State">
     <eOperations name="getAppropriateEPackage" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="time" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"
@@ -69,13 +68,13 @@
       <eParameters name="oldWorkspace" eType="#//Workspace"/>
     </eOperations>
     <eOperations name="createContribution" eType="#//Contribution">
-      <eParameters name="blueprint" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
+      <eParameters name="blueprint" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
     </eOperations>
     <eOperations name="getContribution" eType="#//Contribution">
-      <eParameters name="eObject" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
+      <eParameters name="eObject" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
     </eOperations>
     <eOperations name="getContribution" eType="#//Contribution">
-      <eParameters name="ePackage" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
+      <eParameters name="ePackage" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
     </eOperations>
     <eOperations name="findContribution" eType="#//Contribution">
       <eParameters name="projectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -87,7 +86,7 @@
       <eParameters name="contribution" eType="#//Contribution"/>
     </eOperations>
     <eOperations name="contains" eType="#//Phase">
-      <eParameters name="blueprint" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
+      <eParameters name="blueprint" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
     </eOperations>
     <eOperations name="save">
       <eParameters name="monitor" eType="#//IProgressMonitor"/>

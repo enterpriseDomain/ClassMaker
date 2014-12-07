@@ -3,10 +3,6 @@
 package org.classupplier.impl;
 
 import java.util.Date;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 import org.classupplier.ClassSupplierPackage;
 import org.classupplier.Phase;
@@ -55,7 +51,7 @@ import org.eclipse.equinox.p2.metadata.Version;
  *
  * @generated NOT
  */
-public class StateImpl extends EObjectImpl implements State, InternalState {
+public class StateImpl extends EObjectImpl implements State, Constructable {
 	private final class ResultAdapter extends AdapterImpl {
 		private EPackage result;
 
@@ -377,19 +373,6 @@ public class StateImpl extends EObjectImpl implements State, InternalState {
 				newRuntimeEPackage);
 	}
 
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public synchronized Future<? extends EPackage> construct(
-			IProgressMonitor monitor) {
-		ExecutorService executorService = Executors.newSingleThreadExecutor();
-		Future<? extends EPackage> result = executorService
-				.submit(new ConstructCallable(monitor));
-		return result;
-	}
-
 	public EPackage doConstruct(IProgressMonitor monitor) throws Exception {
 		Phase oldStage = getStage();
 		setStage(Phase.PROCESSING);
@@ -426,25 +409,10 @@ public class StateImpl extends EObjectImpl implements State, InternalState {
 			monitor.done();
 		}
 
-		while (!eIsSet(ClassSupplierPackage.CONTRIBUTION__RUNTIME_EPACKAGE)) {
+		while (!eIsSet(ClassSupplierPackage.STATE__RUNTIME_EPACKAGE)) {
 			Thread.yield();
 		}
 		return results.getResult();
-	}
-
-	protected class ConstructCallable implements Callable<EPackage> {
-
-		protected IProgressMonitor monitor;
-
-		public ConstructCallable(IProgressMonitor monitor) {
-			this.monitor = monitor;
-
-		}
-
-		@Override
-		public EPackage call() throws Exception {
-			return doConstruct(monitor);
-		}
 	}
 
 	/**

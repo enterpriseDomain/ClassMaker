@@ -72,8 +72,6 @@ public class ClassSupplierSwitch<T> extends Switch<T> {
 			Contribution contribution = (Contribution) theEObject;
 			T result = caseContribution(contribution);
 			if (result == null)
-				result = caseState(contribution);
-			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}

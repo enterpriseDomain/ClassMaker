@@ -165,11 +165,56 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getContribution_Name() {
+		return (EAttribute) contributionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getContribution_Time() {
+		return (EAttribute) contributionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getContribution_Version() {
+		return (EAttribute) contributionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getContribution_Stage() {
+		return (EAttribute) contributionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getContribution_ProjectName() {
+		return (EAttribute) contributionEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EReference getContribution_Snapshots() {
-		return (EReference) contributionEClass.getEStructuralFeatures().get(0);
+		return (EReference) contributionEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -177,7 +222,16 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	public EReference getContribution_State() {
-		return (EReference) contributionEClass.getEStructuralFeatures().get(1);
+		return (EReference) contributionEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getContribution_EPackage() {
+		return (EReference) contributionEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -370,8 +424,14 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 
 		// Create classes and their features
 		contributionEClass = createEClass(CONTRIBUTION);
+		createEAttribute(contributionEClass, CONTRIBUTION__NAME);
+		createEAttribute(contributionEClass, CONTRIBUTION__TIME);
+		createEAttribute(contributionEClass, CONTRIBUTION__VERSION);
+		createEAttribute(contributionEClass, CONTRIBUTION__STAGE);
+		createEAttribute(contributionEClass, CONTRIBUTION__PROJECT_NAME);
 		createEReference(contributionEClass, CONTRIBUTION__SNAPSHOTS);
 		createEReference(contributionEClass, CONTRIBUTION__STATE);
+		createEReference(contributionEClass, CONTRIBUTION__EPACKAGE);
 
 		stateEClass = createEClass(STATE);
 		createEAttribute(stateEClass, STATE__NAME);
@@ -438,12 +498,31 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		contributionEClass.getESuperTypes().add(this.getState());
 		workspaceEClass.getESuperTypes().add(this.getISchedulingRule());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(contributionEClass, Contribution.class, "Contribution",
 				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getContribution_Name(), ecorePackage.getEString(),
+				"name", "", 0, 1, Contribution.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEAttribute(getContribution_Time(), ecorePackage.getEDate(), "time",
+				null, 0, 1, Contribution.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEAttribute(getContribution_Version(), this.getVersion(), "version",
+				null, 0, 1, Contribution.class, !IS_TRANSIENT, IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED,
+				IS_ORDERED);
+		initEAttribute(getContribution_Stage(), this.getPhase(), "stage", "",
+				0, 1, Contribution.class, !IS_TRANSIENT, IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED,
+				IS_ORDERED);
+		initEAttribute(getContribution_ProjectName(),
+				ecorePackage.getEString(), "projectName", "", 0, 1,
+				Contribution.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE,
+				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getContribution_Snapshots(),
 				this.getDateToStateMapEntry(), null, "snapshots", null, 0, -1,
 				Contribution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
@@ -453,45 +532,33 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 				null, 0, 1, Contribution.class, IS_TRANSIENT, IS_VOLATILE,
 				!IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getContribution_EPackage(), ecorePackage.getEPackage(),
+				null, "ePackage", null, 0, 1, Contribution.class, IS_TRANSIENT,
+				IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
-		EOperation op = addEOperation(contributionEClass, null, "apply", 0, 1,
+		EOperation op = addEOperation(contributionEClass, null, "construct", 0,
+				1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
+		EGenericType g1 = createEGenericType(this.getFuture());
+		EGenericType g2 = createEGenericType();
+		g1.getETypeArguments().add(g2);
+		EGenericType g3 = createEGenericType(theEcorePackage.getEPackage());
+		g2.setEUpperBound(g3);
+		initEOperation(op, g1);
+
+		op = addEOperation(contributionEClass, null, "apply", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDate(), "version", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
 
 		addEOperation(contributionEClass, this.getState(), "newState", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(contributionEClass, theEcorePackage.getEString(),
-				"getName", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(contributionEClass, null, "setName", 0, 1,
+		op = addEOperation(contributionEClass, null, "setModelEPackage", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theEcorePackage.getEString(), "newName", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(contributionEClass, this.getVersion(), "getVersion", 0,
-				1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(contributionEClass, null, "setVersion", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getVersion(), "version", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-
-		addEOperation(contributionEClass, this.getPhase(), "getStage", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(contributionEClass, null, "setStage", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getPhase(), "newStage", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-
-		addEOperation(contributionEClass, ecorePackage.getEString(),
-				"getProjectName", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(contributionEClass, null, "setProjectName", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "newProjectName", 0, 1,
+		addEParameter(op, ecorePackage.getEPackage(), "blueprint", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
 
 		initEClass(stateEClass, State.class, "State", !IS_ABSTRACT,
@@ -528,17 +595,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
 				IS_DERIVED, IS_ORDERED);
 
-		op = addEOperation(stateEClass, null, "construct", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		EGenericType g1 = createEGenericType(this.getFuture());
-		EGenericType g2 = createEGenericType();
-		g1.getETypeArguments().add(g2);
-		EGenericType g3 = createEGenericType(theEcorePackage.getEPackage());
-		g2.setEUpperBound(g3);
-		initEOperation(op, g1);
-
 		addEOperation(stateEClass, theEcorePackage.getEPackage(),
 				"getAppropriateEPackage", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -561,17 +617,17 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 
 		op = addEOperation(workspaceEClass, this.getContribution(),
 				"createContribution", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theEcorePackage.getEPackage(), "blueprint", 0, 1,
+		addEParameter(op, ecorePackage.getEPackage(), "blueprint", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(workspaceEClass, this.getContribution(),
 				"getContribution", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theEcorePackage.getEObject(), "eObject", 0, 1,
+		addEParameter(op, ecorePackage.getEObject(), "eObject", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(workspaceEClass, this.getContribution(),
 				"getContribution", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theEcorePackage.getEPackage(), "ePackage", 0, 1,
+		addEParameter(op, ecorePackage.getEPackage(), "ePackage", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(workspaceEClass, this.getContribution(),
@@ -591,7 +647,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 
 		op = addEOperation(workspaceEClass, this.getPhase(), "contains", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theEcorePackage.getEPackage(), "blueprint", 0, 1,
+		addEParameter(op, ecorePackage.getEPackage(), "blueprint", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(workspaceEClass, null, "save", 0, 1, IS_UNIQUE,

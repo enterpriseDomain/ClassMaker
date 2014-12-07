@@ -3,9 +3,7 @@
 package org.classupplier;
 
 import java.util.Date;
-import java.util.concurrent.Future;
 
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.FeatureMap;
@@ -211,14 +209,6 @@ public interface State extends EObject {
 	 * @generated
 	 */
 	void setRuntimeEPackage(EPackage value);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model type="org.classupplier.Future<? extends org.eclipse.emf.ecore.EPackage>" monitorDataType="org.classupplier.IProgressMonitor"
-	 * @generated
-	 */
-	Future<? extends EPackage> construct(IProgressMonitor monitor);
 
 	/**
 	 * Returns the value of the '<em><b>Stage</b></em>' attribute.
