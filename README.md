@@ -36,7 +36,7 @@ Example:
                               .construct(new NullProgressMonitor());
     EPackage ePackage = result.get();
     
-    // And use the runtime
+    // Use the runtime
     EClass jClass = (EClass) ePackage.getEClassifier(eClass.getName());
     EObject jObject = ePackage.getEFactoryInstance().create(jClass); 
     int pages = 500;
