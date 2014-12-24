@@ -13,9 +13,9 @@ Example:
     modelEPackage.setName("library");
     modelEPackage.setNsPrefix("library");
     modelEPackage.setNsURI("http://library/1.0");
-    final EClass eClass = EcoreFactory.eINSTANCE.createEClass();
+    EClass eClass = EcoreFactory.eINSTANCE.createEClass();
     eClass.setName("Book");
-    final EAttribute eAttr = EcoreFactory.eINSTANCE.createEAttribute();
+    EAttribute eAttr = EcoreFactory.eINSTANCE.createEAttribute();
     eAttr.setName("pages");
     eAttr.setEType(EcorePackage.Literals.EINT);
     eClass.getEStructuralFeatures().add(eAttr);
