@@ -33,7 +33,7 @@ Example:
     Contribution contribution = classupplier.getWorkspace().createContribution(
                               modelEPackage);
     Future<? extends EPackage> result = contribution
-                              .construct(new NullProgressMonitor()));
+                              .construct(new NullProgressMonitor());
     EPackage ePackage = result.get();
     
     // And use the runtime
