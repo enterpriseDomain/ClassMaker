@@ -27,14 +27,14 @@ Example:
     ServiceReference<?> serviceReference = bundleContext
                               .getServiceReference(ClassSupplier.class);
     ClassSupplier classupplier = (ClassSupplier) bundleContext
-                                 .getService(serviceReference);
+                              .getService(serviceReference);
     
     // Combine them
     Contribution contribution = classupplier.getWorkspace().createContribution(
-				modelEPackage);
-	 Future<? extends EPackage> result = contribution
-				.construct(new NullProgressMonitor()));
-	 EPackage ePackage = result.get();
+                              modelEPackage);
+    Future<? extends EPackage> result = contribution
+                              .construct(new NullProgressMonitor()));
+    EPackage ePackage = result.get();
     
     // And use the runtime
     EClass jClass = (EClass) ePackage.getEClassifier(eClass.getName());
