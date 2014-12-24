@@ -48,6 +48,6 @@ Example:
         
 [Here](/org.classupplier.test/src/org/classupplier/test/ClassSupplierTests.java) is an example.  
 
-Clone this repo ```https://github.com/kirillzotkin/ClassSupplier.git```.
+For further details see [project's wiki](https://github.com/kirillzotkin/ClassSupplier/wiki).
 
-For further details see [project's wiki](https://github.com/kirillzotkin/ClassSupplier/wiki) .
+Clone this repo ```https://github.com/kirillzotkin/ClassSupplier.git```.
