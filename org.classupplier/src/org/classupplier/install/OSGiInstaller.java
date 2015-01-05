@@ -68,7 +68,7 @@ public class OSGiInstaller extends Installer {
 			frameworkWiring.resolveBundles(bundles);
 			int timeout = 0;
 			while (!isReady(osgiBundle.getState()) && timeout < 50) {
-				Thread.sleep(14);
+				Thread.sleep(12);
 				timeout = timeout + 1;
 			}
 			return ClassSupplierOSGi.createOKStatus(NLS.bind(
@@ -94,7 +94,8 @@ public class OSGiInstaller extends Installer {
 	}
 
 	private boolean isReady(int state) {
-		return state == Bundle.STARTING || state == Bundle.ACTIVE;
+		return state == Bundle.RESOLVED || state == Bundle.STARTING
+				|| state == Bundle.ACTIVE;
 	}
 
 	private Collection<Bundle> getExistingBundles() {
@@ -102,8 +103,7 @@ public class OSGiInstaller extends Installer {
 		BundleContext context = getContext();
 		List<Bundle> results = new ArrayList<Bundle>();
 		for (Bundle bundle : context.getBundles())
-			if (bundle.getSymbolicName().equals(state.getProjectName())
-					&& bundle.getVersion().equals(state.getVersion()))
+			if (bundle.getSymbolicName().equals(state.getProjectName()))
 				results.add(bundle);
 		return results;
 	}

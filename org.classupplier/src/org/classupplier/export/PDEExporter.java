@@ -39,7 +39,6 @@ public class PDEExporter extends AbstractExporter {
 		final FeatureExportInfo info = new FeatureExportInfo();
 		info.destinationDirectory = getExportDestination().toString();
 		info.exportSource = false;
-		info.exportSourceBundle = true;
 		info.toDirectory = true;
 		info.useJarFormat = true;
 		info.exportMetadata = true;

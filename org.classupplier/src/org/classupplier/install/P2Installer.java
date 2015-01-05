@@ -73,7 +73,7 @@ public class P2Installer extends Installer {
 		iuPatchDescription
 				.setProperty(
 						IInstallableUnit.PROP_DESCRIPTION,
-						"This patch was created as part of Contribution produce operation to modify the contents of the current application.");
+						"This patch was created as part of Contribution construct operation to modify the contents of the current application.");
 		Version patchVersion = Version.createOSGi(1, 0, 0,
 				ResourceUtil.formatQualifier(new Date()));
 		iuPatchDescription.setVersion(patchVersion);
