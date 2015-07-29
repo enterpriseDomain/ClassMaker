@@ -1,7 +1,7 @@
 ClassSupplier
 ===========
 
-ClassSupplier is the Eclipse plug-in allowing to make code programmatically.  
+ClassSupplier is an Eclipse plug-in allowing to make code programmatically.  
 
 It generates, builds & exports, installs in runtime and loads the entire plug-in with the Java classes that conform the model provided and are reflectively accessible through that API.  
 
@@ -35,11 +35,6 @@ Example:
     Future<? extends EPackage> result = contribution
                               .construct(new NullProgressMonitor());
     EPackage jPackage = result.get();
-    
-    // Synchronize (TBD listeners)
-    while (!result.isDone()) {
-        Thread.yield();
-    }
     
     // Use the runtime
     EClass jClass = (EClass) jPackage.getEClassifier(eClass.getName());
