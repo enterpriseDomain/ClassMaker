@@ -2,7 +2,6 @@
  */
 package org.classupplier;
 
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -16,11 +15,11 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.classupplier.Workspace#getContributions <em>Contributions</em>}</li>
  *   <li>{@link org.classupplier.Workspace#getResourceSet <em>Resource Set</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.classupplier.ClassSupplierPackage#getWorkspace()
  * @model superTypes="org.classupplier.ISchedulingRule"
@@ -64,7 +63,7 @@ public interface Workspace extends EObject, ISchedulingRule {
 	 * @model
 	 * @generated
 	 */
-	void init(Workspace oldWorkspace);
+	void init();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -96,7 +95,7 @@ public interface Workspace extends EObject, ISchedulingRule {
 	 * @model
 	 * @generated
 	 */
-	Contribution findContribution(String projectName);
+	Contribution getContribution(String projectName);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -121,13 +120,5 @@ public interface Workspace extends EObject, ISchedulingRule {
 	 * @generated
 	 */
 	Phase contains(EPackage blueprint);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model monitorDataType="org.classupplier.IProgressMonitor"
-	 * @generated
-	 */
-	void save(IProgressMonitor monitor);
 
 } // Workspace

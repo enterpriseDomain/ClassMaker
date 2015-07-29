@@ -7,7 +7,6 @@ import java.util.Map;
 import org.classupplier.Phase;
 import org.classupplier.State;
 import org.classupplier.impl.ClassSupplierOSGi;
-import org.classupplier.util.ClassSupplierUtil;
 import org.classupplier.util.ResourceUtil;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -41,6 +40,11 @@ public class ResourceBuilder extends IncrementalProjectBuilder {
 		job.setProject(getProject());
 		job.setProgressGroup(monitor, 1);
 		job.schedule();
+		try {
+			job.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
@@ -67,9 +71,8 @@ public class ResourceBuilder extends IncrementalProjectBuilder {
 				} catch (IOException e) {
 					return ClassSupplierOSGi.createWarningStatus(e);
 				}
-			State state = ClassSupplierUtil.getState(getProject());
-			if (state.getStage() == Phase.MODELED
-					|| state.getStage() == Phase.PROCESSING) {
+			State state = getContribution();
+			if (state.getStage() == Phase.MODELED) {
 				if (!resource.getContents().isEmpty()
 						&& resource.getContents().contains(
 								state.getDynamicEPackage())) {
@@ -87,9 +90,17 @@ public class ResourceBuilder extends IncrementalProjectBuilder {
 			} catch (IOException e) {
 				return ClassSupplierOSGi.createWarningStatus(e);
 			}
+			state.setStage(Phase.MODELED);
 			return Status.OK_STATUS;
 		}
 
+		@Override
+		public void checkStage() throws CoreException {
+			if (getContribution().getStage().getValue() < Phase.DEFINED_VALUE)
+				throw new CoreException(
+						ClassSupplierOSGi
+								.createWarningStatus("Contribution is not defined."));
+		}
 	}
 
 }

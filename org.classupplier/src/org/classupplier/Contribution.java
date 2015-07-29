@@ -3,21 +3,22 @@
 package org.classupplier;
 
 import java.util.Date;
-import java.util.concurrent.Future;
 
+import org.classupplier.impl.Constructable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.equinox.p2.metadata.Version;
+import org.eclipse.equinox.concurrent.future.IFuture;
+import org.osgi.framework.Version;
 
 /**
- * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Contribution</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object '
+ * <em><b>Contribution</b></em>'. <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.classupplier.Contribution#getName <em>Name</em>}</li>
  *   <li>{@link org.classupplier.Contribution#getTime <em>Time</em>}</li>
@@ -26,23 +27,23 @@ import org.eclipse.equinox.p2.metadata.Version;
  *   <li>{@link org.classupplier.Contribution#getProjectName <em>Project Name</em>}</li>
  *   <li>{@link org.classupplier.Contribution#getSnapshots <em>Snapshots</em>}</li>
  *   <li>{@link org.classupplier.Contribution#getState <em>State</em>}</li>
- *   <li>{@link org.classupplier.Contribution#getEPackage <em>EPackage</em>}</li>
+ *   <li>{@link org.classupplier.Contribution#getModel <em>Model</em>}</li>
+ *   <li>{@link org.classupplier.Contribution#getRuntime <em>Runtime</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.classupplier.ClassSupplierPackage#getContribution()
- * @model
+ * @model superTypes="org.classupplier.Constructable"
  * @generated
  */
-public interface Contribution extends EObject {
+public interface Contribution extends EObject, Constructable {
 	/**
 	 * Returns the value of the '<em><b>Snapshots</b></em>' map.
 	 * The key is of type {@link java.util.Date},
 	 * and the value is of type {@link org.classupplier.State},
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Snapshots</em>' map isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Snapshots</em>' map isn't clear, there really
+	 * should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Snapshots</em>' map.
@@ -53,13 +54,14 @@ public interface Contribution extends EObject {
 	EMap<Date, State> getSnapshots();
 
 	/**
-	 * Returns the value of the '<em><b>State</b></em>' reference.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>State</b></em>' reference. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>State</em>' reference isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>State</em>' reference isn't clear, there
+	 * really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>State</em>' reference.
 	 * @see org.classupplier.ClassSupplierPackage#getContribution_State()
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
@@ -68,57 +70,71 @@ public interface Contribution extends EObject {
 	State getState();
 
 	/**
-	 * Returns the value of the '<em><b>EPackage</b></em>' reference.
+	 * Returns the value of the '<em><b>Model</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>EPackage</em>' reference isn't clear,
+	 * If the meaning of the '<em>Model</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>EPackage</em>' reference.
-	 * @see org.classupplier.ClassSupplierPackage#getContribution_EPackage()
-	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @return the value of the '<em>Model</em>' reference.
+	 * @see #setModel(EPackage)
+	 * @see org.classupplier.ClassSupplierPackage#getContribution_Model()
+	 * @model volatile="true"
 	 * @generated
 	 */
-	EPackage getEPackage();
+	EPackage getModel();
 
 	/**
+	 * Sets the value of the '{@link org.classupplier.Contribution#getModel <em>Model</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model type="org.classupplier.Future<? extends org.eclipse.emf.ecore.EPackage>" monitorDataType="org.classupplier.IProgressMonitor"
+	 * @param value the new value of the '<em>Model</em>' reference.
+	 * @see #getModel()
 	 * @generated
 	 */
-	Future<? extends EPackage> construct(IProgressMonitor monitor);
+	void setModel(EPackage value);
 
 	/**
+	 * Returns the value of the '<em><b>Runtime</b></em>' reference.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Runtime</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Runtime</em>' reference.
+	 * @see org.classupplier.ClassSupplierPackage#getContribution_Runtime()
+	 * @model changeable="false" volatile="true"
+	 * @generated
+	 */
+	EPackage getRuntime();
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @model type="org.classupplier.IFuture<? extends org.eclipse.emf.ecore.EPackage>" monitorDataType="org.classupplier.IProgressMonitor"
+	 * @generated
+	 */
+	IFuture<? extends EPackage> construct(IProgressMonitor monitor);
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @model
 	 * @generated
 	 */
 	void apply(Date version);
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @model
 	 * @generated
 	 */
 	State newState();
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void setModelEPackage(EPackage blueprint);
-
-	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * The default value is <code>""</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see org.classupplier.ClassSupplierPackage#getContribution_Name()
@@ -129,8 +145,7 @@ public interface Contribution extends EObject {
 
 	/**
 	 * Sets the value of the '{@link org.classupplier.Contribution#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Name</em>' attribute.
 	 * @see #getName()
 	 * @generated
@@ -138,13 +153,14 @@ public interface Contribution extends EObject {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Time</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Time</b></em>' attribute. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Time</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Time</em>' attribute isn't clear, there really
+	 * should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Time</em>' attribute.
 	 * @see #setTime(Date)
 	 * @see org.classupplier.ClassSupplierPackage#getContribution_Time()
@@ -155,8 +171,7 @@ public interface Contribution extends EObject {
 
 	/**
 	 * Sets the value of the '{@link org.classupplier.Contribution#getTime <em>Time</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Time</em>' attribute.
 	 * @see #getTime()
 	 * @generated
@@ -164,9 +179,9 @@ public interface Contribution extends EObject {
 	void setTime(Date value);
 
 	/**
-	 * Returns the value of the '<em><b>Version</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the value of the '<em><b>Version</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Version</em>' attribute.
 	 * @see #setVersion(Version)
 	 * @see org.classupplier.ClassSupplierPackage#getContribution_Version()
@@ -176,21 +191,23 @@ public interface Contribution extends EObject {
 	Version getVersion();
 
 	/**
-	 * Sets the value of the '{@link org.classupplier.Contribution#getVersion <em>Version</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Version</em>' attribute.
+	 * Sets the value of the '{@link org.classupplier.Contribution#getVersion
+	 * <em>Version</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Version</em>' attribute.
 	 * @see #getVersion()
 	 * @generated
 	 */
 	void setVersion(Version value);
 
 	/**
-	 * Returns the value of the '<em><b>Stage</b></em>' attribute.
-	 * The default value is <code>""</code>.
-	 * The literals are from the enumeration {@link org.classupplier.Phase}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the value of the '<em><b>Stage</b></em>' attribute. The default
+	 * value is <code>""</code>. The literals are from the enumeration
+	 * {@link org.classupplier.Phase}. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
 	 * @return the value of the '<em>Stage</em>' attribute.
 	 * @see org.classupplier.Phase
 	 * @see #setStage(Phase)
@@ -202,8 +219,7 @@ public interface Contribution extends EObject {
 
 	/**
 	 * Sets the value of the '{@link org.classupplier.Contribution#getStage <em>Stage</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Stage</em>' attribute.
 	 * @see org.classupplier.Phase
 	 * @see #getStage()
@@ -214,8 +230,8 @@ public interface Contribution extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Project Name</b></em>' attribute.
 	 * The default value is <code>""</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @return the value of the '<em>Project Name</em>' attribute.
 	 * @see #setProjectName(String)
 	 * @see org.classupplier.ClassSupplierPackage#getContribution_ProjectName()
@@ -226,8 +242,7 @@ public interface Contribution extends EObject {
 
 	/**
 	 * Sets the value of the '{@link org.classupplier.Contribution#getProjectName <em>Project Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Project Name</em>' attribute.
 	 * @see #getProjectName()
 	 * @generated

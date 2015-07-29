@@ -4,16 +4,17 @@ package org.classupplier.util;
 
 import java.util.Date;
 import java.util.Map;
-import java.util.concurrent.Future;
 
 import org.classupplier.ClassSupplierPackage;
 import org.classupplier.Contribution;
 import org.classupplier.State;
 import org.classupplier.Workspace;
+import org.classupplier.impl.Constructable;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.eclipse.equinox.concurrent.future.IFuture;
 
 /**
  * <!-- begin-user-doc --> The <b>Switch</b> for the model's inheritance
@@ -72,12 +73,16 @@ public class ClassSupplierSwitch<T> extends Switch<T> {
 			Contribution contribution = (Contribution) theEObject;
 			T result = caseContribution(contribution);
 			if (result == null)
+				result = caseConstructable(contribution);
+			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
 		case ClassSupplierPackage.STATE: {
 			State state = (State) theEObject;
 			T result = caseState(state);
+			if (result == null)
+				result = caseConstructable(state);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -106,9 +111,16 @@ public class ClassSupplierSwitch<T> extends Switch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case ClassSupplierPackage.FUTURE: {
-			Future<?> future = (Future<?>) theEObject;
-			T result = caseFuture(future);
+		case ClassSupplierPackage.IFUTURE: {
+			IFuture<?> iFuture = (IFuture<?>) theEObject;
+			T result = caseIFuture(iFuture);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ClassSupplierPackage.CONSTRUCTABLE: {
+			Constructable constructable = (Constructable) theEObject;
+			T result = caseConstructable(constructable);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -189,16 +201,32 @@ public class ClassSupplierSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Future</em>'.
-	 * <!-- begin-user-doc --> This implementation returns
-	 * null; returning a non-null result will terminate the switch. <!--
-	 * end-user-doc -->
+	 * Returns the result of interpreting the object as an instance of '<em>IFuture</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Future</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>IFuture</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public <V> T caseFuture(Future<V> object) {
+	public <ResultType> T caseIFuture(IFuture<ResultType> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Constructable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Constructable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConstructable(Constructable object) {
 		return null;
 	}
 

@@ -40,11 +40,11 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <em><b>Workspace</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.classupplier.impl.WorkspaceImpl#getContributions <em>Contributions</em>}</li>
  *   <li>{@link org.classupplier.impl.WorkspaceImpl#getResourceSet <em>Resource Set</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -101,8 +101,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 */
 	public EList<Contribution> getContributions() {
 		if (contributions == null) {
-			contributions = new EObjectContainmentEList<Contribution>(
-					Contribution.class, this,
+			contributions = new EObjectContainmentEList<Contribution>(Contribution.class, this,
 					ClassSupplierPackage.WORKSPACE__CONTRIBUTIONS);
 		}
 		return contributions;
@@ -121,7 +120,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * 
 	 * @generated NOT
 	 */
-	public void init(Workspace oldWorkspace) {
+	public void init() {
 		IProgressMonitor monitor = new NullProgressMonitor();
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		for (IProject project : workspace.getRoot().getProjects()) {
@@ -130,16 +129,11 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 				if (!project.isOpen())
 					project.open(monitor);
 				if (project.hasNature(ClassSupplierOSGi.NATURE_ID)) {
-					if (oldWorkspace != null)
-						contribution = oldWorkspace.findContribution(project
-								.getName());
 					if (contribution == null) {
-						contribution = (ContributionImpl) ClassSupplierFactory.eINSTANCE
-								.createContribution();
+						contribution = (ContributionImpl) ClassSupplierFactory.eINSTANCE.createContribution();
 						contribution.setProjectName(project.getName());
 					}
 					registerContribution(contribution);
-					workspace.run(new Initializer(project, this), monitor);
 				}
 			} catch (CoreException e) {
 				ClassSupplierOSGi.getInstance().getLog().log(e.getStatus());
@@ -156,11 +150,10 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		Contribution result = getContribution(blueprint);
 		if (result != null)
 			return result;
-		result = (ContributionImpl) ClassSupplierFactory.eINSTANCE
-				.createContribution();
+		result = (ContributionImpl) ClassSupplierFactory.eINSTANCE.createContribution();
 		result.newState();
 		result.setName(blueprint.getName());
-		result.setModelEPackage(blueprint);
+		result.setModel(blueprint);
 		registerContribution(result);
 		return result;
 	}
@@ -198,8 +191,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 				case EcorePackage.EOBJECT:
 					getContribution(((EObject) object).eClass().getEPackage());
 				case EcorePackage.ETYPED_ELEMENT:
-					getContribution(((ETypedElement) object).getEType()
-							.getEPackage());
+					getContribution(((ETypedElement) object).getEType().getEPackage());
 				case EcorePackage.EFACTORY:
 					return getContribution(((EFactory) object).getEPackage());
 				}
@@ -219,10 +211,10 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		for (Contribution a : getContributions())
 			switch (a.getStage()) {
 			case MODELED:
-				if (packagesAreEqual(ePackage, a.getEPackage()))
+				if (packagesAreEqual(ePackage, a.getModel()))
 					return a;
 			case LOADED:
-				if (packagesAreEqual(ePackage, a.getEPackage()))
+				if (packagesAreEqual(ePackage, a.getRuntime()))
 					return a;
 			default:
 				break;
@@ -253,13 +245,28 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * 
 	 * @generated NOT
 	 */
-	public Contribution findContribution(String projectName) {
+	public Contribution getContribution(String projectName) {
 		for (Contribution contribution : getContributions()) {
-			if (contribution.getProjectName() != null
-					&& contribution.getProjectName().equals(projectName))
+			if (contribution.getProjectName() != null && contribution.getProjectName().equals(projectName))
 				return contribution;
 		}
-		return null;
+		IProgressMonitor monitor = new NullProgressMonitor();
+		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
+		Contribution contribution = null;
+		try {
+			if (!project.isOpen())
+				project.open(monitor);
+			if (project.hasNature(ClassSupplierOSGi.NATURE_ID)) {
+				if (contribution == null) {
+					contribution = (ContributionImpl) ClassSupplierFactory.eINSTANCE.createContribution();
+					contribution.setProjectName(project.getName());
+				}
+				registerContribution(contribution);
+			}
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+		return contribution;
 	}
 
 	/**
@@ -268,30 +275,23 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * @generated NOT
 	 */
 	public Phase contains(EPackage blueprint) {
-		for (Contribution c : getContributions())
-			if (packagesAreEqual(blueprint, c.getEPackage()))
-				return c.getStage();
-		return Phase.DEFINED;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public void save(IProgressMonitor monitor) {
-		try {
-			ResourcesPlugin.getWorkspace().save(true, monitor);
-		} catch (CoreException e) {
-			ClassSupplierOSGi.getInstance().getLog().log(e.getStatus());
+		for (Contribution c : getContributions()) {
+			if (c.getStage().getValue() < Phase.LOADED_VALUE) {
+				if (packagesAreEqual(blueprint, c.getModel()))
+					return c.getStage();
+			} else {
+				if (packagesAreEqual(blueprint, c.getRuntime()))
+					return c.getStage();
+			}
 		}
+		return Phase.DEFINED;
+
 	}
 
 	private boolean packagesAreEqual(EPackage first, EPackage second) {
 		if (first == null || second == null)
 			return false;
-		return first.getNsURI().equals(second.getNsURI())
-				|| first.getName().equals(second.getName());
+		return first.getNsURI().equals(second.getNsURI()) || first.getName().equals(second.getName());
 	}
 
 	/**
@@ -299,12 +299,10 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case ClassSupplierPackage.WORKSPACE__CONTRIBUTIONS:
-			return ((InternalEList<?>) getContributions()).basicRemove(
-					otherEnd, msgs);
+			return ((InternalEList<?>) getContributions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -334,8 +332,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		switch (featureID) {
 		case ClassSupplierPackage.WORKSPACE__CONTRIBUTIONS:
 			getContributions().clear();
-			getContributions().addAll(
-					(Collection<? extends Contribution>) newValue);
+			getContributions().addAll((Collection<? extends Contribution>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -365,8 +362,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		case ClassSupplierPackage.WORKSPACE__CONTRIBUTIONS:
 			return contributions != null && !contributions.isEmpty();
 		case ClassSupplierPackage.WORKSPACE__RESOURCE_SET:
-			return RESOURCE_SET_EDEFAULT == null ? resourceSet != null
-					: !RESOURCE_SET_EDEFAULT.equals(resourceSet);
+			return RESOURCE_SET_EDEFAULT == null ? resourceSet != null : !RESOURCE_SET_EDEFAULT.equals(resourceSet);
 		}
 		return super.eIsSet(featureID);
 	}

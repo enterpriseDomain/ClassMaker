@@ -5,7 +5,7 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.equinox.p2.metadata.Version;
+import org.osgi.framework.Version;
 
 public interface Exporter extends IAdaptable {
 

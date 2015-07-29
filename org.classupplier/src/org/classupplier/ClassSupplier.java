@@ -2,7 +2,6 @@
  */
 package org.classupplier;
 
-
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Class Supplier</b></em>'. <!-- end-user-doc -->
@@ -19,6 +18,8 @@ package org.classupplier;
  * @generated NOT
  */
 public interface ClassSupplier {
+
+	public static final String INVOCATION_DELEGATE_URI = "org.classupplier.reflection.java";
 
 	/**
 	 * Returns the value of the '<em><b>Workspace</b></em>' reference. <!--

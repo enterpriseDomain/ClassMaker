@@ -10,6 +10,7 @@ import java.util.TimeZone;
 
 import org.classupplier.Workspace;
 import org.classupplier.impl.ClassSupplierOSGi;
+import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IWorkspace;
@@ -19,37 +20,32 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.preferences.IPreferencesService;
-import org.eclipse.emf.common.util.URI;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.BundleContext;
 
 public class ResourceUtil {
 
-	private static final IPreferencesService preferencesService = Platform
-			.getPreferencesService();
+	private static final IPreferencesService preferencesService = Platform.getPreferencesService();
 
-	private static String modelFolderName = preferencesService.getString(
-			ClassSupplierOSGi.PLUGIN_ID,
+	private static String modelFolderName = preferencesService.getString(ClassSupplierOSGi.PLUGIN_ID,
 			ClassSupplierOSGi.MODEL_FOLDER_PREF_KEY, "model", null);
 
-	private static String fileExt = preferencesService.getString(
-			ClassSupplierOSGi.PLUGIN_ID,
+	private static String fileExt = preferencesService.getString(ClassSupplierOSGi.PLUGIN_ID,
 			ClassSupplierOSGi.MODEL_RESOURCE_EXT_PREF_KEY, "xmi", null);
 
 	private static final String targetFolderName = "target";
 
-	private static final DateFormat qualifierFormat = new SimpleDateFormat(
-			"yyyyMMddHHmm");
+	private static final DateFormat qualifierFormat = new SimpleDateFormat("yyyyMMddHHmm");
 
 	static {
 		qualifierFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 	}
 
-	public static IPath getModelResourcePath(IProject project,
-			Workspace workspace) {
+	public static IPath getModelResourcePath(IProject project, Workspace workspace) {
 		if (workspace == null)
 			workspace = ClassSupplierOSGi.getClassSupplier().getWorkspace();
-		String name = ClassSupplierUtil.getState(workspace, project).getName();
-		return project.getFullPath().append(getModelFolderName())
-				.append(getFileName(name));
+		String name = workspace.getContribution(project.getName()).getState().getName();
+		return project.getFullPath().append(getModelFolderName()).append(getFileName(name));
 	}
 
 	public static IPath getExportDestination(IProject project) {
@@ -86,8 +82,7 @@ public class ResourceUtil {
 		return ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
 	}
 
-	public static IProjectDescription addProjectNature(
-			IProjectDescription description, String natureId) {
+	public static IProjectDescription addProjectNature(IProjectDescription description, String natureId) {
 		String[] oldNatures = description.getNatureIds();
 		String[] newNatures = new String[oldNatures.length + 1];
 		System.arraycopy(oldNatures, 0, newNatures, 0, oldNatures.length);
@@ -96,8 +91,7 @@ public class ResourceUtil {
 		return description;
 	}
 
-	public static void setAutoBuilding(IWorkspace workspace, boolean value)
-			throws CoreException {
+	public static void setAutoBuilding(IWorkspace workspace, boolean value) throws CoreException {
 		IWorkspaceDescription d = workspace.getDescription();
 		d.setAutoBuilding(value);
 		workspace.setDescription(d);
@@ -107,18 +101,7 @@ public class ResourceUtil {
 		return qualifierFormat.format(timestamp);
 	}
 
-	public static URI workspaceResourceURI(String fileName) {
-		return URI.createURI("platform:/meta/" + ClassSupplierOSGi.PLUGIN_ID
-				+ "/" + fileName);
-	}
-
-	public static String workspaceResourcePath(String fileName) {
-		return ClassSupplierOSGi.getInstance().getStateLocation()
-				.append(fileName).toString();
-	}
-
-	public static void writeFile(IPath location, CharSequence contents)
-			throws CoreException {
+	public static void writeFile(IPath location, CharSequence contents) throws CoreException {
 		location.uptoSegment(location.segmentCount() - 1).toFile().mkdirs();
 		File file = location.toFile();
 		try {
@@ -136,5 +119,47 @@ public class ResourceUtil {
 			throw new CoreException(ClassSupplierOSGi.createErrorStatus(e));
 		}
 	}
-	
+
+	// public static IPluginModelBase[] getBundleModels() {
+	// PluginModelManager manager = PDECore.getDefault().getModelManager();
+	// IPluginModelBase[] selectFrom = manager.getActiveModels();
+	// IPluginModelBase[] excluding = manager.getWorkspaceModels();
+	// Collection<IPluginModelBase> results = new ArrayList<IPluginModelBase>(
+	// selectFrom.length - excluding.length - 1);
+	// for (int i = 0; i < selectFrom.length; i++) {
+	// IPluginModelBase model = selectFrom[i];
+	// if (Arrays.binarySearch(excluding, model,
+	// new Comparator<IPluginModelBase>() {
+	//
+	// @Override
+	// public int compare(IPluginModelBase o1,
+	// IPluginModelBase o2) {
+	// return o1.getPluginBase().getId().hashCode()
+	// - o2.getPluginBase().getId().hashCode();
+	// }
+	//
+	// }) > -1)
+	// continue;
+	// results.add(model);
+	// }
+	// // results.remove(manager.findModel(manager.getSystemBundleId()));
+	// return results.toArray(new IPluginModelBase[results.size()]);
+	// }
+
+	public static Bundle getBundle(String symbolicName, BundleContext context) {
+		if (context == null)
+			return null;
+		for (Bundle bundle : context.getBundles())
+			if (bundle.getSymbolicName().equals(symbolicName))
+				return bundle;
+		return null;
+	}
+
+	public static ICommand getBuildSpec(IProjectDescription description, String builderId) {
+		for (ICommand build : description.getBuildSpec())
+			if (build.getBuilderName().equals(builderId))
+				return build;
+		return null;
+	}
+
 }

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension
+         point="org.eclipse.core.runtime.applications"
+         id="ClassSupplierEditorAdvisorApplication">
+      <!-- @generated ClassSupplier -->
+      <application>
+         <run class="org.classupplier.presentation.ClassSupplierEditorAdvisor$Application"/>
+      </application>
+   </extension>
+
+   <extension point="org.eclipse.ui.perspectives">
+      <!-- @generated ClassSupplier -->
+      <perspective
+            name="%_UI_Perspective_label"
+            class="org.classupplier.presentation.ClassSupplierEditorAdvisor$Perspective"
+            id="org.classupplier.presentation.ClassSupplierEditorAdvisorPerspective">
+      </perspective>
+   </extension>
+
+   <extension point="org.eclipse.ui.commands">
+      <!-- @generated ClassSupplier -->
+      <command
+            name="%_UI_Menu_OpenURI_label"
+            description="%_UI_Menu_OpenURI_description"
+            categoryId="org.eclipse.ui.category.file"
+            id="org.classupplier.presentation.ClassSupplierEditorAdvisorOpenURICommand"/>
+      <command
+            name="%_UI_Menu_Open_label"
+            description="%_UI_Menu_Open_description"
+            categoryId="org.eclipse.ui.category.file"
+            id="org.classupplier.presentation.ClassSupplierEditorAdvisorOpenCommand"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.bindings">
+      <!-- @generated ClassSupplier -->
+      <key
+            commandId="org.classupplier.presentation.ClassSupplierEditorAdvisorOpenURICommand"
+            sequence="M1+U"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+      <key
+            commandId="org.classupplier.presentation.ClassSupplierEditorAdvisorOpenCommand"
+            sequence="M1+O"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.actionSets">
+      <!-- @generated ClassSupplier -->
+      <actionSet
+            label="%_UI_ClassSupplierEditorAdvisor_ActionSet_label"
+            visible="true"
+            id="ClassSupplierEditorAdvisorActionSet">
+         <action
+               label="%_UI_Menu_About_label"
+               class="org.classupplier.presentation.ClassSupplierEditorAdvisor$AboutAction"
+               menubarPath="help/additions"
+               id="org.classupplier.presentation.ClassSupplierEditorAdvisorAboutAction"/>
+         <action
+               label="%_UI_Menu_OpenURI_label"
+               definitionId="org.classupplier.presentation.ClassSupplierEditorAdvisorOpenURICommand"
+               class="org.classupplier.presentation.ClassSupplierEditorAdvisor$OpenURIAction"
+               menubarPath="file/additions"
+               id="org.classupplier.presentation.ClassSupplierEditorAdvisorOpenURIAction"/>
+         <action
+               label="%_UI_Menu_Open_label"
+               definitionId="org.classupplier.presentation.ClassSupplierEditorAdvisorOpenCommand"
+               class="org.classupplier.presentation.ClassSupplierEditorAdvisor$OpenAction"
+               menubarPath="file/additions"
+               id="org.classupplier.presentation.ClassSupplierEditorAdvisorOpenAction"/>
+      </actionSet>
+   </extension>
+
+   <extension point="org.eclipse.ui.actionSets">
+      <!-- @generated ClassSupplier -->
+      <actionSet
+            label="%_UI_ClassSupplierModelWizard_ActionSet_label"
+            visible="true"
+            id="org.classupplier.presentation.ClassSupplierActionBarContributorActionSet">
+         <action
+               label="%_UI_ClassSupplierModelWizard_label"
+               class="org.classupplier.presentation.ClassSupplierActionBarContributor$NewAction"
+               menubarPath="file/new/additions"
+               id="org.classupplier.presentation.ClassSupplierActionBarContributorNewAction"/>
+      </actionSet>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated ClassSupplier -->
+      <editor
+            id="org.classupplier.presentation.ClassSupplierEditorID"
+            name="%_UI_ClassSupplierEditor_label"
+            icon="icons/full/obj16/ClassSupplierModelFile.gif"
+            extensions="classupplier"
+            class="org.classupplier.presentation.ClassSupplierEditor"
+            contributorClass="org.classupplier.presentation.ClassSupplierActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>

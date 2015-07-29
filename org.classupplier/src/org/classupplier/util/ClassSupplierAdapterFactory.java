@@ -4,17 +4,18 @@ package org.classupplier.util;
 
 import java.util.Date;
 import java.util.Map;
-import java.util.concurrent.Future;
 
 import org.classupplier.ClassSupplierPackage;
 import org.classupplier.Contribution;
 import org.classupplier.State;
 import org.classupplier.Workspace;
+import org.classupplier.impl.Constructable;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.equinox.concurrent.future.IFuture;
 
 /**
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides
@@ -95,8 +96,13 @@ public class ClassSupplierAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public <V> Adapter caseFuture(Future<V> object) {
-			return createFutureAdapter();
+		public <ResultType> Adapter caseIFuture(IFuture<ResultType> object) {
+			return createIFutureAdapter();
+		}
+
+		@Override
+		public Adapter caseConstructable(Constructable object) {
+			return createConstructableAdapter();
 		}
 
 		@Override
@@ -191,16 +197,30 @@ public class ClassSupplierAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link java.util.concurrent.Future <em>Future</em>}'.
-	 * <!-- begin-user-doc
-	 * --> This default implementation returns null so that we can easily ignore
-	 * cases; it's useful to ignore a case when inheritance will catch all the
-	 * cases anyway. <!-- end-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.equinox.concurrent.future.IFuture <em>IFuture</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see java.util.concurrent.Future
+	 * @see org.eclipse.equinox.concurrent.future.IFuture
 	 * @generated
 	 */
-	public Adapter createFutureAdapter() {
+	public Adapter createIFutureAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.classupplier.impl.Constructable <em>Constructable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.classupplier.impl.Constructable
+	 * @generated
+	 */
+	public Adapter createConstructableAdapter() {
 		return null;
 	}
 

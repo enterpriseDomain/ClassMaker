@@ -19,69 +19,54 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum Phase implements Enumerator {
 	/**
-	 * The '<em><b>PROCESSING</b></em>' literal object.
+	 * The '<em><b>DEFINED</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #PROCESSING_VALUE
+	 * @see #DEFINED_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	PROCESSING(-1, "PROCESSING", "PROCESSING"), /**
-												 * The '<em><b>DEFINED</b></em>' literal object.
-												 * <!-- begin-user-doc -->
-												 * <!-- end-user-doc -->
-												 * @see #DEFINED_VALUE
-												 * @generated
-												 * @ordered
-												 */
 	DEFINED(0, "DEFINED", "DEFINED"), /**
-										 * The '<em><b>MODELED</b></em>' literal object.
-										 * <!-- begin-user-doc -->
+										* The '<em><b>MODELED</b></em>' literal object.
+										* <!-- begin-user-doc -->
 										 * <!-- end-user-doc -->
-										 * @see #MODELED_VALUE
-										 * @generated
-										 * @ordered
-										 */
+										* @see #MODELED_VALUE
+										* @generated
+										* @ordered
+										*/
 	MODELED(1, "MODELED", "MODELED"), /**
-										 * The '<em><b>GENERATED</b></em>' literal object.
-										 * <!-- begin-user-doc -->
+										* The '<em><b>GENERATED</b></em>' literal object.
+										* <!-- begin-user-doc -->
 										 * <!-- end-user-doc -->
-										 * @see #GENERATED_VALUE
-										 * @generated
-										 * @ordered
-										 */
+										* @see #GENERATED_VALUE
+										* @generated
+										* @ordered
+										*/
 	GENERATED(2, "GENERATED", ""), /**
-									 * The '<em><b>EXPORTED</b></em>' literal object.
-									 * <!-- begin-user-doc -->
+									* The '<em><b>EXPORTED</b></em>' literal object.
+									* <!-- begin-user-doc -->
 									 * <!-- end-user-doc -->
-									 * @see #EXPORTED_VALUE
-									 * @generated
-									 * @ordered
-									 */
+									* @see #EXPORTED_VALUE
+									* @generated
+									* @ordered
+									*/
 	EXPORTED(3, "EXPORTED", "EXPORTED"), /**
-											 * The '<em><b>LOADED</b></em>' literal object.
-											 * <!-- begin-user-doc -->
+											* The '<em><b>INSTALLED</b></em>' literal object.
+											* <!-- begin-user-doc -->
 											 * <!-- end-user-doc -->
-											 * @see #LOADED_VALUE
-											 * @generated
-											 * @ordered
-											 */
-	LOADED(4, "LOADED", "LOADED");
-
-	/**
-	 * The '<em><b>PROCESSING</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>PROCESSING</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @see #PROCESSING
-	 * @model
-	 * @generated
-	 * @ordered
-	 */
-	public static final int PROCESSING_VALUE = -1;
+											* @see #INSTALLED_VALUE
+											* @generated
+											* @ordered
+											*/
+	INSTALLED(4, "INSTALLED", "INSTALLED"), /**
+											* The '<em><b>LOADED</b></em>' literal object.
+											* <!-- begin-user-doc -->
+											 * <!-- end-user-doc -->
+											* @see #LOADED_VALUE
+											* @generated
+											* @ordered
+											*/
+	LOADED(5, "LOADED", "LOADED");
 
 	/**
 	 * The '<em><b>DEFINED</b></em>' literal value.
@@ -144,6 +129,21 @@ public enum Phase implements Enumerator {
 	public static final int EXPORTED_VALUE = 3;
 
 	/**
+	 * The '<em><b>INSTALLED</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>INSTALLED</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #INSTALLED
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int INSTALLED_VALUE = 4;
+
+	/**
 	 * The '<em><b>LOADED</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -156,7 +156,7 @@ public enum Phase implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int LOADED_VALUE = 4;
+	public static final int LOADED_VALUE = 5;
 
 	/**
 	 * An array of all the '<em><b>Phase</b></em>' enumerators.
@@ -164,8 +164,8 @@ public enum Phase implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final Phase[] VALUES_ARRAY = new Phase[] { PROCESSING,
-			DEFINED, MODELED, GENERATED, EXPORTED, LOADED, };
+	private static final Phase[] VALUES_ARRAY = new Phase[] { DEFINED, MODELED, GENERATED, EXPORTED, INSTALLED,
+			LOADED, };
 
 	/**
 	 * A public read-only list of all the '<em><b>Phase</b></em>' enumerators.
@@ -173,13 +173,14 @@ public enum Phase implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<Phase> VALUES = Collections
-			.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<Phase> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
 	 * Returns the '<em><b>Phase</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param literal the literal.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static Phase get(String literal) {
@@ -196,6 +197,8 @@ public enum Phase implements Enumerator {
 	 * Returns the '<em><b>Phase</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param name the name.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static Phase getByName(String name) {
@@ -212,12 +215,12 @@ public enum Phase implements Enumerator {
 	 * Returns the '<em><b>Phase</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param value the integer value.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static Phase get(int value) {
 		switch (value) {
-		case PROCESSING_VALUE:
-			return PROCESSING;
 		case DEFINED_VALUE:
 			return DEFINED;
 		case MODELED_VALUE:
@@ -226,6 +229,8 @@ public enum Phase implements Enumerator {
 			return GENERATED;
 		case EXPORTED_VALUE:
 			return EXPORTED;
+		case INSTALLED_VALUE:
+			return INSTALLED;
 		case LOADED_VALUE:
 			return LOADED;
 		}

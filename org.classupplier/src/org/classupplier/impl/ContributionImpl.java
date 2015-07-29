@@ -3,18 +3,15 @@
 package org.classupplier.impl;
 
 import java.util.Date;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.Semaphore;
 
 import org.classupplier.ClassSupplierFactory;
 import org.classupplier.ClassSupplierPackage;
 import org.classupplier.Contribution;
 import org.classupplier.Phase;
 import org.classupplier.State;
-import org.classupplier.Workspace;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EMap;
@@ -26,37 +23,36 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.equinox.p2.metadata.Version;
+import org.eclipse.equinox.concurrent.future.IFuture;
+import org.eclipse.equinox.concurrent.future.IProgressRunnable;
+import org.eclipse.equinox.concurrent.future.ThreadsExecutor;
+import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
  * <em><b>Contribution</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
- * <ul>
- * <li>{@link org.classupplier.impl.ContributionImpl#getName <em>Name</em>}</li>
- * <li>{@link org.classupplier.impl.ContributionImpl#getTime <em>Time</em>}</li>
- * <li>{@link org.classupplier.impl.ContributionImpl#getVersion <em>Version
- * </em>}</li>
- * <li>{@link org.classupplier.impl.ContributionImpl#getStage <em>Stage</em>}</li>
- * <li>{@link org.classupplier.impl.ContributionImpl#getProjectName <em>Project
- * Name</em>}</li>
- * <li>{@link org.classupplier.impl.ContributionImpl#getSnapshots <em>Snapshots
- * </em>}</li>
- * <li>{@link org.classupplier.impl.ContributionImpl#getState <em>State</em>}</li>
- * <li>{@link org.classupplier.impl.ContributionImpl#getEPackage <em>EPackage
- * </em>}</li>
- * </ul>
  * </p>
+ * <ul>
+ *   <li>{@link org.classupplier.impl.ContributionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.classupplier.impl.ContributionImpl#getTime <em>Time</em>}</li>
+ *   <li>{@link org.classupplier.impl.ContributionImpl#getVersion <em>Version</em>}</li>
+ *   <li>{@link org.classupplier.impl.ContributionImpl#getStage <em>Stage</em>}</li>
+ *   <li>{@link org.classupplier.impl.ContributionImpl#getProjectName <em>Project Name</em>}</li>
+ *   <li>{@link org.classupplier.impl.ContributionImpl#getSnapshots <em>Snapshots</em>}</li>
+ *   <li>{@link org.classupplier.impl.ContributionImpl#getState <em>State</em>}</li>
+ *   <li>{@link org.classupplier.impl.ContributionImpl#getModel <em>Model</em>}</li>
+ *   <li>{@link org.classupplier.impl.ContributionImpl#getRuntime <em>Runtime</em>}</li>
+ * </ul>
  *
  * @generated
  */
-public class ContributionImpl extends EObjectImpl implements Contribution,
-		Constructable {
+public class ContributionImpl extends EObjectImpl implements Contribution {
+
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -65,7 +61,6 @@ public class ContributionImpl extends EObjectImpl implements Contribution,
 	/**
 	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -74,7 +69,6 @@ public class ContributionImpl extends EObjectImpl implements Contribution,
 	/**
 	 * The default value of the '{@link #getTime() <em>Time</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getTime()
 	 * @generated
 	 * @ordered
@@ -83,16 +77,14 @@ public class ContributionImpl extends EObjectImpl implements Contribution,
 	/**
 	 * The cached value of the '{@link #getTime() <em>Time</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getTime()
 	 * @generated
 	 * @ordered
 	 */
 	protected Date time = TIME_EDEFAULT;
 	/**
-	 * The default value of the '{@link #getVersion() <em>Version</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getVersion()
 	 * @generated
 	 * @ordered
@@ -101,16 +93,14 @@ public class ContributionImpl extends EObjectImpl implements Contribution,
 	/**
 	 * The default value of the '{@link #getStage() <em>Stage</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getStage()
 	 * @generated
 	 * @ordered
 	 */
 	protected static final Phase STAGE_EDEFAULT = Phase.GENERATED;
 	/**
-	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}
-	 * ' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getProjectName()
 	 * @generated
 	 * @ordered
@@ -119,7 +109,6 @@ public class ContributionImpl extends EObjectImpl implements Contribution,
 	/**
 	 * The cached value of the '{@link #getSnapshots() <em>Snapshots</em>}' map.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getSnapshots()
 	 * @generated
 	 * @ordered
@@ -128,7 +117,6 @@ public class ContributionImpl extends EObjectImpl implements Contribution,
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected ContributionImpl() {
@@ -137,7 +125,6 @@ public class ContributionImpl extends EObjectImpl implements Contribution,
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -147,28 +134,23 @@ public class ContributionImpl extends EObjectImpl implements Contribution,
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EMap<Date, State> getSnapshots() {
 		if (snapshots == null) {
-			snapshots = new EcoreEMap<Date, State>(
-					ClassSupplierPackage.Literals.DATE_TO_STATE_MAP_ENTRY,
-					DateToStateMapEntryImpl.class, this,
-					ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS);
+			snapshots = new EcoreEMap<Date, State>(ClassSupplierPackage.Literals.DATE_TO_STATE_MAP_ENTRY,
+					DateToStateMapEntryImpl.class, this, ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS);
 		}
 		return snapshots;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public State getState() {
 		State state = basicGetState();
-		return state != null && state.eIsProxy() ? (State) eResolveProxy((InternalEObject) state)
-				: state;
+		return state != null && state.eIsProxy() ? (State) eResolveProxy((InternalEObject) state) : state;
 	}
 
 	/**
@@ -177,8 +159,7 @@ public class ContributionImpl extends EObjectImpl implements Contribution,
 	 * @generated NOT
 	 */
 	public State basicGetState() {
-		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__TIME)
-				&& eIsSet(ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS)
+		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__TIME) && eIsSet(ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS)
 				&& getSnapshots().containsKey(getTime()))
 			return getSnapshots().get(getTime());
 		return null;
@@ -187,13 +168,11 @@ public class ContributionImpl extends EObjectImpl implements Contribution,
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
-	public EPackage getEPackage() {
-		EPackage ePackage = basicGetEPackage();
-		return ePackage != null && ePackage.eIsProxy() ? (EPackage) eResolveProxy((InternalEObject) ePackage)
-				: ePackage;
+	public EPackage getModel() {
+		EPackage model = basicGetModel();
+		return model != null && model.eIsProxy() ? (EPackage) eResolveProxy((InternalEObject) model) : model;
 	}
 
 	/**
@@ -201,8 +180,10 @@ public class ContributionImpl extends EObjectImpl implements Contribution,
 	 * 
 	 * @generated NOT
 	 */
-	public EPackage basicGetEPackage() {
-		return getState().getAppropriateEPackage();
+	public EPackage basicGetModel() {
+		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS))
+			return getState().getDynamicEPackage();
+		return null;
 	}
 
 	/**
@@ -210,26 +191,54 @@ public class ContributionImpl extends EObjectImpl implements Contribution,
 	 * 
 	 * @generated NOT
 	 */
-	public Future<? extends EPackage> construct(IProgressMonitor monitor) {
-		ExecutorService executorService = Executors.newSingleThreadExecutor();
-		Future<? extends EPackage> result = executorService
-				.submit(new ConstructCallable(monitor));
+	public void setModel(EPackage newModel) {
+		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS))
+			getState().setDynamicEPackage(newModel);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EPackage getRuntime() {
+		EPackage runtime = basicGetRuntime();
+		return runtime != null && runtime.eIsProxy() ? (EPackage) eResolveProxy((InternalEObject) runtime) : runtime;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public EPackage basicGetRuntime() {
+		return getState().getRuntimeEPackage();
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public synchronized IFuture<? extends EPackage> construct(IProgressMonitor monitor) {
+		ThreadsExecutor executor = new ThreadsExecutor();
+		IFuture<? extends EPackage> result = null;
+		try {
+			result = executor.execute(new ConstructRunnable<EPackage>(), monitor);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return result;
 	}
 
-	protected class ConstructCallable implements Callable<EPackage> {
+	public class ConstructRunnable<T extends EPackage> implements IProgressRunnable<T> {
 
-		protected IProgressMonitor monitor;
-
-		public ConstructCallable(IProgressMonitor monitor) {
-			this.monitor = monitor;
-
+		public T run(IProgressMonitor monitor) throws Exception {
+			@SuppressWarnings("unchecked")
+			T result = (T) doConstruct(monitor);
+			constructed().acquire();
+			return result;
 		}
 
-		@Override
-		public EPackage call() throws Exception {
-			return doConstruct(monitor);
-		}
 	}
 
 	/**
@@ -255,13 +264,12 @@ public class ContributionImpl extends EObjectImpl implements Contribution,
 		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS))
 			getState().setName(newName);
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ClassSupplierPackage.CONTRIBUTION__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.CONTRIBUTION__NAME, oldName,
+					name));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Date getTime() {
@@ -270,15 +278,14 @@ public class ContributionImpl extends EObjectImpl implements Contribution,
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setTime(Date newTime) {
 		Date oldTime = time;
 		time = newTime;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ClassSupplierPackage.CONTRIBUTION__TIME, oldTime, time));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.CONTRIBUTION__TIME, oldTime,
+					time));
 	}
 
 	@Override
@@ -346,44 +353,33 @@ public class ContributionImpl extends EObjectImpl implements Contribution,
 		return newState;
 	}
 
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public void setModelEPackage(EPackage blueprint) {
-		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS))
-			getState().setDynamicEPackage(blueprint);
-	}
-
 	@Override
 	public EPackage doConstruct(IProgressMonitor monitor) throws Exception {
 		if (getStage().equals(Phase.LOADED))
-			return getEPackage();
-		EPackage result = ((Constructable) getState()).doConstruct(monitor);
-		((Workspace) eContainer()).save(monitor);
-		return result;
+			return getRuntime();
+		return ((Constructable) getState()).doConstruct(new SubProgressMonitor(monitor, 1));
+	}
+
+	@Override
+	public Semaphore constructed() {
+		return ((Constructable) getState()).constructed();
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS:
-			return ((InternalEList<?>) getSnapshots()).basicRemove(otherEnd,
-					msgs);
+			return ((InternalEList<?>) getSnapshots()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -408,17 +404,20 @@ public class ContributionImpl extends EObjectImpl implements Contribution,
 			if (resolve)
 				return getState();
 			return basicGetState();
-		case ClassSupplierPackage.CONTRIBUTION__EPACKAGE:
+		case ClassSupplierPackage.CONTRIBUTION__MODEL:
 			if (resolve)
-				return getEPackage();
-			return basicGetEPackage();
+				return getModel();
+			return basicGetModel();
+		case ClassSupplierPackage.CONTRIBUTION__RUNTIME:
+			if (resolve)
+				return getRuntime();
+			return basicGetRuntime();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -442,13 +441,15 @@ public class ContributionImpl extends EObjectImpl implements Contribution,
 		case ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS:
 			((EStructuralFeature.Setting) getSnapshots()).set(newValue);
 			return;
+		case ClassSupplierPackage.CONTRIBUTION__MODEL:
+			setModel((EPackage) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -472,27 +473,26 @@ public class ContributionImpl extends EObjectImpl implements Contribution,
 		case ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS:
 			getSnapshots().clear();
 			return;
+		case ClassSupplierPackage.CONTRIBUTION__MODEL:
+			setModel((EPackage) null);
+			return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case ClassSupplierPackage.CONTRIBUTION__NAME:
-			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT
-					.equals(name);
+			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		case ClassSupplierPackage.CONTRIBUTION__TIME:
-			return TIME_EDEFAULT == null ? time != null : !TIME_EDEFAULT
-					.equals(time);
+			return TIME_EDEFAULT == null ? time != null : !TIME_EDEFAULT.equals(time);
 		case ClassSupplierPackage.CONTRIBUTION__VERSION:
-			return VERSION_EDEFAULT == null ? getVersion() != null
-					: !VERSION_EDEFAULT.equals(getVersion());
+			return VERSION_EDEFAULT == null ? getVersion() != null : !VERSION_EDEFAULT.equals(getVersion());
 		case ClassSupplierPackage.CONTRIBUTION__STAGE:
 			return getStage() != STAGE_EDEFAULT;
 		case ClassSupplierPackage.CONTRIBUTION__PROJECT_NAME:
@@ -502,15 +502,16 @@ public class ContributionImpl extends EObjectImpl implements Contribution,
 			return snapshots != null && !snapshots.isEmpty();
 		case ClassSupplierPackage.CONTRIBUTION__STATE:
 			return basicGetState() != null;
-		case ClassSupplierPackage.CONTRIBUTION__EPACKAGE:
-			return basicGetEPackage() != null;
+		case ClassSupplierPackage.CONTRIBUTION__MODEL:
+			return basicGetModel() != null;
+		case ClassSupplierPackage.CONTRIBUTION__RUNTIME:
+			return basicGetRuntime() != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

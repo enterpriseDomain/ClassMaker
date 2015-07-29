@@ -55,8 +55,26 @@ public interface ClassSupplierPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	ClassSupplierPackage eINSTANCE = org.classupplier.impl.ClassSupplierPackageImpl
-			.init();
+	ClassSupplierPackage eINSTANCE = org.classupplier.impl.ClassSupplierPackageImpl.init();
+
+	/**
+	 * The meta object id for the '{@link org.classupplier.impl.Constructable <em>Constructable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.classupplier.impl.Constructable
+	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getConstructable()
+	 * @generated
+	 */
+	int CONSTRUCTABLE = 6;
+
+	/**
+	 * The number of structural features of the '<em>Constructable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRUCTABLE_FEATURE_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.classupplier.impl.StateImpl <em>State</em>}' class.
@@ -85,7 +103,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__NAME = 0;
+	int CONTRIBUTION__NAME = CONSTRUCTABLE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Time</b></em>' attribute.
@@ -94,7 +112,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__TIME = 1;
+	int CONTRIBUTION__TIME = CONSTRUCTABLE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Version</b></em>' attribute.
@@ -103,7 +121,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__VERSION = 2;
+	int CONTRIBUTION__VERSION = CONSTRUCTABLE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Stage</b></em>' attribute.
@@ -112,7 +130,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__STAGE = 3;
+	int CONTRIBUTION__STAGE = CONSTRUCTABLE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Project Name</b></em>' attribute.
@@ -121,7 +139,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__PROJECT_NAME = 4;
+	int CONTRIBUTION__PROJECT_NAME = CONSTRUCTABLE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Snapshots</b></em>' map.
@@ -130,7 +148,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__SNAPSHOTS = 5;
+	int CONTRIBUTION__SNAPSHOTS = CONSTRUCTABLE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>State</b></em>' reference.
@@ -139,16 +157,25 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__STATE = 6;
+	int CONTRIBUTION__STATE = CONSTRUCTABLE_FEATURE_COUNT + 6;
 
 	/**
-	 * The feature id for the '<em><b>EPackage</b></em>' reference.
+	 * The feature id for the '<em><b>Model</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__EPACKAGE = 7;
+	int CONTRIBUTION__MODEL = CONSTRUCTABLE_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Runtime</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTRIBUTION__RUNTIME = CONSTRUCTABLE_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Contribution</em>' class.
@@ -157,7 +184,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION_FEATURE_COUNT = 8;
+	int CONTRIBUTION_FEATURE_COUNT = CONSTRUCTABLE_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -166,7 +193,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__NAME = 0;
+	int STATE__NAME = CONSTRUCTABLE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Time</b></em>' attribute.
@@ -175,7 +202,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__TIME = 1;
+	int STATE__TIME = CONSTRUCTABLE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Version</b></em>' attribute.
@@ -184,7 +211,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__VERSION = 2;
+	int STATE__VERSION = CONSTRUCTABLE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Stage</b></em>' attribute.
@@ -193,7 +220,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__STAGE = 3;
+	int STATE__STAGE = CONSTRUCTABLE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Project Name</b></em>' attribute.
@@ -202,7 +229,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__PROJECT_NAME = 4;
+	int STATE__PROJECT_NAME = CONSTRUCTABLE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>EPackage</b></em>' attribute list.
@@ -211,7 +238,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__EPACKAGE = 5;
+	int STATE__EPACKAGE = CONSTRUCTABLE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Dynamic EPackage</b></em>' containment reference.
@@ -220,7 +247,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__DYNAMIC_EPACKAGE = 6;
+	int STATE__DYNAMIC_EPACKAGE = CONSTRUCTABLE_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Runtime EPackage</b></em>' containment reference.
@@ -229,7 +256,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__RUNTIME_EPACKAGE = 7;
+	int STATE__RUNTIME_EPACKAGE = CONSTRUCTABLE_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of structural features of the '<em>State</em>' class.
@@ -238,7 +265,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE_FEATURE_COUNT = 8;
+	int STATE_FEATURE_COUNT = CONSTRUCTABLE_FEATURE_COUNT + 8;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.core.runtime.jobs.ISchedulingRule <em>IScheduling Rule</em>}' class.
@@ -334,23 +361,23 @@ public interface ClassSupplierPackage extends EPackage {
 	int DATE_TO_STATE_MAP_ENTRY_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link java.util.concurrent.Future <em>Future</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.equinox.concurrent.future.IFuture <em>IFuture</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see java.util.concurrent.Future
-	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getFuture()
+	 * @see org.eclipse.equinox.concurrent.future.IFuture
+	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getIFuture()
 	 * @generated
 	 */
-	int FUTURE = 5;
+	int IFUTURE = 5;
 
 	/**
-	 * The number of structural features of the '<em>Future</em>' class.
+	 * The number of structural features of the '<em>IFuture</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FUTURE_FEATURE_COUNT = 0;
+	int IFUTURE_FEATURE_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.classupplier.Phase <em>Phase</em>}' enum.
@@ -360,7 +387,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getPhase()
 	 * @generated
 	 */
-	int PHASE = 6;
+	int PHASE = 7;
 
 	/**
 	 * The meta object id for the '<em>IProgress Monitor</em>' data type.
@@ -370,17 +397,27 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getIProgressMonitor()
 	 * @generated
 	 */
-	int IPROGRESS_MONITOR = 7;
+	int IPROGRESS_MONITOR = 8;
 
 	/**
 	 * The meta object id for the '<em>Version</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.equinox.p2.metadata.Version
+	 * @see org.osgi.framework.Version
 	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getVersion()
 	 * @generated
 	 */
-	int VERSION = 8;
+	int VERSION = 9;
+
+	/**
+	 * The meta object id for the '<em>Semaphore</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.util.concurrent.Semaphore
+	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getSemaphore()
+	 * @generated
+	 */
+	int SEMAPHORE = 10;
 
 	/**
 	 * Returns the meta object for class '{@link org.classupplier.Contribution <em>Contribution</em>}'.
@@ -470,15 +507,26 @@ public interface ClassSupplierPackage extends EPackage {
 	EReference getContribution_State();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.classupplier.Contribution#getEPackage <em>EPackage</em>}'.
+	 * Returns the meta object for the reference '{@link org.classupplier.Contribution#getModel <em>Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>EPackage</em>'.
-	 * @see org.classupplier.Contribution#getEPackage()
+	 * @return the meta object for the reference '<em>Model</em>'.
+	 * @see org.classupplier.Contribution#getModel()
 	 * @see #getContribution()
 	 * @generated
 	 */
-	EReference getContribution_EPackage();
+	EReference getContribution_Model();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.classupplier.Contribution#getRuntime <em>Runtime</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Runtime</em>'.
+	 * @see org.classupplier.Contribution#getRuntime()
+	 * @see #getContribution()
+	 * @generated
+	 */
+	EReference getContribution_Runtime();
 
 	/**
 	 * Returns the meta object for class '{@link org.classupplier.State <em>State</em>}'.
@@ -656,15 +704,26 @@ public interface ClassSupplierPackage extends EPackage {
 	EClass getISchedulingRule();
 
 	/**
-	 * Returns the meta object for class '{@link java.util.concurrent.Future <em>Future</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.equinox.concurrent.future.IFuture <em>IFuture</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Future</em>'.
-	 * @see java.util.concurrent.Future
-	 * @model instanceClass="java.util.concurrent.Future" typeParameters="V"
+	 * @return the meta object for class '<em>IFuture</em>'.
+	 * @see org.eclipse.equinox.concurrent.future.IFuture
+	 * @model instanceClass="org.eclipse.equinox.concurrent.future.IFuture" typeParameters="ResultType"
 	 * @generated
 	 */
-	EClass getFuture();
+	EClass getIFuture();
+
+	/**
+	 * Returns the meta object for class '{@link org.classupplier.impl.Constructable <em>Constructable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Constructable</em>'.
+	 * @see org.classupplier.impl.Constructable
+	 * @model instanceClass="org.classupplier.impl.Constructable"
+	 * @generated
+	 */
+	EClass getConstructable();
 
 	/**
 	 * Returns the meta object for enum '{@link org.classupplier.Phase <em>Phase</em>}'.
@@ -688,15 +747,26 @@ public interface ClassSupplierPackage extends EPackage {
 	EDataType getIProgressMonitor();
 
 	/**
-	 * Returns the meta object for data type '{@link org.eclipse.equinox.p2.metadata.Version <em>Version</em>}'.
+	 * Returns the meta object for data type '{@link org.osgi.framework.Version <em>Version</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Version</em>'.
-	 * @see org.eclipse.equinox.p2.metadata.Version
-	 * @model instanceClass="org.eclipse.equinox.p2.metadata.Version"
+	 * @see org.osgi.framework.Version
+	 * @model instanceClass="org.osgi.framework.Version"
 	 * @generated
 	 */
 	EDataType getVersion();
+
+	/**
+	 * Returns the meta object for data type '{@link java.util.concurrent.Semaphore <em>Semaphore</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Semaphore</em>'.
+	 * @see java.util.concurrent.Semaphore
+	 * @model instanceClass="java.util.concurrent.Semaphore"
+	 * @generated
+	 */
+	EDataType getSemaphore();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -768,8 +838,7 @@ public interface ClassSupplierPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CONTRIBUTION__PROJECT_NAME = eINSTANCE
-				.getContribution_ProjectName();
+		EAttribute CONTRIBUTION__PROJECT_NAME = eINSTANCE.getContribution_ProjectName();
 
 		/**
 		 * The meta object literal for the '<em><b>Snapshots</b></em>' map feature.
@@ -777,8 +846,7 @@ public interface ClassSupplierPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CONTRIBUTION__SNAPSHOTS = eINSTANCE
-				.getContribution_Snapshots();
+		EReference CONTRIBUTION__SNAPSHOTS = eINSTANCE.getContribution_Snapshots();
 
 		/**
 		 * The meta object literal for the '<em><b>State</b></em>' reference feature.
@@ -789,13 +857,20 @@ public interface ClassSupplierPackage extends EPackage {
 		EReference CONTRIBUTION__STATE = eINSTANCE.getContribution_State();
 
 		/**
-		 * The meta object literal for the '<em><b>EPackage</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Model</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CONTRIBUTION__EPACKAGE = eINSTANCE
-				.getContribution_EPackage();
+		EReference CONTRIBUTION__MODEL = eINSTANCE.getContribution_Model();
+
+		/**
+		 * The meta object literal for the '<em><b>Runtime</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONTRIBUTION__RUNTIME = eINSTANCE.getContribution_Runtime();
 
 		/**
 		 * The meta object literal for the '{@link org.classupplier.impl.StateImpl <em>State</em>}' class.
@@ -861,8 +936,7 @@ public interface ClassSupplierPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference STATE__DYNAMIC_EPACKAGE = eINSTANCE
-				.getState_DynamicEPackage();
+		EReference STATE__DYNAMIC_EPACKAGE = eINSTANCE.getState_DynamicEPackage();
 
 		/**
 		 * The meta object literal for the '<em><b>Runtime EPackage</b></em>' containment reference feature.
@@ -870,8 +944,7 @@ public interface ClassSupplierPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference STATE__RUNTIME_EPACKAGE = eINSTANCE
-				.getState_RuntimeEPackage();
+		EReference STATE__RUNTIME_EPACKAGE = eINSTANCE.getState_RuntimeEPackage();
 
 		/**
 		 * The meta object literal for the '{@link org.classupplier.impl.WorkspaceImpl <em>Workspace</em>}' class.
@@ -889,8 +962,7 @@ public interface ClassSupplierPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference WORKSPACE__CONTRIBUTIONS = eINSTANCE
-				.getWorkspace_Contributions();
+		EReference WORKSPACE__CONTRIBUTIONS = eINSTANCE.getWorkspace_Contributions();
 
 		/**
 		 * The meta object literal for the '<em><b>Resource Set</b></em>' attribute feature.
@@ -898,8 +970,7 @@ public interface ClassSupplierPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute WORKSPACE__RESOURCE_SET = eINSTANCE
-				.getWorkspace_ResourceSet();
+		EAttribute WORKSPACE__RESOURCE_SET = eINSTANCE.getWorkspace_ResourceSet();
 
 		/**
 		 * The meta object literal for the '{@link org.classupplier.impl.DateToStateMapEntryImpl <em>Date To State Map Entry</em>}' class.
@@ -917,8 +988,7 @@ public interface ClassSupplierPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute DATE_TO_STATE_MAP_ENTRY__KEY = eINSTANCE
-				.getDateToStateMapEntry_Key();
+		EAttribute DATE_TO_STATE_MAP_ENTRY__KEY = eINSTANCE.getDateToStateMapEntry_Key();
 
 		/**
 		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
@@ -926,8 +996,7 @@ public interface ClassSupplierPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DATE_TO_STATE_MAP_ENTRY__VALUE = eINSTANCE
-				.getDateToStateMapEntry_Value();
+		EReference DATE_TO_STATE_MAP_ENTRY__VALUE = eINSTANCE.getDateToStateMapEntry_Value();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.core.runtime.jobs.ISchedulingRule <em>IScheduling Rule</em>}' class.
@@ -940,14 +1009,24 @@ public interface ClassSupplierPackage extends EPackage {
 		EClass ISCHEDULING_RULE = eINSTANCE.getISchedulingRule();
 
 		/**
-		 * The meta object literal for the '{@link java.util.concurrent.Future <em>Future</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.equinox.concurrent.future.IFuture <em>IFuture</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see java.util.concurrent.Future
-		 * @see org.classupplier.impl.ClassSupplierPackageImpl#getFuture()
+		 * @see org.eclipse.equinox.concurrent.future.IFuture
+		 * @see org.classupplier.impl.ClassSupplierPackageImpl#getIFuture()
 		 * @generated
 		 */
-		EClass FUTURE = eINSTANCE.getFuture();
+		EClass IFUTURE = eINSTANCE.getIFuture();
+
+		/**
+		 * The meta object literal for the '{@link org.classupplier.impl.Constructable <em>Constructable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.classupplier.impl.Constructable
+		 * @see org.classupplier.impl.ClassSupplierPackageImpl#getConstructable()
+		 * @generated
+		 */
+		EClass CONSTRUCTABLE = eINSTANCE.getConstructable();
 
 		/**
 		 * The meta object literal for the '{@link org.classupplier.Phase <em>Phase</em>}' enum.
@@ -973,11 +1052,21 @@ public interface ClassSupplierPackage extends EPackage {
 		 * The meta object literal for the '<em>Version</em>' data type.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.equinox.p2.metadata.Version
+		 * @see org.osgi.framework.Version
 		 * @see org.classupplier.impl.ClassSupplierPackageImpl#getVersion()
 		 * @generated
 		 */
 		EDataType VERSION = eINSTANCE.getVersion();
+
+		/**
+		 * The meta object literal for the '<em>Semaphore</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.util.concurrent.Semaphore
+		 * @see org.classupplier.impl.ClassSupplierPackageImpl#getSemaphore()
+		 * @generated
+		 */
+		EDataType SEMAPHORE = eINSTANCE.getSemaphore();
 
 	}
 

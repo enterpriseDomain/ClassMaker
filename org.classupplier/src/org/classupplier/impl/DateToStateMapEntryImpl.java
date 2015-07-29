@@ -21,16 +21,15 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <em><b>Date To State Map Entry</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.classupplier.impl.DateToStateMapEntryImpl#getTypedKey <em>Key</em>}</li>
  *   <li>{@link org.classupplier.impl.DateToStateMapEntryImpl#getTypedValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
-public class DateToStateMapEntryImpl extends EObjectImpl implements
-		BasicEMap.Entry<Date, State> {
+public class DateToStateMapEntryImpl extends EObjectImpl implements BasicEMap.Entry<Date, State> {
 	/**
 	 * The default value of the '{@link #getTypedKey() <em>Key</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -91,9 +90,8 @@ public class DateToStateMapEntryImpl extends EObjectImpl implements
 		Date oldKey = key;
 		key = newKey;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__KEY, oldKey,
-					key));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__KEY,
+					oldKey, key));
 	}
 
 	/**
@@ -108,15 +106,12 @@ public class DateToStateMapEntryImpl extends EObjectImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetTypedValue(State newValue,
-			NotificationChain msgs) {
+	public NotificationChain basicSetTypedValue(State newValue, NotificationChain msgs) {
 		State oldValue = value;
 		value = newValue;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET,
-					ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__VALUE,
-					oldValue, newValue);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__VALUE, oldValue, newValue);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -133,25 +128,16 @@ public class DateToStateMapEntryImpl extends EObjectImpl implements
 		if (newValue != value) {
 			NotificationChain msgs = null;
 			if (value != null)
-				msgs = ((InternalEObject) value)
-						.eInverseRemove(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__VALUE,
-								null, msgs);
+				msgs = ((InternalEObject) value).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__VALUE, null, msgs);
 			if (newValue != null)
-				msgs = ((InternalEObject) newValue)
-						.eInverseAdd(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__VALUE,
-								null, msgs);
+				msgs = ((InternalEObject) newValue).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__VALUE, null, msgs);
 			msgs = basicSetTypedValue(newValue, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__VALUE,
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__VALUE,
 					newValue, newValue));
 	}
 
@@ -160,8 +146,7 @@ public class DateToStateMapEntryImpl extends EObjectImpl implements
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__VALUE:
 			return basicSetTypedValue(null, msgs);
@@ -226,8 +211,7 @@ public class DateToStateMapEntryImpl extends EObjectImpl implements
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__KEY:
-			return KEY_EDEFAULT == null ? key != null : !KEY_EDEFAULT
-					.equals(key);
+			return KEY_EDEFAULT == null ? key != null : !KEY_EDEFAULT.equals(key);
 		case ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__VALUE:
 			return value != null;
 		}
@@ -317,8 +301,7 @@ public class DateToStateMapEntryImpl extends EObjectImpl implements
 	@SuppressWarnings("unchecked")
 	public EMap<Date, State> getEMap() {
 		EObject container = eContainer();
-		return container == null ? null : (EMap<Date, State>) container
-				.eGet(eContainmentFeature());
+		return container == null ? null : (EMap<Date, State>) container.eGet(eContainmentFeature());
 	}
 
 } // DateToStateMapEntryImpl

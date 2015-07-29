@@ -4,6 +4,7 @@ package org.classupplier.impl;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.concurrent.Semaphore;
 
 import org.classupplier.ClassSupplierFactory;
 import org.classupplier.ClassSupplierPackage;
@@ -18,15 +19,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.equinox.p2.metadata.Version;
+import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
  * end-user-doc -->
  * @generated
  */
-public class ClassSupplierFactoryImpl extends EFactoryImpl implements
-		ClassSupplierFactory {
+public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSupplierFactory {
 	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc --> <!--
@@ -72,8 +72,7 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements
 		case ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY:
 			return (EObject) createDateToStateMapEntry();
 		default:
-			throw new IllegalArgumentException("The class '" + eClass.getName()
-					+ "' is not a valid classifier");
+			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -90,9 +89,10 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements
 			return createIProgressMonitorFromString(eDataType, initialValue);
 		case ClassSupplierPackage.VERSION:
 			return createVersionFromString(eDataType, initialValue);
+		case ClassSupplierPackage.SEMAPHORE:
+			return createSemaphoreFromString(eDataType, initialValue);
 		default:
-			throw new IllegalArgumentException("The datatype '"
-					+ eDataType.getName() + "' is not a valid classifier");
+			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -109,15 +109,15 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements
 			return convertIProgressMonitorToString(eDataType, instanceValue);
 		case ClassSupplierPackage.VERSION:
 			return convertVersionToString(eDataType, instanceValue);
+		case ClassSupplierPackage.SEMAPHORE:
+			return convertSemaphoreToString(eDataType, instanceValue);
 		default:
-			throw new IllegalArgumentException("The datatype '"
-					+ eDataType.getName() + "' is not a valid classifier");
+			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Contribution createContribution() {
@@ -159,9 +159,8 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements
 	public Phase createPhaseFromString(EDataType eDataType, String initialValue) {
 		Phase result = Phase.get(initialValue);
 		if (result == null)
-			throw new IllegalArgumentException("The value '" + initialValue
-					+ "' is not a valid enumerator of '" + eDataType.getName()
-					+ "'");
+			throw new IllegalArgumentException(
+					"The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
@@ -177,18 +176,15 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public IProgressMonitor createIProgressMonitorFromString(
-			EDataType eDataType, String initialValue) {
-		return (IProgressMonitor) super.createFromString(eDataType,
-				initialValue);
+	public IProgressMonitor createIProgressMonitorFromString(EDataType eDataType, String initialValue) {
+		return (IProgressMonitor) super.createFromString(eDataType, initialValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertIProgressMonitorToString(EDataType eDataType,
-			Object instanceValue) {
+	public String convertIProgressMonitorToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 
@@ -197,8 +193,7 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements
 	 * 
 	 * @generated NOT
 	 */
-	public Version createVersionFromString(EDataType eDataType,
-			String initialValue) {
+	public Version createVersionFromString(EDataType eDataType, String initialValue) {
 		return Version.parseVersion(initialValue);
 	}
 
@@ -206,8 +201,25 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertVersionToString(EDataType eDataType,
-			Object instanceValue) {
+	public String convertVersionToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Semaphore createSemaphoreFromString(EDataType eDataType, String initialValue) {
+		return (Semaphore) super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertSemaphoreToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

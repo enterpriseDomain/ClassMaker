@@ -36,9 +36,8 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * <!-- end-user-doc -->
  * @generated
  */
-public class StateItemProvider extends ItemProviderAdapter implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class StateItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
+		IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -78,15 +77,12 @@ public class StateItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_State_name_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_State_name_feature", "_UI_State_type"),
-				ClassSupplierPackage.Literals.STATE__NAME, true, false, false,
-				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_State_name_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_State_name_feature", "_UI_State_type"),
+						ClassSupplierPackage.Literals.STATE__NAME, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -96,15 +92,12 @@ public class StateItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	protected void addTimePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_State_time_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_State_time_feature", "_UI_State_type"),
-				ClassSupplierPackage.Literals.STATE__TIME, true, false, false,
-				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_State_time_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_State_time_feature", "_UI_State_type"),
+						ClassSupplierPackage.Literals.STATE__TIME, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -114,15 +107,12 @@ public class StateItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	protected void addVersionPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_State_version_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_State_version_feature", "_UI_State_type"),
-				ClassSupplierPackage.Literals.STATE__VERSION, true, false,
-				false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_State_version_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_State_version_feature", "_UI_State_type"),
+						ClassSupplierPackage.Literals.STATE__VERSION, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -132,15 +122,12 @@ public class StateItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	protected void addStagePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_State_stage_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_State_stage_feature", "_UI_State_type"),
-				ClassSupplierPackage.Literals.STATE__STAGE, true, false, false,
-				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_State_stage_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_State_stage_feature", "_UI_State_type"),
+						ClassSupplierPackage.Literals.STATE__STAGE, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -150,15 +137,13 @@ public class StateItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	protected void addProjectNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_State_projectName_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_State_projectName_feature", "_UI_State_type"),
-				ClassSupplierPackage.Literals.STATE__PROJECT_NAME, true, false,
-				false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_State_projectName_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_State_projectName_feature",
+								"_UI_State_type"),
+						ClassSupplierPackage.Literals.STATE__PROJECT_NAME, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -168,15 +153,12 @@ public class StateItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	protected void addDynamicEPackagePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_State_dynamicEPackage_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_State_dynamicEPackage_feature", "_UI_State_type"),
-				ClassSupplierPackage.Literals.STATE__DYNAMIC_EPACKAGE, true,
-				false, false, null, null, null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_State_dynamicEPackage_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_State_dynamicEPackage_feature",
+								"_UI_State_type"),
+						ClassSupplierPackage.Literals.STATE__DYNAMIC_EPACKAGE, true, false, false, null, null, null));
 	}
 
 	/**
@@ -186,15 +168,12 @@ public class StateItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	protected void addRuntimeEPackagePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_State_runtimeEPackage_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_State_runtimeEPackage_feature", "_UI_State_type"),
-				ClassSupplierPackage.Literals.STATE__RUNTIME_EPACKAGE, false,
-				false, false, null, null, null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_State_runtimeEPackage_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_State_runtimeEPackage_feature",
+								"_UI_State_type"),
+						ClassSupplierPackage.Literals.STATE__RUNTIME_EPACKAGE, false, false, false, null, null, null));
 	}
 
 	/**
@@ -206,8 +185,7 @@ public class StateItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(
-			Object object) {
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ClassSupplierPackage.Literals.STATE__EPACKAGE);
@@ -236,8 +214,7 @@ public class StateItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/State"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/State"));
 	}
 
 	/**
@@ -270,12 +247,10 @@ public class StateItemProvider extends ItemProviderAdapter implements
 		case ClassSupplierPackage.STATE__VERSION:
 		case ClassSupplierPackage.STATE__STAGE:
 		case ClassSupplierPackage.STATE__PROJECT_NAME:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case ClassSupplierPackage.STATE__EPACKAGE:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), true, false));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -289,20 +264,15 @@ public class StateItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(
-				ClassSupplierPackage.Literals.STATE__EPACKAGE,
-				FeatureMapUtil.createEntry(
-						ClassSupplierPackage.Literals.STATE__DYNAMIC_EPACKAGE,
+		newChildDescriptors.add(createChildParameter(ClassSupplierPackage.Literals.STATE__EPACKAGE,
+				FeatureMapUtil.createEntry(ClassSupplierPackage.Literals.STATE__DYNAMIC_EPACKAGE,
 						EcoreFactory.eINSTANCE.createEPackage())));
 
-		newChildDescriptors.add(createChildParameter(
-				ClassSupplierPackage.Literals.STATE__EPACKAGE,
-				FeatureMapUtil.createEntry(
-						ClassSupplierPackage.Literals.STATE__RUNTIME_EPACKAGE,
+		newChildDescriptors.add(createChildParameter(ClassSupplierPackage.Literals.STATE__EPACKAGE,
+				FeatureMapUtil.createEntry(ClassSupplierPackage.Literals.STATE__RUNTIME_EPACKAGE,
 						EcoreFactory.eINSTANCE.createEPackage())));
 	}
 
@@ -313,14 +283,12 @@ public class StateItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	@Override
-	public String getCreateChildText(Object owner, Object feature,
-			Object child, Collection<?> selection) {
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
 		Object childFeature = feature;
 		Object childObject = child;
 
 		if (childFeature instanceof EStructuralFeature
-				&& FeatureMapUtil
-						.isFeatureMap((EStructuralFeature) childFeature)) {
+				&& FeatureMapUtil.isFeatureMap((EStructuralFeature) childFeature)) {
 			FeatureMap.Entry entry = (FeatureMap.Entry) childObject;
 			childFeature = entry.getEStructuralFeature();
 			childObject = entry.getValue();
@@ -330,9 +298,8 @@ public class StateItemProvider extends ItemProviderAdapter implements
 				|| childFeature == ClassSupplierPackage.Literals.STATE__RUNTIME_EPACKAGE;
 
 		if (qualify) {
-			return getString("_UI_CreateChild_text2", new Object[] {
-					getTypeText(childObject), getFeatureText(childFeature),
-					getTypeText(owner) });
+			return getString("_UI_CreateChild_text2",
+					new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
 		}
 		return super.getCreateChildText(owner, feature, child, selection);
 	}

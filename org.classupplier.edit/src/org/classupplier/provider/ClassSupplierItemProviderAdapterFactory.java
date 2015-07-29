@@ -32,9 +32,8 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ClassSupplierItemProviderAdapterFactory extends
-		ClassSupplierAdapterFactory implements ComposeableAdapterFactory,
-		IChangeNotifier, IDisposable {
+public class ClassSupplierItemProviderAdapterFactory extends ClassSupplierAdapterFactory
+		implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
 	/**
 	 * This keeps track of the root adapter factory that delegates to this adapter factory.
 	 * <!-- begin-user-doc -->
@@ -159,8 +158,7 @@ public class ClassSupplierItemProviderAdapterFactory extends
 	@Override
 	public Adapter createDateToStateMapEntryAdapter() {
 		if (dateToStateMapEntryItemProvider == null) {
-			dateToStateMapEntryItemProvider = new DateToStateMapEntryItemProvider(
-					this);
+			dateToStateMapEntryItemProvider = new DateToStateMapEntryItemProvider(this);
 		}
 
 		return dateToStateMapEntryItemProvider;
@@ -173,8 +171,7 @@ public class ClassSupplierItemProviderAdapterFactory extends
 	 * @generated
 	 */
 	public ComposeableAdapterFactory getRootAdapterFactory() {
-		return parentAdapterFactory == null ? this : parentAdapterFactory
-				.getRootAdapterFactory();
+		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
 	}
 
 	/**
@@ -183,8 +180,7 @@ public class ClassSupplierItemProviderAdapterFactory extends
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setParentAdapterFactory(
-			ComposedAdapterFactory parentAdapterFactory) {
+	public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
 		this.parentAdapterFactory = parentAdapterFactory;
 	}
 
@@ -218,8 +214,7 @@ public class ClassSupplierItemProviderAdapterFactory extends
 	public Object adapt(Object object, Object type) {
 		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class<?>)
-					|| (((Class<?>) type).isInstance(adapter))) {
+			if (!(type instanceof Class<?>) || (((Class<?>) type).isInstance(adapter))) {
 				return adapter;
 			}
 		}

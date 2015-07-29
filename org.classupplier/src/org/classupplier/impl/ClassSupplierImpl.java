@@ -48,14 +48,5 @@ public class ClassSupplierImpl implements ClassSupplier {
 	public Workspace getWorkspace() {
 		return workspace;
 	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public void setWorkspace(Workspace newWorkspace) {
-		workspace = newWorkspace;
-	}
-
+	
 } // ClassSupplierImpl

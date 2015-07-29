@@ -33,9 +33,8 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * <!-- end-user-doc -->
  * @generated
  */
-public class DateToStateMapEntryItemProvider extends ItemProviderAdapter
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class DateToStateMapEntryItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
+		IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -70,16 +69,12 @@ public class DateToStateMapEntryItemProvider extends ItemProviderAdapter
 	 */
 	protected void addKeyPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
+				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
 				getString("_UI_DateToStateMapEntry_key_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_DateToStateMapEntry_key_feature",
+				getString("_UI_PropertyDescriptor_description", "_UI_DateToStateMapEntry_key_feature",
 						"_UI_DateToStateMapEntry_type"),
-				ClassSupplierPackage.Literals.DATE_TO_STATE_MAP_ENTRY__KEY,
-				true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				null, null));
+				ClassSupplierPackage.Literals.DATE_TO_STATE_MAP_ENTRY__KEY, true, false, false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -91,12 +86,10 @@ public class DateToStateMapEntryItemProvider extends ItemProviderAdapter
 	 * @generated
 	 */
 	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(
-			Object object) {
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures
-					.add(ClassSupplierPackage.Literals.DATE_TO_STATE_MAP_ENTRY__VALUE);
+			childrenFeatures.add(ClassSupplierPackage.Literals.DATE_TO_STATE_MAP_ENTRY__VALUE);
 		}
 		return childrenFeatures;
 	}
@@ -122,8 +115,7 @@ public class DateToStateMapEntryItemProvider extends ItemProviderAdapter
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/DateToStateMapEntry"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/DateToStateMapEntry"));
 	}
 
 	/**
@@ -135,8 +127,7 @@ public class DateToStateMapEntryItemProvider extends ItemProviderAdapter
 	@Override
 	public String getText(Object object) {
 		Map.Entry<?, ?> dateToStateMapEntry = (Map.Entry<?, ?>) object;
-		return "" + dateToStateMapEntry.getKey() + " -> "
-				+ dateToStateMapEntry.getValue();
+		return "" + dateToStateMapEntry.getKey() + " -> " + dateToStateMapEntry.getValue();
 	}
 
 	/**
@@ -152,12 +143,10 @@ public class DateToStateMapEntryItemProvider extends ItemProviderAdapter
 
 		switch (notification.getFeatureID(Map.Entry.class)) {
 		case ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__KEY:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY__VALUE:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), true, false));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -171,12 +160,10 @@ public class DateToStateMapEntryItemProvider extends ItemProviderAdapter
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(
-				ClassSupplierPackage.Literals.DATE_TO_STATE_MAP_ENTRY__VALUE,
+		newChildDescriptors.add(createChildParameter(ClassSupplierPackage.Literals.DATE_TO_STATE_MAP_ENTRY__VALUE,
 				ClassSupplierFactory.eINSTANCE.createState()));
 	}
 

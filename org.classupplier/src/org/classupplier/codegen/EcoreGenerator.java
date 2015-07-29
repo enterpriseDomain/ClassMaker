@@ -3,9 +3,9 @@ package org.classupplier.codegen;
 import java.io.IOException;
 import java.util.Collections;
 
+import org.classupplier.Phase;
 import org.classupplier.builders.SupplementaryJob;
 import org.classupplier.impl.ClassSupplierOSGi;
-import org.classupplier.util.ClassSupplierUtil;
 import org.classupplier.util.ResourceUtil;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -18,6 +18,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.codegen.ecore.Generator;
+import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
@@ -25,8 +26,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.osgi.util.NLS;
 
-public class EcoreGenerator extends SupplementaryJob implements
-		org.classupplier.codegen.Generator {
+public class EcoreGenerator extends SupplementaryJob implements org.classupplier.codegen.Generator {
 
 	public EcoreGenerator() {
 		super("Generate Code");
@@ -49,7 +49,7 @@ public class EcoreGenerator extends SupplementaryJob implements
 	protected class GenModelSetupJob extends SupplementaryJob {
 
 		public GenModelSetupJob() {
-			super("Setup GenModel");
+			super("Configure GenModel");
 		}
 
 		private IPath path;
@@ -57,17 +57,14 @@ public class EcoreGenerator extends SupplementaryJob implements
 		@Override
 		public IStatus work(IProgressMonitor monitor) throws CoreException {
 			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-			URI genModelURI = URI.createFileURI(root.getRawLocation()
-					.append(getGenModelPath()).toString());
+			URI genModelURI = URI.createFileURI(root.getRawLocation().append(getGenModelPath()).toString());
 			Resource resource = resourceSet.getResource(genModelURI, true);
 			GenModel genModel = (GenModel) resource.getContents().get(0);
-			setupGenModel(getGenModelPath().removeFileExtension()
-					.removeLastSegments(2), genModel);
+			setupGenModel(getGenModelPath().removeFileExtension().removeLastSegments(2), genModel);
 			try {
 				resource.save(Collections.EMPTY_MAP);
 			} catch (IOException e) {
-				throw new CoreException(
-						ClassSupplierOSGi.createWarningStatus(e));
+				throw new CoreException(ClassSupplierOSGi.createWarningStatus(e));
 			}
 			return Status.OK_STATUS;
 		}
@@ -78,6 +75,12 @@ public class EcoreGenerator extends SupplementaryJob implements
 
 		public void setGenModelPath(IPath path) {
 			this.path = path;
+		}
+
+		@Override
+		public void checkStage() throws CoreException {
+			if (getContribution().getStage().getValue() < Phase.MODELED_VALUE)
+				throw new CoreException(ClassSupplierOSGi.createWarningStatus("Contribution is not modeled."));
 		}
 
 	}
@@ -95,9 +98,7 @@ public class EcoreGenerator extends SupplementaryJob implements
 		@Override
 		public IStatus work(IProgressMonitor monitor) throws CoreException {
 			getGenerator()
-					.run(new String[] { "-ecore2GenModel",
-							getPath().toString(), "",
-							ClassSupplierUtil.getState(getProject()).getName() });
+					.run(new String[] { "-ecore2GenModel", getPath().toString(), "", getContribution().getName() });
 			return Status.OK_STATUS;
 		}
 
@@ -105,8 +106,7 @@ public class EcoreGenerator extends SupplementaryJob implements
 			return generator;
 		}
 
-		public void setGenerator(
-				org.eclipse.emf.codegen.ecore.Generator generator) {
+		public void setGenerator(org.eclipse.emf.codegen.ecore.Generator generator) {
 			this.generator = generator;
 		}
 
@@ -116,6 +116,12 @@ public class EcoreGenerator extends SupplementaryJob implements
 
 		public void setPath(IPath path) {
 			this.path = path;
+		}
+
+		@Override
+		public void checkStage() throws CoreException {
+			if (getContribution().getStage().getValue() < Phase.MODELED_VALUE)
+				throw new CoreException(ClassSupplierOSGi.createWarningStatus("Contribution is not modeled."));
 		}
 
 	}
@@ -132,11 +138,8 @@ public class EcoreGenerator extends SupplementaryJob implements
 
 		@Override
 		public IStatus work(IProgressMonitor monitor) throws CoreException {
-			getGenerator().run(
-					new String[] {
-							"-model",
-							EcorePlugin.getWorkspaceRoot().getRawLocation()
-									.append(getGenModelPath()).toString() });
+			getGenerator().run(new String[] { "-model",
+					EcorePlugin.getWorkspaceRoot().getRawLocation().append(getGenModelPath()).toString() });
 			return Status.OK_STATUS;
 		}
 
@@ -144,8 +147,7 @@ public class EcoreGenerator extends SupplementaryJob implements
 			return generator;
 		}
 
-		public void setGenerator(
-				org.eclipse.emf.codegen.ecore.Generator generator) {
+		public void setGenerator(org.eclipse.emf.codegen.ecore.Generator generator) {
 			this.generator = generator;
 		}
 
@@ -157,12 +159,17 @@ public class EcoreGenerator extends SupplementaryJob implements
 			this.path = path;
 		}
 
+		@Override
+		public void checkStage() throws CoreException {
+			if (getContribution().getStage().getValue() < Phase.MODELED_VALUE)
+				throw new CoreException(ClassSupplierOSGi.createWarningStatus("Contribution is not modeled."));
+		}
+
 	}
 
 	@Override
 	public IStatus generate(IProgressMonitor monitor) throws CoreException {
-		IPath modelPath = ensureModelResourcePathExists(getProject(),
-				ClassSupplierUtil.getState(getProject()).getName(), monitor);
+		IPath modelPath = ensureModelResourcePathExists(getProject(), getContribution().getName(), monitor);
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		final IPath path = root.getRawLocation().append(modelPath);
 		final org.eclipse.emf.codegen.ecore.Generator generator = new Generator();
@@ -186,16 +193,15 @@ public class EcoreGenerator extends SupplementaryJob implements
 			genModelGeneration.schedule();
 		} else
 			genModelSetup.schedule();
-
+		getContribution().setStage(Phase.GENERATED);
 		return Status.OK_STATUS;
 	}
 
-	private IPath ensureModelResourcePathExists(IProject project, String name,
-			IProgressMonitor monitor) throws CoreException {
+	private IPath ensureModelResourcePathExists(IProject project, String name, IProgressMonitor monitor)
+			throws CoreException {
 		if (!project.exists())
-			throw new CoreException(ClassSupplierOSGi.createErrorStatus(NLS
-					.bind("The project {0} was not created before generation.",
-							project)));
+			throw new CoreException(ClassSupplierOSGi
+					.createErrorStatus(NLS.bind("The project {0} was not created before generation.", project)));
 		project.open(monitor);
 		IFolder folder = project.getFolder(ResourceUtil.getModelFolderName());
 		if (!folder.exists())
@@ -208,13 +214,11 @@ public class EcoreGenerator extends SupplementaryJob implements
 		return path.removeFileExtension().addFileExtension(GENMODEL_EXT);
 	}
 
-	protected void setupGenModel(IPath projectPath,
-			org.eclipse.emf.codegen.ecore.genmodel.GenModel ecoreGenModel) {
-		ecoreGenModel.setModelName(ClassSupplierUtil.getState(getProject())
-				.getName());
+	protected void setupGenModel(IPath projectPath, org.eclipse.emf.codegen.ecore.genmodel.GenModel ecoreGenModel) {
+		ecoreGenModel.setModelName(getContribution().getName());
+		ecoreGenModel.setComplianceLevel(GenJDKLevel.JDK70_LITERAL);
 		ecoreGenModel.setSuppressInterfaces(true);
-		ecoreGenModel.setModelDirectory(projectPath.append(SOURCE_FOLDER_NAME)
-				.toString());
+		ecoreGenModel.setModelDirectory(projectPath.append(SOURCE_FOLDER_NAME).toString());
 		ecoreGenModel.setModelPluginID(getProject().getName());
 	}
 
@@ -226,6 +230,12 @@ public class EcoreGenerator extends SupplementaryJob implements
 	@Override
 	public IStatus work(IProgressMonitor monitor) throws CoreException {
 		return generate(monitor);
+	}
+
+	@Override
+	public void checkStage() throws CoreException {
+		if (getContribution().getStage().getValue() < Phase.MODELED_VALUE)
+			throw new CoreException(ClassSupplierOSGi.createWarningStatus("Contribution is not modeled."));
 	}
 
 }

@@ -8,6 +8,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.7,
 Require-Bundle: org.classupplier,
  javax.inject,
  org.eclipse.core.runtime,
- org.eclipse.e4.core.di
+ org.eclipse.e4.core.di,
+ org.eclipse.equinox.concurrent
 Bundle-ActivationPolicy: lazy
 

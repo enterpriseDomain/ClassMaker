@@ -3,10 +3,12 @@
 package org.classupplier.impl;
 
 import java.util.Date;
+import java.util.concurrent.Semaphore;
 
 import org.classupplier.ClassSupplierPackage;
 import org.classupplier.Phase;
 import org.classupplier.State;
+import org.classupplier.builders.SupplementaryJob;
 import org.classupplier.util.ResourceUtil;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
@@ -27,38 +29,39 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.BasicFeatureMap;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.equinox.p2.metadata.Version;
+import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
  * <em><b>State</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  * <li>{@link org.classupplier.impl.StateImpl#getName <em>Name</em>}</li>
  * <li>{@link org.classupplier.impl.StateImpl#getTime <em>Time</em>}</li>
  * <li>{@link org.classupplier.impl.StateImpl#getVersion <em>Version</em>}</li>
  * <li>{@link org.classupplier.impl.StateImpl#getStage <em>Stage</em>}</li>
- * <li>{@link org.classupplier.impl.StateImpl#getProjectName <em>Project Name
- * </em>}</li>
- * <li>{@link org.classupplier.impl.StateImpl#getEPackage <em>EPackage</em>}</li>
- * <li>{@link org.classupplier.impl.StateImpl#getDynamicEPackage <em>Dynamic
- * EPackage</em>}</li>
- * <li>{@link org.classupplier.impl.StateImpl#getRuntimeEPackage <em>Runtime
- * EPackage</em>}</li>
+ * <li>{@link org.classupplier.impl.StateImpl#getProjectName
+ * <em>Project Name</em>}</li>
+ * <li>{@link org.classupplier.impl.StateImpl#getEPackage <em>EPackage</em>}
+ * </li>
+ * <li>{@link org.classupplier.impl.StateImpl#getDynamicEPackage
+ * <em>Dynamic EPackage</em>}</li>
+ * <li>{@link org.classupplier.impl.StateImpl#getRuntimeEPackage
+ * <em>Runtime EPackage</em>}</li>
  * </ul>
- * </p>
  *
- * @generated NOT
+ * @generated
  */
-public class StateImpl extends EObjectImpl implements State, Constructable {
+public class StateImpl extends EObjectImpl implements State {
 	private final class ResultAdapter extends AdapterImpl {
 		private EPackage result;
 
 		@Override
 		public void notifyChanged(Notification msg) {
 			if (msg.getEventType() == Notification.SET
-					&& msg.getFeatureID(State.class) == ClassSupplierPackage.CONTRIBUTION__STAGE
+					&& msg.getFeatureID(State.class) == ClassSupplierPackage.STATE__STAGE
 					&& msg.getNewValue().equals(Phase.LOADED))
 				setResult(getRuntimeEPackage());
 		}
@@ -68,7 +71,12 @@ public class StateImpl extends EObjectImpl implements State, Constructable {
 		}
 
 		public void setResult(EPackage result) {
+			if (this.result != null && result == null)
+				return;
 			this.result = result;
+			synchronized (lock) {
+				lock.notifyAll();
+			}
 		}
 	}
 
@@ -202,7 +210,11 @@ public class StateImpl extends EObjectImpl implements State, Constructable {
 	 */
 	protected FeatureMap ePackage;
 
-	private ResultAdapter results = new ResultAdapter();;
+	private ResultAdapter resultCollector = new ResultAdapter();;
+
+	private Semaphore constructed = new Semaphore(0);
+
+	private Object lock = new Object();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -212,7 +224,7 @@ public class StateImpl extends EObjectImpl implements State, Constructable {
 	protected StateImpl() {
 		super();
 		eAdapters().add(new StageAdapter());
-		eAdapters().add(results);
+		eAdapters().add(resultCollector);
 	}
 
 	/**
@@ -231,8 +243,10 @@ public class StateImpl extends EObjectImpl implements State, Constructable {
 	 * @generated NOT
 	 */
 	public String getName() {
-		if (getAppropriateEPackage() != null)
-			return getAppropriateEPackage().getName();
+		if (getStage().getValue() < Phase.LOADED_VALUE && getDynamicEPackage() != null)
+			return getDynamicEPackage().getName();
+		else if (getRuntimeEPackage() != null)
+			return getRuntimeEPackage().getName();
 		return name;
 	}
 
@@ -245,8 +259,7 @@ public class StateImpl extends EObjectImpl implements State, Constructable {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ClassSupplierPackage.STATE__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.STATE__NAME, oldName, name));
 	}
 
 	/**
@@ -267,8 +280,7 @@ public class StateImpl extends EObjectImpl implements State, Constructable {
 		Date oldTime = time;
 		time = new Date(newTime.getTime());
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ClassSupplierPackage.STATE__TIME, oldTime, time));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.STATE__TIME, oldTime, time));
 	}
 
 	/**
@@ -289,9 +301,8 @@ public class StateImpl extends EObjectImpl implements State, Constructable {
 		String oldProjectName = projectName;
 		projectName = newProjectName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ClassSupplierPackage.STATE__PROJECT_NAME, oldProjectName,
-					projectName));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.STATE__PROJECT_NAME,
+					oldProjectName, projectName));
 	}
 
 	/**
@@ -301,8 +312,7 @@ public class StateImpl extends EObjectImpl implements State, Constructable {
 	 */
 	public FeatureMap getEPackage() {
 		if (ePackage == null) {
-			ePackage = new BasicFeatureMap(this,
-					ClassSupplierPackage.STATE__EPACKAGE);
+			ePackage = new BasicFeatureMap(this, ClassSupplierPackage.STATE__EPACKAGE);
 		}
 		return ePackage;
 	}
@@ -313,8 +323,7 @@ public class StateImpl extends EObjectImpl implements State, Constructable {
 	 * @generated
 	 */
 	public EPackage getDynamicEPackage() {
-		return (EPackage) getEPackage().get(
-				ClassSupplierPackage.Literals.STATE__DYNAMIC_EPACKAGE, true);
+		return (EPackage) getEPackage().get(ClassSupplierPackage.Literals.STATE__DYNAMIC_EPACKAGE, true);
 	}
 
 	/**
@@ -322,10 +331,8 @@ public class StateImpl extends EObjectImpl implements State, Constructable {
 	 * 
 	 * @generated
 	 */
-	public NotificationChain basicSetDynamicEPackage(
-			EPackage newDynamicEPackage, NotificationChain msgs) {
-		return ((FeatureMap.Internal) getEPackage()).basicAdd(
-				ClassSupplierPackage.Literals.STATE__DYNAMIC_EPACKAGE,
+	public NotificationChain basicSetDynamicEPackage(EPackage newDynamicEPackage, NotificationChain msgs) {
+		return ((FeatureMap.Internal) getEPackage()).basicAdd(ClassSupplierPackage.Literals.STATE__DYNAMIC_EPACKAGE,
 				newDynamicEPackage, msgs);
 	}
 
@@ -335,8 +342,7 @@ public class StateImpl extends EObjectImpl implements State, Constructable {
 	 * @generated
 	 */
 	public void setDynamicEPackage(EPackage newDynamicEPackage) {
-		((FeatureMap.Internal) getEPackage()).set(
-				ClassSupplierPackage.Literals.STATE__DYNAMIC_EPACKAGE,
+		((FeatureMap.Internal) getEPackage()).set(ClassSupplierPackage.Literals.STATE__DYNAMIC_EPACKAGE,
 				newDynamicEPackage);
 	}
 
@@ -346,8 +352,7 @@ public class StateImpl extends EObjectImpl implements State, Constructable {
 	 * @generated
 	 */
 	public EPackage getRuntimeEPackage() {
-		return (EPackage) getEPackage().get(
-				ClassSupplierPackage.Literals.STATE__RUNTIME_EPACKAGE, true);
+		return (EPackage) getEPackage().get(ClassSupplierPackage.Literals.STATE__RUNTIME_EPACKAGE, true);
 	}
 
 	/**
@@ -355,10 +360,8 @@ public class StateImpl extends EObjectImpl implements State, Constructable {
 	 * 
 	 * @generated
 	 */
-	public NotificationChain basicSetRuntimeEPackage(
-			EPackage newRuntimeEPackage, NotificationChain msgs) {
-		return ((FeatureMap.Internal) getEPackage()).basicAdd(
-				ClassSupplierPackage.Literals.STATE__RUNTIME_EPACKAGE,
+	public NotificationChain basicSetRuntimeEPackage(EPackage newRuntimeEPackage, NotificationChain msgs) {
+		return ((FeatureMap.Internal) getEPackage()).basicAdd(ClassSupplierPackage.Literals.STATE__RUNTIME_EPACKAGE,
 				newRuntimeEPackage, msgs);
 	}
 
@@ -368,14 +371,24 @@ public class StateImpl extends EObjectImpl implements State, Constructable {
 	 * @generated
 	 */
 	public void setRuntimeEPackage(EPackage newRuntimeEPackage) {
-		((FeatureMap.Internal) getEPackage()).set(
-				ClassSupplierPackage.Literals.STATE__RUNTIME_EPACKAGE,
+		((FeatureMap.Internal) getEPackage()).set(ClassSupplierPackage.Literals.STATE__RUNTIME_EPACKAGE,
 				newRuntimeEPackage);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public void fireJobsCompleted() {
+		constructed().release();
+		synchronized (lock) {
+			lock.notifyAll();
+		}
 	}
 
 	public EPackage doConstruct(IProgressMonitor monitor) throws Exception {
 		Phase oldStage = getStage();
-		setStage(Phase.PROCESSING);
 		try {
 			IWorkspace workspace = ResourcesPlugin.getWorkspace();
 			boolean autoBuild = workspace.isAutoBuilding();
@@ -386,13 +399,13 @@ public class StateImpl extends EObjectImpl implements State, Constructable {
 				project.open(monitor);
 				ResourceUtil.setAutoBuilding(workspace, false);
 				IProjectDescription description = project.getDescription();
-				description = ResourceUtil.addProjectNature(description,
-						ClassSupplierOSGi.NATURE_ID);
+				description = ResourceUtil.addProjectNature(description, ClassSupplierOSGi.NATURE_ID);
 				project.setDescription(description, monitor);
 			} else {
 				project.open(monitor);
 			}
 			project.build(IncrementalProjectBuilder.FULL_BUILD, monitor);
+			SupplementaryJob.joinManualBuild(monitor);
 			ResourceUtil.setAutoBuilding(workspace, autoBuild);
 		} catch (CoreException e) {
 			if (e.getStatus().getSeverity() == IStatus.ERROR) {
@@ -409,10 +422,17 @@ public class StateImpl extends EObjectImpl implements State, Constructable {
 			monitor.done();
 		}
 
-		while (!eIsSet(ClassSupplierPackage.STATE__RUNTIME_EPACKAGE)) {
-			Thread.yield();
+		synchronized (lock) {
+			while (resultCollector.getResult() == null || constructed().availablePermits() < 0)
+				lock.wait();
 		}
-		return results.getResult();
+
+		return resultCollector.getResult();
+	}
+
+	@Override
+	public Semaphore constructed() {
+		return constructed;
 	}
 
 	/**
@@ -433,26 +453,7 @@ public class StateImpl extends EObjectImpl implements State, Constructable {
 		Phase oldStage = stage;
 		stage = newStage == null ? STAGE_EDEFAULT : newStage;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ClassSupplierPackage.STATE__STAGE, oldStage, stage));
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public EPackage getAppropriateEPackage() {
-		switch (getStage()) {
-		case LOADED:
-			if (eIsSet(ClassSupplierPackage.STATE__RUNTIME_EPACKAGE))
-				return getRuntimeEPackage();
-		case MODELED:
-			if (eIsSet(ClassSupplierPackage.STATE__DYNAMIC_EPACKAGE))
-				return getDynamicEPackage();
-		default:
-			return null;
-		}
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.STATE__STAGE, oldStage, stage));
 	}
 
 	/**
@@ -461,12 +462,10 @@ public class StateImpl extends EObjectImpl implements State, Constructable {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case ClassSupplierPackage.STATE__EPACKAGE:
-			return ((InternalEList<?>) getEPackage()).basicRemove(otherEnd,
-					msgs);
+			return ((InternalEList<?>) getEPackage()).basicRemove(otherEnd, msgs);
 		case ClassSupplierPackage.STATE__DYNAMIC_EPACKAGE:
 			return basicSetDynamicEPackage(null, msgs);
 		case ClassSupplierPackage.STATE__RUNTIME_EPACKAGE:
@@ -493,8 +492,8 @@ public class StateImpl extends EObjectImpl implements State, Constructable {
 		Version oldVersion = version;
 		version = newVersion;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					ClassSupplierPackage.STATE__VERSION, oldVersion, version));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.STATE__VERSION, oldVersion,
+					version));
 	}
 
 	/**
@@ -608,19 +607,15 @@ public class StateImpl extends EObjectImpl implements State, Constructable {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case ClassSupplierPackage.STATE__NAME:
-			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT
-					.equals(name);
+			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		case ClassSupplierPackage.STATE__TIME:
-			return TIME_EDEFAULT == null ? time != null : !TIME_EDEFAULT
-					.equals(time);
+			return TIME_EDEFAULT == null ? time != null : !TIME_EDEFAULT.equals(time);
 		case ClassSupplierPackage.STATE__VERSION:
-			return VERSION_EDEFAULT == null ? version != null
-					: !VERSION_EDEFAULT.equals(version);
+			return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
 		case ClassSupplierPackage.STATE__STAGE:
 			return stage != STAGE_EDEFAULT;
 		case ClassSupplierPackage.STATE__PROJECT_NAME:
-			return PROJECT_NAME_EDEFAULT == null ? projectName != null
-					: !PROJECT_NAME_EDEFAULT.equals(projectName);
+			return PROJECT_NAME_EDEFAULT == null ? projectName != null : !PROJECT_NAME_EDEFAULT.equals(projectName);
 		case ClassSupplierPackage.STATE__EPACKAGE:
 			return ePackage != null && !ePackage.isEmpty();
 		case ClassSupplierPackage.STATE__DYNAMIC_EPACKAGE:

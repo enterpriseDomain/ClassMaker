@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="classupplier" nsURI="http://org/classupplier/0.7.6" nsPrefix="classupplier">
-  <eClassifiers xsi:type="ecore:EClass" name="Contribution">
+  <eClassifiers xsi:type="ecore:EClass" name="Contribution" eSuperTypes="#//Constructable">
     <eOperations name="construct">
-      <eGenericType eClassifier="#//Future">
+      <eGenericType eClassifier="#//IFuture">
         <eTypeArguments>
-          <eUpperBound eClassifier="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
+          <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
         </eTypeArguments>
       </eGenericType>
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
@@ -14,9 +14,6 @@
       <eParameters name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     </eOperations>
     <eOperations name="newState" eType="#//State"/>
-    <eOperations name="setModelEPackage">
-      <eParameters name="blueprint" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="time" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"
@@ -31,11 +28,13 @@
         eType="#//DateToStateMapEntry" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//State"
         changeable="false" volatile="true" transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ePackage" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
-        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="model" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
+        volatile="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="runtime" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
+        changeable="false" volatile="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="State">
-    <eOperations name="getAppropriateEPackage" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
+  <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//Constructable">
+    <eOperations name="fireJobsCompleted"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="time" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"
         iD="true"/>
@@ -64,9 +63,7 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Workspace" eSuperTypes="#//ISchedulingRule">
-    <eOperations name="init">
-      <eParameters name="oldWorkspace" eType="#//Workspace"/>
-    </eOperations>
+    <eOperations name="init"/>
     <eOperations name="createContribution" eType="#//Contribution">
       <eParameters name="blueprint" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
     </eOperations>
@@ -76,7 +73,7 @@
     <eOperations name="getContribution" eType="#//Contribution">
       <eParameters name="ePackage" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
     </eOperations>
-    <eOperations name="findContribution" eType="#//Contribution">
+    <eOperations name="getContribution" eType="#//Contribution">
       <eParameters name="projectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eOperations name="registerContribution">
@@ -88,33 +85,33 @@
     <eOperations name="contains" eType="#//Phase">
       <eParameters name="blueprint" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
     </eOperations>
-    <eOperations name="save">
-      <eParameters name="monitor" eType="#//IProgressMonitor"/>
-    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="contributions" upperBound="-1"
         eType="#//Contribution" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourceSet" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EResourceSet"
         changeable="false" transient="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="IProgressMonitor" instanceClassName="org.eclipse.core.runtime.IProgressMonitor"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="Version" instanceClassName="org.eclipse.equinox.p2.metadata.Version"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Version" instanceClassName="org.osgi.framework.Version"/>
   <eClassifiers xsi:type="ecore:EClass" name="DateToStateMapEntry" instanceClassName="java.util.Map$Entry">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//State"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Phase">
-    <eLiterals name="PROCESSING" value="-1"/>
     <eLiterals name="DEFINED"/>
     <eLiterals name="MODELED" value="1"/>
     <eLiterals name="GENERATED" value="2" literal=""/>
     <eLiterals name="EXPORTED" value="3"/>
-    <eLiterals name="LOADED" value="4"/>
+    <eLiterals name="INSTALLED" value="4" literal="INSTALLED"/>
+    <eLiterals name="LOADED" value="5"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ISchedulingRule" instanceClassName="org.eclipse.core.runtime.jobs.ISchedulingRule"
       abstract="true" interface="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Future" instanceClassName="java.util.concurrent.Future"
+  <eClassifiers xsi:type="ecore:EClass" name="IFuture" instanceClassName="org.eclipse.equinox.concurrent.future.IFuture"
       abstract="true" interface="true">
-    <eTypeParameters name="V"/>
+    <eTypeParameters name="ResultType"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Semaphore" instanceClassName="java.util.concurrent.Semaphore"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Constructable" instanceClassName="org.classupplier.impl.Constructable"
+      abstract="true" interface="true"/>
 </ecore:EPackage>

@@ -4,6 +4,7 @@ package org.classupplier;
 
 import java.util.Date;
 
+import org.classupplier.impl.Constructable;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.FeatureMap;
@@ -15,6 +16,7 @@ import org.osgi.framework.Version;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.classupplier.State#getName <em>Name</em>}</li>
  *   <li>{@link org.classupplier.State#getTime <em>Time</em>}</li>
@@ -25,13 +27,12 @@ import org.osgi.framework.Version;
  *   <li>{@link org.classupplier.State#getDynamicEPackage <em>Dynamic EPackage</em>}</li>
  *   <li>{@link org.classupplier.State#getRuntimeEPackage <em>Runtime EPackage</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.classupplier.ClassSupplierPackage#getState()
- * @model
+ * @model superTypes="org.classupplier.Constructable"
  * @generated
  */
-public interface State extends EObject {
+public interface State extends EObject, Constructable {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute. <!--
 	 * begin-user-doc -->
@@ -99,7 +100,7 @@ public interface State extends EObject {
 	 * @model dataType="org.classupplier.Version"
 	 * @generated
 	 */
-	org.eclipse.equinox.p2.metadata.Version getVersion();
+	Version getVersion();
 
 	/**
 	 * Sets the value of the '{@link org.classupplier.State#getVersion <em>Version</em>}' attribute.
@@ -109,7 +110,7 @@ public interface State extends EObject {
 	 * @see #getVersion()
 	 * @generated
 	 */
-	void setVersion(org.eclipse.equinox.p2.metadata.Version value);
+	void setVersion(Version value);
 
 	/**
 	 * Returns the value of the '<em><b>Project Name</b></em>' attribute.
@@ -211,6 +212,14 @@ public interface State extends EObject {
 	void setRuntimeEPackage(EPackage value);
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void fireJobsCompleted();
+
+	/**
 	 * Returns the value of the '<em><b>Stage</b></em>' attribute.
 	 * The default value is <code>""</code>.
 	 * The literals are from the enumeration {@link org.classupplier.Phase}.
@@ -238,13 +247,5 @@ public interface State extends EObject {
 	 * @generated
 	 */
 	void setStage(Phase value);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 * @generated
-	 */
-	EPackage getAppropriateEPackage();
 
 } // State

@@ -5,10 +5,9 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.equinox.p2.metadata.Version;
+import org.osgi.framework.Version;
 
-public abstract class AbstractExporter extends SupplementaryJob implements
-		Exporter {
+public abstract class AbstractExporter extends SupplementaryJob implements Exporter {
 
 	public AbstractExporter() {
 		super("Plug-in Export");

@@ -35,9 +35,8 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * <!-- end-user-doc -->
  * @generated
  */
-public class WorkspaceItemProvider extends ItemProviderAdapter implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class WorkspaceItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
+		IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -71,17 +70,13 @@ public class WorkspaceItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	protected void addResourceSetPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_Workspace_resourceSet_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_Workspace_resourceSet_feature",
-						"_UI_Workspace_type"),
-				ClassSupplierPackage.Literals.WORKSPACE__RESOURCE_SET, false,
-				false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null,
-				null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Workspace_resourceSet_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Workspace_resourceSet_feature",
+								"_UI_Workspace_type"),
+						ClassSupplierPackage.Literals.WORKSPACE__RESOURCE_SET, false, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -93,12 +88,10 @@ public class WorkspaceItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(
-			Object object) {
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures
-					.add(ClassSupplierPackage.Literals.WORKSPACE__CONTRIBUTIONS);
+			childrenFeatures.add(ClassSupplierPackage.Literals.WORKSPACE__CONTRIBUTIONS);
 		}
 		return childrenFeatures;
 	}
@@ -124,8 +117,7 @@ public class WorkspaceItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/Workspace"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Workspace"));
 	}
 
 	/**
@@ -155,12 +147,10 @@ public class WorkspaceItemProvider extends ItemProviderAdapter implements
 
 		switch (notification.getFeatureID(Workspace.class)) {
 		case ClassSupplierPackage.WORKSPACE__RESOURCE_SET:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case ClassSupplierPackage.WORKSPACE__CONTRIBUTIONS:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), true, false));
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -174,12 +164,10 @@ public class WorkspaceItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	@Override
-	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(
-				ClassSupplierPackage.Literals.WORKSPACE__CONTRIBUTIONS,
+		newChildDescriptors.add(createChildParameter(ClassSupplierPackage.Literals.WORKSPACE__CONTRIBUTIONS,
 				ClassSupplierFactory.eINSTANCE.createContribution()));
 	}
 

@@ -12,15 +12,16 @@
       generateExampleClass="false" multipleEditorPages="false" fileExtensions="classupplier"
       ecorePackage="ClassSupplier.ecore#/" publicationLocation="">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="ClassSupplier.ecore#//Phase">
-      <genEnumLiterals ecoreEnumLiteral="ClassSupplier.ecore#//Phase/PROCESSING"/>
       <genEnumLiterals ecoreEnumLiteral="ClassSupplier.ecore#//Phase/DEFINED"/>
       <genEnumLiterals ecoreEnumLiteral="ClassSupplier.ecore#//Phase/MODELED"/>
       <genEnumLiterals ecoreEnumLiteral="ClassSupplier.ecore#//Phase/GENERATED"/>
       <genEnumLiterals ecoreEnumLiteral="ClassSupplier.ecore#//Phase/EXPORTED"/>
+      <genEnumLiterals ecoreEnumLiteral="ClassSupplier.ecore#//Phase/INSTALLED"/>
       <genEnumLiterals ecoreEnumLiteral="ClassSupplier.ecore#//Phase/LOADED"/>
     </genEnums>
     <genDataTypes ecoreDataType="ClassSupplier.ecore#//IProgressMonitor"/>
     <genDataTypes ecoreDataType="ClassSupplier.ecore#//Version"/>
+    <genDataTypes ecoreDataType="ClassSupplier.ecore#//Semaphore"/>
     <genClasses ecoreClass="ClassSupplier.ecore#//Contribution">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//Contribution/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//Contribution/time"/>
@@ -29,8 +30,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//Contribution/projectName"/>
       <genFeatures property="None" createChild="false" propertyDescription="" ecoreFeature="ecore:EReference ClassSupplier.ecore#//Contribution/snapshots"/>
       <genFeatures property="None" createChild="false" propertyCategory="" ecoreFeature="ecore:EReference ClassSupplier.ecore#//Contribution/state"/>
-      <genFeatures property="Readonly" notify="false" children="true" createChild="false"
-          ecoreFeature="ecore:EReference ClassSupplier.ecore#//Contribution/ePackage"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//Contribution/model"/>
       <genOperations ecoreOperation="ClassSupplier.ecore#//Contribution/construct">
         <genParameters ecoreParameter="ClassSupplier.ecore#//Contribution/construct/monitor"/>
       </genOperations>
@@ -38,9 +38,7 @@
         <genParameters ecoreParameter="ClassSupplier.ecore#//Contribution/apply/version"/>
       </genOperations>
       <genOperations ecoreOperation="ClassSupplier.ecore#//Contribution/newState"/>
-      <genOperations ecoreOperation="ClassSupplier.ecore#//Contribution/setModelEPackage">
-        <genParameters ecoreParameter="ClassSupplier.ecore#//Contribution/setModelEPackage/blueprint"/>
-      </genOperations>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//Contribution/getRuntimeEPackage"/>
     </genClasses>
     <genClasses ecoreClass="ClassSupplier.ecore#//State">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//State/name"/>
@@ -52,14 +50,12 @@
       <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference ClassSupplier.ecore#//State/dynamicEPackage"/>
       <genFeatures property="Readonly" notify="false" createChild="false" propertyCategory=""
           propertyDescription="" ecoreFeature="ecore:EReference ClassSupplier.ecore#//State/runtimeEPackage"/>
-      <genOperations ecoreOperation="ClassSupplier.ecore#//State/getAppropriateEPackage"/>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//State/fireJobComplete"/>
     </genClasses>
     <genClasses ecoreClass="ClassSupplier.ecore#//Workspace">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//Workspace/contributions"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//Workspace/resourceSet"/>
-      <genOperations ecoreOperation="ClassSupplier.ecore#//Workspace/init">
-        <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/init/oldWorkspace"/>
-      </genOperations>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//Workspace/init"/>
       <genOperations ecoreOperation="ClassSupplier.ecore#//Workspace/createContribution">
         <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/createContribution/blueprint"/>
       </genOperations>
@@ -69,8 +65,8 @@
       <genOperations ecoreOperation="ClassSupplier.ecore#//Workspace/getContribution.1">
         <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/getContribution.1/ePackage"/>
       </genOperations>
-      <genOperations ecoreOperation="ClassSupplier.ecore#//Workspace/findContribution">
-        <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/findContribution/projectName"/>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//Workspace/getContribution.2">
+        <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/getContribution.2/projectName"/>
       </genOperations>
       <genOperations ecoreOperation="ClassSupplier.ecore#//Workspace/registerContribution">
         <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/registerContribution/contribution"/>
@@ -81,17 +77,15 @@
       <genOperations ecoreOperation="ClassSupplier.ecore#//Workspace/contains">
         <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/contains/blueprint"/>
       </genOperations>
-      <genOperations ecoreOperation="ClassSupplier.ecore#//Workspace/save">
-        <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/save/monitor"/>
-      </genOperations>
     </genClasses>
     <genClasses ecoreClass="ClassSupplier.ecore#//DateToStateMapEntry">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//DateToStateMapEntry/key"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//DateToStateMapEntry/value"/>
     </genClasses>
     <genClasses image="false" ecoreClass="ClassSupplier.ecore#//ISchedulingRule"/>
-    <genClasses image="false" ecoreClass="ClassSupplier.ecore#//Future">
-      <genTypeParameters ecoreTypeParameter="ClassSupplier.ecore#//Future/V"/>
+    <genClasses image="false" ecoreClass="ClassSupplier.ecore#//IFuture">
+      <genTypeParameters ecoreTypeParameter="ClassSupplier.ecore#//IFuture/ResultType"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="ClassSupplier.ecore#//Constructable"/>
   </genPackages>
 </genmodel:GenModel>

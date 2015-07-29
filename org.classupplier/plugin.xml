@@ -45,11 +45,18 @@
    </extension>
    <extension
          id="materializer"
-         name="Materializer"
+         name="Model Materializer"
          point="org.eclipse.core.resources.builders">
       <builder>
          <run
                class="org.classupplier.builders.MaterialisingBuilder">
          </run></builder>
+   </extension>
+   <extension
+         point="org.eclipse.emf.ecore.invocation_delegate">
+      <factory
+            class="org.classupplier.ReflectiveInvocationDelegateFactory"
+            uri="org.classupplier.reflection.java">
+      </factory>
    </extension>
 </plugin>

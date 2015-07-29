@@ -19,8 +19,7 @@ public interface ClassSupplierFactory extends EFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	ClassSupplierFactory eINSTANCE = org.classupplier.impl.ClassSupplierFactoryImpl
-			.init();
+	ClassSupplierFactory eINSTANCE = org.classupplier.impl.ClassSupplierFactoryImpl.init();
 
 	/**
 	 * Returns a new object of class '<em>Contribution</em>'.

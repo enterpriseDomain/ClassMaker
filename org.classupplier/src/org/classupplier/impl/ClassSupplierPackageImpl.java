@@ -3,7 +3,7 @@
 package org.classupplier.impl;
 
 import java.util.Map;
-import java.util.concurrent.Future;
+import java.util.concurrent.Semaphore;
 
 import org.classupplier.ClassSupplierFactory;
 import org.classupplier.ClassSupplierPackage;
@@ -23,15 +23,15 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-import org.eclipse.equinox.p2.metadata.Version;
+import org.eclipse.equinox.concurrent.future.IFuture;
+import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Package</b>. <!--
  * end-user-doc -->
  * @generated
  */
-public class ClassSupplierPackageImpl extends EPackageImpl implements
-		ClassSupplierPackage {
+public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSupplierPackage {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
@@ -63,10 +63,18 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 	private EClass iSchedulingRuleEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass futureEClass = null;
+	private EClass iFutureEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass constructableEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -85,6 +93,13 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	private EDataType versionEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType semaphoreEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -128,13 +143,12 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 	 */
 	public static ClassSupplierPackage init() {
 		if (isInited)
-			return (ClassSupplierPackage) EPackage.Registry.INSTANCE
-					.getEPackage(ClassSupplierPackage.eNS_URI);
+			return (ClassSupplierPackage) EPackage.Registry.INSTANCE.getEPackage(ClassSupplierPackage.eNS_URI);
 
 		// Obtain or create and register package
 		ClassSupplierPackageImpl theClassSupplierPackage = (ClassSupplierPackageImpl) (EPackage.Registry.INSTANCE
-				.get(eNS_URI) instanceof ClassSupplierPackageImpl ? EPackage.Registry.INSTANCE
-				.get(eNS_URI) : new ClassSupplierPackageImpl());
+				.get(eNS_URI) instanceof ClassSupplierPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI)
+						: new ClassSupplierPackageImpl());
 
 		isInited = true;
 
@@ -151,8 +165,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 		theClassSupplierPackage.freeze();
 
 		// Update the registry and return the package
-		EPackage.Registry.INSTANCE.put(ClassSupplierPackage.eNS_URI,
-				theClassSupplierPackage);
+		EPackage.Registry.INSTANCE.put(ClassSupplierPackage.eNS_URI, theClassSupplierPackage);
 		return theClassSupplierPackage;
 	}
 
@@ -165,8 +178,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EAttribute getContribution_Name() {
@@ -174,8 +186,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EAttribute getContribution_Time() {
@@ -183,8 +194,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EAttribute getContribution_Version() {
@@ -192,8 +202,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EAttribute getContribution_Stage() {
@@ -201,8 +210,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EAttribute getContribution_ProjectName() {
@@ -230,8 +238,17 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getContribution_EPackage() {
+	public EReference getContribution_Model() {
 		return (EReference) contributionEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getContribution_Runtime() {
+		return (EReference) contributionEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -343,8 +360,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	public EAttribute getDateToStateMapEntry_Key() {
-		return (EAttribute) dateToStateMapEntryEClass.getEStructuralFeatures()
-				.get(0);
+		return (EAttribute) dateToStateMapEntryEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -352,8 +368,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	public EReference getDateToStateMapEntry_Value() {
-		return (EReference) dateToStateMapEntryEClass.getEStructuralFeatures()
-				.get(1);
+		return (EReference) dateToStateMapEntryEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -365,11 +380,21 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getFuture() {
-		return futureEClass;
+	public EClass getIFuture() {
+		return iFutureEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getConstructable() {
+		return constructableEClass;
 	}
 
 	/**
@@ -394,6 +419,15 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 	 */
 	public EDataType getVersion() {
 		return versionEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getSemaphore() {
+		return semaphoreEDataType;
 	}
 
 	/**
@@ -431,7 +465,8 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 		createEAttribute(contributionEClass, CONTRIBUTION__PROJECT_NAME);
 		createEReference(contributionEClass, CONTRIBUTION__SNAPSHOTS);
 		createEReference(contributionEClass, CONTRIBUTION__STATE);
-		createEReference(contributionEClass, CONTRIBUTION__EPACKAGE);
+		createEReference(contributionEClass, CONTRIBUTION__MODEL);
+		createEReference(contributionEClass, CONTRIBUTION__RUNTIME);
 
 		stateEClass = createEClass(STATE);
 		createEAttribute(stateEClass, STATE__NAME);
@@ -448,14 +483,14 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 		createEAttribute(workspaceEClass, WORKSPACE__RESOURCE_SET);
 
 		dateToStateMapEntryEClass = createEClass(DATE_TO_STATE_MAP_ENTRY);
-		createEAttribute(dateToStateMapEntryEClass,
-				DATE_TO_STATE_MAP_ENTRY__KEY);
-		createEReference(dateToStateMapEntryEClass,
-				DATE_TO_STATE_MAP_ENTRY__VALUE);
+		createEAttribute(dateToStateMapEntryEClass, DATE_TO_STATE_MAP_ENTRY__KEY);
+		createEReference(dateToStateMapEntryEClass, DATE_TO_STATE_MAP_ENTRY__VALUE);
 
 		iSchedulingRuleEClass = createEClass(ISCHEDULING_RULE);
 
-		futureEClass = createEClass(FUTURE);
+		iFutureEClass = createEClass(IFUTURE);
+
+		constructableEClass = createEClass(CONSTRUCTABLE);
 
 		// Create enums
 		phaseEEnum = createEEnum(PHASE);
@@ -463,6 +498,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 		// Create data types
 		iProgressMonitorEDataType = createEDataType(IPROGRESS_MONITOR);
 		versionEDataType = createEDataType(VERSION);
+		semaphoreEDataType = createEDataType(SEMAPHORE);
 	}
 
 	/**
@@ -489,206 +525,143 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		EcorePackage theEcorePackage = (EcorePackage) EPackage.Registry.INSTANCE
-				.getEPackage(EcorePackage.eNS_URI);
+		EcorePackage theEcorePackage = (EcorePackage) EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
 
 		// Create type parameters
-		addETypeParameter(futureEClass, "V");
+		addETypeParameter(iFutureEClass, "ResultType");
 
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		contributionEClass.getESuperTypes().add(this.getConstructable());
+		stateEClass.getESuperTypes().add(this.getConstructable());
 		workspaceEClass.getESuperTypes().add(this.getISchedulingRule());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(contributionEClass, Contribution.class, "Contribution",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getContribution_Name(), ecorePackage.getEString(),
-				"name", "", 0, 1, Contribution.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getContribution_Time(), ecorePackage.getEDate(), "time",
-				null, 0, 1, Contribution.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEAttribute(getContribution_Version(), this.getVersion(), "version",
-				null, 0, 1, Contribution.class, !IS_TRANSIENT, IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED,
-				IS_ORDERED);
-		initEAttribute(getContribution_Stage(), this.getPhase(), "stage", "",
-				0, 1, Contribution.class, !IS_TRANSIENT, IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED,
-				IS_ORDERED);
-		initEAttribute(getContribution_ProjectName(),
-				ecorePackage.getEString(), "projectName", "", 0, 1,
-				Contribution.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE,
-				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getContribution_Snapshots(),
-				this.getDateToStateMapEntry(), null, "snapshots", null, 0, -1,
-				Contribution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEReference(getContribution_State(), this.getState(), null, "state",
-				null, 0, 1, Contribution.class, IS_TRANSIENT, IS_VOLATILE,
-				!IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getContribution_EPackage(), ecorePackage.getEPackage(),
-				null, "ePackage", null, 0, 1, Contribution.class, IS_TRANSIENT,
-				IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEClass(contributionEClass, Contribution.class, "Contribution", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getContribution_Name(), ecorePackage.getEString(), "name", "", 0, 1, Contribution.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getContribution_Time(), ecorePackage.getEDate(), "time", null, 0, 1, Contribution.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getContribution_Version(), this.getVersion(), "version", null, 0, 1, Contribution.class,
+				!IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getContribution_Stage(), this.getPhase(), "stage", "", 0, 1, Contribution.class, !IS_TRANSIENT,
+				IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getContribution_ProjectName(), ecorePackage.getEString(), "projectName", "", 0, 1,
+				Contribution.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				IS_DERIVED, IS_ORDERED);
+		initEReference(getContribution_Snapshots(), this.getDateToStateMapEntry(), null, "snapshots", null, 0, -1,
+				Contribution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getContribution_State(), this.getState(), null, "state", null, 0, 1, Contribution.class,
+				IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
+				IS_DERIVED, IS_ORDERED);
+		initEReference(getContribution_Model(), ecorePackage.getEPackage(), null, "model", null, 0, 1,
+				Contribution.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getContribution_Runtime(), ecorePackage.getEPackage(), null, "runtime", null, 0, 1,
+				Contribution.class, !IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = addEOperation(contributionEClass, null, "construct", 0,
-				1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		EGenericType g1 = createEGenericType(this.getFuture());
+		EOperation op = addEOperation(contributionEClass, null, "construct", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EGenericType g1 = createEGenericType(this.getIFuture());
 		EGenericType g2 = createEGenericType();
 		g1.getETypeArguments().add(g2);
-		EGenericType g3 = createEGenericType(theEcorePackage.getEPackage());
+		EGenericType g3 = createEGenericType(ecorePackage.getEPackage());
 		g2.setEUpperBound(g3);
 		initEOperation(op, g1);
 
-		op = addEOperation(contributionEClass, null, "apply", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-		addEParameter(op, ecorePackage.getEDate(), "version", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
+		op = addEOperation(contributionEClass, null, "apply", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDate(), "version", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(contributionEClass, this.getState(), "newState", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
+		addEOperation(contributionEClass, this.getState(), "newState", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(contributionEClass, null, "setModelEPackage", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEPackage(), "blueprint", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
+		initEClass(stateEClass, State.class, "State", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getState_Name(), ecorePackage.getEString(), "name", null, 0, 1, State.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getState_Time(), ecorePackage.getEDate(), "time", null, 0, 1, State.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getState_Version(), this.getVersion(), "version", null, 0, 1, State.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getState_Stage(), this.getPhase(), "stage", "", 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getState_ProjectName(), ecorePackage.getEString(), "projectName", "", 0, 1, State.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getState_EPackage(), theEcorePackage.getEFeatureMapEntry(), "ePackage", null, 0, 1, State.class,
+				IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getState_DynamicEPackage(), theEcorePackage.getEPackage(), null, "dynamicEPackage", null, 0, 1,
+				State.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getState_RuntimeEPackage(), theEcorePackage.getEPackage(), null, "runtimeEPackage", null, 0, 1,
+				State.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
-		initEClass(stateEClass, State.class, "State", !IS_ABSTRACT,
-				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getState_Name(), ecorePackage.getEString(), "name",
-				null, 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEAttribute(getState_Time(), ecorePackage.getEDate(), "time", null,
-				0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getState_Version(), this.getVersion(), "version", null,
-				0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getState_Stage(), this.getPhase(), "stage", "", 0, 1,
-				State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getState_ProjectName(), ecorePackage.getEString(),
-				"projectName", "", 0, 1, State.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getState_EPackage(),
-				theEcorePackage.getEFeatureMapEntry(), "ePackage", null, 0, 1,
-				State.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getState_DynamicEPackage(),
-				theEcorePackage.getEPackage(), null, "dynamicEPackage", null,
-				0, 1, State.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE,
-				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
-				IS_DERIVED, IS_ORDERED);
-		initEReference(getState_RuntimeEPackage(),
-				theEcorePackage.getEPackage(), null, "runtimeEPackage", null,
-				0, 1, State.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE,
-				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
-				IS_DERIVED, IS_ORDERED);
+		addEOperation(stateEClass, null, "fireJobsCompleted", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(stateEClass, theEcorePackage.getEPackage(),
-				"getAppropriateEPackage", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(workspaceEClass, Workspace.class, "Workspace", !IS_ABSTRACT,
-				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getWorkspace_Contributions(), this.getContribution(),
-				null, "contributions", null, 0, -1, Workspace.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEAttribute(getWorkspace_ResourceSet(),
-				ecorePackage.getEResourceSet(), "resourceSet", null, 0, 1,
-				Workspace.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE,
-				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		op = addEOperation(workspaceEClass, null, "init", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-		addEParameter(op, this.getWorkspace(), "oldWorkspace", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-
-		op = addEOperation(workspaceEClass, this.getContribution(),
-				"createContribution", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEPackage(), "blueprint", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(workspaceEClass, this.getContribution(),
-				"getContribution", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEObject(), "eObject", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(workspaceEClass, this.getContribution(),
-				"getContribution", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEPackage(), "ePackage", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(workspaceEClass, this.getContribution(),
-				"findContribution", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "projectName", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(workspaceEClass, null, "registerContribution", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getContribution(), "contribution", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(workspaceEClass, null, "unregisterContribution", 0,
-				1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getContribution(), "contribution", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(workspaceEClass, this.getPhase(), "contains", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEPackage(), "blueprint", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(workspaceEClass, null, "save", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-
-		initEClass(dateToStateMapEntryEClass, Map.Entry.class,
-				"DateToStateMapEntry", !IS_ABSTRACT, !IS_INTERFACE,
-				!IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDateToStateMapEntry_Key(), ecorePackage.getEDate(),
-				"key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEReference(getDateToStateMapEntry_Value(), this.getState(), null,
-				"value", null, 0, 1, Map.Entry.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+		initEClass(workspaceEClass, Workspace.class, "Workspace", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getWorkspace_Contributions(), this.getContribution(), null, "contributions", null, 0, -1,
+				Workspace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getWorkspace_ResourceSet(), ecorePackage.getEResourceSet(), "resourceSet", null, 0, 1,
+				Workspace.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
 
-		initEClass(iSchedulingRuleEClass, ISchedulingRule.class,
-				"ISchedulingRule", IS_ABSTRACT, IS_INTERFACE,
+		addEOperation(workspaceEClass, null, "init", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(workspaceEClass, this.getContribution(), "createContribution", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEPackage(), "blueprint", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(workspaceEClass, this.getContribution(), "getContribution", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEObject(), "eObject", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(workspaceEClass, this.getContribution(), "getContribution", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEPackage(), "ePackage", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(workspaceEClass, this.getContribution(), "getContribution", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "projectName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(workspaceEClass, null, "registerContribution", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getContribution(), "contribution", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(workspaceEClass, null, "unregisterContribution", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getContribution(), "contribution", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(workspaceEClass, this.getPhase(), "contains", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEPackage(), "blueprint", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(dateToStateMapEntryEClass, Map.Entry.class, "DateToStateMapEntry", !IS_ABSTRACT, !IS_INTERFACE,
+				!IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getDateToStateMapEntry_Key(), ecorePackage.getEDate(), "key", null, 0, 1, Map.Entry.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDateToStateMapEntry_Value(), this.getState(), null, "value", null, 0, 1, Map.Entry.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(iSchedulingRuleEClass, ISchedulingRule.class, "ISchedulingRule", IS_ABSTRACT, IS_INTERFACE,
 				!IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(futureEClass, Future.class, "Future", IS_ABSTRACT,
-				IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEClass(iFutureEClass, IFuture.class, "IFuture", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(constructableEClass, Constructable.class, "Constructable", IS_ABSTRACT, IS_INTERFACE,
+				!IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(phaseEEnum, Phase.class, "Phase");
-		addEEnumLiteral(phaseEEnum, Phase.PROCESSING);
 		addEEnumLiteral(phaseEEnum, Phase.DEFINED);
 		addEEnumLiteral(phaseEEnum, Phase.MODELED);
 		addEEnumLiteral(phaseEEnum, Phase.GENERATED);
 		addEEnumLiteral(phaseEEnum, Phase.EXPORTED);
+		addEEnumLiteral(phaseEEnum, Phase.INSTALLED);
 		addEEnumLiteral(phaseEEnum, Phase.LOADED);
 
 		// Initialize data types
-		initEDataType(iProgressMonitorEDataType, IProgressMonitor.class,
-				"IProgressMonitor", IS_SERIALIZABLE,
+		initEDataType(iProgressMonitorEDataType, IProgressMonitor.class, "IProgressMonitor", IS_SERIALIZABLE,
 				!IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(versionEDataType, Version.class, "Version",
-				IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(versionEDataType, Version.class, "Version", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(semaphoreEDataType, Semaphore.class, "Semaphore", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -707,12 +680,9 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements
 	 */
 	protected void createExtendedMetaDataAnnotations() {
 		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";
-		addAnnotation(getState_EPackage(), source, new String[] { "kind",
-				"group" });
-		addAnnotation(getState_DynamicEPackage(), source, new String[] {
-				"group", "#ePackage" });
-		addAnnotation(getState_RuntimeEPackage(), source, new String[] {
-				"group", "#ePackage" });
+		addAnnotation(getState_EPackage(), source, new String[] { "kind", "group" });
+		addAnnotation(getState_DynamicEPackage(), source, new String[] { "group", "#ePackage" });
+		addAnnotation(getState_RuntimeEPackage(), source, new String[] { "group", "#ePackage" });
 	}
 
 } // ClassSupplierPackageImpl
