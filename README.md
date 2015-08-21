@@ -46,6 +46,6 @@ Example:
     assertEquals(pages, jObject.eGet(jAttr));
     assertEquals(eClass.getName(), jObject.getClass().getSimpleName());  
         
-[Here](/org.classupplier.tests/src/org/classupplier/tests/ClassSupplierTest.java) is the example.  
+[Here](/org.classupplier.tests/src/org/classupplier/tests/ClassSupplierTest.java) is an example.  
 
 For further details please see the project's [wiki](https://github.com/kirillzotkin/ClassSupplier/wiki).
