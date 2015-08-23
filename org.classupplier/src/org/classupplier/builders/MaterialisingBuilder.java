@@ -36,7 +36,7 @@ public class MaterialisingBuilder extends IncrementalProjectBuilder {
 			return null;
 		SupplementaryJob exporterJob = (SupplementaryJob) exporter.getAdapter(SupplementaryJob.class);
 		exporterJob.setProject(getProject());
-		State state = exporterJob.getContribution();
+		final State state = exporterJob.getContribution();
 		if (state != null
 				&& (state.getDynamicEPackage().getEClassifiers().isEmpty() || (state.getStage().equals(Phase.DEFINED))))
 			return null;

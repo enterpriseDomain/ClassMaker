@@ -30,7 +30,10 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//Contribution/projectName"/>
       <genFeatures property="None" createChild="false" propertyDescription="" ecoreFeature="ecore:EReference ClassSupplier.ecore#//Contribution/snapshots"/>
       <genFeatures property="None" createChild="false" propertyCategory="" ecoreFeature="ecore:EReference ClassSupplier.ecore#//Contribution/state"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//Contribution/model"/>
+      <genFeatures notify="false" children="true" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference ClassSupplier.ecore#//Contribution/model"/>
+      <genFeatures property="Readonly" notify="false" children="true" createChild="false"
+          ecoreFeature="ecore:EReference ClassSupplier.ecore#//Contribution/runtime"/>
       <genOperations ecoreOperation="ClassSupplier.ecore#//Contribution/construct">
         <genParameters ecoreParameter="ClassSupplier.ecore#//Contribution/construct/monitor"/>
       </genOperations>
@@ -38,7 +41,6 @@
         <genParameters ecoreParameter="ClassSupplier.ecore#//Contribution/apply/version"/>
       </genOperations>
       <genOperations ecoreOperation="ClassSupplier.ecore#//Contribution/newState"/>
-      <genOperations ecoreOperation="ClassSupplier.ecore#//Contribution/getRuntimeEPackage"/>
     </genClasses>
     <genClasses ecoreClass="ClassSupplier.ecore#//State">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//State/name"/>
@@ -50,7 +52,7 @@
       <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference ClassSupplier.ecore#//State/dynamicEPackage"/>
       <genFeatures property="Readonly" notify="false" createChild="false" propertyCategory=""
           propertyDescription="" ecoreFeature="ecore:EReference ClassSupplier.ecore#//State/runtimeEPackage"/>
-      <genOperations ecoreOperation="ClassSupplier.ecore#//State/fireJobComplete"/>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//State/fireJobsCompleted"/>
     </genClasses>
     <genClasses ecoreClass="ClassSupplier.ecore#//Workspace">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//Workspace/contributions"/>
