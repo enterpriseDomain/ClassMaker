@@ -5,8 +5,8 @@ import static org.junit.Assert.fail;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import org.classupplier.Contribution;
 import org.classupplier.ClassSupplier;
+import org.classupplier.Contribution;
 import org.classupplier.Phase;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;

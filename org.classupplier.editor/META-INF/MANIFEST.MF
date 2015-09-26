@@ -7,7 +7,9 @@ Bundle-ClassPath: .
 Bundle-Activator: org.classupplier.presentation.ClassSupplierEditorPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8,
+ JavaSE-1.7,
+ JavaSE-1.6
 Export-Package: org.classupplier.presentation
 Require-Bundle: org.eclipse.core.runtime,
  org.classupplier.edit;visibility:=reexport,

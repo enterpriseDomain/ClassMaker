@@ -160,22 +160,22 @@ public interface ClassSupplierPackage extends EPackage {
 	int CONTRIBUTION__STATE = CONSTRUCTABLE_FEATURE_COUNT + 6;
 
 	/**
-	 * The feature id for the '<em><b>Model</b></em>' reference.
+	 * The feature id for the '<em><b>Dynamic EPackage</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__MODEL = CONSTRUCTABLE_FEATURE_COUNT + 7;
+	int CONTRIBUTION__DYNAMIC_EPACKAGE = CONSTRUCTABLE_FEATURE_COUNT + 7;
 
 	/**
-	 * The feature id for the '<em><b>Runtime</b></em>' reference.
+	 * The feature id for the '<em><b>Generated EPackage</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__RUNTIME = CONSTRUCTABLE_FEATURE_COUNT + 8;
+	int CONTRIBUTION__GENERATED_EPACKAGE = CONSTRUCTABLE_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Contribution</em>' class.
@@ -250,13 +250,13 @@ public interface ClassSupplierPackage extends EPackage {
 	int STATE__DYNAMIC_EPACKAGE = CONSTRUCTABLE_FEATURE_COUNT + 6;
 
 	/**
-	 * The feature id for the '<em><b>Runtime EPackage</b></em>' containment reference.
+	 * The feature id for the '<em><b>Generated EPackage</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__RUNTIME_EPACKAGE = CONSTRUCTABLE_FEATURE_COUNT + 7;
+	int STATE__GENERATED_EPACKAGE = CONSTRUCTABLE_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of structural features of the '<em>State</em>' class.
@@ -507,26 +507,26 @@ public interface ClassSupplierPackage extends EPackage {
 	EReference getContribution_State();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.classupplier.Contribution#getModel <em>Model</em>}'.
+	 * Returns the meta object for the reference '{@link org.classupplier.Contribution#getDynamicEPackage <em>Dynamic EPackage</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Model</em>'.
-	 * @see org.classupplier.Contribution#getModel()
+	 * @return the meta object for the reference '<em>Dynamic EPackage</em>'.
+	 * @see org.classupplier.Contribution#getDynamicEPackage()
 	 * @see #getContribution()
 	 * @generated
 	 */
-	EReference getContribution_Model();
+	EReference getContribution_DynamicEPackage();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.classupplier.Contribution#getRuntime <em>Runtime</em>}'.
+	 * Returns the meta object for the reference '{@link org.classupplier.Contribution#getGeneratedEPackage <em>Generated EPackage</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Runtime</em>'.
-	 * @see org.classupplier.Contribution#getRuntime()
+	 * @return the meta object for the reference '<em>Generated EPackage</em>'.
+	 * @see org.classupplier.Contribution#getGeneratedEPackage()
 	 * @see #getContribution()
 	 * @generated
 	 */
-	EReference getContribution_Runtime();
+	EReference getContribution_GeneratedEPackage();
 
 	/**
 	 * Returns the meta object for class '{@link org.classupplier.State <em>State</em>}'.
@@ -616,15 +616,15 @@ public interface ClassSupplierPackage extends EPackage {
 	EReference getState_DynamicEPackage();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.classupplier.State#getRuntimeEPackage <em>Runtime EPackage</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.classupplier.State#getGeneratedEPackage <em>Generated EPackage</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Runtime EPackage</em>'.
-	 * @see org.classupplier.State#getRuntimeEPackage()
+	 * @return the meta object for the containment reference '<em>Generated EPackage</em>'.
+	 * @see org.classupplier.State#getGeneratedEPackage()
 	 * @see #getState()
 	 * @generated
 	 */
-	EReference getState_RuntimeEPackage();
+	EReference getState_GeneratedEPackage();
 
 	/**
 	 * Returns the meta object for class '{@link org.classupplier.Workspace <em>Workspace</em>}'.
@@ -857,20 +857,20 @@ public interface ClassSupplierPackage extends EPackage {
 		EReference CONTRIBUTION__STATE = eINSTANCE.getContribution_State();
 
 		/**
-		 * The meta object literal for the '<em><b>Model</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Dynamic EPackage</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CONTRIBUTION__MODEL = eINSTANCE.getContribution_Model();
+		EReference CONTRIBUTION__DYNAMIC_EPACKAGE = eINSTANCE.getContribution_DynamicEPackage();
 
 		/**
-		 * The meta object literal for the '<em><b>Runtime</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Generated EPackage</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CONTRIBUTION__RUNTIME = eINSTANCE.getContribution_Runtime();
+		EReference CONTRIBUTION__GENERATED_EPACKAGE = eINSTANCE.getContribution_GeneratedEPackage();
 
 		/**
 		 * The meta object literal for the '{@link org.classupplier.impl.StateImpl <em>State</em>}' class.
@@ -939,12 +939,12 @@ public interface ClassSupplierPackage extends EPackage {
 		EReference STATE__DYNAMIC_EPACKAGE = eINSTANCE.getState_DynamicEPackage();
 
 		/**
-		 * The meta object literal for the '<em><b>Runtime EPackage</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Generated EPackage</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference STATE__RUNTIME_EPACKAGE = eINSTANCE.getState_RuntimeEPackage();
+		EReference STATE__GENERATED_EPACKAGE = eINSTANCE.getState_GeneratedEPackage();
 
 		/**
 		 * The meta object literal for the '{@link org.classupplier.impl.WorkspaceImpl <em>Workspace</em>}' class.

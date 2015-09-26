@@ -10,7 +10,6 @@ import org.classupplier.Contribution;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -56,8 +55,8 @@ public class ContributionItemProvider extends ItemProviderAdapter implements IEd
 			addVersionPropertyDescriptor(object);
 			addStagePropertyDescriptor(object);
 			addProjectNamePropertyDescriptor(object);
-			addModelPropertyDescriptor(object);
-			addRuntimePropertyDescriptor(object);
+			addDynamicEPackagePropertyDescriptor(object);
+			addGeneratedEPackagePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -143,63 +142,34 @@ public class ContributionItemProvider extends ItemProviderAdapter implements IEd
 	}
 
 	/**
-	 * This adds a property descriptor for the Model feature.
+	 * This adds a property descriptor for the Dynamic EPackage feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addModelPropertyDescriptor(Object object) {
+	protected void addDynamicEPackagePropertyDescriptor(Object object) {
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_Contribution_model_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_Contribution_model_feature",
+						getResourceLocator(), getString("_UI_Contribution_dynamicEPackage_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Contribution_dynamicEPackage_feature",
 								"_UI_Contribution_type"),
-						ClassSupplierPackage.Literals.CONTRIBUTION__MODEL, true, false, true, null, null, null));
+						ClassSupplierPackage.Literals.CONTRIBUTION__DYNAMIC_EPACKAGE, true, false, true, null, null,
+						null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Runtime feature.
+	 * This adds a property descriptor for the Generated EPackage feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addRuntimePropertyDescriptor(Object object) {
+	protected void addGeneratedEPackagePropertyDescriptor(Object object) {
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_Contribution_runtime_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_Contribution_runtime_feature",
+						getResourceLocator(), getString("_UI_Contribution_generatedEPackage_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Contribution_generatedEPackage_feature",
 								"_UI_Contribution_type"),
-						ClassSupplierPackage.Literals.CONTRIBUTION__RUNTIME, false, false, false, null, null, null));
-	}
-
-	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(ClassSupplierPackage.Literals.CONTRIBUTION__MODEL);
-		}
-		return childrenFeatures;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
-		// adding (see {@link AddCommand}) it as a child.
-
-		return super.getChildFeature(object, child);
+				ClassSupplierPackage.Literals.CONTRIBUTION__GENERATED_EPACKAGE, false, false, false, null, null, null));
 	}
 
 	/**

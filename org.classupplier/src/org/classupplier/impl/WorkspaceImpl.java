@@ -153,7 +153,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		result = (ContributionImpl) ClassSupplierFactory.eINSTANCE.createContribution();
 		result.newState();
 		result.setName(blueprint.getName());
-		result.setModel(blueprint);
+		result.setDynamicEPackage(blueprint);
 		registerContribution(result);
 		return result;
 	}
@@ -211,10 +211,10 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		for (Contribution a : getContributions())
 			switch (a.getStage()) {
 			case MODELED:
-				if (packagesAreEqual(ePackage, a.getModel()))
+				if (packagesAreEqual(ePackage, a.getDynamicEPackage()))
 					return a;
 			case LOADED:
-				if (packagesAreEqual(ePackage, a.getRuntime()))
+				if (packagesAreEqual(ePackage, a.getGeneratedEPackage()))
 					return a;
 			default:
 				break;
@@ -277,10 +277,10 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	public Phase contains(EPackage blueprint) {
 		for (Contribution c : getContributions()) {
 			if (c.getStage().getValue() < Phase.LOADED_VALUE) {
-				if (packagesAreEqual(blueprint, c.getModel()))
+				if (packagesAreEqual(blueprint, c.getDynamicEPackage()))
 					return c.getStage();
 			} else {
-				if (packagesAreEqual(blueprint, c.getRuntime()))
+				if (packagesAreEqual(blueprint, c.getGeneratedEPackage()))
 					return c.getStage();
 			}
 		}

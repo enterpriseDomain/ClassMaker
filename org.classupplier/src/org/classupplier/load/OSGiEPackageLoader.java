@@ -22,7 +22,7 @@ import org.osgi.framework.Constants;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.startlevel.BundleStartLevel;
 
-public class BundleEPackageLoader extends SupplementaryJob {
+public class OSGiEPackageLoader extends SupplementaryJob {
 
 	private EPackage ePackage;
 
@@ -44,7 +44,7 @@ public class BundleEPackageLoader extends SupplementaryJob {
 		}
 	};
 
-	public BundleEPackageLoader() {
+	public OSGiEPackageLoader() {
 		super("Load");
 	}
 
@@ -127,7 +127,7 @@ public class BundleEPackageLoader extends SupplementaryJob {
 			setException(e);
 		}
 		if (ePackage != null) {
-			state.setRuntimeEPackage(ePackage);
+			state.setGeneratedEPackage(ePackage);
 		} else if (exception == null)
 			setException(new Error());
 		loaded.release();

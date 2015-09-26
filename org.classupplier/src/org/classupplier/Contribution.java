@@ -27,8 +27,8 @@ import org.osgi.framework.Version;
  *   <li>{@link org.classupplier.Contribution#getProjectName <em>Project Name</em>}</li>
  *   <li>{@link org.classupplier.Contribution#getSnapshots <em>Snapshots</em>}</li>
  *   <li>{@link org.classupplier.Contribution#getState <em>State</em>}</li>
- *   <li>{@link org.classupplier.Contribution#getModel <em>Model</em>}</li>
- *   <li>{@link org.classupplier.Contribution#getRuntime <em>Runtime</em>}</li>
+ *   <li>{@link org.classupplier.Contribution#getDynamicEPackage <em>Dynamic EPackage</em>}</li>
+ *   <li>{@link org.classupplier.Contribution#getGeneratedEPackage <em>Generated EPackage</em>}</li>
  * </ul>
  *
  * @see org.classupplier.ClassSupplierPackage#getContribution()
@@ -70,45 +70,45 @@ public interface Contribution extends EObject, Constructable {
 	State getState();
 
 	/**
-	 * Returns the value of the '<em><b>Model</b></em>' reference.
+	 * Returns the value of the '<em><b>Dynamic EPackage</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Model</em>' reference isn't clear,
+	 * If the meaning of the '<em>Dynamic EPackage</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Model</em>' reference.
-	 * @see #setModel(EPackage)
-	 * @see org.classupplier.ClassSupplierPackage#getContribution_Model()
+	 * @return the value of the '<em>Dynamic EPackage</em>' reference.
+	 * @see #setDynamicEPackage(EPackage)
+	 * @see org.classupplier.ClassSupplierPackage#getContribution_DynamicEPackage()
 	 * @model volatile="true"
 	 * @generated
 	 */
-	EPackage getModel();
+	EPackage getDynamicEPackage();
 
 	/**
-	 * Sets the value of the '{@link org.classupplier.Contribution#getModel <em>Model</em>}' reference.
+	 * Sets the value of the '{@link org.classupplier.Contribution#getDynamicEPackage <em>Dynamic EPackage</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Model</em>' reference.
-	 * @see #getModel()
+	 * @param value the new value of the '<em>Dynamic EPackage</em>' reference.
+	 * @see #getDynamicEPackage()
 	 * @generated
 	 */
-	void setModel(EPackage value);
+	void setDynamicEPackage(EPackage value);
 
 	/**
-	 * Returns the value of the '<em><b>Runtime</b></em>' reference.
+	 * Returns the value of the '<em><b>Generated EPackage</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Runtime</em>' reference isn't clear,
+	 * If the meaning of the '<em>Generated EPackage</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Runtime</em>' reference.
-	 * @see org.classupplier.ClassSupplierPackage#getContribution_Runtime()
+	 * @return the value of the '<em>Generated EPackage</em>' reference.
+	 * @see org.classupplier.ClassSupplierPackage#getContribution_GeneratedEPackage()
 	 * @model changeable="false" volatile="true"
 	 * @generated
 	 */
-	EPackage getRuntime();
+	EPackage getGeneratedEPackage();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

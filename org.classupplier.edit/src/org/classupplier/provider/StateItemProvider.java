@@ -60,7 +60,6 @@ public class StateItemProvider extends ItemProviderAdapter implements IEditingDo
 			addStagePropertyDescriptor(object);
 			addProjectNamePropertyDescriptor(object);
 			addDynamicEPackagePropertyDescriptor(object);
-			addRuntimeEPackagePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -154,21 +153,6 @@ public class StateItemProvider extends ItemProviderAdapter implements IEditingDo
 						getString("_UI_PropertyDescriptor_description", "_UI_State_dynamicEPackage_feature",
 								"_UI_State_type"),
 						ClassSupplierPackage.Literals.STATE__DYNAMIC_EPACKAGE, true, false, false, null, null, null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Runtime EPackage feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addRuntimeEPackagePropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_State_runtimeEPackage_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_State_runtimeEPackage_feature",
-								"_UI_State_type"),
-						ClassSupplierPackage.Literals.STATE__RUNTIME_EPACKAGE, false, false, false, null, null, null));
 	}
 
 	/**
@@ -267,7 +251,7 @@ public class StateItemProvider extends ItemProviderAdapter implements IEditingDo
 						EcoreFactory.eINSTANCE.createEPackage())));
 
 		newChildDescriptors.add(createChildParameter(ClassSupplierPackage.Literals.STATE__EPACKAGE,
-				FeatureMapUtil.createEntry(ClassSupplierPackage.Literals.STATE__RUNTIME_EPACKAGE,
+				FeatureMapUtil.createEntry(ClassSupplierPackage.Literals.STATE__GENERATED_EPACKAGE,
 						EcoreFactory.eINSTANCE.createEPackage())));
 	}
 
@@ -290,7 +274,7 @@ public class StateItemProvider extends ItemProviderAdapter implements IEditingDo
 		}
 
 		boolean qualify = childFeature == ClassSupplierPackage.Literals.STATE__DYNAMIC_EPACKAGE
-				|| childFeature == ClassSupplierPackage.Literals.STATE__RUNTIME_EPACKAGE;
+				|| childFeature == ClassSupplierPackage.Literals.STATE__GENERATED_EPACKAGE;
 
 		if (qualify) {
 			return getString("_UI_CreateChild_text2",

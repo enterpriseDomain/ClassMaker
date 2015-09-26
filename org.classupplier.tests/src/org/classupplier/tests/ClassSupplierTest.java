@@ -6,7 +6,6 @@ import static org.junit.Assert.fail;
 
 import org.classupplier.ClassSupplier;
 import org.classupplier.Contribution;
-import org.classupplier.tests.AbstractTest;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
@@ -86,7 +85,7 @@ public class ClassSupplierTest extends AbstractTest {
 				}
 			}
 			assertNotNull(ePackage);
-			assertEquals(contribution.getRuntime().getNsURI(), ePackage.getNsURI());
+			assertEquals(contribution.getGeneratedEPackage().getNsURI(), ePackage.getNsURI());
 			assertEquals(readerEPackage.getName(), ePackage.getName());
 			assertEquals(readerEPackage.getNsPrefix(), ePackage.getNsPrefix());
 			assertEquals(readerEPackage.getNsURI(), ePackage.getNsURI());

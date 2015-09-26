@@ -45,7 +45,7 @@ public class ResourceBuilder extends IncrementalProjectBuilder {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return new IProject[] { getProject() };
 	}
 
 	private class ResourcesJob extends SupplementaryJob {

@@ -28,9 +28,9 @@
         eType="#//DateToStateMapEntry" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//State"
         changeable="false" volatile="true" transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="model" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dynamicEPackage" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
         volatile="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="runtime" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="generatedEPackage" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
         changeable="false" volatile="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//Constructable">
@@ -55,7 +55,7 @@
         <details key="group" value="#ePackage"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="runtimeEPackage" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="generatedEPackage" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"
         volatile="true" transient="true" derived="true" containment="true">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
         <details key="group" value="#ePackage"/>

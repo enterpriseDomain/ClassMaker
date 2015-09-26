@@ -238,7 +238,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getContribution_Model() {
+	public EReference getContribution_DynamicEPackage() {
 		return (EReference) contributionEClass.getEStructuralFeatures().get(7);
 	}
 
@@ -247,7 +247,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getContribution_Runtime() {
+	public EReference getContribution_GeneratedEPackage() {
 		return (EReference) contributionEClass.getEStructuralFeatures().get(8);
 	}
 
@@ -316,10 +316,11 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getState_RuntimeEPackage() {
+	public EReference getState_GeneratedEPackage() {
 		return (EReference) stateEClass.getEStructuralFeatures().get(7);
 	}
 
@@ -465,8 +466,8 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 		createEAttribute(contributionEClass, CONTRIBUTION__PROJECT_NAME);
 		createEReference(contributionEClass, CONTRIBUTION__SNAPSHOTS);
 		createEReference(contributionEClass, CONTRIBUTION__STATE);
-		createEReference(contributionEClass, CONTRIBUTION__MODEL);
-		createEReference(contributionEClass, CONTRIBUTION__RUNTIME);
+		createEReference(contributionEClass, CONTRIBUTION__DYNAMIC_EPACKAGE);
+		createEReference(contributionEClass, CONTRIBUTION__GENERATED_EPACKAGE);
 
 		stateEClass = createEClass(STATE);
 		createEAttribute(stateEClass, STATE__NAME);
@@ -476,7 +477,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 		createEAttribute(stateEClass, STATE__PROJECT_NAME);
 		createEAttribute(stateEClass, STATE__EPACKAGE);
 		createEReference(stateEClass, STATE__DYNAMIC_EPACKAGE);
-		createEReference(stateEClass, STATE__RUNTIME_EPACKAGE);
+		createEReference(stateEClass, STATE__GENERATED_EPACKAGE);
 
 		workspaceEClass = createEClass(WORKSPACE);
 		createEReference(workspaceEClass, WORKSPACE__CONTRIBUTIONS);
@@ -557,11 +558,11 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 		initEReference(getContribution_State(), this.getState(), null, "state", null, 0, 1, Contribution.class,
 				IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
 				IS_DERIVED, IS_ORDERED);
-		initEReference(getContribution_Model(), ecorePackage.getEPackage(), null, "model", null, 0, 1,
-				Contribution.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+		initEReference(getContribution_DynamicEPackage(), ecorePackage.getEPackage(), null, "dynamicEPackage", null, 0,
+				1, Contribution.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getContribution_Runtime(), ecorePackage.getEPackage(), null, "runtime", null, 0, 1,
-				Contribution.class, !IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+		initEReference(getContribution_GeneratedEPackage(), ecorePackage.getEPackage(), null, "generatedEPackage", null,
+				0, 1, Contribution.class, !IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(contributionEClass, null, "construct", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -594,8 +595,8 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 		initEReference(getState_DynamicEPackage(), theEcorePackage.getEPackage(), null, "dynamicEPackage", null, 0, 1,
 				State.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getState_RuntimeEPackage(), theEcorePackage.getEPackage(), null, "runtimeEPackage", null, 0, 1,
-				State.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+		initEReference(getState_GeneratedEPackage(), theEcorePackage.getEPackage(), null, "generatedEPackage", null, 0,
+				1, State.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		addEOperation(stateEClass, null, "fireJobsCompleted", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -682,7 +683,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";
 		addAnnotation(getState_EPackage(), source, new String[] { "kind", "group" });
 		addAnnotation(getState_DynamicEPackage(), source, new String[] { "group", "#ePackage" });
-		addAnnotation(getState_RuntimeEPackage(), source, new String[] { "group", "#ePackage" });
+		addAnnotation(getState_GeneratedEPackage(), source, new String[] { "group", "#ePackage" });
 	}
 
 } // ClassSupplierPackageImpl

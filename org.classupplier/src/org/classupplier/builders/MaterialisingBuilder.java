@@ -12,7 +12,7 @@ import org.classupplier.export.PDEExporter;
 import org.classupplier.impl.ClassSupplierOSGi;
 import org.classupplier.install.Installer;
 import org.classupplier.install.OSGiInstaller;
-import org.classupplier.load.BundleEPackageLoader;
+import org.classupplier.load.OSGiEPackageLoader;
 import org.classupplier.util.ResourceUtil;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
@@ -55,7 +55,7 @@ public class MaterialisingBuilder extends IncrementalProjectBuilder {
 
 		Installer installJob = new OSGiInstaller();
 		exporterJob.setNextJob(installJob);
-		SupplementaryJob lastJob = new BundleEPackageLoader();
+		SupplementaryJob lastJob = new OSGiEPackageLoader();
 		lastJob.addListener();
 		lastJob.addJobChangeListener(new JobChangeAdapter() {
 
@@ -76,7 +76,7 @@ public class MaterialisingBuilder extends IncrementalProjectBuilder {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return new IProject[] { getProject() };
 	}
 
 }

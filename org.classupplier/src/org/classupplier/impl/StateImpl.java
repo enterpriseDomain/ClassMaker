@@ -38,18 +38,14 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link org.classupplier.impl.StateImpl#getName <em>Name</em>}</li>
- * <li>{@link org.classupplier.impl.StateImpl#getTime <em>Time</em>}</li>
- * <li>{@link org.classupplier.impl.StateImpl#getVersion <em>Version</em>}</li>
- * <li>{@link org.classupplier.impl.StateImpl#getStage <em>Stage</em>}</li>
- * <li>{@link org.classupplier.impl.StateImpl#getProjectName
- * <em>Project Name</em>}</li>
- * <li>{@link org.classupplier.impl.StateImpl#getEPackage <em>EPackage</em>}
- * </li>
- * <li>{@link org.classupplier.impl.StateImpl#getDynamicEPackage
- * <em>Dynamic EPackage</em>}</li>
- * <li>{@link org.classupplier.impl.StateImpl#getRuntimeEPackage
- * <em>Runtime EPackage</em>}</li>
+ *   <li>{@link org.classupplier.impl.StateImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.classupplier.impl.StateImpl#getTime <em>Time</em>}</li>
+ *   <li>{@link org.classupplier.impl.StateImpl#getVersion <em>Version</em>}</li>
+ *   <li>{@link org.classupplier.impl.StateImpl#getStage <em>Stage</em>}</li>
+ *   <li>{@link org.classupplier.impl.StateImpl#getProjectName <em>Project Name</em>}</li>
+ *   <li>{@link org.classupplier.impl.StateImpl#getEPackage <em>EPackage</em>}</li>
+ *   <li>{@link org.classupplier.impl.StateImpl#getDynamicEPackage <em>Dynamic EPackage</em>}</li>
+ *   <li>{@link org.classupplier.impl.StateImpl#getGeneratedEPackage <em>Generated EPackage</em>}</li>
  * </ul>
  *
  * @generated
@@ -63,7 +59,7 @@ public class StateImpl extends EObjectImpl implements State {
 			if (msg.getEventType() == Notification.SET
 					&& msg.getFeatureID(State.class) == ClassSupplierPackage.STATE__STAGE
 					&& msg.getNewValue().equals(Phase.LOADED))
-				setResult(getRuntimeEPackage());
+				setResult(getGeneratedEPackage());
 		}
 
 		public EPackage getResult() {
@@ -90,7 +86,7 @@ public class StateImpl extends EObjectImpl implements State {
 			case ClassSupplierPackage.STATE__DYNAMIC_EPACKAGE:
 				setStage(Phase.MODELED);
 				break;
-			case ClassSupplierPackage.STATE__RUNTIME_EPACKAGE:
+			case ClassSupplierPackage.STATE__GENERATED_EPACKAGE:
 				setStage(Phase.LOADED);
 				break;
 			case ClassSupplierPackage.STATE__NAME:
@@ -103,7 +99,6 @@ public class StateImpl extends EObjectImpl implements State {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -113,7 +108,6 @@ public class StateImpl extends EObjectImpl implements State {
 	/**
 	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -123,7 +117,6 @@ public class StateImpl extends EObjectImpl implements State {
 	/**
 	 * The default value of the '{@link #getTime() <em>Time</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getTime()
 	 * @generated
 	 * @ordered
@@ -133,7 +126,6 @@ public class StateImpl extends EObjectImpl implements State {
 	/**
 	 * The cached value of the '{@link #getTime() <em>Time</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getTime()
 	 * @generated
 	 * @ordered
@@ -151,9 +143,8 @@ public class StateImpl extends EObjectImpl implements State {
 	protected static final Version VERSION_EDEFAULT = Version.emptyVersion;
 
 	/**
-	 * The cached value of the '{@link #getVersion() <em>Version</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getVersion()
 	 * @generated
 	 * @ordered
@@ -163,7 +154,6 @@ public class StateImpl extends EObjectImpl implements State {
 	/**
 	 * The default value of the '{@link #getStage() <em>Stage</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getStage()
 	 * @generated
 	 * @ordered
@@ -173,7 +163,6 @@ public class StateImpl extends EObjectImpl implements State {
 	/**
 	 * The cached value of the '{@link #getStage() <em>Stage</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getStage()
 	 * @generated
 	 * @ordered
@@ -181,9 +170,8 @@ public class StateImpl extends EObjectImpl implements State {
 	protected Phase stage = STAGE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}
-	 * ' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getProjectName()
 	 * @generated
 	 * @ordered
@@ -191,9 +179,8 @@ public class StateImpl extends EObjectImpl implements State {
 	protected static final String PROJECT_NAME_EDEFAULT = "";
 
 	/**
-	 * The cached value of the '{@link #getProjectName() <em>Project Name</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getProjectName() <em>Project Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getProjectName()
 	 * @generated
 	 * @ordered
@@ -201,9 +188,8 @@ public class StateImpl extends EObjectImpl implements State {
 	protected String projectName = PROJECT_NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getEPackage() <em>EPackage</em>}'
-	 * attribute list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getEPackage() <em>EPackage</em>}' attribute list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getEPackage()
 	 * @generated
 	 * @ordered
@@ -229,7 +215,6 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -245,14 +230,13 @@ public class StateImpl extends EObjectImpl implements State {
 	public String getName() {
 		if (getStage().getValue() < Phase.LOADED_VALUE && getDynamicEPackage() != null)
 			return getDynamicEPackage().getName();
-		else if (getRuntimeEPackage() != null)
-			return getRuntimeEPackage().getName();
+		else if (getGeneratedEPackage() != null)
+			return getGeneratedEPackage().getName();
 		return name;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setName(String newName) {
@@ -285,7 +269,6 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getProjectName() {
@@ -294,7 +277,6 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setProjectName(String newProjectName) {
@@ -307,7 +289,6 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public FeatureMap getEPackage() {
@@ -319,7 +300,6 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EPackage getDynamicEPackage() {
@@ -328,7 +308,6 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetDynamicEPackage(EPackage newDynamicEPackage, NotificationChain msgs) {
@@ -338,7 +317,6 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setDynamicEPackage(EPackage newDynamicEPackage) {
@@ -347,32 +325,32 @@ public class StateImpl extends EObjectImpl implements State {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EPackage getRuntimeEPackage() {
-		return (EPackage) getEPackage().get(ClassSupplierPackage.Literals.STATE__RUNTIME_EPACKAGE, true);
+	public EPackage getGeneratedEPackage() {
+		return (EPackage) getEPackage().get(ClassSupplierPackage.Literals.STATE__GENERATED_EPACKAGE, true);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetRuntimeEPackage(EPackage newRuntimeEPackage, NotificationChain msgs) {
-		return ((FeatureMap.Internal) getEPackage()).basicAdd(ClassSupplierPackage.Literals.STATE__RUNTIME_EPACKAGE,
-				newRuntimeEPackage, msgs);
+	public NotificationChain basicSetGeneratedEPackage(EPackage newGeneratedEPackage, NotificationChain msgs) {
+		return ((FeatureMap.Internal) getEPackage()).basicAdd(ClassSupplierPackage.Literals.STATE__GENERATED_EPACKAGE,
+				newGeneratedEPackage, msgs);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setRuntimeEPackage(EPackage newRuntimeEPackage) {
-		((FeatureMap.Internal) getEPackage()).set(ClassSupplierPackage.Literals.STATE__RUNTIME_EPACKAGE,
-				newRuntimeEPackage);
+	public void setGeneratedEPackage(EPackage newGeneratedEPackage) {
+		((FeatureMap.Internal) getEPackage()).set(ClassSupplierPackage.Literals.STATE__GENERATED_EPACKAGE,
+				newGeneratedEPackage);
 	}
 
 	/**
@@ -437,7 +415,6 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Phase getStage() {
@@ -446,7 +423,6 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setStage(Phase newStage) {
@@ -458,7 +434,6 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -468,15 +443,14 @@ public class StateImpl extends EObjectImpl implements State {
 			return ((InternalEList<?>) getEPackage()).basicRemove(otherEnd, msgs);
 		case ClassSupplierPackage.STATE__DYNAMIC_EPACKAGE:
 			return basicSetDynamicEPackage(null, msgs);
-		case ClassSupplierPackage.STATE__RUNTIME_EPACKAGE:
-			return basicSetRuntimeEPackage(null, msgs);
+		case ClassSupplierPackage.STATE__GENERATED_EPACKAGE:
+			return basicSetGeneratedEPackage(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Version getVersion() {
@@ -485,7 +459,6 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setVersion(Version newVersion) {
@@ -498,7 +471,6 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -520,15 +492,14 @@ public class StateImpl extends EObjectImpl implements State {
 			return ((FeatureMap.Internal) getEPackage()).getWrapper();
 		case ClassSupplierPackage.STATE__DYNAMIC_EPACKAGE:
 			return getDynamicEPackage();
-		case ClassSupplierPackage.STATE__RUNTIME_EPACKAGE:
-			return getRuntimeEPackage();
+		case ClassSupplierPackage.STATE__GENERATED_EPACKAGE:
+			return getGeneratedEPackage();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -555,8 +526,8 @@ public class StateImpl extends EObjectImpl implements State {
 		case ClassSupplierPackage.STATE__DYNAMIC_EPACKAGE:
 			setDynamicEPackage((EPackage) newValue);
 			return;
-		case ClassSupplierPackage.STATE__RUNTIME_EPACKAGE:
-			setRuntimeEPackage((EPackage) newValue);
+		case ClassSupplierPackage.STATE__GENERATED_EPACKAGE:
+			setGeneratedEPackage((EPackage) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -564,7 +535,6 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -591,8 +561,8 @@ public class StateImpl extends EObjectImpl implements State {
 		case ClassSupplierPackage.STATE__DYNAMIC_EPACKAGE:
 			setDynamicEPackage((EPackage) null);
 			return;
-		case ClassSupplierPackage.STATE__RUNTIME_EPACKAGE:
-			setRuntimeEPackage((EPackage) null);
+		case ClassSupplierPackage.STATE__GENERATED_EPACKAGE:
+			setGeneratedEPackage((EPackage) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -600,7 +570,6 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -620,15 +589,14 @@ public class StateImpl extends EObjectImpl implements State {
 			return ePackage != null && !ePackage.isEmpty();
 		case ClassSupplierPackage.STATE__DYNAMIC_EPACKAGE:
 			return getDynamicEPackage() != null;
-		case ClassSupplierPackage.STATE__RUNTIME_EPACKAGE:
-			return getRuntimeEPackage() != null;
+		case ClassSupplierPackage.STATE__GENERATED_EPACKAGE:
+			return getGeneratedEPackage() != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

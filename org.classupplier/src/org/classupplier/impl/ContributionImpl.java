@@ -42,8 +42,8 @@ import org.osgi.framework.Version;
  *   <li>{@link org.classupplier.impl.ContributionImpl#getProjectName <em>Project Name</em>}</li>
  *   <li>{@link org.classupplier.impl.ContributionImpl#getSnapshots <em>Snapshots</em>}</li>
  *   <li>{@link org.classupplier.impl.ContributionImpl#getState <em>State</em>}</li>
- *   <li>{@link org.classupplier.impl.ContributionImpl#getModel <em>Model</em>}</li>
- *   <li>{@link org.classupplier.impl.ContributionImpl#getRuntime <em>Runtime</em>}</li>
+ *   <li>{@link org.classupplier.impl.ContributionImpl#getDynamicEPackage <em>Dynamic EPackage</em>}</li>
+ *   <li>{@link org.classupplier.impl.ContributionImpl#getGeneratedEPackage <em>Generated EPackage</em>}</li>
  * </ul>
  *
  * @generated
@@ -167,51 +167,55 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EPackage getModel() {
-		EPackage model = basicGetModel();
-		return model != null && model.eIsProxy() ? (EPackage) eResolveProxy((InternalEObject) model) : model;
+	public EPackage getDynamicEPackage() {
+		EPackage dynamicEPackage = basicGetDynamicEPackage();
+		return dynamicEPackage != null && dynamicEPackage.eIsProxy()
+				? (EPackage) eResolveProxy((InternalEObject) dynamicEPackage) : dynamicEPackage;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public EPackage basicGetModel() {
+	public EPackage basicGetDynamicEPackage() {
 		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS))
 			return getState().getDynamicEPackage();
 		return null;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void setModel(EPackage newModel) {
+	public void setDynamicEPackage(EPackage newDynamicEPackage) {
 		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS))
-			getState().setDynamicEPackage(newModel);
+			getState().setDynamicEPackage(newDynamicEPackage);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EPackage getRuntime() {
-		EPackage runtime = basicGetRuntime();
-		return runtime != null && runtime.eIsProxy() ? (EPackage) eResolveProxy((InternalEObject) runtime) : runtime;
+	public EPackage getGeneratedEPackage() {
+		EPackage generatedEPackage = basicGetGeneratedEPackage();
+		return generatedEPackage != null && generatedEPackage.eIsProxy()
+				? (EPackage) eResolveProxy((InternalEObject) generatedEPackage) : generatedEPackage;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public EPackage basicGetRuntime() {
-		return getState().getRuntimeEPackage();
+	public EPackage basicGetGeneratedEPackage() {
+		return getState().getGeneratedEPackage();
 	}
 
 	/**
@@ -356,7 +360,7 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 	@Override
 	public EPackage doConstruct(IProgressMonitor monitor) throws Exception {
 		if (getStage().equals(Phase.LOADED))
-			return getRuntime();
+			return getGeneratedEPackage();
 		return ((Constructable) getState()).doConstruct(new SubProgressMonitor(monitor, 1));
 	}
 
@@ -404,14 +408,14 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 			if (resolve)
 				return getState();
 			return basicGetState();
-		case ClassSupplierPackage.CONTRIBUTION__MODEL:
+		case ClassSupplierPackage.CONTRIBUTION__DYNAMIC_EPACKAGE:
 			if (resolve)
-				return getModel();
-			return basicGetModel();
-		case ClassSupplierPackage.CONTRIBUTION__RUNTIME:
+				return getDynamicEPackage();
+			return basicGetDynamicEPackage();
+		case ClassSupplierPackage.CONTRIBUTION__GENERATED_EPACKAGE:
 			if (resolve)
-				return getRuntime();
-			return basicGetRuntime();
+				return getGeneratedEPackage();
+			return basicGetGeneratedEPackage();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -441,8 +445,8 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 		case ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS:
 			((EStructuralFeature.Setting) getSnapshots()).set(newValue);
 			return;
-		case ClassSupplierPackage.CONTRIBUTION__MODEL:
-			setModel((EPackage) newValue);
+		case ClassSupplierPackage.CONTRIBUTION__DYNAMIC_EPACKAGE:
+			setDynamicEPackage((EPackage) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -473,8 +477,8 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 		case ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS:
 			getSnapshots().clear();
 			return;
-		case ClassSupplierPackage.CONTRIBUTION__MODEL:
-			setModel((EPackage) null);
+		case ClassSupplierPackage.CONTRIBUTION__DYNAMIC_EPACKAGE:
+			setDynamicEPackage((EPackage) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -502,10 +506,10 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 			return snapshots != null && !snapshots.isEmpty();
 		case ClassSupplierPackage.CONTRIBUTION__STATE:
 			return basicGetState() != null;
-		case ClassSupplierPackage.CONTRIBUTION__MODEL:
-			return basicGetModel() != null;
-		case ClassSupplierPackage.CONTRIBUTION__RUNTIME:
-			return basicGetRuntime() != null;
+		case ClassSupplierPackage.CONTRIBUTION__DYNAMIC_EPACKAGE:
+			return basicGetDynamicEPackage() != null;
+		case ClassSupplierPackage.CONTRIBUTION__GENERATED_EPACKAGE:
+			return basicGetGeneratedEPackage() != null;
 		}
 		return super.eIsSet(featureID);
 	}

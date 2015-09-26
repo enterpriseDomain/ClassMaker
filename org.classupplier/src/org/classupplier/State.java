@@ -25,7 +25,7 @@ import org.osgi.framework.Version;
  *   <li>{@link org.classupplier.State#getProjectName <em>Project Name</em>}</li>
  *   <li>{@link org.classupplier.State#getEPackage <em>EPackage</em>}</li>
  *   <li>{@link org.classupplier.State#getDynamicEPackage <em>Dynamic EPackage</em>}</li>
- *   <li>{@link org.classupplier.State#getRuntimeEPackage <em>Runtime EPackage</em>}</li>
+ *   <li>{@link org.classupplier.State#getGeneratedEPackage <em>Generated EPackage</em>}</li>
  * </ul>
  *
  * @see org.classupplier.ClassSupplierPackage#getState()
@@ -185,31 +185,31 @@ public interface State extends EObject, Constructable {
 	void setDynamicEPackage(EPackage value);
 
 	/**
-	 * Returns the value of the '<em><b>Runtime EPackage</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Generated EPackage</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Runtime EPackage</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Generated EPackage</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Runtime EPackage</em>' containment reference.
-	 * @see #setRuntimeEPackage(EPackage)
-	 * @see org.classupplier.ClassSupplierPackage#getState_RuntimeEPackage()
+	 * @return the value of the '<em>Generated EPackage</em>' containment reference.
+	 * @see #setGeneratedEPackage(EPackage)
+	 * @see org.classupplier.ClassSupplierPackage#getState_GeneratedEPackage()
 	 * @model containment="true" transient="true" volatile="true" derived="true"
 	 *        extendedMetaData="group='#ePackage'"
 	 * @generated
 	 */
-	EPackage getRuntimeEPackage();
+	EPackage getGeneratedEPackage();
 
 	/**
-	 * Sets the value of the '{@link org.classupplier.State#getRuntimeEPackage <em>Runtime EPackage</em>}' containment reference.
+	 * Sets the value of the '{@link org.classupplier.State#getGeneratedEPackage <em>Generated EPackage</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Runtime EPackage</em>' containment reference.
-	 * @see #getRuntimeEPackage()
+	 * @param value the new value of the '<em>Generated EPackage</em>' containment reference.
+	 * @see #getGeneratedEPackage()
 	 * @generated
 	 */
-	void setRuntimeEPackage(EPackage value);
+	void setGeneratedEPackage(EPackage value);
 
 	/**
 	 * <!-- begin-user-doc -->
