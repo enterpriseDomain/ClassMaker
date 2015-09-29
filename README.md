@@ -20,7 +20,7 @@ Example:
     eAttr.setEType(EcorePackage.Literals.EINT);
     eClass.getEStructuralFeatures().add(eAttr);
     ePackage.getEClassifiers().add(eClass);
-    
+
     // Acquire ClassSupplier OSGi service
     BundleContext bundleContext = FrameworkUtil.getBundle(this.getClass())
                                 .getBundleContext();
@@ -28,15 +28,15 @@ Example:
                               .getServiceReference(ClassSupplier.class);
     ClassSupplier classupplier = (ClassSupplier) bundleContext
                               .getService(serviceReference);
-    
+
     // Combine them
     Contribution contribution = classupplier.getWorkspace().createContribution(
                               ePackage);
     Future<? extends EPackage> result = contribution
                               .construct(new NullProgressMonitor());
     EPackage jPackage = result.get();
+
     ...
-    
     // Use the runtime
     EClass jClass = (EClass) jPackage.getEClassifier(eClass.getName());
     EObject jObject = jPackage.getEFactoryInstance().create(jClass); 
