@@ -12,7 +12,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.junit.Before;
 
 public abstract class AbstractTest {
@@ -44,15 +43,14 @@ public abstract class AbstractTest {
 		EcoreFactory ecoreFactory = EcoreFactory.eINSTANCE;
 		EPackage ePackage = ecoreFactory.createEPackage();
 		ePackage.setName(name);
-		ePackage.setNsPrefix(name);
+		ePackage.setNsPrefix(CodeGenUtil.capName(name));
 		ePackage.setNsURI("http://" + name + "/" + version);
 		return ePackage;
 	}
 
 	protected EPackage updateEPackage(EPackage ePackage, String version) {
-		EPackage result = EcoreUtil.copy(ePackage);
-		result.setNsURI("http://" + ePackage.getName() + "/" + version);
-		return result;
+		ePackage.setNsURI("http://" + ePackage.getName() + "/" + version);
+		return ePackage;
 	}
 
 	protected IProgressMonitor getProgressMonitor() {

@@ -56,7 +56,7 @@ public class ProjectBuilder extends IncrementalProjectBuilder {
 		resourceJob.setProject(getProject());
 		resourceJob.setProgressGroup(monitor, 1);
 		resourceJob.setNextJob(generatorJob);
-		
+
 		Installer installJob = new OSGiInstaller();
 		exporterJob.setNextJob(installJob);
 		SupplementaryJob loadJob = new OSGiEPackageLoader();

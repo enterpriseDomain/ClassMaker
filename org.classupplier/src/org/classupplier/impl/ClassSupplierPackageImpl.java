@@ -30,77 +30,90 @@ import org.osgi.framework.Version;
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Package</b>. <!--
  * end-user-doc -->
+ * 
  * @generated
  */
 public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSupplierPackage {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private EClass contributionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private EClass stateEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private EClass workspaceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private EClass versionToStateMapEntryEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private EClass iSchedulingRuleEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private EClass iFutureEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private EClass constructableEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private EEnum phaseEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private EDataType iProgressMonitorEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private EDataType versionEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private EDataType semaphoreEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private EDataType coreExceptionEDataType = null;
@@ -126,6 +139,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private static boolean isInited = false;
@@ -175,6 +189,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EClass getContribution() {
@@ -183,6 +198,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EAttribute getContribution_Name() {
@@ -190,8 +206,8 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EAttribute getContribution_Language() {
@@ -200,6 +216,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EAttribute getContribution_Version() {
@@ -208,6 +225,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EAttribute getContribution_Stage() {
@@ -216,6 +234,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EAttribute getContribution_ProjectName() {
@@ -224,6 +243,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EReference getContribution_StateHistory() {
@@ -232,6 +252,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EReference getContribution_State() {
@@ -240,6 +261,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EReference getContribution_DynamicEPackage() {
@@ -248,6 +270,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EReference getContribution_GeneratedEPackage() {
@@ -256,6 +279,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EClass getState() {
@@ -264,6 +288,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EAttribute getState_Name() {
@@ -271,8 +296,8 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EAttribute getState_Language() {
@@ -281,6 +306,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EAttribute getState_Timestamp() {
@@ -289,6 +315,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EAttribute getState_Number() {
@@ -297,6 +324,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EAttribute getState_Version() {
@@ -305,6 +333,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EAttribute getState_Stage() {
@@ -313,6 +342,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EAttribute getState_ProjectName() {
@@ -321,6 +351,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EAttribute getState_DeployableUnitName() {
@@ -329,6 +360,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EAttribute getState_EPackage() {
@@ -337,6 +369,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EReference getState_DynamicEPackage() {
@@ -345,6 +378,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EReference getState_GeneratedEPackage() {
@@ -353,6 +387,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EClass getWorkspace() {
@@ -361,6 +396,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EReference getWorkspace_Contributions() {
@@ -369,6 +405,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EAttribute getWorkspace_ResourceSet() {
@@ -377,6 +414,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EClass getVersionToStateMapEntry() {
@@ -385,6 +423,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EAttribute getVersionToStateMapEntry_Key() {
@@ -393,6 +432,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EReference getVersionToStateMapEntry_Value() {
@@ -401,6 +441,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EClass getISchedulingRule() {
@@ -409,6 +450,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EClass getIFuture() {
@@ -417,6 +459,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EClass getConstructable() {
@@ -425,6 +468,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EEnum getPhase() {
@@ -433,6 +477,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EDataType getIProgressMonitor() {
@@ -441,6 +486,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EDataType getVersion() {
@@ -449,6 +495,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EDataType getSemaphore() {
@@ -457,6 +504,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EDataType getCoreException() {
@@ -465,6 +513,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ClassSupplierFactory getClassSupplierFactory() {
@@ -473,15 +522,16 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private boolean isCreated = false;
 
 	/**
-	 * Creates the meta-model objects for the package.  This method is
-	 * guarded to have no affect on any invocation but its first.
-	 * <!-- begin-user-doc -->
+	 * Creates the meta-model objects for the package. This method is guarded to
+	 * have no affect on any invocation but its first. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void createPackageContents() {
@@ -540,6 +590,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private boolean isInitialized = false;

@@ -47,16 +47,16 @@ import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 
 /**
- * This is a simple wizard for creating a new model file.
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * This is a simple wizard for creating a new model file. <!-- begin-user-doc
+ * --> <!-- end-user-doc -->
+ * 
  * @generated
  */
 public class ClassSupplierModelWizard extends Wizard implements INewWizard {
 	/**
-	 * The supported extensions for created files.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The supported extensions for created files. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static final List<String> FILE_EXTENSIONS = Collections
@@ -64,66 +64,66 @@ public class ClassSupplierModelWizard extends Wizard implements INewWizard {
 					.getString("_UI_ClassSupplierEditorFilenameExtensions").split("\\s*,\\s*")));
 
 	/**
-	 * A formatted list of supported file extensions, suitable for display.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * A formatted list of supported file extensions, suitable for display. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static final String FORMATTED_FILE_EXTENSIONS = ClassSupplierEditorPlugin.INSTANCE
 			.getString("_UI_ClassSupplierEditorFilenameExtensions").replaceAll("\\s*,\\s*", ", ");
 
 	/**
-	 * This caches an instance of the model package.
-	 * <!-- begin-user-doc -->
+	 * This caches an instance of the model package. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected ClassSupplierPackage classSupplierPackage = ClassSupplierPackage.eINSTANCE;
 
 	/**
-	 * This caches an instance of the model factory.
-	 * <!-- begin-user-doc -->
+	 * This caches an instance of the model factory. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected ClassSupplierFactory classSupplierFactory = classSupplierPackage.getClassSupplierFactory();
 
 	/**
-	 * This is the initial object creation page.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This is the initial object creation page. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected ClassSupplierModelWizardInitialObjectCreationPage initialObjectCreationPage;
 
 	/**
-	 * Remember the selection during initialization for populating the default container.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Remember the selection during initialization for populating the default
+	 * container. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected IStructuredSelection selection;
 
 	/**
-	 * Remember the workbench during initialization.
-	 * <!-- begin-user-doc -->
+	 * Remember the workbench during initialization. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected IWorkbench workbench;
 
 	/**
 	 * Caches the names of the types that can be created as the root object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected List<String> initialObjectNames;
 
 	/**
-	 * This just records the information.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This just records the information. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
@@ -136,8 +136,8 @@ public class ClassSupplierModelWizard extends Wizard implements INewWizard {
 
 	/**
 	 * Returns the names of the types that can be created as the root object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected Collection<String> getInitialObjectNames() {
@@ -157,9 +157,8 @@ public class ClassSupplierModelWizard extends Wizard implements INewWizard {
 	}
 
 	/**
-	 * Create a new model.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Create a new model. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected EObject createInitialModel() {
@@ -169,9 +168,9 @@ public class ClassSupplierModelWizard extends Wizard implements INewWizard {
 	}
 
 	/**
-	 * Do the work after everything is specified.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Do the work after everything is specified. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -233,44 +232,41 @@ public class ClassSupplierModelWizard extends Wizard implements INewWizard {
 	}
 
 	/**
-	 * This is the page where the type of object to create is selected.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This is the page where the type of object to create is selected. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public class ClassSupplierModelWizardInitialObjectCreationPage extends WizardPage {
 		/**
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		protected Text fileField;
 
 		/**
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		protected Combo initialObjectField;
 
 		/**
-		 * @generated
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * @generated <!-- begin-user-doc --> <!-- end-user-doc -->
 		 */
 		protected List<String> encodings;
 
 		/**
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		protected Combo encodingField;
 
 		/**
-		 * Pass in the selection.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * Pass in the selection. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		public ClassSupplierModelWizardInitialObjectCreationPage(String pageId) {
@@ -278,8 +274,8 @@ public class ClassSupplierModelWizard extends Wizard implements INewWizard {
 		}
 
 		/**
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		public void createControl(Composite parent) {
@@ -399,8 +395,8 @@ public class ClassSupplierModelWizard extends Wizard implements INewWizard {
 		}
 
 		/**
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		protected ModifyListener validator = new ModifyListener() {
@@ -410,8 +406,8 @@ public class ClassSupplierModelWizard extends Wizard implements INewWizard {
 		};
 
 		/**
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		protected boolean validatePage() {
@@ -434,8 +430,8 @@ public class ClassSupplierModelWizard extends Wizard implements INewWizard {
 		}
 
 		/**
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		@Override
@@ -449,8 +445,8 @@ public class ClassSupplierModelWizard extends Wizard implements INewWizard {
 		}
 
 		/**
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		public String getInitialObjectName() {
@@ -465,8 +461,8 @@ public class ClassSupplierModelWizard extends Wizard implements INewWizard {
 		}
 
 		/**
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		public String getEncoding() {
@@ -474,8 +470,8 @@ public class ClassSupplierModelWizard extends Wizard implements INewWizard {
 		}
 
 		/**
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		public URI getFileURI() {
@@ -488,8 +484,8 @@ public class ClassSupplierModelWizard extends Wizard implements INewWizard {
 		}
 
 		/**
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		public void selectFileField() {
@@ -500,9 +496,9 @@ public class ClassSupplierModelWizard extends Wizard implements INewWizard {
 		}
 
 		/**
-		 * Returns the label for the specified type name.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * Returns the label for the specified type name. <!-- begin-user-doc
+		 * --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		protected String getLabel(String typeName) {
@@ -515,8 +511,8 @@ public class ClassSupplierModelWizard extends Wizard implements INewWizard {
 		}
 
 		/**
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		protected Collection<String> getEncodings() {
@@ -533,9 +529,9 @@ public class ClassSupplierModelWizard extends Wizard implements INewWizard {
 	}
 
 	/**
-	 * The framework calls this to create the contents of the wizard.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The framework calls this to create the contents of the wizard. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -549,9 +545,8 @@ public class ClassSupplierModelWizard extends Wizard implements INewWizard {
 	}
 
 	/**
-	 * Get the URI from the page.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Get the URI from the page. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public URI getModelURI() {

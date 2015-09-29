@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreEMap;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.equinox.concurrent.future.IFuture;
 import org.eclipse.equinox.concurrent.future.IProgressRunnable;
@@ -399,7 +398,7 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 			checkout(newState.getVersion());
 		else {
 			newState.setName(getName());
-			newState.setDynamicEPackage(EcoreUtil.copy(getDynamicEPackage()));
+			newState.setDynamicEPackage(getDynamicEPackage());
 		}
 		return newState;
 	}

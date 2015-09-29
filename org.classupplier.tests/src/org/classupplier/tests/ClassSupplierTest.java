@@ -285,7 +285,7 @@ public class ClassSupplierTest extends AbstractTest {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	private void assertObjectClass(String className, EPackage resultPackage) {

@@ -9,7 +9,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 public interface Generator extends IAdaptable {
 
 	ResourceSet getResourceSet();
-	
+
 	void setResourceSet(ResourceSet resourceSet);
 
 	IStatus generate(IProgressMonitor monitor) throws CoreException;

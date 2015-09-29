@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.BasicFeatureMap;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.pde.core.project.IBundleProjectDescription;
@@ -489,11 +490,11 @@ public class StateImpl extends EObjectImpl implements State {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @generated
+	 * @generated NOT
 	 */
 	public void setDynamicEPackage(EPackage newDynamicEPackage) {
 		((FeatureMap.Internal) getEPackage()).set(ClassSupplierPackage.Literals.STATE__DYNAMIC_EPACKAGE,
-				newDynamicEPackage);
+				EcoreUtil.copy(newDynamicEPackage));
 	}
 
 	/**
