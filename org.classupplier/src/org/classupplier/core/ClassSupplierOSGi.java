@@ -1,9 +1,11 @@
-package org.classupplier.impl;
+package org.classupplier.core;
 
 import java.util.Dictionary;
 import java.util.Hashtable;
 
 import org.classupplier.ClassSupplier;
+import org.classupplier.impl.ClassSupplierImpl;
+import org.classupplier.impl.ServiceFactory;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -21,7 +23,7 @@ public class ClassSupplierOSGi extends Plugin {
 
 	public static final String PLUGIN_ID = "org.classupplier";
 
-	public static final String NATURE_ID = PLUGIN_ID + '.' + "userDomainNature";
+	public static final String NATURE_ID = PLUGIN_ID + '.' + "classSupplierNature";
 
 	public static final String MODEL_FOLDER_PREF_KEY = "modelFolder";
 
@@ -58,9 +60,10 @@ public class ClassSupplierOSGi extends Plugin {
 		tracker.open();
 		T result = tracker.getService();
 		tracker.close();
-//		ServiceReference<T> reference = (ServiceReference<T>) context.getServiceReference(serviceClass);
-//		T result = context.getService(reference);
-//		context.ungetService(reference);
+		// ServiceReference<T> reference = (ServiceReference<T>)
+		// context.getServiceReference(serviceClass);
+		// T result = context.getService(reference);
+		// context.ungetService(reference);
 		return result;
 	}
 

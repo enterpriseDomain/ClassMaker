@@ -35,6 +35,7 @@ Example:
     Future<? extends EPackage> result = contribution
                               .construct(new NullProgressMonitor());
     EPackage jPackage = result.get();
+    ...
     
     // Use the runtime
     EClass jClass = (EClass) jPackage.getEClassifier(eClass.getName());

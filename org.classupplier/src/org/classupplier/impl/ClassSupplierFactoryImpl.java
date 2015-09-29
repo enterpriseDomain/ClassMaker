@@ -2,7 +2,6 @@
  */
 package org.classupplier.impl;
 
-import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.Semaphore;
 
@@ -12,6 +11,7 @@ import org.classupplier.Contribution;
 import org.classupplier.Phase;
 import org.classupplier.State;
 import org.classupplier.Workspace;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -69,8 +69,8 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 			return createState();
 		case ClassSupplierPackage.WORKSPACE:
 			return createWorkspace();
-		case ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY:
-			return (EObject) createDateToStateMapEntry();
+		case ClassSupplierPackage.VERSION_TO_STATE_MAP_ENTRY:
+			return (EObject) createVersionToStateMapEntry();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -91,6 +91,8 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 			return createVersionFromString(eDataType, initialValue);
 		case ClassSupplierPackage.SEMAPHORE:
 			return createSemaphoreFromString(eDataType, initialValue);
+		case ClassSupplierPackage.CORE_EXCEPTION:
+			return createCoreExceptionFromString(eDataType, initialValue);
 		default:
 			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -111,6 +113,8 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 			return convertVersionToString(eDataType, instanceValue);
 		case ClassSupplierPackage.SEMAPHORE:
 			return convertSemaphoreToString(eDataType, instanceValue);
+		case ClassSupplierPackage.CORE_EXCEPTION:
+			return convertCoreExceptionToString(eDataType, instanceValue);
 		default:
 			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -147,9 +151,9 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Map.Entry<Date, State> createDateToStateMapEntry() {
-		DateToStateMapEntryImpl dateToStateMapEntry = new DateToStateMapEntryImpl();
-		return dateToStateMapEntry;
+	public Map.Entry<Version, State> createVersionToStateMapEntry() {
+		VersionToStateMapEntryImpl versionToStateMapEntry = new VersionToStateMapEntryImpl();
+		return versionToStateMapEntry;
 	}
 
 	/**
@@ -206,8 +210,7 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Semaphore createSemaphoreFromString(EDataType eDataType, String initialValue) {
@@ -215,11 +218,26 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String convertSemaphoreToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CoreException createCoreExceptionFromString(EDataType eDataType, String initialValue) {
+		return (CoreException) super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertCoreExceptionToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

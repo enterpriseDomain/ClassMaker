@@ -55,11 +55,15 @@ public class StateItemProvider extends ItemProviderAdapter implements IEditingDo
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
-			addTimePropertyDescriptor(object);
+			addLanguagePropertyDescriptor(object);
+			addTimestampPropertyDescriptor(object);
+			addNumberPropertyDescriptor(object);
 			addVersionPropertyDescriptor(object);
 			addStagePropertyDescriptor(object);
 			addProjectNamePropertyDescriptor(object);
+			addDeployableUnitNamePropertyDescriptor(object);
 			addDynamicEPackagePropertyDescriptor(object);
+			addGeneratedEPackagePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -80,18 +84,49 @@ public class StateItemProvider extends ItemProviderAdapter implements IEditingDo
 	}
 
 	/**
-	 * This adds a property descriptor for the Time feature.
+	 * This adds a property descriptor for the Language feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addTimePropertyDescriptor(Object object) {
+	protected void addLanguagePropertyDescriptor(Object object) {
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_State_time_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_State_time_feature", "_UI_State_type"),
-						ClassSupplierPackage.Literals.STATE__TIME, true, false, false,
+						getResourceLocator(), getString("_UI_State_language_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_State_language_feature", "_UI_State_type"),
+						ClassSupplierPackage.Literals.STATE__LANGUAGE, true, false, false,
 						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Timestamp feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTimestampPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_State_timestamp_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_State_timestamp_feature",
+								"_UI_State_type"),
+						ClassSupplierPackage.Literals.STATE__TIMESTAMP, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Number feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNumberPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_State_number_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_State_number_feature", "_UI_State_type"),
+						ClassSupplierPackage.Literals.STATE__NUMBER, true, false, false,
+						ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -141,6 +176,22 @@ public class StateItemProvider extends ItemProviderAdapter implements IEditingDo
 	}
 
 	/**
+	 * This adds a property descriptor for the Deployable Unit Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDeployableUnitNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_State_deployableUnitName_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_State_deployableUnitName_feature",
+								"_UI_State_type"),
+						ClassSupplierPackage.Literals.STATE__DEPLOYABLE_UNIT_NAME, false, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+	}
+
+	/**
 	 * This adds a property descriptor for the Dynamic EPackage feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -153,6 +204,22 @@ public class StateItemProvider extends ItemProviderAdapter implements IEditingDo
 						getString("_UI_PropertyDescriptor_description", "_UI_State_dynamicEPackage_feature",
 								"_UI_State_type"),
 						ClassSupplierPackage.Literals.STATE__DYNAMIC_EPACKAGE, true, false, false, null, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Generated EPackage feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addGeneratedEPackagePropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_State_generatedEPackage_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_State_generatedEPackage_feature",
+								"_UI_State_type"),
+						ClassSupplierPackage.Literals.STATE__GENERATED_EPACKAGE, false, false, false, null, null,
+						null));
 	}
 
 	/**
@@ -222,10 +289,13 @@ public class StateItemProvider extends ItemProviderAdapter implements IEditingDo
 
 		switch (notification.getFeatureID(State.class)) {
 		case ClassSupplierPackage.STATE__NAME:
-		case ClassSupplierPackage.STATE__TIME:
+		case ClassSupplierPackage.STATE__LANGUAGE:
+		case ClassSupplierPackage.STATE__TIMESTAMP:
+		case ClassSupplierPackage.STATE__NUMBER:
 		case ClassSupplierPackage.STATE__VERSION:
 		case ClassSupplierPackage.STATE__STAGE:
 		case ClassSupplierPackage.STATE__PROJECT_NAME:
+		case ClassSupplierPackage.STATE__DEPLOYABLE_UNIT_NAME:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case ClassSupplierPackage.STATE__EPACKAGE:

@@ -11,6 +11,7 @@ import org.classupplier.Contribution;
 import org.classupplier.Phase;
 import org.classupplier.State;
 import org.classupplier.Workspace;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.emf.ecore.EAttribute;
@@ -54,7 +55,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass dateToStateMapEntryEClass = null;
+	private EClass versionToStateMapEntryEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -63,15 +64,13 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 	private EClass iSchedulingRuleEClass = null;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass iFutureEClass = null;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass constructableEClass = null;
@@ -95,11 +94,16 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 	private EDataType versionEDataType = null;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EDataType semaphoreEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType coreExceptionEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -186,10 +190,11 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getContribution_Time() {
+	public EAttribute getContribution_Language() {
 		return (EAttribute) contributionEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -221,7 +226,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getContribution_Snapshots() {
+	public EReference getContribution_StateHistory() {
 		return (EReference) contributionEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -234,8 +239,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EReference getContribution_DynamicEPackage() {
@@ -243,8 +247,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EReference getContribution_GeneratedEPackage() {
@@ -268,10 +271,11 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getState_Time() {
+	public EAttribute getState_Language() {
 		return (EAttribute) stateEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -279,7 +283,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getState_Version() {
+	public EAttribute getState_Timestamp() {
 		return (EAttribute) stateEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -287,7 +291,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getState_Stage() {
+	public EAttribute getState_Number() {
 		return (EAttribute) stateEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -295,7 +299,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getState_ProjectName() {
+	public EAttribute getState_Version() {
 		return (EAttribute) stateEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -303,7 +307,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getState_EPackage() {
+	public EAttribute getState_Stage() {
 		return (EAttribute) stateEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -311,17 +315,40 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getState_DynamicEPackage() {
-		return (EReference) stateEClass.getEStructuralFeatures().get(6);
+	public EAttribute getState_ProjectName() {
+		return (EAttribute) stateEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getState_DeployableUnitName() {
+		return (EAttribute) stateEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getState_EPackage() {
+		return (EAttribute) stateEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getState_DynamicEPackage() {
+		return (EReference) stateEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EReference getState_GeneratedEPackage() {
-		return (EReference) stateEClass.getEStructuralFeatures().get(7);
+		return (EReference) stateEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -352,24 +379,24 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getDateToStateMapEntry() {
-		return dateToStateMapEntryEClass;
+	public EClass getVersionToStateMapEntry() {
+		return versionToStateMapEntryEClass;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getDateToStateMapEntry_Key() {
-		return (EAttribute) dateToStateMapEntryEClass.getEStructuralFeatures().get(0);
+	public EAttribute getVersionToStateMapEntry_Key() {
+		return (EAttribute) versionToStateMapEntryEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDateToStateMapEntry_Value() {
-		return (EReference) dateToStateMapEntryEClass.getEStructuralFeatures().get(1);
+	public EReference getVersionToStateMapEntry_Value() {
+		return (EReference) versionToStateMapEntryEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -381,8 +408,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EClass getIFuture() {
@@ -390,8 +416,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EClass getConstructable() {
@@ -423,12 +448,19 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EDataType getSemaphore() {
 		return semaphoreEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getCoreException() {
+		return coreExceptionEDataType;
 	}
 
 	/**
@@ -460,21 +492,24 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 		// Create classes and their features
 		contributionEClass = createEClass(CONTRIBUTION);
 		createEAttribute(contributionEClass, CONTRIBUTION__NAME);
-		createEAttribute(contributionEClass, CONTRIBUTION__TIME);
+		createEAttribute(contributionEClass, CONTRIBUTION__LANGUAGE);
 		createEAttribute(contributionEClass, CONTRIBUTION__VERSION);
 		createEAttribute(contributionEClass, CONTRIBUTION__STAGE);
 		createEAttribute(contributionEClass, CONTRIBUTION__PROJECT_NAME);
-		createEReference(contributionEClass, CONTRIBUTION__SNAPSHOTS);
+		createEReference(contributionEClass, CONTRIBUTION__STATE_HISTORY);
 		createEReference(contributionEClass, CONTRIBUTION__STATE);
 		createEReference(contributionEClass, CONTRIBUTION__DYNAMIC_EPACKAGE);
 		createEReference(contributionEClass, CONTRIBUTION__GENERATED_EPACKAGE);
 
 		stateEClass = createEClass(STATE);
 		createEAttribute(stateEClass, STATE__NAME);
-		createEAttribute(stateEClass, STATE__TIME);
+		createEAttribute(stateEClass, STATE__LANGUAGE);
+		createEAttribute(stateEClass, STATE__TIMESTAMP);
+		createEAttribute(stateEClass, STATE__NUMBER);
 		createEAttribute(stateEClass, STATE__VERSION);
 		createEAttribute(stateEClass, STATE__STAGE);
 		createEAttribute(stateEClass, STATE__PROJECT_NAME);
+		createEAttribute(stateEClass, STATE__DEPLOYABLE_UNIT_NAME);
 		createEAttribute(stateEClass, STATE__EPACKAGE);
 		createEReference(stateEClass, STATE__DYNAMIC_EPACKAGE);
 		createEReference(stateEClass, STATE__GENERATED_EPACKAGE);
@@ -483,9 +518,9 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 		createEReference(workspaceEClass, WORKSPACE__CONTRIBUTIONS);
 		createEAttribute(workspaceEClass, WORKSPACE__RESOURCE_SET);
 
-		dateToStateMapEntryEClass = createEClass(DATE_TO_STATE_MAP_ENTRY);
-		createEAttribute(dateToStateMapEntryEClass, DATE_TO_STATE_MAP_ENTRY__KEY);
-		createEReference(dateToStateMapEntryEClass, DATE_TO_STATE_MAP_ENTRY__VALUE);
+		versionToStateMapEntryEClass = createEClass(VERSION_TO_STATE_MAP_ENTRY);
+		createEAttribute(versionToStateMapEntryEClass, VERSION_TO_STATE_MAP_ENTRY__KEY);
+		createEReference(versionToStateMapEntryEClass, VERSION_TO_STATE_MAP_ENTRY__VALUE);
 
 		iSchedulingRuleEClass = createEClass(ISCHEDULING_RULE);
 
@@ -500,6 +535,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 		iProgressMonitorEDataType = createEDataType(IPROGRESS_MONITOR);
 		versionEDataType = createEDataType(VERSION);
 		semaphoreEDataType = createEDataType(SEMAPHORE);
+		coreExceptionEDataType = createEDataType(CORE_EXCEPTION);
 	}
 
 	/**
@@ -543,17 +579,18 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 				IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getContribution_Name(), ecorePackage.getEString(), "name", "", 0, 1, Contribution.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getContribution_Time(), ecorePackage.getEDate(), "time", null, 0, 1, Contribution.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getContribution_Language(), ecorePackage.getEString(), "language", null, 0, 1,
+				Contribution.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
 		initEAttribute(getContribution_Version(), this.getVersion(), "version", null, 0, 1, Contribution.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getContribution_Stage(), this.getPhase(), "stage", "DEFINED", 0, 1, Contribution.class,
 				!IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getContribution_Stage(), this.getPhase(), "stage", "", 0, 1, Contribution.class, !IS_TRANSIENT,
-				IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getContribution_ProjectName(), ecorePackage.getEString(), "projectName", "", 0, 1,
 				Contribution.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				IS_DERIVED, IS_ORDERED);
-		initEReference(getContribution_Snapshots(), this.getDateToStateMapEntry(), null, "snapshots", null, 0, -1,
-				Contribution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+		initEReference(getContribution_StateHistory(), this.getVersionToStateMapEntry(), null, "stateHistory", null, 0,
+				-1, Contribution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getContribution_State(), this.getState(), null, "state", null, 0, 1, Contribution.class,
 				IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
@@ -565,7 +602,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 				0, 1, Contribution.class, !IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = addEOperation(contributionEClass, null, "construct", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EOperation op = addEOperation(contributionEClass, null, "apply", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 		EGenericType g1 = createEGenericType(this.getIFuture());
 		EGenericType g2 = createEGenericType();
@@ -574,22 +611,29 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 		g2.setEUpperBound(g3);
 		initEOperation(op, g1);
 
-		op = addEOperation(contributionEClass, null, "apply", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEDate(), "version", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(contributionEClass, null, "checkout", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getVersion(), "version", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(contributionEClass, this.getState(), "newState", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(stateEClass, State.class, "State", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getState_Name(), ecorePackage.getEString(), "name", null, 0, 1, State.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getState_Time(), ecorePackage.getEDate(), "time", null, 0, 1, State.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getState_Language(), ecorePackage.getEString(), "language", null, 0, 1, State.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getState_Timestamp(), ecorePackage.getEDate(), "timestamp", null, 0, 1, State.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getState_Number(), ecorePackage.getEInt(), "number", null, 0, 1, State.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getState_Version(), this.getVersion(), "version", null, 0, 1, State.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getState_Stage(), this.getPhase(), "stage", "", 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getState_Stage(), this.getPhase(), "stage", "DEFINED", 0, 1, State.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getState_ProjectName(), ecorePackage.getEString(), "projectName", "", 0, 1, State.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getState_DeployableUnitName(), ecorePackage.getEString(), "deployableUnitName", "", 0, 1,
+				State.class, !IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED,
+				IS_ORDERED);
 		initEAttribute(getState_EPackage(), theEcorePackage.getEFeatureMapEntry(), "ePackage", null, 0, 1, State.class,
 				IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getState_DynamicEPackage(), theEcorePackage.getEPackage(), null, "dynamicEPackage", null, 0, 1,
@@ -600,6 +644,12 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 				!IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		addEOperation(stateEClass, null, "fireJobsCompleted", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(stateEClass, ecorePackage.getEString(), "formatVersion", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(stateEClass, null, "setProjectVersion", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEException(op, this.getCoreException());
 
 		initEClass(workspaceEClass, Workspace.class, "Workspace", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
@@ -633,11 +683,11 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 		op = addEOperation(workspaceEClass, this.getPhase(), "contains", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEPackage(), "blueprint", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(dateToStateMapEntryEClass, Map.Entry.class, "DateToStateMapEntry", !IS_ABSTRACT, !IS_INTERFACE,
+		initEClass(versionToStateMapEntryEClass, Map.Entry.class, "VersionToStateMapEntry", !IS_ABSTRACT, !IS_INTERFACE,
 				!IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDateToStateMapEntry_Key(), ecorePackage.getEDate(), "key", null, 0, 1, Map.Entry.class,
+		initEAttribute(getVersionToStateMapEntry_Key(), this.getVersion(), "key", null, 0, 1, Map.Entry.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDateToStateMapEntry_Value(), this.getState(), null, "value", null, 0, 1, Map.Entry.class,
+		initEReference(getVersionToStateMapEntry_Value(), this.getState(), null, "value", null, 0, 1, Map.Entry.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -663,6 +713,8 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 				!IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(versionEDataType, Version.class, "Version", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(semaphoreEDataType, Semaphore.class, "Semaphore", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(coreExceptionEDataType, CoreException.class, "CoreException", IS_SERIALIZABLE,
+				!IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

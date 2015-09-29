@@ -7,7 +7,7 @@ import java.util.concurrent.Semaphore;
 
 import org.classupplier.Phase;
 import org.classupplier.State;
-import org.classupplier.impl.ClassSupplierOSGi;
+import org.classupplier.core.ClassSupplierOSGi;
 import org.classupplier.util.ResourceUtil;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
@@ -64,15 +64,19 @@ public class OSGiInstaller extends Installer {
 	public IStatus install(IProgressMonitor monitor) {
 		if (getContribution().getStage() == Phase.DEFINED)
 			return ClassSupplierOSGi.createErrorStatus("Model is not specified.");
-		IPath jarPath = getTargetResourcePath(getContribution());
+		IPath jarPath = ResourceUtil.getTargetResourcePath(getProject(), getContribution());
 		BundleContext context = getContext();
 		try {
-			for (Bundle bundle : getExistingBundles())
-				return ClassSupplierOSGi
-						.createOKStatus(NLS.bind("Bundle {0}-{1} is already installed and in state {2}.",
-								new Object[] { bundle.getSymbolicName(),
-										bundle.getHeaders().get(Constants.BUNDLE_VERSION),
-										ClassSupplierOSGi.bundleStateAsString(bundle.getState()) }));
+			for (Bundle bundle : getExistingBundles()) {
+				if (getContribution().getProjectName().equals(bundle.getSymbolicName())
+						&& (getContribution().getVersion().compareTo(
+								Version.parseVersion(bundle.getHeaders().get(Constants.BUNDLE_VERSION))) > 0))
+					try {
+						bundle.uninstall();
+					} catch (BundleException e) {
+						return ClassSupplierOSGi.createErrorStatus(e);
+					}
+			}
 			if (monitor.isCanceled())
 				return Status.CANCEL_STATUS;
 			return installBundle(jarPath, context);
@@ -147,21 +151,6 @@ public class OSGiInstaller extends Installer {
 			if (bundle.getSymbolicName().equals(state.getProjectName()))
 				results.add(bundle);
 		return results;
-	}
-
-	public IPath getTargetResourcePath(State state) {
-		return ResourceUtil.getExportDestination(getProject()).append("plugins").addTrailingSeparator()
-				.append(getJarName(state)).addFileExtension("jar");
-	}
-
-	public String getJarName(State state) {
-		String jarName;
-		Version version = Version.parseVersion(state.getVersion().toString());
-		if (version.equals(Version.emptyVersion))
-			jarName = state.getProjectName() + '_' + Version.parseVersion("1.0.0.qualifier").toString();
-		else
-			jarName = state.getProjectName() + '_' + version;
-		return jarName;
 	}
 
 	@Override

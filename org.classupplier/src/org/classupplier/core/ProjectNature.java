@@ -1,27 +1,23 @@
-package org.classupplier.impl;
+package org.classupplier.core;
 
-import org.classupplier.builders.MaterialisingBuilder;
-import org.classupplier.builders.ResourceBuilder;
 import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IProjectNature;
 import org.eclipse.core.runtime.CoreException;
 
-public class UserDomainProjectNature implements IProjectNature {
+public class ProjectNature implements IProjectNature {
 
 	private IProject project;
 
 	@Override
 	public void configure() throws CoreException {
-		addToBuildSpec(MaterialisingBuilder.BUILDER_ID);
-		addToBuildSpec(ResourceBuilder.BUILDER_ID);
+		addToBuildSpec(ProjectBuilder.BUILDER_ID);
 	}
 
 	@Override
 	public void deconfigure() throws CoreException {
-		removeFromBuildSpec(ResourceBuilder.BUILDER_ID);
-		removeFromBuildSpec(MaterialisingBuilder.BUILDER_ID);
+		removeFromBuildSpec(ProjectBuilder.BUILDER_ID);
 	}
 
 	@Override
@@ -37,8 +33,7 @@ public class UserDomainProjectNature implements IProjectNature {
 	protected void addToBuildSpec(String builderID) throws CoreException {
 
 		IProjectDescription description = this.project.getDescription();
-		int commandIndex = getCommandIndex(description.getBuildSpec(),
-				builderID);
+		int commandIndex = getCommandIndex(description.getBuildSpec(), builderID);
 
 		if (commandIndex == -1) {
 
@@ -55,8 +50,7 @@ public class UserDomainProjectNature implements IProjectNature {
 			if (commands[i].getBuilderName().equals(builderID)) {
 				ICommand[] newCommands = new ICommand[commands.length - 1];
 				System.arraycopy(commands, 0, newCommands, 0, i);
-				System.arraycopy(commands, i + 1, newCommands, i,
-						commands.length - i - 1);
+				System.arraycopy(commands, i + 1, newCommands, i, commands.length - i - 1);
 				description.setBuildSpec(newCommands);
 				this.project.setDescription(description, null);
 				return;
@@ -64,18 +58,15 @@ public class UserDomainProjectNature implements IProjectNature {
 		}
 	}
 
-	private void setCommand(IProjectDescription description, ICommand newCommand)
-			throws CoreException {
+	private void setCommand(IProjectDescription description, ICommand newCommand) throws CoreException {
 
 		ICommand[] oldBuildSpec = description.getBuildSpec();
-		int oldBuilderCommandIndex = getCommandIndex(oldBuildSpec,
-				newCommand.getBuilderName());
+		int oldBuilderCommandIndex = getCommandIndex(oldBuildSpec, newCommand.getBuilderName());
 		ICommand[] newCommands;
 
 		if (oldBuilderCommandIndex == -1) {
 			newCommands = new ICommand[oldBuildSpec.length + 1];
-			System.arraycopy(oldBuildSpec, 0, newCommands, 1,
-					oldBuildSpec.length);
+			System.arraycopy(oldBuildSpec, 0, newCommands, 1, oldBuildSpec.length);
 			newCommands[0] = newCommand;
 		} else {
 			oldBuildSpec[oldBuilderCommandIndex] = newCommand;

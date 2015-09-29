@@ -1,7 +1,6 @@
-package org.classupplier.builders;
+package org.classupplier.core;
 
 import org.classupplier.State;
-import org.classupplier.impl.ClassSupplierOSGi;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.resources.WorkspaceJob;
@@ -59,7 +58,7 @@ public abstract class SupplementaryJob extends WorkspaceJob {
 		setUser(true);
 		setPriority(Job.SHORT);
 		setRule(ClassSupplierOSGi.getClassSupplier().getWorkspace());
-		setJobGroup(new JobGroup("ClassSupply", 0, 1));
+		setJobGroup(new JobGroup("Class Supply", 0, 1));
 	}
 
 	@Override

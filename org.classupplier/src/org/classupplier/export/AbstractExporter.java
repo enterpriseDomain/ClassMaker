@@ -1,6 +1,6 @@
 package org.classupplier.export;
 
-import org.classupplier.builders.SupplementaryJob;
+import org.classupplier.core.SupplementaryJob;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;

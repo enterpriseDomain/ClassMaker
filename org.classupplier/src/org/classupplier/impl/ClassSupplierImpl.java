@@ -48,5 +48,5 @@ public class ClassSupplierImpl implements ClassSupplier {
 	public Workspace getWorkspace() {
 		return workspace;
 	}
-	
+
 } // ClassSupplierImpl

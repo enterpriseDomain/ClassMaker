@@ -10,6 +10,7 @@ import org.classupplier.Contribution;
 import org.classupplier.Phase;
 import org.classupplier.State;
 import org.classupplier.Workspace;
+import org.classupplier.core.ClassSupplierOSGi;
 import org.classupplier.util.ClassSupplierSwitch;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
@@ -150,7 +151,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		Contribution result = getContribution(blueprint);
 		if (result != null)
 			return result;
-		result = (ContributionImpl) ClassSupplierFactory.eINSTANCE.createContribution();
+		result = ClassSupplierFactory.eINSTANCE.createContribution();
 		result.newState();
 		result.setName(blueprint.getName());
 		result.setDynamicEPackage(blueprint);

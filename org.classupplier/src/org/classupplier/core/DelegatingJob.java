@@ -1,4 +1,4 @@
-package org.classupplier.builders;
+package org.classupplier.core;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;

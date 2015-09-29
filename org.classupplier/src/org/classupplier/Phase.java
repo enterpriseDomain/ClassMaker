@@ -9,10 +9,9 @@ import java.util.List;
 import org.eclipse.emf.common.util.Enumerator;
 
 /**
- * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>Phase</b></em>',
- * and utility methods for working with them.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the literals of the enumeration '
+ * <em><b>Phase</b></em>', and utility methods for working with them. <!--
+ * end-user-doc -->
  * @see org.classupplier.ClassSupplierPackage#getPhase()
  * @model
  * @generated
@@ -27,45 +26,43 @@ public enum Phase implements Enumerator {
 	 * @ordered
 	 */
 	DEFINED(0, "DEFINED", "DEFINED"), /**
-										* The '<em><b>MODELED</b></em>' literal object.
-										* <!-- begin-user-doc -->
-										 * <!-- end-user-doc -->
-										* @see #MODELED_VALUE
-										* @generated
-										* @ordered
-										*/
+										 * The '<em><b>MODELED</b></em>' literal object. <!--
+										 * begin-user-doc --> <!-- end-user-doc -->
+										 * 
+										 * @see #MODELED_VALUE
+										 * @generated
+										 * @ordered
+										 */
 	MODELED(1, "MODELED", "MODELED"), /**
-										* The '<em><b>GENERATED</b></em>' literal object.
-										* <!-- begin-user-doc -->
-										 * <!-- end-user-doc -->
-										* @see #GENERATED_VALUE
-										* @generated
-										* @ordered
-										*/
-	GENERATED(2, "GENERATED", ""), /**
-									* The '<em><b>EXPORTED</b></em>' literal object.
-									* <!-- begin-user-doc -->
-									 * <!-- end-user-doc -->
-									* @see #EXPORTED_VALUE
-									* @generated
-									* @ordered
-									*/
+										 * The '<em><b>GENERATED</b></em>' literal object. <!--
+										 * begin-user-doc --> <!-- end-user-doc -->
+										 * 
+										 * @see #GENERATED_VALUE
+										 * @generated
+										 * @ordered
+										 */
+	GENERATED(2, "GENERATED", "GENERATED"), /**
+											* The '<em><b>EXPORTED</b></em>' literal object.
+											* <!-- begin-user-doc --> <!-- end-user-doc -->
+											* @see #EXPORTED_VALUE
+											* @generated
+											* @ordered
+											*/
 	EXPORTED(3, "EXPORTED", "EXPORTED"), /**
 											* The '<em><b>INSTALLED</b></em>' literal object.
-											* <!-- begin-user-doc -->
-											 * <!-- end-user-doc -->
+											* <!-- begin-user-doc --> <!-- end-user-doc -->
 											* @see #INSTALLED_VALUE
 											* @generated
 											* @ordered
 											*/
 	INSTALLED(4, "INSTALLED", "INSTALLED"), /**
-											* The '<em><b>LOADED</b></em>' literal object.
-											* <!-- begin-user-doc -->
-											 * <!-- end-user-doc -->
-											* @see #LOADED_VALUE
-											* @generated
-											* @ordered
-											*/
+											 * The '<em><b>LOADED</b></em>' literal object. <!--
+											 * begin-user-doc --> <!-- end-user-doc -->
+											 * 
+											 * @see #LOADED_VALUE
+											 * @generated
+											 * @ordered
+											 */
 	LOADED(5, "LOADED", "LOADED");
 
 	/**
@@ -107,7 +104,7 @@ public enum Phase implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #GENERATED
-	 * @model literal=""
+	 * @model
 	 * @generated
 	 * @ordered
 	 */
@@ -159,9 +156,9 @@ public enum Phase implements Enumerator {
 	public static final int LOADED_VALUE = 5;
 
 	/**
-	 * An array of all the '<em><b>Phase</b></em>' enumerators.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * An array of all the '<em><b>Phase</b></em>' enumerators. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private static final Phase[] VALUES_ARRAY = new Phase[] { DEFINED, MODELED, GENERATED, EXPORTED, INSTALLED,
@@ -169,16 +166,14 @@ public enum Phase implements Enumerator {
 
 	/**
 	 * A public read-only list of all the '<em><b>Phase</b></em>' enumerators.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static final List<Phase> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
 	 * Returns the '<em><b>Phase</b></em>' literal with the specified literal value.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param literal the literal.
 	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
@@ -194,10 +189,11 @@ public enum Phase implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Phase</b></em>' literal with the specified name.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param name the name.
+	 * Returns the '<em><b>Phase</b></em>' literal with the specified name. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param name
+	 *            the name.
 	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
@@ -213,8 +209,7 @@ public enum Phase implements Enumerator {
 
 	/**
 	 * Returns the '<em><b>Phase</b></em>' literal with the specified integer value.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the integer value.
 	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
@@ -238,30 +233,27 @@ public enum Phase implements Enumerator {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	private final int value;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	private final String name;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	private final String literal;
 
 	/**
 	 * Only this class can construct instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @generated
 	 */
 	private Phase(int value, String name, String literal) {
@@ -271,8 +263,7 @@ public enum Phase implements Enumerator {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public int getValue() {
@@ -280,8 +271,7 @@ public enum Phase implements Enumerator {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String getName() {
@@ -289,8 +279,7 @@ public enum Phase implements Enumerator {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String getLiteral() {
@@ -299,8 +288,7 @@ public enum Phase implements Enumerator {
 
 	/**
 	 * Returns the literal value of the enumerator, which is its string representation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -308,4 +296,4 @@ public enum Phase implements Enumerator {
 		return literal;
 	}
 
-} //Phase
+} // Phase

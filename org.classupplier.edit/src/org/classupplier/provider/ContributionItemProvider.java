@@ -52,7 +52,7 @@ public class ContributionItemProvider extends ItemProviderAdapter implements IEd
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
-			addTimePropertyDescriptor(object);
+			addLanguagePropertyDescriptor(object);
 			addVersionPropertyDescriptor(object);
 			addStagePropertyDescriptor(object);
 			addProjectNamePropertyDescriptor(object);
@@ -79,18 +79,18 @@ public class ContributionItemProvider extends ItemProviderAdapter implements IEd
 	}
 
 	/**
-	 * This adds a property descriptor for the Time feature.
+	 * This adds a property descriptor for the Language feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addTimePropertyDescriptor(Object object) {
+	protected void addLanguagePropertyDescriptor(Object object) {
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_Contribution_time_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_Contribution_time_feature",
+						getResourceLocator(), getString("_UI_Contribution_language_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Contribution_language_feature",
 								"_UI_Contribution_type"),
-						ClassSupplierPackage.Literals.CONTRIBUTION__TIME, true, false, false,
+						ClassSupplierPackage.Literals.CONTRIBUTION__LANGUAGE, true, false, false,
 						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
@@ -241,11 +241,11 @@ public class ContributionItemProvider extends ItemProviderAdapter implements IEd
 
 		switch (notification.getFeatureID(Contribution.class)) {
 		case ClassSupplierPackage.CONTRIBUTION__NAME:
-		case ClassSupplierPackage.CONTRIBUTION__TIME:
+		case ClassSupplierPackage.CONTRIBUTION__LANGUAGE:
 		case ClassSupplierPackage.CONTRIBUTION__VERSION:
 		case ClassSupplierPackage.CONTRIBUTION__STAGE:
 		case ClassSupplierPackage.CONTRIBUTION__PROJECT_NAME:
-		case ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS:
+		case ClassSupplierPackage.CONTRIBUTION__STATE_HISTORY:
 		case ClassSupplierPackage.CONTRIBUTION__STATE:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;

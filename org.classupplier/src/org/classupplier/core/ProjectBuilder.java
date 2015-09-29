@@ -1,6 +1,5 @@
-package org.classupplier.builders;
+package org.classupplier.core;
 
-import java.util.Date;
 import java.util.Map;
 
 import org.classupplier.Phase;
@@ -9,10 +8,10 @@ import org.classupplier.codegen.EcoreGenerator;
 import org.classupplier.codegen.Generator;
 import org.classupplier.export.Exporter;
 import org.classupplier.export.PDEExporter;
-import org.classupplier.impl.ClassSupplierOSGi;
 import org.classupplier.install.Installer;
 import org.classupplier.install.OSGiInstaller;
 import org.classupplier.load.OSGiEPackageLoader;
+import org.classupplier.model.ModelResourceManager;
 import org.classupplier.util.ResourceUtil;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
@@ -22,9 +21,9 @@ import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.osgi.framework.Version;
 
-public class MaterialisingBuilder extends IncrementalProjectBuilder {
+public class ProjectBuilder extends IncrementalProjectBuilder {
 
-	public static final String BUILDER_ID = ClassSupplierOSGi.PLUGIN_ID + '.' + "materializer";
+	public static final String BUILDER_ID = ClassSupplierOSGi.PLUGIN_ID + '.' + "builder";
 
 	protected Generator generator = new EcoreGenerator();
 
@@ -34,6 +33,7 @@ public class MaterialisingBuilder extends IncrementalProjectBuilder {
 	protected IProject[] build(int kind, Map<String, String> args, IProgressMonitor monitor) throws CoreException {
 		if (kind != FULL_BUILD)
 			return null;
+
 		SupplementaryJob exporterJob = (SupplementaryJob) exporter.getAdapter(SupplementaryJob.class);
 		exporterJob.setProject(getProject());
 		final State state = exporterJob.getContribution();
@@ -41,7 +41,6 @@ public class MaterialisingBuilder extends IncrementalProjectBuilder {
 				&& (state.getDynamicEPackage().getEClassifiers().isEmpty() || (state.getStage().equals(Phase.DEFINED))))
 			return null;
 		exporter.setExportDestination(ResourceUtil.getExportDestination(getProject()));
-		state.setVersion(org.osgi.framework.Version.parseVersion("1.0.0." + ResourceUtil.formatQualifier(new Date())));
 		if (exporter.getVersion() == null) {
 			Version version = state.getVersion();
 			exporter.setVersion(version);
@@ -53,11 +52,16 @@ public class MaterialisingBuilder extends IncrementalProjectBuilder {
 		generatorJob.setProgressGroup(monitor, 1);
 		generatorJob.setNextJob(exporterJob);
 
+		ModelResourceManager resourceJob = new ModelResourceManager();
+		resourceJob.setProject(getProject());
+		resourceJob.setProgressGroup(monitor, 1);
+		resourceJob.setNextJob(generatorJob);
+		
 		Installer installJob = new OSGiInstaller();
 		exporterJob.setNextJob(installJob);
-		SupplementaryJob lastJob = new OSGiEPackageLoader();
-		lastJob.addListener();
-		lastJob.addJobChangeListener(new JobChangeAdapter() {
+		SupplementaryJob loadJob = new OSGiEPackageLoader();
+		loadJob.addListener();
+		loadJob.addJobChangeListener(new JobChangeAdapter() {
 
 			@Override
 			public void done(IJobChangeEvent event) {
@@ -65,14 +69,15 @@ public class MaterialisingBuilder extends IncrementalProjectBuilder {
 			}
 
 		});
-		installJob.setNextJob(lastJob);
+		installJob.setNextJob(loadJob);
 
-		generatorJob.schedule();
+		resourceJob.schedule();
 		try {
+			resourceJob.join();
 			generatorJob.join();
 			exporterJob.join();
 			installJob.join();
-			lastJob.join();
+			loadJob.join();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

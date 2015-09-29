@@ -8,8 +8,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+import org.classupplier.State;
 import org.classupplier.Workspace;
-import org.classupplier.impl.ClassSupplierOSGi;
+import org.classupplier.core.ClassSupplierOSGi;
 import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
@@ -52,6 +53,11 @@ public class ResourceUtil {
 		return project.getLocation().append(getTargetFolderName());
 	}
 
+	public static IPath getTargetResourcePath(IProject project, State state) {
+		return getExportDestination(project).append("plugins").addTrailingSeparator()
+				.append(state.getDeployableUnitName()).addFileExtension("jar");
+	}
+
 	/**
 	 * Returns the name of the folder within project, where the model resource
 	 * is located.
@@ -82,13 +88,12 @@ public class ResourceUtil {
 		return ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
 	}
 
-	public static IProjectDescription addProjectNature(IProjectDescription description, String natureId) {
-		String[] oldNatures = description.getNatureIds();
+	public static String[] addProjectNature(String[] natureIds, String natureId) {
+		String[] oldNatures = natureIds;
 		String[] newNatures = new String[oldNatures.length + 1];
 		System.arraycopy(oldNatures, 0, newNatures, 0, oldNatures.length);
 		newNatures[oldNatures.length] = natureId;
-		description.setNatureIds(newNatures);
-		return description;
+		return newNatures;
 	}
 
 	public static void setAutoBuilding(IWorkspace workspace, boolean value) throws CoreException {
@@ -98,6 +103,8 @@ public class ResourceUtil {
 	}
 
 	public static String formatQualifier(Date timestamp) {
+		if (timestamp == null)
+			return "qualifier";
 		return qualifierFormat.format(timestamp);
 	}
 

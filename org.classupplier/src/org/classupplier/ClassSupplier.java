@@ -9,7 +9,8 @@ package org.classupplier;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.classupplier.ClassSupplier#getWorkspace <em>Workspace</em>}</li>
+ * <li>{@link org.classupplier.ClassSupplier#getWorkspace <em>Workspace</em>}
+ * </li>
  * </ul>
  * </p>
  *

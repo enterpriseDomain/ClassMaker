@@ -2,7 +2,6 @@
  */
 package org.classupplier.util;
 
-import java.util.Date;
 import java.util.Map;
 
 import org.classupplier.ClassSupplierPackage;
@@ -15,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.equinox.concurrent.future.IFuture;
+import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc --> The <b>Switch</b> for the model's inheritance
@@ -96,10 +96,10 @@ public class ClassSupplierSwitch<T> extends Switch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case ClassSupplierPackage.DATE_TO_STATE_MAP_ENTRY: {
+		case ClassSupplierPackage.VERSION_TO_STATE_MAP_ENTRY: {
 			@SuppressWarnings("unchecked")
-			Map.Entry<Date, State> dateToStateMapEntry = (Map.Entry<Date, State>) theEObject;
-			T result = caseDateToStateMapEntry(dateToStateMapEntry);
+			Map.Entry<Version, State> versionToStateMapEntry = (Map.Entry<Version, State>) theEObject;
+			T result = caseVersionToStateMapEntry(versionToStateMapEntry);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -173,16 +173,16 @@ public class ClassSupplierSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Date To State Map Entry</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Version To State Map Entry</em>'.
 	 * <!-- begin-user-doc --> This
 	 * implementation returns null; returning a non-null result will terminate
 	 * the switch. <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Date To State Map Entry</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Version To State Map Entry</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseDateToStateMapEntry(Map.Entry<Date, State> object) {
+	public T caseVersionToStateMapEntry(Map.Entry<Version, State> object) {
 		return null;
 	}
 
@@ -202,10 +202,9 @@ public class ClassSupplierSwitch<T> extends Switch<T> {
 
 	/**
 	 * Returns the result of interpreting the object as an instance of '<em>IFuture</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> This implementation returns
+	 * null; returning a non-null result will terminate the switch. <!--
+	 * end-user-doc -->
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>IFuture</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
@@ -217,10 +216,9 @@ public class ClassSupplierSwitch<T> extends Switch<T> {
 
 	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Constructable</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> This implementation
+	 * returns null; returning a non-null result will terminate the switch. <!--
+	 * end-user-doc -->
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>Constructable</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)

@@ -2,7 +2,7 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="classupplier" nsURI="http://org/classupplier/0.7.6" nsPrefix="classupplier">
   <eClassifiers xsi:type="ecore:EClass" name="Contribution" eSuperTypes="#//Constructable">
-    <eOperations name="construct">
+    <eOperations name="apply">
       <eGenericType eClassifier="#//IFuture">
         <eTypeArguments>
           <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
@@ -10,22 +10,21 @@
       </eGenericType>
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
-    <eOperations name="apply">
-      <eParameters name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eOperations name="checkout">
+      <eParameters name="version" eType="#//Version"/>
     </eOperations>
     <eOperations name="newState" eType="#//State"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral=""/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="time" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"
-        iD="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="#//Version"
-        volatile="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        volatile="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="#//Version"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="stage" eType="#//Phase"
-        volatile="true" defaultValueLiteral="" derived="true"/>
+        volatile="true" defaultValueLiteral="DEFINED" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="projectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         volatile="true" defaultValueLiteral="" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="snapshots" upperBound="-1"
-        eType="#//DateToStateMapEntry" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stateHistory" upperBound="-1"
+        eType="#//VersionToStateMapEntry" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//State"
         changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dynamicEPackage" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
@@ -35,14 +34,22 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//Constructable">
     <eOperations name="fireJobsCompleted"/>
+    <eOperations name="formatVersion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="setProjectVersion" eExceptions="#//CoreException">
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="time" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"
         iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="number" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="#//Version"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="stage" eType="#//Phase"
-        defaultValueLiteral=""/>
+        defaultValueLiteral="DEFINED"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="projectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deployableUnitName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" defaultValueLiteral="" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ePackage" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFeatureMapEntry"
         transient="true">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
@@ -92,15 +99,15 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="IProgressMonitor" instanceClassName="org.eclipse.core.runtime.IProgressMonitor"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Version" instanceClassName="org.osgi.framework.Version"/>
-  <eClassifiers xsi:type="ecore:EClass" name="DateToStateMapEntry" instanceClassName="java.util.Map$Entry">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VersionToStateMapEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="#//Version"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//State"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Phase">
     <eLiterals name="DEFINED"/>
     <eLiterals name="MODELED" value="1"/>
-    <eLiterals name="GENERATED" value="2" literal=""/>
+    <eLiterals name="GENERATED" value="2" literal="GENERATED"/>
     <eLiterals name="EXPORTED" value="3"/>
     <eLiterals name="INSTALLED" value="4" literal="INSTALLED"/>
     <eLiterals name="LOADED" value="5"/>
@@ -114,4 +121,5 @@
   <eClassifiers xsi:type="ecore:EDataType" name="Semaphore" instanceClassName="java.util.concurrent.Semaphore"/>
   <eClassifiers xsi:type="ecore:EClass" name="Constructable" instanceClassName="org.classupplier.impl.Constructable"
       abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="CoreException" instanceClassName="org.eclipse.core.runtime.CoreException"/>
 </ecore:EPackage>

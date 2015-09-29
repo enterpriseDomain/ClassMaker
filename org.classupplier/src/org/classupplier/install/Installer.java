@@ -1,6 +1,6 @@
 package org.classupplier.install;
 
-import org.classupplier.builders.SupplementaryJob;
+import org.classupplier.core.SupplementaryJob;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;

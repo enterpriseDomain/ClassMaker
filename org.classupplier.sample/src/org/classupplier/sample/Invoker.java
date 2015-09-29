@@ -47,7 +47,7 @@ public class Invoker implements Runnable {
 		EPackage ePackage;
 		try {
 			IFuture<? extends EPackage> result = contribution
-					.construct(new CodeGenUtil.EclipseUtil.StreamProgressMonitor(System.out));
+					.apply(new CodeGenUtil.EclipseUtil.StreamProgressMonitor(System.out));
 			ePackage = result.get();
 			while (!result.isDone()) {
 				Thread.yield();

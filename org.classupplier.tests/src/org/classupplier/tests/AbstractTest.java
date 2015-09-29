@@ -8,8 +8,11 @@ import java.util.concurrent.TimeUnit;
 import org.classupplier.ClassSupplier;
 import org.classupplier.Contribution;
 import org.classupplier.Phase;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.junit.Before;
 
 public abstract class AbstractTest {
@@ -34,7 +37,7 @@ public abstract class AbstractTest {
 
 	protected void waitLoad(Contribution contribution) {
 		while (!contribution.getStage().equals(Phase.LOADED))
-			Thread.yield();		
+			Thread.yield();
 	}
 
 	protected EPackage createEPackage(String name, String version) {
@@ -44,6 +47,16 @@ public abstract class AbstractTest {
 		ePackage.setNsPrefix(name);
 		ePackage.setNsURI("http://" + name + "/" + version);
 		return ePackage;
+	}
+
+	protected EPackage updateEPackage(EPackage ePackage, String version) {
+		EPackage result = EcoreUtil.copy(ePackage);
+		result.setNsURI("http://" + ePackage.getName() + "/" + version);
+		return result;
+	}
+
+	protected IProgressMonitor getProgressMonitor() {
+		return new CodeGenUtil.EclipseUtil.StreamProgressMonitor(System.out);
 	}
 
 }

@@ -24,32 +24,22 @@
             class="org.classupplier.util.ClassSupplierResourceFactoryImpl"/>
    </extension>
    <extension
-         id="userDomainNature"
-         name="User Domain Nature"
+         id="classSupplierNature"
+         name="ClassSupplier Nature"
          point="org.eclipse.core.resources.natures">
       <runtime>
          <run
-               class="org.classupplier.impl.UserDomainProjectNature">
+               class="org.classupplier.core.ProjectNature">
          </run>
       </runtime>
    </extension>
    <extension
-         id="resourceBuilder"
-         name="Model Resource Persistence"
+         id="builder"
+         name="ClassSupplier"
          point="org.eclipse.core.resources.builders">
       <builder>
          <run
-               class="org.classupplier.builders.ResourceBuilder">
-         </run>
-      </builder>
-   </extension>
-   <extension
-         id="materializer"
-         name="Model Materializer"
-         point="org.eclipse.core.resources.builders">
-      <builder>
-         <run
-               class="org.classupplier.builders.MaterialisingBuilder">
+               class="org.classupplier.core.ProjectBuilder">
          </run></builder>
    </extension>
    <extension

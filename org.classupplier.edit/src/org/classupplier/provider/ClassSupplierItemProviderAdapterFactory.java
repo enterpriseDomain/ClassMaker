@@ -145,7 +145,7 @@ public class ClassSupplierItemProviderAdapterFactory extends ClassSupplierAdapte
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected DateToStateMapEntryItemProvider dateToStateMapEntryItemProvider;
+	protected VersionToStateMapEntryItemProvider versionToStateMapEntryItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link java.util.Map.Entry}.
@@ -154,12 +154,12 @@ public class ClassSupplierItemProviderAdapterFactory extends ClassSupplierAdapte
 	 * @generated
 	 */
 	@Override
-	public Adapter createDateToStateMapEntryAdapter() {
-		if (dateToStateMapEntryItemProvider == null) {
-			dateToStateMapEntryItemProvider = new DateToStateMapEntryItemProvider(this);
+	public Adapter createVersionToStateMapEntryAdapter() {
+		if (versionToStateMapEntryItemProvider == null) {
+			versionToStateMapEntryItemProvider = new VersionToStateMapEntryItemProvider(this);
 		}
 
-		return dateToStateMapEntryItemProvider;
+		return versionToStateMapEntryItemProvider;
 	}
 
 	/**
@@ -267,8 +267,8 @@ public class ClassSupplierItemProviderAdapterFactory extends ClassSupplierAdapte
 			stateItemProvider.dispose();
 		if (workspaceItemProvider != null)
 			workspaceItemProvider.dispose();
-		if (dateToStateMapEntryItemProvider != null)
-			dateToStateMapEntryItemProvider.dispose();
+		if (versionToStateMapEntryItemProvider != null)
+			versionToStateMapEntryItemProvider.dispose();
 	}
 
 }

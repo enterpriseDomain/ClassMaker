@@ -8,7 +8,7 @@ import org.eclipse.emf.ecore.EPackage;
 public interface Constructable {
 
 	Semaphore constructed();
-	
-	EPackage doConstruct(IProgressMonitor monitor) throws Exception;
+
+	EPackage construct(IProgressMonitor monitor) throws Exception;
 
 }

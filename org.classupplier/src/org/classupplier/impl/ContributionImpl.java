@@ -22,10 +22,12 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreEMap;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.equinox.concurrent.future.IFuture;
 import org.eclipse.equinox.concurrent.future.IProgressRunnable;
 import org.eclipse.equinox.concurrent.future.ThreadsExecutor;
+import org.eclipse.osgi.util.NLS;
 import org.osgi.framework.Version;
 
 /**
@@ -35,15 +37,23 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.classupplier.impl.ContributionImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.classupplier.impl.ContributionImpl#getTime <em>Time</em>}</li>
- *   <li>{@link org.classupplier.impl.ContributionImpl#getVersion <em>Version</em>}</li>
- *   <li>{@link org.classupplier.impl.ContributionImpl#getStage <em>Stage</em>}</li>
- *   <li>{@link org.classupplier.impl.ContributionImpl#getProjectName <em>Project Name</em>}</li>
- *   <li>{@link org.classupplier.impl.ContributionImpl#getSnapshots <em>Snapshots</em>}</li>
- *   <li>{@link org.classupplier.impl.ContributionImpl#getState <em>State</em>}</li>
- *   <li>{@link org.classupplier.impl.ContributionImpl#getDynamicEPackage <em>Dynamic EPackage</em>}</li>
- *   <li>{@link org.classupplier.impl.ContributionImpl#getGeneratedEPackage <em>Generated EPackage</em>}</li>
+ * <li>{@link org.classupplier.impl.ContributionImpl#getName <em>Name</em>}</li>
+ * <li>{@link org.classupplier.impl.ContributionImpl#getLanguage
+ * <em>Language</em>}</li>
+ * <li>{@link org.classupplier.impl.ContributionImpl#getVersion <em>Version</em>
+ * }</li>
+ * <li>{@link org.classupplier.impl.ContributionImpl#getStage <em>Stage</em>}
+ * </li>
+ * <li>{@link org.classupplier.impl.ContributionImpl#getProjectName
+ * <em>Project Name</em>}</li>
+ * <li>{@link org.classupplier.impl.ContributionImpl#getStateHistory
+ * <em>State History</em>}</li>
+ * <li>{@link org.classupplier.impl.ContributionImpl#getState <em>State</em>}
+ * </li>
+ * <li>{@link org.classupplier.impl.ContributionImpl#getDynamicEPackage
+ * <em>Dynamic EPackage</em>}</li>
+ * <li>{@link org.classupplier.impl.ContributionImpl#getGeneratedEPackage
+ * <em>Generated EPackage</em>}</li>
  * </ul>
  *
  * @generated
@@ -53,6 +63,7 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -61,63 +72,73 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 	/**
 	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
 	/**
-	 * The default value of the '{@link #getTime() <em>Time</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #getTime()
+	 * The default value of the '{@link #getLanguage() <em>Language</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getLanguage()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Date TIME_EDEFAULT = null;
+	protected static final String LANGUAGE_EDEFAULT = null;
 	/**
-	 * The cached value of the '{@link #getTime() <em>Time</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #getTime()
-	 * @generated
-	 * @ordered
-	 */
-	protected Date time = TIME_EDEFAULT;
-	/**
-	 * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getVersion() <em>Version</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getVersion()
 	 * @generated
 	 * @ordered
 	 */
 	protected static final Version VERSION_EDEFAULT = null;
 	/**
+	 * The cached value of the '{@link #getVersion() <em>Version</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getVersion()
+	 * @generated
+	 * @ordered
+	 */
+	protected Version version = VERSION_EDEFAULT;
+	/**
 	 * The default value of the '{@link #getStage() <em>Stage</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getStage()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Phase STAGE_EDEFAULT = Phase.GENERATED;
+	protected static final Phase STAGE_EDEFAULT = Phase.DEFINED;
 	/**
-	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}
+	 * ' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getProjectName()
 	 * @generated
 	 * @ordered
 	 */
 	protected static final String PROJECT_NAME_EDEFAULT = "";
 	/**
-	 * The cached value of the '{@link #getSnapshots() <em>Snapshots</em>}' map.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #getSnapshots()
+	 * The cached value of the '{@link #getStateHistory() <em>State History</em>
+	 * }' map. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getStateHistory()
 	 * @generated
 	 * @ordered
 	 */
-	protected EMap<Date, State> snapshots;
+	protected EMap<Version, State> stateHistory;
+
+	protected int stateCounter = 0;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
+	 * 
+	 * @generated NOT
 	 */
 	protected ContributionImpl() {
 		super();
@@ -125,6 +146,7 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -134,18 +156,7 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EMap<Date, State> getSnapshots() {
-		if (snapshots == null) {
-			snapshots = new EcoreEMap<Date, State>(ClassSupplierPackage.Literals.DATE_TO_STATE_MAP_ENTRY,
-					DateToStateMapEntryImpl.class, this, ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS);
-		}
-		return snapshots;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public State getState() {
@@ -159,16 +170,16 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 	 * @generated NOT
 	 */
 	public State basicGetState() {
-		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__TIME) && eIsSet(ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS)
-				&& getSnapshots().containsKey(getTime()))
-			return getSnapshots().get(getTime());
+		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__STATE_HISTORY)
+				&& eIsSet(ClassSupplierPackage.CONTRIBUTION__VERSION) && getStateHistory().containsKey(getVersion()))
+			return getStateHistory().get(getVersion());
 		return null;
 
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EPackage getDynamicEPackage() {
@@ -178,29 +189,29 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	public EPackage basicGetDynamicEPackage() {
-		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS))
+		if (stateInited())
 			return getState().getDynamicEPackage();
 		return null;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	public void setDynamicEPackage(EPackage newDynamicEPackage) {
-		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS))
+		if (stateInited())
 			getState().setDynamicEPackage(newDynamicEPackage);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EPackage getGeneratedEPackage() {
@@ -210,8 +221,8 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	public EPackage basicGetGeneratedEPackage() {
@@ -223,7 +234,7 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 	 * 
 	 * @generated NOT
 	 */
-	public synchronized IFuture<? extends EPackage> construct(IProgressMonitor monitor) {
+	public IFuture<? extends EPackage> apply(IProgressMonitor monitor) {
 		ThreadsExecutor executor = new ThreadsExecutor();
 		IFuture<? extends EPackage> result = null;
 		try {
@@ -234,11 +245,23 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 		return result;
 	}
 
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public void checkout(Version version) {
+		if (getStateHistory().containsKey(version))
+			setVersion(version);
+		else
+			throw new IllegalStateException(NLS.bind("Version {0} has no state.", version));
+	}
+
 	public class ConstructRunnable<T extends EPackage> implements IProgressRunnable<T> {
 
 		public T run(IProgressMonitor monitor) throws Exception {
 			@SuppressWarnings("unchecked")
-			T result = (T) doConstruct(monitor);
+			T result = (T) construct(monitor);
 			constructed().acquire();
 			return result;
 		}
@@ -251,7 +274,7 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 	 * @generated NOT
 	 */
 	public String getName() {
-		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__STATE))
+		if (stateInited())
 			return getState().getName();
 		return name;
 	}
@@ -265,70 +288,15 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
-		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS))
+		if (stateInited())
 			getState().setName(newName);
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.CONTRIBUTION__NAME, oldName,
 					name));
 	}
 
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Date getTime() {
-		return time;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTime(Date newTime) {
-		Date oldTime = time;
-		time = newTime;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.CONTRIBUTION__TIME, oldTime,
-					time));
-	}
-
-	@Override
-	public Version getVersion() {
-		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS))
-			return getState().getVersion();
-		return VERSION_EDEFAULT;
-	}
-
-	@Override
-	public void setVersion(Version newVersion) {
-		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS))
-			getState().setVersion(newVersion);
-	}
-
-	@Override
-	public String getProjectName() {
-		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS))
-			return getState().getProjectName();
-		return PROJECT_NAME_EDEFAULT;
-	}
-
-	@Override
-	public void setProjectName(String newProjectName) {
-		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__STATE))
-			getState().setProjectName(newProjectName);
-	}
-
-	@Override
-	public Phase getStage() {
-		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__STATE))
-			return getState().getStage();
-		return Phase.DEFINED;
-	}
-
-	@Override
-	public void setStage(Phase newStage) {
-		if (eIsSet(ClassSupplierPackage.Literals.CONTRIBUTION__STATE))
-			getState().setStage(newStage);
+	protected boolean stateInited() {
+		return eIsSet(ClassSupplierPackage.CONTRIBUTION__STATE);
 	}
 
 	/**
@@ -336,9 +304,82 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 	 * 
 	 * @generated NOT
 	 */
-	public void apply(Date version) {
-		setTime(version);
+	public String getLanguage() {
+		return getState().getLanguage();
+	}
 
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public void setLanguage(String newLanguage) {
+		getState().setLanguage(newLanguage);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public Version getVersion() {
+		return version;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public void setVersion(Version newVersion) {
+		Version oldVersion = version;
+		version = newVersion;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.CONTRIBUTION__VERSION,
+					oldVersion, version));
+	}
+
+	@Override
+	public String getProjectName() {
+		if (stateInited())
+			return getState().getProjectName();
+		return PROJECT_NAME_EDEFAULT;
+	}
+
+	@Override
+	public void setProjectName(String newProjectName) {
+		if (stateInited())
+			getState().setProjectName(newProjectName);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EMap<Version, State> getStateHistory() {
+		if (stateHistory == null) {
+			stateHistory = new EcoreEMap<Version, State>(ClassSupplierPackage.Literals.VERSION_TO_STATE_MAP_ENTRY,
+					VersionToStateMapEntryImpl.class, this, ClassSupplierPackage.CONTRIBUTION__STATE_HISTORY);
+		}
+		return stateHistory;
+	}
+
+	@Override
+	public Phase getStage() {
+		if (stateInited())
+			return getState().getStage();
+		return Phase.DEFINED;
+	}
+
+	@Override
+	public void setStage(Phase newStage) {
+		if (stateInited())
+			getState().setStage(newStage);
+	}
+
+	private int getNewNumber() {
+		return stateCounter++;
 	}
 
 	/**
@@ -349,19 +390,23 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 	public State newState() {
 		Date time = new Date();
 		State newState = ClassSupplierFactory.eINSTANCE.createState();
-		newState.setTime(time);
-		boolean first = getSnapshots().isEmpty();
-		getSnapshots().put(time, newState);
+		newState.setTimestamp(time);
+		newState.setNumber(getNewNumber());
+		newState.setVersion(org.osgi.framework.Version.parseVersion(newState.formatVersion()));
+		boolean first = getStateHistory().isEmpty();
+		getStateHistory().put(newState.getVersion(), newState);
 		if (first)
-			apply(time);
+			checkout(newState.getVersion());
+		else {
+			newState.setName(getName());
+			newState.setDynamicEPackage(EcoreUtil.copy(getDynamicEPackage()));
+		}
 		return newState;
 	}
 
 	@Override
-	public EPackage doConstruct(IProgressMonitor monitor) throws Exception {
-		if (getStage().equals(Phase.LOADED))
-			return getGeneratedEPackage();
-		return ((Constructable) getState()).doConstruct(new SubProgressMonitor(monitor, 1));
+	public EPackage construct(IProgressMonitor monitor) throws Exception {
+		return ((Constructable) getState()).construct(new SubProgressMonitor(monitor, 1));
 	}
 
 	@Override
@@ -371,19 +416,21 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS:
-			return ((InternalEList<?>) getSnapshots()).basicRemove(otherEnd, msgs);
+		case ClassSupplierPackage.CONTRIBUTION__STATE_HISTORY:
+			return ((InternalEList<?>) getStateHistory()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -391,19 +438,19 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 		switch (featureID) {
 		case ClassSupplierPackage.CONTRIBUTION__NAME:
 			return getName();
-		case ClassSupplierPackage.CONTRIBUTION__TIME:
-			return getTime();
+		case ClassSupplierPackage.CONTRIBUTION__LANGUAGE:
+			return getLanguage();
 		case ClassSupplierPackage.CONTRIBUTION__VERSION:
 			return getVersion();
 		case ClassSupplierPackage.CONTRIBUTION__STAGE:
 			return getStage();
 		case ClassSupplierPackage.CONTRIBUTION__PROJECT_NAME:
 			return getProjectName();
-		case ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS:
+		case ClassSupplierPackage.CONTRIBUTION__STATE_HISTORY:
 			if (coreType)
-				return getSnapshots();
+				return getStateHistory();
 			else
-				return getSnapshots().map();
+				return getStateHistory().map();
 		case ClassSupplierPackage.CONTRIBUTION__STATE:
 			if (resolve)
 				return getState();
@@ -422,6 +469,7 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -430,8 +478,8 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 		case ClassSupplierPackage.CONTRIBUTION__NAME:
 			setName((String) newValue);
 			return;
-		case ClassSupplierPackage.CONTRIBUTION__TIME:
-			setTime((Date) newValue);
+		case ClassSupplierPackage.CONTRIBUTION__LANGUAGE:
+			setLanguage((String) newValue);
 			return;
 		case ClassSupplierPackage.CONTRIBUTION__VERSION:
 			setVersion((Version) newValue);
@@ -442,8 +490,8 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 		case ClassSupplierPackage.CONTRIBUTION__PROJECT_NAME:
 			setProjectName((String) newValue);
 			return;
-		case ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS:
-			((EStructuralFeature.Setting) getSnapshots()).set(newValue);
+		case ClassSupplierPackage.CONTRIBUTION__STATE_HISTORY:
+			((EStructuralFeature.Setting) getStateHistory()).set(newValue);
 			return;
 		case ClassSupplierPackage.CONTRIBUTION__DYNAMIC_EPACKAGE:
 			setDynamicEPackage((EPackage) newValue);
@@ -454,6 +502,7 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -462,8 +511,8 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 		case ClassSupplierPackage.CONTRIBUTION__NAME:
 			setName(NAME_EDEFAULT);
 			return;
-		case ClassSupplierPackage.CONTRIBUTION__TIME:
-			setTime(TIME_EDEFAULT);
+		case ClassSupplierPackage.CONTRIBUTION__LANGUAGE:
+			setLanguage(LANGUAGE_EDEFAULT);
 			return;
 		case ClassSupplierPackage.CONTRIBUTION__VERSION:
 			setVersion(VERSION_EDEFAULT);
@@ -474,8 +523,8 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 		case ClassSupplierPackage.CONTRIBUTION__PROJECT_NAME:
 			setProjectName(PROJECT_NAME_EDEFAULT);
 			return;
-		case ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS:
-			getSnapshots().clear();
+		case ClassSupplierPackage.CONTRIBUTION__STATE_HISTORY:
+			getStateHistory().clear();
 			return;
 		case ClassSupplierPackage.CONTRIBUTION__DYNAMIC_EPACKAGE:
 			setDynamicEPackage((EPackage) null);
@@ -486,6 +535,7 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -493,17 +543,17 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 		switch (featureID) {
 		case ClassSupplierPackage.CONTRIBUTION__NAME:
 			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-		case ClassSupplierPackage.CONTRIBUTION__TIME:
-			return TIME_EDEFAULT == null ? time != null : !TIME_EDEFAULT.equals(time);
+		case ClassSupplierPackage.CONTRIBUTION__LANGUAGE:
+			return LANGUAGE_EDEFAULT == null ? getLanguage() != null : !LANGUAGE_EDEFAULT.equals(getLanguage());
 		case ClassSupplierPackage.CONTRIBUTION__VERSION:
-			return VERSION_EDEFAULT == null ? getVersion() != null : !VERSION_EDEFAULT.equals(getVersion());
+			return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
 		case ClassSupplierPackage.CONTRIBUTION__STAGE:
 			return getStage() != STAGE_EDEFAULT;
 		case ClassSupplierPackage.CONTRIBUTION__PROJECT_NAME:
 			return PROJECT_NAME_EDEFAULT == null ? getProjectName() != null
 					: !PROJECT_NAME_EDEFAULT.equals(getProjectName());
-		case ClassSupplierPackage.CONTRIBUTION__SNAPSHOTS:
-			return snapshots != null && !snapshots.isEmpty();
+		case ClassSupplierPackage.CONTRIBUTION__STATE_HISTORY:
+			return stateHistory != null && !stateHistory.isEmpty();
 		case ClassSupplierPackage.CONTRIBUTION__STATE:
 			return basicGetState() != null;
 		case ClassSupplierPackage.CONTRIBUTION__DYNAMIC_EPACKAGE:
@@ -516,6 +566,7 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -526,8 +577,8 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
-		result.append(", time: ");
-		result.append(time);
+		result.append(", version: ");
+		result.append(version);
 		result.append(')');
 		return result.toString();
 	}

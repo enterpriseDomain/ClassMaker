@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: InCore Sample App
+Bundle-Name: ClassSupplier Sample App
 Bundle-SymbolicName: org.classupplier.sample;singleton:=true
 Bundle-Version: 0.0.2.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7,

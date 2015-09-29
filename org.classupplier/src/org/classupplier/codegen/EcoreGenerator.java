@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.Collections;
 
 import org.classupplier.Phase;
-import org.classupplier.builders.SupplementaryJob;
-import org.classupplier.impl.ClassSupplierOSGi;
+import org.classupplier.core.ClassSupplierOSGi;
+import org.classupplier.core.SupplementaryJob;
 import org.classupplier.util.ResourceUtil;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -20,7 +20,11 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.codegen.ecore.Generator;
 import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
+import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
+import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -38,29 +42,99 @@ public class EcoreGenerator extends SupplementaryJob implements org.classupplier
 
 	public static final String GENMODEL_EXT = "genmodel";
 
-	private GenModelSetupJob genModelSetup = new GenModelSetupJob();
+	private GeneratorJob genModelGeneration = new GenModelGenerationJob();
 
-	private GenModelGenerationJob genModelGeneration = new GenModelGenerationJob();
+	private GeneratorJob genModelSetup = new GenModelSetupJob();
 
 	private CodeGenerationJob codeGeneration = new CodeGenerationJob();
 
 	protected ResourceSet resourceSet;
 
-	protected class GenModelSetupJob extends SupplementaryJob {
+	protected abstract class GeneratorJob extends SupplementaryJob {
+
+		private org.eclipse.emf.codegen.ecore.Generator generator;
+		private IPath modelPath;
+		private IPath genModelPath;
+
+		public GeneratorJob(String jobName) {
+			super(jobName);
+		}
+
+		public org.eclipse.emf.codegen.ecore.Generator getGenerator() {
+			return generator;
+		}
+
+		public void setGenerator(org.eclipse.emf.codegen.ecore.Generator generator) {
+			this.generator = generator;
+		}
+
+		public IPath getModelPath() {
+			return modelPath;
+		}
+
+		public void setModelPath(IPath path) {
+			this.modelPath = path;
+		}
+
+		public IPath getGenModelPath() {
+			return genModelPath;
+		}
+
+		public void setGenModelPath(IPath path) {
+			this.genModelPath = path;
+		}
+
+	}
+
+	protected class GenModelGenerationJob extends GeneratorJob {
+
+		public GenModelGenerationJob() {
+			super("GenModel Generation");
+		}
+
+		@Override
+		public IStatus work(IProgressMonitor monitor) throws CoreException {
+			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+			final IPath modelFullPath = root.getRawLocation().append(getModelPath());
+			getGenerator()
+					.run(new String[] { "-ecore2GenModel", modelFullPath.toString(), "", getContribution().getName() });
+			return Status.OK_STATUS;
+		}
+
+		@Override
+		public void checkStage() throws CoreException {
+			if (getContribution().getStage().getValue() < Phase.MODELED_VALUE)
+				throw new CoreException(ClassSupplierOSGi.createWarningStatus("Contribution is not modeled."));
+		}
+
+	}
+
+	protected class GenModelSetupJob extends GeneratorJob {
 
 		public GenModelSetupJob() {
 			super("Configure GenModel");
 		}
 
-		private IPath path;
-
 		@Override
 		public IStatus work(IProgressMonitor monitor) throws CoreException {
 			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+			// getResourceSet().getURIConverter().getURIMap().putAll(EcorePlugin.computePlatformURIMap(true));
+			URI modelURI = URI.createFileURI(root.getRawLocation().append(getModelPath()).toString());
+			Resource resource = getResourceSet().getResource(modelURI, true);
+			EPackage modelEPackage = null;
+			for (EObject eObject : resource.getContents()) {
+				EPackage ePackage = null;
+				if (eObject instanceof EPackage) {
+					ePackage = (EPackage) eObject;
+					if (ePackage.getNsURI().equals(getContribution().getDynamicEPackage().getNsURI()))
+						modelEPackage = ePackage;
+				}
+			}
+
 			URI genModelURI = URI.createFileURI(root.getRawLocation().append(getGenModelPath()).toString());
-			Resource resource = resourceSet.getResource(genModelURI, true);
+			resource = getResourceSet().getResource(genModelURI, true);
 			GenModel genModel = (GenModel) resource.getContents().get(0);
-			setupGenModel(getGenModelPath().removeFileExtension().removeLastSegments(2), genModel);
+			setupGenModel(getGenModelPath().removeFileExtension().removeLastSegments(2), modelEPackage, genModel);
 			try {
 				resource.save(Collections.EMPTY_MAP);
 			} catch (IOException e) {
@@ -69,14 +143,6 @@ public class EcoreGenerator extends SupplementaryJob implements org.classupplier
 			return Status.OK_STATUS;
 		}
 
-		public IPath getGenModelPath() {
-			return path;
-		}
-
-		public void setGenModelPath(IPath path) {
-			this.path = path;
-		}
-
 		@Override
 		public void checkStage() throws CoreException {
 			if (getContribution().getStage().getValue() < Phase.MODELED_VALUE)
@@ -85,78 +151,18 @@ public class EcoreGenerator extends SupplementaryJob implements org.classupplier
 
 	}
 
-	protected class GenModelGenerationJob extends SupplementaryJob {
-
-		private org.eclipse.emf.codegen.ecore.Generator generator;
-
-		private IPath path;
-
-		public GenModelGenerationJob() {
-			super("GenModel Generation");
-		}
-
-		@Override
-		public IStatus work(IProgressMonitor monitor) throws CoreException {
-			getGenerator()
-					.run(new String[] { "-ecore2GenModel", getPath().toString(), "", getContribution().getName() });
-			return Status.OK_STATUS;
-		}
-
-		public org.eclipse.emf.codegen.ecore.Generator getGenerator() {
-			return generator;
-		}
-
-		public void setGenerator(org.eclipse.emf.codegen.ecore.Generator generator) {
-			this.generator = generator;
-		}
-
-		public IPath getPath() {
-			return path;
-		}
-
-		public void setPath(IPath path) {
-			this.path = path;
-		}
-
-		@Override
-		public void checkStage() throws CoreException {
-			if (getContribution().getStage().getValue() < Phase.MODELED_VALUE)
-				throw new CoreException(ClassSupplierOSGi.createWarningStatus("Contribution is not modeled."));
-		}
-
-	}
-
-	protected class CodeGenerationJob extends SupplementaryJob {
+	protected class CodeGenerationJob extends GeneratorJob {
 
 		public CodeGenerationJob() {
 			super("Code Generation");
 		}
 
-		private org.eclipse.emf.codegen.ecore.Generator generator;
-
-		private IPath path;
-
 		@Override
 		public IStatus work(IProgressMonitor monitor) throws CoreException {
-			getGenerator().run(new String[] { "-model",
+			getGenerator().run(new String[] { "-forceOverwrite", "-codeFormatting", "default", "-model",
 					EcorePlugin.getWorkspaceRoot().getRawLocation().append(getGenModelPath()).toString() });
+			getContribution().setProjectVersion(monitor);
 			return Status.OK_STATUS;
-		}
-
-		public org.eclipse.emf.codegen.ecore.Generator getGenerator() {
-			return generator;
-		}
-
-		public void setGenerator(org.eclipse.emf.codegen.ecore.Generator generator) {
-			this.generator = generator;
-		}
-
-		public IPath getGenModelPath() {
-			return path;
-		}
-
-		public void setGenModelPath(IPath path) {
-			this.path = path;
 		}
 
 		@Override
@@ -170,11 +176,9 @@ public class EcoreGenerator extends SupplementaryJob implements org.classupplier
 	@Override
 	public IStatus generate(IProgressMonitor monitor) throws CoreException {
 		IPath modelPath = ensureModelResourcePathExists(getProject(), getContribution().getName(), monitor);
-		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-		final IPath path = root.getRawLocation().append(modelPath);
+		IPath genModelPath = getGenModelResourcePath(modelPath);
 		final org.eclipse.emf.codegen.ecore.Generator generator = new Generator();
 
-		IPath genModelPath = getGenModelResourcePath(modelPath);
 		codeGeneration.setProject(getProject());
 		codeGeneration.setGenerator(generator);
 		codeGeneration.setGenModelPath(genModelPath);
@@ -182,17 +186,16 @@ public class EcoreGenerator extends SupplementaryJob implements org.classupplier
 		setNextJob(null);
 
 		genModelSetup.setProject(getProject());
+		genModelSetup.setModelPath(modelPath);
 		genModelSetup.setGenModelPath(genModelPath);
 		genModelSetup.setNextJob(codeGeneration);
 
-		if (!genModelPath.toFile().exists()) {
-			genModelGeneration.setProject(getProject());
-			genModelGeneration.setGenerator(generator);
-			genModelGeneration.setPath(path);
-			genModelGeneration.setNextJob(genModelSetup);
-			genModelGeneration.schedule();
-		} else
-			genModelSetup.schedule();
+		genModelGeneration.setProject(getProject());
+		genModelGeneration.setGenerator(generator);
+		genModelGeneration.setModelPath(modelPath);
+		genModelGeneration.setNextJob(genModelSetup);
+		genModelGeneration.schedule();
+
 		getContribution().setStage(Phase.GENERATED);
 		return Status.OK_STATUS;
 	}
@@ -214,17 +217,28 @@ public class EcoreGenerator extends SupplementaryJob implements org.classupplier
 		return path.removeFileExtension().addFileExtension(GENMODEL_EXT);
 	}
 
-	protected void setupGenModel(IPath projectPath, org.eclipse.emf.codegen.ecore.genmodel.GenModel ecoreGenModel) {
-		ecoreGenModel.setModelName(getContribution().getName());
-		ecoreGenModel.setComplianceLevel(GenJDKLevel.JDK70_LITERAL);
-		ecoreGenModel.setSuppressInterfaces(true);
-		ecoreGenModel.setModelDirectory(projectPath.append(SOURCE_FOLDER_NAME).toString());
-		ecoreGenModel.setModelPluginID(getProject().getName());
+	protected void setupGenModel(IPath projectPath, EPackage modelEPackage,
+			org.eclipse.emf.codegen.ecore.genmodel.GenModel genModel) {
+		genModel.reconcile();
+		genModel.initialize(Collections.singletonList(modelEPackage));
+		genModel.setModelName(getContribution().getName());
+		genModel.setLanguage(getContribution().getLanguage());
+		genModel.setComplianceLevel(GenJDKLevel.JDK70_LITERAL);
+		genModel.setUpdateClasspath(true);
+		genModel.setModelDirectory(projectPath.append(SOURCE_FOLDER_NAME).toString());
+		genModel.setModelPluginID(getProject().getName());
+		genModel.setSuppressInterfaces(true);
+		for (GenPackage genPackage : genModel.getGenPackages())
+			genPackage.setPrefix(CodeGenUtil.capName(genPackage.getPrefix(), genModel.getLocale()));
 	}
 
 	@Override
 	public void setResourceSet(ResourceSet resourceSet) {
 		this.resourceSet = resourceSet;
+	}
+
+	public ResourceSet getResourceSet() {
+		return resourceSet;
 	}
 
 	@Override

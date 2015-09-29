@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.classupplier.Phase;
 import org.classupplier.State;
-import org.classupplier.builders.DelegatingJob;
-import org.classupplier.impl.ClassSupplierOSGi;
+import org.classupplier.core.ClassSupplierOSGi;
+import org.classupplier.core.DelegatingJob;
 import org.classupplier.util.ResourceUtil;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.runtime.CoreException;
@@ -29,9 +29,10 @@ public class PDEExporter extends AbstractExporter {
 	public IStatus export(final IProgressMonitor monitor) throws CoreException {
 		if (!getProject().hasNature(PDE_PLUGIN_NATURE)) {
 			IProjectDescription description = getProject().getDescription();
-			description = ResourceUtil.addProjectNature(description, PDE_PLUGIN_NATURE);
+			description.setNatureIds(ResourceUtil.addProjectNature(description.getNatureIds(), PDE_PLUGIN_NATURE));
 			getProject().setDescription(description, monitor);
 		}
+
 		final FeatureExportInfo info = new FeatureExportInfo();
 		info.destinationDirectory = getExportDestination().toString();
 		info.exportSource = false;
@@ -42,13 +43,15 @@ public class PDEExporter extends AbstractExporter {
 		Version version = state.getVersion();
 		if (!version.equals(Version.emptyVersion))
 			info.qualifier = (String) version.getQualifier();
+
 		PluginModelManager modelManager = PDECore.getDefault().getModelManager();
 		modelManager.bundleRootChanged(getProject());
 		List<IPluginModelBase> models = new ArrayList<IPluginModelBase>();
-		for (IPluginModelBase model : modelManager.getActiveModels())
-			if (model.getBundleDescription().getName().equals(getProject().getName()))
-				models.add(model);
-		info.items = models.toArray();
+		IPluginModelBase model = modelManager.findModel(getProject());
+		if (model != null) {
+			models.add(model);
+			info.items = models.toArray();
+		}
 
 		PluginExportOperation op = new PluginExportOperation(info, "PDE Plug-in Export");
 		DelegatingJob delegate = new DelegatingJob(op);

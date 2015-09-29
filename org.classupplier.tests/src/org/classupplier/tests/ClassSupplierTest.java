@@ -2,13 +2,16 @@ package org.classupplier.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.classupplier.ClassSupplier;
 import org.classupplier.Contribution;
+import org.classupplier.State;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAnnotation;
@@ -17,6 +20,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
@@ -28,6 +32,7 @@ import org.junit.Test;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceReference;
+import org.osgi.framework.Version;
 
 public class ClassSupplierTest extends AbstractTest {
 
@@ -69,8 +74,7 @@ public class ClassSupplierTest extends AbstractTest {
 
 		assertNotNull(service);
 		Contribution contribution = service.getWorkspace().createContribution(readerEPackage);
-		IFuture<? extends EPackage> result = contribution
-				.construct(new CodeGenUtil.EclipseUtil.StreamProgressMonitor(System.out));
+		IFuture<? extends EPackage> result = contribution.apply(getProgressMonitor());
 		EPackage ePackage;
 		try {
 			ePackage = result.get();
@@ -135,8 +139,7 @@ public class ClassSupplierTest extends AbstractTest {
 		Contribution contribution = tested.getWorkspace().createContribution(ePackage);
 		EPackage resultEPackage;
 		try {
-			IFuture<? extends EPackage> result = contribution
-					.construct(new CodeGenUtil.EclipseUtil.StreamProgressMonitor(System.out));
+			IFuture<? extends EPackage> result = contribution.apply(getProgressMonitor());
 			resultEPackage = result.get();
 			while (!result.isDone()) {
 				Thread.yield();
@@ -169,8 +172,7 @@ public class ClassSupplierTest extends AbstractTest {
 		metaClass.getEStructuralFeatures().add(attribute);
 		_package.getEClassifiers().add(metaClass);
 		Contribution contribution = service.getWorkspace().createContribution(_package);
-		IFuture<? extends EPackage> result = contribution
-				.construct(new CodeGenUtil.EclipseUtil.StreamProgressMonitor(System.out));
+		IFuture<? extends EPackage> result = contribution.apply(getProgressMonitor());
 		EPackage ePackage;
 		try {
 			ePackage = result.get();
@@ -194,6 +196,96 @@ public class ClassSupplierTest extends AbstractTest {
 			e.printStackTrace();
 			fail(e.getLocalizedMessage());
 		}
+	}
+
+	@Test
+	public void update() {
+		EcoreFactory f = EcoreFactory.eINSTANCE;
+		EPackage p = createEPackage("updatable", "0.1");
+		EClass cl = f.createEClass();
+		cl.setName("SomeClass");
+		EAttribute a = f.createEAttribute();
+		a.setName("a");
+		a.setEType(EcorePackage.Literals.EJAVA_OBJECT);
+		cl.getEStructuralFeatures().add(a);
+		p.getEClassifiers().add(cl);
+
+		Contribution c = service.getWorkspace().createContribution(p);
+		try {
+			IFuture<? extends EPackage> r = c.apply(getProgressMonitor());
+			while (!r.isDone()) {
+				Thread.yield();
+			}
+			EPackage e = r.get();
+			EClass cla = (EClass) e.getEClassifier(cl.getName());
+			EObject o = e.getEFactoryInstance().create(cla);
+			assertEquals(cla.getName(), o.getClass().getSimpleName());
+			o.eSet(cla.getEStructuralFeature(a.getName()), "test");
+			assertEquals("test", o.eGet(cla.getEStructuralFeature(a.getName())));
+		} catch (OperationCanceledException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		Version v1 = c.getVersion();
+
+		Registry packageRegistry = service.getWorkspace().getResourceSet().getPackageRegistry();
+		assertNotNull(packageRegistry.getEPackage(p.getNsURI()));
+		String oldNS_URI = p.getNsURI();
+
+		p = updateEPackage(p, "0.2");
+		EAttribute b = f.createEAttribute();
+		b.setName("b");
+		b.setEType(EcorePackage.Literals.EINT);
+		((EClass) p.getEClassifier(cl.getName())).getEStructuralFeatures().add(b);
+
+		try {
+			State state = c.newState();
+			state.setDynamicEPackage(p);
+			Version id = state.getVersion();
+			c.checkout(id);
+			IFuture<? extends EPackage> r = c.apply(getProgressMonitor());
+			while (!r.isDone()) {
+				Thread.yield();
+			}
+			EPackage e = r.get();
+			EClass cla = (EClass) e.getEClassifier(cl.getName());
+			EObject o = e.getEFactoryInstance().create(cla);
+			assertEquals(cla.getName(), o.getClass().getSimpleName());
+			o.eSet(cla.getEStructuralFeature(a.getName()), "test");
+			assertEquals("test", o.eGet(cla.getEStructuralFeature(a.getName())));
+			o.eSet(cla.getEStructuralFeature(b.getName()), 5);
+			assertEquals(5, o.eGet(cla.getEStructuralFeature(b.getName())));
+		} catch (OperationCanceledException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		Version v2 = c.getVersion();
+		assertTrue(v2.compareTo(v1) > 0);
+
+		assertNull(packageRegistry.getEPackage(oldNS_URI));
+		assertNotNull(packageRegistry.getEPackage(p.getNsURI()));
+
+		p = updateEPackage(p, "0.3");
+		try {
+			State state = c.newState();
+			state.setDynamicEPackage(p);
+			Version id = state.getVersion();
+			c.checkout(id);
+			IFuture<? extends EPackage> r = c.apply(getProgressMonitor());
+			while (!r.isDone()) {
+				Thread.yield();
+			}
+			EPackage e = r.get();
+			assertEquals("http://" + e.getName() + "/0.3", e.getNsURI());
+		} catch (OperationCanceledException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	private void assertObjectClass(String className, EPackage resultPackage) {

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.classupplier;singleton:=true
-Bundle-Version: 0.7.7.qualifier
+Bundle-Version: 0.7.8.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
@@ -10,7 +10,13 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8,
  JavaSE-1.7,
  JavaSE-1.6
 Export-Package: org.classupplier,
+ org.classupplier.codegen,
+ org.classupplier.core,
+ org.classupplier.export,
  org.classupplier.impl,
+ org.classupplier.install,
+ org.classupplier.load,
+ org.classupplier.model,
  org.classupplier.util
 Require-Bundle: org.eclipse.core.runtime;visibility:=reexport,
  org.eclipse.emf.ecore;visibility:=reexport,
@@ -32,4 +38,4 @@ Require-Bundle: org.eclipse.core.runtime;visibility:=reexport,
  org.eclipse.equinox.concurrent;visibility:=reexport
 Service-Component: OSGI-INF/component.xml
 Bundle-ActivationPolicy: lazy
-Bundle-Activator: org.classupplier.impl.ClassSupplierOSGi
+Bundle-Activator: org.classupplier.core.ClassSupplierOSGi

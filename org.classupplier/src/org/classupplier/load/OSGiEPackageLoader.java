@@ -4,8 +4,8 @@ import java.util.concurrent.Semaphore;
 
 import org.classupplier.Phase;
 import org.classupplier.State;
-import org.classupplier.builders.SupplementaryJob;
-import org.classupplier.impl.ClassSupplierOSGi;
+import org.classupplier.core.ClassSupplierOSGi;
+import org.classupplier.core.SupplementaryJob;
 import org.classupplier.util.ResourceUtil;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -114,7 +114,8 @@ public class OSGiEPackageLoader extends SupplementaryJob {
 	}
 
 	private synchronized void doLoad(State state, Bundle osgiBundle) {
-		String packageClassName = state.getDynamicEPackage().getName() + "." + state.getName() + "Package";
+		String packageClassName = state.getDynamicEPackage().getName() + "." + state.getDynamicEPackage().getNsPrefix()
+				+ "Package";
 		Class<?> packageClass = null;
 		try {
 			packageClass = osgiBundle.loadClass(packageClassName);

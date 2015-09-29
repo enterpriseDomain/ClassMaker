@@ -2,7 +2,6 @@
  */
 package org.classupplier.util;
 
-import java.util.Date;
 import java.util.Map;
 
 import org.classupplier.ClassSupplierPackage;
@@ -16,6 +15,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.equinox.concurrent.future.IFuture;
+import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides
@@ -86,8 +86,8 @@ public class ClassSupplierAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseDateToStateMapEntry(Map.Entry<Date, State> object) {
-			return createDateToStateMapEntryAdapter();
+		public Adapter caseVersionToStateMapEntry(Map.Entry<Version, State> object) {
+			return createVersionToStateMapEntryAdapter();
 		}
 
 		@Override
@@ -169,16 +169,16 @@ public class ClassSupplierAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>Date To State Map Entry</em>}'.
-	 * <!-- begin-user-doc --> This default
-	 * implementation returns null so that we can easily ignore cases; it's
-	 * useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
+	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>Version To State Map Entry</em>}'.
+	 * <!-- begin-user-doc --> This
+	 * default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases
+	 * anyway. <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see java.util.Map.Entry
 	 * @generated
 	 */
-	public Adapter createDateToStateMapEntryAdapter() {
+	public Adapter createVersionToStateMapEntryAdapter() {
 		return null;
 	}
 
@@ -198,10 +198,9 @@ public class ClassSupplierAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.equinox.concurrent.future.IFuture <em>IFuture</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> This default implementation returns null so that
+	 * we can easily ignore cases; it's useful to ignore a case when inheritance
+	 * will catch all the cases anyway. <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.equinox.concurrent.future.IFuture
 	 * @generated
@@ -211,11 +210,12 @@ public class ClassSupplierAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.classupplier.impl.Constructable <em>Constructable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
+	 * Creates a new adapter for an object of class '
+	 * {@link org.classupplier.impl.Constructable <em>Constructable</em>}'. <!--
+	 * begin-user-doc --> This default implementation returns null so that we
+	 * can easily ignore cases; it's useful to ignore a case when inheritance
+	 * will catch all the cases anyway. <!-- end-user-doc -->
+	 * 
 	 * @return the new adapter.
 	 * @see org.classupplier.impl.Constructable
 	 * @generated
