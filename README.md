@@ -49,4 +49,4 @@ Example:
         
 [Here](/org.classupplier.tests/src/org/classupplier/tests/ClassSupplierTest.java) is an example.  
 
-For further details please see the project's [wiki](https://github.com/kirillzotkin/ClassSupplier/wiki).
+For further details please see project's [wiki](https://github.com/kirillzotkin/ClassSupplier/wiki).
