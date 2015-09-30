@@ -12,6 +12,7 @@ import org.classupplier.State;
 import org.classupplier.Workspace;
 import org.classupplier.core.ClassSupplierOSGi;
 import org.classupplier.util.ClassSupplierSwitch;
+import org.classupplier.util.ResourceUtil;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -43,20 +44,17 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link org.classupplier.impl.WorkspaceImpl#getContributions
- * <em>Contributions</em>}</li>
- * <li>{@link org.classupplier.impl.WorkspaceImpl#getResourceSet
- * <em>Resource Set</em>}</li>
+ *   <li>{@link org.classupplier.impl.WorkspaceImpl#getContributions <em>Contributions</em>}</li>
+ *   <li>{@link org.classupplier.impl.WorkspaceImpl#getResourceSet <em>Resource Set</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	/**
-	 * The cached value of the '{@link #getContributions()
-	 * <em>Contributions</em>}' containment reference list. <!-- begin-user-doc
+	 * The cached value of the '{@link #getContributions() <em>Contributions</em>}' containment reference list.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @see #getContributions()
 	 * @generated
 	 * @ordered
@@ -74,9 +72,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	protected static final ResourceSet RESOURCE_SET_EDEFAULT = new ResourceSetImpl();
 
 	/**
-	 * The cached value of the '{@link #getResourceSet() <em>Resource Set</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getResourceSet() <em>Resource Set</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getResourceSet()
 	 * @generated
 	 * @ordered
@@ -85,7 +82,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected WorkspaceImpl() {
@@ -94,7 +90,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -104,7 +99,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EList<Contribution> getContributions() {
@@ -117,7 +111,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ResourceSet getResourceSet() {
@@ -220,10 +213,10 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		for (Contribution a : getContributions())
 			switch (a.getStage()) {
 			case MODELED:
-				if (packagesAreEqual(ePackage, a.getDynamicEPackage()))
+				if (ResourceUtil.ePackagesAreEqual(ePackage, a.getDynamicEPackage()))
 					return a;
 			case LOADED:
-				if (packagesAreEqual(ePackage, a.getGeneratedEPackage()))
+				if (ResourceUtil.ePackagesAreEqual(ePackage, a.getGeneratedEPackage()))
 					return a;
 			default:
 				break;
@@ -286,10 +279,10 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	public Phase contains(EPackage blueprint) {
 		for (Contribution c : getContributions()) {
 			if (c.getStage().getValue() < Phase.LOADED_VALUE) {
-				if (packagesAreEqual(blueprint, c.getDynamicEPackage()))
+				if (ResourceUtil.ePackagesAreEqual(blueprint, c.getDynamicEPackage()))
 					return c.getStage();
 			} else {
-				if (packagesAreEqual(blueprint, c.getGeneratedEPackage()))
+				if (ResourceUtil.ePackagesAreEqual(blueprint, c.getGeneratedEPackage()))
 					return c.getStage();
 			}
 		}
@@ -297,15 +290,18 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	}
 
-	private boolean packagesAreEqual(EPackage first, EPackage second) {
-		if (first == null || second == null)
-			return false;
-		return first.getNsURI().equals(second.getNsURI()) || first.getName().equals(second.getName());
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public void delete(Object object, IProgressMonitor monitor) throws CoreException {
+		if (object instanceof EObject)
+			getContribution((EObject) object).delete(monitor);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -319,7 +315,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -335,7 +330,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -352,7 +346,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -367,7 +360,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -383,7 +375,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

@@ -1,6 +1,7 @@
 package org.classupplier.codegen;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Collections;
 
 import org.classupplier.Phase;
@@ -22,6 +23,8 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
+import org.eclipse.emf.common.util.ECollections;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -84,6 +87,15 @@ public class EcoreGenerator extends SupplementaryJob implements org.classupplier
 			this.genModelPath = path;
 		}
 
+		protected IPath computeProjectPath() {
+			return getGenModelPath().removeFileExtension().removeLastSegments(2);
+		}
+
+		@Override
+		public Phase requiredStage() {
+			return Phase.MODELED;
+		}
+
 	}
 
 	protected class GenModelGenerationJob extends GeneratorJob {
@@ -101,12 +113,6 @@ public class EcoreGenerator extends SupplementaryJob implements org.classupplier
 			return Status.OK_STATUS;
 		}
 
-		@Override
-		public void checkStage() throws CoreException {
-			if (getContribution().getStage().getValue() < Phase.MODELED_VALUE)
-				throw new CoreException(ClassSupplierOSGi.createWarningStatus("Contribution is not modeled."));
-		}
-
 	}
 
 	protected class GenModelSetupJob extends GeneratorJob {
@@ -122,10 +128,12 @@ public class EcoreGenerator extends SupplementaryJob implements org.classupplier
 			URI modelURI = URI.createFileURI(root.getRawLocation().append(getModelPath()).toString());
 			Resource resource = getResourceSet().getResource(modelURI, true);
 			EPackage modelEPackage = null;
+			EList<EPackage> allEPackages = ECollections.newBasicEList();
 			for (EObject eObject : resource.getContents()) {
 				EPackage ePackage = null;
 				if (eObject instanceof EPackage) {
 					ePackage = (EPackage) eObject;
+					allEPackages.add(ePackage);
 					if (ePackage.getNsURI().equals(getContribution().getDynamicEPackage().getNsURI()))
 						modelEPackage = ePackage;
 				}
@@ -134,19 +142,13 @@ public class EcoreGenerator extends SupplementaryJob implements org.classupplier
 			URI genModelURI = URI.createFileURI(root.getRawLocation().append(getGenModelPath()).toString());
 			resource = getResourceSet().getResource(genModelURI, true);
 			GenModel genModel = (GenModel) resource.getContents().get(0);
-			setupGenModel(getGenModelPath().removeFileExtension().removeLastSegments(2), modelEPackage, genModel);
+			setupGenModel(computeProjectPath(), modelEPackage, genModel, allEPackages);
 			try {
 				resource.save(Collections.EMPTY_MAP);
 			} catch (IOException e) {
 				throw new CoreException(ClassSupplierOSGi.createWarningStatus(e));
 			}
 			return Status.OK_STATUS;
-		}
-
-		@Override
-		public void checkStage() throws CoreException {
-			if (getContribution().getStage().getValue() < Phase.MODELED_VALUE)
-				throw new CoreException(ClassSupplierOSGi.createWarningStatus("Contribution is not modeled."));
 		}
 
 	}
@@ -163,12 +165,6 @@ public class EcoreGenerator extends SupplementaryJob implements org.classupplier
 					EcorePlugin.getWorkspaceRoot().getRawLocation().append(getGenModelPath()).toString() });
 			getContribution().setProjectVersion(monitor);
 			return Status.OK_STATUS;
-		}
-
-		@Override
-		public void checkStage() throws CoreException {
-			if (getContribution().getStage().getValue() < Phase.MODELED_VALUE)
-				throw new CoreException(ClassSupplierOSGi.createWarningStatus("Contribution is not modeled."));
 		}
 
 	}
@@ -218,7 +214,12 @@ public class EcoreGenerator extends SupplementaryJob implements org.classupplier
 	}
 
 	protected void setupGenModel(IPath projectPath, EPackage modelEPackage,
-			org.eclipse.emf.codegen.ecore.genmodel.GenModel genModel) {
+			org.eclipse.emf.codegen.ecore.genmodel.GenModel genModel, Collection<EPackage> allEPackages) {
+		for (EPackage ePackage : allEPackages) {
+			GenPackage genPackage = genModel.findGenPackage(ePackage);
+			if (genPackage != null)
+				genPackage.setEcorePackage(modelEPackage);
+		}
 		genModel.reconcile();
 		genModel.initialize(Collections.singletonList(modelEPackage));
 		genModel.setModelName(getContribution().getName());
@@ -247,9 +248,8 @@ public class EcoreGenerator extends SupplementaryJob implements org.classupplier
 	}
 
 	@Override
-	public void checkStage() throws CoreException {
-		if (getContribution().getStage().getValue() < Phase.MODELED_VALUE)
-			throw new CoreException(ClassSupplierOSGi.createWarningStatus("Contribution is not modeled."));
+	public Phase requiredStage() {
+		return Phase.MODELED;
 	}
 
 }

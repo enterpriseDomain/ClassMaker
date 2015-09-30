@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Semaphore;
 
+import org.classupplier.Messages;
 import org.classupplier.Phase;
 import org.classupplier.State;
 import org.classupplier.core.ClassSupplierOSGi;
@@ -28,7 +29,6 @@ import org.osgi.framework.wiring.FrameworkWiring;
 
 public class OSGiInstaller extends Installer {
 
-	private Bundle osgiBundle;
 	private BundleListener listener = new BundleListener() {
 
 		@Override
@@ -48,6 +48,7 @@ public class OSGiInstaller extends Installer {
 	};
 	private Semaphore installed;
 	private Semaphore uninstalled;
+	private FrameworkWiring frameworkWiring;
 
 	public OSGiInstaller() {
 		super();
@@ -63,24 +64,25 @@ public class OSGiInstaller extends Installer {
 	@Override
 	public IStatus install(IProgressMonitor monitor) {
 		if (getContribution().getStage() == Phase.DEFINED)
-			return ClassSupplierOSGi.createErrorStatus("Model is not specified.");
+			return ClassSupplierOSGi.createErrorStatus(Messages.ModelNotSpecified);
 		IPath jarPath = ResourceUtil.getTargetResourcePath(getProject(), getContribution());
 		BundleContext context = getContext();
 		try {
 			for (Bundle bundle : getExistingBundles()) {
-				if (getContribution().getProjectName().equals(bundle.getSymbolicName())
-						&& (getContribution().getVersion().compareTo(
-								Version.parseVersion(bundle.getHeaders().get(Constants.BUNDLE_VERSION))) > 0))
-					try {
-						bundle.uninstall();
-					} catch (BundleException e) {
-						return ClassSupplierOSGi.createErrorStatus(e);
-					}
+				if (getContribution().getProjectName().equals(bundle.getSymbolicName())) {
+					int compare = getContribution().getVersion()
+							.compareTo(Version.parseVersion(bundle.getHeaders().get(Constants.BUNDLE_VERSION)));
+					if (compare == 0) {
+						getContribution().setStage(Phase.INSTALLED);
+						refreshBundle(bundle, context);
+						return getOKStatus(bundle);
+					} else
+						return installBundle(bundle, jarPath, context);
+				}
 			}
 			if (monitor.isCanceled())
 				return Status.CANCEL_STATUS;
-			return installBundle(jarPath, context);
-
+			return installBundle(null, jarPath, context);
 		} catch (IllegalArgumentException e) {
 			return ClassSupplierOSGi.createErrorStatus(e);
 		} catch (SecurityException e) {
@@ -92,55 +94,70 @@ public class OSGiInstaller extends Installer {
 		}
 	}
 
-	private IStatus installBundle(IPath jarPath, BundleContext context) throws InterruptedException {
-		osgiBundle = null;
+	private IStatus installBundle(Bundle existingBundle, IPath jarPath, BundleContext context)
+			throws InterruptedException {
+		Bundle bundle = null;
 		try {
 			context.addBundleListener(listener);
-			osgiBundle = ResourceUtil.getBundle(getContribution().getProjectName(), context);
-			if (osgiBundle != null) {
-				osgiBundle.uninstall();
+			if (existingBundle != null) {
+				existingBundle.uninstall();
 				uninstalled.acquire();
+				refreshBundle(null, context);
 			}
-			osgiBundle = context.installBundle(URI.createFileURI(jarPath.toString()).toString());
-			if (osgiBundle == null)
+			bundle = context.installBundle(URI.createFileURI(jarPath.toString()).toString());
+			if (bundle == null)
 				return ClassSupplierOSGi
-						.createErrorStatus(NLS.bind("Bundle {0} is not installed.", getProject().getName()));
+						.createErrorStatus(NLS.bind(Messages.BundleNotInstalled, getProject().getName()));
 			installed.acquire();
-			Collection<Bundle> bundles = new ArrayList<Bundle>();
-			bundles.add(osgiBundle);
-			FrameworkWiring frameworkWiring = context.getBundle(0).adapt(FrameworkWiring.class);
-			frameworkWiring.refreshBundles(bundles, new FrameworkListener[0]);
-			frameworkWiring.resolveBundles(bundles);
 			getContribution().setStage(Phase.INSTALLED);
-			return getOKStatus(osgiBundle);
+			refreshBundle(bundle, context);
+			return getOKStatus(bundle);
 		} catch (BundleException e) {
-			Bundle bundle = ResourceUtil.getBundle(getProject().getName(), context);
-			if (bundle != null) {
-				if (e.getType() == BundleException.DUPLICATE_BUNDLE_ERROR)
-					return getOKStatus(bundle);
-			} else {
-				e.printStackTrace();
-				return getWarningStatus();
-			}
+			if (e.getType() == BundleException.DUPLICATE_BUNDLE_ERROR)
+				return getOKStatus(existingBundle, bundle);
+			return getWarningStatus(bundle, e);
 		} finally {
 			getContext().removeBundleListener(listener);
 		}
-		if (osgiBundle != null)
-			return getOKStatus(osgiBundle);
+	}
+
+	protected Collection<Bundle> refreshBundle(Bundle bundle, BundleContext context) {
+		Collection<Bundle> bundles = new ArrayList<Bundle>();
+		if (bundle != null)
+			bundles.add(bundle);
+		frameworkWiring = context.getBundle(0).adapt(FrameworkWiring.class);
+		frameworkWiring.refreshBundles(bundles, new FrameworkListener[0]);
+		return bundles;
+	}
+
+	private IStatus getWarningStatus(Bundle bundle, BundleException e) {
+		if (bundle == null)
+			return ClassSupplierOSGi.createWarningStatus(NLS.bind(Messages.NoBundle, getProject().getName()), e);
 		else
-			return getWarningStatus();
+			return ClassSupplierOSGi.createWarningStatus(getStateStatusMessage(bundle), e);
 	}
 
-	private IStatus getWarningStatus() {
-		return ClassSupplierOSGi.createWarningStatus(NLS.bind("Bundle {0} not found.", getProject().getName()));
+	private IStatus getOKStatus(Bundle existingBundle, Bundle bundle) {
+		return ClassSupplierOSGi.createOKStatus(getDuplicateStatusMessage(existingBundle, bundle));
 	}
 
-	private IStatus getOKStatus(Bundle osgiBundle) {
-		return ClassSupplierOSGi
-				.createOKStatus(NLS.bind("Bundle {0}-{1} is {2}.",
-						new Object[] { osgiBundle.getSymbolicName(),
-								osgiBundle.getHeaders().get(Constants.BUNDLE_VERSION),
-								ClassSupplierOSGi.bundleStateAsString(osgiBundle.getState()).toLowerCase() }));
+	private IStatus getOKStatus(Bundle bundle) {
+		return ClassSupplierOSGi.createOKStatus(getStateStatusMessage(bundle));
+	}
+
+	protected String getStateStatusMessage(Bundle bundle) {
+		return NLS.bind(Messages.BundleState,
+				new Object[] { bundle.getSymbolicName(), bundle.getHeaders().get(Constants.BUNDLE_VERSION),
+						ClassSupplierOSGi.bundleStateAsString(bundle.getState()) });
+	}
+
+	private String getDuplicateStatusMessage(Bundle existingBundle, Bundle bundle) {
+		return NLS.bind(Messages.DuplicateBundle,
+				new Object[] { existingBundle.getSymbolicName(),
+						existingBundle.getHeaders().get(Constants.BUNDLE_VERSION),
+						ClassSupplierOSGi.bundleStateAsString(existingBundle.getState()), bundle.getSymbolicName(),
+						bundle.getHeaders().get(Constants.BUNDLE_VERSION),
+						ClassSupplierOSGi.bundleStateAsString(bundle.getState()) });
 	}
 
 	private Collection<Bundle> getExistingBundles() {
@@ -154,9 +171,8 @@ public class OSGiInstaller extends Installer {
 	}
 
 	@Override
-	public void checkStage() throws CoreException {
-		if (getContribution().getStage().getValue() < Phase.EXPORTED_VALUE)
-			throw new CoreException(ClassSupplierOSGi.createWarningStatus("Contribution is not exported."));
+	public Phase requiredStage() {
+		return Phase.EXPORTED;
 	}
 
 }

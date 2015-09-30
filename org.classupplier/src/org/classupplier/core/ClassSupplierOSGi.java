@@ -105,12 +105,20 @@ public class ClassSupplierOSGi extends Plugin {
 		return new Status(IStatus.OK, ClassSupplierOSGi.PLUGIN_ID, message);
 	}
 
+	public static IStatus createInfoStatus(String message) {
+		return new Status(IStatus.INFO, ClassSupplierOSGi.PLUGIN_ID, message);
+	}
+
 	public static IStatus createWarningStatus(String message) {
 		return new Status(IStatus.WARNING, ClassSupplierOSGi.PLUGIN_ID, message);
 	}
 
 	public static IStatus createWarningStatus(Throwable exception) {
 		return new Status(IStatus.WARNING, ClassSupplierOSGi.PLUGIN_ID, exception.getLocalizedMessage(), exception);
+	}
+
+	public static IStatus createWarningStatus(String message, Throwable exception) {
+		return new Status(IStatus.WARNING, ClassSupplierOSGi.PLUGIN_ID, message, exception);
 	}
 
 	public static IStatus createErrorStatus(String message) {

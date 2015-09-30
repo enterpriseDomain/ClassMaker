@@ -24,14 +24,13 @@ import org.osgi.framework.Version;
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
  * end-user-doc -->
- * 
  * @generated
  */
 public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSupplierFactory {
 	/**
-	 * Creates the default factory implementation. <!-- begin-user-doc --> <!--
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public static ClassSupplierFactory init() {
@@ -48,9 +47,9 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 	}
 
 	/**
-	 * Creates an instance of the factory. <!-- begin-user-doc --> <!--
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ClassSupplierFactoryImpl() {
@@ -59,7 +58,6 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -80,7 +78,6 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -103,7 +100,6 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -126,7 +122,6 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Contribution createContribution() {
@@ -136,7 +131,6 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public State createState() {
@@ -146,7 +140,6 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Workspace createWorkspace() {
@@ -156,7 +149,6 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Map.Entry<Version, State> createVersionToStateMapEntry() {
@@ -166,7 +158,6 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Phase createPhaseFromString(EDataType eDataType, String initialValue) {
@@ -179,7 +170,6 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String convertPhaseToString(EDataType eDataType, Object instanceValue) {
@@ -188,7 +178,6 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public IProgressMonitor createIProgressMonitorFromString(EDataType eDataType, String initialValue) {
@@ -197,7 +186,6 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String convertIProgressMonitorToString(EDataType eDataType, Object instanceValue) {
@@ -215,7 +203,6 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String convertVersionToString(EDataType eDataType, Object instanceValue) {
@@ -224,7 +211,6 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Semaphore createSemaphoreFromString(EDataType eDataType, String initialValue) {
@@ -233,7 +219,6 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String convertSemaphoreToString(EDataType eDataType, Object instanceValue) {
@@ -242,7 +227,6 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public CoreException createCoreExceptionFromString(EDataType eDataType, String initialValue) {
@@ -251,7 +235,6 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String convertCoreExceptionToString(EDataType eDataType, Object instanceValue) {
@@ -260,7 +243,6 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ClassSupplierPackage getClassSupplierPackage() {
@@ -269,7 +251,6 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @deprecated
 	 * @generated
 	 */

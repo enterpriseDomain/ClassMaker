@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.preferences.IPreferencesService;
+import org.eclipse.emf.ecore.EPackage;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 
@@ -102,6 +103,12 @@ public class ResourceUtil {
 		workspace.setDescription(d);
 	}
 
+	public static boolean ePackagesAreEqual(EPackage first, EPackage second) {
+		if (first == null || second == null)
+			return false;
+		return first.getNsURI().equals(second.getNsURI()) || first.getName().equals(second.getName());
+	}
+	
 	public static String formatQualifier(Date timestamp) {
 		if (timestamp == null)
 			return "qualifier";

@@ -10,6 +10,7 @@ import org.classupplier.ClassSupplierPackage;
 import org.classupplier.Contribution;
 import org.classupplier.Phase;
 import org.classupplier.State;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.common.notify.Notification;
@@ -91,10 +92,10 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getVersion()
-	 * @generated
+	 * @generated NOT
 	 * @ordered
 	 */
-	protected static final Version VERSION_EDEFAULT = null;
+	protected static final Version VERSION_EDEFAULT = Version.emptyVersion;
 	/**
 	 * The cached value of the '{@link #getVersion() <em>Version</em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -172,6 +173,10 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 		if (eIsSet(ClassSupplierPackage.CONTRIBUTION__STATE_HISTORY)
 				&& eIsSet(ClassSupplierPackage.CONTRIBUTION__VERSION) && getStateHistory().containsKey(getVersion()))
 			return getStateHistory().get(getVersion());
+		else if (eIsSet(ClassSupplierPackage.CONTRIBUTION__STATE_HISTORY)
+				&& !eIsSet(ClassSupplierPackage.CONTRIBUTION__VERSION)) {
+			return null;
+		}
 		return null;
 
 	}
@@ -250,7 +255,7 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 	 * @generated NOT
 	 */
 	public void checkout(Version version) {
-		if (getStateHistory().containsKey(version))
+		if (getStateHistory().containsKey(version) || version.equals(VERSION_EDEFAULT))
 			setVersion(version);
 		else
 			throw new IllegalStateException(NLS.bind("Version {0} has no state.", version));
@@ -394,13 +399,23 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 		newState.setVersion(org.osgi.framework.Version.parseVersion(newState.formatVersion()));
 		boolean first = getStateHistory().isEmpty();
 		getStateHistory().put(newState.getVersion(), newState);
-		if (first)
-			checkout(newState.getVersion());
-		else {
+		if (!first) {
 			newState.setName(getName());
 			newState.setDynamicEPackage(getDynamicEPackage());
 		}
+		checkout(newState.getVersion());
 		return newState;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public void delete(IProgressMonitor monitor) throws CoreException {
+		State state = getState();
+		checkout(VERSION_EDEFAULT);
+		state.delete(monitor);
 	}
 
 	@Override

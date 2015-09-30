@@ -14,6 +14,9 @@
       <eParameters name="version" eType="#//Version"/>
     </eOperations>
     <eOperations name="newState" eType="#//State"/>
+    <eOperations name="delete" eExceptions="#//CoreException">
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
@@ -36,6 +39,9 @@
     <eOperations name="fireJobsCompleted"/>
     <eOperations name="formatVersion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eOperations name="setProjectVersion" eExceptions="#//CoreException">
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
+    <eOperations name="delete" eExceptions="#//CoreException">
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -91,6 +97,10 @@
     </eOperations>
     <eOperations name="contains" eType="#//Phase">
       <eParameters name="blueprint" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+    </eOperations>
+    <eOperations name="delete" eExceptions="#//CoreException">
+      <eParameters name="object" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="contributions" upperBound="-1"
         eType="#//Contribution" containment="true"/>

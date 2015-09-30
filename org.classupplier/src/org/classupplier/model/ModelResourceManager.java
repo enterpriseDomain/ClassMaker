@@ -82,9 +82,8 @@ public class ModelResourceManager extends SupplementaryJob {
 	}
 
 	@Override
-	public void checkStage() throws CoreException {
-		if (getContribution().getStage().getValue() < Phase.DEFINED_VALUE)
-			throw new CoreException(ClassSupplierOSGi.createWarningStatus("Contribution is not defined."));
+	public Phase requiredStage() {
+		return Phase.DEFINED;
 	}
 
 }

@@ -1,5 +1,6 @@
 package org.classupplier.core;
 
+import org.classupplier.Phase;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -26,8 +27,8 @@ public class DelegatingJob extends SupplementaryJob {
 	}
 
 	@Override
-	public void checkStage() throws CoreException {
-
+	public Phase requiredStage() {
+		return Phase.DEFINED;
 	}
 
 }

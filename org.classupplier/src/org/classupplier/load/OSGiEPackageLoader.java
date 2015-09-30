@@ -2,6 +2,7 @@ package org.classupplier.load;
 
 import java.util.concurrent.Semaphore;
 
+import org.classupplier.Messages;
 import org.classupplier.Phase;
 import org.classupplier.State;
 import org.classupplier.core.ClassSupplierOSGi;
@@ -45,13 +46,13 @@ public class OSGiEPackageLoader extends SupplementaryJob {
 	};
 
 	public OSGiEPackageLoader() {
-		super("Load");
+		super("Class Load"); //$NON-NLS-1$
 	}
 
 	public IStatus load(IProgressMonitor monitor) throws CoreException {
 		State state = getContribution();
 		if (state.getStage() == Phase.DEFINED)
-			return ClassSupplierOSGi.createErrorStatus("Model not specified.");
+			return ClassSupplierOSGi.createErrorStatus(Messages.ModelNotSpecified);
 		try {
 			Bundle osgiBundle = ResourceUtil.getBundle(getProject().getName(), getContext());
 			if (osgiBundle != null) {
@@ -71,7 +72,7 @@ public class OSGiEPackageLoader extends SupplementaryJob {
 				}
 			} else
 				return ClassSupplierOSGi.createErrorStatus(
-						NLS.bind("Bundle {0} not found in plug-in registry.", getProject().getName()));
+						NLS.bind(Messages.BundleNotFound, getProject().getName()));
 
 			if (monitor.isCanceled()) {
 				return Status.CANCEL_STATUS;
@@ -94,7 +95,7 @@ public class OSGiEPackageLoader extends SupplementaryJob {
 
 	private IStatus getOKStatus(Bundle osgiBundle) {
 		return ClassSupplierOSGi
-				.createOKStatus(NLS.bind("Bundle {0}-{1} with EPackage {2} has been loaded successfully.",
+				.createOKStatus(NLS.bind(Messages.EPackageClassLoadComplete,
 						new Object[] { osgiBundle.getSymbolicName(),
 								osgiBundle.getHeaders().get(Constants.BUNDLE_VERSION), ePackage.getNsURI() }));
 	}
@@ -114,8 +115,8 @@ public class OSGiEPackageLoader extends SupplementaryJob {
 	}
 
 	private synchronized void doLoad(State state, Bundle osgiBundle) {
-		String packageClassName = state.getDynamicEPackage().getName() + "." + state.getDynamicEPackage().getNsPrefix()
-				+ "Package";
+		String packageClassName = state.getDynamicEPackage().getName() + "." + state.getDynamicEPackage().getNsPrefix() //$NON-NLS-1$
+				+ "Package"; //$NON-NLS-1$
 		Class<?> packageClass = null;
 		try {
 			packageClass = osgiBundle.loadClass(packageClassName);
@@ -123,7 +124,7 @@ public class OSGiEPackageLoader extends SupplementaryJob {
 			setException(e);
 		}
 		try {
-			ePackage = (EPackage) packageClass.getField("eINSTANCE").get(packageClass);
+			ePackage = (EPackage) packageClass.getField("eINSTANCE").get(packageClass); //$NON-NLS-1$
 		} catch (Exception e) {
 			setException(e);
 		}
@@ -139,15 +140,13 @@ public class OSGiEPackageLoader extends SupplementaryJob {
 		return load(monitor);
 	}
 
-	@Override
-	public void checkStage() throws CoreException {
-		if (getContribution().getStage().getValue() < Phase.INSTALLED_VALUE)
-			throw new CoreException(ClassSupplierOSGi
-					.createWarningStatus(NLS.bind("Contribution {0} is not installed.", getContribution().getName())));
-	}
-
 	public void setException(Throwable exception) {
 		this.exception = exception;
+	}
+
+	@Override
+	public Phase requiredStage() {
+		return Phase.INSTALLED;
 	}
 
 }

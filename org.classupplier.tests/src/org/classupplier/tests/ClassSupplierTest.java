@@ -9,6 +9,7 @@ import static org.junit.Assert.fail;
 import org.classupplier.ClassSupplier;
 import org.classupplier.Contribution;
 import org.classupplier.State;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
@@ -243,8 +244,6 @@ public class ClassSupplierTest extends AbstractTest {
 		try {
 			State state = c.newState();
 			state.setDynamicEPackage(p);
-			Version id = state.getVersion();
-			c.checkout(id);
 			IFuture<? extends EPackage> r = c.apply(getProgressMonitor());
 			while (!r.isDone()) {
 				Thread.yield();
@@ -272,8 +271,6 @@ public class ClassSupplierTest extends AbstractTest {
 		try {
 			State state = c.newState();
 			state.setDynamicEPackage(p);
-			Version id = state.getVersion();
-			c.checkout(id);
 			IFuture<? extends EPackage> r = c.apply(getProgressMonitor());
 			while (!r.isDone()) {
 				Thread.yield();
@@ -288,8 +285,70 @@ public class ClassSupplierTest extends AbstractTest {
 
 	}
 
-	private void assertObjectClass(String className, EPackage resultPackage) {
-		EObject result = resultPackage.getEFactoryInstance().create((EClass) resultPackage.getEClassifier(className));
-		assertEquals(className, result.getClass().getSimpleName());
+	@Test
+	public void downgrade() {
+		setPackageName("pack");
+		setClassName("C");
+		setAttrName("x");
+		setAttrType(EcorePackage.Literals.EJAVA_OBJECT);
+		Contribution contribution = testEPackage();
+		Version v0 = contribution.getVersion();
+
+		contribution.newState();
+		EPackage p = contribution.getDynamicEPackage(); // contains copy of
+														// model EPackage from
+														// previous state
+		EClass clazz = (EClass) p.getEClassifier(getClassName());
+		clazz.getEStructuralFeatures().remove(clazz.getEStructuralFeature(getAttrName()));
+		p = updateEPackage(p, "1");
+		contribution.setDynamicEPackage(p);
+
+		test(contribution);
+		EPackage g = contribution.getGeneratedEPackage();
+		EClass gClazz = (EClass) g.getEClassifier(getClassName());
+		EObject o = g.getEFactoryInstance().create(gClazz);
+		assertNull(gClazz.getEStructuralFeature(getAttrName()));
+		assertEquals(getClassName(), o.getClass().getSimpleName());
+
+		contribution.checkout(v0);
+		contribution = testEPackage();
+		g = contribution.getGeneratedEPackage();
+		gClazz = (EClass) g.getEClassifier(getClassName());
+		o = g.getEFactoryInstance().create(gClazz);
+		EAttribute a = (EAttribute) gClazz.getEStructuralFeature(getAttrName());
+		assertNotNull(a);
+		assertEquals(getAttrType(), a.getEType());
+		assertEquals(getClassName(), o.getClass().getSimpleName());
 	}
+
+	@Test
+	public void recreate() {
+		setPackageName("p");
+		setClassName("C");
+		setAttrName("c");
+		setAttrType(EcorePackage.Literals.EJAVA_OBJECT);
+		Contribution c = testEPackage();
+		try {
+			c.delete(getProgressMonitor());
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+		testEPackage();
+		// TODO update
+	}
+
+	@Test
+	public void oldVersion() {
+		setPackageName("same");
+		setClassName("C");
+		setAttrName("c");
+		setAttrType(EcorePackage.Literals.EJAVA_OBJECT);
+		Contribution c = testEPackage();
+		State oldState = c.getState();
+		c.newState();
+		c.checkout(oldState.getVersion());
+		test(c);
+		test(c);
+	}
+
 }

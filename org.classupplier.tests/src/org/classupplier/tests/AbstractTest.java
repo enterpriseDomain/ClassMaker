@@ -1,5 +1,6 @@
 package org.classupplier.tests;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.util.concurrent.CountDownLatch;
@@ -10,16 +11,31 @@ import org.classupplier.Contribution;
 import org.classupplier.Phase;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.equinox.concurrent.future.IFuture;
 import org.junit.Before;
 
 public abstract class AbstractTest {
 
 	protected static ClassSupplier service;
-
+	
 	private static CountDownLatch latch = new CountDownLatch(1);
 
+	protected String packageName;
+
+	protected String className = "C";
+
+	protected String attrName = "c";
+
+	protected EDataType attrType = EcorePackage.Literals.EJAVA_OBJECT;
+	
 	public void setReference(ClassSupplier dependency) {
 		service = dependency;
 		latch.countDown();
@@ -51,6 +67,89 @@ public abstract class AbstractTest {
 	protected EPackage updateEPackage(EPackage ePackage, String version) {
 		ePackage.setNsURI("http://" + ePackage.getName() + "/" + version);
 		return ePackage;
+	}
+	
+	protected EClass createEClass(String name) {
+		EcoreFactory ecoreFactory = EcoreFactory.eINSTANCE;
+		EClass eClass = ecoreFactory.createEClass();
+		eClass.setName(name);
+		return eClass;
+	}
+	
+	protected EAttribute createEAttribute(String name, EDataType type) {
+		EcoreFactory ecoreFactory = EcoreFactory.eINSTANCE;
+		EAttribute eAttribute= ecoreFactory.createEAttribute();
+		eAttribute.setName(name);
+		eAttribute.setEType(type);
+		return eAttribute;
+	}
+	
+	protected Contribution testEPackage() {
+		EPackage p = createEPackage(getPackageName(), "0");
+		EClass c = createEClass(getClassName());
+		c.getEStructuralFeatures().add(createEAttribute("a", EcorePackage.Literals.EBOOLEAN));
+		c.getEStructuralFeatures().add(createEAttribute(getAttrName(), getAttrType()));
+		p.getEClassifiers().add(c);
+		Contribution n = test(p);
+		EPackage e = n.getGeneratedEPackage();
+		EClass s = (EClass) e.getEClassifier(c.getName());
+		EStructuralFeature a = s.getEStructuralFeatures().get(0);
+		EObject o = e.getEFactoryInstance().create(s);
+		o.eSet(a, true);
+		assertEquals(true, o.eGet(a));
+		assertEquals(c.getName(), o.getClass().getSimpleName());
+		assertEquals(p.getName(), o.getClass().getPackage().getName());
+		return n;
+	}
+	
+	protected Contribution test(EPackage ePackage) {
+		Contribution n = service.getWorkspace().createContribution(ePackage);
+		return test(n);
+	}
+
+	protected Contribution test(Contribution contribution) {
+		IFuture<? extends EPackage> r = contribution.apply(getProgressMonitor());
+		while (!r.isDone()) {
+			Thread.yield();
+		}
+		return contribution;
+	}
+
+	protected void assertObjectClass(String className, EPackage resultPackage) {
+		EObject result = resultPackage.getEFactoryInstance().create((EClass) resultPackage.getEClassifier(className));
+		assertEquals(className, result.getClass().getSimpleName());
+	}
+
+	protected String getPackageName() {
+		return packageName;
+	}
+
+	protected void setPackageName(String packageName) {
+		this.packageName = packageName;
+	}
+
+	protected String getClassName() {
+		return className;
+	}
+
+	protected void setClassName(String className) {
+		this.className = className;
+	}
+
+	protected String getAttrName() {
+		return attrName;
+	}
+
+	protected void setAttrName(String attrName) {
+		this.attrName = attrName;
+	}
+
+	protected EDataType getAttrType() {
+		return attrType;
+	}
+
+	protected void setAttrType(EDataType attrType) {
+		this.attrType = attrType;
 	}
 
 	protected IProgressMonitor getProgressMonitor() {

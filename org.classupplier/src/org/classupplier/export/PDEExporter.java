@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.classupplier.Phase;
 import org.classupplier.State;
-import org.classupplier.core.ClassSupplierOSGi;
 import org.classupplier.core.DelegatingJob;
 import org.classupplier.util.ResourceUtil;
 import org.eclipse.core.resources.IProjectDescription;
@@ -62,8 +61,7 @@ public class PDEExporter extends AbstractExporter {
 	}
 
 	@Override
-	public void checkStage() throws CoreException {
-		if (getContribution().getStage().getValue() < Phase.GENERATED_VALUE)
-			throw new CoreException(ClassSupplierOSGi.createWarningStatus("Contribution is not generated."));
+	public Phase requiredStage() {
+		return Phase.GENERATED;
 	}
 }

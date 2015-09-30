@@ -1,6 +1,8 @@
 package org.classupplier.core;
 
+import org.classupplier.Phase;
 import org.classupplier.State;
+import org.classupplier.Messages;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.resources.WorkspaceJob;
@@ -14,6 +16,7 @@ import org.eclipse.core.runtime.jobs.IJobChangeListener;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.core.runtime.jobs.JobGroup;
+import org.eclipse.osgi.util.NLS;
 
 public abstract class SupplementaryJob extends WorkspaceJob {
 
@@ -37,7 +40,7 @@ public abstract class SupplementaryJob extends WorkspaceJob {
 		@Override
 		public void done(IJobChangeEvent event) {
 			Status result = new Status(event.getResult().getSeverity(), ClassSupplierOSGi.PLUGIN_ID,
-					event.getJob().getName() + ": " + event.getResult().getMessage());
+					event.getJob().getName() + ": " + event.getResult().getMessage()); //$NON-NLS-1$
 			ClassSupplierOSGi.getInstance().getLog().log(result);
 			if (getNextJob() == null) {
 				return;
@@ -58,7 +61,7 @@ public abstract class SupplementaryJob extends WorkspaceJob {
 		setUser(true);
 		setPriority(Job.SHORT);
 		setRule(ClassSupplierOSGi.getClassSupplier().getWorkspace());
-		setJobGroup(new JobGroup("Class Supply", 0, 1));
+		setJobGroup(new JobGroup("Class Supply", 0, 1)); //$NON-NLS-1$
 	}
 
 	@Override
@@ -68,8 +71,6 @@ public abstract class SupplementaryJob extends WorkspaceJob {
 	}
 
 	public abstract IStatus work(IProgressMonitor monitor) throws CoreException;
-
-	public abstract void checkStage() throws CoreException;
 
 	@Override
 	public boolean belongsTo(Object family) {
@@ -119,4 +120,12 @@ public abstract class SupplementaryJob extends WorkspaceJob {
 		return ClassSupplierOSGi.getClassSupplier().getWorkspace().getContribution(getProject().getName()).getState();
 	}
 
+	public abstract Phase requiredStage();
+
+	public void checkStage() throws CoreException {
+		if (getContribution().getStage().getValue() < requiredStage().getValue())
+			throw new CoreException(ClassSupplierOSGi
+					.createWarningStatus(NLS.bind(Messages.NotEnoughContributionStage, requiredStage().getLiteral())));
+	}
+	
 }
