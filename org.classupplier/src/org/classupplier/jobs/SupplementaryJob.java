@@ -1,8 +1,9 @@
-package org.classupplier.core;
+package org.classupplier.jobs;
 
+import org.classupplier.Messages;
 import org.classupplier.Phase;
 import org.classupplier.State;
-import org.classupplier.Messages;
+import org.classupplier.core.ClassSupplierOSGi;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.resources.WorkspaceJob;

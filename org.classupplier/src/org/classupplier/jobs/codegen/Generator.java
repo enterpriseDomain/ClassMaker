@@ -1,4 +1,4 @@
-package org.classupplier.codegen;
+package org.classupplier.jobs.codegen;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;

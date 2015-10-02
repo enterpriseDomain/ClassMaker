@@ -22,8 +22,6 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.preferences.IPreferencesService;
 import org.eclipse.emf.ecore.EPackage;
-import org.osgi.framework.Bundle;
-import org.osgi.framework.BundleContext;
 
 public class ResourceUtil {
 
@@ -159,15 +157,6 @@ public class ResourceUtil {
 	// // results.remove(manager.findModel(manager.getSystemBundleId()));
 	// return results.toArray(new IPluginModelBase[results.size()]);
 	// }
-
-	public static Bundle getBundle(String symbolicName, BundleContext context) {
-		if (context == null)
-			return null;
-		for (Bundle bundle : context.getBundles())
-			if (bundle.getSymbolicName().equals(symbolicName))
-				return bundle;
-		return null;
-	}
 
 	public static ICommand getBuildSpec(IProjectDescription description, String builderId) {
 		for (ICommand build : description.getBuildSpec())

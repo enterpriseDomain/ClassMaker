@@ -1,4 +1,4 @@
-package org.classupplier.model;
+package org.classupplier.jobs.model;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -6,7 +6,7 @@ import java.util.Collections;
 import org.classupplier.Phase;
 import org.classupplier.State;
 import org.classupplier.core.ClassSupplierOSGi;
-import org.classupplier.core.SupplementaryJob;
+import org.classupplier.jobs.SupplementaryJob;
 import org.classupplier.util.ResourceUtil;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IWorkspaceRoot;

@@ -1,4 +1,4 @@
-package org.classupplier.load;
+package org.classupplier.jobs.load;
 
 import java.util.concurrent.Semaphore;
 
@@ -6,8 +6,7 @@ import org.classupplier.Messages;
 import org.classupplier.Phase;
 import org.classupplier.State;
 import org.classupplier.core.ClassSupplierOSGi;
-import org.classupplier.core.SupplementaryJob;
-import org.classupplier.util.ResourceUtil;
+import org.classupplier.jobs.ContainerJob;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -15,15 +14,13 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.osgi.util.NLS;
 import org.osgi.framework.Bundle;
-import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleEvent;
 import org.osgi.framework.BundleException;
 import org.osgi.framework.BundleListener;
 import org.osgi.framework.Constants;
-import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.startlevel.BundleStartLevel;
 
-public class OSGiEPackageLoader extends SupplementaryJob {
+public class OSGiEPackageLoader extends ContainerJob {
 
 	private EPackage ePackage;
 
@@ -50,16 +47,16 @@ public class OSGiEPackageLoader extends SupplementaryJob {
 	}
 
 	public IStatus load(IProgressMonitor monitor) throws CoreException {
-		State state = getContribution();
-		if (state.getStage() == Phase.DEFINED)
+		State contribution = getContribution();
+		if (contribution.getStage() == Phase.DEFINED)
 			return ClassSupplierOSGi.createErrorStatus(Messages.ModelNotSpecified);
 		try {
-			Bundle osgiBundle = ResourceUtil.getBundle(getProject().getName(), getContext());
+			Bundle osgiBundle = getBundle(contribution.getVersion());
 			if (osgiBundle != null) {
 				if (osgiBundle.getHeaders().get(Constants.FRAGMENT_HOST) == null) {
 					if (osgiBundle.getState() == Bundle.STARTING || osgiBundle.getState() == Bundle.ACTIVE) {
 						getContext().removeBundleListener(listener);
-						doLoad(state, osgiBundle);
+						doLoad(contribution, osgiBundle);
 					} else {
 						getContext().addBundleListener(listener);
 						int options = getOptions(4, false, osgiBundle);
@@ -108,10 +105,6 @@ public class OSGiEPackageLoader extends SupplementaryJob {
 		options |= bundle.getHeaders(Constants.BUNDLE_ACTIVATIONPOLICY).equals(Constants.ACTIVATION_LAZY)
 				? Bundle.START_ACTIVATION_POLICY : 0;
 		return options;
-	}
-
-	private BundleContext getContext() {
-		return FrameworkUtil.getBundle(this.getClass()).getBundleContext();
 	}
 
 	private synchronized void doLoad(State state, Bundle osgiBundle) {

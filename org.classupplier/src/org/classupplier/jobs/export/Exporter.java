@@ -1,4 +1,4 @@
-package org.classupplier.export;
+package org.classupplier.jobs.export;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;

@@ -1,13 +1,13 @@
-package org.classupplier.export;
+package org.classupplier.jobs.export;
 
-import org.classupplier.core.SupplementaryJob;
+import org.classupplier.jobs.ContainerJob;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.osgi.framework.Version;
 
-public abstract class AbstractExporter extends SupplementaryJob implements Exporter {
+public abstract class AbstractExporter extends ContainerJob implements Exporter {
 
 	public AbstractExporter() {
 		super("Plug-in Export");

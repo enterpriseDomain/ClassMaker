@@ -1,4 +1,4 @@
-package org.classupplier.core;
+package org.classupplier.jobs;
 
 import org.classupplier.Phase;
 import org.eclipse.core.runtime.CoreException;

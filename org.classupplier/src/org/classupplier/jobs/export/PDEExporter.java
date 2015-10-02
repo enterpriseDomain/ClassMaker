@@ -1,11 +1,11 @@
-package org.classupplier.export;
+package org.classupplier.jobs.export;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.classupplier.Phase;
 import org.classupplier.State;
-import org.classupplier.core.DelegatingJob;
+import org.classupplier.jobs.DelegatingJob;
 import org.classupplier.util.ResourceUtil;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.runtime.CoreException;
@@ -32,17 +32,16 @@ public class PDEExporter extends AbstractExporter {
 			getProject().setDescription(description, monitor);
 		}
 
+		State contribution = getContribution();
+		Version version = contribution.getVersion();
 		final FeatureExportInfo info = new FeatureExportInfo();
 		info.destinationDirectory = getExportDestination().toString();
 		info.exportSource = false;
 		info.toDirectory = true;
 		info.useJarFormat = true;
 		info.exportMetadata = true;
-		State state = getContribution();
-		Version version = state.getVersion();
 		if (!version.equals(Version.emptyVersion))
 			info.qualifier = (String) version.getQualifier();
-
 		PluginModelManager modelManager = PDECore.getDefault().getModelManager();
 		modelManager.bundleRootChanged(getProject());
 		List<IPluginModelBase> models = new ArrayList<IPluginModelBase>();
@@ -56,7 +55,7 @@ public class PDEExporter extends AbstractExporter {
 		DelegatingJob delegate = new DelegatingJob(op);
 		delegate.setNextJob(getNextJob());
 		setNextJob(delegate);
-		getContribution().setStage(Phase.EXPORTED);
+		contribution.setStage(Phase.EXPORTED);
 		return Status.OK_STATUS;
 	}
 

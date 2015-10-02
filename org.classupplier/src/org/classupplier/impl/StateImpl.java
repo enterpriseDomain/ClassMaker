@@ -10,7 +10,7 @@ import org.classupplier.ClassSupplierPackage;
 import org.classupplier.Phase;
 import org.classupplier.State;
 import org.classupplier.core.ClassSupplierOSGi;
-import org.classupplier.core.SupplementaryJob;
+import org.classupplier.jobs.SupplementaryJob;
 import org.classupplier.util.ResourceUtil;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;

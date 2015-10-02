@@ -1,8 +1,7 @@
-package org.classupplier.install;
+package org.classupplier.jobs.install;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.concurrent.Semaphore;
 
 import org.classupplier.Messages;
@@ -63,22 +62,21 @@ public class OSGiInstaller extends Installer {
 
 	@Override
 	public IStatus install(IProgressMonitor monitor) {
-		if (getContribution().getStage() == Phase.DEFINED)
+		State contribution = getContribution();
+		if (contribution.getStage() == Phase.DEFINED)
 			return ClassSupplierOSGi.createErrorStatus(Messages.ModelNotSpecified);
-		IPath jarPath = ResourceUtil.getTargetResourcePath(getProject(), getContribution());
+		IPath jarPath = ResourceUtil.getTargetResourcePath(getProject(), contribution);
 		BundleContext context = getContext();
 		try {
-			for (Bundle bundle : getExistingBundles()) {
-				if (getContribution().getProjectName().equals(bundle.getSymbolicName())) {
-					int compare = getContribution().getVersion()
-							.compareTo(Version.parseVersion(bundle.getHeaders().get(Constants.BUNDLE_VERSION)));
-					if (compare == 0) {
-						getContribution().setStage(Phase.INSTALLED);
-						refreshBundle(bundle, context);
-						return getOKStatus(bundle);
-					} else
-						return installBundle(bundle, jarPath, context);
-				}
+			for (Bundle exisingBundle : getBundles()) {
+				int compare = contribution.getVersion()
+						.compareTo(Version.parseVersion(exisingBundle.getHeaders().get(Constants.BUNDLE_VERSION)));
+				if (compare == 0) {
+					contribution.setStage(Phase.INSTALLED);
+					refreshBundle(exisingBundle, context);
+					return getOKStatus(exisingBundle);
+				} else
+					return installBundle(exisingBundle, jarPath, context);
 			}
 			if (monitor.isCanceled())
 				return Status.CANCEL_STATUS;
@@ -158,16 +156,6 @@ public class OSGiInstaller extends Installer {
 						ClassSupplierOSGi.bundleStateAsString(existingBundle.getState()), bundle.getSymbolicName(),
 						bundle.getHeaders().get(Constants.BUNDLE_VERSION),
 						ClassSupplierOSGi.bundleStateAsString(bundle.getState()) });
-	}
-
-	private Collection<Bundle> getExistingBundles() {
-		State state = getContribution();
-		BundleContext context = getContext();
-		List<Bundle> results = new ArrayList<Bundle>();
-		for (Bundle bundle : context.getBundles())
-			if (bundle.getSymbolicName().equals(state.getProjectName()))
-				results.add(bundle);
-		return results;
 	}
 
 	@Override

@@ -4,14 +4,14 @@ import java.util.Map;
 
 import org.classupplier.Phase;
 import org.classupplier.State;
-import org.classupplier.codegen.EcoreGenerator;
-import org.classupplier.codegen.Generator;
-import org.classupplier.export.Exporter;
-import org.classupplier.export.PDEExporter;
-import org.classupplier.install.Installer;
-import org.classupplier.install.OSGiInstaller;
-import org.classupplier.load.OSGiEPackageLoader;
-import org.classupplier.model.ModelResourceManager;
+import org.classupplier.jobs.SupplementaryJob;
+import org.classupplier.jobs.codegen.EcoreGenerator;
+import org.classupplier.jobs.codegen.Generator;
+import org.classupplier.jobs.export.Exporter;
+import org.classupplier.jobs.export.PDEExporter;
+import org.classupplier.jobs.install.OSGiInstaller;
+import org.classupplier.jobs.load.OSGiEPackageLoader;
+import org.classupplier.jobs.model.ModelResourceManager;
 import org.classupplier.util.ResourceUtil;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
@@ -57,7 +57,7 @@ public class ProjectBuilder extends IncrementalProjectBuilder {
 		resourceJob.setProgressGroup(monitor, 1);
 		resourceJob.setNextJob(generatorJob);
 
-		Installer installJob = new OSGiInstaller();
+		SupplementaryJob installJob = new OSGiInstaller();
 		exporterJob.setNextJob(installJob);
 		SupplementaryJob loadJob = new OSGiEPackageLoader();
 		loadJob.addListener();

@@ -291,7 +291,7 @@ public class ClassSupplierTest extends AbstractTest {
 		setClassName("C");
 		setAttrName("x");
 		setAttrType(EcorePackage.Literals.EJAVA_OBJECT);
-		Contribution contribution = testEPackage();
+		Contribution contribution = createAndTestEPackage();
 		Version v0 = contribution.getVersion();
 
 		contribution.newState();
@@ -303,7 +303,7 @@ public class ClassSupplierTest extends AbstractTest {
 		p = updateEPackage(p, "1");
 		contribution.setDynamicEPackage(p);
 
-		test(contribution);
+		applyAndTest(contribution);
 		EPackage g = contribution.getGeneratedEPackage();
 		EClass gClazz = (EClass) g.getEClassifier(getClassName());
 		EObject o = g.getEFactoryInstance().create(gClazz);
@@ -311,7 +311,7 @@ public class ClassSupplierTest extends AbstractTest {
 		assertEquals(getClassName(), o.getClass().getSimpleName());
 
 		contribution.checkout(v0);
-		contribution = testEPackage();
+		contribution =createAndTestEPackage();
 		g = contribution.getGeneratedEPackage();
 		gClazz = (EClass) g.getEClassifier(getClassName());
 		o = g.getEFactoryInstance().create(gClazz);
@@ -327,13 +327,13 @@ public class ClassSupplierTest extends AbstractTest {
 		setClassName("C");
 		setAttrName("c");
 		setAttrType(EcorePackage.Literals.EJAVA_OBJECT);
-		Contribution c = testEPackage();
+		Contribution c = createAndTestEPackage();
 		try {
 			c.delete(getProgressMonitor());
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
-		testEPackage();
+		createAndTestEPackage();
 		// TODO update
 	}
 
@@ -343,12 +343,32 @@ public class ClassSupplierTest extends AbstractTest {
 		setClassName("C");
 		setAttrName("c");
 		setAttrType(EcorePackage.Literals.EJAVA_OBJECT);
-		Contribution c = testEPackage();
+		Contribution c = createAndTestEPackage();
 		State oldState = c.getState();
 		c.newState();
 		c.checkout(oldState.getVersion());
-		test(c);
-		test(c);
+		applyAndTest(c);
+		applyAndTest(c);
 	}
 
+	@Test
+	public void rename() {
+		setPackageName("one");
+		setClassName("T");
+		setAttrName("t");
+		setAttrType(EcorePackage.Literals.EJAVA_OBJECT);
+		Contribution c = createAndTestEPackage();
+		c.newState();
+		EPackage p = c.getDynamicEPackage();
+		setPackageName("another");
+		updateEPackage(p, "1");
+		p.setName("another");
+		p.setNsPrefix("another");
+		EClass cl = (EClass) p.getEClassifier(getClassName());
+		setClassName("P");
+		cl.setName(getClassName());
+		cl.getEStructuralFeature(getAttrName());
+		c.setDynamicEPackage(p);
+		applyAndTest(c);
+	}
 }

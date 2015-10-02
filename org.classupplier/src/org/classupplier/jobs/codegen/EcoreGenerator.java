@@ -1,12 +1,13 @@
-package org.classupplier.codegen;
+package org.classupplier.jobs.codegen;
 
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 
 import org.classupplier.Phase;
 import org.classupplier.core.ClassSupplierOSGi;
-import org.classupplier.core.SupplementaryJob;
+import org.classupplier.jobs.SupplementaryJob;
 import org.classupplier.util.ResourceUtil;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -33,7 +34,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.osgi.util.NLS;
 
-public class EcoreGenerator extends SupplementaryJob implements org.classupplier.codegen.Generator {
+public class EcoreGenerator extends SupplementaryJob implements org.classupplier.jobs.codegen.Generator {
 
 	public EcoreGenerator() {
 		super("Generate Code");
@@ -134,15 +135,28 @@ public class EcoreGenerator extends SupplementaryJob implements org.classupplier
 				if (eObject instanceof EPackage) {
 					ePackage = (EPackage) eObject;
 					allEPackages.add(ePackage);
-					if (ePackage.getNsURI().equals(getContribution().getDynamicEPackage().getNsURI()))
+					if (ResourceUtil.ePackagesAreEqual(ePackage, getContribution().getDynamicEPackage()))
 						modelEPackage = ePackage;
 				}
+			}
+			if (modelEPackage == null && !allEPackages.isEmpty()) {
+				EList<EPackage> choise = ECollections.newBasicEList(allEPackages);
+				choise.sort(new Comparator<EPackage>() {
+
+					@Override
+					public int compare(EPackage o1, EPackage o2) {
+						return o1.getNsURI().compareToIgnoreCase(o2.getNsURI())
+								+ o2.getName().compareToIgnoreCase(o2.getName());
+					}
+
+				});
+				modelEPackage = choise.get(choise.size() - 1);
 			}
 
 			URI genModelURI = URI.createFileURI(root.getRawLocation().append(getGenModelPath()).toString());
 			resource = getResourceSet().getResource(genModelURI, true);
 			GenModel genModel = (GenModel) resource.getContents().get(0);
-			setupGenModel(computeProjectPath(), modelEPackage, genModel, allEPackages);
+			setupGenModel(computeProjectPath(), genModel, modelEPackage, allEPackages);
 			try {
 				resource.save(Collections.EMPTY_MAP);
 			} catch (IOException e) {
@@ -213,8 +227,8 @@ public class EcoreGenerator extends SupplementaryJob implements org.classupplier
 		return path.removeFileExtension().addFileExtension(GENMODEL_EXT);
 	}
 
-	protected void setupGenModel(IPath projectPath, EPackage modelEPackage,
-			org.eclipse.emf.codegen.ecore.genmodel.GenModel genModel, Collection<EPackage> allEPackages) {
+	protected void setupGenModel(IPath projectPath, org.eclipse.emf.codegen.ecore.genmodel.GenModel genModel,
+			EPackage modelEPackage, Collection<EPackage> allEPackages) {
 		for (EPackage ePackage : allEPackages) {
 			GenPackage genPackage = genModel.findGenPackage(ePackage);
 			if (genPackage != null)
