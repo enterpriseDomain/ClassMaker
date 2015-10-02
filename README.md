@@ -3,7 +3,7 @@ ClassSupplier
 
 ClassSupplier is an Eclipse plug-in allowing to make code programmatically.  
 
-It generates source code from provided model, builds, exports, and installs in runtime the entire plug-in, and then loads it's classes, that are reflectively accessible through modeled API.  
+It generates source code from the provided model, builds, exports, and installs it in runtime as entire plug-in, and then loads classes, that are reflectively accessible through modeled API.  
 
 
 Example:  
