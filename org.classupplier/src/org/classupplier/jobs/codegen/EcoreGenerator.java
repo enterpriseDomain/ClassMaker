@@ -8,7 +8,7 @@ import java.util.Comparator;
 import org.classupplier.Messages;
 import org.classupplier.Phase;
 import org.classupplier.core.ClassSupplierOSGi;
-import org.classupplier.jobs.SupplementaryJob;
+import org.classupplier.jobs.ClassSupplierJob;
 import org.classupplier.util.ResourceUtil;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -32,10 +32,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.osgi.util.NLS;
 
-public class EcoreGenerator extends SupplementaryJob implements org.classupplier.jobs.codegen.Generator {
+public class EcoreGenerator extends ClassSupplierJob implements org.classupplier.jobs.codegen.Generator {
 
 	public EcoreGenerator() {
 		super(Messages.CodeGeneratorJobName);
@@ -53,9 +52,7 @@ public class EcoreGenerator extends SupplementaryJob implements org.classupplier
 
 	private CodeGenerationJob codeGeneration = new CodeGenerationJob();
 
-	protected ResourceSet resourceSet;
-
-	protected abstract class GeneratorJob extends SupplementaryJob {
+	protected abstract class GeneratorJob extends ClassSupplierJob {
 
 		private org.eclipse.emf.codegen.ecore.Generator generator;
 		private IPath modelPath;
@@ -190,17 +187,20 @@ public class EcoreGenerator extends SupplementaryJob implements org.classupplier
 		IPath genModelPath = getGenModelResourcePath(modelPath);
 		final org.eclipse.emf.codegen.ecore.Generator generator = new Generator();
 
+		codeGeneration.setResourceSet(getResourceSet());
 		codeGeneration.setProject(getProject());
 		codeGeneration.setGenerator(generator);
 		codeGeneration.setGenModelPath(genModelPath);
 		codeGeneration.setNextJob(getNextJob());
 		setNextJob(null);
 
+		genModelSetup.setResourceSet(getResourceSet());
 		genModelSetup.setProject(getProject());
 		genModelSetup.setModelPath(modelPath);
 		genModelSetup.setGenModelPath(genModelPath);
 		genModelSetup.setNextJob(codeGeneration);
 
+		genModelGeneration.setResourceSet(getResourceSet());
 		genModelGeneration.setProject(getProject());
 		genModelGeneration.setGenerator(generator);
 		genModelGeneration.setModelPath(modelPath);
@@ -246,15 +246,6 @@ public class EcoreGenerator extends SupplementaryJob implements org.classupplier
 		genModel.setSuppressInterfaces(true);
 		for (GenPackage genPackage : genModel.getGenPackages())
 			genPackage.setPrefix(CodeGenUtil.capName(genPackage.getPrefix(), genModel.getLocale()));
-	}
-
-	@Override
-	public void setResourceSet(ResourceSet resourceSet) {
-		this.resourceSet = resourceSet;
-	}
-
-	public ResourceSet getResourceSet() {
-		return resourceSet;
 	}
 
 	@Override

@@ -6,7 +6,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.jobs.Job;
 
-public class DelegatingJob extends SupplementaryJob {
+public class DelegatingJob extends ClassSupplierJob {
 
 	private Job delegate;
 

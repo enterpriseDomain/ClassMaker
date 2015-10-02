@@ -9,7 +9,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.Version;
 
-public abstract class ContainerJob extends SupplementaryJob {
+public abstract class ContainerJob extends ClassSupplierJob {
 
 	public ContainerJob(String name) {
 		super(name);

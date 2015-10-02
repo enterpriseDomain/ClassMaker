@@ -7,7 +7,7 @@ import org.classupplier.Messages;
 import org.classupplier.Phase;
 import org.classupplier.State;
 import org.classupplier.core.ClassSupplierOSGi;
-import org.classupplier.jobs.SupplementaryJob;
+import org.classupplier.jobs.ClassSupplierJob;
 import org.classupplier.util.ResourceUtil;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IWorkspaceRoot;
@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-public class ModelResourceManager extends SupplementaryJob {
+public class ModelResourceManager extends ClassSupplierJob {
 
 	public IStatus manage(IProgressMonitor monitor) throws CoreException {
 		IFolder folder = getProject().getFolder(ResourceUtil.getModelFolderName());
