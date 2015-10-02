@@ -3,6 +3,7 @@ package org.classupplier.jobs.export;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.classupplier.Messages;
 import org.classupplier.Phase;
 import org.classupplier.State;
 import org.classupplier.jobs.DelegatingJob;
@@ -22,7 +23,7 @@ import org.osgi.framework.Version;
 @SuppressWarnings("restriction")
 public class PDEExporter extends AbstractExporter {
 
-	private static final String PDE_PLUGIN_NATURE = "org.eclipse.pde.PluginNature";
+	private static final String PDE_PLUGIN_NATURE = "org.eclipse.pde.PluginNature"; //$NON-NLS-1$
 
 	@Override
 	public IStatus export(final IProgressMonitor monitor) throws CoreException {
@@ -51,7 +52,7 @@ public class PDEExporter extends AbstractExporter {
 			info.items = models.toArray();
 		}
 
-		PluginExportOperation op = new PluginExportOperation(info, "PDE Plug-in Export");
+		PluginExportOperation op = new PluginExportOperation(info, Messages.PDEExportJobName);
 		DelegatingJob delegate = new DelegatingJob(op);
 		delegate.setNextJob(getNextJob());
 		setNextJob(delegate);

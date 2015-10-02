@@ -383,7 +383,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (resourceSet: ");
+		result.append(" (resourceSet: "); //$NON-NLS-1$
 		result.append(resourceSet);
 		result.append(')');
 		return result.toString();

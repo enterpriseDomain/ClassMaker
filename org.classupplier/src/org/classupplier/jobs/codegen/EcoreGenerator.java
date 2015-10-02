@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 
+import org.classupplier.Messages;
 import org.classupplier.Phase;
 import org.classupplier.core.ClassSupplierOSGi;
 import org.classupplier.jobs.SupplementaryJob;
@@ -37,14 +38,14 @@ import org.eclipse.osgi.util.NLS;
 public class EcoreGenerator extends SupplementaryJob implements org.classupplier.jobs.codegen.Generator {
 
 	public EcoreGenerator() {
-		super("Generate Code");
+		super(Messages.CodeGeneratorJobName);
 		// setRule(EcorePlugin.getWorkspaceRoot());
 		// setPriority(BUILD);
 	}
 
-	protected static final String SOURCE_FOLDER_NAME = "src/main/java";
+	protected static final String SOURCE_FOLDER_NAME = "src/main/java"; //$NON-NLS-1$
 
-	public static final String GENMODEL_EXT = "genmodel";
+	public static final String GENMODEL_EXT = "genmodel"; //$NON-NLS-1$
 
 	private GeneratorJob genModelGeneration = new GenModelGenerationJob();
 
@@ -102,7 +103,7 @@ public class EcoreGenerator extends SupplementaryJob implements org.classupplier
 	protected class GenModelGenerationJob extends GeneratorJob {
 
 		public GenModelGenerationJob() {
-			super("GenModel Generation");
+			super(Messages.GenModelGenerationJobName);
 		}
 
 		@Override
@@ -110,7 +111,7 @@ public class EcoreGenerator extends SupplementaryJob implements org.classupplier
 			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 			final IPath modelFullPath = root.getRawLocation().append(getModelPath());
 			getGenerator()
-					.run(new String[] { "-ecore2GenModel", modelFullPath.toString(), "", getContribution().getName() });
+					.run(new String[] { "-ecore2GenModel", modelFullPath.toString(), "", getContribution().getName() }); //$NON-NLS-1$ //$NON-NLS-2$
 			return Status.OK_STATUS;
 		}
 
@@ -119,7 +120,7 @@ public class EcoreGenerator extends SupplementaryJob implements org.classupplier
 	protected class GenModelSetupJob extends GeneratorJob {
 
 		public GenModelSetupJob() {
-			super("Configure GenModel");
+			super(Messages.GenModelConfigurationJobName);
 		}
 
 		@Override
@@ -170,12 +171,12 @@ public class EcoreGenerator extends SupplementaryJob implements org.classupplier
 	protected class CodeGenerationJob extends GeneratorJob {
 
 		public CodeGenerationJob() {
-			super("Code Generation");
+			super(Messages.CodeGenerationJobName);
 		}
 
 		@Override
 		public IStatus work(IProgressMonitor monitor) throws CoreException {
-			getGenerator().run(new String[] { "-forceOverwrite", "-codeFormatting", "default", "-model",
+			getGenerator().run(new String[] { "-forceOverwrite", "-codeFormatting", "default", "-model", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 					EcorePlugin.getWorkspaceRoot().getRawLocation().append(getGenModelPath()).toString() });
 			getContribution().setProjectVersion(monitor);
 			return Status.OK_STATUS;
@@ -214,7 +215,7 @@ public class EcoreGenerator extends SupplementaryJob implements org.classupplier
 			throws CoreException {
 		if (!project.exists())
 			throw new CoreException(ClassSupplierOSGi
-					.createErrorStatus(NLS.bind("The project {0} was not created before generation.", project)));
+					.createErrorStatus(NLS.bind(Messages.ProjectNotExist, project)));
 		project.open(monitor);
 		IFolder folder = project.getFolder(ResourceUtil.getModelFolderName());
 		if (!folder.exists())

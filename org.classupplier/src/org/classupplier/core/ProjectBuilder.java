@@ -23,7 +23,7 @@ import org.osgi.framework.Version;
 
 public class ProjectBuilder extends IncrementalProjectBuilder {
 
-	public static final String BUILDER_ID = ClassSupplierOSGi.PLUGIN_ID + '.' + "builder";
+	public static final String BUILDER_ID = ClassSupplierOSGi.PLUGIN_ID + '.' + "builder"; //$NON-NLS-1$
 
 	protected Generator generator = new EcoreGenerator();
 

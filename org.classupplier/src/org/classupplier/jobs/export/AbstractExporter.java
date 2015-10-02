@@ -1,5 +1,6 @@
 package org.classupplier.jobs.export;
 
+import org.classupplier.Messages;
 import org.classupplier.jobs.ContainerJob;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
@@ -10,7 +11,7 @@ import org.osgi.framework.Version;
 public abstract class AbstractExporter extends ContainerJob implements Exporter {
 
 	public AbstractExporter() {
-		super("Plug-in Export");
+		super(Messages.AbstractExporter_ExportJobName);
 	}
 
 	private IPath destination;

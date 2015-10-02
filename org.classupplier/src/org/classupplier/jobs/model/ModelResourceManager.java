@@ -3,6 +3,7 @@ package org.classupplier.jobs.model;
 import java.io.IOException;
 import java.util.Collections;
 
+import org.classupplier.Messages;
 import org.classupplier.Phase;
 import org.classupplier.State;
 import org.classupplier.core.ClassSupplierOSGi;
@@ -73,7 +74,7 @@ public class ModelResourceManager extends SupplementaryJob {
 	}
 
 	public ModelResourceManager() {
-		super("Model Persistence");
+		super(Messages.ModelResourceJobName);
 	}
 
 	@Override

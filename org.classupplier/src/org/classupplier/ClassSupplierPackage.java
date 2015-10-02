@@ -29,21 +29,21 @@ public interface ClassSupplierPackage extends EPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNAME = "classupplier";
+	String eNAME = "classupplier"; //$NON-NLS-1$
 
 	/**
 	 * The package namespace URI.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://org/classupplier/0.7.6";
+	String eNS_URI = "http://org/classupplier/0.7.8"; //$NON-NLS-1$
 
 	/**
 	 * The package namespace name.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "classupplier";
+	String eNS_PREFIX = "classupplier"; //$NON-NLS-1$
 
 	/**
 	 * The singleton instance of the package.

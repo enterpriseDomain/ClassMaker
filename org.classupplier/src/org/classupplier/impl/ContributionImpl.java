@@ -68,7 +68,7 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NAME_EDEFAULT = "";
+	protected static final String NAME_EDEFAULT = ""; //$NON-NLS-1$
 	/**
 	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -122,7 +122,7 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String PROJECT_NAME_EDEFAULT = "";
+	protected static final String PROJECT_NAME_EDEFAULT = ""; //$NON-NLS-1$
 	/**
 	 * The cached value of the '{@link #getStateHistory() <em>State History</em>
 	 * }' map. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -258,7 +258,7 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 		if (getStateHistory().containsKey(version) || version.equals(VERSION_EDEFAULT))
 			setVersion(version);
 		else
-			throw new IllegalStateException(NLS.bind("Version {0} has no state.", version));
+			throw new IllegalStateException(NLS.bind("Version {0} has no state.", version)); //$NON-NLS-1$
 	}
 
 	public class ConstructRunnable<T extends EPackage> implements IProgressRunnable<T> {
@@ -589,9 +589,9 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
+		result.append(" (name: "); //$NON-NLS-1$
 		result.append(name);
-		result.append(", version: ");
+		result.append(", version: "); //$NON-NLS-1$
 		result.append(version);
 		result.append(')');
 		return result.toString();

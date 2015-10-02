@@ -242,7 +242,7 @@ public class StateImpl extends EObjectImpl implements State {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String PROJECT_NAME_EDEFAULT = "";
+	protected static final String PROJECT_NAME_EDEFAULT = ""; //$NON-NLS-1$
 
 	/**
 	 * The cached value of the '{@link #getProjectName() <em>Project Name</em>}' attribute.
@@ -261,7 +261,7 @@ public class StateImpl extends EObjectImpl implements State {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String DEPLOYABLE_UNIT_NAME_EDEFAULT = "";
+	protected static final String DEPLOYABLE_UNIT_NAME_EDEFAULT = ""; //$NON-NLS-1$
 
 	/**
 	 * The cached value of the '{@link #getEPackage() <em>EPackage</em>}' attribute list.
@@ -511,7 +511,7 @@ public class StateImpl extends EObjectImpl implements State {
 	 * @generated NOT
 	 */
 	public String formatVersion() {
-		return NLS.bind("1.0.{0}.{1}", getNumber(), ResourceUtil.formatQualifier(getTimestamp()));
+		return NLS.bind("1.0.{0}.{1}", getNumber(), ResourceUtil.formatQualifier(getTimestamp())); //$NON-NLS-1$
 	}
 
 	/**
@@ -805,21 +805,21 @@ public class StateImpl extends EObjectImpl implements State {
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
+		result.append(" (name: "); //$NON-NLS-1$
 		result.append(name);
-		result.append(", language: ");
+		result.append(", language: "); //$NON-NLS-1$
 		result.append(language);
-		result.append(", timestamp: ");
+		result.append(", timestamp: "); //$NON-NLS-1$
 		result.append(timestamp);
-		result.append(", number: ");
+		result.append(", number: "); //$NON-NLS-1$
 		result.append(number);
-		result.append(", version: ");
+		result.append(", version: "); //$NON-NLS-1$
 		result.append(version);
-		result.append(", stage: ");
+		result.append(", stage: "); //$NON-NLS-1$
 		result.append(stage);
-		result.append(", projectName: ");
+		result.append(", projectName: "); //$NON-NLS-1$
 		result.append(projectName);
-		result.append(", ePackage: ");
+		result.append(", ePackage: "); //$NON-NLS-1$
 		result.append(ePackage);
 		result.append(')');
 		return result.toString();

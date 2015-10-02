@@ -20,7 +20,7 @@ package org.classupplier;
  */
 public interface ClassSupplier {
 
-	public static final String INVOCATION_DELEGATE_URI = "org.classupplier.reflection.java";
+	public static final String INVOCATION_DELEGATE_URI = "org.classupplier.reflection.java"; //$NON-NLS-1$
 
 	/**
 	 * Returns the value of the '<em><b>Workspace</b></em>' reference. <!--

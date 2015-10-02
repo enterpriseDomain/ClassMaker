@@ -563,7 +563,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 		EcorePackage theEcorePackage = (EcorePackage) EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
 
 		// Create type parameters
-		addETypeParameter(iFutureEClass, "ResultType");
+		addETypeParameter(iFutureEClass, "ResultType"); //$NON-NLS-1$
 
 		// Set bounds for type parameters
 
@@ -573,35 +573,35 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 		workspaceEClass.getESuperTypes().add(this.getISchedulingRule());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(contributionEClass, Contribution.class, "Contribution", !IS_ABSTRACT, !IS_INTERFACE,
+		initEClass(contributionEClass, Contribution.class, "Contribution", !IS_ABSTRACT, !IS_INTERFACE, //$NON-NLS-1$
 				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getContribution_Name(), ecorePackage.getEString(), "name", "", 0, 1, Contribution.class,
+		initEAttribute(getContribution_Name(), ecorePackage.getEString(), "name", "", 0, 1, Contribution.class, //$NON-NLS-1$ //$NON-NLS-2$
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getContribution_Language(), ecorePackage.getEString(), "language", null, 0, 1,
+		initEAttribute(getContribution_Language(), ecorePackage.getEString(), "language", null, 0, 1, //$NON-NLS-1$
 				Contribution.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getContribution_Version(), this.getVersion(), "version", null, 0, 1, Contribution.class,
+		initEAttribute(getContribution_Version(), this.getVersion(), "version", null, 0, 1, Contribution.class, //$NON-NLS-1$
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getContribution_Stage(), this.getPhase(), "stage", "DEFINED", 0, 1, Contribution.class,
+		initEAttribute(getContribution_Stage(), this.getPhase(), "stage", "DEFINED", 0, 1, Contribution.class, //$NON-NLS-1$ //$NON-NLS-2$
 				!IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getContribution_ProjectName(), ecorePackage.getEString(), "projectName", "", 0, 1,
+		initEAttribute(getContribution_ProjectName(), ecorePackage.getEString(), "projectName", "", 0, 1, //$NON-NLS-1$ //$NON-NLS-2$
 				Contribution.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				IS_DERIVED, IS_ORDERED);
-		initEReference(getContribution_StateHistory(), this.getVersionToStateMapEntry(), null, "stateHistory", null, 0,
+		initEReference(getContribution_StateHistory(), this.getVersionToStateMapEntry(), null, "stateHistory", null, 0, //$NON-NLS-1$
 				-1, Contribution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getContribution_State(), this.getState(), null, "state", null, 0, 1, Contribution.class,
+		initEReference(getContribution_State(), this.getState(), null, "state", null, 0, 1, Contribution.class, //$NON-NLS-1$
 				IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
 				IS_DERIVED, IS_ORDERED);
-		initEReference(getContribution_DynamicEPackage(), ecorePackage.getEPackage(), null, "dynamicEPackage", null, 0,
+		initEReference(getContribution_DynamicEPackage(), ecorePackage.getEPackage(), null, "dynamicEPackage", null, 0, //$NON-NLS-1$
 				1, Contribution.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getContribution_GeneratedEPackage(), ecorePackage.getEPackage(), null, "generatedEPackage", null,
+		initEReference(getContribution_GeneratedEPackage(), ecorePackage.getEPackage(), null, "generatedEPackage", null, //$NON-NLS-1$
 				0, 1, Contribution.class, !IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = addEOperation(contributionEClass, null, "apply", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EOperation op = addEOperation(contributionEClass, null, "apply", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		EGenericType g1 = createEGenericType(this.getIFuture());
 		EGenericType g2 = createEGenericType();
 		g1.getETypeArguments().add(g2);
@@ -609,109 +609,109 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 		g2.setEUpperBound(g3);
 		initEOperation(op, g1);
 
-		op = addEOperation(contributionEClass, null, "checkout", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getVersion(), "version", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(contributionEClass, null, "checkout", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, this.getVersion(), "version", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		addEOperation(contributionEClass, this.getState(), "newState", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(contributionEClass, this.getState(), "newState", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(contributionEClass, null, "delete", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(contributionEClass, null, "delete", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEException(op, this.getCoreException());
 
-		initEClass(stateEClass, State.class, "State", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getState_Name(), ecorePackage.getEString(), "name", null, 0, 1, State.class, !IS_TRANSIENT,
+		initEClass(stateEClass, State.class, "State", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEAttribute(getState_Name(), ecorePackage.getEString(), "name", null, 0, 1, State.class, !IS_TRANSIENT, //$NON-NLS-1$
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getState_Language(), ecorePackage.getEString(), "language", null, 0, 1, State.class,
+		initEAttribute(getState_Language(), ecorePackage.getEString(), "language", null, 0, 1, State.class, //$NON-NLS-1$
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getState_Timestamp(), ecorePackage.getEDate(), "timestamp", null, 0, 1, State.class,
+		initEAttribute(getState_Timestamp(), ecorePackage.getEDate(), "timestamp", null, 0, 1, State.class, //$NON-NLS-1$
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getState_Number(), ecorePackage.getEInt(), "number", null, 0, 1, State.class, !IS_TRANSIENT,
+		initEAttribute(getState_Number(), ecorePackage.getEInt(), "number", null, 0, 1, State.class, !IS_TRANSIENT, //$NON-NLS-1$
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getState_Version(), this.getVersion(), "version", null, 0, 1, State.class, !IS_TRANSIENT,
+		initEAttribute(getState_Version(), this.getVersion(), "version", null, 0, 1, State.class, !IS_TRANSIENT, //$NON-NLS-1$
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getState_Stage(), this.getPhase(), "stage", "DEFINED", 0, 1, State.class, !IS_TRANSIENT,
+		initEAttribute(getState_Stage(), this.getPhase(), "stage", "DEFINED", 0, 1, State.class, !IS_TRANSIENT, //$NON-NLS-1$ //$NON-NLS-2$
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getState_ProjectName(), ecorePackage.getEString(), "projectName", "", 0, 1, State.class,
+		initEAttribute(getState_ProjectName(), ecorePackage.getEString(), "projectName", "", 0, 1, State.class, //$NON-NLS-1$ //$NON-NLS-2$
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getState_DeployableUnitName(), ecorePackage.getEString(), "deployableUnitName", "", 0, 1,
+		initEAttribute(getState_DeployableUnitName(), ecorePackage.getEString(), "deployableUnitName", "", 0, 1, //$NON-NLS-1$ //$NON-NLS-2$
 				State.class, !IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED,
 				IS_ORDERED);
-		initEAttribute(getState_EPackage(), theEcorePackage.getEFeatureMapEntry(), "ePackage", null, 0, 1, State.class,
+		initEAttribute(getState_EPackage(), theEcorePackage.getEFeatureMapEntry(), "ePackage", null, 0, 1, State.class, //$NON-NLS-1$
 				IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getState_DynamicEPackage(), theEcorePackage.getEPackage(), null, "dynamicEPackage", null, 0, 1,
+		initEReference(getState_DynamicEPackage(), theEcorePackage.getEPackage(), null, "dynamicEPackage", null, 0, 1, //$NON-NLS-1$
 				State.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getState_GeneratedEPackage(), theEcorePackage.getEPackage(), null, "generatedEPackage", null, 0,
+		initEReference(getState_GeneratedEPackage(), theEcorePackage.getEPackage(), null, "generatedEPackage", null, 0, //$NON-NLS-1$
 				1, State.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
-		addEOperation(stateEClass, null, "fireJobsCompleted", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(stateEClass, null, "fireJobsCompleted", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		addEOperation(stateEClass, ecorePackage.getEString(), "formatVersion", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(stateEClass, ecorePackage.getEString(), "formatVersion", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(stateEClass, null, "setProjectVersion", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(stateEClass, null, "setProjectVersion", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEException(op, this.getCoreException());
 
-		op = addEOperation(stateEClass, null, "delete", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(stateEClass, null, "delete", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEException(op, this.getCoreException());
 
-		initEClass(workspaceEClass, Workspace.class, "Workspace", !IS_ABSTRACT, !IS_INTERFACE,
+		initEClass(workspaceEClass, Workspace.class, "Workspace", !IS_ABSTRACT, !IS_INTERFACE, //$NON-NLS-1$
 				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getWorkspace_Contributions(), this.getContribution(), null, "contributions", null, 0, -1,
+		initEReference(getWorkspace_Contributions(), this.getContribution(), null, "contributions", null, 0, -1, //$NON-NLS-1$
 				Workspace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getWorkspace_ResourceSet(), ecorePackage.getEResourceSet(), "resourceSet", null, 0, 1,
+		initEAttribute(getWorkspace_ResourceSet(), ecorePackage.getEResourceSet(), "resourceSet", null, 0, 1, //$NON-NLS-1$
 				Workspace.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
 
-		addEOperation(workspaceEClass, null, "init", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(workspaceEClass, null, "init", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(workspaceEClass, this.getContribution(), "createContribution", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEPackage(), "blueprint", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(workspaceEClass, this.getContribution(), "createContribution", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEPackage(), "blueprint", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(workspaceEClass, this.getContribution(), "getContribution", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEObject(), "eObject", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(workspaceEClass, this.getContribution(), "getContribution", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEObject(), "eObject", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(workspaceEClass, this.getContribution(), "getContribution", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEPackage(), "ePackage", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(workspaceEClass, this.getContribution(), "getContribution", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEPackage(), "ePackage", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(workspaceEClass, this.getContribution(), "getContribution", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "projectName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(workspaceEClass, this.getContribution(), "getContribution", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEString(), "projectName", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(workspaceEClass, null, "registerContribution", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getContribution(), "contribution", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(workspaceEClass, null, "registerContribution", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, this.getContribution(), "contribution", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(workspaceEClass, null, "unregisterContribution", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getContribution(), "contribution", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(workspaceEClass, null, "unregisterContribution", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, this.getContribution(), "contribution", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(workspaceEClass, this.getPhase(), "contains", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEPackage(), "blueprint", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(workspaceEClass, this.getPhase(), "contains", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEPackage(), "blueprint", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(workspaceEClass, null, "delete", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEJavaObject(), "object", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(workspaceEClass, null, "delete", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEJavaObject(), "object", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEException(op, this.getCoreException());
 
-		initEClass(versionToStateMapEntryEClass, Map.Entry.class, "VersionToStateMapEntry", !IS_ABSTRACT, !IS_INTERFACE,
+		initEClass(versionToStateMapEntryEClass, Map.Entry.class, "VersionToStateMapEntry", !IS_ABSTRACT, !IS_INTERFACE, //$NON-NLS-1$
 				!IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getVersionToStateMapEntry_Key(), this.getVersion(), "key", null, 0, 1, Map.Entry.class,
+		initEAttribute(getVersionToStateMapEntry_Key(), this.getVersion(), "key", null, 0, 1, Map.Entry.class, //$NON-NLS-1$
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getVersionToStateMapEntry_Value(), this.getState(), null, "value", null, 0, 1, Map.Entry.class,
+		initEReference(getVersionToStateMapEntry_Value(), this.getState(), null, "value", null, 0, 1, Map.Entry.class, //$NON-NLS-1$
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(iSchedulingRuleEClass, ISchedulingRule.class, "ISchedulingRule", IS_ABSTRACT, IS_INTERFACE,
+		initEClass(iSchedulingRuleEClass, ISchedulingRule.class, "ISchedulingRule", IS_ABSTRACT, IS_INTERFACE, //$NON-NLS-1$
 				!IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(iFutureEClass, IFuture.class, "IFuture", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEClass(iFutureEClass, IFuture.class, "IFuture", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-		initEClass(constructableEClass, Constructable.class, "Constructable", IS_ABSTRACT, IS_INTERFACE,
+		initEClass(constructableEClass, Constructable.class, "Constructable", IS_ABSTRACT, IS_INTERFACE, //$NON-NLS-1$
 				!IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
-		initEEnum(phaseEEnum, Phase.class, "Phase");
+		initEEnum(phaseEEnum, Phase.class, "Phase"); //$NON-NLS-1$
 		addEEnumLiteral(phaseEEnum, Phase.DEFINED);
 		addEEnumLiteral(phaseEEnum, Phase.MODELED);
 		addEEnumLiteral(phaseEEnum, Phase.GENERATED);
@@ -720,11 +720,11 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 		addEEnumLiteral(phaseEEnum, Phase.LOADED);
 
 		// Initialize data types
-		initEDataType(iProgressMonitorEDataType, IProgressMonitor.class, "IProgressMonitor", IS_SERIALIZABLE,
+		initEDataType(iProgressMonitorEDataType, IProgressMonitor.class, "IProgressMonitor", IS_SERIALIZABLE, //$NON-NLS-1$
 				!IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(versionEDataType, Version.class, "Version", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(semaphoreEDataType, Semaphore.class, "Semaphore", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(coreExceptionEDataType, CoreException.class, "CoreException", IS_SERIALIZABLE,
+		initEDataType(versionEDataType, Version.class, "Version", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEDataType(semaphoreEDataType, Semaphore.class, "Semaphore", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEDataType(coreExceptionEDataType, CoreException.class, "CoreException", IS_SERIALIZABLE, //$NON-NLS-1$
 				!IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
@@ -743,10 +743,10 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";
-		addAnnotation(getState_EPackage(), source, new String[] { "kind", "group" });
-		addAnnotation(getState_DynamicEPackage(), source, new String[] { "group", "#ePackage" });
-		addAnnotation(getState_GeneratedEPackage(), source, new String[] { "group", "#ePackage" });
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData"; //$NON-NLS-1$
+		addAnnotation(getState_EPackage(), source, new String[] { "kind", "group" }); //$NON-NLS-1$ //$NON-NLS-2$
+		addAnnotation(getState_DynamicEPackage(), source, new String[] { "group", "#ePackage" }); //$NON-NLS-1$ //$NON-NLS-2$
+		addAnnotation(getState_GeneratedEPackage(), source, new String[] { "group", "#ePackage" }); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 } // ClassSupplierPackageImpl

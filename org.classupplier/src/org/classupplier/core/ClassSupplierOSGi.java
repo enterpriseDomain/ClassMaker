@@ -21,13 +21,13 @@ import org.osgi.util.tracker.ServiceTracker;
 
 public class ClassSupplierOSGi extends Plugin {
 
-	public static final String PLUGIN_ID = "org.classupplier";
+	public static final String PLUGIN_ID = "org.classupplier"; //$NON-NLS-1$
 
-	public static final String NATURE_ID = PLUGIN_ID + '.' + "classSupplierNature";
+	public static final String NATURE_ID = PLUGIN_ID + '.' + "classSupplierNature"; //$NON-NLS-1$
 
-	public static final String MODEL_FOLDER_PREF_KEY = "modelFolder";
+	public static final String MODEL_FOLDER_PREF_KEY = "modelFolder"; //$NON-NLS-1$
 
-	public static final String MODEL_RESOURCE_EXT_PREF_KEY = "resourceExt";
+	public static final String MODEL_RESOURCE_EXT_PREF_KEY = "resourceExt"; //$NON-NLS-1$
 
 	private static ClassSupplierOSGi instance;
 
@@ -132,19 +132,19 @@ public class ClassSupplierOSGi extends Plugin {
 	public static String bundleStateAsString(int state) {
 		switch (state) {
 		case Bundle.ACTIVE:
-			return "ACTIVE";
+			return "ACTIVE"; //$NON-NLS-1$
 		case Bundle.INSTALLED:
-			return "INSTALLED";
+			return "INSTALLED"; //$NON-NLS-1$
 		case Bundle.RESOLVED:
-			return "RESOLVED";
+			return "RESOLVED"; //$NON-NLS-1$
 		case Bundle.STARTING:
-			return "STARTING";
+			return "STARTING"; //$NON-NLS-1$
 		case Bundle.STOPPING:
-			return "STOPPING";
+			return "STOPPING"; //$NON-NLS-1$
 		case Bundle.UNINSTALLED:
-			return "UNINSTALLED";
+			return "UNINSTALLED"; //$NON-NLS-1$
 		default:
-			return "unknown bundle state: " + state;
+			return "unknown bundle state: " + state; //$NON-NLS-1$
 		}
 	}
 

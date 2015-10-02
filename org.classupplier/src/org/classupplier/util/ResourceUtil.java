@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+import org.classupplier.Messages;
 import org.classupplier.State;
 import org.classupplier.Workspace;
 import org.classupplier.core.ClassSupplierOSGi;
@@ -28,17 +29,17 @@ public class ResourceUtil {
 	private static final IPreferencesService preferencesService = Platform.getPreferencesService();
 
 	private static String modelFolderName = preferencesService.getString(ClassSupplierOSGi.PLUGIN_ID,
-			ClassSupplierOSGi.MODEL_FOLDER_PREF_KEY, "model", null);
+			ClassSupplierOSGi.MODEL_FOLDER_PREF_KEY, Messages.ModelFolderDefault, null);
 
 	private static String fileExt = preferencesService.getString(ClassSupplierOSGi.PLUGIN_ID,
-			ClassSupplierOSGi.MODEL_RESOURCE_EXT_PREF_KEY, "xmi", null);
+			ClassSupplierOSGi.MODEL_RESOURCE_EXT_PREF_KEY, Messages.ResourceExtDefault, null);
 
-	private static final String targetFolderName = "target";
+	private static final String targetFolderName = "target"; //$NON-NLS-1$
 
-	private static final DateFormat qualifierFormat = new SimpleDateFormat("yyyyMMddHHmm");
+	private static final DateFormat qualifierFormat = new SimpleDateFormat("yyyyMMddHHmm"); //$NON-NLS-1$
 
 	static {
-		qualifierFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+		qualifierFormat.setTimeZone(TimeZone.getTimeZone("UTC")); //$NON-NLS-1$
 	}
 
 	public static IPath getModelResourcePath(IProject project, Workspace workspace) {
@@ -53,8 +54,8 @@ public class ResourceUtil {
 	}
 
 	public static IPath getTargetResourcePath(IProject project, State state) {
-		return getExportDestination(project).append("plugins").addTrailingSeparator()
-				.append(state.getDeployableUnitName()).addFileExtension("jar");
+		return getExportDestination(project).append("plugins").addTrailingSeparator() //$NON-NLS-1$
+				.append(state.getDeployableUnitName()).addFileExtension("jar"); //$NON-NLS-1$
 	}
 
 	/**
@@ -109,7 +110,7 @@ public class ResourceUtil {
 	
 	public static String formatQualifier(Date timestamp) {
 		if (timestamp == null)
-			return "qualifier";
+			return "qualifier"; //$NON-NLS-1$
 		return qualifierFormat.format(timestamp);
 	}
 

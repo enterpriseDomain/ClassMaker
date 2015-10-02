@@ -8,6 +8,7 @@ import java.util.concurrent.Semaphore;
 import org.classupplier.ClassSupplierFactory;
 import org.classupplier.ClassSupplierPackage;
 import org.classupplier.Contribution;
+import org.classupplier.Messages;
 import org.classupplier.Phase;
 import org.classupplier.State;
 import org.classupplier.Workspace;
@@ -72,7 +73,7 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 		case ClassSupplierPackage.VERSION_TO_STATE_MAP_ENTRY:
 			return (EObject) createVersionToStateMapEntry();
 		default:
-			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+			throw new IllegalArgumentException(Messages.Class + eClass.getName() + Messages.NotValidClassifier);
 		}
 	}
 
@@ -94,7 +95,7 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 		case ClassSupplierPackage.CORE_EXCEPTION:
 			return createCoreExceptionFromString(eDataType, initialValue);
 		default:
-			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+			throw new IllegalArgumentException(Messages.Datatype + eDataType.getName() + Messages.NotValidClassifier);
 		}
 	}
 
@@ -116,7 +117,7 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 		case ClassSupplierPackage.CORE_EXCEPTION:
 			return convertCoreExceptionToString(eDataType, instanceValue);
 		default:
-			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+			throw new IllegalArgumentException(Messages.Datatype + eDataType.getName() + Messages.NotValidClassifier);
 		}
 	}
 
@@ -164,7 +165,7 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 		Phase result = Phase.get(initialValue);
 		if (result == null)
 			throw new IllegalArgumentException(
-					"The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+					Messages.Value + initialValue + Messages.NotValidEnumerator + eDataType.getName() + Messages.Quote);
 		return result;
 	}
 

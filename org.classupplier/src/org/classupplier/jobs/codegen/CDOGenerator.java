@@ -14,9 +14,9 @@ public class CDOGenerator extends EcoreGenerator {
 		super.setupGenModel(projectPath, ecoreGenModel, modelEPackage, allEPackages);
 		ecoreGenModel.setSuppressInterfaces(false);
 		ecoreGenModel.setFeatureDelegation(GenDelegationKind.REFLECTIVE_LITERAL);
-		ecoreGenModel.getModelPluginVariables().add("CDO=org.eclipse.emf.cdo");
-		ecoreGenModel.setRootExtendsClass("org.eclipse.emf.internal.cdo.CDOObjectImpl");
-		ecoreGenModel.setRootExtendsInterface("org.eclipse.emf.cdo.CDOObject");
+		ecoreGenModel.getModelPluginVariables().add("CDO=org.eclipse.emf.cdo"); //$NON-NLS-1$
+		ecoreGenModel.setRootExtendsClass("org.eclipse.emf.internal.cdo.CDOObjectImpl"); //$NON-NLS-1$
+		ecoreGenModel.setRootExtendsInterface("org.eclipse.emf.cdo.CDOObject"); //$NON-NLS-1$
 	}
 
 }
