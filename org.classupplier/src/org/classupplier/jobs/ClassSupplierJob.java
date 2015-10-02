@@ -17,19 +17,20 @@ import org.eclipse.core.runtime.jobs.IJobChangeListener;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.core.runtime.jobs.JobGroup;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.osgi.util.NLS;
 
-public abstract class SupplementaryJob extends WorkspaceJob {
+public abstract class ClassSupplierJob extends WorkspaceJob {
 
-	private SupplementaryJob nextJob;
+	private ClassSupplierJob nextJob;
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
 		if (Job.class.equals(adapter))
 			return (Job) this;
-		if (SupplementaryJob.class.equals(adapter))
-			return (SupplementaryJob) this;
+		if (ClassSupplierJob.class.equals(adapter))
+			return (ClassSupplierJob) this;
 
 		return super.getAdapter(adapter);
 	}
@@ -57,7 +58,9 @@ public abstract class SupplementaryJob extends WorkspaceJob {
 
 	};
 
-	public SupplementaryJob(String name) {
+	private ResourceSet resourceSet;
+
+	public ClassSupplierJob(String name) {
 		super(name);
 		setUser(true);
 		setPriority(Job.SHORT);
@@ -97,11 +100,11 @@ public abstract class SupplementaryJob extends WorkspaceJob {
 		this.project = project;
 	}
 
-	public SupplementaryJob getNextJob() {
+	public ClassSupplierJob getNextJob() {
 		return nextJob;
 	}
 
-	public void setNextJob(SupplementaryJob nextJob) {
+	public void setNextJob(ClassSupplierJob nextJob) {
 		this.nextJob = nextJob;
 		if (this.nextJob != null)
 			addListener();
@@ -127,6 +130,14 @@ public abstract class SupplementaryJob extends WorkspaceJob {
 		if (getContribution().getStage().getValue() < requiredStage().getValue())
 			throw new CoreException(ClassSupplierOSGi
 					.createWarningStatus(NLS.bind(Messages.NotEnoughContributionStage, requiredStage().getLiteral())));
+	}
+
+	public void setResourceSet(ResourceSet resourceSet) {
+		this.resourceSet = resourceSet;
+	}
+
+	public ResourceSet getResourceSet() {
+		return resourceSet;
 	}
 	
 }

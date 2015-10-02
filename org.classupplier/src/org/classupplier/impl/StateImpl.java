@@ -10,7 +10,7 @@ import org.classupplier.ClassSupplierPackage;
 import org.classupplier.Phase;
 import org.classupplier.State;
 import org.classupplier.core.ClassSupplierOSGi;
-import org.classupplier.jobs.SupplementaryJob;
+import org.classupplier.jobs.ClassSupplierJob;
 import org.classupplier.util.ResourceUtil;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
@@ -558,7 +558,7 @@ public class StateImpl extends EObjectImpl implements State {
 				project.open(monitor);
 			}
 			project.build(IncrementalProjectBuilder.FULL_BUILD, monitor);
-			SupplementaryJob.joinManualBuild(monitor);
+			ClassSupplierJob.joinManualBuild(monitor);
 			ResourceUtil.setAutoBuilding(workspace, autoBuild);
 		} catch (CoreException e) {
 			if (e.getStatus().getSeverity() == IStatus.ERROR) {

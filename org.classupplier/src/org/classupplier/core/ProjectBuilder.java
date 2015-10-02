@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.classupplier.Phase;
 import org.classupplier.State;
-import org.classupplier.jobs.SupplementaryJob;
+import org.classupplier.jobs.ClassSupplierJob;
 import org.classupplier.jobs.codegen.EcoreGenerator;
 import org.classupplier.jobs.codegen.Generator;
 import org.classupplier.jobs.export.Exporter;
@@ -34,7 +34,7 @@ public class ProjectBuilder extends IncrementalProjectBuilder {
 		if (kind != FULL_BUILD)
 			return null;
 
-		SupplementaryJob exporterJob = (SupplementaryJob) exporter.getAdapter(SupplementaryJob.class);
+		ClassSupplierJob exporterJob = (ClassSupplierJob) exporter.getAdapter(ClassSupplierJob.class);
 		exporterJob.setProject(getProject());
 		final State state = exporterJob.getContribution();
 		if (state != null
@@ -47,7 +47,7 @@ public class ProjectBuilder extends IncrementalProjectBuilder {
 		}
 
 		generator.setResourceSet(ClassSupplierOSGi.getClassSupplier().getWorkspace().getResourceSet());
-		SupplementaryJob generatorJob = ((SupplementaryJob) generator.getAdapter(SupplementaryJob.class));
+		ClassSupplierJob generatorJob = ((ClassSupplierJob) generator.getAdapter(ClassSupplierJob.class));
 		generatorJob.setProject(getProject());
 		generatorJob.setProgressGroup(monitor, 1);
 		generatorJob.setNextJob(exporterJob);
@@ -57,9 +57,9 @@ public class ProjectBuilder extends IncrementalProjectBuilder {
 		resourceJob.setProgressGroup(monitor, 1);
 		resourceJob.setNextJob(generatorJob);
 
-		SupplementaryJob installJob = new OSGiInstaller();
+		ClassSupplierJob installJob = new OSGiInstaller();
 		exporterJob.setNextJob(installJob);
-		SupplementaryJob loadJob = new OSGiEPackageLoader();
+		ClassSupplierJob loadJob = new OSGiEPackageLoader();
 		loadJob.addListener();
 		loadJob.addJobChangeListener(new JobChangeAdapter() {
 
