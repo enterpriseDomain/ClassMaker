@@ -52,7 +52,7 @@ public class PDEExporter extends AbstractExporter {
 			info.items = models.toArray();
 		}
 
-		PluginExportOperation op = new PluginExportOperation(info, Messages.PDEExportJobName);
+		PluginExportOperation op = new PluginExportOperation(info, Messages.JobNamePDEExport);
 		DelegatingJob delegate = new DelegatingJob(op);
 		delegate.setNextJob(getNextJob());
 		setNextJob(delegate);

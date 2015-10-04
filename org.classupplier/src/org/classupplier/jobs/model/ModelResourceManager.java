@@ -17,9 +17,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -50,17 +48,13 @@ public class ModelResourceManager extends ClassSupplierJob {
 		State state = getContribution();
 		if (state.getStage() == Phase.MODELED) {
 			if (resource.getContents().isEmpty())
-				resource.getContents().add(EcoreUtil.copy(state.getDynamicEPackage()));
-			else if (resource.getContents().contains(state.getDynamicEPackage())) {
-				int index = resource.getContents().lastIndexOf(state.getDynamicEPackage());
-				resource.getContents().set(index, EcoreUtil.copy(state.getDynamicEPackage()));
-			} else {
-				EList<EObject> contents = resource.getContents();
-				for (int i = 0; i < contents.size(); i++) {
-					if (contents.get(i) instanceof EPackage) {
-						resource.getContents().set(i, EcoreUtil.copy(state.getDynamicEPackage()));
-					}
-				}
+				resource.getContents().addAll(EcoreUtil.copyAll(state.getDynamicEPackages()));
+			else {
+				for (EPackage ePackage : state.getDynamicEPackages())
+					if (resource.getContents().contains(ePackage))
+						resource.getContents().set(resource.getContents().indexOf(ePackage), EcoreUtil.copy(ePackage));
+					else
+						resource.getContents().add(EcoreUtil.copy(ePackage));
 			}
 		}
 		try {
@@ -74,7 +68,7 @@ public class ModelResourceManager extends ClassSupplierJob {
 	}
 
 	public ModelResourceManager() {
-		super(Messages.ModelResourceJobName);
+		super(Messages.JobNameModelResource);
 	}
 
 	@Override

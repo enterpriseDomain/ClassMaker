@@ -9,7 +9,7 @@ import org.eclipse.core.runtime.IStatus;
 public abstract class Installer extends ContainerJob {
 
 	public Installer() {
-		super(Messages.InstallerJobName);
+		super(Messages.JobNameInstaller);
 	}
 
 	public abstract IStatus install(IProgressMonitor monitor);

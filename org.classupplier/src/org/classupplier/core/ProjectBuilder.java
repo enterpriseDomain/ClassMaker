@@ -2,6 +2,7 @@ package org.classupplier.core;
 
 import java.util.Map;
 
+import org.classupplier.Messages;
 import org.classupplier.Phase;
 import org.classupplier.State;
 import org.classupplier.jobs.ClassSupplierJob;
@@ -19,6 +20,8 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.osgi.util.NLS;
 import org.osgi.framework.Version;
 
 public class ProjectBuilder extends IncrementalProjectBuilder {
@@ -37,9 +40,16 @@ public class ProjectBuilder extends IncrementalProjectBuilder {
 		ClassSupplierJob exporterJob = (ClassSupplierJob) exporter.getAdapter(ClassSupplierJob.class);
 		exporterJob.setProject(getProject());
 		final State state = exporterJob.getContribution();
-		if (state != null
-				&& (state.getDynamicEPackage().getEClassifiers().isEmpty() || (state.getStage().equals(Phase.DEFINED))))
-			return null;
+		if (state != null) {
+			if (state.getStage().equals(Phase.DEFINED))
+				return null;
+			for (EPackage ePackage : state.getDynamicEPackages())
+				if (ePackage.getEClassifiers().isEmpty()) {
+					ClassSupplierOSGi.getInstance().getLog().log(ClassSupplierOSGi
+							.createWarningStatus(NLS.bind(Messages.WarningEPackageNoClassifiers, ePackage)));
+					return null;
+				}
+		}
 		exporter.setExportDestination(ResourceUtil.getExportDestination(getProject()));
 		if (exporter.getVersion() == null) {
 			Version version = state.getVersion();

@@ -10,7 +10,6 @@ import org.classupplier.Contribution;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -23,9 +22,8 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link org.classupplier.Contribution}
- * object. <!-- begin-user-doc --> <!-- end-user-doc -->
- * 
+ * This is the item provider adapter for a {@link org.classupplier.Contribution} object.
+ * <!-- begin-user-doc --> <!-- end-user-doc -->
  * @generated
  */
 public class ContributionItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
@@ -56,16 +54,16 @@ public class ContributionItemProvider extends ItemProviderAdapter implements IEd
 			addVersionPropertyDescriptor(object);
 			addStagePropertyDescriptor(object);
 			addProjectNamePropertyDescriptor(object);
-			addDynamicEPackagePropertyDescriptor(object);
-			addGeneratedEPackagePropertyDescriptor(object);
+			addDynamicEPackagesPropertyDescriptor(object);
+			addGeneratedEPackagesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Name feature. <!-- begin-user-doc
+	 * This adds a property descriptor for the Name feature.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addNamePropertyDescriptor(Object object) {
@@ -143,68 +141,35 @@ public class ContributionItemProvider extends ItemProviderAdapter implements IEd
 	}
 
 	/**
-	 * This adds a property descriptor for the Dynamic EPackage feature. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This adds a property descriptor for the Dynamic EPackages feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addDynamicEPackagePropertyDescriptor(Object object) {
+	protected void addDynamicEPackagesPropertyDescriptor(Object object) {
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_Contribution_dynamicEPackage_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_Contribution_dynamicEPackage_feature",
+						getResourceLocator(), getString("_UI_Contribution_dynamicEPackages_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Contribution_dynamicEPackages_feature",
 								"_UI_Contribution_type"),
-						ClassSupplierPackage.Literals.CONTRIBUTION__DYNAMIC_EPACKAGE, true, false, true, null, null,
+						ClassSupplierPackage.Literals.CONTRIBUTION__DYNAMIC_EPACKAGES, true, false, true, null, null,
 						null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Generated EPackage feature. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This adds a property descriptor for the Generated EPackages feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addGeneratedEPackagePropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_Contribution_generatedEPackage_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_Contribution_generatedEPackage_feature",
-								"_UI_Contribution_type"),
-				ClassSupplierPackage.Literals.CONTRIBUTION__GENERATED_EPACKAGE, false, false, false, null, null, null));
-	}
-
-	/**
-	 * This specifies how to implement {@link #getChildren} and is used to
-	 * deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in
-	 * {@link #createCommand}. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(ClassSupplierPackage.Literals.CONTRIBUTION__DYNAMIC_EPACKAGE);
-			childrenFeatures.add(ClassSupplierPackage.Literals.CONTRIBUTION__GENERATED_EPACKAGE);
-		}
-		return childrenFeatures;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper
-		// feature to use for
-		// adding (see {@link AddCommand}) it as a child.
-
-		return super.getChildFeature(object, child);
+	protected void addGeneratedEPackagesPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
+				getString("_UI_Contribution_generatedEPackages_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_Contribution_generatedEPackages_feature",
+						"_UI_Contribution_type"),
+				ClassSupplierPackage.Literals.CONTRIBUTION__GENERATED_EPACKAGES, false, false, false, null, null,
+				null));
 	}
 
 	/**
@@ -219,9 +184,9 @@ public class ContributionItemProvider extends ItemProviderAdapter implements IEd
 	}
 
 	/**
-	 * This returns the label text for the adapted class. <!-- begin-user-doc
+	 * This returns the label text for the adapted class.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -232,11 +197,10 @@ public class ContributionItemProvider extends ItemProviderAdapter implements IEd
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -252,10 +216,6 @@ public class ContributionItemProvider extends ItemProviderAdapter implements IEd
 		case ClassSupplierPackage.CONTRIBUTION__STATE_HISTORY:
 		case ClassSupplierPackage.CONTRIBUTION__STATE:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-			return;
-		case ClassSupplierPackage.CONTRIBUTION__DYNAMIC_EPACKAGE:
-		case ClassSupplierPackage.CONTRIBUTION__GENERATED_EPACKAGE:
-			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
 		super.notifyChanged(notification);

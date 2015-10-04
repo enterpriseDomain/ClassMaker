@@ -70,25 +70,25 @@ public class ClassSupplierActionBarContributor extends EditingDomainActionBarCon
 	}
 
 	/**
-	 * This keeps track of the active editor. <!-- begin-user-doc --> <!--
+	 * This keeps track of the active editor.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected IEditorPart activeEditorPart;
 
 	/**
-	 * This keeps track of the current selection provider. <!-- begin-user-doc
+	 * This keeps track of the current selection provider.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected ISelectionProvider selectionProvider;
 
 	/**
-	 * This action opens the Properties view. <!-- begin-user-doc --> <!--
+	 * This action opens the Properties view.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected IAction showPropertiesViewAction = new Action(
@@ -129,20 +129,16 @@ public class ClassSupplierActionBarContributor extends EditingDomainActionBarCon
 	};
 
 	/**
-	 * This will contain one
-	 * {@link org.eclipse.emf.edit.ui.action.CreateChildAction} corresponding to
-	 * each descriptor generated for the current selection by the item provider.
+	 * This will contain one {@link org.eclipse.emf.edit.ui.action.CreateChildAction} corresponding to each descriptor
+	 * generated for the current selection by the item provider.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected Collection<IAction> createChildActions;
 
 	/**
-	 * This will contain a map of
-	 * {@link org.eclipse.emf.edit.ui.action.CreateChildAction}s, keyed by
-	 * sub-menu text. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This will contain a map of {@link org.eclipse.emf.edit.ui.action.CreateChildAction}s, keyed by sub-menu text.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected Map<String, Collection<IAction>> createChildSubmenuActions;
@@ -157,37 +153,32 @@ public class ClassSupplierActionBarContributor extends EditingDomainActionBarCon
 	protected IMenuManager createChildMenuManager;
 
 	/**
-	 * This will contain one
-	 * {@link org.eclipse.emf.edit.ui.action.CreateSiblingAction} corresponding
-	 * to each descriptor generated for the current selection by the item
-	 * provider. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This will contain one {@link org.eclipse.emf.edit.ui.action.CreateSiblingAction} corresponding to each descriptor
+	 * generated for the current selection by the item provider.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected Collection<IAction> createSiblingActions;
 
 	/**
-	 * This will contain a map of
-	 * {@link org.eclipse.emf.edit.ui.action.CreateSiblingAction}s, keyed by
-	 * submenu text. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This will contain a map of {@link org.eclipse.emf.edit.ui.action.CreateSiblingAction}s, keyed by submenu text.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected Map<String, Collection<IAction>> createSiblingSubmenuActions;
 
 	/**
-	 * This is the menu manager into which menu contribution items should be
-	 * added for CreateSibling actions. <!-- begin-user-doc --> <!--
+	 * This is the menu manager into which menu contribution items should be added for CreateSibling actions.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected IMenuManager createSiblingMenuManager;
 
 	/**
-	 * This creates an instance of the contributor. <!-- begin-user-doc --> <!--
+	 * This creates an instance of the contributor.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ClassSupplierActionBarContributor() {
@@ -252,10 +243,9 @@ public class ClassSupplierActionBarContributor extends EditingDomainActionBarCon
 	}
 
 	/**
-	 * When the active editor changes, this remembers the change and registers
-	 * with it as a selection provider. <!-- begin-user-doc --> <!--
+	 * When the active editor changes, this remembers the change and registers with it as a selection provider.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -339,10 +329,9 @@ public class ClassSupplierActionBarContributor extends EditingDomainActionBarCon
 	}
 
 	/**
-	 * This generates a {@link org.eclipse.emf.edit.ui.action.CreateChildAction}
-	 * for each object in <code>descriptors</code>, and returns the collection
-	 * of these actions. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This generates a {@link org.eclipse.emf.edit.ui.action.CreateChildAction} for each object in <code>descriptors</code>,
+	 * and returns the collection of these actions.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected Collection<IAction> generateCreateChildActions(Collection<?> descriptors, ISelection selection) {
@@ -356,11 +345,9 @@ public class ClassSupplierActionBarContributor extends EditingDomainActionBarCon
 	}
 
 	/**
-	 * This generates a
-	 * {@link org.eclipse.emf.edit.ui.action.CreateSiblingAction} for each
-	 * object in <code>descriptors</code>, and returns the collection of these
-	 * actions. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This generates a {@link org.eclipse.emf.edit.ui.action.CreateSiblingAction} for each object in <code>descriptors</code>,
+	 * and returns the collection of these actions.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected Collection<IAction> generateCreateSiblingActions(Collection<?> descriptors, ISelection selection) {
@@ -374,14 +361,11 @@ public class ClassSupplierActionBarContributor extends EditingDomainActionBarCon
 	}
 
 	/**
-	 * This populates the specified <code>manager</code> with
-	 * {@link org.eclipse.jface.action.ActionContributionItem}s based on the
-	 * {@link org.eclipse.jface.action.IAction}s contained in the
-	 * <code>actions</code> collection, by inserting them before the specified
-	 * contribution item <code>contributionID</code>. If
-	 * <code>contributionID</code> is <code>null</code>, they are simply added.
+	 * This populates the specified <code>manager</code> with {@link org.eclipse.jface.action.ActionContributionItem}s
+	 * based on the {@link org.eclipse.jface.action.IAction}s contained in the <code>actions</code> collection,
+	 * by inserting them before the specified contribution item <code>contributionID</code>.
+	 * If <code>contributionID</code> is <code>null</code>, they are simply added.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void populateManager(IContributionManager manager, Collection<? extends IAction> actions,
@@ -398,12 +382,10 @@ public class ClassSupplierActionBarContributor extends EditingDomainActionBarCon
 	}
 
 	/**
-	 * This removes from the specified <code>manager</code> all
-	 * {@link org.eclipse.jface.action.ActionContributionItem}s based on the
-	 * {@link org.eclipse.jface.action.IAction}s contained in the
-	 * <code>actions</code> collection. <!-- begin-user-doc --> <!--
+	 * This removes from the specified <code>manager</code> all {@link org.eclipse.jface.action.ActionContributionItem}s
+	 * based on the {@link org.eclipse.jface.action.IAction}s contained in the <code>actions</code> collection.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void depopulateManager(IContributionManager manager, Collection<? extends IAction> actions) {
@@ -430,10 +412,9 @@ public class ClassSupplierActionBarContributor extends EditingDomainActionBarCon
 	}
 
 	/**
-	 * This extracts those actions in the <code>submenuActions</code> collection
-	 * whose text is qualified and returns a map of these actions, keyed by
-	 * submenu text. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This extracts those actions in the <code>submenuActions</code> collection whose text is qualified and returns
+	 * a map of these actions, keyed by submenu text.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected Map<String, Collection<IAction>> extractSubmenuActions(Collection<IAction> createActions) {
@@ -458,15 +439,12 @@ public class ClassSupplierActionBarContributor extends EditingDomainActionBarCon
 	}
 
 	/**
-	 * This populates the specified <code>manager</code> with
-	 * {@link org.eclipse.jface.action.MenuManager}s containing
-	 * {@link org.eclipse.jface.action.ActionContributionItem}s based on the
-	 * {@link org.eclipse.jface.action.IAction}s contained in the
-	 * <code>submenuActions</code> collection, by inserting them before the
-	 * specified contribution item <code>contributionID</code>. If
-	 * <code>contributionID</code> is <code>null</code>, they are simply added.
+	 * This populates the specified <code>manager</code> with {@link org.eclipse.jface.action.MenuManager}s containing
+	 * {@link org.eclipse.jface.action.ActionContributionItem}s based on the {@link org.eclipse.jface.action.IAction}s
+	 * contained in the <code>submenuActions</code> collection, by inserting them before the specified contribution
+	 * item <code>contributionID</code>.
+	 * If <code>contributionID</code> is <code>null</code>, they are simply added.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void populateManager(IContributionManager manager, Map<String, Collection<IAction>> submenuActions,
@@ -485,13 +463,11 @@ public class ClassSupplierActionBarContributor extends EditingDomainActionBarCon
 	}
 
 	/**
-	 * This removes from the specified <code>manager</code> all
-	 * {@link org.eclipse.jface.action.MenuManager}s and their
-	 * {@link org.eclipse.jface.action.ActionContributionItem}s based on the
-	 * {@link org.eclipse.jface.action.IAction}s contained in the
-	 * <code>submenuActions</code> map. <!-- begin-user-doc --> <!--
+	 * This removes from the specified <code>manager</code> all {@link org.eclipse.jface.action.MenuManager}s and their
+	 * {@link org.eclipse.jface.action.ActionContributionItem}s based on the {@link org.eclipse.jface.action.IAction}s
+	 * contained in the <code>submenuActions</code> map.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void depopulateManager(IContributionManager manager, Map<String, Collection<IAction>> submenuActions) {
@@ -511,9 +487,9 @@ public class ClassSupplierActionBarContributor extends EditingDomainActionBarCon
 	}
 
 	/**
-	 * This populates the pop-up menu before it appears. <!-- begin-user-doc -->
+	 * This populates the pop-up menu before it appears.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -550,9 +526,8 @@ public class ClassSupplierActionBarContributor extends EditingDomainActionBarCon
 	}
 
 	/**
-	 * This ensures that a delete action will clean up all references to deleted
-	 * objects. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This ensures that a delete action will clean up all references to deleted objects.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override

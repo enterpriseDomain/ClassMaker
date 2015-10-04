@@ -11,6 +11,7 @@ import org.classupplier.Contribution;
 import org.classupplier.Phase;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -56,6 +57,7 @@ public abstract class AbstractTest {
 	}
 
 	protected EPackage createEPackage(String name, String version) {
+		setPackageName(name);
 		EcoreFactory ecoreFactory = EcoreFactory.eINSTANCE;
 		EPackage ePackage = ecoreFactory.createEPackage();
 		ePackage.setName(name);
@@ -65,7 +67,7 @@ public abstract class AbstractTest {
 	}
 
 	protected EPackage updateEPackage(EPackage ePackage, String version) {
-		ePackage.setNsURI("http://" + ePackage.getName() + "/" + version);
+		ePackage.setNsURI("http://" + getPackageName() + "/" + version);
 		return ePackage;
 	}
 
@@ -100,11 +102,11 @@ public abstract class AbstractTest {
 	}
 
 	protected Contribution applyAndTest(Contribution contribution) {
-		IFuture<? extends EPackage> r = contribution.apply(getProgressMonitor());
+		IFuture<EList<EPackage>> r = contribution.apply(getProgressMonitor());
 		while (!r.isDone()) {
 			Thread.yield();
 		}
-		EPackage e = contribution.getGeneratedEPackage();
+		EPackage e = contribution.getGeneratedEPackages().get(0);
 		EClass s = (EClass) e.getEClassifier(getClassName());
 		EStructuralFeature a = s.getEStructuralFeatures().get(0);
 		EObject o = e.getEFactoryInstance().create(s);

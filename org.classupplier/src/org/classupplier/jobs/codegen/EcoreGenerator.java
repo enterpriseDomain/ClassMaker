@@ -3,7 +3,6 @@ package org.classupplier.jobs.codegen;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 
 import org.classupplier.Messages;
 import org.classupplier.Phase;
@@ -37,7 +36,7 @@ import org.eclipse.osgi.util.NLS;
 public class EcoreGenerator extends ClassSupplierJob implements org.classupplier.jobs.codegen.Generator {
 
 	public EcoreGenerator() {
-		super(Messages.CodeGeneratorJobName);
+		super(Messages.JobNameCodeGenerator);
 		// setRule(EcorePlugin.getWorkspaceRoot());
 		// setPriority(BUILD);
 	}
@@ -100,7 +99,7 @@ public class EcoreGenerator extends ClassSupplierJob implements org.classupplier
 	protected class GenModelGenerationJob extends GeneratorJob {
 
 		public GenModelGenerationJob() {
-			super(Messages.GenModelGenerationJobName);
+			super(Messages.JobNameGenModelGeneration);
 		}
 
 		@Override
@@ -117,7 +116,7 @@ public class EcoreGenerator extends ClassSupplierJob implements org.classupplier
 	protected class GenModelSetupJob extends GeneratorJob {
 
 		public GenModelSetupJob() {
-			super(Messages.GenModelConfigurationJobName);
+			super(Messages.JobNameGenModelConfiguration);
 		}
 
 		@Override
@@ -126,35 +125,17 @@ public class EcoreGenerator extends ClassSupplierJob implements org.classupplier
 			// getResourceSet().getURIConverter().getURIMap().putAll(EcorePlugin.computePlatformURIMap(true));
 			URI modelURI = URI.createFileURI(root.getRawLocation().append(getModelPath()).toString());
 			Resource resource = getResourceSet().getResource(modelURI, true);
-			EPackage modelEPackage = null;
-			EList<EPackage> allEPackages = ECollections.newBasicEList();
+			EList<EPackage> ePackages = ECollections.newBasicEList();
 			for (EObject eObject : resource.getContents()) {
-				EPackage ePackage = null;
 				if (eObject instanceof EPackage) {
-					ePackage = (EPackage) eObject;
-					allEPackages.add(ePackage);
-					if (ResourceUtil.ePackagesAreEqual(ePackage, getContribution().getDynamicEPackage()))
-						modelEPackage = ePackage;
+					ePackages.add((EPackage) eObject);
 				}
-			}
-			if (modelEPackage == null && !allEPackages.isEmpty()) {
-				EList<EPackage> choise = ECollections.newBasicEList(allEPackages);
-				choise.sort(new Comparator<EPackage>() {
-
-					@Override
-					public int compare(EPackage o1, EPackage o2) {
-						return o1.getNsURI().compareToIgnoreCase(o2.getNsURI())
-								+ o2.getName().compareToIgnoreCase(o2.getName());
-					}
-
-				});
-				modelEPackage = choise.get(choise.size() - 1);
 			}
 
 			URI genModelURI = URI.createFileURI(root.getRawLocation().append(getGenModelPath()).toString());
 			resource = getResourceSet().getResource(genModelURI, true);
 			GenModel genModel = (GenModel) resource.getContents().get(0);
-			setupGenModel(computeProjectPath(), genModel, modelEPackage, allEPackages);
+			setupGenModel(computeProjectPath(), genModel, ePackages);
 			try {
 				resource.save(Collections.EMPTY_MAP);
 			} catch (IOException e) {
@@ -168,7 +149,7 @@ public class EcoreGenerator extends ClassSupplierJob implements org.classupplier
 	protected class CodeGenerationJob extends GeneratorJob {
 
 		public CodeGenerationJob() {
-			super(Messages.CodeGenerationJobName);
+			super(Messages.JobNameCodeGeneration);
 		}
 
 		@Override
@@ -214,8 +195,7 @@ public class EcoreGenerator extends ClassSupplierJob implements org.classupplier
 	private IPath ensureModelResourcePathExists(IProject project, String name, IProgressMonitor monitor)
 			throws CoreException {
 		if (!project.exists())
-			throw new CoreException(ClassSupplierOSGi
-					.createErrorStatus(NLS.bind(Messages.ProjectNotExist, project)));
+			throw new CoreException(ClassSupplierOSGi.createErrorStatus(NLS.bind(Messages.ProjectNotExist, project)));
 		project.open(monitor);
 		IFolder folder = project.getFolder(ResourceUtil.getModelFolderName());
 		if (!folder.exists())
@@ -229,14 +209,14 @@ public class EcoreGenerator extends ClassSupplierJob implements org.classupplier
 	}
 
 	protected void setupGenModel(IPath projectPath, org.eclipse.emf.codegen.ecore.genmodel.GenModel genModel,
-			EPackage modelEPackage, Collection<EPackage> allEPackages) {
-		for (EPackage ePackage : allEPackages) {
+			Collection<EPackage> ePackages) {
+		for (EPackage ePackage : ePackages) {
 			GenPackage genPackage = genModel.findGenPackage(ePackage);
 			if (genPackage != null)
-				genPackage.setEcorePackage(modelEPackage);
+				genPackage.setEcorePackage(ePackage);
 		}
 		genModel.reconcile();
-		genModel.initialize(Collections.singletonList(modelEPackage));
+		genModel.initialize(ePackages);
 		genModel.setModelName(getContribution().getName());
 		genModel.setLanguage(getContribution().getLanguage());
 		genModel.setComplianceLevel(GenJDKLevel.JDK70_LITERAL);

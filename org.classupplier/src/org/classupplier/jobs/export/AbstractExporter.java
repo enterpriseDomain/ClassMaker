@@ -11,7 +11,7 @@ import org.osgi.framework.Version;
 public abstract class AbstractExporter extends ContainerJob implements Exporter {
 
 	public AbstractExporter() {
-		super(Messages.AbstractExporter_ExportJobName);
+		super(Messages.JobNameExport);
 	}
 
 	private IPath destination;

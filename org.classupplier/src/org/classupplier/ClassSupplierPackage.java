@@ -36,7 +36,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://org/classupplier/0.7.8"; //$NON-NLS-1$
+	String eNS_URI = "http://org/classupplier/0.7.6"; //$NON-NLS-1$
 
 	/**
 	 * The package namespace name.
@@ -156,21 +156,31 @@ public interface ClassSupplierPackage extends EPackage {
 	int CONTRIBUTION__STATE = CONSTRUCTABLE_FEATURE_COUNT + 6;
 
 	/**
-	 * The feature id for the '<em><b>Dynamic EPackage</b></em>' reference. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The feature id for the '<em><b>Dynamic EPackages</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__DYNAMIC_EPACKAGE = CONSTRUCTABLE_FEATURE_COUNT + 7;
+	int CONTRIBUTION__DYNAMIC_EPACKAGES = CONSTRUCTABLE_FEATURE_COUNT + 7;
 
 	/**
-	 * The feature id for the '<em><b>Generated EPackage</b></em>' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Generated EPackages</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__GENERATED_EPACKAGE = CONSTRUCTABLE_FEATURE_COUNT + 8;
+	int CONTRIBUTION__GENERATED_EPACKAGES = CONSTRUCTABLE_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Workspace</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTRIBUTION__WORKSPACE = CONSTRUCTABLE_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of structural features of the '<em>Contribution</em>' class.
@@ -178,7 +188,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION_FEATURE_COUNT = CONSTRUCTABLE_FEATURE_COUNT + 9;
+	int CONTRIBUTION_FEATURE_COUNT = CONSTRUCTABLE_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute. <!--
@@ -252,29 +262,40 @@ public interface ClassSupplierPackage extends EPackage {
 	int STATE__DEPLOYABLE_UNIT_NAME = CONSTRUCTABLE_FEATURE_COUNT + 7;
 
 	/**
-	 * The feature id for the '<em><b>EPackage</b></em>' attribute list. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The feature id for the '<em><b>EPackages</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__EPACKAGE = CONSTRUCTABLE_FEATURE_COUNT + 8;
+	int STATE__EPACKAGES = CONSTRUCTABLE_FEATURE_COUNT + 8;
 
 	/**
-	 * The feature id for the '<em><b>Dynamic EPackage</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Dynamic EPackages</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__DYNAMIC_EPACKAGE = CONSTRUCTABLE_FEATURE_COUNT + 9;
+	int STATE__DYNAMIC_EPACKAGES = CONSTRUCTABLE_FEATURE_COUNT + 9;
 
 	/**
-	 * The feature id for the '<em><b>Generated EPackage</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Generated EPackages</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__GENERATED_EPACKAGE = CONSTRUCTABLE_FEATURE_COUNT + 10;
+	int STATE__GENERATED_EPACKAGES = CONSTRUCTABLE_FEATURE_COUNT + 10;
+
+	/**
+	 * The feature id for the '<em><b>Contribution</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__CONTRIBUTION = CONSTRUCTABLE_FEATURE_COUNT + 11;
 
 	/**
 	 * The number of structural features of the '<em>State</em>' class. <!--
@@ -283,7 +304,7 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE_FEATURE_COUNT = CONSTRUCTABLE_FEATURE_COUNT + 11;
+	int STATE_FEATURE_COUNT = CONSTRUCTABLE_FEATURE_COUNT + 12;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.core.runtime.jobs.ISchedulingRule <em>IScheduling Rule</em>}' class.
@@ -442,6 +463,16 @@ public interface ClassSupplierPackage extends EPackage {
 	int CORE_EXCEPTION = 11;
 
 	/**
+	 * The meta object id for the '<em>EList</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.emf.common.util.EList
+	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getEList()
+	 * @generated
+	 */
+	int ELIST = 12;
+
+	/**
 	 * Returns the meta object for class '{@link org.classupplier.Contribution <em>Contribution</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Contribution</em>'.
@@ -529,30 +560,37 @@ public interface ClassSupplierPackage extends EPackage {
 	EReference getContribution_State();
 
 	/**
-	 * Returns the meta object for the reference '
-	 * {@link org.classupplier.Contribution#getDynamicEPackage
-	 * <em>Dynamic EPackage</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
-	 * 
-	 * @return the meta object for the reference '<em>Dynamic EPackage</em>'.
-	 * @see org.classupplier.Contribution#getDynamicEPackage()
+	 * Returns the meta object for the reference list '{@link org.classupplier.Contribution#getDynamicEPackages <em>Dynamic EPackages</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Dynamic EPackages</em>'.
+	 * @see org.classupplier.Contribution#getDynamicEPackages()
 	 * @see #getContribution()
 	 * @generated
 	 */
-	EReference getContribution_DynamicEPackage();
+	EReference getContribution_DynamicEPackages();
 
 	/**
-	 * Returns the meta object for the reference '
-	 * {@link org.classupplier.Contribution#getGeneratedEPackage
-	 * <em>Generated EPackage</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
-	 * 
-	 * @return the meta object for the reference '<em>Generated EPackage</em>'.
-	 * @see org.classupplier.Contribution#getGeneratedEPackage()
+	 * Returns the meta object for the reference list '{@link org.classupplier.Contribution#getGeneratedEPackages <em>Generated EPackages</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Generated EPackages</em>'.
+	 * @see org.classupplier.Contribution#getGeneratedEPackages()
 	 * @see #getContribution()
 	 * @generated
 	 */
-	EReference getContribution_GeneratedEPackage();
+	EReference getContribution_GeneratedEPackages();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.classupplier.Contribution#getWorkspace <em>Workspace</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Workspace</em>'.
+	 * @see org.classupplier.Contribution#getWorkspace()
+	 * @see #getContribution()
+	 * @generated
+	 */
+	EReference getContribution_Workspace();
 
 	/**
 	 * Returns the meta object for class '{@link org.classupplier.State <em>State</em>}'.
@@ -657,44 +695,48 @@ public interface ClassSupplierPackage extends EPackage {
 	EAttribute getState_DeployableUnitName();
 
 	/**
-	 * Returns the meta object for the attribute list '
-	 * {@link org.classupplier.State#getEPackage <em>EPackage</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for the attribute list '<em>EPackage</em>'.
-	 * @see org.classupplier.State#getEPackage()
+	 * Returns the meta object for the attribute list '{@link org.classupplier.State#getEPackages <em>EPackages</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>EPackages</em>'.
+	 * @see org.classupplier.State#getEPackages()
 	 * @see #getState()
 	 * @generated
 	 */
-	EAttribute getState_EPackage();
+	EAttribute getState_EPackages();
 
 	/**
-	 * Returns the meta object for the containment reference '
-	 * {@link org.classupplier.State#getDynamicEPackage
-	 * <em>Dynamic EPackage</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
-	 * 
-	 * @return the meta object for the containment reference '
-	 *         <em>Dynamic EPackage</em>'.
-	 * @see org.classupplier.State#getDynamicEPackage()
+	 * Returns the meta object for the containment reference list '{@link org.classupplier.State#getDynamicEPackages <em>Dynamic EPackages</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Dynamic EPackages</em>'.
+	 * @see org.classupplier.State#getDynamicEPackages()
 	 * @see #getState()
 	 * @generated
 	 */
-	EReference getState_DynamicEPackage();
+	EReference getState_DynamicEPackages();
 
 	/**
-	 * Returns the meta object for the containment reference '
-	 * {@link org.classupplier.State#getGeneratedEPackage
-	 * <em>Generated EPackage</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
-	 * 
-	 * @return the meta object for the containment reference '
-	 *         <em>Generated EPackage</em>'.
-	 * @see org.classupplier.State#getGeneratedEPackage()
+	 * Returns the meta object for the containment reference list '{@link org.classupplier.State#getGeneratedEPackages <em>Generated EPackages</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Generated EPackages</em>'.
+	 * @see org.classupplier.State#getGeneratedEPackages()
 	 * @see #getState()
 	 * @generated
 	 */
-	EReference getState_GeneratedEPackage();
+	EReference getState_GeneratedEPackages();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.classupplier.State#getContribution <em>Contribution</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Contribution</em>'.
+	 * @see org.classupplier.State#getContribution()
+	 * @see #getState()
+	 * @generated
+	 */
+	EReference getState_Contribution();
 
 	/**
 	 * Returns the meta object for class '{@link org.classupplier.Workspace <em>Workspace</em>}'.
@@ -848,6 +890,17 @@ public interface ClassSupplierPackage extends EPackage {
 	EDataType getCoreException();
 
 	/**
+	 * Returns the meta object for data type '{@link org.eclipse.emf.common.util.EList <em>EList</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>EList</em>'.
+	 * @see org.eclipse.emf.common.util.EList
+	 * @model instanceClass="org.eclipse.emf.common.util.EList" typeParameters="T"
+	 * @generated
+	 */
+	EDataType getEList();
+
+	/**
 	 * Returns the factory that creates the instances of the model. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -921,25 +974,35 @@ public interface ClassSupplierPackage extends EPackage {
 		EReference CONTRIBUTION__STATE_HISTORY = eINSTANCE.getContribution_StateHistory();
 
 		/**
-		 * The meta object literal for the '<em><b>State</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>State</b></em>' containment reference feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference CONTRIBUTION__STATE = eINSTANCE.getContribution_State();
 
 		/**
-		 * The meta object literal for the '<em><b>Dynamic EPackage</b></em>' reference feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Dynamic EPackages</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CONTRIBUTION__DYNAMIC_EPACKAGE = eINSTANCE.getContribution_DynamicEPackage();
+		EReference CONTRIBUTION__DYNAMIC_EPACKAGES = eINSTANCE.getContribution_DynamicEPackages();
 
 		/**
-		 * The meta object literal for the '<em><b>Generated EPackage</b></em>' reference feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Generated EPackages</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CONTRIBUTION__GENERATED_EPACKAGE = eINSTANCE.getContribution_GeneratedEPackage();
+		EReference CONTRIBUTION__GENERATED_EPACKAGES = eINSTANCE.getContribution_GeneratedEPackages();
+
+		/**
+		 * The meta object literal for the '<em><b>Workspace</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONTRIBUTION__WORKSPACE = eINSTANCE.getContribution_Workspace();
 
 		/**
 		 * The meta object literal for the '
@@ -1009,27 +1072,36 @@ public interface ClassSupplierPackage extends EPackage {
 		EAttribute STATE__DEPLOYABLE_UNIT_NAME = eINSTANCE.getState_DeployableUnitName();
 
 		/**
-		 * The meta object literal for the '<em><b>EPackage</b></em>' attribute list feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>EPackages</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute STATE__EPACKAGE = eINSTANCE.getState_EPackage();
+		EAttribute STATE__EPACKAGES = eINSTANCE.getState_EPackages();
 
 		/**
-		 * The meta object literal for the '<em><b>Dynamic EPackage</b></em>' containment reference feature.
-		 * <!-- begin-user-doc --> <!--
-		 * end-user-doc -->
+		 * The meta object literal for the '<em><b>Dynamic EPackages</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference STATE__DYNAMIC_EPACKAGE = eINSTANCE.getState_DynamicEPackage();
+		EReference STATE__DYNAMIC_EPACKAGES = eINSTANCE.getState_DynamicEPackages();
 
 		/**
-		 * The meta object literal for the '<em><b>Generated EPackage</b></em>' containment reference feature.
-		 * <!-- begin-user-doc --> <!--
-		 * end-user-doc -->
+		 * The meta object literal for the '<em><b>Generated EPackages</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference STATE__GENERATED_EPACKAGE = eINSTANCE.getState_GeneratedEPackage();
+		EReference STATE__GENERATED_EPACKAGES = eINSTANCE.getState_GeneratedEPackages();
+
+		/**
+		 * The meta object literal for the '<em><b>Contribution</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATE__CONTRIBUTION = eINSTANCE.getState_Contribution();
 
 		/**
 		 * The meta object literal for the '{@link org.classupplier.impl.WorkspaceImpl <em>Workspace</em>}' class.
@@ -1153,6 +1225,16 @@ public interface ClassSupplierPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType CORE_EXCEPTION = eINSTANCE.getCoreException();
+
+		/**
+		 * The meta object literal for the '<em>EList</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.emf.common.util.EList
+		 * @see org.classupplier.impl.ClassSupplierPackageImpl#getEList()
+		 * @generated
+		 */
+		EDataType ELIST = eINSTANCE.getEList();
 
 	}
 

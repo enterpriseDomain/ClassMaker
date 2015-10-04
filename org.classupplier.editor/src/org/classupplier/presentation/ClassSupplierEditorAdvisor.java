@@ -80,8 +80,8 @@ public final class ClassSupplierEditorAdvisor extends WorkbenchAdvisor {
 	}
 
 	/**
-	 * RCP's application <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * RCP's application
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static class Application implements IApplication {
@@ -106,7 +106,8 @@ public final class ClassSupplierEditorAdvisor extends WorkbenchAdvisor {
 		}
 
 		/**
-		 * @see org.eclipse.equinox.app.IApplication#stop() <!-- begin-user-doc
+		 * @see org.eclipse.equinox.app.IApplication#stop()
+		 * <!-- begin-user-doc
 		 *      --> <!-- end-user-doc -->
 		 * @generated
 		 */
@@ -116,14 +117,14 @@ public final class ClassSupplierEditorAdvisor extends WorkbenchAdvisor {
 	}
 
 	/**
-	 * RCP's perspective <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * RCP's perspective
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static class Perspective implements IPerspectiveFactory {
 		/**
-		 * Perspective ID <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * Perspective ID
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final String ID_PERSPECTIVE = "org.classupplier.presentation.ClassSupplierEditorAdvisorPerspective";
@@ -146,8 +147,8 @@ public final class ClassSupplierEditorAdvisor extends WorkbenchAdvisor {
 	}
 
 	/**
-	 * RCP's window advisor <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * RCP's window advisor
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static class WindowAdvisor extends WorkbenchWindowAdvisor {
@@ -186,8 +187,8 @@ public final class ClassSupplierEditorAdvisor extends WorkbenchAdvisor {
 	}
 
 	/**
-	 * RCP's action bar advisor <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * RCP's action bar advisor
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static class WindowActionBarAdvisor extends ActionBarAdvisor {
@@ -310,10 +311,9 @@ public final class ClassSupplierEditorAdvisor extends WorkbenchAdvisor {
 		}
 
 		/**
-		 * Adds the specified action to the given menu and also registers the
-		 * action with the action bar configurer, in order to activate its key
-		 * binding. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * Adds the specified action to the given menu and also registers the action with the
+		 * action bar configurer, in order to activate its key binding.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		protected void addToMenuAndRegister(IMenuManager menuManager, IAction action) {
@@ -323,9 +323,9 @@ public final class ClassSupplierEditorAdvisor extends WorkbenchAdvisor {
 	}
 
 	/**
-	 * About action for the RCP application. <!-- begin-user-doc --> <!--
+	 * About action for the RCP application.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public static class AboutAction extends WorkbenchWindowActionDelegate {
@@ -369,9 +369,8 @@ public final class ClassSupplierEditorAdvisor extends WorkbenchAdvisor {
 	 */
 	public static class OpenURIAction extends WorkbenchWindowActionDelegate {
 		/**
-		 * Opens the editors for the files selected using the
-		 * LoadResourceDialog. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * Opens the editors for the files selected using the LoadResourceDialog.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		public void run(IAction action) {
@@ -387,7 +386,6 @@ public final class ClassSupplierEditorAdvisor extends WorkbenchAdvisor {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public static String[] openFilePathDialog(Shell shell, int style, String[] fileExtensionFilters) {
@@ -397,7 +395,6 @@ public final class ClassSupplierEditorAdvisor extends WorkbenchAdvisor {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public static String[] openFilePathDialog(Shell shell, int style, String[] fileExtensionFilters,
@@ -407,8 +404,7 @@ public final class ClassSupplierEditorAdvisor extends WorkbenchAdvisor {
 			fileExtensionFilters = FILE_EXTENSION_FILTERS;
 		}
 
-		// If requested, augment the file extension filters by adding a group of
-		// all the other filters (*.ext1;*.ext2;...)
+		// If requested, augment the file extension filters by adding a group of all the other filters (*.ext1;*.ext2;...)
 		// at the beginning and/or an all files wildcard (*.*) at the end.
 		//
 		includeGroupFilter &= fileExtensionFilters.length > 1;
@@ -447,8 +443,7 @@ public final class ClassSupplierEditorAdvisor extends WorkbenchAdvisor {
 		String path = fileDialog.getFilterPath() + File.separator;
 		String extension = null;
 
-		// If extension adding requested, get the dotted extension corresponding
-		// to the selected filter.
+		// If extension adding requested, get the dotted extension corresponding to the selected filter.
 		//
 		if (addExtension) {
 			int i = fileDialog.getFilterIndex();
@@ -462,8 +457,7 @@ public final class ClassSupplierEditorAdvisor extends WorkbenchAdvisor {
 			}
 		}
 
-		// Build the result by adding the selected path and, if needed,
-		// auto-appending the extension.
+		// Build the result by adding the selected path and, if needed, auto-appending the extension.
 		//
 		for (int i = 0; i < filenames.length; i++) {
 			String filename = path + filenames[i];
@@ -480,7 +474,6 @@ public final class ClassSupplierEditorAdvisor extends WorkbenchAdvisor {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public static boolean openEditor(IWorkbench workbench, URI uri) {

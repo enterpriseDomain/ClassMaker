@@ -8,12 +8,12 @@ import java.util.concurrent.Semaphore;
 import org.classupplier.ClassSupplierFactory;
 import org.classupplier.ClassSupplierPackage;
 import org.classupplier.Contribution;
-import org.classupplier.Messages;
 import org.classupplier.Phase;
 import org.classupplier.State;
 import org.classupplier.Workspace;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -73,7 +73,7 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 		case ClassSupplierPackage.VERSION_TO_STATE_MAP_ENTRY:
 			return (EObject) createVersionToStateMapEntry();
 		default:
-			throw new IllegalArgumentException(Messages.Class + eClass.getName() + Messages.NotValidClassifier);
+			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -94,8 +94,10 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 			return createSemaphoreFromString(eDataType, initialValue);
 		case ClassSupplierPackage.CORE_EXCEPTION:
 			return createCoreExceptionFromString(eDataType, initialValue);
+		case ClassSupplierPackage.ELIST:
+			return createEListFromString(eDataType, initialValue);
 		default:
-			throw new IllegalArgumentException(Messages.Datatype + eDataType.getName() + Messages.NotValidClassifier);
+			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -116,8 +118,10 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 			return convertSemaphoreToString(eDataType, instanceValue);
 		case ClassSupplierPackage.CORE_EXCEPTION:
 			return convertCoreExceptionToString(eDataType, instanceValue);
+		case ClassSupplierPackage.ELIST:
+			return convertEListToString(eDataType, instanceValue);
 		default:
-			throw new IllegalArgumentException(Messages.Datatype + eDataType.getName() + Messages.NotValidClassifier);
+			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -165,7 +169,7 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 		Phase result = Phase.get(initialValue);
 		if (result == null)
 			throw new IllegalArgumentException(
-					Messages.Value + initialValue + Messages.NotValidEnumerator + eDataType.getName() + Messages.Quote);
+					"The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
@@ -240,6 +244,24 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 	 */
 	public String convertCoreExceptionToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<?> createEListFromString(EDataType eDataType, String initialValue) {
+		return (EList<?>) super.createFromString(initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertEListToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(instanceValue);
 	}
 
 	/**

@@ -2,6 +2,7 @@ package org.classupplier.jobs.load;
 
 import java.util.concurrent.Semaphore;
 
+import org.classupplier.ClassSupplierPackage;
 import org.classupplier.Messages;
 import org.classupplier.Phase;
 import org.classupplier.State;
@@ -11,6 +12,8 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.common.util.ECollections;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.osgi.util.NLS;
 import org.osgi.framework.Bundle;
@@ -22,7 +25,7 @@ import org.osgi.framework.startlevel.BundleStartLevel;
 
 public class OSGiEPackageLoader extends ContainerJob {
 
-	private EPackage ePackage;
+	private EList<EPackage> ePackages;
 
 	private Semaphore loaded = new Semaphore(0);
 
@@ -68,8 +71,7 @@ public class OSGiEPackageLoader extends ContainerJob {
 					}
 				}
 			} else
-				return ClassSupplierOSGi.createErrorStatus(
-						NLS.bind(Messages.BundleNotFound, getProject().getName()));
+				return ClassSupplierOSGi.createErrorStatus(NLS.bind(Messages.BundleNotFound, getProject().getName()));
 
 			if (monitor.isCanceled()) {
 				return Status.CANCEL_STATUS;
@@ -80,7 +82,7 @@ public class OSGiEPackageLoader extends ContainerJob {
 				return Status.CANCEL_STATUS;
 			}
 			if (exception == null) {
-				if (ePackage != null)
+				if (!ePackages.isEmpty() && ePackages.size() == contribution.getDynamicEPackages().size())
 					return getOKStatus(osgiBundle);
 			} else
 				return ClassSupplierOSGi.createErrorStatus(exception);
@@ -91,10 +93,13 @@ public class OSGiEPackageLoader extends ContainerJob {
 	}
 
 	private IStatus getOKStatus(Bundle osgiBundle) {
-		return ClassSupplierOSGi
-				.createOKStatus(NLS.bind(Messages.EPackageClassLoadComplete,
-						new Object[] { osgiBundle.getSymbolicName(),
-								osgiBundle.getHeaders().get(Constants.BUNDLE_VERSION), ePackage.getNsURI() }));
+		String ePackagesMsg = "";
+		for (EPackage ePackage : ePackages)
+			ePackagesMsg = ePackagesMsg + ePackage.getNsURI() + ", ";
+		ePackagesMsg = ePackagesMsg.subSequence(0, ePackagesMsg.length() - 2).toString();
+		return ClassSupplierOSGi.createOKStatus(NLS.bind(Messages.EPackageClassLoadComplete, new Object[] {
+				osgiBundle.getSymbolicName(), osgiBundle.getHeaders().get(Constants.BUNDLE_VERSION), ePackagesMsg }));
+
 	}
 
 	private int getOptions(int startlevel, boolean autoStart, Bundle bundle) {
@@ -108,23 +113,34 @@ public class OSGiEPackageLoader extends ContainerJob {
 	}
 
 	private synchronized void doLoad(State state, Bundle osgiBundle) {
-		String packageClassName = state.getDynamicEPackage().getName() + "." + state.getDynamicEPackage().getNsPrefix() //$NON-NLS-1$
-				+ "Package"; //$NON-NLS-1$
-		Class<?> packageClass = null;
-		try {
-			packageClass = osgiBundle.loadClass(packageClassName);
-		} catch (ClassNotFoundException e) {
-			setException(e);
+		ePackages = ECollections.newBasicEList();
+		for (EPackage model : state.getDynamicEPackages()) {
+			String packageClassName = model.getName() + "." + model.getNsPrefix() //$NON-NLS-1$
+					+ "Package"; //$NON-NLS-1$
+			Class<?> packageClass = null;
+			try {
+				packageClass = osgiBundle.loadClass(packageClassName);
+			} catch (ClassNotFoundException e) {
+				setException(e);
+			}
+			EPackage ePackage = null;
+			try {
+				ePackage = (EPackage) packageClass.getField("eINSTANCE").get(packageClass); //$NON-NLS-1$
+				ePackages.add(ePackage);
+			} catch (Exception e) {
+				setException(e);
+			}
+			int index = ePackages.indexOf(ePackage);
+			if (ePackages != null) {
+				if (getContribution().contains(ClassSupplierPackage.Literals.CONTRIBUTION__GENERATED_EPACKAGES,
+						ePackage))
+					state.getGeneratedEPackages().set(index, ePackage);
+				else
+					state.getGeneratedEPackages().add(ePackage);
+
+			} else if (exception == null)
+				setException(new Error());
 		}
-		try {
-			ePackage = (EPackage) packageClass.getField("eINSTANCE").get(packageClass); //$NON-NLS-1$
-		} catch (Exception e) {
-			setException(e);
-		}
-		if (ePackage != null) {
-			state.setGeneratedEPackage(ePackage);
-		} else if (exception == null)
-			setException(new Error());
 		loaded.release();
 	}
 

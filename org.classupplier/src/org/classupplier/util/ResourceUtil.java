@@ -22,17 +22,16 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.preferences.IPreferencesService;
-import org.eclipse.emf.ecore.EPackage;
 
 public class ResourceUtil {
 
 	private static final IPreferencesService preferencesService = Platform.getPreferencesService();
 
 	private static String modelFolderName = preferencesService.getString(ClassSupplierOSGi.PLUGIN_ID,
-			ClassSupplierOSGi.MODEL_FOLDER_PREF_KEY, Messages.ModelFolderDefault, null);
+			ClassSupplierOSGi.MODEL_FOLDER_PREF_KEY, Messages.DefaultModelFolder, null);
 
 	private static String fileExt = preferencesService.getString(ClassSupplierOSGi.PLUGIN_ID,
-			ClassSupplierOSGi.MODEL_RESOURCE_EXT_PREF_KEY, Messages.ResourceExtDefault, null);
+			ClassSupplierOSGi.MODEL_RESOURCE_EXT_PREF_KEY, Messages.DefaultResourceExt, null);
 
 	private static final String targetFolderName = "target"; //$NON-NLS-1$
 
@@ -100,12 +99,6 @@ public class ResourceUtil {
 		IWorkspaceDescription d = workspace.getDescription();
 		d.setAutoBuilding(value);
 		workspace.setDescription(d);
-	}
-
-	public static boolean ePackagesAreEqual(EPackage first, EPackage second) {
-		if (first == null || second == null)
-			return false;
-		return first.getNsURI().equals(second.getNsURI()) || first.getName().equals(second.getName());
 	}
 	
 	public static String formatQualifier(Date timestamp) {

@@ -75,10 +75,10 @@ public class ClassSupplierTest extends AbstractTest {
 
 		assertNotNull(service);
 		Contribution contribution = service.getWorkspace().createContribution(readerEPackage);
-		IFuture<? extends EPackage> result = contribution.apply(getProgressMonitor());
-		EPackage ePackage;
+		IFuture<? extends EList<EPackage>> result = contribution.apply(getProgressMonitor());
+		EList<EPackage> ePackages;
 		try {
-			ePackage = result.get();
+			ePackages = result.get();
 			while (!result.isDone()) {
 				Thread.yield();
 			}
@@ -89,11 +89,15 @@ public class ClassSupplierTest extends AbstractTest {
 					status.getException().printStackTrace();
 				}
 			}
-			assertNotNull(ePackage);
-			assertEquals(contribution.getGeneratedEPackage().getNsURI(), ePackage.getNsURI());
-			assertEquals(readerEPackage.getName(), ePackage.getName());
-			assertEquals(readerEPackage.getNsPrefix(), ePackage.getNsPrefix());
-			assertEquals(readerEPackage.getNsURI(), ePackage.getNsURI());
+			assertNotNull(ePackages);
+			assertTrue(!ePackages.isEmpty());
+			assertTrue(contribution.getWorkspace().ePackagesAreEqual(contribution.getGeneratedEPackages(), ePackages,
+					true));
+			// assertEquals(readerEPackage.getName(), ePackages.getName());
+			// assertEquals(readerEPackage.getNsPrefix(),
+			// ePackages.getNsPrefix());
+			// assertEquals(readerEPackage.getNsURI(), ePackages.getNsURI());
+			EPackage ePackage = ePackages.get(0);
 			EClass theClass = (EClass) ePackage.getEClassifier(eClass.getName());
 			EObject theObject = ePackage.getEFactoryInstance().create(theClass);
 
@@ -140,8 +144,8 @@ public class ClassSupplierTest extends AbstractTest {
 		Contribution contribution = tested.getWorkspace().createContribution(ePackage);
 		EPackage resultEPackage;
 		try {
-			IFuture<? extends EPackage> result = contribution.apply(getProgressMonitor());
-			resultEPackage = result.get();
+			IFuture<EList<EPackage>> result = contribution.apply(getProgressMonitor());
+			resultEPackage = result.get().get(0);
 			while (!result.isDone()) {
 				Thread.yield();
 			}
@@ -173,10 +177,10 @@ public class ClassSupplierTest extends AbstractTest {
 		metaClass.getEStructuralFeatures().add(attribute);
 		_package.getEClassifiers().add(metaClass);
 		Contribution contribution = service.getWorkspace().createContribution(_package);
-		IFuture<? extends EPackage> result = contribution.apply(getProgressMonitor());
+		IFuture<EList<EPackage>> result = contribution.apply(getProgressMonitor());
 		EPackage ePackage;
 		try {
-			ePackage = result.get();
+			ePackage = result.get().get(0);
 			while (!result.isDone()) {
 				Thread.yield();
 			}
@@ -201,23 +205,25 @@ public class ClassSupplierTest extends AbstractTest {
 
 	@Test
 	public void update() {
+		setClassName("SomeClass");
 		EcoreFactory f = EcoreFactory.eINSTANCE;
 		EPackage p = createEPackage("updatable", "0.1");
 		EClass cl = f.createEClass();
-		cl.setName("SomeClass");
+		cl.setName(getClassName());
+		setAttrName("a");
 		EAttribute a = f.createEAttribute();
-		a.setName("a");
+		a.setName(getAttrName());
 		a.setEType(EcorePackage.Literals.EJAVA_OBJECT);
 		cl.getEStructuralFeatures().add(a);
 		p.getEClassifiers().add(cl);
 
 		Contribution c = service.getWorkspace().createContribution(p);
 		try {
-			IFuture<? extends EPackage> r = c.apply(getProgressMonitor());
+			IFuture<? extends EList<EPackage>> r = c.apply(getProgressMonitor());
 			while (!r.isDone()) {
 				Thread.yield();
 			}
-			EPackage e = r.get();
+			EPackage e = r.get().get(0);
 			EClass cla = (EClass) e.getEClassifier(cl.getName());
 			EObject o = e.getEFactoryInstance().create(cla);
 			assertEquals(cla.getName(), o.getClass().getSimpleName());
@@ -235,20 +241,20 @@ public class ClassSupplierTest extends AbstractTest {
 		assertNotNull(packageRegistry.getEPackage(p.getNsURI()));
 		String oldNS_URI = p.getNsURI();
 
-		p = updateEPackage(p, "0.2");
-		EAttribute b = f.createEAttribute();
-		b.setName("b");
-		b.setEType(EcorePackage.Literals.EINT);
-		((EClass) p.getEClassifier(cl.getName())).getEStructuralFeatures().add(b);
-
 		try {
-			State state = c.newState();
-			state.setDynamicEPackage(p);
-			IFuture<? extends EPackage> r = c.apply(getProgressMonitor());
+			c.newState();
+			p = updateEPackage(c.getDynamicEPackages().get(0), "0.2");
+			EAttribute b = f.createEAttribute();
+			setAttrName("b");
+			b.setName(getAttrName());
+			b.setEType(EcorePackage.Literals.EINT);
+			((EClass) p.getEClassifier(cl.getName())).getEStructuralFeatures().add(b);
+
+			IFuture<EList<EPackage>> r = c.apply(getProgressMonitor());
 			while (!r.isDone()) {
 				Thread.yield();
 			}
-			EPackage e = r.get();
+			EPackage e = r.get().get(0);
 			EClass cla = (EClass) e.getEClassifier(cl.getName());
 			EObject o = e.getEFactoryInstance().create(cla);
 			assertEquals(cla.getName(), o.getClass().getSimpleName());
@@ -264,18 +270,20 @@ public class ClassSupplierTest extends AbstractTest {
 		Version v2 = c.getVersion();
 		assertTrue(v2.compareTo(v1) > 0);
 
-		assertNull(packageRegistry.getEPackage(oldNS_URI));
+		p = packageRegistry.getEPackage(oldNS_URI);
+		cl = (EClass) p.getEClassifier(getClassName());
+		assertNull(cl.getEStructuralFeature(getAttrName()));
+
 		assertNotNull(packageRegistry.getEPackage(p.getNsURI()));
 
-		p = updateEPackage(p, "0.3");
 		try {
-			State state = c.newState();
-			state.setDynamicEPackage(p);
-			IFuture<? extends EPackage> r = c.apply(getProgressMonitor());
+			c.newState();
+			p = updateEPackage(c.getDynamicEPackages().get(0), "0.3");
+			IFuture<EList<EPackage>> r = c.apply(getProgressMonitor());
 			while (!r.isDone()) {
 				Thread.yield();
 			}
-			EPackage e = r.get();
+			EPackage e = r.get().get(0);
 			assertEquals("http://" + e.getName() + "/0.3", e.getNsURI());
 		} catch (OperationCanceledException e) {
 			e.printStackTrace();
@@ -295,24 +303,23 @@ public class ClassSupplierTest extends AbstractTest {
 		Version v0 = contribution.getVersion();
 
 		contribution.newState();
-		EPackage p = contribution.getDynamicEPackage(); // contains copy of
-														// model EPackage from
-														// previous state
+		// contains a copy of model EPackages from previous state
+		EPackage p = contribution.getDynamicEPackages().get(0);
 		EClass clazz = (EClass) p.getEClassifier(getClassName());
 		clazz.getEStructuralFeatures().remove(clazz.getEStructuralFeature(getAttrName()));
 		p = updateEPackage(p, "1");
-		contribution.setDynamicEPackage(p);
+		contribution.getDynamicEPackages().set(0, p);
 
 		applyAndTest(contribution);
-		EPackage g = contribution.getGeneratedEPackage();
+		EPackage g = contribution.getGeneratedEPackages().get(0);
 		EClass gClazz = (EClass) g.getEClassifier(getClassName());
 		EObject o = g.getEFactoryInstance().create(gClazz);
 		assertNull(gClazz.getEStructuralFeature(getAttrName()));
 		assertEquals(getClassName(), o.getClass().getSimpleName());
 
 		contribution.checkout(v0);
-		contribution =createAndTestEPackage();
-		g = contribution.getGeneratedEPackage();
+		contribution = createAndTestEPackage();
+		g = contribution.getGeneratedEPackages().get(0);
 		gClazz = (EClass) g.getEClassifier(getClassName());
 		o = g.getEFactoryInstance().create(gClazz);
 		EAttribute a = (EAttribute) gClazz.getEStructuralFeature(getAttrName());
@@ -334,7 +341,6 @@ public class ClassSupplierTest extends AbstractTest {
 			e.printStackTrace();
 		}
 		createAndTestEPackage();
-		// TODO update
 	}
 
 	@Test
@@ -359,16 +365,16 @@ public class ClassSupplierTest extends AbstractTest {
 		setAttrType(EcorePackage.Literals.EJAVA_OBJECT);
 		Contribution c = createAndTestEPackage();
 		c.newState();
-		EPackage p = c.getDynamicEPackage();
+		EPackage p = c.getDynamicEPackages().get(0);
 		setPackageName("another");
 		updateEPackage(p, "1");
 		p.setName("another");
-		p.setNsPrefix("another");
+		p.setNsPrefix("another");		
 		EClass cl = (EClass) p.getEClassifier(getClassName());
 		setClassName("P");
 		cl.setName(getClassName());
 		cl.getEStructuralFeature(getAttrName());
-		c.setDynamicEPackage(p);
+		c.getDynamicEPackages().set(0, p);
 		applyAndTest(c);
 	}
 }

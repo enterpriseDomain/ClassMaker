@@ -2,6 +2,7 @@
  */
 package org.classupplier.impl;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.concurrent.Semaphore;
 
@@ -10,11 +11,14 @@ import org.classupplier.ClassSupplierPackage;
 import org.classupplier.Contribution;
 import org.classupplier.Phase;
 import org.classupplier.State;
+import org.classupplier.Workspace;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.ECollections;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
@@ -23,6 +27,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreEMap;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.equinox.concurrent.future.IFuture;
 import org.eclipse.equinox.concurrent.future.IProgressRunnable;
@@ -50,10 +55,12 @@ import org.osgi.framework.Version;
  * <em>State History</em>}</li>
  * <li>{@link org.classupplier.impl.ContributionImpl#getState <em>State</em>}
  * </li>
- * <li>{@link org.classupplier.impl.ContributionImpl#getDynamicEPackage
- * <em>Dynamic EPackage</em>}</li>
- * <li>{@link org.classupplier.impl.ContributionImpl#getGeneratedEPackage
- * <em>Generated EPackage</em>}</li>
+ * <li>{@link org.classupplier.impl.ContributionImpl#getDynamicEPackages
+ * <em>Dynamic EPackages</em>}</li>
+ * <li>{@link org.classupplier.impl.ContributionImpl#getGeneratedEPackages
+ * <em>Generated EPackages</em>}</li>
+ * <li>{@link org.classupplier.impl.ContributionImpl#getWorkspace
+ * <em>Workspace</em>}</li>
  * </ul>
  *
  * @generated
@@ -157,11 +164,25 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @generated
+	 * @generated NOT
 	 */
 	public State getState() {
 		State state = basicGetState();
 		return state != null && state.eIsProxy() ? (State) eResolveProxy((InternalEObject) state) : state;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public NotificationChain basicSetState(State newState, NotificationChain msgs) {
+		State oldState = basicGetState();
+		getStateHistory().put(newState.getVersion(), newState);
+		if (eNotificationRequired())
+			msgs.add(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.CONTRIBUTION__STATE, oldState,
+					newState));
+		return msgs;
 	}
 
 	/**
@@ -184,12 +205,12 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @generated
+	 * @generated NOT
 	 */
-	public EPackage getDynamicEPackage() {
-		EPackage dynamicEPackage = basicGetDynamicEPackage();
-		return dynamicEPackage != null && dynamicEPackage.eIsProxy()
-				? (EPackage) eResolveProxy((InternalEObject) dynamicEPackage) : dynamicEPackage;
+	public EList<EPackage> getDynamicEPackages() {
+		if (stateInited())
+			return getState().getDynamicEPackages();
+		return ECollections.emptyEList();
 	}
 
 	/**
@@ -197,20 +218,10 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 	 * 
 	 * @generated NOT
 	 */
-	public EPackage basicGetDynamicEPackage() {
+	public EList<EPackage> getGeneratedEPackages() {
 		if (stateInited())
-			return getState().getDynamicEPackage();
-		return null;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public void setDynamicEPackage(EPackage newDynamicEPackage) {
-		if (stateInited())
-			getState().setDynamicEPackage(newDynamicEPackage);
+			return getState().getGeneratedEPackages();
+		return ECollections.emptyEList();
 	}
 
 	/**
@@ -218,10 +229,44 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 	 * 
 	 * @generated
 	 */
-	public EPackage getGeneratedEPackage() {
-		EPackage generatedEPackage = basicGetGeneratedEPackage();
-		return generatedEPackage != null && generatedEPackage.eIsProxy()
-				? (EPackage) eResolveProxy((InternalEObject) generatedEPackage) : generatedEPackage;
+	public Workspace getWorkspace() {
+		if (eContainerFeatureID() != ClassSupplierPackage.CONTRIBUTION__WORKSPACE)
+			return null;
+		return (Workspace) eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public NotificationChain basicSetWorkspace(Workspace newWorkspace, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject) newWorkspace, ClassSupplierPackage.CONTRIBUTION__WORKSPACE, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public void setWorkspace(Workspace newWorkspace) {
+		if (newWorkspace != eInternalContainer()
+				|| (eContainerFeatureID() != ClassSupplierPackage.CONTRIBUTION__WORKSPACE && newWorkspace != null)) {
+			if (EcoreUtil.isAncestor(this, newWorkspace))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newWorkspace != null)
+				msgs = ((InternalEObject) newWorkspace).eInverseAdd(this, ClassSupplierPackage.WORKSPACE__CONTRIBUTIONS,
+						Workspace.class, msgs);
+			msgs = basicSetWorkspace(newWorkspace, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.CONTRIBUTION__WORKSPACE,
+					newWorkspace, newWorkspace));
 	}
 
 	/**
@@ -229,24 +274,15 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 	 * 
 	 * @generated NOT
 	 */
-	public EPackage basicGetGeneratedEPackage() {
-		return getState().getGeneratedEPackage();
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public IFuture<? extends EPackage> apply(IProgressMonitor monitor) {
+	public <T extends EList<EPackage>> IFuture<T> apply(IProgressMonitor monitor) {
 		ThreadsExecutor executor = new ThreadsExecutor();
-		IFuture<? extends EPackage> result = null;
+		IFuture<T> results = null;
 		try {
-			result = executor.execute(new ConstructRunnable<EPackage>(), monitor);
+			results = (IFuture<T>) executor.execute(new ConstructRunnable<T>(), monitor);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return result;
+		return results;
 	}
 
 	/**
@@ -261,7 +297,7 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 			throw new IllegalStateException(NLS.bind("Version {0} has no state.", version)); //$NON-NLS-1$
 	}
 
-	public class ConstructRunnable<T extends EPackage> implements IProgressRunnable<T> {
+	public class ConstructRunnable<T extends EList<? extends EPackage>> implements IProgressRunnable<T> {
 
 		public T run(IProgressMonitor monitor) throws Exception {
 			@SuppressWarnings("unchecked")
@@ -401,7 +437,7 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 		getStateHistory().put(newState.getVersion(), newState);
 		if (!first) {
 			newState.setName(getName());
-			newState.setDynamicEPackage(getDynamicEPackage());
+			newState.getDynamicEPackages().addAll(EcoreUtil.copyAll(getDynamicEPackages()));
 		}
 		checkout(newState.getVersion());
 		return newState;
@@ -418,8 +454,33 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 		state.delete(monitor);
 	}
 
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public boolean contains(EStructuralFeature eFeature, EPackage questionEPackage) {
+		return getState().contains(eFeature, questionEPackage);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	@Override
-	public EPackage construct(IProgressMonitor monitor) throws Exception {
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+		case ClassSupplierPackage.CONTRIBUTION__WORKSPACE:
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			return basicSetWorkspace((Workspace) otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	@Override
+	public <T extends EList<? extends EPackage>> T construct(IProgressMonitor monitor) throws Exception {
 		return ((Constructable) getState()).construct(new SubProgressMonitor(monitor, 1));
 	}
 
@@ -438,8 +499,27 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 		switch (featureID) {
 		case ClassSupplierPackage.CONTRIBUTION__STATE_HISTORY:
 			return ((InternalEList<?>) getStateHistory()).basicRemove(otherEnd, msgs);
+		case ClassSupplierPackage.CONTRIBUTION__STATE:
+			return basicSetState(null, msgs);
+		case ClassSupplierPackage.CONTRIBUTION__WORKSPACE:
+			return basicSetWorkspace(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+		case ClassSupplierPackage.CONTRIBUTION__WORKSPACE:
+			return eInternalContainer().eInverseRemove(this, ClassSupplierPackage.WORKSPACE__CONTRIBUTIONS,
+					Workspace.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -466,17 +546,13 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 			else
 				return getStateHistory().map();
 		case ClassSupplierPackage.CONTRIBUTION__STATE:
-			if (resolve)
-				return getState();
-			return basicGetState();
-		case ClassSupplierPackage.CONTRIBUTION__DYNAMIC_EPACKAGE:
-			if (resolve)
-				return getDynamicEPackage();
-			return basicGetDynamicEPackage();
-		case ClassSupplierPackage.CONTRIBUTION__GENERATED_EPACKAGE:
-			if (resolve)
-				return getGeneratedEPackage();
-			return basicGetGeneratedEPackage();
+			return getState();
+		case ClassSupplierPackage.CONTRIBUTION__DYNAMIC_EPACKAGES:
+			return getDynamicEPackages();
+		case ClassSupplierPackage.CONTRIBUTION__GENERATED_EPACKAGES:
+			return getGeneratedEPackages();
+		case ClassSupplierPackage.CONTRIBUTION__WORKSPACE:
+			return getWorkspace();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -486,6 +562,7 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 	 * 
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -507,8 +584,12 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 		case ClassSupplierPackage.CONTRIBUTION__STATE_HISTORY:
 			((EStructuralFeature.Setting) getStateHistory()).set(newValue);
 			return;
-		case ClassSupplierPackage.CONTRIBUTION__DYNAMIC_EPACKAGE:
-			setDynamicEPackage((EPackage) newValue);
+		case ClassSupplierPackage.CONTRIBUTION__DYNAMIC_EPACKAGES:
+			getDynamicEPackages().clear();
+			getDynamicEPackages().addAll((Collection<? extends EPackage>) newValue);
+			return;
+		case ClassSupplierPackage.CONTRIBUTION__WORKSPACE:
+			setWorkspace((Workspace) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -540,8 +621,11 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 		case ClassSupplierPackage.CONTRIBUTION__STATE_HISTORY:
 			getStateHistory().clear();
 			return;
-		case ClassSupplierPackage.CONTRIBUTION__DYNAMIC_EPACKAGE:
-			setDynamicEPackage((EPackage) null);
+		case ClassSupplierPackage.CONTRIBUTION__DYNAMIC_EPACKAGES:
+			getDynamicEPackages().clear();
+			return;
+		case ClassSupplierPackage.CONTRIBUTION__WORKSPACE:
+			setWorkspace((Workspace) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -569,11 +653,13 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 		case ClassSupplierPackage.CONTRIBUTION__STATE_HISTORY:
 			return stateHistory != null && !stateHistory.isEmpty();
 		case ClassSupplierPackage.CONTRIBUTION__STATE:
-			return basicGetState() != null;
-		case ClassSupplierPackage.CONTRIBUTION__DYNAMIC_EPACKAGE:
-			return basicGetDynamicEPackage() != null;
-		case ClassSupplierPackage.CONTRIBUTION__GENERATED_EPACKAGE:
-			return basicGetGeneratedEPackage() != null;
+			return getState() != null;
+		case ClassSupplierPackage.CONTRIBUTION__DYNAMIC_EPACKAGES:
+			return !getDynamicEPackages().isEmpty();
+		case ClassSupplierPackage.CONTRIBUTION__GENERATED_EPACKAGES:
+			return !getGeneratedEPackages().isEmpty();
+		case ClassSupplierPackage.CONTRIBUTION__WORKSPACE:
+			return getWorkspace() != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -589,9 +675,9 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: "); //$NON-NLS-1$
+		result.append(" (name: ");
 		result.append(name);
-		result.append(", version: "); //$NON-NLS-1$
+		result.append(", version: ");
 		result.append(version);
 		result.append(')');
 		return result.toString();

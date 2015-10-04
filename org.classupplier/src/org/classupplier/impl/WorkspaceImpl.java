@@ -12,7 +12,6 @@ import org.classupplier.State;
 import org.classupplier.Workspace;
 import org.classupplier.core.ClassSupplierOSGi;
 import org.classupplier.util.ClassSupplierSwitch;
-import org.classupplier.util.ResourceUtil;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -22,6 +21,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.core.runtime.jobs.MultiRule;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -34,7 +34,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -103,8 +103,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 */
 	public EList<Contribution> getContributions() {
 		if (contributions == null) {
-			contributions = new EObjectContainmentEList<Contribution>(Contribution.class, this,
-					ClassSupplierPackage.WORKSPACE__CONTRIBUTIONS);
+			contributions = new EObjectContainmentWithInverseEList<Contribution>(Contribution.class, this,
+					ClassSupplierPackage.WORKSPACE__CONTRIBUTIONS, ClassSupplierPackage.CONTRIBUTION__WORKSPACE);
 		}
 		return contributions;
 	}
@@ -149,13 +149,22 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * @generated NOT
 	 */
 	public Contribution createContribution(EPackage blueprint) {
-		Contribution result = getContribution(blueprint);
+		return createContribution(ECollections.singletonEList(blueprint));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Contribution createContribution(EList<EPackage> blueprints) {
+		Contribution result = getContribution(blueprints);
 		if (result != null)
 			return result;
 		result = ClassSupplierFactory.eINSTANCE.createContribution();
 		result.newState();
-		result.setName(blueprint.getName());
-		result.setDynamicEPackage(blueprint);
+		result.setName(blueprints.get(blueprints.size() - 1).getName());
+		result.getDynamicEPackages().addAll(blueprints);
 		registerContribution(result);
 		return result;
 	}
@@ -210,14 +219,23 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * @generated NOT
 	 */
 	public Contribution getContribution(EPackage ePackage) {
-		for (Contribution a : getContributions())
-			switch (a.getStage()) {
+		return getContribution(ECollections.singletonEList(ePackage));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Contribution getContribution(EList<EPackage> ePackages) {
+		for (Contribution c : getContributions())
+			switch (c.getStage()) {
 			case MODELED:
-				if (ResourceUtil.ePackagesAreEqual(ePackage, a.getDynamicEPackage()))
-					return a;
+				if (ePackagesAreEqual(ePackages, c.getDynamicEPackages(), false))
+					return c;
 			case LOADED:
-				if (ResourceUtil.ePackagesAreEqual(ePackage, a.getGeneratedEPackage()))
-					return a;
+				if (ePackagesAreEqual(ePackages, c.getGeneratedEPackages(), false))
+					return c;
 			default:
 				break;
 			}
@@ -279,10 +297,10 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	public Phase contains(EPackage blueprint) {
 		for (Contribution c : getContributions()) {
 			if (c.getStage().getValue() < Phase.LOADED_VALUE) {
-				if (ResourceUtil.ePackagesAreEqual(blueprint, c.getDynamicEPackage()))
+				if (ePackagesAreEqual(blueprint, c.getDynamicEPackages(), false))
 					return c.getStage();
 			} else {
-				if (ResourceUtil.ePackagesAreEqual(blueprint, c.getGeneratedEPackage()))
+				if (ePackagesAreEqual(blueprint, c.getGeneratedEPackages(), false))
 					return c.getStage();
 			}
 		}
@@ -298,6 +316,66 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	public void delete(Object object, IProgressMonitor monitor) throws CoreException {
 		if (object instanceof EObject)
 			getContribution((EObject) object).delete(monitor);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public boolean ePackagesAreEqual(EPackage first, EPackage second, boolean conjunction) {
+		if (first == null || second == null)
+			return false;
+		return conjunction ? first.getNsURI().equals(second.getNsURI()) && first.getName().equals(second.getName())
+				: first.getNsURI().equals(second.getNsURI()) || first.getName().equals(second.getName());
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public boolean ePackagesAreEqual(EPackage first, EList<EPackage> second, boolean conjunction) {
+		boolean result = second.contains(first);
+		if (result)
+			return result;
+		for (EPackage secondEPackage : second)
+			if (conjunction)
+				result &= ePackagesAreEqual(first, secondEPackage, conjunction);
+			else
+				result |= ePackagesAreEqual(first, secondEPackage, conjunction);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public boolean ePackagesAreEqual(EList<EPackage> first, EList<EPackage> second, boolean conjunction) {
+		boolean result = first.equals(second);
+		if (result)
+			return result;
+		for (EPackage firstEPackage : first)
+			if (conjunction)
+				result &= ePackagesAreEqual(firstEPackage, second, conjunction);
+			else
+				result |= ePackagesAreEqual(firstEPackage, second, conjunction);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+		case ClassSupplierPackage.WORKSPACE__CONTRIBUTIONS:
+			return ((InternalEList<InternalEObject>) (InternalEList<?>) getContributions()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -383,7 +461,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (resourceSet: "); //$NON-NLS-1$
+		result.append(" (resourceSet: ");
 		result.append(resourceSet);
 		result.append(')');
 		return result.toString();

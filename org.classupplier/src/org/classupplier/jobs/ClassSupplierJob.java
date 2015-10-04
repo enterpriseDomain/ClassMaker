@@ -3,6 +3,7 @@ package org.classupplier.jobs;
 import org.classupplier.Messages;
 import org.classupplier.Phase;
 import org.classupplier.State;
+import org.classupplier.Workspace;
 import org.classupplier.core.ClassSupplierOSGi;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -64,7 +65,7 @@ public abstract class ClassSupplierJob extends WorkspaceJob {
 		super(name);
 		setUser(true);
 		setPriority(Job.SHORT);
-		setRule(ClassSupplierOSGi.getClassSupplier().getWorkspace());
+		setRule(getWorkspace());
 		setJobGroup(new JobGroup("Class Supply", 0, 1)); //$NON-NLS-1$
 	}
 
@@ -121,7 +122,11 @@ public abstract class ClassSupplierJob extends WorkspaceJob {
 	}
 
 	public State getContribution() {
-		return ClassSupplierOSGi.getClassSupplier().getWorkspace().getContribution(getProject().getName()).getState();
+		return getWorkspace().getContribution(getProject().getName()).getState();
+	}
+
+	protected Workspace getWorkspace() {
+		return ClassSupplierOSGi.getClassSupplier().getWorkspace();
 	}
 
 	public abstract Phase requiredStage();
@@ -129,7 +134,7 @@ public abstract class ClassSupplierJob extends WorkspaceJob {
 	public void checkStage() throws CoreException {
 		if (getContribution().getStage().getValue() < requiredStage().getValue())
 			throw new CoreException(ClassSupplierOSGi
-					.createWarningStatus(NLS.bind(Messages.NotEnoughContributionStage, requiredStage().getLiteral())));
+					.createWarningStatus(NLS.bind(Messages.ContributionStageNotEnough, requiredStage().getLiteral())));
 	}
 
 	public void setResourceSet(ResourceSet resourceSet) {

@@ -130,7 +130,7 @@ public class OSGiInstaller extends Installer {
 
 	private IStatus getWarningStatus(Bundle bundle, BundleException e) {
 		if (bundle == null)
-			return ClassSupplierOSGi.createWarningStatus(NLS.bind(Messages.NoBundle, getProject().getName()), e);
+			return ClassSupplierOSGi.createWarningStatus(NLS.bind(Messages.BundleNo, getProject().getName()), e);
 		else
 			return ClassSupplierOSGi.createWarningStatus(getStateStatusMessage(bundle), e);
 	}
@@ -150,7 +150,7 @@ public class OSGiInstaller extends Installer {
 	}
 
 	private String getDuplicateStatusMessage(Bundle existingBundle, Bundle bundle) {
-		return NLS.bind(Messages.DuplicateBundle,
+		return NLS.bind(Messages.BundleDuplicate,
 				new Object[] { existingBundle.getSymbolicName(),
 						existingBundle.getHeaders().get(Constants.BUNDLE_VERSION),
 						ClassSupplierOSGi.bundleStateAsString(existingBundle.getState()), bundle.getSymbolicName(),

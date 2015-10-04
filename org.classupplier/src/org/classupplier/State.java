@@ -7,8 +7,10 @@ import java.util.Date;
 import org.classupplier.impl.Constructable;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.osgi.framework.Version;
 
@@ -28,9 +30,10 @@ import org.osgi.framework.Version;
  *   <li>{@link org.classupplier.State#getStage <em>Stage</em>}</li>
  *   <li>{@link org.classupplier.State#getProjectName <em>Project Name</em>}</li>
  *   <li>{@link org.classupplier.State#getDeployableUnitName <em>Deployable Unit Name</em>}</li>
- *   <li>{@link org.classupplier.State#getEPackage <em>EPackage</em>}</li>
- *   <li>{@link org.classupplier.State#getDynamicEPackage <em>Dynamic EPackage</em>}</li>
- *   <li>{@link org.classupplier.State#getGeneratedEPackage <em>Generated EPackage</em>}</li>
+ *   <li>{@link org.classupplier.State#getEPackages <em>EPackages</em>}</li>
+ *   <li>{@link org.classupplier.State#getDynamicEPackages <em>Dynamic EPackages</em>}</li>
+ *   <li>{@link org.classupplier.State#getGeneratedEPackages <em>Generated EPackages</em>}</li>
+ *   <li>{@link org.classupplier.State#getContribution <em>Contribution</em>}</li>
  * </ul>
  *
  * @see org.classupplier.ClassSupplierPackage#getState()
@@ -224,76 +227,83 @@ public interface State extends EObject, Constructable {
 	String getDeployableUnitName();
 
 	/**
-	 * Returns the value of the '<em><b>EPackage</b></em>' attribute list.
+	 * Returns the value of the '<em><b>EPackages</b></em>' attribute list.
 	 * The list contents are of type {@link org.eclipse.emf.ecore.util.FeatureMap.Entry}.
-	 * <!-- begin-user-doc
-	 * -->
+	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>EPackage</em>' attribute list isn't clear,
+	 * If the meaning of the '<em>EPackages</em>' attribute list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>EPackage</em>' attribute list.
-	 * @see org.classupplier.ClassSupplierPackage#getState_EPackage()
-	 * @model dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="false" transient="true"
+	 * @return the value of the '<em>EPackages</em>' attribute list.
+	 * @see org.classupplier.ClassSupplierPackage#getState_EPackages()
+	 * @model dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true" transient="true"
 	 *        extendedMetaData="kind='group'"
 	 * @generated
 	 */
-	FeatureMap getEPackage();
+	FeatureMap getEPackages();
 
 	/**
-	 * Returns the value of the '<em><b>Dynamic EPackage</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Dynamic EPackages</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.emf.ecore.EPackage}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Dynamic EPackage</em>' containment reference
-	 * isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Dynamic EPackages</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Dynamic EPackage</em>' containment reference.
-	 * @see #setDynamicEPackage(EPackage)
-	 * @see org.classupplier.ClassSupplierPackage#getState_DynamicEPackage()
+	 * @return the value of the '<em>Dynamic EPackages</em>' containment reference list.
+	 * @see org.classupplier.ClassSupplierPackage#getState_DynamicEPackages()
 	 * @model containment="true" transient="true" volatile="true" derived="true"
-	 *        extendedMetaData="group='#ePackage'"
+	 *        extendedMetaData="group='#ePackages'"
 	 * @generated
 	 */
-	EPackage getDynamicEPackage();
+	EList<EPackage> getDynamicEPackages();
 
 	/**
-	 * Sets the value of the '{@link org.classupplier.State#getDynamicEPackage <em>Dynamic EPackage</em>}' containment reference.
-	 * <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Dynamic EPackage</em>' containment reference.
-	 * @see #getDynamicEPackage()
-	 * @generated
-	 */
-	void setDynamicEPackage(EPackage value);
-
-	/**
-	 * Returns the value of the '<em><b>Generated EPackage</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Generated EPackages</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.emf.ecore.EPackage}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Generated EPackage</em>' containment reference
-	 * isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Generated EPackages</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Generated EPackage</em>' containment reference.
-	 * @see #setGeneratedEPackage(EPackage)
-	 * @see org.classupplier.ClassSupplierPackage#getState_GeneratedEPackage()
+	 * @return the value of the '<em>Generated EPackages</em>' containment reference list.
+	 * @see org.classupplier.ClassSupplierPackage#getState_GeneratedEPackages()
 	 * @model containment="true" transient="true" volatile="true" derived="true"
-	 *        extendedMetaData="group='#ePackage'"
+	 *        extendedMetaData="group='#ePackages'"
 	 * @generated
 	 */
-	EPackage getGeneratedEPackage();
+	EList<EPackage> getGeneratedEPackages();
 
 	/**
-	 * Sets the value of the '{@link org.classupplier.State#getGeneratedEPackage <em>Generated EPackage</em>}' containment reference.
-	 * <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Generated EPackage</em>' containment reference.
-	 * @see #getGeneratedEPackage()
+	 * Returns the value of the '<em><b>Contribution</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.classupplier.Contribution#getState <em>State</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Contribution</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Contribution</em>' container reference.
+	 * @see #setContribution(Contribution)
+	 * @see org.classupplier.ClassSupplierPackage#getState_Contribution()
+	 * @see org.classupplier.Contribution#getState
+	 * @model opposite="state"
 	 * @generated
 	 */
-	void setGeneratedEPackage(EPackage value);
+	Contribution getContribution();
+
+	/**
+	 * Sets the value of the '{@link org.classupplier.State#getContribution <em>Contribution</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Contribution</em>' container reference.
+	 * @see #getContribution()
+	 * @generated
+	 */
+	void setContribution(Contribution value);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -323,6 +333,22 @@ public interface State extends EObject, Constructable {
 	 * @generated
 	 */
 	void delete(IProgressMonitor monitor) throws CoreException;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	EPackage find(EPackage ePackage, Phase stage);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	boolean contains(EStructuralFeature eFeature, EPackage questionEPackage);
 
 	/**
 	 * Returns the value of the '<em><b>Stage</b></em>' attribute.
