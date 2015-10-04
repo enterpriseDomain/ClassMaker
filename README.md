@@ -32,9 +32,8 @@ Example:
     // Combine them
     Contribution contribution = classupplier.getWorkspace().createContribution(
                               ePackage);
-    Future<? extends EPackage> result = contribution
-                              .construct(new NullProgressMonitor());
-    EPackage jPackage = result.get();
+    Future<EList<EPackage>> result = contribution.apply(new NullProgressMonitor());
+    EPackage jPackage = result.get().get(0);
 
     ...
     // Use the runtime
