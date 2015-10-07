@@ -22,18 +22,21 @@ import org.osgi.framework.Version;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.classupplier.State#getName <em>Name</em>}</li>
- *   <li>{@link org.classupplier.State#getLanguage <em>Language</em>}</li>
- *   <li>{@link org.classupplier.State#getTimestamp <em>Timestamp</em>}</li>
- *   <li>{@link org.classupplier.State#getNumber <em>Number</em>}</li>
- *   <li>{@link org.classupplier.State#getVersion <em>Version</em>}</li>
- *   <li>{@link org.classupplier.State#getStage <em>Stage</em>}</li>
- *   <li>{@link org.classupplier.State#getProjectName <em>Project Name</em>}</li>
- *   <li>{@link org.classupplier.State#getDeployableUnitName <em>Deployable Unit Name</em>}</li>
- *   <li>{@link org.classupplier.State#getEPackages <em>EPackages</em>}</li>
- *   <li>{@link org.classupplier.State#getDynamicEPackages <em>Dynamic EPackages</em>}</li>
- *   <li>{@link org.classupplier.State#getGeneratedEPackages <em>Generated EPackages</em>}</li>
- *   <li>{@link org.classupplier.State#getContribution <em>Contribution</em>}</li>
+ * <li>{@link org.classupplier.State#getName <em>Name</em>}</li>
+ * <li>{@link org.classupplier.State#getLanguage <em>Language</em>}</li>
+ * <li>{@link org.classupplier.State#getTimestamp <em>Timestamp</em>}</li>
+ * <li>{@link org.classupplier.State#getNumber <em>Number</em>}</li>
+ * <li>{@link org.classupplier.State#getVersion <em>Version</em>}</li>
+ * <li>{@link org.classupplier.State#getStage <em>Stage</em>}</li>
+ * <li>{@link org.classupplier.State#getProjectName <em>Project Name</em>}</li>
+ * <li>{@link org.classupplier.State#getDeployableUnitName
+ * <em>Deployable Unit Name</em>}</li>
+ * <li>{@link org.classupplier.State#getEPackages <em>EPackages</em>}</li>
+ * <li>{@link org.classupplier.State#getDynamicEPackages
+ * <em>Dynamic EPackages</em>}</li>
+ * <li>{@link org.classupplier.State#getGeneratedEPackages
+ * <em>Generated EPackages</em>}</li>
+ * <li>{@link org.classupplier.State#getContribution <em>Contribution</em>}</li>
  * </ul>
  *
  * @see org.classupplier.ClassSupplierPackage#getState()
@@ -59,9 +62,11 @@ public interface State extends EObject, Constructable {
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link org.classupplier.State#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * Sets the value of the '{@link org.classupplier.State#getName
+	 * <em>Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Name</em>' attribute.
 	 * @see #getName()
 	 * @generated
 	 */
@@ -184,14 +189,14 @@ public interface State extends EObject, Constructable {
 	void setVersion(Version value);
 
 	/**
-	 * Returns the value of the '<em><b>Project Name</b></em>' attribute.
-	 * The default value is <code>""</code>.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Project Name</b></em>' attribute. The
+	 * default value is <code>""</code>. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Project Name</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Project Name</em>' attribute.
 	 * @see #setProjectName(String)
 	 * @see org.classupplier.ClassSupplierPackage#getState_ProjectName()
@@ -201,24 +206,26 @@ public interface State extends EObject, Constructable {
 	String getProjectName();
 
 	/**
-	 * Sets the value of the '{@link org.classupplier.State#getProjectName <em>Project Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.classupplier.State#getProjectName
+	 * <em>Project Name</em>}' attribute. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * @param value the new value of the '<em>Project Name</em>' attribute.
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Project Name</em>' attribute.
 	 * @see #getProjectName()
 	 * @generated
 	 */
 	void setProjectName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Deployable Unit Name</b></em>' attribute.
-	 * The default value is <code>""</code>.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Deployable Unit Name</b></em>'
+	 * attribute. The default value is <code>""</code>. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Deployable Unit Name</em>' attribute isn't
 	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Deployable Unit Name</em>' attribute.
 	 * @see org.classupplier.ClassSupplierPackage#getState_DeployableUnitName()
 	 * @model default="" changeable="false" volatile="true" derived="true"
@@ -227,32 +234,36 @@ public interface State extends EObject, Constructable {
 	String getDeployableUnitName();
 
 	/**
-	 * Returns the value of the '<em><b>EPackages</b></em>' attribute list.
-	 * The list contents are of type {@link org.eclipse.emf.ecore.util.FeatureMap.Entry}.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>EPackages</b></em>' attribute list. The
+	 * list contents are of type
+	 * {@link org.eclipse.emf.ecore.util.FeatureMap.Entry}. <!-- begin-user-doc
+	 * -->
 	 * <p>
 	 * If the meaning of the '<em>EPackages</em>' attribute list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>EPackages</em>' attribute list.
 	 * @see org.classupplier.ClassSupplierPackage#getState_EPackages()
-	 * @model dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true" transient="true"
-	 *        extendedMetaData="kind='group'"
+	 * @model dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true"
+	 *        transient="true" extendedMetaData="kind='group'"
 	 * @generated
 	 */
 	FeatureMap getEPackages();
 
 	/**
-	 * Returns the value of the '<em><b>Dynamic EPackages</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.emf.ecore.EPackage}.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Dynamic EPackages</b></em>' containment
+	 * reference list. The list contents are of type
+	 * {@link org.eclipse.emf.ecore.EPackage}. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Dynamic EPackages</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Dynamic EPackages</em>' containment reference
+	 * list isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Dynamic EPackages</em>' containment reference list.
+	 * 
+	 * @return the value of the '<em>Dynamic EPackages</em>' containment
+	 *         reference list.
 	 * @see org.classupplier.ClassSupplierPackage#getState_DynamicEPackages()
 	 * @model containment="true" transient="true" volatile="true" derived="true"
 	 *        extendedMetaData="group='#ePackages'"
@@ -261,15 +272,18 @@ public interface State extends EObject, Constructable {
 	EList<EPackage> getDynamicEPackages();
 
 	/**
-	 * Returns the value of the '<em><b>Generated EPackages</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.emf.ecore.EPackage}.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Generated EPackages</b></em>'
+	 * containment reference list. The list contents are of type
+	 * {@link org.eclipse.emf.ecore.EPackage}. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Generated EPackages</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Generated EPackages</em>' containment
+	 * reference list isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Generated EPackages</em>' containment reference list.
+	 * 
+	 * @return the value of the '<em>Generated EPackages</em>' containment
+	 *         reference list.
 	 * @see org.classupplier.ClassSupplierPackage#getState_GeneratedEPackages()
 	 * @model containment="true" transient="true" volatile="true" derived="true"
 	 *        extendedMetaData="group='#ePackages'"
@@ -278,14 +292,16 @@ public interface State extends EObject, Constructable {
 	EList<EPackage> getGeneratedEPackages();
 
 	/**
-	 * Returns the value of the '<em><b>Contribution</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.classupplier.Contribution#getState <em>State</em>}'.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Contribution</b></em>' container
+	 * reference. It is bidirectional and its opposite is '
+	 * {@link org.classupplier.Contribution#getState <em>State</em>}'. <!--
+	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Contribution</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Contribution</em>' container reference.
 	 * @see #setContribution(Contribution)
 	 * @see org.classupplier.ClassSupplierPackage#getState_Contribution()
@@ -296,10 +312,13 @@ public interface State extends EObject, Constructable {
 	Contribution getContribution();
 
 	/**
-	 * Sets the value of the '{@link org.classupplier.State#getContribution <em>Contribution</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Contribution</em>' container reference.
+	 * Sets the value of the '{@link org.classupplier.State#getContribution
+	 * <em>Contribution</em>}' container reference. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Contribution</em>' container
+	 *            reference.
 	 * @see #getContribution()
 	 * @generated
 	 */
@@ -307,6 +326,7 @@ public interface State extends EObject, Constructable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -314,6 +334,7 @@ public interface State extends EObject, Constructable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -321,45 +342,48 @@ public interface State extends EObject, Constructable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model exceptions="org.classupplier.CoreException" monitorDataType="org.classupplier.IProgressMonitor"
+	 * 
+	 * @model exceptions="org.classupplier.CoreException"
+	 *        monitorDataType="org.classupplier.IProgressMonitor"
 	 * @generated
 	 */
 	void setProjectVersion(IProgressMonitor monitor) throws CoreException;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model exceptions="org.classupplier.CoreException" monitorDataType="org.classupplier.IProgressMonitor"
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model exceptions="org.classupplier.CoreException"
+	 *        monitorDataType="org.classupplier.IProgressMonitor"
 	 * @generated
 	 */
 	void delete(IProgressMonitor monitor) throws CoreException;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
 	EPackage find(EPackage ePackage, Phase stage);
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
 	boolean contains(EStructuralFeature eFeature, EPackage questionEPackage);
 
 	/**
-	 * Returns the value of the '<em><b>Stage</b></em>' attribute.
-	 * The default value is <code>"DEFINED"</code>.
-	 * The literals are from the enumeration {@link org.classupplier.Phase}.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Stage</b></em>' attribute. The default
+	 * value is <code>"DEFINED"</code>. The literals are from the enumeration
+	 * {@link org.classupplier.Phase}. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Stage</em>' attribute isn't clear, there
 	 * really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Stage</em>' attribute.
 	 * @see org.classupplier.Phase
 	 * @see #setStage(Phase)
@@ -370,9 +394,11 @@ public interface State extends EObject, Constructable {
 	Phase getStage();
 
 	/**
-	 * Sets the value of the '{@link org.classupplier.State#getStage <em>Stage</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Stage</em>' attribute.
+	 * Sets the value of the '{@link org.classupplier.State#getStage
+	 * <em>Stage</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Stage</em>' attribute.
 	 * @see org.classupplier.Phase
 	 * @see #getStage()
 	 * @generated

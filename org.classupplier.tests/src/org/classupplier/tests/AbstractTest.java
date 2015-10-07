@@ -10,6 +10,7 @@ import org.classupplier.ClassSupplier;
 import org.classupplier.Contribution;
 import org.classupplier.Phase;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
@@ -106,14 +107,21 @@ public abstract class AbstractTest {
 		while (!r.isDone()) {
 			Thread.yield();
 		}
-		EPackage e = contribution.getGeneratedEPackages().get(0);
-		EClass s = (EClass) e.getEClassifier(getClassName());
-		EStructuralFeature a = s.getEStructuralFeatures().get(0);
-		EObject o = e.getEFactoryInstance().create(s);
-		o.eSet(a, true);
-		assertEquals(true, o.eGet(a));
-		assertEquals(getClassName(), o.getClass().getSimpleName());
-		assertEquals(e.getName(), o.getClass().getPackage().getName());
+		EPackage e;
+		try {
+			e = r.get().get(0);
+			EClass s = (EClass) e.getEClassifier(getClassName());
+			EStructuralFeature a = s.getEStructuralFeatures().get(0);
+			EObject o = e.getEFactoryInstance().create(s);
+			o.eSet(a, true);
+			assertEquals(true, o.eGet(a));
+			assertEquals(getClassName(), o.getClass().getSimpleName());
+			assertEquals(e.getName(), o.getClass().getPackage().getName());
+		} catch (OperationCanceledException ex) {
+			ex.printStackTrace();
+		} catch (InterruptedException ex) {
+			ex.printStackTrace();
+		}
 		return contribution;
 	}
 

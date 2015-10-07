@@ -106,13 +106,10 @@ public class StateImpl extends EObjectImpl implements State {
 			switch (msg.getFeatureID(State.class)) {
 			case ClassSupplierPackage.STATE__DYNAMIC_EPACKAGES:
 				switch (msg.getEventType()) {
-				case Notification.ADD:
-					onNewEPackage((EPackage) msg.getNewValue());
-					setStage(Phase.MODELED);
-					break;
 				case Notification.SET:
+				case Notification.ADD:
 				case Notification.ADD_MANY:
-					onNewEPackage((EPackage) msg.getNewValue());
+					onNewDynamicEPackage((EPackage) msg.getNewValue());
 					setStage(Phase.MODELED);
 					break;
 				}
@@ -122,32 +119,38 @@ public class StateImpl extends EObjectImpl implements State {
 				if ((eventType == Notification.SET || eventType == Notification.ADD
 						|| eventType == Notification.ADD_MANY)
 						&& (eIsSet(ClassSupplierPackage.Literals.STATE__GENERATED_EPACKAGES)
-								&& getGeneratedEPackages().size() == getDynamicEPackages().size()))
+								&& getGeneratedEPackages().size() == getDynamicEPackages().size())) {
 					setStage(Phase.LOADED);
+				}
 				break;
-			case ClassSupplierPackage.STATE__NAME:
-				if (msg.getEventType() == Notification.SET && msg.getNewStringValue() != null)
-					setProjectName(msg.getNewStringValue().toLowerCase());
 			}
 		}
 
-		private void onNewEPackage(EPackage newValue) {
+		private void onNewDynamicEPackage(EPackage newValue) {
 			newValue.setNsPrefix(CodeGenUtil.capName(newValue.getNsPrefix(), getLocale()));
-
 		}
 
 	}
 
-	public class VersionAdapter extends AdapterImpl {
+	public class PropertiesAdapter extends AdapterImpl {
 
 		@Override
 		public void notifyChanged(Notification msg) {
-			if (msg.getFeatureID(State.class) == ClassSupplierPackage.STATE__VERSION
-					&& StateImpl.this.eContainer() != null && msg.getEventType() == Notification.SET) {
-				EMap<Version, State> map = ((VersionToStateMapEntryImpl) StateImpl.this.eContainer()).getEMap();
-				map.remove(msg.getOldValue());
-				map.put((Version) msg.getNewValue(), StateImpl.this);
+			if (msg.getFeatureID(State.class) == ClassSupplierPackage.STATE__NAME
+					&& msg.getEventType() == Notification.SET && msg.getNewStringValue() != null)
+				setProjectName(msg.getNewStringValue().toLowerCase());
+			else if (msg.getFeatureID(State.class) == ClassSupplierPackage.STATE__VERSION && getContribution() != null
+					&& msg.getEventType() == Notification.SET) {
+				Contribution contribution = getContribution();
+				synchronized (contribution) {
+					EMap<Version, State> map = contribution.getStateHistory();
+					if (map.containsKey(msg.getOldValue()) && contribution.getVersion().equals(msg.getOldValue()))
+						contribution.setVersion((Version) msg.getNewValue());
+					map.remove(msg.getOldValue());
+					map.put((Version) msg.getNewValue(), StateImpl.this);
+				}
 			}
+
 		}
 
 	}
@@ -282,7 +285,7 @@ public class StateImpl extends EObjectImpl implements State {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String PROJECT_NAME_EDEFAULT = ""; //$NON-NLS-1$
+	protected static final String PROJECT_NAME_EDEFAULT = ""; // $NON-NLS-0$
 
 	/**
 	 * The cached value of the '{@link #getProjectName() <em>Project Name</em>}'
@@ -328,8 +331,8 @@ public class StateImpl extends EObjectImpl implements State {
 	 */
 	protected StateImpl() {
 		super();
+		eAdapters().add(new PropertiesAdapter());
 		eAdapters().add(new StageAdapter());
-		eAdapters().add(new VersionAdapter());
 		eAdapters().add(resultCollector);
 	}
 
@@ -599,10 +602,12 @@ public class StateImpl extends EObjectImpl implements State {
 				|| getGeneratedEPackages().contains(questionEPackage);
 		if (result)
 			return true;
-		if (eFeature.equals(ClassSupplierPackage.Literals.CONTRIBUTION__DYNAMIC_EPACKAGES))
+		if (eFeature.equals(ClassSupplierPackage.Literals.STATE__DYNAMIC_EPACKAGES)
+				|| eFeature.equals(ClassSupplierPackage.Literals.CONTRIBUTION__DYNAMIC_EPACKAGES))
 			for (EPackage answerEPackage : getDynamicEPackages())
 				result |= getContribution().getWorkspace().ePackagesAreEqual(questionEPackage, answerEPackage, false);
-		else if (eFeature.equals(ClassSupplierPackage.Literals.CONTRIBUTION__GENERATED_EPACKAGES))
+		else if (eFeature.equals(ClassSupplierPackage.Literals.STATE__GENERATED_EPACKAGES)
+				|| eFeature.equals(ClassSupplierPackage.Literals.CONTRIBUTION__GENERATED_EPACKAGES))
 			for (EPackage answerEPackage : getGeneratedEPackages())
 				result |= getContribution().getWorkspace().ePackagesAreEqual(questionEPackage, answerEPackage, false);
 		return result;

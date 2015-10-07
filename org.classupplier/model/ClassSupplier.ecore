@@ -177,7 +177,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="Constructable" instanceClassName="org.classupplier.impl.Constructable"
       abstract="true" interface="true"/>
   <eClassifiers xsi:type="ecore:EDataType" name="CoreException" instanceClassName="org.eclipse.core.runtime.CoreException"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="EList" instanceClassName="org.eclipse.emf.common.util.EList">
+  <eClassifiers xsi:type="ecore:EClass" name="EList" instanceClassName="org.eclipse.emf.common.util.EList"
+      abstract="true" interface="true">
     <eTypeParameters name="T"/>
   </eClassifiers>
 </ecore:EPackage>

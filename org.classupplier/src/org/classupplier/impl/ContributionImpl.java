@@ -248,13 +248,13 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @generated
+	 * @generated NOT
 	 */
 	public void setWorkspace(Workspace newWorkspace) {
 		if (newWorkspace != eInternalContainer()
 				|| (eContainerFeatureID() != ClassSupplierPackage.CONTRIBUTION__WORKSPACE && newWorkspace != null)) {
 			if (EcoreUtil.isAncestor(this, newWorkspace))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString()); //$NON-NLS-1$
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
@@ -432,9 +432,10 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 		State newState = ClassSupplierFactory.eINSTANCE.createState();
 		newState.setTimestamp(time);
 		newState.setNumber(getNewNumber());
-		newState.setVersion(org.osgi.framework.Version.parseVersion(newState.formatVersion()));
+		Version newVersion = org.osgi.framework.Version.parseVersion(newState.formatVersion());
 		boolean first = getStateHistory().isEmpty();
-		getStateHistory().put(newState.getVersion(), newState);
+		getStateHistory().put(newVersion, newState);
+		newState.setVersion(newVersion);
 		if (!first) {
 			newState.setName(getName());
 			newState.getDynamicEPackages().addAll(EcoreUtil.copyAll(getDynamicEPackages()));
@@ -460,7 +461,9 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 	 * @generated NOT
 	 */
 	public boolean contains(EStructuralFeature eFeature, EPackage questionEPackage) {
-		return getState().contains(eFeature, questionEPackage);
+		if (stateInited())
+			return getState().contains(eFeature, questionEPackage);
+		return false;
 	}
 
 	/**

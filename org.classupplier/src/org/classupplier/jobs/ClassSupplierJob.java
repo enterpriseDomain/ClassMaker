@@ -144,5 +144,5 @@ public abstract class ClassSupplierJob extends WorkspaceJob {
 	public ResourceSet getResourceSet() {
 		return resourceSet;
 	}
-	
+
 }

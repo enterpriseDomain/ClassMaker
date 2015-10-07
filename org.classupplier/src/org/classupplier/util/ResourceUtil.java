@@ -100,7 +100,7 @@ public class ResourceUtil {
 		d.setAutoBuilding(value);
 		workspace.setDescription(d);
 	}
-	
+
 	public static String formatQualifier(Date timestamp) {
 		if (timestamp == null)
 			return "qualifier"; //$NON-NLS-1$

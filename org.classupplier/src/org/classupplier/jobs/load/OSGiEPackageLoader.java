@@ -96,7 +96,8 @@ public class OSGiEPackageLoader extends ContainerJob {
 		String ePackagesMsg = "";
 		for (EPackage ePackage : ePackages)
 			ePackagesMsg = ePackagesMsg + ePackage.getNsURI() + ", ";
-		ePackagesMsg = ePackagesMsg.subSequence(0, ePackagesMsg.length() - 2).toString();
+		if (ePackagesMsg.length() > 2)
+			ePackagesMsg = ePackagesMsg.subSequence(0, ePackagesMsg.length() - 2).toString();
 		return ClassSupplierOSGi.createOKStatus(NLS.bind(Messages.EPackageClassLoadComplete, new Object[] {
 				osgiBundle.getSymbolicName(), osgiBundle.getHeaders().get(Constants.BUNDLE_VERSION), ePackagesMsg }));
 
@@ -132,8 +133,7 @@ public class OSGiEPackageLoader extends ContainerJob {
 			}
 			int index = ePackages.indexOf(ePackage);
 			if (ePackages != null) {
-				if (getContribution().contains(ClassSupplierPackage.Literals.CONTRIBUTION__GENERATED_EPACKAGES,
-						ePackage))
+				if (getContribution().contains(ClassSupplierPackage.Literals.STATE__GENERATED_EPACKAGES, ePackage))
 					state.getGeneratedEPackages().set(index, ePackage);
 				else
 					state.getGeneratedEPackages().add(ePackage);

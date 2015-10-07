@@ -18,7 +18,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -47,15 +46,8 @@ public class ModelResourceManager extends ClassSupplierJob {
 			}
 		State state = getContribution();
 		if (state.getStage() == Phase.MODELED) {
-			if (resource.getContents().isEmpty())
-				resource.getContents().addAll(EcoreUtil.copyAll(state.getDynamicEPackages()));
-			else {
-				for (EPackage ePackage : state.getDynamicEPackages())
-					if (resource.getContents().contains(ePackage))
-						resource.getContents().set(resource.getContents().indexOf(ePackage), EcoreUtil.copy(ePackage));
-					else
-						resource.getContents().add(EcoreUtil.copy(ePackage));
-			}
+			resource.getContents().clear();
+			resource.getContents().addAll(EcoreUtil.copyAll(state.getDynamicEPackages()));			
 		}
 		try {
 			resource.save(Collections.emptyMap());

@@ -13,6 +13,7 @@ import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.equinox.concurrent.future.IFuture;
 import org.osgi.framework.Version;
@@ -21,21 +22,22 @@ import org.osgi.framework.Version;
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides
  * an adapter <code>createXXX</code> method for each class of the model. <!--
  * end-user-doc -->
+ * 
  * @see org.classupplier.ClassSupplierPackage
  * @generated
  */
 public class ClassSupplierAdapterFactory extends AdapterFactoryImpl {
 	/**
-	 * The cached model package.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached model package. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected static ClassSupplierPackage modelPackage;
 
 	/**
-	 * Creates an instance of the adapter factory.
-	 * <!-- begin-user-doc --> <!--
+	 * Creates an instance of the adapter factory. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ClassSupplierAdapterFactory() {
@@ -49,6 +51,7 @@ public class ClassSupplierAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This implementation returns <code>true</code> if
 	 * the object is either the model's package or is an instance object of the
 	 * model. <!-- end-user-doc -->
+	 * 
 	 * @return whether this factory is applicable for the type of the object.
 	 * @generated
 	 */
@@ -106,16 +109,22 @@ public class ClassSupplierAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public <T> Adapter caseEList(EList<T> object) {
+			return createEListAdapter();
+		}
+
+		@Override
 		public Adapter defaultCase(EObject object) {
 			return createEObjectAdapter();
 		}
 	};
 
 	/**
-	 * Creates an adapter for the <code>target</code>.
-	 * <!-- begin-user-doc -->
+	 * Creates an adapter for the <code>target</code>. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param target the object to adapt.
+	 * 
+	 * @param target
+	 *            the object to adapt.
 	 * @return the adapter for the <code>target</code>.
 	 * @generated
 	 */
@@ -140,11 +149,12 @@ public class ClassSupplierAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.classupplier.State <em>State</em>}'.
-	 * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '
+	 * {@link org.classupplier.State <em>State</em>}'. <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore
 	 * cases; it's useful to ignore a case when inheritance will catch all the
 	 * cases anyway. <!-- end-user-doc -->
+	 * 
 	 * @return the new adapter.
 	 * @see org.classupplier.State
 	 * @generated
@@ -169,11 +179,12 @@ public class ClassSupplierAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>Version To State Map Entry</em>}'.
-	 * <!-- begin-user-doc --> This
+	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry
+	 * <em>Version To State Map Entry</em>}'. <!-- begin-user-doc --> This
 	 * default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases
 	 * anyway. <!-- end-user-doc -->
+	 * 
 	 * @return the new adapter.
 	 * @see java.util.Map.Entry
 	 * @generated
@@ -183,11 +194,13 @@ public class ClassSupplierAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.core.runtime.jobs.ISchedulingRule <em>IScheduling Rule</em>}'.
-	 * <!-- begin-user-doc --> This default
+	 * Creates a new adapter for an object of class '
+	 * {@link org.eclipse.core.runtime.jobs.ISchedulingRule
+	 * <em>IScheduling Rule</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the new adapter.
 	 * @see org.eclipse.core.runtime.jobs.ISchedulingRule
 	 * @generated
@@ -197,10 +210,12 @@ public class ClassSupplierAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.equinox.concurrent.future.IFuture <em>IFuture</em>}'.
+	 * Creates a new adapter for an object of class '
+	 * {@link org.eclipse.equinox.concurrent.future.IFuture <em>IFuture</em>}'.
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
+	 * 
 	 * @return the new adapter.
 	 * @see org.eclipse.equinox.concurrent.future.IFuture
 	 * @generated
@@ -225,9 +240,24 @@ public class ClassSupplierAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for the default case.
-	 * <!-- begin-user-doc --> This
+	 * Creates a new adapter for an object of class '
+	 * {@link org.eclipse.emf.common.util.EList <em>EList</em>}'. <!--
+	 * begin-user-doc --> This default implementation returns null so that we
+	 * can easily ignore cases; it's useful to ignore a case when inheritance
+	 * will catch all the cases anyway. <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see org.eclipse.emf.common.util.EList
+	 * @generated
+	 */
+	public Adapter createEListAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for the default case. <!-- begin-user-doc --> This
 	 * default implementation returns null. <!-- end-user-doc -->
+	 * 
 	 * @return the new adapter.
 	 * @generated
 	 */

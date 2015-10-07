@@ -270,10 +270,7 @@ public class ClassSupplierTest extends AbstractTest {
 		Version v2 = c.getVersion();
 		assertTrue(v2.compareTo(v1) > 0);
 
-		p = packageRegistry.getEPackage(oldNS_URI);
-		cl = (EClass) p.getEClassifier(getClassName());
-		assertNull(cl.getEStructuralFeature(getAttrName()));
-
+		assertNull(packageRegistry.getEPackage(oldNS_URI));
 		assertNotNull(packageRegistry.getEPackage(p.getNsURI()));
 
 		try {

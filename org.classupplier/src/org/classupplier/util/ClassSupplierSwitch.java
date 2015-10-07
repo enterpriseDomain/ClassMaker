@@ -10,6 +10,7 @@ import org.classupplier.State;
 import org.classupplier.Workspace;
 import org.classupplier.impl.Constructable;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
@@ -23,21 +24,22 @@ import org.osgi.framework.Version;
  * starting with the actual class of the object and proceeding up the
  * inheritance hierarchy until a non-null result is returned, which is the
  * result of the switch. <!-- end-user-doc -->
+ * 
  * @see org.classupplier.ClassSupplierPackage
  * @generated
  */
-public class ClassSupplierSwitch<T> extends Switch<T> {
+public class ClassSupplierSwitch<T1> extends Switch<T1> {
 	/**
-	 * The cached model package
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached model package <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected static ClassSupplierPackage modelPackage;
 
 	/**
-	 * Creates an instance of the switch.
-	 * <!-- begin-user-doc --> <!--
+	 * Creates an instance of the switch. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ClassSupplierSwitch() {
@@ -60,18 +62,20 @@ public class ClassSupplierSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
-	 * <!-- begin-user-doc --> <!--
+	 * Calls <code>caseXXX</code> for each class of the model until one returns
+	 * a non null result; it yields that result. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * @return the first non-null result returned by a <code>caseXXX</code> call.
+	 * 
+	 * @return the first non-null result returned by a <code>caseXXX</code>
+	 *         call.
 	 * @generated
 	 */
 	@Override
-	protected T doSwitch(int classifierID, EObject theEObject) {
+	protected T1 doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
 		case ClassSupplierPackage.CONTRIBUTION: {
 			Contribution contribution = (Contribution) theEObject;
-			T result = caseContribution(contribution);
+			T1 result = caseContribution(contribution);
 			if (result == null)
 				result = caseConstructable(contribution);
 			if (result == null)
@@ -80,7 +84,7 @@ public class ClassSupplierSwitch<T> extends Switch<T> {
 		}
 		case ClassSupplierPackage.STATE: {
 			State state = (State) theEObject;
-			T result = caseState(state);
+			T1 result = caseState(state);
 			if (result == null)
 				result = caseConstructable(state);
 			if (result == null)
@@ -89,7 +93,7 @@ public class ClassSupplierSwitch<T> extends Switch<T> {
 		}
 		case ClassSupplierPackage.WORKSPACE: {
 			Workspace workspace = (Workspace) theEObject;
-			T result = caseWorkspace(workspace);
+			T1 result = caseWorkspace(workspace);
 			if (result == null)
 				result = caseISchedulingRule(workspace);
 			if (result == null)
@@ -99,28 +103,35 @@ public class ClassSupplierSwitch<T> extends Switch<T> {
 		case ClassSupplierPackage.VERSION_TO_STATE_MAP_ENTRY: {
 			@SuppressWarnings("unchecked")
 			Map.Entry<Version, State> versionToStateMapEntry = (Map.Entry<Version, State>) theEObject;
-			T result = caseVersionToStateMapEntry(versionToStateMapEntry);
+			T1 result = caseVersionToStateMapEntry(versionToStateMapEntry);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
 		case ClassSupplierPackage.ISCHEDULING_RULE: {
 			ISchedulingRule iSchedulingRule = (ISchedulingRule) theEObject;
-			T result = caseISchedulingRule(iSchedulingRule);
+			T1 result = caseISchedulingRule(iSchedulingRule);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
 		case ClassSupplierPackage.IFUTURE: {
 			IFuture<?> iFuture = (IFuture<?>) theEObject;
-			T result = caseIFuture(iFuture);
+			T1 result = caseIFuture(iFuture);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
 		case ClassSupplierPackage.CONSTRUCTABLE: {
 			Constructable constructable = (Constructable) theEObject;
-			T result = caseConstructable(constructable);
+			T1 result = caseConstructable(constructable);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ClassSupplierPackage.ELIST: {
+			EList<?> eList = (EList<?>) theEObject;
+			T1 result = caseEList(eList);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -131,115 +142,156 @@ public class ClassSupplierSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Contribution</em>'.
-	 * <!-- begin-user-doc --> This implementation
+	 * Returns the result of interpreting the object as an instance of '
+	 * <em>Contribution</em>'. <!-- begin-user-doc --> This implementation
 	 * returns null; returning a non-null result will terminate the switch. <!--
 	 * end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Contribution</em>'.
+	 * 
+	 * @param object
+	 *            the target of the switch.
+	 * @return the result of interpreting the object as an instance of '
+	 *         <em>Contribution</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseContribution(Contribution object) {
+	public T1 caseContribution(Contribution object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>State</em>'.
-	 * <!-- begin-user-doc --> This implementation returns
+	 * Returns the result of interpreting the object as an instance of '
+	 * <em>State</em>'. <!-- begin-user-doc --> This implementation returns
 	 * null; returning a non-null result will terminate the switch. <!--
 	 * end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>State</em>'.
+	 * 
+	 * @param object
+	 *            the target of the switch.
+	 * @return the result of interpreting the object as an instance of '
+	 *         <em>State</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseState(State object) {
+	public T1 caseState(State object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Workspace</em>'.
-	 * <!-- begin-user-doc --> This implementation returns
+	 * Returns the result of interpreting the object as an instance of '
+	 * <em>Workspace</em>'. <!-- begin-user-doc --> This implementation returns
 	 * null; returning a non-null result will terminate the switch. <!--
 	 * end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Workspace</em>'.
+	 * 
+	 * @param object
+	 *            the target of the switch.
+	 * @return the result of interpreting the object as an instance of '
+	 *         <em>Workspace</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseWorkspace(Workspace object) {
+	public T1 caseWorkspace(Workspace object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Version To State Map Entry</em>'.
-	 * <!-- begin-user-doc --> This
+	 * Returns the result of interpreting the object as an instance of '
+	 * <em>Version To State Map Entry</em>'. <!-- begin-user-doc --> This
 	 * implementation returns null; returning a non-null result will terminate
 	 * the switch. <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Version To State Map Entry</em>'.
+	 * 
+	 * @param object
+	 *            the target of the switch.
+	 * @return the result of interpreting the object as an instance of '
+	 *         <em>Version To State Map Entry</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseVersionToStateMapEntry(Map.Entry<Version, State> object) {
+	public T1 caseVersionToStateMapEntry(Map.Entry<Version, State> object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>IScheduling Rule</em>'.
-	 * <!-- begin-user-doc --> This implementation
+	 * Returns the result of interpreting the object as an instance of '
+	 * <em>IScheduling Rule</em>'. <!-- begin-user-doc --> This implementation
 	 * returns null; returning a non-null result will terminate the switch. <!--
 	 * end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>IScheduling Rule</em>'.
+	 * 
+	 * @param object
+	 *            the target of the switch.
+	 * @return the result of interpreting the object as an instance of '
+	 *         <em>IScheduling Rule</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseISchedulingRule(ISchedulingRule object) {
+	public T1 caseISchedulingRule(ISchedulingRule object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>IFuture</em>'.
-	 * <!-- begin-user-doc --> This implementation returns
+	 * Returns the result of interpreting the object as an instance of '
+	 * <em>IFuture</em>'. <!-- begin-user-doc --> This implementation returns
 	 * null; returning a non-null result will terminate the switch. <!--
 	 * end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>IFuture</em>'.
+	 * 
+	 * @param object
+	 *            the target of the switch.
+	 * @return the result of interpreting the object as an instance of '
+	 *         <em>IFuture</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public <ResultType> T caseIFuture(IFuture<ResultType> object) {
+	public <ResultType> T1 caseIFuture(IFuture<ResultType> object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Constructable</em>'.
-	 * <!-- begin-user-doc --> This implementation
+	 * Returns the result of interpreting the object as an instance of '
+	 * <em>Constructable</em>'. <!-- begin-user-doc --> This implementation
 	 * returns null; returning a non-null result will terminate the switch. <!--
 	 * end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Constructable</em>'.
+	 * 
+	 * @param object
+	 *            the target of the switch.
+	 * @return the result of interpreting the object as an instance of '
+	 *         <em>Constructable</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseConstructable(Constructable object) {
+	public T1 caseConstructable(Constructable object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
-	 * <!-- begin-user-doc --> This implementation returns
+	 * Returns the result of interpreting the object as an instance of '
+	 * <em>EList</em>'. <!-- begin-user-doc --> This implementation returns
+	 * null; returning a non-null result will terminate the switch. <!--
+	 * end-user-doc -->
+	 * 
+	 * @param object
+	 *            the target of the switch.
+	 * @return the result of interpreting the object as an instance of '
+	 *         <em>EList</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <T> T1 caseEList(EList<T> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '
+	 * <em>EObject</em>'. <!-- begin-user-doc --> This implementation returns
 	 * null; returning a non-null result will terminate the switch, but this is
 	 * the last case anyway. <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
+	 * 
+	 * @param object
+	 *            the target of the switch.
+	 * @return the result of interpreting the object as an instance of '
+	 *         <em>EObject</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
 	 * @generated
 	 */
 	@Override
-	public T defaultCase(EObject object) {
+	public T1 defaultCase(EObject object) {
 		return null;
 	}
 
