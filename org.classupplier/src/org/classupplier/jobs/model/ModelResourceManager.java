@@ -47,7 +47,7 @@ public class ModelResourceManager extends ClassSupplierJob {
 		State state = getContribution();
 		if (state.getStage() == Phase.MODELED) {
 			resource.getContents().clear();
-			resource.getContents().addAll(EcoreUtil.copyAll(state.getDynamicEPackages()));			
+			resource.getContents().addAll(EcoreUtil.copyAll(state.getDynamicEPackages()));
 		}
 		try {
 			resource.save(Collections.emptyMap());
