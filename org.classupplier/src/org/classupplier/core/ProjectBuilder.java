@@ -34,20 +34,21 @@ public class ProjectBuilder extends IncrementalProjectBuilder {
 
 	@Override
 	protected IProject[] build(int kind, Map<String, String> args, IProgressMonitor monitor) throws CoreException {
+		IProject[] results = new IProject[] { getProject() };
 		if (kind != FULL_BUILD)
-			return null;
+			return results;
 
 		ClassSupplierJob exporterJob = (ClassSupplierJob) exporter.getAdapter(ClassSupplierJob.class);
 		exporterJob.setProject(getProject());
 		final State state = exporterJob.getContribution();
 		if (state != null) {
 			if (state.getStage().equals(Phase.DEFINED))
-				return null;
+				return results;
 			for (EPackage ePackage : state.getDynamicEPackages())
 				if (ePackage.getEClassifiers().isEmpty()) {
 					ClassSupplierOSGi.getInstance().getLog().log(ClassSupplierOSGi
 							.createWarningStatus(NLS.bind(Messages.WarningEPackageNoClassifiers, ePackage)));
-					return null;
+					return results;
 				}
 		}
 		exporter.setExportDestination(ResourceUtil.getExportDestination(getProject()));
@@ -91,7 +92,7 @@ public class ProjectBuilder extends IncrementalProjectBuilder {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		return new IProject[] { getProject() };
+		return results;
 	}
 
 }

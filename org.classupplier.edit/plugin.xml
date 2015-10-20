@@ -9,7 +9,7 @@
    <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
       <!-- @generated ClassSupplier -->
       <factory
-            uri="http://org/classupplier/0.7.6"
+            uri="http://org/classupplier/0.7.8"
             class="org.classupplier.provider.ClassSupplierItemProviderAdapterFactory"
             supportedTypes=
               "org.eclipse.emf.edit.provider.IEditingDomainItemProvider

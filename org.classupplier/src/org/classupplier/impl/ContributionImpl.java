@@ -414,8 +414,13 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 
 	@Override
 	public void setStage(Phase newStage) {
-		if (stateInited())
+		if (stateInited()) {
+			Phase oldStage = getState().getStage();
 			getState().setStage(newStage);
+			if (eNotificationRequired())
+				eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.CONTRIBUTION__STAGE,
+						oldStage, newStage));
+		}
 	}
 
 	private int getNewNumber() {

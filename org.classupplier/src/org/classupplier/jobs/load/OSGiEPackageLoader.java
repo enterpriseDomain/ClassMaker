@@ -85,7 +85,7 @@ public class OSGiEPackageLoader extends ContainerJob {
 				if (!ePackages.isEmpty() && ePackages.size() == contribution.getDynamicEPackages().size())
 					return getOKStatus(osgiBundle);
 			} else
-				return ClassSupplierOSGi.createErrorStatus(exception);
+				throw new CoreException(ClassSupplierOSGi.createErrorStatus(exception));
 		} finally {
 			monitor.done();
 		}
@@ -93,9 +93,9 @@ public class OSGiEPackageLoader extends ContainerJob {
 	}
 
 	private IStatus getOKStatus(Bundle osgiBundle) {
-		String ePackagesMsg = "";
+		String ePackagesMsg = ""; //$NON-NLS-1$
 		for (EPackage ePackage : ePackages)
-			ePackagesMsg = ePackagesMsg + ePackage.getNsURI() + ", ";
+			ePackagesMsg = ePackagesMsg + ePackage.getNsURI() + ", "; //$NON-NLS-1$
 		if (ePackagesMsg.length() > 2)
 			ePackagesMsg = ePackagesMsg.subSequence(0, ePackagesMsg.length() - 2).toString();
 		return ClassSupplierOSGi.createOKStatus(NLS.bind(Messages.EPackageClassLoadComplete, new Object[] {

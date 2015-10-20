@@ -131,14 +131,11 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * @generated NOT
 	 */
 	public void init() {
-		IProgressMonitor monitor = new NullProgressMonitor();
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		for (IProject project : workspace.getRoot().getProjects()) {
 			Contribution contribution = null;
 			try {
-				if (!project.isOpen())
-					project.open(monitor);
-				if (project.hasNature(ClassSupplierOSGi.NATURE_ID)) {
+				if (project.isOpen() && project.hasNature(ClassSupplierOSGi.NATURE_ID)) {
 					if (contribution == null) {
 						contribution = (ContributionImpl) ClassSupplierFactory.eINSTANCE.createContribution();
 						contribution.setProjectName(project.getName());
