@@ -74,6 +74,7 @@ import org.osgi.framework.Version;
  * @generated
  */
 public class StateImpl extends EObjectImpl implements State {
+
 	private final class ResultAdapter extends AdapterImpl {
 		private EList<EPackage> results;
 
@@ -119,7 +120,7 @@ public class StateImpl extends EObjectImpl implements State {
 				if ((eventType == Notification.SET || eventType == Notification.ADD
 						|| eventType == Notification.ADD_MANY)
 						&& (eIsSet(ClassSupplierPackage.Literals.STATE__GENERATED_EPACKAGES)
-								&& getGeneratedEPackages().size() == getDynamicEPackages().size())) {
+								? getGeneratedEPackages().size() == getDynamicEPackages().size() : true)) {
 					setStage(Phase.LOADED);
 				}
 				break;
