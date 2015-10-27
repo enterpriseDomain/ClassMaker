@@ -412,10 +412,10 @@ public class ClassSupplierTest extends AbstractTest {
 			ex.printStackTrace();
 		} catch (InterruptedException ex) {
 			ex.printStackTrace();
-		} catch (SecurityException e1) {
-			e1.printStackTrace();
-		} catch (ClassNotFoundException e1) {
-			e1.printStackTrace();
+		} catch (SecurityException ex) {
+			ex.printStackTrace();
+		} catch (ClassNotFoundException ex) {
+			ex.printStackTrace();
 		}
 
 	}
