@@ -9,7 +9,9 @@ import java.util.concurrent.Semaphore;
 import org.classupplier.ClassSupplierFactory;
 import org.classupplier.ClassSupplierPackage;
 import org.classupplier.Contribution;
+import org.classupplier.Customizer;
 import org.classupplier.Phase;
+import org.classupplier.PhaseQualifier;
 import org.classupplier.State;
 import org.classupplier.Workspace;
 import org.eclipse.core.runtime.CoreException;
@@ -42,25 +44,17 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link org.classupplier.impl.ContributionImpl#getName <em>Name</em>}</li>
- * <li>{@link org.classupplier.impl.ContributionImpl#getLanguage
- * <em>Language</em>}</li>
- * <li>{@link org.classupplier.impl.ContributionImpl#getVersion <em>Version</em>
- * }</li>
- * <li>{@link org.classupplier.impl.ContributionImpl#getStage <em>Stage</em>}
- * </li>
- * <li>{@link org.classupplier.impl.ContributionImpl#getProjectName
- * <em>Project Name</em>}</li>
- * <li>{@link org.classupplier.impl.ContributionImpl#getStateHistory
- * <em>State History</em>}</li>
- * <li>{@link org.classupplier.impl.ContributionImpl#getState <em>State</em>}
- * </li>
- * <li>{@link org.classupplier.impl.ContributionImpl#getDynamicEPackages
- * <em>Dynamic EPackages</em>}</li>
- * <li>{@link org.classupplier.impl.ContributionImpl#getGeneratedEPackages
- * <em>Generated EPackages</em>}</li>
- * <li>{@link org.classupplier.impl.ContributionImpl#getWorkspace
- * <em>Workspace</em>}</li>
+ *   <li>{@link org.classupplier.impl.ContributionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.classupplier.impl.ContributionImpl#getLanguage <em>Language</em>}</li>
+ *   <li>{@link org.classupplier.impl.ContributionImpl#getVersion <em>Version</em>}</li>
+ *   <li>{@link org.classupplier.impl.ContributionImpl#getStage <em>Stage</em>}</li>
+ *   <li>{@link org.classupplier.impl.ContributionImpl#getProjectName <em>Project Name</em>}</li>
+ *   <li>{@link org.classupplier.impl.ContributionImpl#getStateHistory <em>State History</em>}</li>
+ *   <li>{@link org.classupplier.impl.ContributionImpl#getState <em>State</em>}</li>
+ *   <li>{@link org.classupplier.impl.ContributionImpl#getDynamicEPackages <em>Dynamic EPackages</em>}</li>
+ *   <li>{@link org.classupplier.impl.ContributionImpl#getGeneratedEPackages <em>Generated EPackages</em>}</li>
+ *   <li>{@link org.classupplier.impl.ContributionImpl#getWorkspace <em>Workspace</em>}</li>
+ *   <li>{@link org.classupplier.impl.ContributionImpl#getCustomizers <em>Customizers</em>}</li>
  * </ul>
  *
  * @generated
@@ -70,7 +64,6 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -79,16 +72,14 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 	/**
 	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
 	/**
-	 * The default value of the '{@link #getLanguage() <em>Language</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getLanguage() <em>Language</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getLanguage()
 	 * @generated
 	 * @ordered
@@ -104,9 +95,8 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 	 */
 	protected static final Version VERSION_EDEFAULT = Version.emptyVersion;
 	/**
-	 * The cached value of the '{@link #getVersion() <em>Version</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getVersion()
 	 * @generated
 	 * @ordered
@@ -115,25 +105,22 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 	/**
 	 * The default value of the '{@link #getStage() <em>Stage</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getStage()
 	 * @generated
 	 * @ordered
 	 */
 	protected static final Phase STAGE_EDEFAULT = Phase.DEFINED;
 	/**
-	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}
-	 * ' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getProjectName()
 	 * @generated
 	 * @ordered
 	 */
 	protected static final String PROJECT_NAME_EDEFAULT = ""; //$NON-NLS-1$
 	/**
-	 * The cached value of the '{@link #getStateHistory() <em>State History</em>
-	 * }' map. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getStateHistory() <em>State History</em>}' map.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getStateHistory()
 	 * @generated
 	 * @ordered
@@ -153,7 +140,6 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -226,7 +212,6 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Workspace getWorkspace() {
@@ -237,7 +222,6 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetWorkspace(Workspace newWorkspace, NotificationChain msgs) {
@@ -267,6 +251,18 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ClassSupplierPackage.CONTRIBUTION__WORKSPACE,
 					newWorkspace, newWorkspace));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public EMap<PhaseQualifier, Customizer> getCustomizers() {
+		if (stateInited())
+			return getState().getCustomizers();
+
+		return ECollections.emptyEMap();
 	}
 
 	/**
@@ -359,7 +355,6 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Version getVersion() {
@@ -368,7 +363,6 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setVersion(Version newVersion) {
@@ -394,7 +388,6 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EMap<Version, State> getStateHistory() {
@@ -473,7 +466,6 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -499,7 +491,6 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -511,13 +502,14 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 			return basicSetState(null, msgs);
 		case ClassSupplierPackage.CONTRIBUTION__WORKSPACE:
 			return basicSetWorkspace(null, msgs);
+		case ClassSupplierPackage.CONTRIBUTION__CUSTOMIZERS:
+			return ((InternalEList<?>) getCustomizers()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -532,7 +524,6 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -561,13 +552,17 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 			return getGeneratedEPackages();
 		case ClassSupplierPackage.CONTRIBUTION__WORKSPACE:
 			return getWorkspace();
+		case ClassSupplierPackage.CONTRIBUTION__CUSTOMIZERS:
+			if (coreType)
+				return getCustomizers();
+			else
+				return getCustomizers().map();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -599,13 +594,15 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 		case ClassSupplierPackage.CONTRIBUTION__WORKSPACE:
 			setWorkspace((Workspace) newValue);
 			return;
+		case ClassSupplierPackage.CONTRIBUTION__CUSTOMIZERS:
+			((EStructuralFeature.Setting) getCustomizers()).set(newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -635,13 +632,15 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 		case ClassSupplierPackage.CONTRIBUTION__WORKSPACE:
 			setWorkspace((Workspace) null);
 			return;
+		case ClassSupplierPackage.CONTRIBUTION__CUSTOMIZERS:
+			getCustomizers().clear();
+			return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -668,13 +667,14 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 			return !getGeneratedEPackages().isEmpty();
 		case ClassSupplierPackage.CONTRIBUTION__WORKSPACE:
 			return getWorkspace() != null;
+		case ClassSupplierPackage.CONTRIBUTION__CUSTOMIZERS:
+			return !getCustomizers().isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

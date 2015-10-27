@@ -57,6 +57,7 @@ public class ContributionItemProvider extends ItemProviderAdapter implements IEd
 			addProjectNamePropertyDescriptor(object);
 			addDynamicEPackagesPropertyDescriptor(object);
 			addGeneratedEPackagesPropertyDescriptor(object);
+			addCustomizersPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -174,6 +175,21 @@ public class ContributionItemProvider extends ItemProviderAdapter implements IEd
 	}
 
 	/**
+	 * This adds a property descriptor for the Customizers feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addCustomizersPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Contribution_customizers_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Contribution_customizers_feature",
+								"_UI_Contribution_type"),
+						ClassSupplierPackage.Literals.CONTRIBUTION__CUSTOMIZERS, true, false, true, null, null, null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -186,7 +202,6 @@ public class ContributionItemProvider extends ItemProviderAdapter implements IEd
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ClassSupplierPackage.Literals.CONTRIBUTION__DYNAMIC_EPACKAGES);
-			childrenFeatures.add(ClassSupplierPackage.Literals.CONTRIBUTION__GENERATED_EPACKAGES);
 		}
 		return childrenFeatures;
 	}
@@ -247,10 +262,10 @@ public class ContributionItemProvider extends ItemProviderAdapter implements IEd
 		case ClassSupplierPackage.CONTRIBUTION__PROJECT_NAME:
 		case ClassSupplierPackage.CONTRIBUTION__STATE_HISTORY:
 		case ClassSupplierPackage.CONTRIBUTION__STATE:
+		case ClassSupplierPackage.CONTRIBUTION__GENERATED_EPACKAGES:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case ClassSupplierPackage.CONTRIBUTION__DYNAMIC_EPACKAGES:
-		case ClassSupplierPackage.CONTRIBUTION__GENERATED_EPACKAGES:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}

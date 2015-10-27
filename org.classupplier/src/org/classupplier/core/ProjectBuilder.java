@@ -28,7 +28,7 @@ public class ProjectBuilder extends IncrementalProjectBuilder {
 
 	public static final String BUILDER_ID = ClassSupplierOSGi.PLUGIN_ID + '.' + "builder"; //$NON-NLS-1$
 
-	protected Generator generator = new EcoreGenerator();
+	protected Generator generator = EcoreGenerator.createInstance();
 
 	protected Exporter exporter = new PDEExporter();
 

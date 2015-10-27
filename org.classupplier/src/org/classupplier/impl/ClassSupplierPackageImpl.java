@@ -8,7 +8,9 @@ import java.util.concurrent.Semaphore;
 import org.classupplier.ClassSupplierFactory;
 import org.classupplier.ClassSupplierPackage;
 import org.classupplier.Contribution;
+import org.classupplier.Customizer;
 import org.classupplier.Phase;
+import org.classupplier.PhaseQualifier;
 import org.classupplier.State;
 import org.classupplier.Workspace;
 import org.eclipse.core.runtime.CoreException;
@@ -32,97 +34,102 @@ import org.osgi.framework.Version;
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Package</b>. <!--
  * end-user-doc -->
- * 
  * @generated
  */
 public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSupplierPackage {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass contributionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass stateEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass workspaceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass versionToStateMapEntryEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass iSchedulingRuleEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass iFutureEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass constructableEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass eListEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * @generated
+	 */
+	private EClass customizerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass phaseQualifierEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass phaseQualifierToCustomizerMapEntryEClass = null;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EEnum phaseEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EDataType iProgressMonitorEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EDataType versionEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EDataType semaphoreEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EDataType coreExceptionEDataType = null;
@@ -148,7 +155,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private static boolean isInited = false;
@@ -198,7 +204,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getContribution() {
@@ -207,7 +212,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getContribution_Name() {
@@ -216,7 +220,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getContribution_Language() {
@@ -225,7 +228,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getContribution_Version() {
@@ -234,7 +236,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getContribution_Stage() {
@@ -243,7 +244,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getContribution_ProjectName() {
@@ -252,7 +252,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getContribution_StateHistory() {
@@ -261,7 +260,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getContribution_State() {
@@ -270,7 +268,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getContribution_DynamicEPackages() {
@@ -279,7 +276,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getContribution_GeneratedEPackages() {
@@ -288,7 +284,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getContribution_Workspace() {
@@ -297,7 +292,14 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * @generated
+	 */
+	public EReference getContribution_Customizers() {
+		return (EReference) contributionEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EClass getState() {
@@ -306,7 +308,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getState_Name() {
@@ -315,7 +316,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getState_Language() {
@@ -324,7 +324,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getState_Timestamp() {
@@ -333,7 +332,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getState_Number() {
@@ -342,7 +340,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getState_Version() {
@@ -351,7 +348,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getState_Stage() {
@@ -360,7 +356,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getState_ProjectName() {
@@ -369,7 +364,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getState_DeployableUnitName() {
@@ -378,7 +372,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getState_EPackages() {
@@ -387,7 +380,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getState_DynamicEPackages() {
@@ -396,7 +388,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getState_GeneratedEPackages() {
@@ -405,7 +396,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getState_Contribution() {
@@ -414,7 +404,14 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * @generated
+	 */
+	public EReference getState_Customizers() {
+		return (EReference) stateEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EClass getWorkspace() {
@@ -423,7 +420,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getWorkspace_Contributions() {
@@ -432,7 +428,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getWorkspace_ResourceSet() {
@@ -441,7 +436,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getVersionToStateMapEntry() {
@@ -450,7 +444,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getVersionToStateMapEntry_Key() {
@@ -459,7 +452,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getVersionToStateMapEntry_Value() {
@@ -468,7 +460,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getISchedulingRule() {
@@ -477,7 +468,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getIFuture() {
@@ -486,7 +476,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getConstructable() {
@@ -495,7 +484,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EEnum getPhase() {
@@ -504,7 +492,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EDataType getIProgressMonitor() {
@@ -513,7 +500,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EDataType getVersion() {
@@ -522,7 +508,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EDataType getSemaphore() {
@@ -531,7 +516,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EDataType getCoreException() {
@@ -540,7 +524,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getEList() {
@@ -549,7 +532,74 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * @generated
+	 */
+	public EClass getCustomizer() {
+		return customizerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCustomizer_AppliesTo() {
+		return (EReference) customizerEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPhaseQualifier() {
+		return phaseQualifierEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPhaseQualifier_Stage() {
+		return (EAttribute) phaseQualifierEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPhaseQualifier_Filter() {
+		return (EAttribute) phaseQualifierEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPhaseQualifierToCustomizerMapEntry() {
+		return phaseQualifierToCustomizerMapEntryEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPhaseQualifierToCustomizerMapEntry_Key() {
+		return (EReference) phaseQualifierToCustomizerMapEntryEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPhaseQualifierToCustomizerMapEntry_Value() {
+		return (EReference) phaseQualifierToCustomizerMapEntryEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public ClassSupplierFactory getClassSupplierFactory() {
@@ -558,16 +608,15 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private boolean isCreated = false;
 
 	/**
-	 * Creates the meta-model objects for the package. This method is guarded to
-	 * have no affect on any invocation but its first. <!-- begin-user-doc -->
+	 * Creates the meta-model objects for the package.  This method is
+	 * guarded to have no affect on any invocation but its first.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void createPackageContents() {
@@ -587,6 +636,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 		createEReference(contributionEClass, CONTRIBUTION__DYNAMIC_EPACKAGES);
 		createEReference(contributionEClass, CONTRIBUTION__GENERATED_EPACKAGES);
 		createEReference(contributionEClass, CONTRIBUTION__WORKSPACE);
+		createEReference(contributionEClass, CONTRIBUTION__CUSTOMIZERS);
 
 		stateEClass = createEClass(STATE);
 		createEAttribute(stateEClass, STATE__NAME);
@@ -601,6 +651,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 		createEReference(stateEClass, STATE__DYNAMIC_EPACKAGES);
 		createEReference(stateEClass, STATE__GENERATED_EPACKAGES);
 		createEReference(stateEClass, STATE__CONTRIBUTION);
+		createEReference(stateEClass, STATE__CUSTOMIZERS);
 
 		workspaceEClass = createEClass(WORKSPACE);
 		createEReference(workspaceEClass, WORKSPACE__CONTRIBUTIONS);
@@ -618,6 +669,17 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 		eListEClass = createEClass(ELIST);
 
+		customizerEClass = createEClass(CUSTOMIZER);
+		createEReference(customizerEClass, CUSTOMIZER__APPLIES_TO);
+
+		phaseQualifierEClass = createEClass(PHASE_QUALIFIER);
+		createEAttribute(phaseQualifierEClass, PHASE_QUALIFIER__STAGE);
+		createEAttribute(phaseQualifierEClass, PHASE_QUALIFIER__FILTER);
+
+		phaseQualifierToCustomizerMapEntryEClass = createEClass(PHASE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY);
+		createEReference(phaseQualifierToCustomizerMapEntryEClass, PHASE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY__KEY);
+		createEReference(phaseQualifierToCustomizerMapEntryEClass, PHASE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY__VALUE);
+
 		// Create enums
 		phaseEEnum = createEEnum(PHASE);
 
@@ -630,7 +692,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private boolean isInitialized = false;
@@ -696,6 +757,9 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 		initEReference(getContribution_Workspace(), this.getWorkspace(), this.getWorkspace_Contributions(), "workspace",
 				null, 0, 1, Contribution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
 				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getContribution_Customizers(), this.getPhaseQualifierToCustomizerMapEntry(), null, "customizers",
+				null, 0, -1, Contribution.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(contributionEClass, null, "apply", 0, 1, IS_UNIQUE, IS_ORDERED);
 		ETypeParameter t1 = addETypeParameter(op, "T");
@@ -751,6 +815,9 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 				!IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getState_Contribution(), this.getContribution(), this.getContribution_State(), "contribution",
 				null, 0, 1, State.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getState_Customizers(), this.getPhaseQualifierToCustomizerMapEntry(), null, "customizers", null,
+				0, -1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(stateEClass, null, "fireJobsCompleted", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -851,6 +918,32 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 				!IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(eListEClass, EList.class, "EList", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(customizerEClass, Customizer.class, "Customizer", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCustomizer_AppliesTo(), this.getPhaseQualifier(), null, "appliesTo", null, 0, 1,
+				Customizer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(customizerEClass, null, "customize", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEJavaObject(), "args", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(phaseQualifierEClass, PhaseQualifier.class, "PhaseQualifier", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPhaseQualifier_Stage(), this.getPhase(), "stage", null, 0, 1, PhaseQualifier.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPhaseQualifier_Filter(), ecorePackage.getEString(), "filter", null, 0, 1,
+				PhaseQualifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+
+		initEClass(phaseQualifierToCustomizerMapEntryEClass, Map.Entry.class, "PhaseQualifierToCustomizerMapEntry",
+				!IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getPhaseQualifierToCustomizerMapEntry_Key(), this.getPhaseQualifier(), null, "key", null, 0, 1,
+				Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPhaseQualifierToCustomizerMapEntry_Value(), this.getCustomizer(), null, "value", null, 0, 1,
+				Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(phaseEEnum, Phase.class, "Phase");

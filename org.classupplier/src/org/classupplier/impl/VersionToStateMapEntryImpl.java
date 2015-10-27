@@ -22,10 +22,8 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link org.classupplier.impl.VersionToStateMapEntryImpl#getTypedKey
- * <em>Key</em>}</li>
- * <li>{@link org.classupplier.impl.VersionToStateMapEntryImpl#getTypedValue
- * <em>Value</em>}</li>
+ *   <li>{@link org.classupplier.impl.VersionToStateMapEntryImpl#getTypedKey <em>Key</em>}</li>
+ *   <li>{@link org.classupplier.impl.VersionToStateMapEntryImpl#getTypedValue <em>Value</em>}</li>
  * </ul>
  *
  * @generated
@@ -34,7 +32,6 @@ public class VersionToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 	/**
 	 * The default value of the '{@link #getTypedKey() <em>Key</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getTypedKey()
 	 * @generated
 	 * @ordered
@@ -44,7 +41,6 @@ public class VersionToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 	/**
 	 * The cached value of the '{@link #getTypedKey() <em>Key</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getTypedKey()
 	 * @generated
 	 * @ordered
@@ -52,9 +48,8 @@ public class VersionToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 	protected Version key = KEY_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getTypedValue() <em>Value</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getTypedValue() <em>Value</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getTypedValue()
 	 * @generated
 	 * @ordered
@@ -63,7 +58,6 @@ public class VersionToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected VersionToStateMapEntryImpl() {
@@ -72,7 +66,6 @@ public class VersionToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -82,7 +75,6 @@ public class VersionToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Version getTypedKey() {
@@ -91,7 +83,6 @@ public class VersionToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setTypedKey(Version newKey) {
@@ -104,7 +95,6 @@ public class VersionToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public State getTypedValue() {
@@ -113,7 +103,6 @@ public class VersionToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetTypedValue(State newValue, NotificationChain msgs) {
@@ -132,7 +121,6 @@ public class VersionToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setTypedValue(State newValue) {
@@ -154,7 +142,6 @@ public class VersionToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -168,7 +155,6 @@ public class VersionToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -184,7 +170,6 @@ public class VersionToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -202,7 +187,6 @@ public class VersionToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -220,7 +204,6 @@ public class VersionToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -236,7 +219,6 @@ public class VersionToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -253,14 +235,12 @@ public class VersionToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected int hash = -1;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public int getHash() {
@@ -273,7 +253,6 @@ public class VersionToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setHash(int hash) {
@@ -282,7 +261,6 @@ public class VersionToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Version getKey() {
@@ -291,7 +269,6 @@ public class VersionToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setKey(Version key) {
@@ -300,7 +277,6 @@ public class VersionToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public State getValue() {
@@ -309,7 +285,6 @@ public class VersionToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public State setValue(State value) {
@@ -320,7 +295,6 @@ public class VersionToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")

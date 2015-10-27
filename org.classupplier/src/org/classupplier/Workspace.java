@@ -18,10 +18,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
  * The following features are supported:
  * </p>
  * <ul>
- * <li>{@link org.classupplier.Workspace#getContributions <em>Contributions</em>
- * }</li>
- * <li>{@link org.classupplier.Workspace#getResourceSet <em>Resource Set</em>}
- * </li>
+ *   <li>{@link org.classupplier.Workspace#getContributions <em>Contributions</em>}</li>
+ *   <li>{@link org.classupplier.Workspace#getResourceSet <em>Resource Set</em>}</li>
  * </ul>
  *
  * @see org.classupplier.ClassSupplierPackage#getWorkspace()
@@ -30,19 +28,16 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
  */
 public interface Workspace extends EObject, ISchedulingRule {
 	/**
-	 * Returns the value of the '<em><b>Contributions</b></em>' containment
-	 * reference list. The list contents are of type
-	 * {@link org.classupplier.Contribution}. It is bidirectional and its
-	 * opposite is '{@link org.classupplier.Contribution#getWorkspace
-	 * <em>Workspace</em>}'. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Contributions</b></em>' containment reference list.
+	 * The list contents are of type {@link org.classupplier.Contribution}.
+	 * It is bidirectional and its opposite is '{@link org.classupplier.Contribution#getWorkspace <em>Workspace</em>}'.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Contributions</em>' containment reference list
 	 * isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Contributions</em>' containment reference
-	 *         list.
+	 * @return the value of the '<em>Contributions</em>' containment reference list.
 	 * @see org.classupplier.ClassSupplierPackage#getWorkspace_Contributions()
 	 * @see org.classupplier.Contribution#getWorkspace
 	 * @model opposite="workspace" containment="true"
@@ -68,7 +63,6 @@ public interface Workspace extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model
 	 * @generated
 	 */
@@ -76,7 +70,6 @@ public interface Workspace extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model
 	 * @generated
 	 */
@@ -84,7 +77,6 @@ public interface Workspace extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model blueprintsMany="true"
 	 * @generated
 	 */
@@ -92,7 +84,6 @@ public interface Workspace extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model
 	 * @generated
 	 */
@@ -100,7 +91,6 @@ public interface Workspace extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model
 	 * @generated
 	 */
@@ -108,7 +98,6 @@ public interface Workspace extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model ePackagesMany="true"
 	 * @generated
 	 */
@@ -116,7 +105,6 @@ public interface Workspace extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model
 	 * @generated
 	 */
@@ -124,7 +112,6 @@ public interface Workspace extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model
 	 * @generated
 	 */
@@ -132,7 +119,6 @@ public interface Workspace extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model
 	 * @generated
 	 */
@@ -140,7 +126,6 @@ public interface Workspace extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model
 	 * @generated
 	 */
@@ -148,16 +133,13 @@ public interface Workspace extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model exceptions="org.classupplier.CoreException"
-	 *        monitorDataType="org.classupplier.IProgressMonitor"
+	 * @model exceptions="org.classupplier.CoreException" monitorDataType="org.classupplier.IProgressMonitor"
 	 * @generated
 	 */
 	void delete(Object object, IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model
 	 * @generated
 	 */
@@ -165,7 +147,6 @@ public interface Workspace extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model secondMany="true"
 	 * @generated
 	 */
@@ -173,7 +154,6 @@ public interface Workspace extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model firstMany="true" secondMany="true"
 	 * @generated
 	 */

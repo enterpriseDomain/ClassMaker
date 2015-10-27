@@ -163,6 +163,75 @@ public class ClassSupplierItemProviderAdapterFactory extends ClassSupplierAdapte
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.classupplier.Customizer} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected CustomizerItemProvider customizerItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.classupplier.Customizer}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createCustomizerAdapter() {
+		if (customizerItemProvider == null) {
+			customizerItemProvider = new CustomizerItemProvider(this);
+		}
+
+		return customizerItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.classupplier.PhaseQualifier} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PhaseQualifierItemProvider phaseQualifierItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.classupplier.PhaseQualifier}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPhaseQualifierAdapter() {
+		if (phaseQualifierItemProvider == null) {
+			phaseQualifierItemProvider = new PhaseQualifierItemProvider(this);
+		}
+
+		return phaseQualifierItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link java.util.Map.Entry} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PhaseQualifierToCustomizerMapEntryItemProvider phaseQualifierToCustomizerMapEntryItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link java.util.Map.Entry}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPhaseQualifierToCustomizerMapEntryAdapter() {
+		if (phaseQualifierToCustomizerMapEntryItemProvider == null) {
+			phaseQualifierToCustomizerMapEntryItemProvider = new PhaseQualifierToCustomizerMapEntryItemProvider(this);
+		}
+
+		return phaseQualifierToCustomizerMapEntryItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -265,6 +334,12 @@ public class ClassSupplierItemProviderAdapterFactory extends ClassSupplierAdapte
 			workspaceItemProvider.dispose();
 		if (versionToStateMapEntryItemProvider != null)
 			versionToStateMapEntryItemProvider.dispose();
+		if (customizerItemProvider != null)
+			customizerItemProvider.dispose();
+		if (phaseQualifierItemProvider != null)
+			phaseQualifierItemProvider.dispose();
+		if (phaseQualifierToCustomizerMapEntryItemProvider != null)
+			phaseQualifierToCustomizerMapEntryItemProvider.dispose();
 	}
 
 }

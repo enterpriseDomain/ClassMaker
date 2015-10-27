@@ -8,11 +8,15 @@ import static org.junit.Assert.fail;
 
 import org.classupplier.ClassSupplier;
 import org.classupplier.Contribution;
+import org.classupplier.Customizer;
 import org.classupplier.State;
+import org.classupplier.impl.CustomizerImpl;
+import org.classupplier.jobs.codegen.EcoreGenerator;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAnnotation;
@@ -93,10 +97,6 @@ public class ClassSupplierTest extends AbstractTest {
 			assertTrue(!ePackages.isEmpty());
 			assertTrue(contribution.getWorkspace().ePackagesAreEqual(contribution.getGeneratedEPackages(), ePackages,
 					true));
-			// assertEquals(readerEPackage.getName(), ePackages.getName());
-			// assertEquals(readerEPackage.getNsPrefix(),
-			// ePackages.getNsPrefix());
-			// assertEquals(readerEPackage.getNsURI(), ePackages.getNsURI());
 			EPackage ePackage = ePackages.get(0);
 			EClass theClass = (EClass) ePackage.getEClassifier(eClass.getName());
 			EObject theObject = ePackage.getEFactoryInstance().create(theClass);
@@ -337,7 +337,8 @@ public class ClassSupplierTest extends AbstractTest {
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
-		createAndTestEPackage();
+		c = createAndTestEPackage();
+		applyAndTest(c);
 	}
 
 	@Test
@@ -350,7 +351,6 @@ public class ClassSupplierTest extends AbstractTest {
 		State oldState = c.getState();
 		c.newState();
 		c.checkout(oldState.getVersion());
-		applyAndTest(c);
 		applyAndTest(c);
 	}
 
@@ -366,12 +366,57 @@ public class ClassSupplierTest extends AbstractTest {
 		setPackageName("another");
 		updateEPackage(p, "1");
 		p.setName("another");
-		p.setNsPrefix("another");		
+		p.setNsPrefix("another");
 		EClass cl = (EClass) p.getEClassifier(getClassName());
 		setClassName("P");
 		cl.setName(getClassName());
 		cl.getEStructuralFeature(getAttrName());
 		c.getDynamicEPackages().set(0, p);
 		applyAndTest(c);
+	}
+
+	@Test(expected = NoSuchMethodException.class)
+	public void immutable() throws NoSuchMethodException {
+		setPackageName("immutable");
+		EPackage eP = createEPackage(getPackageName(), "0.0.1");
+		EClass eC = createEClass(getClassName());
+		setAttrName("C");
+		setAttrType(EcorePackage.Literals.EJAVA_OBJECT);
+		EAttribute at = createEAttribute(getAttrName(), getAttrType());
+		EcoreUtil.setSuppressedVisibility(at, EcoreUtil.SET, true);
+		eC.getEStructuralFeatures().add(at);
+		eP.getEClassifiers().add(eC);
+		Contribution c = service.getWorkspace().createContribution(eP);
+		Customizer customizer = new CustomizerImpl() {
+
+			@Override
+			public void customize(EList<Object> args) {
+				GenModel genModel = ((GenModel) args.get(1));
+				genModel.setDynamicTemplates(true);
+				genModel.setTemplateDirectory("platform:/plugin/org.classupplier.tests/templates");
+				genModel.setSuppressInterfaces(false);
+			}
+
+		};
+		c.getCustomizers().put(EcoreGenerator.GenModelSetupJob.STAGE, customizer);
+		IFuture<EList<EPackage>> r = c.apply(getProgressMonitor());
+		while (!r.isDone()) {
+			Thread.yield();
+		}
+		EPackage e;
+		try {
+			e = r.get().get(0);
+			Class<?> cl = e.getClass().getClassLoader().loadClass(getPackageName() + "." + getClassName());
+			cl.getMethod("set" + getAttrName(), Object.class);
+		} catch (OperationCanceledException ex) {
+			ex.printStackTrace();
+		} catch (InterruptedException ex) {
+			ex.printStackTrace();
+		} catch (SecurityException e1) {
+			e1.printStackTrace();
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
+
 	}
 }

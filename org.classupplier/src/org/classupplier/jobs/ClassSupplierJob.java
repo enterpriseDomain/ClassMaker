@@ -71,7 +71,7 @@ public abstract class ClassSupplierJob extends WorkspaceJob {
 
 	@Override
 	public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
-		checkStage();
+		checkStage();		
 		return work(monitor);
 	}
 
@@ -130,7 +130,7 @@ public abstract class ClassSupplierJob extends WorkspaceJob {
 	}
 
 	public abstract Phase requiredStage();
-
+	
 	public void checkStage() throws CoreException {
 		if (getContribution().getStage().getValue() < requiredStage().getValue())
 			throw new CoreException(ClassSupplierOSGi

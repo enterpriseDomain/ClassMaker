@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 
+import org.classupplier.ClassSupplierFactory;
 import org.classupplier.Messages;
 import org.classupplier.Phase;
+import org.classupplier.PhaseQualifier;
 import org.classupplier.core.ClassSupplierOSGi;
 import org.classupplier.jobs.ClassSupplierJob;
 import org.classupplier.util.ResourceUtil;
@@ -35,10 +37,18 @@ import org.eclipse.osgi.util.NLS;
 
 public class EcoreGenerator extends ClassSupplierJob implements org.classupplier.jobs.codegen.Generator {
 
-	public EcoreGenerator() {
+	private static EcoreGenerator INSTANCE;
+
+	protected EcoreGenerator() {
 		super(Messages.JobNameCodeGenerator);
 		// setRule(EcorePlugin.getWorkspaceRoot());
 		// setPriority(BUILD);
+	}
+
+	public static EcoreGenerator createInstance() {
+		EcoreGenerator newInstance = new EcoreGenerator();
+		INSTANCE = newInstance;
+		return newInstance;
 	}
 
 	protected static final String SOURCE_FOLDER_NAME = "src/main/java"; //$NON-NLS-1$
@@ -51,7 +61,7 @@ public class EcoreGenerator extends ClassSupplierJob implements org.classupplier
 
 	private CodeGenerationJob codeGeneration = new CodeGenerationJob();
 
-	protected abstract class GeneratorJob extends ClassSupplierJob {
+	protected static abstract class GeneratorJob extends ClassSupplierJob {
 
 		private org.eclipse.emf.codegen.ecore.Generator generator;
 		private IPath modelPath;
@@ -113,7 +123,16 @@ public class EcoreGenerator extends ClassSupplierJob implements org.classupplier
 
 	}
 
-	protected class GenModelSetupJob extends GeneratorJob {
+	public static class GenModelSetupJob extends GeneratorJob {
+
+		static {
+			PhaseQualifier genModelSetupQualifier = ClassSupplierFactory.eINSTANCE.createPhaseQualifier();
+			genModelSetupQualifier.setStage(Phase.GENERATED);
+			genModelSetupQualifier.setFilter("genmodel.setup");
+			STAGE = genModelSetupQualifier;
+		}
+
+		public static PhaseQualifier STAGE;
 
 		public GenModelSetupJob() {
 			super(Messages.JobNameGenModelConfiguration);
@@ -208,7 +227,7 @@ public class EcoreGenerator extends ClassSupplierJob implements org.classupplier
 		return path.removeFileExtension().addFileExtension(GENMODEL_EXT);
 	}
 
-	protected void setupGenModel(IPath projectPath, org.eclipse.emf.codegen.ecore.genmodel.GenModel genModel,
+	protected static void setupGenModel(IPath projectPath, org.eclipse.emf.codegen.ecore.genmodel.GenModel genModel,
 			Collection<EPackage> ePackages) {
 		for (EPackage ePackage : ePackages) {
 			GenPackage genPackage = genModel.findGenPackage(ePackage);
@@ -217,15 +236,19 @@ public class EcoreGenerator extends ClassSupplierJob implements org.classupplier
 		}
 		genModel.reconcile();
 		genModel.initialize(ePackages);
-		genModel.setModelName(getContribution().getName());
-		genModel.setLanguage(getContribution().getLanguage());
+		genModel.setModelName(INSTANCE.getContribution().getName());
+		genModel.setLanguage(INSTANCE.getContribution().getLanguage());
 		genModel.setComplianceLevel(GenJDKLevel.JDK70_LITERAL);
 		genModel.setUpdateClasspath(true);
 		genModel.setModelDirectory(projectPath.append(SOURCE_FOLDER_NAME).toString());
-		genModel.setModelPluginID(getProject().getName());
+		genModel.setModelPluginID(INSTANCE.getProject().getName());
 		genModel.setSuppressInterfaces(true);
 		for (GenPackage genPackage : genModel.getGenPackages())
 			genPackage.setPrefix(CodeGenUtil.capName(genPackage.getPrefix(), genModel.getLocale()));
+		for (PhaseQualifier filter : INSTANCE.getContribution().getCustomizers().keySet())
+			if (filter.equals(GenModelSetupJob.STAGE))
+				INSTANCE.getContribution().getCustomizers().get(filter)
+						.customize(ECollections.asEList(projectPath, genModel, ePackages));
 	}
 
 	@Override

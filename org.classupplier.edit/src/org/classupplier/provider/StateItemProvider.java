@@ -61,6 +61,7 @@ public class StateItemProvider extends ItemProviderAdapter implements IEditingDo
 			addStagePropertyDescriptor(object);
 			addProjectNamePropertyDescriptor(object);
 			addDeployableUnitNamePropertyDescriptor(object);
+			addCustomizersPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -185,6 +186,21 @@ public class StateItemProvider extends ItemProviderAdapter implements IEditingDo
 								"_UI_State_type"),
 						ClassSupplierPackage.Literals.STATE__DEPLOYABLE_UNIT_NAME, false, false, false,
 						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Customizers feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addCustomizersPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_State_customizers_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_State_customizers_feature",
+								"_UI_State_type"),
+						ClassSupplierPackage.Literals.STATE__CUSTOMIZERS, true, false, true, null, null, null));
 	}
 
 	/**
