@@ -6,6 +6,9 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 import org.classupplier.ClassSupplier;
 import org.classupplier.Contribution;
 import org.classupplier.Customizer;
@@ -205,7 +208,7 @@ public class ClassSupplierTest extends AbstractTest {
 
 	@Test
 	public void update() {
-		setClassName("SameClass");
+		setClassName("Same");
 		EcoreFactory f = EcoreFactory.eINSTANCE;
 		EPackage p = createEPackage("updatable", "0.1");
 		EClass cl = f.createEClass();
@@ -403,10 +406,11 @@ public class ClassSupplierTest extends AbstractTest {
 		while (!r.isDone()) {
 			Thread.yield();
 		}
-		EPackage e;
+		EPackage e = null;
+		Class<?> cl = null;
 		try {
 			e = r.get().get(0);
-			Class<?> cl = e.getClass().getClassLoader().loadClass(getPackageName() + "." + getClassName());
+			cl = e.getClass().getClassLoader().loadClass(getPackageName() + "." + getClassName());
 			cl.getMethod("set" + getAttrName(), Object.class);
 		} catch (OperationCanceledException ex) {
 			ex.printStackTrace();
@@ -416,8 +420,28 @@ public class ClassSupplierTest extends AbstractTest {
 			ex.printStackTrace();
 		} catch (ClassNotFoundException ex) {
 			ex.printStackTrace();
-		} catch (NoSuchMethodException ex){
+		} catch (NoSuchMethodException ex) {
 			throw ex;
+		}
+		try {
+			Method m = cl.getMethod("get" + getAttrName(), new Class<?>[] {});
+			EClass ec = (EClass) e.getEClassifier(getClassName());
+			EObject eo = e.getEFactoryInstance().create(ec);
+			Object o = new Object();
+			eo.eSet(ec.getEStructuralFeature(getAttrName()), o);
+			assertEquals(o, m.invoke(eo, new Object[] {}));
+		} catch (OperationCanceledException ex) {
+			ex.printStackTrace();
+		} catch (SecurityException ex) {
+			ex.printStackTrace();
+		} catch (NoSuchMethodException ex) {
+			fail();
+		} catch (IllegalAccessException ex) {
+			ex.printStackTrace();
+		} catch (IllegalArgumentException ex) {
+			ex.printStackTrace();
+		} catch (InvocationTargetException ex) {
+			ex.printStackTrace();
 		}
 
 	}
