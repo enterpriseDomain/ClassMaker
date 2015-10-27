@@ -205,7 +205,7 @@ public class ClassSupplierTest extends AbstractTest {
 
 	@Test
 	public void update() {
-		setClassName("SomeClass");
+		setClassName("SameClass");
 		EcoreFactory f = EcoreFactory.eINSTANCE;
 		EPackage p = createEPackage("updatable", "0.1");
 		EClass cl = f.createEClass();
@@ -343,7 +343,7 @@ public class ClassSupplierTest extends AbstractTest {
 
 	@Test
 	public void oldVersion() {
-		setPackageName("same");
+		setPackageName("some");
 		setClassName("C");
 		setAttrName("c");
 		setAttrType(EcorePackage.Literals.EJAVA_OBJECT);
@@ -416,6 +416,8 @@ public class ClassSupplierTest extends AbstractTest {
 			ex.printStackTrace();
 		} catch (ClassNotFoundException ex) {
 			ex.printStackTrace();
+		} catch (NoSuchMethodException ex){
+			throw ex;
 		}
 
 	}

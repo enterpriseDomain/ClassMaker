@@ -12,8 +12,10 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.common.util.BasicEMap;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.osgi.util.NLS;
 import org.osgi.framework.Bundle;
@@ -115,6 +117,8 @@ public class OSGiEPackageLoader extends ContainerJob {
 
 	private synchronized void doLoad(State state, Bundle osgiBundle) {
 		ePackages = ECollections.newBasicEList();
+		EMap<Integer, EPackage> toSet = new BasicEMap<Integer, EPackage>();
+		EList<EPackage> toAdd = ECollections.newBasicEList();
 		for (EPackage model : state.getDynamicEPackages()) {
 			String packageClassName = model.getName() + "." + model.getNsPrefix() //$NON-NLS-1$
 					+ "Package"; //$NON-NLS-1$
@@ -134,13 +138,17 @@ public class OSGiEPackageLoader extends ContainerJob {
 			int index = ePackages.indexOf(ePackage);
 			if (ePackages != null) {
 				if (getContribution().contains(ClassSupplierPackage.Literals.STATE__GENERATED_EPACKAGES, ePackage))
-					state.getGeneratedEPackages().set(index, ePackage);
+					toSet.put(index, ePackage);
 				else
-					state.getGeneratedEPackages().add(ePackage);
+					toAdd.add(ePackage);
 
 			} else if (exception == null)
 				setException(new Error());
 		}
+		for (Integer index : toSet.keySet())
+			getContribution().getGeneratedEPackages().set(index, toSet.get(index));
+		getContribution().getGeneratedEPackages().addAll(toAdd);
+
 		loaded.release();
 	}
 
