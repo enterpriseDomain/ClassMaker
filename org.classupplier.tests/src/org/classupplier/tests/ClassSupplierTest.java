@@ -445,4 +445,10 @@ public class ClassSupplierTest extends AbstractTest {
 		}
 
 	}
+	
+	@Test
+	public void package_() {
+		setPackageName("package");
+		createAndTestEPackage();
+	}
 }

@@ -116,7 +116,7 @@ public abstract class AbstractTest {
 			o.eSet(a, true);
 			assertEquals(true, o.eGet(a));
 			assertEquals(getClassName(), o.getClass().getSimpleName());
-			assertEquals(e.getName(), o.getClass().getPackage().getName());
+			assertEquals(CodeGenUtil.safeName(e.getName()), o.getClass().getPackage().getName());
 		} catch (OperationCanceledException ex) {
 			ex.printStackTrace();
 		} catch (InterruptedException ex) {

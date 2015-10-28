@@ -12,6 +12,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.BasicEMap;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
@@ -102,7 +103,7 @@ public class OSGiEPackageLoader extends ContainerJob {
 		if (ePackagesMsg.length() > 2)
 			ePackagesMsg = ePackagesMsg.subSequence(0, ePackagesMsg.length() - 2).toString();
 		if (ePackages.isEmpty())
-			ePackagesMsg = "no EPackages";
+			ePackagesMsg = "none";
 		return ClassSupplierOSGi.createOKStatus(NLS.bind(Messages.EPackageClassLoadComplete, new Object[] {
 				osgiBundle.getSymbolicName(), osgiBundle.getHeaders().get(Constants.BUNDLE_VERSION), ePackagesMsg }));
 
@@ -123,12 +124,13 @@ public class OSGiEPackageLoader extends ContainerJob {
 		EMap<Integer, EPackage> toSet = new BasicEMap<Integer, EPackage>();
 		EList<EPackage> toAdd = ECollections.newBasicEList();
 		for (EPackage model : state.getDynamicEPackages()) {
-			String packageClassName = model.getName() + "." + model.getNsPrefix() //$NON-NLS-1$
+			String packageClassName = CodeGenUtil.safeName(model.getName()) + "." + model.getNsPrefix() //$NON-NLS-1$
 					+ "Package"; //$NON-NLS-1$
 			Class<?> packageClass = null;
 			try {
 				packageClass = osgiBundle.loadClass(packageClassName);
 			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
 				setException(e);
 			}
 			EPackage ePackage = null;
@@ -136,6 +138,7 @@ public class OSGiEPackageLoader extends ContainerJob {
 				ePackage = (EPackage) packageClass.getField("eINSTANCE").get(packageClass); //$NON-NLS-1$
 				ePackages.add(ePackage);
 			} catch (Exception e) {
+				e.printStackTrace();
 				setException(e);
 			}
 			int index = ePackages.indexOf(ePackage);
