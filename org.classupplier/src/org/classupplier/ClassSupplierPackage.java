@@ -503,22 +503,13 @@ public interface ClassSupplierPackage extends EPackage {
 	int CUSTOMIZER = 8;
 
 	/**
-	 * The feature id for the '<em><b>Applies To</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CUSTOMIZER__APPLIES_TO = 0;
-
-	/**
 	 * The number of structural features of the '<em>Customizer</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CUSTOMIZER_FEATURE_COUNT = 1;
+	int CUSTOMIZER_FEATURE_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.classupplier.impl.PhaseQualifierImpl <em>Phase Qualifier</em>}' class.
@@ -1068,17 +1059,6 @@ public interface ClassSupplierPackage extends EPackage {
 	EClass getCustomizer();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.classupplier.Customizer#getAppliesTo <em>Applies To</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Applies To</em>'.
-	 * @see org.classupplier.Customizer#getAppliesTo()
-	 * @see #getCustomizer()
-	 * @generated
-	 */
-	EReference getCustomizer_AppliesTo();
-
-	/**
 	 * Returns the meta object for class '{@link org.classupplier.PhaseQualifier <em>Phase Qualifier</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1502,14 +1482,6 @@ public interface ClassSupplierPackage extends EPackage {
 		 * @generated
 		 */
 		EClass CUSTOMIZER = eINSTANCE.getCustomizer();
-
-		/**
-		 * The meta object literal for the '<em><b>Applies To</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CUSTOMIZER__APPLIES_TO = eINSTANCE.getCustomizer_AppliesTo();
 
 		/**
 		 * The meta object literal for the '{@link org.classupplier.impl.PhaseQualifierImpl <em>Phase Qualifier</em>}' class.

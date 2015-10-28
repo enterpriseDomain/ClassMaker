@@ -23,6 +23,7 @@ import org.eclipse.core.runtime.jobs.MultiRule;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EFactory;
@@ -35,6 +36,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -44,17 +46,20 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.classupplier.impl.WorkspaceImpl#getContributions <em>Contributions</em>}</li>
- *   <li>{@link org.classupplier.impl.WorkspaceImpl#getResourceSet <em>Resource Set</em>}</li>
+ * <li>{@link org.classupplier.impl.WorkspaceImpl#getContributions
+ * <em>Contributions</em>}</li>
+ * <li>{@link org.classupplier.impl.WorkspaceImpl#getResourceSet
+ * <em>Resource Set</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	/**
-	 * The cached value of the '{@link #getContributions() <em>Contributions</em>}' containment reference list.
-	 * <!-- begin-user-doc
+	 * The cached value of the '{@link #getContributions()
+	 * <em>Contributions</em>}' containment reference list. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
+	 * 
 	 * @see #getContributions()
 	 * @generated
 	 * @ordered
@@ -72,8 +77,9 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	protected static final ResourceSet RESOURCE_SET_EDEFAULT = new ResourceSetImpl();
 
 	/**
-	 * The cached value of the '{@link #getResourceSet() <em>Resource Set</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getResourceSet() <em>Resource Set</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getResourceSet()
 	 * @generated
 	 * @ordered
@@ -82,6 +88,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected WorkspaceImpl() {
@@ -90,6 +97,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -99,6 +107,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EList<Contribution> getContributions() {
@@ -111,6 +120,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ResourceSet getResourceSet() {
@@ -155,13 +165,18 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * @generated NOT
 	 */
 	public Contribution createContribution(EList<EPackage> blueprints) {
-		Contribution result = getContribution(blueprints);
-		if (result != null)
+		Contribution result = getContribution(blueprints, true);
+		if (result != null) {
+			result.newState();
+			result.setName(blueprints.get(blueprints.size() - 1).getName());
+			result.getDynamicEPackages().clear();
+			result.getDynamicEPackages().addAll(EcoreUtil.copyAll(blueprints));
 			return result;
+		}
 		result = ClassSupplierFactory.eINSTANCE.createContribution();
 		result.newState();
 		result.setName(blueprints.get(blueprints.size() - 1).getName());
-		result.getDynamicEPackages().addAll(blueprints);
+		result.getDynamicEPackages().addAll(EcoreUtil.copyAll(blueprints));
 		registerContribution(result);
 		return result;
 	}
@@ -216,7 +231,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * @generated NOT
 	 */
 	public Contribution getContribution(EPackage ePackage) {
-		return getContribution(ECollections.singletonEList(ePackage));
+		return getContribution(ePackage, true);
 	}
 
 	/**
@@ -225,13 +240,31 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * @generated NOT
 	 */
 	public Contribution getContribution(EList<EPackage> ePackages) {
+		return getContribution(ePackages, true);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Contribution getContribution(EPackage ePackage, boolean searchOptimistic) {
+		return getContribution(ECollections.singletonEList(ePackage), searchOptimistic);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Contribution getContribution(EList<EPackage> ePackages, boolean searchOptimistic) {
 		for (Contribution c : getContributions())
 			switch (c.getStage()) {
 			case MODELED:
-				if (ePackagesAreEqual(ePackages, c.getDynamicEPackages(), false))
+				if (ePackagesAreEqual(ePackages, c.getDynamicEPackages(), !searchOptimistic))
 					return c;
 			case LOADED:
-				if (ePackagesAreEqual(ePackages, c.getGeneratedEPackages(), false))
+				if (ePackagesAreEqual(ePackages, c.getGeneratedEPackages(), !searchOptimistic))
 					return c;
 			default:
 				break;
@@ -323,8 +356,30 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	public boolean ePackagesAreEqual(EPackage first, EPackage second, boolean conjunction) {
 		if (first == null || second == null)
 			return false;
-		return conjunction ? first.getNsURI().equals(second.getNsURI()) && first.getName().equals(second.getName())
+		boolean result = conjunction
+				? first.getNsURI().equals(second.getNsURI()) && first.getName().equals(second.getName())
 				: first.getNsURI().equals(second.getNsURI()) || first.getName().equals(second.getName());
+		TreeIterator<EObject> firstIt = first.eAllContents();
+		TreeIterator<EObject> secondIt = second.eAllContents();
+		while (conjunction ? firstIt.hasNext() && secondIt.hasNext() : firstIt.hasNext() || secondIt.hasNext()) {
+			EObject f = null;
+			if (firstIt.hasNext())
+				f = firstIt.next();
+			EObject s = null;
+			if (secondIt.hasNext())
+				s = secondIt.next();
+			boolean eq = conjunction;
+			if (f == null || s == null)
+				eq = false;
+			else {
+				eq = f.equals(s); // EcoreUtil.equals(f, s);
+			}
+			if (conjunction)
+				result &= eq;
+			else
+				result |= eq;
+		}
+		return result;
 	}
 
 	/**
@@ -363,6 +418,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -377,6 +433,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -390,6 +447,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -405,6 +463,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -421,6 +480,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -435,6 +495,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -450,6 +511,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

@@ -45,7 +45,7 @@ public class ModelResourceManager extends ClassSupplierJob {
 				return ClassSupplierOSGi.createWarningStatus(e);
 			}
 		State state = getContribution();
-		if (state.getStage() == Phase.MODELED) {
+		if (state.getStage().getValue() >= Phase.MODELED_VALUE) {
 			resource.getContents().clear();
 			resource.getContents().addAll(EcoreUtil.copyAll(state.getDynamicEPackages()));
 		}

@@ -542,14 +542,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCustomizer_AppliesTo() {
-		return (EReference) customizerEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getPhaseQualifier() {
 		return phaseQualifierEClass;
 	}
@@ -670,7 +662,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 		eListEClass = createEClass(ELIST);
 
 		customizerEClass = createEClass(CUSTOMIZER);
-		createEReference(customizerEClass, CUSTOMIZER__APPLIES_TO);
 
 		phaseQualifierEClass = createEClass(PHASE_QUALIFIER);
 		createEAttribute(phaseQualifierEClass, PHASE_QUALIFIER__STAGE);
@@ -869,6 +860,14 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 		op = addEOperation(workspaceEClass, this.getContribution(), "getContribution", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "projectName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(workspaceEClass, this.getContribution(), "getContribution", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEPackage(), "ePackage", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEBoolean(), "searchOptimistic", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(workspaceEClass, this.getContribution(), "getContribution", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEPackage(), "ePackages", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEBoolean(), "searchOptimistic", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		op = addEOperation(workspaceEClass, null, "registerContribution", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getContribution(), "contribution", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -921,9 +920,6 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 
 		initEClass(customizerEClass, Customizer.class, "Customizer", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCustomizer_AppliesTo(), this.getPhaseQualifier(), null, "appliesTo", null, 0, 1,
-				Customizer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(customizerEClass, null, "customize", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEJavaObject(), "args", 0, -1, IS_UNIQUE, IS_ORDERED);

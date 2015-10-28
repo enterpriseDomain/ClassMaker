@@ -111,6 +111,22 @@ public interface Workspace extends EObject, ISchedulingRule {
 	Contribution getContribution(String projectName);
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	Contribution getContribution(EPackage ePackage, boolean searchOptimistic);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model ePackagesMany="true"
+	 * @generated
+	 */
+	Contribution getContribution(EList<EPackage> ePackages, boolean searchOptimistic);
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @model
 	 * @generated

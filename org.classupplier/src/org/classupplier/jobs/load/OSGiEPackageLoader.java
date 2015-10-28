@@ -55,8 +55,9 @@ public class OSGiEPackageLoader extends ContainerJob {
 		State contribution = getContribution();
 		if (contribution.getStage() == Phase.DEFINED)
 			return ClassSupplierOSGi.createErrorStatus(Messages.ModelNotSpecified);
+		Bundle osgiBundle = null;
 		try {
-			Bundle osgiBundle = getBundle(contribution.getVersion());
+			osgiBundle = getBundle(contribution.getVersion());
 			if (osgiBundle != null) {
 				if (osgiBundle.getHeaders().get(Constants.FRAGMENT_HOST) == null) {
 					if (osgiBundle.getState() == Bundle.STARTING || osgiBundle.getState() == Bundle.ACTIVE) {
@@ -91,7 +92,7 @@ public class OSGiEPackageLoader extends ContainerJob {
 		} finally {
 			monitor.done();
 		}
-		throw new Error();
+		return getOKStatus(osgiBundle);
 	}
 
 	private IStatus getOKStatus(Bundle osgiBundle) {
@@ -100,6 +101,8 @@ public class OSGiEPackageLoader extends ContainerJob {
 			ePackagesMsg = ePackagesMsg + ePackage.getNsURI() + ", "; //$NON-NLS-1$
 		if (ePackagesMsg.length() > 2)
 			ePackagesMsg = ePackagesMsg.subSequence(0, ePackagesMsg.length() - 2).toString();
+		if (ePackages.isEmpty())
+			ePackagesMsg = "no EPackages";
 		return ClassSupplierOSGi.createOKStatus(NLS.bind(Messages.EPackageClassLoadComplete, new Object[] {
 				osgiBundle.getSymbolicName(), osgiBundle.getHeaders().get(Constants.BUNDLE_VERSION), ePackagesMsg }));
 
@@ -147,7 +150,8 @@ public class OSGiEPackageLoader extends ContainerJob {
 		}
 		for (Integer index : toSet.keySet())
 			getContribution().getGeneratedEPackages().set(index, toSet.get(index));
-		getContribution().getGeneratedEPackages().addAll(toAdd);
+		if (!toAdd.isEmpty())
+			getContribution().getGeneratedEPackages().addAll(toAdd);
 
 		loaded.release();
 	}
