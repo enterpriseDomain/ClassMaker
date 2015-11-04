@@ -8,8 +8,8 @@ import org.eclipse.emf.ecore.EPackage;
 
 public class CDOGenerator extends EcoreGenerator {
 
-	protected static void setupGenModel(IPath projectPath, org.eclipse.emf.codegen.ecore.genmodel.GenModel ecoreGenModel,
-			Collection<EPackage> ePackages) {
+	protected static void setupGenModel(IPath projectPath,
+			org.eclipse.emf.codegen.ecore.genmodel.GenModel ecoreGenModel, Collection<EPackage> ePackages) {
 		EcoreGenerator.setupGenModel(projectPath, ecoreGenModel, ePackages);
 		ecoreGenModel.setSuppressInterfaces(false);
 		ecoreGenModel.setFeatureDelegation(GenDelegationKind.REFLECTIVE_LITERAL);

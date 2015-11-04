@@ -11,15 +11,16 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Phase Qualifier</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Phase Qualifier</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.classupplier.impl.PhaseQualifierImpl#getStage <em>Stage</em>}</li>
- *   <li>{@link org.classupplier.impl.PhaseQualifierImpl#getFilter <em>Filter</em>}</li>
+ * <li>{@link org.classupplier.impl.PhaseQualifierImpl#getStage <em>Stage</em>}
+ * </li>
+ * <li>{@link org.classupplier.impl.PhaseQualifierImpl#getFilter <em>Filter</em>
+ * }</li>
  * </ul>
  *
  * @generated NOT
@@ -28,8 +29,8 @@ public class PhaseQualifierImpl extends EObjectImpl implements PhaseQualifier {
 
 	/**
 	 * The default value of the '{@link #getStage() <em>Stage</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getStage()
 	 * @generated
 	 * @ordered
@@ -38,8 +39,8 @@ public class PhaseQualifierImpl extends EObjectImpl implements PhaseQualifier {
 
 	/**
 	 * The cached value of the '{@link #getStage() <em>Stage</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getStage()
 	 * @generated
 	 * @ordered
@@ -47,9 +48,9 @@ public class PhaseQualifierImpl extends EObjectImpl implements PhaseQualifier {
 	protected Phase stage = STAGE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getFilter() <em>Filter</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The default value of the '{@link #getFilter() <em>Filter</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getFilter()
 	 * @generated
 	 * @ordered
@@ -58,8 +59,8 @@ public class PhaseQualifierImpl extends EObjectImpl implements PhaseQualifier {
 
 	/**
 	 * The cached value of the '{@link #getFilter() <em>Filter</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getFilter()
 	 * @generated
 	 * @ordered
@@ -67,8 +68,8 @@ public class PhaseQualifierImpl extends EObjectImpl implements PhaseQualifier {
 	protected String filter = FILTER_EDEFAULT;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected PhaseQualifierImpl() {
@@ -76,8 +77,8 @@ public class PhaseQualifierImpl extends EObjectImpl implements PhaseQualifier {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -86,8 +87,8 @@ public class PhaseQualifierImpl extends EObjectImpl implements PhaseQualifier {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Phase getStage() {
@@ -95,8 +96,8 @@ public class PhaseQualifierImpl extends EObjectImpl implements PhaseQualifier {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setStage(Phase newStage) {
@@ -108,8 +109,8 @@ public class PhaseQualifierImpl extends EObjectImpl implements PhaseQualifier {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String getFilter() {
@@ -117,8 +118,8 @@ public class PhaseQualifierImpl extends EObjectImpl implements PhaseQualifier {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setFilter(String newFilter) {
@@ -130,8 +131,8 @@ public class PhaseQualifierImpl extends EObjectImpl implements PhaseQualifier {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -146,8 +147,8 @@ public class PhaseQualifierImpl extends EObjectImpl implements PhaseQualifier {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -164,8 +165,8 @@ public class PhaseQualifierImpl extends EObjectImpl implements PhaseQualifier {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -182,8 +183,8 @@ public class PhaseQualifierImpl extends EObjectImpl implements PhaseQualifier {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -226,8 +227,8 @@ public class PhaseQualifierImpl extends EObjectImpl implements PhaseQualifier {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -244,4 +245,4 @@ public class PhaseQualifierImpl extends EObjectImpl implements PhaseQualifier {
 		return result.toString();
 	}
 
-} //PhaseQualifierImpl
+} // PhaseQualifierImpl

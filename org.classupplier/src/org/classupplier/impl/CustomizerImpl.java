@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 public class CustomizerImpl extends EObjectImpl implements Customizer {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	public CustomizerImpl() {
@@ -25,6 +26,7 @@ public class CustomizerImpl extends EObjectImpl implements Customizer {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -33,8 +35,8 @@ public class CustomizerImpl extends EObjectImpl implements Customizer {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	public void customize(EList<Object> args) {

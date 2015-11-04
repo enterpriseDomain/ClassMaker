@@ -19,36 +19,37 @@ import org.eclipse.emf.ecore.EReference;
  * <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
+ * 
  * @see org.classupplier.ClassSupplierFactory
  * @model kind="package"
  * @generated
  */
 public interface ClassSupplierPackage extends EPackage {
 	/**
-	 * The package name.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The package name. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	String eNAME = "classupplier"; //$NON-NLS-1$
 
 	/**
-	 * The package namespace URI.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The package namespace URI. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	String eNS_URI = "http://org/classupplier/0.7.8"; //$NON-NLS-1$
 
 	/**
-	 * The package namespace name.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The package namespace name. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	String eNS_PREFIX = "classupplier"; //$NON-NLS-1$
 
 	/**
-	 * The singleton instance of the package.
-	 * <!-- begin-user-doc --> <!--
+	 * The singleton instance of the package. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	ClassSupplierPackage eINSTANCE = org.classupplier.impl.ClassSupplierPackageImpl.init();
@@ -67,14 +68,16 @@ public interface ClassSupplierPackage extends EPackage {
 	/**
 	 * The number of structural features of the '<em>Constructable</em>' class.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int CONSTRUCTABLE_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.classupplier.impl.StateImpl <em>State</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The meta object id for the '{@link org.classupplier.impl.StateImpl
+	 * <em>State</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see org.classupplier.impl.StateImpl
 	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getState()
 	 * @generated
@@ -156,16 +159,18 @@ public interface ClassSupplierPackage extends EPackage {
 	int CONTRIBUTION__STATE = CONSTRUCTABLE_FEATURE_COUNT + 6;
 
 	/**
-	 * The feature id for the '<em><b>Dynamic EPackages</b></em>' reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Dynamic EPackages</b></em>' reference
+	 * list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int CONTRIBUTION__DYNAMIC_EPACKAGES = CONSTRUCTABLE_FEATURE_COUNT + 7;
 
 	/**
-	 * The feature id for the '<em><b>Generated EPackages</b></em>' reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Generated EPackages</b></em>' reference
+	 * list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -174,15 +179,16 @@ public interface ClassSupplierPackage extends EPackage {
 	/**
 	 * The feature id for the '<em><b>Workspace</b></em>' container reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int CONTRIBUTION__WORKSPACE = CONSTRUCTABLE_FEATURE_COUNT + 9;
 
 	/**
-	 * The feature id for the '<em><b>Customizers</b></em>' map.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Customizers</b></em>' map. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -191,6 +197,7 @@ public interface ClassSupplierPackage extends EPackage {
 	/**
 	 * The number of structural features of the '<em>Contribution</em>' class.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -262,6 +269,7 @@ public interface ClassSupplierPackage extends EPackage {
 	/**
 	 * The feature id for the '<em><b>Deployable Unit Name</b></em>' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -277,33 +285,36 @@ public interface ClassSupplierPackage extends EPackage {
 	int STATE__EPACKAGES = CONSTRUCTABLE_FEATURE_COUNT + 8;
 
 	/**
-	 * The feature id for the '<em><b>Dynamic EPackages</b></em>' containment reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Dynamic EPackages</b></em>' containment
+	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int STATE__DYNAMIC_EPACKAGES = CONSTRUCTABLE_FEATURE_COUNT + 9;
 
 	/**
-	 * The feature id for the '<em><b>Generated EPackages</b></em>' containment reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Generated EPackages</b></em>' containment
+	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int STATE__GENERATED_EPACKAGES = CONSTRUCTABLE_FEATURE_COUNT + 10;
 
 	/**
-	 * The feature id for the '<em><b>Contribution</b></em>' container reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Contribution</b></em>' container
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int STATE__CONTRIBUTION = CONSTRUCTABLE_FEATURE_COUNT + 11;
 
 	/**
-	 * The feature id for the '<em><b>Customizers</b></em>' map.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Customizers</b></em>' map. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -319,9 +330,11 @@ public interface ClassSupplierPackage extends EPackage {
 	int STATE_FEATURE_COUNT = CONSTRUCTABLE_FEATURE_COUNT + 13;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.core.runtime.jobs.ISchedulingRule <em>IScheduling Rule</em>}' class.
-	 * <!-- begin-user-doc --> <!--
+	 * The meta object id for the '
+	 * {@link org.eclipse.core.runtime.jobs.ISchedulingRule
+	 * <em>IScheduling Rule</em>}' class. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @see org.eclipse.core.runtime.jobs.ISchedulingRule
 	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getISchedulingRule()
 	 * @generated
@@ -329,16 +342,18 @@ public interface ClassSupplierPackage extends EPackage {
 	int ISCHEDULING_RULE = 4;
 
 	/**
-	 * The number of structural features of the '<em>IScheduling Rule</em>' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The number of structural features of the '<em>IScheduling Rule</em>'
+	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int ISCHEDULING_RULE_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.classupplier.impl.WorkspaceImpl <em>Workspace</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The meta object id for the '{@link org.classupplier.impl.WorkspaceImpl
+	 * <em>Workspace</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see org.classupplier.impl.WorkspaceImpl
 	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getWorkspace()
 	 * @generated
@@ -346,8 +361,9 @@ public interface ClassSupplierPackage extends EPackage {
 	int WORKSPACE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Contributions</b></em>' containment reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Contributions</b></em>' containment
+	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -372,9 +388,11 @@ public interface ClassSupplierPackage extends EPackage {
 	int WORKSPACE_FEATURE_COUNT = ISCHEDULING_RULE_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.classupplier.impl.VersionToStateMapEntryImpl <em>Version To State Map Entry</em>}' class.
-	 * <!-- begin-user-doc --> <!--
+	 * The meta object id for the '
+	 * {@link org.classupplier.impl.VersionToStateMapEntryImpl
+	 * <em>Version To State Map Entry</em>}' class. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @see org.classupplier.impl.VersionToStateMapEntryImpl
 	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getVersionToStateMapEntry()
 	 * @generated
@@ -393,23 +411,27 @@ public interface ClassSupplierPackage extends EPackage {
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' containment reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int VERSION_TO_STATE_MAP_ENTRY__VALUE = 1;
 
 	/**
-	 * The number of structural features of the '<em>Version To State Map Entry</em>' class.
-	 * <!-- begin-user-doc --> <!--
+	 * The number of structural features of the '
+	 * <em>Version To State Map Entry</em>' class. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int VERSION_TO_STATE_MAP_ENTRY_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.equinox.concurrent.future.IFuture <em>IFuture</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The meta object id for the '
+	 * {@link org.eclipse.equinox.concurrent.future.IFuture <em>IFuture</em>}'
+	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see org.eclipse.equinox.concurrent.future.IFuture
 	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getIFuture()
 	 * @generated
@@ -426,8 +448,9 @@ public interface ClassSupplierPackage extends EPackage {
 	int IFUTURE_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.classupplier.Phase <em>Phase</em>}' enum.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The meta object id for the '{@link org.classupplier.Phase <em>Phase</em>}
+	 * ' enum. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see org.classupplier.Phase
 	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getPhase()
 	 * @generated
@@ -475,8 +498,9 @@ public interface ClassSupplierPackage extends EPackage {
 	int CORE_EXCEPTION = 15;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.common.util.EList <em>EList</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The meta object id for the '{@link org.eclipse.emf.common.util.EList
+	 * <em>EList</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see org.eclipse.emf.common.util.EList
 	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getEList()
 	 * @generated
@@ -493,9 +517,10 @@ public interface ClassSupplierPackage extends EPackage {
 	int ELIST_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.classupplier.impl.CustomizerImpl <em>Customizer</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The meta object id for the '{@link org.classupplier.impl.CustomizerImpl
+	 * <em>Customizer</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
 	 * @see org.classupplier.impl.CustomizerImpl
 	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getCustomizer()
 	 * @generated
@@ -504,17 +529,18 @@ public interface ClassSupplierPackage extends EPackage {
 
 	/**
 	 * The number of structural features of the '<em>Customizer</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int CUSTOMIZER_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.classupplier.impl.PhaseQualifierImpl <em>Phase Qualifier</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The meta object id for the '
+	 * {@link org.classupplier.impl.PhaseQualifierImpl <em>Phase Qualifier</em>}
+	 * ' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see org.classupplier.impl.PhaseQualifierImpl
 	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getPhaseQualifier()
 	 * @generated
@@ -522,36 +548,38 @@ public interface ClassSupplierPackage extends EPackage {
 	int PHASE_QUALIFIER = 9;
 
 	/**
-	 * The feature id for the '<em><b>Stage</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Stage</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int PHASE_QUALIFIER__STAGE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Filter</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Filter</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int PHASE_QUALIFIER__FILTER = 1;
 
 	/**
-	 * The number of structural features of the '<em>Phase Qualifier</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The number of structural features of the '<em>Phase Qualifier</em>'
+	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int PHASE_QUALIFIER_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link org.classupplier.impl.PhaseQualifierToCustomizerMapEntryImpl <em>Phase Qualifier To Customizer Map Entry</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The meta object id for the '
+	 * {@link org.classupplier.impl.PhaseQualifierToCustomizerMapEntryImpl
+	 * <em>Phase Qualifier To Customizer Map Entry</em>}' class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see org.classupplier.impl.PhaseQualifierToCustomizerMapEntryImpl
 	 * @see org.classupplier.impl.ClassSupplierPackageImpl#getPhaseQualifierToCustomizerMapEntry()
 	 * @generated
@@ -559,9 +587,9 @@ public interface ClassSupplierPackage extends EPackage {
 	int PHASE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY = 10;
 
 	/**
-	 * The feature id for the '<em><b>Key</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Key</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -569,25 +597,27 @@ public interface ClassSupplierPackage extends EPackage {
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int PHASE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY__VALUE = 1;
 
 	/**
-	 * The number of structural features of the '<em>Phase Qualifier To Customizer Map Entry</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The number of structural features of the '
+	 * <em>Phase Qualifier To Customizer Map Entry</em>' class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int PHASE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY_FEATURE_COUNT = 2;
 
 	/**
-	 * Returns the meta object for class '{@link org.classupplier.Contribution <em>Contribution</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the meta object for class '{@link org.classupplier.Contribution
+	 * <em>Contribution</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for class '<em>Contribution</em>'.
 	 * @see org.classupplier.Contribution
 	 * @generated
@@ -607,8 +637,10 @@ public interface ClassSupplierPackage extends EPackage {
 	EAttribute getContribution_Name();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.classupplier.Contribution#getLanguage <em>Language</em>}'.
+	 * Returns the meta object for the attribute '
+	 * {@link org.classupplier.Contribution#getLanguage <em>Language</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for the attribute '<em>Language</em>'.
 	 * @see org.classupplier.Contribution#getLanguage()
 	 * @see #getContribution()
@@ -641,8 +673,10 @@ public interface ClassSupplierPackage extends EPackage {
 	EAttribute getContribution_Stage();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.classupplier.Contribution#getProjectName <em>Project Name</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the meta object for the attribute '
+	 * {@link org.classupplier.Contribution#getProjectName <em>Project Name</em>
+	 * }'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for the attribute '<em>Project Name</em>'.
 	 * @see org.classupplier.Contribution#getProjectName()
 	 * @see #getContribution()
@@ -651,8 +685,10 @@ public interface ClassSupplierPackage extends EPackage {
 	EAttribute getContribution_ProjectName();
 
 	/**
-	 * Returns the meta object for the map '{@link org.classupplier.Contribution#getStateHistory <em>State History</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the meta object for the map '
+	 * {@link org.classupplier.Contribution#getStateHistory
+	 * <em>State History</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for the map '<em>State History</em>'.
 	 * @see org.classupplier.Contribution#getStateHistory()
 	 * @see #getContribution()
@@ -701,8 +737,10 @@ public interface ClassSupplierPackage extends EPackage {
 	EReference getContribution_GeneratedEPackages();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.classupplier.Contribution#getWorkspace <em>Workspace</em>}'.
+	 * Returns the meta object for the container reference '
+	 * {@link org.classupplier.Contribution#getWorkspace <em>Workspace</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for the container reference '<em>Workspace</em>'.
 	 * @see org.classupplier.Contribution#getWorkspace()
 	 * @see #getContribution()
@@ -711,9 +749,10 @@ public interface ClassSupplierPackage extends EPackage {
 	EReference getContribution_Workspace();
 
 	/**
-	 * Returns the meta object for the map '{@link org.classupplier.Contribution#getCustomizers <em>Customizers</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the meta object for the map '
+	 * {@link org.classupplier.Contribution#getCustomizers <em>Customizers</em>}
+	 * '. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for the map '<em>Customizers</em>'.
 	 * @see org.classupplier.Contribution#getCustomizers()
 	 * @see #getContribution()
@@ -722,8 +761,9 @@ public interface ClassSupplierPackage extends EPackage {
 	EReference getContribution_Customizers();
 
 	/**
-	 * Returns the meta object for class '{@link org.classupplier.State <em>State</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the meta object for class '{@link org.classupplier.State
+	 * <em>State</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for class '<em>State</em>'.
 	 * @see org.classupplier.State
 	 * @generated
@@ -803,8 +843,10 @@ public interface ClassSupplierPackage extends EPackage {
 	EAttribute getState_Stage();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.classupplier.State#getProjectName <em>Project Name</em>}'.
+	 * Returns the meta object for the attribute '
+	 * {@link org.classupplier.State#getProjectName <em>Project Name</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for the attribute '<em>Project Name</em>'.
 	 * @see org.classupplier.State#getProjectName()
 	 * @see #getState()
@@ -813,10 +855,13 @@ public interface ClassSupplierPackage extends EPackage {
 	EAttribute getState_ProjectName();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.classupplier.State#getDeployableUnitName <em>Deployable Unit Name</em>}'.
-	 * <!-- begin-user-doc --> <!--
+	 * Returns the meta object for the attribute '
+	 * {@link org.classupplier.State#getDeployableUnitName
+	 * <em>Deployable Unit Name</em>}'. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * @return the meta object for the attribute '<em>Deployable Unit Name</em>'.
+	 * 
+	 * @return the meta object for the attribute '<em>Deployable Unit Name</em>
+	 *         '.
 	 * @see org.classupplier.State#getDeployableUnitName()
 	 * @see #getState()
 	 * @generated
@@ -864,9 +909,12 @@ public interface ClassSupplierPackage extends EPackage {
 	EReference getState_GeneratedEPackages();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.classupplier.State#getContribution <em>Contribution</em>}'.
+	 * Returns the meta object for the container reference '
+	 * {@link org.classupplier.State#getContribution <em>Contribution</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Contribution</em>'.
+	 * 
+	 * @return the meta object for the container reference '
+	 *         <em>Contribution</em>'.
 	 * @see org.classupplier.State#getContribution()
 	 * @see #getState()
 	 * @generated
@@ -874,9 +922,10 @@ public interface ClassSupplierPackage extends EPackage {
 	EReference getState_Contribution();
 
 	/**
-	 * Returns the meta object for the map '{@link org.classupplier.State#getCustomizers <em>Customizers</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the meta object for the map '
+	 * {@link org.classupplier.State#getCustomizers <em>Customizers</em>}'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for the map '<em>Customizers</em>'.
 	 * @see org.classupplier.State#getCustomizers()
 	 * @see #getState()
@@ -885,8 +934,9 @@ public interface ClassSupplierPackage extends EPackage {
 	EReference getState_Customizers();
 
 	/**
-	 * Returns the meta object for class '{@link org.classupplier.Workspace <em>Workspace</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the meta object for class '{@link org.classupplier.Workspace
+	 * <em>Workspace</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for class '<em>Workspace</em>'.
 	 * @see org.classupplier.Workspace
 	 * @generated
@@ -894,9 +944,12 @@ public interface ClassSupplierPackage extends EPackage {
 	EClass getWorkspace();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.classupplier.Workspace#getContributions <em>Contributions</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Contributions</em>'.
+	 * Returns the meta object for the containment reference list '
+	 * {@link org.classupplier.Workspace#getContributions <em>Contributions</em>
+	 * }'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the containment reference list '
+	 *         <em>Contributions</em>'.
 	 * @see org.classupplier.Workspace#getContributions()
 	 * @see #getWorkspace()
 	 * @generated
@@ -904,8 +957,10 @@ public interface ClassSupplierPackage extends EPackage {
 	EReference getWorkspace_Contributions();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.classupplier.Workspace#getResourceSet <em>Resource Set</em>}'.
+	 * Returns the meta object for the attribute '
+	 * {@link org.classupplier.Workspace#getResourceSet <em>Resource Set</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for the attribute '<em>Resource Set</em>'.
 	 * @see org.classupplier.Workspace#getResourceSet()
 	 * @see #getWorkspace()
@@ -914,9 +969,10 @@ public interface ClassSupplierPackage extends EPackage {
 	EAttribute getWorkspace_ResourceSet();
 
 	/**
-	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Version To State Map Entry</em>}'.
-	 * <!-- begin-user-doc --> <!--
+	 * Returns the meta object for class '{@link java.util.Map.Entry
+	 * <em>Version To State Map Entry</em>}'. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @return the meta object for class '<em>Version To State Map Entry</em>'.
 	 * @see java.util.Map.Entry
 	 * @model keyDataType="org.classupplier.Version"
@@ -926,8 +982,9 @@ public interface ClassSupplierPackage extends EPackage {
 	EClass getVersionToStateMapEntry();
 
 	/**
-	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Key</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry
+	 * <em>Key</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for the attribute '<em>Key</em>'.
 	 * @see java.util.Map.Entry
 	 * @see #getVersionToStateMapEntry()
@@ -936,9 +993,10 @@ public interface ClassSupplierPackage extends EPackage {
 	EAttribute getVersionToStateMapEntry_Key();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link java.util.Map.Entry <em>Value</em>}'.
-	 * <!-- begin-user-doc --> <!--
+	 * Returns the meta object for the containment reference '
+	 * {@link java.util.Map.Entry <em>Value</em>}'. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @return the meta object for the containment reference '<em>Value</em>'.
 	 * @see java.util.Map.Entry
 	 * @see #getVersionToStateMapEntry()
@@ -960,11 +1018,14 @@ public interface ClassSupplierPackage extends EPackage {
 	EClass getISchedulingRule();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.equinox.concurrent.future.IFuture <em>IFuture</em>}'.
+	 * Returns the meta object for class '
+	 * {@link org.eclipse.equinox.concurrent.future.IFuture <em>IFuture</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for class '<em>IFuture</em>'.
 	 * @see org.eclipse.equinox.concurrent.future.IFuture
-	 * @model instanceClass="org.eclipse.equinox.concurrent.future.IFuture" typeParameters="ResultType"
+	 * @model instanceClass="org.eclipse.equinox.concurrent.future.IFuture"
+	 *        typeParameters="ResultType"
 	 * @generated
 	 */
 	EClass getIFuture();
@@ -982,8 +1043,9 @@ public interface ClassSupplierPackage extends EPackage {
 	EClass getConstructable();
 
 	/**
-	 * Returns the meta object for enum '{@link org.classupplier.Phase <em>Phase</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the meta object for enum '{@link org.classupplier.Phase
+	 * <em>Phase</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for enum '<em>Phase</em>'.
 	 * @see org.classupplier.Phase
 	 * @generated
@@ -1004,8 +1066,9 @@ public interface ClassSupplierPackage extends EPackage {
 	EDataType getIProgressMonitor();
 
 	/**
-	 * Returns the meta object for data type '{@link org.osgi.framework.Version <em>Version</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the meta object for data type '{@link org.osgi.framework.Version
+	 * <em>Version</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for data type '<em>Version</em>'.
 	 * @see org.osgi.framework.Version
 	 * @model instanceClass="org.osgi.framework.Version"
@@ -1026,8 +1089,10 @@ public interface ClassSupplierPackage extends EPackage {
 	EDataType getSemaphore();
 
 	/**
-	 * Returns the meta object for data type '{@link org.eclipse.core.runtime.CoreException <em>Core Exception</em>}'.
+	 * Returns the meta object for data type '
+	 * {@link org.eclipse.core.runtime.CoreException <em>Core Exception</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for data type '<em>Core Exception</em>'.
 	 * @see org.eclipse.core.runtime.CoreException
 	 * @model instanceClass="org.eclipse.core.runtime.CoreException"
@@ -1049,9 +1114,9 @@ public interface ClassSupplierPackage extends EPackage {
 	EClass getEList();
 
 	/**
-	 * Returns the meta object for class '{@link org.classupplier.Customizer <em>Customizer</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the meta object for class '{@link org.classupplier.Customizer
+	 * <em>Customizer</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for class '<em>Customizer</em>'.
 	 * @see org.classupplier.Customizer
 	 * @generated
@@ -1059,9 +1124,9 @@ public interface ClassSupplierPackage extends EPackage {
 	EClass getCustomizer();
 
 	/**
-	 * Returns the meta object for class '{@link org.classupplier.PhaseQualifier <em>Phase Qualifier</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the meta object for class '{@link org.classupplier.PhaseQualifier
+	 * <em>Phase Qualifier</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for class '<em>Phase Qualifier</em>'.
 	 * @see org.classupplier.PhaseQualifier
 	 * @generated
@@ -1069,9 +1134,10 @@ public interface ClassSupplierPackage extends EPackage {
 	EClass getPhaseQualifier();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.classupplier.PhaseQualifier#getStage <em>Stage</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the meta object for the attribute '
+	 * {@link org.classupplier.PhaseQualifier#getStage <em>Stage</em>}'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for the attribute '<em>Stage</em>'.
 	 * @see org.classupplier.PhaseQualifier#getStage()
 	 * @see #getPhaseQualifier()
@@ -1080,9 +1146,10 @@ public interface ClassSupplierPackage extends EPackage {
 	EAttribute getPhaseQualifier_Stage();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.classupplier.PhaseQualifier#getFilter <em>Filter</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the meta object for the attribute '
+	 * {@link org.classupplier.PhaseQualifier#getFilter <em>Filter</em>}'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for the attribute '<em>Filter</em>'.
 	 * @see org.classupplier.PhaseQualifier#getFilter()
 	 * @see #getPhaseQualifier()
@@ -1091,10 +1158,12 @@ public interface ClassSupplierPackage extends EPackage {
 	EAttribute getPhaseQualifier_Filter();
 
 	/**
-	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Phase Qualifier To Customizer Map Entry</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Phase Qualifier To Customizer Map Entry</em>'.
+	 * Returns the meta object for class '{@link java.util.Map.Entry
+	 * <em>Phase Qualifier To Customizer Map Entry</em>}'. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for class '
+	 *         <em>Phase Qualifier To Customizer Map Entry</em>'.
 	 * @see java.util.Map.Entry
 	 * @model keyType="org.classupplier.PhaseQualifier"
 	 *        valueType="org.classupplier.Customizer" valueContainment="true"
@@ -1103,9 +1172,9 @@ public interface ClassSupplierPackage extends EPackage {
 	EClass getPhaseQualifierToCustomizerMapEntry();
 
 	/**
-	 * Returns the meta object for the reference '{@link java.util.Map.Entry <em>Key</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the meta object for the reference '{@link java.util.Map.Entry
+	 * <em>Key</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the meta object for the reference '<em>Key</em>'.
 	 * @see java.util.Map.Entry
 	 * @see #getPhaseQualifierToCustomizerMapEntry()
@@ -1114,9 +1183,10 @@ public interface ClassSupplierPackage extends EPackage {
 	EReference getPhaseQualifierToCustomizerMapEntry_Key();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link java.util.Map.Entry <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the meta object for the containment reference '
+	 * {@link java.util.Map.Entry <em>Value</em>}'. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @return the meta object for the containment reference '<em>Value</em>'.
 	 * @see java.util.Map.Entry
 	 * @see #getPhaseQualifierToCustomizerMapEntry()
@@ -1143,12 +1213,15 @@ public interface ClassSupplierPackage extends EPackage {
 	 * <li>and each data type</li>
 	 * </ul>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.classupplier.impl.ContributionImpl <em>Contribution</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '
+		 * {@link org.classupplier.impl.ContributionImpl <em>Contribution</em>}'
+		 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @see org.classupplier.impl.ContributionImpl
 		 * @see org.classupplier.impl.ClassSupplierPackageImpl#getContribution()
 		 * @generated
@@ -1156,79 +1229,89 @@ public interface ClassSupplierPackage extends EPackage {
 		EClass CONTRIBUTION = eINSTANCE.getContribution();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EAttribute CONTRIBUTION__NAME = eINSTANCE.getContribution_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Language</b></em>' attribute feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Language</b></em>' attribute
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EAttribute CONTRIBUTION__LANGUAGE = eINSTANCE.getContribution_Language();
 
 		/**
-		 * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Version</b></em>' attribute
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EAttribute CONTRIBUTION__VERSION = eINSTANCE.getContribution_Version();
 
 		/**
-		 * The meta object literal for the '<em><b>Stage</b></em>' attribute feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Stage</b></em>' attribute
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EAttribute CONTRIBUTION__STAGE = eINSTANCE.getContribution_Stage();
 
 		/**
-		 * The meta object literal for the '<em><b>Project Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Project Name</b></em>'
+		 * attribute feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EAttribute CONTRIBUTION__PROJECT_NAME = eINSTANCE.getContribution_ProjectName();
 
 		/**
-		 * The meta object literal for the '<em><b>State History</b></em>' map feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>State History</b></em>' map
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EReference CONTRIBUTION__STATE_HISTORY = eINSTANCE.getContribution_StateHistory();
 
 		/**
-		 * The meta object literal for the '<em><b>State</b></em>' containment reference feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>State</b></em>' containment
+		 * reference feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EReference CONTRIBUTION__STATE = eINSTANCE.getContribution_State();
 
 		/**
-		 * The meta object literal for the '<em><b>Dynamic EPackages</b></em>' reference list feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Dynamic EPackages</b></em>'
+		 * reference list feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EReference CONTRIBUTION__DYNAMIC_EPACKAGES = eINSTANCE.getContribution_DynamicEPackages();
 
 		/**
-		 * The meta object literal for the '<em><b>Generated EPackages</b></em>' reference list feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Generated EPackages</b></em>'
+		 * reference list feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EReference CONTRIBUTION__GENERATED_EPACKAGES = eINSTANCE.getContribution_GeneratedEPackages();
 
 		/**
-		 * The meta object literal for the '<em><b>Workspace</b></em>' container reference feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Workspace</b></em>' container
+		 * reference feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EReference CONTRIBUTION__WORKSPACE = eINSTANCE.getContribution_Workspace();
 
 		/**
-		 * The meta object literal for the '<em><b>Customizers</b></em>' map feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Customizers</b></em>' map
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EReference CONTRIBUTION__CUSTOMIZERS = eINSTANCE.getContribution_Customizers();
@@ -1245,103 +1328,117 @@ public interface ClassSupplierPackage extends EPackage {
 		EClass STATE = eINSTANCE.getState();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EAttribute STATE__NAME = eINSTANCE.getState_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Language</b></em>' attribute feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Language</b></em>' attribute
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EAttribute STATE__LANGUAGE = eINSTANCE.getState_Language();
 
 		/**
-		 * The meta object literal for the '<em><b>Timestamp</b></em>' attribute feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Timestamp</b></em>' attribute
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EAttribute STATE__TIMESTAMP = eINSTANCE.getState_Timestamp();
 
 		/**
-		 * The meta object literal for the '<em><b>Number</b></em>' attribute feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Number</b></em>' attribute
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EAttribute STATE__NUMBER = eINSTANCE.getState_Number();
 
 		/**
-		 * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Version</b></em>' attribute
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EAttribute STATE__VERSION = eINSTANCE.getState_Version();
 
 		/**
-		 * The meta object literal for the '<em><b>Stage</b></em>' attribute feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Stage</b></em>' attribute
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EAttribute STATE__STAGE = eINSTANCE.getState_Stage();
 
 		/**
-		 * The meta object literal for the '<em><b>Project Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Project Name</b></em>'
+		 * attribute feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EAttribute STATE__PROJECT_NAME = eINSTANCE.getState_ProjectName();
 
 		/**
-		 * The meta object literal for the '<em><b>Deployable Unit Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Deployable Unit Name</b></em>
+		 * ' attribute feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EAttribute STATE__DEPLOYABLE_UNIT_NAME = eINSTANCE.getState_DeployableUnitName();
 
 		/**
-		 * The meta object literal for the '<em><b>EPackages</b></em>' attribute list feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>EPackages</b></em>' attribute
+		 * list feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EAttribute STATE__EPACKAGES = eINSTANCE.getState_EPackages();
 
 		/**
-		 * The meta object literal for the '<em><b>Dynamic EPackages</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '<em><b>Dynamic EPackages</b></em>'
+		 * containment reference list feature. <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EReference STATE__DYNAMIC_EPACKAGES = eINSTANCE.getState_DynamicEPackages();
 
 		/**
-		 * The meta object literal for the '<em><b>Generated EPackages</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '<em><b>Generated EPackages</b></em>'
+		 * containment reference list feature. <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EReference STATE__GENERATED_EPACKAGES = eINSTANCE.getState_GeneratedEPackages();
 
 		/**
-		 * The meta object literal for the '<em><b>Contribution</b></em>' container reference feature.
-		 * <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '<em><b>Contribution</b></em>'
+		 * container reference feature. <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EReference STATE__CONTRIBUTION = eINSTANCE.getState_Contribution();
 
 		/**
-		 * The meta object literal for the '<em><b>Customizers</b></em>' map feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Customizers</b></em>' map
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EReference STATE__CUSTOMIZERS = eINSTANCE.getState_Customizers();
 
 		/**
-		 * The meta object literal for the '{@link org.classupplier.impl.WorkspaceImpl <em>Workspace</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '
+		 * {@link org.classupplier.impl.WorkspaceImpl <em>Workspace</em>}'
+		 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @see org.classupplier.impl.WorkspaceImpl
 		 * @see org.classupplier.impl.ClassSupplierPackageImpl#getWorkspace()
 		 * @generated
@@ -1349,24 +1446,28 @@ public interface ClassSupplierPackage extends EPackage {
 		EClass WORKSPACE = eINSTANCE.getWorkspace();
 
 		/**
-		 * The meta object literal for the '<em><b>Contributions</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '<em><b>Contributions</b></em>'
+		 * containment reference list feature. <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EReference WORKSPACE__CONTRIBUTIONS = eINSTANCE.getWorkspace_Contributions();
 
 		/**
-		 * The meta object literal for the '<em><b>Resource Set</b></em>' attribute feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Resource Set</b></em>'
+		 * attribute feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EAttribute WORKSPACE__RESOURCE_SET = eINSTANCE.getWorkspace_ResourceSet();
 
 		/**
-		 * The meta object literal for the '{@link org.classupplier.impl.VersionToStateMapEntryImpl <em>Version To State Map Entry</em>}' class.
-		 * <!-- begin-user-doc -->
+		 * The meta object literal for the '
+		 * {@link org.classupplier.impl.VersionToStateMapEntryImpl
+		 * <em>Version To State Map Entry</em>}' class. <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * 
 		 * @see org.classupplier.impl.VersionToStateMapEntryImpl
 		 * @see org.classupplier.impl.ClassSupplierPackageImpl#getVersionToStateMapEntry()
 		 * @generated
@@ -1374,23 +1475,27 @@ public interface ClassSupplierPackage extends EPackage {
 		EClass VERSION_TO_STATE_MAP_ENTRY = eINSTANCE.getVersionToStateMapEntry();
 
 		/**
-		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Key</b></em>' attribute
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EAttribute VERSION_TO_STATE_MAP_ENTRY__KEY = eINSTANCE.getVersionToStateMapEntry_Key();
 
 		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Value</b></em>' containment
+		 * reference feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EReference VERSION_TO_STATE_MAP_ENTRY__VALUE = eINSTANCE.getVersionToStateMapEntry_Value();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.core.runtime.jobs.ISchedulingRule <em>IScheduling Rule</em>}' class.
-		 * <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '
+		 * {@link org.eclipse.core.runtime.jobs.ISchedulingRule
+		 * <em>IScheduling Rule</em>}' class. <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
+		 * 
 		 * @see org.eclipse.core.runtime.jobs.ISchedulingRule
 		 * @see org.classupplier.impl.ClassSupplierPackageImpl#getISchedulingRule()
 		 * @generated
@@ -1398,8 +1503,10 @@ public interface ClassSupplierPackage extends EPackage {
 		EClass ISCHEDULING_RULE = eINSTANCE.getISchedulingRule();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.equinox.concurrent.future.IFuture <em>IFuture</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '
+		 * {@link org.eclipse.equinox.concurrent.future.IFuture <em>IFuture</em>
+		 * }' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @see org.eclipse.equinox.concurrent.future.IFuture
 		 * @see org.classupplier.impl.ClassSupplierPackageImpl#getIFuture()
 		 * @generated
@@ -1407,8 +1514,10 @@ public interface ClassSupplierPackage extends EPackage {
 		EClass IFUTURE = eINSTANCE.getIFuture();
 
 		/**
-		 * The meta object literal for the '{@link org.classupplier.impl.Constructable <em>Constructable</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '
+		 * {@link org.classupplier.impl.Constructable <em>Constructable</em>}'
+		 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @see org.classupplier.impl.Constructable
 		 * @see org.classupplier.impl.ClassSupplierPackageImpl#getConstructable()
 		 * @generated
@@ -1416,8 +1525,9 @@ public interface ClassSupplierPackage extends EPackage {
 		EClass CONSTRUCTABLE = eINSTANCE.getConstructable();
 
 		/**
-		 * The meta object literal for the '{@link org.classupplier.Phase <em>Phase</em>}' enum.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '{@link org.classupplier.Phase
+		 * <em>Phase</em>}' enum. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @see org.classupplier.Phase
 		 * @see org.classupplier.impl.ClassSupplierPackageImpl#getPhase()
 		 * @generated
@@ -1425,8 +1535,9 @@ public interface ClassSupplierPackage extends EPackage {
 		EEnum PHASE = eINSTANCE.getPhase();
 
 		/**
-		 * The meta object literal for the '<em>IProgress Monitor</em>' data type.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em>IProgress Monitor</em>' data
+		 * type. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @see org.eclipse.core.runtime.IProgressMonitor
 		 * @see org.classupplier.impl.ClassSupplierPackageImpl#getIProgressMonitor()
 		 * @generated
@@ -1456,6 +1567,7 @@ public interface ClassSupplierPackage extends EPackage {
 		/**
 		 * The meta object literal for the '<em>Core Exception</em>' data type.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @see org.eclipse.core.runtime.CoreException
 		 * @see org.classupplier.impl.ClassSupplierPackageImpl#getCoreException()
 		 * @generated
@@ -1474,9 +1586,10 @@ public interface ClassSupplierPackage extends EPackage {
 		EClass ELIST = eINSTANCE.getEList();
 
 		/**
-		 * The meta object literal for the '{@link org.classupplier.impl.CustomizerImpl <em>Customizer</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * The meta object literal for the '
+		 * {@link org.classupplier.impl.CustomizerImpl <em>Customizer</em>}'
+		 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @see org.classupplier.impl.CustomizerImpl
 		 * @see org.classupplier.impl.ClassSupplierPackageImpl#getCustomizer()
 		 * @generated
@@ -1484,9 +1597,11 @@ public interface ClassSupplierPackage extends EPackage {
 		EClass CUSTOMIZER = eINSTANCE.getCustomizer();
 
 		/**
-		 * The meta object literal for the '{@link org.classupplier.impl.PhaseQualifierImpl <em>Phase Qualifier</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * The meta object literal for the '
+		 * {@link org.classupplier.impl.PhaseQualifierImpl
+		 * <em>Phase Qualifier</em>}' class. <!-- begin-user-doc --> <!--
+		 * end-user-doc -->
+		 * 
 		 * @see org.classupplier.impl.PhaseQualifierImpl
 		 * @see org.classupplier.impl.ClassSupplierPackageImpl#getPhaseQualifier()
 		 * @generated
@@ -1494,25 +1609,27 @@ public interface ClassSupplierPackage extends EPackage {
 		EClass PHASE_QUALIFIER = eINSTANCE.getPhaseQualifier();
 
 		/**
-		 * The meta object literal for the '<em><b>Stage</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Stage</b></em>' attribute
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EAttribute PHASE_QUALIFIER__STAGE = eINSTANCE.getPhaseQualifier_Stage();
 
 		/**
-		 * The meta object literal for the '<em><b>Filter</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Filter</b></em>' attribute
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EAttribute PHASE_QUALIFIER__FILTER = eINSTANCE.getPhaseQualifier_Filter();
 
 		/**
-		 * The meta object literal for the '{@link org.classupplier.impl.PhaseQualifierToCustomizerMapEntryImpl <em>Phase Qualifier To Customizer Map Entry</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * The meta object literal for the '
+		 * {@link org.classupplier.impl.PhaseQualifierToCustomizerMapEntryImpl
+		 * <em>Phase Qualifier To Customizer Map Entry</em>}' class. <!--
+		 * begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @see org.classupplier.impl.PhaseQualifierToCustomizerMapEntryImpl
 		 * @see org.classupplier.impl.ClassSupplierPackageImpl#getPhaseQualifierToCustomizerMapEntry()
 		 * @generated
@@ -1520,17 +1637,17 @@ public interface ClassSupplierPackage extends EPackage {
 		EClass PHASE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY = eINSTANCE.getPhaseQualifierToCustomizerMapEntry();
 
 		/**
-		 * The meta object literal for the '<em><b>Key</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Key</b></em>' reference
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EReference PHASE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY__KEY = eINSTANCE.getPhaseQualifierToCustomizerMapEntry_Key();
 
 		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Value</b></em>' containment
+		 * reference feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		EReference PHASE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY__VALUE = eINSTANCE

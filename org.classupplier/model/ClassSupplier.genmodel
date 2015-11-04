@@ -27,7 +27,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//Contribution/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//Contribution/language"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//Contribution/version"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//Contribution/stage"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//Contribution/stage"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//Contribution/projectName"/>
       <genFeatures property="None" createChild="false" ecoreFeature="ecore:EReference ClassSupplier.ecore#//Contribution/stateHistory"/>
       <genFeatures property="None" createChild="false" propertyCategory="" ecoreFeature="ecore:EReference ClassSupplier.ecore#//Contribution/state"/>
@@ -104,6 +104,14 @@
       <genOperations ecoreOperation="ClassSupplier.ecore#//Workspace/getContribution.3">
         <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/getContribution.3/projectName"/>
       </genOperations>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//Workspace/getContribution.4">
+        <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/getContribution.4/ePackage"/>
+        <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/getContribution.4/searchOptimistic"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//Workspace/getContribution.5">
+        <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/getContribution.5/ePackages"/>
+        <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/getContribution.5/searchOptimistic"/>
+      </genOperations>
       <genOperations ecoreOperation="ClassSupplier.ecore#//Workspace/registerContribution">
         <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/registerContribution/contribution"/>
       </genOperations>
@@ -146,14 +154,17 @@
       <genTypeParameters ecoreTypeParameter="ClassSupplier.ecore#//EList/T"/>
     </genClasses>
     <genClasses image="false" ecoreClass="ClassSupplier.ecore#//Customizer">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//Customizer/appliesTo"/>
       <genOperations ecoreOperation="ClassSupplier.ecore#//Customizer/customize">
         <genParameters ecoreParameter="ClassSupplier.ecore#//Customizer/customize/args"/>
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="ClassSupplier.ecore#//PhaseQualifier">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//PhaseQualifier/stage"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//PhaseQualifier/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//PhaseQualifier/filter"/>
+    </genClasses>
+    <genClasses ecoreClass="ClassSupplier.ecore#//PhaseQualifierToCustomizerMapEntry">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//PhaseQualifierToCustomizerMapEntry/key"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//PhaseQualifierToCustomizerMapEntry/value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

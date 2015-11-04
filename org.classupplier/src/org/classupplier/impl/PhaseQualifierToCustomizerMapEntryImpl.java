@@ -16,15 +16,19 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Phase Qualifier To Customizer Map Entry</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Phase Qualifier To Customizer Map Entry</b></em>'. <!-- end-user-doc
+ * -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.classupplier.impl.PhaseQualifierToCustomizerMapEntryImpl#getTypedKey <em>Key</em>}</li>
- *   <li>{@link org.classupplier.impl.PhaseQualifierToCustomizerMapEntryImpl#getTypedValue <em>Value</em>}</li>
+ * <li>
+ * {@link org.classupplier.impl.PhaseQualifierToCustomizerMapEntryImpl#getTypedKey
+ * <em>Key</em>}</li>
+ * <li>
+ * {@link org.classupplier.impl.PhaseQualifierToCustomizerMapEntryImpl#getTypedValue
+ * <em>Value</em>}</li>
  * </ul>
  *
  * @generated
@@ -33,8 +37,8 @@ public class PhaseQualifierToCustomizerMapEntryImpl extends EObjectImpl
 		implements BasicEMap.Entry<PhaseQualifier, Customizer> {
 	/**
 	 * The cached value of the '{@link #getTypedKey() <em>Key</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getTypedKey()
 	 * @generated
 	 * @ordered
@@ -42,9 +46,9 @@ public class PhaseQualifierToCustomizerMapEntryImpl extends EObjectImpl
 	protected PhaseQualifier key;
 
 	/**
-	 * The cached value of the '{@link #getTypedValue() <em>Value</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getTypedValue() <em>Value</em>}'
+	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getTypedValue()
 	 * @generated
 	 * @ordered
@@ -52,8 +56,8 @@ public class PhaseQualifierToCustomizerMapEntryImpl extends EObjectImpl
 	protected Customizer value;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected PhaseQualifierToCustomizerMapEntryImpl() {
@@ -61,8 +65,8 @@ public class PhaseQualifierToCustomizerMapEntryImpl extends EObjectImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -71,8 +75,8 @@ public class PhaseQualifierToCustomizerMapEntryImpl extends EObjectImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public PhaseQualifier getTypedKey() {
@@ -89,8 +93,8 @@ public class PhaseQualifierToCustomizerMapEntryImpl extends EObjectImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public PhaseQualifier basicGetTypedKey() {
@@ -98,8 +102,8 @@ public class PhaseQualifierToCustomizerMapEntryImpl extends EObjectImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setTypedKey(PhaseQualifier newKey) {
@@ -111,8 +115,8 @@ public class PhaseQualifierToCustomizerMapEntryImpl extends EObjectImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Customizer getTypedValue() {
@@ -120,8 +124,8 @@ public class PhaseQualifierToCustomizerMapEntryImpl extends EObjectImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetTypedValue(Customizer newValue, NotificationChain msgs) {
@@ -139,8 +143,8 @@ public class PhaseQualifierToCustomizerMapEntryImpl extends EObjectImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setTypedValue(Customizer newValue) {
@@ -163,8 +167,8 @@ public class PhaseQualifierToCustomizerMapEntryImpl extends EObjectImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -177,8 +181,8 @@ public class PhaseQualifierToCustomizerMapEntryImpl extends EObjectImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -195,8 +199,8 @@ public class PhaseQualifierToCustomizerMapEntryImpl extends EObjectImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -213,8 +217,8 @@ public class PhaseQualifierToCustomizerMapEntryImpl extends EObjectImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -231,8 +235,8 @@ public class PhaseQualifierToCustomizerMapEntryImpl extends EObjectImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -247,15 +251,15 @@ public class PhaseQualifierToCustomizerMapEntryImpl extends EObjectImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected int hash = -1;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public int getHash() {
@@ -267,8 +271,8 @@ public class PhaseQualifierToCustomizerMapEntryImpl extends EObjectImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setHash(int hash) {
@@ -276,8 +280,8 @@ public class PhaseQualifierToCustomizerMapEntryImpl extends EObjectImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public PhaseQualifier getKey() {
@@ -285,8 +289,8 @@ public class PhaseQualifierToCustomizerMapEntryImpl extends EObjectImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setKey(PhaseQualifier key) {
@@ -294,8 +298,8 @@ public class PhaseQualifierToCustomizerMapEntryImpl extends EObjectImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Customizer getValue() {
@@ -303,8 +307,8 @@ public class PhaseQualifierToCustomizerMapEntryImpl extends EObjectImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Customizer setValue(Customizer value) {
@@ -314,8 +318,8 @@ public class PhaseQualifierToCustomizerMapEntryImpl extends EObjectImpl
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -324,4 +328,4 @@ public class PhaseQualifierToCustomizerMapEntryImpl extends EObjectImpl
 		return container == null ? null : (EMap<PhaseQualifier, Customizer>) container.eGet(eContainmentFeature());
 	}
 
-} //PhaseQualifierToCustomizerMapEntryImpl
+} // PhaseQualifierToCustomizerMapEntryImpl
