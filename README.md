@@ -48,4 +48,4 @@ Example:
         
 Here is [more examples](/org.classupplier.tests/src/org/classupplier/tests/ClassSupplierTest.java).  
 
-For further details please see project's [wiki](https://github.com/kirillzotkin/ClassSupplier/wiki).
+Please see project's [wiki](https://github.com/kirillzotkin/ClassSupplier/wiki) for further details.
