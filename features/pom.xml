@@ -1,0 +1,17 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.classupplier</groupId>
+    <artifactId>org.classupplier.features</artifactId>
+    <version>0.7.8-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>org.classupplier</groupId>
+        <artifactId>org.classupplier.root</artifactId>
+        <version>0.7.8-SNAPSHOT</version>
+    </parent>
+
+    <modules>
+        <module>org.classupplier.feature</module>
+    </modules>
+</project>

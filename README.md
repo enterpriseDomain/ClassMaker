@@ -3,7 +3,7 @@ ClassSupplier
 
 ClassSupplier is an Eclipse plug-in allowing you to make code programmatically.  
 
-It generates source code from the model provided, exports binary, installs in runtime, and then loads classes making available for client code to access reflectively through modeled API.  
+It generates source code from the model provided, exports binary, installs in runtime, and then loads classes making available for client code's reflective access through modeled API.  
 
 
 Example:  
@@ -46,6 +46,6 @@ Example:
     assertEquals(pages, jObject.eGet(jAttr));
     assertEquals(eClass.getName(), jObject.getClass().getSimpleName());  
         
-Here is [more examples](/org.classupplier.tests/src/org/classupplier/tests/ClassSupplierTest.java).  
+Here is [more examples](/org.classupplier.tests/src/org/classupplier/tests/TestClassSupplier.java).  
 
-Please see project's [wiki](https://github.com/kirillzotkin/ClassSupplier/wiki) for further details.
+Please see project's [wiki](https://github.com/kyrillzotkin/ClassSupplier/wiki) for further details.

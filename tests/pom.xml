@@ -1,0 +1,35 @@
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.classupplier</groupId>
+	<artifactId>org.classupplier.tests.root</artifactId>
+	<version>0.0.4-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<parent>
+		<groupId>org.classupplier</groupId>
+		<artifactId>org.classupplier.root</artifactId>
+		<version>0.7.8-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-surefire-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<configuration>
+					<dependency>
+						<type>eclipse-plugin</type>
+						<artifactId>org.eclipse.core.runtime.compatibility.registry</artifactId>
+						<version>0.0.0</version>
+					</dependency>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<modules>
+		<module>org.classupplier.tests</module>
+	</modules>
+</project>
