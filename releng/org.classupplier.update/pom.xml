@@ -1,0 +1,11 @@
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.classupplier</groupId>
+		<artifactId>org.classupplier.releng</artifactId>
+		<version>0.7.8-SNAPSHOT</version>
+	</parent>
+	<artifactId>org.classupplier.update</artifactId>
+	<version>0.7.8-SNAPSHOT</version>
+	<packaging>eclipse-repository</packaging>
+</project>

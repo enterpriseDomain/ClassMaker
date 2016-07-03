@@ -243,7 +243,7 @@ public class EcoreGenerator extends ClassSupplierJob implements org.classupplier
 		genModel.initialize(ePackages);
 		genModel.setModelName(INSTANCE.getContribution().getName());
 		genModel.setLanguage(INSTANCE.getContribution().getLanguage());
-		genModel.setComplianceLevel(GenJDKLevel.JDK70_LITERAL);
+		genModel.setComplianceLevel(GenJDKLevel.JDK80_LITERAL);
 		genModel.setUpdateClasspath(true);
 		genModel.setModelDirectory(projectPath.append(SOURCE_FOLDER_NAME).toString());
 		genModel.setModelPluginID(INSTANCE.getProject().getName());

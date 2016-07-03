@@ -1,17 +1,18 @@
 <project>
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>org.classupplier</groupId>
-    <artifactId>org.classupplier.releng</artifactId>
-    <version>0.7.8-SNAPSHOT</version>
-    <packaging>pom</packaging>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.classupplier</groupId>
+	<artifactId>org.classupplier.releng</artifactId>
+	<version>0.7.8-SNAPSHOT</version>
+	<packaging>pom</packaging>
 
-    <parent>
-        <groupId>org.classupplier</groupId>
-        <artifactId>org.classupplier.root</artifactId>
-        <version>0.7.8-SNAPSHOT</version>
-    </parent>
+	<parent>
+		<groupId>org.classupplier</groupId>
+		<artifactId>org.classupplier.root</artifactId>
+		<version>0.7.8-SNAPSHOT</version>
+	</parent>
 
-    <modules>
-        <module>org.classupplier.target</module>
-    </modules>
+	<modules>
+		<module>org.classupplier.update</module>
+		<module>org.classupplier.target</module>
+	</modules>
 </project>

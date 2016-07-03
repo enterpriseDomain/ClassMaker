@@ -132,9 +132,11 @@ public abstract class ClassSupplierJob extends WorkspaceJob {
 	public abstract Phase requiredStage();
 
 	public void checkStage() throws CoreException {
-		if (getContribution().getStage().getValue() < requiredStage().getValue())
-			throw new CoreException(ClassSupplierOSGi
-					.createWarningStatus(NLS.bind(Messages.ContributionStageNotEnough, requiredStage().getLiteral())));
+		while (getContribution().getStage().getValue() < requiredStage().getValue())
+			Thread.yield();
+//		if (getContribution().getStage().getValue() < requiredStage().getValue())
+//			throw new CoreException(ClassSupplierOSGi
+//					.createWarningStatus(NLS.bind(Messages.ContributionStageNotEnough, requiredStage().getLiteral())));
 	}
 
 	public void setResourceSet(ResourceSet resourceSet) {
