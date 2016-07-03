@@ -61,17 +61,7 @@ public class PDEExporter extends AbstractExporter {
 		DelegatingJob delegate = new DelegatingJob(op);
 		delegate.setNextJob(getNextJob());
 		setNextJob(delegate);
-		delegate.addJobChangeListener(new JobChangeAdapter() {
-
-			@Override
-			public void done(IJobChangeEvent event) {
-				if (event.getResult().isOK())
-					contribution.setStage(Phase.EXPORTED);
-				else
-					event.getResult().getException().printStackTrace();
-			}
-
-		});
+		contribution.setStage(Phase.EXPORTED);
 		monitor.worked(1);
 		return Status.OK_STATUS;
 	}
