@@ -41,7 +41,7 @@ public class OSGiEPackageLoader extends ContainerJob {
 			if (event.getBundle() == null)
 				return;
 			if (event.getBundle().getSymbolicName().equals(getProject().getName()))
-				if (event.getType() == BundleEvent.STARTED) {
+				if (event.getType() == BundleEvent.STARTED || event.getType() == BundleEvent.LAZY_ACTIVATION) {
 					doLoad(getContribution(), event.getBundle());
 				}
 
@@ -94,9 +94,7 @@ public class OSGiEPackageLoader extends ContainerJob {
 		} finally {
 			monitor.done();
 		}
-		return
-
-		getOKStatus(osgiBundle);
+		return getOKStatus(osgiBundle);
 	}
 
 	private IStatus getOKStatus(Bundle osgiBundle) {
@@ -126,40 +124,42 @@ public class OSGiEPackageLoader extends ContainerJob {
 		ePackages = ECollections.newBasicEList();
 		EMap<Integer, EPackage> toSet = new BasicEMap<Integer, EPackage>();
 		EList<EPackage> toAdd = ECollections.newBasicEList();
-		for (EPackage model : state.getDynamicEPackages()) {
-			String packageClassName = CodeGenUtil.safeName(model.getName()) + "." + model.getNsPrefix() //$NON-NLS-1$
-					+ "Package"; //$NON-NLS-1$
-			Class<?> packageClass = null;
-			try {
-				packageClass = osgiBundle.loadClass(packageClassName);
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-				setException(e);
-			}
-			EPackage ePackage = null;
-			try {
-				ePackage = (EPackage) packageClass.getField("eINSTANCE").get(packageClass); //$NON-NLS-1$
-				ePackages.add(ePackage);
-			} catch (Exception e) {
-				e.printStackTrace();
-				setException(e);
-			}
-			int index = ePackages.indexOf(ePackage);
-			if (ePackages != null) {
-				if (getContribution().contains(ClassSupplierPackage.Literals.STATE__GENERATED_EPACKAGES, ePackage))
-					toSet.put(index, ePackage);
-				else
-					toAdd.add(ePackage);
+		try {
+			for (EPackage model : state.getDynamicEPackages()) {
+				String packageClassName = CodeGenUtil.safeName(model.getName()) + "." + model.getNsPrefix() //$NON-NLS-1$
+						+ "Package"; //$NON-NLS-1$
+				Class<?> packageClass = null;
+				try {
+					packageClass = osgiBundle.loadClass(packageClassName);
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+					setException(e);
+				}
+				EPackage ePackage = null;
+				try {
+					ePackage = (EPackage) packageClass.getField("eINSTANCE").get(packageClass); //$NON-NLS-1$
+					ePackages.add(ePackage);
+				} catch (Exception e) {
+					e.printStackTrace();
+					setException(e);
+				}
+				int index = ePackages.indexOf(ePackage);
+				if (ePackages != null) {
+					if (getContribution().contains(ClassSupplierPackage.Literals.STATE__GENERATED_EPACKAGES, ePackage))
+						toSet.put(index, ePackage);
+					else
+						toAdd.add(ePackage);
 
-			} else if (exception == null)
-				setException(new Error());
+				} else if (exception == null)
+					setException(new Error());
+			}
+			for (Integer index : toSet.keySet())
+				getContribution().getGeneratedEPackages().set(index, toSet.get(index));
+			if (!toAdd.isEmpty())
+				getContribution().getGeneratedEPackages().addAll(toAdd);
+		} finally {
+			loaded.release();
 		}
-		for (Integer index : toSet.keySet())
-			getContribution().getGeneratedEPackages().set(index, toSet.get(index));
-		if (!toAdd.isEmpty())
-			getContribution().getGeneratedEPackages().addAll(toAdd);
-
-		loaded.release();
 	}
 
 	@Override
