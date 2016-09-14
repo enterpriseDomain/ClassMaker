@@ -41,7 +41,9 @@ public class OSGiEPackageLoader extends ContainerJob {
 			if (event.getBundle() == null)
 				return;
 			if (event.getBundle().getSymbolicName().equals(getProject().getName()))
-				if (event.getType() == BundleEvent.STARTED || event.getType() == BundleEvent.LAZY_ACTIVATION) {
+				if (((event.getType() == BundleEvent.STARTED || event.getType() == BundleEvent.RESOLVED
+						|| event.getType() == BundleEvent.LAZY_ACTIVATION)
+						&& event.getBundle().getState() == Bundle.ACTIVE)) {
 					doLoad(getContribution(), event.getBundle());
 				}
 
@@ -61,8 +63,7 @@ public class OSGiEPackageLoader extends ContainerJob {
 			osgiBundle = getBundle(contribution.getVersion());
 			if (osgiBundle != null) {
 				if (osgiBundle.getHeaders().get(Constants.FRAGMENT_HOST) == null) {
-					// if (osgiBundle.getState() == Bundle.STARTING ||
-					// osgiBundle.getState() == Bundle.ACTIVE) {
+					// if (osgiBundle.getState() == Bundle.ACTIVE)
 					getContext().removeBundleListener(listener);
 					// doLoad(contribution, osgiBundle);
 					// } else {
@@ -92,6 +93,7 @@ public class OSGiEPackageLoader extends ContainerJob {
 			} else
 				throw new CoreException(ClassSupplierOSGi.createErrorStatus(exception));
 		} finally {
+			getContext().removeBundleListener(listener);
 			monitor.done();
 		}
 		return getOKStatus(osgiBundle);
@@ -104,9 +106,10 @@ public class OSGiEPackageLoader extends ContainerJob {
 		if (ePackagesMsg.length() > 2)
 			ePackagesMsg = ePackagesMsg.subSequence(0, ePackagesMsg.length() - 2).toString();
 		if (ePackages.isEmpty())
-			ePackagesMsg = "none";
-		return ClassSupplierOSGi.createOKStatus(NLS.bind(Messages.EPackageClassLoadComplete, new Object[] {
-				osgiBundle.getSymbolicName(), osgiBundle.getHeaders().get(Constants.BUNDLE_VERSION), ePackagesMsg }));
+			ePackagesMsg = Messages.None;
+		return ClassSupplierOSGi.createOKStatus(Messages.OK + " "
+				+ NLS.bind(Messages.EPackageClassLoadComplete, new Object[] { osgiBundle.getSymbolicName(),
+						osgiBundle.getHeaders().get(Constants.BUNDLE_VERSION), ePackagesMsg }));
 
 	}
 
@@ -155,7 +158,7 @@ public class OSGiEPackageLoader extends ContainerJob {
 			}
 			for (Integer index : toSet.keySet())
 				getContribution().getGeneratedEPackages().set(index, toSet.get(index));
-			if (!toAdd.isEmpty())
+			if (toAdd.toArray().length > 0 || !toAdd.isEmpty())
 				getContribution().getGeneratedEPackages().addAll(toAdd);
 		} finally {
 			loaded.release();

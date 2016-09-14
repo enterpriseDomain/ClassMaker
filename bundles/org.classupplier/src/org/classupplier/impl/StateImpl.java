@@ -52,19 +52,28 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.classupplier.impl.StateImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.classupplier.impl.StateImpl#getLanguage <em>Language</em>}</li>
- *   <li>{@link org.classupplier.impl.StateImpl#getTimestamp <em>Timestamp</em>}</li>
- *   <li>{@link org.classupplier.impl.StateImpl#getNumber <em>Number</em>}</li>
- *   <li>{@link org.classupplier.impl.StateImpl#getVersion <em>Version</em>}</li>
- *   <li>{@link org.classupplier.impl.StateImpl#getStage <em>Stage</em>}</li>
- *   <li>{@link org.classupplier.impl.StateImpl#getProjectName <em>Project Name</em>}</li>
- *   <li>{@link org.classupplier.impl.StateImpl#getDeployableUnitName <em>Deployable Unit Name</em>}</li>
- *   <li>{@link org.classupplier.impl.StateImpl#getEPackages <em>EPackages</em>}</li>
- *   <li>{@link org.classupplier.impl.StateImpl#getDynamicEPackages <em>Dynamic EPackages</em>}</li>
- *   <li>{@link org.classupplier.impl.StateImpl#getGeneratedEPackages <em>Generated EPackages</em>}</li>
- *   <li>{@link org.classupplier.impl.StateImpl#getContribution <em>Contribution</em>}</li>
- *   <li>{@link org.classupplier.impl.StateImpl#getCustomizers <em>Customizers</em>}</li>
+ * <li>{@link org.classupplier.impl.StateImpl#getName <em>Name</em>}</li>
+ * <li>{@link org.classupplier.impl.StateImpl#getLanguage
+ * <em>Language</em>}</li>
+ * <li>{@link org.classupplier.impl.StateImpl#getTimestamp
+ * <em>Timestamp</em>}</li>
+ * <li>{@link org.classupplier.impl.StateImpl#getNumber <em>Number</em>}</li>
+ * <li>{@link org.classupplier.impl.StateImpl#getVersion <em>Version</em>}</li>
+ * <li>{@link org.classupplier.impl.StateImpl#getStage <em>Stage</em>}</li>
+ * <li>{@link org.classupplier.impl.StateImpl#getProjectName <em>Project
+ * Name</em>}</li>
+ * <li>{@link org.classupplier.impl.StateImpl#getDeployableUnitName
+ * <em>Deployable Unit Name</em>}</li>
+ * <li>{@link org.classupplier.impl.StateImpl#getEPackages
+ * <em>EPackages</em>}</li>
+ * <li>{@link org.classupplier.impl.StateImpl#getDynamicEPackages <em>Dynamic
+ * EPackages</em>}</li>
+ * <li>{@link org.classupplier.impl.StateImpl#getGeneratedEPackages
+ * <em>Generated EPackages</em>}</li>
+ * <li>{@link org.classupplier.impl.StateImpl#getContribution
+ * <em>Contribution</em>}</li>
+ * <li>{@link org.classupplier.impl.StateImpl#getCustomizers
+ * <em>Customizers</em>}</li>
  * </ul>
  *
  * @generated
@@ -155,6 +164,7 @@ public class StateImpl extends EObjectImpl implements State {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -164,6 +174,7 @@ public class StateImpl extends EObjectImpl implements State {
 	/**
 	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -171,8 +182,9 @@ public class StateImpl extends EObjectImpl implements State {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getLanguage() <em>Language</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getLanguage() <em>Language</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getLanguage()
 	 * @generated
 	 * @ordered
@@ -180,8 +192,9 @@ public class StateImpl extends EObjectImpl implements State {
 	protected static final String LANGUAGE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getLanguage() <em>Language</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getLanguage() <em>Language</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getLanguage()
 	 * @generated
 	 * @ordered
@@ -191,8 +204,9 @@ public class StateImpl extends EObjectImpl implements State {
 	protected Locale locale;
 
 	/**
-	 * The default value of the '{@link #getTimestamp() <em>Timestamp</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getTimestamp() <em>Timestamp</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getTimestamp()
 	 * @generated
 	 * @ordered
@@ -200,8 +214,9 @@ public class StateImpl extends EObjectImpl implements State {
 	protected static final Date TIMESTAMP_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getTimestamp() <em>Timestamp</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getTimestamp() <em>Timestamp</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getTimestamp()
 	 * @generated
 	 * @ordered
@@ -209,8 +224,9 @@ public class StateImpl extends EObjectImpl implements State {
 	protected Date timestamp = TIMESTAMP_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getNumber() <em>Number</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getNumber() <em>Number</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getNumber()
 	 * @generated
 	 * @ordered
@@ -220,6 +236,7 @@ public class StateImpl extends EObjectImpl implements State {
 	/**
 	 * The cached value of the '{@link #getNumber() <em>Number</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getNumber()
 	 * @generated
 	 * @ordered
@@ -237,8 +254,9 @@ public class StateImpl extends EObjectImpl implements State {
 	protected static final Version VERSION_EDEFAULT = Version.emptyVersion;
 
 	/**
-	 * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getVersion() <em>Version</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getVersion()
 	 * @generated
 	 * @ordered
@@ -248,6 +266,7 @@ public class StateImpl extends EObjectImpl implements State {
 	/**
 	 * The default value of the '{@link #getStage() <em>Stage</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getStage()
 	 * @generated
 	 * @ordered
@@ -257,6 +276,7 @@ public class StateImpl extends EObjectImpl implements State {
 	/**
 	 * The cached value of the '{@link #getStage() <em>Stage</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getStage()
 	 * @generated
 	 * @ordered
@@ -264,8 +284,9 @@ public class StateImpl extends EObjectImpl implements State {
 	protected Phase stage = STAGE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getProjectName() <em>Project
+	 * Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getProjectName()
 	 * @generated
 	 * @ordered
@@ -273,8 +294,9 @@ public class StateImpl extends EObjectImpl implements State {
 	protected static final String PROJECT_NAME_EDEFAULT = ""; // $NON-NLS-0$
 
 	/**
-	 * The cached value of the '{@link #getProjectName() <em>Project Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getProjectName() <em>Project Name</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getProjectName()
 	 * @generated
 	 * @ordered
@@ -282,9 +304,9 @@ public class StateImpl extends EObjectImpl implements State {
 	protected String projectName = PROJECT_NAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getDeployableUnitName() <em>Deployable Unit Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * The default value of the '{@link #getDeployableUnitName() <em>Deployable
+	 * Unit Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getDeployableUnitName()
 	 * @generated
 	 * @ordered
@@ -292,8 +314,9 @@ public class StateImpl extends EObjectImpl implements State {
 	protected static final String DEPLOYABLE_UNIT_NAME_EDEFAULT = ""; //$NON-NLS-1$
 
 	/**
-	 * The cached value of the '{@link #getEPackages() <em>EPackages</em>}' attribute list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getEPackages() <em>EPackages</em>}'
+	 * attribute list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getEPackages()
 	 * @generated
 	 * @ordered
@@ -301,8 +324,9 @@ public class StateImpl extends EObjectImpl implements State {
 	protected FeatureMap ePackages;
 
 	/**
-	 * The cached value of the '{@link #getCustomizers() <em>Customizers</em>}' map.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getCustomizers() <em>Customizers</em>}'
+	 * map. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getCustomizers()
 	 * @generated
 	 * @ordered
@@ -329,6 +353,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -338,6 +363,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String getName() {
@@ -346,6 +372,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setName(String newName) {
@@ -357,6 +384,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String getLanguage() {
@@ -365,6 +393,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setLanguage(String newLanguage) {
@@ -410,6 +439,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public int getNumber() {
@@ -418,6 +448,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setNumber(int newNumber) {
@@ -430,6 +461,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String getProjectName() {
@@ -438,6 +470,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setProjectName(String newProjectName) {
@@ -465,6 +498,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public FeatureMap getEPackages() {
@@ -512,6 +546,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EMap<PhaseQualifier, Customizer> getCustomizers() {
@@ -611,6 +646,7 @@ public class StateImpl extends EObjectImpl implements State {
 	public <T extends EList<? extends EPackage>> T construct(IProgressMonitor monitor) throws Exception {
 		Phase oldStage = getStage();
 		try {
+			getContribution().getWorkspace().provision(monitor);
 			IWorkspace workspace = ResourcesPlugin.getWorkspace();
 			boolean autoBuild = workspace.isAutoBuilding();
 			String projectName = getProjectName();
@@ -659,6 +695,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Phase getStage() {
@@ -667,6 +704,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setStage(Phase newStage) {
@@ -678,6 +716,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -695,6 +734,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -709,6 +749,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Version getVersion() {
@@ -717,6 +758,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setVersion(Version newVersion) {
@@ -729,6 +771,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -771,6 +814,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -821,6 +865,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -868,6 +913,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -906,6 +952,7 @@ public class StateImpl extends EObjectImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

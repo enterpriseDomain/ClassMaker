@@ -2,7 +2,17 @@
  */
 package org.classupplier.impl;
 
+import java.io.File;
+import java.net.SocketTimeoutException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.Semaphore;
 
 import org.classupplier.ClassSupplierFactory;
 import org.classupplier.ClassSupplierPackage;
@@ -12,14 +22,23 @@ import org.classupplier.State;
 import org.classupplier.Workspace;
 import org.classupplier.core.ClassSupplierOSGi;
 import org.classupplier.util.ClassSupplierSwitch;
+import org.classupplier.util.ResourceUtil;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
+import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.core.runtime.jobs.MultiRule;
+import org.eclipse.ecf.filetransfer.BrowseFileTransferException;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
@@ -38,6 +57,42 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.equinox.internal.p2.director.app.DirectorApplication;
+import org.eclipse.equinox.internal.p2.metadata.expression.Expression;
+import org.eclipse.equinox.p2.core.IProvisioningAgent;
+import org.eclipse.equinox.p2.core.IProvisioningAgentProvider;
+import org.eclipse.equinox.p2.core.ProvisionException;
+import org.eclipse.equinox.p2.internal.repository.tools.MirrorApplication;
+import org.eclipse.equinox.p2.metadata.IInstallableUnit;
+import org.eclipse.equinox.p2.metadata.expression.ExpressionUtil;
+import org.eclipse.equinox.p2.metadata.expression.IExpression;
+import org.eclipse.equinox.p2.metadata.expression.IExpressionFactory;
+import org.eclipse.equinox.p2.operations.ProvisioningSession;
+import org.eclipse.equinox.p2.publisher.IPublisherAction;
+import org.eclipse.equinox.p2.publisher.IPublisherInfo;
+import org.eclipse.equinox.p2.publisher.Publisher;
+import org.eclipse.equinox.p2.publisher.PublisherInfo;
+import org.eclipse.equinox.p2.publisher.eclipse.FeaturesAndBundlesPublisherApplication;
+import org.eclipse.equinox.p2.query.IQueryResult;
+import org.eclipse.equinox.p2.query.QueryUtil;
+import org.eclipse.equinox.p2.repository.artifact.IArtifactRepositoryManager;
+import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
+import org.eclipse.osgi.internal.framework.EquinoxBundle;
+import org.eclipse.osgi.storage.BundleInfo.Generation;
+import org.eclipse.pde.core.plugin.IPluginModelBase;
+import org.eclipse.pde.core.plugin.TargetPlatform;
+import org.eclipse.pde.core.target.ITargetDefinition;
+import org.eclipse.pde.core.target.ITargetHandle;
+import org.eclipse.pde.core.target.ITargetLocation;
+import org.eclipse.pde.core.target.ITargetPlatformService;
+import org.eclipse.pde.core.target.LoadTargetDefinitionJob;
+import org.eclipse.pde.core.target.TargetBundle;
+import org.eclipse.pde.internal.core.PDECore;
+import org.eclipse.pde.internal.core.TargetPlatformHelper;
+import org.eclipse.pde.internal.core.target.Messages;
+import org.eclipse.pde.internal.core.target.TargetPlatformService;
+import org.omg.CORBA.PUBLIC_MEMBER;
+import org.osgi.framework.Bundle;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -46,17 +101,20 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.classupplier.impl.WorkspaceImpl#getContributions <em>Contributions</em>}</li>
- *   <li>{@link org.classupplier.impl.WorkspaceImpl#getResourceSet <em>Resource Set</em>}</li>
+ * <li>{@link org.classupplier.impl.WorkspaceImpl#getContributions
+ * <em>Contributions</em>}</li>
+ * <li>{@link org.classupplier.impl.WorkspaceImpl#getResourceSet <em>Resource
+ * Set</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	/**
-	 * The cached value of the '{@link #getContributions() <em>Contributions</em>}' containment reference list.
-	 * <!-- begin-user-doc
+	 * The cached value of the '{@link #getContributions()
+	 * <em>Contributions</em>}' containment reference list. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
+	 * 
 	 * @see #getContributions()
 	 * @generated
 	 * @ordered
@@ -74,8 +132,9 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	protected static final ResourceSet RESOURCE_SET_EDEFAULT = new ResourceSetImpl();
 
 	/**
-	 * The cached value of the '{@link #getResourceSet() <em>Resource Set</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getResourceSet() <em>Resource Set</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getResourceSet()
 	 * @generated
 	 * @ordered
@@ -84,6 +143,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected WorkspaceImpl() {
@@ -92,6 +152,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -101,6 +162,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EList<Contribution> getContributions() {
@@ -113,6 +175,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ResourceSet getResourceSet() {
@@ -136,10 +199,26 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 					}
 					registerContribution(contribution);
 				}
+				provision(ClassSupplierOSGi.getInstance().getProgressMonitor());
 			} catch (CoreException e) {
 				ClassSupplierOSGi.getInstance().getLog().log(e.getStatus());
 			}
 		}
+	}
+
+	private StringBuffer targetVMArguments = null;
+
+	private StringBuffer getVMArguments(ITargetLocation[] containers) {
+		StringBuffer arguments = new StringBuffer(""); //$NON-NLS-1$
+		for (int i = 0; i < containers.length; i++) {
+			String[] vmargs = containers[i].getVMArguments();
+			if (vmargs == null)
+				continue;
+			for (int j = 0; j < vmargs.length; j++) {
+				arguments.append(vmargs[j]).append(' ');
+			}
+		}
+		return arguments;
 	}
 
 	/**
@@ -292,7 +371,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			if (contribution.getProjectName() != null && contribution.getProjectName().equals(projectName))
 				return contribution;
 		}
-		IProgressMonitor monitor = new NullProgressMonitor();
+		IProgressMonitor monitor = ClassSupplierOSGi.getInstance().getProgressMonitor();
 		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
 		Contribution contribution = null;
 		try {
@@ -338,6 +417,64 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	public void delete(Object object, IProgressMonitor monitor) throws CoreException {
 		if (object instanceof EObject)
 			getContribution((EObject) object).delete(monitor);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public void provision(IProgressMonitor monitor) throws CoreException {
+		for (IProject project : ResourcesPlugin.getWorkspace().getRoot().getProjects()) {
+			if (project.hasNature(ClassSupplierOSGi.NATURE_ID)
+					&& !project.hasNature(ClassSupplierOSGi.PDE_PLUGIN_NATURE)) {
+				IProjectDescription description = project.getDescription();
+				description.setNatureIds(
+						ResourceUtil.addProjectNature(description.getNatureIds(), ClassSupplierOSGi.PDE_PLUGIN_NATURE));
+				project.setDescription(description, monitor);
+			}
+		}
+
+		IPath targetPlatformLocation = ClassSupplierOSGi.getInstance().getStateLocation().append("target")
+				.append("workspace").addFileExtension("target");
+		ITargetPlatformService targetPlatformService = TargetPlatformService.getDefault();
+		ITargetDefinition targetDefinition = null;
+		if (targetPlatformLocation.toFile().exists())
+			targetDefinition = targetPlatformService.getTarget(targetPlatformLocation.toFile().toURI())
+					.getTargetDefinition();
+		if (targetDefinition == null) {
+			targetDefinition = targetPlatformService.newTarget();
+			targetDefinition.setName("Platform");
+			Bundle[] bundles = Platform.getBundle("org.eclipse.core.runtime").getBundleContext().getBundles();
+			List<ITargetLocation> bundleContainers = new ArrayList<ITargetLocation>();
+			Set<File> dirs = new HashSet<File>();
+			for (Bundle bundle : bundles) {
+				EquinoxBundle bundleImpl = (EquinoxBundle) bundle;
+				Generation generation = (Generation) bundleImpl.getModule().getCurrentRevision().getRevisionInfo();
+				File file = generation.getBundleFile().getBaseFile();
+				File folder = file.getParentFile();
+				if (!dirs.contains(folder)) {
+					dirs.add(folder);
+					bundleContainers.add(targetPlatformService.newDirectoryLocation(folder.getAbsolutePath()));
+				}
+			}
+			targetDefinition.setTargetLocations(bundleContainers.toArray(new ITargetLocation[bundleContainers.size()]));
+			targetDefinition.setArch(Platform.getOSArch());
+			targetDefinition.setOS(Platform.getOS());
+			targetDefinition.setWS(Platform.getWS());
+			targetDefinition.setNL(Platform.getNL());
+			// targetDef.setJREContainer()
+			targetPlatformService.saveTargetDefinition(targetDefinition);
+		}
+		Job job = new LoadTargetDefinitionJob(targetDefinition);
+		job.schedule();
+		try {
+			job.join();
+		} catch (InterruptedException e) {
+			monitor.setCanceled(true);
+			e.printStackTrace();
+		}
+		monitor.worked(1);
 	}
 
 	/**
@@ -410,6 +547,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -424,6 +562,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -437,6 +576,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -452,6 +592,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -468,6 +609,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -482,6 +624,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -497,6 +640,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

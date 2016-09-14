@@ -36,7 +36,7 @@ public class OSGiInstaller extends Installer {
 				return;
 			if (event.getBundle().getSymbolicName().equals(getProject().getName()))
 				switch (event.getType()) {
-				case BundleEvent.INSTALLED:
+				case BundleEvent.INSTALLED:				
 					installed.release();
 					break;
 				case BundleEvent.UNINSTALLED:
@@ -69,13 +69,13 @@ public class OSGiInstaller extends Installer {
 		BundleContext context = getContext();
 		try {
 			for (Bundle exisingBundle : getBundles()) {
-				int compare = contribution.getVersion()
-						.compareTo(Version.parseVersion(exisingBundle.getHeaders().get(Constants.BUNDLE_VERSION)));
-				if (compare == 0) {
-					contribution.setStage(Phase.INSTALLED);
-					refreshBundle(exisingBundle, context);
-					return getOKStatus(exisingBundle);
-				} else
+				// int compare = contribution.getVersion()
+				// .compareTo(Version.parseVersion(exisingBundle.getHeaders().get(Constants.BUNDLE_VERSION)));
+				// if (compare == 0) {
+				// contribution.setStage(Phase.INSTALLED);
+				// refreshBundle(exisingBundle, context);
+				// return getOKStatus(exisingBundle);
+				// } else
 					return installBundle(exisingBundle, jarPath, context);
 			}
 			if (monitor.isCanceled())
@@ -136,11 +136,11 @@ public class OSGiInstaller extends Installer {
 	}
 
 	private IStatus getOKStatus(Bundle existingBundle, Bundle bundle) {
-		return ClassSupplierOSGi.createOKStatus(getDuplicateStatusMessage(existingBundle, bundle));
+		return ClassSupplierOSGi.createOKStatus(Messages.OK +" "+ getDuplicateStatusMessage(existingBundle, bundle));
 	}
 
 	private IStatus getOKStatus(Bundle bundle) {
-		return ClassSupplierOSGi.createOKStatus(getStateStatusMessage(bundle));
+		return ClassSupplierOSGi.createOKStatus(Messages.OK +" " + getStateStatusMessage(bundle));
 	}
 
 	protected String getStateStatusMessage(Bundle bundle) {

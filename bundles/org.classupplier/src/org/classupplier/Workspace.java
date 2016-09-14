@@ -153,6 +153,14 @@ public interface Workspace extends EObject, ISchedulingRule {
 	void delete(Object object, IProgressMonitor monitor) throws CoreException;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model exceptions="org.classupplier.CoreException" monitorDataType="org.classupplier.IProgressMonitor"
+	 * @generated
+	 */
+	void provision(IProgressMonitor monitor) throws CoreException;
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @model
 	 * @generated

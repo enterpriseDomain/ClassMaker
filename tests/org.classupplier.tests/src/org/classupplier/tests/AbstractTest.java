@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 import org.classupplier.ClassSupplier;
 import org.classupplier.Contribution;
 import org.classupplier.Phase;
+import org.classupplier.core.ClassSupplierOSGi;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
@@ -31,7 +32,7 @@ public abstract class AbstractTest {
 	private static CountDownLatch latch = new CountDownLatch(1);
 
 	private IProgressMonitor monitor;
-	
+
 	protected String packageName;
 
 	protected String className = "C";
@@ -165,9 +166,7 @@ public abstract class AbstractTest {
 	}
 
 	protected IProgressMonitor getProgressMonitor() {
-		if (monitor == null)
-			monitor = new CodeGenUtil.EclipseUtil.StreamProgressMonitor(System.out);
-		return monitor;
+		return ClassSupplierOSGi.getInstance().getProgressMonitor();
 	}
 
 }

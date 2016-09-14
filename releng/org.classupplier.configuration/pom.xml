@@ -44,11 +44,11 @@
 								<id>org.eclipse.osgi.compatibility.state</id>
 								<versionRange>0.0.0</versionRange>
 							</requirement>
-							<requirement>
+							<!-- <requirement>
 								<type>p2-installable-unit</type>
 								<id>org.classupplier</id>
 								<versionRange>0.0.0</versionRange>
-							</requirement>
+							</requirement>-->
 						</extraRequirements>
 					</dependency-resolution>
 

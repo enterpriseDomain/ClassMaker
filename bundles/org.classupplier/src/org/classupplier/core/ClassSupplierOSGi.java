@@ -6,7 +6,9 @@ import java.util.Hashtable;
 import org.classupplier.ClassSupplier;
 import org.classupplier.impl.ClassSupplierImpl;
 import org.classupplier.impl.ServiceFactory;
+import org.classupplier.impl.WorkspaceImpl;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -14,8 +16,11 @@ import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.contexts.IContextFunction;
+import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.BundleEvent;
+import org.osgi.framework.BundleListener;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.util.tracker.ServiceTracker;
 
@@ -24,6 +29,8 @@ public class ClassSupplierOSGi extends Plugin {
 	public static final String PLUGIN_ID = "org.classupplier"; //$NON-NLS-1$
 
 	public static final String NATURE_ID = PLUGIN_ID + '.' + "classSupplierNature"; //$NON-NLS-1$
+
+	public static final String PDE_PLUGIN_NATURE = "org.eclipse.pde.PluginNature"; //$NON-NLS-1$
 
 	public static final String MODEL_FOLDER_PREF_KEY = "modelFolder"; //$NON-NLS-1$
 
@@ -82,7 +89,20 @@ public class ClassSupplierOSGi extends Plugin {
 		context.registerService(IContextFunction.SERVICE_NAME, new ServiceFactory(), properties);
 		tracker = new ServiceTracker<ClassSupplier, ClassSupplierImpl>(context, ClassSupplier.class, null);
 		tracker.open();
-		getClassSupplier().getWorkspace().init();
+		ClassSupplierOSGi.getInstance()
+				.setProgressMonitor(new CodeGenUtil.EclipseUtil.StreamProgressMonitor(System.out));
+		context.addBundleListener(new BundleListener() {
+
+			@Override
+			public void bundleChanged(BundleEvent event) {
+				if (event.getBundle().getSymbolicName().equals(PLUGIN_ID))
+					if (event.getType() == BundleEvent.STARTED) {
+						getClassSupplier().getWorkspace().init();
+						event.getBundle().getBundleContext().removeBundleListener(this);
+					}
+
+			}
+		});
 	}
 
 	/*
@@ -92,13 +112,23 @@ public class ClassSupplierOSGi extends Plugin {
 	 * org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
-		IProgressMonitor monitor = new NullProgressMonitor();
+		IProgressMonitor monitor = getInstance().getProgressMonitor();
 		Job.getJobManager().join(ResourcesPlugin.FAMILY_MANUAL_BUILD, monitor);
 		ResourcesPlugin.getWorkspace().save(true, monitor);
 		tracker.close();
 		reg.unregister();
 		instance = null;
 
+	}
+
+	private IProgressMonitor monitor;
+
+	public void setProgressMonitor(IProgressMonitor monitor) {
+		this.monitor = monitor;
+	}
+
+	public IProgressMonitor getProgressMonitor() {
+		return monitor;
 	}
 
 	public static IStatus createOKStatus(String message) {
@@ -118,7 +148,8 @@ public class ClassSupplierOSGi extends Plugin {
 	}
 
 	public static IStatus createWarningStatus(String message, Throwable exception) {
-		return new Status(IStatus.WARNING, ClassSupplierOSGi.PLUGIN_ID, message, exception);
+		return new Status(IStatus.WARNING, ClassSupplierOSGi.PLUGIN_ID,
+				message + ": " + exception.getLocalizedMessage(), exception);
 	}
 
 	public static IStatus createErrorStatus(String message) {

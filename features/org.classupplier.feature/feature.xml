@@ -17,6 +17,10 @@
       [Enter License Description here.]
    </license>
 
+   <includes
+         id="org.eclipse.e4.rcp"
+         version="0.0.0"/>
+
    <plugin
          id="org.classupplier"
          download-size="0"

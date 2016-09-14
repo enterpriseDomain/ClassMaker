@@ -877,6 +877,10 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEException(op, this.getCoreException());
 
+		op = addEOperation(workspaceEClass, null, "provision", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEException(op, this.getCoreException());
+
 		op = addEOperation(workspaceEClass, ecorePackage.getEBoolean(), "ePackagesAreEqual", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEPackage(), "first", 0, 1, IS_UNIQUE, IS_ORDERED);

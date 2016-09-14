@@ -481,7 +481,7 @@ public class ContributionImpl extends EObjectImpl implements Contribution {
 
 	@Override
 	public <T extends EList<? extends EPackage>> T construct(IProgressMonitor monitor) throws Exception {
-		return ((Constructable) getState()).construct(new SubProgressMonitor(monitor, 1));
+		return ((Constructable) getState()).construct(new SubProgressMonitor(monitor, 2));
 	}
 
 	@Override

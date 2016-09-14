@@ -175,8 +175,11 @@ public class TestClassSupplier extends AbstractTest {
 		EClass metaClass = factory.createEClass();
 		metaClass.setName("MetaObject");
 		EAttribute attribute = factory.createEAttribute();
-		attribute.setName("value");
-		attribute.setEType(EcorePackage.Literals.EJAVA_OBJECT);
+		attribute.setName("name");
+		attribute.setEType(EcorePackage.Literals.ESTRING);
+		EOperation operation = factory.createEOperation();
+		operation.setName("create");
+		metaClass.getEOperations().add(operation);
 		metaClass.getEStructuralFeatures().add(attribute);
 		_package.getEClassifiers().add(metaClass);
 		Contribution contribution = service.getWorkspace().createContribution(_package);
@@ -196,10 +199,15 @@ public class TestClassSupplier extends AbstractTest {
 			}
 			assertNotNull(ePackage);
 			EClass resultClass = (EClass) ePackage.getEClassifier(metaClass.getName());
-			EObject book = ePackage.getEFactoryInstance().create(resultClass);
+			EObject concreteObject = ePackage.getEFactoryInstance().create(resultClass);
 			EAttribute resultAttribute = (EAttribute) resultClass.getEStructuralFeature(attribute.getName());
-			book.eSet(resultAttribute, "Text");
-			assertEquals("Text", book.eGet(resultAttribute));
+			concreteObject.eSet(resultAttribute, "ConcreteObject");
+			assertEquals("ConcreteObject", concreteObject.eGet(resultAttribute));
+			EOperation create = null;
+			for (EOperation op : resultClass.getEOperations())
+				if (op.getName().equals("create"))
+					create = op;
+			concreteObject.eInvoke(create, ECollections.emptyEList());
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail(e.getLocalizedMessage());

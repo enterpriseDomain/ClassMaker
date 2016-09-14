@@ -19,16 +19,15 @@
 				<artifactId>tycho-surefire-plugin</artifactId>
 				<version>${tycho.version}</version>
 				<configuration>
-					<configuration>
-						<testRuntime>p2Installed</testRuntime>
-					</configuration>
+					<useSystemClassLoader>true</useSystemClassLoader>
+					<useManifestOnlyJar>false</useManifestOnlyJar>
 					<dependency>
 						<type>eclipse-plugin</type>
 						<artifactId>org.eclipse.core.runtime.compatibility.registry</artifactId>
 						<version>0.0.0</version>
 					</dependency>
 				</configuration>
-			</plugin>
+			</plugin>			
 		</plugins>
 	</build>
 
