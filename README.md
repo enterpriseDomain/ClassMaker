@@ -7,7 +7,7 @@ It generates source code from the model provided, exports binary, installs it in
 
 ClassSupplier is purposed for creation of application with adaptable domain for citizen developers which is currently under construction.
 
-But for a while, here is how you can use ClassSupplier:  
+But for now, here is how you can use ClassSupplier:  
 
     // Model EMF EPackage
     EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
