@@ -49,4 +49,4 @@ But for a while, here is how you can use ClassSupplier:
         
 Here is [more](/tests/org.classupplier.tests/src/org/classupplier/tests/TestClassSupplier.java) examples.  
 
-Also see the [ClassSupplier wiki](https://github.com/kyrillzotkin/ClassSupplier/wiki) for further details.
+Also, please see the [ClassSupplier wiki](https://github.com/kyrillzotkin/ClassSupplier/wiki) for further details.
