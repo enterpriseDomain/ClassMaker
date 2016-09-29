@@ -47,6 +47,6 @@ But for a while, here is how you can use ClassSupplier:
     assertEquals(pages, jObject.eGet(jAttr));
     assertEquals(eClass.getName(), jObject.getClass().getSimpleName());  
         
-Here is [more] examples(/tests/org.classupplier.tests/src/org/classupplier/tests/TestClassSupplier.java).  
+Here is [more](/tests/org.classupplier.tests/src/org/classupplier/tests/TestClassSupplier.java) examples.  
 
 Also see the [ClassSupplier wiki](https://github.com/kyrillzotkin/ClassSupplier/wiki) for further details.
