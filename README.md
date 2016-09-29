@@ -5,11 +5,11 @@ ClassSupplier is an Eclipse plug-in allowing you to make code programmatically.
 
 It generates source code from the model provided, exports binary, installs it in runtime, and then loads classes making available for client code's reflective access through modeled API.  
 
-ClassSupplier is purposed for creation of application with adaptable domain for citizen developers which is currently under construction.
+ClassSupplier is purposed for creation of application with domain model, that is editable by users (currently under construction).
 
 But for now, here is how you can use ClassSupplier:  
 
-    // Model EMF EPackage
+    // Create blueprint model - dynamic EMF EPackage
     EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
     ePackage.setName("library");
     ePackage.setNsPrefix("library");
@@ -37,7 +37,7 @@ But for now, here is how you can use ClassSupplier:
     EPackage jPackage = result.get().get(0);
 
     ...
-    // Use the runtime
+    // Use the generated model in runtime
     EClass jClass = (EClass) jPackage.getEClassifier(eClass.getName());
     EObject jObject = jPackage.getEFactoryInstance().create(jClass); 
     int pages = 500;
@@ -47,6 +47,6 @@ But for now, here is how you can use ClassSupplier:
     assertEquals(pages, jObject.eGet(jAttr));
     assertEquals(eClass.getName(), jObject.getClass().getSimpleName());  
         
-Here is [more](/tests/org.classupplier.tests/src/org/classupplier/tests/TestClassSupplier.java) examples.  
+Here is [more](/tests/org.classupplier.tests/src/org/classupplier/tests/TestClassSupplier.java) code, where you can specify body and call a method, or customize generation templates. 
 
 Also, please see the [ClassSupplier wiki](https://github.com/kyrillzotkin/ClassSupplier/wiki) for further details.
