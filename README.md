@@ -50,3 +50,4 @@ But for now, here is how you can use ClassSupplier:
 Here is even more [code](/tests/org.classupplier.tests/src/org/classupplier/tests/TestClassSupplier.java), where you can specify a method body and call it, or customize generation templates. 
 
 Contributions are welcome!
+-----------
