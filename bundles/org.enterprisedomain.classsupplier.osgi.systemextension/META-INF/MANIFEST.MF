@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ClassSupplier OSGi System Extension
+Bundle-SymbolicName: org.enterprisedomain.classsupplier.osgi.systemextension
+Bundle-Version: 0.7.8.qualifier
+Bundle-Vendor: Kyrill Zotkin
+Fragment-Host: org.eclipse.osgi;bundle-version="3.11.2"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.enterprisedomain.classsupplier.osgi.systemextension
+ExtensionBundle-Activator: org.enterprisedomain.classsupplier.osgi.systemextension.Activator

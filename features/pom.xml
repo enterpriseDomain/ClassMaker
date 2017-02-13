@@ -1,17 +1,18 @@
 <project>
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>org.classupplier</groupId>
-    <artifactId>org.classupplier.features</artifactId>
-    <version>0.7.8-SNAPSHOT</version>
-    <packaging>pom</packaging>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.enterprisedomain</groupId>
+	<artifactId>org.enterprisedomain.features</artifactId>
+	<version>0.7.8-SNAPSHOT</version>
+	<packaging>pom</packaging>
 
-    <parent>
-        <groupId>org.classupplier</groupId>
-        <artifactId>org.classupplier.root</artifactId>
-        <version>0.7.8-SNAPSHOT</version>
-    </parent>
+	<parent>
+		<groupId>org.enterprisedomain</groupId>
+		<artifactId>org.enterprisedomain.root</artifactId>
+		<version>0.7.8-SNAPSHOT</version>
+	</parent>
 
-    <modules>
-        <module>org.classupplier.feature</module>
-    </modules>
+	<modules>
+		<module>org.enterprisedomain.feature</module>
+		<module>org.enterprisedomain.classsupplier.resolverhooks.feature</module>
+	</modules>
 </project>

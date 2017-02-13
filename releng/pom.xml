@@ -1,18 +1,17 @@
 <project>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.classupplier</groupId>
-	<artifactId>org.classupplier.releng</artifactId>
+	<groupId>org.enterprisedomain</groupId>
+	<artifactId>org.enterprisedomain.releng</artifactId>
 	<version>0.7.8-SNAPSHOT</version>
 	<packaging>pom</packaging>
-
 	<parent>
-		<groupId>org.classupplier</groupId>
-		<artifactId>org.classupplier.root</artifactId>
+		<groupId>org.enterprisedomain</groupId>
+		<artifactId>org.enterprisedomain.root</artifactId>
 		<version>0.7.8-SNAPSHOT</version>
 	</parent>
-
 	<modules>
-		<module>org.classupplier.update</module>
-		<module>org.classupplier.target</module>
+	    <module>org.enterprisedomain.configuration</module>
+		<module>org.enterprisedomain.update</module>
+		<module>org.enterprisedomain.target</module>
 	</modules>
 </project>

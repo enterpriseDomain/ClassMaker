@@ -1,17 +1,19 @@
 <project>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.classupplier</groupId>
-    <artifactId>org.classupplier.bundles</artifactId>
+    <groupId>org.enterprisedomain</groupId>
+    <artifactId>org.enterprisedomain.bundles</artifactId>
     <version>0.7.8-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <parent>
-        <groupId>org.classupplier</groupId>
-        <artifactId>org.classupplier.root</artifactId>
+        <groupId>org.enterprisedomain</groupId>
+        <artifactId>org.enterprisedomain.root</artifactId>
         <version>0.7.8-SNAPSHOT</version>
     </parent>
 
     <modules>
-        <module>org.classupplier</module>
+        <module>org.enterprisedomain.classsupplier</module>
+        <module>org.enterprisedomain.classsupplier.osgi.systemextension</module>
+        <module>org.enterprisedomain.edit</module>        
     </modules>
 </project>

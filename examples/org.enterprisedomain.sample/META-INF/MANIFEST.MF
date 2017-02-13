@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: enterpriseDomain Sample App
+Bundle-SymbolicName: org.enterprisedomain.sample;singleton:=true
+Bundle-Version: 0.0.2.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7,
+ JavaSE-1.6
+Require-Bundle: org.enterprisedomain.classsupplier,
+ javax.inject,
+ org.eclipse.core.runtime,
+ org.eclipse.e4.core.di,
+ org.eclipse.equinox.concurrent
+Bundle-ActivationPolicy: lazy
+

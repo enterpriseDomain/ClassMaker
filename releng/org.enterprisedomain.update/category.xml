@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.enterprisedomain.feature_0.7.8.qualifier.jar" id="org.enterprisedomain.feature" version="0.7.8.qualifier">
+      <category name="enterprisedomain"/>
+   </feature>
+   <feature url="features/org.enterprisedomain.classsupplier.resolverhooks.feature_0.7.8.qualifier.jar" id="org.enterprisedomain.classsupplier.resolverhooks.feature" version="0.7.8.qualifier">
+      <category name="enterprisedomain"/>
+   </feature>
+   <category-def name="enterprisedomain" label="enterpriseDomain"/>
+</site>
