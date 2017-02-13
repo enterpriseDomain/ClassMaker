@@ -1,13 +1,13 @@
 <project>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.classupplier</groupId>
-	<artifactId>org.classupplier.tests.root</artifactId>
+	<groupId>org.enterprisedomain</groupId>
+	<artifactId>org.enterprisedomain.tests.root</artifactId>
 	<version>0.0.4-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<parent>
-		<groupId>org.classupplier</groupId>
-		<artifactId>org.classupplier.root</artifactId>
+		<groupId>org.enterprisedomain</groupId>
+		<artifactId>org.enterprisedomain.root</artifactId>
 		<version>0.7.8-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
@@ -32,6 +32,6 @@
 	</build>
 
 	<modules>
-		<module>org.classupplier.tests</module>
+		<module>org.enterprisedomain.tests</module>
 	</modules>
 </project>

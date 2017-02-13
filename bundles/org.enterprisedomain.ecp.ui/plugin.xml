@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         id="provider"
+         name="enterpriseDomain"
+         point="org.eclipse.emf.ecp.ui.uiProviders">
+      <uiProvider
+            class="org.enterprisedomain.ecp.ui.EnterpriseDomainUIProvider"
+            provider="org.enterprisedomain.ecp.provider">
+      </uiProvider>
+   </extension>
+
+</plugin>

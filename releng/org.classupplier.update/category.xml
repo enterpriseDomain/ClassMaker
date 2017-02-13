@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<site>
-   <feature url="features/org.classupplier.feature_0.7.8.qualifier.jar" id="org.classupplier.feature" version="0.7.8.qualifier">
-      <category name="classupplier"/>
-   </feature>
-   <category-def name="classupplier" label="ClassSuppllier"/>
-</site>

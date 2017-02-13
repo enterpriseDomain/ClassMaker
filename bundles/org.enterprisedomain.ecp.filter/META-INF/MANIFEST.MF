@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: enterpriseDomain ECP EPackage Filter
+Bundle-SymbolicName: org.enterprisedomain.ecp.filter;singleton:=true
+Bundle-Version: 0.0.1.qualifier
+Bundle-Activator: org.enterprisedomain.ecp.filter.Activator
+Bundle-Vendor: Kyrill Zotkin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.emf.ecp.core;bundle-version="1.7.1",
+ org.enterprisedomain.classsupplier;bundle-version="0.7.8",
+ org.enterprisedomain.edit;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

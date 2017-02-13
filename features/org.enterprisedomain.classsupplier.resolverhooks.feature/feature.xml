@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.enterprisedomain.classsupplier.resolverhooks.feature"
+      label="%featureName"
+      version="0.7.8.qualifier"
+      provider-name="%providerName">
+
+   <plugin
+         id="org.enterprisedomain.classsupplier.osgi.systemextension"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
+         unpack="false"/>
+
+</feature>

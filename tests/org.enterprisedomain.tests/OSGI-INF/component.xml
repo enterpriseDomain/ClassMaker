@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" enabled="true" name="org.enterprisedomain.tests">
+   <implementation class="org.enterprisedomain.tests.TestEnterpriseDomain"/>
+   <reference bind="setReference" cardinality="1..1" interface="org.enterprisedomain.classsupplier.ClassSupplier" name="ClassSupplier" policy="static"/>   
+</scr:component>
