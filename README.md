@@ -31,11 +31,8 @@ But for now, here is how you can use ClassSupplier:
                               .getService(serviceReference);
 
     // Combine them
-    Contribution contribution = classupplier.getWorkspace().createContribution(
-                              ePackage);
-    Future<EList<EPackage>> result = contribution.apply(new NullProgressMonitor());
-    EPackage jPackage = result.get().get(0);
-
+    EPackage jPackage = classupplier.create(ePackage);
+    
     ...
     // Use the generated model in runtime
     EClass jClass = (EClass) jPackage.getEClassifier(eClass.getName());
