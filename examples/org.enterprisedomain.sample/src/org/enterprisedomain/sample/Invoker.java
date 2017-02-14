@@ -24,8 +24,6 @@ public class Invoker implements Runnable {
 	@Inject
 	private ClassSupplier m;
 
-	private Contribution contribution;
-
 	private EPackage ePackage;
 
 	private void inject() {
@@ -47,30 +45,15 @@ public class Invoker implements Runnable {
 		a.setEType(EcorePackage.Literals.ESTRING);
 		c.getEStructuralFeatures().add(a);
 		p.getEClassifiers().add(c);
-		IProgressMonitor monitor = new CodeGenUtil.EclipseUtil.StreamProgressMonitor(System.out);
 		try {
-			contribution = m.getWorkspace().createContribution(p, monitor);
-		} catch (CoreException e) {
-			e.printStackTrace();
-		}
-		try {
-			contribution.save(monitor);
-			contribution.addSaveCompletionListener(new CompletionListenerImpl() {
-
-				@Override
-				public void completed(Contribution result) throws Exception {
-					ePackage = contribution.getDomainModel().getGenerated();
-					EClass e = (EClass) ePackage.getEClassifier(c.getName());
-					System.out.println(e.getName());
-					EObject o = ePackage.getEFactoryInstance().create(e);
-					EAttribute ea = (EAttribute) e.getEStructuralFeature(a.getName());
-					o.eSet(ea, "Lorem ipsum");
-					Object v = o.eGet(ea);
-					System.out.println(v);
-				}
-
-			});
-
+			EPackage ePackage = m.create(p);
+			EClass e = (EClass) ePackage.getEClassifier(c.getName());
+			System.out.println(e.getName());
+			EObject o = ePackage.getEFactoryInstance().create(e);
+			EAttribute ea = (EAttribute) e.getEStructuralFeature(a.getName());
+			o.eSet(ea, "Lorem ipsum");
+			Object v = o.eGet(ea);
+			System.out.println(v);
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
