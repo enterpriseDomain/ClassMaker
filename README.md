@@ -27,11 +27,11 @@ But for now, here is how you can use ClassSupplier:
                                 .getBundleContext();
     ServiceReference<?> serviceReference = bundleContext
                               .getServiceReference(ClassSupplier.class);
-    ClassSupplier classupplier = (ClassSupplier) bundleContext
+    ClassSupplier classSupplier = (ClassSupplier) bundleContext
                               .getService(serviceReference);
 
     // Combine them
-    EPackage jPackage = classupplier.create(ePackage);
+    EPackage jPackage = classSupplier.create(ePackage);
     
     ...
     // Use the generated model in runtime
