@@ -46,4 +46,10 @@ But for now, here is how you can use ClassSupplier:
         
 Here is even more [code](/tests/org.enterprisedomain.tests/src/org/enterprisedomain/tests/TestEnterpriseDomain.java), where you can specify a method body and call it, or customize generation templates. 
 
+
+Feedback
+---------
+If you have anything to suggest, please feel free to file an [issue](https://github.com/kyrillzotkin/ClassSupplier/issues). 
+
+
 Development continues...
