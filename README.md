@@ -51,5 +51,6 @@ Feedback
 ---------
 If you have anything to suggest, please feel free to file an [issue](https://github.com/kyrillzotkin/ClassSupplier/issues). 
 
+<br><br>
 
 Development continues...
