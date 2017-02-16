@@ -9,7 +9,7 @@ ClassSupplier is purposed for creation of application with domain model, that is
 
 But for now, here is how you can use ClassSupplier:  
 
-    // Create blueprint model - dynamic EMF EPackage
+    // Create a blueprint model - dynamic EMF EPackage
     EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
     ePackage.setName("library");
     ePackage.setNsPrefix("library");
