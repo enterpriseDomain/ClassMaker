@@ -17,14 +17,14 @@ package org.enterprisedomain.classsupplier.core;
 
 import org.eclipse.e4.core.contexts.ContextFunction;
 import org.eclipse.e4.core.contexts.IEclipseContext;
-import org.enterprisedomain.classsupplier.ClassSupplier;
+import org.enterprisedomain.classsupplier.ClassPlant;
 
 public class ServiceFactory extends ContextFunction {
 
 	@Override
 	public Object compute(IEclipseContext context) {
-		ClassSupplier supplier = ClassSupplierOSGi.getClassSupplier();
-		context.set(ClassSupplier.class, supplier);
+		ClassPlant supplier = ClassSupplierOSGi.getClassSupplier();
+		context.set(ClassPlant.class, supplier);
 		return supplier;
 	}
 

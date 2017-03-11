@@ -54,12 +54,13 @@ public class PDEPluginExporter extends AbstractExporter {
 
 	@Override
 	public IStatus export(final IProgressMonitor monitor) throws CoreException {
-		if (!getProject().hasNature(ClassSupplierOSGi.PDE_PLUGIN_NATURE)) {
-			IProjectDescription description = getProject().getDescription();
-			description.setNatureIds(
-					ResourceUtils.addProjectNature(description.getNatureIds(), ClassSupplierOSGi.PDE_PLUGIN_NATURE));
-			getProject().setDescription(description, monitor);
-		}
+		// if (!getProject().hasNature(ClassSupplierOSGi.PDE_PLUGIN_NATURE)) {
+		// IProjectDescription description = getProject().getDescription();
+		// description.setNatureIds(
+		// ResourceUtils.addProjectNature(description.getNatureIds(),
+		// ClassSupplierOSGi.PDE_PLUGIN_NATURE));
+		// getProject().setDescription(description, monitor);
+		// }
 
 		if (monitor.isCanceled()) {
 			return Status.CANCEL_STATUS;

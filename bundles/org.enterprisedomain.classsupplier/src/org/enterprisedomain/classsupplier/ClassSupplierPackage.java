@@ -1135,14 +1135,14 @@ public interface ClassSupplierPackage extends EPackage {
 	int RESOURCE_ADAPTER_FEATURE_COUNT = ADAPTER_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.enterprisedomain.classsupplier.impl.ClassSupplierImpl <em>Class Supplier</em>}' class.
+	 * The meta object id for the '{@link org.enterprisedomain.classsupplier.impl.ClassPlantImpl <em>Class Plant</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.enterprisedomain.classsupplier.impl.ClassSupplierImpl
-	 * @see org.enterprisedomain.classsupplier.impl.ClassSupplierPackageImpl#getClassSupplier()
+	 * @see org.enterprisedomain.classsupplier.impl.ClassPlantImpl
+	 * @see org.enterprisedomain.classsupplier.impl.ClassSupplierPackageImpl#getClassPlant()
 	 * @generated
 	 */
-	int CLASS_SUPPLIER = 20;
+	int CLASS_PLANT = 20;
 
 	/**
 	 * The feature id for the '<em><b>Workspace</b></em>' reference.
@@ -1151,16 +1151,16 @@ public interface ClassSupplierPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_SUPPLIER__WORKSPACE = 0;
+	int CLASS_PLANT__WORKSPACE = 0;
 
 	/**
-	 * The number of structural features of the '<em>Class Supplier</em>' class.
+	 * The number of structural features of the '<em>Class Plant</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_SUPPLIER_FEATURE_COUNT = 1;
+	int CLASS_PLANT_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '<em>Locale</em>' data type.
@@ -1972,25 +1972,25 @@ public interface ClassSupplierPackage extends EPackage {
 	EAttribute getResourceAdapter_Filename();
 
 	/**
-	 * Returns the meta object for class '{@link org.enterprisedomain.classsupplier.ClassSupplier <em>Class Supplier</em>}'.
+	 * Returns the meta object for class '{@link org.enterprisedomain.classsupplier.ClassPlant <em>Class Plant</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Class Supplier</em>'.
-	 * @see org.enterprisedomain.classsupplier.ClassSupplier
+	 * @return the meta object for class '<em>Class Plant</em>'.
+	 * @see org.enterprisedomain.classsupplier.ClassPlant
 	 * @generated
 	 */
-	EClass getClassSupplier();
+	EClass getClassPlant();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.enterprisedomain.classsupplier.ClassSupplier#getWorkspace <em>Workspace</em>}'.
+	 * Returns the meta object for the reference '{@link org.enterprisedomain.classsupplier.ClassPlant#getWorkspace <em>Workspace</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Workspace</em>'.
-	 * @see org.enterprisedomain.classsupplier.ClassSupplier#getWorkspace()
-	 * @see #getClassSupplier()
+	 * @see org.enterprisedomain.classsupplier.ClassPlant#getWorkspace()
+	 * @see #getClassPlant()
 	 * @generated
 	 */
-	EReference getClassSupplier_Workspace();
+	EReference getClassPlant_Workspace();
 
 	/**
 	 * Returns the meta object for data type '{@link java.util.Locale <em>Locale</em>}'.
@@ -2679,14 +2679,14 @@ public interface ClassSupplierPackage extends EPackage {
 		EAttribute RESOURCE_ADAPTER__FILENAME = eINSTANCE.getResourceAdapter_Filename();
 
 		/**
-		 * The meta object literal for the '{@link org.enterprisedomain.classsupplier.impl.ClassSupplierImpl <em>Class Supplier</em>}' class.
+		 * The meta object literal for the '{@link org.enterprisedomain.classsupplier.impl.ClassPlantImpl <em>Class Plant</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.enterprisedomain.classsupplier.impl.ClassSupplierImpl
-		 * @see org.enterprisedomain.classsupplier.impl.ClassSupplierPackageImpl#getClassSupplier()
+		 * @see org.enterprisedomain.classsupplier.impl.ClassPlantImpl
+		 * @see org.enterprisedomain.classsupplier.impl.ClassSupplierPackageImpl#getClassPlant()
 		 * @generated
 		 */
-		EClass CLASS_SUPPLIER = eINSTANCE.getClassSupplier();
+		EClass CLASS_PLANT = eINSTANCE.getClassPlant();
 
 		/**
 		 * The meta object literal for the '<em><b>Workspace</b></em>' reference feature.
@@ -2694,7 +2694,7 @@ public interface ClassSupplierPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CLASS_SUPPLIER__WORKSPACE = eINSTANCE.getClassSupplier_Workspace();
+		EReference CLASS_PLANT__WORKSPACE = eINSTANCE.getClassPlant_Workspace();
 
 		/**
 		 * The meta object literal for the '<em>Locale</em>' data type.

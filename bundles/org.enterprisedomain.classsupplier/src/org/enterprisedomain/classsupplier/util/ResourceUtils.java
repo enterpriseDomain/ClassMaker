@@ -161,9 +161,9 @@ public class ResourceUtils {
 		mask.add(ICoreConstants.PLUGIN_FILENAME_DESCRIPTOR);
 		mask.add(ICoreConstants.BUILD_FILENAME_DESCRIPTOR);
 		mask.add(PLUGIN_PROPS_FILENAME_DESCRIPTOR);
+		mask.add(IProjectDescription.DESCRIPTION_FILE_NAME);
 		if (folderPath.isEmpty()) {
 			path = project.getFullPath();
-			mask.add(IProjectDescription.DESCRIPTION_FILE_NAME);
 		} else
 			path = project.getFullPath().append(folderPath);
 		path = project.getWorkspace().getRoot().getLocation().append(path);

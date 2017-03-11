@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.enterprisedomain.classsupplier.*;
-import org.enterprisedomain.classsupplier.ClassSupplier;
+import org.enterprisedomain.classsupplier.ClassPlant;
 import org.enterprisedomain.classsupplier.ClassSupplierFactory;
 import org.enterprisedomain.classsupplier.ClassSupplierPackage;
 import org.enterprisedomain.classsupplier.Contribution;
@@ -112,8 +112,8 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 			return createModelPair();
 		case ClassSupplierPackage.RESOURCE_ADAPTER:
 			return createResourceAdapter();
-		case ClassSupplierPackage.CLASS_SUPPLIER:
-			return createClassSupplier();
+		case ClassSupplierPackage.CLASS_PLANT:
+			return createClassPlant();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -302,9 +302,9 @@ public class ClassSupplierFactoryImpl extends EFactoryImpl implements ClassSuppl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassSupplier createClassSupplier() {
-		ClassSupplierImpl classSupplier = new ClassSupplierImpl();
-		return classSupplier;
+	public ClassPlant createClassPlant() {
+		ClassPlantImpl classPlant = new ClassPlantImpl();
+		return classPlant;
 	}
 
 	/**

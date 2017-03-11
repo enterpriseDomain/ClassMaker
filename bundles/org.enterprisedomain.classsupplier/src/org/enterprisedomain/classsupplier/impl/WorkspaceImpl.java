@@ -188,15 +188,16 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * @generated NOT
 	 */
 	public void provision(IProgressMonitor monitor) throws CoreException {
-		for (IProject project : ResourcesPlugin.getWorkspace().getRoot().getProjects()) {
-			if (project.hasNature(ClassSupplierOSGi.NATURE_ID)
-					&& !project.hasNature(ClassSupplierOSGi.PDE_PLUGIN_NATURE)) {
-				IProjectDescription description = project.getDescription();
-				description.setNatureIds(ResourceUtils.addProjectNature(description.getNatureIds(),
-						ClassSupplierOSGi.PDE_PLUGIN_NATURE));
-				project.setDescription(description, monitor);
-			}
-		}
+		// for (IProject project :
+		// ResourcesPlugin.getWorkspace().getRoot().getProjects()) {
+		// if (project.hasNature(ClassSupplierOSGi.NATURE_ID)
+		// && !project.hasNature(ClassSupplierOSGi.PDE_PLUGIN_NATURE)) {
+		// IProjectDescription description = project.getDescription();
+		// description.setNatureIds(ResourceUtils.addProjectNature(description.getNatureIds(),
+		// ClassSupplierOSGi.PDE_PLUGIN_NATURE));
+		// project.setDescription(description, monitor);
+		// }
+		// }
 
 		IPath targetPlatformLocation = ClassSupplierOSGi.getInstance().getStateLocation().append("target")
 				.append("workspace").addFileExtension("target");

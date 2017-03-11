@@ -34,7 +34,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.enterprisedomain.classsupplier.ClassSupplier;
+import org.enterprisedomain.classsupplier.ClassPlant;
 import org.enterprisedomain.classsupplier.CompletionListener;
 import org.enterprisedomain.classsupplier.Contribution;
 import org.enterprisedomain.classsupplier.core.ClassSupplierOSGi;
@@ -43,7 +43,7 @@ import org.junit.Before;
 
 public abstract class AbstractTest {
 
-	protected static ClassSupplier service;
+	protected static ClassPlant service;
 
 	private static CountDownLatch latch = new CountDownLatch(1);
 
@@ -51,13 +51,11 @@ public abstract class AbstractTest {
 
 	protected String className;
 
-	protected String attrName;
+	protected String attributeName;
 
-	protected EDataType attrType;
+	protected EDataType attributeType;
 
-	private IProgressMonitor monitor;
-
-	public void setReference(ClassSupplier dependency) {
+	public void setReference(ClassPlant dependency) {
 		service = dependency;
 		latch.countDown();
 	}
@@ -75,8 +73,8 @@ public abstract class AbstractTest {
 	public void prepare() {
 		setPackageName(null);
 		setClassName("C");
-		setAttrName("c");
-		setAttrType(EcorePackage.Literals.EJAVA_OBJECT);
+		setAttributeName("c");
+		setAttributeType(EcorePackage.Literals.EJAVA_OBJECT);
 	}
 
 	protected EPackage createEPackage(String name, String version) {
@@ -113,7 +111,7 @@ public abstract class AbstractTest {
 		EPackage p = createEPackage(getPackageName(), "0");
 		EClass c = createEClass(getClassName());
 		c.getEStructuralFeatures().add(createEAttribute("a", EcorePackage.Literals.EBOOLEAN));
-		c.getEStructuralFeatures().add(createEAttribute(getAttrName(), getAttrType()));
+		c.getEStructuralFeatures().add(createEAttribute(getAttributeName(), getAttributeType()));
 		p.getEClassifiers().add(c);
 		Contribution n = createAndTest(p);
 		return n;
@@ -133,7 +131,7 @@ public abstract class AbstractTest {
 		EPackage p = createEPackage(getPackageName(), "0");
 		EClass c = createEClass(getClassName());
 		c.getEStructuralFeatures().add(createEAttribute("a", EcorePackage.Literals.EBOOLEAN));
-		c.getEStructuralFeatures().add(createEAttribute(getAttrName(), getAttrType()));
+		c.getEStructuralFeatures().add(createEAttribute(getAttributeName(), getAttributeType()));
 		p.getEClassifiers().add(c);
 		EPackage e = testAPICreate(p);
 		assertNotNull(e);
@@ -142,7 +140,7 @@ public abstract class AbstractTest {
 
 	protected EPackage testAPICreate(EPackage ePackage) throws CoreException, InterruptedException {
 		try {
-			EPackage result = service.create(ePackage);
+			EPackage result = service.produce(ePackage);
 			return testResult(result);
 		} catch (CoreException e) {
 			fail(e.getLocalizedMessage());
@@ -154,7 +152,7 @@ public abstract class AbstractTest {
 	protected EPackage testAPIUpdate(EPackage originalEPackage, EPackage ePackage)
 			throws CoreException, InterruptedException {
 		try {
-			EPackage result = service.update(originalEPackage, ePackage);
+			EPackage result = service.replace(originalEPackage, ePackage);
 			return testResult(result);
 		} catch (CoreException e) {
 			fail(e.getLocalizedMessage());
@@ -233,20 +231,20 @@ public abstract class AbstractTest {
 		this.className = className;
 	}
 
-	protected String getAttrName() {
-		return attrName;
+	protected String getAttributeName() {
+		return attributeName;
 	}
 
-	protected void setAttrName(String attrName) {
-		this.attrName = attrName;
+	protected void setAttributeName(String attrName) {
+		this.attributeName = attrName;
 	}
 
-	protected EDataType getAttrType() {
-		return attrType;
+	protected EDataType getAttributeType() {
+		return attributeType;
 	}
 
-	protected void setAttrType(EDataType attrType) {
-		this.attrType = attrType;
+	protected void setAttributeType(EDataType attrType) {
+		this.attributeType = attrType;
 	}
 
 	protected IProgressMonitor getProgressMonitor() {

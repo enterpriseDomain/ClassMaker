@@ -17,6 +17,8 @@ package org.enterprisedomain.classsupplier.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -33,7 +35,11 @@ import org.enterprisedomain.classsupplier.core.ClassSupplierOSGi;
 
 public class GitUtil {
 
-	public static Git getRepositoryGit(File dir) throws GitAPIException {
+	private static Map<String, Git> gits = new HashMap<String, Git>();
+
+	public synchronized static Git getRepositoryGit(File dir) throws GitAPIException {
+		if (gits.containsKey(dir.getName()))
+			return gits.get(dir.getName());
 		Git git = null;
 		try {
 			git = Git.open(dir);
@@ -44,13 +50,17 @@ public class GitUtil {
 		} catch (IOException e) {
 			ClassSupplierOSGi.getInstance().getLog().log(ClassSupplierOSGi.createWarningStatus(e));
 		}
+		gits.put(dir.getName(), git);
 		return git;
 	}
 
-	public static Git getRepositoryGit(String projectName) throws GitAPIException {
+	public synchronized static Git getRepositoryGit(String projectName) throws GitAPIException {
+		if (gits.containsKey(projectName))
+			return gits.get(projectName);
 		IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 		IPath projectPath = workspaceRoot.getLocation().append(workspaceRoot.getProject(projectName).getFullPath());
-		return getRepositoryGit(projectPath.toFile());
+		gits.put(projectName, getRepositoryGit(projectPath.toFile()));
+		return gits.get(projectName);
 	}
 
 	public static String getCommitMessage(State state, int timestamp) {

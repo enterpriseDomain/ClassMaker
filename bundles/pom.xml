@@ -14,6 +14,6 @@
     <modules>
         <module>org.enterprisedomain.classsupplier</module>
         <module>org.enterprisedomain.classsupplier.osgi.systemextension</module>
-        <module>org.enterprisedomain.edit</module>        
+        <module>org.enterprisedomain.classsupplier.edit</module>        
     </modules>
 </project>

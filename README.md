@@ -1,15 +1,13 @@
 ClassSupplier
 ===========
 
-ClassSupplier is an Eclipse plug-in allowing you to create code programmatically.  
+ClassSupplier is the Eclipse plugin allowing you to create classes programmatically.  
 
-It generates source code from the model provided, exports binary, installs it into its own runtime, and then loads classes making available for client code's reflective access through modeled API.  
+It generates source code from the provided model, exports binary, installs it into own runtime, and then loads classes making them available for client code through reflective modeled API.  
 
-ClassSupplier is purposed for creation of application with domain model, that is editable by users (currently under construction).
+Here is how you can use it:  
 
-But for now, here is how you can use ClassSupplier:  
-
-    // Create a blueprint model - dynamic EMF EPackage
+    // Design a blueprint model - dynamic EMF EPackage
     EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
     ePackage.setName("library");
     ePackage.setNsPrefix("library");
@@ -22,19 +20,19 @@ But for now, here is how you can use ClassSupplier:
     eClass.getEStructuralFeatures().add(eAttr);
     ePackage.getEClassifiers().add(eClass);
 
-    // Acquire ClassSupplier OSGi service
+    // Acquire ClassSupplier's OSGi service
     BundleContext bundleContext = FrameworkUtil.getBundle(this.getClass())
                                 .getBundleContext();
     ServiceReference<?> serviceReference = bundleContext
-                              .getServiceReference(ClassSupplier.class);
-    ClassSupplier classSupplier = (ClassSupplier) bundleContext
+                              .getServiceReference(ClassPlant.class);
+    ClassPlant classPlant = (ClassPlant) bundleContext
                               .getService(serviceReference);
 
-    // Combine them
-    EPackage jPackage = classSupplier.create(ePackage);
+    // Produce result by combining them
+    EPackage jPackage = classPlant.produce(ePackage);
     
     ...
-    // Use the generated model in runtime
+    // Use the generated model at runtime
     EClass jClass = (EClass) jPackage.getEClassifier(eClass.getName());
     EObject jObject = jPackage.getEFactoryInstance().create(jClass); 
     int pages = 500;
@@ -44,13 +42,10 @@ But for now, here is how you can use ClassSupplier:
     assertEquals(pages, jObject.eGet(jAttr));
     assertEquals(eClass.getName(), jObject.getClass().getSimpleName());  
         
-Here is even more [code](/tests/org.enterprisedomain.tests/src/org/enterprisedomain/tests/TestEnterpriseDomain.java), where you can specify a method body and call it, or customize generation templates. 
+Here is even more [code](/tests/org.enterprisedomain.tests/src/org/enterprisedomain/tests/TestEnterpriseDomain.java) :), in which you can specify a method body and call the method, or customize generation templates. 
 
 
 Feedback
 ---------
-If you have anything to suggest, please feel free to file an [issue](https://github.com/kyrillzotkin/ClassSupplier/issues). 
+If you have anything to suggest, please feel free to file a [bug](https://github.com/kyrillzotkin/ClassSupplier/issues). 
 
-<br><br><br>
-
-Development continues...

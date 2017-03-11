@@ -26,9 +26,9 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.contexts.IContextFunction;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
-import org.enterprisedomain.classsupplier.ClassSupplier;
+import org.enterprisedomain.classsupplier.ClassPlant;
 import org.enterprisedomain.classsupplier.ClassSupplierFactory;
-import org.enterprisedomain.classsupplier.impl.ClassSupplierImpl;
+import org.enterprisedomain.classsupplier.impl.ClassPlantImpl;
 import org.enterprisedomain.classsupplier.jobs.ProgressMonitorFactory;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
@@ -55,9 +55,9 @@ public class ClassSupplierOSGi extends Plugin {
 
 	private static Object[] monitorParameters;
 
-	private static ServiceTracker<ClassSupplier, ClassSupplierImpl> tracker;
+	private static ServiceTracker<ClassPlant, ClassPlantImpl> tracker;
 
-	private ServiceRegistration<ClassSupplier> reg;
+	private ServiceRegistration<ClassPlant> reg;
 
 	public static ClassSupplierOSGi getInstance() {
 		return instance;
@@ -68,7 +68,7 @@ public class ClassSupplierOSGi extends Plugin {
 	 * 
 	 * @return enterpriseDomain service instance
 	 */
-	public static ClassSupplier getClassSupplier() {
+	public static ClassPlant getClassSupplier() {
 		return tracker.getService();
 	}
 
@@ -97,11 +97,11 @@ public class ClassSupplierOSGi extends Plugin {
 	public void start(BundleContext context) throws Exception {
 		instance = this;
 
-		reg = context.registerService(ClassSupplier.class, ClassSupplierFactory.eINSTANCE.createClassSupplier(), null);
+		reg = context.registerService(ClassPlant.class, ClassSupplierFactory.eINSTANCE.createClassPlant(), null);
 		Dictionary<String, String> properties = new Hashtable<String, String>();
-		properties.put(IContextFunction.SERVICE_CONTEXT_KEY, ClassSupplier.class.getName());
+		properties.put(IContextFunction.SERVICE_CONTEXT_KEY, ClassPlant.class.getName());
 		context.registerService(IContextFunction.SERVICE_NAME, new ServiceFactory(), properties);
-		tracker = new ServiceTracker<ClassSupplier, ClassSupplierImpl>(context, ClassSupplier.class, null);
+		tracker = new ServiceTracker<ClassPlant, ClassPlantImpl>(context, ClassPlant.class, null);
 		tracker.open();
 		context.addBundleListener(new BundleListener() {
 

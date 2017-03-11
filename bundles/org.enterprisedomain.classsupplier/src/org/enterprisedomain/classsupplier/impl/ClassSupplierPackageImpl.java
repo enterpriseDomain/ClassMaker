@@ -39,7 +39,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.enterprisedomain.classsupplier.ClassSupplier;
+import org.enterprisedomain.classsupplier.ClassPlant;
 import org.enterprisedomain.classsupplier.ClassSupplierFactory;
 import org.enterprisedomain.classsupplier.ClassSupplierPackage;
 import org.enterprisedomain.classsupplier.CompletionListener;
@@ -208,7 +208,7 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass classSupplierEClass = null;
+	private EClass classPlantEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -940,8 +940,8 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getClassSupplier() {
-		return classSupplierEClass;
+	public EClass getClassPlant() {
+		return classPlantEClass;
 	}
 
 	/**
@@ -949,8 +949,8 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getClassSupplier_Workspace() {
-		return (EReference) classSupplierEClass.getEStructuralFeatures().get(0);
+	public EReference getClassPlant_Workspace() {
+		return (EReference) classPlantEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1141,8 +1141,8 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 		createEReference(resourceAdapterEClass, RESOURCE_ADAPTER__RESOURCE);
 		createEAttribute(resourceAdapterEClass, RESOURCE_ADAPTER__FILENAME);
 
-		classSupplierEClass = createEClass(CLASS_SUPPLIER);
-		createEReference(classSupplierEClass, CLASS_SUPPLIER__WORKSPACE);
+		classPlantEClass = createEClass(CLASS_PLANT);
+		createEReference(classPlantEClass, CLASS_PLANT__WORKSPACE);
 
 		// Create enums
 		stageEEnum = createEEnum(STAGE);
@@ -1579,39 +1579,39 @@ public class ClassSupplierPackageImpl extends EPackageImpl implements ClassSuppl
 				ResourceAdapter.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				IS_DERIVED, IS_ORDERED);
 
-		initEClass(classSupplierEClass, ClassSupplier.class, "ClassSupplier", !IS_ABSTRACT, !IS_INTERFACE,
+		initEClass(classPlantEClass, ClassPlant.class, "ClassPlant", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getClassSupplier_Workspace(), this.getWorkspace(), null, "workspace", null, 0, 1,
-				ClassSupplier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClassPlant_Workspace(), this.getWorkspace(), null, "workspace", null, 0, 1, ClassPlant.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = addEOperation(classSupplierEClass, theEcorePackage.getEPackage(), "create", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(classPlantEClass, theEcorePackage.getEPackage(), "produce", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEPackage(), "dynamicModel", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEException(op, this.getCoreException());
 
-		op = addEOperation(classSupplierEClass, theEcorePackage.getEPackage(), "create", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theEcorePackage.getEPackage(), "dynamicModel", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEException(op, this.getCoreException());
-
-		op = addEOperation(classSupplierEClass, theEcorePackage.getEPackage(), "update", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theEcorePackage.getEPackage(), "queryModel", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theEcorePackage.getEPackage(), "dynamicModel", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEException(op, this.getCoreException());
-
-		op = addEOperation(classSupplierEClass, theEcorePackage.getEPackage(), "update", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theEcorePackage.getEPackage(), "queryModel", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(classPlantEClass, theEcorePackage.getEPackage(), "produce", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEPackage(), "dynamicModel", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEException(op, this.getCoreException());
 
-		op = addEOperation(classSupplierEClass, theEcorePackage.getEPackage(), "update", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(classPlantEClass, theEcorePackage.getEPackage(), "replace", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEPackage(), "queryModel", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEPackage(), "dynamicModel", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEException(op, this.getCoreException());
+
+		op = addEOperation(classPlantEClass, theEcorePackage.getEPackage(), "replace", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEPackage(), "queryModel", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEPackage(), "dynamicModel", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEException(op, this.getCoreException());
+
+		op = addEOperation(classPlantEClass, theEcorePackage.getEPackage(), "replace", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEPackage(), "queryModel", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEPackage(), "dynamicModel", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEBoolean(), "changeVersion", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEException(op, this.getCoreException());
 
-		op = addEOperation(classSupplierEClass, theEcorePackage.getEPackage(), "update", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(classPlantEClass, theEcorePackage.getEPackage(), "replace", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEPackage(), "queryModel", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEPackage(), "dynamicModel", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEBoolean(), "changeVersion", 0, 1, IS_UNIQUE, IS_ORDERED);

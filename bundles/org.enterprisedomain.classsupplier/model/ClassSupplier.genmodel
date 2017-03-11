@@ -2,10 +2,10 @@
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright 2017 Kyrill Zotkin&#xA;&#xA;Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);&#xA;you may not use this file except in compliance with the License.&#xA;You may obtain a copy of the License at&#xA;&#xA;    http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;Unless required by applicable law or agreed to in writing, software&#xA;distributed under the License is distributed on an &quot;AS IS&quot; BASIS,&#xA;WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;See the License for the specific language governing permissions and&#xA;limitations under the License."
     modelDirectory="/org.enterprisedomain.classsupplier/src" creationSubmenus="true"
-    editDirectory="/org.enterprisedomain.edit/src" editorDirectory="/org.enterprisedomain.editor/src"
+    editDirectory="/org.enterprisedomain.classsupplier.edit/src" editorDirectory="/org.enterprisedomain.editor/src"
     modelPluginID="org.enterprisedomain.classsupplier" templateDirectory="" redirection=""
     modelName="ClassSupplier" modelPluginClass="" codeFormatting="true" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="6.0" copyrightFields="false" editPluginID="org.enterprisedomain.edit"
+    complianceLevel="6.0" copyrightFields="false" editPluginID="org.enterprisedomain.classsupplier.edit"
     editorPluginID="org.enterprisedomain.editor" language="" usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore"
     interfaceNamePattern="" runtimePlatform="RCP" pluginKey="ClassSupplier">
   <foreignModel>ClassSupplier.ecore</foreignModel>
@@ -26,6 +26,7 @@
     <genDataTypes ecoreDataType="ClassSupplier.ecore#//CoreException"/>
     <genDataTypes ecoreDataType="ClassSupplier.ecore#//URI"/>
     <genDataTypes ecoreDataType="ClassSupplier.ecore#//Exception"/>
+    <genDataTypes ecoreDataType="ClassSupplier.ecore#//Locale"/>
     <genClasses ecoreClass="ClassSupplier.ecore#//Contribution">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//Contribution/revision"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//Contribution/revisions"/>
@@ -118,17 +119,18 @@
       <genOperations ecoreOperation="ClassSupplier.ecore#//Revision/addAdapters">
         <genParameters ecoreParameter="ClassSupplier.ecore#//Revision/addAdapters/adapters"/>
       </genOperations>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//Revision/copyModel">
+        <genParameters ecoreParameter="ClassSupplier.ecore#//Revision/copyModel/from"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="ClassSupplier.ecore#//State">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ClassSupplier.ecore#//State/contribution"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//State/revision"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//State/timestamp"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//State/stateLanguage"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//State/deployableUnitName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//State/jobFamily"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//State/resource"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//State/commitIds"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//State/stateDomainModels"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//State/stateCustomizers"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//State/projectName"/>
       <genOperations ecoreOperation="ClassSupplier.ecore#//State/setProjectVersion">
@@ -145,9 +147,6 @@
       <genOperations ecoreOperation="ClassSupplier.ecore#//State/checkout.1">
         <genParameters ecoreParameter="ClassSupplier.ecore#//State/checkout.1/commitId"/>
       </genOperations>
-      <genOperations ecoreOperation="ClassSupplier.ecore#//State/copyModel">
-        <genParameters ecoreParameter="ClassSupplier.ecore#//State/copyModel/from"/>
-      </genOperations>
       <genOperations ecoreOperation="ClassSupplier.ecore#//State/commit">
         <genParameters ecoreParameter="ClassSupplier.ecore#//State/commit/filepattern"/>
       </genOperations>
@@ -158,9 +157,10 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//Item/phase"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//Item/version"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//Item/language"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//Item/domainModels"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference ClassSupplier.ecore#//Item/domainModel"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//Item/customizers"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//Item/parent"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//Item/locale"/>
       <genOperations ecoreOperation="ClassSupplier.ecore#//Item/load">
         <genParameters ecoreParameter="ClassSupplier.ecore#//Item/load/create"/>
       </genOperations>
@@ -168,6 +168,9 @@
         <genParameters ecoreParameter="ClassSupplier.ecore#//Item/save/monitor"/>
       </genOperations>
       <genOperations ecoreOperation="ClassSupplier.ecore#//Item/initialize"/>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//Item/copyModel">
+        <genParameters ecoreParameter="ClassSupplier.ecore#//Item/copyModel/from"/>
+      </genOperations>
     </genClasses>
     <genClasses image="false" ecoreClass="ClassSupplier.ecore#//Adapter"/>
     <genClasses ecoreClass="ClassSupplier.ecore#//Workspace">
@@ -181,10 +184,6 @@
         <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/createContribution/blueprint"/>
         <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/createContribution/monitor"/>
       </genOperations>
-      <genOperations ecoreOperation="ClassSupplier.ecore#//Workspace/createContribution.1">
-        <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/createContribution.1/blueprints"/>
-        <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/createContribution.1/monitor"/>
-      </genOperations>
       <genOperations ecoreOperation="ClassSupplier.ecore#//Workspace/getContribution">
         <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/getContribution/eObject"/>
       </genOperations>
@@ -192,10 +191,7 @@
         <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/getContribution.1/ePackage"/>
       </genOperations>
       <genOperations ecoreOperation="ClassSupplier.ecore#//Workspace/getContribution.2">
-        <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/getContribution.2/ePackages"/>
-      </genOperations>
-      <genOperations ecoreOperation="ClassSupplier.ecore#//Workspace/getContribution.3">
-        <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/getContribution.3/projectName"/>
+        <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/getContribution.2/projectName"/>
       </genOperations>
       <genOperations ecoreOperation="ClassSupplier.ecore#//Workspace/createProject">
         <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/createProject/name"/>
@@ -204,13 +200,9 @@
       <genOperations ecoreOperation="ClassSupplier.ecore#//Workspace/getProject">
         <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/getProject/projectName"/>
       </genOperations>
-      <genOperations ecoreOperation="ClassSupplier.ecore#//Workspace/getContribution.4">
-        <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/getContribution.4/ePackage"/>
-        <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/getContribution.4/searchOptimistic"/>
-      </genOperations>
-      <genOperations ecoreOperation="ClassSupplier.ecore#//Workspace/getContribution.5">
-        <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/getContribution.5/ePackages"/>
-        <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/getContribution.5/searchOptimistic"/>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//Workspace/getContribution.3">
+        <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/getContribution.3/ePackage"/>
+        <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/getContribution.3/searchOptimistic"/>
       </genOperations>
       <genOperations ecoreOperation="ClassSupplier.ecore#//Workspace/registerProject">
         <genParameters ecoreParameter="ClassSupplier.ecore#//Workspace/registerProject/project"/>
@@ -278,9 +270,10 @@
       </genOperations>
     </genClasses>
     <genClasses image="false" ecoreClass="ClassSupplier.ecore#//ResourceSet"/>
-    <genClasses ecoreClass="ClassSupplier.ecore#//EPackageToEPackageMapEntry">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//EPackageToEPackageMapEntry/key"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//EPackageToEPackageMapEntry/value"/>
+    <genClasses ecoreClass="ClassSupplier.ecore#//ModelPair">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//ModelPair/dynamic"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//ModelPair/generated"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ClassSupplier.ecore#//ModelPair/parent"/>
     </genClasses>
     <genClasses image="false" ecoreClass="ClassSupplier.ecore#//Resource"/>
     <genClasses image="false" ecoreClass="ClassSupplier.ecore#//CompletionListener">
@@ -292,39 +285,34 @@
       <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//ResourceAdapter/resource"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ClassSupplier.ecore#//ResourceAdapter/filename"/>
     </genClasses>
-    <genClasses ecoreClass="ClassSupplier.ecore#//ClassSupplier">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//ClassSupplier/workspace"/>
-      <genOperations ecoreOperation="ClassSupplier.ecore#//ClassSupplier/create">
-        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassSupplier/create/dynamicModels"/>
+    <genClasses ecoreClass="ClassSupplier.ecore#//ClassPlant">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassSupplier.ecore#//ClassPlant/workspace"/>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//ClassPlant/produce">
+        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassPlant/produce/dynamicModel"/>
       </genOperations>
-      <genOperations ecoreOperation="ClassSupplier.ecore#//ClassSupplier/create.1">
-        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassSupplier/create.1/dynamicModels"/>
-        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassSupplier/create.1/monitor"/>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//ClassPlant/produce.1">
+        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassPlant/produce.1/dynamicModel"/>
+        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassPlant/produce.1/monitor"/>
       </genOperations>
-      <genOperations ecoreOperation="ClassSupplier.ecore#//ClassSupplier/create.2">
-        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassSupplier/create.2/dynamicModel"/>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//ClassPlant/replace">
+        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassPlant/replace/queryModel"/>
+        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassPlant/replace/dynamicModel"/>
       </genOperations>
-      <genOperations ecoreOperation="ClassSupplier.ecore#//ClassSupplier/create.3">
-        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassSupplier/create.3/dynamicModel"/>
-        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassSupplier/create.3/monitor"/>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//ClassPlant/replace.1">
+        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassPlant/replace.1/queryModel"/>
+        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassPlant/replace.1/dynamicModel"/>
+        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassPlant/replace.1/monitor"/>
       </genOperations>
-      <genOperations ecoreOperation="ClassSupplier.ecore#//ClassSupplier/update">
-        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassSupplier/update/queryModels"/>
-        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassSupplier/update/dynamicModels"/>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//ClassPlant/replace.2">
+        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassPlant/replace.2/queryModel"/>
+        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassPlant/replace.2/dynamicModel"/>
+        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassPlant/replace.2/changeVersion"/>
       </genOperations>
-      <genOperations ecoreOperation="ClassSupplier.ecore#//ClassSupplier/update.1">
-        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassSupplier/update.1/queryModels"/>
-        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassSupplier/update.1/dynamicModels"/>
-        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassSupplier/update.1/monitor"/>
-      </genOperations>
-      <genOperations ecoreOperation="ClassSupplier.ecore#//ClassSupplier/update.2">
-        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassSupplier/update.2/queryModel"/>
-        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassSupplier/update.2/dynamicModel"/>
-      </genOperations>
-      <genOperations ecoreOperation="ClassSupplier.ecore#//ClassSupplier/update.3">
-        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassSupplier/update.3/queryModel"/>
-        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassSupplier/update.3/dynamicModel"/>
-        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassSupplier/update.3/monitor"/>
+      <genOperations ecoreOperation="ClassSupplier.ecore#//ClassPlant/replace.3">
+        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassPlant/replace.3/queryModel"/>
+        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassPlant/replace.3/dynamicModel"/>
+        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassPlant/replace.3/changeVersion"/>
+        <genParameters ecoreParameter="ClassSupplier.ecore#//ClassPlant/replace.3/monitor"/>
       </genOperations>
     </genClasses>
   </genPackages>

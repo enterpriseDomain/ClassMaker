@@ -151,8 +151,7 @@ public class EcoreGenerator extends EnterpriseDomainJob
 
 		@Override
 		public IStatus work(IProgressMonitor monitor) throws CoreException {
-			ResourceUtils.cleanupDir(getProject(), "",
-					new String[] { ResourceUtils.getModelFolderName(), ResourceUtils.getTargetFolderName() });
+			ResourceUtils.cleanupDir(getProject(), SOURCE_FOLDER_NAME);
 			getProject().refreshLocal(IResource.DEPTH_INFINITE, monitor);
 			int result = (Integer) getGenerator()
 					.run(new String[] { "-forceOverwrite", "-codeFormatting", "default", "-model", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$

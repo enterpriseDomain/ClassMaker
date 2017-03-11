@@ -116,13 +116,13 @@ public interface ClassSupplierFactory extends EFactory {
 	ResourceAdapter createResourceAdapter();
 
 	/**
-	 * Returns a new object of class '<em>Class Supplier</em>'.
+	 * Returns a new object of class '<em>Class Plant</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Class Supplier</em>'.
+	 * @return a new object of class '<em>Class Plant</em>'.
 	 * @generated
 	 */
-	ClassSupplier createClassSupplier();
+	ClassPlant createClassPlant();
 
 	/**
 	 * Returns the package supported by this factory.

@@ -27,12 +27,12 @@ public class ProjectNature implements IProjectNature {
 
 	@Override
 	public void configure() throws CoreException {
-		addToBuildSpec(ProjectBuilder.BUILDER_ID);
+		// addToBuildSpec(ProjectBuilder.BUILDER_ID);
 	}
 
 	@Override
 	public void deconfigure() throws CoreException {
-		removeFromBuildSpec(ProjectBuilder.BUILDER_ID);
+		// removeFromBuildSpec(ProjectBuilder.BUILDER_ID);
 	}
 
 	@Override
