@@ -407,7 +407,7 @@ public class StateImpl extends ItemImpl implements State {
 
 			EnterpriseDomainJob exporterJob = (EnterpriseDomainJob) exporter.getAdapter(EnterpriseDomainJob.class);
 			exporterJob.setProject(getProject());
-			exporterJob.setStateTimestamp(timestamp);
+			exporterJob.setStateTimestamp(getTimestamp());
 			exporter.setExportDestination(ResourceUtils.getExportDestination(getProject()));
 			if (exporter.getVersion() == null) {
 				Version version = getVersion();
@@ -417,7 +417,7 @@ public class StateImpl extends ItemImpl implements State {
 			generator.setResourceSet(ClassSupplierOSGi.getClassSupplier().getWorkspace().getResourceSet());
 			EnterpriseDomainJob generatorJob = ((EnterpriseDomainJob) generator.getAdapter(EnterpriseDomainJob.class));
 			generatorJob.setProject(getProject());
-			generatorJob.setStateTimestamp(timestamp);
+			generatorJob.setStateTimestamp(getTimestamp());
 			generatorJob.setProgressGroup(monitor, 1);
 			generatorJob.setNextJob(exporterJob);
 
@@ -425,11 +425,11 @@ public class StateImpl extends ItemImpl implements State {
 			exporterJob.setNextJob(installJob);
 
 			EnterpriseDomainJob loadJob = new OSGiEPackageLoader(runId);
-			loadJob.setStateTimestamp(timestamp);
+			loadJob.setStateTimestamp(getTimestamp());
 			loadJob.addListener(new JobListener());
 			loadJob.addListener();
 
-			installJob.setStateTimestamp(timestamp);
+			installJob.setStateTimestamp(getTimestamp());
 			installJob.setNextJob(loadJob);
 
 			monitor.beginTask("Save", 4);
@@ -504,7 +504,7 @@ public class StateImpl extends ItemImpl implements State {
 	public void checkout(String commitId) {
 		try {
 			GitUtil.getRepositoryGit(getProjectName()).checkout().setName(commitId).setForce(true).call();
-			setModelName(getContribution().getModelName());
+			copyModel(getContribution());
 			load(false);
 		} catch (CheckoutConflictException e) {
 			e.getConflictingPaths().clear();

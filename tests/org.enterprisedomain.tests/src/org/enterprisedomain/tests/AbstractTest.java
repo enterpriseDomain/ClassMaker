@@ -133,15 +133,16 @@ public abstract class AbstractTest {
 		c.getEStructuralFeatures().add(createEAttribute("a", EcorePackage.Literals.EBOOLEAN));
 		c.getEStructuralFeatures().add(createEAttribute(getAttributeName(), getAttributeType()));
 		p.getEClassifiers().add(c);
-		EPackage e = testAPICreate(p);
+		EPackage e = testAPICreate(p, "a", EcorePackage.Literals.EBOOLEAN, true);
 		assertNotNull(e);
 		return p;
 	}
 
-	protected EPackage testAPICreate(EPackage ePackage) throws CoreException, InterruptedException {
+	protected EPackage testAPICreate(EPackage ePackage, String attributeName, EDataType attributeType,
+			Object attributeValue) throws CoreException, InterruptedException {
 		try {
 			EPackage result = service.produce(ePackage);
-			return testResult(result);
+			return testResult(result, attributeName, attributeType, attributeValue);
 		} catch (CoreException e) {
 			fail(e.getLocalizedMessage());
 			e.printStackTrace();
@@ -149,11 +150,11 @@ public abstract class AbstractTest {
 		return null;
 	}
 
-	protected EPackage testAPIUpdate(EPackage originalEPackage, EPackage ePackage)
-			throws CoreException, InterruptedException {
+	protected EPackage testAPIUpdate(EPackage originalEPackage, EPackage ePackage, String attributeName,
+			EDataType attributeType, Object attributeValue) throws CoreException, InterruptedException {
 		try {
 			EPackage result = service.replace(originalEPackage, ePackage);
-			return testResult(result);
+			return testResult(result, attributeName, attributeType, attributeValue);
 		} catch (CoreException e) {
 			fail(e.getLocalizedMessage());
 			e.printStackTrace();
@@ -161,13 +162,16 @@ public abstract class AbstractTest {
 		return null;
 	}
 
-	private EPackage testResult(EPackage result) {
+	private EPackage testResult(EPackage result, String attributeName, EDataType attributeType, Object attributeValue) {
 		assertNotNull(result);
 		EClass s = (EClass) result.getEClassifier(getClassName());
-		EStructuralFeature a = s.getEStructuralFeatures().get(0);
+		EStructuralFeature a = null;
+		for (EStructuralFeature f : s.getEStructuralFeatures())
+			if (f.getName().equals(attributeName) && f.getEType().equals(attributeType))
+				a = f;
 		EObject o = result.getEFactoryInstance().create(s);
-		o.eSet(a, true);
-		assertEquals(true, o.eGet(a));
+		o.eSet(a, attributeValue);
+		assertEquals(attributeValue, o.eGet(a));
 		assertEquals(getClassName(), o.getClass().getSimpleName());
 		assertEquals(CodeGenUtil.safeName(result.getName()), o.getClass().getPackage().getName());
 		return result;

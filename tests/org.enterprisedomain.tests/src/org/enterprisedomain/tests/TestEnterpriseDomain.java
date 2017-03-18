@@ -414,7 +414,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		setClassName("P");
 		cl.setName(getClassName());
 		cl.getEStructuralFeature(getAttributeName());
-		testAPIUpdate(p, p2);
+		testAPIUpdate(p, p2, "t", EcorePackage.Literals.EJAVA_OBJECT, new Object());
 	}
 
 	@Test

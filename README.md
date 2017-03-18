@@ -1,9 +1,9 @@
 ClassSupplier
 ===========
 
-ClassSupplier is the Eclipse plugin allowing you to create classes programmatically.  
+ClassSupplier is the Eclipse plug-in allowing to create classes programmatically, making them accessible to client bundle.  
 
-It generates source code from the provided model, exports binary, installs it into own runtime, and then loads classes making them available for client code through reflective modeled API.  
+It actually generates source code from the provided model, exports binary, installs it into its own runtime, and then loads classes making them available to client code through model's reflective API.  
 
 Here is how you can use it:  
 
@@ -42,10 +42,10 @@ Here is how you can use it:
     assertEquals(pages, jObject.eGet(jAttr));
     assertEquals(eClass.getName(), jObject.getClass().getSimpleName());  
         
-Here is even more [code](/tests/org.enterprisedomain.tests/src/org/enterprisedomain/tests/TestEnterpriseDomain.java) :), in which you can specify a method body and call the method, or customize generation templates. 
+There is more [code](/tests/org.enterprisedomain.tests/src/org/enterprisedomain/tests/TestEnterpriseDomain.java), where you can specify a method body and call the method, or customize the generation templates. 
 
 
 Feedback
 ---------
-If you have anything to suggest, please feel free to file a [bug](https://github.com/kyrillzotkin/ClassSupplier/issues). 
+If you have anything to suggest, please feel free to file a [bug at GitHub](https://github.com/kyrillzotkin/ClassSupplier/issues). 
 

@@ -164,6 +164,9 @@ public class OSGiEPackageLoader extends ContainerJob {
 				e.printStackTrace();
 				setException(e);
 			}
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+			setException(e);
 		} finally {
 			loaded.release();
 			((ContributionImpl) getContributionState().getContribution()).notifyCompletion();

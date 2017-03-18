@@ -350,8 +350,7 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	public String initialize() {
 		if (!eIsSet(ClassSupplierPackage.ITEM__PARENT))
 			return null;
-		setModelName(getParent().getModelName());
-		setLanguage(getParent().getLanguage());
+		copyModel(getParent());
 		return "";
 	}
 
