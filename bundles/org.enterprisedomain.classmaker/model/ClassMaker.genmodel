@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright 2017 Kyrill Zotkin&#xA;&#xA;Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);&#xA;you may not use this file except in compliance with the License.&#xA;You may obtain a copy of the License at&#xA;&#xA;    http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;Unless required by applicable law or agreed to in writing, software&#xA;distributed under the License is distributed on an &quot;AS IS&quot; BASIS,&#xA;WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;See the License for the specific language governing permissions and&#xA;limitations under the License."
+    modelDirectory="/org.enterprisedomain.classmaker/src" creationSubmenus="true"
+    editDirectory="/org.enterprisedomain.classmaker.edit/src" editorDirectory="/org.enterprisedomain.editor/src"
+    modelPluginID="org.enterprisedomain.classmaker" templateDirectory="" redirection=""
+    modelName="ClassMaker" modelPluginClass="" codeFormatting="true" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false" editPluginID="org.enterprisedomain.classmaker.edit"
+    editorPluginID="org.enterprisedomain.editor" language="" usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore"
+    interfaceNamePattern="" runtimePlatform="RCP" pluginKey="ClassMaker">
+  <foreignModel>ClassMaker.ecore</foreignModel>
+  <genPackages prefix="ClassMaker" basePackage="org.enterprisedomain" resource="XMI"
+      disposableProviderFactory="true" generateExampleClass="false" multipleEditorPages="false"
+      fileExtensions="domainmodel" ecorePackage="ClassMaker.ecore#/" publicationLocation="">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="ClassMaker.ecore#//Stage">
+      <genEnumLiterals ecoreEnumLiteral="ClassMaker.ecore#//Stage/DEFINED"/>
+      <genEnumLiterals ecoreEnumLiteral="ClassMaker.ecore#//Stage/MODELED"/>
+      <genEnumLiterals ecoreEnumLiteral="ClassMaker.ecore#//Stage/GENERATED"/>
+      <genEnumLiterals ecoreEnumLiteral="ClassMaker.ecore#//Stage/EXPORTED"/>
+      <genEnumLiterals ecoreEnumLiteral="ClassMaker.ecore#//Stage/INSTALLED"/>
+      <genEnumLiterals ecoreEnumLiteral="ClassMaker.ecore#//Stage/LOADED"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="ClassMaker.ecore#//IProgressMonitor"/>
+    <genDataTypes ecoreDataType="ClassMaker.ecore#//OSGiVersion"/>
+    <genDataTypes ecoreDataType="ClassMaker.ecore#//Semaphore"/>
+    <genDataTypes ecoreDataType="ClassMaker.ecore#//CoreException"/>
+    <genDataTypes ecoreDataType="ClassMaker.ecore#//URI"/>
+    <genDataTypes ecoreDataType="ClassMaker.ecore#//Exception"/>
+    <genDataTypes ecoreDataType="ClassMaker.ecore#//Locale"/>
+    <genClasses ecoreClass="ClassMaker.ecore#//Contribution">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//Contribution/revision"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//Contribution/revisions"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference ClassMaker.ecore#//Contribution/state"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Contribution/latestVersion"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference ClassMaker.ecore#//Contribution/model"/>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Contribution/createRevision">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/createRevision/monitor"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Contribution/checkout">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/checkout/version"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Contribution/checkout.1">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/checkout.1/version"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/checkout.1/time"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Contribution/checkout.2">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/checkout.2/version"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/checkout.2/time"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/checkout.2/commitId"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Contribution/checkout.3">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/checkout.3/time"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Contribution/checkout.4">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/checkout.4/time"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/checkout.4/commitId"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Contribution/checkout.5">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/checkout.5/commitId"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Contribution/newRevision">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/newRevision/version"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Contribution/newVersion">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/newVersion/base"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/newVersion/incrementMajor"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/newVersion/incrementMinor"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/newVersion/incrementMicro"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Contribution/newVersion.1">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/newVersion.1/incrementMajor"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/newVersion.1/incrementMinor"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/newVersion.1/incrementMicro"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Contribution/nextVersion"/>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Contribution/delete">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/delete/monitor"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Contribution/addSaveCompletionListener">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/addSaveCompletionListener/resultListener"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Contribution/removeSaveCompletionListener">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/removeSaveCompletionListener/resultListener"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Contribution/save">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/save/revision"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/save/monitor"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Contribution/getState">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/getState/timestamp"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Contribution/initAdapters">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/initAdapters/revision"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="ClassMaker.ecore#//Revision">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//Revision/state"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Revision/timestamp"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//Revision/stateHistory"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Revision/latestTimestamp"/>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Revision/create">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Revision/create/monitor"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Revision/checkout">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Revision/checkout/stateTime"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//Revision/checkout/commitId"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Revision/checkout.1">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Revision/checkout.1/stateTime"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Revision/checkout.2">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Revision/checkout.2/commitId"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Revision/newState"/>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Revision/delete">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Revision/delete/monitor"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Revision/addAdapters">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Revision/addAdapters/adapters"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Revision/copyModel">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Revision/copyModel/from"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="ClassMaker.ecore#//State">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//State/revision"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/timestamp"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/deployableUnitName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/jobFamily"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//State/resource"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/commitIds"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//State/stateCustomizers"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/projectName"/>
+      <genOperations ecoreOperation="ClassMaker.ecore#//State/setProjectVersion">
+        <genParameters ecoreParameter="ClassMaker.ecore#//State/setProjectVersion/monitor"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//State/delete">
+        <genParameters ecoreParameter="ClassMaker.ecore#//State/delete/monitor"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//State/find">
+        <genParameters ecoreParameter="ClassMaker.ecore#//State/find/ePackage"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//State/find/stage"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//State/checkout"/>
+      <genOperations ecoreOperation="ClassMaker.ecore#//State/checkout.1">
+        <genParameters ecoreParameter="ClassMaker.ecore#//State/checkout.1/commitId"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//State/commit">
+        <genParameters ecoreParameter="ClassMaker.ecore#//State/commit/filepattern"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//State/saveResource"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="ClassMaker.ecore#//Item">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Item/modelName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Item/phase"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Item/version"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Item/language"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference ClassMaker.ecore#//Item/domainModel"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//Item/customizers"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//Item/parent"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Item/locale"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//Item/contribution"/>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Item/load">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Item/load/create"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Item/save">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Item/save/monitor"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Item/initialize"/>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Item/copyModel">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Item/copyModel/from"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="ClassMaker.ecore#//Adapter"/>
+    <genClasses ecoreClass="ClassMaker.ecore#//Workspace">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//Workspace/projects"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Workspace/resourceSet"/>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Workspace/initialize"/>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Workspace/provision">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/provision/monitor"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Workspace/createContribution">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/createContribution/blueprint"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/createContribution/monitor"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Workspace/getContribution">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/getContribution/eObject"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Workspace/getContribution.1">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/getContribution.1/ePackage"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Workspace/getContribution.2">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/getContribution.2/projectName"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Workspace/createProject">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/createProject/name"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/createProject/monitor"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Workspace/getProject">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/getProject/projectName"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Workspace/getContribution.3">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/getContribution.3/ePackage"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/getContribution.3/searchOptimistic"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Workspace/registerProject">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/registerProject/project"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Workspace/unregisterProject">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/unregisterProject/project"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Workspace/contains">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/contains/blueprint"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Workspace/contains.1">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/contains.1/eObject"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Workspace/delete">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/delete/object"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/delete/monitor"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="ClassMaker.ecore#//IntegerToStateMapEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//IntegerToStateMapEntry/key"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//IntegerToStateMapEntry/value"/>
+    </genClasses>
+    <genClasses ecoreClass="ClassMaker.ecore#//VersionToRevisionMapEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//VersionToRevisionMapEntry/key"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//VersionToRevisionMapEntry/value"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="ClassMaker.ecore#//ISchedulingRule"/>
+    <genClasses image="false" ecoreClass="ClassMaker.ecore#//Future">
+      <genTypeParameters ecoreTypeParameter="ClassMaker.ecore#//Future/ResultType"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="ClassMaker.ecore#//EMap">
+      <genTypeParameters ecoreTypeParameter="ClassMaker.ecore#//EMap/K"/>
+      <genTypeParameters ecoreTypeParameter="ClassMaker.ecore#//EMap/V"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="ClassMaker.ecore#//Customizer">
+      <genOperations ecoreOperation="ClassMaker.ecore#//Customizer/customize">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Customizer/customize/args"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="ClassMaker.ecore#//StageQualifier">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//StageQualifier/stage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//StageQualifier/step"/>
+    </genClasses>
+    <genClasses ecoreClass="ClassMaker.ecore#//StageQualifierToCustomizerMapEntry">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//StageQualifierToCustomizerMapEntry/key"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//StageQualifierToCustomizerMapEntry/value"/>
+    </genClasses>
+    <genClasses ecoreClass="ClassMaker.ecore#//Project">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Project/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Project/projectName"/>
+      <genFeatures property="Readonly" children="true" createChild="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//Project/children"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Project/dirty"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ClassMaker.ecore#//Project/workspace"/>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Project/create">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Project/create/monitor"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Project/delete">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Project/delete/monitor"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Project/delete.1">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Project/delete.1/objects"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Project/save">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Project/save/monitor"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="ClassMaker.ecore#//ResourceSet"/>
+    <genClasses ecoreClass="ClassMaker.ecore#//ModelPair">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//ModelPair/dynamic"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//ModelPair/generated"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ClassMaker.ecore#//ModelPair/parent"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="ClassMaker.ecore#//Resource"/>
+    <genClasses image="false" ecoreClass="ClassMaker.ecore#//CompletionListener">
+      <genOperations ecoreOperation="ClassMaker.ecore#//CompletionListener/completed">
+        <genParameters ecoreParameter="ClassMaker.ecore#//CompletionListener/completed/result"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="ClassMaker.ecore#//ResourceAdapter">
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//ResourceAdapter/resource"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//ResourceAdapter/filename"/>
+    </genClasses>
+    <genClasses ecoreClass="ClassMaker.ecore#//ClassPlant">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//ClassPlant/workspace"/>
+      <genOperations ecoreOperation="ClassMaker.ecore#//ClassPlant/produce">
+        <genParameters ecoreParameter="ClassMaker.ecore#//ClassPlant/produce/dynamicModel"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//ClassPlant/produce.1">
+        <genParameters ecoreParameter="ClassMaker.ecore#//ClassPlant/produce.1/dynamicModel"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//ClassPlant/produce.1/monitor"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//ClassPlant/replace">
+        <genParameters ecoreParameter="ClassMaker.ecore#//ClassPlant/replace/queryModel"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//ClassPlant/replace/dynamicModel"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//ClassPlant/replace.1">
+        <genParameters ecoreParameter="ClassMaker.ecore#//ClassPlant/replace.1/queryModel"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//ClassPlant/replace.1/dynamicModel"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//ClassPlant/replace.1/monitor"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//ClassPlant/replace.2">
+        <genParameters ecoreParameter="ClassMaker.ecore#//ClassPlant/replace.2/queryModel"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//ClassPlant/replace.2/dynamicModel"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//ClassPlant/replace.2/changeVersion"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//ClassPlant/replace.3">
+        <genParameters ecoreParameter="ClassMaker.ecore#//ClassPlant/replace.3/queryModel"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//ClassPlant/replace.3/dynamicModel"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//ClassPlant/replace.3/changeVersion"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//ClassPlant/replace.3/monitor"/>
+      </genOperations>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

@@ -12,7 +12,7 @@
 	</parent>
 
 	<modules>
-		<module>org.enterprisedomain.classsupplier.feature</module>
-		<module>org.enterprisedomain.classsupplier.osgi.resolverhooks.feature</module>
+		<module>org.enterprisedomain.classmaker.feature</module>
+		<module>org.enterprisedomain.classmaker.osgi.resolverhooks.feature</module>
 	</modules>
 </project>

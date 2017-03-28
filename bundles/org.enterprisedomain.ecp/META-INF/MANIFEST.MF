@@ -7,7 +7,7 @@ Bundle-Activator: org.enterprisedomain.ecp.Activator
 Bundle-Vendor: Kyrill Zotkin
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecp.core;bundle-version="[1.7.1,2.0.0)",
- org.enterprisedomain.classsupplier,
+ org.enterprisedomain.classmaker,
  org.eclipse.emf.ecp.view.model
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

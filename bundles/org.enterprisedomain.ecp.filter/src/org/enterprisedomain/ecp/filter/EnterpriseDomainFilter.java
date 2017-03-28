@@ -19,7 +19,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.emf.ecp.core.util.ECPFilterProvider;
-import org.enterprisedomain.classsupplier.ClassSupplierPackage;
+import org.enterprisedomain.classmaker.ClassMakerPackage;
 
 public class EnterpriseDomainFilter implements ECPFilterProvider {
 
@@ -29,7 +29,7 @@ public class EnterpriseDomainFilter implements ECPFilterProvider {
 	@Override
 	public Set<String> getHiddenPackages() {
 		final Set<String> packages = new HashSet<String>();
-		packages.add(ClassSupplierPackage.eNS_URI);
+		packages.add(ClassMakerPackage.eNS_URI);
 		return packages;
 	}
 

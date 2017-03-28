@@ -46,15 +46,15 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.enterprisedomain.classsupplier.ClassPlant;
-import org.enterprisedomain.classsupplier.CompletionListener;
-import org.enterprisedomain.classsupplier.Contribution;
-import org.enterprisedomain.classsupplier.Customizer;
-import org.enterprisedomain.classsupplier.ModelPair;
-import org.enterprisedomain.classsupplier.impl.CompletionListenerImpl;
-import org.enterprisedomain.classsupplier.impl.CustomizerImpl;
-import org.enterprisedomain.classsupplier.jobs.codegen.GenModelSetupJob;
-import org.enterprisedomain.classsupplier.util.ModelUtil;
+import org.enterprisedomain.classmaker.ClassPlant;
+import org.enterprisedomain.classmaker.CompletionListener;
+import org.enterprisedomain.classmaker.Contribution;
+import org.enterprisedomain.classmaker.Customizer;
+import org.enterprisedomain.classmaker.ModelPair;
+import org.enterprisedomain.classmaker.impl.CompletionListenerImpl;
+import org.enterprisedomain.classmaker.impl.CustomizerImpl;
+import org.enterprisedomain.classmaker.jobs.codegen.GenModelSetupJob;
+import org.enterprisedomain.classmaker.util.ModelUtil;
 import org.junit.Test;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
@@ -255,35 +255,13 @@ public class TestEnterpriseDomain extends AbstractTest {
 		a.setEType(EcorePackage.Literals.EJAVA_OBJECT);
 		cl.getEStructuralFeatures().add(a);
 		p.getEClassifiers().add(cl);
-
-		final Contribution c = service.getWorkspace().createContribution(p, getProgressMonitor());
-		final Semaphore complete = new Semaphore(0);
-
-		CompletionListener l1 = new CompletionListenerImpl() {
-
-			@Override
-			public void completed(Contribution result) throws Exception {
-				try {
-					EPackage e0 = result.getDomainModel().getGenerated();
-					EClass cla = (EClass) e0.getEClassifier(cl.getName());
-					o = e0.getEFactoryInstance().create(cla);
-					assertEquals(cla.getName(), o.getClass().getSimpleName());
-					o.eSet(cla.getEStructuralFeature(a.getName()), "test");
-					assertEquals("test", o.eGet(cla.getEStructuralFeature(a.getName())));
-				} catch (Exception e) {
-					e.printStackTrace();
-				} finally {
-					complete.release();
-				}
-			}
-		};
-		c.addSaveCompletionListener(l1);
-		c.save(getProgressMonitor());
-		complete.acquire();
-		c.removeSaveCompletionListener(l1);
-
-		final Version v1 = c.getVersion();
-
+		EPackage e0 = service.produce(p, getProgressMonitor());
+		EClass c0 = (EClass) e0.getEClassifier(cl.getName());
+		o = e0.getEFactoryInstance().create(c0);
+		assertEquals(c0.getName(), o.getClass().getSimpleName());
+		o.eSet(c0.getEStructuralFeature(a.getName()), "test");
+		assertEquals("test", o.eGet(c0.getEStructuralFeature(a.getName())));
+		final Version v1 = service.getWorkspace().getContribution(p).getVersion();
 		final Registry packageRegistry = service.getWorkspace().getResourceSet().getPackageRegistry();
 		assertNotNull(packageRegistry.getEPackage(p.getNsURI()));
 
@@ -293,7 +271,6 @@ public class TestEnterpriseDomain extends AbstractTest {
 		b.setName(getAttributeName());
 		b.setEType(EcorePackage.Literals.EINT);
 		((EClass) p2.getEClassifier(cl.getName())).getEStructuralFeatures().add(b);
-
 		EPackage e1 = service.replace(p, p2, true);
 		EClass cla = (EClass) e1.getEClassifier(cl.getName());
 		o = e1.getEFactoryInstance().create(cla);
@@ -302,38 +279,19 @@ public class TestEnterpriseDomain extends AbstractTest {
 		assertEquals("test", o.eGet(cla.getEStructuralFeature(a.getName())));
 		o.eSet(cla.getEStructuralFeature(b.getName()), 5);
 		assertEquals(5, o.eGet(cla.getEStructuralFeature(b.getName())));
-		Version v2 = c.getVersion();
+		Version v2 = service.getWorkspace().getContribution(p2).getVersion();
 		assertTrue(v2.compareTo(v1) > 0);
-		c.addSaveCompletionListener(l1);
-		c.save(getProgressMonitor());
-		complete.acquire();
-		c.removeSaveCompletionListener(l1);
-
+		EClass c1 = (EClass) e0.getEClassifier(cl.getName());
+		o = e0.getEFactoryInstance().create(c1);
+		assertEquals(c1.getName(), o.getClass().getSimpleName());
+		o.eSet(c1.getEStructuralFeature(a.getName()), "test");
+		assertEquals("test", o.eGet(c1.getEStructuralFeature(a.getName())));
 		assertNotNull(packageRegistry.getEPackage(p2.getNsURI()));
 
-		c.checkout(v1);
-		p = updateEPackage(p, "0.3");
-		c.getDomainModel().setDynamic(p);
-
-		CompletionListener l3 = new CompletionListenerImpl() {
-
-			@Override
-			public void completed(Contribution result) throws Exception {
-				try {
-					EPackage e2 = result.getDomainModel().getGenerated();
-					assertEquals("http://" + e2.getName() + "/0.3", e2.getNsURI());
-				} catch (Exception e) {
-					fail(e.getLocalizedMessage());
-				} finally {
-					complete.release();
-				}
-			}
-		};
-		c.addSaveCompletionListener(l3);
-		c.save(getProgressMonitor());
-		complete.acquire();
-		c.removeSaveCompletionListener(l3);
-
+		service.getWorkspace().getContribution(p.getName().toLowerCase()).checkout(v1);
+		EPackage p3 = updateEPackage(p, "0.3");
+		EPackage e2 = service.replace(p, p3);
+		assertEquals("http://" + e2.getName() + "/0.3", e2.getNsURI());		
 	}
 
 	@Test

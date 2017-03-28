@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/org.enterprisedomain.classsupplier.feature_0.7.8.qualifier.jar" id="org.enterprisedomain.classsupplier.feature" version="0.7.8.qualifier">
+   <feature url="features/org.enterprisedomain.classmaker.feature_0.7.8.qualifier.jar" id="org.enterprisedomain.classmaker.feature" version="0.7.8.qualifier">
       <category name="enterprisedomain"/>
    </feature>
-   <feature url="features/org.enterprisedomain.classsupplier.osgi.resolverhooks.feature_0.7.8.qualifier.jar" id="org.enterprisedomain.classsupplier.osgi.resolverhooks.feature" version="0.7.8.qualifier">
+   <feature url="features/org.enterprisedomain.classmaker.osgi.resolverhooks.feature_0.7.8.qualifier.jar" id="org.enterprisedomain.classmaker.osgi.resolverhooks.feature" version="0.7.8.qualifier">
       <category name="enterprisedomain"/>
    </feature>
    <category-def name="enterprisedomain" label="enterpriseDomain"/>

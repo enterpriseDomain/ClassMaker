@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.enterprisedomain.classsupplier.ClassPlant;
+import org.enterprisedomain.classmaker.ClassPlant;
 import org.osgi.framework.FrameworkUtil;
 
 public class Invoker implements Runnable {

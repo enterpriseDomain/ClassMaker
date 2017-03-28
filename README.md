@@ -1,9 +1,9 @@
-ClassSupplier
+ClassMaker
 ===========
 
-ClassSupplier is the Eclipse plug-in allowing to create classes programmatically, making them accessible to client bundle.  
+ClassMaker is an Eclipse plug-in allowing to create classes programmatically, supplying them to client bundle.  
 
-It actually generates source code from the provided model, exports binary, installs it into its own runtime, and then loads classes making them available to client code through model's reflective API.  
+ClassMaker actually generates the source code of provided model, compiles and exports binary, then installs it into its own runtime, and then loads classes making them available to client's code through model's reflective API.  
 
 Here is how you can use it:  
 
@@ -20,7 +20,7 @@ Here is how you can use it:
     eClass.getEStructuralFeatures().add(eAttr);
     ePackage.getEClassifiers().add(eClass);
 
-    // Acquire ClassSupplier's OSGi service
+    // Acquire ClassMaker's OSGi service
     BundleContext bundleContext = FrameworkUtil.getBundle(this.getClass())
                                 .getBundleContext();
     ServiceReference<?> serviceReference = bundleContext
@@ -47,5 +47,5 @@ There is more [code](/tests/org.enterprisedomain.tests/src/org/enterprisedomain/
 
 Feedback
 ---------
-If you have anything to suggest, please feel free to file a [bug at GitHub](https://github.com/kyrillzotkin/ClassSupplier/issues). 
+If you have anything to suggest, please feel free to file a [bug at GitHub](https://github.com/kyrillzotkin//ClassMaker/issues). 
 

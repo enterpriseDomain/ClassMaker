@@ -5,7 +5,7 @@ Bundle-SymbolicName: org.enterprisedomain.sample;singleton:=true
 Bundle-Version: 0.0.2.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7,
  JavaSE-1.6
-Require-Bundle: org.enterprisedomain.classsupplier,
+Require-Bundle: org.enterprisedomain.classmaker,
  javax.inject,
  org.eclipse.core.runtime,
  org.eclipse.e4.core.di,

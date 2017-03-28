@@ -34,11 +34,11 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.enterprisedomain.classsupplier.ClassPlant;
-import org.enterprisedomain.classsupplier.CompletionListener;
-import org.enterprisedomain.classsupplier.Contribution;
-import org.enterprisedomain.classsupplier.core.ClassSupplierOSGi;
-import org.enterprisedomain.classsupplier.impl.CompletionListenerImpl;
+import org.enterprisedomain.classmaker.ClassPlant;
+import org.enterprisedomain.classmaker.CompletionListener;
+import org.enterprisedomain.classmaker.Contribution;
+import org.enterprisedomain.classmaker.core.ClassMakerOSGi;
+import org.enterprisedomain.classmaker.impl.CompletionListenerImpl;
 import org.junit.Before;
 
 public abstract class AbstractTest {
@@ -194,9 +194,6 @@ public abstract class AbstractTest {
 					assertEquals(true, o.eGet(a));
 					assertEquals(getClassName(), o.getClass().getSimpleName());
 					assertEquals(CodeGenUtil.safeName(e.getName()), o.getClass().getPackage().getName());
-
-				} catch (Exception e) {
-					fail(e.getLocalizedMessage());
 				} finally {
 					complete.release();
 				}
@@ -252,7 +249,7 @@ public abstract class AbstractTest {
 	}
 
 	protected IProgressMonitor getProgressMonitor() {
-		return ClassSupplierOSGi.getInstance().getProgressMonitor();
+		return ClassMakerOSGi.getInstance().getProgressMonitor();
 	}
 
 }

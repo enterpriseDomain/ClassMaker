@@ -12,8 +12,8 @@
     </parent>
 
     <modules>
-        <module>org.enterprisedomain.classsupplier</module>
-        <module>org.enterprisedomain.classsupplier.osgi.systemextension</module>
-        <module>org.enterprisedomain.classsupplier.edit</module>        
+        <module>org.enterprisedomain.classmaker</module>
+        <module>org.enterprisedomain.classmaker.osgi.systemextension</module>
+        <module>org.enterprisedomain.classmaker.edit</module>        
     </modules>
 </project>

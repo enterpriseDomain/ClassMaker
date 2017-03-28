@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+   <extension
+         id="enterpriseDomainNature"
+         name="EnterpriseDomain Nature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="org.enterprisedomain.classmaker.core.ProjectNature">
+         </run>
+      </runtime>
+   </extension>
+   <extension
+         id="builder"
+         name="EnterpriseDomain"
+         point="org.eclipse.core.resources.builders">
+      <builder>
+         <run
+               class="org.enterprisedomain.classmaker.core.ProjectBuilder">
+         </run></builder>
+   </extension>
+   <extension
+         point="org.eclipse.emf.ecore.invocation_delegate">
+      <factory
+            class="org.enterprisedomain.classmaker.ReflectiveInvocationDelegateFactory"
+            uri="org.enterprisedomain.classmaker.reflection.java">
+      </factory>
+   </extension>
+   <extension
+         point="org.eclipse.emf.ecore.protocol_parser">
+      <parser
+            class="org.enterprisedomain.classmaker.impl.GeneratedProtocolFactory"
+            protocolName="org.enterprisedomain.classmaker.generated">
+      </parser>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated ClassMaker -->
+      <package
+            uri="http://org/enterprisedomain/ClassMaker/0.7.8"
+            class="org.enterprisedomain.classmaker.ClassMakerPackage"
+            genModel="model/ClassMaker.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated ClassMaker -->
+      <parser
+            type="domainmodel"
+            class="org.enterprisedomain.classmaker.util.ClassMakerResourceFactoryImpl"/>
+   </extension>
+</plugin>
