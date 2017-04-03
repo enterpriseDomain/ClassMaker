@@ -48,8 +48,8 @@ import org.enterprisedomain.classmaker.Revision;
 import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.core.ClassMakerOSGi;
-import org.enterprisedomain.classmaker.util.ListUtil;
 import org.enterprisedomain.classmaker.util.GitUtil;
+import org.enterprisedomain.classmaker.util.ListUtil;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -359,12 +359,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	 */
 	public String save(IProgressMonitor monitor) throws Exception {
 		getState().copyModel(getContribution());
-		getState().saveResource();
-		State state = newState();
-		state.copyModel(getState());
-		String commitId = state.initialize();
-		checkout(state.getTimestamp(), commitId);
-		state.load(false);
 		return getState().save(monitor);
 	}
 
@@ -400,11 +394,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 		if (isStateSet()) {
 			State state = getState();
 			state.delete(monitor);
-			try {
-				state.commit(".");
-			} catch (Exception e) {
-				throw new CoreException(ClassMakerOSGi.createErrorStatus(e));
-			}
 		}
 	}
 

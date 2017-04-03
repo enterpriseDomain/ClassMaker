@@ -33,6 +33,7 @@ import org.osgi.framework.Version;
  *   <li>{@link org.enterprisedomain.classmaker.Contribution#getState <em>State</em>}</li>
  *   <li>{@link org.enterprisedomain.classmaker.Contribution#getLatestVersion <em>Latest Version</em>}</li>
  *   <li>{@link org.enterprisedomain.classmaker.Contribution#getModel <em>Model</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Contribution#isCompletionNotified <em>Completion Notified</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getContribution()
@@ -129,6 +130,33 @@ public interface Contribution extends Project, Item {
 	 * @generated
 	 */
 	ResourceAdapter getModel();
+
+	/**
+	 * Returns the value of the '<em><b>Completion Notified</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Completion Notified</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Completion Notified</em>' attribute.
+	 * @see #setCompletionNotified(boolean)
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getContribution_CompletionNotified()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isCompletionNotified();
+
+	/**
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Contribution#isCompletionNotified <em>Completion Notified</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Completion Notified</em>' attribute.
+	 * @see #isCompletionNotified()
+	 * @generated
+	 */
+	void setCompletionNotified(boolean value);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -260,5 +288,13 @@ public interface Contribution extends Project, Item {
 	 * @generated
 	 */
 	void initAdapters(Revision revision);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model exceptions="org.enterprisedomain.classmaker.Exception"
+	 * @generated
+	 */
+	void notifyCompletion() throws Exception;
 
 } // Contribution

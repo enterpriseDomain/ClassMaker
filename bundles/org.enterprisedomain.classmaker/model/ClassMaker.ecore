@@ -63,6 +63,7 @@
     <eOperations name="initAdapters">
       <eParameters name="revision" eType="#//Revision"/>
     </eOperations>
+    <eOperations name="notifyCompletion" eExceptions="#//Exception"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="revision" eType="#//Revision"
         volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="revisions" upperBound="-1"
@@ -73,6 +74,8 @@
         changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="model" eType="#//ResourceAdapter"
         changeable="false" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="completionNotified" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Revision" eSuperTypes="#//Item">
     <eOperations name="create" eExceptions="#//CoreException">
@@ -142,6 +145,8 @@
         eType="#//StageQualifierToCustomizerMapEntry" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="projectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="saving" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Item" abstract="true">
     <eOperations name="load" eExceptions="#//CoreException">
@@ -191,6 +196,19 @@
       <eParameters name="ePackage" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
     </eOperations>
     <eOperations name="getContribution" eType="#//Contribution">
+      <eParameters name="ePackage" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="searchOptimistic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="getContribution" eType="#//Contribution">
+      <eParameters name="ePackage" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="filter" eType="#//Stage"/>
+    </eOperations>
+    <eOperations name="getContribution" eType="#//Contribution">
+      <eParameters name="ePackage" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="filter" eType="#//Stage"/>
+      <eParameters name="searchOptimistic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="getContribution" eType="#//Contribution">
       <eParameters name="projectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eOperations name="createProject" eType="#//Project" eExceptions="#//CoreException">
@@ -198,11 +216,7 @@
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
     <eOperations name="getProject" eType="#//Project">
-      <eParameters name="projectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eOperations>
-    <eOperations name="getContribution" eType="#//Contribution">
-      <eParameters name="ePackage" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="searchOptimistic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eOperations name="registerProject">
       <eParameters name="project" eType="#//Project"/>
@@ -354,6 +368,26 @@
       <eParameters name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
       <eParameters name="changeVersion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
+    <eOperations name="replace" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
+        eExceptions="#//CoreException">
+      <eParameters name="queryModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="version" eType="#//OSGiVersion"/>
+    </eOperations>
+    <eOperations name="replace" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
+        eExceptions="#//CoreException">
+      <eParameters name="queryModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="version" eType="#//OSGiVersion"/>
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
+    <eOperations name="delete" eExceptions="#//CoreException">
+      <eParameters name="packageName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
+    <eOperations name="computeProjectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eParameters name="packageName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="workspace" eType="#//Workspace"/>
   </eClassifiers>

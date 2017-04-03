@@ -50,16 +50,6 @@ public abstract class AbstractExporter extends ContainerJob implements Exporter 
 	}
 
 	@Override
-	public Version getVersion() {
-		return version;
-	}
-
-	@Override
-	public void setVersion(Version version) {
-		this.version = version;
-	}
-
-	@Override
 	public Stage getResultStage() {
 		return Stage.EXPORTED;
 	}

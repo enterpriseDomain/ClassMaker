@@ -31,18 +31,19 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.core.runtime.preferences.IPreferencesService;
-import org.eclipse.jgit.api.RemoveNoteCommand;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.pde.internal.core.ICoreConstants;
 import org.enterprisedomain.classmaker.Messages;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.core.ClassMakerOSGi;
 
+@SuppressWarnings("restriction")
 public class ResourceUtils {
+
+	public static List<String> PROJECT_DELETE_MASK;
 
 	private static final String PLUGIN_PROPS_FILENAME_DESCRIPTOR = "plugin.properties";
 
@@ -55,6 +56,17 @@ public class ResourceUtils {
 			ClassMakerOSGi.MODEL_RESOURCE_EXT_PREF_KEY, Messages.DefaultResourceExt, null);
 
 	private static final String targetFolderName = "target"; //$NON-NLS-1$
+
+	static {
+		PROJECT_DELETE_MASK = new ArrayList<String>();
+		PROJECT_DELETE_MASK.add(Constants.DOT_GIT);
+		PROJECT_DELETE_MASK.add(ICoreConstants.PLUGIN_FILENAME_DESCRIPTOR);
+		PROJECT_DELETE_MASK.add(ICoreConstants.MANIFEST_FOLDER_NAME);
+		PROJECT_DELETE_MASK.add(ICoreConstants.MANIFEST_FILENAME);
+		PROJECT_DELETE_MASK.add(ICoreConstants.BUILD_FILENAME_DESCRIPTOR);
+		PROJECT_DELETE_MASK.add(PLUGIN_PROPS_FILENAME_DESCRIPTOR);
+		PROJECT_DELETE_MASK.add(IProjectDescription.DESCRIPTION_FILE_NAME);
+	}
 
 	public static IPath getModelResourcePath(IProject project, String modelName) {
 		return project.getFullPath().append(getModelFolderName()).append(getFileName(modelName));
@@ -103,22 +115,28 @@ public class ResourceUtils {
 		return ResourcesPlugin.getWorkspace().getRoot().getProject(projectName).exists();
 	}
 
-	public static String[] addProjectNature(String[] natureIds, String natureId) {
-		String[] oldNatures = natureIds;
-		String[] newNatures = new String[oldNatures.length + 1];
-		System.arraycopy(oldNatures, 0, newNatures, 0, oldNatures.length);
-		newNatures[oldNatures.length] = natureId;
+	public static String[] addElement(String[] elements, String element) {
+		String[] oldElements = elements;
+		String[] newElements = new String[oldElements.length + 1];
+		System.arraycopy(oldElements, 0, newElements, 0, oldElements.length);
+		newElements[oldElements.length] = element;
+		return newElements;
+	}
+
+	public static String[] removeElement(String[] elements, String element) {
+		String[] oldElements = elements;
+		if (oldElements.length == 0)
+			return oldElements;
+		String[] newNatures = new String[oldElements.length - 1];
+		int index = Arrays.binarySearch(oldElements, element);
+		System.arraycopy(oldElements, index + 1, newNatures, index, oldElements.length - 1 - index);
 		return newNatures;
 	}
 
-	public static String[] removeProjectNature(String[] natureIds, String natureId) {
-		String[] oldNatures = natureIds;
-		if (oldNatures.length == 0)
-			return oldNatures;
-		String[] newNatures = new String[oldNatures.length - 1];
-		int index = Arrays.binarySearch(oldNatures, natureId);
-		System.arraycopy(oldNatures, index + 1, newNatures, index, oldNatures.length - 1 - index);
-		return newNatures;
+	public static void removeProjectNature(IProject project, String natureId) throws CoreException {
+		IProjectDescription description = project.getDescription();
+		description.setNatureIds(removeElement(description.getNatureIds(), natureId));
+		project.setDescription(description, ClassMakerOSGi.getInstance().getProgressMonitor());
 	}
 
 	@SuppressWarnings("deprecation")
@@ -133,7 +151,7 @@ public class ResourceUtils {
 			project.open(pm);
 			if (nature != null && !nature.isEmpty()) {
 				IProjectDescription description = project.getDescription();
-				description.setNatureIds(ResourceUtils.addProjectNature(description.getNatureIds(), nature));
+				description.setNatureIds(ResourceUtils.addElement(description.getNatureIds(), nature));
 				project.setDescription(description, pm);
 			}
 		} finally {
@@ -149,65 +167,37 @@ public class ResourceUtils {
 		workspace.setDescription(d);
 	}
 
+	public static void cleanupDir(IProject project) throws CoreException {
+		cleanupDir(project, "");
+	}
+
 	public static void cleanupDir(IProject project, String folderPath) throws CoreException {
 		cleanupDir(project, folderPath, new String[] {});
 	}
 
-	@SuppressWarnings("restriction")
 	public static void cleanupDir(IProject project, String folderPath, String[] excluding) throws CoreException {
 		IPath path = null;
-		List<String> mask = new ArrayList<String>(Arrays.asList(excluding));
-		mask.add(Constants.DOT_GIT);
-		mask.add(ICoreConstants.PLUGIN_FILENAME_DESCRIPTOR);
-		mask.add(ICoreConstants.BUILD_FILENAME_DESCRIPTOR);
-		mask.add(PLUGIN_PROPS_FILENAME_DESCRIPTOR);
-		mask.add(IProjectDescription.DESCRIPTION_FILE_NAME);
 		if (folderPath.isEmpty()) {
 			path = project.getFullPath();
-		} else
-			path = project.getFullPath().append(folderPath);
+			;
+		} else {
+			path = project.getFolder(folderPath).getFullPath();
+		}
 		path = project.getWorkspace().getRoot().getLocation().append(path);
 		File folder = path.toFile();
 		if (!folder.exists())
 			return;
 		for (String fileName : folder.list())
-			if (!mask.contains(fileName)) {
-				delete(new File(folder.toString() + File.separator + fileName));
-			}
+			delete(new File(folder.toString() + File.separator + fileName), excluding);
 	}
 
-	@SuppressWarnings("restriction")
-	public static void deleteProject(IProject project, String[] excluding) throws CoreException {
-		IPath path = null;
-		List<String> mask = new ArrayList<String>(Arrays.asList(excluding));
-		mask.add(Constants.DOT_GIT);
-		mask.add(ICoreConstants.PLUGIN_FILENAME_DESCRIPTOR);
-		mask.add(IProjectDescription.DESCRIPTION_FILE_NAME);
-		mask.add(ICoreConstants.BUILD_FILENAME_DESCRIPTOR);
-		mask.add(ICoreConstants.MANIFEST_FOLDER_NAME);
-		mask.add(ICoreConstants.MANIFEST_FILENAME);
-		path = project.getFullPath();
-		path = project.getWorkspace().getRoot().getLocation().append(path);
-		File folder = path.toFile();
-		if (!folder.exists())
-			return;
-		for (String fileName : folder.list())
-			if (!mask.contains(fileName)) {
-				delete(new File(folder.toString() + folder.separator + fileName));
-			}
-	}
-
-	public static void removeProjectNature(IProject project, String natureId) throws CoreException {
-		IProjectDescription description = project.getDescription();
-		description.setNatureIds(removeProjectNature(description.getNatureIds(), natureId));
-		project.setDescription(description, ClassMakerOSGi.getInstance().getProgressMonitor());
-	}
-
-	public static void delete(File fileOrDir) {
+	public static void delete(File fileOrDir, String[] excluding) {
+		List<String> excludingList = Arrays.asList(excluding);
 		if (fileOrDir.isDirectory())
 			for (File file : fileOrDir.listFiles())
-				delete(file);
-		fileOrDir.delete();
+				delete(file, excluding);
+		if (!excludingList.contains(fileOrDir.getName()) && !PROJECT_DELETE_MASK.contains(fileOrDir.getName()))
+			fileOrDir.delete();
 	}
 
 	public static void writeFile(IPath location, CharSequence contents) throws CoreException {

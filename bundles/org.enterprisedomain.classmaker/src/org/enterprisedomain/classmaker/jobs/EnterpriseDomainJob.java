@@ -34,7 +34,6 @@ import org.eclipse.core.runtime.jobs.ProgressProvider;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Stage;
-import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
 import org.enterprisedomain.classmaker.core.ClassMakerOSGi;
@@ -43,8 +42,6 @@ import org.enterprisedomain.classmaker.core.ProjectBuilder;
 public abstract class EnterpriseDomainJob extends WorkspaceJob {
 
 	private EnterpriseDomainJob nextJob;
-
-	public static StageQualifier STAGE;
 
 	private long runId;
 

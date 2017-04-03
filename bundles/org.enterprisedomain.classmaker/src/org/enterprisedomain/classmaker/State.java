@@ -40,6 +40,7 @@ import org.eclipse.emf.ecore.resource.Resource;
  *   <li>{@link org.enterprisedomain.classmaker.State#getCommitIds <em>Commit Ids</em>}</li>
  *   <li>{@link org.enterprisedomain.classmaker.State#getStateCustomizers <em>State Customizers</em>}</li>
  *   <li>{@link org.enterprisedomain.classmaker.State#getProjectName <em>Project Name</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.State#isSaving <em>Saving</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getState()
@@ -226,6 +227,33 @@ public interface State extends Item {
 	 * @generated
 	 */
 	void setProjectName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Saving</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Saving</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Saving</em>' attribute.
+	 * @see #setSaving(boolean)
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getState_Saving()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isSaving();
+
+	/**
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.State#isSaving <em>Saving</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Saving</em>' attribute.
+	 * @see #isSaving()
+	 * @generated
+	 */
+	void setSaving(boolean value);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

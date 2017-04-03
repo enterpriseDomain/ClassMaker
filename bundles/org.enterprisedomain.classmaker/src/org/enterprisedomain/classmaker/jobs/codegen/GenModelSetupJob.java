@@ -31,20 +31,10 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.enterprisedomain.classmaker.ClassMakerFactory;
 import org.enterprisedomain.classmaker.Messages;
-import org.enterprisedomain.classmaker.Stage;
-import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.core.ClassMakerOSGi;
 
 public class GenModelSetupJob extends EcoreGenerator.GeneratorJob {
-
-	static {
-		StageQualifier genModelSetupQualifier = ClassMakerFactory.eINSTANCE.createStageQualifier();
-		genModelSetupQualifier.setStage(Stage.GENERATED);
-		genModelSetupQualifier.setStep("genmodel.setup");
-		STAGE = genModelSetupQualifier;
-	}
 
 	/**
 	 * 

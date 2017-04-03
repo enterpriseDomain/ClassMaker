@@ -24,13 +24,11 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.core.runtime.jobs.Job;
@@ -69,7 +67,6 @@ import org.enterprisedomain.classmaker.Workspace;
 import org.enterprisedomain.classmaker.core.ClassMakerOSGi;
 import org.enterprisedomain.classmaker.util.ClassMakerSwitch;
 import org.enterprisedomain.classmaker.util.ModelUtil;
-import org.enterprisedomain.classmaker.util.ResourceUtils;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.Version;
 
@@ -80,16 +77,19 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl#getProjects <em>Projects</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl#getResourceSet <em>Resource Set</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl#getProjects
+ * <em>Projects</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl#getResourceSet
+ * <em>Resource Set</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	/**
-	 * The cached value of the '{@link #getProjects() <em>Projects</em>}' containment reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getProjects() <em>Projects</em>}'
+	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getProjects()
 	 * @generated
 	 * @ordered
@@ -107,8 +107,9 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	protected static final ResourceSet RESOURCE_SET_EDEFAULT = new ResourceSetImpl();
 
 	/**
-	 * The cached value of the '{@link #getResourceSet() <em>Resource Set</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getResourceSet() <em>Resource Set</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getResourceSet()
 	 * @generated
 	 * @ordered
@@ -117,6 +118,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected WorkspaceImpl() {
@@ -125,6 +127,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -134,6 +137,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EList<Project> getProjects() {
@@ -154,6 +158,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ResourceSet getResourceSet() {
@@ -338,9 +343,43 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * @generated NOT
 	 */
 	public Contribution getContribution(EPackage ePackage, boolean searchOptimistic) {
-		for (Contribution c : getContributions())
-			if (ModelUtil.ePackagesAreEqual(ePackage, c.getDomainModel().getDynamic(), !searchOptimistic))
-				return c;
+		return getContribution(ePackage, Stage.MODELED, searchOptimistic);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Contribution getContribution(EPackage ePackage, Stage filter) {
+		return getContribution(ePackage, filter, true);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Contribution getContribution(EPackage ePackage, Stage filter, boolean searchOptimistic) {
+		switch (filter.getValue()) {
+		case Stage.DEFINED_VALUE:
+		case Stage.MODELED_VALUE:
+		case Stage.GENERATED_VALUE:
+		case Stage.EXPORTED_VALUE:
+		case Stage.INSTALLED_VALUE:
+			for (Contribution c : getContributions())
+				if (ModelUtil.ePackagesAreEqual(ePackage, c.getDomainModel().getDynamic(), !searchOptimistic))
+					return c;
+			break;
+		case Stage.LOADED_VALUE:
+			for (Contribution c : getContributions()) {
+				if (ModelUtil.ePackagesAreEqual(ePackage, c.getDomainModel().getDynamic(), false))
+					while (c.getState().isSaving() && !c.getPhase().equals(Stage.LOADED))
+						Thread.yield();
+				if (ModelUtil.ePackagesAreEqual(ePackage, c.getDomainModel().getGenerated(), !searchOptimistic))
+					return c;
+			}
+		}
 		return null;
 	}
 
@@ -376,6 +415,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
 		Contribution contribution = null;
 		try {
+			if (!project.exists())
+				return contribution;
 			if (!project.isOpen())
 				project.open(monitor);
 			if (project.hasNature(ClassMakerOSGi.NATURE_ID)) {
@@ -410,7 +451,11 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * 
 	 * @generated NOT
 	 */
-	public Project getProject(String projectName) {
+	public Project getProject(String name) {
+		String projectName = name;
+		Contribution contribution = getContribution(ClassMakerOSGi.getClassMaker().computeProjectName(projectName));
+		if (contribution != null)
+			projectName = contribution.getProjectName();
 		for (Project project : getProjects()) {
 			if (project.getProjectName() != null && project.getProjectName().equals(projectName))
 				return project;
@@ -478,6 +523,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -492,6 +538,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -505,6 +552,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -520,6 +568,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -536,6 +585,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -550,6 +600,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -565,6 +616,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

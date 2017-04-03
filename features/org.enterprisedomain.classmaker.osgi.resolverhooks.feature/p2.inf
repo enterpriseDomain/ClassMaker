@@ -1,4 +1,11 @@
+instructions.install = \
+addJvmArg(jvmArg:-Dosgi.framework.extensions=org.enterprisedomain.classmaker.osgi.systemextension);
+
+instructions.install.import= \
+org.eclipse.equinox.p2.touchpoint.eclipse.addJvmArg;
+
 instructions.configure = \
 setProgramProperty(propName:osgi.framework.extensions, propValue:org.enterprisedomain.classmaker.osgi.systemextension);
+
 instructions.unconfigure = \
 setProgramProperty(propName:osgi.framework.extensions, propValue:);
