@@ -17,9 +17,9 @@ package org.enterprisedomain.classmaker;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,6 +40,19 @@ import org.eclipse.emf.ecore.EPackage;
 public interface ClassPlant extends EObject {
 
 	public static final String INVOCATION_DELEGATE_URI = "org.enterprisedomain.classmaker.reflection.java"; //$NON-NLS-1$
+
+	public abstract class Stages {
+
+		public static StageQualifier GENMODEL_SETUP = createStageQualifier(Stage.GENERATED, "genmodel.setup");
+
+		private static StageQualifier createStageQualifier(Stage phase, String step) {
+			StageQualifier stageQualifier = ClassMakerFactory.eINSTANCE.createStageQualifier();
+			stageQualifier.setStage(phase);
+			stageQualifier.setStep(step);
+			return stageQualifier;
+		}
+
+	}
 
 	/**
 	 * Returns the value of the '<em><b>Workspace</b></em>' reference.
@@ -119,5 +132,38 @@ public interface ClassPlant extends EObject {
 	 */
 	EPackage replace(EPackage queryModel, EPackage dynamicModel, boolean changeVersion, IProgressMonitor monitor)
 			throws CoreException;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
+	 * @generated
+	 */
+	EPackage replace(EPackage queryModel, EPackage dynamicModel, Version version) throws CoreException;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" versionDataType="org.enterprisedomain.classmaker.OSGiVersion" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * @generated
+	 */
+	EPackage replace(EPackage queryModel, EPackage dynamicModel, Version version, IProgressMonitor monitor)
+			throws CoreException;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * @generated
+	 */
+	void delete(String packageName, IProgressMonitor monitor) throws CoreException;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	String computeProjectName(String packageName);
 
 } // ClassPlant

@@ -7,4 +7,11 @@
       <category name="enterprisedomain"/>
    </feature>
    <category-def name="enterprisedomain" label="enterpriseDomain"/>
+   <repository-reference location="http://download.eclipse.org/eclipse/updates/4.6" enabled="true" />
+   <repository-reference location="http://download.eclipse.org/egit/updates" enabled="true" />
+   <repository-reference location="http://download.eclipse.org/releases/neon" enabled="true" />
+   <repository-reference location="http://download.eclipse.org/rt/ecf/3.13.1/site.p2" enabled="true" />
+   <repository-reference location="http://download.eclipse.org/tools/orbit/downloads/drops/R20160221192158/repository/" enabled="true" />
+   <repository-reference location="http://download.eclipse.org/edapt/releases/12x" enabled="true" />
+   <repository-reference location="http://download.eclipse.org/emfstore/releases_18" enabled="true" />
 </site>

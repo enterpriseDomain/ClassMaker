@@ -335,13 +335,22 @@ public interface ClassMakerPackage extends EPackage {
 	int CONTRIBUTION__MODEL = PROJECT_FEATURE_COUNT + 13;
 
 	/**
+	 * The feature id for the '<em><b>Completion Notified</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTRIBUTION__COMPLETION_NOTIFIED = PROJECT_FEATURE_COUNT + 14;
+
+	/**
 	 * The number of structural features of the '<em>Contribution</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION_FEATURE_COUNT = PROJECT_FEATURE_COUNT + 14;
+	int CONTRIBUTION_FEATURE_COUNT = PROJECT_FEATURE_COUNT + 15;
 
 	/**
 	 * The meta object id for the '{@link org.enterprisedomain.classmaker.impl.ItemImpl <em>Item</em>}' class.
@@ -743,13 +752,22 @@ public interface ClassMakerPackage extends EPackage {
 	int STATE__PROJECT_NAME = ITEM_FEATURE_COUNT + 7;
 
 	/**
+	 * The feature id for the '<em><b>Saving</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__SAVING = ITEM_FEATURE_COUNT + 8;
+
+	/**
 	 * The number of structural features of the '<em>State</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE_FEATURE_COUNT = ITEM_FEATURE_COUNT + 8;
+	int STATE_FEATURE_COUNT = ITEM_FEATURE_COUNT + 9;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.emf.common.notify.Adapter <em>Adapter</em>}' class.
@@ -1326,6 +1344,17 @@ public interface ClassMakerPackage extends EPackage {
 	EReference getContribution_Model();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.enterprisedomain.classmaker.Contribution#isCompletionNotified <em>Completion Notified</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Completion Notified</em>'.
+	 * @see org.enterprisedomain.classmaker.Contribution#isCompletionNotified()
+	 * @see #getContribution()
+	 * @generated
+	 */
+	EAttribute getContribution_CompletionNotified();
+
+	/**
 	 * Returns the meta object for class '{@link org.enterprisedomain.classmaker.Revision <em>Revision</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1476,6 +1505,17 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getState_ProjectName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.enterprisedomain.classmaker.State#isSaving <em>Saving</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Saving</em>'.
+	 * @see org.enterprisedomain.classmaker.State#isSaving()
+	 * @see #getState()
+	 * @generated
+	 */
+	EAttribute getState_Saving();
 
 	/**
 	 * Returns the meta object for class '{@link org.enterprisedomain.classmaker.Item <em>Item</em>}'.
@@ -2159,6 +2199,14 @@ public interface ClassMakerPackage extends EPackage {
 		EReference CONTRIBUTION__MODEL = eINSTANCE.getContribution_Model();
 
 		/**
+		 * The meta object literal for the '<em><b>Completion Notified</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONTRIBUTION__COMPLETION_NOTIFIED = eINSTANCE.getContribution_CompletionNotified();
+
+		/**
 		 * The meta object literal for the '{@link org.enterprisedomain.classmaker.impl.RevisionImpl <em>Revision</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2273,6 +2321,14 @@ public interface ClassMakerPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute STATE__PROJECT_NAME = eINSTANCE.getState_ProjectName();
+
+		/**
+		 * The meta object literal for the '<em><b>Saving</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATE__SAVING = eINSTANCE.getState_Saving();
 
 		/**
 		 * The meta object literal for the '{@link org.enterprisedomain.classmaker.impl.ItemImpl <em>Item</em>}' class.

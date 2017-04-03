@@ -37,6 +37,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.osgi.util.NLS;
+import org.enterprisedomain.classmaker.ClassPlant;
 import org.enterprisedomain.classmaker.Messages;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.StageQualifier;
@@ -243,7 +244,7 @@ public class EcoreGenerator extends EnterpriseDomainJob
 			genModel.setLanguage(getContributionState().getLanguage());
 			genModel.setModelPluginID(EcoreGenerator.this.getProject().getName());
 			for (StageQualifier filter : getContributionState().getCustomizers().keySet())
-				if (filter.equals(GenModelSetupJob.STAGE))
+				if (filter.equals(ClassPlant.Stages.GENMODEL_SETUP))
 					getContributionState().getCustomizers().get(filter)
 							.customize(ECollections.asEList(projectPath, genModel, ePackages));
 		}

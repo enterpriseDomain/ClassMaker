@@ -20,7 +20,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 import org.eclipse.core.runtime.CoreException;
@@ -34,11 +33,9 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.enterprisedomain.classmaker.ClassPlant;
-import org.enterprisedomain.classmaker.CompletionListener;
-import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.core.ClassMakerOSGi;
-import org.enterprisedomain.classmaker.impl.CompletionListenerImpl;
 import org.junit.Before;
 
 public abstract class AbstractTest {
@@ -77,6 +74,16 @@ public abstract class AbstractTest {
 		setAttributeType(EcorePackage.Literals.EJAVA_OBJECT);
 	}
 
+	public void cleanup() {
+		try {
+			service.delete(getPackageName(), getProgressMonitor());
+			service.getWorkspace().getProject(getPackageName()).save(getProgressMonitor());
+		} catch (CoreException e) {
+			e.printStackTrace();
+			fail(e.getLocalizedMessage());
+		}
+	}
+
 	protected EPackage createEPackage(String name, String version) {
 		setPackageName(name);
 		EcoreFactory ecoreFactory = EcoreFactory.eINSTANCE;
@@ -88,8 +95,9 @@ public abstract class AbstractTest {
 	}
 
 	protected EPackage updateEPackage(EPackage ePackage, String version) {
-		ePackage.setNsURI("http://" + getPackageName() + "/" + version);
-		return ePackage;
+		EPackage result = EcoreUtil.copy(ePackage);
+		result.setNsURI("http://" + getPackageName() + "/" + version);
+		return result;
 	}
 
 	protected EClass createEClass(String name) {
@@ -107,24 +115,13 @@ public abstract class AbstractTest {
 		return eAttribute;
 	}
 
-	protected Contribution createAndTestEPackage() throws CoreException, InterruptedException {
+	protected EPackage createAndTestEPackage() throws CoreException, InterruptedException {
 		EPackage p = createEPackage(getPackageName(), "0");
 		EClass c = createEClass(getClassName());
 		c.getEStructuralFeatures().add(createEAttribute("a", EcorePackage.Literals.EBOOLEAN));
 		c.getEStructuralFeatures().add(createEAttribute(getAttributeName(), getAttributeType()));
 		p.getEClassifiers().add(c);
-		Contribution n = createAndTest(p);
-		return n;
-	}
-
-	protected Contribution createAndTest(EPackage ePackage) throws CoreException, InterruptedException {
-		Contribution n = null;
-		try {
-			n = service.getWorkspace().createContribution(ePackage, getProgressMonitor());
-		} catch (CoreException e) {
-			e.printStackTrace();
-		}
-		return saveAndTest(n);
+		return saveAndTest(p, "a", true);
 	}
 
 	protected EPackage createAndTestAPI() throws CoreException, InterruptedException {
@@ -177,38 +174,23 @@ public abstract class AbstractTest {
 		return result;
 	}
 
-	protected Contribution saveAndTest(Contribution contribution) throws CoreException, InterruptedException {
-		final Semaphore complete = new Semaphore(0);
-		CompletionListener l = new CompletionListenerImpl() {
+	protected EPackage saveAndTest(EPackage ePackage, String attributeName, Object attributeValue)
+			throws CoreException, InterruptedException {
+		EPackage e = service.produce(ePackage);
+		return test(e, attributeName, attributeValue);
+	}
 
-			@Override
-			public void completed(Contribution result) {
-				try {
-					EPackage e = result.getDomainModel().getGenerated();
-					if (e == null)
-						return;
-					EClass s = (EClass) e.getEClassifier(getClassName());
-					EStructuralFeature a = s.getEStructuralFeatures().get(0);
-					EObject o = e.getEFactoryInstance().create(s);
-					o.eSet(a, true);
-					assertEquals(true, o.eGet(a));
-					assertEquals(getClassName(), o.getClass().getSimpleName());
-					assertEquals(CodeGenUtil.safeName(e.getName()), o.getClass().getPackage().getName());
-				} finally {
-					complete.release();
-				}
-			}
-
-		};
-		contribution.addSaveCompletionListener(l);
-		contribution.save(getProgressMonitor());
-		try {
-			complete.acquire();
-		} catch (InterruptedException e) {
-			throw e;
-		}
-		contribution.removeSaveCompletionListener(l);
-		return contribution;
+	protected EPackage test(EPackage ePackage, String attributeName, Object attributeValue) {
+		if (ePackage == null)
+			return ePackage;
+		EClass s = (EClass) ePackage.getEClassifier(getClassName());
+		EObject o = ePackage.getEFactoryInstance().create(s);
+		assertEquals(getClassName(), o.getClass().getSimpleName());
+		EStructuralFeature a = s.getEStructuralFeature(attributeName);
+		o.eSet(a, attributeValue);
+		assertEquals(attributeValue, o.eGet(a));
+		assertEquals(CodeGenUtil.safeName(ePackage.getName()), o.getClass().getPackage().getName());
+		return ePackage;
 	}
 
 	protected void assertObjectClass(String className, EPackage resultPackage) {

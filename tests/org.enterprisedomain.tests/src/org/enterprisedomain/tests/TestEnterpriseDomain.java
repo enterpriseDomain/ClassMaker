@@ -1,5 +1,5 @@
 /**
- * Copyright 2012-2016 Kyrill Zotkin
+ * Copyright 2012-2017 Kyrill Zotkin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,10 @@
 package org.enterprisedomain.tests;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-import static org.junit.Assume.assumeNotNull;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -50,11 +48,9 @@ import org.enterprisedomain.classmaker.ClassPlant;
 import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Customizer;
-import org.enterprisedomain.classmaker.ModelPair;
+import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.impl.CompletionListenerImpl;
 import org.enterprisedomain.classmaker.impl.CustomizerImpl;
-import org.enterprisedomain.classmaker.jobs.codegen.GenModelSetupJob;
-import org.enterprisedomain.classmaker.util.ModelUtil;
 import org.junit.Test;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
@@ -67,7 +63,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 	private EPackage p;
 
 	@Test
-	public void creationOfTheClass() throws Exception {
+	public void classCreation() throws Exception {
 		EcoreFactory ecoreFactory = EcoreFactory.eINSTANCE;
 		final EPackage readerEPackage = createEPackage("reader", "1.0");
 		final EClass eClass = ecoreFactory.createEClass();
@@ -104,52 +100,29 @@ public class TestEnterpriseDomain extends AbstractTest {
 
 		assertNotNull(service);
 
-		final Contribution contribution = service.getWorkspace().createContribution(readerEPackage,
-				getProgressMonitor());
-		final Semaphore complete = new Semaphore(0);
-		CompletionListener resultListener = new CompletionListenerImpl() {
+		EPackage ePackage = service.produce(readerEPackage, getProgressMonitor());
+		assertNotNull(ePackage);
+		EClass theClass = (EClass) ePackage.getEClassifier(eClass.getName());
+		EObject theObject = ePackage.getEFactoryInstance().create(theClass);
 
-			@Override
-			public void completed(Contribution result) throws Exception {
-				try {
-					ModelPair ePackages = result.getDomainModel();
-					assumeNotNull(ePackages);
-					assertFalse(ePackages.getGenerated() == null);
-					assertTrue(ModelUtil.ePackagesAreEqual(contribution.getDomainModel().getGenerated(),
-							ePackages.getGenerated(), true));
-					EPackage ePackage = ePackages.getGenerated();
-					EClass theClass = (EClass) ePackage.getEClassifier(eClass.getName());
-					EObject theObject = ePackage.getEFactoryInstance().create(theClass);
+		int pages = 22;
+		EAttribute objectPageAttr = (EAttribute) theClass.getEStructuralFeature(pagesAttr.getName());
+		theObject.eSet(objectPageAttr, pages);
+		assertEquals(pages, theObject.eGet(objectPageAttr));
 
-					int pages = 22;
-					EAttribute objectPageAttr = (EAttribute) theClass.getEStructuralFeature(pagesAttr.getName());
-					theObject.eSet(objectPageAttr, pages);
-					assertEquals(pages, theObject.eGet(objectPageAttr));
-
-					int readPagesCount = 11;
-					EList<?> arguments = ECollections.asEList(readPagesCount);
-					for (EOperation operation : theClass.getEAllOperations())
-						if (operation.getName().equals(op.getName())) {
-							EcoreUtil.getInvocationDelegateFactory(operation).createInvocationDelegate(operation)
-									.dynamicInvoke((InternalEObject) theObject, arguments);
-						}
-
-					EStructuralFeature state = theClass.getEStructuralFeature(attr.getName());
-					assertEquals(readPagesCount, theObject.eGet(state));
-
-					assertEquals(eClass.getName(), theObject.getClass().getSimpleName());
-				} catch (Exception e) {
-					fail(e.getLocalizedMessage());
-				} finally {
-					complete.release();
-				}
+		int readPagesCount = 11;
+		EList<?> arguments = ECollections.asEList(readPagesCount);
+		for (EOperation operation : theClass.getEAllOperations())
+			if (operation.getName().equals(op.getName())) {
+				EcoreUtil.getInvocationDelegateFactory(operation).createInvocationDelegate(operation)
+						.dynamicInvoke((InternalEObject) theObject, arguments);
 			}
 
-		};
-		contribution.addSaveCompletionListener(resultListener);
-		contribution.save(getProgressMonitor());
-		complete.acquire();
-		contribution.removeSaveCompletionListener(resultListener);
+		EStructuralFeature state = theClass.getEStructuralFeature(attr.getName());
+		assertEquals(readPagesCount, theObject.eGet(state));
+
+		assertEquals(eClass.getName(), theObject.getClass().getSimpleName());
+		cleanup();
 	}
 
 	@Test
@@ -168,29 +141,11 @@ public class TestEnterpriseDomain extends AbstractTest {
 		eClass.setName(className1);
 		ePackage.getEClassifiers().add(eClass);
 
-		final Contribution contribution = tested.getWorkspace().createContribution(ePackage, getProgressMonitor());
-		final Semaphore complete = new Semaphore(0);
-		CompletionListener resultListener = new CompletionListenerImpl() {
-
-			@Override
-			public void completed(Contribution result) throws Exception {
-				try {
-					EPackage resultEPackage = result.getDomainModel().getGenerated();
-					assertNotNull(resultEPackage);
-					assertObjectClass(className0, resultEPackage);
-					assertObjectClass(className1, resultEPackage);
-				} catch (Exception e) {
-					fail(e.getLocalizedMessage());
-				} finally {
-					complete.release();
-				}
-			}
-		};
-		contribution.addSaveCompletionListener(resultListener);
-		contribution.save(getProgressMonitor());
-		complete.acquire();
-		contribution.removeSaveCompletionListener(resultListener);
-
+		ePackage = tested.produce(ePackage, getProgressMonitor());
+		assertNotNull(ePackage);
+		assertObjectClass(className0, ePackage);
+		assertObjectClass(className1, ePackage);
+		cleanup();
 	}
 
 	@Test
@@ -240,13 +195,15 @@ public class TestEnterpriseDomain extends AbstractTest {
 						.createInvocationDelegate(operation).dynamicInvoke((InternalEObject) object, arguments);
 			}
 		assertEquals(object.eClass(), nativeObject.eClass());
+		cleanup();
 	}
 
 	@Test
 	public void update() throws OperationCanceledException, InterruptedException, CoreException, ExecutionException {
+		setPackageName("updateable");
 		setClassName("Same");
 		EcoreFactory f = EcoreFactory.eINSTANCE;
-		p = createEPackage("updateable", "0.1");
+		p = createEPackage(getPackageName(), "0.1");
 		final EClass cl = f.createEClass();
 		cl.setName(getClassName());
 		setAttributeName("a");
@@ -265,7 +222,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		final Registry packageRegistry = service.getWorkspace().getResourceSet().getPackageRegistry();
 		assertNotNull(packageRegistry.getEPackage(p.getNsURI()));
 
-		EPackage p2 = updateEPackage(EcoreUtil.copy(p), "0.2");
+		EPackage p2 = updateEPackage(p, "0.2");
 		final EAttribute b = f.createEAttribute();
 		setAttributeName("b");
 		b.setName(getAttributeName());
@@ -288,10 +245,11 @@ public class TestEnterpriseDomain extends AbstractTest {
 		assertEquals("test", o.eGet(c1.getEStructuralFeature(a.getName())));
 		assertNotNull(packageRegistry.getEPackage(p2.getNsURI()));
 
-		service.getWorkspace().getContribution(p.getName().toLowerCase()).checkout(v1);
+		service.getWorkspace().getContribution(service.computeProjectName(p.getName())).checkout(v1);
 		EPackage p3 = updateEPackage(p, "0.3");
 		EPackage e2 = service.replace(p, p3);
-		assertEquals("http://" + e2.getName() + "/0.3", e2.getNsURI());		
+		assertEquals("http://" + e2.getName() + "/0.3", e2.getNsURI());
+		cleanup();
 	}
 
 	@Test
@@ -300,44 +258,40 @@ public class TestEnterpriseDomain extends AbstractTest {
 		setClassName("C");
 		setAttributeName("x");
 		setAttributeType(EcorePackage.Literals.EJAVA_OBJECT);
-		Contribution contribution = createAndTestEPackage();
-		Version v0 = contribution.getVersion();
-		EPackage p = EcoreUtil.copy(contribution.getDomainModel().getDynamic());
+		EPackage p = createAndTestEPackage();
+		Contribution c = service.getWorkspace().getContribution(p, Stage.LOADED);
+		p = c.getDomainModel().getDynamic();
+		Version v = c.getVersion();
 
-		Version newVersion = contribution.newVersion(v0, false, false, true);
-		contribution.newRevision(newVersion);
-		contribution.checkout(newVersion);
-		EClass clazz = (EClass) p.getEClassifier(getClassName());
+		EPackage p2 = updateEPackage(p, "1");
+		EClass clazz = (EClass) p2.getEClassifier(getClassName());
 		clazz.getEStructuralFeatures().remove(clazz.getEStructuralFeature(getAttributeName()));
-		p = updateEPackage(p, "1");
-		contribution.getDomainModel().setDynamic(p);
-		saveAndTest(contribution);
-		EPackage g = contribution.getDomainModel().getGenerated();
+		EPackage g = service.replace(p, p2, true);
 		EClass gClazz = (EClass) g.getEClassifier(getClassName());
 		EObject o = g.getEFactoryInstance().create(gClazz);
 		assertNull(gClazz.getEStructuralFeature(getAttributeName()));
 		assertEquals(getClassName(), o.getClass().getSimpleName());
 
-		contribution.checkout(v0);
-		saveAndTest(contribution);
-		g = contribution.getDomainModel().getGenerated();
+		g = service.replace(p, p, v);
 		gClazz = (EClass) g.getEClassifier(getClassName());
 		o = g.getEFactoryInstance().create(gClazz);
 		EAttribute a = (EAttribute) gClazz.getEStructuralFeature(getAttributeName());
 		assertNotNull(a);
 		assertEquals(getAttributeType(), a.getEType());
 		assertEquals(getClassName(), o.getClass().getSimpleName());
+		cleanup();
 	}
 
 	@Test
 	public void recreate() throws CoreException, OperationCanceledException, InterruptedException, ExecutionException {
-		setPackageName("p");
+		setPackageName("pi");
 		setClassName("C");
-		setAttributeName("c");
+		setAttributeName("count");
 		setAttributeType(EcorePackage.Literals.EJAVA_OBJECT);
-		Contribution c = createAndTestEPackage();
+		Contribution c = service.getWorkspace().getContribution(createAndTestEPackage(), Stage.LOADED);
 		c.delete(getProgressMonitor());
 		createAndTestEPackage();
+		cleanup();
 	}
 
 	@Test
@@ -346,18 +300,21 @@ public class TestEnterpriseDomain extends AbstractTest {
 		setClassName("C");
 		setAttributeName("c");
 		setAttributeType(EcorePackage.Literals.EJAVA_OBJECT);
-		Contribution c = createAndTestEPackage();
+		EPackage p = createAndTestEPackage();
+		Contribution c = service.getWorkspace().getContribution(p, Stage.LOADED);
 		Version oldVersion = c.getRevision().getVersion();
-		Version version = c.nextVersion();
-		c.newRevision(version);
-		c.checkout(version);
-		saveAndTest(c);
-		c.checkout(oldVersion);
-		saveAndTest(c);
+		Version newVersion = c.nextVersion();
+		EPackage g = service.replace(p, p, newVersion);
+		assertNotNull(g);
+		test(g, "c", new Object());
+		g = service.replace(p, p, oldVersion);
+		assertNotNull(g);
+		test(g, "c", new Object());
+		cleanup();
 	}
 
 	@Test
-	public void renameEPackage()
+	public void changeModel()
 			throws OperationCanceledException, InterruptedException, ExecutionException, CoreException {
 		setPackageName("one");
 		setClassName("T");
@@ -365,7 +322,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		setAttributeType(EcorePackage.Literals.EJAVA_OBJECT);
 		EPackage p = createAndTestAPI();
 		setPackageName("another");
-		EPackage p2 = updateEPackage(EcoreUtil.copy(p), "1");
+		EPackage p2 = updateEPackage(p, "1");
 		p2.setName("another");
 		p2.setNsPrefix("another");
 		EClass cl = (EClass) p2.getEClassifier(getClassName());
@@ -373,6 +330,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		cl.setName(getClassName());
 		cl.getEStructuralFeature(getAttributeName());
 		testAPIUpdate(p, p2, "t", EcorePackage.Literals.EJAVA_OBJECT, new Object());
+		cleanup();
 	}
 
 	@Test
@@ -401,7 +359,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 			}
 
 		};
-		c.getCustomizers().put(GenModelSetupJob.STAGE, customizer);
+		c.getCustomizers().put(ClassPlant.Stages.GENMODEL_SETUP, customizer);
 
 		final Semaphore complete = new Semaphore(0);
 
@@ -435,11 +393,13 @@ public class TestEnterpriseDomain extends AbstractTest {
 		c.save(getProgressMonitor());
 		complete.acquire();
 		c.removeSaveCompletionListener(l);
+		cleanup();
 	}
 
 	@Test
 	public void package_() throws OperationCanceledException, InterruptedException, ExecutionException, CoreException {
 		setPackageName("package");
 		createAndTestEPackage();
+		cleanup();
 	}
 }

@@ -132,7 +132,7 @@ public interface Workspace extends EObject, ISchedulingRule {
 	 * @model
 	 * @generated
 	 */
-	Project getProject(String projectName);
+	Project getProject(String name);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -140,6 +140,22 @@ public interface Workspace extends EObject, ISchedulingRule {
 	 * @generated
 	 */
 	Contribution getContribution(EPackage ePackage, boolean searchOptimistic);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	Contribution getContribution(EPackage ePackage, Stage filter);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	Contribution getContribution(EPackage ePackage, Stage filter, boolean searchOptimistic);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

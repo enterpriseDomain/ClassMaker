@@ -1,6 +1,8 @@
 ClassMaker
 ===========
 
+(formerly also known as ClassSupplier)
+
 ClassMaker is an Eclipse plug-in allowing to create classes programmatically, supplying them to client bundle.  
 
 ClassMaker actually generates the source code of provided model, compiles and exports binary, then installs it into its own runtime, and then loads classes making them available to client's code through model's reflective API.  
@@ -47,5 +49,5 @@ There is more [code](/tests/org.enterprisedomain.tests/src/org/enterprisedomain/
 
 Feedback
 ---------
-If you have anything to suggest, please feel free to file a [bug at GitHub](https://github.com/kyrillzotkin//ClassMaker/issues). 
+If you have anything to suggest, please feel free to file a [bug at GitHub](https://github.com/kyrillzotkin/ClassMaker/issues). 
 

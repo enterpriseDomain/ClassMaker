@@ -20,7 +20,6 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.osgi.framework.Version;
 
 public interface Exporter extends IAdaptable {
 
@@ -29,9 +28,5 @@ public interface Exporter extends IAdaptable {
 	IPath getExportDestination();
 
 	void setExportDestination(IPath path);
-
-	Version getVersion();
-
-	void setVersion(Version version);
 
 }

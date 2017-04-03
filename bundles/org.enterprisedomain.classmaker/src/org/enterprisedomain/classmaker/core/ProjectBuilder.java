@@ -39,7 +39,6 @@ import org.enterprisedomain.classmaker.jobs.install.OSGiInstaller;
 import org.enterprisedomain.classmaker.jobs.load.OSGiEPackageLoader;
 import org.enterprisedomain.classmaker.util.GitUtil;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
-import org.osgi.framework.Version;
 
 public class ProjectBuilder extends IncrementalProjectBuilder {
 
@@ -100,11 +99,7 @@ public class ProjectBuilder extends IncrementalProjectBuilder {
 					return results;				
 			}
 			exporter.setExportDestination(ResourceUtils.getExportDestination(getProject()));
-			if (exporter.getVersion() == null && state != null) {
-				Version version = state.getVersion();
-				exporter.setVersion(version);
-			}
-
+			
 			generator.setResourceSet(ClassMakerOSGi.getClassMaker().getWorkspace().getResourceSet());
 			EnterpriseDomainJob generatorJob = ((EnterpriseDomainJob) generator.getAdapter(EnterpriseDomainJob.class));
 			generatorJob.setProject(getProject());

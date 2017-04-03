@@ -58,9 +58,14 @@ public class GitUtil {
 		if (gits.containsKey(projectName))
 			return gits.get(projectName);
 		IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-		IPath projectPath = workspaceRoot.getLocation().append(workspaceRoot.getProject(projectName).getFullPath());
-		gits.put(projectName, getRepositoryGit(projectPath.toFile()));
+		IPath projectGitPath = workspaceRoot.getLocation().append(workspaceRoot.getProject(projectName).getFullPath());
+		gits.put(projectName, getRepositoryGit(projectGitPath.toFile()));
 		return gits.get(projectName);
+	}
+
+	public synchronized static void deleteProject(String projectName) {
+		if (gits.containsKey(projectName))
+			gits.remove(projectName);
 	}
 
 	public static String getCommitMessage(State state, int timestamp) {
@@ -95,5 +100,14 @@ public class GitUtil {
 			commitId = revCommit.getId().name();
 		}
 		return commitId;
+	}
+
+	public static void checkoutOrphan(String projectName, String branchName, int timestamp)
+			throws GitAPIException, IOException {
+		Git git = getRepositoryGit(projectName);
+		synchronized (git) {
+			git.checkout().setOrphan(true).setName(branchName).call();
+			git.commit().setMessage(projectName + "_" + branchName + " " + timestamp).call();
+		}
 	}
 }

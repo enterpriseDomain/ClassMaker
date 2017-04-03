@@ -28,7 +28,6 @@ import org.enterprisedomain.classmaker.Messages;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.core.ClassMakerOSGi;
-import org.enterprisedomain.classmaker.impl.ContributionImpl;
 import org.enterprisedomain.classmaker.jobs.ContainerJob;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleEvent;
@@ -103,8 +102,9 @@ public class OSGiEPackageLoader extends ContainerJob {
 			}
 			if (exception == null) {
 				return getOKStatus(osgiBundle);
-			} else
+			} else {
 				throw new CoreException(ClassMakerOSGi.createErrorStatus(exception));
+			}
 		} finally {
 			monitor.done();
 			setException(null);
@@ -169,7 +169,7 @@ public class OSGiEPackageLoader extends ContainerJob {
 			setException(e);
 		} finally {
 			loaded.release();
-			((ContributionImpl) getContributionState().getContribution()).notifyCompletion();
+			getContributionState().getContribution().setCompletionNotified(true);
 		}
 	}
 
