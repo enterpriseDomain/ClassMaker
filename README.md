@@ -1,4 +1,4 @@
-ClassMaker
+ClassMaker [![Code Triagers Badge](https://www.codetriage.com/kyrillzotkin/classmaker/badges/users.svg)](https://www.codetriage.com/kyrillzotkin/classmaker)
 ===========
 
 (formerly known as ClassSupplier)
