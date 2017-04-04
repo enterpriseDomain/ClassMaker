@@ -5,7 +5,13 @@ instructions.install.import= \
 org.eclipse.equinox.p2.touchpoint.eclipse.addJvmArg;
 
 instructions.configure = \
-setProgramProperty(propName:osgi.framework.extensions, propValue:org.enterprisedomain.classmaker.osgi.systemextension);
+setProgramProperty(propName:osgi.framework.extensions,propValue:org.enterprisedomain.classmaker.osgi.systemextension);
+
+instructions.configure.import = \
+org.eclipse.equinox.p2.touchpoint.eclipse.setProgramProperty;
 
 instructions.unconfigure = \
-setProgramProperty(propName:osgi.framework.extensions, propValue:);
+setProgramProperty(propName:osgi.framework.extensions,propValue:);
+
+instructions.unconfigure.import = \
+org.eclipse.equinox.p2.touchpoint.eclipse.setProgramProperty;
