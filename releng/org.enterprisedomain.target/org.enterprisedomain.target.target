@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/mbarbero/fr.obeo.releng.targetplatform -->
-<target name="org.enterprisedomain.target" sequenceNumber="1491217356">
+<target name="org.enterprisedomain.target" sequenceNumber="1491281564">
   <locations>
-    <location includeMode="slicer" includeAllPlatforms="false" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
+    <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.eclipse.platform.feature.group" version="4.6.3.v20170301-0400"/>
       <unit id="org.eclipse.rcp.feature.group" version="4.6.3.v20170301-0400"/>
       <unit id="org.eclipse.rcp.configuration.feature.group" version="1.0.200.v20170301-0400"/>
       <unit id="org.eclipse.equinox.sdk.feature.group" version="3.12.0.v20170209-1843"/>
+      <unit id="org.eclipse.equinox.executable.feature.group" version="3.6.300.v20161122-1740"/>
       <unit id="org.eclipse.platform.ide" version="4.6.3.M20170301-0400"/>
       <unit id="org.eclipse.jdt.core" version="3.12.3.v20170228-1205"/>
       <unit id="org.eclipse.pde.core" version="3.11.1.v20161115-1951"/>
       <repository location="http://download.eclipse.org/eclipse/updates/4.6"/>
     </location>
-    <location includeMode="slicer" includeAllPlatforms="false" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
+    <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.eclipse.emf.emfstore.client.transaction.feature.feature.group" version="1.8.1.v20161125-1451"/>
       <unit id="org.eclipse.emf.emfstore.client.feature.feature.group" version="1.8.1.v20161125-1451"/>
       <unit id="org.eclipse.emf.emfstore.common.feature.feature.group" version="1.8.1.v20161125-1451"/>
@@ -23,14 +24,13 @@
       <unit id="org.eclipse.emf.emfstore.ecore.feature.feature.group" version="1.8.1.v20161125-1451"/>
       <repository location="http://download.eclipse.org/emfstore/releases_18"/>
     </location>
-    <location includeMode="slicer" includeAllPlatforms="false" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
+    <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.eclipse.jgit.feature.group" version="4.6.1.201703071140-r"/>
       <unit id="org.eclipse.jgit.http.apache.feature.group" version="4.6.1.201703071140-r"/>
       <unit id="org.eclipse.jgit.pgm.feature.group" version="4.6.1.201703071140-r"/>
-      <unit id="org.eclipse.egit.feature.group" version="4.6.1.201703071140-r"/>
       <repository location="http://download.eclipse.org/egit/updates"/>
     </location>
-    <location includeMode="slicer" includeAllPlatforms="false" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
+    <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.eclipse.jdt.feature.group" version="3.12.3.v20170301-0400"/>
       <unit id="org.eclipse.emf.sdk.feature.group" version="2.12.0.v20160526-0356"/>
       <unit id="org.eclipse.gef.sdk.feature.group" version="3.11.0.201606061308"/>
@@ -45,12 +45,12 @@
       <unit id="org.eclipse.xtend.sdk.feature.group" version="2.10.0.v201605250459"/>
       <repository location="http://download.eclipse.org/releases/neon"/>
     </location>
-    <location includeMode="slicer" includeAllPlatforms="false" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
+    <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.eclipse.ecf.core.feature.feature.group" version="1.3.0.v20160405-1820"/>
       <unit id="org.eclipse.ecf.filetransfer.feature.feature.group" version="3.13.1.v20160405-1820"/>
       <repository location="http://download.eclipse.org/rt/ecf/3.13.1/site.p2"/>
     </location>
-    <location includeMode="slicer" includeAllPlatforms="false" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
+    <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="javax.validation" version="1.0.0.GA_v201205091237"/>
       <unit id="org.apache.poi.source" version="3.9.0.v201405241750"/>
       <unit id="org.apache.poi" version="3.9.0.v201405241750"/>
@@ -70,7 +70,7 @@
       <unit id="org.hamcrest.library.source" version="1.3.0.v201505072020"/>
       <repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20160221192158/repository/"/>
     </location>
-    <location includeMode="slicer" includeAllPlatforms="false" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
+    <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.eclipse.emf.edapt.runtime.feature.feature.group" version="1.2.1.201610270928"/>
       <unit id="org.eclipse.emf.edapt.runtime.feature.source.feature.group" version="1.2.1.201610270928"/>
       <repository location="http://download.eclipse.org/edapt/releases/12x"/>

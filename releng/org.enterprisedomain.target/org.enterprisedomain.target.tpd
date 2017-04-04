@@ -1,4 +1,5 @@
-target "org.enterprisedomain.target" with configurePhase
+target "org.enterprisedomain.target" with allEnvironments configurePhase
+
 
 //location "http://download.eclipse.org/technology/swtbot/releases/latest/" {
 //	org.eclipse.swtbot.forms.feature.group
@@ -13,6 +14,7 @@ location "http://download.eclipse.org/eclipse/updates/4.6" {
 	org.eclipse.rcp.feature.group
 	org.eclipse.rcp.configuration.feature.group
 	org.eclipse.equinox.sdk.feature.group
+	org.eclipse.equinox.executable.feature.group
 	org.eclipse.platform.ide
 	org.eclipse.jdt.core
 	org.eclipse.pde.core
