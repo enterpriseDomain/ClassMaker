@@ -1,7 +1,7 @@
 ClassMaker
 ===========
 
-(formerly also known as ClassSupplier)
+(formerly known as ClassSupplier)
 
 ClassMaker is an Eclipse plug-in allowing to create classes programmatically, supplying them to client bundle.  
 
