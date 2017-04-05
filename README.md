@@ -26,9 +26,9 @@ Here is how you can use it:
     BundleContext bundleContext = FrameworkUtil.getBundle(this.getClass())
                                 .getBundleContext();
     ServiceReference<?> serviceReference = bundleContext
-                              .getServiceReference(ClassPlant.class);
+                                .getServiceReference(ClassPlant.class);
     ClassPlant classPlant = (ClassPlant) bundleContext
-                              .getService(serviceReference);
+                                .getService(serviceReference);
 
     // Produce result by combining them
     EPackage jPackage = classPlant.produce(ePackage);
@@ -49,5 +49,5 @@ There is more [code](/tests/org.enterprisedomain.tests/src/org/enterprisedomain/
 
 Feedback
 ---------
-If you have anything to suggest, please feel free to file a [bug at GitHub](https://github.com/kyrillzotkin/ClassMaker/issues). 
+If you have anything to suggest or complain, please feel free to file a [bug at GitHub](https://github.com/kyrillzotkin/ClassMaker/issues). 
 
