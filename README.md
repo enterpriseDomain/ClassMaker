@@ -49,5 +49,5 @@ There is more [code](/tests/org.enterprisedomain.tests/src/org/enterprisedomain/
 
 Feedback
 ---------
-If you have anything to suggest or complain, please feel free to file a [bug at GitHub](https://github.com/kyrillzotkin/ClassMaker/issues). 
+If you have anything to complain or suggest, please feel free to file a [bug at GitHub](https://github.com/kyrillzotkin/ClassMaker/issues). 
 
