@@ -46,6 +46,9 @@ Here is how you can use it:
         
 There is more [code](/tests/org.enterprisedomain.tests/src/org/enterprisedomain/tests/TestEnterpriseDomain.java), where you can specify a method body and call the method, or customize the generation templates. 
 
+Download
+---------
+Please, use [the update site](https://dl.bintray.com/kyrillzotkin/ClassMaker/) to install ClassMaker.
 
 Feedback
 ---------
