@@ -48,7 +48,7 @@ There is more [code](/tests/org.enterprisedomain.tests/src/org/enterprisedomain/
 
 Download
 ---------
-Please, use the [update site](https://dl.bintray.com/kyrillzotkin/ClassMaker/) to install ClassMaker.
+Please, use [the update site](https://dl.bintray.com/kyrillzotkin/ClassMaker/) to install ClassMaker.
 
 Feedback
 ---------
