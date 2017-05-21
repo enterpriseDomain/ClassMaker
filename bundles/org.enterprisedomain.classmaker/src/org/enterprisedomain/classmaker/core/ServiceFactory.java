@@ -17,14 +17,14 @@ package org.enterprisedomain.classmaker.core;
 
 import org.eclipse.e4.core.contexts.ContextFunction;
 import org.eclipse.e4.core.contexts.IEclipseContext;
-import org.enterprisedomain.classmaker.ClassPlant;
+import org.enterprisedomain.classmaker.ClassMakerPlant;
 
 public class ServiceFactory extends ContextFunction {
 
 	@Override
 	public Object compute(IEclipseContext context) {
-		ClassPlant supplier = ClassMakerOSGi.getClassMaker();
-		context.set(ClassPlant.class, supplier);
+		ClassMakerPlant supplier = ClassMakerPlugin.getClassMaker();
+		context.set(ClassMakerPlant.class, supplier);
 		return supplier;
 	}
 

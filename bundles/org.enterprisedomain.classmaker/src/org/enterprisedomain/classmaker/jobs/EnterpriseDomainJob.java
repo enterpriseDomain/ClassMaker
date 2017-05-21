@@ -36,7 +36,7 @@ import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
-import org.enterprisedomain.classmaker.core.ClassMakerOSGi;
+import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.core.ProjectBuilder;
 
 public abstract class EnterpriseDomainJob extends WorkspaceJob {
@@ -66,9 +66,9 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob {
 				return;
 			getContributionState().setPhase(getResultStage());
 
-			Status result = new Status(event.getResult().getSeverity(), ClassMakerOSGi.PLUGIN_ID,
+			Status result = new Status(event.getResult().getSeverity(), ClassMakerPlugin.PLUGIN_ID,
 					event.getJob().getName() + ": " + event.getResult().getMessage()); //$NON-NLS-1$
-			ClassMakerOSGi.getInstance().getLog().log(result);
+			ClassMakerPlugin.getInstance().getLog().log(result);
 
 			if (getNextJob() == null) {
 				return;
@@ -78,7 +78,7 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob {
 			try {
 				getNextJob().join();
 			} catch (InterruptedException e) {
-				ClassMakerOSGi.getInstance().getLog().log(ClassMakerOSGi.createErrorStatus(e));
+				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 			}
 		}
 
@@ -137,10 +137,10 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob {
 
 		@Override
 		public IProgressMonitor createMonitor(Job job) {
-			if (ClassMakerOSGi.getInstance() == null)
-				return ProgressMonitorFactory.create(ClassMakerOSGi.getProgressMonitorClass(),
-						ClassMakerOSGi.getProgressMonitorClassConstructorParameters());
-			return ClassMakerOSGi.getInstance().getProgressMonitor();
+			if (ClassMakerPlugin.getInstance() == null)
+				return ProgressMonitorFactory.create(ClassMakerPlugin.getProgressMonitorClass(),
+						ClassMakerPlugin.getProgressMonitorClassConstructorParameters());
+			return ClassMakerPlugin.getInstance().getProgressMonitor();
 		}
 	};
 
@@ -212,7 +212,7 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob {
 	}
 
 	protected Workspace getWorkspace() {
-		return ClassMakerOSGi.getClassMaker().getWorkspace();
+		return ClassMakerPlugin.getClassMaker().getWorkspace();
 	}
 
 	protected long getRunId() {

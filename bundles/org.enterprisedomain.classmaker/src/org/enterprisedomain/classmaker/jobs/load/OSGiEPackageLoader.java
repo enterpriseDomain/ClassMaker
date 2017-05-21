@@ -27,7 +27,7 @@ import org.eclipse.osgi.util.NLS;
 import org.enterprisedomain.classmaker.Messages;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.State;
-import org.enterprisedomain.classmaker.core.ClassMakerOSGi;
+import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.jobs.ContainerJob;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleEvent;
@@ -69,7 +69,7 @@ public class OSGiEPackageLoader extends ContainerJob {
 	public IStatus load(IProgressMonitor monitor) throws CoreException {
 		State contribution = getContributionState();
 		if (contribution.getPhase() == Stage.DEFINED)
-			return ClassMakerOSGi.createErrorStatus(Messages.ModelNotSpecified);
+			return ClassMakerPlugin.createErrorStatus(Messages.ModelNotSpecified);
 		Bundle osgiBundle = null;
 		try {
 			for (Bundle bundle : getBundles())
@@ -90,7 +90,7 @@ public class OSGiEPackageLoader extends ContainerJob {
 					}
 				}
 			} else
-				return ClassMakerOSGi.createErrorStatus(NLS.bind(Messages.BundleNotFound, getProject().getName()));
+				return ClassMakerPlugin.createErrorStatus(NLS.bind(Messages.BundleNotFound, getProject().getName()));
 
 			if (monitor.isCanceled()) {
 				return Status.CANCEL_STATUS;
@@ -103,7 +103,7 @@ public class OSGiEPackageLoader extends ContainerJob {
 			if (exception == null) {
 				return getOKStatus(osgiBundle);
 			} else {
-				throw new CoreException(ClassMakerOSGi.createErrorStatus(exception));
+				throw new CoreException(ClassMakerPlugin.createErrorStatus(exception));
 			}
 		} finally {
 			monitor.done();
@@ -125,7 +125,7 @@ public class OSGiEPackageLoader extends ContainerJob {
 			else
 				ePackagesMsg = "no EPackage";
 		}
-		return ClassMakerOSGi.createOKStatus(Messages.OK + " "
+		return ClassMakerPlugin.createOKStatus(Messages.OK + " "
 				+ NLS.bind(Messages.EPackageClassLoadComplete, new Object[] { osgiBundle.getSymbolicName(),
 						osgiBundle.getHeaders().get(Constants.BUNDLE_VERSION), ePackagesMsg }));
 

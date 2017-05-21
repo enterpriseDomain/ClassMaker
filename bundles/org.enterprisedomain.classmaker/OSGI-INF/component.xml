@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" enabled="true" immediate="true" name="org.enterprisedomain.classmaker.service">
-   <implementation class="org.enterprisedomain.classmaker.impl.ClassPlantImpl"/>
+   <implementation class="org.enterprisedomain.classmaker.impl.ClassMakerPlantImpl"/>
    <service>
-      <provide interface="org.enterprisedomain.classmaker.ClassPlant"/>
+      <provide interface="org.enterprisedomain.classmaker.ClassMakerPlant"/>
    </service>
 </scr:component>

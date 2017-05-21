@@ -67,9 +67,11 @@ public class ContributionItemProvider extends ProjectItemProvider {
 			addParentPropertyDescriptor(object);
 			addLocalePropertyDescriptor(object);
 			addContributionPropertyDescriptor(object);
+			addDependenciesPropertyDescriptor(object);
 			addRevisionPropertyDescriptor(object);
 			addStatePropertyDescriptor(object);
 			addLatestVersionPropertyDescriptor(object);
+			addCompletionNotifiedPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -179,6 +181,22 @@ public class ContributionItemProvider extends ProjectItemProvider {
 	}
 
 	/**
+	 * This adds a property descriptor for the Dependencies feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDependenciesPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Contribution_dependencies_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Contribution_dependencies_feature",
+								"_UI_Contribution_type"),
+						ClassMakerPackage.Literals.CONTRIBUTION__DEPENDENCIES, false, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+	}
+
+	/**
 	 * This adds a property descriptor for the Revision feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -222,6 +240,22 @@ public class ContributionItemProvider extends ProjectItemProvider {
 								"_UI_Contribution_type"),
 						ClassMakerPackage.Literals.CONTRIBUTION__LATEST_VERSION, false, false, false,
 						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Completion Notified feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addCompletionNotifiedPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Contribution_completionNotified_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Contribution_completionNotified_feature",
+								"_UI_Contribution_type"),
+						ClassMakerPackage.Literals.CONTRIBUTION__COMPLETION_NOTIFIED, true, false, false,
+						ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -298,7 +332,9 @@ public class ContributionItemProvider extends ProjectItemProvider {
 		case ClassMakerPackage.CONTRIBUTION__VERSION:
 		case ClassMakerPackage.CONTRIBUTION__LANGUAGE:
 		case ClassMakerPackage.CONTRIBUTION__LOCALE:
+		case ClassMakerPackage.CONTRIBUTION__DEPENDENCIES:
 		case ClassMakerPackage.CONTRIBUTION__LATEST_VERSION:
+		case ClassMakerPackage.CONTRIBUTION__COMPLETION_NOTIFIED:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case ClassMakerPackage.CONTRIBUTION__DOMAIN_MODEL:

@@ -3,13 +3,25 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.enterprisedomain</groupId>
 	<artifactId>org.enterprisedomain.configuration</artifactId>
-	<version>0.7.8-SNAPSHOT</version>
+	<version>0.7.9-SNAPSHOT</version>
 	<properties>
-		<tycho.version>0.25.0</tycho.version>
-		<tycho.extras.version>0.26.0</tycho.extras.version>
+		<tycho.version>1.0.0</tycho.version>
+		<tycho.extras.version>${tycho.version}</tycho.extras.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<neon-repo.url>http://download.eclipse.org/releases/neon</neon-repo.url>
 	</properties>
+	<repositories>
+		<repository>
+			<id>eclipse-p2-repo</id>
+			<url>${neon-repo.url}</url>
+			<layout>p2</layout>			
+		</repository>
+		<repository>
+			<id>edapt-p2-repo</id>
+			<url>http://download.eclipse.org/edapt/releases/12x</url>
+			<layout>p2</layout>			
+		</repository>		
+	</repositories>
 	<build>
 		<plugins>
 			<plugin>
@@ -27,7 +39,7 @@
 						<artifact>
 							<groupId>org.enterprisedomain</groupId>
 							<artifactId>org.enterprisedomain.target</artifactId>
-							<version>0.7.8-SNAPSHOT</version>
+							<version>0.7.9-SNAPSHOT</version>
 						</artifact>
 					</target>
 					<dependency-resolution>

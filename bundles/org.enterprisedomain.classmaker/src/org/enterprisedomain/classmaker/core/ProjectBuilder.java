@@ -52,7 +52,7 @@ public class ProjectBuilder extends IncrementalProjectBuilder {
 		}
 	}
 
-	public static final String BUILDER_ID = ClassMakerOSGi.PLUGIN_ID + '.' + "builder"; //$NON-NLS-1$
+	public static final String BUILDER_ID = ClassMakerPlugin.PLUGIN_ID + '.' + "builder"; //$NON-NLS-1$
 
 	public static final String INTERNAL_BUILD_ARG = "isInternalBuild";
 
@@ -100,7 +100,7 @@ public class ProjectBuilder extends IncrementalProjectBuilder {
 			}
 			exporter.setExportDestination(ResourceUtils.getExportDestination(getProject()));
 			
-			generator.setResourceSet(ClassMakerOSGi.getClassMaker().getWorkspace().getResourceSet());
+			generator.setResourceSet(ClassMakerPlugin.getClassMaker().getWorkspace().getResourceSet());
 			EnterpriseDomainJob generatorJob = ((EnterpriseDomainJob) generator.getAdapter(EnterpriseDomainJob.class));
 			generatorJob.setProject(getProject());
 			generatorJob.setBuildKind(kind);

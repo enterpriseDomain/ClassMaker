@@ -139,7 +139,7 @@
    </plugins>
 
    <features>
-      <feature id="org.enterprisedomain.feature" version="0.7.8.qualifier"/>
+      <feature id="org.enterprisedomain.classmaker.feature" version="0.7.9.qualifier"/>
       <feature id="org.enterprisedomain.ecp.feature" version="0.0.1.qualifier"/>
       <feature id="org.eclipse.emf.ecp.e4.feature" version="1.8.0.20160216-1319"/>
       <feature id="org.eclipse.emf.ecp.feature"/>

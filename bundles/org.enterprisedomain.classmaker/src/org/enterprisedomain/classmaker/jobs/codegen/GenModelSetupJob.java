@@ -32,7 +32,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.enterprisedomain.classmaker.Messages;
-import org.enterprisedomain.classmaker.core.ClassMakerOSGi;
+import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 
 public class GenModelSetupJob extends EcoreGenerator.GeneratorJob {
 
@@ -65,7 +65,7 @@ public class GenModelSetupJob extends EcoreGenerator.GeneratorJob {
 		try {
 			resource.save(Collections.EMPTY_MAP);
 		} catch (IOException e) {
-			throw new CoreException(ClassMakerOSGi.createWarningStatus(e));
+			throw new CoreException(ClassMakerPlugin.createWarningStatus(e));
 		}
 		monitor.worked(1);
 		return Status.OK_STATUS;

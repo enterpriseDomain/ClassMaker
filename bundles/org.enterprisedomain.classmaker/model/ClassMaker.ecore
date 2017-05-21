@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="classmaker" nsURI="http://org/enterprisedomain/ClassMaker/0.7.8"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="classmaker" nsURI="http://org/enterprisedomain/ClassMaker/0.7.9"
     nsPrefix="ClassMaker">
   <eClassifiers xsi:type="ecore:EClass" name="Contribution" eSuperTypes="#//Project #//Item">
     <eOperations name="createRevision" eType="#//Revision" eExceptions="#//CoreException">
@@ -64,6 +64,9 @@
       <eParameters name="revision" eType="#//Revision"/>
     </eOperations>
     <eOperations name="notifyCompletion" eExceptions="#//Exception"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dependencies" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" changeable="false"
+        volatile="true" defaultValueLiteral="" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="revision" eType="#//Revision"
         volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="revisions" upperBound="-1"
@@ -130,6 +133,8 @@
       <eParameters name="filepattern" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eOperations name="saveResource"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="imports" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="revision" eType="#//Revision"
         volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
@@ -335,7 +340,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="filename" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         changeable="false" volatile="true" transient="true" derived="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ClassPlant">
+  <eClassifiers xsi:type="ecore:EClass" name="ClassMakerPlant">
     <eOperations name="produce" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
         eExceptions="#//CoreException">
       <eParameters name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
@@ -380,6 +385,17 @@
       <eParameters name="queryModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
       <eParameters name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
       <eParameters name="version" eType="#//OSGiVersion"/>
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
+    <eOperations name="transform" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
+        eExceptions="#//CoreException">
+      <eParameters name="source" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      <eParameters name="transformationURI" eType="#//URI"/>
+    </eOperations>
+    <eOperations name="transform" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
+        eExceptions="#//CoreException">
+      <eParameters name="source" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      <eParameters name="transformationURI" eType="#//URI"/>
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
     <eOperations name="delete" eExceptions="#//CoreException">

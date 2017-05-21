@@ -60,6 +60,7 @@ public class StateItemProvider extends ItemItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addImportsPropertyDescriptor(object);
 			addRevisionPropertyDescriptor(object);
 			addTimestampPropertyDescriptor(object);
 			addDeployableUnitNamePropertyDescriptor(object);
@@ -67,8 +68,24 @@ public class StateItemProvider extends ItemItemProvider {
 			addResourcePropertyDescriptor(object);
 			addCommitIdsPropertyDescriptor(object);
 			addProjectNamePropertyDescriptor(object);
+			addSavingPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Imports feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addImportsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_State_imports_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_State_imports_feature", "_UI_State_type"),
+						ClassMakerPackage.Literals.STATE__IMPORTS, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -180,6 +197,21 @@ public class StateItemProvider extends ItemItemProvider {
 	}
 
 	/**
+	 * This adds a property descriptor for the Saving feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSavingPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_State_saving_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_State_saving_feature", "_UI_State_type"),
+						ClassMakerPackage.Literals.STATE__SAVING, true, false, false,
+						ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -245,11 +277,13 @@ public class StateItemProvider extends ItemItemProvider {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(State.class)) {
+		case ClassMakerPackage.STATE__IMPORTS:
 		case ClassMakerPackage.STATE__TIMESTAMP:
 		case ClassMakerPackage.STATE__DEPLOYABLE_UNIT_NAME:
 		case ClassMakerPackage.STATE__JOB_FAMILY:
 		case ClassMakerPackage.STATE__COMMIT_IDS:
 		case ClassMakerPackage.STATE__PROJECT_NAME:
+		case ClassMakerPackage.STATE__SAVING:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case ClassMakerPackage.STATE__STATE_CUSTOMIZERS:

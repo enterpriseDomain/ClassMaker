@@ -47,7 +47,7 @@ import org.enterprisedomain.classmaker.ModelPair;
 import org.enterprisedomain.classmaker.Revision;
 import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
-import org.enterprisedomain.classmaker.core.ClassMakerOSGi;
+import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.util.GitUtil;
 import org.enterprisedomain.classmaker.util.ListUtil;
 
@@ -243,10 +243,10 @@ public class RevisionImpl extends ItemImpl implements Revision {
 				return state.initialize();
 			}
 		} catch (GitAPIException e) {
-			ClassMakerOSGi.getInstance().getLog().log(ClassMakerOSGi.createErrorStatus(e));
+			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 			return null;
 		} catch (IOException e) {
-			ClassMakerOSGi.getInstance().getLog().log(ClassMakerOSGi.createErrorStatus(e));
+			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 			return null;
 		}
 		return "";
@@ -299,7 +299,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 				Git git = GitUtil.getRepositoryGit(getContribution().getProjectName());
 				git.branchCreate().setForce(true).setName(getVersion().toString()).call();
 			} catch (GitAPIException e) {
-				throw new CoreException(ClassMakerOSGi.createErrorStatus(e));
+				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 			}
 		}
 	}
@@ -373,12 +373,12 @@ public class RevisionImpl extends ItemImpl implements Revision {
 				Ref branch = git.getRepository().findRef(getVersion().toString());
 				if (branch == null) {
 					getState().initialize();
-					create(ClassMakerOSGi.getInstance().getProgressMonitor());
+					create(ClassMakerPlugin.getInstance().getProgressMonitor());
 				}
 			} catch (GitAPIException e) {
-				throw new CoreException(ClassMakerOSGi.createErrorStatus(e));
+				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 			} catch (IOException e) {
-				throw new CoreException(ClassMakerOSGi.createErrorStatus(e));
+				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 			}
 		}
 		if (isStateSet())

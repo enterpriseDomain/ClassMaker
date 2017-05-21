@@ -64,7 +64,7 @@ import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.ResourceAdapter;
 import org.enterprisedomain.classmaker.Contribution;
-import org.enterprisedomain.classmaker.core.ClassMakerOSGi;
+import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.impl.CompletionListenerImpl;
 import org.enterprisedomain.classmaker.util.ClassMakerAdapterFactory;
 
@@ -246,7 +246,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 		if (ResourceSet.class.isAssignableFrom(adapterType))
 			return (T) Activator.getClassMaker().getWorkspace().getResourceSet();
 		if (IProgressMonitor.class.isAssignableFrom(adapterType))
-			return (T) ClassMakerOSGi.getInstance().getProgressMonitor();
+			return (T) ClassMakerPlugin.getInstance().getProgressMonitor();
 		return super.getAdapter(adaptable, adapterType);
 	}
 

@@ -34,13 +34,13 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.enterprisedomain.classmaker.ClassPlant;
-import org.enterprisedomain.classmaker.core.ClassMakerOSGi;
+import org.enterprisedomain.classmaker.ClassMakerPlant;
+import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.junit.Before;
 
 public abstract class AbstractTest {
 
-	protected static ClassPlant service;
+	protected static ClassMakerPlant service;
 
 	private static CountDownLatch latch = new CountDownLatch(1);
 
@@ -52,7 +52,7 @@ public abstract class AbstractTest {
 
 	protected EDataType attributeType;
 
-	public void setReference(ClassPlant dependency) {
+	public void setReference(ClassMakerPlant dependency) {
 		service = dependency;
 		latch.countDown();
 	}
@@ -231,7 +231,7 @@ public abstract class AbstractTest {
 	}
 
 	protected IProgressMonitor getProgressMonitor() {
-		return ClassMakerOSGi.getInstance().getProgressMonitor();
+		return ClassMakerPlugin.getInstance().getProgressMonitor();
 	}
 
 }

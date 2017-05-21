@@ -27,8 +27,8 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.contexts.IContextFunction;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.enterprisedomain.classmaker.ClassMakerFactory;
-import org.enterprisedomain.classmaker.ClassPlant;
-import org.enterprisedomain.classmaker.impl.ClassPlantImpl;
+import org.enterprisedomain.classmaker.ClassMakerPlant;
+import org.enterprisedomain.classmaker.impl.ClassMakerPlantImpl;
 import org.enterprisedomain.classmaker.jobs.ProgressMonitorFactory;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
@@ -37,7 +37,7 @@ import org.osgi.framework.BundleListener;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.util.tracker.ServiceTracker;
 
-public class ClassMakerOSGi extends Plugin {
+public class ClassMakerPlugin extends Plugin {
 
 	public static final String PLUGIN_ID = "org.enterprisedomain.classmaker"; //$NON-NLS-1$
 
@@ -49,17 +49,17 @@ public class ClassMakerOSGi extends Plugin {
 
 	public static final String MODEL_RESOURCE_EXT_PREF_KEY = "resourceExtension"; //$NON-NLS-1$
 
-	private static ClassMakerOSGi instance;
+	private static ClassMakerPlugin instance;
 
 	private static Class<? extends IProgressMonitor> monitorClass;
 
 	private static Object[] monitorParameters;
 
-	private static ServiceTracker<ClassPlant, ClassPlantImpl> tracker;
+	private static ServiceTracker<ClassMakerPlant, ClassMakerPlantImpl> tracker;
 
-	private ServiceRegistration<ClassPlant> reg;
+	private ServiceRegistration<ClassMakerPlant> reg;
 
-	public static ClassMakerOSGi getInstance() {
+	public static ClassMakerPlugin getInstance() {
 		return instance;
 	}
 
@@ -68,7 +68,7 @@ public class ClassMakerOSGi extends Plugin {
 	 * 
 	 * @return enterpriseDomain service instance
 	 */
-	public static ClassPlant getClassMaker() {
+	public static ClassMakerPlant getClassMaker() {
 		return tracker.getService();
 	}
 
@@ -97,11 +97,11 @@ public class ClassMakerOSGi extends Plugin {
 	public void start(BundleContext context) throws Exception {
 		instance = this;
 
-		reg = context.registerService(ClassPlant.class, ClassMakerFactory.eINSTANCE.createClassPlant(), null);
+		reg = context.registerService(ClassMakerPlant.class, ClassMakerFactory.eINSTANCE.createClassMakerPlant(), null);
 		Dictionary<String, String> properties = new Hashtable<String, String>();
-		properties.put(IContextFunction.SERVICE_CONTEXT_KEY, ClassPlant.class.getName());
+		properties.put(IContextFunction.SERVICE_CONTEXT_KEY, ClassMakerPlant.class.getName());
 		context.registerService(IContextFunction.SERVICE_NAME, new ServiceFactory(), properties);
-		tracker = new ServiceTracker<ClassPlant, ClassPlantImpl>(context, ClassPlant.class, null);
+		tracker = new ServiceTracker<ClassMakerPlant, ClassMakerPlantImpl>(context, ClassMakerPlant.class, null);
 		tracker.open();
 		context.addBundleListener(new BundleListener() {
 
@@ -139,16 +139,16 @@ public class ClassMakerOSGi extends Plugin {
 
 	public static <T extends IProgressMonitor> void setMonitorParameters(Class<T> monitorClass,
 			Object... constructorParameters) {
-		ClassMakerOSGi.monitorClass = monitorClass;
-		ClassMakerOSGi.monitorParameters = constructorParameters;
+		ClassMakerPlugin.monitorClass = monitorClass;
+		ClassMakerPlugin.monitorParameters = constructorParameters;
 	}
 
 	public static Class<? extends IProgressMonitor> getProgressMonitorClass() {
-		return ClassMakerOSGi.monitorClass;
+		return ClassMakerPlugin.monitorClass;
 	}
 
 	public static Object[] getProgressMonitorClassConstructorParameters() {
-		return ClassMakerOSGi.monitorParameters;
+		return ClassMakerPlugin.monitorParameters;
 	}
 
 	private IProgressMonitor createProgressMonitor() {
@@ -158,32 +158,32 @@ public class ClassMakerOSGi extends Plugin {
 	}
 
 	public static IStatus createOKStatus(String message) {
-		return new Status(IStatus.OK, ClassMakerOSGi.PLUGIN_ID, message);
+		return new Status(IStatus.OK, ClassMakerPlugin.PLUGIN_ID, message);
 	}
 
 	public static IStatus createInfoStatus(String message) {
-		return new Status(IStatus.INFO, ClassMakerOSGi.PLUGIN_ID, message);
+		return new Status(IStatus.INFO, ClassMakerPlugin.PLUGIN_ID, message);
 	}
 
 	public static IStatus createWarningStatus(String message) {
-		return new Status(IStatus.WARNING, ClassMakerOSGi.PLUGIN_ID, message);
+		return new Status(IStatus.WARNING, ClassMakerPlugin.PLUGIN_ID, message);
 	}
 
 	public static IStatus createWarningStatus(Throwable exception) {
-		return new Status(IStatus.WARNING, ClassMakerOSGi.PLUGIN_ID, exception.getLocalizedMessage(), exception);
+		return new Status(IStatus.WARNING, ClassMakerPlugin.PLUGIN_ID, exception.getLocalizedMessage(), exception);
 	}
 
 	public static IStatus createWarningStatus(String message, Throwable exception) {
-		return new Status(IStatus.WARNING, ClassMakerOSGi.PLUGIN_ID,
-				message + ": " + exception.getLocalizedMessage(), exception);
+		return new Status(IStatus.WARNING, ClassMakerPlugin.PLUGIN_ID, message + ": " + exception.getLocalizedMessage(),
+				exception);
 	}
 
 	public static IStatus createErrorStatus(String message) {
-		return new Status(IStatus.ERROR, ClassMakerOSGi.PLUGIN_ID, message);
+		return new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, message);
 	}
 
 	public static IStatus createErrorStatus(Throwable exception) {
-		return new Status(IStatus.ERROR, ClassMakerOSGi.PLUGIN_ID, exception.getLocalizedMessage(), exception);
+		return new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, exception.getLocalizedMessage(), exception);
 	}
 
 	public static String bundleStateAsString(int state) {

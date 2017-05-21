@@ -18,6 +18,8 @@ package org.enterprisedomain.classmaker.util;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -38,7 +40,7 @@ import org.eclipse.jgit.lib.Constants;
 import org.eclipse.pde.internal.core.ICoreConstants;
 import org.enterprisedomain.classmaker.Messages;
 import org.enterprisedomain.classmaker.State;
-import org.enterprisedomain.classmaker.core.ClassMakerOSGi;
+import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 
 @SuppressWarnings("restriction")
 public class ResourceUtils {
@@ -49,11 +51,11 @@ public class ResourceUtils {
 
 	private static final IPreferencesService preferencesService = Platform.getPreferencesService();
 
-	private static String modelFolderName = preferencesService.getString(ClassMakerOSGi.PLUGIN_ID,
-			ClassMakerOSGi.MODEL_FOLDER_PREF_KEY, Messages.DefaultModelFolder, null);
+	private static String modelFolderName = preferencesService.getString(ClassMakerPlugin.PLUGIN_ID,
+			ClassMakerPlugin.MODEL_FOLDER_PREF_KEY, Messages.DefaultModelFolder, null);
 
-	private static String fileExt = preferencesService.getString(ClassMakerOSGi.PLUGIN_ID,
-			ClassMakerOSGi.MODEL_RESOURCE_EXT_PREF_KEY, Messages.DefaultResourceExt, null);
+	private static String fileExt = preferencesService.getString(ClassMakerPlugin.PLUGIN_ID,
+			ClassMakerPlugin.MODEL_RESOURCE_EXT_PREF_KEY, Messages.DefaultResourceExt, null);
 
 	private static final String targetFolderName = "target"; //$NON-NLS-1$
 
@@ -70,6 +72,11 @@ public class ResourceUtils {
 
 	public static IPath getModelResourcePath(IProject project, String modelName) {
 		return project.getFullPath().append(getModelFolderName()).append(getFileName(modelName));
+	}
+
+	public static IPath getModelTransformationPath(IProject project,
+			org.eclipse.emf.common.util.URI transformationURI) {
+		return project.getFullPath().append(getModelFolderName()).append(transformationURI.lastSegment());
 	}
 
 	public static IPath getExportDestination(IProject project) {
@@ -136,7 +143,7 @@ public class ResourceUtils {
 	public static void removeProjectNature(IProject project, String natureId) throws CoreException {
 		IProjectDescription description = project.getDescription();
 		description.setNatureIds(removeElement(description.getNatureIds(), natureId));
-		project.setDescription(description, ClassMakerOSGi.getInstance().getProgressMonitor());
+		project.setDescription(description, ClassMakerPlugin.getInstance().getProgressMonitor());
 	}
 
 	@SuppressWarnings("deprecation")
@@ -158,6 +165,16 @@ public class ResourceUtils {
 			if (pm != null)
 				pm.done();
 			ResourceUtils.setAutoBuilding(project.getWorkspace(), autoBuilding);
+		}
+	}
+
+	public static void copyFile(org.eclipse.emf.common.util.URI sourceURI, IPath targetPath) throws CoreException {
+		try {
+			Files.copy(new File(sourceURI.toFileString()).toPath(),
+					ResourcesPlugin.getWorkspace().getRoot().getRawLocation().append(targetPath).toFile().toPath(),
+					StandardCopyOption.REPLACE_EXISTING);
+		} catch (IOException e) {
+			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 		}
 	}
 
@@ -215,7 +232,7 @@ public class ResourceUtils {
 					writer.close();
 			}
 		} catch (IOException e) {
-			throw new CoreException(ClassMakerOSGi.createErrorStatus(e));
+			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 		}
 	}
 

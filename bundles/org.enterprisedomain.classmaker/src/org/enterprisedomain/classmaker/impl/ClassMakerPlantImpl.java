@@ -17,42 +17,58 @@ package org.enterprisedomain.classmaker.impl;
 
 import java.util.concurrent.Semaphore;
 
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.ECollections;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.m2m.qvt.oml.BasicModelExtent;
+import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
+import org.eclipse.m2m.qvt.oml.ExecutionDiagnostic;
+import org.eclipse.m2m.qvt.oml.ModelExtent;
+import org.eclipse.m2m.qvt.oml.TransformationExecutor;
 import org.enterprisedomain.classmaker.ClassMakerFactory;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
-import org.enterprisedomain.classmaker.ClassPlant;
+import org.enterprisedomain.classmaker.ClassMakerPlant;
 import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Messages;
 import org.enterprisedomain.classmaker.Revision;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
-import org.enterprisedomain.classmaker.core.ClassMakerOSGi;
+import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.util.ModelUtil;
+import org.enterprisedomain.classmaker.util.ResourceUtils;
 import org.osgi.framework.Version;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Class
- * Plant</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object
+ * '<em><b>Plant</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ClassPlantImpl#getWorkspace <em>Workspace</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ClassMakerPlantImpl#getWorkspace <em>Workspace</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ClassPlantImpl extends EObjectImpl implements ClassPlant {
+public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant {
 	/**
 	 * The cached value of the '{@link #getWorkspace() <em>Workspace</em>}' reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -69,7 +85,7 @@ public class ClassPlantImpl extends EObjectImpl implements ClassPlant {
 	 * 
 	 * @generated NOT
 	 */
-	public ClassPlantImpl() {
+	public ClassMakerPlantImpl() {
 		super();
 		workspace = ClassMakerFactory.eINSTANCE.createWorkspace();
 	}
@@ -80,7 +96,7 @@ public class ClassPlantImpl extends EObjectImpl implements ClassPlant {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ClassMakerPackage.Literals.CLASS_PLANT;
+		return ClassMakerPackage.Literals.CLASS_MAKER_PLANT;
 	}
 
 	/**
@@ -93,8 +109,8 @@ public class ClassPlantImpl extends EObjectImpl implements ClassPlant {
 			workspace = (Workspace) eResolveProxy(oldWorkspace);
 			if (workspace != oldWorkspace) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassMakerPackage.CLASS_PLANT__WORKSPACE,
-							oldWorkspace, workspace));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							ClassMakerPackage.CLASS_MAKER_PLANT__WORKSPACE, oldWorkspace, workspace));
 			}
 		}
 		return workspace;
@@ -116,7 +132,7 @@ public class ClassPlantImpl extends EObjectImpl implements ClassPlant {
 		Workspace oldWorkspace = workspace;
 		workspace = newWorkspace;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.CLASS_PLANT__WORKSPACE,
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.CLASS_MAKER_PLANT__WORKSPACE,
 					oldWorkspace, workspace));
 	}
 
@@ -126,7 +142,7 @@ public class ClassPlantImpl extends EObjectImpl implements ClassPlant {
 	 * @generated NOT
 	 */
 	public EPackage produce(EPackage dynamicModel) throws CoreException {
-		IProgressMonitor monitor = ClassMakerOSGi.getInstance().getProgressMonitor();
+		IProgressMonitor monitor = ClassMakerPlugin.getInstance().getProgressMonitor();
 		return produce(dynamicModel, monitor);
 	}
 
@@ -143,11 +159,11 @@ public class ClassPlantImpl extends EObjectImpl implements ClassPlant {
 			lock.acquire();
 			return contrib.getDomainModel().getGenerated();
 		} catch (CoreException e) {
-			ClassMakerOSGi.getInstance().getLog().log(e.getStatus());
+			ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
 			throw e;
 		} catch (InterruptedException e) {
 			monitor.setCanceled(true);
-			throw new CoreException(ClassMakerOSGi.createWarningStatus(Messages.APINoResult));
+			throw new CoreException(ClassMakerPlugin.createWarningStatus(Messages.APINoResult));
 		}
 	}
 
@@ -175,7 +191,7 @@ public class ClassPlantImpl extends EObjectImpl implements ClassPlant {
 	 * @generated NOT
 	 */
 	public EPackage replace(EPackage queryModel, EPackage dynamicModel, boolean changeVersion) throws CoreException {
-		IProgressMonitor monitor = ClassMakerOSGi.getInstance().getProgressMonitor();
+		IProgressMonitor monitor = ClassMakerPlugin.getInstance().getProgressMonitor();
 		return replace(queryModel, dynamicModel, changeVersion, monitor);
 	}
 
@@ -209,7 +225,7 @@ public class ClassPlantImpl extends EObjectImpl implements ClassPlant {
 	 * @generated NOT
 	 */
 	public EPackage replace(EPackage queryModel, EPackage dynamicModel, Version version) throws CoreException {
-		IProgressMonitor monitor = ClassMakerOSGi.getInstance().getProgressMonitor();
+		IProgressMonitor monitor = ClassMakerPlugin.getInstance().getProgressMonitor();
 		return replace(queryModel, dynamicModel, version, monitor);
 	}
 
@@ -274,6 +290,56 @@ public class ClassPlantImpl extends EObjectImpl implements ClassPlant {
 	 * 
 	 * @generated NOT
 	 */
+	public EObject transform(EObject source, URI transformationURI) throws CoreException {
+		IProgressMonitor monitor = ClassMakerPlugin.getInstance().getProgressMonitor();
+		return transform(source, transformationURI, monitor);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public EObject transform(EObject source, URI transformationURI, IProgressMonitor monitor) throws CoreException {
+		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+		IPath transformationPath = ResourceUtils.getModelTransformationPath(
+				root.getProject(getWorkspace().getContribution(source).getProjectName()), transformationURI);
+		ResourceUtils.copyFile(transformationURI, transformationPath);
+		URI localTransformationURI = URI.createFileURI(
+				ResourcesPlugin.getWorkspace().getRoot().getRawLocation().append(transformationPath).toOSString());
+		TransformationExecutor executor = new TransformationExecutor(localTransformationURI);
+
+		EList<EObject> inObjects = ECollections.newBasicEList(source);
+
+		ModelExtent input = new BasicModelExtent(inObjects);
+		ModelExtent output = new BasicModelExtent();
+
+		// setup the execution environment details ->
+		// configuration properties, logger, monitor object etc.
+		ExecutionContextImpl context = new ExecutionContextImpl();
+		context.setConfigProperty("keepModeling", true);
+
+		// run the transformation assigned to the executor with the given
+		// input and output and execution context
+		// Remark: variable arguments count is supported
+		ExecutionDiagnostic result = executor.execute(context, input, output);
+
+		// check the result for success
+		if (result.getSeverity() == Diagnostic.OK) {
+			return output.getContents().get(0);
+		} else {
+			// turn the result diagnostic into status and send it to error log
+			IStatus status = BasicDiagnostic.toIStatus(result);
+			ClassMakerPlugin.getInstance().getLog().log(status);
+			return null;
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
 	public void delete(String packageName, IProgressMonitor monitor) throws CoreException {
 		Contribution contribution = getWorkspace().getContribution(computeProjectName(packageName));
 		if (contribution != null)
@@ -306,7 +372,7 @@ public class ClassPlantImpl extends EObjectImpl implements ClassPlant {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case ClassMakerPackage.CLASS_PLANT__WORKSPACE:
+		case ClassMakerPackage.CLASS_MAKER_PLANT__WORKSPACE:
 			if (resolve)
 				return getWorkspace();
 			return basicGetWorkspace();
@@ -321,7 +387,7 @@ public class ClassPlantImpl extends EObjectImpl implements ClassPlant {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case ClassMakerPackage.CLASS_PLANT__WORKSPACE:
+		case ClassMakerPackage.CLASS_MAKER_PLANT__WORKSPACE:
 			setWorkspace((Workspace) newValue);
 			return;
 		}
@@ -335,7 +401,7 @@ public class ClassPlantImpl extends EObjectImpl implements ClassPlant {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case ClassMakerPackage.CLASS_PLANT__WORKSPACE:
+		case ClassMakerPackage.CLASS_MAKER_PLANT__WORKSPACE:
 			setWorkspace((Workspace) null);
 			return;
 		}
@@ -349,10 +415,10 @@ public class ClassPlantImpl extends EObjectImpl implements ClassPlant {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case ClassMakerPackage.CLASS_PLANT__WORKSPACE:
+		case ClassMakerPackage.CLASS_MAKER_PLANT__WORKSPACE:
 			return workspace != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} // ClassPlantImpl
+} // ClassMakerPlantImpl

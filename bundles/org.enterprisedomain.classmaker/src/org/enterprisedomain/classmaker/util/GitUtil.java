@@ -31,7 +31,7 @@ import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.errors.RepositoryNotFoundException;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.enterprisedomain.classmaker.State;
-import org.enterprisedomain.classmaker.core.ClassMakerOSGi;
+import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 
 public class GitUtil {
 
@@ -48,7 +48,7 @@ public class GitUtil {
 			init.setDirectory(dir);
 			git = init.call();
 		} catch (IOException e) {
-			ClassMakerOSGi.getInstance().getLog().log(ClassMakerOSGi.createWarningStatus(e));
+			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createWarningStatus(e));
 		}
 		gits.put(dir.getName(), git);
 		return git;

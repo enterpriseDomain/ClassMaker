@@ -52,7 +52,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://org/enterprisedomain/ClassMaker/0.7.8";
+	String eNS_URI = "http://org/enterprisedomain/ClassMaker/0.7.9";
 
 	/**
 	 * The package namespace name.
@@ -290,13 +290,22 @@ public interface ClassMakerPackage extends EPackage {
 	int CONTRIBUTION__CONTRIBUTION = PROJECT_FEATURE_COUNT + 8;
 
 	/**
+	 * The feature id for the '<em><b>Dependencies</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTRIBUTION__DEPENDENCIES = PROJECT_FEATURE_COUNT + 9;
+
+	/**
 	 * The feature id for the '<em><b>Revision</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__REVISION = PROJECT_FEATURE_COUNT + 9;
+	int CONTRIBUTION__REVISION = PROJECT_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' map.
@@ -305,7 +314,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__REVISIONS = PROJECT_FEATURE_COUNT + 10;
+	int CONTRIBUTION__REVISIONS = PROJECT_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>State</b></em>' reference.
@@ -314,7 +323,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__STATE = PROJECT_FEATURE_COUNT + 11;
+	int CONTRIBUTION__STATE = PROJECT_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Latest Version</b></em>' attribute.
@@ -323,7 +332,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__LATEST_VERSION = PROJECT_FEATURE_COUNT + 12;
+	int CONTRIBUTION__LATEST_VERSION = PROJECT_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Model</b></em>' reference.
@@ -332,7 +341,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__MODEL = PROJECT_FEATURE_COUNT + 13;
+	int CONTRIBUTION__MODEL = PROJECT_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Completion Notified</b></em>' attribute.
@@ -341,7 +350,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__COMPLETION_NOTIFIED = PROJECT_FEATURE_COUNT + 14;
+	int CONTRIBUTION__COMPLETION_NOTIFIED = PROJECT_FEATURE_COUNT + 15;
 
 	/**
 	 * The number of structural features of the '<em>Contribution</em>' class.
@@ -350,7 +359,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION_FEATURE_COUNT = PROJECT_FEATURE_COUNT + 15;
+	int CONTRIBUTION_FEATURE_COUNT = PROJECT_FEATURE_COUNT + 16;
 
 	/**
 	 * The meta object id for the '{@link org.enterprisedomain.classmaker.impl.ItemImpl <em>Item</em>}' class.
@@ -680,13 +689,22 @@ public interface ClassMakerPackage extends EPackage {
 	int STATE__CONTRIBUTION = ITEM__CONTRIBUTION;
 
 	/**
+	 * The feature id for the '<em><b>Imports</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__IMPORTS = ITEM_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Revision</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__REVISION = ITEM_FEATURE_COUNT + 0;
+	int STATE__REVISION = ITEM_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Timestamp</b></em>' attribute.
@@ -695,7 +713,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__TIMESTAMP = ITEM_FEATURE_COUNT + 1;
+	int STATE__TIMESTAMP = ITEM_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Deployable Unit Name</b></em>' attribute.
@@ -704,7 +722,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__DEPLOYABLE_UNIT_NAME = ITEM_FEATURE_COUNT + 2;
+	int STATE__DEPLOYABLE_UNIT_NAME = ITEM_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Job Family</b></em>' attribute.
@@ -713,7 +731,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__JOB_FAMILY = ITEM_FEATURE_COUNT + 3;
+	int STATE__JOB_FAMILY = ITEM_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Resource</b></em>' reference.
@@ -722,7 +740,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__RESOURCE = ITEM_FEATURE_COUNT + 4;
+	int STATE__RESOURCE = ITEM_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Commit Ids</b></em>' attribute list.
@@ -731,7 +749,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__COMMIT_IDS = ITEM_FEATURE_COUNT + 5;
+	int STATE__COMMIT_IDS = ITEM_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>State Customizers</b></em>' map.
@@ -740,7 +758,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__STATE_CUSTOMIZERS = ITEM_FEATURE_COUNT + 6;
+	int STATE__STATE_CUSTOMIZERS = ITEM_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Project Name</b></em>' attribute.
@@ -749,7 +767,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__PROJECT_NAME = ITEM_FEATURE_COUNT + 7;
+	int STATE__PROJECT_NAME = ITEM_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Saving</b></em>' attribute.
@@ -758,7 +776,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__SAVING = ITEM_FEATURE_COUNT + 8;
+	int STATE__SAVING = ITEM_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of structural features of the '<em>State</em>' class.
@@ -767,7 +785,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE_FEATURE_COUNT = ITEM_FEATURE_COUNT + 9;
+	int STATE_FEATURE_COUNT = ITEM_FEATURE_COUNT + 10;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.emf.common.notify.Adapter <em>Adapter</em>}' class.
@@ -1171,14 +1189,14 @@ public interface ClassMakerPackage extends EPackage {
 	int RESOURCE_ADAPTER_FEATURE_COUNT = ADAPTER_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.enterprisedomain.classmaker.impl.ClassPlantImpl <em>Class Plant</em>}' class.
+	 * The meta object id for the '{@link org.enterprisedomain.classmaker.impl.ClassMakerPlantImpl <em>Plant</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.enterprisedomain.classmaker.impl.ClassPlantImpl
-	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getClassPlant()
+	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPlantImpl
+	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getClassMakerPlant()
 	 * @generated
 	 */
-	int CLASS_PLANT = 20;
+	int CLASS_MAKER_PLANT = 20;
 
 	/**
 	 * The feature id for the '<em><b>Workspace</b></em>' reference.
@@ -1187,16 +1205,16 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_PLANT__WORKSPACE = 0;
+	int CLASS_MAKER_PLANT__WORKSPACE = 0;
 
 	/**
-	 * The number of structural features of the '<em>Class Plant</em>' class.
+	 * The number of structural features of the '<em>Plant</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_PLANT_FEATURE_COUNT = 1;
+	int CLASS_MAKER_PLANT_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '<em>Locale</em>' data type.
@@ -1287,6 +1305,17 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getContribution();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.enterprisedomain.classmaker.Contribution#getDependencies <em>Dependencies</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Dependencies</em>'.
+	 * @see org.enterprisedomain.classmaker.Contribution#getDependencies()
+	 * @see #getContribution()
+	 * @generated
+	 */
+	EAttribute getContribution_Dependencies();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.enterprisedomain.classmaker.Contribution#getRevision <em>Revision</em>}'.
@@ -1417,6 +1446,17 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getState();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.enterprisedomain.classmaker.State#getImports <em>Imports</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Imports</em>'.
+	 * @see org.enterprisedomain.classmaker.State#getImports()
+	 * @see #getState()
+	 * @generated
+	 */
+	EAttribute getState_Imports();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.enterprisedomain.classmaker.State#getRevision <em>Revision</em>}'.
@@ -2019,25 +2059,25 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getResourceAdapter_Filename();
 
 	/**
-	 * Returns the meta object for class '{@link org.enterprisedomain.classmaker.ClassPlant <em>Class Plant</em>}'.
+	 * Returns the meta object for class '{@link org.enterprisedomain.classmaker.ClassMakerPlant <em>Plant</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Class Plant</em>'.
-	 * @see org.enterprisedomain.classmaker.ClassPlant
+	 * @return the meta object for class '<em>Plant</em>'.
+	 * @see org.enterprisedomain.classmaker.ClassMakerPlant
 	 * @generated
 	 */
-	EClass getClassPlant();
+	EClass getClassMakerPlant();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.enterprisedomain.classmaker.ClassPlant#getWorkspace <em>Workspace</em>}'.
+	 * Returns the meta object for the reference '{@link org.enterprisedomain.classmaker.ClassMakerPlant#getWorkspace <em>Workspace</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Workspace</em>'.
-	 * @see org.enterprisedomain.classmaker.ClassPlant#getWorkspace()
-	 * @see #getClassPlant()
+	 * @see org.enterprisedomain.classmaker.ClassMakerPlant#getWorkspace()
+	 * @see #getClassMakerPlant()
 	 * @generated
 	 */
-	EReference getClassPlant_Workspace();
+	EReference getClassMakerPlant_Workspace();
 
 	/**
 	 * Returns the meta object for data type '{@link java.util.Locale <em>Locale</em>}'.
@@ -2159,6 +2199,14 @@ public interface ClassMakerPackage extends EPackage {
 		EClass CONTRIBUTION = eINSTANCE.getContribution();
 
 		/**
+		 * The meta object literal for the '<em><b>Dependencies</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONTRIBUTION__DEPENDENCIES = eINSTANCE.getContribution_Dependencies();
+
+		/**
 		 * The meta object literal for the '<em><b>Revision</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2257,6 +2305,14 @@ public interface ClassMakerPackage extends EPackage {
 		 * @generated
 		 */
 		EClass STATE = eINSTANCE.getState();
+
+		/**
+		 * The meta object literal for the '<em><b>Imports</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATE__IMPORTS = eINSTANCE.getState_Imports();
 
 		/**
 		 * The meta object literal for the '<em><b>Revision</b></em>' reference feature.
@@ -2734,14 +2790,14 @@ public interface ClassMakerPackage extends EPackage {
 		EAttribute RESOURCE_ADAPTER__FILENAME = eINSTANCE.getResourceAdapter_Filename();
 
 		/**
-		 * The meta object literal for the '{@link org.enterprisedomain.classmaker.impl.ClassPlantImpl <em>Class Plant</em>}' class.
+		 * The meta object literal for the '{@link org.enterprisedomain.classmaker.impl.ClassMakerPlantImpl <em>Plant</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.enterprisedomain.classmaker.impl.ClassPlantImpl
-		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getClassPlant()
+		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPlantImpl
+		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getClassMakerPlant()
 		 * @generated
 		 */
-		EClass CLASS_PLANT = eINSTANCE.getClassPlant();
+		EClass CLASS_MAKER_PLANT = eINSTANCE.getClassMakerPlant();
 
 		/**
 		 * The meta object literal for the '<em><b>Workspace</b></em>' reference feature.
@@ -2749,7 +2805,7 @@ public interface ClassMakerPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CLASS_PLANT__WORKSPACE = eINSTANCE.getClassPlant_Workspace();
+		EReference CLASS_MAKER_PLANT__WORKSPACE = eINSTANCE.getClassMakerPlant_Workspace();
 
 		/**
 		 * The meta object literal for the '<em>Locale</em>' data type.

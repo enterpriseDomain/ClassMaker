@@ -26,8 +26,9 @@ import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.enterprisedomain.classmaker.*;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
-import org.enterprisedomain.classmaker.ClassPlant;
+import org.enterprisedomain.classmaker.ClassMakerPlant;
 import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Customizer;
@@ -195,8 +196,8 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseClassPlant(ClassPlant object) {
-			return createClassPlantAdapter();
+		public Adapter caseClassMakerPlant(ClassMakerPlant object) {
+			return createClassMakerPlantAdapter();
 		}
 
 		@Override
@@ -506,15 +507,16 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.enterprisedomain.classmaker.ClassPlant <em>Class Plant</em>}'.
-	 * <!-- begin-user-doc --> This default implementation returns
-	 * null so that we can easily ignore cases; it's useful to ignore a case
-	 * when inheritance will catch all the cases anyway. <!-- end-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.enterprisedomain.classmaker.ClassMakerPlant <em>Plant</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.enterprisedomain.classmaker.ClassPlant
+	 * @see org.enterprisedomain.classmaker.ClassMakerPlant
 	 * @generated
 	 */
-	public Adapter createClassPlantAdapter() {
+	public Adapter createClassMakerPlantAdapter() {
 		return null;
 	}
 

@@ -29,7 +29,7 @@ import org.eclipse.osgi.util.NLS;
 import org.enterprisedomain.classmaker.Messages;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.State;
-import org.enterprisedomain.classmaker.core.ClassMakerOSGi;
+import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
@@ -76,7 +76,7 @@ public class OSGiInstaller extends Installer {
 	public IStatus install(IProgressMonitor monitor) throws CoreException {
 		State contribution = getContributionState();
 		if (contribution.getPhase() == Stage.DEFINED)
-			return ClassMakerOSGi.createErrorStatus(Messages.ModelNotSpecified);
+			return ClassMakerPlugin.createErrorStatus(Messages.ModelNotSpecified);
 		IPath jarPath = ResourceUtils.getTargetResourcePath(getProject(), contribution);
 		BundleContext bundleContext = getContext();
 		try {
@@ -87,9 +87,9 @@ public class OSGiInstaller extends Installer {
 					existingBundle = bundle;
 			return installBundle(existingBundle, jarPath, bundleContext);
 		} catch (IllegalArgumentException e) {
-			throw new CoreException(ClassMakerOSGi.createErrorStatus(e));
+			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 		} catch (SecurityException e) {
-			throw new CoreException(ClassMakerOSGi.createErrorStatus(e));
+			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 		} catch (InterruptedException e) {
 			return Status.CANCEL_STATUS;
 		} finally {
@@ -109,7 +109,7 @@ public class OSGiInstaller extends Installer {
 			}
 			bundle = context.installBundle(URI.createFileURI(jarPath.toString()).toString());
 			if (bundle == null)
-				return ClassMakerOSGi
+				return ClassMakerPlugin
 						.createErrorStatus(NLS.bind(Messages.BundleNotInstalled, getProject().getName()));
 			installed.acquire();
 			getContributionState().setPhase(getResultStage());
@@ -135,32 +135,32 @@ public class OSGiInstaller extends Installer {
 
 	private IStatus getWarningStatus(Bundle bundle, BundleException e) {
 		if (bundle == null)
-			return ClassMakerOSGi.createWarningStatus(NLS.bind(Messages.BundleNo, getProject().getName()), e);
+			return ClassMakerPlugin.createWarningStatus(NLS.bind(Messages.BundleNo, getProject().getName()), e);
 		else
-			return ClassMakerOSGi.createWarningStatus(getStateStatusMessage(bundle), e);
+			return ClassMakerPlugin.createWarningStatus(getStateStatusMessage(bundle), e);
 	}
 
 	private IStatus getOKStatus(Bundle existingBundle, Bundle bundle) {
-		return ClassMakerOSGi.createOKStatus(Messages.OK + " " + getDuplicateStatusMessage(existingBundle, bundle));
+		return ClassMakerPlugin.createOKStatus(Messages.OK + " " + getDuplicateStatusMessage(existingBundle, bundle));
 	}
 
 	private IStatus getOKStatus(Bundle bundle) {
-		return ClassMakerOSGi.createOKStatus(Messages.OK + " " + getStateStatusMessage(bundle));
+		return ClassMakerPlugin.createOKStatus(Messages.OK + " " + getStateStatusMessage(bundle));
 	}
 
 	protected String getStateStatusMessage(Bundle bundle) {
 		return NLS.bind(Messages.BundleState,
 				new Object[] { bundle.getSymbolicName(), bundle.getHeaders().get(Constants.BUNDLE_VERSION),
-						ClassMakerOSGi.bundleStateAsString(bundle.getState()) });
+						ClassMakerPlugin.bundleStateAsString(bundle.getState()) });
 	}
 
 	private String getDuplicateStatusMessage(Bundle existingBundle, Bundle bundle) {
 		return NLS.bind(Messages.BundleDuplicate,
 				new Object[] { existingBundle.getSymbolicName(),
 						existingBundle.getHeaders().get(Constants.BUNDLE_VERSION),
-						ClassMakerOSGi.bundleStateAsString(existingBundle.getState()), bundle.getSymbolicName(),
+						ClassMakerPlugin.bundleStateAsString(existingBundle.getState()), bundle.getSymbolicName(),
 						bundle.getHeaders().get(Constants.BUNDLE_VERSION),
-						ClassMakerOSGi.bundleStateAsString(bundle.getState()) });
+						ClassMakerPlugin.bundleStateAsString(bundle.getState()) });
 	}
 
 	@Override

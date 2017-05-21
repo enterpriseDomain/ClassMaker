@@ -268,7 +268,7 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 				ClassMakerFactory.eINSTANCE.createResourceAdapter()));
 
 		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				ClassMakerFactory.eINSTANCE.createClassPlant()));
+				ClassMakerFactory.eINSTANCE.createClassMakerPlant()));
 
 		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
 				EcoreFactory.eINSTANCE.createEAttribute()));

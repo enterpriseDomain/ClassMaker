@@ -1,4 +1,4 @@
-package org.enterprisedomain.sample;
+package org.enterprisedomain.classmaker.sample;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;

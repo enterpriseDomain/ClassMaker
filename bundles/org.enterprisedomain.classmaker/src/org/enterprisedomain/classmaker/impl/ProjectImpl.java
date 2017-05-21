@@ -41,7 +41,7 @@ import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
-import org.enterprisedomain.classmaker.core.ClassMakerOSGi;
+import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
 
 /**
@@ -51,16 +51,11 @@ import org.enterprisedomain.classmaker.util.ResourceUtils;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getName
- * <em>Name</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getProjectName
- * <em>Project Name</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getChildren
- * <em>Children</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#isDirty
- * <em>Dirty</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getWorkspace
- * <em>Workspace</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getProjectName <em>Project Name</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getChildren <em>Children</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#isDirty <em>Dirty</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getWorkspace <em>Workspace</em>}</li>
  * </ul>
  *
  * @generated
@@ -73,7 +68,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		public void notifyChanged(Notification msg) {
 			if (msg.getFeatureID(State.class) == ClassMakerPackage.PROJECT__NAME
 					&& msg.getEventType() == Notification.SET && msg.getNewStringValue() != null)
-				setProjectName(ClassMakerOSGi.getClassMaker().computeProjectName(msg.getNewStringValue()));
+				setProjectName(ClassMakerPlugin.getClassMaker().computeProjectName(msg.getNewStringValue()));
 		}
 
 	}
@@ -81,7 +76,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -91,7 +85,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	/**
 	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -99,9 +92,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getProjectName() <em>Project
-	 * Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getProjectName()
 	 * @generated
 	 * @ordered
@@ -109,9 +101,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	protected static final String PROJECT_NAME_EDEFAULT = "";
 
 	/**
-	 * The cached value of the '{@link #getProjectName() <em>Project Name</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getProjectName() <em>Project Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getProjectName()
 	 * @generated
 	 * @ordered
@@ -121,7 +112,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	/**
 	 * The default value of the '{@link #isDirty() <em>Dirty</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #isDirty()
 	 * @generated
 	 * @ordered
@@ -140,7 +130,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -150,7 +139,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getName() {
@@ -159,7 +147,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setName(String newName) {
@@ -171,7 +158,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getProjectName() {
@@ -212,7 +198,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Workspace getWorkspace() {
@@ -223,7 +208,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetWorkspace(Workspace newWorkspace, NotificationChain msgs) {
@@ -233,7 +217,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setWorkspace(Workspace newWorkspace) {
@@ -294,8 +277,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
+	 * @generated NOT
 	 */
 	public String save(IProgressMonitor monitor) throws CoreException {
 		return "";
@@ -315,7 +297,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -331,7 +312,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -345,7 +325,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -385,7 +364,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -407,7 +385,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -428,7 +405,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -449,7 +425,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -496,7 +471,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

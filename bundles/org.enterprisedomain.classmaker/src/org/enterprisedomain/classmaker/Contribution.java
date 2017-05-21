@@ -17,6 +17,7 @@ package org.enterprisedomain.classmaker;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.osgi.framework.Version;
 
@@ -28,6 +29,7 @@ import org.osgi.framework.Version;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.enterprisedomain.classmaker.Contribution#getDependencies <em>Dependencies</em>}</li>
  *   <li>{@link org.enterprisedomain.classmaker.Contribution#getRevision <em>Revision</em>}</li>
  *   <li>{@link org.enterprisedomain.classmaker.Contribution#getRevisions <em>Revisions</em>}</li>
  *   <li>{@link org.enterprisedomain.classmaker.Contribution#getState <em>State</em>}</li>
@@ -41,6 +43,22 @@ import org.osgi.framework.Version;
  * @generated
  */
 public interface Contribution extends Project, Item {
+
+	/**
+	 * Returns the value of the '<em><b>Dependencies</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Dependencies</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Dependencies</em>' attribute list.
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getContribution_Dependencies()
+	 * @model default="" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	EList<String> getDependencies();
 
 	/**
 	 * Returns the value of the '<em><b>Revision</b></em>' reference.

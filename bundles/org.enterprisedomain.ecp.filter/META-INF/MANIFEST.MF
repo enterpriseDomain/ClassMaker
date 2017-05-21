@@ -8,7 +8,7 @@ Bundle-Vendor: Kyrill Zotkin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.emf.ecp.core;bundle-version="1.7.1",
- org.enterprisedomain.classmaker;bundle-version="0.7.8",
- org.enterprisedomain.edit;bundle-version="1.0.0"
+ org.enterprisedomain.classmaker;bundle-version="[0.7.8,0.8.0)",
+ org.enterprisedomain.classmaker.edit;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

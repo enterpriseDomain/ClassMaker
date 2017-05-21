@@ -1,4 +1,4 @@
-package org.enterprisedomain.sample;
+package org.enterprisedomain.classmaker.sample;
 
 import javax.inject.Inject;
 
@@ -12,13 +12,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.enterprisedomain.classmaker.ClassPlant;
+import org.enterprisedomain.classmaker.ClassMakerPlant;
 import org.osgi.framework.FrameworkUtil;
 
 public class Invoker implements Runnable {
 
 	@Inject
-	private ClassPlant m;
+	private ClassMakerPlant m;
 
 	private EPackage ePackage;
 

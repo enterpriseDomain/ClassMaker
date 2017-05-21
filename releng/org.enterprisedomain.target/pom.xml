@@ -1,16 +1,63 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>org.enterprisedomain</groupId>
-        <artifactId>org.enterprisedomain.releng</artifactId>
-        <version>0.7.8-SNAPSHOT</version>
-    </parent>
-    <groupId>org.enterprisedomain</groupId>
-    <artifactId>org.enterprisedomain.target</artifactId>
-    <version>0.7.8-SNAPSHOT</version>
-    <packaging>eclipse-target-definition</packaging>
-    
-    
-
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.enterprisedomain</groupId>
+		<artifactId>org.enterprisedomain.releng</artifactId>
+		<version>0.7.9-SNAPSHOT</version>
+	</parent>
+	<artifactId>org.enterprisedomain.target</artifactId>
+	<packaging>eclipse-target-definition</packaging>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho.version}</version>
+				<configuration>
+					<dependency-resolution>
+						<profileProperties>
+							<!-- set property so that the filter condition on the p2 dependencies 
+								from org.eclipse.swt to the fragments does not match -->
+							<org.eclipse.swt.buildtime>true</org.eclipse.swt.buildtime>
+						</profileProperties>
+						<extraRequirements>
+							<requirement>
+								<type>eclipse-plugin</type>
+								<id>org.eclipse.osgi.compatibility.state</id>
+								<versionRange>0.0.0</versionRange>
+							</requirement>
+						</extraRequirements>
+					</dependency-resolution>
+					<environments>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>macosx</os>
+							<ws>cocoa</ws>
+							<arch>x86_64</arch>
+						</environment>
+					</environments>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

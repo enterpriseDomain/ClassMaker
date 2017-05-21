@@ -10,7 +10,7 @@
             thread="main"
             visible="true">
          <run
-               class="org.enterprisedomain.sample.App">
+               class="org.enterprisedomain.classmaker.sample.App">
          </run>
       </application>
    </extension>

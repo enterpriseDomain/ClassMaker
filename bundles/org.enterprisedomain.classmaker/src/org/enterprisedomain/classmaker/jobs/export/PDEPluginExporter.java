@@ -38,7 +38,7 @@ import org.eclipse.pde.internal.core.exports.PluginExportOperation;
 import org.enterprisedomain.classmaker.Messages;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.State;
-import org.enterprisedomain.classmaker.core.ClassMakerOSGi;
+import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.jobs.DelegatingJob;
 import org.enterprisedomain.classmaker.util.GitUtil;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
@@ -108,7 +108,7 @@ public class PDEPluginExporter extends AbstractExporter {
 		try {
 			GitUtil.add(getProject().getName(), ".");
 		} catch (GitAPIException e) {
-			throw new CoreException(ClassMakerOSGi.createErrorStatus(e));
+			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 		}
 	}
 

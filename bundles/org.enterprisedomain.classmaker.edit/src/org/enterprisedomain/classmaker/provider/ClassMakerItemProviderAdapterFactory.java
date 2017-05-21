@@ -362,26 +362,26 @@ public class ClassMakerItemProviderAdapterFactory extends ClassMakerAdapterFacto
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.enterprisedomain.classmaker.ClassPlant} instances.
+	 * This keeps track of the one adapter used for all {@link org.enterprisedomain.classmaker.ClassMakerPlant} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ClassPlantItemProvider classPlantItemProvider;
+	protected ClassMakerPlantItemProvider classMakerPlantItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.enterprisedomain.classmaker.ClassPlant}.
+	 * This creates an adapter for a {@link org.enterprisedomain.classmaker.ClassMakerPlant}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createClassPlantAdapter() {
-		if (classPlantItemProvider == null) {
-			classPlantItemProvider = new ClassPlantItemProvider(this);
+	public Adapter createClassMakerPlantAdapter() {
+		if (classMakerPlantItemProvider == null) {
+			classMakerPlantItemProvider = new ClassMakerPlantItemProvider(this);
 		}
 
-		return classPlantItemProvider;
+		return classMakerPlantItemProvider;
 	}
 
 	/**
@@ -507,8 +507,8 @@ public class ClassMakerItemProviderAdapterFactory extends ClassMakerAdapterFacto
 			modelPairItemProvider.dispose();
 		if (resourceAdapterItemProvider != null)
 			resourceAdapterItemProvider.dispose();
-		if (classPlantItemProvider != null)
-			classPlantItemProvider.dispose();
+		if (classMakerPlantItemProvider != null)
+			classMakerPlantItemProvider.dispose();
 	}
 
 }

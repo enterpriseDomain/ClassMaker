@@ -4,7 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.enterprisedomain.classmaker.core.ClassMakerOSGi;
+import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 
 public class ProgressMonitorFactory {
 
@@ -21,13 +21,13 @@ public class ProgressMonitorFactory {
 			try {
 				return (IProgressMonitor) constructor.newInstance(parameters);
 			} catch (InstantiationException e) {
-				ClassMakerOSGi.getInstance().getLog().log(ClassMakerOSGi.createWarningStatus(e));
+				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createWarningStatus(e));
 			} catch (IllegalAccessException e) {
-				ClassMakerOSGi.getInstance().getLog().log(ClassMakerOSGi.createWarningStatus(e));
+				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createWarningStatus(e));
 			} catch (IllegalArgumentException e) {
-				ClassMakerOSGi.getInstance().getLog().log(ClassMakerOSGi.createWarningStatus(e));
+				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createWarningStatus(e));
 			} catch (InvocationTargetException e) {
-				ClassMakerOSGi.getInstance().getLog().log(ClassMakerOSGi.createWarningStatus(e));
+				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createWarningStatus(e));
 			}
 		return null;
 	}

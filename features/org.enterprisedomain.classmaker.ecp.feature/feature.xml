@@ -99,12 +99,10 @@ limitations under the License.
    </license>
 
    <includes
-         id="org.enterprisedomain.feature"
+         id="org.enterprisedomain.classmaker.feature"
          version="0.0.0"/>
 
    <requires>
-      <import plugin="org.enterprisedomain"/>
-      <import plugin="org.enterprisedomain" version="0.7.8" match="greaterOrEqual"/>
       <import plugin="org.enterprisedomain.ecp" version="0.0.1" match="greaterOrEqual"/>
       <import feature="org.eclipse.emf.ecp.feature" version="1.8.0.20160216-1319" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.runtime"/>
@@ -133,6 +131,13 @@ limitations under the License.
 
    <plugin
          id="org.enterprisedomain.ecp.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.enterprisedomain.classmaker"
          download-size="0"
          install-size="0"
          version="0.0.0"

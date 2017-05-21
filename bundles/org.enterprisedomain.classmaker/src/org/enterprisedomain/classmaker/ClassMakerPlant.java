@@ -17,27 +17,28 @@ package org.enterprisedomain.classmaker;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Class Plant</b></em>'.
+ * A representation of the model object '<em><b>Plant</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.ClassPlant#getWorkspace <em>Workspace</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.ClassMakerPlant#getWorkspace <em>Workspace</em>}</li>
  * </ul>
  *
- * @see org.enterprisedomain.classmaker.ClassMakerPackage#getClassPlant()
+ * @see org.enterprisedomain.classmaker.ClassMakerPackage#getClassMakerPlant()
  * @model
- * @generated
+ * @generated NOT
  */
-public interface ClassPlant extends EObject {
+public interface ClassMakerPlant extends EObject {
 
 	public static final String INVOCATION_DELEGATE_URI = "org.enterprisedomain.classmaker.reflection.java"; //$NON-NLS-1$
 
@@ -64,14 +65,14 @@ public interface ClassPlant extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Workspace</em>' reference.
 	 * @see #setWorkspace(Workspace)
-	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getClassPlant_Workspace()
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getClassMakerPlant_Workspace()
 	 * @model
 	 * @generated
 	 */
 	Workspace getWorkspace();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.ClassPlant#getWorkspace <em>Workspace</em>}' reference.
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.ClassMakerPlant#getWorkspace <em>Workspace</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Workspace</em>' reference.
@@ -114,10 +115,6 @@ public interface ClassPlant extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * 
-	 * @param queryModel model identifying what to replace
-	 * @param dynamicModel model to replace with
-	 * @param changeVersion whether to increase version of plug-in
 	 * <!-- end-user-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
 	 * @generated
@@ -153,6 +150,22 @@ public interface ClassPlant extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" transformationURIDataType="org.enterprisedomain.classmaker.URI"
+	 * @generated
+	 */
+	EObject transform(EObject source, URI transformationURI) throws CoreException;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" transformationURIDataType="org.enterprisedomain.classmaker.URI" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * @generated
+	 */
+	EObject transform(EObject source, URI transformationURI, IProgressMonitor monitor) throws CoreException;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
@@ -166,4 +179,4 @@ public interface ClassPlant extends EObject {
 	 */
 	String computeProjectName(String packageName);
 
-} // ClassPlant
+} // ClassMakerPlant

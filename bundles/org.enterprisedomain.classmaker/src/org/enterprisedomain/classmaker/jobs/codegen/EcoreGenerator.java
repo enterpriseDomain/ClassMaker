@@ -37,11 +37,11 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.osgi.util.NLS;
-import org.enterprisedomain.classmaker.ClassPlant;
+import org.enterprisedomain.classmaker.ClassMakerPlant;
 import org.enterprisedomain.classmaker.Messages;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.StageQualifier;
-import org.enterprisedomain.classmaker.core.ClassMakerOSGi;
+import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.jobs.EnterpriseDomainJob;
 import org.enterprisedomain.classmaker.util.GitUtil;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
@@ -132,13 +132,13 @@ public class EcoreGenerator extends EnterpriseDomainJob
 			int result = (Integer) getGenerator().run(new String[] { "-ecore2GenModel", modelFullPath.toString(), "", //$NON-NLS-1$ //$NON-NLS-2$
 					getContributionState().getModelName() });
 			if (result == 1)
-				throw new CoreException(ClassMakerOSGi.createErrorStatus("GenModel generation failed."));
+				throw new CoreException(ClassMakerPlugin.createErrorStatus("GenModel generation failed."));
 			else {
 				monitor.worked(1);
 				if (result == 0)
 					return Status.OK_STATUS;
 				else
-					return ClassMakerOSGi.createWarningStatus("GenModel generation returned unknown result.");
+					return ClassMakerPlugin.createWarningStatus("GenModel generation returned unknown result.");
 			}
 		}
 
@@ -161,16 +161,16 @@ public class EcoreGenerator extends EnterpriseDomainJob
 			try {
 				GitUtil.add(getProject().getName(), ".");
 			} catch (GitAPIException e) {
-				throw new CoreException(ClassMakerOSGi.createErrorStatus(e));
+				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 			}
 			if (result == 1)
-				throw new CoreException(ClassMakerOSGi.createErrorStatus("Code generation failed."));
+				throw new CoreException(ClassMakerPlugin.createErrorStatus("Code generation failed."));
 			else {
 				monitor.worked(1);
 				if (result == 0)
 					return Status.OK_STATUS;
 				else
-					return ClassMakerOSGi.createWarningStatus("Code generation returned unknown result.");
+					return ClassMakerPlugin.createWarningStatus("Code generation returned unknown result.");
 			}
 		}
 
@@ -210,7 +210,7 @@ public class EcoreGenerator extends EnterpriseDomainJob
 	private IPath ensureModelResourcePathExists(IProject project, String name, IProgressMonitor monitor)
 			throws CoreException {
 		if (!project.exists())
-			throw new CoreException(ClassMakerOSGi.createErrorStatus(NLS.bind(Messages.ProjectNotExist, project)));
+			throw new CoreException(ClassMakerPlugin.createErrorStatus(NLS.bind(Messages.ProjectNotExist, project)));
 		project.open(monitor);
 		IFolder folder = project.getFolder(ResourceUtils.getModelFolderName());
 		if (!folder.exists())
@@ -240,11 +240,14 @@ public class EcoreGenerator extends EnterpriseDomainJob
 			genPackage.setPrefix(CodeGenUtil.capName(genPackage.getPrefix(), genModel.getLocale()));
 
 		if (getContributionState() != null) {
+			for (String qualifiedName : getContributionState().getImports()) {
+				genModel.addImport(qualifiedName);
+			}
 			genModel.setModelName(getContributionState().getModelName());
 			genModel.setLanguage(getContributionState().getLanguage());
 			genModel.setModelPluginID(EcoreGenerator.this.getProject().getName());
 			for (StageQualifier filter : getContributionState().getCustomizers().keySet())
-				if (filter.equals(ClassPlant.Stages.GENMODEL_SETUP))
+				if (filter.equals(ClassMakerPlant.Stages.GENMODEL_SETUP))
 					getContributionState().getCustomizers().get(filter)
 							.customize(ECollections.asEList(projectPath, genModel, ePackages));
 		}

@@ -116,13 +116,13 @@ public interface ClassMakerFactory extends EFactory {
 	ResourceAdapter createResourceAdapter();
 
 	/**
-	 * Returns a new object of class '<em>Class Plant</em>'.
+	 * Returns a new object of class '<em>Plant</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Class Plant</em>'.
+	 * @return a new object of class '<em>Plant</em>'.
 	 * @generated
 	 */
-	ClassPlant createClassPlant();
+	ClassMakerPlant createClassMakerPlant();
 
 	/**
 	 * Returns the package supported by this factory.

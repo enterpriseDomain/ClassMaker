@@ -64,7 +64,7 @@ import org.enterprisedomain.classmaker.Revision;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
-import org.enterprisedomain.classmaker.core.ClassMakerOSGi;
+import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.util.ClassMakerSwitch;
 import org.enterprisedomain.classmaker.util.ModelUtil;
 import org.osgi.framework.Bundle;
@@ -77,19 +77,16 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl#getProjects
- * <em>Projects</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl#getResourceSet
- * <em>Resource Set</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl#getProjects <em>Projects</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl#getResourceSet <em>Resource Set</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	/**
-	 * The cached value of the '{@link #getProjects() <em>Projects</em>}'
-	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getProjects() <em>Projects</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getProjects()
 	 * @generated
 	 * @ordered
@@ -107,9 +104,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	protected static final ResourceSet RESOURCE_SET_EDEFAULT = new ResourceSetImpl();
 
 	/**
-	 * The cached value of the '{@link #getResourceSet() <em>Resource Set</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getResourceSet() <em>Resource Set</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getResourceSet()
 	 * @generated
 	 * @ordered
@@ -118,7 +114,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected WorkspaceImpl() {
@@ -127,7 +122,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -137,7 +131,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EList<Project> getProjects() {
@@ -158,7 +151,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ResourceSet getResourceSet() {
@@ -175,14 +167,14 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		for (IProject project : workspace.getRoot().getProjects()) {
 			Contribution contribution = null;
 			try {
-				if (project.isOpen() && project.hasNature(ClassMakerOSGi.NATURE_ID)) {
+				if (project.isOpen() && project.hasNature(ClassMakerPlugin.NATURE_ID)) {
 					contribution = (ContributionImpl) ClassMakerFactory.eINSTANCE.createContribution();
 					contribution.setProjectName(project.getName());
 					registerProject(contribution);
 					contribution.initialize();
 				}
 			} catch (CoreException e) {
-				ClassMakerOSGi.getInstance().getLog().log(e.getStatus());
+				ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
 			}
 		}
 	}
@@ -204,7 +196,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		// }
 		// }
 
-		IPath targetPlatformLocation = ClassMakerOSGi.getInstance().getStateLocation().append("target")
+		IPath targetPlatformLocation = ClassMakerPlugin.getInstance().getStateLocation().append("target")
 				.append("workspace").addFileExtension("target");
 		ITargetPlatformService targetPlatformService = TargetPlatformService.getDefault();
 		ITargetDefinition targetDefinition = null;
@@ -411,7 +403,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			if (contribution.getProjectName() != null && contribution.getProjectName().equals(projectName))
 				return contribution;
 		}
-		IProgressMonitor monitor = ClassMakerOSGi.getInstance().getProgressMonitor();
+		IProgressMonitor monitor = ClassMakerPlugin.getInstance().getProgressMonitor();
 		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
 		Contribution contribution = null;
 		try {
@@ -419,7 +411,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 				return contribution;
 			if (!project.isOpen())
 				project.open(monitor);
-			if (project.hasNature(ClassMakerOSGi.NATURE_ID)) {
+			if (project.hasNature(ClassMakerPlugin.NATURE_ID)) {
 				if (contribution == null) {
 					contribution = (ContributionImpl) ClassMakerFactory.eINSTANCE.createContribution();
 					contribution.setProjectName(project.getName());
@@ -453,14 +445,14 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 */
 	public Project getProject(String name) {
 		String projectName = name;
-		Contribution contribution = getContribution(ClassMakerOSGi.getClassMaker().computeProjectName(projectName));
+		Contribution contribution = getContribution(ClassMakerPlugin.getClassMaker().computeProjectName(projectName));
 		if (contribution != null)
 			projectName = contribution.getProjectName();
 		for (Project project : getProjects()) {
 			if (project.getProjectName() != null && project.getProjectName().equals(projectName))
 				return project;
 		}
-		IProgressMonitor monitor = ClassMakerOSGi.getInstance().getProgressMonitor();
+		IProgressMonitor monitor = ClassMakerPlugin.getInstance().getProgressMonitor();
 		IProject eProject = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
 		Project project = null;
 		try {
@@ -469,7 +461,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 					eProject.create(monitor);
 			eProject.open(monitor);
 			if (project == null) {
-				if (eProject.hasNature(ClassMakerOSGi.NATURE_ID))
+				if (eProject.hasNature(ClassMakerPlugin.NATURE_ID))
 					project = ClassMakerFactory.eINSTANCE.createContribution();
 				else if (project == null)
 					project = ClassMakerFactory.eINSTANCE.createProject();
@@ -523,7 +515,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -538,7 +529,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -552,7 +542,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -568,7 +557,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -585,7 +573,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -600,7 +587,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -616,7 +602,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

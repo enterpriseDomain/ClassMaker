@@ -28,9 +28,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.enterprisedomain.classmaker.*;
 import org.enterprisedomain.classmaker.ClassMakerFactory;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
-import org.enterprisedomain.classmaker.ClassPlant;
+import org.enterprisedomain.classmaker.ClassMakerPlant;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Customizer;
 import org.enterprisedomain.classmaker.ModelPair;
@@ -111,8 +112,8 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 			return createModelPair();
 		case ClassMakerPackage.RESOURCE_ADAPTER:
 			return createResourceAdapter();
-		case ClassMakerPackage.CLASS_PLANT:
-			return createClassPlant();
+		case ClassMakerPackage.CLASS_MAKER_PLANT:
+			return createClassMakerPlant();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -301,9 +302,9 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassPlant createClassPlant() {
-		ClassPlantImpl classPlant = new ClassPlantImpl();
-		return classPlant;
+	public ClassMakerPlant createClassMakerPlant() {
+		ClassMakerPlantImpl classMakerPlant = new ClassMakerPlantImpl();
+		return classMakerPlant;
 	}
 
 	/**

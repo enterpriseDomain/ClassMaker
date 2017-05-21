@@ -26,8 +26,9 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.Switch;
+import org.enterprisedomain.classmaker.*;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
-import org.enterprisedomain.classmaker.ClassPlant;
+import org.enterprisedomain.classmaker.ClassMakerPlant;
 import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Customizer;
@@ -254,9 +255,9 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case ClassMakerPackage.CLASS_PLANT: {
-			ClassPlant classPlant = (ClassPlant) theEObject;
-			T result = caseClassPlant(classPlant);
+		case ClassMakerPackage.CLASS_MAKER_PLANT: {
+			ClassMakerPlant classMakerPlant = (ClassMakerPlant) theEObject;
+			T result = caseClassMakerPlant(classMakerPlant);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -547,16 +548,17 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Class Plant</em>'.
-	 * <!-- begin-user-doc --> This implementation
-	 * returns null; returning a non-null result will terminate the switch. <!--
-	 * end-user-doc -->
+	 * Returns the result of interpreting the object as an instance of '<em>Plant</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Class Plant</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Plant</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseClassPlant(ClassPlant object) {
+	public T caseClassMakerPlant(ClassMakerPlant object) {
 		return null;
 	}
 

@@ -23,14 +23,18 @@ import static org.junit.Assert.fail;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Semaphore;
 
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -39,18 +43,23 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.EParameter;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.enterprisedomain.classmaker.ClassPlant;
+import org.enterprisedomain.classmaker.ClassMakerPlant;
 import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Customizer;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.impl.CompletionListenerImpl;
 import org.enterprisedomain.classmaker.impl.CustomizerImpl;
+import org.enterprisedomain.classmaker.util.ResourceUtils;
 import org.junit.Test;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
@@ -89,12 +98,12 @@ public class TestEnterpriseDomain extends AbstractTest {
 		an.getDetails().put("body", "setPagesRead(getPagesRead() + pagesRead);");
 		op.getEAnnotations().add(an);
 		EAnnotation invocation = ecoreFactory.createEAnnotation();
-		invocation.setSource(ClassPlant.INVOCATION_DELEGATE_URI);
+		invocation.setSource(ClassMakerPlant.INVOCATION_DELEGATE_URI);
 		op.getEAnnotations().add(invocation);
 		eClass.getEOperations().add(op);
 		invocation = ecoreFactory.createEAnnotation();
 		invocation.setSource(EcorePackage.eNS_URI);
-		invocation.getDetails().put("invocationDelegates", ClassPlant.INVOCATION_DELEGATE_URI);
+		invocation.getDetails().put("invocationDelegates", ClassMakerPlant.INVOCATION_DELEGATE_URI);
 		readerEPackage.getEAnnotations().add(invocation);
 		readerEPackage.getEClassifiers().add(eClass);
 
@@ -128,8 +137,8 @@ public class TestEnterpriseDomain extends AbstractTest {
 	@Test
 	public void osgiService() throws Exception {
 		BundleContext bundleContext = FrameworkUtil.getBundle(this.getClass()).getBundleContext();
-		ServiceReference<?> serviceReference = bundleContext.getServiceReference(ClassPlant.class);
-		ClassPlant tested = (ClassPlant) bundleContext.getService(serviceReference);
+		ServiceReference<?> serviceReference = bundleContext.getServiceReference(ClassMakerPlant.class);
+		ClassMakerPlant tested = (ClassMakerPlant) bundleContext.getService(serviceReference);
 		assertNotNull(tested);
 		EPackage ePackage = createEPackage("deeds", "0.2");
 		EClass eClass = EcoreFactory.eINSTANCE.createEClass();
@@ -151,17 +160,20 @@ public class TestEnterpriseDomain extends AbstractTest {
 	@Test
 	public void metaModel() throws Exception {
 		EcoreFactory factory = EcoreFactory.eINSTANCE;
-		EPackage _package = createEPackage("meta", "");
+		EPackage metaPackage = createEPackage("meta", "");
 		EClass metaClass = factory.createEClass();
 		metaClass.setName("MetaObject");
+		String nameAttributeName = "name";
 		EAttribute nameAttribute = factory.createEAttribute();
-		nameAttribute.setName("name");
+		nameAttribute.setName(nameAttributeName);
 		nameAttribute.setEType(EcorePackage.Literals.ESTRING);
 		metaClass.getEStructuralFeatures().add(nameAttribute);
-		EAttribute valueAttribute = factory.createEAttribute();
-		valueAttribute.setName("value");
-		valueAttribute.setEType(EcorePackage.Literals.EJAVA_OBJECT);
-		metaClass.getEStructuralFeatures().add(valueAttribute);
+		EAttribute attributesAttribute = factory.createEAttribute();
+		String attributesAttributeName = "attributes";
+		attributesAttribute.setName(attributesAttributeName);
+		attributesAttribute.setEType(EcorePackage.Literals.ESTRING);
+		attributesAttribute.setUpperBound(-1);
+		metaClass.getEStructuralFeatures().add(attributesAttribute);
 		EOperation op = factory.createEOperation();
 		op.setName("createInstance");
 		op.setEType(metaClass);
@@ -170,22 +182,35 @@ public class TestEnterpriseDomain extends AbstractTest {
 		an.getDetails().put("body", "return <%meta.MetaFactory%>.eINSTANCE.createMetaObject();");
 		op.getEAnnotations().add(an);
 		EAnnotation invocation = factory.createEAnnotation();
-		invocation.setSource(ClassPlant.INVOCATION_DELEGATE_URI);
+		invocation.setSource(ClassMakerPlant.INVOCATION_DELEGATE_URI);
 		op.getEAnnotations().add(invocation);
 		metaClass.getEOperations().add(op);
-		_package.getEClassifiers().add(metaClass);
+		metaPackage.getEClassifiers().add(metaClass);
 		EAnnotation invocationDelegate = factory.createEAnnotation();
 		invocationDelegate.setSource(EcorePackage.eNS_URI);
-		invocationDelegate.getDetails().put("invocationDelegates", ClassPlant.INVOCATION_DELEGATE_URI);
-		_package.getEAnnotations().add(invocationDelegate);
+		invocationDelegate.getDetails().put("invocationDelegates", ClassMakerPlant.INVOCATION_DELEGATE_URI);
+		metaPackage.getEAnnotations().add(invocationDelegate);
+		EClass modelClass = factory.createEClass();
+		modelClass.setName("MetaModel");
+		EAttribute modelName = factory.createEAttribute();
+		modelName.setName(nameAttributeName);
+		modelName.setEType(EcorePackage.Literals.ESTRING);
+		modelClass.getEStructuralFeatures().add(modelName);
+		EReference objectsReference = factory.createEReference();
+		objectsReference.setName("objects");
+		objectsReference.setUpperBound(-1);
+		objectsReference.setEType(metaClass);
+		modelClass.getEStructuralFeatures().add(objectsReference);
+		metaPackage.getEClassifiers().add(modelClass);
 
-		EPackage ePackage = service.produce(_package);
+		EPackage ePackage = service.produce(metaPackage);
 		assertNotNull(ePackage);
 		EClass resultClass = (EClass) ePackage.getEClassifier(metaClass.getName());
-		EObject metaObject = ePackage.getEFactoryInstance().create(resultClass);
+		EObject metaClassObject = ePackage.getEFactoryInstance().create(resultClass);
 		EAttribute resultAttribute = (EAttribute) resultClass.getEStructuralFeature(nameAttribute.getName());
-		metaObject.eSet(resultAttribute, "Notebook");
-		assertEquals("Notebook", metaObject.eGet(resultAttribute));
+		String domainClassName = "Metaphor";
+		metaClassObject.eSet(resultAttribute, domainClassName);
+		assertEquals(domainClassName, metaClassObject.eGet(resultAttribute));
 		EObject object = ePackage.getEFactoryInstance().create(resultClass);
 		EList<?> arguments = ECollections.emptyEList();
 		EObject nativeObject = null;
@@ -195,6 +220,48 @@ public class TestEnterpriseDomain extends AbstractTest {
 						.createInvocationDelegate(operation).dynamicInvoke((InternalEObject) object, arguments);
 			}
 		assertEquals(object.eClass(), nativeObject.eClass());
+		EObject nativeModel = ePackage.getEFactoryInstance().create(modelClass);
+		nativeModel.eSet(
+				((EClass) ePackage.getEClassifier(modelClass.getName())).getEStructuralFeature(nameAttributeName),
+				"Toolkit");
+		EList<String> attributes = ECollections.newBasicEList();
+		attributes.add(nameAttributeName);
+		nativeObject.eSet(
+				((EClass) ePackage.getEClassifier(resultClass.getName())).getEStructuralFeature(nameAttributeName),
+				domainClassName);
+		nativeObject.eSet(((EClass) ePackage.getEClassifier(resultClass.getName()))
+				.getEStructuralFeature(attributesAttributeName), attributes);
+		EList<EObject> list = ECollections.newBasicEList();
+		list.add(nativeObject);
+		nativeModel.eSet(((EClass) ePackage.getEClassifier(modelClass.getName()))
+				.getEStructuralFeature(objectsReference.getName()), list);
+		IPath qvt = ClassMakerTestsPlugin.getInstance().getStateLocation()
+				.append(service.getWorkspace().getContribution(metaPackage).getProjectName() + "/transform.qvto");
+		ResourceUtils.writeFile(qvt, "import emf.tools;\n\nmodeltype " + EcorePackage.eINSTANCE.getName() + " uses \""
+				+ EcorePackage.eINSTANCE.getNsURI() + "\";\n" + "modeltype " + metaPackage.getName() + " uses \""
+				+ metaPackage.getNsURI() + "\";\n\n" + "transformation objectToEcore(in obj : " + metaPackage.getName()
+				+ ", out eCore : " + EcorePackage.eINSTANCE.getName() + ");\n\n" + "main() {\n\tobj.rootObjects()["
+				+ modelClass.getName() + "].map toEPackage();\n" + "}\n\n" + "mapping " + metaPackage.getName() + "::"
+				+ modelClass.getName() + "::toEPackage() : EPackage {\n\tname := self." + modelName.getName()
+				+ ".toLowerCase();\n\t" + "nsPrefix := self." + modelName.getName() + ";\n"
+				+ "\tnsURI := (\"http://\" + self." + modelName.getName() + " + \"/\").toLowerCase();\n"
+				+ "\teClassifiers += self." + objectsReference.getName() + ".map toEClass();" + "\n}\n\n" + "mapping "
+				+ metaPackage.getName() + "::" + metaClass.getName() + "::toEClass(): EClass {\n"
+				+ "init{\n\tvar eObject := object EObject {};\n}\n" + "\tname := self." + nameAttribute.getName()
+				+ ";\n" + "\teStructuralFeatures += self." + attributesAttribute.getName()
+				+ ".map toEAttribute(eObject.eClass().ePackage.getEClassifier('EString').oclAsType(EDataType));\n}\n\n"
+				+ "mapping String::toEAttribute(in type : EDataType) : EAttribute {\n\tname := self;\n"
+				+ "\teType := type;\n}\n");
+		EPackage metaModel = (EPackage) service.transform(nativeModel, URI.createFileURI(qvt.toString()));
+		assertNotNull(metaModel);
+		EPackage resultMetaModel = service.produce(metaModel);
+		EObject o = resultMetaModel.getEFactoryInstance()
+				.create((EClass) resultMetaModel.getEClassifier(domainClassName));
+		String domainObjectName = "Gear";
+		o.eSet(((EClass) resultMetaModel.getEClassifier(domainClassName)).getEStructuralFeature(nameAttributeName),
+				domainObjectName);
+		assertEquals(domainObjectName, o.eGet(
+				((EClass) resultMetaModel.getEClassifier(domainClassName)).getEStructuralFeature(nameAttributeName)));
 		cleanup();
 	}
 
@@ -354,12 +421,12 @@ public class TestEnterpriseDomain extends AbstractTest {
 			public void customize(EList<Object> args) {
 				GenModel genModel = ((GenModel) args.get(1));
 				genModel.setDynamicTemplates(true);
-				genModel.setTemplateDirectory("platform:/plugin/org.genericdomain.tests/templates");
+				genModel.setTemplateDirectory("platform:/plugin/org.enterprisedomain.tests/templates");
 				genModel.setSuppressInterfaces(false);
 			}
 
 		};
-		c.getCustomizers().put(ClassPlant.Stages.GENMODEL_SETUP, customizer);
+		c.getCustomizers().put(ClassMakerPlant.Stages.GENMODEL_SETUP, customizer);
 
 		final Semaphore complete = new Semaphore(0);
 
