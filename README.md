@@ -26,12 +26,12 @@ Here is how you can use it:
     BundleContext bundleContext = FrameworkUtil.getBundle(this.getClass())
                                 .getBundleContext();
     ServiceReference<?> serviceReference = bundleContext
-                                .getServiceReference(ClassPlant.class);
-    ClassPlant classPlant = (ClassPlant) bundleContext
+                                .getServiceReference(ClassMakerPlant.class);
+    ClassMakerPlant classMaker = (ClassPlant) bundleContext
                                 .getService(serviceReference);
 
     // Produce result by combining them
-    EPackage jPackage = classPlant.produce(ePackage);
+    EPackage jPackage = classMaker.produce(ePackage);
     
     ...
     // Use the generated model at runtime
