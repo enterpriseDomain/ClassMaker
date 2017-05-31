@@ -23,8 +23,6 @@ import static org.junit.Assert.fail;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Semaphore;
 
@@ -48,9 +46,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.enterprisedomain.classmaker.ClassMakerPlant;
 import org.enterprisedomain.classmaker.CompletionListener;
@@ -82,25 +77,25 @@ public class TestEnterpriseDomain extends AbstractTest {
 		pagesAttr.setEType(EcorePackage.Literals.EINT);
 		eClass.getEStructuralFeatures().add(pagesAttr);
 
-		final EAttribute attr = ecoreFactory.createEAttribute();
-		attr.setName("pagesRead");
-		attr.setEType(EcorePackage.Literals.EINT);
-		eClass.getEStructuralFeatures().add(attr);
+		final EAttribute attribute = ecoreFactory.createEAttribute();
+		attribute.setName("pagesRead");
+		attribute.setEType(EcorePackage.Literals.EINT);
+		eClass.getEStructuralFeatures().add(attribute);
 
-		final EOperation op = ecoreFactory.createEOperation();
-		op.setName("read");
+		final EOperation operation = ecoreFactory.createEOperation();
+		operation.setName("read");
 		EParameter p = ecoreFactory.createEParameter();
 		p.setEType(EcorePackage.Literals.EINT);
 		p.setName("pagesRead");
-		op.getEParameters().add(p);
+		operation.getEParameters().add(p);
 		EAnnotation an = ecoreFactory.createEAnnotation();
 		an.setSource("http://www.eclipse.org/emf/2002/GenModel");
 		an.getDetails().put("body", "setPagesRead(getPagesRead() + pagesRead);");
-		op.getEAnnotations().add(an);
+		operation.getEAnnotations().add(an);
 		EAnnotation invocation = ecoreFactory.createEAnnotation();
 		invocation.setSource(ClassMakerPlant.INVOCATION_DELEGATE_URI);
-		op.getEAnnotations().add(invocation);
-		eClass.getEOperations().add(op);
+		operation.getEAnnotations().add(invocation);
+		eClass.getEOperations().add(operation);
 		invocation = ecoreFactory.createEAnnotation();
 		invocation.setSource(EcorePackage.eNS_URI);
 		invocation.getDetails().put("invocationDelegates", ClassMakerPlant.INVOCATION_DELEGATE_URI);
@@ -121,13 +116,13 @@ public class TestEnterpriseDomain extends AbstractTest {
 
 		int readPagesCount = 11;
 		EList<?> arguments = ECollections.asEList(readPagesCount);
-		for (EOperation operation : theClass.getEAllOperations())
-			if (operation.getName().equals(op.getName())) {
-				EcoreUtil.getInvocationDelegateFactory(operation).createInvocationDelegate(operation)
+		for (EOperation op : theClass.getEAllOperations())
+			if (op.getName().equals(op.getName())) {
+				EcoreUtil.getInvocationDelegateFactory(op).createInvocationDelegate(op)
 						.dynamicInvoke((InternalEObject) theObject, arguments);
 			}
 
-		EStructuralFeature state = theClass.getEStructuralFeature(attr.getName());
+		EStructuralFeature state = theClass.getEStructuralFeature(attribute.getName());
 		assertEquals(readPagesCount, theObject.eGet(state));
 
 		assertEquals(eClass.getName(), theObject.getClass().getSimpleName());
