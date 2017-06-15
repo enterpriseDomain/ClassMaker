@@ -22,7 +22,7 @@
          </property>
          <property
                name="lifeCycleURI"
-               value="bundleclass://org.enterprisedomain.ui.workbench.rcp/org.enterprisedomain.ui.rcp.handlers.LifeCycleManager">
+               value="bundleclass://org.enterprisedomain.ui.workplace.rcp/org.enterprisedomain.ui.rcp.handlers.LifeCycleManager">
          </property>
       </product>
    </extension>
