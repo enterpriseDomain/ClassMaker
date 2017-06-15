@@ -403,7 +403,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			if (contribution.getProjectName() != null && contribution.getProjectName().equals(projectName))
 				return contribution;
 		}
-		IProgressMonitor monitor = ClassMakerPlugin.getInstance().getProgressMonitor();
+		IProgressMonitor monitor = ClassMakerPlugin.getProgressMonitor();
 		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
 		Contribution contribution = null;
 		try {
@@ -452,7 +452,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			if (project.getProjectName() != null && project.getProjectName().equals(projectName))
 				return project;
 		}
-		IProgressMonitor monitor = ClassMakerPlugin.getInstance().getProgressMonitor();
+		IProgressMonitor monitor = ClassMakerPlugin.getProgressMonitor();
 		IProject eProject = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
 		Project project = null;
 		try {

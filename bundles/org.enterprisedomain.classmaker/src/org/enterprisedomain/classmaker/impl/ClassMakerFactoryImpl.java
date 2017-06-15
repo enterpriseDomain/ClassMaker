@@ -15,6 +15,7 @@
  */
 package org.enterprisedomain.classmaker.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.Semaphore;
@@ -137,6 +138,8 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 			return createSemaphoreFromString(eDataType, initialValue);
 		case ClassMakerPackage.CORE_EXCEPTION:
 			return createCoreExceptionFromString(eDataType, initialValue);
+		case ClassMakerPackage.INVOCATION_TARGET_EXCEPTION:
+			return createInvocationTargetExceptionFromString(eDataType, initialValue);
 		case ClassMakerPackage.URI:
 			return createURIFromString(eDataType, initialValue);
 		case ClassMakerPackage.EXCEPTION:
@@ -166,6 +169,8 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 			return convertSemaphoreToString(eDataType, instanceValue);
 		case ClassMakerPackage.CORE_EXCEPTION:
 			return convertCoreExceptionToString(eDataType, instanceValue);
+		case ClassMakerPackage.INVOCATION_TARGET_EXCEPTION:
+			return convertInvocationTargetExceptionToString(eDataType, instanceValue);
 		case ClassMakerPackage.URI:
 			return convertURIToString(eDataType, instanceValue);
 		case ClassMakerPackage.EXCEPTION:
@@ -398,6 +403,25 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 	 * @generated
 	 */
 	public String convertCoreExceptionToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public InvocationTargetException createInvocationTargetExceptionFromString(EDataType eDataType,
+			String initialValue) {
+		return (InvocationTargetException) super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertInvocationTargetExceptionToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

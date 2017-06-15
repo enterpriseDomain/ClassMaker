@@ -246,7 +246,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 		if (ResourceSet.class.isAssignableFrom(adapterType))
 			return (T) Activator.getClassMaker().getWorkspace().getResourceSet();
 		if (IProgressMonitor.class.isAssignableFrom(adapterType))
-			return (T) ClassMakerPlugin.getInstance().getProgressMonitor();
+			return (T) ClassMakerPlugin.getProgressMonitor();
 		return super.getAdapter(adaptable, adapterType);
 	}
 

@@ -17,8 +17,8 @@ package org.enterprisedomain.ecp;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Plugin;
-import org.enterprisedomain.classmaker.ClassMaker;
-import org.enterprisedomain.classmaker.impl.ClassMakerImpl;
+import org.enterprisedomain.classmaker.ClassMakerPlant;
+import org.enterprisedomain.classmaker.impl.ClassMakerPlantImpl;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
@@ -27,23 +27,23 @@ public class Activator extends Plugin implements BundleActivator {
 
 	private static Activator instance;
 
-	private static ServiceTracker<ClassMaker, ClassMakerImpl> ClassMaker;
+	private static ServiceTracker<ClassMakerPlant, ClassMakerPlantImpl> classMaker;
 
-	public static ClassMaker getClassMaker() {
-		return ClassMaker.getService();
+	public static ClassMakerPlant getClassMaker() {
+		return classMaker.getService();
 	}
 
 	@Override
 	public void start(BundleContext context) throws Exception {
 		instance = this;
-		ClassMaker = new ServiceTracker<ClassMaker, ClassMakerImpl>(context, ClassMaker.class, null);
-		ClassMaker.open();
+		classMaker = new ServiceTracker<ClassMakerPlant, ClassMakerPlantImpl>(context, ClassMakerPlant.class, null);
+		classMaker.open();
 	}
 
 	@Override
 	public void stop(BundleContext context) throws Exception {
-		ClassMaker.close();
-		ClassMaker = null;
+		classMaker.close();
+		classMaker = null;
 		instance = null;
 	}
 

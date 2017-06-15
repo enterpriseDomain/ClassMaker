@@ -15,6 +15,7 @@
  */
 package org.enterprisedomain.classmaker.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.Semaphore;
 
 import org.eclipse.core.resources.IWorkspaceRoot;
@@ -32,6 +33,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -142,7 +144,7 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * @generated NOT
 	 */
 	public EPackage produce(EPackage dynamicModel) throws CoreException {
-		IProgressMonitor monitor = ClassMakerPlugin.getInstance().getProgressMonitor();
+		IProgressMonitor monitor = ClassMakerPlugin.getProgressMonitor();
 		return produce(dynamicModel, monitor);
 	}
 
@@ -152,8 +154,30 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * @generated NOT
 	 */
 	public EPackage produce(EPackage dynamicModel, IProgressMonitor monitor) throws CoreException {
+		EList<String> dependencies = ECollections.emptyEList();
+		return produce(dynamicModel, dependencies);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public EPackage produce(EPackage dynamicModel, EList<String> dependencies) throws CoreException {
+		IProgressMonitor monitor = ClassMakerPlugin.getProgressMonitor();
+		return produce(dynamicModel, dependencies, monitor);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public EPackage produce(EPackage dynamicModel, EList<String> dependencies, IProgressMonitor monitor)
+			throws CoreException {
 		try {
 			Contribution contrib = getWorkspace().createContribution(dynamicModel, monitor);
+			contrib.getDependencies().addAll(dependencies);
 			contrib.addSaveCompletionListener(yieldResultListener);
 			contrib.save(monitor);
 			lock.acquire();
@@ -191,7 +215,7 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * @generated NOT
 	 */
 	public EPackage replace(EPackage queryModel, EPackage dynamicModel, boolean changeVersion) throws CoreException {
-		IProgressMonitor monitor = ClassMakerPlugin.getInstance().getProgressMonitor();
+		IProgressMonitor monitor = ClassMakerPlugin.getProgressMonitor();
 		return replace(queryModel, dynamicModel, changeVersion, monitor);
 	}
 
@@ -225,7 +249,7 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * @generated NOT
 	 */
 	public EPackage replace(EPackage queryModel, EPackage dynamicModel, Version version) throws CoreException {
-		IProgressMonitor monitor = ClassMakerPlugin.getInstance().getProgressMonitor();
+		IProgressMonitor monitor = ClassMakerPlugin.getProgressMonitor();
 		return replace(queryModel, dynamicModel, version, monitor);
 	}
 
@@ -291,7 +315,7 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * @generated NOT
 	 */
 	public EObject transform(EObject source, URI transformationURI) throws CoreException {
-		IProgressMonitor monitor = ClassMakerPlugin.getInstance().getProgressMonitor();
+		IProgressMonitor monitor = ClassMakerPlugin.getProgressMonitor();
 		return transform(source, transformationURI, monitor);
 	}
 
@@ -333,6 +357,21 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 			ClassMakerPlugin.getInstance().getLog().log(status);
 			return null;
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Object invoke(EOperation operation, EObject object, EList<Object> arguments)
+			throws InvocationTargetException {
+		for (EOperation o : object.eClass().getEAllOperations())
+			if (o.getName().equals(operation.getName())) {
+				return EcoreUtil.getInvocationDelegateFactory(o).createInvocationDelegate(o)
+						.dynamicInvoke((InternalEObject) object, arguments);
+			}
+		return null;
 	}
 
 	/**

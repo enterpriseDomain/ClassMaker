@@ -373,7 +373,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 				Ref branch = git.getRepository().findRef(getVersion().toString());
 				if (branch == null) {
 					getState().initialize();
-					create(ClassMakerPlugin.getInstance().getProgressMonitor());
+					create(ClassMakerPlugin.getProgressMonitor());
 				}
 			} catch (GitAPIException e) {
 				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));

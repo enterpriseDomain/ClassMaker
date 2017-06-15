@@ -32,7 +32,7 @@ import org.eclipse.emf.ecore.resource.Resource;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.State#getImports <em>Imports</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.State#getRequiredPlugins <em>Required Plugins</em>}</li>
  *   <li>{@link org.enterprisedomain.classmaker.State#getRevision <em>Revision</em>}</li>
  *   <li>{@link org.enterprisedomain.classmaker.State#getTimestamp <em>Timestamp</em>}</li>
  *   <li>{@link org.enterprisedomain.classmaker.State#getDeployableUnitName <em>Deployable Unit Name</em>}</li>
@@ -50,20 +50,20 @@ import org.eclipse.emf.ecore.resource.Resource;
  */
 public interface State extends Item {
 	/**
-	 * Returns the value of the '<em><b>Imports</b></em>' attribute list.
+	 * Returns the value of the '<em><b>Required Plugins</b></em>' attribute list.
 	 * The list contents are of type {@link java.lang.String}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Imports</em>' attribute list isn't clear,
+	 * If the meaning of the '<em>Required Plugins</em>' attribute list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Imports</em>' attribute list.
-	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getState_Imports()
+	 * @return the value of the '<em>Required Plugins</em>' attribute list.
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getState_RequiredPlugins()
 	 * @model
 	 * @generated
 	 */
-	EList<String> getImports();
+	EList<String> getRequiredPlugins();
 
 	/**
 	 * Returns the value of the '<em><b>Timestamp</b></em>' attribute. <!--

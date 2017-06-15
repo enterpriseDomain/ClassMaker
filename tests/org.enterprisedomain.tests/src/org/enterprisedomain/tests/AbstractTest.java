@@ -88,10 +88,14 @@ public abstract class AbstractTest {
 		setPackageName(name);
 		EcoreFactory ecoreFactory = EcoreFactory.eINSTANCE;
 		EPackage ePackage = ecoreFactory.createEPackage();
-		ePackage.setName(name);
+		ePackage.setName(name.toLowerCase());
 		ePackage.setNsPrefix(CodeGenUtil.capName(name));
-		ePackage.setNsURI("http://" + name + "/" + version);
+		ePackage.setNsURI("http://" + name.toLowerCase() + "/" + version);
 		return ePackage;
+	}
+
+	protected EPackage createEPackage(String version) {
+		return createEPackage(getPackageName(), version);
 	}
 
 	protected EPackage updateEPackage(EPackage ePackage, String version) {
@@ -106,6 +110,10 @@ public abstract class AbstractTest {
 		eClass.setName(name);
 		return eClass;
 	}
+	
+	protected EClass createEClass(){
+		return createEClass(getClassName());
+	}
 
 	protected EAttribute createEAttribute(String name, EDataType type) {
 		EcoreFactory ecoreFactory = EcoreFactory.eINSTANCE;
@@ -113,6 +121,10 @@ public abstract class AbstractTest {
 		eAttribute.setName(name);
 		eAttribute.setEType(type);
 		return eAttribute;
+	}
+
+	protected EAttribute createEAttribute(){
+		return createEAttribute(getAttributeName(),getAttributeType());
 	}
 
 	protected EPackage createAndTestEPackage() throws CoreException, InterruptedException {

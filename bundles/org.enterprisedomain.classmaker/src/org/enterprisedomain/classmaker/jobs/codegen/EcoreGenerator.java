@@ -240,8 +240,8 @@ public class EcoreGenerator extends EnterpriseDomainJob
 			genPackage.setPrefix(CodeGenUtil.capName(genPackage.getPrefix(), genModel.getLocale()));
 
 		if (getContributionState() != null) {
-			for (String qualifiedName : getContributionState().getImports()) {
-				genModel.addImport(qualifiedName);
+			for (String qualifiedName : getContributionState().getRequiredPlugins()) {
+				genModel.getModelPluginVariables().add(qualifiedName);
 			}
 			genModel.setModelName(getContributionState().getModelName());
 			genModel.setLanguage(getContributionState().getLanguage());

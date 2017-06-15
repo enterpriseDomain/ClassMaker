@@ -140,7 +140,7 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob {
 			if (ClassMakerPlugin.getInstance() == null)
 				return ProgressMonitorFactory.create(ClassMakerPlugin.getProgressMonitorClass(),
 						ClassMakerPlugin.getProgressMonitorClassConstructorParameters());
-			return ClassMakerPlugin.getInstance().getProgressMonitor();
+			return ClassMakerPlugin.getProgressMonitor();
 		}
 	};
 

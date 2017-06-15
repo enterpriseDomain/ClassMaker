@@ -15,6 +15,7 @@
  */
 package org.enterprisedomain.classmaker.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import static org.enterprisedomain.classmaker.ClassMakerPackage.ADAPTER;
 import static org.enterprisedomain.classmaker.ClassMakerPackage.RESOURCE;
 
@@ -250,6 +251,13 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EDataType invocationTargetExceptionEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EDataType uriEDataType = null;
 
 	/**
@@ -463,7 +471,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getState_Imports() {
+	public EAttribute getState_RequiredPlugins() {
 		return (EAttribute) stateEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1039,6 +1047,15 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getInvocationTargetException() {
+		return invocationTargetExceptionEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getURI() {
 		return uriEDataType;
 	}
@@ -1097,7 +1114,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		createEAttribute(revisionEClass, REVISION__LATEST_TIMESTAMP);
 
 		stateEClass = createEClass(STATE);
-		createEAttribute(stateEClass, STATE__IMPORTS);
+		createEAttribute(stateEClass, STATE__REQUIRED_PLUGINS);
 		createEReference(stateEClass, STATE__REVISION);
 		createEAttribute(stateEClass, STATE__TIMESTAMP);
 		createEAttribute(stateEClass, STATE__DEPLOYABLE_UNIT_NAME);
@@ -1182,6 +1199,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		osGiVersionEDataType = createEDataType(OS_GI_VERSION);
 		semaphoreEDataType = createEDataType(SEMAPHORE);
 		coreExceptionEDataType = createEDataType(CORE_EXCEPTION);
+		invocationTargetExceptionEDataType = createEDataType(INVOCATION_TARGET_EXCEPTION);
 		uriEDataType = createEDataType(URI);
 		exceptionEDataType = createEDataType(EXCEPTION);
 		localeEDataType = createEDataType(LOCALE);
@@ -1363,8 +1381,9 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		addEParameter(op, this.getRevision(), "from", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(stateEClass, State.class, "State", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getState_Imports(), ecorePackage.getEString(), "imports", null, 0, -1, State.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getState_RequiredPlugins(), ecorePackage.getEString(), "requiredPlugins", null, 0, -1,
+				State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
 		initEReference(getState_Revision(), this.getRevision(), null, "revision", null, 0, 1, State.class, IS_TRANSIENT,
 				IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED,
 				IS_ORDERED);
@@ -1640,6 +1659,17 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEException(op, this.getCoreException());
 
+		op = addEOperation(classMakerPlantEClass, ecorePackage.getEPackage(), "produce", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEPackage(), "dynamicModel", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "dependencies", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEException(op, this.getCoreException());
+
+		op = addEOperation(classMakerPlantEClass, ecorePackage.getEPackage(), "produce", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEPackage(), "dynamicModel", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "dependencies", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEException(op, this.getCoreException());
+
 		op = addEOperation(classMakerPlantEClass, ecorePackage.getEPackage(), "replace", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEPackage(), "queryModel", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEPackage(), "dynamicModel", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1687,6 +1717,12 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		addEParameter(op, this.getURI(), "transformationURI", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEException(op, this.getCoreException());
+
+		op = addEOperation(classMakerPlantEClass, ecorePackage.getEJavaObject(), "invoke", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEOperation(), "operation", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEObject(), "object", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEJavaObject(), "arguments", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEException(op, this.getInvocationTargetException());
 
 		op = addEOperation(classMakerPlantEClass, null, "delete", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "packageName", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1714,6 +1750,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEDataType(semaphoreEDataType, Semaphore.class, "Semaphore", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(coreExceptionEDataType, CoreException.class, "CoreException", IS_SERIALIZABLE,
 				!IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(invocationTargetExceptionEDataType, InvocationTargetException.class, "InvocationTargetException",
+				IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(uriEDataType, org.eclipse.emf.common.util.URI.class, "URI", IS_SERIALIZABLE,
 				!IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(exceptionEDataType, Exception.class, "Exception", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

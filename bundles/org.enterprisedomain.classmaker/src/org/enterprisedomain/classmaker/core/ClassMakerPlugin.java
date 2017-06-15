@@ -124,7 +124,7 @@ public class ClassMakerPlugin extends Plugin {
 	 * org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
-		IProgressMonitor monitor = getInstance().getProgressMonitor();
+		IProgressMonitor monitor = getProgressMonitor();
 		Job.getJobManager().join(ResourcesPlugin.FAMILY_MANUAL_BUILD, monitor);
 		ResourcesPlugin.getWorkspace().save(true, monitor);
 		tracker.close();
@@ -133,7 +133,7 @@ public class ClassMakerPlugin extends Plugin {
 
 	}
 
-	public IProgressMonitor getProgressMonitor() {
+	public static IProgressMonitor getProgressMonitor() {
 		return createProgressMonitor();
 	}
 
@@ -151,7 +151,7 @@ public class ClassMakerPlugin extends Plugin {
 		return ClassMakerPlugin.monitorParameters;
 	}
 
-	private IProgressMonitor createProgressMonitor() {
+	private static IProgressMonitor createProgressMonitor() {
 		if (monitorClass == null || monitorParameters == null)
 			setMonitorParameters(CodeGenUtil.EclipseUtil.StreamProgressMonitor.class, System.out);
 		return ProgressMonitorFactory.create(monitorClass, monitorParameters);

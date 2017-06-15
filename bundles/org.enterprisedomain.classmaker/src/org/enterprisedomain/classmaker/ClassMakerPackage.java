@@ -689,13 +689,13 @@ public interface ClassMakerPackage extends EPackage {
 	int STATE__CONTRIBUTION = ITEM__CONTRIBUTION;
 
 	/**
-	 * The feature id for the '<em><b>Imports</b></em>' attribute list.
+	 * The feature id for the '<em><b>Required Plugins</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__IMPORTS = ITEM_FEATURE_COUNT + 0;
+	int STATE__REQUIRED_PLUGINS = ITEM_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Revision</b></em>' reference.
@@ -1224,7 +1224,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getLocale()
 	 * @generated
 	 */
-	int LOCALE = 28;
+	int LOCALE = 29;
 
 	/**
 	 * The meta object id for the '{@link org.enterprisedomain.classmaker.Stage <em>Stage</em>}' enum.
@@ -1277,6 +1277,16 @@ public interface ClassMakerPackage extends EPackage {
 	int CORE_EXCEPTION = 25;
 
 	/**
+	 * The meta object id for the '<em>Invocation Target Exception</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.lang.reflect.InvocationTargetException
+	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getInvocationTargetException()
+	 * @generated
+	 */
+	int INVOCATION_TARGET_EXCEPTION = 26;
+
+	/**
 	 * The meta object id for the '<em>URI</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1284,7 +1294,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getURI()
 	 * @generated
 	 */
-	int URI = 26;
+	int URI = 27;
 
 	/**
 	 * The meta object id for the '<em>Exception</em>' data type.
@@ -1294,7 +1304,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getException()
 	 * @generated
 	 */
-	int EXCEPTION = 27;
+	int EXCEPTION = 28;
 
 	/**
 	 * Returns the meta object for class '{@link org.enterprisedomain.classmaker.Contribution <em>Contribution</em>}'.
@@ -1448,15 +1458,15 @@ public interface ClassMakerPackage extends EPackage {
 	EClass getState();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link org.enterprisedomain.classmaker.State#getImports <em>Imports</em>}'.
+	 * Returns the meta object for the attribute list '{@link org.enterprisedomain.classmaker.State#getRequiredPlugins <em>Required Plugins</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Imports</em>'.
-	 * @see org.enterprisedomain.classmaker.State#getImports()
+	 * @return the meta object for the attribute list '<em>Required Plugins</em>'.
+	 * @see org.enterprisedomain.classmaker.State#getRequiredPlugins()
 	 * @see #getState()
 	 * @generated
 	 */
-	EAttribute getState_Imports();
+	EAttribute getState_RequiredPlugins();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.enterprisedomain.classmaker.State#getRevision <em>Revision</em>}'.
@@ -2145,6 +2155,17 @@ public interface ClassMakerPackage extends EPackage {
 	EDataType getCoreException();
 
 	/**
+	 * Returns the meta object for data type '{@link java.lang.reflect.InvocationTargetException <em>Invocation Target Exception</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Invocation Target Exception</em>'.
+	 * @see java.lang.reflect.InvocationTargetException
+	 * @model instanceClass="java.lang.reflect.InvocationTargetException"
+	 * @generated
+	 */
+	EDataType getInvocationTargetException();
+
+	/**
 	 * Returns the meta object for data type '{@link org.eclipse.emf.common.util.URI <em>URI</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2307,12 +2328,12 @@ public interface ClassMakerPackage extends EPackage {
 		EClass STATE = eINSTANCE.getState();
 
 		/**
-		 * The meta object literal for the '<em><b>Imports</b></em>' attribute list feature.
+		 * The meta object literal for the '<em><b>Required Plugins</b></em>' attribute list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute STATE__IMPORTS = eINSTANCE.getState_Imports();
+		EAttribute STATE__REQUIRED_PLUGINS = eINSTANCE.getState_RequiredPlugins();
 
 		/**
 		 * The meta object literal for the '<em><b>Revision</b></em>' reference feature.
@@ -2866,6 +2887,16 @@ public interface ClassMakerPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType CORE_EXCEPTION = eINSTANCE.getCoreException();
+
+		/**
+		 * The meta object literal for the '<em>Invocation Target Exception</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.lang.reflect.InvocationTargetException
+		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getInvocationTargetException()
+		 * @generated
+		 */
+		EDataType INVOCATION_TARGET_EXCEPTION = eINSTANCE.getInvocationTargetException();
 
 		/**
 		 * The meta object literal for the '<em>URI</em>' data type.

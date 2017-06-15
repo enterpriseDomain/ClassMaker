@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.enterprisedomain.ui.workbench.rcp.feature"
-      label="Enterprise Domain UI Workbench RCP Feature"
+      id="org.enterprisedomain.ui.workplace.rcp.feature"
+      label="Domain Workplace RCP UI Feature"
       version="0.0.1.qualifier"
       provider-name="Kyrill Zotkin">
 

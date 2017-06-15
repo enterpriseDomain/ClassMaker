@@ -36,6 +36,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
@@ -52,6 +53,7 @@ import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Customizer;
 import org.enterprisedomain.classmaker.Stage;
+import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.impl.CompletionListenerImpl;
 import org.enterprisedomain.classmaker.impl.CustomizerImpl;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
@@ -261,11 +263,98 @@ public class TestEnterpriseDomain extends AbstractTest {
 	}
 
 	@Test
+	public void imports() throws CoreException, InvocationTargetException {
+		setPackageName("creator");
+		setClassName("Builder");
+		EPackage p = createEPackage("0.1");
+		EClass c = createEClass();
+		EcoreFactory f = EcoreFactory.eINSTANCE;
+		EReference r = f.createEReference();
+		r.setName("product");
+		r.setEType(EcorePackage.Literals.EPACKAGE);
+		c.getEStructuralFeatures().add(r);
+		EOperation opSet = f.createEOperation();
+		opSet.setName("set");
+		opSet.setEType(c);
+		EParameter pa = f.createEParameter();
+		pa.setName("packageName");
+		pa.setEType(EcorePackage.Literals.ESTRING);
+		opSet.getEParameters().add(pa);
+		EAnnotation a = f.createEAnnotation();
+		a.setSource("http://www.eclipse.org/emf/2002/GenModel");
+		a.getDetails().put("body",
+				"EPackage effect=<%org.eclipse.emf.ecore.EcoreFactory%>.eINSTANCE.createEPackage();\n"
+						+ "effect.setName(packageName.toLowerCase());\n" + "effect.setNsPrefix(packageName);\n"
+						+ "effect.setNsURI(\"http://\" + packageName.toLowerCase() + \"/\");\n"
+						+ "setProduct(effect);\nreturn this;");
+		opSet.getEAnnotations().add(a);
+		a = f.createEAnnotation();
+		a.setSource(ClassMakerPlant.INVOCATION_DELEGATE_URI);
+		opSet.getEAnnotations().add(a);
+		c.getEOperations().add(opSet);
+		EOperation opClass = f.createEOperation();
+		opClass.setName("newClass");
+		opClass.setEType(c);
+		pa = f.createEParameter();
+		pa.setName("name");
+		pa.setEType(EcorePackage.Literals.ESTRING);
+		opClass.getEParameters().add(pa);
+		a = f.createEAnnotation();
+		a.setSource("http://www.eclipse.org/emf/2002/GenModel");
+		a.getDetails().put("body", "EClass effect=<%org.eclipse.emf.ecore.EcoreFactory%>.eINSTANCE.createEClass();\n"
+				+ "effect.setName(name);\ngetProduct().getEClassifiers().add(effect);\nreturn this;");
+		opClass.getEAnnotations().add(a);
+		a = f.createEAnnotation();
+		a.setSource(ClassMakerPlant.INVOCATION_DELEGATE_URI);
+		opClass.getEAnnotations().add(a);
+		c.getEOperations().add(opClass);
+		EOperation opBuild = f.createEOperation();
+		opBuild.setName("build");
+		opBuild.setEType(EcorePackage.Literals.EPACKAGE);
+		a = f.createEAnnotation();
+		a.setSource("http://www.eclipse.org/emf/2002/GenModel");
+		a.getDetails().put("body", "return <%org.enterprisedomain.classmaker.core.ClassMakerPlugin%>"
+				+ ".getClassMaker().produce(getProduct());\n");
+		opBuild.getEAnnotations().add(a);
+		a = f.createEAnnotation();
+		a.setSource(ClassMakerPlant.INVOCATION_DELEGATE_URI);
+		opBuild.getEAnnotations().add(a);
+		c.getEOperations().add(opBuild);
+		a = f.createEAnnotation();
+		a.setSource(EcorePackage.eNS_URI);
+		a.getDetails().put("invocationDelegates", ClassMakerPlant.INVOCATION_DELEGATE_URI);
+		p.getEAnnotations().add(a);
+		EDataType e = f.createEDataType();
+		e.setName("CoreException");
+		e.setInstanceTypeName(CoreException.class.getName());
+		opBuild.getEExceptions().add(e);
+		p.getEClassifiers().add(e);
+		p.getEClassifiers().add(c);
+
+		EList<String> dependencies = ECollections.newBasicEList();
+		dependencies.add(ClassMakerPlugin.PLUGIN_ID);
+		EPackage creator = service.produce(p, dependencies);
+		EObject builder = (EObject) creator.getEFactoryInstance().create((EClass) creator.getEClassifier(c.getName()));
+		EList<Object> args = ECollections.newBasicEList();
+		args.add("world");
+		builder = (EObject) service.invoke(opSet, builder, args);
+		args = ECollections.newBasicEList();
+		String n = "Picture";
+		args.add(n);
+		builder = (EObject) service.invoke(opClass, builder, args);
+		EPackage result = (EPackage) service.invoke(opBuild, builder, ECollections.newBasicEList());
+		assertNotNull(result);
+		EObject o = result.getEFactoryInstance().create((EClass) result.getEClassifier(n));
+		assertEquals(n, o.eClass().getName());
+		assertEquals(o.eClass().getName(), o.getClass().getSimpleName());
+	}
+
+	@Test
 	public void update() throws OperationCanceledException, InterruptedException, CoreException, ExecutionException {
 		setPackageName("updateable");
 		setClassName("Same");
 		EcoreFactory f = EcoreFactory.eINSTANCE;
-		p = createEPackage(getPackageName(), "0.1");
+		p = createEPackage("0.1");
 		final EClass cl = f.createEClass();
 		cl.setName(getClassName());
 		setAttributeName("a");
@@ -346,9 +435,9 @@ public class TestEnterpriseDomain extends AbstractTest {
 
 	@Test
 	public void recreate() throws CoreException, OperationCanceledException, InterruptedException, ExecutionException {
-		setPackageName("pi");
-		setClassName("C");
-		setAttributeName("count");
+		setPackageName("dir");
+		setClassName("File");
+		setAttributeName("data");
 		setAttributeType(EcorePackage.Literals.EJAVA_OBJECT);
 		Contribution c = service.getWorkspace().getContribution(createAndTestEPackage(), Stage.LOADED);
 		c.delete(getProgressMonitor());
@@ -400,11 +489,11 @@ public class TestEnterpriseDomain extends AbstractTest {
 			InterruptedException, SecurityException, ClassNotFoundException, ExecutionException, IllegalAccessException,
 			IllegalArgumentException, InvocationTargetException {
 		setPackageName("immutable");
-		EPackage eP = createEPackage(getPackageName(), "0.0.1");
-		EClass eC = createEClass(getClassName());
+		EPackage eP = createEPackage("0.0.1");
+		EClass eC = createEClass();
 		setAttributeName("C");
 		setAttributeType(EcorePackage.Literals.EJAVA_OBJECT);
-		EAttribute at = createEAttribute(getAttributeName(), getAttributeType());
+		EAttribute at = createEAttribute();
 		EcoreUtil.setSuppressedVisibility(at, EcoreUtil.SET, true);
 		eC.getEStructuralFeatures().add(at);
 		eP.getEClassifiers().add(eC);

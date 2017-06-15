@@ -143,7 +143,7 @@ public class ResourceUtils {
 	public static void removeProjectNature(IProject project, String natureId) throws CoreException {
 		IProjectDescription description = project.getDescription();
 		description.setNatureIds(removeElement(description.getNatureIds(), natureId));
-		project.setDescription(description, ClassMakerPlugin.getInstance().getProgressMonitor());
+		project.setDescription(description, ClassMakerPlugin.getProgressMonitor());
 	}
 
 	@SuppressWarnings("deprecation")

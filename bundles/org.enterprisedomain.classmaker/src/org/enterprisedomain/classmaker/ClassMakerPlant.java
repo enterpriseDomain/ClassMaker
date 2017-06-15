@@ -15,17 +15,19 @@
  */
 package org.enterprisedomain.classmaker;
 
+import java.lang.reflect.InvocationTargetException;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.osgi.framework.Version;
 
 /**
- * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Plant</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object
+ * '<em><b>Plant</b></em>'. <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
@@ -36,7 +38,7 @@ import org.osgi.framework.Version;
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getClassMakerPlant()
  * @model
- * @generated NOT
+ * @generated
  */
 public interface ClassMakerPlant extends EObject {
 
@@ -56,13 +58,14 @@ public interface ClassMakerPlant extends EObject {
 	}
 
 	/**
-	 * Returns the value of the '<em><b>Workspace</b></em>' reference.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Workspace</b></em>' reference. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Workspace</em>' reference isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Workspace</em>' reference isn't clear, there
+	 * really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Workspace</em>' reference.
 	 * @see #setWorkspace(Workspace)
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getClassMakerPlant_Workspace()
@@ -72,26 +75,27 @@ public interface ClassMakerPlant extends EObject {
 	Workspace getWorkspace();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.ClassMakerPlant#getWorkspace <em>Workspace</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Workspace</em>' reference.
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.ClassMakerPlant#getWorkspace
+	 * <em>Workspace</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Workspace</em>' reference.
 	 * @see #getWorkspace()
 	 * @generated
 	 */
 	void setWorkspace(Workspace value);
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
 	 * @generated
 	 */
 	EPackage produce(EPackage dynamicModel) throws CoreException;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
@@ -100,30 +104,42 @@ public interface ClassMakerPlant extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" dependenciesMany="true"
+	 * @generated
+	 */
+	EPackage produce(EPackage dynamicModel, EList<String> dependencies) throws CoreException;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" dependenciesMany="true" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * @generated
+	 */
+	EPackage produce(EPackage dynamicModel, EList<String> dependencies, IProgressMonitor monitor) throws CoreException;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
 	 * @generated
 	 */
 	EPackage replace(EPackage queryModel, EPackage dynamicModel) throws CoreException;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	EPackage replace(EPackage queryModel, EPackage dynamicModel, IProgressMonitor monitor) throws CoreException;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
 	 * @generated
 	 */
 	EPackage replace(EPackage queryModel, EPackage dynamicModel, boolean changeVersion) throws CoreException;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
@@ -131,16 +147,14 @@ public interface ClassMakerPlant extends EObject {
 			throws CoreException;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
 	 * @generated
 	 */
 	EPackage replace(EPackage queryModel, EPackage dynamicModel, Version version) throws CoreException;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" versionDataType="org.enterprisedomain.classmaker.OSGiVersion" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
@@ -148,32 +162,35 @@ public interface ClassMakerPlant extends EObject {
 			throws CoreException;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" transformationURIDataType="org.enterprisedomain.classmaker.URI"
 	 * @generated
 	 */
 	EObject transform(EObject source, URI transformationURI) throws CoreException;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" transformationURIDataType="org.enterprisedomain.classmaker.URI" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	EObject transform(EObject source, URI transformationURI, IProgressMonitor monitor) throws CoreException;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @model exceptions="org.enterprisedomain.classmaker.InvocationTargetException" argumentsMany="true"
+	 * @generated
+	 */
+	Object invoke(EOperation operation, EObject object, EList<Object> arguments) throws InvocationTargetException;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	void delete(String packageName, IProgressMonitor monitor) throws CoreException;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @model
 	 * @generated
 	 */
