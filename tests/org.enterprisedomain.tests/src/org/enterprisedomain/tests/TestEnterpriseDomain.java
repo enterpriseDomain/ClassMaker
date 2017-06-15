@@ -263,7 +263,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 	}
 
 	@Test
-	public void imports() throws CoreException, InvocationTargetException {
+	public void requiredPlugins() throws CoreException, InvocationTargetException {
 		setPackageName("creator");
 		setClassName("Builder");
 		EPackage p = createEPackage("0.1");
@@ -348,7 +348,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		assertEquals(n, o.eClass().getName());
 		assertEquals(o.eClass().getName(), o.getClass().getSimpleName());
 	}
-
+	
 	@Test
 	public void update() throws OperationCanceledException, InterruptedException, CoreException, ExecutionException {
 		setPackageName("updateable");
