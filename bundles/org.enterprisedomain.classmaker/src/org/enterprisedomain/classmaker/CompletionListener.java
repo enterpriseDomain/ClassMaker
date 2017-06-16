@@ -22,6 +22,10 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Completion Listener</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Process completion listener.
+ * <!-- end-model-doc -->
+ *
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getCompletionListener()
  * @model abstract="true"
@@ -31,6 +35,9 @@ public interface CompletionListener extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Notify process completion.
+	 * <!-- end-model-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.Exception"
 	 * @generated
 	 */

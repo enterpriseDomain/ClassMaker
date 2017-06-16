@@ -29,6 +29,10 @@ import org.osgi.framework.Version;
  * <!-- begin-user-doc --> A representation of the model object
  * '<em><b>Plant</b></em>'. <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * ClassMaker's facade API service.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * </p>
@@ -89,6 +93,9 @@ public interface ClassMakerPlant extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Performs EPackage generation, build and export, then installs results into OSGi container and loads generated EPackage class.
+	 * <!-- end-model-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
 	 * @generated
 	 */
