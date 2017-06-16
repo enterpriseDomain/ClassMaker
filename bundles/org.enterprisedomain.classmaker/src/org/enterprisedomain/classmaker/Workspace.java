@@ -27,6 +27,10 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Workspace</b></em>'. <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Maps EMF ResourceSet to Eclipse Resources API's Workspace Root.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * </p>
@@ -87,6 +91,9 @@ public interface Workspace extends EObject, ISchedulingRule {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Provision target platform.
+	 * <!-- end-model-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
@@ -94,6 +101,9 @@ public interface Workspace extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Create new Contribution.
+	 * <!-- end-model-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
@@ -101,6 +111,9 @@ public interface Workspace extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Lookup workspace Contribution by any type of EObject contained.
+	 * <!-- end-model-doc -->
 	 * @model
 	 * @generated
 	 */
@@ -108,6 +121,9 @@ public interface Workspace extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Lookup workspace Contribution by model EPackage.
+	 * <!-- end-model-doc -->
 	 * @model
 	 * @generated
 	 */
@@ -115,6 +131,9 @@ public interface Workspace extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Lookup Contribution by underlying project resource name.
+	 * <!-- end-model-doc -->
 	 * @model
 	 * @generated
 	 */
@@ -122,6 +141,9 @@ public interface Workspace extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Create Project.
+	 * <!-- end-model-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
@@ -129,6 +151,9 @@ public interface Workspace extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Lookup project by name.
+	 * <!-- end-model-doc -->
 	 * @model
 	 * @generated
 	 */
@@ -136,6 +161,11 @@ public interface Workspace extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Lookup workspace Contribution by model EPackage.
+	 * 
+	 * @param searchOptimistic true if use OR while EPackage comparison, overwise use AND.
+	 * <!-- end-model-doc -->
 	 * @model
 	 * @generated
 	 */
@@ -144,6 +174,11 @@ public interface Workspace extends EObject, ISchedulingRule {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Lookup workspace Contribution by model EPackage.
+	 * 
+	 * @param filter returns blueprint EPackage if Stage is less or equal MODELED, generated if it equals LOADED.
+	 * <!-- end-model-doc -->
 	 * @model
 	 * @generated
 	 */
@@ -152,6 +187,12 @@ public interface Workspace extends EObject, ISchedulingRule {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Lookup workspace Contribution by model EPackage.
+	 * 
+	 * @param filter returns blueprint EPackage if Stage is less or equal MODELED, generated if it equals LOADED.
+	 * @param searchOptimistic true if use OR while EPackage comparison, overwise use AND.
+	 * <!-- end-model-doc -->
 	 * @model
 	 * @generated
 	 */

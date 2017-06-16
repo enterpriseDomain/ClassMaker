@@ -97,7 +97,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getProject()
 	 * @generated
 	 */
-	int PROJECT = 14;
+	int PROJECT = 12;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -918,44 +918,6 @@ public interface ClassMakerPackage extends EPackage {
 	int VERSION_TO_REVISION_MAP_ENTRY_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link java.util.concurrent.Future <em>Future</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see java.util.concurrent.Future
-	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getFuture()
-	 * @generated
-	 */
-	int FUTURE = 9;
-
-	/**
-	 * The number of structural features of the '<em>Future</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUTURE_FEATURE_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.emf.common.util.EMap <em>EMap</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.emf.common.util.EMap
-	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getEMap()
-	 * @generated
-	 */
-	int EMAP = 10;
-
-	/**
-	 * The number of structural features of the '<em>EMap</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMAP_FEATURE_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link org.enterprisedomain.classmaker.impl.CustomizerImpl <em>Customizer</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -963,7 +925,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getCustomizer()
 	 * @generated
 	 */
-	int CUSTOMIZER = 11;
+	int CUSTOMIZER = 9;
 
 	/**
 	 * The number of structural features of the '<em>Customizer</em>' class.
@@ -982,7 +944,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getStageQualifier()
 	 * @generated
 	 */
-	int STAGE_QUALIFIER = 12;
+	int STAGE_QUALIFIER = 10;
 
 	/**
 	 * The feature id for the '<em><b>Stage</b></em>' attribute.
@@ -1019,7 +981,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getStageQualifierToCustomizerMapEntry()
 	 * @generated
 	 */
-	int STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY = 13;
+	int STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY = 11;
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' reference.
@@ -1049,25 +1011,6 @@ public interface ClassMakerPackage extends EPackage {
 	int STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.ecore.resource.ResourceSet <em>Resource Set</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.emf.ecore.resource.ResourceSet
-	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getResourceSet()
-	 * @generated
-	 */
-	int RESOURCE_SET = 15;
-
-	/**
-	 * The number of structural features of the '<em>Resource Set</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESOURCE_SET_FEATURE_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link org.enterprisedomain.classmaker.impl.ModelPairImpl <em>Model Pair</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1075,7 +1018,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getModelPair()
 	 * @generated
 	 */
-	int MODEL_PAIR = 16;
+	int MODEL_PAIR = 13;
 
 	/**
 	 * The feature id for the '<em><b>Dynamic</b></em>' reference.
@@ -1121,7 +1064,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getResource()
 	 * @generated
 	 */
-	int RESOURCE = 17;
+	int RESOURCE = 14;
 
 	/**
 	 * The number of structural features of the '<em>Resource</em>' class.
@@ -1140,7 +1083,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getCompletionListener()
 	 * @generated
 	 */
-	int COMPLETION_LISTENER = 18;
+	int COMPLETION_LISTENER = 15;
 
 	/**
 	 * The number of structural features of the '<em>Completion Listener</em>' class.
@@ -1159,7 +1102,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getResourceAdapter()
 	 * @generated
 	 */
-	int RESOURCE_ADAPTER = 19;
+	int RESOURCE_ADAPTER = 16;
 
 	/**
 	 * The feature id for the '<em><b>Resource</b></em>' reference.
@@ -1196,7 +1139,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getClassMakerPlant()
 	 * @generated
 	 */
-	int CLASS_MAKER_PLANT = 20;
+	int CLASS_MAKER_PLANT = 17;
 
 	/**
 	 * The feature id for the '<em><b>Workspace</b></em>' reference.
@@ -1224,7 +1167,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getLocale()
 	 * @generated
 	 */
-	int LOCALE = 29;
+	int LOCALE = 26;
 
 	/**
 	 * The meta object id for the '{@link org.enterprisedomain.classmaker.Stage <em>Stage</em>}' enum.
@@ -1234,7 +1177,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getStage()
 	 * @generated
 	 */
-	int STAGE = 21;
+	int STAGE = 18;
 
 	/**
 	 * The meta object id for the '<em>IProgress Monitor</em>' data type.
@@ -1244,7 +1187,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getIProgressMonitor()
 	 * @generated
 	 */
-	int IPROGRESS_MONITOR = 22;
+	int IPROGRESS_MONITOR = 19;
 
 	/**
 	 * The meta object id for the '<em>OS Gi Version</em>' data type.
@@ -1254,7 +1197,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getOSGiVersion()
 	 * @generated
 	 */
-	int OS_GI_VERSION = 23;
+	int OS_GI_VERSION = 20;
 
 	/**
 	 * The meta object id for the '<em>Semaphore</em>' data type.
@@ -1264,7 +1207,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getSemaphore()
 	 * @generated
 	 */
-	int SEMAPHORE = 24;
+	int SEMAPHORE = 21;
 
 	/**
 	 * The meta object id for the '<em>Core Exception</em>' data type.
@@ -1274,7 +1217,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getCoreException()
 	 * @generated
 	 */
-	int CORE_EXCEPTION = 25;
+	int CORE_EXCEPTION = 22;
 
 	/**
 	 * The meta object id for the '<em>Invocation Target Exception</em>' data type.
@@ -1284,7 +1227,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getInvocationTargetException()
 	 * @generated
 	 */
-	int INVOCATION_TARGET_EXCEPTION = 26;
+	int INVOCATION_TARGET_EXCEPTION = 23;
 
 	/**
 	 * The meta object id for the '<em>URI</em>' data type.
@@ -1294,7 +1237,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getURI()
 	 * @generated
 	 */
-	int URI = 27;
+	int URI = 24;
 
 	/**
 	 * The meta object id for the '<em>Exception</em>' data type.
@@ -1304,7 +1247,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getException()
 	 * @generated
 	 */
-	int EXCEPTION = 28;
+	int EXCEPTION = 25;
 
 	/**
 	 * Returns the meta object for class '{@link org.enterprisedomain.classmaker.Contribution <em>Contribution</em>}'.
@@ -1799,28 +1742,6 @@ public interface ClassMakerPackage extends EPackage {
 	EClass getISchedulingRule();
 
 	/**
-	 * Returns the meta object for class '{@link java.util.concurrent.Future <em>Future</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Future</em>'.
-	 * @see java.util.concurrent.Future
-	 * @model instanceClass="java.util.concurrent.Future" typeParameters="ResultType"
-	 * @generated
-	 */
-	EClass getFuture();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.common.util.EMap <em>EMap</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>EMap</em>'.
-	 * @see org.eclipse.emf.common.util.EMap
-	 * @model instanceClass="org.eclipse.emf.common.util.EMap" typeParameters="K V"
-	 * @generated
-	 */
-	EClass getEMap();
-
-	/**
 	 * Returns the meta object for class '{@link org.enterprisedomain.classmaker.Customizer <em>Customizer</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1960,17 +1881,6 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getProject_Workspace();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.ecore.resource.ResourceSet <em>Resource Set</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Resource Set</em>'.
-	 * @see org.eclipse.emf.ecore.resource.ResourceSet
-	 * @model instanceClass="org.eclipse.emf.ecore.resource.ResourceSet"
-	 * @generated
-	 */
-	EClass getResourceSet();
 
 	/**
 	 * Returns the meta object for class '{@link org.enterprisedomain.classmaker.ModelPair <em>Model Pair</em>}'.
@@ -2588,26 +2498,6 @@ public interface ClassMakerPackage extends EPackage {
 		EClass ISCHEDULING_RULE = eINSTANCE.getISchedulingRule();
 
 		/**
-		 * The meta object literal for the '{@link java.util.concurrent.Future <em>Future</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see java.util.concurrent.Future
-		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getFuture()
-		 * @generated
-		 */
-		EClass FUTURE = eINSTANCE.getFuture();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.common.util.EMap <em>EMap</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.emf.common.util.EMap
-		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getEMap()
-		 * @generated
-		 */
-		EClass EMAP = eINSTANCE.getEMap();
-
-		/**
 		 * The meta object literal for the '{@link org.enterprisedomain.classmaker.impl.CustomizerImpl <em>Customizer</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2719,16 +2609,6 @@ public interface ClassMakerPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PROJECT__WORKSPACE = eINSTANCE.getProject_Workspace();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.ecore.resource.ResourceSet <em>Resource Set</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.emf.ecore.resource.ResourceSet
-		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getResourceSet()
-		 * @generated
-		 */
-		EClass RESOURCE_SET = eINSTANCE.getResourceSet();
 
 		/**
 		 * The meta object literal for the '{@link org.enterprisedomain.classmaker.impl.ModelPairImpl <em>Model Pair</em>}' class.

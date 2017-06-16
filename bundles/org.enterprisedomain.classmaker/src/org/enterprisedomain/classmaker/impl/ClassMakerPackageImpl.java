@@ -132,20 +132,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass futureEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass eMapEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass customizerEClass = null;
 
 	/**
@@ -168,13 +154,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	private EClass projectEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass resourceSetEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -750,24 +729,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getFuture() {
-		return futureEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getEMap() {
-		return eMapEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getCustomizer() {
 		return customizerEClass;
 	}
@@ -878,15 +839,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	public EReference getProject_Workspace() {
 		return (EReference) projectEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getResourceSet() {
-		return resourceSetEClass;
 	}
 
 	/**
@@ -1152,10 +1104,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 		iSchedulingRuleEClass = createEClass(ISCHEDULING_RULE);
 
-		futureEClass = createEClass(FUTURE);
-
-		eMapEClass = createEClass(EMAP);
-
 		customizerEClass = createEClass(CUSTOMIZER);
 
 		stageQualifierEClass = createEClass(STAGE_QUALIFIER);
@@ -1172,8 +1120,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		createEReference(projectEClass, PROJECT__CHILDREN);
 		createEAttribute(projectEClass, PROJECT__DIRTY);
 		createEReference(projectEClass, PROJECT__WORKSPACE);
-
-		resourceSetEClass = createEClass(RESOURCE_SET);
 
 		modelPairEClass = createEClass(MODEL_PAIR);
 		createEReference(modelPairEClass, MODEL_PAIR__DYNAMIC);
@@ -1230,9 +1176,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		setNsURI(eNS_URI);
 
 		// Create type parameters
-		addETypeParameter(futureEClass, "ResultType");
-		addETypeParameter(eMapEClass, "K");
-		addETypeParameter(eMapEClass, "V");
 
 		// Set bounds for type parameters
 
@@ -1556,10 +1499,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEClass(iSchedulingRuleEClass, ISchedulingRule.class, "ISchedulingRule", IS_ABSTRACT, IS_INTERFACE,
 				!IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(futureEClass, Future.class, "Future", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(eMapEClass, EMap.class, "EMap", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
-
 		initEClass(customizerEClass, Customizer.class, "Customizer", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
 
@@ -1610,9 +1549,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		op = addEOperation(projectEClass, ecorePackage.getEString(), "save", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEException(op, this.getCoreException());
-
-		initEClass(resourceSetEClass, ResourceSet.class, "ResourceSet", IS_ABSTRACT, IS_INTERFACE,
-				!IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(modelPairEClass, ModelPair.class, "ModelPair", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);

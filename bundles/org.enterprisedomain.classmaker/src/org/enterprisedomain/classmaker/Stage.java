@@ -26,6 +26,9 @@ import org.eclipse.emf.common.util.Enumerator;
  * A representation of the literals of the enumeration '<em><b>Stage</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
+ * <!-- begin-model-doc -->
+ * A stage in which subject could be.
+ * <!-- end-model-doc -->
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getStage()
  * @model
  * @generated
@@ -99,6 +102,9 @@ public enum Stage implements Enumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * A subject was just defined.
+	 * <!-- end-model-doc -->
 	 * @see #DEFINED
 	 * @model
 	 * @generated
@@ -114,6 +120,9 @@ public enum Stage implements Enumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The subject is initialized.
+	 * <!-- end-model-doc -->
 	 * @see #MODELED
 	 * @model
 	 * @generated
@@ -129,6 +138,9 @@ public enum Stage implements Enumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The subject's code is generated.
+	 * <!-- end-model-doc -->
 	 * @see #GENERATED
 	 * @model
 	 * @generated
@@ -144,6 +156,9 @@ public enum Stage implements Enumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The subject binary is exported.
+	 * <!-- end-model-doc -->
 	 * @see #EXPORTED
 	 * @model
 	 * @generated
@@ -159,6 +174,9 @@ public enum Stage implements Enumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * A subject's binary is installed on runtime.
+	 * <!-- end-model-doc -->
 	 * @see #INSTALLED
 	 * @model
 	 * @generated
@@ -174,6 +192,9 @@ public enum Stage implements Enumerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * A subject's program is loaded.
+	 * <!-- end-model-doc -->
 	 * @see #LOADED
 	 * @model
 	 * @generated

@@ -173,20 +173,6 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case ClassMakerPackage.FUTURE: {
-			Future<?> future = (Future<?>) theEObject;
-			T result = caseFuture(future);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case ClassMakerPackage.EMAP: {
-			EMap<?, ?> eMap = (EMap<?, ?>) theEObject;
-			T result = caseEMap(eMap);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		case ClassMakerPackage.CUSTOMIZER: {
 			Customizer customizer = (Customizer) theEObject;
 			T result = caseCustomizer(customizer);
@@ -214,13 +200,6 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 			T result = caseProject(project);
 			if (result == null)
 				result = caseISchedulingRule(project);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case ClassMakerPackage.RESOURCE_SET: {
-			ResourceSet resourceSet = (ResourceSet) theEObject;
-			T result = caseResourceSet(resourceSet);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -394,34 +373,6 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Future</em>'.
-	 * <!-- begin-user-doc --> This implementation returns
-	 * null; returning a non-null result will terminate the switch. <!--
-	 * end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Future</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public <ResultType> T caseFuture(Future<ResultType> object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>EMap</em>'.
-	 * <!-- begin-user-doc --> This implementation returns
-	 * null; returning a non-null result will terminate the switch. <!--
-	 * end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>EMap</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public <K, V> T caseEMap(EMap<K, V> object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Customizer</em>'.
 	 * <!-- begin-user-doc --> This implementation
 	 * returns null; returning a non-null result will terminate the switch. <!--
@@ -474,20 +425,6 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseProject(Project object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Resource Set</em>'.
-	 * <!-- begin-user-doc --> This implementation
-	 * returns null; returning a non-null result will terminate the switch. <!--
-	 * end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Resource Set</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseResourceSet(ResourceSet object) {
 		return null;
 	}
 

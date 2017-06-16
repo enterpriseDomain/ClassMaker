@@ -141,16 +141,6 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public <ResultType> Adapter caseFuture(Future<ResultType> object) {
-			return createFutureAdapter();
-		}
-
-		@Override
-		public <K, V> Adapter caseEMap(EMap<K, V> object) {
-			return createEMapAdapter();
-		}
-
-		@Override
 		public Adapter caseCustomizer(Customizer object) {
 			return createCustomizerAdapter();
 		}
@@ -168,11 +158,6 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseProject(Project object) {
 			return createProjectAdapter();
-		}
-
-		@Override
-		public Adapter caseResourceSet(ResourceSet object) {
-			return createResourceSetAdapter();
 		}
 
 		@Override
@@ -349,36 +334,6 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class
-	 * '{@link java.util.concurrent.Future <em>Future</em>}'. <!--
-	 * begin-user-doc --> This default implementation returns null so that we
-	 * can easily ignore cases; it's useful to ignore a case when inheritance
-	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
-	 * @return the new adapter.
-	 * @see java.util.concurrent.Future
-	 * @generated
-	 */
-	public Adapter createFutureAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class
-	 * '{@link org.eclipse.emf.common.util.EMap <em>EMap</em>}'. <!--
-	 * begin-user-doc --> This default implementation returns null so that we
-	 * can easily ignore cases; it's useful to ignore a case when inheritance
-	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
-	 * @return the new adapter.
-	 * @see org.eclipse.emf.common.util.EMap
-	 * @generated
-	 */
-	public Adapter createEMapAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.enterprisedomain.classmaker.Customizer <em>Customizer</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
@@ -432,19 +387,6 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createProjectAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.ecore.resource.ResourceSet <em>Resource Set</em>}'.
-	 * <!-- begin-user-doc --> This default implementation returns
-	 * null so that we can easily ignore cases; it's useful to ignore a case
-	 * when inheritance will catch all the cases anyway. <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.emf.ecore.resource.ResourceSet
-	 * @generated
-	 */
-	public Adapter createResourceSetAdapter() {
 		return null;
 	}
 
