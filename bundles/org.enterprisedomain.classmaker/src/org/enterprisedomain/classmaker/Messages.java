@@ -41,6 +41,8 @@ public class Messages extends NLS {
 	public static String DefaultResourceExt;
 	public static String None;
 	public static String OK;
+	public static String ResourceImported;
+	public static String Save;
 	public static String VersionNotExists;
 	public static String WarningEPackageNoClassifiers;
 

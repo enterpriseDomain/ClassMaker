@@ -21,8 +21,10 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Collections;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Semaphore;
 
@@ -47,6 +49,9 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.enterprisedomain.classmaker.ClassMakerPlant;
 import org.enterprisedomain.classmaker.CompletionListener;
@@ -348,7 +353,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		assertEquals(n, o.eClass().getName());
 		assertEquals(o.eClass().getName(), o.getClass().getSimpleName());
 	}
-	
+
 	@Test
 	public void update() throws OperationCanceledException, InterruptedException, CoreException, ExecutionException {
 		setPackageName("updateable");
@@ -431,6 +436,27 @@ public class TestEnterpriseDomain extends AbstractTest {
 		assertEquals(getAttributeType(), a.getEType());
 		assertEquals(getClassName(), o.getClass().getSimpleName());
 		cleanup();
+	}
+
+	@Test
+	public void importModel() throws IOException, CoreException {
+		setPackageName("extra");
+		setClassName("Deluxe");
+		EPackage p = createEPackage("1.0");
+		EClass c = createEClass();
+		EAttribute a = EcoreFactory.eINSTANCE.createEAttribute();
+		a.setName("number");
+		a.setEType(EcorePackage.Literals.EINT);
+		c.getEStructuralFeatures().add(a);
+		p.getEClassifiers().add(c);
+		URI resourceURI = URI.createFileURI(ClassMakerTestsPlugin.getInstance().getStateLocation().append(p.getName())
+				.append(p.getNsPrefix()).addFileExtension("xmi").toString());
+		ResourceSet resourceSet = new ResourceSetImpl();
+		Resource resource = resourceSet.createResource(resourceURI);
+		resource.getContents().add(p);
+		resource.save(Collections.emptyMap());
+		EPackage r = service.produce(p);
+		assertNotNull(r);
 	}
 
 	@Test

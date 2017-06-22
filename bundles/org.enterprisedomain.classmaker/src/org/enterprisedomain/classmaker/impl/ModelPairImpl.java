@@ -76,7 +76,6 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 
 		private EPackageAdapter adapter = new EPackageAdapter();
 
-		@SuppressWarnings("unchecked")
 		@Override
 		public void notifyChanged(Notification msg) {
 			if (msg.getNotifier() instanceof ModelPair && msg.getEventType() == Notification.SET) {
