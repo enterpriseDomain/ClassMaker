@@ -1,0 +1,64 @@
+target "org.enterprisedomain.target.etc" with allEnvironments configurePhase
+
+//location "http://download.eclipse.org/technology/swtbot/releases/latest/" {
+//	org.eclipse.swtbot.forms.feature.group
+//	org.eclipse.swtbot.eclipse.feature.group
+//	org.eclipse.swtbot.eclipse.gef.feature.group
+//	org.eclipse.swtbot.feature.group
+//	org.eclipse.swtbot.eclipse.test.junit.feature.group
+//}
+
+location "http://download.eclipse.org/emfstore/releases_18" {
+	org.eclipse.emf.emfstore.client.transaction.feature.feature.group
+	org.eclipse.emf.emfstore.client.feature.feature.group
+	org.eclipse.emf.emfstore.common.feature.feature.group
+	org.eclipse.emf.emfstore.server.feature.feature.group
+	org.eclipse.emf.emfstore.example.feature.feature.group
+	org.eclipse.emf.emfstore.client.ui.feature.feature.group
+	org.eclipse.emf.emfstore.ecore.feature.feature.group
+}
+
+location "http://download.eclipse.org/egit/updates" {
+	org.eclipse.jgit.feature.group
+	org.eclipse.jgit.http.apache.feature.group
+	org.eclipse.jgit.pgm.feature.group
+}
+
+location "http://download.eclipse.org/rt/ecf/3.13.1/site.p2" {
+	org.eclipse.ecf.core.feature.feature.group
+	org.eclipse.ecf.filetransfer.feature.feature.group
+}
+
+//location "http://build.eclipse.org/rt/rap/base-platforms/3.1/extra-dependencies/" {
+//	org.mockito.mockito-core-hamcrest-modified
+//}
+
+location "http://download.eclipse.org/tools/orbit/downloads/drops/R20160221192158/repository/" {
+	javax.validation
+	org.apache.poi.source
+	org.apache.poi
+	org.apache.log4j.source
+	org.objenesis
+	org.objenesis.source
+	org.h2
+	javax.validation.source
+	org.apache.log4j
+	org.h2.source
+	com.google.gson.source
+	com.google.gson
+	com.google.guava
+	com.google.guava.source
+	org.hamcrest.core
+	org.hamcrest.library
+	org.hamcrest.library.source
+}
+
+location "http://download.eclipse.org/edapt/releases/12x" {
+	org.eclipse.emf.edapt.runtime.feature.feature.group
+	org.eclipse.emf.edapt.runtime.feature.source.feature.group
+}
+
+//location "http://download.eclipse.org/nebula/releases/1.0.0" {
+//	org.eclipse.nebula.widgets.grid.feature.feature.group
+//}
+

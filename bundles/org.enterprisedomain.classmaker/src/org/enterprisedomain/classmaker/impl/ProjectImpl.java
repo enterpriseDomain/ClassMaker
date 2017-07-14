@@ -62,7 +62,7 @@ import org.enterprisedomain.classmaker.util.ResourceUtils;
  */
 public class ProjectImpl extends EObjectImpl implements Project {
 
-	public class PropertiesAdapter extends AdapterImpl {
+	public class ProjectNameAdapter extends AdapterImpl {
 
 		@Override
 		public void notifyChanged(Notification msg) {
@@ -74,8 +74,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	}
 
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -83,8 +84,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	protected static final String NAME_EDEFAULT = "";
 
 	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -110,8 +112,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	protected String projectName = PROJECT_NAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isDirty() <em>Dirty</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #isDirty() <em>Dirty</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #isDirty()
 	 * @generated
 	 * @ordered
@@ -125,7 +128,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 */
 	protected ProjectImpl() {
 		super();
-		eAdapters().add(new PropertiesAdapter());
+		eAdapters().add(new ProjectNameAdapter());
 	}
 
 	/**
@@ -277,6 +280,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	public String save(IProgressMonitor monitor) throws CoreException {

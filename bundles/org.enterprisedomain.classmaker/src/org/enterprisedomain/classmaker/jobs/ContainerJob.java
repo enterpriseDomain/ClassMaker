@@ -26,9 +26,8 @@ import org.osgi.framework.Version;
 
 public abstract class ContainerJob extends EnterpriseDomainJob {
 
-	public ContainerJob(String name, long runId) {
-		super(name, runId);
-
+	public ContainerJob(String name) {
+		super(name);
 	}
 
 	public Collection<Bundle> getBundles(String symbolicName, Version version, BundleContext context) {

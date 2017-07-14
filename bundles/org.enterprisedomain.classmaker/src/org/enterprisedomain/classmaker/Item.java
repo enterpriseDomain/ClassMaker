@@ -17,6 +17,7 @@ package org.enterprisedomain.classmaker;
 
 import java.util.Locale;
 
+import java.util.Properties;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EMap;
@@ -41,6 +42,7 @@ import org.osgi.framework.Version;
  *   <li>{@link org.enterprisedomain.classmaker.Item#getParent <em>Parent</em>}</li>
  *   <li>{@link org.enterprisedomain.classmaker.Item#getLocale <em>Locale</em>}</li>
  *   <li>{@link org.enterprisedomain.classmaker.Item#getContribution <em>Contribution</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Item#getProperties <em>Properties</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getItem()
@@ -186,7 +188,7 @@ public interface Item extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Customizers</em>' map.
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getItem_Customizers()
-	 * @model mapType="org.enterprisedomain.classmaker.StageQualifierToCustomizerMapEntry<org.enterprisedomain.classmaker.StageQualifier, org.enterprisedomain.classmaker.Customizer>" transient="true" volatile="true" derived="true"
+	 * @model mapType="org.enterprisedomain.classmaker.StageQualifierToCustomizerMapEntry&lt;org.enterprisedomain.classmaker.StageQualifier, org.enterprisedomain.classmaker.Customizer&gt;" transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
 	EMap<StageQualifier, Customizer> getCustomizers();
@@ -286,5 +288,32 @@ public interface Item extends EObject {
 	 * @generated
 	 */
 	void setContribution(Contribution value);
+
+	/**
+	 * Returns the value of the '<em><b>Properties</b></em>' attribute.
+	 * The default value is <code>""</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Properties</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Properties</em>' attribute.
+	 * @see #setProperties(Properties)
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getItem_Properties()
+	 * @model default="" dataType="org.enterprisedomain.classmaker.Properties"
+	 * @generated
+	 */
+	Properties getProperties();
+
+	/**
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Item#getProperties <em>Properties</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Properties</em>' attribute.
+	 * @see #getProperties()
+	 * @generated
+	 */
+	void setProperties(Properties value);
 
 } // Item

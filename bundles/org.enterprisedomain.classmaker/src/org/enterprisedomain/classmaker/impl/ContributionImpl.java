@@ -18,11 +18,14 @@ package org.enterprisedomain.classmaker.impl;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map.Entry;
+import java.util.Properties;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -67,6 +70,7 @@ import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
+import org.enterprisedomain.classmaker.jobs.export.Exporter;
 import org.enterprisedomain.classmaker.util.GitUtil;
 import org.enterprisedomain.classmaker.util.ListUtil;
 import org.enterprisedomain.classmaker.util.ModelUtil;
@@ -88,6 +92,7 @@ import org.osgi.framework.Version;
  *   <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getParent <em>Parent</em>}</li>
  *   <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getLocale <em>Locale</em>}</li>
  *   <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getContribution <em>Contribution</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getDependencies <em>Dependencies</em>}</li>
  *   <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getRevision <em>Revision</em>}</li>
  *   <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getRevisions <em>Revisions</em>}</li>
@@ -118,24 +123,26 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	 */
 	protected String modelName = MODEL_NAME_EDEFAULT;
 	/**
-	 * The default value of the '{@link #getPhase() <em>Phase</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getPhase() <em>Phase</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getPhase()
 	 * @generated
 	 * @ordered
 	 */
 	protected static final Stage PHASE_EDEFAULT = Stage.DEFINED;
 	/**
-	 * The cached value of the '{@link #getPhase() <em>Phase</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getPhase() <em>Phase</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getPhase()
 	 * @generated
 	 * @ordered
 	 */
 	protected Stage phase = PHASE_EDEFAULT;
 	/**
-	 * The default value of the '{@link #getVersion() <em>Version</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getVersion()
 	 * @generated NOT
@@ -193,6 +200,23 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	 */
 	protected Locale locale = LOCALE_EDEFAULT;
 	/**
+	 * The default value of the '{@link #getProperties() <em>Properties</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getProperties()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Properties PROPERTIES_EDEFAULT = (Properties) ClassMakerFactory.eINSTANCE
+			.createFromString(ClassMakerPackage.eINSTANCE.getProperties(), "");
+	/**
+	 * The cached value of the '{@link #getProperties() <em>Properties</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getProperties()
+	 * @generated
+	 * @ordered
+	 */
+	protected Properties properties = PROPERTIES_EDEFAULT;
+	/**
 	 * The cached value of the '{@link #getRevisions() <em>Revisions</em>}' map.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getRevisions()
@@ -209,8 +233,9 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	 */
 	protected static final Version LATEST_VERSION_EDEFAULT = null;
 	/**
-	 * The cached value of the '{@link #getModel() <em>Model</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getModel() <em>Model</em>}' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getModel()
 	 * @generated
 	 * @ordered
@@ -254,7 +279,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 		}
 	};
 
-	protected final class CompletionNotifiedAdapter extends AdapterImpl {
+	protected final class CompletionNotificationAdapter extends AdapterImpl {
 
 		@Override
 		public void notifyChanged(Notification msg) {
@@ -277,7 +302,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	 */
 	protected ContributionImpl() {
 		super();
-		eAdapters().add(new CompletionNotifiedAdapter());
+		eAdapters().add(new CompletionNotificationAdapter());
 	}
 
 	/**
@@ -530,7 +555,8 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	public Contribution getContribution() {
 		Contribution contribution = basicGetContribution();
 		return contribution != null && contribution.eIsProxy()
-				? (Contribution) eResolveProxy((InternalEObject) contribution) : contribution;
+				? (Contribution) eResolveProxy((InternalEObject) contribution)
+				: contribution;
 	}
 
 	/**
@@ -549,6 +575,26 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	 */
 	public void setContribution(Contribution newContribution) {
 		// no-op
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Properties getProperties() {
+		return properties;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setProperties(Properties newProperties) {
+		Properties oldProperties = properties;
+		properties = newProperties;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.CONTRIBUTION__PROPERTIES,
+					oldProperties, properties));
 	}
 
 	/**
@@ -739,14 +785,13 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 			revision = getRevisions().get(version);
 			if (revision.getStateHistory().containsKey(time)) {
 				EList<String> commits = revision.getStateHistory().get((Object) time).getCommitIds();
-				if (!commits.isEmpty())
+				if (!commits.isEmpty()) {
 					revision.checkout(time, commits.get(ListUtil.lastIndex(commits.size())));
-				else
+				} else
 					revision.checkout(time);
 			}
 		} else
 			throw new IllegalStateException(NLS.bind(Messages.VersionNotExists, version));
-
 	}
 
 	/**
@@ -1165,6 +1210,8 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 			if (resolve)
 				return getContribution();
 			return basicGetContribution();
+		case ClassMakerPackage.CONTRIBUTION__PROPERTIES:
+			return getProperties();
 		case ClassMakerPackage.CONTRIBUTION__DEPENDENCIES:
 			return getDependencies();
 		case ClassMakerPackage.CONTRIBUTION__REVISION:
@@ -1220,6 +1267,9 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 		case ClassMakerPackage.CONTRIBUTION__CONTRIBUTION:
 			setContribution((Contribution) newValue);
 			return;
+		case ClassMakerPackage.CONTRIBUTION__PROPERTIES:
+			setProperties((Properties) newValue);
+			return;
 		case ClassMakerPackage.CONTRIBUTION__REVISION:
 			setRevision((Revision) newValue);
 			return;
@@ -1261,6 +1311,9 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 		case ClassMakerPackage.CONTRIBUTION__CONTRIBUTION:
 			setContribution((Contribution) null);
 			return;
+		case ClassMakerPackage.CONTRIBUTION__PROPERTIES:
+			setProperties(PROPERTIES_EDEFAULT);
+			return;
 		case ClassMakerPackage.CONTRIBUTION__REVISION:
 			setRevision((Revision) null);
 			return;
@@ -1299,6 +1352,8 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 			return LOCALE_EDEFAULT == null ? locale != null : !LOCALE_EDEFAULT.equals(locale);
 		case ClassMakerPackage.CONTRIBUTION__CONTRIBUTION:
 			return basicGetContribution() != null;
+		case ClassMakerPackage.CONTRIBUTION__PROPERTIES:
+			return PROPERTIES_EDEFAULT == null ? properties != null : !PROPERTIES_EDEFAULT.equals(properties);
 		case ClassMakerPackage.CONTRIBUTION__DEPENDENCIES:
 			return !getDependencies().isEmpty();
 		case ClassMakerPackage.CONTRIBUTION__REVISION:
@@ -1344,6 +1399,8 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 				return ClassMakerPackage.ITEM__LOCALE;
 			case ClassMakerPackage.CONTRIBUTION__CONTRIBUTION:
 				return ClassMakerPackage.ITEM__CONTRIBUTION;
+			case ClassMakerPackage.CONTRIBUTION__PROPERTIES:
+				return ClassMakerPackage.ITEM__PROPERTIES;
 			default:
 				return -1;
 			}
@@ -1377,6 +1434,8 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 				return ClassMakerPackage.CONTRIBUTION__LOCALE;
 			case ClassMakerPackage.ITEM__CONTRIBUTION:
 				return ClassMakerPackage.CONTRIBUTION__CONTRIBUTION;
+			case ClassMakerPackage.ITEM__PROPERTIES:
+				return ClassMakerPackage.CONTRIBUTION__PROPERTIES;
 			default:
 				return -1;
 			}
@@ -1404,6 +1463,8 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 		result.append(language);
 		result.append(", locale: ");
 		result.append(locale);
+		result.append(", properties: ");
+		result.append(properties);
 		result.append(", completionNotified: ");
 		result.append(completionNotified);
 		result.append(')');

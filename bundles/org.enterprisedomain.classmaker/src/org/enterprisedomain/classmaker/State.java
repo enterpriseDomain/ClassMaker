@@ -19,6 +19,7 @@ import java.util.Date;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EPackage;
@@ -39,16 +40,17 @@ import org.eclipse.emf.ecore.resource.Resource;
  *   <li>{@link org.enterprisedomain.classmaker.State#getJobFamily <em>Job Family</em>}</li>
  *   <li>{@link org.enterprisedomain.classmaker.State#getResource <em>Resource</em>}</li>
  *   <li>{@link org.enterprisedomain.classmaker.State#getCommitIds <em>Commit Ids</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.State#getCommitId <em>Commit Id</em>}</li>
  *   <li>{@link org.enterprisedomain.classmaker.State#getStateCustomizers <em>State Customizers</em>}</li>
  *   <li>{@link org.enterprisedomain.classmaker.State#getProjectName <em>Project Name</em>}</li>
  *   <li>{@link org.enterprisedomain.classmaker.State#isSaving <em>Saving</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getState()
- * @model
+ * @model superTypes="org.enterprisedomain.classmaker.Item org.enterprisedomain.classmaker.ISchedulingRule"
  * @generated
  */
-public interface State extends Item {
+public interface State extends Item, ISchedulingRule {
 	/**
 	 * Returns the value of the '<em><b>Required Plugins</b></em>' attribute list.
 	 * The list contents are of type {@link java.lang.String}.
@@ -203,6 +205,32 @@ public interface State extends Item {
 	EList<String> getCommitIds();
 
 	/**
+	 * Returns the value of the '<em><b>Commit Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Commit Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Commit Id</em>' attribute.
+	 * @see #setCommitId(String)
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getState_CommitId()
+	 * @model
+	 * @generated
+	 */
+	String getCommitId();
+
+	/**
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.State#getCommitId <em>Commit Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Commit Id</em>' attribute.
+	 * @see #getCommitId()
+	 * @generated
+	 */
+	void setCommitId(String value);
+
+	/**
 	 * Returns the value of the '<em><b>State Customizers</b></em>' map.
 	 * The key is of type {@link org.enterprisedomain.classmaker.StageQualifier},
 	 * and the value is of type {@link org.enterprisedomain.classmaker.Customizer},
@@ -214,7 +242,7 @@ public interface State extends Item {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>State Customizers</em>' map.
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getState_StateCustomizers()
-	 * @model mapType="org.enterprisedomain.classmaker.StageQualifierToCustomizerMapEntry<org.enterprisedomain.classmaker.StageQualifier, org.enterprisedomain.classmaker.Customizer>"
+	 * @model mapType="org.enterprisedomain.classmaker.StageQualifierToCustomizerMapEntry&lt;org.enterprisedomain.classmaker.StageQualifier, org.enterprisedomain.classmaker.Customizer&gt;"
 	 * @generated
 	 */
 	EMap<StageQualifier, Customizer> getStateCustomizers();

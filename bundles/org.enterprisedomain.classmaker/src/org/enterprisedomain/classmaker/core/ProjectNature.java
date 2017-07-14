@@ -46,7 +46,6 @@ public class ProjectNature implements IProjectNature {
 	}
 
 	protected void addToBuildSpec(String builderID) throws CoreException {
-
 		IProjectDescription description = this.project.getDescription();
 		int commandIndex = getCommandIndex(description.getBuildSpec(), builderID);
 
@@ -74,7 +73,6 @@ public class ProjectNature implements IProjectNature {
 	}
 
 	private void setCommand(IProjectDescription description, ICommand newCommand) throws CoreException {
-
 		ICommand[] oldBuildSpec = description.getBuildSpec();
 		int oldBuilderCommandIndex = getCommandIndex(oldBuildSpec, newCommand.getBuilderName());
 		ICommand[] newCommands;
@@ -93,7 +91,6 @@ public class ProjectNature implements IProjectNature {
 	}
 
 	private int getCommandIndex(ICommand[] buildSpec, String builderID) {
-
 		for (int i = 0; i < buildSpec.length; ++i) {
 			if (buildSpec[i].getBuilderName().equals(builderID)) {
 				return i;

@@ -47,60 +47,49 @@ import org.osgi.framework.Version;
 @SuppressWarnings("restriction")
 public class PDEPluginExporter extends AbstractExporter {
 
-	public PDEPluginExporter(long runId) {
-		super(runId);
+	public PDEPluginExporter() {
+		super();
 	}
 
 	@Override
 	public IStatus export(final IProgressMonitor monitor) throws CoreException {
-		// if (!getProject().hasNature(ClassMakerOSGi.PDE_PLUGIN_NATURE)) {
-		// IProjectDescription description = getProject().getDescription();
-		// description.setNatureIds(
-		// ResourceUtils.addProjectNature(description.getNatureIds(),
-		// ClassMakerOSGi.PDE_PLUGIN_NATURE));
-		// getProject().setDescription(description, monitor);
-		// }
-
 		if (monitor.isCanceled()) {
 			return Status.CANCEL_STATUS;
 		}
+			cleanup();
+			getProject().refreshLocal(IResource.DEPTH_INFINITE, monitor);
 
-		cleanup();
-		getProject().refreshLocal(IResource.DEPTH_INFINITE, monitor);
+			State contribution = getContributionState();
+			Version version = contribution.getVersion();
+			final FeatureExportInfo info = new FeatureExportInfo();
+			info.destinationDirectory = getExportDestination().toString();
+			info.toDirectory = true;
+			info.useJarFormat = true;
+			info.exportMetadata = true;
+			info.useWorkspaceCompiledClasses = false;
+			info.targets = new String[][] { { "os", TargetPlatform.getOS() }, { "ws", TargetPlatform.getWS() },
+					{ "arch", TargetPlatform.getOSArch() }, { "nl", TargetPlatform.getNL() } };
+			if (!version.equals(Version.emptyVersion))
+				info.qualifier = (String) version.getQualifier();
+			PluginModelManager modelManager = PDECore.getDefault().getModelManager();
+			modelManager.bundleRootChanged(getProject());
+			List<IPluginModelBase> models = new ArrayList<IPluginModelBase>();
+			IPluginModelBase model = modelManager.findModel(getProject());
+			if (model != null) {
+				models.add(model);
+				updateBuildProperties(model);
+				info.items = models.toArray();
+			}
 
-		State contribution = getContributionState();
-		Version version = contribution.getVersion();
-		final FeatureExportInfo info = new FeatureExportInfo();
-		info.destinationDirectory = getExportDestination().toString();
-		info.exportSource = true;
-		info.exportSourceBundle = true;
-		info.toDirectory = true;
-		info.useJarFormat = true;
-		info.exportMetadata = true;
-		info.useWorkspaceCompiledClasses = false;
-		info.targets = new String[][] { { "os", TargetPlatform.getOS() }, { "ws", TargetPlatform.getWS() },
-				{ "arch", TargetPlatform.getOSArch() }, { "nl", TargetPlatform.getNL() } };
-		if (!version.equals(Version.emptyVersion))
-			info.qualifier = (String) version.getQualifier();
-		PluginModelManager modelManager = PDECore.getDefault().getModelManager();
-		modelManager.bundleRootChanged(getProject());
-		List<IPluginModelBase> models = new ArrayList<IPluginModelBase>();
-		IPluginModelBase model = modelManager.findModel(getProject());
-		if (model != null) {
-			models.add(model);
-			updateBuildProperties(model);
-			info.items = models.toArray();
-		}
-
-		PluginExportOperation op = new PluginExportOperation(info, Messages.JobNamePDEExport);
-		DelegatingJob delegate = new DelegatingJob(op, getRunId());
-		delegate.setNextJob(getNextJob());
-		delegate.setResultStage(getResultStage());
-		delegate.setDirtyStage(getDirtyStage());
-		setNextJob(delegate);
-		contribution.setPhase(getResultStage());
-		monitor.worked(1);
-		return Status.OK_STATUS;
+			PluginExportOperation op = new PluginExportOperation(info, Messages.JobNamePDEExport);
+			DelegatingJob delegate = new DelegatingJob(op);
+			delegate.setNextJob(getNextJob());
+			delegate.setResultStage(getResultStage());
+			delegate.setDirtyStage(getDirtyStage());
+			setNextJob(delegate);
+			contribution.setPhase(getResultStage());
+			monitor.worked(1);
+			return Status.OK_STATUS;	
 	}
 
 	private void cleanup() throws CoreException {

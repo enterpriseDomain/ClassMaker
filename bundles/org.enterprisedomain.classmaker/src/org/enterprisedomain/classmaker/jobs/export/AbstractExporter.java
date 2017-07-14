@@ -22,21 +22,22 @@ import org.eclipse.core.runtime.IStatus;
 import org.enterprisedomain.classmaker.Messages;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.jobs.ContainerJob;
-import org.osgi.framework.Version;
 
 public abstract class AbstractExporter extends ContainerJob implements Exporter {
 
-	public AbstractExporter(long runId) {
-		super(Messages.JobNameExport, runId);
+	public AbstractExporter() {
+		super(Messages.JobNameExport);
 	}
 
 	private IPath destination;
 
-	private Version version;
-
 	@Override
 	public IStatus work(IProgressMonitor monitor) throws CoreException {
-		return export(monitor);
+		try {
+			return export(monitor);
+		} finally {
+			monitor.done();
+		}
 	}
 
 	@Override

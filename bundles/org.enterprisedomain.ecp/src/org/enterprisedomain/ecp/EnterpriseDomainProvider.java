@@ -15,7 +15,7 @@
  */
 package org.enterprisedomain.ecp;
 
-import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -40,10 +40,8 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EContentAdapter;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecp.core.ECPProject;
 import org.eclipse.emf.ecp.core.ECPRepository;
 import org.eclipse.emf.ecp.core.util.ECPContainer;
@@ -56,14 +54,13 @@ import org.eclipse.emf.ecp.spi.core.InternalProvider;
 import org.eclipse.emf.ecp.spi.core.ProviderChangeListener;
 import org.eclipse.emf.ecp.spi.core.util.InternalChildrenList;
 import org.eclipse.emf.edit.command.ChangeCommand;
-import org.eclipse.emf.edit.command.DeleteCommand;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.enterprisedomain.classmaker.CompletionListener;
+import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.ResourceAdapter;
-import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.impl.CompletionListenerImpl;
 import org.enterprisedomain.classmaker.util.ClassMakerAdapterFactory;
@@ -94,7 +91,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 
 	@Override
 	public EList<? extends Object> getElements(InternalProject project) {
-		Project domainProject = (Project) project.getProviderSpecificData();
+		Project domainProject = (Project) Activator.getClassMaker().getWorkspace().getProject(project.getName());
 		return domainProject.getChildren();
 	}
 
@@ -153,8 +150,9 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 			public void postDelete(EObject objectToBeDeleted) {
 				if (!projects.containsKey(objectToBeDeleted))
 					return;
+				final Object[] eObjects = new Object[] { objectToBeDeleted };
 				ECPUtil.getECPObserverBus().notify(ECPProjectContentChangedObserver.class)
-						.objectsChanged(projects.get(objectToBeDeleted), Collections.singleton(objectToBeDeleted));
+						.objectsChanged(projects.get(objectToBeDeleted), (Collection<Object>) Arrays.asList(eObjects));
 				projects.remove(objectToBeDeleted);
 			}
 
@@ -181,8 +179,12 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 			model.setName(project.getName());
 			model.setNsPrefix(CodeGenUtil.capName(project.getName().replaceAll(" ", "").toLowerCase()));
 			model.setNsURI("http://" + project.getName().replaceAll(" ", "") + "/1.0");
-			EClass ec = EcoreFactory.eINSTANCE.createEClass();
+			EClass ec = ecoreFactory.createEClass();
 			ec.setName("Class0");
+			EAttribute a = ecoreFactory.createEAttribute();
+			a.setName("value");
+			a.setEType(EcorePackage.Literals.EJAVA_OBJECT);
+			ec.getEStructuralFeatures().add(a);
 			model.getEClassifiers().add(ec);
 			try {
 				domainProject = Activator.getClassMaker().getWorkspace().createContribution(model,
@@ -200,13 +202,12 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 			} catch (CoreException e) {
 				Activator.log(e);
 			}
-		project.setProviderSpecificData(domainProject);
 		domainProject.getWorkspace().getResourceSet().eAdapters()
 				.add(new AdapterFactoryEditingDomain.EditingDomainProvider(project.getEditingDomain()));
 	}
 
 	protected void removeProject(InternalProject project) {
-		Project domainProject = (Project) project.getProviderSpecificData();
+		Project domainProject = (Project) Activator.getClassMaker().getWorkspace().getProject(project.getName());
 		try {
 			domainProject.delete(getUIProvider().getAdapter(project, IProgressMonitor.class));
 		} catch (CoreException e) {
@@ -271,9 +272,8 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 
 		@Override
 		public void completed(Contribution result) {
-			for (EPackage ePackage : result.getDomainModels().values())
-				project.getVisiblePackages().add(project.getEditingDomain().getResourceSet().getPackageRegistry()
-						.getEPackage(ePackage.getNsURI()));
+			project.getVisiblePackages().add(project.getEditingDomain().getResourceSet().getPackageRegistry()
+					.getEPackage(result.getDomainModel().getGenerated().getNsURI()));
 		}
 
 	};
@@ -301,7 +301,8 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 			if (notification.getNotifier() instanceof EObject) {
 				provider.notifyProviderChangeListeners(notification);
 				final EObject eObject = (EObject) notification.getNotifier();
-				project.notifyObjectsChanged(Collections.singleton(eObject), false);
+				final Object[] eObjects = new Object[] { eObject };
+				project.notifyObjectsChanged((Collection<Object>) Arrays.asList(eObjects), false);
 
 				final Object feature = notification.getFeature();
 				if (feature instanceof EReference) {
@@ -361,9 +362,10 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 		IProgressMonitor monitor = null;
 		try {
 			monitor = getUIProvider().getAdapter(project, IProgressMonitor.class);
-			final Map<Object, Object> saveOptions = new HashMap<Object, Object>();
-			saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
-			Semaphore saved = new Semaphore(0);
+			// final Map<Object, Object> saveOptions = new HashMap<Object, Object>();
+			// saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED,
+			// Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
+			final Semaphore saved = new Semaphore(0);
 			CompletionListener saveListener = new CompletionListenerImpl() {
 
 				@Override
@@ -372,9 +374,9 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 				}
 
 			};
-			if (project.getProviderSpecificData() instanceof Contribution) {
-				Contribution contrib = ((Contribution) project.getProviderSpecificData());
-				contrib.getState().getResource().save(saveOptions);
+			Project domainProject = Activator.getClassMaker().getWorkspace().getProject(project.getName());
+			if (domainProject instanceof Contribution) {
+				Contribution contrib = (Contribution) domainProject;
 				contrib.addSaveCompletionListener(saveListener);
 				contrib.save(monitor);
 				try {
@@ -386,72 +388,36 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 				}
 				contrib.removeSaveCompletionListener(saveListener);
 			} else
-				// ((BasicCommandStack)
-				// project.getEditingDomain().getCommandStack()).execute(new
-				// SaveCommand());
-				// final List<Resource> resources =
-				// project.getEditingDomain().getResourceSet().getResources();
-				// for (final Resource resource : resources) {
-				// resource.save(saveOptions);
-				// }
-				((Project) project.getProviderSpecificData()).save(monitor);
+				domainProject.save(monitor);
 			((BasicCommandStack) project.getEditingDomain().getCommandStack()).saveIsDone();
 		} catch (CoreException e) {
 			e.printStackTrace();
 			if (monitor != null)
 				monitor.setCanceled(true);
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 		super.doSave(project);
 	}
 
 	@Override
-	public void doDelete(InternalProject project, Collection<Object> objects) {
-		if (project.getProviderSpecificData() instanceof Contribution)
-			((Contribution) project.getProviderSpecificData()).delete(ECollections.newBasicEList(objects));
-		// for (Object object : objects)
-		// if (object instanceof EPackage
-		// && ((Contribution)
-		// project.getProviderSpecificData()).getDomainModels().containsKey(object))
-		// {
-		// ((Contribution)
-		// project.getProviderSpecificData()).getChildren().remove(object);
-		// }
-
-		final Command deleteCommand = DeleteCommand.create(project.getEditingDomain(), objects);
-		if (deleteCommand.canExecute()) {
-			project.getEditingDomain().getCommandStack().execute(deleteCommand);
-			return;
-		}
-
-		/*
-		 * the default DeleteCommand cannot be executed for whatever reason.
-		 * Wrap an EcoreUtil.delete in a change command for undo support.
-		 */
+	public void doDelete(final InternalProject project, final Collection<Object> objects) {
 		final Command changeCommand = new ChangeCommand(project.getEditingDomain().getResourceSet()) {
 			@Override
 			protected void doExecute() {
-				for (final Object object : objects) {
-					final Object unwrap = AdapterFactoryEditingDomain.unwrap(object);
-					if (!EObject.class.isInstance(unwrap)) {
-						continue;
+				Project domainProject = Activator.getClassMaker().getWorkspace().getProject(project.getName());
+				if (objects.isEmpty())
+					try {
+						domainProject.delete(getUIProvider().getAdapter(project, IProgressMonitor.class));
+					} catch (CoreException e) {
+						Activator.log(e);
 					}
-					EcoreUtil.delete(EObject.class.cast(unwrap), true);
-				}
+				else
+					domainProject.delete(ECollections.newBasicEList(objects));
 			}
 		};
 		if (changeCommand.canExecute()) {
 			project.getEditingDomain().getCommandStack().execute(changeCommand);
 			return;
 		}
-
-		// unexpected
-		throw new IllegalStateException("Delete was not successful."); //$NON-NLS-1$
-
-		// EList<Object> eList = ECollections.newBasicEList(objects);
-		// Project domainProject = (Project) project.getProviderSpecificData();
-		// domainProject.delete(eList);
 	}
 
 }

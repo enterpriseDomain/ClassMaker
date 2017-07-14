@@ -77,19 +77,16 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl#getProjects
- * <em>Projects</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl#getResourceSet
- * <em>Resource Set</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl#getProjects <em>Projects</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl#getResourceSet <em>Resource Set</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	/**
-	 * The cached value of the '{@link #getProjects() <em>Projects</em>}'
-	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getProjects() <em>Projects</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getProjects()
 	 * @generated
 	 * @ordered
@@ -97,8 +94,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	protected EList<Project> projects;
 
 	/**
-	 * The default value of the '{@link #getResourceSet() <em>Resource Set</em>}
-	 * ' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getResourceSet() <em>Resource Set</em>} '
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getResourceSet()
 	 * @generated NOT
@@ -107,9 +104,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	protected static final ResourceSet RESOURCE_SET_EDEFAULT = new ResourceSetImpl();
 
 	/**
-	 * The cached value of the '{@link #getResourceSet() <em>Resource Set</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getResourceSet() <em>Resource Set</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getResourceSet()
 	 * @generated
 	 * @ordered
@@ -118,7 +114,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected WorkspaceImpl() {
@@ -127,7 +122,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -137,7 +131,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EList<Project> getProjects() {
@@ -158,7 +151,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ResourceSet getResourceSet() {
@@ -192,58 +184,52 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * 
 	 * @generated NOT
 	 */
+	@SuppressWarnings("restriction")
 	public void provision(IProgressMonitor monitor) throws CoreException {
-		// for (IProject project :
-		// ResourcesPlugin.getWorkspace().getRoot().getProjects()) {
-		// if (project.hasNature(ClassMakerOSGi.NATURE_ID)
-		// && !project.hasNature(ClassMakerOSGi.PDE_PLUGIN_NATURE)) {
-		// IProjectDescription description = project.getDescription();
-		// description.setNatureIds(ResourceUtils.addProjectNature(description.getNatureIds(),
-		// ClassMakerOSGi.PDE_PLUGIN_NATURE));
-		// project.setDescription(description, monitor);
-		// }
-		// }
-
-		IPath targetPlatformLocation = ClassMakerPlugin.getInstance().getStateLocation().append("target")
-				.append("workspace").addFileExtension("target");
-		ITargetPlatformService targetPlatformService = TargetPlatformService.getDefault();
-		ITargetDefinition targetDefinition = null;
-		if (targetPlatformLocation.toFile().exists())
-			targetDefinition = targetPlatformService.getTarget(targetPlatformLocation.toFile().toURI())
-					.getTargetDefinition();
-		if (targetDefinition == null) {
-			targetDefinition = targetPlatformService.newTarget();
-			targetDefinition.setName("Platform");
-			Bundle[] bundles = Platform.getBundle("org.eclipse.core.runtime").getBundleContext().getBundles();
-			List<ITargetLocation> bundleContainers = new ArrayList<ITargetLocation>();
-			Set<File> dirs = new HashSet<File>();
-			for (Bundle bundle : bundles) {
-				EquinoxBundle bundleImpl = (EquinoxBundle) bundle;
-				Generation generation = (Generation) bundleImpl.getModule().getCurrentRevision().getRevisionInfo();
-				File file = generation.getBundleFile().getBaseFile();
-				File folder = file.getParentFile();
-				if (!dirs.contains(folder)) {
-					dirs.add(folder);
-					bundleContainers.add(targetPlatformService.newDirectoryLocation(folder.getAbsolutePath()));
-				}
-			}
-			targetDefinition.setTargetLocations(bundleContainers.toArray(new ITargetLocation[bundleContainers.size()]));
-			targetDefinition.setArch(Platform.getOSArch());
-			targetDefinition.setOS(Platform.getOS());
-			targetDefinition.setWS(Platform.getWS());
-			targetDefinition.setNL(Platform.getNL());
-			targetPlatformService.saveTargetDefinition(targetDefinition);
-		}
-		Job job = new LoadTargetDefinitionJob(targetDefinition);
-		job.schedule();
 		try {
-			job.join();
-		} catch (InterruptedException e) {
-			monitor.setCanceled(true);
-			e.printStackTrace();
+			IPath targetPlatformLocation = ClassMakerPlugin.getInstance().getStateLocation().append("target")
+					.append("workspace").addFileExtension("target");
+			ITargetPlatformService targetPlatformService = TargetPlatformService.getDefault();
+			ITargetDefinition targetDefinition = null;
+			if (targetPlatformLocation.toFile().exists())
+				targetDefinition = targetPlatformService.getTarget(targetPlatformLocation.toFile().toURI())
+						.getTargetDefinition();
+			if (targetDefinition == null) {
+				targetDefinition = targetPlatformService.newTarget();
+				targetDefinition.setName("Platform");
+				Bundle[] bundles = Platform.getBundle("org.eclipse.core.runtime").getBundleContext().getBundles();
+				List<ITargetLocation> bundleContainers = new ArrayList<ITargetLocation>();
+				Set<File> dirs = new HashSet<File>();
+				for (Bundle bundle : bundles) {
+					EquinoxBundle bundleImpl = (EquinoxBundle) bundle;
+					Generation generation = (Generation) bundleImpl.getModule().getCurrentRevision().getRevisionInfo();
+					File file = generation.getBundleFile().getBaseFile();
+					File folder = file.getParentFile();
+					if (!dirs.contains(folder)) {
+						dirs.add(folder);
+						bundleContainers.add(targetPlatformService.newDirectoryLocation(folder.getAbsolutePath()));
+					}
+				}
+				targetDefinition
+						.setTargetLocations(bundleContainers.toArray(new ITargetLocation[bundleContainers.size()]));
+				targetDefinition.setArch(Platform.getOSArch());
+				targetDefinition.setOS(Platform.getOS());
+				targetDefinition.setWS(Platform.getWS());
+				targetDefinition.setNL(Platform.getNL());
+				targetPlatformService.saveTargetDefinition(targetDefinition);
+			}
+			Job job = new LoadTargetDefinitionJob(targetDefinition);
+			job.schedule();
+			try {
+				job.join();
+			} catch (InterruptedException e) {
+				monitor.setCanceled(true);
+				e.printStackTrace();
+			}
+			PDECore.getDefault().getModelManager().targetReloaded(monitor);
+		} finally {
+			monitor.done();
 		}
-		PDECore.getDefault().getModelManager().targetReloaded(monitor);
-		monitor.worked(1);
 	}
 
 	/**
@@ -252,33 +238,37 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * @generated NOT
 	 */
 	public Contribution createContribution(EPackage blueprint, IProgressMonitor monitor) throws CoreException {
-		Contribution result = getContribution(blueprint, true);
-		if (result != null) {
-			if (!result.getRevisions().isEmpty()) {
-				Revision newRevision = result.newRevision(result.nextVersion());
-				result.checkout(newRevision.getVersion());
-			} else {
-				result.createRevision(monitor);
-				result.load(true);
+		try {
+			Contribution result = getContribution(blueprint, true);
+			if (result != null) {
+				if (!result.getRevisions().isEmpty()) {
+					Revision newRevision = result.newRevision(result.nextVersion());
+					result.checkout(newRevision.getVersion());
+				} else {
+					result.createRevision(monitor);
+					result.load(true);
+				}
+				registerProject(result);
+				return result;
 			}
+			// contribution not exist. create
+			result = ClassMakerFactory.eINSTANCE.createContribution();
+			result.setName(blueprint.getName());
 			registerProject(result);
+			result.create(monitor);
+			Version version = result.nextVersion();
+			Revision revision = result.newRevision(version);
+			result.checkout(revision.getVersion());
+			result.load(true);
+			EPackage model = EcoreUtil.copy(blueprint);
+			result.getDomainModel().setDynamic(model);
+			if (blueprint.eResource() != null)
+				blueprint.eResource().getContents().add(model);
+			result.getState().saveResource();
 			return result;
+		} finally {
+			monitor.done();
 		}
-		// contribution not exist. create
-		result = ClassMakerFactory.eINSTANCE.createContribution();
-		result.setName(blueprint.getName());
-		registerProject(result);
-		result.create(monitor);
-		Version version = result.nextVersion();
-		Revision revision = result.newRevision(version);
-		result.checkout(revision.getVersion());
-		result.load(true);
-		EPackage model = EcoreUtil.copy(blueprint);
-		result.getDomainModel().setDynamic(model);
-		if (blueprint.eResource() != null)
-			blueprint.eResource().getContents().add(model);
-		result.getState().saveResource();
-		return result;
 	}
 
 	/**
@@ -429,7 +419,9 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 				registerProject(contribution);
 			}
 		} catch (CoreException e) {
-			e.printStackTrace();
+			ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
+		} finally {
+			monitor.done();
 		}
 		return contribution;
 
@@ -441,11 +433,15 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * @generated NOT
 	 */
 	public Project createProject(String name, IProgressMonitor monitor) throws CoreException {
-		Project project = ClassMakerFactory.eINSTANCE.createProject();
-		project.setName(name);
-		registerProject(project);
-		project.create(monitor);
-		return project;
+		try {
+			Project project = ClassMakerFactory.eINSTANCE.createProject();
+			project.setName(name);
+			registerProject(project);
+			project.create(monitor);
+			return project;
+		} finally {
+			monitor.done();
+		}
 	}
 
 	/**
@@ -479,7 +475,9 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 				registerProject(project);
 			}
 		} catch (CoreException e) {
-			e.printStackTrace();
+			ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
+		} finally {
+			monitor.done();
 		}
 		return project;
 
@@ -519,13 +517,16 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * @generated NOT
 	 */
 	public void delete(Object object, IProgressMonitor monitor) throws CoreException {
-		if (object instanceof EObject)
-			getContribution((EObject) object).delete(monitor);
+		try {
+			if (object instanceof EObject)
+				getContribution((EObject) object).delete(monitor);
+		} finally {
+			monitor.done();
+		}
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -540,7 +541,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -554,7 +554,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -570,7 +569,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -587,7 +585,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -602,7 +599,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -618,7 +614,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

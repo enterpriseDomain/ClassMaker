@@ -76,6 +76,7 @@ public class ItemItemProvider extends ItemProviderAdapter implements IEditingDom
 			addParentPropertyDescriptor(object);
 			addLocalePropertyDescriptor(object);
 			addContributionPropertyDescriptor(object);
+			addPropertiesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -185,6 +186,21 @@ public class ItemItemProvider extends ItemProviderAdapter implements IEditingDom
 	}
 
 	/**
+	 * This adds a property descriptor for the Properties feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addPropertiesPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Item_properties_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Item_properties_feature", "_UI_Item_type"),
+						ClassMakerPackage.Literals.ITEM__PROPERTIES, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -245,6 +261,7 @@ public class ItemItemProvider extends ItemProviderAdapter implements IEditingDom
 		case ClassMakerPackage.ITEM__VERSION:
 		case ClassMakerPackage.ITEM__LANGUAGE:
 		case ClassMakerPackage.ITEM__LOCALE:
+		case ClassMakerPackage.ITEM__PROPERTIES:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case ClassMakerPackage.ITEM__DOMAIN_MODEL:

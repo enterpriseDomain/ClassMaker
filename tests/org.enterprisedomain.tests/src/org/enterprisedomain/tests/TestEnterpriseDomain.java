@@ -472,7 +472,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 	}
 
 	@Test
-	public void version() throws OperationCanceledException, InterruptedException, ExecutionException, CoreException {
+	public void versions() throws OperationCanceledException, InterruptedException, ExecutionException, CoreException {
 		setPackageName("some");
 		setClassName("C");
 		setAttributeName("c");

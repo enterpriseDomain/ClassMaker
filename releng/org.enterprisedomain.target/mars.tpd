@@ -1,0 +1,16 @@
+target "org.enterprisedomain.target.oxygen" with allEnvironments configurePhase
+
+location "http://download.eclipse.org/eclipse/updates/4.5" {
+	org.eclipse.platform.feature.group
+	org.eclipse.rcp.feature.group
+	org.eclipse.rcp.configuration.feature.group
+	org.eclipse.equinox.sdk.feature.group
+	org.eclipse.equinox.executable.feature.group
+	org.eclipse.platform.ide
+	org.eclipse.jdt.core
+	org.eclipse.pde.core
+	org.eclipse.core.databinding
+	org.eclipse.core.databinding.beans
+	org.eclipse.core.databinding.observable
+	org.eclipse.core.databinding.property
+}

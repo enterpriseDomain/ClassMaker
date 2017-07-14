@@ -21,6 +21,7 @@ import static org.enterprisedomain.classmaker.ClassMakerPackage.RESOURCE;
 
 import java.util.Locale;
 import java.util.Map;
+import java.util.Properties;
 import java.util.concurrent.Future;
 import java.util.concurrent.Semaphore;
 
@@ -196,6 +197,13 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	private EEnum stageEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType propertiesEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -513,8 +521,17 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getState_CommitId() {
+		return (EAttribute) stateEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getState_StateCustomizers() {
-		return (EReference) stateEClass.getEStructuralFeatures().get(7);
+		return (EReference) stateEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -523,7 +540,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	public EAttribute getState_ProjectName() {
-		return (EAttribute) stateEClass.getEStructuralFeatures().get(8);
+		return (EAttribute) stateEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -532,7 +549,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	public EAttribute getState_Saving() {
-		return (EAttribute) stateEClass.getEStructuralFeatures().get(9);
+		return (EAttribute) stateEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -623,6 +640,15 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	public EReference getItem_Contribution() {
 		return (EReference) itemEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getItem_Properties() {
+		return (EAttribute) itemEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -963,6 +989,15 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getProperties() {
+		return propertiesEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getIProgressMonitor() {
 		return iProgressMonitorEDataType;
 	}
@@ -1073,6 +1108,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		createEAttribute(stateEClass, STATE__JOB_FAMILY);
 		createEReference(stateEClass, STATE__RESOURCE);
 		createEAttribute(stateEClass, STATE__COMMIT_IDS);
+		createEAttribute(stateEClass, STATE__COMMIT_ID);
 		createEReference(stateEClass, STATE__STATE_CUSTOMIZERS);
 		createEAttribute(stateEClass, STATE__PROJECT_NAME);
 		createEAttribute(stateEClass, STATE__SAVING);
@@ -1087,6 +1123,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		createEReference(itemEClass, ITEM__PARENT);
 		createEAttribute(itemEClass, ITEM__LOCALE);
 		createEReference(itemEClass, ITEM__CONTRIBUTION);
+		createEAttribute(itemEClass, ITEM__PROPERTIES);
 
 		adapterEClass = createEClass(ADAPTER);
 
@@ -1141,6 +1178,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		stageEEnum = createEEnum(STAGE);
 
 		// Create data types
+		propertiesEDataType = createEDataType(PROPERTIES);
 		iProgressMonitorEDataType = createEDataType(IPROGRESS_MONITOR);
 		osGiVersionEDataType = createEDataType(OS_GI_VERSION);
 		semaphoreEDataType = createEDataType(SEMAPHORE);
@@ -1184,6 +1222,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		contributionEClass.getESuperTypes().add(this.getItem());
 		revisionEClass.getESuperTypes().add(this.getItem());
 		stateEClass.getESuperTypes().add(this.getItem());
+		stateEClass.getESuperTypes().add(this.getISchedulingRule());
 		workspaceEClass.getESuperTypes().add(this.getISchedulingRule());
 		projectEClass.getESuperTypes().add(this.getISchedulingRule());
 		resourceAdapterEClass.getESuperTypes().add(this.getAdapter());
@@ -1342,6 +1381,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getState_CommitIds(), ecorePackage.getEString(), "commitIds", null, 0, -1, State.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getState_CommitId(), ecorePackage.getEString(), "commitId", null, 0, 1, State.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getState_StateCustomizers(), this.getStageQualifierToCustomizerMapEntry(), null,
 				"stateCustomizers", null, 0, -1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1396,6 +1437,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEReference(getItem_Contribution(), this.getContribution(), null, "contribution", null, 0, 1, Item.class,
 				IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
 				IS_DERIVED, IS_ORDERED);
+		initEAttribute(getItem_Properties(), this.getProperties(), "properties", "", 0, 1, Item.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(itemEClass, null, "load", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEBoolean(), "create", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1679,6 +1722,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		addEEnumLiteral(stageEEnum, Stage.LOADED);
 
 		// Initialize data types
+		initEDataType(propertiesEDataType, Properties.class, "Properties", IS_SERIALIZABLE,
+				!IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(iProgressMonitorEDataType, IProgressMonitor.class, "IProgressMonitor", IS_SERIALIZABLE,
 				!IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(osGiVersionEDataType, Version.class, "OSGiVersion", IS_SERIALIZABLE,

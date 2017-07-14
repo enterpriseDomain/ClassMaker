@@ -27,9 +27,11 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.IJobChangeListener;
+import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.core.runtime.jobs.JobGroup;
+import org.eclipse.core.runtime.jobs.MultiRule;
 import org.eclipse.core.runtime.jobs.ProgressProvider;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.enterprisedomain.classmaker.Contribution;
@@ -37,13 +39,10 @@ import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
-import org.enterprisedomain.classmaker.core.ProjectBuilder;
 
 public abstract class EnterpriseDomainJob extends WorkspaceJob {
 
 	private EnterpriseDomainJob nextJob;
-
-	private long runId;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -78,7 +77,7 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob {
 			try {
 				getNextJob().join();
 			} catch (InterruptedException e) {
-				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
+				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createWarningStatus(e));
 			}
 		}
 
@@ -92,13 +91,15 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob {
 
 	private int buildKind;
 
-	public EnterpriseDomainJob(String name, long runId) {
+	private boolean changeRule;
+
+	public EnterpriseDomainJob(String name) {
 		super(name);
 		setUser(true);
 		setPriority(Job.BUILD);
 		setRule(getWorkspace());
-		setJobGroup(new JobGroup("Supplying Class" + "  " + runId, 0, 1)); //$NON-NLS-1$
-		this.runId = runId;
+		setChangeRule(true);
+		setJobGroup(new JobGroup("Supplying Class", 0, 1)); //$NON-NLS-1$
 	}
 
 	@Override
@@ -182,7 +183,13 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob {
 
 	public void setProject(IProject project) {
 		this.project = project;
-		setRule(getWorkspace().getContribution(project.getName()));
+		if (isChangeRule())
+			setRule(calcSchedulingRule(project));
+	}
+
+	private ISchedulingRule calcSchedulingRule(IProject project) {
+		ISchedulingRule rule = getWorkspace().getContribution(project.getName()).getState(getStateTimestamp());
+		return MultiRule.combine(project, rule);
 	}
 
 	public EnterpriseDomainJob getNextJob() {
@@ -215,13 +222,9 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob {
 		return ClassMakerPlugin.getClassMaker().getWorkspace();
 	}
 
-	protected long getRunId() {
-		return runId;
-	}
-
 	/**
-	 * Returns a stage in which contribution state remains after execution of
-	 * this job.
+	 * Returns a stage in which contribution state remains after execution of this
+	 * job.
 	 * 
 	 * @return job stage
 	 */
@@ -243,7 +246,6 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob {
 
 	public void checkStage() {
 		while (getContributionState().getProjectName().equals(getProject().getName())
-				&& getRunId() < ProjectBuilder.getRunId()
 				&& getContributionState().getPhase().getValue() < getPrerequisiteStage().getValue())
 			Thread.yield();
 	}
@@ -270,6 +272,14 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob {
 
 	public ResourceSet getResourceSet() {
 		return resourceSet;
+	}
+
+	public boolean isChangeRule() {
+		return changeRule;
+	}
+
+	public void setChangeRule(boolean changeRule) {
+		this.changeRule = changeRule;
 	}
 
 }

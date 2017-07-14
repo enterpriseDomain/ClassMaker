@@ -6,7 +6,7 @@
          id="product"
          point="org.eclipse.core.runtime.products">
       <product
-            name="org.enterprisedomain.ui.workbench.rcp"
+            name="org.enterprisedomain.ui.workplace.rcp"
             application="org.eclipse.e4.ui.workbench.swt.E4Application">
          <property
                name="clearPersistedState"
@@ -18,7 +18,7 @@
          </property>
          <property
                name="appName"
-               value="org.enterprisedomain.ui.workbench.rcp">
+               value="org.enterprisedomain.ui.workplace.rcp">
          </property>
          <property
                name="lifeCycleURI"
@@ -172,15 +172,5 @@
          </with>
       </definition>
    </extension>
-   <extension
-         point="org.eclipse.emf.ecp.ui.modelElementOpener">
-      <modelElementOpener
-            class="org.enterprisedomain.ui.workbench.rcp.editor.CustomEditorOpener">
-         <staticTester
-               modelElement="org.eclipse.emf.ecore.EObject"
-               priority="2">
-         </staticTester>
-      </modelElementOpener>
-   </extension>   
 
 </plugin>

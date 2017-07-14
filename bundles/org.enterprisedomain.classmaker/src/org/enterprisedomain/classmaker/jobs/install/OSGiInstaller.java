@@ -66,8 +66,8 @@ public class OSGiInstaller extends Installer {
 	private Semaphore uninstalled;
 	private FrameworkWiring frameworkWiring;
 
-	public OSGiInstaller(long runId) {
-		super(runId);
+	public OSGiInstaller() {
+		super();
 		installed = new Semaphore(0);
 		uninstalled = new Semaphore(0);
 	}
@@ -91,6 +91,7 @@ public class OSGiInstaller extends Installer {
 		} catch (SecurityException e) {
 			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 		} catch (InterruptedException e) {
+			monitor.setCanceled(true);
 			return Status.CANCEL_STATUS;
 		} finally {
 			monitor.worked(1);

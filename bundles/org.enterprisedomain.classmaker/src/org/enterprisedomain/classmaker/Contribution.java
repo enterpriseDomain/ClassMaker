@@ -98,7 +98,7 @@ public interface Contribution extends Project, Item {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Revisions</em>' map.
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getContribution_Revisions()
-	 * @model mapType="org.enterprisedomain.classmaker.VersionToRevisionMapEntry<org.enterprisedomain.classmaker.OSGiVersion, org.enterprisedomain.classmaker.Revision>"
+	 * @model mapType="org.enterprisedomain.classmaker.VersionToRevisionMapEntry&lt;org.enterprisedomain.classmaker.OSGiVersion, org.enterprisedomain.classmaker.Revision&gt;"
 	 * @generated
 	 */
 	EMap<Version, Revision> getRevisions();

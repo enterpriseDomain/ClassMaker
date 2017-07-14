@@ -1,0 +1,37 @@
+target "org.enterprisedomain.target.oxygen" with allEnvironments configurePhase
+
+
+location updates4_7 "http://download.eclipse.org/eclipse/updates/4.7" {
+	org.eclipse.platform.feature.group
+	org.eclipse.rcp.feature.group
+	org.eclipse.rcp.configuration.feature.group
+	org.eclipse.equinox.sdk.feature.group
+	org.eclipse.equinox.executable.feature.group
+	org.eclipse.platform.ide
+	org.eclipse.jdt.core
+	org.eclipse.pde.core
+}
+
+location oxygen "http://download.eclipse.org/releases/oxygen" {
+	org.eclipse.jdt.feature.group
+	org.eclipse.emf.sdk.feature.group
+	org.eclipse.gef.sdk.feature.group
+	org.eclipse.graphiti.feature.feature.group
+	org.eclipse.graphiti.export.feature.feature.group
+	org.eclipse.emf.validation.sdk.feature.group
+	org.eclipse.emf.transaction.sdk.feature.group
+	org.eclipse.net4j.sdk.feature.group
+	org.eclipse.emf.cdo.sdk.feature.group
+	org.eclipse.pde.feature.group
+	org.eclipse.pde.api.tools.ee.javase16
+	org.eclipse.pde.api.tools.ee.javase17
+	org.eclipse.pde.api.tools.ee.javase18
+	org.eclipse.ocl.all.sdk.feature.group
+	org.eclipse.m2m.qvt.oml.sdk.feature.group
+	org.eclipse.xtend.sdk.feature.group
+	org.eclipse.emf.ecp.sdk.e4.feature.feature.group
+	org.eclipse.sirius.runtime.feature.group
+	org.eclipse.sirius.diagram.ui
+	org.eclipse.sirius.diagram.ui.ext
+}
+

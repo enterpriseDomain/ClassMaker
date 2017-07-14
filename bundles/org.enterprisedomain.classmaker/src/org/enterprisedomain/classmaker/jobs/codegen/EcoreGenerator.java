@@ -49,8 +49,8 @@ import org.enterprisedomain.classmaker.util.ResourceUtils;
 public class EcoreGenerator extends EnterpriseDomainJob
 		implements org.enterprisedomain.classmaker.jobs.codegen.Generator {
 
-	public EcoreGenerator(IProject project, long runId) {
-		super(Messages.JobNameCodeGenerator, runId);
+	public EcoreGenerator(IProject project) {
+		super(Messages.JobNameCodeGenerator);
 		setProject(project);
 	}
 
@@ -58,11 +58,11 @@ public class EcoreGenerator extends EnterpriseDomainJob
 
 	public static final String GENMODEL_EXT = "genmodel"; //$NON-NLS-1$
 
-	private GeneratorJob genModelGeneration = new GenModelGenerationJob(getRunId());
+	private GeneratorJob genModelGeneration = new GenModelGenerationJob();
 
-	private GeneratorJob genModelSetup = new GenModelSetupJob(this, getRunId());
+	private GeneratorJob genModelSetup = new GenModelSetupJob(this);
 
-	private CodeGenerationJob codeGeneration = new CodeGenerationJob(getRunId());
+	private CodeGenerationJob codeGeneration = new CodeGenerationJob();
 
 	protected static abstract class GeneratorJob extends EnterpriseDomainJob {
 
@@ -70,8 +70,8 @@ public class EcoreGenerator extends EnterpriseDomainJob
 		private IPath modelPath;
 		private IPath genModelPath;
 
-		public GeneratorJob(String jobName, long runId) {
-			super(jobName, runId);
+		public GeneratorJob(String jobName) {
+			super(jobName);
 		}
 
 		public org.eclipse.emf.codegen.ecore.Generator getGenerator() {
@@ -121,8 +121,9 @@ public class EcoreGenerator extends EnterpriseDomainJob
 
 	protected class GenModelGenerationJob extends GeneratorJob {
 
-		public GenModelGenerationJob(long runId) {
-			super(Messages.JobNameGenModelGeneration, runId);
+		public GenModelGenerationJob() {
+			super(Messages.JobNameGenModelGeneration);
+			setChangeRule(false);
 		}
 
 		@Override
@@ -146,31 +147,35 @@ public class EcoreGenerator extends EnterpriseDomainJob
 
 	protected class CodeGenerationJob extends GeneratorJob {
 
-		public CodeGenerationJob(long runId) {
-			super(Messages.JobNameCodeGeneration, runId);
+		public CodeGenerationJob() {
+			super(Messages.JobNameCodeGeneration);
+			setChangeRule(false);
 		}
 
 		@Override
 		public IStatus work(IProgressMonitor monitor) throws CoreException {
-			ResourceUtils.cleanupDir(getProject(), SOURCE_FOLDER_NAME);
-			getProject().refreshLocal(IResource.DEPTH_INFINITE, monitor);
-			int result = (Integer) getGenerator()
-					.run(new String[] { "-forceOverwrite", "-codeFormatting", "default", "-model", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-							EcorePlugin.getWorkspaceRoot().getRawLocation().append(getGenModelLocation()).toString() });
-			getContributionState().setProjectVersion(monitor);
 			try {
-				GitUtil.add(getProject().getName(), ".");
-			} catch (GitAPIException e) {
-				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
-			}
-			if (result == 1)
-				throw new CoreException(ClassMakerPlugin.createErrorStatus("Code generation failed."));
-			else {
-				monitor.worked(1);
-				if (result == 0)
-					return Status.OK_STATUS;
-				else
-					return ClassMakerPlugin.createWarningStatus("Code generation returned unknown result.");
+				ResourceUtils.cleanupDir(getProject(), SOURCE_FOLDER_NAME);
+				getProject().refreshLocal(IResource.DEPTH_INFINITE, monitor);
+				int result = (Integer) getGenerator().run(new String[] { "-forceOverwrite", "-codeFormatting", //$NON-NLS-1$ //$NON-NLS-2$
+						"default", "-model", //$NON-NLS-1$ //$NON-NLS-2$
+						EcorePlugin.getWorkspaceRoot().getRawLocation().append(getGenModelLocation()).toString() });
+				getContributionState().setProjectVersion(monitor);
+				try {
+					GitUtil.add(getProject().getName(), ".");
+				} catch (GitAPIException e) {
+					throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
+				}
+				if (result == 1)
+					throw new CoreException(ClassMakerPlugin.createErrorStatus("Code generation failed."));
+				else {
+					if (result == 0)
+						return Status.OK_STATUS;
+					else
+						return ClassMakerPlugin.createWarningStatus("Code generation returned unknown result.");
+				}
+			} finally {
+				monitor.done();
 			}
 		}
 

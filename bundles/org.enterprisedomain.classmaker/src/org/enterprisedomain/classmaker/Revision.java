@@ -114,7 +114,7 @@ public interface Revision extends Item {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>State History</em>' map.
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getRevision_StateHistory()
-	 * @model mapType="org.enterprisedomain.classmaker.IntegerToStateMapEntry<org.eclipse.emf.ecore.EIntegerObject, org.enterprisedomain.classmaker.State>"
+	 * @model mapType="org.enterprisedomain.classmaker.IntegerToStateMapEntry&lt;org.eclipse.emf.ecore.EIntegerObject, org.enterprisedomain.classmaker.State&gt;"
 	 * @generated
 	 */
 	EMap<Integer, State> getStateHistory();

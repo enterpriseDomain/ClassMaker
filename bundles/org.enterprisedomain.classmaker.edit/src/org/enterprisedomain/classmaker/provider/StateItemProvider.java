@@ -40,9 +40,9 @@ import org.enterprisedomain.classmaker.State;
  */
 public class StateItemProvider extends ItemItemProvider {
 	/**
-	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public StateItemProvider(AdapterFactory adapterFactory) {
@@ -50,9 +50,9 @@ public class StateItemProvider extends ItemItemProvider {
 	}
 
 	/**
-	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This returns the property descriptors for the adapted class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -60,7 +60,7 @@ public class StateItemProvider extends ItemItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addImportsPropertyDescriptor(object);
+			addRequiredPluginsPropertyDescriptor(object);
 			addRevisionPropertyDescriptor(object);
 			addTimestampPropertyDescriptor(object);
 			addDeployableUnitNamePropertyDescriptor(object);
@@ -74,24 +74,25 @@ public class StateItemProvider extends ItemItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Imports feature.
+	 * This adds a property descriptor for the Required Plugins feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addImportsPropertyDescriptor(Object object) {
+	protected void addRequiredPluginsPropertyDescriptor(Object object) {
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_State_imports_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_State_imports_feature", "_UI_State_type"),
-						ClassMakerPackage.Literals.STATE__IMPORTS, true, false, false,
+						getResourceLocator(), getString("_UI_State_requiredPlugins_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_State_requiredPlugins_feature",
+								"_UI_State_type"),
+						ClassMakerPackage.Literals.STATE__REQUIRED_PLUGINS, true, false, false,
 						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
 	 * This adds a property descriptor for the Revision feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected void addRevisionPropertyDescriptor(Object object) {
@@ -103,9 +104,9 @@ public class StateItemProvider extends ItemItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Timestamp feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This adds a property descriptor for the Timestamp feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addTimestampPropertyDescriptor(Object object) {
@@ -119,9 +120,9 @@ public class StateItemProvider extends ItemItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Deployable Unit Name feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This adds a property descriptor for the Deployable Unit Name feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addDeployableUnitNamePropertyDescriptor(Object object) {
@@ -135,9 +136,9 @@ public class StateItemProvider extends ItemItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Job Family feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This adds a property descriptor for the Job Family feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addJobFamilyPropertyDescriptor(Object object) {
@@ -152,8 +153,8 @@ public class StateItemProvider extends ItemItemProvider {
 
 	/**
 	 * This adds a property descriptor for the Resource feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected void addResourcePropertyDescriptor(Object object) {
@@ -165,9 +166,9 @@ public class StateItemProvider extends ItemItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Commit Ids feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This adds a property descriptor for the Commit Ids feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addCommitIdsPropertyDescriptor(Object object) {
@@ -181,9 +182,9 @@ public class StateItemProvider extends ItemItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Project Name feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This adds a property descriptor for the Project Name feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addProjectNamePropertyDescriptor(Object object) {
@@ -198,8 +199,8 @@ public class StateItemProvider extends ItemItemProvider {
 
 	/**
 	 * This adds a property descriptor for the Saving feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected void addSavingPropertyDescriptor(Object object) {
@@ -215,8 +216,7 @@ public class StateItemProvider extends ItemItemProvider {
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -229,8 +229,7 @@ public class StateItemProvider extends ItemItemProvider {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -243,8 +242,7 @@ public class StateItemProvider extends ItemItemProvider {
 
 	/**
 	 * This returns State.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -268,8 +266,7 @@ public class StateItemProvider extends ItemItemProvider {
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached
 	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -277,7 +274,7 @@ public class StateItemProvider extends ItemItemProvider {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(State.class)) {
-		case ClassMakerPackage.STATE__IMPORTS:
+		case ClassMakerPackage.STATE__REQUIRED_PLUGINS:
 		case ClassMakerPackage.STATE__TIMESTAMP:
 		case ClassMakerPackage.STATE__DEPLOYABLE_UNIT_NAME:
 		case ClassMakerPackage.STATE__JOB_FAMILY:
@@ -311,8 +308,8 @@ public class StateItemProvider extends ItemItemProvider {
 
 	/**
 	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override

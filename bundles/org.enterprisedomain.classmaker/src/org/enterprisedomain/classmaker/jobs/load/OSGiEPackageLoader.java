@@ -62,8 +62,8 @@ public class OSGiEPackageLoader extends ContainerJob {
 		}
 	};
 
-	public OSGiEPackageLoader(long runId) {
-		super("Loading class", runId);
+	public OSGiEPackageLoader() {
+		super("Loading class");
 	}
 
 	public IStatus load(IProgressMonitor monitor) throws CoreException {

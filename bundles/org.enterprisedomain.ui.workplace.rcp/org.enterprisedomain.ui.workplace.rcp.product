@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="org.enterprisedomain.ui.workbench.rcp" id="org.enterprisedomain.ui.workbench.rcp.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="0.0.1.qualifier" useFeatures="true" includeLaunchers="true">
+<product name="org.enterprisedomain.ui.workplace.rcp" id="org.enterprisedomain.ui.workplace.rcp.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="0.0.1.qualifier" useFeatures="true" includeLaunchers="true">
 
    <configIni use="default">
    </configIni>
@@ -141,14 +141,14 @@
    <features>
       <feature id="org.enterprisedomain.classmaker.feature" version="0.7.9.qualifier"/>
       <feature id="org.enterprisedomain.ecp.feature" version="0.0.1.qualifier"/>
-      <feature id="org.eclipse.emf.ecp.e4.feature" version="1.8.0.20160216-1319"/>
+      <feature id="org.eclipse.emf.ecp.e4.feature"/>
       <feature id="org.eclipse.emf.ecp.feature"/>
       <feature id="org.eclipse.emf.codegen.ecore"/>
-      <feature id="org.eclipse.emf.ecp.ecore.feature" version="1.9.0.qualifier"/>
-      <feature id="org.eclipse.e4.rcp" version="1.4.1.v20160212-1350"/>
-      <feature id="org.eclipse.emf.ecp.viewmodel.feature" version="1.8.0.20160216-1319"/>
-      <feature id="org.eclipse.emf.ecp.view.model.editor.feature" version="1.8.0.20160216-1319"/>
-      <feature id="org.eclipse.emfforms.editor.feature" version="1.9.0.qualifier"/>
+      <feature id="org.eclipse.emf.ecp.ecore.feature"/>
+      <feature id="org.eclipse.e4.rcp"/>
+      <feature id="org.eclipse.emf.ecp.viewmodel.feature"/>
+      <feature id="org.eclipse.emf.ecp.view.model.editor.feature"/>
+      <feature id="org.eclipse.emfforms.editor.feature"/>
       <feature id="org.eclipse.emf.ecp.view.treemasterdetail.feature"/>
       <feature id="org.eclipse.emf.ecp.view.template.feature"/>
       <feature id="org.eclipse.emf.common"/>
@@ -166,6 +166,7 @@
       <feature id="org.eclipse.emf.ecp.view.rule.feature"/>
       <feature id="org.eclipse.emf.ecp.view.unset.feature"/>
       <feature id="org.eclipse.emf.ecp.view.horizontal.feature"/>
+      <feature id="org.enterprisedomain.classmaker.osgi.resolverhooks.feature"/>
    </features>
 
 

@@ -41,7 +41,7 @@ public class ClassMakerPlugin extends Plugin {
 
 	public static final String PLUGIN_ID = "org.enterprisedomain.classmaker"; //$NON-NLS-1$
 
-	public static final String NATURE_ID = PLUGIN_ID + '.' + "enterpriseDomainNature"; //$NON-NLS-1$
+	public static final String NATURE_ID = PLUGIN_ID + ".projectNature"; //$NON-NLS-1$
 
 	public static final String PDE_PLUGIN_NATURE = "org.eclipse.pde.PluginNature"; //$NON-NLS-1$
 
@@ -91,8 +91,7 @@ public class ClassMakerPlugin extends Plugin {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext
-	 * )
+	 * org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext )
 	 */
 	public void start(BundleContext context) throws Exception {
 		instance = this;

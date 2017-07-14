@@ -17,6 +17,7 @@ package org.enterprisedomain.classmaker.impl;
 
 import java.util.Locale;
 
+import java.util.Properties;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.notify.Notification;
@@ -56,6 +57,7 @@ import org.osgi.framework.Version;
  *   <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getParent <em>Parent</em>}</li>
  *   <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getLocale <em>Locale</em>}</li>
  *   <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getContribution <em>Contribution</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getProperties <em>Properties</em>}</li>
  * </ul>
  *
  * @generated
@@ -80,8 +82,9 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	protected String modelName = MODEL_NAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getPhase() <em>Phase</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getPhase() <em>Phase</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getPhase()
 	 * @generated
 	 * @ordered
@@ -89,8 +92,9 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	protected static final Stage PHASE_EDEFAULT = Stage.DEFINED;
 
 	/**
-	 * The cached value of the '{@link #getPhase() <em>Phase</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getPhase() <em>Phase</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getPhase()
 	 * @generated
 	 * @ordered
@@ -98,8 +102,8 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	protected Stage phase = PHASE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getVersion() <em>Version</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getVersion()
 	 * @generated NOT
@@ -154,6 +158,25 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 			.createFromString(ClassMakerPackage.eINSTANCE.getLocale(), "");
 
 	protected Locale locale;
+
+	/**
+	 * The default value of the '{@link #getProperties() <em>Properties</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getProperties()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Properties PROPERTIES_EDEFAULT = (Properties) ClassMakerFactory.eINSTANCE
+			.createFromString(ClassMakerPackage.eINSTANCE.getProperties(), "");
+
+	/**
+	 * The cached value of the '{@link #getProperties() <em>Properties</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getProperties()
+	 * @generated
+	 * @ordered
+	 */
+	protected Properties properties = PROPERTIES_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -252,7 +275,8 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	public Contribution getContribution() {
 		Contribution contribution = basicGetContribution();
 		return contribution != null && contribution.eIsProxy()
-				? (Contribution) eResolveProxy((InternalEObject) contribution) : contribution;
+				? (Contribution) eResolveProxy((InternalEObject) contribution)
+				: contribution;
 	}
 
 	/**
@@ -273,6 +297,26 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 		// TODO: implement this method to set the 'Contribution' reference
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Properties getProperties() {
+		return properties;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setProperties(Properties newProperties) {
+		Properties oldProperties = properties;
+		properties = newProperties;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.ITEM__PROPERTIES, oldProperties,
+					properties));
 	}
 
 	/**
@@ -462,6 +506,8 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 			if (resolve)
 				return getContribution();
 			return basicGetContribution();
+		case ClassMakerPackage.ITEM__PROPERTIES:
+			return getProperties();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -493,6 +539,9 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 			return;
 		case ClassMakerPackage.ITEM__CONTRIBUTION:
 			setContribution((Contribution) newValue);
+			return;
+		case ClassMakerPackage.ITEM__PROPERTIES:
+			setProperties((Properties) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -526,6 +575,9 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 		case ClassMakerPackage.ITEM__CONTRIBUTION:
 			setContribution((Contribution) null);
 			return;
+		case ClassMakerPackage.ITEM__PROPERTIES:
+			setProperties(PROPERTIES_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -555,6 +607,8 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 			return LOCALE_EDEFAULT == null ? locale != null : !LOCALE_EDEFAULT.equals(locale);
 		case ClassMakerPackage.ITEM__CONTRIBUTION:
 			return basicGetContribution() != null;
+		case ClassMakerPackage.ITEM__PROPERTIES:
+			return PROPERTIES_EDEFAULT == null ? properties != null : !PROPERTIES_EDEFAULT.equals(properties);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -579,6 +633,8 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 		result.append(language);
 		result.append(", locale: ");
 		result.append(locale);
+		result.append(", properties: ");
+		result.append(properties);
 		result.append(')');
 		return result.toString();
 	}

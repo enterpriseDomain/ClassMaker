@@ -41,8 +41,8 @@ public class GenModelSetupJob extends EcoreGenerator.GeneratorJob {
 	 */
 	private final EcoreGenerator ecoreGenerator;
 
-	public GenModelSetupJob(EcoreGenerator ecoreGenerator, long runId) {
-		super(Messages.JobNameGenModelConfiguration, runId);
+	public GenModelSetupJob(EcoreGenerator ecoreGenerator) {
+		super(Messages.JobNameGenModelConfiguration);
 		this.ecoreGenerator = ecoreGenerator;
 	}
 

@@ -19,6 +19,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -29,6 +32,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
@@ -102,6 +106,8 @@ import org.osgi.framework.Version;
  * <em>Resource</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getCommitIds
  * <em>Commit Ids</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getCommitId
+ * <em>Commit Id</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getStateCustomizers
  * <em>State Customizers</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getProjectName
@@ -116,8 +122,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * The cached value of the '{@link #getRequiredPlugins() <em>Required
-	 * Plugins</em>}' attribute list. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
+	 * Plugins</em>}' attribute list. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getRequiredPlugins()
 	 * @generated
@@ -157,8 +162,8 @@ public class StateImpl extends ItemImpl implements State {
 	protected int timestamp = TIMESTAMP_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getVersion() <em>Version</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getVersion()
 	 * @generated NOT
@@ -167,8 +172,8 @@ public class StateImpl extends ItemImpl implements State {
 	protected static final Version VERSION_EDEFAULT = Version.emptyVersion;
 
 	/**
-	 * The default value of the '{@link #getDeployableUnitName() <em>Deployable
-	 * Unit Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getDeployableUnitName() <em>Deployable Unit
+	 * Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getDeployableUnitName()
 	 * @generated
@@ -197,8 +202,8 @@ public class StateImpl extends ItemImpl implements State {
 	protected String jobFamily = JOB_FAMILY_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getResource() <em>Resource</em>}'
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getResource() <em>Resource</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getResource()
 	 * @generated
@@ -217,6 +222,26 @@ public class StateImpl extends ItemImpl implements State {
 	protected EList<String> commitIds;
 
 	/**
+	 * The default value of the '{@link #getCommitId() <em>Commit Id</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getCommitId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String COMMIT_ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getCommitId() <em>Commit Id</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getCommitId()
+	 * @generated
+	 * @ordered
+	 */
+	protected String commitId = COMMIT_ID_EDEFAULT;
+
+	/**
 	 * The cached value of the '{@link #getStateCustomizers() <em>State
 	 * Customizers</em>}' map. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -227,8 +252,8 @@ public class StateImpl extends ItemImpl implements State {
 	protected EMap<StageQualifier, Customizer> stateCustomizers;
 
 	/**
-	 * The default value of the '{@link #getProjectName() <em>Project
-	 * Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getProjectName()
 	 * @generated
@@ -372,6 +397,8 @@ public class StateImpl extends ItemImpl implements State {
 					folder.create(true, true, monitor);
 				} catch (CoreException e) {
 					ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
+				} finally {
+					monitor.done();
 				}
 			}
 			String modelName = getModelName();
@@ -488,9 +515,8 @@ public class StateImpl extends ItemImpl implements State {
 				ResourceUtils.createProject(project, ClassMakerPlugin.NATURE_ID, monitor);
 			}
 			Job.getJobManager().setProgressProvider(new EnterpriseDomainJob.JobProgressProvider());
-			long runId = getTimestamp();
-			Generator generator = new EcoreGenerator(getProject(), runId);
-			Exporter exporter = new PDEPluginExporter(runId);
+			Generator generator = new EcoreGenerator(getProject());
+			Exporter exporter = new PDEPluginExporter();
 
 			EnterpriseDomainJob exporterJob = (EnterpriseDomainJob) exporter.getAdapter(EnterpriseDomainJob.class);
 			exporterJob.setProject(getProject());
@@ -504,10 +530,10 @@ public class StateImpl extends ItemImpl implements State {
 			generatorJob.setProgressGroup(monitor, 1);
 			generatorJob.setNextJob(exporterJob);
 
-			EnterpriseDomainJob installJob = new OSGiInstaller(runId);
+			EnterpriseDomainJob installJob = new OSGiInstaller();
 			exporterJob.setNextJob(installJob);
 
-			EnterpriseDomainJob loadJob = new OSGiEPackageLoader(runId);
+			EnterpriseDomainJob loadJob = new OSGiEPackageLoader();
 			loadJob.setStateTimestamp(getTimestamp());
 			loadJob.addListener(new JobListener());
 			loadJob.addListener();
@@ -587,7 +613,8 @@ public class StateImpl extends ItemImpl implements State {
 	 */
 	public void checkout(String commitId) {
 		try {
-			GitUtil.getRepositoryGit(getProjectName()).checkout().setName(commitId).setForce(true).call();
+			setCommitId(commitId);
+			GitUtil.getRepositoryGit(getProjectName()).checkout().setName(getCommitId()).setForce(true).call();
 			copyModel(getContribution());
 			load(false);
 		} catch (CheckoutConflictException e) {
@@ -607,13 +634,7 @@ public class StateImpl extends ItemImpl implements State {
 	public String commit(String filepattern) throws Exception {
 		GitUtil.add(getProjectName(), filepattern);
 		String commitId = null;
-		// try {
 		commitId = GitUtil.commit(getProjectName(), GitUtil.getCommitMessage(this, getTimestamp()));
-		// } catch (NoHeadException e) {
-		// GitUtil.checkoutOrphan(getProjectName(), getVersion().toString());
-		// commitId = GitUtil.commit(getProjectName(),
-		// GitUtil.getCommitMessage(this, getTimestamp()));
-		// }
 		getCommitIds().add(commitId);
 		return commitId;
 	}
@@ -827,6 +848,28 @@ public class StateImpl extends ItemImpl implements State {
 		return commitIds;
 	}
 
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public String getCommitId() {
+		return commitId;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public void setCommitId(String newCommitId) {
+		String oldCommitId = commitId;
+		commitId = newCommitId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.STATE__COMMIT_ID, oldCommitId,
+					commitId));
+	}
+
 	@Override
 	public EMap<StageQualifier, Customizer> getCustomizers() {
 		return getStateCustomizers();
@@ -891,13 +934,17 @@ public class StateImpl extends ItemImpl implements State {
 	 * @generated NOT
 	 */
 	public void setProjectVersion(IProgressMonitor monitor) throws CoreException {
-		IBundleProjectService service = ((IBundleProjectService) ClassMakerPlugin
-				.getService(IBundleProjectService.class.getName()));
-		IWorkspace workspace = ResourcesPlugin.getWorkspace();
-		IProject project = workspace.getRoot().getProject(getProjectName());
-		IBundleProjectDescription bundleProjectDescription = service.getDescription(project);
-		bundleProjectDescription.setBundleVersion(getVersion());
-		bundleProjectDescription.apply(monitor);
+		try {
+			IBundleProjectService service = ((IBundleProjectService) ClassMakerPlugin
+					.getService(IBundleProjectService.class.getName()));
+			IWorkspace workspace = ResourcesPlugin.getWorkspace();
+			IProject project = workspace.getRoot().getProject(getProjectName());
+			IBundleProjectDescription bundleProjectDescription = service.getDescription(project);
+			bundleProjectDescription.setBundleVersion(getVersion());
+			bundleProjectDescription.apply(monitor);
+		} finally {
+			monitor.done();
+		}
 	}
 
 	/**
@@ -906,13 +953,17 @@ public class StateImpl extends ItemImpl implements State {
 	 * @generated NOT
 	 */
 	public void delete(IProgressMonitor monitor) throws CoreException {
-		GitUtil.deleteProject(getProjectName());
 		try {
-			GitUtil.checkoutOrphan(getProjectName(), getVersion().toString(), getTimestamp());
-		} catch (GitAPIException e) {
-			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
-		} catch (IOException e) {
-			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
+			GitUtil.deleteProject(getProjectName());
+			try {
+				GitUtil.checkoutOrphan(getProjectName(), getVersion().toString(), getTimestamp());
+			} catch (GitAPIException e) {
+				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
+			} catch (IOException e) {
+				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
+			}
+		} finally {
+			monitor.done();
 		}
 	}
 
@@ -961,6 +1012,8 @@ public class StateImpl extends ItemImpl implements State {
 			return getResource();
 		case ClassMakerPackage.STATE__COMMIT_IDS:
 			return getCommitIds();
+		case ClassMakerPackage.STATE__COMMIT_ID:
+			return getCommitId();
 		case ClassMakerPackage.STATE__STATE_CUSTOMIZERS:
 			if (coreType)
 				return getStateCustomizers();
@@ -1003,6 +1056,9 @@ public class StateImpl extends ItemImpl implements State {
 			getCommitIds().clear();
 			getCommitIds().addAll((Collection<? extends String>) newValue);
 			return;
+		case ClassMakerPackage.STATE__COMMIT_ID:
+			setCommitId((String) newValue);
+			return;
 		case ClassMakerPackage.STATE__STATE_CUSTOMIZERS:
 			((EStructuralFeature.Setting) getStateCustomizers()).set(newValue);
 			return;
@@ -1042,6 +1098,9 @@ public class StateImpl extends ItemImpl implements State {
 		case ClassMakerPackage.STATE__COMMIT_IDS:
 			getCommitIds().clear();
 			return;
+		case ClassMakerPackage.STATE__COMMIT_ID:
+			setCommitId(COMMIT_ID_EDEFAULT);
+			return;
 		case ClassMakerPackage.STATE__STATE_CUSTOMIZERS:
 			getStateCustomizers().clear();
 			return;
@@ -1078,6 +1137,8 @@ public class StateImpl extends ItemImpl implements State {
 			return resource != null;
 		case ClassMakerPackage.STATE__COMMIT_IDS:
 			return commitIds != null && !commitIds.isEmpty();
+		case ClassMakerPackage.STATE__COMMIT_ID:
+			return COMMIT_ID_EDEFAULT == null ? commitId != null : !COMMIT_ID_EDEFAULT.equals(commitId);
 		case ClassMakerPackage.STATE__STATE_CUSTOMIZERS:
 			return stateCustomizers != null && !stateCustomizers.isEmpty();
 		case ClassMakerPackage.STATE__PROJECT_NAME:
@@ -1100,18 +1161,39 @@ public class StateImpl extends ItemImpl implements State {
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (requiredPlugins: "); //$NON-NLS-1$
+		result.append(" (requiredPlugins: ");
 		result.append(requiredPlugins);
-		result.append(", timestamp: "); //$NON-NLS-1$
+		result.append(", timestamp: ");
 		result.append(timestamp);
-		result.append(", jobFamily: "); //$NON-NLS-1$
+		result.append(", jobFamily: ");
 		result.append(jobFamily);
-		result.append(", commitIds: "); //$NON-NLS-1$
+		result.append(", commitIds: ");
 		result.append(commitIds);
-		result.append(", saving: "); //$NON-NLS-1$
+		result.append(", commitId: ");
+		result.append(commitId);
+		result.append(", saving: ");
 		result.append(saving);
 		result.append(')');
 		return result.toString();
+	}
+
+	@Override
+	public boolean contains(ISchedulingRule otherRule) {
+		if (otherRule instanceof State)
+			return getVersion().equals(((State) otherRule).getVersion())
+					&& getRevision().equals(((State) otherRule).getRevision())
+					&& getTimestamp() == ((State) otherRule).getTimestamp();
+		return false;
+	}
+
+	@Override
+	public boolean isConflicting(ISchedulingRule otherRule) {
+		if (otherRule instanceof State)
+			return getVersion().equals(((State) otherRule).getVersion())
+					&& getRevision().equals(((State) otherRule).getRevision())
+					&& getTimestamp() == ((State) otherRule).getTimestamp()
+					&& getCommitId() == ((State) otherRule).getCommitId();
+		return false;
 	}
 
 } // StateImpl

@@ -67,6 +67,7 @@ public class ContributionItemProvider extends ProjectItemProvider {
 			addParentPropertyDescriptor(object);
 			addLocalePropertyDescriptor(object);
 			addContributionPropertyDescriptor(object);
+			addPropertiesPropertyDescriptor(object);
 			addDependenciesPropertyDescriptor(object);
 			addRevisionPropertyDescriptor(object);
 			addStatePropertyDescriptor(object);
@@ -178,6 +179,21 @@ public class ContributionItemProvider extends ProjectItemProvider {
 						getString("_UI_PropertyDescriptor_description", "_UI_Item_contribution_feature",
 								"_UI_Item_type"),
 						ClassMakerPackage.Literals.ITEM__CONTRIBUTION, true, false, true, null, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Properties feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addPropertiesPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Item_properties_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Item_properties_feature", "_UI_Item_type"),
+						ClassMakerPackage.Literals.ITEM__PROPERTIES, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -332,6 +348,7 @@ public class ContributionItemProvider extends ProjectItemProvider {
 		case ClassMakerPackage.CONTRIBUTION__VERSION:
 		case ClassMakerPackage.CONTRIBUTION__LANGUAGE:
 		case ClassMakerPackage.CONTRIBUTION__LOCALE:
+		case ClassMakerPackage.CONTRIBUTION__PROPERTIES:
 		case ClassMakerPackage.CONTRIBUTION__DEPENDENCIES:
 		case ClassMakerPackage.CONTRIBUTION__LATEST_VERSION:
 		case ClassMakerPackage.CONTRIBUTION__COMPLETION_NOTIFIED:

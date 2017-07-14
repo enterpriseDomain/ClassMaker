@@ -69,7 +69,7 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider {
 
 	@Override
 	public Control createNewProjectUI(Composite parent, CompositeStateObserver observer,
-			ECPProperties projectProperties) {
+			final ECPProperties projectProperties) {
 		providerStackLayout = new StackLayout();
 		Composite control = new Composite(parent, SWT.NONE);
 		control.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));

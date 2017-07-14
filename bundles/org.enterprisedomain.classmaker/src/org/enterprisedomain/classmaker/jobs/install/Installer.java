@@ -23,15 +23,19 @@ import org.enterprisedomain.classmaker.jobs.ContainerJob;
 
 public abstract class Installer extends ContainerJob {
 
-	public Installer(long runId) {
-		super(Messages.JobNameInstaller, runId);
+	public Installer() {
+		super(Messages.JobNameInstaller);
 	}
 
 	public abstract IStatus install(IProgressMonitor monitor) throws CoreException;
 
 	@Override
 	public IStatus work(IProgressMonitor monitor) throws CoreException {
-		return install(monitor);
+		try {
+			return install(monitor);
+		} finally {
+			monitor.done();
+		}
 	}
 
 }

@@ -19,7 +19,9 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.jobs.Job;
+import org.enterprisedomain.classmaker.ClassMakerPlant;
 import org.enterprisedomain.classmaker.Stage;
+import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 
 public class DelegatingJob extends EnterpriseDomainJob {
 
@@ -29,8 +31,8 @@ public class DelegatingJob extends EnterpriseDomainJob {
 
 	private Stage dirtyStage;
 
-	public DelegatingJob(Job delegate, long runId) {
-		super(delegate.getName(), runId);
+	public DelegatingJob(Job delegate) {
+		super(delegate.getName());
 		this.delegate = delegate;
 	}
 
@@ -40,6 +42,7 @@ public class DelegatingJob extends EnterpriseDomainJob {
 		try {
 			delegate.join();
 		} catch (InterruptedException e) {
+			monitor.setCanceled(true);
 			e.printStackTrace();
 		}
 		return delegate.getResult();

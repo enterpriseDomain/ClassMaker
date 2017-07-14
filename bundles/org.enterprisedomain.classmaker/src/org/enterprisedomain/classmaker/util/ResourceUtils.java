@@ -195,8 +195,7 @@ public class ResourceUtils {
 	public static void cleanupDir(IProject project, String folderPath, String[] excluding) throws CoreException {
 		IPath path = null;
 		if (folderPath.isEmpty()) {
-			path = project.getFullPath();
-			;
+			path = project.getFullPath();			
 		} else {
 			path = project.getFolder(folderPath).getFullPath();
 		}

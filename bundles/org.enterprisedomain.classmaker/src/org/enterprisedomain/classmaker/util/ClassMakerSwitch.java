@@ -124,6 +124,8 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 			if (result == null)
 				result = caseItem(state);
 			if (result == null)
+				result = caseISchedulingRule(state);
+			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
