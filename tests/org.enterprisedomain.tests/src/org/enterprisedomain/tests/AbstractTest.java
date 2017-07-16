@@ -1,5 +1,4 @@
 /**
- * Copyright 2016 Kyrill Zotkin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +18,14 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
+import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorCompletionService;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 
 import org.eclipse.core.runtime.CoreException;
@@ -110,8 +116,8 @@ public abstract class AbstractTest {
 		eClass.setName(name);
 		return eClass;
 	}
-	
-	protected EClass createEClass(){
+
+	protected EClass createEClass() {
 		return createEClass(getClassName());
 	}
 
@@ -123,8 +129,8 @@ public abstract class AbstractTest {
 		return eAttribute;
 	}
 
-	protected EAttribute createEAttribute(){
-		return createEAttribute(getAttributeName(),getAttributeType());
+	protected EAttribute createEAttribute() {
+		return createEAttribute(getAttributeName(), getAttributeType());
 	}
 
 	protected EPackage createAndTestEPackage() throws CoreException, InterruptedException {
@@ -134,6 +140,15 @@ public abstract class AbstractTest {
 		c.getEStructuralFeatures().add(createEAttribute(getAttributeName(), getAttributeType()));
 		p.getEClassifiers().add(c);
 		return saveAndTest(p, "a", true);
+	}
+
+	protected Future<EPackage> createAndSaveEPackage(Executor executor) throws CoreException, InterruptedException {
+		EPackage p = createEPackage(getPackageName(), "0");
+		EClass c = createEClass(getClassName());
+		c.getEStructuralFeatures().add(createEAttribute("a", EcorePackage.Literals.EBOOLEAN));
+		c.getEStructuralFeatures().add(createEAttribute(getAttributeName(), getAttributeType()));
+		p.getEClassifiers().add(c);
+		return save(p, executor);
 	}
 
 	protected EPackage createAndTestAPI() throws CoreException, InterruptedException {
@@ -190,6 +205,19 @@ public abstract class AbstractTest {
 			throws CoreException, InterruptedException {
 		EPackage e = service.produce(ePackage);
 		return test(e, attributeName, attributeValue);
+	}
+
+	private Future<EPackage> save(final EPackage ePackage, Executor executor)
+			throws CoreException, InterruptedException {
+		FutureTask<EPackage> future = new FutureTask<EPackage>(new Callable<EPackage>() {
+
+			@Override
+			public EPackage call() throws Exception {
+				return service.produce(ePackage);
+			}
+		});
+		executor.execute(future);
+		return future;
 	}
 
 	protected EPackage test(EPackage ePackage, String attributeName, Object attributeValue) {

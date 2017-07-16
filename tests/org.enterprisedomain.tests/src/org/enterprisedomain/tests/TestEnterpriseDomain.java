@@ -25,7 +25,11 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collections;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.FutureTask;
 import java.util.concurrent.Semaphore;
 
 import org.eclipse.core.runtime.CoreException;
@@ -134,6 +138,17 @@ public class TestEnterpriseDomain extends AbstractTest {
 
 		assertEquals(eClass.getName(), theObject.getClass().getSimpleName());
 		cleanup();
+	}
+
+	@Test
+	public void async() throws ExecutionException, InterruptedException, CoreException {
+		Executor executor = Executors.newFixedThreadPool(2);
+		setPackageName("t0");
+		EPackage t0 = createAndSaveEPackage(executor).get();
+		setPackageName("t1");
+		EPackage t1 = createAndSaveEPackage(executor).get();
+		test(t0, "a", true);
+		test(t1, "a", true);
 	}
 
 	@Test

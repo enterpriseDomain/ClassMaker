@@ -89,8 +89,8 @@ public class ResourceUtils {
 	}
 
 	/**
-	 * Returns the name of the folder within project, where the model resource
-	 * is located.
+	 * Returns the name of the folder within project, where the model resource is
+	 * located.
 	 * 
 	 * @return
 	 */
@@ -140,10 +140,77 @@ public class ResourceUtils {
 		return newNatures;
 	}
 
+	public static void addProjectNature(IProject project, String natureId) throws CoreException {
+		IProjectDescription description = project.getDescription();
+		description.setNatureIds(addElement(description.getNatureIds(), natureId));
+		project.setDescription(description, ClassMakerPlugin.getProgressMonitor());
+	}
+
 	public static void removeProjectNature(IProject project, String natureId) throws CoreException {
 		IProjectDescription description = project.getDescription();
 		description.setNatureIds(removeElement(description.getNatureIds(), natureId));
 		project.setDescription(description, ClassMakerPlugin.getProgressMonitor());
+	}
+
+	public static ICommand getBuildSpec(IProjectDescription description, String builderId) {
+		for (ICommand build : description.getBuildSpec())
+			if (build.getBuilderName().equals(builderId))
+				return build;
+		return null;
+	}
+
+	public void addToBuildSpec(IProject project, String builderID) throws CoreException {
+		IProjectDescription description = project.getDescription();
+		int commandIndex = getCommandIndex(description.getBuildSpec(), builderID);
+
+		if (commandIndex == -1) {
+			ICommand command = description.newCommand();
+			command.setBuilderName(builderID);
+			setCommand(project, description, command);
+		}
+	}
+
+	public void removeFromBuildSpec(IProject project, String builderID) throws CoreException {
+		IProjectDescription description = project.getDescription();
+		ICommand[] commands = description.getBuildSpec();
+		for (int i = 0; i < commands.length; ++i) {
+			if (commands[i].getBuilderName().equals(builderID)) {
+				ICommand[] newCommands = new ICommand[commands.length - 1];
+				System.arraycopy(commands, 0, newCommands, 0, i);
+				System.arraycopy(commands, i + 1, newCommands, i, commands.length - i - 1);
+				description.setBuildSpec(newCommands);
+				project.setDescription(description, null);
+				return;
+			}
+		}
+	}
+
+	private void setCommand(IProject project, IProjectDescription description, ICommand newCommand)
+			throws CoreException {
+		ICommand[] oldBuildSpec = description.getBuildSpec();
+		int oldBuilderCommandIndex = getCommandIndex(oldBuildSpec, newCommand.getBuilderName());
+		ICommand[] newCommands;
+
+		if (oldBuilderCommandIndex == -1) {
+			newCommands = new ICommand[oldBuildSpec.length + 1];
+			System.arraycopy(oldBuildSpec, 0, newCommands, 1, oldBuildSpec.length);
+			newCommands[0] = newCommand;
+		} else {
+			oldBuildSpec[oldBuilderCommandIndex] = newCommand;
+			newCommands = oldBuildSpec;
+		}
+
+		description.setBuildSpec(newCommands);
+		project.setDescription(description, null);
+	}
+
+	private int getCommandIndex(ICommand[] buildSpec, String builderID) {
+		for (int i = 0; i < buildSpec.length; ++i) {
+			if (buildSpec[i].getBuilderName().equals(builderID)) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	@SuppressWarnings("deprecation")
@@ -195,7 +262,7 @@ public class ResourceUtils {
 	public static void cleanupDir(IProject project, String folderPath, String[] excluding) throws CoreException {
 		IPath path = null;
 		if (folderPath.isEmpty()) {
-			path = project.getFullPath();			
+			path = project.getFullPath();
 		} else {
 			path = project.getFolder(folderPath).getFullPath();
 		}
@@ -233,13 +300,6 @@ public class ResourceUtils {
 		} catch (IOException e) {
 			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 		}
-	}
-
-	public static ICommand getBuildSpec(IProjectDescription description, String builderId) {
-		for (ICommand build : description.getBuildSpec())
-			if (build.getBuilderName().equals(builderId))
-				return build;
-		return null;
 	}
 
 }
