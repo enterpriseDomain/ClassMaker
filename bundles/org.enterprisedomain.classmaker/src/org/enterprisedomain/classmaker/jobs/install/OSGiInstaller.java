@@ -66,8 +66,8 @@ public class OSGiInstaller extends Installer {
 	private Semaphore uninstalled;
 	private FrameworkWiring frameworkWiring;
 
-	public OSGiInstaller() {
-		super();
+	public OSGiInstaller(int stateTimestamp) {
+		super(stateTimestamp);
 		installed = new Semaphore(0);
 		uninstalled = new Semaphore(0);
 	}

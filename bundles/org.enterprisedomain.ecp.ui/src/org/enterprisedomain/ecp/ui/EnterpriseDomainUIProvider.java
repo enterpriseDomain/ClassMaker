@@ -18,14 +18,16 @@ package org.enterprisedomain.ecp.ui;
 import javax.inject.Inject;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.ecp.core.ECPProject;
 import org.eclipse.emf.ecp.core.ECPRepository;
 import org.eclipse.emf.ecp.core.util.ECPProperties;
 import org.eclipse.emf.ecp.spi.core.InternalProvider;
 import org.eclipse.emf.ecp.spi.ui.CompositeStateObserver;
 import org.eclipse.emf.ecp.spi.ui.DefaultUIProvider;
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.emf.edit.e4.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
+import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StackLayout;
@@ -38,20 +40,22 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
+import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
+import org.enterprisedomain.classmaker.provider.ClassMakerItemProviderAdapterFactory;
+import org.enterprisedomain.classmaker.util.ClassMakerAdapterFactory;
+import org.enterprisedomain.ecp.Activator;
 import org.enterprisedomain.ecp.EnterpriseDomainProvider;
 
 public class EnterpriseDomainUIProvider extends DefaultUIProvider {
 
-	public static final ILabelProvider ENTERPRISE_DOMAIN_LABEL_PROVIDER = new AdapterFactoryLabelProvider(
-			EnterpriseDomainProvider.ENTERPRISE_DOMAIN_ADAPTER_FACTORY);
+	public static final ComposeableAdapterFactory ENTERPRISE_DOMAIN_ITEM_PROVIDER_ADAPTER_FACTORY = new ComposedAdapterFactory(
+			new AdapterFactory[] { new ClassMakerItemProviderAdapterFactory(), new ClassMakerAdapterFactory(),
+					InternalProvider.EMF_ADAPTER_FACTORY });
 
-	@Inject
-	private Shell shell;
+	private static final ILabelProvider ENTERPRISE_DOMAIN_LABEL_PROVIDER = new AdapterFactoryLabelProvider(
+			ENTERPRISE_DOMAIN_ITEM_PROVIDER_ADAPTER_FACTORY);
 
 	private Button isContributionButton;
-	private StackLayout providerStackLayout;
-	private static IProgressMonitor monitor;
-
 	private boolean isContribution;
 
 	public EnterpriseDomainUIProvider() {
@@ -62,15 +66,15 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider {
 	@Override
 	public <T> T getAdapter(Object adaptable, Class<T> adapterType) {
 		if (IProgressMonitor.class.isAssignableFrom(adapterType))
-			if (monitor != null)
-				return (T) monitor;
+			return (T) ClassMakerPlugin.getProgressMonitor();
+		if (ComposeableAdapterFactory.class.isAssignableFrom(adapterType))
+			return (T) ENTERPRISE_DOMAIN_ITEM_PROVIDER_ADAPTER_FACTORY;
 		return (T) getProvider().getAdapter(adaptable, adapterType);
 	}
 
 	@Override
 	public Control createNewProjectUI(Composite parent, CompositeStateObserver observer,
 			final ECPProperties projectProperties) {
-		providerStackLayout = new StackLayout();
 		Composite control = new Composite(parent, SWT.NONE);
 		control.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		control.setLayout(new GridLayout(1, false));
@@ -92,10 +96,6 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider {
 		});
 		observer.compositeChangedState(control, true, projectProperties);
 		return control;
-	}
-
-	public static void setProgessMonitor(IProgressMonitor monitor) {
-		EnterpriseDomainUIProvider.monitor = monitor;
 	}
 
 	// observer.compositeChangedState(this, complete, projectProperties);

@@ -24,8 +24,8 @@ import org.eclipse.emf.ecore.EPackage;
 
 public class CDOGenerator extends EcoreGenerator {
 
-	public CDOGenerator(IProject project) {
-		super(project);
+	public CDOGenerator(IProject project, int stateTimestamp) {
+		super(project, stateTimestamp);
 	}
 
 	protected void setupGenModel(IPath projectPath, org.eclipse.emf.codegen.ecore.genmodel.GenModel ecoreGenModel,

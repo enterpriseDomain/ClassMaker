@@ -10,5 +10,24 @@
             description="Dynamic Generation Provider">
       </provider>
    </extension>
+   <extension
+         point="org.eclipse.core.runtime.adapters">
+      <factory
+            adaptableType="org.enterprisedomain.ecp.EnterpriseDomainProvider"
+            class="org.enterprisedomain.ecp.EnterpriseDomainProviderAdapterFactory">
+         <adapter
+               type="org.eclipse.core.runtime.IProgressMonitor">
+         </adapter>
+         <adapter
+               type="org.eclipse.emf.edit.provider.ComposeableAdapterFactory">
+         </adapter>
+         <adapter
+               type="org.eclipse.emf.common.notify.AdapterFactory">
+         </adapter>
+         <adapter
+               type="org.eclipse.emf.ecore.resource.ResourceSet">
+         </adapter>
+      </factory>
+   </extension>
 
 </plugin>

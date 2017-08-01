@@ -172,5 +172,15 @@
          </with>
       </definition>
    </extension>
+   <extension
+         point="org.eclipse.emf.ecp.ui.modelElementOpener">
+      <modelElementOpener
+            class="org.enterprisedomain.ui.workplace.rcp.GenericModelElementOpener">
+         <staticTester
+               modelElement="org.eclipse.emf.ecore.EObject"
+               priority="4">
+         </staticTester>
+      </modelElementOpener>
+   </extension>
 
 </plugin>

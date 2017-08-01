@@ -186,4 +186,28 @@ public interface Project extends EObject, ISchedulingRule {
 	 */
 	String save(IProgressMonitor monitor) throws CoreException;
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * @generated
+	 */
+	boolean open(IProgressMonitor monitor) throws CoreException;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * @generated
+	 */
+	void close(IProgressMonitor monitor) throws CoreException;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	String initialize();
+
 } // Project

@@ -16,6 +16,7 @@
 package org.enterprisedomain.classmaker.util;
 
 import java.util.Map;
+import java.util.concurrent.Executor;
 import java.util.concurrent.Future;
 
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
@@ -171,6 +172,20 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 		case ClassMakerPackage.ISCHEDULING_RULE: {
 			ISchedulingRule iSchedulingRule = (ISchedulingRule) theEObject;
 			T result = caseISchedulingRule(iSchedulingRule);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ClassMakerPackage.EXECUTOR: {
+			Executor executor = (Executor) theEObject;
+			T result = caseExecutor(executor);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ClassMakerPackage.FUTURE: {
+			Future<?> future = (Future<?>) theEObject;
+			T result = caseFuture(future);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -371,6 +386,36 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseISchedulingRule(ISchedulingRule object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Executor</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Executor</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExecutor(Executor object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Future</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Future</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <V> T caseFuture(Future<V> object) {
 		return null;
 	}
 

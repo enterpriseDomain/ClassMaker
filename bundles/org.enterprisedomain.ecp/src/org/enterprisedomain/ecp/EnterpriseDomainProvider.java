@@ -56,6 +56,7 @@ import org.eclipse.emf.ecp.spi.core.util.InternalChildrenList;
 import org.eclipse.emf.edit.command.ChangeCommand;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.Contribution;
@@ -132,7 +133,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 
 	protected void initProject(InternalProject project) {
 		final EditingDomain editingDomain = project.getEditingDomain();
-		editingDomain.getResourceSet().eAdapters().add(new GenericDomainProjectObserver(project, this));
+		editingDomain.getResourceSet().eAdapters().add(new EnterpriseDomainProjectObserver(project, this));
 		registerChangeListener(new ProviderChangeListener() {
 
 			private Map<EObject, ECPProject> projects = new HashMap<EObject, ECPProject>();
@@ -170,6 +171,9 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 
 	protected void createProject(InternalProject project) {
 		Project domainProject = null;
+		domainProject = Activator.getClassMaker().getWorkspace().getProject(project.getName());
+		if (domainProject != null)
+			return;
 		boolean contribution = false;
 		if (project.getProperties().getKeys().contains(PROP_CONTRIBUTION))
 			contribution = Boolean.valueOf(project.getProperties().getValue(PROP_CONTRIBUTION));
@@ -187,21 +191,15 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 			ec.getEStructuralFeatures().add(a);
 			model.getEClassifiers().add(ec);
 			try {
-				domainProject = Activator.getClassMaker().getWorkspace().createContribution(model,
-						getUIProvider().getAdapter(project, IProgressMonitor.class));
+				Activator.getClassMaker().produce(model, getUIProvider().getAdapter(project, IProgressMonitor.class));
+				domainProject = Activator.getClassMaker().getWorkspace().getContribution(model);
 			} catch (CoreException e) {
 				Activator.log(e);
 			}
 			project.getVisiblePackages().add(EcorePackage.eINSTANCE);
 			((Contribution) domainProject).addSaveCompletionListener(new VisiblePackagesListener(project));
-
 		} else
-			try {
-				domainProject = Activator.getClassMaker().getWorkspace().createProject(project.getName(),
-						getUIProvider().getAdapter(project, IProgressMonitor.class));
-			} catch (CoreException e) {
-				Activator.log(e);
-			}
+			domainProject = Activator.getClassMaker().getWorkspace().getProject(project.getName());
 		domainProject.getWorkspace().getResourceSet().eAdapters()
 				.add(new AdapterFactoryEditingDomain.EditingDomainProvider(project.getEditingDomain()));
 	}
@@ -229,6 +227,11 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 		} else if (parent instanceof ECPProject) {
 			final ECPProject project = (ECPProject) parent;
 			final Project domainProject = Activator.getClassMaker().getWorkspace().getProject(project.getName());
+			try {
+				domainProject.open(getUIProvider().getAdapter(project, IProgressMonitor.class));
+			} catch (CoreException e) {
+				Activator.log(e);
+			}
 			childrenList.addChildren(domainProject.getChildren());
 		} else if (parent instanceof ResourceAdapter) {
 			final ResourceAdapter resourceAdapter = (ResourceAdapter) parent;
@@ -241,13 +244,11 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T getAdapter(Object adaptable, Class<T> adapterType) {
-		if (ResourceSet.class.isAssignableFrom(adapterType))
-			return (T) Activator.getClassMaker().getWorkspace().getResourceSet();
-		if (IProgressMonitor.class.isAssignableFrom(adapterType))
-			return (T) ClassMakerPlugin.getProgressMonitor();
+		final T adapter = EnterpriseDomainProviderAdapterFactory.adapt(adaptable, adapterType);
+		if (adapter != null)
+			return adapter;
 		return super.getAdapter(adaptable, adapterType);
 	}
 
@@ -283,12 +284,12 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 		return Activator.getClassMaker().getWorkspace();
 	}
 
-	public class GenericDomainProjectObserver extends EContentAdapter {
+	public class EnterpriseDomainProjectObserver extends EContentAdapter {
 
 		private final InternalProject project;
 		private final EnterpriseDomainProvider provider;
 
-		public GenericDomainProjectObserver(InternalProject project, EnterpriseDomainProvider provider) {
+		public EnterpriseDomainProjectObserver(InternalProject project, EnterpriseDomainProvider provider) {
 			this.project = project;
 			this.provider = provider;
 		}

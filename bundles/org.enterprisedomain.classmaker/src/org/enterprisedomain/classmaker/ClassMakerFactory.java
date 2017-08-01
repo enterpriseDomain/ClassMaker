@@ -15,6 +15,8 @@
  */
 package org.enterprisedomain.classmaker;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.Future;
 import org.eclipse.emf.ecore.EFactory;
 
 /**

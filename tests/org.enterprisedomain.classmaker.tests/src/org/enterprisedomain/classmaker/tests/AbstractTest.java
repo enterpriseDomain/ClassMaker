@@ -12,20 +12,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.enterprisedomain.tests;
+package org.enterprisedomain.classmaker.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
-import java.util.concurrent.Callable;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorCompletionService;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 
 import org.eclipse.core.runtime.CoreException;
@@ -41,8 +38,10 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.enterprisedomain.classmaker.ClassMakerPlant;
+import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.junit.Before;
+import org.junit.BeforeClass;
 
 public abstract class AbstractTest {
 
@@ -58,9 +57,16 @@ public abstract class AbstractTest {
 
 	protected EDataType attributeType;
 
+	private static Map<Future<? extends EPackage>, EPackage> currentDynamics;
+
 	public void setReference(ClassMakerPlant dependency) {
 		service = dependency;
 		latch.countDown();
+	}
+
+	@BeforeClass
+	public static void init() {
+		currentDynamics = new HashMap<Future<? extends EPackage>, EPackage>();
 	}
 
 	@Before
@@ -83,7 +89,9 @@ public abstract class AbstractTest {
 	public void cleanup() {
 		try {
 			service.delete(getPackageName(), getProgressMonitor());
-			service.getWorkspace().getProject(getPackageName()).save(getProgressMonitor());
+			Project project = service.getWorkspace().getProject(getPackageName());
+			if (project != null)
+				project.save(getProgressMonitor());
 		} catch (CoreException e) {
 			e.printStackTrace();
 			fail(e.getLocalizedMessage());
@@ -142,13 +150,27 @@ public abstract class AbstractTest {
 		return saveAndTest(p, "a", true);
 	}
 
-	protected Future<EPackage> createAndSaveEPackage(Executor executor) throws CoreException, InterruptedException {
+	protected Future<? extends EPackage> createAndSaveEPackage(Executor executor)
+			throws CoreException, InterruptedException {
 		EPackage p = createEPackage(getPackageName(), "0");
 		EClass c = createEClass(getClassName());
 		c.getEStructuralFeatures().add(createEAttribute("a", EcorePackage.Literals.EBOOLEAN));
 		c.getEStructuralFeatures().add(createEAttribute(getAttributeName(), getAttributeType()));
 		p.getEClassifiers().add(c);
-		return save(p, executor);
+		Future<? extends EPackage> r = save(p, executor);
+		currentDynamics.put(r, p);
+		return r;
+	}
+
+	protected Future<? extends EPackage> updateAndSaveEPackage(Future<? extends EPackage> previousResult,
+			Executor executor) throws CoreException {
+		EPackage previousEPackage = currentDynamics.get(previousResult);
+		EPackage p = EcoreUtil.copy(previousEPackage);
+		EClass c = createEClass("Another" + getClassName());
+		c.getEStructuralFeatures().add(createEAttribute("b", EcorePackage.Literals.EBOOLEAN));
+		c.getEStructuralFeatures().add(createEAttribute(getAttributeName(), getAttributeType()));
+		p.getEClassifiers().add(c);
+		return updateAndSave(previousEPackage, p, executor);
 	}
 
 	protected EPackage createAndTestAPI() throws CoreException, InterruptedException {
@@ -207,30 +229,35 @@ public abstract class AbstractTest {
 		return test(e, attributeName, attributeValue);
 	}
 
-	private Future<EPackage> save(final EPackage ePackage, Executor executor)
+	private Future<? extends EPackage> save(final EPackage ePackage, Executor executor)
 			throws CoreException, InterruptedException {
-		FutureTask<EPackage> future = new FutureTask<EPackage>(new Callable<EPackage>() {
-
-			@Override
-			public EPackage call() throws Exception {
-				return service.produce(ePackage);
-			}
-		});
-		executor.execute(future);
-		return future;
+		return service.produce(ePackage, executor);
 	}
 
-	protected EPackage test(EPackage ePackage, String attributeName, Object attributeValue) {
+	private Future<? extends EPackage> updateAndSave(EPackage ePackage, EPackage updated, Executor executor)
+			throws CoreException {
+		return service.replace(ePackage, updated, executor);
+	}
+
+	protected EPackage test(EPackage ePackage, String className, String attributeName, Object attributeValue) {
 		if (ePackage == null)
 			return ePackage;
-		EClass s = (EClass) ePackage.getEClassifier(getClassName());
+		EClass s = (EClass) ePackage.getEClassifier(className);
 		EObject o = ePackage.getEFactoryInstance().create(s);
-		assertEquals(getClassName(), o.getClass().getSimpleName());
+		assertEquals(className, o.getClass().getSimpleName());
 		EStructuralFeature a = s.getEStructuralFeature(attributeName);
 		o.eSet(a, attributeValue);
 		assertEquals(attributeValue, o.eGet(a));
 		assertEquals(CodeGenUtil.safeName(ePackage.getName()), o.getClass().getPackage().getName());
 		return ePackage;
+	}
+
+	protected EPackage test(EPackage ePackage, String attributeName, Object attributeValue) {
+		return test(ePackage, getClassName(), attributeName, attributeValue);
+	}
+
+	protected EPackage testAnother(EPackage ePackage, String attributeName, Object attributeValue) {
+		return test(ePackage, "Another" + getClassName(), attributeName, attributeValue);
 	}
 
 	protected void assertObjectClass(String className, EPackage resultPackage) {

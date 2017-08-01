@@ -16,6 +16,10 @@
 package org.enterprisedomain.classmaker.impl;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Future;
+import java.util.concurrent.FutureTask;
 import java.util.concurrent.Semaphore;
 
 import org.eclipse.core.resources.IWorkspaceRoot;
@@ -153,6 +157,21 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * 
 	 * @generated NOT
 	 */
+	public Future<? extends EPackage> produce(final EPackage dynamicModel, Executor executor) throws CoreException {
+		return asyncExecute(new Callable<EPackage>() {
+
+			@Override
+			public EPackage call() throws Exception {
+				return produce(dynamicModel);
+			}
+		}, executor);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
 	public EPackage produce(EPackage dynamicModel, IProgressMonitor monitor) throws CoreException {
 		EList<String> dependencies = ECollections.emptyEList();
 		return produce(dynamicModel, dependencies);
@@ -163,9 +182,41 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * 
 	 * @generated NOT
 	 */
+	public Future<? extends EPackage> produce(final EPackage dynamicModel, Executor executor,
+			final IProgressMonitor monitor) throws CoreException {
+		return asyncExecute(new Callable<EPackage>() {
+
+			@Override
+			public EPackage call() throws Exception {
+				return produce(dynamicModel, monitor);
+			}
+		}, executor);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
 	public EPackage produce(EPackage dynamicModel, EList<String> dependencies) throws CoreException {
 		IProgressMonitor monitor = ClassMakerPlugin.getProgressMonitor();
 		return produce(dynamicModel, dependencies, monitor);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Future<? extends EPackage> produce(final EPackage dynamicModel, final EList<String> dependencies,
+			Executor executor) throws CoreException {
+		return asyncExecute(new Callable<EPackage>() {
+
+			@Override
+			public EPackage call() throws Exception {
+				return produce(dynamicModel, dependencies);
+			}
+		}, executor);
 	}
 
 	/**
@@ -196,8 +247,40 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * 
 	 * @generated NOT
 	 */
+	public Future<? extends EPackage> produce(final EPackage dynamicModel, final EList<String> dependencies,
+			Executor executor, final IProgressMonitor monitor) throws CoreException {
+		return asyncExecute(new Callable<EPackage>() {
+
+			@Override
+			public EPackage call() throws Exception {
+				return produce(dynamicModel, dependencies, monitor);
+			}
+		}, executor);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
 	public EPackage replace(EPackage queryModel, EPackage dynamicModel) throws CoreException {
 		return replace(queryModel, dynamicModel, false);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Future<? extends EPackage> replace(final EPackage queryModel, final EPackage dynamicModel, Executor executor)
+			throws CoreException {
+		return asyncExecute(new Callable<EPackage>() {
+
+			@Override
+			public EPackage call() throws Exception {
+				return replace(queryModel, dynamicModel);
+			}
+		}, executor);
 	}
 
 	/**
@@ -214,9 +297,41 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * 
 	 * @generated NOT
 	 */
+	public Future<? extends EPackage> replace(final EPackage queryModel, final EPackage dynamicModel,
+			final IProgressMonitor monitor, Executor executor) throws CoreException {
+		return asyncExecute(new Callable<EPackage>() {
+
+			@Override
+			public EPackage call() throws Exception {
+				return replace(queryModel, dynamicModel, monitor);
+			}
+		}, executor);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
 	public EPackage replace(EPackage queryModel, EPackage dynamicModel, boolean changeVersion) throws CoreException {
 		IProgressMonitor monitor = ClassMakerPlugin.getProgressMonitor();
 		return replace(queryModel, dynamicModel, changeVersion, monitor);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Future<? extends EPackage> replace(final EPackage queryModel, final EPackage dynamicModel,
+			final boolean changeVersion, Executor executor) throws CoreException {
+		return asyncExecute(new Callable<EPackage>() {
+
+			@Override
+			public EPackage call() throws Exception {
+				return replace(queryModel, dynamicModel, changeVersion);
+			}
+		}, executor);
 	}
 
 	/**
@@ -248,9 +363,41 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * 
 	 * @generated NOT
 	 */
+	public Future<? extends EPackage> replace(final EPackage queryModel, final EPackage dynamicModel,
+			final boolean changeVersion, final IProgressMonitor monitor, Executor executor) throws CoreException {
+		return asyncExecute(new Callable<EPackage>() {
+
+			@Override
+			public EPackage call() throws Exception {
+				return replace(queryModel, dynamicModel, changeVersion, monitor);
+			}
+		}, executor);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
 	public EPackage replace(EPackage queryModel, EPackage dynamicModel, Version version) throws CoreException {
 		IProgressMonitor monitor = ClassMakerPlugin.getProgressMonitor();
 		return replace(queryModel, dynamicModel, version, monitor);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Future<? extends EPackage> replace(final EPackage queryModel, final EPackage dynamicModel,
+			final Version version, Executor executor) throws CoreException {
+		return asyncExecute(new Callable<EPackage>() {
+
+			@Override
+			public EPackage call() throws Exception {
+				return replace(queryModel, dynamicModel, version);
+			}
+		}, executor);
 	}
 
 	/**
@@ -314,9 +461,31 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * 
 	 * @generated NOT
 	 */
+	public Future<? extends EPackage> replace(final EPackage queryModel, final EPackage dynamicModel,
+			final Version version, final IProgressMonitor monitor, Executor executor) throws CoreException {
+		return asyncExecute(new Callable<EPackage>() {
+
+			@Override
+			public EPackage call() throws Exception {
+				return replace(queryModel, dynamicModel, version, monitor);
+			}
+		}, executor);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
 	public EObject transform(EObject source, URI transformationURI) throws CoreException {
 		IProgressMonitor monitor = ClassMakerPlugin.getProgressMonitor();
 		return transform(source, transformationURI, monitor);
+	}
+
+	private Future<? extends EPackage> asyncExecute(Callable<EPackage> callable, Executor executor) {
+		FutureTask<? extends EPackage> future = new FutureTask<EPackage>(callable);
+		executor.execute(future);
+		return future;
 	}
 
 	/**

@@ -62,8 +62,8 @@ public class OSGiEPackageLoader extends ContainerJob {
 		}
 	};
 
-	public OSGiEPackageLoader() {
-		super("Loading class");
+	public OSGiEPackageLoader(int stateTimestamp) {
+		super(Messages.JobNameLoad,stateTimestamp);
 	}
 
 	public IStatus load(IProgressMonitor monitor) throws CoreException {
@@ -115,7 +115,7 @@ public class OSGiEPackageLoader extends ContainerJob {
 	private IStatus getOKStatus(Bundle osgiBundle) {
 		String ePackagesMsg = ""; //$NON-NLS-1$
 		if (getContributionState().getDomainModel().getGenerated() == null)
-			ePackagesMsg = "no EPackage";
+			ePackagesMsg = Messages.EPackageNo;
 		else {
 			EPackage ePackage = getContributionState().getDomainModel().getGenerated();
 			if (ePackage != null)
@@ -123,9 +123,9 @@ public class OSGiEPackageLoader extends ContainerJob {
 			if (ePackagesMsg.length() > 2)
 				ePackagesMsg = ePackagesMsg.subSequence(0, ePackagesMsg.length() - 2).toString();
 			else
-				ePackagesMsg = "no EPackage";
+				ePackagesMsg = Messages.EPackageNo;
 		}
-		return ClassMakerPlugin.createOKStatus(Messages.OK + " "
+		return ClassMakerPlugin.createOKStatus(Messages.OK + " " //$NON-NLS-1$
 				+ NLS.bind(Messages.EPackageClassLoadComplete, new Object[] { osgiBundle.getSymbolicName(),
 						osgiBundle.getHeaders().get(Constants.BUNDLE_VERSION), ePackagesMsg }));
 
@@ -154,7 +154,7 @@ public class OSGiEPackageLoader extends ContainerJob {
 			}
 			EPackage ePackage = null;
 			try {
-				ePackage = (EPackage) packageClass.getField("eINSTANCE").get(packageClass); // $NON-NLS-1$
+				ePackage = (EPackage) packageClass.getField("eINSTANCE").get(packageClass); // $NON-NLS-1$ //$NON-NLS-1$
 				if (ePackage != null)
 					getContributionState().getDomainModel().setGenerated(ePackage);
 			} catch (ClassCastException e) {

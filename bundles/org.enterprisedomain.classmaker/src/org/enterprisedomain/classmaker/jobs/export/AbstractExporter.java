@@ -25,8 +25,8 @@ import org.enterprisedomain.classmaker.jobs.ContainerJob;
 
 public abstract class AbstractExporter extends ContainerJob implements Exporter {
 
-	public AbstractExporter() {
-		super(Messages.JobNameExport);
+	public AbstractExporter(int stateTimestamp) {
+		super(Messages.JobNameExport, stateTimestamp);
 	}
 
 	private IPath destination;

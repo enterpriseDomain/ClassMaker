@@ -1,4 +1,4 @@
-package org.enterprisedomain.tests;
+package org.enterprisedomain.classmaker.tests;
 
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;

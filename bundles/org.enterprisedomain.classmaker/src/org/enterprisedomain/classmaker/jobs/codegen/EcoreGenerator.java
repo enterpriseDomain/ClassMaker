@@ -49,8 +49,8 @@ import org.enterprisedomain.classmaker.util.ResourceUtils;
 public class EcoreGenerator extends EnterpriseDomainJob
 		implements org.enterprisedomain.classmaker.jobs.codegen.Generator {
 
-	public EcoreGenerator(IProject project) {
-		super(Messages.JobNameCodeGenerator);
+	public EcoreGenerator(IProject project, int stateTimestamp) {
+		super(Messages.JobNameCodeGenerator, stateTimestamp);
 		setProject(project);
 	}
 
@@ -58,11 +58,11 @@ public class EcoreGenerator extends EnterpriseDomainJob
 
 	public static final String GENMODEL_EXT = "genmodel"; //$NON-NLS-1$
 
-	private GeneratorJob genModelGeneration = new GenModelGenerationJob();
+	private GeneratorJob genModelGeneration = new GenModelGenerationJob(getStateTimestamp());
 
-	private GeneratorJob genModelSetup = new GenModelSetupJob(this);
+	private GeneratorJob genModelSetup = new GenModelSetupJob(this, getStateTimestamp());
 
-	private CodeGenerationJob codeGeneration = new CodeGenerationJob();
+	private CodeGenerationJob codeGeneration = new CodeGenerationJob(getStateTimestamp());
 
 	protected static abstract class GeneratorJob extends EnterpriseDomainJob {
 
@@ -70,8 +70,8 @@ public class EcoreGenerator extends EnterpriseDomainJob
 		private IPath modelPath;
 		private IPath genModelPath;
 
-		public GeneratorJob(String jobName) {
-			super(jobName);
+		public GeneratorJob(String jobName, int stateTimestamp) {
+			super(jobName, stateTimestamp);
 		}
 
 		public org.eclipse.emf.codegen.ecore.Generator getGenerator() {
@@ -121,8 +121,8 @@ public class EcoreGenerator extends EnterpriseDomainJob
 
 	protected class GenModelGenerationJob extends GeneratorJob {
 
-		public GenModelGenerationJob() {
-			super(Messages.JobNameGenModelGeneration);
+		public GenModelGenerationJob(int stateTimestamp) {
+			super(Messages.JobNameGenModelGeneration, stateTimestamp);
 			setChangeRule(false);
 		}
 
@@ -147,8 +147,8 @@ public class EcoreGenerator extends EnterpriseDomainJob
 
 	protected class CodeGenerationJob extends GeneratorJob {
 
-		public CodeGenerationJob() {
-			super(Messages.JobNameCodeGeneration);
+		public CodeGenerationJob(int stateTimestamp) {
+			super(Messages.JobNameCodeGeneration, stateTimestamp);
 			setChangeRule(false);
 		}
 

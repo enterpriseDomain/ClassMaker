@@ -23,8 +23,8 @@ import org.enterprisedomain.classmaker.jobs.ContainerJob;
 
 public abstract class Installer extends ContainerJob {
 
-	public Installer() {
-		super(Messages.JobNameInstaller);
+	public Installer(int stateTimestamp) {
+		super(Messages.JobNameInstaller, stateTimestamp);
 	}
 
 	public abstract IStatus install(IProgressMonitor monitor) throws CoreException;

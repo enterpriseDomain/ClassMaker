@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.enterprisedomain.tests;
+package org.enterprisedomain.classmaker.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -25,11 +25,10 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collections;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-import java.util.concurrent.FutureTask;
+import java.util.concurrent.Future;
 import java.util.concurrent.Semaphore;
 
 import org.eclipse.core.runtime.CoreException;
@@ -66,6 +65,7 @@ import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.impl.CompletionListenerImpl;
 import org.enterprisedomain.classmaker.impl.CustomizerImpl;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
@@ -143,12 +143,11 @@ public class TestEnterpriseDomain extends AbstractTest {
 	@Test
 	public void async() throws ExecutionException, InterruptedException, CoreException {
 		Executor executor = Executors.newFixedThreadPool(2);
-		setPackageName("t0");
-		EPackage t0 = createAndSaveEPackage(executor).get();
-		setPackageName("t1");
-		EPackage t1 = createAndSaveEPackage(executor).get();
-		test(t0, "a", true);
-		test(t1, "a", true);
+		setPackageName("t");
+		Future<? extends EPackage> t = createAndSaveEPackage(executor);
+		test(t.get(), "a", true);
+		t = updateAndSaveEPackage(t, executor);
+		testAnother(t.get(), "b", true);
 	}
 
 	@Test
@@ -430,6 +429,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		setAttributeName("x");
 		setAttributeType(EcorePackage.Literals.EJAVA_OBJECT);
 		EPackage p = createAndTestEPackage();
+		assertNotNull(p);
 		Contribution c = service.getWorkspace().getContribution(p, Stage.LOADED);
 		p = c.getDomainModel().getDynamic();
 		Version v = c.getVersion();

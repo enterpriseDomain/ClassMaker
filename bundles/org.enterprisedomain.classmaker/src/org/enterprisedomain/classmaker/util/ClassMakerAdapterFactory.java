@@ -16,6 +16,7 @@
 package org.enterprisedomain.classmaker.util;
 
 import java.util.Map;
+import java.util.concurrent.Executor;
 import java.util.concurrent.Future;
 
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
@@ -138,6 +139,16 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseISchedulingRule(ISchedulingRule object) {
 			return createISchedulingRuleAdapter();
+		}
+
+		@Override
+		public Adapter caseExecutor(Executor object) {
+			return createExecutorAdapter();
+		}
+
+		@Override
+		public <V> Adapter caseFuture(Future<V> object) {
+			return createFutureAdapter();
 		}
 
 		@Override
@@ -330,6 +341,34 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createISchedulingRuleAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link java.util.concurrent.Executor <em>Executor</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see java.util.concurrent.Executor
+	 * @generated
+	 */
+	public Adapter createExecutorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link java.util.concurrent.Future <em>Future</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see java.util.concurrent.Future
+	 * @generated
+	 */
+	public Adapter createFutureAdapter() {
 		return null;
 	}
 

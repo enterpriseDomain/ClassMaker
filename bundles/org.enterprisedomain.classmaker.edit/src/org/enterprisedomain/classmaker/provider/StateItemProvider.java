@@ -67,6 +67,7 @@ public class StateItemProvider extends ItemItemProvider {
 			addJobFamilyPropertyDescriptor(object);
 			addResourcePropertyDescriptor(object);
 			addCommitIdsPropertyDescriptor(object);
+			addCommitIdPropertyDescriptor(object);
 			addProjectNamePropertyDescriptor(object);
 			addSavingPropertyDescriptor(object);
 		}
@@ -182,6 +183,21 @@ public class StateItemProvider extends ItemItemProvider {
 	}
 
 	/**
+	 * This adds a property descriptor for the Commit Id feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addCommitIdPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_State_commitId_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_State_commitId_feature", "_UI_State_type"),
+						ClassMakerPackage.Literals.STATE__COMMIT_ID, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+	}
+
+	/**
 	 * This adds a property descriptor for the Project Name feature. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -279,6 +295,7 @@ public class StateItemProvider extends ItemItemProvider {
 		case ClassMakerPackage.STATE__DEPLOYABLE_UNIT_NAME:
 		case ClassMakerPackage.STATE__JOB_FAMILY:
 		case ClassMakerPackage.STATE__COMMIT_IDS:
+		case ClassMakerPackage.STATE__COMMIT_ID:
 		case ClassMakerPackage.STATE__PROJECT_NAME:
 		case ClassMakerPackage.STATE__SAVING:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));

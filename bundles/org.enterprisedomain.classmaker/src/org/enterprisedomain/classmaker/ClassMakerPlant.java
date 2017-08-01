@@ -16,6 +16,8 @@
 package org.enterprisedomain.classmaker;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Future;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
@@ -111,6 +113,23 @@ public interface ClassMakerPlant extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @model type="org.enterprisedomain.classmaker.Future&lt;? extends org.eclipse.emf.ecore.EPackage&gt;" exceptions="org.enterprisedomain.classmaker.CoreException" executorType="org.enterprisedomain.classmaker.Executor"
+	 * @generated
+	 */
+	Future<? extends EPackage> produce(EPackage dynamicModel, Executor executor) throws CoreException;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model type="org.enterprisedomain.classmaker.Future&lt;? extends org.eclipse.emf.ecore.EPackage&gt;" exceptions="org.enterprisedomain.classmaker.CoreException" executorType="org.enterprisedomain.classmaker.Executor" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * @generated
+	 */
+	Future<? extends EPackage> produce(EPackage dynamicModel, Executor executor, IProgressMonitor monitor)
+			throws CoreException;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" dependenciesMany="true"
 	 * @generated
 	 */
@@ -125,11 +144,38 @@ public interface ClassMakerPlant extends EObject {
 	EPackage produce(EPackage dynamicModel, EList<String> dependencies, IProgressMonitor monitor) throws CoreException;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model type="org.enterprisedomain.classmaker.Future&lt;? extends org.eclipse.emf.ecore.EPackage&gt;" exceptions="org.enterprisedomain.classmaker.CoreException" dependenciesMany="true" executorType="org.enterprisedomain.classmaker.Executor"
+	 * @generated
+	 */
+	Future<? extends EPackage> produce(EPackage dynamicModel, EList<String> dependencies, Executor executor)
+			throws CoreException;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model type="org.enterprisedomain.classmaker.Future&lt;? extends org.eclipse.emf.ecore.EPackage&gt;" exceptions="org.enterprisedomain.classmaker.CoreException" dependenciesMany="true" executorType="org.enterprisedomain.classmaker.Executor" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * @generated
+	 */
+	Future<? extends EPackage> produce(EPackage dynamicModel, EList<String> dependencies, Executor executor,
+			IProgressMonitor monitor) throws CoreException;
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
 	 * @generated
 	 */
 	EPackage replace(EPackage queryModel, EPackage dynamicModel) throws CoreException;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model type="org.enterprisedomain.classmaker.Future&lt;? extends org.eclipse.emf.ecore.EPackage&gt;" exceptions="org.enterprisedomain.classmaker.CoreException" executorType="org.enterprisedomain.classmaker.Executor"
+	 * @generated
+	 */
+	Future<? extends EPackage> replace(EPackage queryModel, EPackage dynamicModel, Executor executor)
+			throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -139,11 +185,29 @@ public interface ClassMakerPlant extends EObject {
 	EPackage replace(EPackage queryModel, EPackage dynamicModel, IProgressMonitor monitor) throws CoreException;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model type="org.enterprisedomain.classmaker.Future&lt;? extends org.eclipse.emf.ecore.EPackage&gt;" exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor" executorType="org.enterprisedomain.classmaker.Executor"
+	 * @generated
+	 */
+	Future<? extends EPackage> replace(EPackage queryModel, EPackage dynamicModel, IProgressMonitor monitor,
+			Executor executor) throws CoreException;
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
 	 * @generated
 	 */
 	EPackage replace(EPackage queryModel, EPackage dynamicModel, boolean changeVersion) throws CoreException;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model type="org.enterprisedomain.classmaker.Future&lt;? extends org.eclipse.emf.ecore.EPackage&gt;" exceptions="org.enterprisedomain.classmaker.CoreException" executorType="org.enterprisedomain.classmaker.Executor"
+	 * @generated
+	 */
+	Future<? extends EPackage> replace(EPackage queryModel, EPackage dynamicModel, boolean changeVersion,
+			Executor executor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -154,11 +218,29 @@ public interface ClassMakerPlant extends EObject {
 			throws CoreException;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model type="org.enterprisedomain.classmaker.Future&lt;? extends org.eclipse.emf.ecore.EPackage&gt;" exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor" executorType="org.enterprisedomain.classmaker.Executor"
+	 * @generated
+	 */
+	Future<? extends EPackage> replace(EPackage queryModel, EPackage dynamicModel, boolean changeVersion,
+			IProgressMonitor monitor, Executor executor) throws CoreException;
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
 	 * @generated
 	 */
 	EPackage replace(EPackage queryModel, EPackage dynamicModel, Version version) throws CoreException;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model type="org.enterprisedomain.classmaker.Future&lt;? extends org.eclipse.emf.ecore.EPackage&gt;" exceptions="org.enterprisedomain.classmaker.CoreException" versionDataType="org.enterprisedomain.classmaker.OSGiVersion" executorType="org.enterprisedomain.classmaker.Executor"
+	 * @generated
+	 */
+	Future<? extends EPackage> replace(EPackage queryModel, EPackage dynamicModel, Version version, Executor executor)
+			throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -167,6 +249,15 @@ public interface ClassMakerPlant extends EObject {
 	 */
 	EPackage replace(EPackage queryModel, EPackage dynamicModel, Version version, IProgressMonitor monitor)
 			throws CoreException;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model type="org.enterprisedomain.classmaker.Future&lt;? extends org.eclipse.emf.ecore.EPackage&gt;" exceptions="org.enterprisedomain.classmaker.CoreException" versionDataType="org.enterprisedomain.classmaker.OSGiVersion" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor" executorType="org.enterprisedomain.classmaker.Executor"
+	 * @generated
+	 */
+	Future<? extends EPackage> replace(EPackage queryModel, EPackage dynamicModel, Version version,
+			IProgressMonitor monitor, Executor executor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

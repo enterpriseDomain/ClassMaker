@@ -93,8 +93,9 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob {
 
 	private boolean changeRule;
 
-	public EnterpriseDomainJob(String name) {
+	public EnterpriseDomainJob(String name, int stateTimestamp) {
 		super(name);
+		setStateTimestamp(stateTimestamp);
 		setUser(true);
 		setPriority(Job.BUILD);
 		setRule(getWorkspace());

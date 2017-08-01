@@ -28,9 +28,11 @@ public class Messages extends NLS {
 	public static String JobNameCodeGenerator;
 	public static String BundleDuplicate;
 	public static String EPackageClassLoadComplete;
+	public static String EPackageNo;
 	public static String JobNameGenModelConfiguration;
 	public static String JobNameGenModelGeneration;
 	public static String JobNameInstaller;
+	public static String JobNameLoad;
 	public static String DefaultModelFolder;
 	public static String ModelNotSpecified;
 	public static String JobNameModelResource;

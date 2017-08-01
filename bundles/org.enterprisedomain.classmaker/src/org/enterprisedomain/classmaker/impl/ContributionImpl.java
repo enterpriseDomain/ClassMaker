@@ -463,6 +463,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	 * 
 	 * @generated NOT
 	 */
+	@Override 
 	public String initialize() {
 		try {
 			Git git = GitUtil.getRepositoryGit(getProjectName());

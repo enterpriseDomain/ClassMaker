@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EnterpriseDomain Tests
-Bundle-SymbolicName: org.enterprisedomain.tests;singleton:=true
+Bundle-SymbolicName: org.enterprisedomain.classmaker.tests;singleton:=true
 Bundle-Version: 0.0.4.qualifier
 Bundle-Vendor: Kyrill Zotkin
 Require-Bundle: org.eclipse.core.runtime,
@@ -13,4 +13,4 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Service-Component: OSGI-INF/component.xml
 Bundle-ActivationPolicy: lazy
-Bundle-Activator: org.enterprisedomain.tests.ClassMakerTestsPlugin
+Bundle-Activator: org.enterprisedomain.classmaker.tests.ClassMakerTestsPlugin

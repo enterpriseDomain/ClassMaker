@@ -21,6 +21,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Future;
 import java.util.concurrent.Semaphore;
 
 import org.eclipse.core.runtime.CoreException;
