@@ -29,5 +29,13 @@
          </adapter>
       </factory>
    </extension>
+   <extension
+         id="org.enterprisedomain.ecp.repository.local"
+         name="Local Domain Workplace"
+         point="org.eclipse.emf.ecp.core.repositories">
+      <repository
+            provider="org.enterprisedomain.ecp.provider">
+      </repository>
+   </extension>
 
 </plugin>

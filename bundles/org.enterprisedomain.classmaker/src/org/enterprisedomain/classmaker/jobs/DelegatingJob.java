@@ -19,9 +19,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.jobs.Job;
-import org.enterprisedomain.classmaker.ClassMakerPlant;
 import org.enterprisedomain.classmaker.Stage;
-import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 
 public class DelegatingJob extends EnterpriseDomainJob {
 

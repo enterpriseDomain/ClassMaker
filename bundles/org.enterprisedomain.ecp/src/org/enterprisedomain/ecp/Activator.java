@@ -30,7 +30,9 @@ public class Activator extends Plugin implements BundleActivator {
 	private static ServiceTracker<ClassMakerPlant, ClassMakerPlantImpl> classMaker;
 
 	public static ClassMakerPlant getClassMaker() {
-		return classMaker.getService();
+		if (classMaker != null)
+			return classMaker.getService();
+		return null;
 	}
 
 	@Override

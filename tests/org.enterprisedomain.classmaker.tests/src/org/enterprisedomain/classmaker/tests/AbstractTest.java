@@ -91,7 +91,7 @@ public abstract class AbstractTest {
 			service.delete(getPackageName(), getProgressMonitor());
 			Project project = service.getWorkspace().getProject(getPackageName());
 			if (project != null)
-				project.save(getProgressMonitor());
+				project.make(getProgressMonitor());
 		} catch (CoreException e) {
 			e.printStackTrace();
 			fail(e.getLocalizedMessage());

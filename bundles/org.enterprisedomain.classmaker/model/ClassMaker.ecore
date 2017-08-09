@@ -2,7 +2,7 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="classmaker" nsURI="http://org/enterprisedomain/ClassMaker/0.7.9"
     nsPrefix="ClassMaker">
-  <eClassifiers xsi:type="ecore:EClass" name="Contribution" eSuperTypes="#//Project #//Item">
+  <eClassifiers xsi:type="ecore:EClass" name="Contribution" eSuperTypes="#//Project #//Item #//IAdapterFactory">
     <eOperations name="createRevision" eType="#//Revision" eExceptions="#//CoreException">
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
@@ -11,7 +11,7 @@
     </eOperations>
     <eOperations name="checkout">
       <eParameters name="version" eType="#//OSGiVersion"/>
-      <eParameters name="time" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     </eOperations>
     <eOperations name="checkout">
       <eParameters name="version" eType="#//OSGiVersion"/>
@@ -19,16 +19,19 @@
       <eParameters name="commitId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eOperations name="checkout">
-      <eParameters name="time" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     </eOperations>
     <eOperations name="checkout">
-      <eParameters name="time" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
       <eParameters name="commitId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eOperations name="checkout">
       <eParameters name="commitId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eOperations name="newRevision" eType="#//Revision">
+      <eParameters name="version" eType="#//OSGiVersion"/>
+    </eOperations>
+    <eOperations name="newBareRevision" eType="#//Revision">
       <eParameters name="version" eType="#//OSGiVersion"/>
     </eOperations>
     <eOperations name="newVersion" eType="#//OSGiVersion" eExceptions="#//CoreException">
@@ -46,13 +49,7 @@
     <eOperations name="delete" eExceptions="#//CoreException">
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
-    <eOperations name="addSaveCompletionListener">
-      <eParameters name="resultListener" eType="#//CompletionListener"/>
-    </eOperations>
-    <eOperations name="removeSaveCompletionListener">
-      <eParameters name="resultListener" eType="#//CompletionListener"/>
-    </eOperations>
-    <eOperations name="save" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+    <eOperations name="make" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         eExceptions="#//CoreException">
       <eParameters name="revision" eType="#//Revision"/>
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
@@ -63,7 +60,6 @@
     <eOperations name="initAdapters">
       <eParameters name="revision" eType="#//Revision"/>
     </eOperations>
-    <eOperations name="notifyCompletion" eExceptions="#//Exception"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="dependencies" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" changeable="false"
         volatile="true" defaultValueLiteral="" derived="true"/>
@@ -75,21 +71,19 @@
         changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="latestVersion" eType="#//OSGiVersion"
         changeable="false" volatile="true" transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="model" eType="#//ResourceAdapter"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modelResourceAdapter" eType="#//ResourceAdapter"
         changeable="false" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="completionNotified" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Revision" eSuperTypes="#//Item">
     <eOperations name="create" eExceptions="#//CoreException">
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
     <eOperations name="checkout">
-      <eParameters name="stateTime" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
       <eParameters name="commitId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eOperations name="checkout">
-      <eParameters name="stateTime" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     </eOperations>
     <eOperations name="checkout">
       <eParameters name="commitId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -128,10 +122,11 @@
     <eOperations name="checkout">
       <eParameters name="commitId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
-    <eOperations name="commit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        eExceptions="#//Exception">
+    <eOperations name="add" eExceptions="#//Exception">
       <eParameters name="filepattern" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
+    <eOperations name="commit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        eExceptions="#//Exception"/>
     <eOperations name="saveResource"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="requiredPlugins" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -158,11 +153,13 @@
     <eOperations name="load" eExceptions="#//CoreException">
       <eParameters name="create" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eOperations>
-    <eOperations name="save" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+    <eOperations name="make" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         eExceptions="#//Exception">
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
-    <eOperations name="initialize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="initialize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eParameters name="commit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
     <eOperations name="copyModel">
       <eParameters name="from" eType="#//Item"/>
     </eOperations>
@@ -363,6 +360,8 @@
       <details key="documentation" value="Java InvocationTargetException datatype import."/>
     </eAnnotations>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IAdapterFactory" instanceClassName="org.eclipse.core.runtime.IAdapterFactory"
+      abstract="true" interface="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Customizer">
     <eOperations name="customize">
       <eParameters name="args" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
@@ -388,7 +387,7 @@
     <eOperations name="delete">
       <eParameters name="objects" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
     </eOperations>
-    <eOperations name="save" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+    <eOperations name="make" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         eExceptions="#//CoreException">
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
@@ -399,7 +398,16 @@
     <eOperations name="close" eExceptions="#//CoreException">
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
-    <eOperations name="initialize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="initialize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eParameters name="commit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="addCompletionListener">
+      <eParameters name="resultListener" eType="#//CompletionListener"/>
+    </eOperations>
+    <eOperations name="removeCompletionListener">
+      <eParameters name="resultListener" eType="#//CompletionListener"/>
+    </eOperations>
+    <eOperations name="notifyCompletion" eExceptions="#//Exception"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="projectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
@@ -411,6 +419,8 @@
         changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="workspace" eType="#//Workspace"
         eOpposite="#//Workspace/projects"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="needsCompletionNotification"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="URI" instanceClassName="org.eclipse.emf.common.util.URI">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -433,7 +443,7 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Notify process completion."/>
       </eAnnotations>
-      <eParameters name="result" eType="#//Contribution"/>
+      <eParameters name="result" eType="#//Project"/>
     </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Exception" instanceClassName="java.lang.Exception">

@@ -41,6 +41,6 @@ public interface CompletionListener extends EObject {
 	 * @model exceptions="org.enterprisedomain.classmaker.Exception"
 	 * @generated
 	 */
-	void completed(Contribution result) throws Exception;
+	void completed(Project result) throws Exception;
 
 } // CompletionListener

@@ -22,7 +22,6 @@ import org.eclipse.core.resources.WorkspaceJob;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
@@ -107,7 +106,6 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob {
 	public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
 		Contribution contribution = getWorkspace().getContribution(getProject().getName());
 		contributionState = contribution.getState(getStateTimestamp());
-		fireBeforeHooks(contributionState);
 		checkStage();
 		IStatus result = Status.OK_STATUS;
 		monitor.subTask(getName());
@@ -116,21 +114,6 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob {
 			return result;
 		result = work(monitor);
 		return result;
-	}
-
-	private ListenerList<EnterpriseDomainJobListener> listeners = new ListenerList<EnterpriseDomainJobListener>();
-
-	private synchronized void fireBeforeHooks(State contributionState) throws CoreException {
-		for (EnterpriseDomainJobListener listener : listeners)
-			listener.hookBefore(contributionState);
-	}
-
-	public synchronized void addListener(EnterpriseDomainJobListener listener) {
-		listeners.add(listener);
-	}
-
-	public synchronized void removeListener(EnterpriseDomainJobListener listener) {
-		listeners.remove(listener);
 	}
 
 	public abstract IStatus work(IProgressMonitor monitor) throws CoreException;

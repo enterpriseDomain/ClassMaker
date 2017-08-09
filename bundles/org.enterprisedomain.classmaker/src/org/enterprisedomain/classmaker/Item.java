@@ -16,8 +16,8 @@
 package org.enterprisedomain.classmaker;
 
 import java.util.Locale;
-
 import java.util.Properties;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EMap;
@@ -233,7 +233,7 @@ public interface Item extends EObject {
 	 * @model exceptions="org.enterprisedomain.classmaker.Exception" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
-	String save(IProgressMonitor monitor) throws Exception;
+	String make(IProgressMonitor monitor) throws Exception;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -241,7 +241,7 @@ public interface Item extends EObject {
 	 * @model
 	 * @generated
 	 */
-	String initialize();
+	String initialize(boolean commit);
 
 	/**
 	 * <!-- begin-user-doc -->

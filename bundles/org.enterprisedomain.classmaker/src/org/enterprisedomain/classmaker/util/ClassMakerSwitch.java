@@ -19,15 +19,13 @@ import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Future;
 
+import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.Switch;
-import org.enterprisedomain.classmaker.*;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.ClassMakerPlant;
 import org.enterprisedomain.classmaker.CompletionListener;
@@ -104,6 +102,8 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 				result = caseProject(contribution);
 			if (result == null)
 				result = caseItem(contribution);
+			if (result == null)
+				result = caseIAdapterFactory(contribution);
 			if (result == null)
 				result = caseISchedulingRule(contribution);
 			if (result == null)
@@ -186,6 +186,13 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 		case ClassMakerPackage.FUTURE: {
 			Future<?> future = (Future<?>) theEObject;
 			T result = caseFuture(future);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ClassMakerPackage.IADAPTER_FACTORY: {
+			IAdapterFactory iAdapterFactory = (IAdapterFactory) theEObject;
+			T result = caseIAdapterFactory(iAdapterFactory);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -416,6 +423,21 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public <V> T caseFuture(Future<V> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>IAdapter Factory</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>IAdapter Factory</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIAdapterFactory(IAdapterFactory object) {
 		return null;
 	}
 

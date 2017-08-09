@@ -75,6 +75,7 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 			addProjectNamePropertyDescriptor(object);
 			addChildrenPropertyDescriptor(object);
 			addDirtyPropertyDescriptor(object);
+			addNeedsCompletionNotificationPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -139,6 +140,22 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 								"_UI_Project_type"),
 						ClassMakerPackage.Literals.PROJECT__DIRTY, false, false, false,
 						ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Needs Completion Notification feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNeedsCompletionNotificationPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
+				getString("_UI_Project_needsCompletionNotification_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_Project_needsCompletionNotification_feature",
+						"_UI_Project_type"),
+				ClassMakerPackage.Literals.PROJECT__NEEDS_COMPLETION_NOTIFICATION, true, false, false,
+				ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -210,6 +227,7 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 		case ClassMakerPackage.PROJECT__NAME:
 		case ClassMakerPackage.PROJECT__PROJECT_NAME:
 		case ClassMakerPackage.PROJECT__DIRTY:
+		case ClassMakerPackage.PROJECT__NEEDS_COMPLETION_NOTIFICATION:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case ClassMakerPackage.PROJECT__CHILDREN:

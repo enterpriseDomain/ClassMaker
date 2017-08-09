@@ -40,7 +40,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecp.core.ECPProject;
 import org.eclipse.emf.ecp.core.ECPRepository;
@@ -56,8 +55,8 @@ import org.eclipse.emf.ecp.spi.core.util.InternalChildrenList;
 import org.eclipse.emf.edit.command.ChangeCommand;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
+import org.enterprisedomain.classmaker.ClassMakerPlant;
 import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Project;
@@ -118,7 +117,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 				break;
 
 			case DISPOSE:
-				// disposeProject(project);
+				disposeProject(project);
 				break;
 
 			case REMOVE:
@@ -134,6 +133,21 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 	protected void initProject(InternalProject project) {
 		final EditingDomain editingDomain = project.getEditingDomain();
 		editingDomain.getResourceSet().eAdapters().add(new EnterpriseDomainProjectObserver(project, this));
+		ClassMakerPlant plant = Activator.getClassMaker();
+		if (plant != null) {
+			Project domainProject = plant.getWorkspace().getProject(project.getName());
+			if (domainProject != null)
+				try {
+					IProgressMonitor monitor = null;
+					if (getUIProvider() != null)
+						monitor = getUIProvider().getAdapter(project, IProgressMonitor.class);
+					else
+						monitor = ClassMakerPlugin.getProgressMonitor();
+					domainProject.open(monitor);
+				} catch (CoreException e) {
+					Activator.log(e);
+				}
+		}
 		registerChangeListener(new ProviderChangeListener() {
 
 			private Map<EObject, ECPProject> projects = new HashMap<EObject, ECPProject>();
@@ -197,11 +211,30 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 				Activator.log(e);
 			}
 			project.getVisiblePackages().add(EcorePackage.eINSTANCE);
-			((Contribution) domainProject).addSaveCompletionListener(new VisiblePackagesListener(project));
+			((Contribution) domainProject).addCompletionListener(new VisiblePackagesListener(project));
 		} else
 			domainProject = Activator.getClassMaker().getWorkspace().getProject(project.getName());
 		domainProject.getWorkspace().getResourceSet().eAdapters()
 				.add(new AdapterFactoryEditingDomain.EditingDomainProvider(project.getEditingDomain()));
+	}
+
+	protected void disposeProject(InternalProject project) {
+		ClassMakerPlant plant = Activator.getClassMaker();
+		if (plant != null) {
+			Project domainProject = plant.getWorkspace().getProject(project.getName());
+			if (domainProject != null)
+				try {
+					IProgressMonitor monitor = null;
+					if (getUIProvider() == null)
+						monitor = ClassMakerPlugin.getProgressMonitor();
+					else
+						monitor = getUIProvider().getAdapter(project, IProgressMonitor.class);
+					domainProject.close(monitor);
+				} catch (CoreException e) {
+					Activator.log(e);
+				}
+		}
+
 	}
 
 	protected void removeProject(InternalProject project) {
@@ -227,11 +260,6 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 		} else if (parent instanceof ECPProject) {
 			final ECPProject project = (ECPProject) parent;
 			final Project domainProject = Activator.getClassMaker().getWorkspace().getProject(project.getName());
-			try {
-				domainProject.open(getUIProvider().getAdapter(project, IProgressMonitor.class));
-			} catch (CoreException e) {
-				Activator.log(e);
-			}
 			childrenList.addChildren(domainProject.getChildren());
 		} else if (parent instanceof ResourceAdapter) {
 			final ResourceAdapter resourceAdapter = (ResourceAdapter) parent;
@@ -272,9 +300,9 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 		}
 
 		@Override
-		public void completed(Contribution result) {
+		public void completed(Project result) {
 			project.getVisiblePackages().add(project.getEditingDomain().getResourceSet().getPackageRegistry()
-					.getEPackage(result.getDomainModel().getGenerated().getNsURI()));
+					.getEPackage(((Contribution) result).getDomainModel().getGenerated().getNsURI()));
 		}
 
 	};
@@ -370,7 +398,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 			CompletionListener saveListener = new CompletionListenerImpl() {
 
 				@Override
-				public void completed(Contribution result) {
+				public void completed(Project result) {
 					saved.release();
 				}
 
@@ -378,8 +406,8 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 			Project domainProject = Activator.getClassMaker().getWorkspace().getProject(project.getName());
 			if (domainProject instanceof Contribution) {
 				Contribution contrib = (Contribution) domainProject;
-				contrib.addSaveCompletionListener(saveListener);
-				contrib.save(monitor);
+				contrib.addCompletionListener(saveListener);
+				contrib.make(monitor);
 				try {
 					saved.acquire();
 				} catch (InterruptedException e) {
@@ -387,9 +415,9 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 					if (monitor != null)
 						monitor.setCanceled(true);
 				}
-				contrib.removeSaveCompletionListener(saveListener);
+				contrib.removeCompletionListener(saveListener);
 			} else
-				domainProject.save(monitor);
+				domainProject.make(monitor);
 			((BasicCommandStack) project.getEditingDomain().getCommandStack()).saveIsDone();
 		} catch (CoreException e) {
 			e.printStackTrace();

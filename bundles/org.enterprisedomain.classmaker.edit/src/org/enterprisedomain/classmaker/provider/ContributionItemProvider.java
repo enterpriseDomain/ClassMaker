@@ -72,7 +72,7 @@ public class ContributionItemProvider extends ProjectItemProvider {
 			addRevisionPropertyDescriptor(object);
 			addStatePropertyDescriptor(object);
 			addLatestVersionPropertyDescriptor(object);
-			addCompletionNotifiedPropertyDescriptor(object);
+			addModelResourceAdapterPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -259,19 +259,19 @@ public class ContributionItemProvider extends ProjectItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Completion Notified feature.
+	 * This adds a property descriptor for the Model Resource Adapter feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addCompletionNotifiedPropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_Contribution_completionNotified_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_Contribution_completionNotified_feature",
-								"_UI_Contribution_type"),
-						ClassMakerPackage.Literals.CONTRIBUTION__COMPLETION_NOTIFIED, true, false, false,
-						ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+	protected void addModelResourceAdapterPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
+				getString("_UI_Contribution_modelResourceAdapter_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_Contribution_modelResourceAdapter_feature",
+						"_UI_Contribution_type"),
+				ClassMakerPackage.Literals.CONTRIBUTION__MODEL_RESOURCE_ADAPTER, false, false, false, null, null,
+				null));
 	}
 
 	/**
@@ -289,7 +289,6 @@ public class ContributionItemProvider extends ProjectItemProvider {
 			childrenFeatures.add(ClassMakerPackage.Literals.ITEM__DOMAIN_MODEL);
 			childrenFeatures.add(ClassMakerPackage.Literals.ITEM__CUSTOMIZERS);
 			childrenFeatures.add(ClassMakerPackage.Literals.CONTRIBUTION__REVISIONS);
-			childrenFeatures.add(ClassMakerPackage.Literals.CONTRIBUTION__MODEL);
 		}
 		return childrenFeatures;
 	}
@@ -351,13 +350,11 @@ public class ContributionItemProvider extends ProjectItemProvider {
 		case ClassMakerPackage.CONTRIBUTION__PROPERTIES:
 		case ClassMakerPackage.CONTRIBUTION__DEPENDENCIES:
 		case ClassMakerPackage.CONTRIBUTION__LATEST_VERSION:
-		case ClassMakerPackage.CONTRIBUTION__COMPLETION_NOTIFIED:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case ClassMakerPackage.CONTRIBUTION__DOMAIN_MODEL:
 		case ClassMakerPackage.CONTRIBUTION__CUSTOMIZERS:
 		case ClassMakerPackage.CONTRIBUTION__REVISIONS:
-		case ClassMakerPackage.CONTRIBUTION__MODEL:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}

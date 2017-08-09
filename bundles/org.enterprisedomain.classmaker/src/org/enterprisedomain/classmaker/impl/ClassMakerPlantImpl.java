@@ -54,6 +54,7 @@ import org.enterprisedomain.classmaker.ClassMakerPlant;
 import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Messages;
+import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.Revision;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
@@ -229,8 +230,8 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 		try {
 			Contribution contrib = getWorkspace().createContribution(dynamicModel, monitor);
 			contrib.getDependencies().addAll(dependencies);
-			contrib.addSaveCompletionListener(yieldResultListener);
-			contrib.save(monitor);
+			contrib.addCompletionListener(yieldResultListener);
+			contrib.make(monitor);
 			lock.acquire();
 			return contrib.getDomainModel().getGenerated();
 		} catch (CoreException e) {
@@ -435,7 +436,7 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 						State state = revision.getState();
 						state.copyModel(contribution.getState());
 						revision.create(monitor);
-						String commitId = state.initialize();
+						String commitId = state.initialize(true);
 						contribution.checkout(revision.getVersion(), state.getTimestamp(), commitId);
 					} else if (version.compareTo(contribution.getVersion()) < 0) {
 						if (!contribution.getRevisions().containsKey(version))
@@ -446,8 +447,8 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 					revision.getDomainModel().setDynamic(EcoreUtil.copy(dynamicModel));
 				}
 			}
-			contribution.addSaveCompletionListener(yieldResultListener);
-			contribution.save(monitor);
+			contribution.addCompletionListener(yieldResultListener);
+			contribution.make(monitor);
 			lock.acquire();
 			return contribution.getDomainModel().getGenerated();
 		} catch (InterruptedException e) {
@@ -566,8 +567,8 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	private CompletionListener yieldResultListener = new CompletionListenerImpl() {
 
 		@Override
-		public void completed(Contribution result) throws Exception {
-			result.getState().setSaving(false);
+		public void completed(Project result) throws Exception {
+			((Contribution) result).getState().setSaving(false);
 			lock.release();
 		}
 

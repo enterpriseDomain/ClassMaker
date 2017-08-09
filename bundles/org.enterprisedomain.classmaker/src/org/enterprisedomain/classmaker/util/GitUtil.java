@@ -32,8 +32,11 @@ import org.eclipse.jgit.errors.RepositoryNotFoundException;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
+import org.osgi.framework.Version;
 
 public class GitUtil {
+
+	public static final String MASTER_BRANCH = "master"; // $NON-NLS-1$
 
 	private static Map<String, Git> gits = new HashMap<String, Git>();
 
@@ -63,6 +66,14 @@ public class GitUtil {
 		return gits.get(projectName);
 	}
 
+	public synchronized static void ungetRepositoryGit(String projectName) throws GitAPIException {
+		if (!gits.containsKey(projectName))
+			return;
+		Git git = gits.get(projectName);
+		git.close();
+		gits.remove(projectName);
+	}
+
 	public synchronized static void deleteProject(String projectName) {
 		if (gits.containsKey(projectName))
 			gits.remove(projectName);
@@ -72,42 +83,69 @@ public class GitUtil {
 		return state.getDeployableUnitName() + " " + timestamp;
 	}
 
+	public static Version getVersion(String commitMessage) {
+		return Version.parseVersion(commitMessage.split(" ")[0]);
+	}
+
 	public static int getTimestamp(String commitMessage) {
 		try {
-			return Integer.parseInt(commitMessage.split(" ")[1]);
+			String[] parts = commitMessage.split(" ");
+			if (parts.length == 2)
+				return Integer.parseInt(parts[1]);
+			else
+				return -1;
 		} catch (NumberFormatException e) {
 			return -1;
 		}
 	}
 
 	public static void add(String projectName, String filepattern) throws GitAPIException {
-		Git git = GitUtil.getRepositoryGit(projectName);
-		synchronized (git) {
-			AddCommand add = git.add();
-			add.addFilepattern(filepattern);
-			add.call();
+		try {
+			Git git = getRepositoryGit(projectName);
+			synchronized (git) {
+				AddCommand add = git.add();
+				add.addFilepattern(filepattern);
+				add.call();
+			}
+		} finally {
+			ungetRepositoryGit(projectName);
 		}
 	}
 
 	public static String commit(String projectName, String commitMessage) throws GitAPIException {
-		Git git = GitUtil.getRepositoryGit(projectName);
 		String commitId = null;
-		synchronized (git) {
-			CommitCommand commit = git.commit();
-			commit.setAll(true);
-			commit.setMessage(commitMessage);
-			RevCommit revCommit = commit.call();
-			commitId = revCommit.getId().name();
+		try {
+			Git git = getRepositoryGit(projectName);
+			synchronized (git) {
+				CommitCommand commit = git.commit();
+				commit.setMessage(commitMessage);
+				RevCommit revCommit = commit.call();
+				commitId = revCommit.getId().name();
+			}
+		} finally {
+			ungetRepositoryGit(projectName);
 		}
 		return commitId;
 	}
 
+	public static void checkout(String projectName, String branch, String commitId) throws GitAPIException {
+		try {
+			getRepositoryGit(projectName).checkout().setName(branch).setStartPoint(commitId).setForce(true).call();
+		} finally {
+			ungetRepositoryGit(projectName);
+		}
+	}
+
 	public static void checkoutOrphan(String projectName, String branchName, int timestamp)
 			throws GitAPIException, IOException {
-		Git git = getRepositoryGit(projectName);
-		synchronized (git) {
-			git.checkout().setOrphan(true).setName(branchName).call();
-			git.commit().setMessage(projectName + "_" + branchName + " " + timestamp).call();
+		try {
+			Git git = getRepositoryGit(projectName);
+			synchronized (git) {
+				git.checkout().setOrphan(true).setName(branchName).call();
+				git.commit().setMessage(projectName + "_" + branchName + " " + timestamp).call();
+			}
+		} finally {
+			ungetRepositoryGit(projectName);
 		}
 	}
 }

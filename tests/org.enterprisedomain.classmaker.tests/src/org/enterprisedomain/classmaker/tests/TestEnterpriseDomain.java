@@ -60,12 +60,12 @@ import org.enterprisedomain.classmaker.ClassMakerPlant;
 import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Customizer;
+import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.impl.CompletionListenerImpl;
 import org.enterprisedomain.classmaker.impl.CustomizerImpl;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
@@ -558,12 +558,12 @@ public class TestEnterpriseDomain extends AbstractTest {
 		CompletionListener l = new CompletionListenerImpl() {
 
 			@Override
-			public void completed(Contribution result) throws Exception {
+			public void completed(Project result) throws Exception {
 				try {
 					EPackage e = null;
 					Class<?> cl = null;
 					try {
-						e = result.getDomainModel().getGenerated();
+						e = ((Contribution) result).getDomainModel().getGenerated();
 						cl = e.getClass().getClassLoader().loadClass(getPackageName() + "." + getClassName());
 						cl.getMethod("set" + getAttributeName(), Object.class);
 					} catch (NoSuchMethodException ex) {
@@ -581,10 +581,10 @@ public class TestEnterpriseDomain extends AbstractTest {
 				}
 			}
 		};
-		c.addSaveCompletionListener(l);
-		c.save(getProgressMonitor());
+		c.addCompletionListener(l);
+		c.make(getProgressMonitor());
 		complete.acquire();
-		c.removeSaveCompletionListener(l);
+		c.removeCompletionListener(l);
 		cleanup();
 	}
 

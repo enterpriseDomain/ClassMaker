@@ -146,14 +146,14 @@ public interface Revision extends Item {
 	 * @model
 	 * @generated
 	 */
-	void checkout(int stateTime, String commitId);
+	void checkout(int timestamp, String commitId);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @model
 	 * @generated
 	 */
-	void checkout(int stateTime);
+	void checkout(int timestamp);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

@@ -76,11 +76,11 @@
       <genOperations ecoreOperation="ClassMaker.ecore#//Contribution/delete">
         <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/delete/monitor"/>
       </genOperations>
-      <genOperations ecoreOperation="ClassMaker.ecore#//Contribution/addSaveCompletionListener">
-        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/addSaveCompletionListener/resultListener"/>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Contribution/addCompletionListener">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/addCompletionListener/resultListener"/>
       </genOperations>
-      <genOperations ecoreOperation="ClassMaker.ecore#//Contribution/removeSaveCompletionListener">
-        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/removeSaveCompletionListener/resultListener"/>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Contribution/removeCompletionListener">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/removeCompletionListener/resultListener"/>
       </genOperations>
       <genOperations ecoreOperation="ClassMaker.ecore#//Contribution/save">
         <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/save/revision"/>

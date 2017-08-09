@@ -344,7 +344,15 @@ public interface State extends Item, ISchedulingRule {
 	 * @model exceptions="org.enterprisedomain.classmaker.Exception"
 	 * @generated
 	 */
-	String commit(String filepattern) throws Exception;
+	void add(String filepattern) throws Exception;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model exceptions="org.enterprisedomain.classmaker.Exception"
+	 * @generated
+	 */
+	String commit() throws Exception;
 
 	/**
 	 * <!-- begin-user-doc -->

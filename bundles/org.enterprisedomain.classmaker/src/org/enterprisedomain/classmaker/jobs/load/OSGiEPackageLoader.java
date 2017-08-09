@@ -169,7 +169,7 @@ public class OSGiEPackageLoader extends ContainerJob {
 			setException(e);
 		} finally {
 			loaded.release();
-			getContributionState().getContribution().setCompletionNotified(true);
+			getContributionState().getContribution().setNeedsCompletionNotification(true);
 		}
 	}
 

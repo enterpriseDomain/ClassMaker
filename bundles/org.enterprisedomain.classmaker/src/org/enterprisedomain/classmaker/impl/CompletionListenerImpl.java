@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.CompletionListener;
-import org.enterprisedomain.classmaker.Contribution;
+import org.enterprisedomain.classmaker.Project;
 
 /**
  * <!-- begin-user-doc -->
@@ -51,12 +51,9 @@ public abstract class CompletionListenerImpl extends EObjectImpl implements Comp
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public void completed(Contribution result) throws Exception {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+	public void completed(Project result) throws Exception {
 	}
 
 } //CompletionListenerImpl

@@ -16,6 +16,7 @@
 package org.enterprisedomain.classmaker;
 
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
@@ -34,15 +35,14 @@ import org.osgi.framework.Version;
  *   <li>{@link org.enterprisedomain.classmaker.Contribution#getRevisions <em>Revisions</em>}</li>
  *   <li>{@link org.enterprisedomain.classmaker.Contribution#getState <em>State</em>}</li>
  *   <li>{@link org.enterprisedomain.classmaker.Contribution#getLatestVersion <em>Latest Version</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Contribution#getModel <em>Model</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Contribution#isCompletionNotified <em>Completion Notified</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Contribution#getModelResourceAdapter <em>Model Resource Adapter</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getContribution()
- * @model
+ * @model superTypes="org.enterprisedomain.classmaker.Project org.enterprisedomain.classmaker.Item org.enterprisedomain.classmaker.IAdapterFactory"
  * @generated
  */
-public interface Contribution extends Project, Item {
+public interface Contribution extends Project, Item, IAdapterFactory {
 
 	/**
 	 * Returns the value of the '<em><b>Dependencies</b></em>' attribute list.
@@ -135,46 +135,19 @@ public interface Contribution extends Project, Item {
 	Version getLatestVersion();
 
 	/**
-	 * Returns the value of the '<em><b>Model</b></em>' reference.
+	 * Returns the value of the '<em><b>Model Resource Adapter</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Model</em>' reference isn't clear,
+	 * If the meaning of the '<em>Model Resource Adapter</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Model</em>' reference.
-	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getContribution_Model()
+	 * @return the value of the '<em>Model Resource Adapter</em>' reference.
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getContribution_ModelResourceAdapter()
 	 * @model changeable="false" derived="true"
 	 * @generated
 	 */
-	ResourceAdapter getModel();
-
-	/**
-	 * Returns the value of the '<em><b>Completion Notified</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Completion Notified</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Completion Notified</em>' attribute.
-	 * @see #setCompletionNotified(boolean)
-	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getContribution_CompletionNotified()
-	 * @model default="false"
-	 * @generated
-	 */
-	boolean isCompletionNotified();
-
-	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Contribution#isCompletionNotified <em>Completion Notified</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Completion Notified</em>' attribute.
-	 * @see #isCompletionNotified()
-	 * @generated
-	 */
-	void setCompletionNotified(boolean value);
+	ResourceAdapter getModelResourceAdapter();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -197,7 +170,7 @@ public interface Contribution extends Project, Item {
 	 * @model versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
 	 * @generated
 	 */
-	void checkout(Version version, int time);
+	void checkout(Version version, int timestamp);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -213,7 +186,7 @@ public interface Contribution extends Project, Item {
 	 * @model
 	 * @generated
 	 */
-	void checkout(int time);
+	void checkout(int timestamp);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -221,7 +194,7 @@ public interface Contribution extends Project, Item {
 	 * @model
 	 * @generated
 	 */
-	void checkout(int time, String commitId);
+	void checkout(int timestamp, String commitId);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -238,6 +211,14 @@ public interface Contribution extends Project, Item {
 	 * @generated
 	 */
 	Revision newRevision(Version version);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
+	 * @generated
+	 */
+	Revision newBareRevision(Version version);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -270,26 +251,12 @@ public interface Contribution extends Project, Item {
 	Version nextVersion() throws CoreException;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void addSaveCompletionListener(CompletionListener resultListener);
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void removeSaveCompletionListener(CompletionListener resultListener);
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
-	String save(Revision revision, IProgressMonitor monitor) throws Exception, CoreException;
+	String make(Revision revision, IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -306,13 +273,5 @@ public interface Contribution extends Project, Item {
 	 * @generated
 	 */
 	void initAdapters(Revision revision);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.Exception"
-	 * @generated
-	 */
-	void notifyCompletion() throws Exception;
 
 } // Contribution

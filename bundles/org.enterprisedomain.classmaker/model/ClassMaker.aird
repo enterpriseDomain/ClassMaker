@@ -1468,19 +1468,19 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
       </ownedElements>
-      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_rzY4EFKvEee_WcSOE1_ywg" name="addSaveCompletionListener(resultListener CompletionListener)" tooltipText="addSaveCompletionListener(resultListener)">
-        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//Contribution/addSaveCompletionListener"/>
-        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//Contribution/addSaveCompletionListener"/>
-        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//Contribution/addSaveCompletionListener/resultListener"/>
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_rzY4EFKvEee_WcSOE1_ywg" name="addCompletionListener(resultListener CompletionListener)" tooltipText="addCompletionListener(resultListener)">
+        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//Contribution/addCompletionListener"/>
+        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//Contribution/addCompletionListener"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//Contribution/addCompletionListener/resultListener"/>
         <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_rzZfIFKvEee_WcSOE1_ywg" labelAlignment="LEFT">
           <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
       </ownedElements>
-      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_rzZfIVKvEee_WcSOE1_ywg" name="removeSaveCompletionListener(resultListener CompletionListener)" tooltipText="removeSaveCompletionListener(resultListener)">
-        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//Contribution/removeSaveCompletionListener"/>
-        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//Contribution/removeSaveCompletionListener"/>
-        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//Contribution/removeSaveCompletionListener/resultListener"/>
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_rzZfIVKvEee_WcSOE1_ywg" name="removeCompletionListener(resultListener CompletionListener)" tooltipText="removeCompletionListener(resultListener)">
+        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//Contribution/removeCompletionListener"/>
+        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//Contribution/removeCompletionListener"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//Contribution/removeCompletionListener/resultListener"/>
         <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_rzaGMFKvEee_WcSOE1_ywg" labelAlignment="LEFT">
           <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style"/>
         </ownedStyle>

@@ -1,5 +1,5 @@
 /**
- * Copyright 2012-2016 Kyrill Zotkin
+ * Copyright 2012-2017 Kyrill Zotkin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,8 @@
 package org.enterprisedomain.classmaker.impl;
 
 import java.util.Locale;
-
 import java.util.Properties;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.notify.Notification;
@@ -414,7 +414,7 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	 * 
 	 * @generated NOT
 	 */
-	public String save(IProgressMonitor monitor) throws Exception {
+	public String make(IProgressMonitor monitor) throws Exception {
 		return null;
 	}
 
@@ -423,7 +423,7 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	 * 
 	 * @generated NOT
 	 */
-	public String initialize() {
+	public String initialize(boolean commit) {
 		if (!eIsSet(ClassMakerPackage.ITEM__PARENT))
 			return null;
 		copyModel(getParent());
@@ -438,7 +438,9 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	public void copyModel(Item from) {
 		setModelName(from.getModelName());
 		setLanguage(from.getLanguage());
-		EPackage ePackage = from.getDomainModel().getDynamic();
+		EPackage ePackage = null;
+		if (from.getDomainModel() != null)
+			ePackage = from.getDomainModel().getDynamic();
 		if (ePackage != null)
 			getDomainModel().setDynamic(EcoreUtil.copy(ePackage));
 	}
