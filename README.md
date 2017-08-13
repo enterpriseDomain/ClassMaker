@@ -42,7 +42,7 @@ Here is how you can use it:
     assertEquals(pages, jObject.eGet(jAttr));
     assertEquals(eClass.getName(), jObject.getClass().getSimpleName());  
         
-There is more [code](/tests/org.enterprisedomain.tests/src/org/enterprisedomain/tests/TestEnterpriseDomain.java), where you can specify a method body and call a method, customize the generation templates, or create a meta-model of any meta-level.
+There is more [code](/tests/org.enterprisedomain.classmaker.tests/src/org/enterprisedomain/classmaker/tests/TestEnterpriseDomain.java), where you can specify a method body and call a method, customize the generation templates, or create a meta-model of any meta-level.
 
 Download
 ---------
@@ -50,5 +50,5 @@ Please, use [the update site](https://dl.bintray.com/kyrillzotkin/ClassMaker/) t
 
 Feedback
 ---------
-If you have anything to complain or suggest, please feel free to file a [bug at GitHub](https://github.com/kyrillzotkin/ClassMaker/issues). 
+If you have anything to complain or suggest, please feel free to file a [bug at GitHub](https://github.com/enterpriseDomain/ClassMaker/issues). 
 

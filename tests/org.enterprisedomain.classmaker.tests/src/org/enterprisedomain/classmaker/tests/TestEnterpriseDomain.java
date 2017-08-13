@@ -143,11 +143,11 @@ public class TestEnterpriseDomain extends AbstractTest {
 	@Test
 	public void async() throws ExecutionException, InterruptedException, CoreException {
 		Executor executor = Executors.newFixedThreadPool(2);
-		setPackageName("t");
-		Future<? extends EPackage> t = createAndSaveEPackage(executor);
-		test(t.get(), "a", true);
-		t = updateAndSaveEPackage(t, executor);
-		testAnother(t.get(), "b", true);
+		setPackageName("few");
+		Future<? extends EPackage> ePackage = createAndSaveEPackage(executor);
+		test(ePackage.get(), "a", true);
+		ePackage = updateAndSaveEPackage(ePackage, executor);
+		testAnother(ePackage.get(), "b", true);
 	}
 
 	@Test
