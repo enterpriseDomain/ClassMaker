@@ -22,6 +22,10 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Stage Qualifier</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Qualifier of stage in the process.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * </p>
@@ -44,6 +48,9 @@ public interface StageQualifier extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * A <em><b>stage</b></em> of process.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Stage</em>' attribute.
 	 * @see org.enterprisedomain.classmaker.Stage
 	 * @see #setStage(Stage)
@@ -72,6 +79,9 @@ public interface StageQualifier extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * A particular step in the stage of process.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Step</em>' attribute.
 	 * @see #setStep(String)
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getStageQualifier_Step()

@@ -22,6 +22,10 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Customizer</b></em>'. <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Allows to customize the process.
+ * <!-- end-model-doc -->
+ *
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getCustomizer()
  * @model
@@ -30,6 +34,9 @@ import org.eclipse.emf.ecore.EObject;
 public interface Customizer extends EObject {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Provides customization in the process.
+	 * <!-- end-model-doc -->
 	 * @model argsMany="true"
 	 * @generated
 	 */

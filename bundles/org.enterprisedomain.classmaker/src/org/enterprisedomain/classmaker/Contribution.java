@@ -26,6 +26,10 @@ import org.osgi.framework.Version;
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Software Contribution</b></em>'. <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Software contribution project item.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * </p>
@@ -236,19 +240,20 @@ public interface Contribution extends Project, Item, IAdapterFactory {
 			throws CoreException;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
-	 * @generated
-	 */
-	void delete(IProgressMonitor monitor) throws CoreException;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model dataType="org.enterprisedomain.classmaker.OSGiVersion" exceptions="org.enterprisedomain.classmaker.CoreException"
 	 * @generated
 	 */
 	Version nextVersion() throws CoreException;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * @generated
+	 */
+	void delete(IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc -->

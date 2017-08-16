@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
  * <em><b>Workspace</b></em>'. <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Maps EMF ResourceSet to Eclipse Resources API's Workspace Root.
+ * Maps {@link org.eclipse.emf.ecore.resource.ResourceSet} to {@link org.eclipse.core.resources.IWorkspaceRoot}.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -83,6 +83,9 @@ public interface Workspace extends EObject, ISchedulingRule {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Initializes  <em>Workspace</em>.
+	 * <!-- end-model-doc -->
 	 * @model
 	 * @generated
 	 */
@@ -100,7 +103,19 @@ public interface Workspace extends EObject, ISchedulingRule {
 	void provision(IProgressMonitor monitor) throws CoreException;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Create Project.
+	 * <!-- end-model-doc -->
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * @generated
+	 */
+	Project createProject(String name, IProgressMonitor monitor) throws CoreException;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Create new Contribution.
 	 * <!-- end-model-doc -->
@@ -138,16 +153,6 @@ public interface Workspace extends EObject, ISchedulingRule {
 	 * @generated
 	 */
 	Contribution getContribution(String projectName);
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Create Project.
-	 * <!-- end-model-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
-	 * @generated
-	 */
-	Project createProject(String name, IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -227,7 +232,8 @@ public interface Workspace extends EObject, ISchedulingRule {
 	boolean contains(EObject eObject);
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */

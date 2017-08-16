@@ -29,6 +29,10 @@ import org.osgi.framework.Version;
  * A representation of the model object '<em><b>Item</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Common denominator for projects and they parts.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * </p>
@@ -186,6 +190,9 @@ public interface Item extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * {@link Customizer}s collection.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Customizers</em>' map.
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getItem_Customizers()
 	 * @model mapType="org.enterprisedomain.classmaker.StageQualifierToCustomizerMapEntry&lt;org.enterprisedomain.classmaker.StageQualifier, org.enterprisedomain.classmaker.Customizer&gt;" transient="true" volatile="true" derived="true"

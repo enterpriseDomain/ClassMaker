@@ -25,6 +25,10 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Project</b></em>'. <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Default project class.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * </p>
@@ -193,7 +197,8 @@ public interface Project extends EObject, ISchedulingRule {
 	void create(IProgressMonitor monitor) throws CoreException;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
@@ -233,6 +238,12 @@ public interface Project extends EObject, ISchedulingRule {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Initializes <em>Project</em>. Calls {@link #initialize() <em>initialize</em>} on contained <em>Item</em>s.
+	 * 
+	 * @param commit whether to perform commit
+	 * @return commit Id
+	 * <!-- end-model-doc -->
 	 * @model
 	 * @generated
 	 */

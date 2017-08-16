@@ -28,6 +28,10 @@ import org.eclipse.emf.common.util.EMap;
  * <!-- begin-user-doc --> A representation of the model object
  * '<em><b>Revision</b></em>'. <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A revision of <em>Contribution</em>. Identified by {@link #getVersion() <em>Version</em>}.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * </p>
@@ -112,6 +116,9 @@ public interface Revision extends Item {
 	 * really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * A {@link State}s history.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>State History</em>' map.
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getRevision_StateHistory()
 	 * @model mapType="org.enterprisedomain.classmaker.IntegerToStateMapEntry&lt;org.eclipse.emf.ecore.EIntegerObject, org.enterprisedomain.classmaker.State&gt;"
@@ -135,7 +142,8 @@ public interface Revision extends Item {
 	int getLatestTimestamp();
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
@@ -170,8 +178,8 @@ public interface Revision extends Item {
 	State newState();
 
 	/**
-	 * <!-- begin-user-doc -->Delete last state and checkout the latest. <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */

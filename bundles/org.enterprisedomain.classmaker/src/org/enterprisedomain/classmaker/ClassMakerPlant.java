@@ -105,19 +105,20 @@ public interface ClassMakerPlant extends EObject {
 	EPackage produce(EPackage dynamicModel) throws CoreException;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
-	 * @generated
-	 */
-	EPackage produce(EPackage dynamicModel, IProgressMonitor monitor) throws CoreException;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model type="org.enterprisedomain.classmaker.Future&lt;? extends org.eclipse.emf.ecore.EPackage&gt;" exceptions="org.enterprisedomain.classmaker.CoreException" executorType="org.enterprisedomain.classmaker.Executor"
 	 * @generated
 	 */
 	Future<? extends EPackage> produce(EPackage dynamicModel, Executor executor) throws CoreException;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * @generated
+	 */
+	EPackage produce(EPackage dynamicModel, IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -139,19 +140,19 @@ public interface ClassMakerPlant extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" dependenciesMany="true" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
-	 * @generated
-	 */
-	EPackage produce(EPackage dynamicModel, EList<String> dependencies, IProgressMonitor monitor) throws CoreException;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @model type="org.enterprisedomain.classmaker.Future&lt;? extends org.eclipse.emf.ecore.EPackage&gt;" exceptions="org.enterprisedomain.classmaker.CoreException" dependenciesMany="true" executorType="org.enterprisedomain.classmaker.Executor"
 	 * @generated
 	 */
 	Future<? extends EPackage> produce(EPackage dynamicModel, EList<String> dependencies, Executor executor)
 			throws CoreException;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" dependenciesMany="true" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * @generated
+	 */
+	EPackage produce(EPackage dynamicModel, EList<String> dependencies, IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -179,7 +180,8 @@ public interface ClassMakerPlant extends EObject {
 			throws CoreException;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
@@ -211,7 +213,8 @@ public interface ClassMakerPlant extends EObject {
 			Executor executor) throws CoreException;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
@@ -244,7 +247,8 @@ public interface ClassMakerPlant extends EObject {
 			throws CoreException;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" versionDataType="org.enterprisedomain.classmaker.OSGiVersion" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
@@ -268,7 +272,8 @@ public interface ClassMakerPlant extends EObject {
 	EObject transform(EObject source, URI transformationURI) throws CoreException;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" transformationURIDataType="org.enterprisedomain.classmaker.URI" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
@@ -282,7 +287,8 @@ public interface ClassMakerPlant extends EObject {
 	Object invoke(EOperation operation, EObject object, EList<Object> arguments) throws InvocationTargetException;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */

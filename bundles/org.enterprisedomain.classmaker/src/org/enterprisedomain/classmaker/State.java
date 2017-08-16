@@ -29,6 +29,10 @@ import org.eclipse.emf.ecore.resource.Resource;
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>State</b></em>'. <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A complete unit, representing the state of <em><b>Contribution</b></em>. Identified by {@link  #getTimestamp() <em>Timestamp</em>}.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * </p>
@@ -197,6 +201,9 @@ public interface State extends Item, ISchedulingRule {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * An SCM commit's associated with the state identifiers.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Commit Ids</em>' attribute list.
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getState_CommitIds()
 	 * @model
@@ -212,6 +219,9 @@ public interface State extends Item, ISchedulingRule {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * An SCM commit identifier attribute.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Commit Id</em>' attribute.
 	 * @see #setCommitId(String)
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getState_CommitId()
@@ -240,6 +250,9 @@ public interface State extends Item, ISchedulingRule {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * A particular state's {@link Customizer}s. Provides actual implementation to which {@link customizers} feature is delegating.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>State Customizers</em>' map.
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getState_StateCustomizers()
 	 * @model mapType="org.enterprisedomain.classmaker.StageQualifierToCustomizerMapEntry&lt;org.enterprisedomain.classmaker.StageQualifier, org.enterprisedomain.classmaker.Customizer&gt;"
@@ -301,14 +314,16 @@ public interface State extends Item, ISchedulingRule {
 	void setSaving(boolean value);
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	void setProjectVersion(IProgressMonitor monitor) throws CoreException;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
@@ -349,6 +364,11 @@ public interface State extends Item, ISchedulingRule {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Commit changes to SCM.
+	 * 
+	 * @return commitId
+	 * <!-- end-model-doc -->
 	 * @model exceptions="org.enterprisedomain.classmaker.Exception"
 	 * @generated
 	 */

@@ -3,6 +3,9 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="classmaker" nsURI="http://org/enterprisedomain/ClassMaker/0.7.9"
     nsPrefix="ClassMaker">
   <eClassifiers xsi:type="ecore:EClass" name="Contribution" eSuperTypes="#//Project #//Item #//IAdapterFactory">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Software contribution project item."/>
+    </eAnnotations>
     <eOperations name="createRevision" eType="#//Revision" eExceptions="#//CoreException">
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
@@ -75,6 +78,9 @@
         changeable="false" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Revision" eSuperTypes="#//Item">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A revision of &lt;em>Contribution&lt;/em>. Identified by {@link #getVersion() &lt;em>Version&lt;/em>}."/>
+    </eAnnotations>
     <eOperations name="create" eExceptions="#//CoreException">
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
@@ -101,13 +107,24 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//State"
         volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
-        iD="true"/>
+        iD="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A timestamp of last checked out state."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="stateHistory" upperBound="-1"
-        eType="#//IntegerToStateMapEntry" containment="true"/>
+        eType="#//IntegerToStateMapEntry" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A {@link State}s history."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="latestTimestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
         changeable="false" volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//Item #//ISchedulingRule">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A complete unit, representing the state of &lt;em>&lt;b>Contribution&lt;/b>&lt;/em>. Identified by {@link  #getTimestamp() &lt;em>Timestamp&lt;/em>}."/>
+    </eAnnotations>
     <eOperations name="setProjectVersion" eExceptions="#//CoreException">
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
@@ -126,30 +143,53 @@
       <eParameters name="filepattern" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eOperations name="commit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        eExceptions="#//Exception"/>
+        eExceptions="#//Exception">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Commit changes to SCM.&#xA;&#xA;@return commitId"/>
+      </eAnnotations>
+    </eOperations>
     <eOperations name="saveResource"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="requiredPlugins" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="revision" eType="#//Revision"
         volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
-        iD="true"/>
+        iD="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Uniquily identifies &lt;em>&lt;b>State&lt;/b>&lt;/em> in &lt;em>&lt;b>Revision&lt;/b>&lt;/em>."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="deployableUnitName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         changeable="false" volatile="true" defaultValueLiteral="" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="jobFamily" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="resource" eType="#//Resource"
         resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="commitIds" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commitId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="An SCM commit's associated with the state identifiers."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commitId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="An SCM commit identifier attribute."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="stateCustomizers" upperBound="-1"
-        eType="#//StageQualifierToCustomizerMapEntry" containment="true"/>
+        eType="#//StageQualifierToCustomizerMapEntry" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A particular state's {@link Customizer}s. Provides actual implementation to which {@link customizers} feature is delegating."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="projectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="saving" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Item" abstract="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Common denominator for projects and they parts."/>
+    </eAnnotations>
     <eOperations name="load" eExceptions="#//CoreException">
       <eParameters name="create" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eOperations>
@@ -173,7 +213,11 @@
         changeable="false" derived="true" containment="true" eOpposite="#//ModelPair/parent"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="customizers" upperBound="-1"
         eType="#//StageQualifierToCustomizerMapEntry" volatile="true" transient="true"
-        derived="true" containment="true"/>
+        derived="true" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="{@link Customizer}s collection."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//Item"
         volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="locale" eType="#//Locale"
@@ -184,12 +228,20 @@
         defaultValueLiteral=""/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Adapter" instanceClassName="org.eclipse.emf.common.notify.Adapter"
-      abstract="true" interface="true"/>
+      abstract="true" interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An {@link org.eclipse.emf.common.notify.Adapter} class import."/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Workspace" eSuperTypes="#//ISchedulingRule">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Maps EMF ResourceSet to Eclipse Resources API's Workspace Root."/>
+      <details key="documentation" value="Maps {@link org.eclipse.emf.ecore.resource.ResourceSet} to {@link org.eclipse.core.resources.IWorkspaceRoot}."/>
     </eAnnotations>
-    <eOperations name="initialize"/>
+    <eOperations name="initialize">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Initializes  &lt;em>Workspace&lt;/em>."/>
+      </eAnnotations>
+    </eOperations>
     <eOperations name="provision" eExceptions="#//CoreException">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Provision target platform."/>
@@ -281,30 +333,53 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="Properties" instanceClassName="java.util.Properties"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Properties" instanceClassName="java.util.Properties">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="{@link java.util.Properties} datatype import."/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="IProgressMonitor" instanceClassName="org.eclipse.core.runtime.IProgressMonitor">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Eclipse IProgressMonitor datatype import."/>
+      <details key="documentation" value="{@link org.eclipse.core.runtime.IProgressMonitor} datatype import."/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="OSGiVersion" instanceClassName="org.osgi.framework.Version">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="OSGi Version datatype import."/>
+      <details key="documentation" value="{@link org.osgi.framework.Version} datatype import."/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IntegerToStateMapEntry" instanceClassName="java.util.Map$Entry">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A timestamp key."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//State"
-        containment="true"/>
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A state value."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VersionToRevisionMapEntry" instanceClassName="java.util.Map$Entry">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="#//OSGiVersion"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Maps {@link Version} to {@link Revision}. "/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="#//OSGiVersion">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="{@link Version} key."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Revision"
-        containment="true"/>
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="{@link Revision} value."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Stage">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="A stage in which subject could be."/>
+      <details key="documentation" value="A stage in which subject could exist."/>
     </eAnnotations>
     <eLiterals name="DEFINED">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -338,46 +413,80 @@
     </eLiterals>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ISchedulingRule" instanceClassName="org.eclipse.core.runtime.jobs.ISchedulingRule"
-      abstract="true" interface="true"/>
+      abstract="true" interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A {@link org.eclipse.core.runtime.jobs.ISchedulingRule} class import."/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Executor" instanceClassName="java.util.concurrent.Executor"
-      abstract="true" interface="true"/>
+      abstract="true" interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="{@link java.util.concurrent.Executor} class import. "/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Future" instanceClassName="java.util.concurrent.Future"
       abstract="true" interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="{@link java.util.concurrent.Future} class import."/>
+    </eAnnotations>
     <eTypeParameters name="V"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Semaphore" instanceClassName="java.util.concurrent.Semaphore">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Java Semaphore datatype import."/>
+      <details key="documentation" value="{@link java.util.concurrent.Semaphore} datatype import."/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="CoreException" instanceClassName="org.eclipse.core.runtime.CoreException">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Eclipse CoreException datatype import."/>
+      <details key="documentation" value="{@link org.eclipse.core.runtime.CoreException} datatype import."/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="InvocationTargetException" instanceClassName="java.lang.reflect.InvocationTargetException">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Java InvocationTargetException datatype import."/>
+      <details key="documentation" value="{@link java.lang.reflect.TargetException} datatype import."/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IAdapterFactory" instanceClassName="org.eclipse.core.runtime.IAdapterFactory"
       abstract="true" interface="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Customizer">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Allows to customize the process."/>
+    </eAnnotations>
     <eOperations name="customize">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Provides customization in the process."/>
+      </eAnnotations>
       <eParameters name="args" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
     </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StageQualifier">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stage" eType="#//Stage"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="step" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Qualifier of stage in the process."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stage" eType="#//Stage">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A &lt;em>&lt;b>stage&lt;/b>&lt;/em> of process."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="step" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A particular step in the stage of process."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StageQualifierToCustomizerMapEntry"
       instanceClassName="java.util.Map$Entry">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Maps &lt;em>StageQualifier&lt;/em> of process for which customization is needed to &lt;em>Customizer&lt;/em>."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="key" eType="#//StageQualifier"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Customizer"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Project" eSuperTypes="#//ISchedulingRule">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Default project class."/>
+    </eAnnotations>
     <eOperations name="create" eExceptions="#//CoreException">
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
@@ -399,6 +508,9 @@
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
     <eOperations name="initialize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Initializes &lt;em>Project&lt;/em>. Calls {@link #initialize() &lt;em>initialize&lt;/em>} on contained &lt;em>Item&lt;/em>s.&#xA;&#xA;@param commit whether to perform commit&#xA;@return commit Id"/>
+      </eAnnotations>
       <eParameters name="commit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eOperations>
     <eOperations name="addCompletionListener">
@@ -424,17 +536,24 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="URI" instanceClassName="org.eclipse.emf.common.util.URI">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="EMF URI datatype import."/>
+      <details key="documentation" value="{@link org.eclipse.emf.common.util.URI} datatype import."/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ModelPair">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A holder of pair of references. To blueprint dynamic model instance, and to a resulting generated one."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dynamic" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="generated" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//Item"
         eOpposite="#//Item/domainModel"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Resource" instanceClassName="org.eclipse.emf.ecore.resource.Resource"
-      abstract="true" interface="true"/>
+      abstract="true" interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A {@link org.eclipse.emf.ecore.resource.Resource} class import."/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CompletionListener" abstract="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Process completion listener."/>
@@ -448,7 +567,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Exception" instanceClassName="java.lang.Exception">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Java Exception datatype import."/>
+      <details key="documentation" value="{@link java.lang.Exception} datatype import."/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ResourceAdapter" eSuperTypes="#//Adapter">
@@ -655,7 +774,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Locale" instanceClassName="java.util.Locale">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Java Locale datatype import."/>
+      <details key="documentation" value="{@link java.util.Locale} datatype import."/>
     </eAnnotations>
   </eClassifiers>
 </ecore:EPackage>

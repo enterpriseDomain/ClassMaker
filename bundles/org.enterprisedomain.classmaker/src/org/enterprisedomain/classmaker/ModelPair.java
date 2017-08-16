@@ -23,6 +23,10 @@ import org.eclipse.emf.ecore.EPackage;
  * A representation of the model object '<em><b>Model Pair</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A holder of pair of references. To blueprint dynamic model instance, and to a resulting generated one.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * </p>

@@ -86,38 +86,22 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getModelName
- * <em>Model Name</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getPhase
- * <em>Phase</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getVersion
- * <em>Version</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getLanguage
- * <em>Language</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getDomainModel
- * <em>Domain Model</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getCustomizers
- * <em>Customizers</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getParent
- * <em>Parent</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getLocale
- * <em>Locale</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getContribution
- * <em>Contribution</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getProperties
- * <em>Properties</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getDependencies
- * <em>Dependencies</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getRevision
- * <em>Revision</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getRevisions
- * <em>Revisions</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getState
- * <em>State</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getLatestVersion
- * <em>Latest Version</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getModelResourceAdapter
- * <em>Model Resource Adapter</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getModelName <em>Model Name</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getPhase <em>Phase</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getVersion <em>Version</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getLanguage <em>Language</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getDomainModel <em>Domain Model</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getCustomizers <em>Customizers</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getParent <em>Parent</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getLocale <em>Locale</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getContribution <em>Contribution</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getProperties <em>Properties</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getDependencies <em>Dependencies</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getRevision <em>Revision</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getRevisions <em>Revisions</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getState <em>State</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getLatestVersion <em>Latest Version</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getModelResourceAdapter <em>Model Resource Adapter</em>}</li>
  * </ul>
  *
  * @generated
@@ -125,18 +109,16 @@ import org.osgi.framework.Version;
 public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
-	 * The default value of the '{@link #getModelName() <em>Model Name</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getModelName() <em>Model Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getModelName()
 	 * @generated
 	 * @ordered
 	 */
 	protected static final String MODEL_NAME_EDEFAULT = null;
 	/**
-	 * The cached value of the '{@link #getModelName() <em>Model Name</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getModelName() <em>Model Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getModelName()
 	 * @generated
 	 * @ordered
@@ -172,16 +154,14 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	/**
 	 * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getVersion()
 	 * @generated
 	 * @ordered
 	 */
 	protected Version version = VERSION_EDEFAULT;
 	/**
-	 * The default value of the '{@link #getLanguage() <em>Language</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getLanguage() <em>Language</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getLanguage()
 	 * @generated
 	 * @ordered
@@ -191,16 +171,14 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	/**
 	 * The cached value of the '{@link #getLanguage() <em>Language</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getLanguage()
 	 * @generated
 	 * @ordered
 	 */
 	protected String language = LANGUAGE_EDEFAULT;
 	/**
-	 * The cached value of the '{@link #getDomainModel() <em>Domain Model</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getDomainModel() <em>Domain Model</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getDomainModel()
 	 * @generated
 	 * @ordered
@@ -209,7 +187,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	/**
 	 * The default value of the '{@link #getLocale() <em>Locale</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getLocale()
 	 * @generated
 	 * @ordered
@@ -219,16 +196,14 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	/**
 	 * The cached value of the '{@link #getLocale() <em>Locale</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getLocale()
 	 * @generated
 	 * @ordered
 	 */
 	protected Locale locale = LOCALE_EDEFAULT;
 	/**
-	 * The default value of the '{@link #getProperties() <em>Properties</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getProperties() <em>Properties</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getProperties()
 	 * @generated
 	 * @ordered
@@ -236,9 +211,8 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	protected static final Properties PROPERTIES_EDEFAULT = (Properties) ClassMakerFactory.eINSTANCE
 			.createFromString(ClassMakerPackage.eINSTANCE.getProperties(), ""); //$NON-NLS-1$
 	/**
-	 * The cached value of the '{@link #getProperties() <em>Properties</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getProperties() <em>Properties</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getProperties()
 	 * @generated
 	 * @ordered
@@ -247,25 +221,22 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	/**
 	 * The cached value of the '{@link #getRevisions() <em>Revisions</em>}' map.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getRevisions()
 	 * @generated
 	 * @ordered
 	 */
 	protected EMap<Version, Revision> revisions;
 	/**
-	 * The default value of the '{@link #getLatestVersion() <em>Latest
-	 * Version</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getLatestVersion() <em>Latest Version</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getLatestVersion()
 	 * @generated
 	 * @ordered
 	 */
 	protected static final Version LATEST_VERSION_EDEFAULT = null;
 	/**
-	 * The cached value of the '{@link #getModelResourceAdapter() <em>Model Resource
-	 * Adapter</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getModelResourceAdapter() <em>Model Resource Adapter</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getModelResourceAdapter()
 	 * @generated
 	 * @ordered
@@ -315,7 +286,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -325,7 +295,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getModelName() {
@@ -334,7 +303,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setModelName(String newModelName) {
@@ -359,7 +327,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setPhase(Stage newPhase) {
@@ -427,7 +394,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ResourceAdapter getModelResourceAdapter() {
@@ -440,13 +406,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 							ClassMakerPackage.CONTRIBUTION__MODEL_RESOURCE_ADAPTER, oldModelResourceAdapter,
 							modelResourceAdapter));
 			}
-		} else if (modelResourceAdapter == null && isStateSet()) {
-			modelResourceAdapter = ClassMakerFactory.eINSTANCE.createResourceAdapter();
-			modelResourceAdapter.setResource(getState().getResource());
-			if (eNotificationRequired())
-				eNotify(new ENotificationImpl(this, Notification.SET,
-						ClassMakerPackage.CONTRIBUTION__MODEL_RESOURCE_ADAPTER, null, modelResourceAdapter));
-
 		}
 		return modelResourceAdapter;
 	}
@@ -475,7 +434,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -509,7 +467,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Contribution getContribution() {
@@ -539,7 +496,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Properties getProperties() {
@@ -548,7 +504,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setProperties(Properties newProperties) {
@@ -600,7 +555,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Item getParent() {
@@ -627,7 +581,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Revision getRevision() {
@@ -658,7 +611,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EMap<Version, Revision> getRevisions() {
@@ -1010,7 +962,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetDomainModel(ModelPair newDomainModel, NotificationChain msgs) {
@@ -1029,7 +980,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Version getVersion() {
@@ -1038,7 +988,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setVersion(Version newVersion) {
@@ -1201,7 +1150,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1219,7 +1167,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1279,7 +1226,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1321,7 +1267,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1363,7 +1308,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1408,7 +1352,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1450,7 +1393,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1492,7 +1434,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

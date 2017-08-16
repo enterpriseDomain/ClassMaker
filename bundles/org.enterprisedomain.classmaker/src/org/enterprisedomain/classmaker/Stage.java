@@ -27,7 +27,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * and utility methods for working with them.
  * <!-- end-user-doc -->
  * <!-- begin-model-doc -->
- * A stage in which subject could be.
+ * A stage in which subject could exist.
  * <!-- end-model-doc -->
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getStage()
  * @model

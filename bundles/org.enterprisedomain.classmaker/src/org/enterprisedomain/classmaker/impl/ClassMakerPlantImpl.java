@@ -70,17 +70,15 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.impl.ClassMakerPlantImpl#getWorkspace
- * <em>Workspace</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ClassMakerPlantImpl#getWorkspace <em>Workspace</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant {
 	/**
-	 * The cached value of the '{@link #getWorkspace() <em>Workspace</em>}'
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getWorkspace() <em>Workspace</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getWorkspace()
 	 * @generated
 	 * @ordered
@@ -101,7 +99,6 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -111,7 +108,6 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Workspace getWorkspace() {
@@ -129,7 +125,6 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Workspace basicGetWorkspace() {
@@ -138,7 +133,6 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setWorkspace(Workspace newWorkspace) {
@@ -582,7 +576,6 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -598,7 +591,6 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -613,7 +605,6 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -628,7 +619,6 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
