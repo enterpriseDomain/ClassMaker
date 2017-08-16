@@ -25,7 +25,8 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.Localizable#getLanguage <em>Language</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Localizable#getLanguage
+ * <em>Language</em>}</li>
  * </ul>
  *
  * @see org.genericdomain.EnterpriseDomainPackage#getLocalizable()
@@ -37,8 +38,8 @@ public interface Localizable extends EObject {
 	 * Returns the value of the '<em><b>Language</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Language</em>' attribute isn't clear, there
-	 * really should be more of a description here...
+	 * If the meaning of the '<em>Language</em>' attribute isn't clear, there really
+	 * should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -51,9 +52,9 @@ public interface Localizable extends EObject {
 	String getLanguage();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Localizable#getLanguage
-	 * <em>Language</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Localizable#getLanguage
+	 * <em>Language</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value
 	 *            the new value of the '<em>Language</em>' attribute.

@@ -22,16 +22,15 @@ import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.Project;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Completion Listener</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object
+ * '<em><b>Completion Listener</b></em>'. <!-- end-user-doc -->
  *
  * @generated
  */
 public abstract class CompletionListenerImpl extends EObjectImpl implements CompletionListener {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected CompletionListenerImpl() {
@@ -39,8 +38,8 @@ public abstract class CompletionListenerImpl extends EObjectImpl implements Comp
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -49,11 +48,11 @@ public abstract class CompletionListenerImpl extends EObjectImpl implements Comp
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	public void completed(Project result) throws Exception {
 	}
 
-} //CompletionListenerImpl
+} // CompletionListenerImpl

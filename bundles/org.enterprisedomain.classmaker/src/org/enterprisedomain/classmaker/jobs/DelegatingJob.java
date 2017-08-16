@@ -30,7 +30,7 @@ public class DelegatingJob extends EnterpriseDomainJob {
 	private Stage dirtyStage;
 
 	public DelegatingJob(Job delegate, int stateTimestamp) {
-		super(delegate.getName(),stateTimestamp);
+		super(delegate.getName(), stateTimestamp);
 		this.delegate = delegate;
 	}
 

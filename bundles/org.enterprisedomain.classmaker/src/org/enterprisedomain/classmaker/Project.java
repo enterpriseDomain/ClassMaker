@@ -25,20 +25,24 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Project</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc -->
- * Default project class.
- * <!-- end-model-doc -->
+ * <!-- begin-model-doc --> Default project class. <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.Project#getName <em>Name</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Project#getProjectName <em>Project Name</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Project#getChildren <em>Children</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Project#isDirty <em>Dirty</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Project#getWorkspace <em>Workspace</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Project#isNeedsCompletionNotification <em>Needs Completion Notification</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Project#getName
+ * <em>Name</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Project#getProjectName <em>Project
+ * Name</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Project#getChildren
+ * <em>Children</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Project#isDirty
+ * <em>Dirty</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Project#getWorkspace
+ * <em>Workspace</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Project#isNeedsCompletionNotification
+ * <em>Needs Completion Notification</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject()
@@ -47,14 +51,14 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Project extends EObject, ISchedulingRule {
 	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * The default value is <code>""</code>.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Name</b></em>' attribute. The default value
+	 * is <code>""</code>. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Name</em>' attribute isn't clear, there really
 	 * should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject_Name()
@@ -64,23 +68,25 @@ public interface Project extends EObject, ISchedulingRule {
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Project#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Project#getName
+	 * <em>Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Name</em>' attribute.
 	 * @see #getName()
 	 * @generated
 	 */
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Project Name</b></em>' attribute.
-	 * The default value is <code>""</code>.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Project Name</b></em>' attribute. The
+	 * default value is <code>""</code>. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Project Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Project Name</em>' attribute isn't clear, there
+	 * really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Project Name</em>' attribute.
 	 * @see #setProjectName(String)
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject_ProjectName()
@@ -90,22 +96,24 @@ public interface Project extends EObject, ISchedulingRule {
 	String getProjectName();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Project#getProjectName <em>Project Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * @param value the new value of the '<em>Project Name</em>' attribute.
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Project#getProjectName <em>Project
+	 * Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Project Name</em>' attribute.
 	 * @see #getProjectName()
 	 * @generated
 	 */
 	void setProjectName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Children</b></em>' reference list. The
-	 * list contents are of type {@link org.eclipse.emf.ecore.EObject}. <!--
+	 * Returns the value of the '<em><b>Children</b></em>' reference list. The list
+	 * contents are of type {@link org.eclipse.emf.ecore.EObject}. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Children</em>' attribute list isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Children</em>' attribute list isn't clear, there
+	 * really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -120,8 +128,8 @@ public interface Project extends EObject, ISchedulingRule {
 	 * Returns the value of the '<em><b>Dirty</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Dirty</em>' attribute isn't clear, there
-	 * really should be more of a description here...
+	 * If the meaning of the '<em>Dirty</em>' attribute isn't clear, there really
+	 * should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -133,13 +141,13 @@ public interface Project extends EObject, ISchedulingRule {
 	boolean isDirty();
 
 	/**
-	 * Returns the value of the '<em><b>Workspace</b></em>' container reference.
-	 * It is bidirectional and its opposite is '
-	 * {@link org.enterprisedomain.classmaker.Workspace#getProjects <em>Projects</em>}'. <!--
-	 * begin-user-doc -->
+	 * Returns the value of the '<em><b>Workspace</b></em>' container reference. It
+	 * is bidirectional and its opposite is '
+	 * {@link org.enterprisedomain.classmaker.Workspace#getProjects
+	 * <em>Projects</em>}'. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Workspace</em>' container reference isn't
-	 * clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Workspace</em>' container reference isn't clear,
+	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -153,23 +161,27 @@ public interface Project extends EObject, ISchedulingRule {
 	Workspace getWorkspace();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Project#getWorkspace <em>Workspace</em>}' container reference.
-	 * <!-- begin-user-doc --> <!--
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Project#getWorkspace
+	 * <em>Workspace</em>}' container reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * @param value the new value of the '<em>Workspace</em>' container reference.
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Workspace</em>' container reference.
 	 * @see #getWorkspace()
 	 * @generated
 	 */
 	void setWorkspace(Workspace value);
 
 	/**
-	 * Returns the value of the '<em><b>Needs Completion Notification</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Needs Completion Notification</b></em>'
+	 * attribute. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Needs Completion Notification</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Needs Completion Notification</em>' attribute
+	 * isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Needs Completion Notification</em>' attribute.
 	 * @see #setNeedsCompletionNotification(boolean)
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject_NeedsCompletionNotification()
@@ -179,95 +191,104 @@ public interface Project extends EObject, ISchedulingRule {
 	boolean isNeedsCompletionNotification();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Project#isNeedsCompletionNotification <em>Needs Completion Notification</em>}' attribute.
-	 * <!-- begin-user-doc -->
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Project#isNeedsCompletionNotification
+	 * <em>Needs Completion Notification</em>}' attribute. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Needs Completion Notification</em>' attribute.
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Needs Completion Notification</em>'
+	 *            attribute.
 	 * @see #isNeedsCompletionNotification()
 	 * @generated
 	 */
 	void setNeedsCompletionNotification(boolean value);
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	void create(IProgressMonitor monitor) throws CoreException;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	void delete(IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model objectsMany="true"
 	 * @generated
 	 */
 	void delete(EList<Object> objects);
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	String make(IProgressMonitor monitor) throws CoreException;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	boolean open(IProgressMonitor monitor) throws CoreException;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	void close(IProgressMonitor monitor) throws CoreException;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Initializes <em>Project</em>. Calls {@link #initialize() <em>initialize</em>} on contained <em>Item</em>s.
+	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
+	 * Initializes <em>Project</em>. Calls {@link #initialize() <em>initialize</em>}
+	 * on contained <em>Item</em>s.
 	 * 
-	 * @param commit whether to perform commit
-	 * @return commit Id
-	 * <!-- end-model-doc -->
+	 * @param commit
+	 *            whether to perform commit
+	 * @return commit Id <!-- end-model-doc -->
 	 * @model
 	 * @generated
 	 */
 	String initialize(boolean commit);
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
 	void addCompletionListener(CompletionListener resultListener);
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
 	void removeCompletionListener(CompletionListener resultListener);
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model exceptions="org.enterprisedomain.classmaker.Exception"
 	 * @generated
 	 */

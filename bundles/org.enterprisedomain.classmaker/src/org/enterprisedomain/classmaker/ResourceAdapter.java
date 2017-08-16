@@ -20,16 +20,17 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 
 /**
- * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Resource Adapter</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object '<em><b>Resource
+ * Adapter</b></em>'. <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.ResourceAdapter#getResource <em>Resource</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.ResourceAdapter#getFilename <em>Filename</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.ResourceAdapter#getResource
+ * <em>Resource</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.ResourceAdapter#getFilename
+ * <em>Filename</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getResourceAdapter()
@@ -39,13 +40,14 @@ import org.eclipse.emf.ecore.resource.Resource;
 public interface ResourceAdapter extends EObject, Adapter {
 
 	/**
-	 * Returns the value of the '<em><b>Resource</b></em>' reference.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Resource</b></em>' reference. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Resource</em>' reference isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Resource</em>' reference isn't clear, there really
+	 * should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Resource</em>' reference.
 	 * @see #setResource(Resource)
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getResourceAdapter_Resource()
@@ -55,23 +57,26 @@ public interface ResourceAdapter extends EObject, Adapter {
 	Resource getResource();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.ResourceAdapter#getResource <em>Resource</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Resource</em>' reference.
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.ResourceAdapter#getResource
+	 * <em>Resource</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Resource</em>' reference.
 	 * @see #getResource()
 	 * @generated
 	 */
 	void setResource(Resource value);
 
 	/**
-	 * Returns the value of the '<em><b>Filename</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Filename</b></em>' attribute. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Filename</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Filename</em>' attribute isn't clear, there really
+	 * should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Filename</em>' attribute.
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getResourceAdapter_Filename()
 	 * @model transient="true" changeable="false" volatile="true" derived="true"

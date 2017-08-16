@@ -24,24 +24,25 @@ import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.StageQualifier;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Stage Qualifier</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>Stage
+ * Qualifier</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StageQualifierImpl#getStage <em>Stage</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StageQualifierImpl#getStep <em>Step</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StageQualifierImpl#getStage
+ * <em>Stage</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StageQualifierImpl#getStep
+ * <em>Step</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class StageQualifierImpl extends EObjectImpl implements StageQualifier {
 	/**
-	 * The default value of the '{@link #getStage() <em>Stage</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The default value of the '{@link #getStage() <em>Stage</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getStage()
 	 * @generated
 	 * @ordered
@@ -49,9 +50,9 @@ public class StageQualifierImpl extends EObjectImpl implements StageQualifier {
 	protected static final Stage STAGE_EDEFAULT = Stage.DEFINED;
 
 	/**
-	 * The cached value of the '{@link #getStage() <em>Stage</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getStage() <em>Stage</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getStage()
 	 * @generated
 	 * @ordered
@@ -59,9 +60,9 @@ public class StageQualifierImpl extends EObjectImpl implements StageQualifier {
 	protected Stage stage = STAGE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getStep() <em>Step</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The default value of the '{@link #getStep() <em>Step</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getStep()
 	 * @generated
 	 * @ordered
@@ -69,9 +70,9 @@ public class StageQualifierImpl extends EObjectImpl implements StageQualifier {
 	protected static final String STEP_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getStep() <em>Step</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getStep() <em>Step</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getStep()
 	 * @generated
 	 * @ordered
@@ -79,8 +80,8 @@ public class StageQualifierImpl extends EObjectImpl implements StageQualifier {
 	protected String step = STEP_EDEFAULT;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected StageQualifierImpl() {
@@ -88,8 +89,8 @@ public class StageQualifierImpl extends EObjectImpl implements StageQualifier {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -98,8 +99,8 @@ public class StageQualifierImpl extends EObjectImpl implements StageQualifier {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Stage getStage() {
@@ -107,8 +108,8 @@ public class StageQualifierImpl extends EObjectImpl implements StageQualifier {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setStage(Stage newStage) {
@@ -120,8 +121,8 @@ public class StageQualifierImpl extends EObjectImpl implements StageQualifier {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String getStep() {
@@ -129,8 +130,8 @@ public class StageQualifierImpl extends EObjectImpl implements StageQualifier {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setStep(String newStep) {
@@ -142,8 +143,8 @@ public class StageQualifierImpl extends EObjectImpl implements StageQualifier {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -158,8 +159,8 @@ public class StageQualifierImpl extends EObjectImpl implements StageQualifier {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -176,8 +177,8 @@ public class StageQualifierImpl extends EObjectImpl implements StageQualifier {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -194,8 +195,8 @@ public class StageQualifierImpl extends EObjectImpl implements StageQualifier {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -210,8 +211,8 @@ public class StageQualifierImpl extends EObjectImpl implements StageQualifier {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -228,4 +229,4 @@ public class StageQualifierImpl extends EObjectImpl implements StageQualifier {
 		return result.toString();
 	}
 
-} //StageQualifierImpl
+} // StageQualifierImpl

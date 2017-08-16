@@ -18,13 +18,10 @@ package org.enterprisedomain.classmaker;
 import org.eclipse.emf.ecore.EObject;
 
 /**
- * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Completion Listener</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object
+ * '<em><b>Completion Listener</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc -->
- * Process completion listener.
- * <!-- end-model-doc -->
+ * <!-- begin-model-doc --> Process completion listener. <!-- end-model-doc -->
  *
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getCompletionListener()
@@ -33,11 +30,9 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface CompletionListener extends EObject {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Notify process completion.
-	 * <!-- end-model-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc --> Notify
+	 * process completion. <!-- end-model-doc -->
+	 * 
 	 * @model exceptions="org.enterprisedomain.classmaker.Exception"
 	 * @generated
 	 */

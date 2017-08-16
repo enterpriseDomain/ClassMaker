@@ -28,18 +28,21 @@ import org.eclipse.emf.common.util.EMap;
  * <!-- begin-user-doc --> A representation of the model object
  * '<em><b>Revision</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc -->
- * A revision of <em>Contribution</em>. Identified by {@link #getVersion() <em>Version</em>}.
- * <!-- end-model-doc -->
+ * <!-- begin-model-doc --> A revision of <b>Contribution</b>. Identified by
+ * {@link #getVersion() <em>Version</em>}. <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.Revision#getState <em>State</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Revision#getTimestamp <em>Timestamp</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Revision#getStateHistory <em>State History</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Revision#getLatestTimestamp <em>Latest Timestamp</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Revision#getState
+ * <em>State</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Revision#getTimestamp
+ * <em>Timestamp</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Revision#getStateHistory <em>State
+ * History</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Revision#getLatestTimestamp
+ * <em>Latest Timestamp</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getRevision()
@@ -54,8 +57,8 @@ public interface Revision extends Item {
 	 * Returns the value of the '<em><b>State</b></em>' reference. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>State</em>' reference isn't clear, there
-	 * really should be more of a description here...
+	 * If the meaning of the '<em>State</em>' reference isn't clear, there really
+	 * should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -68,9 +71,12 @@ public interface Revision extends Item {
 	State getState();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Revision#getState <em>State</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @param value the new value of the '<em>State</em>' reference.
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Revision#getState <em>State</em>}'
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>State</em>' reference.
 	 * @see #getState()
 	 * @generated
 	 */
@@ -96,8 +102,7 @@ public interface Revision extends Item {
 	/**
 	 * Sets the value of the
 	 * '{@link org.enterprisedomain.classmaker.Revision#getTimestamp
-	 * <em>Timestamp</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
+	 * <em>Timestamp</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value
 	 *            the new value of the '<em>Timestamp</em>' attribute.
@@ -107,33 +112,33 @@ public interface Revision extends Item {
 	void setTimestamp(int value);
 
 	/**
-	 * Returns the value of the '<em><b>State History</b></em>' map.
-	 * The key is of type {@link java.lang.Integer},
-	 * and the value is of type {@link org.enterprisedomain.classmaker.State},
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>State History</b></em>' map. The key is of
+	 * type {@link java.lang.Integer}, and the value is of type
+	 * {@link org.enterprisedomain.classmaker.State}, <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>State History</em>' map isn't clear, there
-	 * really should be more of a description here...
+	 * If the meaning of the '<em>State History</em>' map isn't clear, there really
+	 * should be more of a description here...
 	 * </p>
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * A {@link State}s history.
-	 * <!-- end-model-doc -->
+	 * <!-- end-user-doc --> <!-- begin-model-doc --> A {@link State}s history. <!--
+	 * end-model-doc -->
+	 * 
 	 * @return the value of the '<em>State History</em>' map.
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getRevision_StateHistory()
-	 * @model mapType="org.enterprisedomain.classmaker.IntegerToStateMapEntry&lt;org.eclipse.emf.ecore.EIntegerObject, org.enterprisedomain.classmaker.State&gt;"
+	 * @model mapType="org.enterprisedomain.classmaker.IntegerToStateMapEntry&lt;org.eclipse.emf.ecore.EIntegerObject,
+	 *        org.enterprisedomain.classmaker.State&gt;"
 	 * @generated
 	 */
 	EMap<Integer, State> getStateHistory();
 
 	/**
-	 * Returns the value of the '<em><b>Latest Timestamp</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Latest Timestamp</b></em>' attribute. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * Get latest time stamp from state history. If state history is empty,
-	 * return value of default time stamp.
+	 * Get latest time stamp from state history. If state history is empty, return
+	 * value of default time stamp.
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Latest Timestamp</em>' attribute.
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getRevision_LatestTimestamp()
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
@@ -142,15 +147,17 @@ public interface Revision extends Item {
 	int getLatestTimestamp();
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	void create(IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -158,6 +165,7 @@ public interface Revision extends Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -165,6 +173,7 @@ public interface Revision extends Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -172,29 +181,33 @@ public interface Revision extends Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
 	State newState();
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	void delete(IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model adaptersType="org.enterprisedomain.classmaker.Adapter" adaptersMany="true"
+	 * 
+	 * @model adaptersType="org.enterprisedomain.classmaker.Adapter"
+	 *        adaptersMany="true"
 	 * @generated
 	 */
 	void addAdapters(EList<Adapter> adapters);
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */

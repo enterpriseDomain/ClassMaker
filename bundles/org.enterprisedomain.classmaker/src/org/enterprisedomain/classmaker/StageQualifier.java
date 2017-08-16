@@ -18,20 +18,20 @@ package org.enterprisedomain.classmaker;
 import org.eclipse.emf.ecore.EObject;
 
 /**
- * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Stage Qualifier</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object '<em><b>Stage
+ * Qualifier</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc -->
- * Qualifier of stage in the process.
- * <!-- end-model-doc -->
+ * <!-- begin-model-doc --> Qualifier of stage in the process. <!--
+ * end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.StageQualifier#getStage <em>Stage</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.StageQualifier#getStep <em>Step</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.StageQualifier#getStage
+ * <em>Stage</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.StageQualifier#getStep
+ * <em>Step</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getStageQualifier()
@@ -40,17 +40,16 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface StageQualifier extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Stage</b></em>' attribute.
-	 * The literals are from the enumeration {@link org.enterprisedomain.classmaker.Stage}.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Stage</b></em>' attribute. The literals are
+	 * from the enumeration {@link org.enterprisedomain.classmaker.Stage}. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Stage</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Stage</em>' attribute isn't clear, there really
+	 * should be more of a description here...
 	 * </p>
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * A <em><b>stage</b></em> of process.
-	 * <!-- end-model-doc -->
+	 * <!-- end-user-doc --> <!-- begin-model-doc --> A <em><b>stage</b></em> of
+	 * process. <!-- end-model-doc -->
+	 * 
 	 * @return the value of the '<em>Stage</em>' attribute.
 	 * @see org.enterprisedomain.classmaker.Stage
 	 * @see #setStage(Stage)
@@ -61,10 +60,12 @@ public interface StageQualifier extends EObject {
 	Stage getStage();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.StageQualifier#getStage <em>Stage</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Stage</em>' attribute.
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.StageQualifier#getStage
+	 * <em>Stage</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Stage</em>' attribute.
 	 * @see org.enterprisedomain.classmaker.Stage
 	 * @see #getStage()
 	 * @generated
@@ -72,16 +73,15 @@ public interface StageQualifier extends EObject {
 	void setStage(Stage value);
 
 	/**
-	 * Returns the value of the '<em><b>Step</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Step</b></em>' attribute. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Step</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Step</em>' attribute isn't clear, there really
+	 * should be more of a description here...
 	 * </p>
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * A particular step in the stage of process.
-	 * <!-- end-model-doc -->
+	 * <!-- end-user-doc --> <!-- begin-model-doc --> A particular step in the stage
+	 * of process. <!-- end-model-doc -->
+	 * 
 	 * @return the value of the '<em>Step</em>' attribute.
 	 * @see #setStep(String)
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getStageQualifier_Step()
@@ -91,10 +91,12 @@ public interface StageQualifier extends EObject {
 	String getStep();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.StageQualifier#getStep <em>Step</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Step</em>' attribute.
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.StageQualifier#getStep
+	 * <em>Step</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Step</em>' attribute.
 	 * @see #getStep()
 	 * @generated
 	 */

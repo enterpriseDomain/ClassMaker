@@ -26,6 +26,7 @@ public class CustomizerImpl extends EObjectImpl implements Customizer {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

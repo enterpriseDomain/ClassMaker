@@ -18,9 +18,8 @@ package org.enterprisedomain.classmaker;
 import org.eclipse.emf.ecore.EObject;
 
 /**
- * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Result Listener</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object '<em><b>Result
+ * Listener</b></em>'. <!-- end-user-doc -->
  *
  *
  * @see org.enterprisedomain.classmaker.EnterpriseDomainPackage#getResultListener()
@@ -29,8 +28,8 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface ResultListener extends EObject {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */

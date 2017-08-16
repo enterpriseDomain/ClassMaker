@@ -79,7 +79,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Revision" eSuperTypes="#//Item">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="A revision of &lt;em>Contribution&lt;/em>. Identified by {@link #getVersion() &lt;em>Version&lt;/em>}."/>
+      <details key="documentation" value="A revision of &lt;b>Contribution&lt;/b>. Identified by {@link #getVersion() &lt;em>Version&lt;/em>}."/>
     </eAnnotations>
     <eOperations name="create" eExceptions="#//CoreException">
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
@@ -123,7 +123,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//Item #//ISchedulingRule">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="A complete unit, representing the state of &lt;em>&lt;b>Contribution&lt;/b>&lt;/em>. Identified by {@link  #getTimestamp() &lt;em>Timestamp&lt;/em>}."/>
+      <details key="documentation" value="A complete unit, representing the state of &lt;b>Contribution&lt;/b>. Identified by {@link  #getTimestamp() &lt;em>Timestamp&lt;/em>}."/>
     </eAnnotations>
     <eOperations name="setProjectVersion" eExceptions="#//CoreException">
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
@@ -188,7 +188,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Item" abstract="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Common denominator for projects and they parts."/>
+      <details key="documentation" value="Common denominator for &lt;b>Project&lt;/b>s and they parts."/>
     </eAnnotations>
     <eOperations name="load" eExceptions="#//CoreException">
       <eParameters name="create" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>

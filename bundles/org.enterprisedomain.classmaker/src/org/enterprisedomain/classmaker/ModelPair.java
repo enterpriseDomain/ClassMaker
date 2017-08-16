@@ -19,21 +19,22 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
 /**
- * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Model Pair</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object '<em><b>Model
+ * Pair</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc -->
- * A holder of pair of references. To blueprint dynamic model instance, and to a resulting generated one.
- * <!-- end-model-doc -->
+ * <!-- begin-model-doc --> A holder of pair of references. To blueprint dynamic
+ * model instance, and to a resulting generated one. <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.ModelPair#getDynamic <em>Dynamic</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.ModelPair#getGenerated <em>Generated</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.ModelPair#getParent <em>Parent</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.ModelPair#getDynamic
+ * <em>Dynamic</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.ModelPair#getGenerated
+ * <em>Generated</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.ModelPair#getParent
+ * <em>Parent</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getModelPair()
@@ -42,13 +43,14 @@ import org.eclipse.emf.ecore.EPackage;
  */
 public interface ModelPair extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Dynamic</b></em>' reference.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Dynamic</b></em>' reference. <!--
+	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Dynamic</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Dynamic</em>' reference.
 	 * @see #setDynamic(EPackage)
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getModelPair_Dynamic()
@@ -58,23 +60,26 @@ public interface ModelPair extends EObject {
 	EPackage getDynamic();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.ModelPair#getDynamic <em>Dynamic</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Dynamic</em>' reference.
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.ModelPair#getDynamic
+	 * <em>Dynamic</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Dynamic</em>' reference.
 	 * @see #getDynamic()
 	 * @generated
 	 */
 	void setDynamic(EPackage value);
 
 	/**
-	 * Returns the value of the '<em><b>Generated</b></em>' reference.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Generated</b></em>' reference. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Generated</em>' reference isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Generated</em>' reference isn't clear, there
+	 * really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Generated</em>' reference.
 	 * @see #setGenerated(EPackage)
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getModelPair_Generated()
@@ -84,24 +89,28 @@ public interface ModelPair extends EObject {
 	EPackage getGenerated();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.ModelPair#getGenerated <em>Generated</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Generated</em>' reference.
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.ModelPair#getGenerated
+	 * <em>Generated</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Generated</em>' reference.
 	 * @see #getGenerated()
 	 * @generated
 	 */
 	void setGenerated(EPackage value);
 
 	/**
-	 * Returns the value of the '<em><b>Parent</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.enterprisedomain.classmaker.Item#getDomainModel <em>Domain Model</em>}'.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Parent</b></em>' container reference. It is
+	 * bidirectional and its opposite is
+	 * '{@link org.enterprisedomain.classmaker.Item#getDomainModel <em>Domain
+	 * Model</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Parent</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Parent</em>' container reference.
 	 * @see #setParent(Item)
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getModelPair_Parent()
@@ -112,10 +121,12 @@ public interface ModelPair extends EObject {
 	Item getParent();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.ModelPair#getParent <em>Parent</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Parent</em>' container reference.
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.ModelPair#getParent <em>Parent</em>}'
+	 * container reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Parent</em>' container reference.
 	 * @see #getParent()
 	 * @generated
 	 */

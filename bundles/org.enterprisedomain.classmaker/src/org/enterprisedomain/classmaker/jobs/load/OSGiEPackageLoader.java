@@ -63,7 +63,7 @@ public class OSGiEPackageLoader extends ContainerJob {
 	};
 
 	public OSGiEPackageLoader(int stateTimestamp) {
-		super(Messages.JobNameLoad,stateTimestamp);
+		super(Messages.JobNameLoad, stateTimestamp);
 	}
 
 	public IStatus load(IProgressMonitor monitor) throws CoreException {
@@ -135,7 +135,8 @@ public class OSGiEPackageLoader extends ContainerJob {
 		int options = 0;
 		options |= autoStart ? Bundle.START_TRANSIENT : 0;
 		options |= bundle.getHeaders(Constants.BUNDLE_ACTIVATIONPOLICY).equals(Constants.ACTIVATION_LAZY)
-				? Bundle.START_ACTIVATION_POLICY : 0;
+				? Bundle.START_ACTIVATION_POLICY
+				: 0;
 		return options;
 	}
 
