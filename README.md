@@ -25,7 +25,7 @@ Here is how you can use it:
                                 .getBundleContext();
     ServiceReference<?> serviceReference = bundleContext
                                 .getServiceReference(ClassMakerPlant.class);
-    ClassMakerPlant classMaker = (ClassPlant) bundleContext
+    ClassMakerPlant classMaker = (ClassMakerPlant) bundleContext
                                 .getService(serviceReference);
 
     // Produce result by combining them
@@ -46,7 +46,7 @@ There is more [code](/tests/org.enterprisedomain.classmaker.tests/src/org/enterp
 
 Download
 ---------
-Please, use [the update site](https://dl.bintray.com/kyrillzotkin/ClassMaker/) to install ClassMaker.
+Please, use [the update site](https://dl.bintray.com/enterprisedomain/ClassMaker/) to install ClassMaker.
 
 Feedback
 ---------
