@@ -21,8 +21,10 @@ public class App implements IApplication {
 
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
-				Runnable invoker = new Invoker();
-				invoker.run();
+				Worker worker = new Worker();
+				worker.run();
+				if (worker.getError() != null)
+					return worker.getError();
 				return Status.OK_STATUS;
 			}
 		};

@@ -3,6 +3,7 @@ package org.enterprisedomain.classmaker.sample;
 import javax.inject.Inject;
 
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.EclipseContextFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
@@ -15,12 +16,14 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.enterprisedomain.classmaker.ClassMakerPlant;
 import org.osgi.framework.FrameworkUtil;
 
-public class Invoker implements Runnable {
+public class Worker implements Runnable {
 
 	@Inject
 	private ClassMakerPlant m;
 
 	private EPackage ePackage;
+
+	private IStatus error;
 
 	private void inject() {
 		IEclipseContext context = EclipseContextFactory
@@ -51,7 +54,12 @@ public class Invoker implements Runnable {
 			Object v = o.eGet(ea);
 			System.out.println(v);
 		} catch (CoreException e) {
-			e.printStackTrace();
+			error = e.getStatus();
 		}
+
+	}
+
+	public IStatus getError() {
+		return error;
 	}
 }

@@ -363,10 +363,6 @@ public class StateImpl extends ItemImpl implements State {
 			loadResource(modelURI, !eIsSet(ClassMakerPackage.STATE__RESOURCE), true);
 			saveResource();
 			setPhase(Stage.MODELED);
-			getResource().eAdapters().remove(resourceToModelsAdapter);
-			getResource().eAdapters().add(resourceToModelsAdapter);
-			getDomainModel().eAdapters().remove(modelsToResourceAdapter);
-			getDomainModel().eAdapters().add(modelsToResourceAdapter);
 			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 			if (commit)
 				try {
@@ -404,13 +400,17 @@ public class StateImpl extends ItemImpl implements State {
 					monitor.done();
 				}
 			}
-			String modelName = getModelName();
-			if (modelName == null)
-				modelName = getProjectName();
-			IPath modelPath = ResourceUtils.getModelResourcePath(project, modelName);
+			IPath modelPath = ResourceUtils.getModelResourcePath(project, getModelName());
 			modelURI = URI.createFileURI(root.getRawLocation().append(modelPath).toString());
 		}
 		return modelURI;
+	}
+
+	@Override
+	public String getModelName() {
+		if (super.getModelName() == null)
+			setModelName(getProjectName());
+		return super.getModelName();
 	}
 
 	public void loadResource(URI modelURI, boolean create, boolean loadOnDemand) {
@@ -426,11 +426,17 @@ public class StateImpl extends ItemImpl implements State {
 			loading = false;
 			return;
 		}
+		getResource().eAdapters().remove(resourceToModelsAdapter);
+		getResource().eAdapters().add(resourceToModelsAdapter);
+		getDomainModel().eAdapters().remove(modelsToResourceAdapter);
+		getDomainModel().eAdapters().add(modelsToResourceAdapter);
 		try {
 			getResource().load(Collections.emptyMap());
 		} catch (IOException e) {
 			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createWarningStatus(e));
 		}
+		if (!getResource().getContents().isEmpty())
+			getDomainModel().setDynamic(EcoreUtil.copy((EPackage) getResource().getContents().get(0)));
 		loading = false;
 	}
 
