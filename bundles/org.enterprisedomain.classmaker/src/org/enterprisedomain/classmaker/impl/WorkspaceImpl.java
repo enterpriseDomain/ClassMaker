@@ -376,7 +376,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		case Stage.LOADED_VALUE:
 			for (Contribution c : getContributions()) {
 				if (ModelUtil.ePackagesAreEqual(ePackage, c.getDomainModel().getDynamic(), false))
-					while (c.getState().isSaving() && !c.getPhase().equals(Stage.LOADED))
+					while (c.getState().isMaking() && !c.getPhase().equals(Stage.LOADED))
 						Thread.yield();
 				if (ModelUtil.ePackagesAreEqual(ePackage, c.getDomainModel().getGenerated(), !searchOptimistic))
 					return c;

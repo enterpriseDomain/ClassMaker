@@ -57,8 +57,8 @@ import org.eclipse.emf.ecore.resource.Resource;
  * <em>State Customizers</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.State#getProjectName <em>Project
  * Name</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.State#isSaving
- * <em>Saving</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.State#isMaking
+ * <em>Making</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getState()
@@ -314,32 +314,32 @@ public interface State extends Item, ISchedulingRule {
 	void setProjectName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Saving</b></em>' attribute. The default
+	 * Returns the value of the '<em><b>Making</b></em>' attribute. The default
 	 * value is <code>"false"</code>. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Saving</em>' attribute isn't clear, there really
+	 * If the meaning of the '<em>Making</em>' attribute isn't clear, there really
 	 * should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
-	 * @return the value of the '<em>Saving</em>' attribute.
-	 * @see #setSaving(boolean)
-	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getState_Saving()
+	 * @return the value of the '<em>Making</em>' attribute.
+	 * @see #setMaking(boolean)
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getState_Making()
 	 * @model default="false"
 	 * @generated
 	 */
-	boolean isSaving();
+	boolean isMaking();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.State#isSaving
-	 * <em>Saving</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.State#isMaking
+	 * <em>Making</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value
-	 *            the new value of the '<em>Saving</em>' attribute.
-	 * @see #isSaving()
+	 *            the new value of the '<em>Making</em>' attribute.
+	 * @see #isMaking()
 	 * @generated
 	 */
-	void setSaving(boolean value);
+	void setMaking(boolean value);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

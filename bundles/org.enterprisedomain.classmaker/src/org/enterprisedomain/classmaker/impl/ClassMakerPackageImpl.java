@@ -572,7 +572,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * 
 	 * @generated
 	 */
-	public EAttribute getState_Saving() {
+	public EAttribute getState_Making() {
 		return (EAttribute) stateEClass.getEStructuralFeatures().get(10);
 	}
 
@@ -1197,7 +1197,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		createEAttribute(stateEClass, STATE__COMMIT_ID);
 		createEReference(stateEClass, STATE__STATE_CUSTOMIZERS);
 		createEAttribute(stateEClass, STATE__PROJECT_NAME);
-		createEAttribute(stateEClass, STATE__SAVING);
+		createEAttribute(stateEClass, STATE__MAKING);
 
 		itemEClass = createEClass(ITEM);
 		createEAttribute(itemEClass, ITEM__MODEL_NAME);
@@ -1479,7 +1479,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getState_ProjectName(), ecorePackage.getEString(), "projectName", null, 0, 1, State.class,
 				IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getState_Saving(), ecorePackage.getEBoolean(), "saving", "false", 0, 1, State.class,
+		initEAttribute(getState_Making(), ecorePackage.getEBoolean(), "making", "false", 0, 1, State.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(stateEClass, null, "setProjectVersion", 0, 1, IS_UNIQUE, IS_ORDERED);

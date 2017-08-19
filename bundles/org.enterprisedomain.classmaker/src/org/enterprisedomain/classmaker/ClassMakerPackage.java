@@ -845,13 +845,13 @@ public interface ClassMakerPackage extends EPackage {
 	int STATE__PROJECT_NAME = ITEM_FEATURE_COUNT + 9;
 
 	/**
-	 * The feature id for the '<em><b>Saving</b></em>' attribute. <!--
+	 * The feature id for the '<em><b>Making</b></em>' attribute. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__SAVING = ITEM_FEATURE_COUNT + 10;
+	int STATE__MAKING = ITEM_FEATURE_COUNT + 10;
 
 	/**
 	 * The number of structural features of the '<em>State</em>' class. <!--
@@ -1713,15 +1713,15 @@ public interface ClassMakerPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute
-	 * '{@link org.enterprisedomain.classmaker.State#isSaving <em>Saving</em>}'.
+	 * '{@link org.enterprisedomain.classmaker.State#isMaking <em>Making</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the attribute '<em>Saving</em>'.
-	 * @see org.enterprisedomain.classmaker.State#isSaving()
+	 * @return the meta object for the attribute '<em>Making</em>'.
+	 * @see org.enterprisedomain.classmaker.State#isMaking()
 	 * @see #getState()
 	 * @generated
 	 */
-	EAttribute getState_Saving();
+	EAttribute getState_Making();
 
 	/**
 	 * Returns the meta object for class
@@ -2685,12 +2685,12 @@ public interface ClassMakerPackage extends EPackage {
 		EAttribute STATE__PROJECT_NAME = eINSTANCE.getState_ProjectName();
 
 		/**
-		 * The meta object literal for the '<em><b>Saving</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Making</b></em>' attribute feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
-		EAttribute STATE__SAVING = eINSTANCE.getState_Saving();
+		EAttribute STATE__MAKING = eINSTANCE.getState_Making();
 
 		/**
 		 * The meta object literal for the

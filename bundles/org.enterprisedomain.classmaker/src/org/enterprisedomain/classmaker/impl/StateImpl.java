@@ -110,8 +110,8 @@ import org.osgi.framework.Version;
  * <em>State Customizers</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getProjectName
  * <em>Project Name</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#isSaving
- * <em>Saving</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#isMaking
+ * <em>Making</em>}</li>
  * </ul>
  *
  * @generated
@@ -144,7 +144,7 @@ public class StateImpl extends ItemImpl implements State {
 		@Override
 		public void completed(Project result) throws Exception {
 			if (((Contribution) result).getState().equals(StateImpl.this)) {
-				setSaving(false);
+				setMaking(false);
 				synchronized (makingLock) {
 					makingLock.notifyAll();
 				}
@@ -274,14 +274,24 @@ public class StateImpl extends ItemImpl implements State {
 	protected static final String PROJECT_NAME_EDEFAULT = null;
 
 	/**
-	 * The default value of the '{@link #isSaving() <em>Saving</em>}' attribute.
+	 * The default value of the '{@link #isMaking() <em>Making</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see #isSaving()
+	 * @see #isMaking()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean SAVING_EDEFAULT = false;
+	protected static final boolean MAKING_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isMaking() <em>Making</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #isMaking()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean making = MAKING_EDEFAULT;
 
 	protected String language = LANGUAGE_EDEFAULT;
 
@@ -465,10 +475,10 @@ public class StateImpl extends ItemImpl implements State {
 	private boolean saveResourceWhileMaking = false;
 
 	public void saveResource() {
-		if (savingResource || isSaving())
+		if (savingResource || isMaking())
 			return;
 		savingResource = true;
-		setSaving(true);
+		setMaking(true);
 		if (!eIsSet(ClassMakerPackage.STATE__RESOURCE))
 			return;
 		if (getPhase().getValue() >= Stage.MODELED_VALUE && getDomainModel().getDynamic() != null
@@ -496,7 +506,7 @@ public class StateImpl extends ItemImpl implements State {
 			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createWarningStatus(e));
 		} finally {
 			if (!saveResourceWhileMaking)
-				setSaving(false);
+				setMaking(false);
 			savingResource = false;
 		}
 	}
@@ -529,7 +539,7 @@ public class StateImpl extends ItemImpl implements State {
 			getContribution().addCompletionListener(completionListener);
 			Stage oldStage = getPhase();
 			try {
-				if (isSaving())
+				if (isMaking())
 					if (!getCommitIds().isEmpty())
 						return ListUtil.getLast(getCommitIds());
 					else
@@ -598,7 +608,7 @@ public class StateImpl extends ItemImpl implements State {
 				monitor.setCanceled(true);
 				throw e;
 			} finally {
-				setSaving(false);
+				setMaking(false);
 				monitor.done();
 			}
 			makingLock.wait();
@@ -948,8 +958,8 @@ public class StateImpl extends ItemImpl implements State {
 	 * 
 	 * @generated
 	 */
-	public boolean isSaving() {
-		return saving;
+	public boolean isMaking() {
+		return making;
 	}
 
 	/**
@@ -957,11 +967,11 @@ public class StateImpl extends ItemImpl implements State {
 	 * 
 	 * @generated
 	 */
-	public void setSaving(boolean newSaving) {
-		boolean oldSaving = saving;
-		saving = newSaving;
+	public void setMaking(boolean newMaking) {
+		boolean oldMaking = making;
+		making = newMaking;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.STATE__SAVING, oldSaving, saving));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.STATE__MAKING, oldMaking, making));
 	}
 
 	/**
@@ -1057,8 +1067,8 @@ public class StateImpl extends ItemImpl implements State {
 				return getStateCustomizers().map();
 		case ClassMakerPackage.STATE__PROJECT_NAME:
 			return getProjectName();
-		case ClassMakerPackage.STATE__SAVING:
-			return isSaving();
+		case ClassMakerPackage.STATE__MAKING:
+			return isMaking();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1101,8 +1111,8 @@ public class StateImpl extends ItemImpl implements State {
 		case ClassMakerPackage.STATE__PROJECT_NAME:
 			setProjectName((String) newValue);
 			return;
-		case ClassMakerPackage.STATE__SAVING:
-			setSaving((Boolean) newValue);
+		case ClassMakerPackage.STATE__MAKING:
+			setMaking((Boolean) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -1143,8 +1153,8 @@ public class StateImpl extends ItemImpl implements State {
 		case ClassMakerPackage.STATE__PROJECT_NAME:
 			setProjectName(PROJECT_NAME_EDEFAULT);
 			return;
-		case ClassMakerPackage.STATE__SAVING:
-			setSaving(SAVING_EDEFAULT);
+		case ClassMakerPackage.STATE__MAKING:
+			setMaking(MAKING_EDEFAULT);
 			return;
 		}
 		super.eUnset(featureID);
@@ -1180,8 +1190,8 @@ public class StateImpl extends ItemImpl implements State {
 		case ClassMakerPackage.STATE__PROJECT_NAME:
 			return PROJECT_NAME_EDEFAULT == null ? getProjectName() != null
 					: !PROJECT_NAME_EDEFAULT.equals(getProjectName());
-		case ClassMakerPackage.STATE__SAVING:
-			return saving != SAVING_EDEFAULT;
+		case ClassMakerPackage.STATE__MAKING:
+			return making != MAKING_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1207,8 +1217,8 @@ public class StateImpl extends ItemImpl implements State {
 		result.append(commitIds);
 		result.append(", commitId: ");
 		result.append(commitId);
-		result.append(", saving: ");
-		result.append(saving);
+		result.append(", making: ");
+		result.append(making);
 		result.append(')');
 		return result.toString();
 	}

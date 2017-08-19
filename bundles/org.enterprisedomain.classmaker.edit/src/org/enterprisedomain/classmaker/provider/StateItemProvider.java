@@ -69,7 +69,7 @@ public class StateItemProvider extends ItemItemProvider {
 			addCommitIdsPropertyDescriptor(object);
 			addCommitIdPropertyDescriptor(object);
 			addProjectNamePropertyDescriptor(object);
-			addSavingPropertyDescriptor(object);
+			addMakingPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -214,17 +214,17 @@ public class StateItemProvider extends ItemItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Saving feature.
-	 * <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
+	 * This adds a property descriptor for the Making feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addSavingPropertyDescriptor(Object object) {
+	protected void addMakingPropertyDescriptor(Object object) {
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_State_saving_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_State_saving_feature", "_UI_State_type"),
-						ClassMakerPackage.Literals.STATE__SAVING, true, false, false,
+						getResourceLocator(), getString("_UI_State_making_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_State_making_feature", "_UI_State_type"),
+						ClassMakerPackage.Literals.STATE__MAKING, true, false, false,
 						ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
 	}
 
@@ -297,7 +297,7 @@ public class StateItemProvider extends ItemItemProvider {
 		case ClassMakerPackage.STATE__COMMIT_IDS:
 		case ClassMakerPackage.STATE__COMMIT_ID:
 		case ClassMakerPackage.STATE__PROJECT_NAME:
-		case ClassMakerPackage.STATE__SAVING:
+		case ClassMakerPackage.STATE__MAKING:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case ClassMakerPackage.STATE__STATE_CUSTOMIZERS:
