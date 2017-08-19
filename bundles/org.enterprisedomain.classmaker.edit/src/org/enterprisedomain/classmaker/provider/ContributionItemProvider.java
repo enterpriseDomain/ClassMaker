@@ -393,7 +393,8 @@ public class ContributionItemProvider extends ProjectItemProvider {
 
 		boolean qualify = childFeature == ClassMakerPackage.Literals.PROJECT__CHILDREN
 				|| childFeature == ClassMakerPackage.Literals.CONTRIBUTION__REVISIONS
-				|| childFeature == ClassMakerPackage.Literals.ITEM__CUSTOMIZERS;
+				|| childFeature == ClassMakerPackage.Literals.ITEM__CUSTOMIZERS
+				|| childFeature == ClassMakerPackage.Literals.PROJECT__COMPLETION_NOTIFICATION_ADAPTER;
 
 		if (qualify) {
 			return getString("_UI_CreateChild_text2",

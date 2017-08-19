@@ -58,11 +58,13 @@ import org.eclipse.m2m.internal.qvt.oml.cst.parser.NLS;
 import org.eclipse.pde.core.project.IBundleProjectDescription;
 import org.eclipse.pde.core.project.IBundleProjectService;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
+import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Customizer;
 import org.enterprisedomain.classmaker.Item;
 import org.enterprisedomain.classmaker.Messages;
 import org.enterprisedomain.classmaker.ModelPair;
+import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.Revision;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.StageQualifier;
@@ -133,6 +135,20 @@ public class StateImpl extends ItemImpl implements State {
 			if (msg.getFeatureID(State.class) == ClassMakerPackage.STATE__MODEL_NAME
 					&& msg.getEventType() == Notification.SET && msg.getNewStringValue() != null)
 				setProjectName(ClassMakerPlugin.getClassMaker().computeProjectName(msg.getNewStringValue()));
+		}
+
+	}
+
+	public class MakingCompletionListener extends CompletionListenerImpl {
+
+		@Override
+		public void completed(Project result) throws Exception {
+			if (((Contribution) result).getState().equals(StateImpl.this)) {
+				setSaving(false);
+				synchronized (makingLock) {
+					makingLock.notifyAll();
+				}
+			}
 		}
 
 	}
@@ -274,6 +290,8 @@ public class StateImpl extends ItemImpl implements State {
 	private boolean saving = false;
 
 	private boolean savingResource = false;
+
+	private Object makingLock = new Object();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -417,19 +435,23 @@ public class StateImpl extends ItemImpl implements State {
 		if (loading)
 			return;
 		loading = true;
+		boolean created = false;
 		ResourceSet resourceSet = ClassMakerPlugin.getClassMaker().getWorkspace().getResourceSet();
 		File modelFile = new File(modelURI.toFileString());
 		if (modelFile.exists())
 			setResource(resourceSet.getResource(modelURI, loadOnDemand));
 		else if (create && !eIsSet(ClassMakerPackage.STATE__RESOURCE)) {
 			setResource(resourceSet.createResource(modelURI));
-			loading = false;
-			return;
+			created = true;
 		}
 		getResource().eAdapters().remove(resourceToModelsAdapter);
 		getResource().eAdapters().add(resourceToModelsAdapter);
 		getDomainModel().eAdapters().remove(modelsToResourceAdapter);
 		getDomainModel().eAdapters().add(modelsToResourceAdapter);
+		if (created) {
+			loading = false;
+			return;
+		}
 		try {
 			getResource().load(Collections.emptyMap());
 		} catch (IOException e) {
@@ -502,80 +524,87 @@ public class StateImpl extends ItemImpl implements State {
 	 * @generated NOT
 	 */
 	public String make(IProgressMonitor monitor) throws Exception {
-		Stage oldStage = getPhase();
-		try {
-			if (isSaving())
-				if (!getCommitIds().isEmpty())
-					return ListUtil.getLast(getCommitIds());
-				else
-					return ""; //$NON-NLS-1$
-			saveResourceWhileMaking = true;
-			saveResource();
-
+		synchronized (makingLock) {
+			CompletionListener completionListener = new MakingCompletionListener();
+			getContribution().addCompletionListener(completionListener);
+			Stage oldStage = getPhase();
 			try {
-				getContribution().getWorkspace().provision(monitor);
+				if (isSaving())
+					if (!getCommitIds().isEmpty())
+						return ListUtil.getLast(getCommitIds());
+					else
+						return ""; //$NON-NLS-1$
+				saveResourceWhileMaking = true;
+				saveResource();
+
+				try {
+					getContribution().getWorkspace().provision(monitor);
+				} catch (CoreException e) {
+					ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
+				}
+				IWorkspace workspace = ResourcesPlugin.getWorkspace();
+				String projectName = getProjectName();
+				IProject project = workspace.getRoot().getProject(projectName);
+				if (project.exists()) {
+					project.open(monitor);
+				} else {
+					ResourceUtils.createProject(project, ClassMakerPlugin.NATURE_ID, monitor);
+				}
+				Job.getJobManager().setProgressProvider(new EnterpriseDomainJob.JobProgressProvider());
+				Generator generator = new EcoreGenerator(getProject(), getTimestamp());
+				Exporter exporter = new PDEPluginExporter(getTimestamp());
+
+				EnterpriseDomainJob exporterJob = (EnterpriseDomainJob) exporter.getAdapter(EnterpriseDomainJob.class);
+				exporterJob.setProject(getProject());
+				exporter.setExportDestination(ResourceUtils.getExportDestination(getProject()));
+
+				generator.setResourceSet(ClassMakerPlugin.getClassMaker().getWorkspace().getResourceSet());
+				EnterpriseDomainJob generatorJob = ((EnterpriseDomainJob) generator
+						.getAdapter(EnterpriseDomainJob.class));
+				generatorJob.setProject(getProject());
+				generatorJob.setProgressGroup(monitor, 1);
+				generatorJob.setNextJob(exporterJob);
+
+				EnterpriseDomainJob installJob = new OSGiInstaller(getTimestamp());
+				exporterJob.setNextJob(installJob);
+
+				EnterpriseDomainJob loadJob = new OSGiEPackageLoader(getTimestamp());
+				loadJob.addListener();
+
+				installJob.setNextJob(loadJob);
+
+				monitor.beginTask(Messages.Save, 4);
+				generatorJob.schedule();
+				try {
+					generatorJob.join();
+					exporterJob.join();
+					installJob.join();
+					add(".");
+					loadJob.join();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+					monitor.setCanceled(true);
+				}
+				EnterpriseDomainJob.joinManualBuild(monitor);
 			} catch (CoreException e) {
+				if (e.getStatus().getSeverity() == IStatus.ERROR) {
+					setPhase(oldStage);
+				}
 				ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
-			}
-			IWorkspace workspace = ResourcesPlugin.getWorkspace();
-			String projectName = getProjectName();
-			IProject project = workspace.getRoot().getProject(projectName);
-			if (project.exists()) {
-				project.open(monitor);
-			} else {
-				ResourceUtils.createProject(project, ClassMakerPlugin.NATURE_ID, monitor);
-			}
-			Job.getJobManager().setProgressProvider(new EnterpriseDomainJob.JobProgressProvider());
-			Generator generator = new EcoreGenerator(getProject(), getTimestamp());
-			Exporter exporter = new PDEPluginExporter(getTimestamp());
-
-			EnterpriseDomainJob exporterJob = (EnterpriseDomainJob) exporter.getAdapter(EnterpriseDomainJob.class);
-			exporterJob.setProject(getProject());
-			exporter.setExportDestination(ResourceUtils.getExportDestination(getProject()));
-
-			generator.setResourceSet(ClassMakerPlugin.getClassMaker().getWorkspace().getResourceSet());
-			EnterpriseDomainJob generatorJob = ((EnterpriseDomainJob) generator.getAdapter(EnterpriseDomainJob.class));
-			generatorJob.setProject(getProject());
-			generatorJob.setProgressGroup(monitor, 1);
-			generatorJob.setNextJob(exporterJob);
-
-			EnterpriseDomainJob installJob = new OSGiInstaller(getTimestamp());
-			exporterJob.setNextJob(installJob);
-
-			EnterpriseDomainJob loadJob = new OSGiEPackageLoader(getTimestamp());
-			loadJob.addListener();
-
-			installJob.setNextJob(loadJob);
-
-			monitor.beginTask(Messages.Save, 4);
-			generatorJob.schedule();
-			try {
-				generatorJob.join();
-				exporterJob.join();
-				installJob.join();
-				add(".");
-				loadJob.join();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
 				monitor.setCanceled(true);
-			}
-			EnterpriseDomainJob.joinManualBuild(monitor);
-		} catch (CoreException e) {
-			if (e.getStatus().getSeverity() == IStatus.ERROR) {
+				throw e;
+			} catch (Exception e) {
 				setPhase(oldStage);
+				monitor.setCanceled(true);
+				throw e;
+			} finally {
+				setSaving(false);
+				monitor.done();
 			}
-			ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
-			monitor.setCanceled(true);
-			throw e;
-		} catch (Exception e) {
-			setPhase(oldStage);
-			monitor.setCanceled(true);
-			throw e;
-		} finally {
-			setSaving(false);
-			monitor.done();
+			makingLock.wait();
+			getContribution().removeCompletionListener(completionListener);
+			return commit(); // $NON-NLS-1$
 		}
-		return commit(); // $NON-NLS-1$
 	}
 
 	private IProject getProject() {

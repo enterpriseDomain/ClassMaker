@@ -2,7 +2,7 @@
 <feature
       id="org.enterprisedomain.classmaker.feature"
       label="Enterprise Domain ClassMaker Feature"
-      version="0.7.9.qualifier"
+      version="0.7.900.qualifier"
       provider-name="Kyrill Zotkin">
 
    <copyright>

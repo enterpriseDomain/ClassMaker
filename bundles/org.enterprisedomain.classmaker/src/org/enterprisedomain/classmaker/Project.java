@@ -43,6 +43,8 @@ import org.eclipse.emf.ecore.EObject;
  * <em>Workspace</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.Project#isNeedsCompletionNotification
  * <em>Needs Completion Notification</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Project#getCompletionNotificationAdapter
+ * <em>Completion Notification Adapter</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject()
@@ -142,8 +144,8 @@ public interface Project extends EObject, ISchedulingRule {
 
 	/**
 	 * Returns the value of the '<em><b>Workspace</b></em>' container reference. It
-	 * is bidirectional and its opposite is '
-	 * {@link org.enterprisedomain.classmaker.Workspace#getProjects
+	 * is bidirectional and its opposite is
+	 * '{@link org.enterprisedomain.classmaker.Workspace#getProjects
 	 * <em>Projects</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Workspace</em>' container reference isn't clear,
@@ -153,7 +155,7 @@ public interface Project extends EObject, ISchedulingRule {
 	 * 
 	 * @return the value of the '<em>Workspace</em>' container reference.
 	 * @see #setWorkspace(Workspace)
-	 * @see org.genericdomain.EnterpriseDomainPackage#getProject_Workspace()
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject_Workspace()
 	 * @see org.enterprisedomain.classmaker.Workspace#getProjects
 	 * @model opposite="projects" transient="false"
 	 * @generated
@@ -203,6 +205,38 @@ public interface Project extends EObject, ISchedulingRule {
 	 * @generated
 	 */
 	void setNeedsCompletionNotification(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Completion Notification Adapter</b></em>'
+	 * containment reference. <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Completion Notification Adapter</em>' reference
+	 * isn't clear, there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Completion Notification Adapter</em>'
+	 *         containment reference.
+	 * @see #setCompletionNotificationAdapter(CompletionNotificationAdapter)
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject_CompletionNotificationAdapter()
+	 * @model containment="true"
+	 * @generated
+	 */
+	CompletionNotificationAdapter getCompletionNotificationAdapter();
+
+	/**
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Project#getCompletionNotificationAdapter
+	 * <em>Completion Notification Adapter</em>}' containment reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Completion Notification Adapter</em>'
+	 *            containment reference.
+	 * @see #getCompletionNotificationAdapter()
+	 * @generated
+	 */
+	void setCompletionNotificationAdapter(CompletionNotificationAdapter value);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

@@ -23,6 +23,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.pde.core.IEditableModel;
 import org.eclipse.pde.core.build.IBuild;
@@ -80,6 +81,13 @@ public class PDEPluginExporter extends AbstractExporter {
 			info.items = models.toArray();
 		}
 
+		Job[] jobs = Job.getJobManager().find(null);
+		for (Job job : jobs)
+			if (job.getName().equals(Messages.JobNamePDEExport))
+				try {
+					job.join();
+				} catch (InterruptedException e) {
+				}
 		PluginExportOperation op = new PluginExportOperation(info, Messages.JobNamePDEExport);
 		DelegatingJob delegate = new DelegatingJob(op, getStateTimestamp());
 		delegate.setNextJob(getNextJob());

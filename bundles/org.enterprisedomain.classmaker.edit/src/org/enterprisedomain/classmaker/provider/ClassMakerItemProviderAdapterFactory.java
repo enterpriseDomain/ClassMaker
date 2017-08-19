@@ -385,6 +385,29 @@ public class ClassMakerItemProviderAdapterFactory extends ClassMakerAdapterFacto
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.enterprisedomain.classmaker.CompletionNotificationAdapter} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected CompletionNotificationAdapterItemProvider completionNotificationAdapterItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.enterprisedomain.classmaker.CompletionNotificationAdapter}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createCompletionNotificationAdapterAdapter() {
+		if (completionNotificationAdapterItemProvider == null) {
+			completionNotificationAdapterItemProvider = new CompletionNotificationAdapterItemProvider(this);
+		}
+
+		return completionNotificationAdapterItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -509,6 +532,8 @@ public class ClassMakerItemProviderAdapterFactory extends ClassMakerAdapterFacto
 			resourceAdapterItemProvider.dispose();
 		if (classMakerPlantItemProvider != null)
 			classMakerPlantItemProvider.dispose();
+		if (completionNotificationAdapterItemProvider != null)
+			completionNotificationAdapterItemProvider.dispose();
 	}
 
 }

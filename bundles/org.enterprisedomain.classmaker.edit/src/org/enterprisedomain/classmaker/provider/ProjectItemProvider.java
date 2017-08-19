@@ -171,6 +171,7 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ClassMakerPackage.Literals.PROJECT__CHILDREN);
+			childrenFeatures.add(ClassMakerPackage.Literals.PROJECT__COMPLETION_NOTIFICATION_ADAPTER);
 		}
 		return childrenFeatures;
 	}
@@ -231,6 +232,7 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case ClassMakerPackage.PROJECT__CHILDREN:
+		case ClassMakerPackage.PROJECT__COMPLETION_NOTIFICATION_ADAPTER:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
@@ -289,6 +291,9 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 				ClassMakerFactory.eINSTANCE.createClassMakerPlant()));
 
 		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
+				ClassMakerFactory.eINSTANCE.createCompletionNotificationAdapter()));
+
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
 				EcoreFactory.eINSTANCE.createEAttribute()));
 
 		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
@@ -332,6 +337,31 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 
 		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
 				EcoreFactory.eINSTANCE.createETypeParameter()));
+
+		newChildDescriptors
+				.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__COMPLETION_NOTIFICATION_ADAPTER,
+						ClassMakerFactory.eINSTANCE.createCompletionNotificationAdapter()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify = childFeature == ClassMakerPackage.Literals.PROJECT__CHILDREN
+				|| childFeature == ClassMakerPackage.Literals.PROJECT__COMPLETION_NOTIFICATION_ADAPTER;
+
+		if (qualify) {
+			return getString("_UI_CreateChild_text2",
+					new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 	/**

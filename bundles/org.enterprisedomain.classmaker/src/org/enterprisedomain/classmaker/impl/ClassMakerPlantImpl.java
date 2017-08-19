@@ -51,10 +51,7 @@ import org.eclipse.m2m.qvt.oml.TransformationExecutor;
 import org.enterprisedomain.classmaker.ClassMakerFactory;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.ClassMakerPlant;
-import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.Contribution;
-import org.enterprisedomain.classmaker.Messages;
-import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.Revision;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
@@ -86,8 +83,6 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * @ordered
 	 */
 	protected Workspace workspace;
-
-	private Semaphore lock = new Semaphore(0);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -236,16 +231,11 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 		try {
 			Contribution contrib = getWorkspace().createContribution(dynamicModel, monitor);
 			contrib.getDependencies().addAll(dependencies);
-			contrib.addCompletionListener(yieldResultListener);
 			contrib.make(monitor);
-			lock.acquire();
 			return contrib.getDomainModel().getGenerated();
 		} catch (CoreException e) {
 			ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
 			throw e;
-		} catch (InterruptedException e) {
-			monitor.setCanceled(true);
-			throw new CoreException(ClassMakerPlugin.createWarningStatus(Messages.APINoResult));
 		}
 	}
 
@@ -271,7 +261,7 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * @generated NOT
 	 */
 	public EPackage replace(EPackage queryModel, EPackage dynamicModel) throws CoreException {
-		return replace(queryModel, dynamicModel, false);
+		return replace(queryModel, dynamicModel, true);
 	}
 
 	/**
@@ -348,21 +338,26 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 */
 	public EPackage replace(EPackage queryModel, EPackage dynamicModel, boolean changeVersion, IProgressMonitor monitor)
 			throws CoreException {
-		Version version = null;
-		Contribution contribution = getWorkspace().getContribution(queryModel, false);
-		if (contribution == null) {
-			contribution = getWorkspace().getContribution(queryModel, true);
-			if (contribution != null) {
+		try {
+			Version version = null;
+			Contribution contribution = getWorkspace().getContribution(queryModel, false);
+			if (contribution == null) {
+				contribution = getWorkspace().getContribution(queryModel, true);
+				if (contribution != null) {
+					version = contribution.getVersion();
+					if (changeVersion)
+						version = contribution.newVersion(version, false, false, true);
+				} else
+					return null;
+			} else if (changeVersion)
+				version = contribution.nextVersion();
+			else
 				version = contribution.getVersion();
-				if (changeVersion)
-					version = contribution.newVersion(version, false, false, true);
-			} else
-				return null;
-		} else if (changeVersion)
-			version = contribution.nextVersion();
-		else
-			version = contribution.getVersion();
-		return replace(queryModel, dynamicModel, version, monitor);
+			return replace(queryModel, dynamicModel, version, monitor);
+		} catch (CoreException e) {
+			ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
+			throw e;
+		}
 	}
 
 	/**
@@ -414,53 +409,46 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 */
 	public EPackage replace(EPackage queryModel, EPackage dynamicModel, Version version, IProgressMonitor monitor)
 			throws CoreException {
-		try {
-			Contribution contribution = getWorkspace().getContribution(queryModel, false);
-			if (contribution == null) {
-				contribution = getWorkspace().getContribution(queryModel, true);
-				if (contribution != null) {
-					EPackage existingModel = contribution.getDomainModel().getDynamic();
-					if (ModelUtil.ePackagesAreEqual(existingModel, queryModel, false)) {
-						Revision revision = null;
-						if (version.compareTo(contribution.getVersion()) < 0) {
-							if (!contribution.getRevisions().containsKey(version))
-								return null;
-							revision = contribution.getRevisions().get(version);
-							contribution.checkout(revision.getVersion());
-						} else
-							revision = contribution.createRevision(monitor);
-						revision.getDomainModel().setDynamic(EcoreUtil.copy(dynamicModel));
-					}
-				} else
-					return null;
-			} else {
+		Contribution contribution = getWorkspace().getContribution(queryModel, false);
+		if (contribution == null) {
+			contribution = getWorkspace().getContribution(queryModel, true);
+			if (contribution != null) {
 				EPackage existingModel = contribution.getDomainModel().getDynamic();
-				if (ModelUtil.ePackagesAreEqual(existingModel, queryModel, true)) {
-					Revision revision = contribution.getRevision();
-					if (version.compareTo(contribution.getVersion()) > 0) {
-						revision = contribution.newRevision(version);
-						State state = revision.getState();
-						state.copyModel(contribution.getState());
-						revision.create(monitor);
-						String commitId = state.initialize(true);
-						contribution.checkout(revision.getVersion(), state.getTimestamp(), commitId);
-					} else if (version.compareTo(contribution.getVersion()) < 0) {
+				if (ModelUtil.ePackagesAreEqual(existingModel, queryModel, false)) {
+					Revision revision = null;
+					if (version.compareTo(contribution.getVersion()) < 0) {
 						if (!contribution.getRevisions().containsKey(version))
 							return null;
 						revision = contribution.getRevisions().get(version);
 						contribution.checkout(revision.getVersion());
-					}
+					} else
+						revision = contribution.createRevision(monitor);
 					revision.getDomainModel().setDynamic(EcoreUtil.copy(dynamicModel));
 				}
+			} else
+				return null;
+		} else {
+			EPackage existingModel = contribution.getDomainModel().getDynamic();
+			if (ModelUtil.ePackagesAreEqual(existingModel, queryModel, true)) {
+				Revision revision = contribution.getRevision();
+				if (version.compareTo(contribution.getVersion()) > 0) {
+					revision = contribution.newRevision(version);
+					State state = revision.getState();
+					state.copyModel(contribution.getState());
+					revision.create(monitor);
+					String commitId = state.initialize(true);
+					contribution.checkout(revision.getVersion(), state.getTimestamp(), commitId);
+				} else if (version.compareTo(contribution.getVersion()) < 0) {
+					if (!contribution.getRevisions().containsKey(version))
+						return null;
+					revision = contribution.getRevisions().get(version);
+					contribution.checkout(revision.getVersion());
+				}
+				revision.getDomainModel().setDynamic(EcoreUtil.copy(dynamicModel));
 			}
-			contribution.addCompletionListener(yieldResultListener);
-			contribution.make(monitor);
-			lock.acquire();
-			return contribution.getDomainModel().getGenerated();
-		} catch (InterruptedException e) {
-			monitor.setCanceled(true);
-			return null;
 		}
+		contribution.make(monitor);
+		return contribution.getDomainModel().getGenerated();
 	}
 
 	/**
@@ -569,16 +557,6 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	public String computeProjectName(String packageName) {
 		return CodeGenUtil.safeName(packageName.toLowerCase());
 	}
-
-	private CompletionListener yieldResultListener = new CompletionListenerImpl() {
-
-		@Override
-		public void completed(Project result) throws Exception {
-			((Contribution) result).getState().setSaving(false);
-			lock.release();
-		}
-
-	};
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

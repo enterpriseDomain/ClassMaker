@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.util.Switch;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.ClassMakerPlant;
 import org.enterprisedomain.classmaker.CompletionListener;
+import org.enterprisedomain.classmaker.CompletionNotificationAdapter;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Customizer;
 import org.enterprisedomain.classmaker.Item;
@@ -263,6 +264,15 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 		case ClassMakerPackage.CLASS_MAKER_PLANT: {
 			ClassMakerPlant classMakerPlant = (ClassMakerPlant) theEObject;
 			T result = caseClassMakerPlant(classMakerPlant);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ClassMakerPackage.COMPLETION_NOTIFICATION_ADAPTER: {
+			CompletionNotificationAdapter completionNotificationAdapter = (CompletionNotificationAdapter) theEObject;
+			T result = caseCompletionNotificationAdapter(completionNotificationAdapter);
+			if (result == null)
+				result = caseAdapter(completionNotificationAdapter);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -616,6 +626,23 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseClassMakerPlant(ClassMakerPlant object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of
+	 * '<em>Completion Notification Adapter</em>'. <!-- begin-user-doc --> This
+	 * implementation returns null; returning a non-null result will terminate the
+	 * switch. <!-- end-user-doc -->
+	 * 
+	 * @param object
+	 *            the target of the switch.
+	 * @return the result of interpreting the object as an instance of
+	 *         '<em>Completion Notification Adapter</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCompletionNotificationAdapter(CompletionNotificationAdapter object) {
 		return null;
 	}
 

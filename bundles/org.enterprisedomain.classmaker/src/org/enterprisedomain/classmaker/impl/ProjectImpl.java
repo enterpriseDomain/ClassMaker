@@ -38,8 +38,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.enterprisedomain.classmaker.ClassMakerFactory;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.CompletionListener;
+import org.enterprisedomain.classmaker.CompletionNotificationAdapter;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
@@ -65,6 +67,8 @@ import org.enterprisedomain.classmaker.util.ResourceUtils;
  * <em>Workspace</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#isNeedsCompletionNotification
  * <em>Needs Completion Notification</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getCompletionNotificationAdapter
+ * <em>Completion Notification Adapter</em>}</li>
  * </ul>
  *
  * @generated
@@ -80,22 +84,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			if (msg.getFeatureID(State.class) == ClassMakerPackage.PROJECT__NAME
 					&& msg.getEventType() == Notification.SET && msg.getNewStringValue() != null)
 				setProjectName(ClassMakerPlugin.getClassMaker().computeProjectName(msg.getNewStringValue()));
-		}
-
-	}
-
-	protected final class CompletionNotificationAdapter extends AdapterImpl {
-
-		@Override
-		public void notifyChanged(Notification msg) {
-			if (msg.getFeatureID(Project.class) == ClassMakerPackage.PROJECT__NEEDS_COMPLETION_NOTIFICATION
-					&& msg.getNewBooleanValue())
-				try {
-					ProjectImpl.this.notifyCompletion();
-				} catch (Exception e) {
-					ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
-				}
-
 		}
 
 	}
@@ -173,13 +161,25 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	protected boolean needsCompletionNotification = NEEDS_COMPLETION_NOTIFICATION_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getCompletionNotificationAdapter()
+	 * <em>Completion Notification Adapter</em>}' containment reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getCompletionNotificationAdapter()
+	 * @generated
+	 * @ordered
+	 */
+	protected CompletionNotificationAdapter completionNotificationAdapter;
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
 	 */
 	protected ProjectImpl() {
 		super();
-		eAdapters().add(new CompletionNotificationAdapter());
+		setCompletionNotificationAdapter(ClassMakerFactory.eINSTANCE.createCompletionNotificationAdapter());
+		eAdapters().add(getCompletionNotificationAdapter());
 		eAdapters().add(new ProjectNameAdapter());
 	}
 
@@ -321,6 +321,61 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					ClassMakerPackage.PROJECT__NEEDS_COMPLETION_NOTIFICATION, oldNeedsCompletionNotification,
 					needsCompletionNotification));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public CompletionNotificationAdapter getCompletionNotificationAdapter() {
+		return completionNotificationAdapter;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public NotificationChain basicSetCompletionNotificationAdapter(
+			CompletionNotificationAdapter newCompletionNotificationAdapter, NotificationChain msgs) {
+		CompletionNotificationAdapter oldCompletionNotificationAdapter = completionNotificationAdapter;
+		completionNotificationAdapter = newCompletionNotificationAdapter;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					ClassMakerPackage.PROJECT__COMPLETION_NOTIFICATION_ADAPTER, oldCompletionNotificationAdapter,
+					newCompletionNotificationAdapter);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public void setCompletionNotificationAdapter(CompletionNotificationAdapter newCompletionNotificationAdapter) {
+		if (newCompletionNotificationAdapter != completionNotificationAdapter) {
+			NotificationChain msgs = null;
+			if (completionNotificationAdapter != null)
+				msgs = ((InternalEObject) completionNotificationAdapter).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - ClassMakerPackage.PROJECT__COMPLETION_NOTIFICATION_ADAPTER, null,
+						msgs);
+			if (newCompletionNotificationAdapter != null)
+				msgs = ((InternalEObject) newCompletionNotificationAdapter).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - ClassMakerPackage.PROJECT__COMPLETION_NOTIFICATION_ADAPTER, null,
+						msgs);
+			msgs = basicSetCompletionNotificationAdapter(newCompletionNotificationAdapter, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ClassMakerPackage.PROJECT__COMPLETION_NOTIFICATION_ADAPTER, newCompletionNotificationAdapter,
+					newCompletionNotificationAdapter));
 	}
 
 	/**
@@ -471,6 +526,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		switch (featureID) {
 		case ClassMakerPackage.PROJECT__WORKSPACE:
 			return basicSetWorkspace(null, msgs);
+		case ClassMakerPackage.PROJECT__COMPLETION_NOTIFICATION_ADAPTER:
+			return basicSetCompletionNotificationAdapter(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -535,6 +592,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			return getWorkspace();
 		case ClassMakerPackage.PROJECT__NEEDS_COMPLETION_NOTIFICATION:
 			return isNeedsCompletionNotification();
+		case ClassMakerPackage.PROJECT__COMPLETION_NOTIFICATION_ADAPTER:
+			return getCompletionNotificationAdapter();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -558,6 +617,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			return;
 		case ClassMakerPackage.PROJECT__NEEDS_COMPLETION_NOTIFICATION:
 			setNeedsCompletionNotification((Boolean) newValue);
+			return;
+		case ClassMakerPackage.PROJECT__COMPLETION_NOTIFICATION_ADAPTER:
+			setCompletionNotificationAdapter((CompletionNotificationAdapter) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -583,6 +645,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		case ClassMakerPackage.PROJECT__NEEDS_COMPLETION_NOTIFICATION:
 			setNeedsCompletionNotification(NEEDS_COMPLETION_NOTIFICATION_EDEFAULT);
 			return;
+		case ClassMakerPackage.PROJECT__COMPLETION_NOTIFICATION_ADAPTER:
+			setCompletionNotificationAdapter((CompletionNotificationAdapter) null);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -607,6 +672,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			return getWorkspace() != null;
 		case ClassMakerPackage.PROJECT__NEEDS_COMPLETION_NOTIFICATION:
 			return needsCompletionNotification != NEEDS_COMPLETION_NOTIFICATION_EDEFAULT;
+		case ClassMakerPackage.PROJECT__COMPLETION_NOTIFICATION_ADAPTER:
+			return completionNotificationAdapter != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -89,7 +89,7 @@ public abstract class AbstractTest {
 	public void cleanup() {
 		try {
 			service.delete(getPackageName(), getProgressMonitor());
-			Project project = service.getWorkspace().getProject(getPackageName());
+			Project project = service.getWorkspace().getProject(service.computeProjectName(getPackageName()));
 			if (project != null)
 				project.make(getProgressMonitor());
 		} catch (CoreException e) {

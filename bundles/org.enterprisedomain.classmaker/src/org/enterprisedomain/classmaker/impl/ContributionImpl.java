@@ -299,7 +299,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 		public void notifyChanged(Notification msg) {
 			if (msg.getFeatureID(State.class) == ClassMakerPackage.STATE__RESOURCE
 					&& msg.getEventType() == Notification.SET) {
-				basicGetModelResourceAdapter();
+				getModelResourceAdapter();
 			}
 		}
 	};
@@ -428,7 +428,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @generated
+	 * @generated NOT
 	 */
 	public ResourceAdapter getModelResourceAdapter() {
 		if (modelResourceAdapter != null && modelResourceAdapter.eIsProxy()) {
@@ -440,6 +440,13 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 							ClassMakerPackage.CONTRIBUTION__MODEL_RESOURCE_ADAPTER, oldModelResourceAdapter,
 							modelResourceAdapter));
 			}
+		} else if (modelResourceAdapter == null && isStateSet()
+				&& getState().eIsSet(ClassMakerPackage.Literals.STATE__RESOURCE)) {
+			modelResourceAdapter = ClassMakerFactory.eINSTANCE.createResourceAdapter();
+			modelResourceAdapter.setResource(getState().getResource());
+			if (eNotificationRequired())
+				eNotify(new ENotificationImpl(this, Notification.SET,
+						ClassMakerPackage.CONTRIBUTION__MODEL_RESOURCE_ADAPTER, null, modelResourceAdapter));
 		}
 		return modelResourceAdapter;
 	}
@@ -447,7 +454,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @generated NOT
+	 * @generated
 	 */
 	public ResourceAdapter basicGetModelResourceAdapter() {
 		return modelResourceAdapter;

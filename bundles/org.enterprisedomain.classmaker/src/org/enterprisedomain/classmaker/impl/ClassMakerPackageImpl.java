@@ -46,6 +46,7 @@ import org.enterprisedomain.classmaker.ClassMakerFactory;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.ClassMakerPlant;
 import org.enterprisedomain.classmaker.CompletionListener;
+import org.enterprisedomain.classmaker.CompletionNotificationAdapter;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Customizer;
 import org.enterprisedomain.classmaker.Item;
@@ -212,6 +213,13 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	private EClass classMakerPlantEClass = null;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private EClass completionNotificationAdapterEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -924,6 +932,15 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * 
 	 * @generated
 	 */
+	public EReference getProject_CompletionNotificationAdapter() {
+		return (EReference) projectEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	public EClass getModelPair() {
 		return modelPairEClass;
 	}
@@ -1016,6 +1033,24 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	public EReference getClassMakerPlant_Workspace() {
 		return (EReference) classMakerPlantEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EClass getCompletionNotificationAdapter() {
+		return completionNotificationAdapterEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EAttribute getCompletionNotificationAdapter_Exception() {
+		return (EAttribute) completionNotificationAdapterEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1215,6 +1250,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		createEAttribute(projectEClass, PROJECT__DIRTY);
 		createEReference(projectEClass, PROJECT__WORKSPACE);
 		createEAttribute(projectEClass, PROJECT__NEEDS_COMPLETION_NOTIFICATION);
+		createEReference(projectEClass, PROJECT__COMPLETION_NOTIFICATION_ADAPTER);
 
 		modelPairEClass = createEClass(MODEL_PAIR);
 		createEReference(modelPairEClass, MODEL_PAIR__DYNAMIC);
@@ -1231,6 +1267,9 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 		classMakerPlantEClass = createEClass(CLASS_MAKER_PLANT);
 		createEReference(classMakerPlantEClass, CLASS_MAKER_PLANT__WORKSPACE);
+
+		completionNotificationAdapterEClass = createEClass(COMPLETION_NOTIFICATION_ADAPTER);
+		createEAttribute(completionNotificationAdapterEClass, COMPLETION_NOTIFICATION_ADAPTER__EXCEPTION);
 
 		// Create enums
 		stageEEnum = createEEnum(STAGE);
@@ -1286,6 +1325,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		workspaceEClass.getESuperTypes().add(this.getISchedulingRule());
 		projectEClass.getESuperTypes().add(this.getISchedulingRule());
 		resourceAdapterEClass.getESuperTypes().add(this.getAdapter());
+		completionNotificationAdapterEClass.getESuperTypes().add(this.getAdapter());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(contributionEClass, Contribution.class, "Contribution", !IS_ABSTRACT, !IS_INTERFACE,
@@ -1642,6 +1682,9 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEAttribute(getProject_NeedsCompletionNotification(), ecorePackage.getEBoolean(),
 				"needsCompletionNotification", null, 0, 1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProject_CompletionNotificationAdapter(), this.getCompletionNotificationAdapter(), null,
+				"completionNotificationAdapter", null, 0, 1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(projectEClass, null, "create", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1923,6 +1966,12 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		op = addEOperation(classMakerPlantEClass, ecorePackage.getEString(), "computeProjectName", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "packageName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(completionNotificationAdapterEClass, CompletionNotificationAdapter.class,
+				"CompletionNotificationAdapter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCompletionNotificationAdapter_Exception(), this.getException(), "exception", null, 0, 1,
+				CompletionNotificationAdapter.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE,
+				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(stageEEnum, Stage.class, "Stage");

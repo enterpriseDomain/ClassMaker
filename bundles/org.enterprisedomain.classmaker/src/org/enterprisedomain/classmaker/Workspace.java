@@ -50,7 +50,7 @@ public interface Workspace extends EObject, ISchedulingRule {
 	 * Returns the value of the '<em><b>Projects</b></em>' containment reference
 	 * list. The list contents are of type
 	 * {@link org.enterprisedomain.classmaker.Project}. It is bidirectional and its
-	 * opposite is ' {@link org.enterprisedomain.classmaker.Project#getWorkspace
+	 * opposite is '{@link org.enterprisedomain.classmaker.Project#getWorkspace
 	 * <em>Workspace</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Projects</em>' containment reference list isn't
@@ -59,7 +59,7 @@ public interface Workspace extends EObject, ISchedulingRule {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Projects</em>' containment reference list.
-	 * @see org.genericdomain.EnterpriseDomainPackage#getWorkspace_Projects()
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getWorkspace_Projects()
 	 * @see org.enterprisedomain.classmaker.Project#getWorkspace
 	 * @model opposite="workspace" containment="true"
 	 * @generated

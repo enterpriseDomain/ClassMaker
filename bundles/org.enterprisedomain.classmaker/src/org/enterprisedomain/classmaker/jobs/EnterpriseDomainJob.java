@@ -171,7 +171,7 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob {
 			setRule(calcSchedulingRule(project));
 	}
 
-	private ISchedulingRule calcSchedulingRule(IProject project) {
+	protected ISchedulingRule calcSchedulingRule(IProject project) {
 		ISchedulingRule rule = getWorkspace().getContribution(project.getName()).getState(getStateTimestamp());
 		return MultiRule.combine(project, rule);
 	}

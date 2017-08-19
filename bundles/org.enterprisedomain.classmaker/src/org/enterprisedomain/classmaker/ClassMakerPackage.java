@@ -153,13 +153,22 @@ public interface ClassMakerPackage extends EPackage {
 	int PROJECT__NEEDS_COMPLETION_NOTIFICATION = ISCHEDULING_RULE_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Completion Notification Adapter</b></em>'
+	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECT__COMPLETION_NOTIFICATION_ADAPTER = ISCHEDULING_RULE_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>Project</em>' class. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int PROJECT_FEATURE_COUNT = ISCHEDULING_RULE_FEATURE_COUNT + 6;
+	int PROJECT_FEATURE_COUNT = ISCHEDULING_RULE_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the
@@ -225,6 +234,15 @@ public interface ClassMakerPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONTRIBUTION__NEEDS_COMPLETION_NOTIFICATION = PROJECT__NEEDS_COMPLETION_NOTIFICATION;
+
+	/**
+	 * The feature id for the '<em><b>Completion Notification Adapter</b></em>'
+	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CONTRIBUTION__COMPLETION_NOTIFICATION_ADAPTER = PROJECT__COMPLETION_NOTIFICATION_ADAPTER;
 
 	/**
 	 * The feature id for the '<em><b>Model Name</b></em>' attribute. <!--
@@ -1289,6 +1307,36 @@ public interface ClassMakerPackage extends EPackage {
 	int CLASS_MAKER_PLANT_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the
+	 * '{@link org.enterprisedomain.classmaker.impl.CompletionNotificationAdapterImpl
+	 * <em>Completion Notification Adapter</em>}' class. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @see org.enterprisedomain.classmaker.impl.CompletionNotificationAdapterImpl
+	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getCompletionNotificationAdapter()
+	 * @generated
+	 */
+	int COMPLETION_NOTIFICATION_ADAPTER = 21;
+
+	/**
+	 * The feature id for the '<em><b>Exception</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLETION_NOTIFICATION_ADAPTER__EXCEPTION = ADAPTER_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Completion Notification
+	 * Adapter</em>' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLETION_NOTIFICATION_ADAPTER_FEATURE_COUNT = ADAPTER_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '<em>Locale</em>' data type. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
@@ -1296,7 +1344,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getLocale()
 	 * @generated
 	 */
-	int LOCALE = 30;
+	int LOCALE = 31;
 
 	/**
 	 * The meta object id for the '{@link org.enterprisedomain.classmaker.Stage
@@ -1306,7 +1354,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getStage()
 	 * @generated
 	 */
-	int STAGE = 21;
+	int STAGE = 22;
 
 	/**
 	 * The meta object id for the '<em>Properties</em>' data type. <!--
@@ -1316,7 +1364,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getProperties()
 	 * @generated
 	 */
-	int PROPERTIES = 22;
+	int PROPERTIES = 23;
 
 	/**
 	 * The meta object id for the '<em>IProgress Monitor</em>' data type. <!--
@@ -1326,7 +1374,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getIProgressMonitor()
 	 * @generated
 	 */
-	int IPROGRESS_MONITOR = 23;
+	int IPROGRESS_MONITOR = 24;
 
 	/**
 	 * The meta object id for the '<em>OS Gi Version</em>' data type. <!--
@@ -1336,7 +1384,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getOSGiVersion()
 	 * @generated
 	 */
-	int OS_GI_VERSION = 24;
+	int OS_GI_VERSION = 25;
 
 	/**
 	 * The meta object id for the '<em>Semaphore</em>' data type. <!--
@@ -1346,7 +1394,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getSemaphore()
 	 * @generated
 	 */
-	int SEMAPHORE = 25;
+	int SEMAPHORE = 26;
 
 	/**
 	 * The meta object id for the '<em>Core Exception</em>' data type. <!--
@@ -1356,7 +1404,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getCoreException()
 	 * @generated
 	 */
-	int CORE_EXCEPTION = 26;
+	int CORE_EXCEPTION = 27;
 
 	/**
 	 * The meta object id for the '<em>Invocation Target Exception</em>' data type.
@@ -1366,7 +1414,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getInvocationTargetException()
 	 * @generated
 	 */
-	int INVOCATION_TARGET_EXCEPTION = 27;
+	int INVOCATION_TARGET_EXCEPTION = 28;
 
 	/**
 	 * The meta object id for the '<em>URI</em>' data type. <!-- begin-user-doc -->
@@ -1376,7 +1424,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getURI()
 	 * @generated
 	 */
-	int URI = 28;
+	int URI = 29;
 
 	/**
 	 * The meta object id for the '<em>Exception</em>' data type. <!--
@@ -1386,7 +1434,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getException()
 	 * @generated
 	 */
-	int EXCEPTION = 29;
+	int EXCEPTION = 30;
 
 	/**
 	 * Returns the meta object for class
@@ -2143,6 +2191,20 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getProject_NeedsCompletionNotification();
 
 	/**
+	 * Returns the meta object for the containment reference
+	 * '{@link org.enterprisedomain.classmaker.Project#getCompletionNotificationAdapter
+	 * <em>Completion Notification Adapter</em>}'. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @return the meta object for the containment reference '<em>Completion
+	 *         Notification Adapter</em>'.
+	 * @see org.enterprisedomain.classmaker.Project#getCompletionNotificationAdapter()
+	 * @see #getProject()
+	 * @generated
+	 */
+	EReference getProject_CompletionNotificationAdapter();
+
+	/**
 	 * Returns the meta object for class
 	 * '{@link org.enterprisedomain.classmaker.ModelPair <em>Model Pair</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -2269,6 +2331,30 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getClassMakerPlant_Workspace();
+
+	/**
+	 * Returns the meta object for class
+	 * '{@link org.enterprisedomain.classmaker.CompletionNotificationAdapter
+	 * <em>Completion Notification Adapter</em>}'. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @return the meta object for class '<em>Completion Notification Adapter</em>'.
+	 * @see org.enterprisedomain.classmaker.CompletionNotificationAdapter
+	 * @generated
+	 */
+	EClass getCompletionNotificationAdapter();
+
+	/**
+	 * Returns the meta object for the attribute
+	 * '{@link org.enterprisedomain.classmaker.CompletionNotificationAdapter#getException
+	 * <em>Exception</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the attribute '<em>Exception</em>'.
+	 * @see org.enterprisedomain.classmaker.CompletionNotificationAdapter#getException()
+	 * @see #getCompletionNotificationAdapter()
+	 * @generated
+	 */
+	EAttribute getCompletionNotificationAdapter_Exception();
 
 	/**
 	 * Returns the meta object for data type '{@link java.util.Locale
@@ -2960,6 +3046,15 @@ public interface ClassMakerPackage extends EPackage {
 		EAttribute PROJECT__NEEDS_COMPLETION_NOTIFICATION = eINSTANCE.getProject_NeedsCompletionNotification();
 
 		/**
+		 * The meta object literal for the '<em><b>Completion Notification
+		 * Adapter</b></em>' containment reference feature. <!-- begin-user-doc --> <!--
+		 * end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference PROJECT__COMPLETION_NOTIFICATION_ADAPTER = eINSTANCE.getProject_CompletionNotificationAdapter();
+
+		/**
 		 * The meta object literal for the
 		 * '{@link org.enterprisedomain.classmaker.impl.ModelPairImpl <em>Model
 		 * Pair</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -3062,6 +3157,26 @@ public interface ClassMakerPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CLASS_MAKER_PLANT__WORKSPACE = eINSTANCE.getClassMakerPlant_Workspace();
+
+		/**
+		 * The meta object literal for the
+		 * '{@link org.enterprisedomain.classmaker.impl.CompletionNotificationAdapterImpl
+		 * <em>Completion Notification Adapter</em>}' class. <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @see org.enterprisedomain.classmaker.impl.CompletionNotificationAdapterImpl
+		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getCompletionNotificationAdapter()
+		 * @generated
+		 */
+		EClass COMPLETION_NOTIFICATION_ADAPTER = eINSTANCE.getCompletionNotificationAdapter();
+
+		/**
+		 * The meta object literal for the '<em><b>Exception</b></em>' attribute
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EAttribute COMPLETION_NOTIFICATION_ADAPTER__EXCEPTION = eINSTANCE.getCompletionNotificationAdapter_Exception();
 
 		/**
 		 * The meta object literal for the '<em>Locale</em>' data type. <!--

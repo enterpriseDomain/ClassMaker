@@ -3,16 +3,10 @@
    <description name="enterpriseDomain" url="https://dl.bintray.com/enterprisedomain/ClassMaker">
       enterpriseDomain ClassMaker
    </description>
-   <feature url="features/org.enterprisedomain.classmaker.feature_0.7.8.201704041446.jar" id="org.enterprisedomain.classmaker.feature" version="0.7.8.201704041446" os="linux,macosx,win32" ws="carbon,cocoa,gtk,win32" arch="x86,x86_64">
+   <feature url="features/org.enterprisedomain.classmaker.feature_0.7.900.201708191752.jar" id="org.enterprisedomain.classmaker.feature" version="0.7.900.201708191752">
       <category name="enterprisedomain"/>
    </feature>
-   <feature url="features/org.enterprisedomain.classmaker.osgi.resolverhooks.feature_0.7.8.201704041446.jar" id="org.enterprisedomain.classmaker.osgi.resolverhooks.feature" version="0.7.8.201704041446" os="linux,macosx,win32" ws="carbon,cocoa,gtk,motif,win32,wpf" arch="ppc,x86,x86_64">
-      <category name="enterprisedomain"/>
-   </feature>
-   <feature url="features/org.enterprisedomain.classmaker.feature_0.7.9.201708171236.jar" id="org.enterprisedomain.classmaker.feature" version="0.7.9.201708171236">
-      <category name="enterprisedomain"/>
-   </feature>
-   <feature url="features/org.enterprisedomain.classmaker.osgi.resolverhooks.feature_0.7.9.201708171236.jar" id="org.enterprisedomain.classmaker.osgi.resolverhooks.feature" version="0.7.9.201708171236">
+   <feature url="features/org.enterprisedomain.classmaker.osgi.resolverhooks.feature_0.7.900.201708191752.jar" id="org.enterprisedomain.classmaker.osgi.resolverhooks.feature" version="0.7.900.201708191752">
       <category name="enterprisedomain"/>
    </feature>
    <category-def name="enterprisedomain" label="enterpriseDomain">

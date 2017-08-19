@@ -271,6 +271,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		EPackage metaModel = (EPackage) service.transform(nativeModel, URI.createFileURI(qvt.toString()));
 		assertNotNull(metaModel);
 		EPackage resultMetaModel = service.produce(metaModel);
+		assertNotNull(resultMetaModel);
 		EObject o = resultMetaModel.getEFactoryInstance()
 				.create((EClass) resultMetaModel.getEClassifier(domainClassName));
 		String domainObjectName = "Gear";
@@ -398,7 +399,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		b.setName(getAttributeName());
 		b.setEType(EcorePackage.Literals.EINT);
 		((EClass) p2.getEClassifier(cl.getName())).getEStructuralFeatures().add(b);
-		EPackage e1 = service.replace(p, p2, true);
+		EPackage e1 = service.replace(p, p2);
 		EClass cla = (EClass) e1.getEClassifier(cl.getName());
 		o = e1.getEFactoryInstance().create(cla);
 		assertEquals(cla.getName(), o.getClass().getSimpleName());
@@ -417,7 +418,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 
 		service.getWorkspace().getContribution(service.computeProjectName(p.getName())).checkout(v1);
 		EPackage p3 = updateEPackage(p, "0.3");
-		EPackage e2 = service.replace(p, p3);
+		EPackage e2 = service.replace(p, p3, false);
 		assertEquals("http://" + e2.getName() + "/0.3", e2.getNsURI());
 		cleanup();
 	}
@@ -437,7 +438,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		EPackage p2 = updateEPackage(p, "1");
 		EClass clazz = (EClass) p2.getEClassifier(getClassName());
 		clazz.getEStructuralFeatures().remove(clazz.getEStructuralFeature(getAttributeName()));
-		EPackage g = service.replace(p, p2, true);
+		EPackage g = service.replace(p, p2);
 		EClass gClazz = (EClass) g.getEClassifier(getClassName());
 		EObject o = g.getEFactoryInstance().create(gClazz);
 		assertNull(gClazz.getEStructuralFeature(getAttributeName()));
@@ -526,20 +527,17 @@ public class TestEnterpriseDomain extends AbstractTest {
 	}
 
 	@Test
-	public void immutable() throws NoSuchMethodException, CoreException, OperationCanceledException,
-			InterruptedException, SecurityException, ClassNotFoundException, ExecutionException, IllegalAccessException,
-			IllegalArgumentException, InvocationTargetException {
+	public void immutable() throws Exception {
 		setPackageName("immutable");
 		EPackage eP = createEPackage("0.0.1");
 		EClass eC = createEClass();
 		setAttributeName("C");
 		setAttributeType(EcorePackage.Literals.EJAVA_OBJECT);
-		EAttribute at = createEAttribute();
+		final EAttribute at = createEAttribute();
 		EcoreUtil.setSuppressedVisibility(at, EcoreUtil.SET, true);
 		eC.getEStructuralFeatures().add(at);
 		eP.getEClassifiers().add(eC);
-		Contribution c = null;
-		c = service.getWorkspace().createContribution(eP, getProgressMonitor());
+		final Contribution c = service.getWorkspace().createContribution(eP, getProgressMonitor());
 		Customizer customizer = new CustomizerImpl() {
 
 			@Override
@@ -554,7 +552,6 @@ public class TestEnterpriseDomain extends AbstractTest {
 		c.getCustomizers().put(ClassMakerPlant.Stages.GENMODEL_SETUP, customizer);
 
 		final Semaphore complete = new Semaphore(0);
-
 		CompletionListener l = new CompletionListenerImpl() {
 
 			@Override
@@ -562,24 +559,27 @@ public class TestEnterpriseDomain extends AbstractTest {
 				try {
 					EPackage e = null;
 					Class<?> cl = null;
-					try {
-						e = ((Contribution) result).getDomainModel().getGenerated();
-						cl = e.getClass().getClassLoader().loadClass(getPackageName() + "." + getClassName());
-						cl.getMethod("set" + getAttributeName(), Object.class);
-					} catch (NoSuchMethodException ex) {
-					}
-					Method m = cl.getMethod("get" + getAttributeName(), new Class<?>[] {});
+					e = ((Contribution) result).getDomainModel().getGenerated();
+					cl = e.getClass().getClassLoader().loadClass(getPackageName() + "." + getClassName());
+					Method getMethod0 = cl.getMethod("get" + at.getName(), new Class<?>[] {});
 					EClass ec = (EClass) e.getEClassifier(getClassName());
 					EObject eo = e.getEFactoryInstance().create(ec);
 					Object o = new Object();
-					eo.eSet(ec.getEStructuralFeature(getAttributeName()), o);
-					assertEquals(o, m.invoke(eo, new Object[] {}));
+					eo.eSet(ec.getEStructuralFeature(at.getName()), o);
+					assertEquals(o, getMethod0.invoke(eo, new Object[] {}));
+					try {
+						cl.getMethod("set" + at.getName(), Object.class);
+					} catch (NoSuchMethodException ex) {
+						return;
+					}
 				} catch (Exception e) {
 					fail(e.getLocalizedMessage());
 				} finally {
 					complete.release();
 				}
+				assertTrue(false);
 			}
+
 		};
 		c.addCompletionListener(l);
 		c.make(getProgressMonitor());

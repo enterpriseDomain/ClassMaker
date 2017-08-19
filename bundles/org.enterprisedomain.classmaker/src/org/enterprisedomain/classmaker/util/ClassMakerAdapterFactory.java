@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.ClassMakerPlant;
 import org.enterprisedomain.classmaker.CompletionListener;
+import org.enterprisedomain.classmaker.CompletionNotificationAdapter;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Customizer;
 import org.enterprisedomain.classmaker.Item;
@@ -199,6 +200,11 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseClassMakerPlant(ClassMakerPlant object) {
 			return createClassMakerPlantAdapter();
+		}
+
+		@Override
+		public Adapter caseCompletionNotificationAdapter(CompletionNotificationAdapter object) {
+			return createCompletionNotificationAdapterAdapter();
 		}
 
 		@Override
@@ -533,6 +539,22 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createClassMakerPlantAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class
+	 * '{@link org.enterprisedomain.classmaker.CompletionNotificationAdapter
+	 * <em>Completion Notification Adapter</em>}'. <!-- begin-user-doc --> This
+	 * default implementation returns null so that we can easily ignore cases; it's
+	 * useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see org.enterprisedomain.classmaker.CompletionNotificationAdapter
+	 * @generated
+	 */
+	public Adapter createCompletionNotificationAdapterAdapter() {
 		return null;
 	}
 
