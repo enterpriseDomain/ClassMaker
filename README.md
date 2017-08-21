@@ -50,5 +50,5 @@ Please, use [the update site](https://dl.bintray.com/enterprisedomain/ClassMaker
 
 Feedback
 ---------
-If you have anything to complain or suggest, please feel free to file a [bug at GitHub](https://github.com/enterpriseDomain/ClassMaker/issues). 
+If you have anything to complain or suggest, please feel free to [file](https://help.github.com/articles/creating-an-issue/) a [bug at GitHub](https://github.com/enterpriseDomain/ClassMaker/issues). 
 
