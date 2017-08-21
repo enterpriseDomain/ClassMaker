@@ -25,6 +25,7 @@ import java.util.concurrent.Semaphore;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -148,6 +149,8 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 			return createCoreExceptionFromString(eDataType, initialValue);
 		case ClassMakerPackage.INVOCATION_TARGET_EXCEPTION:
 			return createInvocationTargetExceptionFromString(eDataType, initialValue);
+		case ClassMakerPackage.ISTATUS:
+			return createIStatusFromString(eDataType, initialValue);
 		case ClassMakerPackage.URI:
 			return createURIFromString(eDataType, initialValue);
 		case ClassMakerPackage.EXCEPTION:
@@ -181,6 +184,8 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 			return convertCoreExceptionToString(eDataType, instanceValue);
 		case ClassMakerPackage.INVOCATION_TARGET_EXCEPTION:
 			return convertInvocationTargetExceptionToString(eDataType, instanceValue);
+		case ClassMakerPackage.ISTATUS:
+			return convertIStatusToString(eDataType, instanceValue);
 		case ClassMakerPackage.URI:
 			return convertURIToString(eDataType, instanceValue);
 		case ClassMakerPackage.EXCEPTION:
@@ -467,6 +472,24 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 	 * @generated
 	 */
 	public String convertInvocationTargetExceptionToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public IStatus createIStatusFromString(EDataType eDataType, String initialValue) {
+		return (IStatus) super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public String convertIStatusToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

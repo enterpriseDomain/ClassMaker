@@ -29,6 +29,7 @@ import java.util.concurrent.Semaphore;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EAttribute;
@@ -269,6 +270,13 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	private EDataType invocationTargetExceptionEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private EDataType iStatusEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -1049,7 +1057,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * 
 	 * @generated
 	 */
-	public EAttribute getCompletionNotificationAdapter_Exception() {
+	public EAttribute getCompletionNotificationAdapter_Error() {
 		return (EAttribute) completionNotificationAdapterEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1123,6 +1131,15 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	public EDataType getInvocationTargetException() {
 		return invocationTargetExceptionEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EDataType getIStatus() {
+		return iStatusEDataType;
 	}
 
 	/**
@@ -1269,7 +1286,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		createEReference(classMakerPlantEClass, CLASS_MAKER_PLANT__WORKSPACE);
 
 		completionNotificationAdapterEClass = createEClass(COMPLETION_NOTIFICATION_ADAPTER);
-		createEAttribute(completionNotificationAdapterEClass, COMPLETION_NOTIFICATION_ADAPTER__EXCEPTION);
+		createEAttribute(completionNotificationAdapterEClass, COMPLETION_NOTIFICATION_ADAPTER__ERROR);
 
 		// Create enums
 		stageEEnum = createEEnum(STAGE);
@@ -1281,6 +1298,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		semaphoreEDataType = createEDataType(SEMAPHORE);
 		coreExceptionEDataType = createEDataType(CORE_EXCEPTION);
 		invocationTargetExceptionEDataType = createEDataType(INVOCATION_TARGET_EXCEPTION);
+		iStatusEDataType = createEDataType(ISTATUS);
 		uriEDataType = createEDataType(URI);
 		exceptionEDataType = createEDataType(EXCEPTION);
 		localeEDataType = createEDataType(LOCALE);
@@ -1969,7 +1987,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 		initEClass(completionNotificationAdapterEClass, CompletionNotificationAdapter.class,
 				"CompletionNotificationAdapter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getCompletionNotificationAdapter_Exception(), this.getException(), "exception", null, 0, 1,
+		initEAttribute(getCompletionNotificationAdapter_Error(), this.getIStatus(), "error", null, 0, 1,
 				CompletionNotificationAdapter.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE,
 				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1994,6 +2012,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 				!IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(invocationTargetExceptionEDataType, InvocationTargetException.class, "InvocationTargetException",
 				IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(iStatusEDataType, IStatus.class, "IStatus", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(uriEDataType, org.eclipse.emf.common.util.URI.class, "URI", IS_SERIALIZABLE,
 				!IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(exceptionEDataType, Exception.class, "Exception", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

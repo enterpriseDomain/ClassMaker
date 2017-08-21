@@ -15,6 +15,7 @@
  */
 package org.enterprisedomain.classmaker.impl;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EClass;
@@ -31,32 +32,32 @@ import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.impl.CompletionNotificationAdapterImpl#getException
- * <em>Exception</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.CompletionNotificationAdapterImpl#getError
+ * <em>Error</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class CompletionNotificationAdapterImpl extends EObjectImpl implements CompletionNotificationAdapter {
 	/**
-	 * The default value of the '{@link #getException() <em>Exception</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getError() <em>Error</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see #getException()
+	 * @see #getError()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Exception EXCEPTION_EDEFAULT = null;
+	protected static final IStatus ERROR_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getException() <em>Exception</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getError() <em>Error</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see #getException()
+	 * @see #getError()
 	 * @generated
 	 * @ordered
 	 */
-	protected Exception exception = EXCEPTION_EDEFAULT;
+	protected IStatus error = ERROR_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -78,6 +79,15 @@ public class CompletionNotificationAdapterImpl extends EObjectImpl implements Co
 	}
 
 	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public IStatus getError() {
+		return error;
+	}
+
+	/**
 	 * Returns <code>false</code>
 	 * 
 	 * @param type
@@ -92,12 +102,12 @@ public class CompletionNotificationAdapterImpl extends EObjectImpl implements Co
 	public void notifyChanged(Notification msg) {
 		if (msg.getFeatureID(Project.class) == ClassMakerPackage.PROJECT__NEEDS_COMPLETION_NOTIFICATION
 				&& msg.getNewBooleanValue()) {
-			exception = EXCEPTION_EDEFAULT;
+			error = ERROR_EDEFAULT;
 			try {
 				((Project) eContainer()).notifyCompletion();
 			} catch (Exception e) {
-				exception = e;
-				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
+				error = ClassMakerPlugin.createErrorStatus(e);
+				ClassMakerPlugin.getInstance().getLog().log(getError());
 			}
 		}
 	}
@@ -121,20 +131,11 @@ public class CompletionNotificationAdapterImpl extends EObjectImpl implements Co
 	 * 
 	 * @generated
 	 */
-	public Exception getException() {
-		return exception;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case ClassMakerPackage.COMPLETION_NOTIFICATION_ADAPTER__EXCEPTION:
-			return getException();
+		case ClassMakerPackage.COMPLETION_NOTIFICATION_ADAPTER__ERROR:
+			return getError();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -147,8 +148,8 @@ public class CompletionNotificationAdapterImpl extends EObjectImpl implements Co
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case ClassMakerPackage.COMPLETION_NOTIFICATION_ADAPTER__EXCEPTION:
-			return EXCEPTION_EDEFAULT == null ? exception != null : !EXCEPTION_EDEFAULT.equals(exception);
+		case ClassMakerPackage.COMPLETION_NOTIFICATION_ADAPTER__ERROR:
+			return ERROR_EDEFAULT == null ? error != null : !ERROR_EDEFAULT.equals(error);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -164,8 +165,8 @@ public class CompletionNotificationAdapterImpl extends EObjectImpl implements Co
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (exception: ");
-		result.append(exception);
+		result.append(" (error: ");
+		result.append(error);
 		result.append(')');
 		return result.toString();
 	}

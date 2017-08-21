@@ -15,6 +15,7 @@
  */
 package org.enterprisedomain.classmaker;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 
@@ -26,8 +27,8 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.CompletionNotificationAdapter#getException
- * <em>Exception</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.CompletionNotificationAdapter#getError
+ * <em>Error</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getCompletionNotificationAdapter()
@@ -36,20 +37,19 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface CompletionNotificationAdapter extends EObject, Adapter {
 	/**
-	 * Returns the value of the '<em><b>Exception</b></em>' attribute. <!--
+	 * Returns the value of the '<em><b>Error</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Exception</em>' attribute isn't clear, there
-	 * really should be more of a description here...
+	 * If the meaning of the '<em>Error</em>' attribute isn't clear, there really
+	 * should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
-	 * @return the value of the '<em>Exception</em>' attribute.
-	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getCompletionNotificationAdapter_Exception()
-	 * @model dataType="org.enterprisedomain.classmaker.Exception"
-	 *        changeable="false"
+	 * @return the value of the '<em>Error</em>' attribute.
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getCompletionNotificationAdapter_Error()
+	 * @model dataType="org.enterprisedomain.classmaker.IStatus" changeable="false"
 	 * @generated
 	 */
-	Exception getException();
+	IStatus getError();
 
 } // CompletionNotificationAdapter

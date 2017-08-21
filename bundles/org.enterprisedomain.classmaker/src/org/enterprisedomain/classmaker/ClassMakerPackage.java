@@ -1319,13 +1319,13 @@ public interface ClassMakerPackage extends EPackage {
 	int COMPLETION_NOTIFICATION_ADAPTER = 21;
 
 	/**
-	 * The feature id for the '<em><b>Exception</b></em>' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Error</b></em>' attribute. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int COMPLETION_NOTIFICATION_ADAPTER__EXCEPTION = ADAPTER_FEATURE_COUNT + 0;
+	int COMPLETION_NOTIFICATION_ADAPTER__ERROR = ADAPTER_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Completion Notification
@@ -1344,7 +1344,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getLocale()
 	 * @generated
 	 */
-	int LOCALE = 31;
+	int LOCALE = 32;
 
 	/**
 	 * The meta object id for the '{@link org.enterprisedomain.classmaker.Stage
@@ -1417,6 +1417,16 @@ public interface ClassMakerPackage extends EPackage {
 	int INVOCATION_TARGET_EXCEPTION = 28;
 
 	/**
+	 * The meta object id for the '<em>IStatus</em>' data type. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @see org.eclipse.core.runtime.IStatus
+	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getIStatus()
+	 * @generated
+	 */
+	int ISTATUS = 29;
+
+	/**
 	 * The meta object id for the '<em>URI</em>' data type. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -1424,7 +1434,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getURI()
 	 * @generated
 	 */
-	int URI = 29;
+	int URI = 30;
 
 	/**
 	 * The meta object id for the '<em>Exception</em>' data type. <!--
@@ -1434,7 +1444,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getException()
 	 * @generated
 	 */
-	int EXCEPTION = 30;
+	int EXCEPTION = 31;
 
 	/**
 	 * Returns the meta object for class
@@ -2346,15 +2356,15 @@ public interface ClassMakerPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute
-	 * '{@link org.enterprisedomain.classmaker.CompletionNotificationAdapter#getException
-	 * <em>Exception</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * '{@link org.enterprisedomain.classmaker.CompletionNotificationAdapter#getError
+	 * <em>Error</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the attribute '<em>Exception</em>'.
-	 * @see org.enterprisedomain.classmaker.CompletionNotificationAdapter#getException()
+	 * @return the meta object for the attribute '<em>Error</em>'.
+	 * @see org.enterprisedomain.classmaker.CompletionNotificationAdapter#getError()
 	 * @see #getCompletionNotificationAdapter()
 	 * @generated
 	 */
-	EAttribute getCompletionNotificationAdapter_Exception();
+	EAttribute getCompletionNotificationAdapter_Error();
 
 	/**
 	 * Returns the meta object for data type '{@link java.util.Locale
@@ -2446,6 +2456,18 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 */
 	EDataType getInvocationTargetException();
+
+	/**
+	 * Returns the meta object for data type
+	 * '{@link org.eclipse.core.runtime.IStatus <em>IStatus</em>}'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for data type '<em>IStatus</em>'.
+	 * @see org.eclipse.core.runtime.IStatus
+	 * @model instanceClass="org.eclipse.core.runtime.IStatus"
+	 * @generated
+	 */
+	EDataType getIStatus();
 
 	/**
 	 * Returns the meta object for data type '{@link org.eclipse.emf.common.util.URI
@@ -3171,12 +3193,12 @@ public interface ClassMakerPackage extends EPackage {
 		EClass COMPLETION_NOTIFICATION_ADAPTER = eINSTANCE.getCompletionNotificationAdapter();
 
 		/**
-		 * The meta object literal for the '<em><b>Exception</b></em>' attribute
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Error</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
-		EAttribute COMPLETION_NOTIFICATION_ADAPTER__EXCEPTION = eINSTANCE.getCompletionNotificationAdapter_Exception();
+		EAttribute COMPLETION_NOTIFICATION_ADAPTER__ERROR = eINSTANCE.getCompletionNotificationAdapter_Error();
 
 		/**
 		 * The meta object literal for the '<em>Locale</em>' data type. <!--
@@ -3257,6 +3279,16 @@ public interface ClassMakerPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType INVOCATION_TARGET_EXCEPTION = eINSTANCE.getInvocationTargetException();
+
+		/**
+		 * The meta object literal for the '<em>IStatus</em>' data type. <!--
+		 * begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @see org.eclipse.core.runtime.IStatus
+		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getIStatus()
+		 * @generated
+		 */
+		EDataType ISTATUS = eINSTANCE.getIStatus();
 
 		/**
 		 * The meta object literal for the '<em>URI</em>' data type. <!-- begin-user-doc

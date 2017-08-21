@@ -18,6 +18,7 @@ package org.enterprisedomain.classmaker.provider;
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
@@ -67,24 +68,24 @@ public class CompletionNotificationAdapterItemProvider extends ItemProviderAdapt
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addExceptionPropertyDescriptor(object);
+			addErrorPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Exception feature.
+	 * This adds a property descriptor for the Error feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addExceptionPropertyDescriptor(Object object) {
+	protected void addErrorPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
 				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_CompletionNotificationAdapter_exception_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_CompletionNotificationAdapter_exception_feature",
+				getString("_UI_CompletionNotificationAdapter_error_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_CompletionNotificationAdapter_error_feature",
 						"_UI_CompletionNotificationAdapter_type"),
-				ClassMakerPackage.Literals.COMPLETION_NOTIFICATION_ADAPTER__EXCEPTION, false, false, false,
+				ClassMakerPackage.Literals.COMPLETION_NOTIFICATION_ADAPTER__ERROR, false, false, false,
 				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
@@ -107,7 +108,7 @@ public class CompletionNotificationAdapterItemProvider extends ItemProviderAdapt
 	 */
 	@Override
 	public String getText(Object object) {
-		Exception labelValue = ((CompletionNotificationAdapter) object).getException();
+		IStatus labelValue = ((CompletionNotificationAdapter) object).getError();
 		String label = labelValue == null ? null : labelValue.toString();
 		return label == null || label.length() == 0 ? getString("_UI_CompletionNotificationAdapter_type")
 				: getString("_UI_CompletionNotificationAdapter_type") + " " + label;
@@ -125,7 +126,7 @@ public class CompletionNotificationAdapterItemProvider extends ItemProviderAdapt
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(CompletionNotificationAdapter.class)) {
-		case ClassMakerPackage.COMPLETION_NOTIFICATION_ADAPTER__EXCEPTION:
+		case ClassMakerPackage.COMPLETION_NOTIFICATION_ADAPTER__ERROR:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		}
