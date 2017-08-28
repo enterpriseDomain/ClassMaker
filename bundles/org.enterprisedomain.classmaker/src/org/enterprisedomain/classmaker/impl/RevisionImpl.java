@@ -48,7 +48,8 @@ import org.enterprisedomain.classmaker.Revision;
 import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
-import org.enterprisedomain.classmaker.util.GitUtil;
+import org.enterprisedomain.classmaker.scm.GitSCMOperator;
+import org.enterprisedomain.classmaker.scm.GitSCMRegistry;
 import org.enterprisedomain.classmaker.util.ListUtil;
 
 /**
@@ -270,8 +271,9 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	@Override
 	public String initialize(boolean commit) {
 		super.initialize(commit);
+		GitSCMOperator operator = GitSCMRegistry.get(getContribution().getProjectName());
 		try {
-			Git git = GitUtil.getRepositoryGit(getContribution().getProjectName());
+			Git git = operator.getRepositorySCM();
 
 			LogCommand log = git.log();
 			Ref branch = git.getRepository().findRef(getVersion().toString());
@@ -279,7 +281,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 				log.add(branch.getObjectId());
 				Iterable<RevCommit> commits = log.call();
 				for (RevCommit c : commits) {
-					int timestamp = GitUtil.getTimestamp(c.getShortMessage());
+					int timestamp = operator.getTimestamp(c.getShortMessage());
 					if (timestamp == -1)
 						continue;
 					State state = null;
@@ -309,7 +311,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 			return null;
 		} finally {
 			try {
-				GitUtil.ungetRepositoryGit(getContribution().getProjectName());
+				operator.ungetRepositorySCM();
 			} catch (GitAPIException e) {
 				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 			}
@@ -324,14 +326,15 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	 */
 	public void create(IProgressMonitor monitor) throws CoreException {
 		if (isStateSet()) {
+			GitSCMOperator operator = GitSCMRegistry.get(getContribution().getProjectName());
 			try {
-				Git git = GitUtil.getRepositoryGit(getContribution().getProjectName());
+				Git git = operator.getRepositorySCM();
 				git.branchCreate().setForce(true).setName(getVersion().toString()).call();
 			} catch (GitAPIException e) {
 				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 			} finally {
 				try {
-					GitUtil.ungetRepositoryGit(getContribution().getProjectName());
+					operator.ungetRepositorySCM();
 				} catch (GitAPIException e) {
 					throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 				}
@@ -402,9 +405,10 @@ public class RevisionImpl extends ItemImpl implements Revision {
 		initialize(false);
 		getContribution().initAdapters(this);
 		if (create && isStateSet()) {
-			Git git;
+			GitSCMOperator operator = GitSCMRegistry.get(getContribution().getProjectName());
+			Git git = null;
 			try {
-				git = GitUtil.getRepositoryGit(getContribution().getProjectName());
+				git = operator.getRepositorySCM();
 				Ref branch = git.getRepository().findRef(getVersion().toString());
 				if (branch == null) {
 					if (create) {
@@ -418,7 +422,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 			} finally {
 				try {
-					GitUtil.ungetRepositoryGit(getContribution().getProjectName());
+					operator.ungetRepositorySCM();
 				} catch (GitAPIException e) {
 					throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 				}

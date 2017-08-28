@@ -77,7 +77,8 @@ import org.enterprisedomain.classmaker.jobs.export.Exporter;
 import org.enterprisedomain.classmaker.jobs.export.PDEPluginExporter;
 import org.enterprisedomain.classmaker.jobs.install.OSGiInstaller;
 import org.enterprisedomain.classmaker.jobs.load.OSGiEPackageLoader;
-import org.enterprisedomain.classmaker.util.GitUtil;
+import org.enterprisedomain.classmaker.scm.GitSCMOperator;
+import org.enterprisedomain.classmaker.scm.GitSCMRegistry;
 import org.enterprisedomain.classmaker.util.ListUtil;
 import org.enterprisedomain.classmaker.util.ModelUtil;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
@@ -650,8 +651,9 @@ public class StateImpl extends ItemImpl implements State {
 	 */
 	public void checkout(String commitId) {
 		try {
+			GitSCMOperator operator = GitSCMRegistry.get(getProjectName());
 			setCommitId(commitId);
-			GitUtil.checkout(getProjectName(), getVersion().toString(), getCommitId());
+			operator.checkout(getVersion().toString(), getCommitId());
 			copyModel(getContribution());
 			load(false);
 		} catch (CheckoutConflictException e) {
@@ -669,7 +671,8 @@ public class StateImpl extends ItemImpl implements State {
 	 * @generated NOT
 	 */
 	public void add(String filepattern) throws Exception {
-		GitUtil.add(getProjectName(), filepattern);
+		GitSCMOperator operator = GitSCMRegistry.get(getProjectName());
+		operator.add(filepattern);
 	}
 
 	/**
@@ -678,8 +681,9 @@ public class StateImpl extends ItemImpl implements State {
 	 * @generated NOT
 	 */
 	public String commit() throws Exception {
+		GitSCMOperator operator = GitSCMRegistry.get(getProjectName());
 		String commitId = null;
-		commitId = GitUtil.commit(getProjectName(), GitUtil.getCommitMessage(this, getTimestamp()));
+		commitId = operator.commit(operator.getCommitMessage(this, getTimestamp()));
 		getCommitIds().add(commitId);
 		setCommitId(commitId);
 		return commitId;
@@ -999,10 +1003,11 @@ public class StateImpl extends ItemImpl implements State {
 	 * @generated NOT
 	 */
 	public void delete(IProgressMonitor monitor) throws CoreException {
+		GitSCMOperator operator = GitSCMRegistry.get(getProjectName());
 		try {
-			GitUtil.deleteProject(getProjectName());
+			operator.deleteProject();
 			try {
-				GitUtil.checkoutOrphan(getProjectName(), getVersion().toString(), getTimestamp());
+				operator.checkoutOrphan(getVersion().toString(), getTimestamp());
 			} catch (GitAPIException e) {
 				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 			} catch (IOException e) {

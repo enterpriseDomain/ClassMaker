@@ -7,7 +7,8 @@
          point="org.eclipse.emf.ecp.core.providers">
       <provider
             class="org.enterprisedomain.ecp.EnterpriseDomainProvider"
-            description="Dynamic Generation Provider">
+            description="Dynamic Generation Provider"
+            icon="Integrates ECP with ClassMaker.">
       </provider>
    </extension>
    <extension

@@ -1775,11 +1775,11 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 				ClassMakerPlant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = addEOperation(classMakerPlantEClass, ecorePackage.getEPackage(), "produce", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(classMakerPlantEClass, ecorePackage.getEPackage(), "make", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEPackage(), "dynamicModel", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEException(op, this.getCoreException());
 
-		op = addEOperation(classMakerPlantEClass, null, "produce", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(classMakerPlantEClass, null, "make", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEPackage(), "dynamicModel", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getExecutor(), "executor", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEException(op, this.getCoreException());
@@ -1790,12 +1790,12 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		g2.setEUpperBound(g3);
 		initEOperation(op, g1);
 
-		op = addEOperation(classMakerPlantEClass, ecorePackage.getEPackage(), "produce", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(classMakerPlantEClass, ecorePackage.getEPackage(), "make", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEPackage(), "dynamicModel", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEException(op, this.getCoreException());
 
-		op = addEOperation(classMakerPlantEClass, null, "produce", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(classMakerPlantEClass, null, "make", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEPackage(), "dynamicModel", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getExecutor(), "executor", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1807,12 +1807,12 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		g2.setEUpperBound(g3);
 		initEOperation(op, g1);
 
-		op = addEOperation(classMakerPlantEClass, ecorePackage.getEPackage(), "produce", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(classMakerPlantEClass, ecorePackage.getEPackage(), "make", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEPackage(), "dynamicModel", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "dependencies", 0, -1, IS_UNIQUE, IS_ORDERED);
 		addEException(op, this.getCoreException());
 
-		op = addEOperation(classMakerPlantEClass, null, "produce", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(classMakerPlantEClass, null, "make", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEPackage(), "dynamicModel", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "dependencies", 0, -1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getExecutor(), "executor", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1824,13 +1824,13 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		g2.setEUpperBound(g3);
 		initEOperation(op, g1);
 
-		op = addEOperation(classMakerPlantEClass, ecorePackage.getEPackage(), "produce", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(classMakerPlantEClass, ecorePackage.getEPackage(), "make", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEPackage(), "dynamicModel", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "dependencies", 0, -1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEException(op, this.getCoreException());
 
-		op = addEOperation(classMakerPlantEClass, null, "produce", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(classMakerPlantEClass, null, "make", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEPackage(), "dynamicModel", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "dependencies", 0, -1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getExecutor(), "executor", 0, 1, IS_UNIQUE, IS_ORDERED);

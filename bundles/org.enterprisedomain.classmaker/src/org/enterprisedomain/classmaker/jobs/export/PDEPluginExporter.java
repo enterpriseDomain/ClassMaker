@@ -41,7 +41,8 @@ import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.jobs.DelegatingJob;
-import org.enterprisedomain.classmaker.util.GitUtil;
+import org.enterprisedomain.classmaker.scm.GitSCMOperator;
+import org.enterprisedomain.classmaker.scm.GitSCMRegistry;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
 import org.osgi.framework.Version;
 
@@ -102,7 +103,8 @@ public class PDEPluginExporter extends AbstractExporter {
 	private void cleanup(IProgressMonitor monitor) throws CoreException {
 		ResourceUtils.cleanupDir(getProject(), ResourceUtils.getTargetFolderName());
 		try {
-			GitUtil.add(getProject().getName(), ".");
+			GitSCMOperator operator = GitSCMRegistry.get(getProject().getName());
+			operator.add(".");
 		} catch (GitAPIException e) {
 			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 		}

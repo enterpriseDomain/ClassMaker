@@ -148,9 +148,9 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * 
 	 * @generated NOT
 	 */
-	public EPackage produce(EPackage dynamicModel) throws CoreException {
+	public EPackage make(EPackage dynamicModel) throws CoreException {
 		IProgressMonitor monitor = ClassMakerPlugin.getProgressMonitor();
-		return produce(dynamicModel, monitor);
+		return make(dynamicModel, monitor);
 	}
 
 	/**
@@ -158,12 +158,12 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * 
 	 * @generated NOT
 	 */
-	public Future<? extends EPackage> produce(final EPackage dynamicModel, Executor executor) throws CoreException {
+	public Future<? extends EPackage> make(final EPackage dynamicModel, Executor executor) throws CoreException {
 		return asyncExecute(new Callable<EPackage>() {
 
 			@Override
 			public EPackage call() throws Exception {
-				return produce(dynamicModel);
+				return make(dynamicModel);
 			}
 		}, executor);
 	}
@@ -173,9 +173,9 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * 
 	 * @generated NOT
 	 */
-	public EPackage produce(EPackage dynamicModel, IProgressMonitor monitor) throws CoreException {
+	public EPackage make(EPackage dynamicModel, IProgressMonitor monitor) throws CoreException {
 		EList<String> dependencies = ECollections.emptyEList();
-		return produce(dynamicModel, dependencies, monitor);
+		return make(dynamicModel, dependencies, monitor);
 	}
 
 	/**
@@ -183,13 +183,13 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * 
 	 * @generated NOT
 	 */
-	public Future<? extends EPackage> produce(final EPackage dynamicModel, Executor executor,
+	public Future<? extends EPackage> make(final EPackage dynamicModel, Executor executor,
 			final IProgressMonitor monitor) throws CoreException {
 		return asyncExecute(new Callable<EPackage>() {
 
 			@Override
 			public EPackage call() throws Exception {
-				return produce(dynamicModel, monitor);
+				return make(dynamicModel, monitor);
 			}
 		}, executor);
 	}
@@ -199,9 +199,9 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * 
 	 * @generated NOT
 	 */
-	public EPackage produce(EPackage dynamicModel, EList<String> dependencies) throws CoreException {
+	public EPackage make(EPackage dynamicModel, EList<String> dependencies) throws CoreException {
 		IProgressMonitor monitor = ClassMakerPlugin.getProgressMonitor();
-		return produce(dynamicModel, dependencies, monitor);
+		return make(dynamicModel, dependencies, monitor);
 	}
 
 	/**
@@ -209,15 +209,16 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * 
 	 * @generated NOT
 	 */
-	public Future<? extends EPackage> produce(final EPackage dynamicModel, final EList<String> dependencies,
+	public Future<? extends EPackage> make(final EPackage dynamicModel, final EList<String> dependencies,
 			Executor executor) throws CoreException {
 		return asyncExecute(new Callable<EPackage>() {
 
 			@Override
 			public EPackage call() throws Exception {
-				return produce(dynamicModel, dependencies);
+				return make(dynamicModel, dependencies);
 			}
 		}, executor);
+
 	}
 
 	/**
@@ -225,7 +226,7 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * 
 	 * @generated NOT
 	 */
-	public EPackage produce(EPackage dynamicModel, EList<String> dependencies, IProgressMonitor monitor)
+	public EPackage make(EPackage dynamicModel, EList<String> dependencies, IProgressMonitor monitor)
 			throws CoreException {
 		try {
 			Contribution contrib = getWorkspace().createContribution(dynamicModel, monitor);
@@ -243,13 +244,13 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * 
 	 * @generated NOT
 	 */
-	public Future<? extends EPackage> produce(final EPackage dynamicModel, final EList<String> dependencies,
+	public Future<? extends EPackage> make(final EPackage dynamicModel, final EList<String> dependencies,
 			Executor executor, final IProgressMonitor monitor) throws CoreException {
 		return asyncExecute(new Callable<EPackage>() {
 
 			@Override
 			public EPackage call() throws Exception {
-				return produce(dynamicModel, dependencies, monitor);
+				return make(dynamicModel, dependencies, monitor);
 			}
 		}, executor);
 	}

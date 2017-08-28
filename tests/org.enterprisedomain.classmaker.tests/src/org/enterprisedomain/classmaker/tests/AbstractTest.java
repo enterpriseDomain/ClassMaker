@@ -187,7 +187,7 @@ public abstract class AbstractTest {
 	protected EPackage testAPICreate(EPackage ePackage, String attributeName, EDataType attributeType,
 			Object attributeValue) throws CoreException, InterruptedException {
 		try {
-			EPackage result = service.produce(ePackage);
+			EPackage result = service.make(ePackage);
 			return testResult(result, attributeName, attributeType, attributeValue);
 		} catch (CoreException e) {
 			fail(e.getLocalizedMessage());
@@ -225,13 +225,13 @@ public abstract class AbstractTest {
 
 	protected EPackage saveAndTest(EPackage ePackage, String attributeName, Object attributeValue)
 			throws CoreException, InterruptedException {
-		EPackage e = service.produce(ePackage);
+		EPackage e = service.make(ePackage);
 		return test(e, attributeName, attributeValue);
 	}
 
 	private Future<? extends EPackage> save(final EPackage ePackage, Executor executor)
 			throws CoreException, InterruptedException {
-		return service.produce(ePackage, executor);
+		return service.make(ePackage, executor);
 	}
 
 	private Future<? extends EPackage> updateAndSave(EPackage ePackage, EPackage updated, Executor executor)

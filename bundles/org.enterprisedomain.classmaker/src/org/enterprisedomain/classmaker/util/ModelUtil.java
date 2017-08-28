@@ -29,11 +29,13 @@ public class ModelUtil {
 	/***
 	 * 
 	 * @param first
+	 *            the first EPackage
 	 * @param second
+	 *            the second EPackage
 	 * @param conjunction
 	 *            true if exact matching is required, false if at least one of
 	 *            features are equal
-	 * @return whether first and second are same EPackage
+	 * @return whether the first and the second are a same EPackages
 	 */
 	public static boolean ePackagesAreEqual(EPackage first, EPackage second, boolean conjunction) {
 		if (first == null ^ second == null)

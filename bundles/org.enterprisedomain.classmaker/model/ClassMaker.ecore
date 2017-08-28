@@ -586,14 +586,14 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="ClassMaker's facade API service."/>
     </eAnnotations>
-    <eOperations name="produce" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
+    <eOperations name="make" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
         eExceptions="#//CoreException">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Performs EPackage generation, build and export, then installs results into OSGi container and loads generated EPackage class."/>
       </eAnnotations>
       <eParameters name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
     </eOperations>
-    <eOperations name="produce" eExceptions="#//CoreException">
+    <eOperations name="make" eExceptions="#//CoreException">
       <eGenericType eClassifier="#//Future">
         <eTypeArguments>
           <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
@@ -602,12 +602,12 @@
       <eParameters name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
       <eParameters name="executor" eType="#//Executor"/>
     </eOperations>
-    <eOperations name="produce" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
+    <eOperations name="make" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
         eExceptions="#//CoreException">
       <eParameters name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
-    <eOperations name="produce" eExceptions="#//CoreException">
+    <eOperations name="make" eExceptions="#//CoreException">
       <eGenericType eClassifier="#//Future">
         <eTypeArguments>
           <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
@@ -617,12 +617,12 @@
       <eParameters name="executor" eType="#//Executor"/>
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
-    <eOperations name="produce" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
+    <eOperations name="make" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
         eExceptions="#//CoreException">
       <eParameters name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
       <eParameters name="dependencies" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
-    <eOperations name="produce" eExceptions="#//CoreException">
+    <eOperations name="make" eExceptions="#//CoreException">
       <eGenericType eClassifier="#//Future">
         <eTypeArguments>
           <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
@@ -632,13 +632,13 @@
       <eParameters name="dependencies" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eParameters name="executor" eType="#//Executor"/>
     </eOperations>
-    <eOperations name="produce" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
+    <eOperations name="make" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
         eExceptions="#//CoreException">
       <eParameters name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
       <eParameters name="dependencies" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
-    <eOperations name="produce" eExceptions="#//CoreException">
+    <eOperations name="make" eExceptions="#//CoreException">
       <eGenericType eClassifier="#//Future">
         <eTypeArguments>
           <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>

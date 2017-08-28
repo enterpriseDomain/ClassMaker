@@ -101,7 +101,7 @@ public interface ClassMakerPlant extends EObject {
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
 	 * @generated
 	 */
-	EPackage produce(EPackage dynamicModel) throws CoreException;
+	EPackage make(EPackage dynamicModel) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -112,7 +112,7 @@ public interface ClassMakerPlant extends EObject {
 	 *        executorType="org.enterprisedomain.classmaker.Executor"
 	 * @generated
 	 */
-	Future<? extends EPackage> produce(EPackage dynamicModel, Executor executor) throws CoreException;
+	Future<? extends EPackage> make(EPackage dynamicModel, Executor executor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -121,7 +121,7 @@ public interface ClassMakerPlant extends EObject {
 	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
-	EPackage produce(EPackage dynamicModel, IProgressMonitor monitor) throws CoreException;
+	EPackage make(EPackage dynamicModel, IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -133,7 +133,7 @@ public interface ClassMakerPlant extends EObject {
 	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
-	Future<? extends EPackage> produce(EPackage dynamicModel, Executor executor, IProgressMonitor monitor)
+	Future<? extends EPackage> make(EPackage dynamicModel, Executor executor, IProgressMonitor monitor)
 			throws CoreException;
 
 	/**
@@ -143,7 +143,7 @@ public interface ClassMakerPlant extends EObject {
 	 *        dependenciesMany="true"
 	 * @generated
 	 */
-	EPackage produce(EPackage dynamicModel, EList<String> dependencies) throws CoreException;
+	EPackage make(EPackage dynamicModel, EList<String> dependencies) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -155,7 +155,7 @@ public interface ClassMakerPlant extends EObject {
 	 *        executorType="org.enterprisedomain.classmaker.Executor"
 	 * @generated
 	 */
-	Future<? extends EPackage> produce(EPackage dynamicModel, EList<String> dependencies, Executor executor)
+	Future<? extends EPackage> make(EPackage dynamicModel, EList<String> dependencies, Executor executor)
 			throws CoreException;
 
 	/**
@@ -166,7 +166,7 @@ public interface ClassMakerPlant extends EObject {
 	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
-	EPackage produce(EPackage dynamicModel, EList<String> dependencies, IProgressMonitor monitor) throws CoreException;
+	EPackage make(EPackage dynamicModel, EList<String> dependencies, IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -179,7 +179,7 @@ public interface ClassMakerPlant extends EObject {
 	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
-	Future<? extends EPackage> produce(EPackage dynamicModel, EList<String> dependencies, Executor executor,
+	Future<? extends EPackage> make(EPackage dynamicModel, EList<String> dependencies, Executor executor,
 			IProgressMonitor monitor) throws CoreException;
 
 	/**

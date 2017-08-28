@@ -115,7 +115,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 
 		assertNotNull(service);
 
-		EPackage ePackage = service.produce(readerEPackage, getProgressMonitor());
+		EPackage ePackage = service.make(readerEPackage, getProgressMonitor());
 		assertNotNull(ePackage);
 		EClass theClass = (EClass) ePackage.getEClassifier(eClass.getName());
 		EObject theObject = ePackage.getEFactoryInstance().create(theClass);
@@ -166,7 +166,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		eClass.setName(className1);
 		ePackage.getEClassifiers().add(eClass);
 
-		ePackage = tested.produce(ePackage, getProgressMonitor());
+		ePackage = tested.make(ePackage, getProgressMonitor());
 		assertNotNull(ePackage);
 		assertObjectClass(className0, ePackage);
 		assertObjectClass(className1, ePackage);
@@ -219,7 +219,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		modelClass.getEStructuralFeatures().add(objectsReference);
 		metaPackage.getEClassifiers().add(modelClass);
 
-		EPackage ePackage = service.produce(metaPackage);
+		EPackage ePackage = service.make(metaPackage);
 		assertNotNull(ePackage);
 		EClass resultClass = (EClass) ePackage.getEClassifier(metaClass.getName());
 		EObject metaClassObject = ePackage.getEFactoryInstance().create(resultClass);
@@ -270,7 +270,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 				+ "\teType := type;\n}\n");
 		EPackage metaModel = (EPackage) service.transform(nativeModel, URI.createFileURI(qvt.toString()));
 		assertNotNull(metaModel);
-		EPackage resultMetaModel = service.produce(metaModel);
+		EPackage resultMetaModel = service.make(metaModel);
 		assertNotNull(resultMetaModel);
 		EObject o = resultMetaModel.getEFactoryInstance()
 				.create((EClass) resultMetaModel.getEClassifier(domainClassName));
@@ -334,7 +334,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		a = f.createEAnnotation();
 		a.setSource("http://www.eclipse.org/emf/2002/GenModel");
 		a.getDetails().put("body", "return <%org.enterprisedomain.classmaker.core.ClassMakerPlugin%>"
-				+ ".getClassMaker().produce(getProduct());\n");
+				+ ".getClassMaker().make(getProduct());\n");
 		opBuild.getEAnnotations().add(a);
 		a = f.createEAnnotation();
 		a.setSource(ClassMakerPlant.INVOCATION_DELEGATE_URI);
@@ -353,7 +353,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 
 		EList<String> dependencies = ECollections.newBasicEList();
 		dependencies.add(ClassMakerPlugin.PLUGIN_ID);
-		EPackage creator = service.produce(p, dependencies);
+		EPackage creator = service.make(p, dependencies);
 		EObject builder = (EObject) creator.getEFactoryInstance().create((EClass) creator.getEClassifier(c.getName()));
 		EList<Object> args = ECollections.newBasicEList();
 		args.add("world");
@@ -383,7 +383,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		a.setEType(EcorePackage.Literals.EJAVA_OBJECT);
 		cl.getEStructuralFeatures().add(a);
 		p.getEClassifiers().add(cl);
-		EPackage e0 = service.produce(p, getProgressMonitor());
+		EPackage e0 = service.make(p, getProgressMonitor());
 		EClass c0 = (EClass) e0.getEClassifier(cl.getName());
 		o = e0.getEFactoryInstance().create(c0);
 		assertEquals(c0.getName(), o.getClass().getSimpleName());
@@ -471,7 +471,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		Resource resource = resourceSet.createResource(resourceURI);
 		resource.getContents().add(p);
 		resource.save(Collections.emptyMap());
-		EPackage r = service.produce(p);
+		EPackage r = service.make(p);
 		assertNotNull(r);
 	}
 

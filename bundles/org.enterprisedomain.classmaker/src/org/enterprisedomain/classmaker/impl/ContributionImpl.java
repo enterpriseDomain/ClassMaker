@@ -73,7 +73,8 @@ import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
-import org.enterprisedomain.classmaker.util.GitUtil;
+import org.enterprisedomain.classmaker.scm.GitSCMOperator;
+import org.enterprisedomain.classmaker.scm.GitSCMRegistry;
 import org.enterprisedomain.classmaker.util.ListUtil;
 import org.enterprisedomain.classmaker.util.ModelUtil;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
@@ -675,8 +676,9 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	 * @generated NOT
 	 */
 	public String initialize(boolean commit) {
+		GitSCMOperator operator = GitSCMRegistry.get(getProjectName());
 		try {
-			Git git = GitUtil.getRepositoryGit(getProjectName());
+			Git git = operator.getRepositorySCM();
 
 			String currentBranch = git.getRepository().getBranch();
 
@@ -690,7 +692,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 					branch = it.next();
 					String[] name = branch.getName().split("/"); //$NON-NLS-1$
 					try {
-						version = GitUtil.getVersion(name[name.length - 1]);
+						version = operator.getVersion(name[name.length - 1]);
 					} catch (IllegalArgumentException e) {
 						continue;
 					}
@@ -703,7 +705,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 				setVersion(ListUtil.getLast(getRevisions()).getKey());
 
 			String commitId = getRevision().initialize(commit);
-			if (currentBranch.equals(GitUtil.MASTER_BRANCH))
+			if (currentBranch.equals(GitSCMOperator.MASTER_BRANCH))
 				checkout(getVersion());
 			return commitId;
 		} catch (GitAPIException e) {
@@ -714,7 +716,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 			return null;
 		} finally {
 			try {
-				GitUtil.ungetRepositoryGit(getProjectName());
+				operator.ungetRepositorySCM();
 			} catch (GitAPIException e) {
 				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 			}
@@ -784,8 +786,9 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 			if (getProjectName().isEmpty())
 				return;
 			Git git = null;
+			GitSCMOperator operator = GitSCMRegistry.get(getProjectName());
 			try {
-				git = GitUtil.getRepositoryGit(getProjectName());
+				git = operator.getRepositorySCM();
 				Ref ref = git.getRepository().findRef(version.toString());
 				if (ref != null)
 					git.checkout().setName(ref.getName()).call();
@@ -805,7 +808,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 			} finally {
 				try {
-					GitUtil.ungetRepositoryGit(getProjectName());
+					operator.ungetRepositorySCM();
 				} catch (GitAPIException e) {
 					ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 				}
@@ -1143,8 +1146,9 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 		if (isRevisionSet()) {
 			if (create) {
 				try {
-					GitUtil.add(getProjectName(), ".");
-					GitUtil.commit(getProjectName(), getProjectName());
+					GitSCMOperator operator = GitSCMRegistry.get(getProjectName());
+					operator.add(".");
+					operator.commit(getProjectName());
 				} catch (GitAPIException e) {
 					throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 				}
