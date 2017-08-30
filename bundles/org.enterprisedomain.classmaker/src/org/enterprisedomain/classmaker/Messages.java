@@ -32,7 +32,7 @@ public class Messages extends NLS {
 	public static String JobNameGenModelConfiguration;
 	public static String JobNameGenModelGeneration;
 	public static String JobNameInstaller;
-	public static String JobNameLoad;
+	public static String JobNameLoader;
 	public static String DefaultModelFolder;
 	public static String ModelNotSpecified;
 	public static String JobNameModelResource;

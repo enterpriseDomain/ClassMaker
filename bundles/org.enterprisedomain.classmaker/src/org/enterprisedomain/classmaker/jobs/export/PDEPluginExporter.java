@@ -24,7 +24,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.api.Git;
 import org.eclipse.pde.core.IEditableModel;
 import org.eclipse.pde.core.build.IBuild;
 import org.eclipse.pde.core.build.IBuildEntry;
@@ -37,11 +37,11 @@ import org.eclipse.pde.internal.core.PluginModelManager;
 import org.eclipse.pde.internal.core.exports.FeatureExportInfo;
 import org.eclipse.pde.internal.core.exports.PluginExportOperation;
 import org.enterprisedomain.classmaker.Messages;
+import org.enterprisedomain.classmaker.SCMOperator;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.jobs.DelegatingJob;
-import org.enterprisedomain.classmaker.scm.GitSCMOperator;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
 import org.osgi.framework.Version;
 
@@ -102,9 +102,9 @@ public class PDEPluginExporter extends AbstractExporter {
 	private void cleanup(IProgressMonitor monitor) throws CoreException {
 		ResourceUtils.cleanupDir(getProject(), ResourceUtils.getTargetFolderName());
 		try {
-			GitSCMOperator operator = ClassMakerPlugin.getClassMaker().getSCMRegistry().get(getProject().getName());
+			SCMOperator<Git> operator = ClassMakerPlugin.getClassMaker().getSCMRegistry().get(getProject().getName());
 			operator.add(".");
-		} catch (GitAPIException e) {
+		} catch (Exception e) {
 			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 		}
 		getProject().refreshLocal(IResource.DEPTH_INFINITE, monitor);

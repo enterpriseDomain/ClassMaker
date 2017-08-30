@@ -149,6 +149,10 @@
       </eAnnotations>
     </eOperations>
     <eOperations name="saveResource"/>
+    <eOperations name="createGenerator" eType="#//Generator"/>
+    <eOperations name="createExporter" eType="#//Exporter"/>
+    <eOperations name="createInstaller" eType="#//Installer"/>
+    <eOperations name="createLoader" eType="#//ModelLoader"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="requiredPlugins" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="revision" eType="#//Revision"
@@ -555,6 +559,83 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//Item"
         eOpposite="#//Item/domainModel"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SCMOperator" abstract="true">
+    <eTypeParameters name="T"/>
+    <eOperations name="getRepositorySCM" eExceptions="#//Exception">
+      <eGenericType eTypeParameter="#//SCMOperator/T"/>
+    </eOperations>
+    <eOperations name="ungetRepositorySCM" eExceptions="#//Exception"/>
+    <eOperations name="add" eExceptions="#//Exception">
+      <eParameters name="filepattern" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="commit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        eExceptions="#//Exception">
+      <eParameters name="commitMessage" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="decodeTimestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eParameters name="commitMessage" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="decodeVersion" eType="#//OSGiVersion">
+      <eParameters name="commitMessage" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="encodeCommitMessage" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eParameters name="state" eType="#//State"/>
+      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="deleteProject"/>
+    <eOperations name="checkout" eExceptions="#//Exception">
+      <eParameters name="branch" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="commitId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="checkoutOrphan" eExceptions="#//Exception">
+      <eParameters name="branch" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="projectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SCMRegistry">
+    <eTypeParameters name="T"/>
+    <eOperations name="contains" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="projectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="get">
+      <eGenericType eClassifier="#//SCMOperator">
+        <eTypeArguments eTypeParameter="#//SCMRegistry/T"/>
+      </eGenericType>
+      <eParameters name="projectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="put">
+      <eParameters name="projectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="operator">
+        <eGenericType eClassifier="#//SCMOperator">
+          <eTypeArguments eTypeParameter="#//SCMRegistry/T"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="containsSCM" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="projectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="getSCM">
+      <eGenericType eTypeParameter="#//SCMRegistry/T"/>
+      <eParameters name="projectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="putSCM">
+      <eParameters name="projectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="scm">
+        <eGenericType eTypeParameter="#//SCMRegistry/T"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="removeSCM">
+      <eParameters name="projectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="createSCMOperator">
+      <eGenericType eClassifier="#//SCMOperator">
+        <eTypeArguments eTypeParameter="#//SCMRegistry/T"/>
+      </eGenericType>
+      <eParameters name="projectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Resource" instanceClassName="org.eclipse.emf.ecore.resource.Resource"
       abstract="true" interface="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -778,7 +859,7 @@
       <eParameters name="packageName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="workspace" eType="#//Workspace"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="SCMRegistry" eType="#//GitSCMRegistry"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="SCMRegistry" eType="#//SCMRegistry"
         changeable="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Locale" instanceClassName="java.util.Locale">
@@ -790,5 +871,12 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="error" eType="#//IStatus"
         changeable="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="GitSCMRegistry" instanceClassName="org.enterprisedomain.classmaker.scm.GitSCMRegistry"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Generator" instanceClassName="org.enterprisedomain.classmaker.jobs.codegen.Generator"
+      abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Exporter" instanceClassName="org.enterprisedomain.classmaker.jobs.export.Exporter"
+      abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Installer" instanceClassName="org.enterprisedomain.classmaker.jobs.install.Installer"
+      abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ModelLoader" instanceClassName="org.enterprisedomain.classmaker.jobs.load.ModelLoader"
+      abstract="true" interface="true"/>
 </ecore:EPackage>

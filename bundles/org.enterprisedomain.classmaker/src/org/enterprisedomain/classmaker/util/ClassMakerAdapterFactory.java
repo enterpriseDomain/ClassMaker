@@ -37,9 +37,15 @@ import org.enterprisedomain.classmaker.ModelPair;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.ResourceAdapter;
 import org.enterprisedomain.classmaker.Revision;
+import org.enterprisedomain.classmaker.SCMOperator;
+import org.enterprisedomain.classmaker.SCMRegistry;
 import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
+import org.enterprisedomain.classmaker.jobs.codegen.Generator;
+import org.enterprisedomain.classmaker.jobs.export.Exporter;
+import org.enterprisedomain.classmaker.jobs.install.Installer;
+import org.enterprisedomain.classmaker.jobs.load.ModelLoader;
 import org.osgi.framework.Version;
 
 /**
@@ -183,6 +189,16 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public <T> Adapter caseSCMOperator(SCMOperator<T> object) {
+			return createSCMOperatorAdapter();
+		}
+
+		@Override
+		public <T> Adapter caseSCMRegistry(SCMRegistry<T> object) {
+			return createSCMRegistryAdapter();
+		}
+
+		@Override
 		public Adapter caseResource(Resource object) {
 			return createResourceAdapter();
 		}
@@ -205,6 +221,26 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseCompletionNotificationAdapter(CompletionNotificationAdapter object) {
 			return createCompletionNotificationAdapterAdapter();
+		}
+
+		@Override
+		public Adapter caseGenerator(Generator object) {
+			return createGeneratorAdapter();
+		}
+
+		@Override
+		public Adapter caseExporter(Exporter object) {
+			return createExporterAdapter();
+		}
+
+		@Override
+		public Adapter caseInstaller(Installer object) {
+			return createInstallerAdapter();
+		}
+
+		@Override
+		public Adapter caseModelLoader(ModelLoader object) {
+			return createModelLoaderAdapter();
 		}
 
 		@Override
@@ -484,6 +520,36 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class
+	 * '{@link org.enterprisedomain.classmaker.SCMOperator <em>SCM Operator</em>}'.
+	 * <!-- begin-user-doc --> This default implementation returns null so that we
+	 * can easily ignore cases; it's useful to ignore a case when inheritance will
+	 * catch all the cases anyway. <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see org.enterprisedomain.classmaker.SCMOperator
+	 * @generated
+	 */
+	public Adapter createSCMOperatorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class
+	 * '{@link org.enterprisedomain.classmaker.SCMRegistry <em>SCM Registry</em>}'.
+	 * <!-- begin-user-doc --> This default implementation returns null so that we
+	 * can easily ignore cases; it's useful to ignore a case when inheritance will
+	 * catch all the cases anyway. <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see org.enterprisedomain.classmaker.SCMRegistry
+	 * @generated
+	 */
+	public Adapter createSCMRegistryAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class
 	 * '{@link org.eclipse.emf.ecore.resource.Resource <em>Resource</em>}'. <!--
 	 * begin-user-doc --> This default implementation returns null so that we can
 	 * easily ignore cases; it's useful to ignore a case when inheritance will catch
@@ -555,6 +621,66 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCompletionNotificationAdapterAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class
+	 * '{@link org.enterprisedomain.classmaker.jobs.codegen.Generator
+	 * <em>Generator</em>}'. <!-- begin-user-doc --> This default implementation
+	 * returns null so that we can easily ignore cases; it's useful to ignore a case
+	 * when inheritance will catch all the cases anyway. <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see org.enterprisedomain.classmaker.jobs.codegen.Generator
+	 * @generated
+	 */
+	public Adapter createGeneratorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class
+	 * '{@link org.enterprisedomain.classmaker.jobs.export.Exporter
+	 * <em>Exporter</em>}'. <!-- begin-user-doc --> This default implementation
+	 * returns null so that we can easily ignore cases; it's useful to ignore a case
+	 * when inheritance will catch all the cases anyway. <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see org.enterprisedomain.classmaker.jobs.export.Exporter
+	 * @generated
+	 */
+	public Adapter createExporterAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class
+	 * '{@link org.enterprisedomain.classmaker.jobs.install.Installer
+	 * <em>Installer</em>}'. <!-- begin-user-doc --> This default implementation
+	 * returns null so that we can easily ignore cases; it's useful to ignore a case
+	 * when inheritance will catch all the cases anyway. <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see org.enterprisedomain.classmaker.jobs.install.Installer
+	 * @generated
+	 */
+	public Adapter createInstallerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class
+	 * '{@link org.enterprisedomain.classmaker.jobs.load.ModelLoader <em>Model
+	 * Loader</em>}'. <!-- begin-user-doc --> This default implementation returns
+	 * null so that we can easily ignore cases; it's useful to ignore a case when
+	 * inheritance will catch all the cases anyway. <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see org.enterprisedomain.classmaker.jobs.load.ModelLoader
+	 * @generated
+	 */
+	public Adapter createModelLoaderAdapter() {
 		return null;
 	}
 

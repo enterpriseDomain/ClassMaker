@@ -37,9 +37,15 @@ import org.enterprisedomain.classmaker.ModelPair;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.ResourceAdapter;
 import org.enterprisedomain.classmaker.Revision;
+import org.enterprisedomain.classmaker.SCMOperator;
+import org.enterprisedomain.classmaker.SCMRegistry;
 import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
+import org.enterprisedomain.classmaker.jobs.codegen.Generator;
+import org.enterprisedomain.classmaker.jobs.export.Exporter;
+import org.enterprisedomain.classmaker.jobs.install.Installer;
+import org.enterprisedomain.classmaker.jobs.load.ModelLoader;
 import org.osgi.framework.Version;
 
 /**
@@ -53,7 +59,7 @@ import org.osgi.framework.Version;
  * @see org.enterprisedomain.classmaker.ClassMakerPackage
  * @generated
  */
-public class ClassMakerSwitch<T> extends Switch<T> {
+public class ClassMakerSwitch<T1> extends Switch<T1> {
 	/**
 	 * The cached model package <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -96,11 +102,11 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	@Override
-	protected T doSwitch(int classifierID, EObject theEObject) {
+	protected T1 doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
 		case ClassMakerPackage.CONTRIBUTION: {
 			Contribution contribution = (Contribution) theEObject;
-			T result = caseContribution(contribution);
+			T1 result = caseContribution(contribution);
 			if (result == null)
 				result = caseProject(contribution);
 			if (result == null)
@@ -115,7 +121,7 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 		}
 		case ClassMakerPackage.REVISION: {
 			Revision revision = (Revision) theEObject;
-			T result = caseRevision(revision);
+			T1 result = caseRevision(revision);
 			if (result == null)
 				result = caseItem(revision);
 			if (result == null)
@@ -124,7 +130,7 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 		}
 		case ClassMakerPackage.STATE: {
 			State state = (State) theEObject;
-			T result = caseState(state);
+			T1 result = caseState(state);
 			if (result == null)
 				result = caseItem(state);
 			if (result == null)
@@ -135,21 +141,21 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 		}
 		case ClassMakerPackage.ITEM: {
 			Item item = (Item) theEObject;
-			T result = caseItem(item);
+			T1 result = caseItem(item);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
 		case ClassMakerPackage.ADAPTER: {
 			Adapter adapter = (Adapter) theEObject;
-			T result = caseAdapter(adapter);
+			T1 result = caseAdapter(adapter);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
 		case ClassMakerPackage.WORKSPACE: {
 			Workspace workspace = (Workspace) theEObject;
-			T result = caseWorkspace(workspace);
+			T1 result = caseWorkspace(workspace);
 			if (result == null)
 				result = caseISchedulingRule(workspace);
 			if (result == null)
@@ -159,7 +165,7 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 		case ClassMakerPackage.INTEGER_TO_STATE_MAP_ENTRY: {
 			@SuppressWarnings("unchecked")
 			Map.Entry<Integer, State> integerToStateMapEntry = (Map.Entry<Integer, State>) theEObject;
-			T result = caseIntegerToStateMapEntry(integerToStateMapEntry);
+			T1 result = caseIntegerToStateMapEntry(integerToStateMapEntry);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -167,49 +173,49 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 		case ClassMakerPackage.VERSION_TO_REVISION_MAP_ENTRY: {
 			@SuppressWarnings("unchecked")
 			Map.Entry<Version, Revision> versionToRevisionMapEntry = (Map.Entry<Version, Revision>) theEObject;
-			T result = caseVersionToRevisionMapEntry(versionToRevisionMapEntry);
+			T1 result = caseVersionToRevisionMapEntry(versionToRevisionMapEntry);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
 		case ClassMakerPackage.ISCHEDULING_RULE: {
 			ISchedulingRule iSchedulingRule = (ISchedulingRule) theEObject;
-			T result = caseISchedulingRule(iSchedulingRule);
+			T1 result = caseISchedulingRule(iSchedulingRule);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
 		case ClassMakerPackage.EXECUTOR: {
 			Executor executor = (Executor) theEObject;
-			T result = caseExecutor(executor);
+			T1 result = caseExecutor(executor);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
 		case ClassMakerPackage.FUTURE: {
 			Future<?> future = (Future<?>) theEObject;
-			T result = caseFuture(future);
+			T1 result = caseFuture(future);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
 		case ClassMakerPackage.IADAPTER_FACTORY: {
 			IAdapterFactory iAdapterFactory = (IAdapterFactory) theEObject;
-			T result = caseIAdapterFactory(iAdapterFactory);
+			T1 result = caseIAdapterFactory(iAdapterFactory);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
 		case ClassMakerPackage.CUSTOMIZER: {
 			Customizer customizer = (Customizer) theEObject;
-			T result = caseCustomizer(customizer);
+			T1 result = caseCustomizer(customizer);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
 		case ClassMakerPackage.STAGE_QUALIFIER: {
 			StageQualifier stageQualifier = (StageQualifier) theEObject;
-			T result = caseStageQualifier(stageQualifier);
+			T1 result = caseStageQualifier(stageQualifier);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -217,14 +223,14 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 		case ClassMakerPackage.STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY: {
 			@SuppressWarnings("unchecked")
 			Map.Entry<StageQualifier, Customizer> stageQualifierToCustomizerMapEntry = (Map.Entry<StageQualifier, Customizer>) theEObject;
-			T result = caseStageQualifierToCustomizerMapEntry(stageQualifierToCustomizerMapEntry);
+			T1 result = caseStageQualifierToCustomizerMapEntry(stageQualifierToCustomizerMapEntry);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
 		case ClassMakerPackage.PROJECT: {
 			Project project = (Project) theEObject;
-			T result = caseProject(project);
+			T1 result = caseProject(project);
 			if (result == null)
 				result = caseISchedulingRule(project);
 			if (result == null)
@@ -233,28 +239,42 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 		}
 		case ClassMakerPackage.MODEL_PAIR: {
 			ModelPair modelPair = (ModelPair) theEObject;
-			T result = caseModelPair(modelPair);
+			T1 result = caseModelPair(modelPair);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ClassMakerPackage.SCM_OPERATOR: {
+			SCMOperator<?> scmOperator = (SCMOperator<?>) theEObject;
+			T1 result = caseSCMOperator(scmOperator);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ClassMakerPackage.SCM_REGISTRY: {
+			SCMRegistry<?> scmRegistry = (SCMRegistry<?>) theEObject;
+			T1 result = caseSCMRegistry(scmRegistry);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
 		case ClassMakerPackage.RESOURCE: {
 			Resource resource = (Resource) theEObject;
-			T result = caseResource(resource);
+			T1 result = caseResource(resource);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
 		case ClassMakerPackage.COMPLETION_LISTENER: {
 			CompletionListener completionListener = (CompletionListener) theEObject;
-			T result = caseCompletionListener(completionListener);
+			T1 result = caseCompletionListener(completionListener);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
 		case ClassMakerPackage.RESOURCE_ADAPTER: {
 			ResourceAdapter resourceAdapter = (ResourceAdapter) theEObject;
-			T result = caseResourceAdapter(resourceAdapter);
+			T1 result = caseResourceAdapter(resourceAdapter);
 			if (result == null)
 				result = caseAdapter(resourceAdapter);
 			if (result == null)
@@ -263,16 +283,44 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 		}
 		case ClassMakerPackage.CLASS_MAKER_PLANT: {
 			ClassMakerPlant classMakerPlant = (ClassMakerPlant) theEObject;
-			T result = caseClassMakerPlant(classMakerPlant);
+			T1 result = caseClassMakerPlant(classMakerPlant);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
 		case ClassMakerPackage.COMPLETION_NOTIFICATION_ADAPTER: {
 			CompletionNotificationAdapter completionNotificationAdapter = (CompletionNotificationAdapter) theEObject;
-			T result = caseCompletionNotificationAdapter(completionNotificationAdapter);
+			T1 result = caseCompletionNotificationAdapter(completionNotificationAdapter);
 			if (result == null)
 				result = caseAdapter(completionNotificationAdapter);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ClassMakerPackage.GENERATOR: {
+			Generator generator = (Generator) theEObject;
+			T1 result = caseGenerator(generator);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ClassMakerPackage.EXPORTER: {
+			Exporter exporter = (Exporter) theEObject;
+			T1 result = caseExporter(exporter);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ClassMakerPackage.INSTALLER: {
+			Installer installer = (Installer) theEObject;
+			T1 result = caseInstaller(installer);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ClassMakerPackage.MODEL_LOADER: {
+			ModelLoader modelLoader = (ModelLoader) theEObject;
+			T1 result = caseModelLoader(modelLoader);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -295,7 +343,7 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseContribution(Contribution object) {
+	public T1 caseContribution(Contribution object) {
 		return null;
 	}
 
@@ -312,7 +360,7 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRevision(Revision object) {
+	public T1 caseRevision(Revision object) {
 		return null;
 	}
 
@@ -328,7 +376,7 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseState(State object) {
+	public T1 caseState(State object) {
 		return null;
 	}
 
@@ -344,7 +392,7 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseItem(Item object) {
+	public T1 caseItem(Item object) {
 		return null;
 	}
 
@@ -360,7 +408,7 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAdapter(Adapter object) {
+	public T1 caseAdapter(Adapter object) {
 		return null;
 	}
 
@@ -377,7 +425,7 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseWorkspace(Workspace object) {
+	public T1 caseWorkspace(Workspace object) {
 		return null;
 	}
 
@@ -394,7 +442,7 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseIntegerToStateMapEntry(Map.Entry<Integer, State> object) {
+	public T1 caseIntegerToStateMapEntry(Map.Entry<Integer, State> object) {
 		return null;
 	}
 
@@ -411,7 +459,7 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseVersionToRevisionMapEntry(Map.Entry<Version, Revision> object) {
+	public T1 caseVersionToRevisionMapEntry(Map.Entry<Version, Revision> object) {
 		return null;
 	}
 
@@ -428,7 +476,7 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseISchedulingRule(ISchedulingRule object) {
+	public T1 caseISchedulingRule(ISchedulingRule object) {
 		return null;
 	}
 
@@ -445,7 +493,7 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseExecutor(Executor object) {
+	public T1 caseExecutor(Executor object) {
 		return null;
 	}
 
@@ -461,7 +509,7 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public <V> T caseFuture(Future<V> object) {
+	public <V> T1 caseFuture(Future<V> object) {
 		return null;
 	}
 
@@ -477,7 +525,7 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseIAdapterFactory(IAdapterFactory object) {
+	public T1 caseIAdapterFactory(IAdapterFactory object) {
 		return null;
 	}
 
@@ -494,7 +542,7 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseCustomizer(Customizer object) {
+	public T1 caseCustomizer(Customizer object) {
 		return null;
 	}
 
@@ -510,7 +558,7 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseStageQualifier(StageQualifier object) {
+	public T1 caseStageQualifier(StageQualifier object) {
 		return null;
 	}
 
@@ -527,7 +575,7 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseStageQualifierToCustomizerMapEntry(Map.Entry<StageQualifier, Customizer> object) {
+	public T1 caseStageQualifierToCustomizerMapEntry(Map.Entry<StageQualifier, Customizer> object) {
 		return null;
 	}
 
@@ -543,7 +591,7 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseProject(Project object) {
+	public T1 caseProject(Project object) {
 		return null;
 	}
 
@@ -559,7 +607,39 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseModelPair(ModelPair object) {
+	public T1 caseModelPair(ModelPair object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>SCM
+	 * Operator</em>'. <!-- begin-user-doc --> This implementation returns null;
+	 * returning a non-null result will terminate the switch. <!-- end-user-doc -->
+	 * 
+	 * @param object
+	 *            the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>SCM
+	 *         Operator</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <T> T1 caseSCMOperator(SCMOperator<T> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>SCM
+	 * Registry</em>'. <!-- begin-user-doc --> This implementation returns null;
+	 * returning a non-null result will terminate the switch. <!-- end-user-doc -->
+	 * 
+	 * @param object
+	 *            the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>SCM
+	 *         Registry</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <T> T1 caseSCMRegistry(SCMRegistry<T> object) {
 		return null;
 	}
 
@@ -576,7 +656,7 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseResource(Resource object) {
+	public T1 caseResource(Resource object) {
 		return null;
 	}
 
@@ -593,7 +673,7 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseCompletionListener(CompletionListener object) {
+	public T1 caseCompletionListener(CompletionListener object) {
 		return null;
 	}
 
@@ -609,7 +689,7 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseResourceAdapter(ResourceAdapter object) {
+	public T1 caseResourceAdapter(ResourceAdapter object) {
 		return null;
 	}
 
@@ -625,7 +705,7 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseClassMakerPlant(ClassMakerPlant object) {
+	public T1 caseClassMakerPlant(ClassMakerPlant object) {
 		return null;
 	}
 
@@ -642,7 +722,74 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseCompletionNotificationAdapter(CompletionNotificationAdapter object) {
+	public T1 caseCompletionNotificationAdapter(CompletionNotificationAdapter object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of
+	 * '<em>Generator</em>'. <!-- begin-user-doc --> This implementation returns
+	 * null; returning a non-null result will terminate the switch. <!--
+	 * end-user-doc -->
+	 * 
+	 * @param object
+	 *            the target of the switch.
+	 * @return the result of interpreting the object as an instance of
+	 *         '<em>Generator</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseGenerator(Generator object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of
+	 * '<em>Exporter</em>'. <!-- begin-user-doc --> This implementation returns
+	 * null; returning a non-null result will terminate the switch. <!--
+	 * end-user-doc -->
+	 * 
+	 * @param object
+	 *            the target of the switch.
+	 * @return the result of interpreting the object as an instance of
+	 *         '<em>Exporter</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseExporter(Exporter object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of
+	 * '<em>Installer</em>'. <!-- begin-user-doc --> This implementation returns
+	 * null; returning a non-null result will terminate the switch. <!--
+	 * end-user-doc -->
+	 * 
+	 * @param object
+	 *            the target of the switch.
+	 * @return the result of interpreting the object as an instance of
+	 *         '<em>Installer</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseInstaller(Installer object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Model
+	 * Loader</em>'. <!-- begin-user-doc --> This implementation returns null;
+	 * returning a non-null result will terminate the switch. <!-- end-user-doc -->
+	 * 
+	 * @param object
+	 *            the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Model
+	 *         Loader</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseModelLoader(ModelLoader object) {
 		return null;
 	}
 
@@ -660,7 +807,7 @@ public class ClassMakerSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	@Override
-	public T defaultCase(EObject object) {
+	public T1 defaultCase(EObject object) {
 		return null;
 	}
 

@@ -10,25 +10,28 @@ import org.eclipse.jgit.api.AddCommand;
 import org.eclipse.jgit.api.CommitCommand;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.InitCommand;
-import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.errors.RepositoryNotFoundException;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
+import org.enterprisedomain.classmaker.impl.SCMOperatorImpl;
 import org.osgi.framework.Version;
 
-public class GitSCMOperator {
+public class GitSCMOperator extends SCMOperatorImpl<Git> {
 
-	private String projectName;
-
-	public GitSCMOperator(String projectName) {
-		this.projectName = projectName;
+	@Override
+	public synchronized Git getRepositorySCM() throws Exception {
+		Git git = (Git) ClassMakerPlugin.getClassMaker().getSCMRegistry().getSCM(getProjectName());
+		if (git != null)
+			return git;
+		IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+		IPath projectGitPath = workspaceRoot.getLocation()
+				.append(workspaceRoot.getProject(getProjectName()).getFullPath());
+		return getRepositorySCM(projectGitPath.toFile());
 	}
 
-	public static final String MASTER_BRANCH = "master"; // $NON-NLS-1$
-
-	public static synchronized Git getRepositorySCM(File dir) throws GitAPIException {
-		Git git = ClassMakerPlugin.getClassMaker().getSCMRegistry().getSCM(dir.getName());
+	public static synchronized Git getRepositorySCM(File dir) throws Exception {
+		Git git = (Git) ClassMakerPlugin.getClassMaker().getSCMRegistry().getSCM(dir.getName());
 		try {
 			git = Git.open(dir);
 		} catch (RepositoryNotFoundException e) {
@@ -42,49 +45,17 @@ public class GitSCMOperator {
 		return git;
 	}
 
-	public synchronized Git getRepositorySCM() throws GitAPIException {
-		Git git = ClassMakerPlugin.getClassMaker().getSCMRegistry().getSCM(projectName);
-		if (git != null)
-			return git;
-		IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-		IPath projectGitPath = workspaceRoot.getLocation().append(workspaceRoot.getProject(projectName).getFullPath());
-		return getRepositorySCM(projectGitPath.toFile());
-	}
-
-	public synchronized void ungetRepositorySCM() throws GitAPIException {
-		Git git = ClassMakerPlugin.getClassMaker().getSCMRegistry().getSCM(projectName);
+	@Override
+	public synchronized void ungetRepositorySCM() throws Exception {
+		Git git = (Git) ClassMakerPlugin.getClassMaker().getSCMRegistry().getSCM(getProjectName());
 		if (git == null)
 			return;
 		git.close();
-		ClassMakerPlugin.getClassMaker().getSCMRegistry().removeSCM(projectName);
+		ClassMakerPlugin.getClassMaker().getSCMRegistry().removeSCM(getProjectName());
 	}
 
-	public synchronized void deleteProject() {
-		if (ClassMakerPlugin.getClassMaker().getSCMRegistry().containsSCM(projectName))
-			ClassMakerPlugin.getClassMaker().getSCMRegistry().removeSCM(projectName);
-	}
-
-	public String getCommitMessage(State state, int timestamp) {
-		return state.getDeployableUnitName() + " " + timestamp;
-	}
-
-	public Version getVersion(String commitMessage) {
-		return Version.parseVersion(commitMessage.split(" ")[0]);
-	}
-
-	public int getTimestamp(String commitMessage) {
-		try {
-			String[] parts = commitMessage.split(" ");
-			if (parts.length == 2)
-				return Integer.parseInt(parts[1]);
-			else
-				return -1;
-		} catch (NumberFormatException e) {
-			return -1;
-		}
-	}
-
-	public void add(String filepattern) throws GitAPIException {
+	@Override
+	public void add(String filepattern) throws Exception {
 		try {
 			Git git = getRepositorySCM();
 			synchronized (git) {
@@ -97,7 +68,8 @@ public class GitSCMOperator {
 		}
 	}
 
-	public String commit(String commitMessage) throws GitAPIException {
+	@Override
+	public String commit(String commitMessage) throws Exception {
 		String commitId = null;
 		try {
 			Git git = getRepositorySCM();
@@ -113,24 +85,57 @@ public class GitSCMOperator {
 		return commitId;
 	}
 
-	public void checkout(String branch, String commitId) throws GitAPIException {
+	@Override
+	public int decodeTimestamp(String commitMessage) {
+		try {
+			String[] parts = commitMessage.split(" ");
+			if (parts.length == 2)
+				return Integer.parseInt(parts[1]);
+			else
+				return -1;
+		} catch (NumberFormatException e) {
+			return -1;
+		}
+	}
+
+	@Override
+	public Version decodeVersion(String commitMessage) {
+		return Version.parseVersion(commitMessage.split(" ")[0]);
+	}
+
+	@Override
+	public String encodeCommitMessage(State state, int timestamp) {
+		return state.getDeployableUnitName() + " " + timestamp;
+	}
+
+	@Override
+	public synchronized void deleteProject() {
+		if (ClassMakerPlugin.getClassMaker().getSCMRegistry().containsSCM(getProjectName()))
+			ClassMakerPlugin.getClassMaker().getSCMRegistry().removeSCM(getProjectName());
+	}
+
+	@Override
+	public void checkout(String branch, String commitId) throws Exception {
 		try {
 			getRepositorySCM().checkout().setName(branch).setStartPoint(commitId).setForce(true).call();
 		} finally {
 			ungetRepositorySCM();
 		}
+
 	}
 
-	public void checkoutOrphan(String branchName, int timestamp) throws GitAPIException, IOException {
+	@Override
+	public void checkoutOrphan(String branch, int timestamp) throws Exception {
 		try {
 			Git git = getRepositorySCM();
 			synchronized (git) {
-				git.checkout().setOrphan(true).setName(branchName).call();
-				git.commit().setMessage(projectName + "_" + branchName + " " + timestamp).call();
+				git.checkout().setOrphan(true).setName(branch).call();
+				git.commit().setMessage(getProjectName() + "_" + branch + " " + timestamp).call();
 			}
 		} finally {
 			ungetRepositorySCM();
 		}
+
 	}
 
 }

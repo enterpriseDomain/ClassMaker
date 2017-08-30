@@ -35,15 +35,15 @@ import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.api.Git;
 import org.eclipse.osgi.util.NLS;
 import org.enterprisedomain.classmaker.ClassMakerPlant;
 import org.enterprisedomain.classmaker.Messages;
+import org.enterprisedomain.classmaker.SCMOperator;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.jobs.EnterpriseDomainJob;
-import org.enterprisedomain.classmaker.scm.GitSCMOperator;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
 
 public class EcoreGenerator extends EnterpriseDomainJob
@@ -162,10 +162,10 @@ public class EcoreGenerator extends EnterpriseDomainJob
 						EcorePlugin.getWorkspaceRoot().getRawLocation().append(getGenModelLocation()).toString() });
 				getContributionState().setProjectVersion(monitor);
 				try {
-					GitSCMOperator operator = ClassMakerPlugin.getClassMaker().getSCMRegistry()
+					SCMOperator<Git> operator = ClassMakerPlugin.getClassMaker().getSCMRegistry()
 							.get(getProject().getName());
 					operator.add(".");
-				} catch (GitAPIException e) {
+				} catch (Exception e) {
 					throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 				}
 				if (result == 1)
@@ -179,6 +179,7 @@ public class EcoreGenerator extends EnterpriseDomainJob
 			} finally {
 				monitor.done();
 			}
+
 		}
 
 	}

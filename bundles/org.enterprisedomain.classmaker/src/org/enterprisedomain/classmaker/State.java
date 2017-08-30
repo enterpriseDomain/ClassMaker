@@ -24,6 +24,10 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.enterprisedomain.classmaker.jobs.codegen.Generator;
+import org.enterprisedomain.classmaker.jobs.export.Exporter;
+import org.enterprisedomain.classmaker.jobs.install.Installer;
+import org.enterprisedomain.classmaker.jobs.load.ModelLoader;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '
@@ -408,5 +412,37 @@ public interface State extends Item, ISchedulingRule {
 	 * @generated
 	 */
 	void saveResource();
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model type="org.enterprisedomain.classmaker.Generator"
+	 * @generated
+	 */
+	Generator createGenerator();
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model type="org.enterprisedomain.classmaker.Exporter"
+	 * @generated
+	 */
+	Exporter createExporter();
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model type="org.enterprisedomain.classmaker.Installer"
+	 * @generated
+	 */
+	Installer createInstaller();
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model type="org.enterprisedomain.classmaker.ModelLoader"
+	 * @generated
+	 */
+	ModelLoader createLoader();
 
 } // State

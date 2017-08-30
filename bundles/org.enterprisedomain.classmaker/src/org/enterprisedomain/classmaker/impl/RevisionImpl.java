@@ -15,7 +15,6 @@
  */
 package org.enterprisedomain.classmaker.impl;
 
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.TimeZone;
 
@@ -34,7 +33,6 @@ import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.LogCommand;
-import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.NoHeadException;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.revwalk.RevCommit;
@@ -45,10 +43,10 @@ import org.enterprisedomain.classmaker.Customizer;
 import org.enterprisedomain.classmaker.Item;
 import org.enterprisedomain.classmaker.ModelPair;
 import org.enterprisedomain.classmaker.Revision;
+import org.enterprisedomain.classmaker.SCMOperator;
 import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
-import org.enterprisedomain.classmaker.scm.GitSCMOperator;
 import org.enterprisedomain.classmaker.util.ListUtil;
 
 /**
@@ -270,7 +268,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	@Override
 	public String initialize(boolean commit) {
 		super.initialize(commit);
-		GitSCMOperator operator = ClassMakerPlugin.getClassMaker().getSCMRegistry()
+		SCMOperator<Git> operator = ClassMakerPlugin.getClassMaker().getSCMRegistry()
 				.get(getContribution().getProjectName());
 		try {
 			Git git = operator.getRepositorySCM();
@@ -281,7 +279,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 				log.add(branch.getObjectId());
 				Iterable<RevCommit> commits = log.call();
 				for (RevCommit c : commits) {
-					int timestamp = operator.getTimestamp(c.getShortMessage());
+					int timestamp = operator.decodeTimestamp(c.getShortMessage());
 					if (timestamp == -1)
 						continue;
 					State state = null;
@@ -303,16 +301,13 @@ public class RevisionImpl extends ItemImpl implements Revision {
 			}
 		} catch (NoHeadException e) {
 			return null;
-		} catch (GitAPIException e) {
-			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
-			return null;
-		} catch (IOException e) {
+		} catch (Exception e) {
 			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 			return null;
 		} finally {
 			try {
 				operator.ungetRepositorySCM();
-			} catch (GitAPIException e) {
+			} catch (Exception e) {
 				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 			}
 		}
@@ -326,21 +321,22 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	 */
 	public void create(IProgressMonitor monitor) throws CoreException {
 		if (isStateSet()) {
-			GitSCMOperator operator = ClassMakerPlugin.getClassMaker().getSCMRegistry()
+			SCMOperator<Git> operator = ClassMakerPlugin.getClassMaker().getSCMRegistry()
 					.get(getContribution().getProjectName());
 			try {
 				Git git = operator.getRepositorySCM();
 				git.branchCreate().setForce(true).setName(getVersion().toString()).call();
-			} catch (GitAPIException e) {
+			} catch (Exception e) {
 				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 			} finally {
 				try {
 					operator.ungetRepositorySCM();
-				} catch (GitAPIException e) {
+				} catch (Exception e) {
 					throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 				}
 			}
 		}
+
 	}
 
 	/**
@@ -406,7 +402,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 		initialize(false);
 		getContribution().initAdapters(this);
 		if (create && isStateSet()) {
-			GitSCMOperator operator = ClassMakerPlugin.getClassMaker().getSCMRegistry()
+			SCMOperator<Git> operator = ClassMakerPlugin.getClassMaker().getSCMRegistry()
 					.get(getContribution().getProjectName());
 			Git git = null;
 			try {
@@ -418,14 +414,12 @@ public class RevisionImpl extends ItemImpl implements Revision {
 					}
 					getState().initialize(false);
 				}
-			} catch (GitAPIException e) {
-				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
-			} catch (IOException e) {
+			} catch (Exception e) {
 				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 			} finally {
 				try {
 					operator.ungetRepositorySCM();
-				} catch (GitAPIException e) {
+				} catch (Exception e) {
 					throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 				}
 			}

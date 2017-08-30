@@ -26,7 +26,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
-import org.enterprisedomain.classmaker.scm.GitSCMRegistry;
 import org.osgi.framework.Version;
 
 /**
@@ -111,7 +110,7 @@ public interface ClassMakerPlant extends EObject {
 	 *        changeable="false"
 	 * @generated
 	 */
-	GitSCMRegistry getSCMRegistry();
+	SCMRegistry getSCMRegistry();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->

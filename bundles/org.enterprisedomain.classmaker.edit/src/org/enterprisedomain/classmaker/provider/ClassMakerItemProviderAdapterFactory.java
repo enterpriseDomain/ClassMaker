@@ -339,6 +339,29 @@ public class ClassMakerItemProviderAdapterFactory extends ClassMakerAdapterFacto
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.enterprisedomain.classmaker.SCMRegistry} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SCMRegistryItemProvider scmRegistryItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.enterprisedomain.classmaker.SCMRegistry}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createSCMRegistryAdapter() {
+		if (scmRegistryItemProvider == null) {
+			scmRegistryItemProvider = new SCMRegistryItemProvider(this);
+		}
+
+		return scmRegistryItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.enterprisedomain.classmaker.ResourceAdapter} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -528,6 +551,8 @@ public class ClassMakerItemProviderAdapterFactory extends ClassMakerAdapterFacto
 			projectItemProvider.dispose();
 		if (modelPairItemProvider != null)
 			modelPairItemProvider.dispose();
+		if (scmRegistryItemProvider != null)
+			scmRegistryItemProvider.dispose();
 		if (resourceAdapterItemProvider != null)
 			resourceAdapterItemProvider.dispose();
 		if (classMakerPlantItemProvider != null)

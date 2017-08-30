@@ -110,6 +110,7 @@ public class CompletionNotificationAdapterImpl extends EObjectImpl implements Co
 				ClassMakerPlugin.getInstance().getLog().log(getError());
 			}
 		}
+
 	}
 
 	/*

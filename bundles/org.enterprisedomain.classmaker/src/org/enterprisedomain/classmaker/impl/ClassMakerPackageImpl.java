@@ -40,6 +40,7 @@ import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -55,11 +56,16 @@ import org.enterprisedomain.classmaker.ModelPair;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.ResourceAdapter;
 import org.enterprisedomain.classmaker.Revision;
+import org.enterprisedomain.classmaker.SCMOperator;
+import org.enterprisedomain.classmaker.SCMRegistry;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
-import org.enterprisedomain.classmaker.scm.GitSCMRegistry;
+import org.enterprisedomain.classmaker.jobs.codegen.Generator;
+import org.enterprisedomain.classmaker.jobs.export.Exporter;
+import org.enterprisedomain.classmaker.jobs.install.Installer;
+import org.enterprisedomain.classmaker.jobs.load.ModelLoader;
 import org.osgi.framework.Version;
 
 /**
@@ -193,6 +199,20 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * 
 	 * @generated
 	 */
+	private EClass scmOperatorEClass = null;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private EClass scmRegistryEClass = null;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	private EClass resourceEClass = null;
 
 	/**
@@ -222,6 +242,34 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	private EClass completionNotificationAdapterEClass = null;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private EClass generatorEClass = null;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private EClass exporterEClass = null;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private EClass installerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private EClass modelLoaderEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -299,13 +347,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	private EDataType localeEDataType = null;
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EDataType gitSCMRegistryEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -993,6 +1034,33 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * 
 	 * @generated
 	 */
+	public EClass getSCMOperator() {
+		return scmOperatorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EAttribute getSCMOperator_ProjectName() {
+		return (EAttribute) scmOperatorEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EClass getSCMRegistry() {
+		return scmRegistryEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	public EClass getResource() {
 		return resourceEClass;
 	}
@@ -1056,8 +1124,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * 
 	 * @generated
 	 */
-	public EAttribute getClassMakerPlant_SCMRegistry() {
-		return (EAttribute) classMakerPlantEClass.getEStructuralFeatures().get(1);
+	public EReference getClassMakerPlant_SCMRegistry() {
+		return (EReference) classMakerPlantEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1083,8 +1151,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * 
 	 * @generated
 	 */
-	public EDataType getLocale() {
-		return localeEDataType;
+	public EClass getGenerator() {
+		return generatorEClass;
 	}
 
 	/**
@@ -1092,8 +1160,35 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * 
 	 * @generated
 	 */
-	public EDataType getGitSCMRegistry() {
-		return gitSCMRegistryEDataType;
+	public EClass getExporter() {
+		return exporterEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EClass getInstaller() {
+		return installerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EClass getModelLoader() {
+		return modelLoaderEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EDataType getLocale() {
+		return localeEDataType;
 	}
 
 	/**
@@ -1300,6 +1395,11 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		createEReference(modelPairEClass, MODEL_PAIR__GENERATED);
 		createEReference(modelPairEClass, MODEL_PAIR__PARENT);
 
+		scmOperatorEClass = createEClass(SCM_OPERATOR);
+		createEAttribute(scmOperatorEClass, SCM_OPERATOR__PROJECT_NAME);
+
+		scmRegistryEClass = createEClass(SCM_REGISTRY);
+
 		resourceEClass = createEClass(RESOURCE);
 
 		completionListenerEClass = createEClass(COMPLETION_LISTENER);
@@ -1310,10 +1410,18 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 		classMakerPlantEClass = createEClass(CLASS_MAKER_PLANT);
 		createEReference(classMakerPlantEClass, CLASS_MAKER_PLANT__WORKSPACE);
-		createEAttribute(classMakerPlantEClass, CLASS_MAKER_PLANT__SCM_REGISTRY);
+		createEReference(classMakerPlantEClass, CLASS_MAKER_PLANT__SCM_REGISTRY);
 
 		completionNotificationAdapterEClass = createEClass(COMPLETION_NOTIFICATION_ADAPTER);
 		createEAttribute(completionNotificationAdapterEClass, COMPLETION_NOTIFICATION_ADAPTER__ERROR);
+
+		generatorEClass = createEClass(GENERATOR);
+
+		exporterEClass = createEClass(EXPORTER);
+
+		installerEClass = createEClass(INSTALLER);
+
+		modelLoaderEClass = createEClass(MODEL_LOADER);
 
 		// Create enums
 		stageEEnum = createEEnum(STAGE);
@@ -1329,7 +1437,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		uriEDataType = createEDataType(URI);
 		exceptionEDataType = createEDataType(EXCEPTION);
 		localeEDataType = createEDataType(LOCALE);
-		gitSCMRegistryEDataType = createEDataType(GIT_SCM_REGISTRY);
 	}
 
 	/**
@@ -1358,6 +1465,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 		// Create type parameters
 		addETypeParameter(futureEClass, "V");
+		ETypeParameter scmOperatorEClass_T = addETypeParameter(scmOperatorEClass, "T");
+		ETypeParameter scmRegistryEClass_T = addETypeParameter(scmRegistryEClass, "T");
 
 		// Set bounds for type parameters
 
@@ -1553,6 +1662,14 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		addEException(op, this.getException());
 
 		addEOperation(stateEClass, null, "saveResource", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(stateEClass, this.getGenerator(), "createGenerator", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(stateEClass, this.getExporter(), "createExporter", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(stateEClass, this.getInstaller(), "createInstaller", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(stateEClass, this.getModelLoader(), "createLoader", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(itemEClass, Item.class, "Item", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getItem_ModelName(), ecorePackage.getEString(), "modelName", null, 0, 1, Item.class,
@@ -1779,6 +1896,94 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 				ModelPair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(scmOperatorEClass, SCMOperator.class, "SCMOperator", IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSCMOperator_ProjectName(), ecorePackage.getEString(), "projectName", "", 0, 1,
+				SCMOperator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(scmOperatorEClass, null, "getRepositorySCM", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEException(op, this.getException());
+		EGenericType g1 = createEGenericType(scmOperatorEClass_T);
+		initEOperation(op, g1);
+
+		op = addEOperation(scmOperatorEClass, null, "ungetRepositorySCM", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEException(op, this.getException());
+
+		op = addEOperation(scmOperatorEClass, null, "add", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "filepattern", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEException(op, this.getException());
+
+		op = addEOperation(scmOperatorEClass, ecorePackage.getEString(), "commit", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "commitMessage", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEException(op, this.getException());
+
+		op = addEOperation(scmOperatorEClass, ecorePackage.getEInt(), "decodeTimestamp", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "commitMessage", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(scmOperatorEClass, this.getOSGiVersion(), "decodeVersion", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "commitMessage", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(scmOperatorEClass, ecorePackage.getEString(), "encodeCommitMessage", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+		addEParameter(op, this.getState(), "state", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEInt(), "timestamp", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(scmOperatorEClass, null, "deleteProject", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(scmOperatorEClass, null, "checkout", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "branch", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "commitId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEException(op, this.getException());
+
+		op = addEOperation(scmOperatorEClass, null, "checkoutOrphan", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "branch", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEInt(), "timestamp", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEException(op, this.getException());
+
+		initEClass(scmRegistryEClass, SCMRegistry.class, "SCMRegistry", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+
+		op = addEOperation(scmRegistryEClass, ecorePackage.getEBoolean(), "contains", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "projectName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(scmRegistryEClass, null, "get", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "projectName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(this.getSCMOperator());
+		EGenericType g2 = createEGenericType(scmRegistryEClass_T);
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
+		op = addEOperation(scmRegistryEClass, null, "put", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "projectName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(this.getSCMOperator());
+		g2 = createEGenericType(scmRegistryEClass_T);
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "operator", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(scmRegistryEClass, ecorePackage.getEBoolean(), "containsSCM", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "projectName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(scmRegistryEClass, null, "getSCM", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "projectName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(scmRegistryEClass_T);
+		initEOperation(op, g1);
+
+		op = addEOperation(scmRegistryEClass, null, "putSCM", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "projectName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(scmRegistryEClass_T);
+		addEParameter(op, g1, "scm", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(scmRegistryEClass, null, "removeSCM", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "projectName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(scmRegistryEClass, null, "createSCMOperator", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "projectName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(this.getSCMOperator());
+		g2 = createEGenericType(scmRegistryEClass_T);
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
 		initEClass(resourceEClass, Resource.class, "Resource", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(completionListenerEClass, CompletionListener.class, "CompletionListener", IS_ABSTRACT, !IS_INTERFACE,
@@ -1802,9 +2007,9 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEReference(getClassMakerPlant_Workspace(), this.getWorkspace(), null, "workspace", null, 0, 1,
 				ClassMakerPlant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getClassMakerPlant_SCMRegistry(), this.getGitSCMRegistry(), "SCMRegistry", null, 0, 1,
-				ClassMakerPlant.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
+		initEReference(getClassMakerPlant_SCMRegistry(), this.getSCMRegistry(), null, "SCMRegistry", null, 0, 1,
+				ClassMakerPlant.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(classMakerPlantEClass, ecorePackage.getEPackage(), "make", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEPackage(), "dynamicModel", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1814,8 +2019,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		addEParameter(op, ecorePackage.getEPackage(), "dynamicModel", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getExecutor(), "executor", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEException(op, this.getCoreException());
-		EGenericType g1 = createEGenericType(this.getFuture());
-		EGenericType g2 = createEGenericType();
+		g1 = createEGenericType(this.getFuture());
+		g2 = createEGenericType();
 		g1.getETypeArguments().add(g2);
 		EGenericType g3 = createEGenericType(ecorePackage.getEPackage());
 		g2.setEUpperBound(g3);
@@ -2022,6 +2227,17 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 				CompletionNotificationAdapter.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE,
 				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(generatorEClass, Generator.class, "Generator", IS_ABSTRACT, IS_INTERFACE,
+				!IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(exporterEClass, Exporter.class, "Exporter", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(installerEClass, Installer.class, "Installer", IS_ABSTRACT, IS_INTERFACE,
+				!IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(modelLoaderEClass, ModelLoader.class, "ModelLoader", IS_ABSTRACT, IS_INTERFACE,
+				!IS_GENERATED_INSTANCE_CLASS);
+
 		// Initialize enums and add enum literals
 		initEEnum(stageEEnum, Stage.class, "Stage");
 		addEEnumLiteral(stageEEnum, Stage.DEFINED);
@@ -2048,8 +2264,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 				!IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(exceptionEDataType, Exception.class, "Exception", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(localeEDataType, Locale.class, "Locale", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(gitSCMRegistryEDataType, GitSCMRegistry.class, "GitSCMRegistry", IS_SERIALIZABLE,
-				!IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

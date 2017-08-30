@@ -23,7 +23,6 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -32,15 +31,13 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 
-import org.enterprisedomain.classmaker.ClassMakerPackage;
-
 /**
- * This is the item provider adapter for a {@link org.enterprisedomain.classmaker.ClassMakerPlant} object.
+ * This is the item provider adapter for a {@link org.enterprisedomain.classmaker.SCMRegistry} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ClassMakerPlantItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
+public class SCMRegistryItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
 		IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -48,7 +45,7 @@ public class ClassMakerPlantItemProvider extends ItemProviderAdapter implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassMakerPlantItemProvider(AdapterFactory adapterFactory) {
+	public SCMRegistryItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -63,52 +60,19 @@ public class ClassMakerPlantItemProvider extends ItemProviderAdapter implements 
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addWorkspacePropertyDescriptor(object);
-			addSCMRegistryPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Workspace feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addWorkspacePropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_ClassMakerPlant_workspace_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_ClassMakerPlant_workspace_feature",
-								"_UI_ClassMakerPlant_type"),
-						ClassMakerPackage.Literals.CLASS_MAKER_PLANT__WORKSPACE, true, false, true, null, null, null));
-	}
-
-	/**
-	 * This adds a property descriptor for the SCM Registry feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSCMRegistryPropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_ClassMakerPlant_SCMRegistry_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_ClassMakerPlant_SCMRegistry_feature",
-								"_UI_ClassMakerPlant_type"),
-						ClassMakerPackage.Literals.CLASS_MAKER_PLANT__SCM_REGISTRY, false, false, false, null, null,
-						null));
-	}
-
-	/**
-	 * This returns ClassMakerPlant.gif.
+	 * This returns SCMRegistry.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ClassMakerPlant"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/SCMRegistry"));
 	}
 
 	/**
@@ -119,7 +83,7 @@ public class ClassMakerPlantItemProvider extends ItemProviderAdapter implements 
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_ClassMakerPlant_type");
+		return getString("_UI_SCMRegistry_type");
 	}
 
 	/**

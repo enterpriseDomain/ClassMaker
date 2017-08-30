@@ -28,7 +28,6 @@ import org.enterprisedomain.classmaker.Messages;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
-import org.enterprisedomain.classmaker.jobs.ContainerJob;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleEvent;
 import org.osgi.framework.BundleException;
@@ -37,7 +36,7 @@ import org.osgi.framework.Constants;
 import org.osgi.framework.Version;
 import org.osgi.framework.startlevel.BundleStartLevel;
 
-public class OSGiEPackageLoader extends ContainerJob {
+public class OSGiEPackageLoader extends ModelLoader {
 
 	private Semaphore loaded = new Semaphore(0);
 
@@ -63,7 +62,7 @@ public class OSGiEPackageLoader extends ContainerJob {
 	};
 
 	public OSGiEPackageLoader(int stateTimestamp) {
-		super(Messages.JobNameLoad, stateTimestamp);
+		super(stateTimestamp);
 	}
 
 	public IStatus load(IProgressMonitor monitor) throws CoreException {
@@ -174,28 +173,8 @@ public class OSGiEPackageLoader extends ContainerJob {
 		}
 	}
 
-	@Override
-	public IStatus work(IProgressMonitor monitor) throws CoreException {
-		return load(monitor);
-	}
-
 	public void setException(Throwable exception) {
 		this.exception = exception;
-	}
-
-	@Override
-	public Stage getPrerequisiteStage() {
-		return Stage.INSTALLED;
-	}
-
-	@Override
-	public Stage getResultStage() {
-		return Stage.LOADED;
-	}
-
-	@Override
-	public Stage getDirtyStage() {
-		return Stage.LOADED;
 	}
 
 }

@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
-  <viewpoint:DAnalysis xmi:id="_wXakICNgEeef1b6mpRQVdA" selectedViews="_VvimYFKvEee_WcSOE1_ywg" version="12.0.0.201704271200">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:description_2="http://www.eclipse.org/sirius/table/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:table="http://www.eclipse.org/sirius/table/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/table/description/1.1.0 http://www.eclipse.org/sirius/table/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
+  <viewpoint:DAnalysis xmi:id="_wXakICNgEeef1b6mpRQVdA" selectedViews="_VvimYFKvEee_WcSOE1_ywg _sCBKUI2REee_PuhghmLIqQ" version="12.0.0.201704271200">
     <semanticResources>ClassMaker.ecore</semanticResources>
     <semanticResources>http://www.eclipse.org/emf/2002/Ecore</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" xmi:id="_VvimYFKvEee_WcSOE1_ywg">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
       <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_pJKGcFKvEee_WcSOE1_ywg" name="classmaker class diagram" repPath="#_pJKtgFKvEee_WcSOE1_ywg">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
+        <target xmi:type="ecore:EPackage" href="ClassMaker.ecore#/"/>
+      </ownedRepresentationDescriptors>
+    </ownedViews>
+    <ownedViews xmi:type="viewpoint:DView" xmi:id="_sCBKUI2REee_PuhghmLIqQ">
+      <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']"/>
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_sjb1UI2REee_PuhghmLIqQ" name="classmaker documentation table" repPath="#_sipyMI2REee_PuhghmLIqQ">
+        <description xmi:type="description_2:CrossTableDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']"/>
         <target xmi:type="ecore:EPackage" href="ClassMaker.ecore#/"/>
       </ownedRepresentationDescriptors>
     </ownedViews>
@@ -733,37 +740,37 @@
         <children xmi:type="notation:Node" xmi:id="_sFIvY1KvEee_WcSOE1_ywg" type="2003" element="_rwofAFKvEee_WcSOE1_ywg">
           <children xmi:type="notation:Node" xmi:id="_sFJWcFKvEee_WcSOE1_ywg" type="5007"/>
           <children xmi:type="notation:Node" xmi:id="_sFJWcVKvEee_WcSOE1_ywg" type="7004">
-            <children xmi:type="notation:Node" xmi:id="_sKd7UFKvEee_WcSOE1_ywg" type="3010" element="_r6ciUFKvEee_WcSOE1_ywg">
-              <styles xmi:type="notation:FontStyle" xmi:id="_sKd7UVKvEee_WcSOE1_ywg" fontName="Cantarell" fontHeight="8"/>
-              <layoutConstraint xmi:type="notation:Location" xmi:id="_sKd7UlKvEee_WcSOE1_ywg"/>
+            <children xmi:type="notation:Node" xmi:id="_EhILEI1yEee_PuhghmLIqQ" type="3010" element="_EcbRQI1yEee_PuhghmLIqQ">
+              <styles xmi:type="notation:FontStyle" xmi:id="_EhILEY1yEee_PuhghmLIqQ" fontName="Cantarell" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_EhILEo1yEee_PuhghmLIqQ"/>
             </children>
-            <children xmi:type="notation:Node" xmi:id="_sKeiYFKvEee_WcSOE1_ywg" type="3010" element="_r6e-kFKvEee_WcSOE1_ywg">
-              <styles xmi:type="notation:FontStyle" xmi:id="_sKeiYVKvEee_WcSOE1_ywg" fontName="Cantarell" fontHeight="8"/>
-              <layoutConstraint xmi:type="notation:Location" xmi:id="_sKeiYlKvEee_WcSOE1_ywg"/>
+            <children xmi:type="notation:Node" xmi:id="_Eg6vsI1yEee_PuhghmLIqQ" type="3010" element="_Ecgw0I1yEee_PuhghmLIqQ">
+              <styles xmi:type="notation:FontStyle" xmi:id="_Eg6vsY1yEee_PuhghmLIqQ" fontName="Cantarell" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_Eg6vso1yEee_PuhghmLIqQ"/>
             </children>
-            <children xmi:type="notation:Node" xmi:id="_sKeiY1KvEee_WcSOE1_ywg" type="3010" element="_r6gMsFKvEee_WcSOE1_ywg">
-              <styles xmi:type="notation:FontStyle" xmi:id="_sKeiZFKvEee_WcSOE1_ywg" fontName="Cantarell" fontHeight="8"/>
-              <layoutConstraint xmi:type="notation:Location" xmi:id="_sKeiZVKvEee_WcSOE1_ywg"/>
+            <children xmi:type="notation:Node" xmi:id="_EhBdYI1yEee_PuhghmLIqQ" type="3010" element="_Ecj0IY1yEee_PuhghmLIqQ">
+              <styles xmi:type="notation:FontStyle" xmi:id="_EhCEcI1yEee_PuhghmLIqQ" fontName="Cantarell" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_EhCEcY1yEee_PuhghmLIqQ"/>
             </children>
-            <children xmi:type="notation:Node" xmi:id="_sKfJcFKvEee_WcSOE1_ywg" type="3010" element="_r6m6YFKvEee_WcSOE1_ywg">
-              <styles xmi:type="notation:FontStyle" xmi:id="_sKfJcVKvEee_WcSOE1_ywg" fontName="Cantarell" fontHeight="8"/>
-              <layoutConstraint xmi:type="notation:Location" xmi:id="_sKfJclKvEee_WcSOE1_ywg"/>
+            <children xmi:type="notation:Node" xmi:id="_EhFu0I1yEee_PuhghmLIqQ" type="3010" element="_EckbMY1yEee_PuhghmLIqQ">
+              <styles xmi:type="notation:FontStyle" xmi:id="_EhFu0Y1yEee_PuhghmLIqQ" fontName="Cantarell" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_EhFu0o1yEee_PuhghmLIqQ"/>
             </children>
-            <children xmi:type="notation:Node" xmi:id="_pDHbAGp4EeeeVc5HRP5OGQ" type="3010" element="_pCqvEGp4EeeeVc5HRP5OGQ">
-              <styles xmi:type="notation:FontStyle" xmi:id="_pDHbAWp4EeeeVc5HRP5OGQ" fontName="Cantarell" fontHeight="8"/>
-              <layoutConstraint xmi:type="notation:Location" xmi:id="_pDHbAmp4EeeeVc5HRP5OGQ"/>
+            <children xmi:type="notation:Node" xmi:id="_EhGV4I1yEee_PuhghmLIqQ" type="3010" element="_EcmQYI1yEee_PuhghmLIqQ">
+              <styles xmi:type="notation:FontStyle" xmi:id="_EhGV4Y1yEee_PuhghmLIqQ" fontName="Cantarell" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_EhGV4o1yEee_PuhghmLIqQ"/>
             </children>
-            <children xmi:type="notation:Node" xmi:id="_2yNy0Gp5EeeeVc5HRP5OGQ" type="3010" element="_2xv4wGp5EeeeVc5HRP5OGQ">
-              <styles xmi:type="notation:FontStyle" xmi:id="_2yNy0Wp5EeeeVc5HRP5OGQ" fontName="Cantarell" fontHeight="8"/>
-              <layoutConstraint xmi:type="notation:Location" xmi:id="_2yNy0mp5EeeeVc5HRP5OGQ"/>
+            <children xmi:type="notation:Node" xmi:id="_EhG88I1yEee_PuhghmLIqQ" type="3010" element="_EcosoI1yEee_PuhghmLIqQ">
+              <styles xmi:type="notation:FontStyle" xmi:id="_EhG88Y1yEee_PuhghmLIqQ" fontName="Cantarell" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_EhG88o1yEee_PuhghmLIqQ"/>
             </children>
-            <children xmi:type="notation:Node" xmi:id="_F7oMgGp7EeeeVc5HRP5OGQ" type="3010" element="_F7N80Gp7EeeeVc5HRP5OGQ">
-              <styles xmi:type="notation:FontStyle" xmi:id="_F7oMgWp7EeeeVc5HRP5OGQ" fontName="Cantarell" fontHeight="8"/>
-              <layoutConstraint xmi:type="notation:Location" xmi:id="_F7oMgmp7EeeeVc5HRP5OGQ"/>
+            <children xmi:type="notation:Node" xmi:id="_EhG8841yEee_PuhghmLIqQ" type="3010" element="_EcsXAI1yEee_PuhghmLIqQ">
+              <styles xmi:type="notation:FontStyle" xmi:id="_EhG89I1yEee_PuhghmLIqQ" fontName="Cantarell" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_EhG89Y1yEee_PuhghmLIqQ"/>
             </children>
-            <children xmi:type="notation:Node" xmi:id="_J9iiwGp7EeeeVc5HRP5OGQ" type="3010" element="_J9KvUGp7EeeeVc5HRP5OGQ">
-              <styles xmi:type="notation:FontStyle" xmi:id="_J9iiwWp7EeeeVc5HRP5OGQ" fontName="Cantarell" fontHeight="8"/>
-              <layoutConstraint xmi:type="notation:Location" xmi:id="_J9iiwmp7EeeeVc5HRP5OGQ"/>
+            <children xmi:type="notation:Node" xmi:id="_EhHkAI1yEee_PuhghmLIqQ" type="3010" element="_Ecs-EI1yEee_PuhghmLIqQ">
+              <styles xmi:type="notation:FontStyle" xmi:id="_EhHkAY1yEee_PuhghmLIqQ" fontName="Cantarell" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_EhHkAo1yEee_PuhghmLIqQ"/>
             </children>
             <children xmi:type="notation:Node" xmi:id="_sKfwgFKvEee_WcSOE1_ywg" type="3010" element="_r6oIgFKvEee_WcSOE1_ywg">
               <styles xmi:type="notation:FontStyle" xmi:id="_sKfwgVKvEee_WcSOE1_ywg" fontName="Cantarell" fontHeight="8"/>
@@ -897,9 +904,9 @@
         <children xmi:type="notation:Node" xmi:id="_FOtAwIY1EeeTGNMSfFKooQ" type="2003" element="_FLhJ4IY1EeeTGNMSfFKooQ">
           <children xmi:type="notation:Node" xmi:id="_FO08kIY1EeeTGNMSfFKooQ" type="5007"/>
           <children xmi:type="notation:Node" xmi:id="_FO2KsIY1EeeTGNMSfFKooQ" type="7004">
-            <children xmi:type="notation:Node" xmi:id="_FPFbQIY1EeeTGNMSfFKooQ" type="3010" element="_FMeMIIY1EeeTGNMSfFKooQ">
-              <styles xmi:type="notation:FontStyle" xmi:id="_FPFbQYY1EeeTGNMSfFKooQ" fontName="Cantarell" fontHeight="8"/>
-              <layoutConstraint xmi:type="notation:Location" xmi:id="_FPFbQoY1EeeTGNMSfFKooQ"/>
+            <children xmi:type="notation:Node" xmi:id="_EhU_YI1yEee_PuhghmLIqQ" type="3010" element="_EdCVQI1yEee_PuhghmLIqQ">
+              <styles xmi:type="notation:FontStyle" xmi:id="_EhU_YY1yEee_PuhghmLIqQ" fontName="Cantarell" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_EhU_Yo1yEee_PuhghmLIqQ"/>
             </children>
             <styles xmi:type="notation:SortingStyle" xmi:id="_FO2KsYY1EeeTGNMSfFKooQ"/>
             <styles xmi:type="notation:FilteringStyle" xmi:id="_FO2KsoY1EeeTGNMSfFKooQ"/>
@@ -919,6 +926,118 @@
           </children>
           <styles xmi:type="notation:ShapeStyle" xmi:id="_FO3_4YY1EeeTGNMSfFKooQ" fontName="Cantarell" fontHeight="8"/>
           <layoutConstraint xmi:type="notation:Bounds" xmi:id="_FO3_4oY1EeeTGNMSfFKooQ" x="2356" y="102"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_Jf9ckI1yEee_PuhghmLIqQ" type="2003" element="_Jb8fQI1yEee_PuhghmLIqQ">
+          <children xmi:type="notation:Node" xmi:id="_JgN7QI1yEee_PuhghmLIqQ" type="3012" element="_JeD_II1yEee_PuhghmLIqQ">
+            <children xmi:type="notation:Node" xmi:id="_JgPJYI1yEee_PuhghmLIqQ" type="5010">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_JgPJYY1yEee_PuhghmLIqQ" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_Jg2NYI1yEee_PuhghmLIqQ" type="3005" element="_JeEmMI1yEee_PuhghmLIqQ">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_Jg4CkI1yEee_PuhghmLIqQ" fontName="Cantarell"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Jg4CkY1yEee_PuhghmLIqQ"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_JgN7QY1yEee_PuhghmLIqQ" fontName="Cantarell" fontHeight="8"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JgN7Qo1yEee_PuhghmLIqQ" x="-22" width="30" height="30"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_Jf_RwI1yEee_PuhghmLIqQ" type="5007"/>
+          <children xmi:type="notation:Node" xmi:id="_Jf_40I1yEee_PuhghmLIqQ" type="7004">
+            <children xmi:type="notation:Node" xmi:id="_Jg5QsI1yEee_PuhghmLIqQ" type="3010" element="_JeFNQI1yEee_PuhghmLIqQ">
+              <styles xmi:type="notation:FontStyle" xmi:id="_Jg5QsY1yEee_PuhghmLIqQ" fontName="Cantarell" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_Jg5Qso1yEee_PuhghmLIqQ"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_Jg53wI1yEee_PuhghmLIqQ" type="3010" element="_JeHCcI1yEee_PuhghmLIqQ">
+              <styles xmi:type="notation:FontStyle" xmi:id="_Jg53wY1yEee_PuhghmLIqQ" fontName="Cantarell" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_Jg53wo1yEee_PuhghmLIqQ"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_Jg-JMI1yEee_PuhghmLIqQ" type="3010" element="_JeHpgY1yEee_PuhghmLIqQ">
+              <styles xmi:type="notation:FontStyle" xmi:id="_Jg-wQI1yEee_PuhghmLIqQ" fontName="Cantarell" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_Jg-wQY1yEee_PuhghmLIqQ"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_Jg_XUI1yEee_PuhghmLIqQ" type="3010" element="_JeIQkY1yEee_PuhghmLIqQ">
+              <styles xmi:type="notation:FontStyle" xmi:id="_Jg_XUY1yEee_PuhghmLIqQ" fontName="Cantarell" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_Jg_XUo1yEee_PuhghmLIqQ"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_Jg_-YI1yEee_PuhghmLIqQ" type="3010" element="_JeI3oY1yEee_PuhghmLIqQ">
+              <styles xmi:type="notation:FontStyle" xmi:id="_Jg_-YY1yEee_PuhghmLIqQ" fontName="Cantarell" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_Jg_-Yo1yEee_PuhghmLIqQ"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_JhAlcI1yEee_PuhghmLIqQ" type="3010" element="_JeJesI1yEee_PuhghmLIqQ">
+              <styles xmi:type="notation:FontStyle" xmi:id="_JhAlcY1yEee_PuhghmLIqQ" fontName="Cantarell" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_JhAlco1yEee_PuhghmLIqQ"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_JhBzkI1yEee_PuhghmLIqQ" type="3010" element="_JeKFwI1yEee_PuhghmLIqQ">
+              <styles xmi:type="notation:FontStyle" xmi:id="_JhBzkY1yEee_PuhghmLIqQ" fontName="Cantarell" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_JhBzko1yEee_PuhghmLIqQ"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_JhBzk41yEee_PuhghmLIqQ" type="3010" element="_JeKs0I1yEee_PuhghmLIqQ">
+              <styles xmi:type="notation:FontStyle" xmi:id="_JhBzlI1yEee_PuhghmLIqQ" fontName="Cantarell" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_JhBzlY1yEee_PuhghmLIqQ"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_JhCaoI1yEee_PuhghmLIqQ" type="3010" element="_JeKs0o1yEee_PuhghmLIqQ">
+              <styles xmi:type="notation:FontStyle" xmi:id="_JhCaoY1yEee_PuhghmLIqQ" fontName="Cantarell" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_JhCaoo1yEee_PuhghmLIqQ"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_JhDBsI1yEee_PuhghmLIqQ" type="3010" element="_JeLT4Y1yEee_PuhghmLIqQ">
+              <styles xmi:type="notation:FontStyle" xmi:id="_JhDBsY1yEee_PuhghmLIqQ" fontName="Cantarell" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_JhDBso1yEee_PuhghmLIqQ"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_JhDBs41yEee_PuhghmLIqQ" type="3010" element="_JeL68Y1yEee_PuhghmLIqQ">
+              <styles xmi:type="notation:FontStyle" xmi:id="_JhDBtI1yEee_PuhghmLIqQ" fontName="Cantarell" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_JhDBtY1yEee_PuhghmLIqQ"/>
+            </children>
+            <styles xmi:type="notation:SortingStyle" xmi:id="_Jf_40Y1yEee_PuhghmLIqQ"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_Jf_40o1yEee_PuhghmLIqQ"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_Jf9ckY1yEee_PuhghmLIqQ" fontName="Cantarell" fontHeight="8"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Jf9cko1yEee_PuhghmLIqQ" x="2670" y="247"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_JgJCwI1yEee_PuhghmLIqQ" type="2003" element="_JcYkII1yEee_PuhghmLIqQ">
+          <children xmi:type="notation:Node" xmi:id="_JhDowI1yEee_PuhghmLIqQ" type="3012" element="_JeNJEI1yEee_PuhghmLIqQ">
+            <children xmi:type="notation:Node" xmi:id="_JhEP0I1yEee_PuhghmLIqQ" type="5010">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_JhEP0Y1yEee_PuhghmLIqQ" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_JhFd8I1yEee_PuhghmLIqQ" type="3005" element="_JeNJEY1yEee_PuhghmLIqQ">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_JhFd8Y1yEee_PuhghmLIqQ" fontName="Cantarell"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JhFd8o1yEee_PuhghmLIqQ"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_JhDowY1yEee_PuhghmLIqQ" fontName="Cantarell" fontHeight="8"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JhDowo1yEee_PuhghmLIqQ" x="-22" width="30" height="30"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_JgJp0I1yEee_PuhghmLIqQ" type="5007"/>
+          <children xmi:type="notation:Node" xmi:id="_JgJp0Y1yEee_PuhghmLIqQ" type="7004">
+            <children xmi:type="notation:Node" xmi:id="_JhGFAI1yEee_PuhghmLIqQ" type="3010" element="_JeNwII1yEee_PuhghmLIqQ">
+              <styles xmi:type="notation:FontStyle" xmi:id="_JhGFAY1yEee_PuhghmLIqQ" fontName="Cantarell" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_JhGFAo1yEee_PuhghmLIqQ"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_JhGsEI1yEee_PuhghmLIqQ" type="3010" element="_JeOXMY1yEee_PuhghmLIqQ">
+              <styles xmi:type="notation:FontStyle" xmi:id="_JhGsEY1yEee_PuhghmLIqQ" fontName="Cantarell" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_JhGsEo1yEee_PuhghmLIqQ"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_JhGsE41yEee_PuhghmLIqQ" type="3010" element="_JePlUI1yEee_PuhghmLIqQ">
+              <styles xmi:type="notation:FontStyle" xmi:id="_JhGsFI1yEee_PuhghmLIqQ" fontName="Cantarell" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_JhGsFY1yEee_PuhghmLIqQ"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_JhHTII1yEee_PuhghmLIqQ" type="3010" element="_JeQMYI1yEee_PuhghmLIqQ">
+              <styles xmi:type="notation:FontStyle" xmi:id="_JhHTIY1yEee_PuhghmLIqQ" fontName="Cantarell" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_JhHTIo1yEee_PuhghmLIqQ"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_JhH6MI1yEee_PuhghmLIqQ" type="3010" element="_JeQzcI1yEee_PuhghmLIqQ">
+              <styles xmi:type="notation:FontStyle" xmi:id="_JhH6MY1yEee_PuhghmLIqQ" fontName="Cantarell" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_JhH6Mo1yEee_PuhghmLIqQ"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_JhH6M41yEee_PuhghmLIqQ" type="3010" element="_JeRagI1yEee_PuhghmLIqQ">
+              <styles xmi:type="notation:FontStyle" xmi:id="_JhH6NI1yEee_PuhghmLIqQ" fontName="Cantarell" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_JhH6NY1yEee_PuhghmLIqQ"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_JhIhQI1yEee_PuhghmLIqQ" type="3010" element="_JeSBkI1yEee_PuhghmLIqQ">
+              <styles xmi:type="notation:FontStyle" xmi:id="_JhIhQY1yEee_PuhghmLIqQ" fontName="Cantarell" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_JhIhQo1yEee_PuhghmLIqQ"/>
+            </children>
+            <styles xmi:type="notation:SortingStyle" xmi:id="_JgJp0o1yEee_PuhghmLIqQ"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_JgKQ4I1yEee_PuhghmLIqQ"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_JgJCwY1yEee_PuhghmLIqQ" fontName="Cantarell" fontHeight="8"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JgJCwo1yEee_PuhghmLIqQ" x="2673" y="468"/>
         </children>
         <styles xmi:type="notation:DiagramStyle" xmi:id="_pLJqgFKvEee_WcSOE1_ywg"/>
         <edges xmi:type="notation:Edge" xmi:id="_sLSasFKvEee_WcSOE1_ywg" type="4001" element="_r-GTQFKvEee_WcSOE1_ywg" source="_sCN-Q1KvEee_WcSOE1_ywg" target="_sFAMgFKvEee_WcSOE1_ywg">
@@ -1400,6 +1519,22 @@
           <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_FPhgI4Y1EeeTGNMSfFKooQ" points="[3141, 1619, 3141, 1619]$[3372, 322, 3372, 322]"/>
           <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_FPiuQIY1EeeTGNMSfFKooQ" id="(0.5,0.5)"/>
           <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_FPjVUIY1EeeTGNMSfFKooQ" id="(0.5,1.0)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_JhPO8I1yEee_PuhghmLIqQ" type="4001" element="_JesRQI1yEee_PuhghmLIqQ" source="_sFIvY1KvEee_WcSOE1_ywg" target="_JgJCwI1yEee_PuhghmLIqQ">
+          <children xmi:type="notation:Node" xmi:id="_JhQdEI1yEee_PuhghmLIqQ" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JhQdEY1yEee_PuhghmLIqQ" x="82" y="-10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_JhRrMI1yEee_PuhghmLIqQ" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JhRrMY1yEee_PuhghmLIqQ" x="25" y="10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_JhS5UI1yEee_PuhghmLIqQ" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JhS5UY1yEee_PuhghmLIqQ" x="166" y="10"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_JhPO8Y1yEee_PuhghmLIqQ" routing="Rectilinear"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_JhPO8o1yEee_PuhghmLIqQ" fontColor="7490599" fontName="Cantarell" fontHeight="8"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_JhPO841yEee_PuhghmLIqQ" points="[-163, -214, 1231, 1394]$[-163, -971, 1231, 637]$[-1341, -971, 53, 637]$[-1341, -1537, 53, 71]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_JhWjsI1yEee_PuhghmLIqQ" id="(0.5,0.5)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_JhXKwI1yEee_PuhghmLIqQ" id="(0.5,0.5)"/>
         </edges>
       </data>
     </ownedAnnotationEntries>
@@ -2588,93 +2723,93 @@
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
       </ownedElements>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DNodeList" xmi:id="_rwofAFKvEee_WcSOE1_ywg" name="ClassMakerPlant" tooltipText="" outgoingEdges="_r-mpkFKvEee_WcSOE1_ywg" width="12" height="10">
+    <ownedDiagramElements xmi:type="diagram:DNodeList" xmi:id="_rwofAFKvEee_WcSOE1_ywg" name="ClassMakerPlant" tooltipText="&#xA;WARNING : The generic type associated with the 'SCMRegistry' classifier should have 1 type argument(s) to match the number of type parameter(s) of the classifier " outgoingEdges="_r-mpkFKvEee_WcSOE1_ywg _JesRQI1yEee_PuhghmLIqQ" width="12" height="10">
       <target xmi:type="ecore:EClass" href="ClassMaker.ecore#//ClassMakerPlant"/>
       <semanticElements xmi:type="ecore:EClass" href="ClassMaker.ecore#//ClassMakerPlant"/>
       <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_Rh66MGp7EeeeVc5HRP5OGQ" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" foregroundColor="255,252,216">
         <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
-      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_r6ciUFKvEee_WcSOE1_ywg" name="produce(dynamicModel EPackage) : EPackage" tooltipText="produce(dynamicModel) : EPackage">
-        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//ClassMakerPlant/produce"/>
-        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//ClassMakerPlant/produce"/>
-        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/produce/dynamicModel"/>
-        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_r6dJYFKvEee_WcSOE1_ywg" labelAlignment="LEFT">
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_EcbRQI1yEee_PuhghmLIqQ" name="make(dynamicModel EPackage) : EPackage" tooltipText="make(dynamicModel) : EPackage">
+        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//ClassMakerPlant/make"/>
+        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//ClassMakerPlant/make"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/make/dynamicModel"/>
+        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_EccfYI1yEee_PuhghmLIqQ" labelAlignment="LEFT">
           <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
       </ownedElements>
-      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_r6e-kFKvEee_WcSOE1_ywg" name="produce(dynamicModel EPackage, executor Executor) : Future" tooltipText="produce(dynamicModel, executor) : Future">
-        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//ClassMakerPlant/produce.1"/>
-        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//ClassMakerPlant/produce.1"/>
-        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/produce.1/dynamicModel"/>
-        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/produce.1/executor"/>
-        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_r6floFKvEee_WcSOE1_ywg" labelAlignment="LEFT">
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_Ecgw0I1yEee_PuhghmLIqQ" name="make(dynamicModel EPackage, executor Executor) : Future" tooltipText="make(dynamicModel, executor) : Future">
+        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//ClassMakerPlant/make.1"/>
+        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//ClassMakerPlant/make.1"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/make.1/dynamicModel"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/make.1/executor"/>
+        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_Ecj0II1yEee_PuhghmLIqQ" labelAlignment="LEFT">
           <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
       </ownedElements>
-      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_r6gMsFKvEee_WcSOE1_ywg" name="produce(dynamicModel EPackage, monitor IProgressMonitor) : EPackage" tooltipText="produce(dynamicModel, monitor) : EPackage">
-        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//ClassMakerPlant/produce.2"/>
-        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//ClassMakerPlant/produce.2"/>
-        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/produce.2/dynamicModel"/>
-        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/produce.2/monitor"/>
-        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_r6gzwFKvEee_WcSOE1_ywg" labelAlignment="LEFT">
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_Ecj0IY1yEee_PuhghmLIqQ" name="make(dynamicModel EPackage, monitor IProgressMonitor) : EPackage" tooltipText="make(dynamicModel, monitor) : EPackage">
+        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//ClassMakerPlant/make.2"/>
+        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//ClassMakerPlant/make.2"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/make.2/dynamicModel"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/make.2/monitor"/>
+        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_EckbMI1yEee_PuhghmLIqQ" labelAlignment="LEFT">
           <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
       </ownedElements>
-      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_r6m6YFKvEee_WcSOE1_ywg" name="produce(dynamicModel EPackage, executor Executor, monitor IProgressMonitor) : Future" tooltipText="produce(dynamicModel, executor, monitor) : Future">
-        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//ClassMakerPlant/produce.3"/>
-        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//ClassMakerPlant/produce.3"/>
-        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/produce.3/dynamicModel"/>
-        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/produce.3/executor"/>
-        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/produce.3/monitor"/>
-        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_r6nhcFKvEee_WcSOE1_ywg" labelAlignment="LEFT">
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_EckbMY1yEee_PuhghmLIqQ" name="make(dynamicModel EPackage, executor Executor, monitor IProgressMonitor) : Future" tooltipText="make(dynamicModel, executor, monitor) : Future">
+        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//ClassMakerPlant/make.3"/>
+        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//ClassMakerPlant/make.3"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/make.3/dynamicModel"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/make.3/executor"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/make.3/monitor"/>
+        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_EclCQI1yEee_PuhghmLIqQ" labelAlignment="LEFT">
           <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
       </ownedElements>
-      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_pCqvEGp4EeeeVc5HRP5OGQ" name="produce(dynamicModel EPackage, dependencies EString) : EPackage" tooltipText="produce(dynamicModel, dependencies) : EPackage">
-        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//ClassMakerPlant/produce.4"/>
-        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//ClassMakerPlant/produce.4"/>
-        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/produce.4/dependencies"/>
-        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/produce.4/dynamicModel"/>
-        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_pCqvEWp4EeeeVc5HRP5OGQ" labelAlignment="LEFT">
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_EcmQYI1yEee_PuhghmLIqQ" name="make(dynamicModel EPackage, dependencies EString) : EPackage" tooltipText="make(dynamicModel, dependencies) : EPackage">
+        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//ClassMakerPlant/make.4"/>
+        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//ClassMakerPlant/make.4"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/make.4/dependencies"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/make.4/dynamicModel"/>
+        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_Ecm3cI1yEee_PuhghmLIqQ" labelAlignment="LEFT">
           <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
       </ownedElements>
-      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_2xv4wGp5EeeeVc5HRP5OGQ" name="produce(dynamicModel EPackage, dependencies EString, executor Executor) : Future" tooltipText="produce(dynamicModel, dependencies, executor) : Future">
-        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//ClassMakerPlant/produce.5"/>
-        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//ClassMakerPlant/produce.5"/>
-        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/produce.5/dependencies"/>
-        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/produce.5/dynamicModel"/>
-        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/produce.5/executor"/>
-        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_2xxt8Gp5EeeeVc5HRP5OGQ" labelAlignment="LEFT">
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_EcosoI1yEee_PuhghmLIqQ" name="make(dynamicModel EPackage, dependencies EString, executor Executor) : Future" tooltipText="make(dynamicModel, dependencies, executor) : Future">
+        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//ClassMakerPlant/make.5"/>
+        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//ClassMakerPlant/make.5"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/make.5/dependencies"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/make.5/dynamicModel"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/make.5/executor"/>
+        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_EcpTsI1yEee_PuhghmLIqQ" labelAlignment="LEFT">
           <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
       </ownedElements>
-      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_F7N80Gp7EeeeVc5HRP5OGQ" name="produce(dynamicModel EPackage, dependencies EString, monitor IProgressMonitor) : EPackage" tooltipText="produce(dynamicModel, dependencies, monitor) : EPackage">
-        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//ClassMakerPlant/produce.6"/>
-        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//ClassMakerPlant/produce.6"/>
-        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/produce.6/dependencies"/>
-        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/produce.6/dynamicModel"/>
-        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/produce.6/monitor"/>
-        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_F7Oj4Gp7EeeeVc5HRP5OGQ" labelAlignment="LEFT">
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_EcsXAI1yEee_PuhghmLIqQ" name="make(dynamicModel EPackage, dependencies EString, monitor IProgressMonitor) : EPackage" tooltipText="make(dynamicModel, dependencies, monitor) : EPackage">
+        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//ClassMakerPlant/make.6"/>
+        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//ClassMakerPlant/make.6"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/make.6/dependencies"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/make.6/dynamicModel"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/make.6/monitor"/>
+        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_EcsXAY1yEee_PuhghmLIqQ" labelAlignment="LEFT">
           <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
       </ownedElements>
-      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_J9KvUGp7EeeeVc5HRP5OGQ" name="produce(dynamicModel EPackage, dependencies EString, executor Executor, monitor IProgressMonitor) : Future" tooltipText="produce(dynamicModel, dependencies, executor, monitor) : Future">
-        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//ClassMakerPlant/produce.7"/>
-        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//ClassMakerPlant/produce.7"/>
-        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/produce.7/dependencies"/>
-        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/produce.7/dynamicModel"/>
-        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/produce.7/executor"/>
-        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/produce.7/monitor"/>
-        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_J9KvUWp7EeeeVc5HRP5OGQ" labelAlignment="LEFT">
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_Ecs-EI1yEee_PuhghmLIqQ" name="make(dynamicModel EPackage, dependencies EString, executor Executor, monitor IProgressMonitor) : Future" tooltipText="make(dynamicModel, dependencies, executor, monitor) : Future">
+        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//ClassMakerPlant/make.7"/>
+        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//ClassMakerPlant/make.7"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/make.7/dependencies"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/make.7/dynamicModel"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/make.7/executor"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//ClassMakerPlant/make.7/monitor"/>
+        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_EctlII1yEee_PuhghmLIqQ" labelAlignment="LEFT">
           <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
@@ -3310,10 +3445,10 @@
         <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
-      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_FMeMIIY1EeeTGNMSfFKooQ" name="exception : IStatus" tooltipText="">
-        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//CompletionNotificationAdapter/exception"/>
-        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//CompletionNotificationAdapter/exception"/>
-        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_FMezMIY1EeeTGNMSfFKooQ" labelAlignment="LEFT">
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_EdCVQI1yEee_PuhghmLIqQ" name="error : IStatus" tooltipText="">
+        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//CompletionNotificationAdapter/error"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//CompletionNotificationAdapter/error"/>
+        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_EdCVQY1yEee_PuhghmLIqQ" labelAlignment="LEFT">
           <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
@@ -3367,6 +3502,218 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']"/>
     </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNodeList" xmi:id="_Jb8fQI1yEee_PuhghmLIqQ" name="SCMOperator" tooltipText="" width="12" height="10">
+      <target xmi:type="ecore:EClass" href="ClassMaker.ecore#//SCMOperator"/>
+      <semanticElements xmi:type="ecore:EClass" href="ClassMaker.ecore#//SCMOperator"/>
+      <ownedBorderedNodes xmi:type="diagram:DNode" xmi:id="_JeD_II1yEee_PuhghmLIqQ" name="T" width="3" height="3" resizeKind="NSEW">
+        <target xmi:type="ecore:ETypeParameter" href="ClassMaker.ecore#//SCMOperator/T"/>
+        <semanticElements xmi:type="ecore:ETypeParameter" href="ClassMaker.ecore#//SCMOperator/T"/>
+        <ownedStyle xmi:type="diagram:WorkspaceImage" xmi:id="_JeEmMI1yEee_PuhghmLIqQ" showIcon="false" labelPosition="node" workspacePath="/org.eclipse.emf.ecoretools.design/icons/full/back/generic.svg">
+          <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@borderedNodeMappings[name='EC%20ETypeParameter']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@borderedNodeMappings[name='EC%20ETypeParameter']"/>
+      </ownedBorderedNodes>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_JcCl4I1yEee_PuhghmLIqQ" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" foregroundColor="255,252,216">
+        <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_JeFNQI1yEee_PuhghmLIqQ" name="projectName : EString" tooltipText="">
+        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//SCMOperator/projectName"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//SCMOperator/projectName"/>
+        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_JeGbYI1yEee_PuhghmLIqQ" labelAlignment="LEFT">
+          <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
+      </ownedElements>
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_JeHCcI1yEee_PuhghmLIqQ" name="getRepositorySCM() : T" tooltipText="getRepositorySCM() : T">
+        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMOperator/getRepositorySCM"/>
+        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMOperator/getRepositorySCM"/>
+        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_JeHpgI1yEee_PuhghmLIqQ" labelAlignment="LEFT">
+          <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
+      </ownedElements>
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_JeHpgY1yEee_PuhghmLIqQ" name="ungetRepositorySCM()" tooltipText="ungetRepositorySCM()">
+        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMOperator/ungetRepositorySCM"/>
+        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMOperator/ungetRepositorySCM"/>
+        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_JeIQkI1yEee_PuhghmLIqQ" labelAlignment="LEFT">
+          <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
+      </ownedElements>
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_JeIQkY1yEee_PuhghmLIqQ" name="add(filepattern EString)" tooltipText="add(filepattern)">
+        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMOperator/add"/>
+        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMOperator/add"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//SCMOperator/add/filepattern"/>
+        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_JeI3oI1yEee_PuhghmLIqQ" labelAlignment="LEFT">
+          <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
+      </ownedElements>
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_JeI3oY1yEee_PuhghmLIqQ" name="commit(commitMessage EString) : EString" tooltipText="commit(commitMessage) : EString">
+        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMOperator/commit"/>
+        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMOperator/commit"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//SCMOperator/commit/commitMessage"/>
+        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_JeI3oo1yEee_PuhghmLIqQ" labelAlignment="LEFT">
+          <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
+      </ownedElements>
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_JeJesI1yEee_PuhghmLIqQ" name="decodeTimestamp(commitMessage EString) : EInt" tooltipText="decodeTimestamp(commitMessage) : EInt">
+        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMOperator/decodeTimestamp"/>
+        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMOperator/decodeTimestamp"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//SCMOperator/decodeTimestamp/commitMessage"/>
+        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_JeJesY1yEee_PuhghmLIqQ" labelAlignment="LEFT">
+          <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
+      </ownedElements>
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_JeKFwI1yEee_PuhghmLIqQ" name="decodeVersion(commitMessage EString) : OSGiVersion" tooltipText="decodeVersion(commitMessage) : OSGiVersion">
+        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMOperator/decodeVersion"/>
+        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMOperator/decodeVersion"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//SCMOperator/decodeVersion/commitMessage"/>
+        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_JeKFwY1yEee_PuhghmLIqQ" labelAlignment="LEFT">
+          <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
+      </ownedElements>
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_JeKs0I1yEee_PuhghmLIqQ" name="codeCommitMessage(state State, timestamp EInt) : EString" tooltipText="codeCommitMessage(state, timestamp) : EString">
+        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMOperator/codeCommitMessage"/>
+        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMOperator/codeCommitMessage"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//SCMOperator/codeCommitMessage/state"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//SCMOperator/codeCommitMessage/timestamp"/>
+        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_JeKs0Y1yEee_PuhghmLIqQ" labelAlignment="LEFT">
+          <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
+      </ownedElements>
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_JeKs0o1yEee_PuhghmLIqQ" name="deleteProject()" tooltipText="deleteProject()">
+        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMOperator/deleteProject"/>
+        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMOperator/deleteProject"/>
+        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_JeLT4I1yEee_PuhghmLIqQ" labelAlignment="LEFT">
+          <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
+      </ownedElements>
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_JeLT4Y1yEee_PuhghmLIqQ" name="checkout(branch EString, commitId EString)" tooltipText="checkout(branch, commitId)">
+        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMOperator/checkout"/>
+        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMOperator/checkout"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//SCMOperator/checkout/branch"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//SCMOperator/checkout/commitId"/>
+        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_JeL68I1yEee_PuhghmLIqQ" labelAlignment="LEFT">
+          <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
+      </ownedElements>
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_JeL68Y1yEee_PuhghmLIqQ" name="checkoutOrphan(branch EString, timestamp EInt)" tooltipText="checkoutOrphan(branch, timestamp)">
+        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMOperator/checkoutOrphan"/>
+        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMOperator/checkoutOrphan"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//SCMOperator/checkoutOrphan/branch"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//SCMOperator/checkoutOrphan/timestamp"/>
+        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_JeL68o1yEee_PuhghmLIqQ" labelAlignment="LEFT">
+          <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
+      </ownedElements>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNodeList" xmi:id="_JcYkII1yEee_PuhghmLIqQ" name="SCMRegistry" tooltipText="" incomingEdges="_JesRQI1yEee_PuhghmLIqQ" width="12" height="10">
+      <target xmi:type="ecore:EClass" href="ClassMaker.ecore#//SCMRegistry"/>
+      <semanticElements xmi:type="ecore:EClass" href="ClassMaker.ecore#//SCMRegistry"/>
+      <ownedBorderedNodes xmi:type="diagram:DNode" xmi:id="_JeNJEI1yEee_PuhghmLIqQ" name="T" width="3" height="3" resizeKind="NSEW">
+        <target xmi:type="ecore:ETypeParameter" href="ClassMaker.ecore#//SCMRegistry/T"/>
+        <semanticElements xmi:type="ecore:ETypeParameter" href="ClassMaker.ecore#//SCMRegistry/T"/>
+        <ownedStyle xmi:type="diagram:WorkspaceImage" xmi:id="_JeNJEY1yEee_PuhghmLIqQ" showIcon="false" labelPosition="node" workspacePath="/org.eclipse.emf.ecoretools.design/icons/full/back/generic.svg">
+          <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@borderedNodeMappings[name='EC%20ETypeParameter']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@borderedNodeMappings[name='EC%20ETypeParameter']"/>
+      </ownedBorderedNodes>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_JcZyQI1yEee_PuhghmLIqQ" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" foregroundColor="255,252,216">
+        <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_JeNwII1yEee_PuhghmLIqQ" name="contains(projectName EString) : EBoolean" tooltipText="contains(projectName) : EBoolean">
+        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMRegistry/contains"/>
+        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMRegistry/contains"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//SCMRegistry/contains/projectName"/>
+        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_JeOXMI1yEee_PuhghmLIqQ" labelAlignment="LEFT">
+          <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
+      </ownedElements>
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_JeOXMY1yEee_PuhghmLIqQ" name="get(projectName EString) : SCMOperator" tooltipText="get(projectName) : SCMOperator">
+        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMRegistry/get"/>
+        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMRegistry/get"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//SCMRegistry/get/projectName"/>
+        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_JeO-QI1yEee_PuhghmLIqQ" labelAlignment="LEFT">
+          <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
+      </ownedElements>
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_JePlUI1yEee_PuhghmLIqQ" name="put(projectName EString, operator SCMOperator)" tooltipText="put(projectName, operator)">
+        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMRegistry/put"/>
+        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMRegistry/put"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//SCMRegistry/put/operator"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//SCMRegistry/put/projectName"/>
+        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_JePlUY1yEee_PuhghmLIqQ" labelAlignment="LEFT">
+          <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
+      </ownedElements>
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_JeQMYI1yEee_PuhghmLIqQ" name="containsSCM(projectName EString) : EBoolean" tooltipText="containsSCM(projectName) : EBoolean">
+        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMRegistry/containsSCM"/>
+        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMRegistry/containsSCM"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//SCMRegistry/containsSCM/projectName"/>
+        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_JeQMYY1yEee_PuhghmLIqQ" labelAlignment="LEFT">
+          <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
+      </ownedElements>
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_JeQzcI1yEee_PuhghmLIqQ" name="getSCM(projectName EString) : T" tooltipText="getSCM(projectName) : T">
+        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMRegistry/getSCM"/>
+        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMRegistry/getSCM"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//SCMRegistry/getSCM/projectName"/>
+        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_JeQzcY1yEee_PuhghmLIqQ" labelAlignment="LEFT">
+          <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
+      </ownedElements>
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_JeRagI1yEee_PuhghmLIqQ" name="putSCM(projectName EString, scm T)" tooltipText="putSCM(projectName, scm)">
+        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMRegistry/putSCM"/>
+        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMRegistry/putSCM"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//SCMRegistry/putSCM/projectName"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//SCMRegistry/putSCM/scm"/>
+        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_JeRagY1yEee_PuhghmLIqQ" labelAlignment="LEFT">
+          <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
+      </ownedElements>
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_JeSBkI1yEee_PuhghmLIqQ" name="removeSCM(projectName EString)" tooltipText="removeSCM(projectName)">
+        <target xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMRegistry/removeSCM"/>
+        <semanticElements xmi:type="ecore:EOperation" href="ClassMaker.ecore#//SCMRegistry/removeSCM"/>
+        <semanticElements xmi:type="ecore:EParameter" href="ClassMaker.ecore#//SCMRegistry/removeSCM/projectName"/>
+        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_JeSBkY1yEee_PuhghmLIqQ" labelAlignment="LEFT">
+          <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
+      </ownedElements>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_JesRQI1yEee_PuhghmLIqQ" name="[0..1] SCMRegistry" sourceNode="_rwofAFKvEee_WcSOE1_ywg" targetNode="_JcYkII1yEee_PuhghmLIqQ">
+      <target xmi:type="ecore:EReference" href="ClassMaker.ecore#//ClassMakerPlant/SCMRegistry"/>
+      <semanticElements xmi:type="ecore:EReference" href="ClassMaker.ecore#//ClassMakerPlant/SCMRegistry"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_Jes4UI1yEee_PuhghmLIqQ" routingStyle="manhattan" strokeColor="0,0,0">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC_EReference']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" xmi:id="_Jes4UY1yEee_PuhghmLIqQ" showIcon="false">
+          <customFeatures>labelSize</customFeatures>
+        </centerLabelStyle>
+        <endLabelStyle xmi:type="diagram:EndLabelStyle" xmi:id="_Jes4Uo1yEee_PuhghmLIqQ" showIcon="false" labelColor="39,76,114">
+          <customFeatures>labelSize</customFeatures>
+        </endLabelStyle>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC_EReference']"/>
+    </ownedDiagramElements>
     <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
     <filterVariableHistory xmi:type="diagram:FilterVariableHistory" xmi:id="_pJKthVKvEee_WcSOE1_ywg"/>
     <activatedLayers xmi:type="description_1:Layer" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer"/>
@@ -3374,4 +3721,817 @@
     <activatedLayers xmi:type="description_1:AdditionalLayer" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Validation']"/>
     <target xmi:type="ecore:EPackage" href="ClassMaker.ecore#/"/>
   </diagram:DSemanticDiagram>
+  <table:DTable xmi:id="_sipyMI2REee_PuhghmLIqQ" name="classmaker documentation table" headerColumnWidth="320">
+    <target xmi:type="ecore:EPackage" href="ClassMaker.ecore#/"/>
+    <lines xmi:type="table:DLine" xmi:id="_sirAUY2REee_PuhghmLIqQ" label="EClass : Contribution">
+      <target xmi:type="ecore:EClass" href="ClassMaker.ecore#//Contribution"/>
+      <lines xmi:type="table:DLine" xmi:id="_sirAUo2REee_PuhghmLIqQ" label="EAttribute : dependencies">
+        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//Contribution/dependencies"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//Contribution/dependencies"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirAU42REee_PuhghmLIqQ" label="EReference : revision">
+        <target xmi:type="ecore:EReference" href="ClassMaker.ecore#//Contribution/revision"/>
+        <semanticElements xmi:type="ecore:EReference" href="ClassMaker.ecore#//Contribution/revision"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirAVI2REee_PuhghmLIqQ" label="EReference : revisions">
+        <target xmi:type="ecore:EReference" href="ClassMaker.ecore#//Contribution/revisions"/>
+        <semanticElements xmi:type="ecore:EReference" href="ClassMaker.ecore#//Contribution/revisions"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirAVY2REee_PuhghmLIqQ" label="EReference : state">
+        <target xmi:type="ecore:EReference" href="ClassMaker.ecore#//Contribution/state"/>
+        <semanticElements xmi:type="ecore:EReference" href="ClassMaker.ecore#//Contribution/state"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirAVo2REee_PuhghmLIqQ" label="EAttribute : latestVersion">
+        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//Contribution/latestVersion"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//Contribution/latestVersion"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirAV42REee_PuhghmLIqQ" label="EReference : modelResourceAdapter">
+        <target xmi:type="ecore:EReference" href="ClassMaker.ecore#//Contribution/modelResourceAdapter"/>
+        <semanticElements xmi:type="ecore:EReference" href="ClassMaker.ecore#//Contribution/modelResourceAdapter"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <semanticElements xmi:type="ecore:EClass" href="ClassMaker.ecore#//Contribution"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+      <cells xmi:type="table:DCell" xmi:id="_sirAWI2REee_PuhghmLIqQ" label="Software contribution project item." column="_sisOc42REee_PuhghmLIqQ">
+        <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Contribution/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Contribution/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirAWY2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+          <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </currentStyle>
+        <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+      </cells>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirAWo2REee_PuhghmLIqQ" label="EClass : Revision">
+      <target xmi:type="ecore:EClass" href="ClassMaker.ecore#//Revision"/>
+      <lines xmi:type="table:DLine" xmi:id="_sirAW42REee_PuhghmLIqQ" label="EReference : state">
+        <target xmi:type="ecore:EReference" href="ClassMaker.ecore#//Revision/state"/>
+        <semanticElements xmi:type="ecore:EReference" href="ClassMaker.ecore#//Revision/state"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirAXI2REee_PuhghmLIqQ" label="EAttribute : timestamp">
+        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//Revision/timestamp"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//Revision/timestamp"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+        <cells xmi:type="table:DCell" xmi:id="_sirAXY2REee_PuhghmLIqQ" label="A timestamp of last checked out state." column="_sisOc42REee_PuhghmLIqQ">
+          <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Revision/timestamp/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+          <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Revision/timestamp/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+          <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirAXo2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+            <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+          </currentStyle>
+          <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </cells>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirAX42REee_PuhghmLIqQ" label="EReference : stateHistory">
+        <target xmi:type="ecore:EReference" href="ClassMaker.ecore#//Revision/stateHistory"/>
+        <semanticElements xmi:type="ecore:EReference" href="ClassMaker.ecore#//Revision/stateHistory"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+        <cells xmi:type="table:DCell" xmi:id="_sirAYI2REee_PuhghmLIqQ" label="A {@link State}s history." column="_sisOc42REee_PuhghmLIqQ">
+          <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Revision/stateHistory/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+          <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Revision/stateHistory/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+          <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirAYY2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+            <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+          </currentStyle>
+          <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </cells>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirAYo2REee_PuhghmLIqQ" label="EAttribute : latestTimestamp">
+        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//Revision/latestTimestamp"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//Revision/latestTimestamp"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <semanticElements xmi:type="ecore:EClass" href="ClassMaker.ecore#//Revision"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+      <cells xmi:type="table:DCell" xmi:id="_sirAY42REee_PuhghmLIqQ" label="A revision of &lt;b>Contribution&lt;/b>. Identified by {@link #getVersion() &lt;em>Version&lt;/em>}." column="_sisOc42REee_PuhghmLIqQ">
+        <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Revision/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Revision/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirAZI2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+          <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </currentStyle>
+        <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+      </cells>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirAZY2REee_PuhghmLIqQ" label="EClass : State">
+      <target xmi:type="ecore:EClass" href="ClassMaker.ecore#//State"/>
+      <lines xmi:type="table:DLine" xmi:id="_sirAZo2REee_PuhghmLIqQ" label="EAttribute : requiredPlugins">
+        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//State/requiredPlugins"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//State/requiredPlugins"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirAZ42REee_PuhghmLIqQ" label="EReference : revision">
+        <target xmi:type="ecore:EReference" href="ClassMaker.ecore#//State/revision"/>
+        <semanticElements xmi:type="ecore:EReference" href="ClassMaker.ecore#//State/revision"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirAaI2REee_PuhghmLIqQ" label="EAttribute : timestamp">
+        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//State/timestamp"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//State/timestamp"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+        <cells xmi:type="table:DCell" xmi:id="_sirAaY2REee_PuhghmLIqQ" label="Uniquily identifies &lt;em>&lt;b>State&lt;/b>&lt;/em> in &lt;em>&lt;b>Revision&lt;/b>&lt;/em>." column="_sisOc42REee_PuhghmLIqQ">
+          <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//State/timestamp/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+          <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//State/timestamp/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+          <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirAao2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+            <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+          </currentStyle>
+          <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </cells>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirAa42REee_PuhghmLIqQ" label="EAttribute : deployableUnitName">
+        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//State/deployableUnitName"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//State/deployableUnitName"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirAbI2REee_PuhghmLIqQ" label="EAttribute : jobFamily">
+        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//State/jobFamily"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//State/jobFamily"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirAbY2REee_PuhghmLIqQ" label="EReference : resource">
+        <target xmi:type="ecore:EReference" href="ClassMaker.ecore#//State/resource"/>
+        <semanticElements xmi:type="ecore:EReference" href="ClassMaker.ecore#//State/resource"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirAbo2REee_PuhghmLIqQ" label="EAttribute : commitIds">
+        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//State/commitIds"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//State/commitIds"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+        <cells xmi:type="table:DCell" xmi:id="_sirAb42REee_PuhghmLIqQ" label="An SCM commit's associated with the state identifiers." column="_sisOc42REee_PuhghmLIqQ">
+          <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//State/commitIds/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+          <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//State/commitIds/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+          <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirAcI2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+            <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+          </currentStyle>
+          <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </cells>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirAcY2REee_PuhghmLIqQ" label="EAttribute : commitId">
+        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//State/commitId"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//State/commitId"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+        <cells xmi:type="table:DCell" xmi:id="_sirAco2REee_PuhghmLIqQ" label="An SCM commit identifier attribute." column="_sisOc42REee_PuhghmLIqQ">
+          <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//State/commitId/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+          <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//State/commitId/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+          <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirAc42REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+            <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+          </currentStyle>
+          <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </cells>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirAdI2REee_PuhghmLIqQ" label="EReference : stateCustomizers">
+        <target xmi:type="ecore:EReference" href="ClassMaker.ecore#//State/stateCustomizers"/>
+        <semanticElements xmi:type="ecore:EReference" href="ClassMaker.ecore#//State/stateCustomizers"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+        <cells xmi:type="table:DCell" xmi:id="_sirAdY2REee_PuhghmLIqQ" label="A particular state's {@link Customizer}s. Provides actual implementation to which {@link customizers} feature is delegating." column="_sisOc42REee_PuhghmLIqQ">
+          <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//State/stateCustomizers/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+          <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//State/stateCustomizers/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+          <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirAdo2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+            <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+          </currentStyle>
+          <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </cells>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirAd42REee_PuhghmLIqQ" label="EAttribute : projectName">
+        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//State/projectName"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//State/projectName"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirAeI2REee_PuhghmLIqQ" label="EAttribute : making">
+        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//State/making"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//State/making"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <semanticElements xmi:type="ecore:EClass" href="ClassMaker.ecore#//State"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+      <cells xmi:type="table:DCell" xmi:id="_sirAeY2REee_PuhghmLIqQ" label="A complete unit, representing the state of &lt;b>Contribution&lt;/b>. Identified by {@link  #getTimestamp() &lt;em>Timestamp&lt;/em>}." column="_sisOc42REee_PuhghmLIqQ">
+        <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//State/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//State/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirAeo2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+          <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </currentStyle>
+        <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+      </cells>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirAe42REee_PuhghmLIqQ" label="EClass : Item">
+      <target xmi:type="ecore:EClass" href="ClassMaker.ecore#//Item"/>
+      <lines xmi:type="table:DLine" xmi:id="_sirAfI2REee_PuhghmLIqQ" label="EAttribute : modelName">
+        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//Item/modelName"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//Item/modelName"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirAfY2REee_PuhghmLIqQ" label="EAttribute : phase">
+        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//Item/phase"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//Item/phase"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirAfo2REee_PuhghmLIqQ" label="EAttribute : version">
+        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//Item/version"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//Item/version"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirAf42REee_PuhghmLIqQ" label="EAttribute : language">
+        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//Item/language"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//Item/language"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirAgI2REee_PuhghmLIqQ" label="EReference : domainModel">
+        <target xmi:type="ecore:EReference" href="ClassMaker.ecore#//Item/domainModel"/>
+        <semanticElements xmi:type="ecore:EReference" href="ClassMaker.ecore#//Item/domainModel"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirAgY2REee_PuhghmLIqQ" label="EReference : customizers">
+        <target xmi:type="ecore:EReference" href="ClassMaker.ecore#//Item/customizers"/>
+        <semanticElements xmi:type="ecore:EReference" href="ClassMaker.ecore#//Item/customizers"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+        <cells xmi:type="table:DCell" xmi:id="_sirAgo2REee_PuhghmLIqQ" label="{@link Customizer}s collection." column="_sisOc42REee_PuhghmLIqQ">
+          <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Item/customizers/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+          <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Item/customizers/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+          <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirAg42REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+            <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+          </currentStyle>
+          <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </cells>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirAhI2REee_PuhghmLIqQ" label="EReference : parent">
+        <target xmi:type="ecore:EReference" href="ClassMaker.ecore#//Item/parent"/>
+        <semanticElements xmi:type="ecore:EReference" href="ClassMaker.ecore#//Item/parent"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirAhY2REee_PuhghmLIqQ" label="EAttribute : locale">
+        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//Item/locale"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//Item/locale"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirAho2REee_PuhghmLIqQ" label="EReference : contribution">
+        <target xmi:type="ecore:EReference" href="ClassMaker.ecore#//Item/contribution"/>
+        <semanticElements xmi:type="ecore:EReference" href="ClassMaker.ecore#//Item/contribution"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirnYI2REee_PuhghmLIqQ" label="EAttribute : properties">
+        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//Item/properties"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//Item/properties"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <semanticElements xmi:type="ecore:EClass" href="ClassMaker.ecore#//Item"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+      <cells xmi:type="table:DCell" xmi:id="_sirnYY2REee_PuhghmLIqQ" label="Common denominator for &lt;b>Project&lt;/b>s and they parts." column="_sisOc42REee_PuhghmLIqQ">
+        <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Item/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Item/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirnYo2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+          <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </currentStyle>
+        <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+      </cells>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirnY42REee_PuhghmLIqQ" label="EClass : Adapter">
+      <target xmi:type="ecore:EClass" href="ClassMaker.ecore#//Adapter"/>
+      <semanticElements xmi:type="ecore:EClass" href="ClassMaker.ecore#//Adapter"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+      <cells xmi:type="table:DCell" xmi:id="_sirnZI2REee_PuhghmLIqQ" label="An {@link org.eclipse.emf.common.notify.Adapter} class import." column="_sisOc42REee_PuhghmLIqQ">
+        <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Adapter/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Adapter/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirnZY2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+          <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </currentStyle>
+        <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+      </cells>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirnZo2REee_PuhghmLIqQ" label="EClass : Workspace">
+      <target xmi:type="ecore:EClass" href="ClassMaker.ecore#//Workspace"/>
+      <lines xmi:type="table:DLine" xmi:id="_sirnZ42REee_PuhghmLIqQ" label="EReference : projects">
+        <target xmi:type="ecore:EReference" href="ClassMaker.ecore#//Workspace/projects"/>
+        <semanticElements xmi:type="ecore:EReference" href="ClassMaker.ecore#//Workspace/projects"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirnaI2REee_PuhghmLIqQ" label="EAttribute : resourceSet">
+        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//Workspace/resourceSet"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//Workspace/resourceSet"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+        <cells xmi:type="table:DCell" xmi:id="_sirnaY2REee_PuhghmLIqQ" label="EMF ResourceSet." column="_sisOc42REee_PuhghmLIqQ">
+          <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Workspace/resourceSet/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+          <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Workspace/resourceSet/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+          <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirnao2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+            <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+          </currentStyle>
+          <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </cells>
+      </lines>
+      <semanticElements xmi:type="ecore:EClass" href="ClassMaker.ecore#//Workspace"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+      <cells xmi:type="table:DCell" xmi:id="_sirna42REee_PuhghmLIqQ" label="Maps {@link org.eclipse.emf.ecore.resource.ResourceSet} to {@link org.eclipse.core.resources.IWorkspaceRoot}." column="_sisOc42REee_PuhghmLIqQ">
+        <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Workspace/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Workspace/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirnbI2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+          <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </currentStyle>
+        <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+      </cells>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirnbY2REee_PuhghmLIqQ" label="EDataType : Properties">
+      <target xmi:type="ecore:EDataType" href="ClassMaker.ecore#//Properties"/>
+      <semanticElements xmi:type="ecore:EDataType" href="ClassMaker.ecore#//Properties"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+      <cells xmi:type="table:DCell" xmi:id="_sirnbo2REee_PuhghmLIqQ" label="{@link java.util.Properties} datatype import." column="_sisOc42REee_PuhghmLIqQ">
+        <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Properties/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Properties/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirnb42REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+          <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </currentStyle>
+        <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+      </cells>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirncI2REee_PuhghmLIqQ" label="EDataType : IProgressMonitor">
+      <target xmi:type="ecore:EDataType" href="ClassMaker.ecore#//IProgressMonitor"/>
+      <semanticElements xmi:type="ecore:EDataType" href="ClassMaker.ecore#//IProgressMonitor"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+      <cells xmi:type="table:DCell" xmi:id="_sirncY2REee_PuhghmLIqQ" label="{@link org.eclipse.core.runtime.IProgressMonitor} datatype import." column="_sisOc42REee_PuhghmLIqQ">
+        <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//IProgressMonitor/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//IProgressMonitor/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirnco2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+          <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </currentStyle>
+        <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+      </cells>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirnc42REee_PuhghmLIqQ" label="EDataType : OSGiVersion">
+      <target xmi:type="ecore:EDataType" href="ClassMaker.ecore#//OSGiVersion"/>
+      <semanticElements xmi:type="ecore:EDataType" href="ClassMaker.ecore#//OSGiVersion"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+      <cells xmi:type="table:DCell" xmi:id="_sirndI2REee_PuhghmLIqQ" label="{@link org.osgi.framework.Version} datatype import." column="_sisOc42REee_PuhghmLIqQ">
+        <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//OSGiVersion/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//OSGiVersion/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirndY2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+          <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </currentStyle>
+        <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+      </cells>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirndo2REee_PuhghmLIqQ" label="EClass : IntegerToStateMapEntry">
+      <target xmi:type="ecore:EClass" href="ClassMaker.ecore#//IntegerToStateMapEntry"/>
+      <lines xmi:type="table:DLine" xmi:id="_sirnd42REee_PuhghmLIqQ" label="EAttribute : key">
+        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//IntegerToStateMapEntry/key"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//IntegerToStateMapEntry/key"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+        <cells xmi:type="table:DCell" xmi:id="_sirneI2REee_PuhghmLIqQ" label="A timestamp key." column="_sisOc42REee_PuhghmLIqQ">
+          <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//IntegerToStateMapEntry/key/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+          <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//IntegerToStateMapEntry/key/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+          <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirneY2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+            <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+          </currentStyle>
+          <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </cells>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirneo2REee_PuhghmLIqQ" label="EReference : value">
+        <target xmi:type="ecore:EReference" href="ClassMaker.ecore#//IntegerToStateMapEntry/value"/>
+        <semanticElements xmi:type="ecore:EReference" href="ClassMaker.ecore#//IntegerToStateMapEntry/value"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+        <cells xmi:type="table:DCell" xmi:id="_sirne42REee_PuhghmLIqQ" label="A state value." column="_sisOc42REee_PuhghmLIqQ">
+          <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//IntegerToStateMapEntry/value/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+          <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//IntegerToStateMapEntry/value/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+          <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirnfI2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+            <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+          </currentStyle>
+          <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </cells>
+      </lines>
+      <semanticElements xmi:type="ecore:EClass" href="ClassMaker.ecore#//IntegerToStateMapEntry"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirnfY2REee_PuhghmLIqQ" label="EClass : VersionToRevisionMapEntry">
+      <target xmi:type="ecore:EClass" href="ClassMaker.ecore#//VersionToRevisionMapEntry"/>
+      <lines xmi:type="table:DLine" xmi:id="_sirnfo2REee_PuhghmLIqQ" label="EAttribute : key">
+        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//VersionToRevisionMapEntry/key"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//VersionToRevisionMapEntry/key"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+        <cells xmi:type="table:DCell" xmi:id="_sirnf42REee_PuhghmLIqQ" label="{@link Version} key." column="_sisOc42REee_PuhghmLIqQ">
+          <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//VersionToRevisionMapEntry/key/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+          <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//VersionToRevisionMapEntry/key/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+          <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirngI2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+            <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+          </currentStyle>
+          <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </cells>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirngY2REee_PuhghmLIqQ" label="EReference : value">
+        <target xmi:type="ecore:EReference" href="ClassMaker.ecore#//VersionToRevisionMapEntry/value"/>
+        <semanticElements xmi:type="ecore:EReference" href="ClassMaker.ecore#//VersionToRevisionMapEntry/value"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+        <cells xmi:type="table:DCell" xmi:id="_sirngo2REee_PuhghmLIqQ" label="{@link Revision} value." column="_sisOc42REee_PuhghmLIqQ">
+          <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//VersionToRevisionMapEntry/value/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+          <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//VersionToRevisionMapEntry/value/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+          <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirng42REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+            <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+          </currentStyle>
+          <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </cells>
+      </lines>
+      <semanticElements xmi:type="ecore:EClass" href="ClassMaker.ecore#//VersionToRevisionMapEntry"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+      <cells xmi:type="table:DCell" xmi:id="_sirnhI2REee_PuhghmLIqQ" label="Maps {@link Version} to {@link Revision}. " column="_sisOc42REee_PuhghmLIqQ">
+        <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//VersionToRevisionMapEntry/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//VersionToRevisionMapEntry/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirnhY2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+          <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </currentStyle>
+        <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+      </cells>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirnho2REee_PuhghmLIqQ" label="EEnum : Stage">
+      <target xmi:type="ecore:EEnum" href="ClassMaker.ecore#//Stage"/>
+      <semanticElements xmi:type="ecore:EEnum" href="ClassMaker.ecore#//Stage"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+      <cells xmi:type="table:DCell" xmi:id="_sirnh42REee_PuhghmLIqQ" label="A stage in which subject could exist." column="_sisOc42REee_PuhghmLIqQ">
+        <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Stage/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Stage/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirniI2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+          <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </currentStyle>
+        <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+      </cells>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirniY2REee_PuhghmLIqQ" label="EClass : ISchedulingRule">
+      <target xmi:type="ecore:EClass" href="ClassMaker.ecore#//ISchedulingRule"/>
+      <semanticElements xmi:type="ecore:EClass" href="ClassMaker.ecore#//ISchedulingRule"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+      <cells xmi:type="table:DCell" xmi:id="_sirnio2REee_PuhghmLIqQ" label="A {@link org.eclipse.core.runtime.jobs.ISchedulingRule} class import." column="_sisOc42REee_PuhghmLIqQ">
+        <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//ISchedulingRule/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//ISchedulingRule/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirni42REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+          <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </currentStyle>
+        <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+      </cells>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirnjI2REee_PuhghmLIqQ" label="EClass : Executor">
+      <target xmi:type="ecore:EClass" href="ClassMaker.ecore#//Executor"/>
+      <semanticElements xmi:type="ecore:EClass" href="ClassMaker.ecore#//Executor"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+      <cells xmi:type="table:DCell" xmi:id="_sirnjY2REee_PuhghmLIqQ" label="{@link java.util.concurrent.Executor} class import. " column="_sisOc42REee_PuhghmLIqQ">
+        <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Executor/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Executor/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirnjo2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+          <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </currentStyle>
+        <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+      </cells>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirnj42REee_PuhghmLIqQ" label="EClass : Future">
+      <target xmi:type="ecore:EClass" href="ClassMaker.ecore#//Future"/>
+      <semanticElements xmi:type="ecore:EClass" href="ClassMaker.ecore#//Future"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+      <cells xmi:type="table:DCell" xmi:id="_sirnkI2REee_PuhghmLIqQ" label="{@link java.util.concurrent.Future} class import." column="_sisOc42REee_PuhghmLIqQ">
+        <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Future/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Future/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirnkY2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+          <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </currentStyle>
+        <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+      </cells>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirnko2REee_PuhghmLIqQ" label="EDataType : Semaphore">
+      <target xmi:type="ecore:EDataType" href="ClassMaker.ecore#//Semaphore"/>
+      <semanticElements xmi:type="ecore:EDataType" href="ClassMaker.ecore#//Semaphore"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+      <cells xmi:type="table:DCell" xmi:id="_sirnk42REee_PuhghmLIqQ" label="{@link java.util.concurrent.Semaphore} datatype import." column="_sisOc42REee_PuhghmLIqQ">
+        <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Semaphore/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Semaphore/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirnlI2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+          <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </currentStyle>
+        <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+      </cells>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirnlY2REee_PuhghmLIqQ" label="EDataType : CoreException">
+      <target xmi:type="ecore:EDataType" href="ClassMaker.ecore#//CoreException"/>
+      <semanticElements xmi:type="ecore:EDataType" href="ClassMaker.ecore#//CoreException"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+      <cells xmi:type="table:DCell" xmi:id="_sirnlo2REee_PuhghmLIqQ" label="{@link org.eclipse.core.runtime.CoreException} datatype import." column="_sisOc42REee_PuhghmLIqQ">
+        <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//CoreException/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//CoreException/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirnl42REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+          <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </currentStyle>
+        <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+      </cells>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirnmI2REee_PuhghmLIqQ" label="EDataType : InvocationTargetException">
+      <target xmi:type="ecore:EDataType" href="ClassMaker.ecore#//InvocationTargetException"/>
+      <semanticElements xmi:type="ecore:EDataType" href="ClassMaker.ecore#//InvocationTargetException"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+      <cells xmi:type="table:DCell" xmi:id="_sirnmY2REee_PuhghmLIqQ" label="{@link java.lang.reflect.TargetException} datatype import." column="_sisOc42REee_PuhghmLIqQ">
+        <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//InvocationTargetException/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//InvocationTargetException/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirnmo2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+          <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </currentStyle>
+        <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+      </cells>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirnm42REee_PuhghmLIqQ" label="EClass : IAdapterFactory">
+      <target xmi:type="ecore:EClass" href="ClassMaker.ecore#//IAdapterFactory"/>
+      <semanticElements xmi:type="ecore:EClass" href="ClassMaker.ecore#//IAdapterFactory"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirnnI2REee_PuhghmLIqQ" label="EClass : Customizer">
+      <target xmi:type="ecore:EClass" href="ClassMaker.ecore#//Customizer"/>
+      <semanticElements xmi:type="ecore:EClass" href="ClassMaker.ecore#//Customizer"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+      <cells xmi:type="table:DCell" xmi:id="_sirnnY2REee_PuhghmLIqQ" label="Allows to customize the process." column="_sisOc42REee_PuhghmLIqQ">
+        <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Customizer/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Customizer/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirnno2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+          <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </currentStyle>
+        <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+      </cells>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirnn42REee_PuhghmLIqQ" label="EDataType : IStatus">
+      <target xmi:type="ecore:EDataType" href="ClassMaker.ecore#//IStatus"/>
+      <semanticElements xmi:type="ecore:EDataType" href="ClassMaker.ecore#//IStatus"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+      <cells xmi:type="table:DCell" xmi:id="_sirnoI2REee_PuhghmLIqQ" label="{@link org.eclipse.core.runtime.IStatus} datatype import." column="_sisOc42REee_PuhghmLIqQ">
+        <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//IStatus/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//IStatus/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirnoY2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+          <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </currentStyle>
+        <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+      </cells>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirnoo2REee_PuhghmLIqQ" label="EClass : StageQualifier">
+      <target xmi:type="ecore:EClass" href="ClassMaker.ecore#//StageQualifier"/>
+      <lines xmi:type="table:DLine" xmi:id="_sirno42REee_PuhghmLIqQ" label="EAttribute : stage">
+        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//StageQualifier/stage"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//StageQualifier/stage"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+        <cells xmi:type="table:DCell" xmi:id="_sirnpI2REee_PuhghmLIqQ" label="A &lt;em>&lt;b>stage&lt;/b>&lt;/em> of process." column="_sisOc42REee_PuhghmLIqQ">
+          <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//StageQualifier/stage/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+          <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//StageQualifier/stage/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+          <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirnpY2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+            <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+          </currentStyle>
+          <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </cells>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirnpo2REee_PuhghmLIqQ" label="EAttribute : step">
+        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//StageQualifier/step"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//StageQualifier/step"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+        <cells xmi:type="table:DCell" xmi:id="_sirnp42REee_PuhghmLIqQ" label="A particular step in the stage of process." column="_sisOc42REee_PuhghmLIqQ">
+          <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//StageQualifier/step/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+          <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//StageQualifier/step/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+          <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirnqI2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+            <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+          </currentStyle>
+          <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </cells>
+      </lines>
+      <semanticElements xmi:type="ecore:EClass" href="ClassMaker.ecore#//StageQualifier"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+      <cells xmi:type="table:DCell" xmi:id="_sirnqY2REee_PuhghmLIqQ" label="Qualifier of stage in the process." column="_sisOc42REee_PuhghmLIqQ">
+        <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//StageQualifier/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//StageQualifier/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirnqo2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+          <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </currentStyle>
+        <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+      </cells>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirnq42REee_PuhghmLIqQ" label="EClass : StageQualifierToCustomizerMapEntry">
+      <target xmi:type="ecore:EClass" href="ClassMaker.ecore#//StageQualifierToCustomizerMapEntry"/>
+      <lines xmi:type="table:DLine" xmi:id="_sirnrI2REee_PuhghmLIqQ" label="EReference : key">
+        <target xmi:type="ecore:EReference" href="ClassMaker.ecore#//StageQualifierToCustomizerMapEntry/key"/>
+        <semanticElements xmi:type="ecore:EReference" href="ClassMaker.ecore#//StageQualifierToCustomizerMapEntry/key"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirnrY2REee_PuhghmLIqQ" label="EReference : value">
+        <target xmi:type="ecore:EReference" href="ClassMaker.ecore#//StageQualifierToCustomizerMapEntry/value"/>
+        <semanticElements xmi:type="ecore:EReference" href="ClassMaker.ecore#//StageQualifierToCustomizerMapEntry/value"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <semanticElements xmi:type="ecore:EClass" href="ClassMaker.ecore#//StageQualifierToCustomizerMapEntry"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+      <cells xmi:type="table:DCell" xmi:id="_sirnro2REee_PuhghmLIqQ" label="Maps &lt;em>StageQualifier&lt;/em> of process for which customization is needed to &lt;em>Customizer&lt;/em>." column="_sisOc42REee_PuhghmLIqQ">
+        <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//StageQualifierToCustomizerMapEntry/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//StageQualifierToCustomizerMapEntry/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirnr42REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+          <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </currentStyle>
+        <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+      </cells>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirnsI2REee_PuhghmLIqQ" label="EClass : Project">
+      <target xmi:type="ecore:EClass" href="ClassMaker.ecore#//Project"/>
+      <lines xmi:type="table:DLine" xmi:id="_sirnsY2REee_PuhghmLIqQ" label="EAttribute : name">
+        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//Project/name"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//Project/name"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirnso2REee_PuhghmLIqQ" label="EAttribute : projectName">
+        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//Project/projectName"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//Project/projectName"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirns42REee_PuhghmLIqQ" label="EReference : children">
+        <target xmi:type="ecore:EReference" href="ClassMaker.ecore#//Project/children"/>
+        <semanticElements xmi:type="ecore:EReference" href="ClassMaker.ecore#//Project/children"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirntI2REee_PuhghmLIqQ" label="EAttribute : dirty">
+        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//Project/dirty"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//Project/dirty"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirntY2REee_PuhghmLIqQ" label="EReference : workspace">
+        <target xmi:type="ecore:EReference" href="ClassMaker.ecore#//Project/workspace"/>
+        <semanticElements xmi:type="ecore:EReference" href="ClassMaker.ecore#//Project/workspace"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirnto2REee_PuhghmLIqQ" label="EAttribute : needsCompletionNotification">
+        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//Project/needsCompletionNotification"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//Project/needsCompletionNotification"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirnt42REee_PuhghmLIqQ" label="EReference : completionNotificationAdapter">
+        <target xmi:type="ecore:EReference" href="ClassMaker.ecore#//Project/completionNotificationAdapter"/>
+        <semanticElements xmi:type="ecore:EReference" href="ClassMaker.ecore#//Project/completionNotificationAdapter"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <semanticElements xmi:type="ecore:EClass" href="ClassMaker.ecore#//Project"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+      <cells xmi:type="table:DCell" xmi:id="_sirnuI2REee_PuhghmLIqQ" label="Default project class." column="_sisOc42REee_PuhghmLIqQ">
+        <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Project/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Project/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirnuY2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+          <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </currentStyle>
+        <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+      </cells>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirnuo2REee_PuhghmLIqQ" label="EDataType : URI">
+      <target xmi:type="ecore:EDataType" href="ClassMaker.ecore#//URI"/>
+      <semanticElements xmi:type="ecore:EDataType" href="ClassMaker.ecore#//URI"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+      <cells xmi:type="table:DCell" xmi:id="_sirnu42REee_PuhghmLIqQ" label="{@link org.eclipse.emf.common.util.URI} datatype import." column="_sisOc42REee_PuhghmLIqQ">
+        <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//URI/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//URI/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirnvI2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+          <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </currentStyle>
+        <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+      </cells>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirnvY2REee_PuhghmLIqQ" label="EClass : ModelPair">
+      <target xmi:type="ecore:EClass" href="ClassMaker.ecore#//ModelPair"/>
+      <lines xmi:type="table:DLine" xmi:id="_sirnvo2REee_PuhghmLIqQ" label="EReference : dynamic">
+        <target xmi:type="ecore:EReference" href="ClassMaker.ecore#//ModelPair/dynamic"/>
+        <semanticElements xmi:type="ecore:EReference" href="ClassMaker.ecore#//ModelPair/dynamic"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirnv42REee_PuhghmLIqQ" label="EReference : generated">
+        <target xmi:type="ecore:EReference" href="ClassMaker.ecore#//ModelPair/generated"/>
+        <semanticElements xmi:type="ecore:EReference" href="ClassMaker.ecore#//ModelPair/generated"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirnwI2REee_PuhghmLIqQ" label="EReference : parent">
+        <target xmi:type="ecore:EReference" href="ClassMaker.ecore#//ModelPair/parent"/>
+        <semanticElements xmi:type="ecore:EReference" href="ClassMaker.ecore#//ModelPair/parent"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <semanticElements xmi:type="ecore:EClass" href="ClassMaker.ecore#//ModelPair"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+      <cells xmi:type="table:DCell" xmi:id="_sirnwY2REee_PuhghmLIqQ" label="A holder of pair of references. To blueprint dynamic model instance, and to a resulting generated one." column="_sisOc42REee_PuhghmLIqQ">
+        <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//ModelPair/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//ModelPair/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirnwo2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+          <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </currentStyle>
+        <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+      </cells>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirnw42REee_PuhghmLIqQ" label="EClass : SCMOperator">
+      <target xmi:type="ecore:EClass" href="ClassMaker.ecore#//SCMOperator"/>
+      <lines xmi:type="table:DLine" xmi:id="_sirnxI2REee_PuhghmLIqQ" label="EAttribute : projectName">
+        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//SCMOperator/projectName"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//SCMOperator/projectName"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <semanticElements xmi:type="ecore:EClass" href="ClassMaker.ecore#//SCMOperator"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirnxY2REee_PuhghmLIqQ" label="EClass : SCMRegistry">
+      <target xmi:type="ecore:EClass" href="ClassMaker.ecore#//SCMRegistry"/>
+      <semanticElements xmi:type="ecore:EClass" href="ClassMaker.ecore#//SCMRegistry"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirnxo2REee_PuhghmLIqQ" label="EClass : Resource">
+      <target xmi:type="ecore:EClass" href="ClassMaker.ecore#//Resource"/>
+      <semanticElements xmi:type="ecore:EClass" href="ClassMaker.ecore#//Resource"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+      <cells xmi:type="table:DCell" xmi:id="_sirnx42REee_PuhghmLIqQ" label="A {@link org.eclipse.emf.ecore.resource.Resource} class import." column="_sisOc42REee_PuhghmLIqQ">
+        <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Resource/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Resource/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirnyI2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+          <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </currentStyle>
+        <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+      </cells>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirnyY2REee_PuhghmLIqQ" label="EClass : CompletionListener">
+      <target xmi:type="ecore:EClass" href="ClassMaker.ecore#//CompletionListener"/>
+      <semanticElements xmi:type="ecore:EClass" href="ClassMaker.ecore#//CompletionListener"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+      <cells xmi:type="table:DCell" xmi:id="_sirnyo2REee_PuhghmLIqQ" label="Process completion listener." column="_sisOc42REee_PuhghmLIqQ">
+        <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//CompletionListener/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//CompletionListener/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirny42REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+          <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </currentStyle>
+        <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+      </cells>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirnzI2REee_PuhghmLIqQ" label="EDataType : Exception">
+      <target xmi:type="ecore:EDataType" href="ClassMaker.ecore#//Exception"/>
+      <semanticElements xmi:type="ecore:EDataType" href="ClassMaker.ecore#//Exception"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+      <cells xmi:type="table:DCell" xmi:id="_sirnzY2REee_PuhghmLIqQ" label="{@link java.lang.Exception} datatype import." column="_sisOc42REee_PuhghmLIqQ">
+        <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Exception/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Exception/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirnzo2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+          <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </currentStyle>
+        <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+      </cells>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirnz42REee_PuhghmLIqQ" label="EClass : ResourceAdapter">
+      <target xmi:type="ecore:EClass" href="ClassMaker.ecore#//ResourceAdapter"/>
+      <lines xmi:type="table:DLine" xmi:id="_sirn0I2REee_PuhghmLIqQ" label="EReference : resource">
+        <target xmi:type="ecore:EReference" href="ClassMaker.ecore#//ResourceAdapter/resource"/>
+        <semanticElements xmi:type="ecore:EReference" href="ClassMaker.ecore#//ResourceAdapter/resource"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirn0Y2REee_PuhghmLIqQ" label="EAttribute : filename">
+        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//ResourceAdapter/filename"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//ResourceAdapter/filename"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <semanticElements xmi:type="ecore:EClass" href="ClassMaker.ecore#//ResourceAdapter"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirn0o2REee_PuhghmLIqQ" label="EClass : ClassMakerPlant">
+      <target xmi:type="ecore:EClass" href="ClassMaker.ecore#//ClassMakerPlant"/>
+      <lines xmi:type="table:DLine" xmi:id="_sirn042REee_PuhghmLIqQ" label="EReference : workspace">
+        <target xmi:type="ecore:EReference" href="ClassMaker.ecore#//ClassMakerPlant/workspace"/>
+        <semanticElements xmi:type="ecore:EReference" href="ClassMaker.ecore#//ClassMakerPlant/workspace"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <lines xmi:type="table:DLine" xmi:id="_sirn1I2REee_PuhghmLIqQ" label="EReference : SCMRegistry">
+        <target xmi:type="ecore:EReference" href="ClassMaker.ecore#//ClassMakerPlant/SCMRegistry"/>
+        <semanticElements xmi:type="ecore:EReference" href="ClassMaker.ecore#//ClassMakerPlant/SCMRegistry"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <semanticElements xmi:type="ecore:EClass" href="ClassMaker.ecore#//ClassMakerPlant"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+      <cells xmi:type="table:DCell" xmi:id="_sirn1Y2REee_PuhghmLIqQ" label="ClassMaker's facade API service." column="_sisOc42REee_PuhghmLIqQ">
+        <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//ClassMakerPlant/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//ClassMakerPlant/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <currentStyle xmi:type="table:DCellStyle" xmi:id="_sirn1o2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+          <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </currentStyle>
+        <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+      </cells>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sirn142REee_PuhghmLIqQ" label="EDataType : Locale">
+      <target xmi:type="ecore:EDataType" href="ClassMaker.ecore#//Locale"/>
+      <semanticElements xmi:type="ecore:EDataType" href="ClassMaker.ecore#//Locale"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+      <cells xmi:type="table:DCell" xmi:id="_sirn2I2REee_PuhghmLIqQ" label="{@link java.util.Locale} datatype import." column="_sisOc42REee_PuhghmLIqQ">
+        <target xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Locale/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <semanticElements xmi:type="ecore:EStringToStringMapEntry" href="ClassMaker.ecore#//Locale/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
+        <currentStyle xmi:type="table:DCellStyle" xmi:id="_sisOcI2REee_PuhghmLIqQ" defaultBackgroundStyle="true" backgroundColor="220,234,183">
+          <backgroundStyleOrigin xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+        </currentStyle>
+        <intersectionMapping xmi:type="description_2:IntersectionMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@intersection.0"/>
+      </cells>
+    </lines>
+    <lines xmi:type="table:DLine" xmi:id="_sisOcY2REee_PuhghmLIqQ" label="EClass : CompletionNotificationAdapter">
+      <target xmi:type="ecore:EClass" href="ClassMaker.ecore#//CompletionNotificationAdapter"/>
+      <lines xmi:type="table:DLine" xmi:id="_sisOco2REee_PuhghmLIqQ" label="EAttribute : error">
+        <target xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//CompletionNotificationAdapter/error"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="ClassMaker.ecore#//CompletionNotificationAdapter/error"/>
+        <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']"/>
+      </lines>
+      <semanticElements xmi:type="ecore:EClass" href="ClassMaker.ecore#//CompletionNotificationAdapter"/>
+      <originMapping xmi:type="description_2:LineMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']"/>
+    </lines>
+    <columns xmi:type="table:DTargetColumn" xmi:id="_sisOc42REee_PuhghmLIqQ" label="Domain Documentation" cells="_sirAWI2REee_PuhghmLIqQ _sirAY42REee_PuhghmLIqQ _sirAXY2REee_PuhghmLIqQ _sirAYI2REee_PuhghmLIqQ _sirAeY2REee_PuhghmLIqQ _sirAaY2REee_PuhghmLIqQ _sirAb42REee_PuhghmLIqQ _sirAco2REee_PuhghmLIqQ _sirAdY2REee_PuhghmLIqQ _sirnYY2REee_PuhghmLIqQ _sirAgo2REee_PuhghmLIqQ _sirnZI2REee_PuhghmLIqQ _sirna42REee_PuhghmLIqQ _sirnaY2REee_PuhghmLIqQ _sirnbo2REee_PuhghmLIqQ _sirncY2REee_PuhghmLIqQ _sirndI2REee_PuhghmLIqQ _sirneI2REee_PuhghmLIqQ _sirne42REee_PuhghmLIqQ _sirnhI2REee_PuhghmLIqQ _sirnf42REee_PuhghmLIqQ _sirngo2REee_PuhghmLIqQ _sirnh42REee_PuhghmLIqQ _sirnio2REee_PuhghmLIqQ _sirnjY2REee_PuhghmLIqQ _sirnkI2REee_PuhghmLIqQ _sirnk42REee_PuhghmLIqQ _sirnlo2REee_PuhghmLIqQ _sirnmY2REee_PuhghmLIqQ _sirnnY2REee_PuhghmLIqQ _sirnoI2REee_PuhghmLIqQ _sirnqY2REee_PuhghmLIqQ _sirnpI2REee_PuhghmLIqQ _sirnp42REee_PuhghmLIqQ _sirnro2REee_PuhghmLIqQ _sirnuI2REee_PuhghmLIqQ _sirnu42REee_PuhghmLIqQ _sirnwY2REee_PuhghmLIqQ _sirnx42REee_PuhghmLIqQ _sirnyo2REee_PuhghmLIqQ _sirnzY2REee_PuhghmLIqQ _sirn1Y2REee_PuhghmLIqQ _sirn2I2REee_PuhghmLIqQ">
+      <target xmi:type="ecore:EPackage" href="ClassMaker.ecore#/"/>
+      <semanticElements xmi:type="ecore:EPackage" href="ClassMaker.ecore#/"/>
+      <originMapping xmi:type="description_2:ElementColumnMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedColumnMappings.0"/>
+    </columns>
+    <description xmi:type="description_2:CrossTableDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']"/>
+  </table:DTable>
 </xmi:XMI>

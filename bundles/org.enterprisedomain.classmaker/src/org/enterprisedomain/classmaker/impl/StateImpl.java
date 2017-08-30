@@ -52,8 +52,8 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.CheckoutConflictException;
-import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.m2m.internal.qvt.oml.cst.parser.NLS;
 import org.eclipse.pde.core.project.IBundleProjectDescription;
 import org.eclipse.pde.core.project.IBundleProjectService;
@@ -66,6 +66,7 @@ import org.enterprisedomain.classmaker.Messages;
 import org.enterprisedomain.classmaker.ModelPair;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.Revision;
+import org.enterprisedomain.classmaker.SCMOperator;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
@@ -75,9 +76,10 @@ import org.enterprisedomain.classmaker.jobs.codegen.EcoreGenerator;
 import org.enterprisedomain.classmaker.jobs.codegen.Generator;
 import org.enterprisedomain.classmaker.jobs.export.Exporter;
 import org.enterprisedomain.classmaker.jobs.export.PDEPluginExporter;
+import org.enterprisedomain.classmaker.jobs.install.Installer;
 import org.enterprisedomain.classmaker.jobs.install.OSGiInstaller;
+import org.enterprisedomain.classmaker.jobs.load.ModelLoader;
 import org.enterprisedomain.classmaker.jobs.load.OSGiEPackageLoader;
-import org.enterprisedomain.classmaker.scm.GitSCMOperator;
 import org.enterprisedomain.classmaker.util.ListUtil;
 import org.enterprisedomain.classmaker.util.ModelUtil;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
@@ -509,6 +511,43 @@ public class StateImpl extends ItemImpl implements State {
 				setMaking(false);
 			savingResource = false;
 		}
+
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Generator createGenerator() {
+		return new EcoreGenerator(getProject(), getTimestamp());
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Exporter createExporter() {
+		return new PDEPluginExporter(getTimestamp());
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Installer createInstaller() {
+		return new OSGiInstaller(getTimestamp());
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public ModelLoader createLoader() {
+		return new OSGiEPackageLoader(getTimestamp());
 	}
 
 	private boolean packagesDiffer(EPackage source, EList<EObject> target) {
@@ -561,8 +600,8 @@ public class StateImpl extends ItemImpl implements State {
 					ResourceUtils.createProject(project, ClassMakerPlugin.NATURE_ID, monitor);
 				}
 				Job.getJobManager().setProgressProvider(new EnterpriseDomainJob.JobProgressProvider());
-				Generator generator = new EcoreGenerator(getProject(), getTimestamp());
-				Exporter exporter = new PDEPluginExporter(getTimestamp());
+				Generator generator = createGenerator();
+				Exporter exporter = createExporter();
 
 				EnterpriseDomainJob exporterJob = (EnterpriseDomainJob) exporter.getAdapter(EnterpriseDomainJob.class);
 				exporterJob.setProject(getProject());
@@ -575,10 +614,10 @@ public class StateImpl extends ItemImpl implements State {
 				generatorJob.setProgressGroup(monitor, 1);
 				generatorJob.setNextJob(exporterJob);
 
-				EnterpriseDomainJob installJob = new OSGiInstaller(getTimestamp());
+				EnterpriseDomainJob installJob = createInstaller();
 				exporterJob.setNextJob(installJob);
 
-				EnterpriseDomainJob loadJob = new OSGiEPackageLoader(getTimestamp());
+				EnterpriseDomainJob loadJob = createLoader();
 				loadJob.addListener();
 
 				installJob.setNextJob(loadJob);
@@ -615,6 +654,7 @@ public class StateImpl extends ItemImpl implements State {
 			getContribution().removeCompletionListener(completionListener);
 			return commit(); // $NON-NLS-1$
 		}
+
 	}
 
 	private IProject getProject() {
@@ -650,18 +690,19 @@ public class StateImpl extends ItemImpl implements State {
 	 */
 	public void checkout(String commitId) {
 		try {
-			GitSCMOperator operator = ClassMakerPlugin.getClassMaker().getSCMRegistry().get(getProjectName());
+			SCMOperator<Git> operator = ClassMakerPlugin.getClassMaker().getSCMRegistry().get(getProjectName());
 			setCommitId(commitId);
 			operator.checkout(getVersion().toString(), getCommitId());
 			copyModel(getContribution());
 			load(false);
 		} catch (CheckoutConflictException e) {
 			e.getConflictingPaths().clear();
-		} catch (GitAPIException e) {
-			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 		} catch (CoreException e) {
 			ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
+		} catch (Exception e) {
+			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 		}
+
 	}
 
 	/**
@@ -670,7 +711,7 @@ public class StateImpl extends ItemImpl implements State {
 	 * @generated NOT
 	 */
 	public void add(String filepattern) throws Exception {
-		GitSCMOperator operator = ClassMakerPlugin.getClassMaker().getSCMRegistry().get(getProjectName());
+		SCMOperator<Git> operator = ClassMakerPlugin.getClassMaker().getSCMRegistry().get(getProjectName());
 		operator.add(filepattern);
 	}
 
@@ -680,9 +721,9 @@ public class StateImpl extends ItemImpl implements State {
 	 * @generated NOT
 	 */
 	public String commit() throws Exception {
-		GitSCMOperator operator = ClassMakerPlugin.getClassMaker().getSCMRegistry().get(getProjectName());
+		SCMOperator<Git> operator = ClassMakerPlugin.getClassMaker().getSCMRegistry().get(getProjectName());
 		String commitId = null;
-		commitId = operator.commit(operator.getCommitMessage(this, getTimestamp()));
+		commitId = operator.commit(operator.encodeCommitMessage(this, getTimestamp()));
 		getCommitIds().add(commitId);
 		setCommitId(commitId);
 		return commitId;
@@ -1002,19 +1043,18 @@ public class StateImpl extends ItemImpl implements State {
 	 * @generated NOT
 	 */
 	public void delete(IProgressMonitor monitor) throws CoreException {
-		GitSCMOperator operator = ClassMakerPlugin.getClassMaker().getSCMRegistry().get(getProjectName());
+		SCMOperator<Git> operator = ClassMakerPlugin.getClassMaker().getSCMRegistry().get(getProjectName());
 		try {
 			operator.deleteProject();
 			try {
 				operator.checkoutOrphan(getVersion().toString(), getTimestamp());
-			} catch (GitAPIException e) {
-				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
-			} catch (IOException e) {
+			} catch (Exception e) {
 				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 			}
 		} finally {
 			monitor.done();
 		}
+
 	}
 
 	/**

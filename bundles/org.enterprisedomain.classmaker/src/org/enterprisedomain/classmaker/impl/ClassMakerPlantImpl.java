@@ -52,10 +52,10 @@ import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.ClassMakerPlant;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Revision;
+import org.enterprisedomain.classmaker.SCMRegistry;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
-import org.enterprisedomain.classmaker.scm.GitSCMRegistry;
 import org.enterprisedomain.classmaker.util.ModelUtil;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
 import org.osgi.framework.Version;
@@ -87,23 +87,14 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	protected Workspace workspace;
 
 	/**
-	 * The default value of the '{@link #getSCMRegistry() <em>SCM Registry</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #getSCMRegistry()
-	 * @generated NOT
-	 * @ordered
-	 */
-	protected static final GitSCMRegistry SCM_REGISTRY_EDEFAULT = new GitSCMRegistry();
-	/**
 	 * The cached value of the '{@link #getSCMRegistry() <em>SCM Registry</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getSCMRegistry()
 	 * @generated
 	 * @ordered
 	 */
-	protected GitSCMRegistry scmRegistry = SCM_REGISTRY_EDEFAULT;
+	protected SCMRegistry scmRegistry;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -168,9 +159,29 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
+	 * @generated NOT
+	 */
+	public SCMRegistry getSCMRegistry() {
+		if (scmRegistry != null && scmRegistry.eIsProxy()) {
+			InternalEObject oldSCMRegistry = (InternalEObject) scmRegistry;
+			scmRegistry = (SCMRegistry) eResolveProxy(oldSCMRegistry);
+			if (scmRegistry != oldSCMRegistry) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							ClassMakerPackage.CLASS_MAKER_PLANT__SCM_REGISTRY, oldSCMRegistry, scmRegistry));
+			}
+		}
+		if (scmRegistry == null)
+			scmRegistry = ClassMakerFactory.eINSTANCE.createSCMRegistry();
+		return scmRegistry;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public GitSCMRegistry getSCMRegistry() {
+	public SCMRegistry basicGetSCMRegistry() {
 		return scmRegistry;
 	}
 
@@ -268,6 +279,7 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 			ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
 			throw e;
 		}
+
 	}
 
 	/**
@@ -389,6 +401,7 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 			ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
 			throw e;
 		}
+
 	}
 
 	/**
@@ -602,7 +615,9 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 				return getWorkspace();
 			return basicGetWorkspace();
 		case ClassMakerPackage.CLASS_MAKER_PLANT__SCM_REGISTRY:
-			return getSCMRegistry();
+			if (resolve)
+				return getSCMRegistry();
+			return basicGetSCMRegistry();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -648,26 +663,9 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 		case ClassMakerPackage.CLASS_MAKER_PLANT__WORKSPACE:
 			return workspace != null;
 		case ClassMakerPackage.CLASS_MAKER_PLANT__SCM_REGISTRY:
-			return SCM_REGISTRY_EDEFAULT == null ? scmRegistry != null : !SCM_REGISTRY_EDEFAULT.equals(scmRegistry);
+			return scmRegistry != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy())
-			return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (SCMRegistry: ");
-		result.append(scmRegistry);
-		result.append(')');
-		return result.toString();
 	}
 
 } // ClassMakerPlantImpl

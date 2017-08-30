@@ -106,6 +106,15 @@ public interface ClassMakerFactory extends EFactory {
 	ModelPair createModelPair();
 
 	/**
+	 * Returns a new object of class '<em>SCM Registry</em>'. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @return a new object of class '<em>SCM Registry</em>'.
+	 * @generated
+	 */
+	<T> SCMRegistry<T> createSCMRegistry();
+
+	/**
 	 * Returns a new object of class '<em>Resource Adapter</em>'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 

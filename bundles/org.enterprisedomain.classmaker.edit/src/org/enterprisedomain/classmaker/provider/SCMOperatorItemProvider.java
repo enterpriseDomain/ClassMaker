@@ -30,17 +30,20 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.enterprisedomain.classmaker.ClassMakerPackage;
+import org.enterprisedomain.classmaker.SCMOperator;
 
 /**
- * This is the item provider adapter for a {@link org.enterprisedomain.classmaker.ClassMakerPlant} object.
+ * This is the item provider adapter for a {@link org.enterprisedomain.classmaker.SCMOperator} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ClassMakerPlantItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
+public class SCMOperatorItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
 		IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -48,7 +51,7 @@ public class ClassMakerPlantItemProvider extends ItemProviderAdapter implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassMakerPlantItemProvider(AdapterFactory adapterFactory) {
+	public SCMOperatorItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -63,52 +66,25 @@ public class ClassMakerPlantItemProvider extends ItemProviderAdapter implements 
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addWorkspacePropertyDescriptor(object);
-			addSCMRegistryPropertyDescriptor(object);
+			addProjectNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Workspace feature.
+	 * This adds a property descriptor for the Project Name feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addWorkspacePropertyDescriptor(Object object) {
+	protected void addProjectNamePropertyDescriptor(Object object) {
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_ClassMakerPlant_workspace_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_ClassMakerPlant_workspace_feature",
-								"_UI_ClassMakerPlant_type"),
-						ClassMakerPackage.Literals.CLASS_MAKER_PLANT__WORKSPACE, true, false, true, null, null, null));
-	}
-
-	/**
-	 * This adds a property descriptor for the SCM Registry feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSCMRegistryPropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_ClassMakerPlant_SCMRegistry_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_ClassMakerPlant_SCMRegistry_feature",
-								"_UI_ClassMakerPlant_type"),
-						ClassMakerPackage.Literals.CLASS_MAKER_PLANT__SCM_REGISTRY, false, false, false, null, null,
-						null));
-	}
-
-	/**
-	 * This returns ClassMakerPlant.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ClassMakerPlant"));
+						getResourceLocator(), getString("_UI_SCMOperator_projectName_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_SCMOperator_projectName_feature",
+								"_UI_SCMOperator_type"),
+						ClassMakerPackage.Literals.SCM_OPERATOR__PROJECT_NAME, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -119,7 +95,9 @@ public class ClassMakerPlantItemProvider extends ItemProviderAdapter implements 
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_ClassMakerPlant_type");
+		String label = ((SCMOperator<?>) object).getProjectName();
+		return label == null || label.length() == 0 ? getString("_UI_SCMOperator_type")
+				: getString("_UI_SCMOperator_type") + " " + label;
 	}
 
 	/**
@@ -132,6 +110,12 @@ public class ClassMakerPlantItemProvider extends ItemProviderAdapter implements 
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(SCMOperator.class)) {
+		case ClassMakerPackage.SCM_OPERATOR__PROJECT_NAME:
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+			return;
+		}
 		super.notifyChanged(notification);
 	}
 

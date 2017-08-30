@@ -15,7 +15,6 @@
  */
 package org.enterprisedomain.classmaker.impl;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -69,11 +68,11 @@ import org.enterprisedomain.classmaker.ModelPair;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.ResourceAdapter;
 import org.enterprisedomain.classmaker.Revision;
+import org.enterprisedomain.classmaker.SCMOperator;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
-import org.enterprisedomain.classmaker.scm.GitSCMOperator;
 import org.enterprisedomain.classmaker.util.ListUtil;
 import org.enterprisedomain.classmaker.util.ModelUtil;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
@@ -675,7 +674,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	 * @generated NOT
 	 */
 	public String initialize(boolean commit) {
-		GitSCMOperator operator = ClassMakerPlugin.getClassMaker().getSCMRegistry().get(getProjectName());
+		SCMOperator<Git> operator = ClassMakerPlugin.getClassMaker().getSCMRegistry().get(getProjectName());
 		try {
 			Git git = operator.getRepositorySCM();
 
@@ -691,7 +690,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 					branch = it.next();
 					String[] name = branch.getName().split("/"); //$NON-NLS-1$
 					try {
-						version = operator.getVersion(name[name.length - 1]);
+						version = operator.decodeVersion(name[name.length - 1]);
 					} catch (IllegalArgumentException e) {
 						continue;
 					}
@@ -704,19 +703,16 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 				setVersion(ListUtil.getLast(getRevisions()).getKey());
 
 			String commitId = getRevision().initialize(commit);
-			if (currentBranch.equals(GitSCMOperator.MASTER_BRANCH))
+			if (currentBranch.equals(SCMOperator.MASTER_BRANCH))
 				checkout(getVersion());
 			return commitId;
-		} catch (GitAPIException e) {
-			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
-			return null;
-		} catch (IOException e) {
+		} catch (Exception e) {
 			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 			return null;
 		} finally {
 			try {
 				operator.ungetRepositorySCM();
-			} catch (GitAPIException e) {
+			} catch (Exception e) {
 				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 			}
 		}
@@ -785,7 +781,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 			if (getProjectName().isEmpty())
 				return;
 			Git git = null;
-			GitSCMOperator operator = ClassMakerPlugin.getClassMaker().getSCMRegistry().get(getProjectName());
+			SCMOperator<Git> operator = ClassMakerPlugin.getClassMaker().getSCMRegistry().get(getProjectName());
 			try {
 				git = operator.getRepositorySCM();
 				Ref ref = git.getRepository().findRef(version.toString());
@@ -801,14 +797,12 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 						ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(ex));
 					}
 				}
-			} catch (GitAPIException e) {
-				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
-			} catch (IOException e) {
+			} catch (Exception e) {
 				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 			} finally {
 				try {
 					operator.ungetRepositorySCM();
-				} catch (GitAPIException e) {
+				} catch (Exception e) {
 					ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 				}
 			}
@@ -1145,10 +1139,10 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 		if (isRevisionSet()) {
 			if (create) {
 				try {
-					GitSCMOperator operator = ClassMakerPlugin.getClassMaker().getSCMRegistry().get(getProjectName());
+					SCMOperator<Git> operator = ClassMakerPlugin.getClassMaker().getSCMRegistry().get(getProjectName());
 					operator.add(".");
 					operator.commit(getProjectName());
-				} catch (GitAPIException e) {
+				} catch (Exception e) {
 					throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 				}
 			}
