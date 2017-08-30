@@ -28,7 +28,7 @@ public class GitSCMOperator {
 	public static final String MASTER_BRANCH = "master"; // $NON-NLS-1$
 
 	public static synchronized Git getRepositorySCM(File dir) throws GitAPIException {
-		Git git = GitSCMRegistry.getSCM(dir.getName());
+		Git git = ClassMakerPlugin.getClassMaker().getSCMRegistry().getSCM(dir.getName());
 		try {
 			git = Git.open(dir);
 		} catch (RepositoryNotFoundException e) {
@@ -38,12 +38,12 @@ public class GitSCMOperator {
 		} catch (IOException e) {
 			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createWarningStatus(e));
 		}
-		GitSCMRegistry.putSCM(dir.getName(), git);
+		ClassMakerPlugin.getClassMaker().getSCMRegistry().putSCM(dir.getName(), git);
 		return git;
 	}
 
 	public synchronized Git getRepositorySCM() throws GitAPIException {
-		Git git = GitSCMRegistry.getSCM(projectName);
+		Git git = ClassMakerPlugin.getClassMaker().getSCMRegistry().getSCM(projectName);
 		if (git != null)
 			return git;
 		IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
@@ -52,16 +52,16 @@ public class GitSCMOperator {
 	}
 
 	public synchronized void ungetRepositorySCM() throws GitAPIException {
-		Git git = GitSCMRegistry.getSCM(projectName);
+		Git git = ClassMakerPlugin.getClassMaker().getSCMRegistry().getSCM(projectName);
 		if (git == null)
 			return;
 		git.close();
-		GitSCMRegistry.removeSCM(projectName);
+		ClassMakerPlugin.getClassMaker().getSCMRegistry().removeSCM(projectName);
 	}
 
 	public synchronized void deleteProject() {
-		if (GitSCMRegistry.containsSCM(projectName))
-			GitSCMRegistry.removeSCM(projectName);
+		if (ClassMakerPlugin.getClassMaker().getSCMRegistry().containsSCM(projectName))
+			ClassMakerPlugin.getClassMaker().getSCMRegistry().removeSCM(projectName);
 	}
 
 	public String getCommitMessage(State state, int timestamp) {

@@ -74,7 +74,6 @@ import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.scm.GitSCMOperator;
-import org.enterprisedomain.classmaker.scm.GitSCMRegistry;
 import org.enterprisedomain.classmaker.util.ListUtil;
 import org.enterprisedomain.classmaker.util.ModelUtil;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
@@ -676,7 +675,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	 * @generated NOT
 	 */
 	public String initialize(boolean commit) {
-		GitSCMOperator operator = GitSCMRegistry.get(getProjectName());
+		GitSCMOperator operator = ClassMakerPlugin.getClassMaker().getSCMRegistry().get(getProjectName());
 		try {
 			Git git = operator.getRepositorySCM();
 
@@ -786,7 +785,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 			if (getProjectName().isEmpty())
 				return;
 			Git git = null;
-			GitSCMOperator operator = GitSCMRegistry.get(getProjectName());
+			GitSCMOperator operator = ClassMakerPlugin.getClassMaker().getSCMRegistry().get(getProjectName());
 			try {
 				git = operator.getRepositorySCM();
 				Ref ref = git.getRepository().findRef(version.toString());
@@ -1146,7 +1145,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 		if (isRevisionSet()) {
 			if (create) {
 				try {
-					GitSCMOperator operator = GitSCMRegistry.get(getProjectName());
+					GitSCMOperator operator = ClassMakerPlugin.getClassMaker().getSCMRegistry().get(getProjectName());
 					operator.add(".");
 					operator.commit(getProjectName());
 				} catch (GitAPIException e) {

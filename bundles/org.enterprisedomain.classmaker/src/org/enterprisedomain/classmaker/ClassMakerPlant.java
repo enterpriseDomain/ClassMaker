@@ -26,6 +26,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
+import org.enterprisedomain.classmaker.scm.GitSCMRegistry;
 import org.osgi.framework.Version;
 
 /**
@@ -41,6 +42,8 @@ import org.osgi.framework.Version;
  * <ul>
  * <li>{@link org.enterprisedomain.classmaker.ClassMakerPlant#getWorkspace
  * <em>Workspace</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.ClassMakerPlant#getSCMRegistry
+ * <em>SCM Registry</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getClassMakerPlant()
@@ -92,6 +95,23 @@ public interface ClassMakerPlant extends EObject {
 	 * @generated
 	 */
 	void setWorkspace(Workspace value);
+
+	/**
+	 * Returns the value of the '<em><b>SCM Registry</b></em>' attribute. <!--
+	 * begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>SCM Registry</em>' attribute isn't clear, there
+	 * really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>SCM Registry</em>' attribute.
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getClassMakerPlant_SCMRegistry()
+	 * @model dataType="org.enterprisedomain.classmaker.GitSCMRegistry"
+	 *        changeable="false"
+	 * @generated
+	 */
+	GitSCMRegistry getSCMRegistry();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->

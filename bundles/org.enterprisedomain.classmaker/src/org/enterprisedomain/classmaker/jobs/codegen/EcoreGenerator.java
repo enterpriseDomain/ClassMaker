@@ -44,7 +44,6 @@ import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.jobs.EnterpriseDomainJob;
 import org.enterprisedomain.classmaker.scm.GitSCMOperator;
-import org.enterprisedomain.classmaker.scm.GitSCMRegistry;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
 
 public class EcoreGenerator extends EnterpriseDomainJob
@@ -163,7 +162,8 @@ public class EcoreGenerator extends EnterpriseDomainJob
 						EcorePlugin.getWorkspaceRoot().getRawLocation().append(getGenModelLocation()).toString() });
 				getContributionState().setProjectVersion(monitor);
 				try {
-					GitSCMOperator operator = GitSCMRegistry.get(getProject().getName());
+					GitSCMOperator operator = ClassMakerPlugin.getClassMaker().getSCMRegistry()
+							.get(getProject().getName());
 					operator.add(".");
 				} catch (GitAPIException e) {
 					throw new CoreException(ClassMakerPlugin.createErrorStatus(e));

@@ -49,7 +49,6 @@ import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.scm.GitSCMOperator;
-import org.enterprisedomain.classmaker.scm.GitSCMRegistry;
 import org.enterprisedomain.classmaker.util.ListUtil;
 
 /**
@@ -271,7 +270,8 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	@Override
 	public String initialize(boolean commit) {
 		super.initialize(commit);
-		GitSCMOperator operator = GitSCMRegistry.get(getContribution().getProjectName());
+		GitSCMOperator operator = ClassMakerPlugin.getClassMaker().getSCMRegistry()
+				.get(getContribution().getProjectName());
 		try {
 			Git git = operator.getRepositorySCM();
 
@@ -326,7 +326,8 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	 */
 	public void create(IProgressMonitor monitor) throws CoreException {
 		if (isStateSet()) {
-			GitSCMOperator operator = GitSCMRegistry.get(getContribution().getProjectName());
+			GitSCMOperator operator = ClassMakerPlugin.getClassMaker().getSCMRegistry()
+					.get(getContribution().getProjectName());
 			try {
 				Git git = operator.getRepositorySCM();
 				git.branchCreate().setForce(true).setName(getVersion().toString()).call();
@@ -405,7 +406,8 @@ public class RevisionImpl extends ItemImpl implements Revision {
 		initialize(false);
 		getContribution().initAdapters(this);
 		if (create && isStateSet()) {
-			GitSCMOperator operator = GitSCMRegistry.get(getContribution().getProjectName());
+			GitSCMOperator operator = ClassMakerPlugin.getClassMaker().getSCMRegistry()
+					.get(getContribution().getProjectName());
 			Git git = null;
 			try {
 				git = operator.getRepositorySCM();

@@ -22,39 +22,39 @@ import org.eclipse.jgit.api.Git;
 
 public class GitSCMRegistry {
 
-	private static Map<String, GitSCMOperator> operators = new HashMap<String, GitSCMOperator>();
+	private Map<String, GitSCMOperator> operators = new HashMap<String, GitSCMOperator>();
 
-	private static Map<String, Git> gits = new HashMap<String, Git>();
+	private Map<String, Git> gits = new HashMap<String, Git>();
 
-	public static boolean contains(String projectName) {
+	public boolean contains(String projectName) {
 		return operators.containsKey(projectName);
 	}
 
-	static boolean containsSCM(String projectName) {
+	boolean containsSCM(String projectName) {
 		return gits.containsKey(projectName);
 	}
 
-	public static GitSCMOperator get(String projectName) {
+	public GitSCMOperator get(String projectName) {
 		if (!contains(projectName))
 			put(projectName, new GitSCMOperator(projectName));
 		return operators.get(projectName);
 	}
 
-	static Git getSCM(String projectName) {
+	Git getSCM(String projectName) {
 		if (gits.containsKey(projectName))
 			return gits.get(projectName);
 		return null;
 	}
 
-	static void put(String projectName, GitSCMOperator operator) {
+	void put(String projectName, GitSCMOperator operator) {
 		operators.put(projectName, operator);
 	}
 
-	static void putSCM(String projectName, Git git) {
+	void putSCM(String projectName, Git git) {
 		gits.put(projectName, git);
 	}
 
-	static void removeSCM(String projectName) {
+	void removeSCM(String projectName) {
 		gits.remove(projectName);
 	}
 

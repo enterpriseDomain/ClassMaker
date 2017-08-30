@@ -55,6 +55,7 @@ import org.enterprisedomain.classmaker.Revision;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
+import org.enterprisedomain.classmaker.scm.GitSCMRegistry;
 import org.enterprisedomain.classmaker.util.ModelUtil;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
 import org.osgi.framework.Version;
@@ -68,6 +69,8 @@ import org.osgi.framework.Version;
  * <ul>
  * <li>{@link org.enterprisedomain.classmaker.impl.ClassMakerPlantImpl#getWorkspace
  * <em>Workspace</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ClassMakerPlantImpl#getSCMRegistry
+ * <em>SCM Registry</em>}</li>
  * </ul>
  *
  * @generated
@@ -82,6 +85,25 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * @ordered
 	 */
 	protected Workspace workspace;
+
+	/**
+	 * The default value of the '{@link #getSCMRegistry() <em>SCM Registry</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getSCMRegistry()
+	 * @generated NOT
+	 * @ordered
+	 */
+	protected static final GitSCMRegistry SCM_REGISTRY_EDEFAULT = new GitSCMRegistry();
+	/**
+	 * The cached value of the '{@link #getSCMRegistry() <em>SCM Registry</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getSCMRegistry()
+	 * @generated
+	 * @ordered
+	 */
+	protected GitSCMRegistry scmRegistry = SCM_REGISTRY_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -141,6 +163,15 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.CLASS_MAKER_PLANT__WORKSPACE,
 					oldWorkspace, workspace));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public GitSCMRegistry getSCMRegistry() {
+		return scmRegistry;
 	}
 
 	/**
@@ -570,6 +601,8 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 			if (resolve)
 				return getWorkspace();
 			return basicGetWorkspace();
+		case ClassMakerPackage.CLASS_MAKER_PLANT__SCM_REGISTRY:
+			return getSCMRegistry();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -614,8 +647,27 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 		switch (featureID) {
 		case ClassMakerPackage.CLASS_MAKER_PLANT__WORKSPACE:
 			return workspace != null;
+		case ClassMakerPackage.CLASS_MAKER_PLANT__SCM_REGISTRY:
+			return SCM_REGISTRY_EDEFAULT == null ? scmRegistry != null : !SCM_REGISTRY_EDEFAULT.equals(scmRegistry);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy())
+			return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (SCMRegistry: ");
+		result.append(scmRegistry);
+		result.append(')');
+		return result.toString();
 	}
 
 } // ClassMakerPlantImpl

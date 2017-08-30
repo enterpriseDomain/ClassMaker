@@ -59,6 +59,7 @@ import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
+import org.enterprisedomain.classmaker.scm.GitSCMRegistry;
 import org.osgi.framework.Version;
 
 /**
@@ -298,6 +299,13 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	private EDataType localeEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private EDataType gitSCMRegistryEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -1048,6 +1056,15 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * 
 	 * @generated
 	 */
+	public EAttribute getClassMakerPlant_SCMRegistry() {
+		return (EAttribute) classMakerPlantEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	public EClass getCompletionNotificationAdapter() {
 		return completionNotificationAdapterEClass;
 	}
@@ -1068,6 +1085,15 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	public EDataType getLocale() {
 		return localeEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EDataType getGitSCMRegistry() {
+		return gitSCMRegistryEDataType;
 	}
 
 	/**
@@ -1284,6 +1310,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 		classMakerPlantEClass = createEClass(CLASS_MAKER_PLANT);
 		createEReference(classMakerPlantEClass, CLASS_MAKER_PLANT__WORKSPACE);
+		createEAttribute(classMakerPlantEClass, CLASS_MAKER_PLANT__SCM_REGISTRY);
 
 		completionNotificationAdapterEClass = createEClass(COMPLETION_NOTIFICATION_ADAPTER);
 		createEAttribute(completionNotificationAdapterEClass, COMPLETION_NOTIFICATION_ADAPTER__ERROR);
@@ -1302,6 +1329,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		uriEDataType = createEDataType(URI);
 		exceptionEDataType = createEDataType(EXCEPTION);
 		localeEDataType = createEDataType(LOCALE);
+		gitSCMRegistryEDataType = createEDataType(GIT_SCM_REGISTRY);
 	}
 
 	/**
@@ -1774,6 +1802,9 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEReference(getClassMakerPlant_Workspace(), this.getWorkspace(), null, "workspace", null, 0, 1,
 				ClassMakerPlant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getClassMakerPlant_SCMRegistry(), this.getGitSCMRegistry(), "SCMRegistry", null, 0, 1,
+				ClassMakerPlant.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(classMakerPlantEClass, ecorePackage.getEPackage(), "make", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEPackage(), "dynamicModel", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -2017,6 +2048,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 				!IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(exceptionEDataType, Exception.class, "Exception", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(localeEDataType, Locale.class, "Locale", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(gitSCMRegistryEDataType, GitSCMRegistry.class, "GitSCMRegistry", IS_SERIALIZABLE,
+				!IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

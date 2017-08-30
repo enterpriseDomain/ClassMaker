@@ -78,7 +78,6 @@ import org.enterprisedomain.classmaker.jobs.export.PDEPluginExporter;
 import org.enterprisedomain.classmaker.jobs.install.OSGiInstaller;
 import org.enterprisedomain.classmaker.jobs.load.OSGiEPackageLoader;
 import org.enterprisedomain.classmaker.scm.GitSCMOperator;
-import org.enterprisedomain.classmaker.scm.GitSCMRegistry;
 import org.enterprisedomain.classmaker.util.ListUtil;
 import org.enterprisedomain.classmaker.util.ModelUtil;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
@@ -651,7 +650,7 @@ public class StateImpl extends ItemImpl implements State {
 	 */
 	public void checkout(String commitId) {
 		try {
-			GitSCMOperator operator = GitSCMRegistry.get(getProjectName());
+			GitSCMOperator operator = ClassMakerPlugin.getClassMaker().getSCMRegistry().get(getProjectName());
 			setCommitId(commitId);
 			operator.checkout(getVersion().toString(), getCommitId());
 			copyModel(getContribution());
@@ -671,7 +670,7 @@ public class StateImpl extends ItemImpl implements State {
 	 * @generated NOT
 	 */
 	public void add(String filepattern) throws Exception {
-		GitSCMOperator operator = GitSCMRegistry.get(getProjectName());
+		GitSCMOperator operator = ClassMakerPlugin.getClassMaker().getSCMRegistry().get(getProjectName());
 		operator.add(filepattern);
 	}
 
@@ -681,7 +680,7 @@ public class StateImpl extends ItemImpl implements State {
 	 * @generated NOT
 	 */
 	public String commit() throws Exception {
-		GitSCMOperator operator = GitSCMRegistry.get(getProjectName());
+		GitSCMOperator operator = ClassMakerPlugin.getClassMaker().getSCMRegistry().get(getProjectName());
 		String commitId = null;
 		commitId = operator.commit(operator.getCommitMessage(this, getTimestamp()));
 		getCommitIds().add(commitId);
@@ -1003,7 +1002,7 @@ public class StateImpl extends ItemImpl implements State {
 	 * @generated NOT
 	 */
 	public void delete(IProgressMonitor monitor) throws CoreException {
-		GitSCMOperator operator = GitSCMRegistry.get(getProjectName());
+		GitSCMOperator operator = ClassMakerPlugin.getClassMaker().getSCMRegistry().get(getProjectName());
 		try {
 			operator.deleteProject();
 			try {

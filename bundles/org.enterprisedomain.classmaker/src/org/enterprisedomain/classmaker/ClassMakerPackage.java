@@ -1298,13 +1298,22 @@ public interface ClassMakerPackage extends EPackage {
 	int CLASS_MAKER_PLANT__WORKSPACE = 0;
 
 	/**
+	 * The feature id for the '<em><b>SCM Registry</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_MAKER_PLANT__SCM_REGISTRY = 1;
+
+	/**
 	 * The number of structural features of the '<em>Plant</em>' class. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_MAKER_PLANT_FEATURE_COUNT = 1;
+	int CLASS_MAKER_PLANT_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the
@@ -1345,6 +1354,16 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 */
 	int LOCALE = 32;
+
+	/**
+	 * The meta object id for the '<em>Git SCM Registry</em>' data type. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see org.enterprisedomain.classmaker.scm.GitSCMRegistry
+	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getGitSCMRegistry()
+	 * @generated
+	 */
+	int GIT_SCM_REGISTRY = 33;
 
 	/**
 	 * The meta object id for the '{@link org.enterprisedomain.classmaker.Stage
@@ -2343,6 +2362,18 @@ public interface ClassMakerPackage extends EPackage {
 	EReference getClassMakerPlant_Workspace();
 
 	/**
+	 * Returns the meta object for the attribute
+	 * '{@link org.enterprisedomain.classmaker.ClassMakerPlant#getSCMRegistry
+	 * <em>SCM Registry</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the attribute '<em>SCM Registry</em>'.
+	 * @see org.enterprisedomain.classmaker.ClassMakerPlant#getSCMRegistry()
+	 * @see #getClassMakerPlant()
+	 * @generated
+	 */
+	EAttribute getClassMakerPlant_SCMRegistry();
+
+	/**
 	 * Returns the meta object for class
 	 * '{@link org.enterprisedomain.classmaker.CompletionNotificationAdapter
 	 * <em>Completion Notification Adapter</em>}'. <!-- begin-user-doc --> <!--
@@ -2376,6 +2407,18 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 */
 	EDataType getLocale();
+
+	/**
+	 * Returns the meta object for data type
+	 * '{@link org.enterprisedomain.classmaker.scm.GitSCMRegistry <em>Git SCM
+	 * Registry</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for data type '<em>Git SCM Registry</em>'.
+	 * @see org.enterprisedomain.classmaker.scm.GitSCMRegistry
+	 * @model instanceClass="org.enterprisedomain.classmaker.scm.GitSCMRegistry"
+	 * @generated
+	 */
+	EDataType getGitSCMRegistry();
 
 	/**
 	 * Returns the meta object for enum
@@ -3181,6 +3224,14 @@ public interface ClassMakerPackage extends EPackage {
 		EReference CLASS_MAKER_PLANT__WORKSPACE = eINSTANCE.getClassMakerPlant_Workspace();
 
 		/**
+		 * The meta object literal for the '<em><b>SCM Registry</b></em>' attribute
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EAttribute CLASS_MAKER_PLANT__SCM_REGISTRY = eINSTANCE.getClassMakerPlant_SCMRegistry();
+
+		/**
 		 * The meta object literal for the
 		 * '{@link org.enterprisedomain.classmaker.impl.CompletionNotificationAdapterImpl
 		 * <em>Completion Notification Adapter</em>}' class. <!-- begin-user-doc -->
@@ -3209,6 +3260,16 @@ public interface ClassMakerPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType LOCALE = eINSTANCE.getLocale();
+
+		/**
+		 * The meta object literal for the '<em>Git SCM Registry</em>' data type. <!--
+		 * begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @see org.enterprisedomain.classmaker.scm.GitSCMRegistry
+		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getGitSCMRegistry()
+		 * @generated
+		 */
+		EDataType GIT_SCM_REGISTRY = eINSTANCE.getGitSCMRegistry();
 
 		/**
 		 * The meta object literal for the '{@link org.enterprisedomain.classmaker.Stage

@@ -48,6 +48,7 @@ import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
+import org.enterprisedomain.classmaker.scm.GitSCMRegistry;
 import org.osgi.framework.Version;
 
 /**
@@ -157,6 +158,8 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 			return createExceptionFromString(eDataType, initialValue);
 		case ClassMakerPackage.LOCALE:
 			return createLocaleFromString(eDataType, initialValue);
+		case ClassMakerPackage.GIT_SCM_REGISTRY:
+			return createGitSCMRegistryFromString(eDataType, initialValue);
 		default:
 			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -192,6 +195,8 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 			return convertExceptionToString(eDataType, instanceValue);
 		case ClassMakerPackage.LOCALE:
 			return convertLocaleToString(eDataType, instanceValue);
+		case ClassMakerPackage.GIT_SCM_REGISTRY:
+			return convertGitSCMRegistryToString(eDataType, instanceValue);
 		default:
 			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -544,6 +549,24 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 	 * @generated
 	 */
 	public String convertLocaleToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public GitSCMRegistry createGitSCMRegistryFromString(EDataType eDataType, String initialValue) {
+		return (GitSCMRegistry) super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public String convertGitSCMRegistryToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 
