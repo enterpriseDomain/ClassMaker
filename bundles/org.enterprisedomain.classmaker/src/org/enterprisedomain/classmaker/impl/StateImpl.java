@@ -19,6 +19,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -58,6 +60,7 @@ import org.eclipse.m2m.internal.qvt.oml.cst.parser.NLS;
 import org.eclipse.pde.core.project.IBundleProjectDescription;
 import org.eclipse.pde.core.project.IBundleProjectService;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
+import org.enterprisedomain.classmaker.ClassMakerPlant;
 import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Customizer;
@@ -72,14 +75,8 @@ import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.jobs.EnterpriseDomainJob;
-import org.enterprisedomain.classmaker.jobs.codegen.EcoreGenerator;
-import org.enterprisedomain.classmaker.jobs.codegen.Generator;
-import org.enterprisedomain.classmaker.jobs.export.Exporter;
-import org.enterprisedomain.classmaker.jobs.export.PDEPluginExporter;
-import org.enterprisedomain.classmaker.jobs.install.Installer;
-import org.enterprisedomain.classmaker.jobs.install.OSGiInstaller;
-import org.enterprisedomain.classmaker.jobs.load.ModelLoader;
-import org.enterprisedomain.classmaker.jobs.load.OSGiEPackageLoader;
+import org.enterprisedomain.classmaker.jobs.Worker;
+import org.enterprisedomain.classmaker.jobs.export.AbstractExporter;
 import org.enterprisedomain.classmaker.util.ListUtil;
 import org.enterprisedomain.classmaker.util.ModelUtil;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
@@ -519,8 +516,9 @@ public class StateImpl extends ItemImpl implements State {
 	 * 
 	 * @generated NOT
 	 */
-	public Generator createGenerator() {
-		return new EcoreGenerator(getProject(), getTimestamp());
+	public Worker createGenerator() {
+		return create(ClassMakerPlant.Stages.lookup(ClassMakerPlant.Stages.ID_PREFIX + "create.generator"),
+				getProject(), getTimestamp());
 	}
 
 	/**
@@ -528,8 +526,9 @@ public class StateImpl extends ItemImpl implements State {
 	 * 
 	 * @generated NOT
 	 */
-	public Exporter createExporter() {
-		return new PDEPluginExporter(getTimestamp());
+	public Worker createExporter() {
+		return create(ClassMakerPlant.Stages.lookup(ClassMakerPlant.Stages.ID_PREFIX + "create.exporter"),
+				Integer.valueOf(getTimestamp()));
 	}
 
 	/**
@@ -537,8 +536,9 @@ public class StateImpl extends ItemImpl implements State {
 	 * 
 	 * @generated NOT
 	 */
-	public Installer createInstaller() {
-		return new OSGiInstaller(getTimestamp());
+	public Worker createInstaller() {
+		return create(ClassMakerPlant.Stages.lookup(ClassMakerPlant.Stages.ID_PREFIX + "create.installer"),
+				Integer.valueOf(getTimestamp()));
 	}
 
 	/**
@@ -546,8 +546,22 @@ public class StateImpl extends ItemImpl implements State {
 	 * 
 	 * @generated NOT
 	 */
-	public ModelLoader createLoader() {
-		return new OSGiEPackageLoader(getTimestamp());
+	public Worker createModelLoader() {
+		return create(ClassMakerPlant.Stages.lookup(ClassMakerPlant.Stages.ID_PREFIX + "create.loader"),
+				Integer.valueOf(getTimestamp()));
+	}
+
+	private Worker create(StageQualifier stage, Object... customizerArgs) {
+		SortedSet<Customizer> customizer = new TreeSet<Customizer>(new Customizer.CustomizerComparator());
+		for (StageQualifier filter : getStateCustomizers().keySet())
+			if (filter.equals(stage))
+				customizer.add(getStateCustomizers().get(filter));
+		for (StageQualifier filter : getContribution().getWorkspace().getCustomizers().keySet())
+			if (filter.equals(stage))
+				customizer.add(getContribution().getWorkspace().getCustomizers().get(filter));
+		if (customizer.isEmpty())
+			return null;
+		return (Worker) (customizer.last().customize(ECollections.asEList(customizerArgs)));
 	}
 
 	private boolean packagesDiffer(EPackage source, EList<EObject> target) {
@@ -600,24 +614,27 @@ public class StateImpl extends ItemImpl implements State {
 					ResourceUtils.createProject(project, ClassMakerPlugin.NATURE_ID, monitor);
 				}
 				Job.getJobManager().setProgressProvider(new EnterpriseDomainJob.JobProgressProvider());
-				Generator generator = createGenerator();
-				Exporter exporter = createExporter();
 
+				Worker exporter = createExporter();
 				EnterpriseDomainJob exporterJob = (EnterpriseDomainJob) exporter.getAdapter(EnterpriseDomainJob.class);
 				exporterJob.setProject(getProject());
-				exporter.setExportDestination(ResourceUtils.getExportDestination(getProject()));
+				exporter.getProperties().put(AbstractExporter.EXPORT_DESTINATION_PROP,
+						ResourceUtils.getExportDestination(getProject()).toString());
 
-				generator.setResourceSet(ClassMakerPlugin.getClassMaker().getWorkspace().getResourceSet());
+				Worker generator = createGenerator();
 				EnterpriseDomainJob generatorJob = ((EnterpriseDomainJob) generator
 						.getAdapter(EnterpriseDomainJob.class));
+				generatorJob.setResourceSet(getContribution().getWorkspace().getResourceSet());
 				generatorJob.setProject(getProject());
 				generatorJob.setProgressGroup(monitor, 1);
 				generatorJob.setNextJob(exporterJob);
 
-				EnterpriseDomainJob installJob = createInstaller();
+				EnterpriseDomainJob installJob = (EnterpriseDomainJob) createInstaller()
+						.getAdapter(EnterpriseDomainJob.class);
 				exporterJob.setNextJob(installJob);
 
-				EnterpriseDomainJob loadJob = createLoader();
+				EnterpriseDomainJob loadJob = (EnterpriseDomainJob) createModelLoader()
+						.getAdapter(EnterpriseDomainJob.class);
 				loadJob.addListener();
 
 				installJob.setNextJob(loadJob);

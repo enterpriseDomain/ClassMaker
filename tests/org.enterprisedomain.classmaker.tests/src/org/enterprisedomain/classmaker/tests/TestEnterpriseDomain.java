@@ -541,15 +541,18 @@ public class TestEnterpriseDomain extends AbstractTest {
 		Customizer customizer = new CustomizerImpl() {
 
 			@Override
-			public void customize(EList<Object> args) {
+			public Object customize(EList<Object> args) {
 				GenModel genModel = ((GenModel) args.get(1));
 				genModel.setDynamicTemplates(true);
 				genModel.setTemplateDirectory("platform:/plugin/org.enterprisedomain.tests/templates");
 				genModel.setSuppressInterfaces(false);
+				return super.customize(args);
 			}
 
 		};
-		c.getCustomizers().put(ClassMakerPlant.Stages.GENMODEL_SETUP, customizer);
+		c.getCustomizers().put(
+				ClassMakerPlant.Stages.lookup(ClassMakerPlant.Stages.ID_PREFIX + "generation.genmodel.setup"),
+				customizer);
 
 		final Semaphore complete = new Semaphore(0);
 		CompletionListener l = new CompletionListenerImpl() {

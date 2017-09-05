@@ -19,6 +19,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -39,6 +40,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
  * <em>Projects</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.Workspace#getResourceSet
  * <em>Resource Set</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Workspace#getCustomizers
+ * <em>Customizers</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getWorkspace()
@@ -81,6 +84,21 @@ public interface Workspace extends EObject, ISchedulingRule {
 	 * @generated
 	 */
 	ResourceSet getResourceSet();
+
+	/**
+	 * Returns the value of the '<em><b>Customizers</b></em>' map. The key is of
+	 * type {@link org.enterprisedomain.classmaker.StageQualifier}, and the value is
+	 * of type {@link org.enterprisedomain.classmaker.Customizer}, <!--
+	 * begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
+	 * {@link Customizer}s collection. <!-- end-model-doc -->
+	 * 
+	 * @return the value of the '<em>Customizers</em>' map.
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getWorkspace_Customizers()
+	 * @model mapType="org.enterprisedomain.classmaker.StageQualifierToCustomizerMapEntry&lt;org.enterprisedomain.classmaker.StageQualifier,
+	 *        org.enterprisedomain.classmaker.Customizer&gt;"
+	 * @generated
+	 */
+	EMap<StageQualifier, Customizer> getCustomizers();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->

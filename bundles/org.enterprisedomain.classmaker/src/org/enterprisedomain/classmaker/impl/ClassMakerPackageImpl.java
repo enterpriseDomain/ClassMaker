@@ -62,10 +62,7 @@ import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
-import org.enterprisedomain.classmaker.jobs.codegen.Generator;
-import org.enterprisedomain.classmaker.jobs.export.Exporter;
-import org.enterprisedomain.classmaker.jobs.install.Installer;
-import org.enterprisedomain.classmaker.jobs.load.ModelLoader;
+import org.enterprisedomain.classmaker.jobs.Worker;
 import org.osgi.framework.Version;
 
 /**
@@ -227,6 +224,13 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * 
 	 * @generated
 	 */
+	private EClass workerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	private EClass resourceAdapterEClass = null;
 
 	/**
@@ -242,34 +246,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	private EClass completionNotificationAdapterEClass = null;
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass generatorEClass = null;
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass exporterEClass = null;
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass installerEClass = null;
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass modelLoaderEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -773,6 +749,15 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * 
 	 * @generated
 	 */
+	public EReference getWorkspace_Customizers() {
+		return (EReference) workspaceEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	public EClass getIntegerToStateMapEntry() {
 		return integerToStateMapEntryEClass;
 	}
@@ -865,6 +850,15 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	public EClass getCustomizer() {
 		return customizerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EAttribute getCustomizer_Rank() {
+		return (EAttribute) customizerEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1079,6 +1073,15 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * 
 	 * @generated
 	 */
+	public EClass getWorker() {
+		return workerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	public EClass getResourceAdapter() {
 		return resourceAdapterEClass;
 	}
@@ -1144,42 +1147,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	public EAttribute getCompletionNotificationAdapter_Error() {
 		return (EAttribute) completionNotificationAdapterEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public EClass getGenerator() {
-		return generatorEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public EClass getExporter() {
-		return exporterEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public EClass getInstaller() {
-		return installerEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public EClass getModelLoader() {
-		return modelLoaderEClass;
 	}
 
 	/**
@@ -1354,6 +1321,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		workspaceEClass = createEClass(WORKSPACE);
 		createEReference(workspaceEClass, WORKSPACE__PROJECTS);
 		createEAttribute(workspaceEClass, WORKSPACE__RESOURCE_SET);
+		createEReference(workspaceEClass, WORKSPACE__CUSTOMIZERS);
 
 		integerToStateMapEntryEClass = createEClass(INTEGER_TO_STATE_MAP_ENTRY);
 		createEAttribute(integerToStateMapEntryEClass, INTEGER_TO_STATE_MAP_ENTRY__KEY);
@@ -1372,6 +1340,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		iAdapterFactoryEClass = createEClass(IADAPTER_FACTORY);
 
 		customizerEClass = createEClass(CUSTOMIZER);
+		createEAttribute(customizerEClass, CUSTOMIZER__RANK);
 
 		stageQualifierEClass = createEClass(STAGE_QUALIFIER);
 		createEAttribute(stageQualifierEClass, STAGE_QUALIFIER__STAGE);
@@ -1415,13 +1384,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		completionNotificationAdapterEClass = createEClass(COMPLETION_NOTIFICATION_ADAPTER);
 		createEAttribute(completionNotificationAdapterEClass, COMPLETION_NOTIFICATION_ADAPTER__ERROR);
 
-		generatorEClass = createEClass(GENERATOR);
-
-		exporterEClass = createEClass(EXPORTER);
-
-		installerEClass = createEClass(INSTALLER);
-
-		modelLoaderEClass = createEClass(MODEL_LOADER);
+		workerEClass = createEClass(WORKER);
 
 		// Create enums
 		stageEEnum = createEEnum(STAGE);
@@ -1663,13 +1626,13 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 		addEOperation(stateEClass, null, "saveResource", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(stateEClass, this.getGenerator(), "createGenerator", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(stateEClass, this.getWorker(), "createGenerator", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(stateEClass, this.getExporter(), "createExporter", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(stateEClass, this.getWorker(), "createExporter", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(stateEClass, this.getInstaller(), "createInstaller", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(stateEClass, this.getWorker(), "createInstaller", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(stateEClass, this.getModelLoader(), "createLoader", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(stateEClass, this.getWorker(), "createModelLoader", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(itemEClass, Item.class, "Item", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getItem_ModelName(), ecorePackage.getEString(), "modelName", null, 0, 1, Item.class,
@@ -1721,6 +1684,9 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEAttribute(getWorkspace_ResourceSet(), ecorePackage.getEResourceSet(), "resourceSet", null, 0, 1,
 				Workspace.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
+		initEReference(getWorkspace_Customizers(), this.getStageQualifierToCustomizerMapEntry(), null, "customizers",
+				null, 0, -1, Workspace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(workspaceEClass, null, "initialize", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -1809,8 +1775,10 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 		initEClass(customizerEClass, Customizer.class, "Customizer", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCustomizer_Rank(), ecorePackage.getEInt(), "rank", null, 0, 1, Customizer.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = addEOperation(customizerEClass, null, "customize", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(customizerEClass, ecorePackage.getEJavaObject(), "customize", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEJavaObject(), "args", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(stageQualifierEClass, StageQualifier.class, "StageQualifier", !IS_ABSTRACT, !IS_INTERFACE,
@@ -2227,16 +2195,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 				CompletionNotificationAdapter.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE,
 				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(generatorEClass, Generator.class, "Generator", IS_ABSTRACT, IS_INTERFACE,
-				!IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(exporterEClass, Exporter.class, "Exporter", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(installerEClass, Installer.class, "Installer", IS_ABSTRACT, IS_INTERFACE,
-				!IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(modelLoaderEClass, ModelLoader.class, "ModelLoader", IS_ABSTRACT, IS_INTERFACE,
-				!IS_GENERATED_INSTANCE_CLASS);
+		initEClass(workerEClass, Worker.class, "Worker", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(stageEEnum, Stage.class, "Stage");

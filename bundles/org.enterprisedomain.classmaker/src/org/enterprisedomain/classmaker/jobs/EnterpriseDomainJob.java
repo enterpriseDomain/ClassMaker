@@ -15,6 +15,8 @@
  */
 package org.enterprisedomain.classmaker.jobs;
 
+import java.util.Properties;
+
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -39,7 +41,7 @@ import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 
-public abstract class EnterpriseDomainJob extends WorkspaceJob {
+public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker {
 
 	private EnterpriseDomainJob nextJob;
 
@@ -91,6 +93,8 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob {
 	private int buildKind;
 
 	private boolean changeRule;
+
+	private Properties properties;
 
 	public EnterpriseDomainJob(String name, int stateTimestamp) {
 		super(name);
@@ -264,6 +268,13 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob {
 
 	public void setChangeRule(boolean changeRule) {
 		this.changeRule = changeRule;
+	}
+
+	@Override
+	public Properties getProperties() {
+		if (properties == null)
+			properties = new Properties();
+		return properties;
 	}
 
 }

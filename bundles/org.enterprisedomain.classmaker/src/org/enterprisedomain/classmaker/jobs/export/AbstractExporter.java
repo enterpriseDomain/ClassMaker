@@ -15,39 +15,17 @@
  */
 package org.enterprisedomain.classmaker.jobs.export;
 
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
 import org.enterprisedomain.classmaker.Messages;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.jobs.ContainerJob;
+import org.enterprisedomain.classmaker.jobs.Worker;
 
-public abstract class AbstractExporter extends ContainerJob implements Exporter {
+public abstract class AbstractExporter extends ContainerJob implements Worker {
+
+	public static final String EXPORT_DESTINATION_PROP = "export.destination";
 
 	public AbstractExporter(int stateTimestamp) {
 		super(Messages.JobNameExport, stateTimestamp);
-	}
-
-	private IPath destination;
-
-	@Override
-	public IStatus work(IProgressMonitor monitor) throws CoreException {
-		try {
-			return export(monitor);
-		} finally {
-			monitor.done();
-		}
-	}
-
-	@Override
-	public IPath getExportDestination() {
-		return destination;
-	}
-
-	@Override
-	public void setExportDestination(IPath path) {
-		this.destination = path;
 	}
 
 	@Override

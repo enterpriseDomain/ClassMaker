@@ -149,10 +149,10 @@
       </eAnnotations>
     </eOperations>
     <eOperations name="saveResource"/>
-    <eOperations name="createGenerator" eType="#//Generator"/>
-    <eOperations name="createExporter" eType="#//Exporter"/>
-    <eOperations name="createInstaller" eType="#//Installer"/>
-    <eOperations name="createLoader" eType="#//ModelLoader"/>
+    <eOperations name="createGenerator" eType="#//Worker"/>
+    <eOperations name="createExporter" eType="#//Worker"/>
+    <eOperations name="createInstaller" eType="#//Worker"/>
+    <eOperations name="createModelLoader" eType="#//Worker"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="requiredPlugins" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="revision" eType="#//Revision"
@@ -336,6 +336,12 @@
         <details key="documentation" value="EMF ResourceSet."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="customizers" upperBound="-1"
+        eType="#//StageQualifierToCustomizerMapEntry" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="{@link Customizer}s collection."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Properties" instanceClassName="java.util.Properties">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -456,12 +462,13 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Allows to customize the process."/>
     </eAnnotations>
-    <eOperations name="customize">
+    <eOperations name="customize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Provides customization in the process."/>
       </eAnnotations>
       <eParameters name="args" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
     </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rank" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="IStatus" instanceClassName="org.eclipse.core.runtime.IStatus">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -871,12 +878,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="error" eType="#//IStatus"
         changeable="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Generator" instanceClassName="org.enterprisedomain.classmaker.jobs.codegen.Generator"
-      abstract="true" interface="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Exporter" instanceClassName="org.enterprisedomain.classmaker.jobs.export.Exporter"
-      abstract="true" interface="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Installer" instanceClassName="org.enterprisedomain.classmaker.jobs.install.Installer"
-      abstract="true" interface="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ModelLoader" instanceClassName="org.enterprisedomain.classmaker.jobs.load.ModelLoader"
+  <eClassifiers xsi:type="ecore:EClass" name="Worker" instanceClassName="org.enterprisedomain.classmaker.jobs.Worker"
       abstract="true" interface="true"/>
 </ecore:EPackage>

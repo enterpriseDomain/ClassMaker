@@ -36,15 +36,18 @@ import org.eclipse.core.runtime.jobs.MultiRule;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.osgi.internal.framework.EquinoxBundle;
@@ -58,10 +61,12 @@ import org.eclipse.pde.internal.core.target.TargetPlatformService;
 import org.enterprisedomain.classmaker.ClassMakerFactory;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.Contribution;
+import org.enterprisedomain.classmaker.Customizer;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.ResourceAdapter;
 import org.enterprisedomain.classmaker.Revision;
 import org.enterprisedomain.classmaker.Stage;
+import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
@@ -81,6 +86,8 @@ import org.osgi.framework.Version;
  * <em>Projects</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl#getResourceSet
  * <em>Resource Set</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl#getCustomizers
+ * <em>Customizers</em>}</li>
  * </ul>
  *
  * @generated
@@ -115,6 +122,16 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * @ordered
 	 */
 	protected ResourceSet resourceSet = RESOURCE_SET_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getCustomizers() <em>Customizers</em>}' map.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getCustomizers()
+	 * @generated
+	 * @ordered
+	 */
+	protected EMap<StageQualifier, Customizer> customizers;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -163,6 +180,20 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 */
 	public ResourceSet getResourceSet() {
 		return resourceSet;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EMap<StageQualifier, Customizer> getCustomizers() {
+		if (customizers == null) {
+			customizers = new EcoreEMap<StageQualifier, Customizer>(
+					ClassMakerPackage.Literals.STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY,
+					StageQualifierToCustomizerMapEntryImpl.class, this, ClassMakerPackage.WORKSPACE__CUSTOMIZERS);
+		}
+		return customizers;
 	}
 
 	/**
@@ -538,6 +569,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		switch (featureID) {
 		case ClassMakerPackage.WORKSPACE__PROJECTS:
 			return ((InternalEList<?>) getProjects()).basicRemove(otherEnd, msgs);
+		case ClassMakerPackage.WORKSPACE__CUSTOMIZERS:
+			return ((InternalEList<?>) getCustomizers()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -554,6 +587,11 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			return getProjects();
 		case ClassMakerPackage.WORKSPACE__RESOURCE_SET:
 			return getResourceSet();
+		case ClassMakerPackage.WORKSPACE__CUSTOMIZERS:
+			if (coreType)
+				return getCustomizers();
+			else
+				return getCustomizers().map();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -571,6 +609,9 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			getProjects().clear();
 			getProjects().addAll((Collection<? extends Project>) newValue);
 			return;
+		case ClassMakerPackage.WORKSPACE__CUSTOMIZERS:
+			((EStructuralFeature.Setting) getCustomizers()).set(newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -585,6 +626,9 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		switch (featureID) {
 		case ClassMakerPackage.WORKSPACE__PROJECTS:
 			getProjects().clear();
+			return;
+		case ClassMakerPackage.WORKSPACE__CUSTOMIZERS:
+			getCustomizers().clear();
 			return;
 		}
 		super.eUnset(featureID);
@@ -602,6 +646,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			return projects != null && !projects.isEmpty();
 		case ClassMakerPackage.WORKSPACE__RESOURCE_SET:
 			return RESOURCE_SET_EDEFAULT == null ? resourceSet != null : !RESOURCE_SET_EDEFAULT.equals(resourceSet);
+		case ClassMakerPackage.WORKSPACE__CUSTOMIZERS:
+			return customizers != null && !customizers.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

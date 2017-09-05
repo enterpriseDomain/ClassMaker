@@ -44,14 +44,13 @@ import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.jobs.EnterpriseDomainJob;
+import org.enterprisedomain.classmaker.jobs.Worker;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
 
-public class EcoreGenerator extends EnterpriseDomainJob
-		implements org.enterprisedomain.classmaker.jobs.codegen.Generator {
+public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 
-	public EcoreGenerator(IProject project, int stateTimestamp) {
+	public EcoreGenerator(int stateTimestamp) {
 		super(Messages.JobNameCodeGenerator, stateTimestamp);
-		setProject(project);
 	}
 
 	protected static final String SOURCE_FOLDER_NAME = "src/main/java"; //$NON-NLS-1$
@@ -185,7 +184,7 @@ public class EcoreGenerator extends EnterpriseDomainJob
 	}
 
 	@Override
-	public IStatus generate(IProgressMonitor monitor) throws CoreException {
+	public IStatus work(IProgressMonitor monitor) throws CoreException {
 		IPath modelPath = ensureModelResourcePathExists(getProject(), getContributionState().getModelName(), monitor);
 		IPath genModelPath = getGenModelResourcePath(modelPath);
 		final org.eclipse.emf.codegen.ecore.Generator generator = new Generator();
@@ -255,16 +254,12 @@ public class EcoreGenerator extends EnterpriseDomainJob
 			genModel.setLanguage(getContributionState().getLanguage());
 			genModel.setModelPluginID(EcoreGenerator.this.getProject().getName());
 			for (StageQualifier filter : getContributionState().getCustomizers().keySet())
-				if (filter.equals(ClassMakerPlant.Stages.GENMODEL_SETUP))
+				if (filter.equals(
+						ClassMakerPlant.Stages.lookup(ClassMakerPlant.Stages.ID_PREFIX + "generation.genmodel.setup")))
 					getContributionState().getCustomizers().get(filter)
 							.customize(ECollections.asEList(projectPath, genModel, ePackages));
 		}
 		genModel.setValidateModel(true);
-	}
-
-	@Override
-	public IStatus work(IProgressMonitor monitor) throws CoreException {
-		return generate(monitor);
 	}
 
 	@Override

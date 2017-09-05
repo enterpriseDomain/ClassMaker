@@ -16,16 +16,23 @@
 package org.enterprisedomain.classmaker;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Future;
 
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
+import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.osgi.framework.Version;
 
 /**
@@ -55,13 +62,67 @@ public interface ClassMakerPlant extends EObject {
 
 	public abstract class Stages {
 
-		public static StageQualifier GENMODEL_SETUP = createStageQualifier(Stage.GENERATED, "genmodel.setup");
+		public static final String ID_PREFIX = "org.enterprisedomain.classmaker.customization.stages.";
+
+		private static final String STAGE_ELEMENT = "stage";
+
+		private static final String PHASE_ATTR = "phase";
+
+		private static final String ID_ATTR = "id";
+
+		private static final String STEP_ATTR = "step";
+
+		private static final String CUSTOMIZER_ELEMENT = "customizer";
+
+		private static final String STAGE_ATTR = "stage";
+
+		private static final String RANK_ATTR = "rank";
+
+		private static final String CLASS_ATTR = "class";
+
+		private static HashMap<String, StageQualifier> stages = new HashMap<String, StageQualifier>();
 
 		private static StageQualifier createStageQualifier(Stage phase, String step) {
 			StageQualifier stageQualifier = ClassMakerFactory.eINSTANCE.createStageQualifier();
 			stageQualifier.setStage(phase);
 			stageQualifier.setStep(step);
 			return stageQualifier;
+		}
+
+		public static void contributeStages() {
+			IConfigurationElement[] stageElements = Platform.getExtensionRegistry()
+					.getConfigurationElementsFor(ClassMakerPlugin.STAGES_EXT_POINT);
+			for (IConfigurationElement e : stageElements) {
+				Stage phase = Stage.getByName(e.getAttribute(PHASE_ATTR).toUpperCase());
+				String id = e.getAttribute(ID_ATTR);
+				stages.put(id, createStageQualifier(phase, e.getAttribute(STEP_ATTR)));
+			}
+		}
+
+		public static StageQualifier lookup(String id) {
+			return stages.get(id);
+		}
+
+		public static Set<String> ids() {
+			return stages.keySet();
+		}
+
+		public static SortedSet<Customizer> createCustomizers(String id) {
+			SortedSet<Customizer> results = new TreeSet<Customizer>(new Customizer.CustomizerComparator());
+			IConfigurationElement[] customizerElements = Platform.getExtensionRegistry()
+					.getConfigurationElementsFor(ClassMakerPlugin.CUSTOMIZERS_EXT_POINT);
+			for (IConfigurationElement ce : customizerElements) {
+				if (ce.getAttribute(STAGE_ATTR).equals(id)) {
+					try {
+						Customizer result = (Customizer) ce.createExecutableExtension(CLASS_ATTR);
+						result.setRank(Integer.valueOf(ce.getAttribute(RANK_ATTR)));
+						results.add(result);
+					} catch (CoreException ex) {
+						ClassMakerPlugin.getInstance().getLog().log(ex.getStatus());
+					}
+				}
+			}
+			return results;
 		}
 
 	}

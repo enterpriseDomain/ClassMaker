@@ -24,10 +24,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.enterprisedomain.classmaker.jobs.codegen.Generator;
-import org.enterprisedomain.classmaker.jobs.export.Exporter;
-import org.enterprisedomain.classmaker.jobs.install.Installer;
-import org.enterprisedomain.classmaker.jobs.load.ModelLoader;
+import org.enterprisedomain.classmaker.jobs.Worker;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '
@@ -416,33 +413,33 @@ public interface State extends Item, ISchedulingRule {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @model type="org.enterprisedomain.classmaker.Generator"
+	 * @model type="org.enterprisedomain.classmaker.Worker"
 	 * @generated
 	 */
-	Generator createGenerator();
+	Worker createGenerator();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @model type="org.enterprisedomain.classmaker.Exporter"
+	 * @model type="org.enterprisedomain.classmaker.Worker"
 	 * @generated
 	 */
-	Exporter createExporter();
+	Worker createExporter();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @model type="org.enterprisedomain.classmaker.Installer"
+	 * @model type="org.enterprisedomain.classmaker.Worker"
 	 * @generated
 	 */
-	Installer createInstaller();
+	Worker createInstaller();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @model type="org.enterprisedomain.classmaker.ModelLoader"
+	 * @model type="org.enterprisedomain.classmaker.Worker"
 	 * @generated
 	 */
-	ModelLoader createLoader();
+	Worker createModelLoader();
 
 } // State

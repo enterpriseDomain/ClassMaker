@@ -17,6 +17,7 @@ package org.enterprisedomain.classmaker.core;
 
 import java.util.Dictionary;
 import java.util.Hashtable;
+import java.util.SortedSet;
 
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -28,6 +29,7 @@ import org.eclipse.e4.core.contexts.IContextFunction;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.enterprisedomain.classmaker.ClassMakerFactory;
 import org.enterprisedomain.classmaker.ClassMakerPlant;
+import org.enterprisedomain.classmaker.Customizer;
 import org.enterprisedomain.classmaker.impl.ClassMakerPlantImpl;
 import org.enterprisedomain.classmaker.jobs.ProgressMonitorFactory;
 import org.osgi.framework.Bundle;
@@ -42,6 +44,10 @@ public class ClassMakerPlugin extends Plugin {
 	public static final String PLUGIN_ID = "org.enterprisedomain.classmaker"; //$NON-NLS-1$
 
 	public static final String NATURE_ID = PLUGIN_ID + ".projectNature"; //$NON-NLS-1$
+
+	public static final String STAGES_EXT_POINT = PLUGIN_ID + ".stages"; //$NON-NLS-1$
+
+	public static final String CUSTOMIZERS_EXT_POINT = PLUGIN_ID + ".customizers";//$NON-NLS-1$ l
 
 	public static final String PDE_PLUGIN_NATURE = "org.eclipse.pde.PluginNature"; //$NON-NLS-1$
 
@@ -109,6 +115,14 @@ public class ClassMakerPlugin extends Plugin {
 				if (event.getBundle().getSymbolicName().equals(PLUGIN_ID))
 					if (event.getType() == BundleEvent.STARTED) {
 						getClassMaker().getWorkspace().initialize();
+						ClassMakerPlant.Stages.contributeStages();
+						for (String id : ClassMakerPlant.Stages.ids()) {
+							SortedSet<Customizer> customizers = ClassMakerPlant.Stages.createCustomizers(id);
+							if (!customizers.isEmpty())
+								for (Customizer customizer : customizers)
+									getClassMaker().getWorkspace().getCustomizers()
+											.put(ClassMakerPlant.Stages.lookup(id), customizer);
+						}
 						event.getBundle().getBundleContext().removeBundleListener(this);
 					}
 

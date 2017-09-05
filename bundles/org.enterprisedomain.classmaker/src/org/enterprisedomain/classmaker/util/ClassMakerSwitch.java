@@ -42,10 +42,7 @@ import org.enterprisedomain.classmaker.SCMRegistry;
 import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
-import org.enterprisedomain.classmaker.jobs.codegen.Generator;
-import org.enterprisedomain.classmaker.jobs.export.Exporter;
-import org.enterprisedomain.classmaker.jobs.install.Installer;
-import org.enterprisedomain.classmaker.jobs.load.ModelLoader;
+import org.enterprisedomain.classmaker.jobs.Worker;
 import org.osgi.framework.Version;
 
 /**
@@ -297,30 +294,9 @@ public class ClassMakerSwitch<T1> extends Switch<T1> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case ClassMakerPackage.GENERATOR: {
-			Generator generator = (Generator) theEObject;
-			T1 result = caseGenerator(generator);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case ClassMakerPackage.EXPORTER: {
-			Exporter exporter = (Exporter) theEObject;
-			T1 result = caseExporter(exporter);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case ClassMakerPackage.INSTALLER: {
-			Installer installer = (Installer) theEObject;
-			T1 result = caseInstaller(installer);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case ClassMakerPackage.MODEL_LOADER: {
-			ModelLoader modelLoader = (ModelLoader) theEObject;
-			T1 result = caseModelLoader(modelLoader);
+		case ClassMakerPackage.WORKER: {
+			Worker worker = (Worker) theEObject;
+			T1 result = caseWorker(worker);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -678,6 +654,22 @@ public class ClassMakerSwitch<T1> extends Switch<T1> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of
+	 * '<em>Worker</em>'. <!-- begin-user-doc --> This implementation returns null;
+	 * returning a non-null result will terminate the switch. <!-- end-user-doc -->
+	 * 
+	 * @param object
+	 *            the target of the switch.
+	 * @return the result of interpreting the object as an instance of
+	 *         '<em>Worker</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseWorker(Worker object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Resource
 	 * Adapter</em>'. <!-- begin-user-doc --> This implementation returns null;
 	 * returning a non-null result will terminate the switch. <!-- end-user-doc -->
@@ -723,73 +715,6 @@ public class ClassMakerSwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public T1 caseCompletionNotificationAdapter(CompletionNotificationAdapter object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of
-	 * '<em>Generator</em>'. <!-- begin-user-doc --> This implementation returns
-	 * null; returning a non-null result will terminate the switch. <!--
-	 * end-user-doc -->
-	 * 
-	 * @param object
-	 *            the target of the switch.
-	 * @return the result of interpreting the object as an instance of
-	 *         '<em>Generator</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T1 caseGenerator(Generator object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of
-	 * '<em>Exporter</em>'. <!-- begin-user-doc --> This implementation returns
-	 * null; returning a non-null result will terminate the switch. <!--
-	 * end-user-doc -->
-	 * 
-	 * @param object
-	 *            the target of the switch.
-	 * @return the result of interpreting the object as an instance of
-	 *         '<em>Exporter</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T1 caseExporter(Exporter object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of
-	 * '<em>Installer</em>'. <!-- begin-user-doc --> This implementation returns
-	 * null; returning a non-null result will terminate the switch. <!--
-	 * end-user-doc -->
-	 * 
-	 * @param object
-	 *            the target of the switch.
-	 * @return the result of interpreting the object as an instance of
-	 *         '<em>Installer</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T1 caseInstaller(Installer object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Model
-	 * Loader</em>'. <!-- begin-user-doc --> This implementation returns null;
-	 * returning a non-null result will terminate the switch. <!-- end-user-doc -->
-	 * 
-	 * @param object
-	 *            the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Model
-	 *         Loader</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T1 caseModelLoader(ModelLoader object) {
 		return null;
 	}
 

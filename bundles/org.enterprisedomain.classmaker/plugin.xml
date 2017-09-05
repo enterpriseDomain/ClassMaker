@@ -9,6 +9,8 @@
 -->
 
 <plugin>
+   <extension-point id="stages" name="Work Customization Stages" schema="schema/stages.exsd"/>
+   <extension-point id="customizers" name="Work Stage Customizers" schema="schema/customizers.exsd"/>
    <extension
          id="projectNature"
          name="enterpriseDomain Project Nature"
@@ -25,13 +27,6 @@
             class="org.enterprisedomain.classmaker.ReflectiveInvocationDelegateFactory"
             uri="org.enterprisedomain.classmaker.reflection.java">
       </factory>
-   </extension>
-   <extension
-         point="org.eclipse.emf.ecore.protocol_parser">
-      <parser
-            class="org.enterprisedomain.classmaker.impl.GeneratedProtocolFactory"
-            protocolName="org.enterprisedomain.classmaker.generated">
-      </parser>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
@@ -57,5 +52,59 @@
                type="org.eclipse.emf.ecore.resource.Resource">
          </adapter>
       </factory>
+   </extension>
+   <extension
+         point="org.enterprisedomain.classmaker.stages">
+      <stage
+            id="org.enterprisedomain.classmaker.customization.stages.create.generator"
+            phase="generated"
+            step="create.generator">            
+      </stage>
+      <stage
+            id="org.enterprisedomain.classmaker.customization.stages.generation.genmodel.setup"
+            phase="generated"
+            step="generation.genmodel.setup">
+      </stage>
+      <stage
+            customizer="org.enterprisedomain.classmaker.jobs.export.CreateExporterCustomizer"
+            id="org.enterprisedomain.classmaker.customization.stages.create.exporter"
+            phase="exported"
+            step="create.exporter">
+      </stage>
+      <stage
+            customizer="org.enterprisedomain.classmaker.jobs.install.CreateInstallerCustomizer"
+            id="org.enterprisedomain.classmaker.customization.stages.create.installer"
+            phase="installed"
+            step="create.installer">
+      </stage>
+      <stage
+            customizer="org.enterprisedomain.classmaker.jobs.load.CreateLoaderCustomizer"
+            id="org.enterprisedomain.classmaker.customization.stages.create.loader"
+            phase="loaded"
+            step="create.loader">
+      </stage>
+   </extension>
+   <extension
+         point="org.enterprisedomain.classmaker.customizers">
+      <customizer
+            class="org.enterprisedomain.classmaker.jobs.codegen.CreateGeneratorCustomizer"
+            rank="2"
+            stage="org.enterprisedomain.classmaker.customization.stages.create.generator">
+      </customizer>
+      <customizer
+            class="org.enterprisedomain.classmaker.jobs.export.CreateExporterCustomizer"
+            rank="2"
+            stage="org.enterprisedomain.classmaker.customization.stages.create.exporter">
+      </customizer>
+      <customizer
+            class="org.enterprisedomain.classmaker.jobs.install.CreateInstallerCustomizer"
+            rank="2"
+            stage="org.enterprisedomain.classmaker.customization.stages.create.installer">
+      </customizer>
+      <customizer
+            class="org.enterprisedomain.classmaker.jobs.load.CreateLoaderCustomizer"
+            rank="2"
+            stage="org.enterprisedomain.classmaker.customization.stages.create.loader">
+      </customizer>
    </extension>
 </plugin>

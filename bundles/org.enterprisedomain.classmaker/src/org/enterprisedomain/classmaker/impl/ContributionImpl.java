@@ -737,7 +737,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 			return revision.make(monitor);
 		} catch (JGitInternalException e) {
 		} catch (Exception e) {
-			e.printStackTrace();
 			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 		}
 		return revision.getState().getCommitId();

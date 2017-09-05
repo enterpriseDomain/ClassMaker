@@ -17,15 +17,14 @@ package org.enterprisedomain.classmaker.jobs.codegen;
 
 import java.util.Collection;
 
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.codegen.ecore.genmodel.GenDelegationKind;
 import org.eclipse.emf.ecore.EPackage;
 
 public class CDOGenerator extends EcoreGenerator {
 
-	public CDOGenerator(IProject project, int stateTimestamp) {
-		super(project, stateTimestamp);
+	public CDOGenerator(int stateTimestamp) {
+		super(stateTimestamp);
 	}
 
 	protected void setupGenModel(IPath projectPath, org.eclipse.emf.codegen.ecore.genmodel.GenModel ecoreGenModel,

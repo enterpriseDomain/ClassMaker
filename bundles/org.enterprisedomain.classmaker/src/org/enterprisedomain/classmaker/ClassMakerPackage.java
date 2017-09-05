@@ -911,13 +911,22 @@ public interface ClassMakerPackage extends EPackage {
 	int WORKSPACE__RESOURCE_SET = ISCHEDULING_RULE_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Customizers</b></em>' map. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int WORKSPACE__CUSTOMIZERS = ISCHEDULING_RULE_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Workspace</em>' class. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int WORKSPACE_FEATURE_COUNT = ISCHEDULING_RULE_FEATURE_COUNT + 2;
+	int WORKSPACE_FEATURE_COUNT = ISCHEDULING_RULE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the
@@ -1067,13 +1076,22 @@ public interface ClassMakerPackage extends EPackage {
 	int CUSTOMIZER = 12;
 
 	/**
+	 * The feature id for the '<em><b>Rank</b></em>' attribute. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOMIZER__RANK = 0;
+
+	/**
 	 * The number of structural features of the '<em>Customizer</em>' class. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int CUSTOMIZER_FEATURE_COUNT = 0;
+	int CUSTOMIZER_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the
@@ -1290,6 +1308,17 @@ public interface ClassMakerPackage extends EPackage {
 
 	/**
 	 * The meta object id for the
+	 * '{@link org.enterprisedomain.classmaker.jobs.Worker <em>Worker</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see org.enterprisedomain.classmaker.jobs.Worker
+	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getWorker()
+	 * @generated
+	 */
+	int WORKER = 24;
+
+	/**
+	 * The meta object id for the
 	 * '{@link org.enterprisedomain.classmaker.impl.ResourceAdapterImpl <em>Resource
 	 * Adapter</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -1395,84 +1424,13 @@ public interface ClassMakerPackage extends EPackage {
 	int COMPLETION_NOTIFICATION_ADAPTER_FEATURE_COUNT = ADAPTER_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the
-	 * '{@link org.enterprisedomain.classmaker.jobs.codegen.Generator
-	 * <em>Generator</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see org.enterprisedomain.classmaker.jobs.codegen.Generator
-	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getGenerator()
-	 * @generated
-	 */
-	int GENERATOR = 24;
-
-	/**
-	 * The number of structural features of the '<em>Generator</em>' class. <!--
+	 * The number of structural features of the '<em>Worker</em>' class. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_FEATURE_COUNT = 0;
-
-	/**
-	 * The meta object id for the
-	 * '{@link org.enterprisedomain.classmaker.jobs.export.Exporter
-	 * <em>Exporter</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see org.enterprisedomain.classmaker.jobs.export.Exporter
-	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getExporter()
-	 * @generated
-	 */
-	int EXPORTER = 25;
-
-	/**
-	 * The number of structural features of the '<em>Exporter</em>' class. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int EXPORTER_FEATURE_COUNT = 0;
-
-	/**
-	 * The meta object id for the
-	 * '{@link org.enterprisedomain.classmaker.jobs.install.Installer
-	 * <em>Installer</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see org.enterprisedomain.classmaker.jobs.install.Installer
-	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getInstaller()
-	 * @generated
-	 */
-	int INSTALLER = 26;
-
-	/**
-	 * The number of structural features of the '<em>Installer</em>' class. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int INSTALLER_FEATURE_COUNT = 0;
-
-	/**
-	 * The meta object id for the
-	 * '{@link org.enterprisedomain.classmaker.jobs.load.ModelLoader <em>Model
-	 * Loader</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see org.enterprisedomain.classmaker.jobs.load.ModelLoader
-	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getModelLoader()
-	 * @generated
-	 */
-	int MODEL_LOADER = 27;
-
-	/**
-	 * The number of structural features of the '<em>Model Loader</em>' class. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_LOADER_FEATURE_COUNT = 0;
+	int WORKER_FEATURE_COUNT = 0;
 
 	/**
 	 * The meta object id for the '<em>Locale</em>' data type. <!-- begin-user-doc
@@ -1482,7 +1440,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getLocale()
 	 * @generated
 	 */
-	int LOCALE = 38;
+	int LOCALE = 35;
 
 	/**
 	 * The meta object id for the '{@link org.enterprisedomain.classmaker.Stage
@@ -1492,7 +1450,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getStage()
 	 * @generated
 	 */
-	int STAGE = 28;
+	int STAGE = 25;
 
 	/**
 	 * The meta object id for the '<em>Properties</em>' data type. <!--
@@ -1502,7 +1460,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getProperties()
 	 * @generated
 	 */
-	int PROPERTIES = 29;
+	int PROPERTIES = 26;
 
 	/**
 	 * The meta object id for the '<em>IProgress Monitor</em>' data type. <!--
@@ -1512,7 +1470,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getIProgressMonitor()
 	 * @generated
 	 */
-	int IPROGRESS_MONITOR = 30;
+	int IPROGRESS_MONITOR = 27;
 
 	/**
 	 * The meta object id for the '<em>OS Gi Version</em>' data type. <!--
@@ -1522,7 +1480,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getOSGiVersion()
 	 * @generated
 	 */
-	int OS_GI_VERSION = 31;
+	int OS_GI_VERSION = 28;
 
 	/**
 	 * The meta object id for the '<em>Semaphore</em>' data type. <!--
@@ -1532,7 +1490,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getSemaphore()
 	 * @generated
 	 */
-	int SEMAPHORE = 32;
+	int SEMAPHORE = 29;
 
 	/**
 	 * The meta object id for the '<em>Core Exception</em>' data type. <!--
@@ -1542,7 +1500,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getCoreException()
 	 * @generated
 	 */
-	int CORE_EXCEPTION = 33;
+	int CORE_EXCEPTION = 30;
 
 	/**
 	 * The meta object id for the '<em>Invocation Target Exception</em>' data type.
@@ -1552,7 +1510,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getInvocationTargetException()
 	 * @generated
 	 */
-	int INVOCATION_TARGET_EXCEPTION = 34;
+	int INVOCATION_TARGET_EXCEPTION = 31;
 
 	/**
 	 * The meta object id for the '<em>IStatus</em>' data type. <!-- begin-user-doc
@@ -1562,7 +1520,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getIStatus()
 	 * @generated
 	 */
-	int ISTATUS = 35;
+	int ISTATUS = 32;
 
 	/**
 	 * The meta object id for the '<em>URI</em>' data type. <!-- begin-user-doc -->
@@ -1572,7 +1530,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getURI()
 	 * @generated
 	 */
-	int URI = 36;
+	int URI = 33;
 
 	/**
 	 * The meta object id for the '<em>Exception</em>' data type. <!--
@@ -1582,7 +1540,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getException()
 	 * @generated
 	 */
-	int EXCEPTION = 37;
+	int EXCEPTION = 34;
 
 	/**
 	 * Returns the meta object for class
@@ -2052,6 +2010,18 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getWorkspace_ResourceSet();
 
 	/**
+	 * Returns the meta object for the map
+	 * '{@link org.enterprisedomain.classmaker.Workspace#getCustomizers
+	 * <em>Customizers</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the map '<em>Customizers</em>'.
+	 * @see org.enterprisedomain.classmaker.Workspace#getCustomizers()
+	 * @see #getWorkspace()
+	 * @generated
+	 */
+	EReference getWorkspace_Customizers();
+
+	/**
 	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Integer To
 	 * State Map Entry</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -2179,6 +2149,18 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getCustomizer();
+
+	/**
+	 * Returns the meta object for the attribute
+	 * '{@link org.enterprisedomain.classmaker.Customizer#getRank <em>Rank</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the attribute '<em>Rank</em>'.
+	 * @see org.enterprisedomain.classmaker.Customizer#getRank()
+	 * @see #getCustomizer()
+	 * @generated
+	 */
+	EAttribute getCustomizer_Rank();
 
 	/**
 	 * Returns the meta object for class
@@ -2458,6 +2440,18 @@ public interface ClassMakerPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for class
+	 * '{@link org.enterprisedomain.classmaker.jobs.Worker <em>Worker</em>}'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for class '<em>Worker</em>'.
+	 * @see org.enterprisedomain.classmaker.jobs.Worker
+	 * @model instanceClass="org.enterprisedomain.classmaker.jobs.Worker"
+	 * @generated
+	 */
+	EClass getWorker();
+
+	/**
+	 * Returns the meta object for class
 	 * '{@link org.enterprisedomain.classmaker.ResourceAdapter <em>Resource
 	 * Adapter</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -2549,54 +2543,6 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getCompletionNotificationAdapter_Error();
-
-	/**
-	 * Returns the meta object for class
-	 * '{@link org.enterprisedomain.classmaker.jobs.codegen.Generator
-	 * <em>Generator</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for class '<em>Generator</em>'.
-	 * @see org.enterprisedomain.classmaker.jobs.codegen.Generator
-	 * @model instanceClass="org.enterprisedomain.classmaker.jobs.codegen.Generator"
-	 * @generated
-	 */
-	EClass getGenerator();
-
-	/**
-	 * Returns the meta object for class
-	 * '{@link org.enterprisedomain.classmaker.jobs.export.Exporter
-	 * <em>Exporter</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for class '<em>Exporter</em>'.
-	 * @see org.enterprisedomain.classmaker.jobs.export.Exporter
-	 * @model instanceClass="org.enterprisedomain.classmaker.jobs.export.Exporter"
-	 * @generated
-	 */
-	EClass getExporter();
-
-	/**
-	 * Returns the meta object for class
-	 * '{@link org.enterprisedomain.classmaker.jobs.install.Installer
-	 * <em>Installer</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for class '<em>Installer</em>'.
-	 * @see org.enterprisedomain.classmaker.jobs.install.Installer
-	 * @model instanceClass="org.enterprisedomain.classmaker.jobs.install.Installer"
-	 * @generated
-	 */
-	EClass getInstaller();
-
-	/**
-	 * Returns the meta object for class
-	 * '{@link org.enterprisedomain.classmaker.jobs.load.ModelLoader <em>Model
-	 * Loader</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for class '<em>Model Loader</em>'.
-	 * @see org.enterprisedomain.classmaker.jobs.load.ModelLoader
-	 * @model instanceClass="org.enterprisedomain.classmaker.jobs.load.ModelLoader"
-	 * @generated
-	 */
-	EClass getModelLoader();
 
 	/**
 	 * Returns the meta object for data type '{@link java.util.Locale
@@ -3075,6 +3021,14 @@ public interface ClassMakerPackage extends EPackage {
 		EAttribute WORKSPACE__RESOURCE_SET = eINSTANCE.getWorkspace_ResourceSet();
 
 		/**
+		 * The meta object literal for the '<em><b>Customizers</b></em>' map feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference WORKSPACE__CUSTOMIZERS = eINSTANCE.getWorkspace_Customizers();
+
+		/**
 		 * The meta object literal for the
 		 * '{@link org.enterprisedomain.classmaker.impl.IntegerToStateMapEntryImpl
 		 * <em>Integer To State Map Entry</em>}' class. <!-- begin-user-doc --> <!--
@@ -3182,6 +3136,14 @@ public interface ClassMakerPackage extends EPackage {
 		 * @generated
 		 */
 		EClass CUSTOMIZER = eINSTANCE.getCustomizer();
+
+		/**
+		 * The meta object literal for the '<em><b>Rank</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EAttribute CUSTOMIZER__RANK = eINSTANCE.getCustomizer_Rank();
 
 		/**
 		 * The meta object literal for the
@@ -3398,6 +3360,17 @@ public interface ClassMakerPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the
+		 * '{@link org.enterprisedomain.classmaker.jobs.Worker <em>Worker</em>}' class.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @see org.enterprisedomain.classmaker.jobs.Worker
+		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getWorker()
+		 * @generated
+		 */
+		EClass WORKER = eINSTANCE.getWorker();
+
+		/**
+		 * The meta object literal for the
 		 * '{@link org.enterprisedomain.classmaker.impl.ResourceAdapterImpl <em>Resource
 		 * Adapter</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
@@ -3469,50 +3442,6 @@ public interface ClassMakerPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute COMPLETION_NOTIFICATION_ADAPTER__ERROR = eINSTANCE.getCompletionNotificationAdapter_Error();
-
-		/**
-		 * The meta object literal for the
-		 * '{@link org.enterprisedomain.classmaker.jobs.codegen.Generator
-		 * <em>Generator</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
-		 * @see org.enterprisedomain.classmaker.jobs.codegen.Generator
-		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getGenerator()
-		 * @generated
-		 */
-		EClass GENERATOR = eINSTANCE.getGenerator();
-
-		/**
-		 * The meta object literal for the
-		 * '{@link org.enterprisedomain.classmaker.jobs.export.Exporter
-		 * <em>Exporter</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
-		 * @see org.enterprisedomain.classmaker.jobs.export.Exporter
-		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getExporter()
-		 * @generated
-		 */
-		EClass EXPORTER = eINSTANCE.getExporter();
-
-		/**
-		 * The meta object literal for the
-		 * '{@link org.enterprisedomain.classmaker.jobs.install.Installer
-		 * <em>Installer</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
-		 * @see org.enterprisedomain.classmaker.jobs.install.Installer
-		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getInstaller()
-		 * @generated
-		 */
-		EClass INSTALLER = eINSTANCE.getInstaller();
-
-		/**
-		 * The meta object literal for the
-		 * '{@link org.enterprisedomain.classmaker.jobs.load.ModelLoader <em>Model
-		 * Loader</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
-		 * @see org.enterprisedomain.classmaker.jobs.load.ModelLoader
-		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getModelLoader()
-		 * @generated
-		 */
-		EClass MODEL_LOADER = eINSTANCE.getModelLoader();
 
 		/**
 		 * The meta object literal for the '<em>Locale</em>' data type. <!--

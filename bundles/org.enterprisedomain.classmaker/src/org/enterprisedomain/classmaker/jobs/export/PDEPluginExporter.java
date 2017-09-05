@@ -53,7 +53,7 @@ public class PDEPluginExporter extends AbstractExporter {
 	}
 
 	@Override
-	public IStatus export(final IProgressMonitor monitor) throws CoreException {
+	public IStatus work(final IProgressMonitor monitor) throws CoreException {
 		if (monitor.isCanceled()) {
 			return Status.CANCEL_STATUS;
 		}
@@ -62,7 +62,7 @@ public class PDEPluginExporter extends AbstractExporter {
 		State contribution = getContributionState();
 		Version version = contribution.getVersion();
 		final FeatureExportInfo info = new FeatureExportInfo();
-		info.destinationDirectory = getExportDestination().toString();
+		info.destinationDirectory = getProperties().getProperty(EXPORT_DESTINATION_PROP);
 		info.toDirectory = true;
 		info.useJarFormat = true;
 		info.exportMetadata = true;

@@ -42,10 +42,7 @@ import org.enterprisedomain.classmaker.SCMRegistry;
 import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
-import org.enterprisedomain.classmaker.jobs.codegen.Generator;
-import org.enterprisedomain.classmaker.jobs.export.Exporter;
-import org.enterprisedomain.classmaker.jobs.install.Installer;
-import org.enterprisedomain.classmaker.jobs.load.ModelLoader;
+import org.enterprisedomain.classmaker.jobs.Worker;
 import org.osgi.framework.Version;
 
 /**
@@ -224,23 +221,8 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseGenerator(Generator object) {
-			return createGeneratorAdapter();
-		}
-
-		@Override
-		public Adapter caseExporter(Exporter object) {
-			return createExporterAdapter();
-		}
-
-		@Override
-		public Adapter caseInstaller(Installer object) {
-			return createInstallerAdapter();
-		}
-
-		@Override
-		public Adapter caseModelLoader(ModelLoader object) {
-			return createModelLoaderAdapter();
+		public Adapter caseWorker(Worker object) {
+			return createWorkerAdapter();
 		}
 
 		@Override
@@ -580,6 +562,21 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class
+	 * '{@link org.enterprisedomain.classmaker.jobs.Worker <em>Worker</em>}'. <!--
+	 * begin-user-doc --> This default implementation returns null so that we can
+	 * easily ignore cases; it's useful to ignore a case when inheritance will catch
+	 * all the cases anyway. <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see org.enterprisedomain.classmaker.jobs.Worker
+	 * @generated
+	 */
+	public Adapter createWorkerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class
 	 * '{@link org.enterprisedomain.classmaker.ResourceAdapter <em>Resource
 	 * Adapter</em>}'. <!-- begin-user-doc --> This default implementation returns
 	 * null so that we can easily ignore cases; it's useful to ignore a case when
@@ -621,66 +618,6 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCompletionNotificationAdapterAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class
-	 * '{@link org.enterprisedomain.classmaker.jobs.codegen.Generator
-	 * <em>Generator</em>}'. <!-- begin-user-doc --> This default implementation
-	 * returns null so that we can easily ignore cases; it's useful to ignore a case
-	 * when inheritance will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
-	 * @return the new adapter.
-	 * @see org.enterprisedomain.classmaker.jobs.codegen.Generator
-	 * @generated
-	 */
-	public Adapter createGeneratorAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class
-	 * '{@link org.enterprisedomain.classmaker.jobs.export.Exporter
-	 * <em>Exporter</em>}'. <!-- begin-user-doc --> This default implementation
-	 * returns null so that we can easily ignore cases; it's useful to ignore a case
-	 * when inheritance will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
-	 * @return the new adapter.
-	 * @see org.enterprisedomain.classmaker.jobs.export.Exporter
-	 * @generated
-	 */
-	public Adapter createExporterAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class
-	 * '{@link org.enterprisedomain.classmaker.jobs.install.Installer
-	 * <em>Installer</em>}'. <!-- begin-user-doc --> This default implementation
-	 * returns null so that we can easily ignore cases; it's useful to ignore a case
-	 * when inheritance will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
-	 * @return the new adapter.
-	 * @see org.enterprisedomain.classmaker.jobs.install.Installer
-	 * @generated
-	 */
-	public Adapter createInstallerAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class
-	 * '{@link org.enterprisedomain.classmaker.jobs.load.ModelLoader <em>Model
-	 * Loader</em>}'. <!-- begin-user-doc --> This default implementation returns
-	 * null so that we can easily ignore cases; it's useful to ignore a case when
-	 * inheritance will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
-	 * @return the new adapter.
-	 * @see org.enterprisedomain.classmaker.jobs.load.ModelLoader
-	 * @generated
-	 */
-	public Adapter createModelLoaderAdapter() {
 		return null;
 	}
 
