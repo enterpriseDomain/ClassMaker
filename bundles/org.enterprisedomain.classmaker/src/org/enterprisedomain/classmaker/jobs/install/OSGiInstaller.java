@@ -30,6 +30,7 @@ import org.enterprisedomain.classmaker.Messages;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
+import org.enterprisedomain.classmaker.jobs.ContainerJob;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
@@ -41,7 +42,7 @@ import org.osgi.framework.FrameworkListener;
 import org.osgi.framework.Version;
 import org.osgi.framework.wiring.FrameworkWiring;
 
-public class OSGiInstaller extends Installer {
+public class OSGiInstaller extends ContainerJob {
 
 	private BundleListener listener = new BundleListener() {
 
@@ -67,13 +68,13 @@ public class OSGiInstaller extends Installer {
 	private FrameworkWiring frameworkWiring;
 
 	public OSGiInstaller(int stateTimestamp) {
-		super(stateTimestamp);
+		super(Messages.JobNameInstaller, stateTimestamp);
 		installed = new Semaphore(0);
 		uninstalled = new Semaphore(0);
 	}
 
 	@Override
-	public IStatus install(IProgressMonitor monitor) throws CoreException {
+	public IStatus work(IProgressMonitor monitor) throws CoreException {
 		State contribution = getContributionState();
 		if (contribution.getPhase() == Stage.DEFINED)
 			return ClassMakerPlugin.createErrorStatus(Messages.ModelNotSpecified);

@@ -28,6 +28,7 @@ import org.enterprisedomain.classmaker.Messages;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
+import org.enterprisedomain.classmaker.jobs.ContainerJob;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleEvent;
 import org.osgi.framework.BundleException;
@@ -36,7 +37,7 @@ import org.osgi.framework.Constants;
 import org.osgi.framework.Version;
 import org.osgi.framework.startlevel.BundleStartLevel;
 
-public class OSGiEPackageLoader extends ModelLoader {
+public class OSGiEPackageLoader extends ContainerJob {
 
 	private Semaphore loaded = new Semaphore(0);
 
@@ -62,10 +63,10 @@ public class OSGiEPackageLoader extends ModelLoader {
 	};
 
 	public OSGiEPackageLoader(int stateTimestamp) {
-		super(stateTimestamp);
+		super(Messages.JobNameLoader, stateTimestamp);
 	}
 
-	public IStatus load(IProgressMonitor monitor) throws CoreException {
+	public IStatus work(IProgressMonitor monitor) throws CoreException {
 		State contribution = getContributionState();
 		if (contribution.getPhase() == Stage.DEFINED)
 			return ClassMakerPlugin.createErrorStatus(Messages.ModelNotSpecified);
@@ -82,8 +83,7 @@ public class OSGiEPackageLoader extends ModelLoader {
 					if (osgiBundle.getBundleId() != 0)
 						osgiBundle.adapt(BundleStartLevel.class).setStartLevel(4);
 					try {
-						int options = getOptions(false, osgiBundle);
-						osgiBundle.start(options);
+						osgiBundle.start(getOptions(false));
 					} catch (BundleException e) {
 						setException(e);
 					}
@@ -130,13 +130,8 @@ public class OSGiEPackageLoader extends ModelLoader {
 
 	}
 
-	private int getOptions(boolean autoStart, Bundle bundle) {
-		int options = 0;
-		options |= autoStart ? Bundle.START_TRANSIENT : 0;
-		options |= bundle.getHeaders(Constants.BUNDLE_ACTIVATIONPOLICY).equals(Constants.ACTIVATION_LAZY)
-				? Bundle.START_ACTIVATION_POLICY
-				: 0;
-		return options;
+	private int getOptions(boolean autoStart) {
+		return autoStart ? Bundle.START_TRANSIENT : 0;
 	}
 
 	private synchronized void doLoad(State state, Bundle osgiBundle) throws Exception {
@@ -175,6 +170,21 @@ public class OSGiEPackageLoader extends ModelLoader {
 
 	public void setException(Throwable exception) {
 		this.exception = exception;
+	}
+
+	@Override
+	public Stage getPrerequisiteStage() {
+		return Stage.INSTALLED;
+	}
+
+	@Override
+	public Stage getResultStage() {
+		return Stage.LOADED;
+	}
+
+	@Override
+	public Stage getDirtyStage() {
+		return Stage.LOADED;
 	}
 
 }
