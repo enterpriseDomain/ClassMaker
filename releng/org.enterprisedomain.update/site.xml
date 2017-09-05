@@ -3,10 +3,10 @@
    <description name="enterpriseDomain" url="https://dl.bintray.com/enterprisedomain/ClassMaker">
       enterpriseDomain ClassMaker
    </description>
-   <feature url="features/org.enterprisedomain.classmaker.feature_0.7.901.201709011805.jar" id="org.enterprisedomain.classmaker.feature" version="0.7.901.201709011805">
+   <feature url="features/org.enterprisedomain.classmaker.feature_0.7.901.201709051733.jar" id="org.enterprisedomain.classmaker.feature" version="0.7.901.201709051733">
       <category name="enterprisedomain"/>
    </feature>
-   <feature url="features/org.enterprisedomain.classmaker.osgi.resolverhooks.feature_0.7.901.201709011805.jar" id="org.enterprisedomain.classmaker.osgi.resolverhooks.feature" version="0.7.901.201709011805">
+   <feature url="features/org.enterprisedomain.classmaker.osgi.resolverhooks.feature_0.7.901.201709051733.jar" id="org.enterprisedomain.classmaker.osgi.resolverhooks.feature" version="0.7.901.201709051733">
       <category name="enterprisedomain"/>
    </feature>
    <category-def name="enterprisedomain" label="enterpriseDomain">
