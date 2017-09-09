@@ -23,6 +23,11 @@ import org.eclipse.emf.ecore.resource.Resource;
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Resource
  * Adapter</b></em>'. <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc --> {@link org.eclipse.emf.ecore.EObject EObject}
+ * {@link org.eclipse.emf.common.notify.Adapter adapter} for
+ * {@link org.eclipse.emf.ecore.resource.Resource Resource}. <!-- end-model-doc
+ * -->
+ *
  * <p>
  * The following features are supported:
  * </p>

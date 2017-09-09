@@ -24,6 +24,9 @@ import org.osgi.framework.Version;
  * <!-- begin-user-doc --> A representation of the model object '<em><b>SCM
  * Operator</b></em>'. <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc --> Operator of Source Code Management system. <!--
+ * end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * </p>
@@ -47,7 +50,9 @@ public interface SCMOperator<T> extends EObject {
 	 * If the meaning of the '<em>Project Name</em>' attribute isn't clear, there
 	 * really should be more of a description here...
 	 * </p>
-	 * <!-- end-user-doc -->
+	 * <!-- end-user-doc --> <!-- begin-model-doc --> A name of the
+	 * {@link org.eclipse.core.resources.IProject IProject} contained in SCM repo.
+	 * <!-- end-model-doc -->
 	 * 
 	 * @return the value of the '<em>Project Name</em>' attribute.
 	 * @see #setProjectName(String)

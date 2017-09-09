@@ -59,7 +59,8 @@ public interface Project extends EObject, ISchedulingRule {
 	 * If the meaning of the '<em>Name</em>' attribute isn't clear, there really
 	 * should be more of a description here...
 	 * </p>
-	 * <!-- end-user-doc -->
+	 * <!-- end-user-doc --> <!-- begin-model-doc --> A name of the
+	 * <em><b>Project</b></em>. <!-- end-model-doc -->
 	 * 
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
@@ -87,7 +88,9 @@ public interface Project extends EObject, ISchedulingRule {
 	 * If the meaning of the '<em>Project Name</em>' attribute isn't clear, there
 	 * really should be more of a description here...
 	 * </p>
-	 * <!-- end-user-doc -->
+	 * <!-- end-user-doc --> <!-- begin-model-doc --> A name of the
+	 * {@link org.eclipse.core.resources.IProject IProject} to which the
+	 * <em><b>Project</b></em> is mapped to. <!-- end-model-doc -->
 	 * 
 	 * @return the value of the '<em>Project Name</em>' attribute.
 	 * @see #setProjectName(String)
@@ -151,7 +154,9 @@ public interface Project extends EObject, ISchedulingRule {
 	 * If the meaning of the '<em>Workspace</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
-	 * <!-- end-user-doc -->
+	 * <!-- end-user-doc --> <!-- begin-model-doc --> Reference to
+	 * <em><b>Project</b></em>'s containing {@link Workspace Workspace}. <!--
+	 * end-model-doc -->
 	 * 
 	 * @return the value of the '<em>Workspace</em>' container reference.
 	 * @see #setWorkspace(Workspace)
@@ -182,7 +187,8 @@ public interface Project extends EObject, ISchedulingRule {
 	 * If the meaning of the '<em>Needs Completion Notification</em>' attribute
 	 * isn't clear, there really should be more of a description here...
 	 * </p>
-	 * <!-- end-user-doc -->
+	 * <!-- end-user-doc --> <!-- begin-model-doc --> Set to <code>true</code> when
+	 * completion notification is needed. <!-- end-model-doc -->
 	 * 
 	 * @return the value of the '<em>Needs Completion Notification</em>' attribute.
 	 * @see #setNeedsCompletionNotification(boolean)
@@ -213,7 +219,9 @@ public interface Project extends EObject, ISchedulingRule {
 	 * If the meaning of the '<em>Completion Notification Adapter</em>' reference
 	 * isn't clear, there really should be more of a description here...
 	 * </p>
-	 * <!-- end-user-doc -->
+	 * <!-- end-user-doc --> <!-- begin-model-doc -->
+	 * <em>CompletionNotificationAdapter</em> for <em><b>Project</b></em>'s
+	 * operations. <!-- end-model-doc -->
 	 * 
 	 * @return the value of the '<em>Completion Notification Adapter</em>'
 	 *         containment reference.

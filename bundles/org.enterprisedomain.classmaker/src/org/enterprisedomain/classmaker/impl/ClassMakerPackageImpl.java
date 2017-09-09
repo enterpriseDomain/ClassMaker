@@ -704,15 +704,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * 
 	 * @generated
 	 */
-	public EAttribute getItem_Properties() {
-		return (EAttribute) itemEClass.getEStructuralFeatures().get(9);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
 	public EClass getAdapter() {
 		return adapterEClass;
 	}
@@ -1314,7 +1305,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		createEReference(itemEClass, ITEM__PARENT);
 		createEAttribute(itemEClass, ITEM__LOCALE);
 		createEReference(itemEClass, ITEM__CONTRIBUTION);
-		createEAttribute(itemEClass, ITEM__PROPERTIES);
 
 		adapterEClass = createEClass(ADAPTER);
 
@@ -1657,8 +1647,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEReference(getItem_Contribution(), this.getContribution(), null, "contribution", null, 0, 1, Item.class,
 				IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
 				IS_DERIVED, IS_ORDERED);
-		initEAttribute(getItem_Properties(), this.getProperties(), "properties", "", 0, 1, Item.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(itemEClass, null, "load", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEBoolean(), "create", 0, 1, IS_UNIQUE, IS_ORDERED);

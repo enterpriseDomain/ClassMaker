@@ -21,6 +21,9 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- begin-user-doc --> A representation of the model object '<em><b>SCM
  * Registry</b></em>'. <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc --> Registry of Source Code Management systems. <!--
+ * end-model-doc -->
+ *
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getSCMRegistry()
  * @model

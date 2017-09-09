@@ -31,7 +31,7 @@ import org.enterprisedomain.classmaker.jobs.Worker;
  * <em><b>State</b></em>'. <!-- end-user-doc -->
  *
  * <!-- begin-model-doc --> A complete unit, representing the state of
- * <b>Contribution</b>. Identified by {@link #getTimestamp()
+ * <b>Contribution</b>. Identified by {@link State#getTimestamp()
  * <em>Timestamp</em>}. <!-- end-model-doc -->
  *
  * <p>
@@ -76,7 +76,8 @@ public interface State extends Item, ISchedulingRule {
 	 * If the meaning of the '<em>Required Plugins</em>' attribute list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
-	 * <!-- end-user-doc -->
+	 * <!-- end-user-doc --> <!-- begin-model-doc --> <em><b>State</b></em> bundle's
+	 * <b>Require-Bundle</b> dependencies. <!-- end-model-doc -->
 	 * 
 	 * @return the value of the '<em>Required Plugins</em>' attribute list.
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getState_RequiredPlugins()
@@ -121,7 +122,8 @@ public interface State extends Item, ISchedulingRule {
 	 * If the meaning of the '<em>Deployable Unit Name</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
-	 * <!-- end-user-doc -->
+	 * <!-- end-user-doc --> <!-- begin-model-doc --> A name of the deployed bundle.
+	 * <!-- end-model-doc -->
 	 * 
 	 * @return the value of the '<em>Deployable Unit Name</em>' attribute.
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getState_DeployableUnitName()
@@ -321,7 +323,8 @@ public interface State extends Item, ISchedulingRule {
 	 * If the meaning of the '<em>Making</em>' attribute isn't clear, there really
 	 * should be more of a description here...
 	 * </p>
-	 * <!-- end-user-doc -->
+	 * <!-- end-user-doc --> <!-- begin-model-doc --> Whether
+	 * {@link ClassMakerPlant#make() making}is happening. <!-- end-model-doc -->
 	 * 
 	 * @return the value of the '<em>Making</em>' attribute.
 	 * @see #setMaking(boolean)

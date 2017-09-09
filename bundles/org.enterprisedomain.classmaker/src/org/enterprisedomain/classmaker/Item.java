@@ -16,7 +16,6 @@
 package org.enterprisedomain.classmaker;
 
 import java.util.Locale;
-import java.util.Properties;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -28,8 +27,8 @@ import org.osgi.framework.Version;
  * <!-- begin-user-doc --> A representation of the model object
  * '<em><b>Item</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc --> Common denominator for <b>Project</b>s and they
- * parts. <!-- end-model-doc -->
+ * <!-- begin-model-doc --> Common denominator for <em><b>Project</b></em>'s and
+ * they parts. <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -52,8 +51,6 @@ import org.osgi.framework.Version;
  * <em>Locale</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.Item#getContribution
  * <em>Contribution</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Item#getProperties
- * <em>Properties</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getItem()
@@ -98,7 +95,8 @@ public interface Item extends EObject {
 	 * If the meaning of the '<em>Stage</em>' attribute isn't clear, there really
 	 * should be more of a description here...
 	 * </p>
-	 * <!-- end-user-doc -->
+	 * <!-- end-user-doc --> <!-- begin-model-doc --> A <em><b>Stage</b></em> of
+	 * em><b>Item</b></em>'s model. <!-- end-model-doc -->
 	 * 
 	 * @return the value of the '<em>Phase</em>' attribute.
 	 * @see org.enterprisedomain.classmaker.Stage
@@ -156,7 +154,8 @@ public interface Item extends EObject {
 	 * If the meaning of the '<em>Language</em>' attribute isn't clear, there really
 	 * should be more of a description here...
 	 * </p>
-	 * <!-- end-user-doc -->
+	 * <!-- end-user-doc --> <!-- begin-model-doc --> {@link java.util.Locale
+	 * Locale}'s language. <!-- end-model-doc -->
 	 * 
 	 * @return the value of the '<em>Language</em>' attribute.
 	 * @see #setLanguage(String)
@@ -187,7 +186,9 @@ public interface Item extends EObject {
 	 * If the meaning of the '<em>Domain Model</em>' containment reference isn't
 	 * clear, there really should be more of a description here...
 	 * </p>
-	 * <!-- end-user-doc -->
+	 * <!-- end-user-doc --> <!-- begin-model-doc --> Subject <em>ModelPair</em> for
+	 * <em><b>Item</b></em> {@link ClassMakerPlant#make() making}. <!--
+	 * end-model-doc -->
 	 * 
 	 * @return the value of the '<em>Domain Model</em>' containment reference.
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getItem_DomainModel()
@@ -281,7 +282,8 @@ public interface Item extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Locale</b></em>' attribute. The default
-	 * value is <code>""</code>. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * value is <code>""</code>. <!-- begin-user-doc --> <!-- end-user-doc --> <!--
+	 * begin-model-doc --> A {@link java.util.Locale Locale}. <!-- end-model-doc -->
 	 * 
 	 * @return the value of the '<em>Locale</em>' attribute.
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getItem_Locale()
@@ -320,35 +322,5 @@ public interface Item extends EObject {
 	 * @generated
 	 */
 	void setContribution(Contribution value);
-
-	/**
-	 * Returns the value of the '<em><b>Properties</b></em>' attribute. The default
-	 * value is <code>""</code>. <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Properties</em>' attribute isn't clear, there
-	 * really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Properties</em>' attribute.
-	 * @see #setProperties(Properties)
-	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getItem_Properties()
-	 * @model default="" dataType="org.enterprisedomain.classmaker.Properties"
-	 * @generated
-	 */
-	Properties getProperties();
-
-	/**
-	 * Sets the value of the
-	 * '{@link org.enterprisedomain.classmaker.Item#getProperties
-	 * <em>Properties</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Properties</em>' attribute.
-	 * @see #getProperties()
-	 * @generated
-	 */
-	void setProperties(Properties value);
 
 } // Item

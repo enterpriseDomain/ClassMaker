@@ -28,7 +28,7 @@ import org.eclipse.emf.common.util.EMap;
  * <!-- begin-user-doc --> A representation of the model object
  * '<em><b>Revision</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc --> A revision of <b>Contribution</b>. Identified by
+ * <!-- begin-model-doc --> A revision of <em>Contribution</em>. Identified by
  * {@link #getVersion() <em>Version</em>}. <!-- end-model-doc -->
  *
  * <p>

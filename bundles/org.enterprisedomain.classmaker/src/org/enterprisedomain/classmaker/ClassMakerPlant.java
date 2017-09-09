@@ -39,7 +39,7 @@ import org.osgi.framework.Version;
  * <!-- begin-user-doc --> A representation of the model object
  * '<em><b>Plant</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc --> ClassMaker's facade API service. <!-- end-model-doc
+ * <!-- begin-model-doc --> ClassMaker API facade service. <!-- end-model-doc
  * -->
  *
  * <p>

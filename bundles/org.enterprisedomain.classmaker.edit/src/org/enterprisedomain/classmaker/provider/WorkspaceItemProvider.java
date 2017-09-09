@@ -105,6 +105,7 @@ public class WorkspaceItemProvider extends ItemProviderAdapter implements IEditi
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ClassMakerPackage.Literals.WORKSPACE__PROJECTS);
+			childrenFeatures.add(ClassMakerPackage.Literals.WORKSPACE__CUSTOMIZERS);
 		}
 		return childrenFeatures;
 	}
@@ -163,6 +164,7 @@ public class WorkspaceItemProvider extends ItemProviderAdapter implements IEditi
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case ClassMakerPackage.WORKSPACE__PROJECTS:
+		case ClassMakerPackage.WORKSPACE__CUSTOMIZERS:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
@@ -185,6 +187,10 @@ public class WorkspaceItemProvider extends ItemProviderAdapter implements IEditi
 
 		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.WORKSPACE__PROJECTS,
 				ClassMakerFactory.eINSTANCE.createContribution()));
+
+		newChildDescriptors
+				.add(createChildParameter(ClassMakerPackage.Literals.WORKSPACE__CUSTOMIZERS, ClassMakerFactory.eINSTANCE
+						.create(ClassMakerPackage.Literals.STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY)));
 	}
 
 	/**

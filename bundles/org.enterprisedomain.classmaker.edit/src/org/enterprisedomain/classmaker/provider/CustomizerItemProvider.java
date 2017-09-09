@@ -23,13 +23,18 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
+import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.enterprisedomain.classmaker.ClassMakerPackage;
+import org.enterprisedomain.classmaker.Customizer;
 
 /**
  * This is the item provider adapter for a {@link org.enterprisedomain.classmaker.Customizer} object.
@@ -60,8 +65,25 @@ public class CustomizerItemProvider extends ItemProviderAdapter implements IEdit
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addRankPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Rank feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addRankPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Customizer_rank_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Customizer_rank_feature",
+								"_UI_Customizer_type"),
+						ClassMakerPackage.Literals.CUSTOMIZER__RANK, true, false, false,
+						ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -72,7 +94,8 @@ public class CustomizerItemProvider extends ItemProviderAdapter implements IEdit
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Customizer_type");
+		Customizer customizer = (Customizer) object;
+		return getString("_UI_Customizer_type") + " " + customizer.getRank();
 	}
 
 	/**
@@ -85,6 +108,12 @@ public class CustomizerItemProvider extends ItemProviderAdapter implements IEdit
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(Customizer.class)) {
+		case ClassMakerPackage.CUSTOMIZER__RANK:
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+			return;
+		}
 		super.notifyChanged(notification);
 	}
 

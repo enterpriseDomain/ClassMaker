@@ -10,7 +10,7 @@ Require-Bundle: org.enterprisedomain.ecp;bundle-version="0.0.1",
  org.eclipse.swt;bundle-version="3.104.1",
  org.eclipse.jface;bundle-version="3.11.0",
  org.enterprisedomain.classmaker.edit;bundle-version="1.0.0",
- org.eclipse.emf.edit.e4;bundle-version="1.0.0"
+ org.eclipse.emf.edit.ui
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.enterprisedomain.ecp.ui
 Bundle-ActivationPolicy: lazy

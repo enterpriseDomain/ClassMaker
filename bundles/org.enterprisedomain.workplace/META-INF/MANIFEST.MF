@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: enterpriseDomain Workplace Appication
+Bundle-SymbolicName: org.enterprisedomain.workplace;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.enterprisedomain.workplace.Activator
+Bundle-Vendor: Kyrill Zotkin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.equinox.ds,
+ org.eclipse.equinox.util,
+ org.eclipse.equinox.event,
+ org.eclipse.emf.ecp.application.e3;bundle-version="[1.13.1,2.0.0)",
+ org.eclipse.emfforms.setup.base;bundle-version="[1.13.1,2.0.0)",
+ org.enterprisedomain.ecp.ui;bundle-version="[0.0.1,1.0.0)",
+ org.enterprisedomain.ecp.filter;bundle-version="[0.0.1,1.0.0)",
+ org.eclipse.emfforms.editor;bundle-version="1.13.1",
+ org.eclipse.emfforms.editor.ecore;bundle-version="1.13.1",
+ org.eclipse.emf.ecp.ui;bundle-version="1.13.1",
+ org.eclipse.ui.console;bundle-version="3.7.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Import-Package: org.eclipse.ui.ide

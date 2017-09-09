@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/mbarbero/fr.obeo.releng.targetplatform -->
-<target name="org.enterprisedomain.target" sequenceNumber="1498909191">
+<target name="org.enterprisedomain.target" sequenceNumber="1504776860">
   <locations>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.eclipse.platform.feature.group" version="4.7.0.v20170612-1255"/>
       <unit id="org.eclipse.rcp.feature.group" version="4.7.0.v20170612-1255"/>
       <unit id="org.eclipse.rcp.configuration.feature.group" version="1.1.0.v20170612-0950"/>
+      <unit id="org.eclipse.rcp.source.feature.group" version="4.7.0.v20170612-1255"/>
       <unit id="org.eclipse.equinox.sdk.feature.group" version="3.13.0.v20170531-1133"/>
       <unit id="org.eclipse.equinox.executable.feature.group" version="3.7.0.v20170531-1133"/>
       <unit id="org.eclipse.platform.ide" version="4.7.0.I20170612-0950"/>
@@ -46,6 +47,28 @@
       <unit id="org.eclipse.emf.emfstore.client.ui.feature.feature.group" version="1.8.1.v20161125-1451"/>
       <unit id="org.eclipse.emf.emfstore.ecore.feature.feature.group" version="1.8.1.v20161125-1451"/>
       <repository location="http://download.eclipse.org/emfstore/releases_18"/>
+    </location>
+    <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
+      <unit id="org.eclipse.emf.ecp.application.e3" version="1.13.1.20170711-0730"/>
+      <unit id="org.eclipse.emf.ecp.e3.feature.feature.group" version="1.13.1.20170711-0730"/>
+      <unit id="org.eclipse.emf.ecp.ecore.feature.feature.group" version="1.13.1.20170711-0730"/>
+      <unit id="org.eclipse.emf.ecp.emfforms.runtime.feature.feature.group" version="1.13.1.20170711-0730"/>
+      <unit id="org.eclipse.emfforms.setup.base" version="1.13.1.20170711-0730"/>
+      <unit id="org.eclipse.emf.ecp.feature.feature.group" version="1.13.1.20170711-0730"/>
+      <unit id="org.eclipse.emf.ecp.validation.view.feature.feature.group" version="1.13.1.20170711-0730"/>
+      <unit id="org.eclipse.emf.ecp.view.table.validation" version="1.13.1.20170711-0730"/>
+      <unit id="org.eclipse.emf.ecp.view.treemasterdetail.validation" version="1.13.1.20170711-0730"/>
+      <unit id="org.eclipse.emfforms.core.services.databinding.index" version="1.13.1.20170711-0730"/>
+      <unit id="org.eclipse.emfforms.core.services.databinding.mapping" version="1.13.1.20170711-0730"/>
+      <unit id="org.eclipse.emfforms.core.services.domainexpander.index" version="1.13.1.20170711-0730"/>
+      <unit id="org.eclipse.emfforms.core.services.domainexpander.mapping" version="1.13.1.20170711-0730"/>
+      <unit id="org.eclipse.emfforms.core.services.structuralchange.index" version="1.13.1.20170711-0730"/>
+      <unit id="org.eclipse.emfforms.core.services.structuralchange.mapping" version="1.13.1.20170711-0730"/>
+      <unit id="org.eclipse.emfforms.swt.control.multiattribute" version="1.13.1.20170711-0730"/>
+      <unit id="org.eclipse.emf.ecp.view.indexdmr.model" version="1.13.1.20170711-0730"/>
+      <unit id="org.eclipse.emf.ecp.view.mappingdmr.model" version="1.13.1.20170711-0730"/>
+      <unit id="org.eclipse.emfforms.editor.feature.feature.group" version="1.13.1.20170711-0730"/>
+      <repository id="ecp" location="http://download.eclipse.org/ecp/releases/releases_target_113/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.eclipse.jgit.feature.group" version="4.8.0.201706111038-r"/>

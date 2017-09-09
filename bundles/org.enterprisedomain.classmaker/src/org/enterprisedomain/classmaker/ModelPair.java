@@ -109,7 +109,8 @@ public interface ModelPair extends EObject {
 	 * If the meaning of the '<em>Parent</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
-	 * <!-- end-user-doc -->
+	 * <!-- end-user-doc --> <!-- begin-model-doc --> An {@link Item <em>Item</em>}
+	 * containing <em><b>ModelPair</b></em>. <!-- end-model-doc -->
 	 * 
 	 * @return the value of the '<em>Parent</em>' container reference.
 	 * @see #setParent(Item)

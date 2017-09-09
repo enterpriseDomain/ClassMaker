@@ -26,8 +26,9 @@ import org.osgi.framework.Version;
  * <!-- begin-user-doc --> A representation of the model object
  * '<em><b>Contribution</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc --> Software contribution project item. <!--
- * end-model-doc -->
+ * <!-- begin-model-doc --> Software contribution project item. Basically, it
+ * contibutes the software piece to the body of main program. <!-- end-model-doc
+ * -->
  *
  * <p>
  * The following features are supported:
@@ -62,7 +63,8 @@ public interface Contribution extends Project, Item, IAdapterFactory {
 	 * If the meaning of the '<em>Dependencies</em>' attribute isn't clear, there
 	 * really should be more of a description here...
 	 * </p>
-	 * <!-- end-user-doc -->
+	 * <!-- end-user-doc --> <!-- begin-model-doc --> <em><b>Contribution</b></em>
+	 * bundle's required plugins. <!-- end-model-doc -->
 	 * 
 	 * @return the value of the '<em>Dependencies</em>' attribute list.
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getContribution_Dependencies()
@@ -108,7 +110,9 @@ public interface Contribution extends Project, Item, IAdapterFactory {
 	 * If the meaning of the '<em>Revision History</em>' map isn't clear, there
 	 * really should be more of a description here...
 	 * </p>
-	 * <!-- end-user-doc -->
+	 * <!-- end-user-doc --> <!-- begin-model-doc --> Collection of
+	 * <em><b>Contribution</b></em>'s <em><b>Revision</b></em>'s <!-- end-model-doc
+	 * -->
 	 * 
 	 * @return the value of the '<em>Revisions</em>' map.
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getContribution_Revisions()
@@ -158,8 +162,10 @@ public interface Contribution extends Project, Item, IAdapterFactory {
 	 * If the meaning of the '<em>Model Resource Adapter</em>' reference isn't
 	 * clear, there really should be more of a description here...
 	 * </p>
-	 * <!-- end-user-doc -->
+	 * <!-- end-user-doc --> <!-- begin-model-doc --> A
+	 * <em><b>ResourceAdapter</b></em> for <em>Contibution</em>.
 	 * 
+	 * @see org.enterprisedomain.classmaker.ResourceAdapter <!-- end-model-doc -->
 	 * @return the value of the '<em>Model Resource Adapter</em>' reference.
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getContribution_ModelResourceAdapter()
 	 * @model changeable="false" derived="true"

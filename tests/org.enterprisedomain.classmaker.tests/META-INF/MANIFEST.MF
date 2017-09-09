@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: EnterpriseDomain Tests
+Bundle-Name: enterpriseDomain ClassMaker Test Plugin
 Bundle-SymbolicName: org.enterprisedomain.classmaker.tests;singleton:=true
 Bundle-Version: 0.0.4.qualifier
 Bundle-Vendor: Kyrill Zotkin

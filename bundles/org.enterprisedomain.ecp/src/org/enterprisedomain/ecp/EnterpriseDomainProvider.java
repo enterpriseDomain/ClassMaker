@@ -205,7 +205,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 			ec.getEStructuralFeatures().add(a);
 			model.getEClassifiers().add(ec);
 			try {
-				Activator.getClassMaker().produce(model, getUIProvider().getAdapter(project, IProgressMonitor.class));
+				Activator.getClassMaker().make(model, getUIProvider().getAdapter(project, IProgressMonitor.class));
 				domainProject = Activator.getClassMaker().getWorkspace().getContribution(model);
 			} catch (CoreException e) {
 				Activator.log(e);

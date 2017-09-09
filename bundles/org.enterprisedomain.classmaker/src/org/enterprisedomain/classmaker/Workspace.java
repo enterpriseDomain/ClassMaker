@@ -29,8 +29,9 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
  * <em><b>Workspace</b></em>'. <!-- end-user-doc -->
  *
  * <!-- begin-model-doc --> Maps
- * {@link org.eclipse.emf.ecore.resource.ResourceSet} to
- * {@link org.eclipse.core.resources.IWorkspaceRoot}. <!-- end-model-doc -->
+ * {@link org.eclipse.emf.ecore.resource.ResourceSet ResourceSet} to
+ * {@link org.eclipse.core.resources.IWorkspaceRoot IWorkspaceRoot}. <!--
+ * end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -59,7 +60,9 @@ public interface Workspace extends EObject, ISchedulingRule {
 	 * If the meaning of the '<em>Projects</em>' containment reference list isn't
 	 * clear, there really should be more of a description here...
 	 * </p>
-	 * <!-- end-user-doc -->
+	 * <!-- end-user-doc --> <!-- begin-model-doc --> {@link Project
+	 * <em><b>Projects</b></em>} contained in the <em><b>Workspace</b></em>. <!--
+	 * end-model-doc -->
 	 * 
 	 * @return the value of the '<em>Projects</em>' containment reference list.
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getWorkspace_Projects()

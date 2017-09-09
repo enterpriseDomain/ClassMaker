@@ -50,7 +50,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * 
 	 * @generated
 	 */
-	String eNS_URI = "http://org/enterprisedomain/ClassMaker/0.7.9";
+	String eNS_URI = "http://org/enterprisedomain/ClassMaker/0.7.902";
 
 	/**
 	 * The package namespace name. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -326,22 +326,13 @@ public interface ClassMakerPackage extends EPackage {
 	int CONTRIBUTION__CONTRIBUTION = PROJECT_FEATURE_COUNT + 8;
 
 	/**
-	 * The feature id for the '<em><b>Properties</b></em>' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int CONTRIBUTION__PROPERTIES = PROJECT_FEATURE_COUNT + 9;
-
-	/**
 	 * The feature id for the '<em><b>Dependencies</b></em>' attribute list. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__DEPENDENCIES = PROJECT_FEATURE_COUNT + 10;
+	int CONTRIBUTION__DEPENDENCIES = PROJECT_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Revision</b></em>' reference. <!--
@@ -350,7 +341,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__REVISION = PROJECT_FEATURE_COUNT + 11;
+	int CONTRIBUTION__REVISION = PROJECT_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' map. <!-- begin-user-doc
@@ -359,7 +350,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__REVISIONS = PROJECT_FEATURE_COUNT + 12;
+	int CONTRIBUTION__REVISIONS = PROJECT_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>State</b></em>' reference. <!-- begin-user-doc
@@ -368,7 +359,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__STATE = PROJECT_FEATURE_COUNT + 13;
+	int CONTRIBUTION__STATE = PROJECT_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Latest Version</b></em>' attribute. <!--
@@ -377,7 +368,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__LATEST_VERSION = PROJECT_FEATURE_COUNT + 14;
+	int CONTRIBUTION__LATEST_VERSION = PROJECT_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Model Resource Adapter</b></em>' reference.
@@ -386,7 +377,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__MODEL_RESOURCE_ADAPTER = PROJECT_FEATURE_COUNT + 15;
+	int CONTRIBUTION__MODEL_RESOURCE_ADAPTER = PROJECT_FEATURE_COUNT + 14;
 
 	/**
 	 * The number of structural features of the '<em>Contribution</em>' class. <!--
@@ -395,7 +386,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION_FEATURE_COUNT = PROJECT_FEATURE_COUNT + 16;
+	int CONTRIBUTION_FEATURE_COUNT = PROJECT_FEATURE_COUNT + 15;
 
 	/**
 	 * The meta object id for the
@@ -490,22 +481,13 @@ public interface ClassMakerPackage extends EPackage {
 	int ITEM__CONTRIBUTION = 8;
 
 	/**
-	 * The feature id for the '<em><b>Properties</b></em>' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int ITEM__PROPERTIES = 9;
-
-	/**
 	 * The number of structural features of the '<em>Item</em>' class. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int ITEM_FEATURE_COUNT = 10;
+	int ITEM_FEATURE_COUNT = 9;
 
 	/**
 	 * The meta object id for the
@@ -598,15 +580,6 @@ public interface ClassMakerPackage extends EPackage {
 	 * @ordered
 	 */
 	int REVISION__CONTRIBUTION = ITEM__CONTRIBUTION;
-
-	/**
-	 * The feature id for the '<em><b>Properties</b></em>' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int REVISION__PROPERTIES = ITEM__PROPERTIES;
 
 	/**
 	 * The feature id for the '<em><b>State</b></em>' reference. <!-- begin-user-doc
@@ -744,15 +717,6 @@ public interface ClassMakerPackage extends EPackage {
 	 * @ordered
 	 */
 	int STATE__CONTRIBUTION = ITEM__CONTRIBUTION;
-
-	/**
-	 * The feature id for the '<em><b>Properties</b></em>' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int STATE__PROPERTIES = ITEM__PROPERTIES;
 
 	/**
 	 * The feature id for the '<em><b>Required Plugins</b></em>' attribute list.
@@ -1950,18 +1914,6 @@ public interface ClassMakerPackage extends EPackage {
 	EReference getItem_Contribution();
 
 	/**
-	 * Returns the meta object for the attribute
-	 * '{@link org.enterprisedomain.classmaker.Item#getProperties
-	 * <em>Properties</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for the attribute '<em>Properties</em>'.
-	 * @see org.enterprisedomain.classmaker.Item#getProperties()
-	 * @see #getItem()
-	 * @generated
-	 */
-	EAttribute getItem_Properties();
-
-	/**
 	 * Returns the meta object for class
 	 * '{@link org.eclipse.emf.common.notify.Adapter <em>Adapter</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -2974,14 +2926,6 @@ public interface ClassMakerPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ITEM__CONTRIBUTION = eINSTANCE.getItem_Contribution();
-
-		/**
-		 * The meta object literal for the '<em><b>Properties</b></em>' attribute
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
-		 * @generated
-		 */
-		EAttribute ITEM__PROPERTIES = eINSTANCE.getItem_Properties();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.emf.common.notify.Adapter
