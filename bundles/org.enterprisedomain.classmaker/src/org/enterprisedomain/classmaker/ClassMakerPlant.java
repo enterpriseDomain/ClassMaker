@@ -437,6 +437,14 @@ public interface ClassMakerPlant extends EObject {
 	 * @model
 	 * @generated
 	 */
+	boolean checkEquals(EPackage first, EPackage second);
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model
+	 * @generated
+	 */
 	String computeProjectName(String packageName);
 
 } // ClassMakerPlant

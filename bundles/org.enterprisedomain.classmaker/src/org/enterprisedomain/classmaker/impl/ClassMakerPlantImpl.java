@@ -598,6 +598,15 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * 
 	 * @generated NOT
 	 */
+	public boolean checkEquals(EPackage first, EPackage second) {
+		return EcoreUtil.equals(first, second);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
 	public String computeProjectName(String packageName) {
 		return CodeGenUtil.safeName(packageName.toLowerCase());
 	}

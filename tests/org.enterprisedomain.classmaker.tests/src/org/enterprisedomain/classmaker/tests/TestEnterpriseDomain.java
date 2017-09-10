@@ -16,6 +16,7 @@
 package org.enterprisedomain.classmaker.tests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -138,6 +139,52 @@ public class TestEnterpriseDomain extends AbstractTest {
 
 		assertEquals(eClass.getName(), theObject.getClass().getSimpleName());
 		cleanup();
+	}
+
+	@Test
+	public void checks() throws CoreException {
+		EcoreFactory ecoreFactory = EcoreFactory.eINSTANCE;
+		final EPackage dynamicEPackage = createEPackage("fieldland", "1.0");
+		final EClass base = ecoreFactory.createEClass();
+		base.setName("Base");
+		dynamicEPackage.getEClassifiers().add(base);
+		final EClass specific = ecoreFactory.createEClass();
+		specific.setName("Specific");
+		specific.getESuperTypes().add(base);
+		dynamicEPackage.getEClassifiers().add(specific);
+		final EClass version = ecoreFactory.createEClass();
+		version.setName("Version");
+		final EReference checkedType = ecoreFactory.createEReference();
+		checkedType.setName("value");
+		checkedType.setEType(base);
+		version.getEStructuralFeatures().add(checkedType);
+		final EReference checkedExistance = ecoreFactory.createEReference();
+		checkedExistance.setName("name");
+		checkedExistance.setEType(EcorePackage.Literals.ESTRING);
+		version.getEStructuralFeatures().add(checkedExistance);
+		dynamicEPackage.getEClassifiers().add(version);
+		EPackage first = service.make(dynamicEPackage);
+		EPackage newDynamicEPackage = EcoreUtil.copy(dynamicEPackage);
+		EClass newVersion = (EClass) newDynamicEPackage.getEClassifier(version.getName());
+		newVersion.getEStructuralFeature(checkedType.getName())
+				.setEType(newDynamicEPackage.getEClassifier(specific.getName()));
+		EPackage second = service.replace(dynamicEPackage, newDynamicEPackage);
+		assertFalse(service.checkEquals(first, second));
+		EPackage newerDynamicEPackage = EcoreUtil.copy(newDynamicEPackage);
+		EClass newerVersion = (EClass) newerDynamicEPackage.getEClassifier(version.getName());
+		newerVersion.getEStructuralFeatures().remove(newerVersion.getEStructuralFeature(checkedExistance.getName()));
+		EPackage third = service.replace(newDynamicEPackage, newerDynamicEPackage);
+		assertFalse(service.checkEquals(second, third));
+		assertFalse(service.checkEquals(first, third));
+		EPackage newestDynamicEPackage = EcoreUtil.copy(newerDynamicEPackage);
+		EClass newestVersion = (EClass) newestDynamicEPackage.getEClassifier(version.getName());
+		newestVersion.getEStructuralFeatures().add(EcoreUtil.copy(checkedExistance));
+		newestVersion.getEStructuralFeature(checkedType.getName())
+				.setEType(newestDynamicEPackage.getEClassifier(base.getName()));
+		EPackage fourth = service.replace(newerDynamicEPackage, newestDynamicEPackage);
+		assertFalse(service.checkEquals(second, fourth));
+		assertFalse(service.checkEquals(third, fourth));
+		assertTrue(service.checkEquals(first, fourth));
 	}
 
 	@Test

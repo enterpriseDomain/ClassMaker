@@ -2173,6 +2173,11 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEException(op, this.getCoreException());
 
+		op = addEOperation(classMakerPlantEClass, ecorePackage.getEBoolean(), "checkEquals", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+		addEParameter(op, ecorePackage.getEPackage(), "first", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEPackage(), "second", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		op = addEOperation(classMakerPlantEClass, ecorePackage.getEString(), "computeProjectName", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "packageName", 0, 1, IS_UNIQUE, IS_ORDERED);
