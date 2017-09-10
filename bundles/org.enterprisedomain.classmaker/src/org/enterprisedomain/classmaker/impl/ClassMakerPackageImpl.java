@@ -2175,8 +2175,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 		op = addEOperation(classMakerPlantEClass, ecorePackage.getEBoolean(), "checkEquals", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
-		addEParameter(op, ecorePackage.getEPackage(), "first", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEPackage(), "second", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEPackage(), "model1", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEPackage(), "model2", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(classMakerPlantEClass, ecorePackage.getEString(), "computeProjectName", 0, 1, IS_UNIQUE,
 				IS_ORDERED);

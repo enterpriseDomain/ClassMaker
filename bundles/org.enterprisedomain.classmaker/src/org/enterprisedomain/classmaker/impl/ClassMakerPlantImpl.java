@@ -598,8 +598,8 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * 
 	 * @generated NOT
 	 */
-	public boolean checkEquals(EPackage first, EPackage second) {
-		return EcoreUtil.equals(first, second);
+	public boolean checkEquals(EPackage model1, EPackage model2) {
+		return EcoreUtil.equals(model1, model2);
 	}
 
 	/**

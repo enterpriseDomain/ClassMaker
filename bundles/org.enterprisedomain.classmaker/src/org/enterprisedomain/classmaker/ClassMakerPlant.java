@@ -437,7 +437,7 @@ public interface ClassMakerPlant extends EObject {
 	 * @model
 	 * @generated
 	 */
-	boolean checkEquals(EPackage first, EPackage second);
+	boolean checkEquals(EPackage model1, EPackage model2);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

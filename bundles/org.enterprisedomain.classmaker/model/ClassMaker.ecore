@@ -1037,8 +1037,8 @@
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
     <eOperations name="checkEquals" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
-      <eParameters name="first" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="second" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="model1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="model2" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
     </eOperations>
     <eOperations name="computeProjectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eParameters name="packageName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
