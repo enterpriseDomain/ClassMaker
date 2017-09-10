@@ -38,6 +38,8 @@ import org.enterprisedomain.classmaker.jobs.Worker;
  * The following features are supported:
  * </p>
  * <ul>
+ * <li>{@link org.enterprisedomain.classmaker.State#getPackageClassName
+ * <em>Package Class Name</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.State#getRequiredPlugins
  * <em>Required Plugins</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.State#getRevision
@@ -68,6 +70,33 @@ import org.enterprisedomain.classmaker.jobs.Worker;
  * @generated
  */
 public interface State extends Item, ISchedulingRule {
+	/**
+	 * Returns the value of the '<em><b>Package Class Name</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc --> Generated
+	 * {@link org.eclipse.emf.ecore.EPackage EPackage} class name set in a
+	 * {@link org.eclipse.emf.codegen.ecore.genmodel.GenModel GenModel}. <!--
+	 * end-model-doc -->
+	 * 
+	 * @return the value of the '<em>Package Class Name</em>' attribute.
+	 * @see #setPackageClassName(String)
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getState_PackageClassName()
+	 * @model
+	 * @generated
+	 */
+	String getPackageClassName();
+
+	/**
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.State#getPackageClassName <em>Package
+	 * Class Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Package Class Name</em>' attribute.
+	 * @see #getPackageClassName()
+	 * @generated
+	 */
+	void setPackageClassName(String value);
+
 	/**
 	 * Returns the value of the '<em><b>Required Plugins</b></em>' attribute list.
 	 * The list contents are of type {@link java.lang.String}. <!-- begin-user-doc

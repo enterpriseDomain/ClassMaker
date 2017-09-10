@@ -515,7 +515,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * 
 	 * @generated
 	 */
-	public EAttribute getState_RequiredPlugins() {
+	public EAttribute getState_PackageClassName() {
 		return (EAttribute) stateEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -524,8 +524,17 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * 
 	 * @generated
 	 */
+	public EAttribute getState_RequiredPlugins() {
+		return (EAttribute) stateEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	public EReference getState_Revision() {
-		return (EReference) stateEClass.getEStructuralFeatures().get(1);
+		return (EReference) stateEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -534,15 +543,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	public EAttribute getState_Timestamp() {
-		return (EAttribute) stateEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public EAttribute getState_DeployableUnitName() {
 		return (EAttribute) stateEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -551,7 +551,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * 
 	 * @generated
 	 */
-	public EAttribute getState_JobFamily() {
+	public EAttribute getState_DeployableUnitName() {
 		return (EAttribute) stateEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -560,8 +560,17 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * 
 	 * @generated
 	 */
+	public EAttribute getState_JobFamily() {
+		return (EAttribute) stateEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	public EReference getState_Resource() {
-		return (EReference) stateEClass.getEStructuralFeatures().get(5);
+		return (EReference) stateEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -570,15 +579,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	public EAttribute getState_CommitIds() {
-		return (EAttribute) stateEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public EAttribute getState_CommitId() {
 		return (EAttribute) stateEClass.getEStructuralFeatures().get(7);
 	}
 
@@ -587,8 +587,17 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * 
 	 * @generated
 	 */
+	public EAttribute getState_CommitId() {
+		return (EAttribute) stateEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	public EReference getState_StateCustomizers() {
-		return (EReference) stateEClass.getEStructuralFeatures().get(8);
+		return (EReference) stateEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -597,7 +606,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	public EAttribute getState_ProjectName() {
-		return (EAttribute) stateEClass.getEStructuralFeatures().get(9);
+		return (EAttribute) stateEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -606,7 +615,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	public EAttribute getState_Making() {
-		return (EAttribute) stateEClass.getEStructuralFeatures().get(10);
+		return (EAttribute) stateEClass.getEStructuralFeatures().get(11);
 	}
 
 	/**
@@ -1283,6 +1292,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		createEAttribute(revisionEClass, REVISION__LATEST_TIMESTAMP);
 
 		stateEClass = createEClass(STATE);
+		createEAttribute(stateEClass, STATE__PACKAGE_CLASS_NAME);
 		createEAttribute(stateEClass, STATE__REQUIRED_PLUGINS);
 		createEReference(stateEClass, STATE__REVISION);
 		createEAttribute(stateEClass, STATE__TIMESTAMP);
@@ -1562,6 +1572,9 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		addEParameter(op, this.getRevision(), "from", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(stateEClass, State.class, "State", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getState_PackageClassName(), ecorePackage.getEString(), "packageClassName", null, 0, 1,
+				State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
 		initEAttribute(getState_RequiredPlugins(), ecorePackage.getEString(), "requiredPlugins", null, 0, -1,
 				State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);

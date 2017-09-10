@@ -138,7 +138,7 @@ public class OSGiEPackageLoader extends ContainerJob {
 		try {
 			EPackage model = state.getDomainModel().getDynamic();
 			String packageClassName = CodeGenUtil.safeName(model.getName()) + "." //$NON-NLS-1$
-					+ CodeGenUtil.capName(CodeGenUtil.safeName(model.getName())) + "Package"; //$NON-NLS-1$
+					+ state.getPackageClassName();
 			Class<?> packageClass = null;
 			try {
 				packageClass = osgiBundle.loadClass(packageClassName);

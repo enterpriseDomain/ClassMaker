@@ -89,6 +89,8 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getPackageClassName
+ * <em>Package Class Name</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getRequiredPlugins
  * <em>Required Plugins</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getRevision
@@ -116,6 +118,26 @@ import org.osgi.framework.Version;
  * @generated
  */
 public class StateImpl extends ItemImpl implements State {
+
+	/**
+	 * The default value of the '{@link #getPackageClassName() <em>Package Class
+	 * Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getPackageClassName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PACKAGE_CLASS_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getPackageClassName() <em>Package Class
+	 * Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getPackageClassName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String packageClassName = PACKAGE_CLASS_NAME_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getRequiredPlugins() <em>Required
@@ -320,6 +342,28 @@ public class StateImpl extends ItemImpl implements State {
 	@Override
 	protected EClass eStaticClass() {
 		return ClassMakerPackage.Literals.STATE;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public String getPackageClassName() {
+		return packageClassName;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public void setPackageClassName(String newPackageClassName) {
+		String oldPackageClassName = packageClassName;
+		packageClassName = newPackageClassName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.STATE__PACKAGE_CLASS_NAME,
+					oldPackageClassName, packageClassName));
 	}
 
 	/**
@@ -1103,6 +1147,8 @@ public class StateImpl extends ItemImpl implements State {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+		case ClassMakerPackage.STATE__PACKAGE_CLASS_NAME:
+			return getPackageClassName();
 		case ClassMakerPackage.STATE__REQUIRED_PLUGINS:
 			return getRequiredPlugins();
 		case ClassMakerPackage.STATE__REVISION:
@@ -1143,6 +1189,9 @@ public class StateImpl extends ItemImpl implements State {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+		case ClassMakerPackage.STATE__PACKAGE_CLASS_NAME:
+			setPackageClassName((String) newValue);
+			return;
 		case ClassMakerPackage.STATE__REQUIRED_PLUGINS:
 			getRequiredPlugins().clear();
 			getRequiredPlugins().addAll((Collection<? extends String>) newValue);
@@ -1187,6 +1236,9 @@ public class StateImpl extends ItemImpl implements State {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+		case ClassMakerPackage.STATE__PACKAGE_CLASS_NAME:
+			setPackageClassName(PACKAGE_CLASS_NAME_EDEFAULT);
+			return;
 		case ClassMakerPackage.STATE__REQUIRED_PLUGINS:
 			getRequiredPlugins().clear();
 			return;
@@ -1229,6 +1281,9 @@ public class StateImpl extends ItemImpl implements State {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+		case ClassMakerPackage.STATE__PACKAGE_CLASS_NAME:
+			return PACKAGE_CLASS_NAME_EDEFAULT == null ? packageClassName != null
+					: !PACKAGE_CLASS_NAME_EDEFAULT.equals(packageClassName);
 		case ClassMakerPackage.STATE__REQUIRED_PLUGINS:
 			return requiredPlugins != null && !requiredPlugins.isEmpty();
 		case ClassMakerPackage.STATE__REVISION:
@@ -1268,7 +1323,9 @@ public class StateImpl extends ItemImpl implements State {
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (requiredPlugins: ");
+		result.append(" (packageClassName: ");
+		result.append(packageClassName);
+		result.append(", requiredPlugins: ");
 		result.append(requiredPlugins);
 		result.append(", timestamp: ");
 		result.append(timestamp);

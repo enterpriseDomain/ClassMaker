@@ -30,6 +30,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.codegen.ecore.Generator;
 import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
+import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.ECollections;
@@ -230,8 +231,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 		return path.removeFileExtension().addFileExtension(GENMODEL_EXT);
 	}
 
-	protected void setupGenModel(IPath projectPath, org.eclipse.emf.codegen.ecore.genmodel.GenModel genModel,
-			Collection<EPackage> ePackages) {
+	protected void setupGenModel(IPath projectPath, GenModel genModel, Collection<EPackage> ePackages) {
 		for (EPackage ePackage : ePackages) {
 			GenPackage genPackage = genModel.findGenPackage(ePackage);
 			if (genPackage != null)
@@ -258,6 +258,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 						ClassMakerPlant.Stages.lookup(ClassMakerPlant.Stages.ID_PREFIX + "generation.genmodel.setup")))
 					getContributionState().getCustomizers().get(filter)
 							.customize(ECollections.asEList(projectPath, genModel, ePackages));
+			getContributionState().setPackageClassName(genModel.getGenPackages().get(0).getBasicPackageName());
 		}
 		genModel.setValidateModel(true);
 	}

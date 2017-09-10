@@ -185,6 +185,11 @@
     <eOperations name="createExporter" eType="#//Worker"/>
     <eOperations name="createInstaller" eType="#//Worker"/>
     <eOperations name="createModelLoader" eType="#//Worker"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="packageClassName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Generated {@link org.eclipse.emf.ecore.EPackage EPackage} class name set in a {@link org.eclipse.emf.codegen.ecore.genmodel.GenModel GenModel}."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="requiredPlugins" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
