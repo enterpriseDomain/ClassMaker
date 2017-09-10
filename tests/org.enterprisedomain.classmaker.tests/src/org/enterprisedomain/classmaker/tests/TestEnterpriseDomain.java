@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -505,21 +506,31 @@ public class TestEnterpriseDomain extends AbstractTest {
 	public void importModel() throws IOException, CoreException {
 		setPackageName("extra");
 		setClassName("Deluxe");
-		EPackage p = createEPackage("1.0");
+		EPackage p0 = createEPackage("1.0");
 		EClass c = createEClass();
 		EAttribute a = EcoreFactory.eINSTANCE.createEAttribute();
 		a.setName("number");
 		a.setEType(EcorePackage.Literals.EINT);
 		c.getEStructuralFeatures().add(a);
-		p.getEClassifiers().add(c);
-		URI resourceURI = URI.createFileURI(ClassMakerTestsPlugin.getInstance().getStateLocation().append(p.getName())
-				.append(p.getNsPrefix()).addFileExtension("xmi").toString());
+		p0.getEClassifiers().add(c);
+		URI resourceURI = URI.createFileURI(ClassMakerTestsPlugin.getInstance().getStateLocation().append(p0.getName())
+				.append(p0.getNsPrefix()).addFileExtension("xmi").toString());
 		ResourceSet resourceSet = new ResourceSetImpl();
-		Resource resource = resourceSet.createResource(resourceURI);
-		resource.getContents().add(p);
-		resource.save(Collections.emptyMap());
-		EPackage r = service.make(p);
+		Resource resource0 = resourceSet.createResource(resourceURI);
+		resource0.getContents().add(p0);
+		resource0.save(Collections.emptyMap());
+		EPackage r = service.make(p0);
 		assertNotNull(r);
+
+		String modelName = "MetaModel";
+		Resource resource1 = resourceSet.getResource(
+				URI.createPlatformPluginURI(ClassMakerTestsPlugin.PLUGIN_ID + "/model/" + modelName + ".ecore", false),
+				true);
+		resource1.load(new HashMap<String, String>());
+		EPackage p1 = (EPackage) resource1.getContents().get(0);
+		EPackage ePackage = service.make(p1);
+		assertNotNull(ePackage);
+		assertEquals(modelName, ePackage.getNsPrefix());
 	}
 
 	@Test

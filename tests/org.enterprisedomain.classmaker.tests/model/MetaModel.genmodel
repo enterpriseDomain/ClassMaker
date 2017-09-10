@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/metamodel/src" modelPluginID="metamodel" modelName="MetaModel"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="8.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
+  <foreignModel>MetaModel.ecore</foreignModel>
+  <genPackages prefix="Metamodel" disposableProviderFactory="true" ecorePackage="MetaModel.ecore#/">
+    <genClasses ecoreClass="MetaModel.ecore#//Abstraction">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MetaModel.ecore#//Abstraction/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MetaModel.ecore#//Abstraction/parts"/>
+    </genClasses>
+    <genClasses ecoreClass="MetaModel.ecore#//Direction">
+      <genTypeParameters ecoreTypeParameter="MetaModel.ecore#//Direction/S"/>
+      <genTypeParameters ecoreTypeParameter="MetaModel.ecore#//Direction/T"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MetaModel.ecore#//Direction/source"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MetaModel.ecore#//Direction/target"/>
+    </genClasses>
+    <genClasses ecoreClass="MetaModel.ecore#//Production">
+      <genTypeParameters ecoreTypeParameter="MetaModel.ecore#//Production/T"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MetaModel.ecore#//Production/value"/>
+    </genClasses>
+    <genClasses ecoreClass="MetaModel.ecore#//Consummation">
+      <genOperations ecoreOperation="MetaModel.ecore#//Consummation/perform">
+        <genParameters ecoreParameter="MetaModel.ecore#//Consummation/perform/args"/>
+      </genOperations>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="metaModel" nsURI="http://metamodel/" nsPrefix="MetaModel">
+  <eClassifiers xsi:type="ecore:EClass" name="Abstraction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parts" upperBound="-1"
+        eType="#//Abstraction" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Direction" eSuperTypes="#//Abstraction">
+    <eTypeParameters name="S">
+      <eBounds eClassifier="#//Abstraction"/>
+    </eTypeParameters>
+    <eTypeParameters name="T">
+      <eBounds eClassifier="#//Abstraction"/>
+    </eTypeParameters>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source">
+      <eGenericType eTypeParameter="#//Direction/S"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target">
+      <eGenericType eTypeParameter="#//Direction/T"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Production" eSuperTypes="#//Abstraction">
+    <eTypeParameters name="T"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value">
+      <eGenericType eTypeParameter="#//Production/T"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Consumption" eSuperTypes="#//Abstraction">
+    <eOperations name="perform" eType="#//Abstraction">
+      <eParameters name="args" upperBound="-1" eType="#//Abstraction"/>
+    </eOperations>
+  </eClassifiers>
+</ecore:EPackage>
