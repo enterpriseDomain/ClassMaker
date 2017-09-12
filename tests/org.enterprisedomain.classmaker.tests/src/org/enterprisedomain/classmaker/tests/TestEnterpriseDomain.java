@@ -603,7 +603,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 				GenModel genModel = ((GenModel) args.get(1));
 				genModel.setDynamicTemplates(true);
 				genModel.setTemplateDirectory("platform:/plugin/org.enterprisedomain.tests/templates");
-				genModel.getGenPackages().get(0).setPrefix("wonder");
+				genModel.getGenPackages().get(0).setPrefix("Wonder");
 				genModel.setSuppressInterfaces(false);
 				return super.customize(args);
 			}
