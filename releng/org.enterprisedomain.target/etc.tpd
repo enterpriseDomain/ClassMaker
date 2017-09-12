@@ -37,7 +37,6 @@ location ecp "http://download.eclipse.org/ecp/releases/releases_target_113/" {
 	org.eclipse.emfforms.swt.control.multiattribute
 	org.eclipse.emf.ecp.view.indexdmr.model
 	org.eclipse.emf.ecp.view.mappingdmr.model
-	org.eclipse.emf.ecp.workspace.feature.feature.group
 	org.eclipse.emfforms.editor.feature.feature.group	
 }
 
