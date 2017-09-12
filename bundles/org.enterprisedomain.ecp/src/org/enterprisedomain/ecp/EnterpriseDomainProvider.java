@@ -24,6 +24,7 @@ import java.util.concurrent.Semaphore;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.command.BasicCommandStack;
 import org.eclipse.emf.common.command.Command;
@@ -40,6 +41,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecp.core.ECPProject;
 import org.eclipse.emf.ecp.core.ECPRepository;
@@ -383,7 +385,10 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 
 	@Override
 	public boolean isDirty(InternalProject project) {
-		return ((BasicCommandStack) project.getEditingDomain().getCommandStack()).isSaveNeeded();
+		return ((Resource) Platform.getAdapterManager()
+				.getAdapter(Activator.getClassMaker().getWorkspace().getProject(project.getName()), Resource.class))
+						.isModified();
+
 	}
 
 	@Override

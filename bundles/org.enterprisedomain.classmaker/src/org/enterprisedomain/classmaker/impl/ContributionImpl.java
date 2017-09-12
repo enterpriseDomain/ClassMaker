@@ -27,7 +27,6 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
@@ -44,7 +43,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -248,7 +246,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	 * @ordered
 	 */
 	protected ResourceAdapter modelResourceAdapter;
-	protected Class<?>[] ADAPTED_CLASSES = { Resource.class };
 
 	protected CompletionListener modelListener = new CompletionListenerImpl() {
 
@@ -258,18 +255,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 		}
 
 	};
-
-	@Override
-	public <T> T getAdapter(Object adaptableObject, Class<T> adapterType) {
-		if (ADAPTED_CLASSES[0].isAssignableFrom(adapterType))
-			return (T) ((Contribution) adaptableObject).getModelResourceAdapter();
-		return null;
-	}
-
-	@Override
-	public Class<?>[] getAdapterList() {
-		return ADAPTED_CLASSES;
-	}
 
 	protected Adapter stateModelAdapter = new AdapterImpl() {
 		@Override
@@ -1379,12 +1364,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 				return -1;
 			}
 		}
-		if (baseClass == IAdapterFactory.class) {
-			switch (derivedFeatureID) {
-			default:
-				return -1;
-			}
-		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -1415,12 +1394,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 				return ClassMakerPackage.CONTRIBUTION__LOCALE;
 			case ClassMakerPackage.ITEM__CONTRIBUTION:
 				return ClassMakerPackage.CONTRIBUTION__CONTRIBUTION;
-			default:
-				return -1;
-			}
-		}
-		if (baseClass == IAdapterFactory.class) {
-			switch (baseFeatureID) {
 			default:
 				return -1;
 			}

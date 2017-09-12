@@ -16,7 +16,6 @@
 package org.enterprisedomain.classmaker;
 
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
@@ -49,12 +48,10 @@ import org.osgi.framework.Version;
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getContribution()
- * @model superTypes="org.enterprisedomain.classmaker.Project
- *        org.enterprisedomain.classmaker.Item
- *        org.enterprisedomain.classmaker.IAdapterFactory"
+ * @model
  * @generated
  */
-public interface Contribution extends Project, Item, IAdapterFactory {
+public interface Contribution extends Project, Item {
 
 	/**
 	 * Returns the value of the '<em><b>Dependencies</b></em>' attribute list. The

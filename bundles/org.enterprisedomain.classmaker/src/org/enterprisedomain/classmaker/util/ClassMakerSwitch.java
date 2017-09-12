@@ -109,8 +109,6 @@ public class ClassMakerSwitch<T1> extends Switch<T1> {
 			if (result == null)
 				result = caseItem(contribution);
 			if (result == null)
-				result = caseIAdapterFactory(contribution);
-			if (result == null)
 				result = caseISchedulingRule(contribution);
 			if (result == null)
 				result = defaultCase(theEObject);

@@ -60,6 +60,7 @@ public class StateItemProvider extends ItemItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addPackageClassNamePropertyDescriptor(object);
 			addRequiredPluginsPropertyDescriptor(object);
 			addRevisionPropertyDescriptor(object);
 			addTimestampPropertyDescriptor(object);
@@ -72,6 +73,22 @@ public class StateItemProvider extends ItemItemProvider {
 			addMakingPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Package Class Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addPackageClassNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_State_packageClassName_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_State_packageClassName_feature",
+								"_UI_State_type"),
+						ClassMakerPackage.Literals.STATE__PACKAGE_CLASS_NAME, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -290,6 +307,7 @@ public class StateItemProvider extends ItemItemProvider {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(State.class)) {
+		case ClassMakerPackage.STATE__PACKAGE_CLASS_NAME:
 		case ClassMakerPackage.STATE__REQUIRED_PLUGINS:
 		case ClassMakerPackage.STATE__TIMESTAMP:
 		case ClassMakerPackage.STATE__DEPLOYABLE_UNIT_NAME:

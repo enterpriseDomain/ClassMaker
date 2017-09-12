@@ -1436,7 +1436,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		// Add supertypes to classes
 		contributionEClass.getESuperTypes().add(this.getProject());
 		contributionEClass.getESuperTypes().add(this.getItem());
-		contributionEClass.getESuperTypes().add(this.getIAdapterFactory());
 		revisionEClass.getESuperTypes().add(this.getItem());
 		stateEClass.getESuperTypes().add(this.getItem());
 		stateEClass.getESuperTypes().add(this.getISchedulingRule());
