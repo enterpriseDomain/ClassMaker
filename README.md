@@ -44,11 +44,9 @@ Here is how you can use it:
         
 There is more [code](/tests/org.enterprisedomain.classmaker.tests/src/org/enterprisedomain/classmaker/tests/TestEnterpriseDomain.java), where you can specify a method body and call a method, customize the generation templates, or create a meta-model of any meta-level.
 
-[See](https://github.com/enterpriseDomain/ClassMaker/wiki/HowToRun#usage) how to use it.
-
 Download
 ---------
-Please, use [the update site](https://dl.bintray.com/enterprisedomain/ClassMaker/) to install ClassMaker.
+Please, use [the update site](https://dl.bintray.com/enterprisedomain/ClassMaker/) to install ClassMaker. [See](https://github.com/enterpriseDomain/ClassMaker/wiki/HowToRun#usage) how to use it.
 
 Feedback
 ---------
