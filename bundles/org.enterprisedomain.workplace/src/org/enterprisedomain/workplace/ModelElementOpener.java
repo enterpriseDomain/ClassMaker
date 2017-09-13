@@ -1,9 +1,10 @@
 package org.enterprisedomain.workplace;
 
-import java.net.URI;
 import java.net.URISyntaxException;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecp.core.ECPProject;
 import org.eclipse.emf.ecp.ui.util.ECPModelElementOpener;
 import org.eclipse.ui.IWorkbenchPage;
@@ -18,24 +19,27 @@ public class ModelElementOpener implements ECPModelElementOpener {
 
 	@Override
 	public void openModelElement(Object modelElement, ECPProject ecpProject) {
-		EObject model = (EObject) modelElement;
-		if (model instanceof EObject)
-			if (model.eResource().getURI().lastSegment().equals("ecore"))
-				openEditor(model, "EcoreEditor");
-			else
-				openEditor(model, "org.eclipse.emfforms.editor.ecore.genericxmieditor");
+		if (modelElement instanceof Resource)
+			open(((Resource) modelElement).getURI());
+		if (modelElement instanceof EObject)
+			open(((EObject) modelElement).eResource().getURI());
 
 	}
 
-	private void openEditor(EObject object, String editorId) {
+	private void open(URI uri) {
+		if (uri.lastSegment().equals("ecore"))
+			openEditor(uri, "EcoreEditor");
+		else
+			openEditor(uri, "org.eclipse.emfforms.editor.ecore.genericxmieditor");
+	}
+
+	private void openEditor(URI uri, String editorId) {
 		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 		try {
-			IDE.openEditor(page, new URI(object.eResource().getURI().toString()), editorId, true);
+			IDE.openEditor(page, new java.net.URI(uri.toString()), editorId, true);
 		} catch (PartInitException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

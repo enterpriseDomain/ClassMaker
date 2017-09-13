@@ -43,6 +43,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -985,15 +986,14 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 					version));
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public EList<EObject> getChildren() {
+	public EList<Object> getChildren() {
 		if (children == null) {
-			children = new LoadingEList(getModelResourceAdapter());
+			children = new LoadingEList(getModelResourceAdapter().getResource());
 			eAdapters().remove(modelAdapter);
 			eAdapters().add(modelAdapter);
 		}
-		return (EList<EObject>) (EList<?>) children;
+		return (EList<Object>) children;
 	}
 
 	private LoadingEList children;
@@ -1005,46 +1005,54 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 			super.notifyChanged(msg);
 			if (msg.getFeatureID(Contribution.class) == ClassMakerPackage.CONTRIBUTION__MODEL_RESOURCE_ADAPTER
 					&& msg.getEventType() == Notification.SET && msg.getNewValue() != null) {
-				children.setEObject(getModelResourceAdapter());
+				children.setContents(getModelResourceAdapter().getResource());
 			}
 		}
 
 	};
 
-	private class LoadingEList extends BasicEList<EObject> {
+	private class LoadingEList extends BasicEList<Object> {
 
 		private static final long serialVersionUID = 164926149524632079L;
-		private EObject eObject;
+		private Resource object;
+		private Adapter adapter = new AdapterImpl() {
 
-		public LoadingEList(EObject eObject) {
-			setEObject(eObject);
+			@Override
+			public void notifyChanged(Notification msg) {
+				super.notifyChanged(msg);
+				if (msg.getFeatureID(ResourceAdapter.class) == ClassMakerPackage.RESOURCE_ADAPTER__RESOURCE
+						&& msg.getEventType() == Notification.SET && msg.getNewValue() != null)
+					fill((Resource) msg.getNotifier());
+			}
+
+		};
+
+		public LoadingEList(Resource object) {
+			setContents(object);
 		}
 
-		private void fill(EObject object) {
+		private void fill(Resource object) {
 			clear();
 			add(object);
 		}
 
 		private void attachAdapter() {
-			if (eObject == null)
+			if (object == null)
 				return;
-			eObject.eAdapters().add(new AdapterImpl() {
-
-				@Override
-				public void notifyChanged(Notification msg) {
-					super.notifyChanged(msg);
-					if (msg.getFeatureID(ResourceAdapter.class) == ClassMakerPackage.RESOURCE_ADAPTER__RESOURCE
-							&& msg.getEventType() == Notification.SET && msg.getNewValue() != null)
-						fill((EObject) msg.getNotifier());
-				}
-
-			});
+			object.eAdapters().add(adapter);
 		}
 
-		public void setEObject(EObject eObject) {
-			this.eObject = eObject;
+		private void detachAdapter() {
+			if (object == null)
+				return;
+			object.eAdapters().remove(adapter);
+		}
+
+		public void setContents(Resource object) {
+			detachAdapter();
+			this.object = object;
 			attachAdapter();
-			fill(eObject);
+			fill(object);
 		}
 
 	}

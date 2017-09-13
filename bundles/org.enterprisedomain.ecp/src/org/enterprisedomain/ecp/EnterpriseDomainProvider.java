@@ -263,9 +263,9 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 			final ECPProject project = (ECPProject) parent;
 			final Project domainProject = Activator.getClassMaker().getWorkspace().getProject(project.getName());
 			childrenList.addChildren(domainProject.getChildren());
-		} else if (parent instanceof ResourceAdapter) {
-			final ResourceAdapter resourceAdapter = (ResourceAdapter) parent;
-			childrenList.addChildren(resourceAdapter.getResource().getContents());
+		} else if (parent instanceof Resource) {
+			Resource resource = (Resource) parent;
+			childrenList.addChildren(resource.getContents());
 		} else if (parent instanceof EObject) {
 			final EObject eObject = (EObject) parent;
 			childrenList.addChildren(eObject.eContents());
@@ -385,10 +385,11 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 
 	@Override
 	public boolean isDirty(InternalProject project) {
-		return ((Resource) Platform.getAdapterManager()
-				.getAdapter(Activator.getClassMaker().getWorkspace().getProject(project.getName()), Resource.class))
-						.isModified();
-
+		boolean result = false;
+		for (Object child : Activator.getClassMaker().getWorkspace().getProject(project.getName()).getChildren())
+			if (child instanceof Resource)
+				result &= ((Resource) child).isModified();
+		return result;
 	}
 
 	@Override
@@ -396,9 +397,6 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 		IProgressMonitor monitor = null;
 		try {
 			monitor = getUIProvider().getAdapter(project, IProgressMonitor.class);
-			// final Map<Object, Object> saveOptions = new HashMap<Object, Object>();
-			// saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED,
-			// Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
 			final Semaphore saved = new Semaphore(0);
 			CompletionListener saveListener = new CompletionListenerImpl() {
 

@@ -127,7 +127,7 @@ public interface Project extends EObject, ISchedulingRule {
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
-	EList<EObject> getChildren();
+	EList<Object> getChildren();
 
 	/**
 	 * Returns the value of the '<em><b>Dirty</b></em>' attribute. <!--

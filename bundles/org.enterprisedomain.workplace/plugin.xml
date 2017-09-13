@@ -22,6 +22,10 @@
                modelElement="org.eclipse.emf.ecore.EObject"
                priority="4">
          </staticTester>
+         <staticTester
+               modelElement="org.eclipse.emf.ecore.resource.Resource"
+               priority="4">
+         </staticTester>
       </modelElementOpener>
    </extension>
    <extension

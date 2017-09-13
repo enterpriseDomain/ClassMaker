@@ -2244,16 +2244,16 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getProject_ProjectName();
 
 	/**
-	 * Returns the meta object for the reference list
+	 * Returns the meta object for the attribute list
 	 * '{@link org.enterprisedomain.classmaker.Project#getChildren
 	 * <em>Children</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the reference list '<em>Children</em>'.
+	 * @return the meta object for the attribute list '<em>Children</em>'.
 	 * @see org.enterprisedomain.classmaker.Project#getChildren()
 	 * @see #getProject()
 	 * @generated
 	 */
-	EReference getProject_Children();
+	EAttribute getProject_Children();
 
 	/**
 	 * Returns the meta object for the attribute
@@ -3202,12 +3202,12 @@ public interface ClassMakerPackage extends EPackage {
 		EAttribute PROJECT__PROJECT_NAME = eINSTANCE.getProject_ProjectName();
 
 		/**
-		 * The meta object literal for the '<em><b>Children</b></em>' reference list
+		 * The meta object literal for the '<em><b>Children</b></em>' attribute list
 		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
-		EReference PROJECT__CHILDREN = eINSTANCE.getProject_Children();
+		EAttribute PROJECT__CHILDREN = eINSTANCE.getProject_Children();
 
 		/**
 		 * The meta object literal for the '<em><b>Dirty</b></em>' attribute feature.
