@@ -1,4 +1,4 @@
-package org.enterprisedomain.classmaker.core;
+package org.enterprisedomain.classmaker.util;
 
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.emf.ecore.resource.Resource;

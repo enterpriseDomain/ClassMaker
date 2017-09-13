@@ -47,7 +47,7 @@
          point="org.eclipse.core.runtime.adapters">
       <factory
             adaptableType="org.enterprisedomain.classmaker.Contribution"
-            class="org.enterprisedomain.classmaker.core.ContributionAdapterFactory">
+            class="org.enterprisedomain.classmaker.util.ContributionAdapterFactory">
          <adapter
                type="org.eclipse.emf.ecore.resource.Resource">
          </adapter>
