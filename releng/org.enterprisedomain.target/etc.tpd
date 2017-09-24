@@ -19,25 +19,25 @@ location "http://download.eclipse.org/emfstore/releases_18" {
 }
 
 location ecp "http://download.eclipse.org/ecp/releases/releases_target_113/" {
-	org.eclipse.emf.ecp.application.e3
-	org.eclipse.emf.ecp.e3.feature.feature.group
-	org.eclipse.emf.ecp.ecore.feature.feature.group
-	org.eclipse.emf.ecp.emfforms.runtime.feature.feature.group
-	org.eclipse.emfforms.setup.base
-	org.eclipse.emf.ecp.feature.feature.group
-	org.eclipse.emf.ecp.validation.view.feature.feature.group
-	org.eclipse.emf.ecp.view.table.validation
-	org.eclipse.emf.ecp.view.treemasterdetail.validation
-	org.eclipse.emfforms.core.services.databinding.index
-	org.eclipse.emfforms.core.services.databinding.mapping
-	org.eclipse.emfforms.core.services.domainexpander.index
-	org.eclipse.emfforms.core.services.domainexpander.mapping
-	org.eclipse.emfforms.core.services.structuralchange.index
-	org.eclipse.emfforms.core.services.structuralchange.mapping
-	org.eclipse.emfforms.swt.control.multiattribute
-	org.eclipse.emf.ecp.view.indexdmr.model
-	org.eclipse.emf.ecp.view.mappingdmr.model
-	org.eclipse.emfforms.editor.feature.feature.group	
+	org.eclipse.emf.ecp.application.e3 [1.13.1,2.0.0)
+	org.eclipse.emf.ecp.e3.feature.feature.group [1.13.1,2.0.0)
+	org.eclipse.emf.ecp.ecore.feature.feature.group [1.13.1,2.0.0)
+	org.eclipse.emf.ecp.emfforms.runtime.feature.feature.group [1.13.1,2.0.0)
+	org.eclipse.emfforms.setup.base [1.13.1,2.0.0)	
+	org.eclipse.emf.ecp.feature.feature.group [1.13.1,2.0.0)
+	org.eclipse.emf.ecp.validation.view.feature.feature.group [1.13.1,2.0.0)
+	org.eclipse.emf.ecp.view.table.validation [1.13.1,2.0.0)
+	org.eclipse.emf.ecp.view.treemasterdetail.validation [1.13.1,2.0.0)
+	org.eclipse.emfforms.core.services.databinding.index [1.13.1,2.0.0)
+	org.eclipse.emfforms.core.services.databinding.mapping [1.13.1,2.0.0)
+	org.eclipse.emfforms.core.services.domainexpander.index [1.13.1,2.0.0)
+	org.eclipse.emfforms.core.services.domainexpander.mapping [1.13.1,2.0.0)
+	org.eclipse.emfforms.core.services.structuralchange.index [1.13.1,2.0.0)
+	org.eclipse.emfforms.core.services.structuralchange.mapping [1.13.1,2.0.0)
+	org.eclipse.emf.ecp.view.indexdmr.model [1.13.1,2.0.0)
+	org.eclipse.emf.ecp.view.mappingdmr.model [1.13.1,2.0.0)
+	org.eclipse.emfforms.swt.control.multiattribute [1.13.1,2.0.0)
+	org.eclipse.emfforms.editor.feature.feature.group [1.13.1,2.0.0)
 }
 
 location "http://download.eclipse.org/egit/updates" {

@@ -15,6 +15,10 @@
  */
 package org.enterprisedomain.classmaker.impl;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Collections;
+
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -31,6 +35,7 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.notify.impl.NotificationImpl;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -170,6 +175,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 */
 	protected CompletionNotificationAdapter completionNotificationAdapter;
 
+	protected EList<Object> children;
+
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -241,8 +248,10 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * @generated NOT
 	 */
 	public EList<Object> getChildren() {
-		EList<Object> result = ECollections.newBasicEList();
-		return result;
+		if (children == null) {
+			children = ECollections.newBasicEList();
+		}
+		return children;
 	}
 
 	/**
@@ -466,7 +475,25 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * @generated NOT
 	 */
 	public String initialize(boolean commit) {
+		URI uri = createResourceURI();
+		Resource resource = null;
+		if (new File(uri.toFileString()).exists())
+			getWorkspace().getResourceSet().getResource(uri, false);
+		else
+			resource = getWorkspace().getResourceSet().createResource(uri);
+		try {
+			resource.load(Collections.emptyMap());
+		} catch (IOException e) {
+			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
+		}
+		children.add(resource);
+		// TODO Add SCM support if commit
 		return "";
+	}
+
+	private URI createResourceURI() {
+		return URI.createPlatformResourceURI(getProjectName() + "/" + getName() + ResourceUtils.getModelFileExt(),
+				false);
 	}
 
 	/**

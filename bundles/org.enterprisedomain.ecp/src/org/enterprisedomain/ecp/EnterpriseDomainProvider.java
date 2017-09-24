@@ -24,7 +24,6 @@ import java.util.concurrent.Semaphore;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.command.BasicCommandStack;
 import org.eclipse.emf.common.command.Command;
@@ -62,7 +61,6 @@ import org.enterprisedomain.classmaker.ClassMakerPlant;
 import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Project;
-import org.enterprisedomain.classmaker.ResourceAdapter;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.impl.CompletionListenerImpl;
 import org.enterprisedomain.classmaker.util.ClassMakerAdapterFactory;
@@ -199,13 +197,13 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 			model.setName(project.getName());
 			model.setNsPrefix(CodeGenUtil.capName(project.getName().replaceAll(" ", "").toLowerCase()));
 			model.setNsURI("http://" + project.getName().replaceAll(" ", "") + "/1.0");
-			EClass ec = ecoreFactory.createEClass();
-			ec.setName("Class0");
-			EAttribute a = ecoreFactory.createEAttribute();
-			a.setName("value");
-			a.setEType(EcorePackage.Literals.EJAVA_OBJECT);
-			ec.getEStructuralFeatures().add(a);
-			model.getEClassifiers().add(ec);
+			EClass dummyEClass = ecoreFactory.createEClass();
+			dummyEClass.setName("MyObject");
+			EAttribute dummyEAttribute = ecoreFactory.createEAttribute();
+			dummyEAttribute.setName("value");
+			dummyEAttribute.setEType(EcorePackage.Literals.EJAVA_OBJECT);
+			dummyEClass.getEStructuralFeatures().add(dummyEAttribute);
+			model.getEClassifiers().add(dummyEClass);
 			try {
 				Activator.getClassMaker().make(model, getUIProvider().getAdapter(project, IProgressMonitor.class));
 				domainProject = Activator.getClassMaker().getWorkspace().getContribution(model);
@@ -213,7 +211,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 				Activator.log(e);
 			}
 			project.getVisiblePackages().add(EcorePackage.eINSTANCE);
-			((Contribution) domainProject).addCompletionListener(new VisiblePackagesListener(project));
+			domainProject.addCompletionListener(new VisiblePackagesListener(project));
 		} else
 			domainProject = Activator.getClassMaker().getWorkspace().getProject(project.getName());
 		domainProject.getWorkspace().getResourceSet().eAdapters()
