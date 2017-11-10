@@ -291,9 +291,8 @@ public class StateItemProvider extends ItemItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((State) object).getModelName();
-		return label == null || label.length() == 0 ? getString("_UI_State_type")
-				: getString("_UI_State_type") + " " + label;
+		State state = (State) object;
+		return getString("_UI_State_type") + " " + state.getTimestamp();
 	}
 
 	/**

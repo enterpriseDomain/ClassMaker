@@ -23,6 +23,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
@@ -59,20 +60,13 @@ import org.enterprisedomain.classmaker.util.ResourceUtils;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getName
- * <em>Name</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getProjectName
- * <em>Project Name</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getChildren
- * <em>Children</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#isDirty
- * <em>Dirty</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getWorkspace
- * <em>Workspace</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#isNeedsCompletionNotification
- * <em>Needs Completion Notification</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getCompletionNotificationAdapter
- * <em>Completion Notification Adapter</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getProjectName <em>Project Name</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getChildren <em>Children</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#isDirty <em>Dirty</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getWorkspace <em>Workspace</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#isNeedCompletionNotification <em>Need Completion Notification</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getCompletionNotificationAdapter <em>Completion Notification Adapter</em>}</li>
  * </ul>
  *
  * @generated
@@ -113,9 +107,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getProjectName()
 	 * @generated
 	 * @ordered
@@ -123,9 +116,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	protected static final String PROJECT_NAME_EDEFAULT = "";
 
 	/**
-	 * The cached value of the '{@link #getProjectName() <em>Project Name</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getProjectName() <em>Project Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getProjectName()
 	 * @generated
 	 * @ordered
@@ -143,26 +135,24 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	protected static final boolean DIRTY_EDEFAULT = false;
 
 	/**
-	 * The default value of the '{@link #isNeedsCompletionNotification() <em>Needs
-	 * Completion Notification</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * The default value of the '{@link #isNeedCompletionNotification() <em>Need Completion Notification</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
-	 * @see #isNeedsCompletionNotification()
+	 * @see #isNeedCompletionNotification()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean NEEDS_COMPLETION_NOTIFICATION_EDEFAULT = false;
+	protected static final boolean NEED_COMPLETION_NOTIFICATION_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isNeedsCompletionNotification() <em>Needs
-	 * Completion Notification</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * The cached value of the '{@link #isNeedCompletionNotification() <em>Need Completion Notification</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
-	 * @see #isNeedsCompletionNotification()
+	 * @see #isNeedCompletionNotification()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean needsCompletionNotification = NEEDS_COMPLETION_NOTIFICATION_EDEFAULT;
+	protected boolean needCompletionNotification = NEED_COMPLETION_NOTIFICATION_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getCompletionNotificationAdapter()
@@ -191,7 +181,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -201,7 +190,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getName() {
@@ -210,7 +198,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setName(String newName) {
@@ -222,7 +209,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getProjectName() {
@@ -265,7 +251,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Workspace getWorkspace() {
@@ -276,7 +261,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetWorkspace(Workspace newWorkspace, NotificationChain msgs) {
@@ -286,7 +270,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setWorkspace(Workspace newWorkspace) {
@@ -310,30 +293,27 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
-	public boolean isNeedsCompletionNotification() {
-		return needsCompletionNotification;
+	public boolean isNeedCompletionNotification() {
+		return needCompletionNotification;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
-	public void setNeedsCompletionNotification(boolean newNeedsCompletionNotification) {
-		boolean oldNeedsCompletionNotification = needsCompletionNotification;
-		needsCompletionNotification = newNeedsCompletionNotification;
+	public void setNeedCompletionNotification(boolean newNeedCompletionNotification) {
+		boolean oldNeedCompletionNotification = needCompletionNotification;
+		needCompletionNotification = newNeedCompletionNotification;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ClassMakerPackage.PROJECT__NEEDS_COMPLETION_NOTIFICATION, oldNeedsCompletionNotification,
-					needsCompletionNotification));
+					ClassMakerPackage.PROJECT__NEED_COMPLETION_NOTIFICATION, oldNeedCompletionNotification,
+					needCompletionNotification));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public CompletionNotificationAdapter getCompletionNotificationAdapter() {
@@ -342,7 +322,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetCompletionNotificationAdapter(
@@ -363,7 +342,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setCompletionNotificationAdapter(CompletionNotificationAdapter newCompletionNotificationAdapter) {
@@ -420,12 +398,13 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * @generated NOT
 	 */
 	public void delete(EList<Object> objects) {
-		;
+		((Resource) getChildren().get(0)).getContents().removeAll(objects);
 	}
 
 	public void notifyCompletion() throws Exception {
 		for (Object listener : listeners.getListeners())
 			((CompletionListener) listener).completed(this);
+		setNeedCompletionNotification(false);
 	}
 
 	/**
@@ -434,7 +413,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * @generated NOT
 	 */
 	public String make(IProgressMonitor monitor) throws CoreException {
-		return "";
+		return "You made it!";
 	}
 
 	/**
@@ -477,23 +456,31 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	public String initialize(boolean commit) {
 		URI uri = createResourceURI();
 		Resource resource = null;
-		if (new File(uri.toFileString()).exists())
+		if (new File(uri.toFileString()).exists()) {
 			getWorkspace().getResourceSet().getResource(uri, false);
-		else
+			try {
+				resource.load(Collections.emptyMap());
+			} catch (IOException e) {
+				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
+			}
+		} else {
 			resource = getWorkspace().getResourceSet().createResource(uri);
-		try {
-			resource.load(Collections.emptyMap());
-		} catch (IOException e) {
-			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
+			if (commit)
+				try {
+					resource.save(Collections.emptyMap());
+				} catch (IOException e) {
+					ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
+				}
 		}
-		children.add(resource);
+		getChildren().add(resource);
 		// TODO Add SCM support if commit
 		return "";
 	}
 
 	private URI createResourceURI() {
-		return URI.createPlatformResourceURI(getProjectName() + "/" + getName() + ResourceUtils.getModelFileExt(),
-				false);
+		IPath workspacePath = ResourcesPlugin.getWorkspace().getRoot().getLocation();
+		return URI.createFileURI(workspacePath.toString() + IPath.SEPARATOR + getProjectName() + IPath.SEPARATOR
+				+ getName() + "." + ResourceUtils.getModelFileExt());
 	}
 
 	/**
@@ -528,7 +515,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -544,7 +530,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -560,7 +545,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -600,7 +584,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -616,8 +599,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			return isDirty();
 		case ClassMakerPackage.PROJECT__WORKSPACE:
 			return getWorkspace();
-		case ClassMakerPackage.PROJECT__NEEDS_COMPLETION_NOTIFICATION:
-			return isNeedsCompletionNotification();
+		case ClassMakerPackage.PROJECT__NEED_COMPLETION_NOTIFICATION:
+			return isNeedCompletionNotification();
 		case ClassMakerPackage.PROJECT__COMPLETION_NOTIFICATION_ADAPTER:
 			return getCompletionNotificationAdapter();
 		}
@@ -626,7 +609,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -641,8 +623,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		case ClassMakerPackage.PROJECT__WORKSPACE:
 			setWorkspace((Workspace) newValue);
 			return;
-		case ClassMakerPackage.PROJECT__NEEDS_COMPLETION_NOTIFICATION:
-			setNeedsCompletionNotification((Boolean) newValue);
+		case ClassMakerPackage.PROJECT__NEED_COMPLETION_NOTIFICATION:
+			setNeedCompletionNotification((Boolean) newValue);
 			return;
 		case ClassMakerPackage.PROJECT__COMPLETION_NOTIFICATION_ADAPTER:
 			setCompletionNotificationAdapter((CompletionNotificationAdapter) newValue);
@@ -653,7 +635,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -668,8 +649,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		case ClassMakerPackage.PROJECT__WORKSPACE:
 			setWorkspace((Workspace) null);
 			return;
-		case ClassMakerPackage.PROJECT__NEEDS_COMPLETION_NOTIFICATION:
-			setNeedsCompletionNotification(NEEDS_COMPLETION_NOTIFICATION_EDEFAULT);
+		case ClassMakerPackage.PROJECT__NEED_COMPLETION_NOTIFICATION:
+			setNeedCompletionNotification(NEED_COMPLETION_NOTIFICATION_EDEFAULT);
 			return;
 		case ClassMakerPackage.PROJECT__COMPLETION_NOTIFICATION_ADAPTER:
 			setCompletionNotificationAdapter((CompletionNotificationAdapter) null);
@@ -680,7 +661,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -696,8 +676,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			return isDirty() != DIRTY_EDEFAULT;
 		case ClassMakerPackage.PROJECT__WORKSPACE:
 			return getWorkspace() != null;
-		case ClassMakerPackage.PROJECT__NEEDS_COMPLETION_NOTIFICATION:
-			return needsCompletionNotification != NEEDS_COMPLETION_NOTIFICATION_EDEFAULT;
+		case ClassMakerPackage.PROJECT__NEED_COMPLETION_NOTIFICATION:
+			return needCompletionNotification != NEED_COMPLETION_NOTIFICATION_EDEFAULT;
 		case ClassMakerPackage.PROJECT__COMPLETION_NOTIFICATION_ADAPTER:
 			return completionNotificationAdapter != null;
 		}
@@ -731,7 +711,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -744,8 +723,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		result.append(name);
 		result.append(", projectName: ");
 		result.append(projectName);
-		result.append(", needsCompletionNotification: ");
-		result.append(needsCompletionNotification);
+		result.append(", needCompletionNotification: ");
+		result.append(needCompletionNotification);
 		result.append(')');
 		return result.toString();
 	}

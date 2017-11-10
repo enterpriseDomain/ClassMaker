@@ -21,8 +21,14 @@ public class ModelElementOpener implements ECPModelElementOpener {
 	public void openModelElement(Object modelElement, ECPProject ecpProject) {
 		if (modelElement instanceof Resource)
 			open(((Resource) modelElement).getURI());
-		if (modelElement instanceof EObject)
-			open(((EObject) modelElement).eResource().getURI());
+		if (modelElement instanceof EObject) {
+			if (((EObject) modelElement).eResource() != null)
+				open(((EObject) modelElement).eResource().getURI());
+			else {
+				open(((Resource) Activator.getClassMaker().getWorkspace().getProject(ecpProject.getName()).getChildren()
+						.get(0)).getURI());
+			}
+		}
 
 	}
 

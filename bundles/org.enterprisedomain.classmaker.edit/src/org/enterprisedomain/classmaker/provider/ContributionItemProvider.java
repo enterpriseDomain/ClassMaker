@@ -271,7 +271,6 @@ public class ContributionItemProvider extends ProjectItemProvider {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ClassMakerPackage.Literals.ITEM__DOMAIN_MODEL);
-			childrenFeatures.add(ClassMakerPackage.Literals.ITEM__CUSTOMIZERS);
 			childrenFeatures.add(ClassMakerPackage.Literals.CONTRIBUTION__REVISIONS);
 		}
 		return childrenFeatures;
@@ -330,13 +329,13 @@ public class ContributionItemProvider extends ProjectItemProvider {
 		case ClassMakerPackage.CONTRIBUTION__PHASE:
 		case ClassMakerPackage.CONTRIBUTION__VERSION:
 		case ClassMakerPackage.CONTRIBUTION__LANGUAGE:
+		case ClassMakerPackage.CONTRIBUTION__CUSTOMIZERS:
 		case ClassMakerPackage.CONTRIBUTION__LOCALE:
 		case ClassMakerPackage.CONTRIBUTION__DEPENDENCIES:
 		case ClassMakerPackage.CONTRIBUTION__LATEST_VERSION:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case ClassMakerPackage.CONTRIBUTION__DOMAIN_MODEL:
-		case ClassMakerPackage.CONTRIBUTION__CUSTOMIZERS:
 		case ClassMakerPackage.CONTRIBUTION__REVISIONS:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
@@ -361,29 +360,6 @@ public class ContributionItemProvider extends ProjectItemProvider {
 
 		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.CONTRIBUTION__REVISIONS,
 				ClassMakerFactory.eINSTANCE.create(ClassMakerPackage.Literals.VERSION_TO_REVISION_MAP_ENTRY)));
-	}
-
-	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
-
-		boolean qualify = childFeature == ClassMakerPackage.Literals.PROJECT__CHILDREN
-				|| childFeature == ClassMakerPackage.Literals.CONTRIBUTION__REVISIONS
-				|| childFeature == ClassMakerPackage.Literals.ITEM__CUSTOMIZERS
-				|| childFeature == ClassMakerPackage.Literals.PROJECT__COMPLETION_NOTIFICATION_ADAPTER;
-
-		if (qualify) {
-			return getString("_UI_CreateChild_text2",
-					new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

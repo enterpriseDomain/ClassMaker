@@ -40,8 +40,13 @@ import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
+import org.enterprisedomain.classmaker.util.ReflectiveFactory;
 
 public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker {
+
+	private ProgressProvider progressProvider = null;
+
+	private final ProgressProvider DEFAULT_PROGRESS_PROVIDER = new EnterpriseDomainJob.JobProgressProvider();
 
 	private EnterpriseDomainJob nextJob;
 
@@ -71,6 +76,10 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 			ClassMakerPlugin.getInstance().getLog().log(result);
 
 			if (getNextJob() == null) {
+				if (ClassMakerPlugin.getPreviousProgressProvider() != null)
+					Job.getJobManager().setProgressProvider(ClassMakerPlugin.getPreviousProgressProvider());
+				else
+					Job.getJobManager().setProgressProvider(DEFAULT_PROGRESS_PROVIDER);
 				return;
 			}
 			getNextJob().setProject(getProject());
@@ -96,6 +105,8 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 
 	private Properties properties;
 
+	private ProgressProvider previousProgressProvider = null;
+
 	public EnterpriseDomainJob(String name, int stateTimestamp) {
 		super(name);
 		setStateTimestamp(stateTimestamp);
@@ -103,7 +114,7 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 		setPriority(Job.BUILD);
 		setRule(getWorkspace());
 		setChangeRule(true);
-		setJobGroup(new JobGroup("Supplying Class", 0, 1)); //$NON-NLS-1$
+		setJobGroup(new JobGroup("ClassMaker", 0, 1)); //$NON-NLS-1$
 	}
 
 	@Override
@@ -116,6 +127,8 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 		if (getBuildKind() == IncrementalProjectBuilder.INCREMENTAL_BUILD
 				&& getContributionState().getPhase().getValue() >= getDirtyStage().getValue())
 			return result;
+		if (progressProvider == null)
+			setProgressProvider(DEFAULT_PROGRESS_PROVIDER);
 		result = work(monitor);
 		return result;
 	}
@@ -127,7 +140,7 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 		@Override
 		public IProgressMonitor createMonitor(Job job) {
 			if (ClassMakerPlugin.getInstance() == null)
-				return ProgressMonitorFactory.create(ClassMakerPlugin.getProgressMonitorClass(),
+				return ReflectiveFactory.create(ClassMakerPlugin.getProgressMonitorClass(),
 						ClassMakerPlugin.getProgressMonitorClassConstructorParameters());
 			return ClassMakerPlugin.getProgressMonitor();
 		}
@@ -136,6 +149,11 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 	@Override
 	public boolean belongsTo(Object family) {
 		return super.belongsTo(family) || family == ResourcesPlugin.FAMILY_MANUAL_BUILD;
+	}
+
+	public void setProgressProvider(ProgressProvider progressProvider) {
+		this.progressProvider = progressProvider;
+		Job.getJobManager().setProgressProvider(progressProvider);
 	}
 
 	public static IStatus joinManualBuild(IProgressMonitor monitor) {

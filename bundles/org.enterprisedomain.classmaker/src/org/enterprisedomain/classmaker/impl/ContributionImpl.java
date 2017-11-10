@@ -23,15 +23,18 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
+import org.apache.tools.ant.taskdefs.condition.IsSet;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.common.notify.impl.NotificationImpl;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
@@ -49,6 +52,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.ListBranchCommand;
+import org.eclipse.jgit.api.ResetCommand;
 import org.eclipse.jgit.api.ResetCommand.ResetType;
 import org.eclipse.jgit.api.errors.CheckoutConflictException;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -72,7 +76,6 @@ import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.util.ListUtil;
-import org.enterprisedomain.classmaker.util.ModelUtil;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
 import org.osgi.framework.Version;
 
@@ -240,14 +243,14 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	protected static final Version LATEST_VERSION_EDEFAULT = null;
 	/**
 	 * The cached value of the '{@link #getModelResourceAdapter() <em>Model Resource
-	 * Adapter</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Adapter</em>}' containment reference. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @see #getModelResourceAdapter()
 	 * @generated
 	 * @ordered
 	 */
 	protected ResourceAdapter modelResourceAdapter;
-
 	protected CompletionListener modelListener = new CompletionListenerImpl() {
 
 		@Override
@@ -262,7 +265,16 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 		public void notifyChanged(Notification msg) {
 			if (msg.getFeatureID(State.class) == ClassMakerPackage.STATE__RESOURCE
 					&& msg.getEventType() == Notification.SET) {
-				getModelResourceAdapter();
+				if (isStateSet() && getState().eIsSet(ClassMakerPackage.Literals.STATE__RESOURCE)) {
+					ResourceAdapter modelResourceAdapter = null;
+					if (eIsSet(ClassMakerPackage.CONTRIBUTION__MODEL_RESOURCE_ADAPTER)) {
+						modelResourceAdapter = getModelResourceAdapter();
+					} else {
+						modelResourceAdapter = ClassMakerFactory.eINSTANCE.createResourceAdapter();
+					}
+					modelResourceAdapter.setResource(getState().getResource());
+					modelResourceAdapter.setProject(ContributionImpl.this);
+				}
 			}
 		}
 	};
@@ -391,26 +403,9 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @generated NOT
+	 * @generated
 	 */
 	public ResourceAdapter getModelResourceAdapter() {
-		if (modelResourceAdapter != null && modelResourceAdapter.eIsProxy()) {
-			InternalEObject oldModelResourceAdapter = (InternalEObject) modelResourceAdapter;
-			modelResourceAdapter = (ResourceAdapter) eResolveProxy(oldModelResourceAdapter);
-			if (modelResourceAdapter != oldModelResourceAdapter) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							ClassMakerPackage.CONTRIBUTION__MODEL_RESOURCE_ADAPTER, oldModelResourceAdapter,
-							modelResourceAdapter));
-			}
-		} else if (modelResourceAdapter == null && isStateSet()
-				&& getState().eIsSet(ClassMakerPackage.Literals.STATE__RESOURCE)) {
-			modelResourceAdapter = ClassMakerFactory.eINSTANCE.createResourceAdapter();
-			modelResourceAdapter.setResource(getState().getResource());
-			if (eNotificationRequired())
-				eNotify(new ENotificationImpl(this, Notification.SET,
-						ClassMakerPackage.CONTRIBUTION__MODEL_RESOURCE_ADAPTER, null, modelResourceAdapter));
-		}
 		return modelResourceAdapter;
 	}
 
@@ -419,8 +414,20 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	 * 
 	 * @generated
 	 */
-	public ResourceAdapter basicGetModelResourceAdapter() {
-		return modelResourceAdapter;
+	public NotificationChain basicSetModelResourceAdapter(ResourceAdapter newModelResourceAdapter,
+			NotificationChain msgs) {
+		ResourceAdapter oldModelResourceAdapter = modelResourceAdapter;
+		modelResourceAdapter = newModelResourceAdapter;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					ClassMakerPackage.CONTRIBUTION__MODEL_RESOURCE_ADAPTER, oldModelResourceAdapter,
+					newModelResourceAdapter);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -449,6 +456,11 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 				msgs = ((InternalEObject) domainModel).eInverseRemove(this,
 						EOPPOSITE_FEATURE_BASE - ClassMakerPackage.CONTRIBUTION__DOMAIN_MODEL, null, msgs);
 			return basicSetDomainModel((ModelPair) otherEnd, msgs);
+		case ClassMakerPackage.CONTRIBUTION__MODEL_RESOURCE_ADAPTER:
+			if (modelResourceAdapter != null)
+				msgs = ((InternalEObject) modelResourceAdapter).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - ClassMakerPackage.CONTRIBUTION__MODEL_RESOURCE_ADAPTER, null, msgs);
+			return basicSetModelResourceAdapter((ResourceAdapter) otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -616,7 +628,9 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	 * @generated NOT
 	 */
 	public String initialize(boolean commit) {
-		SCMOperator<Git> operator = ClassMakerPlugin.getClassMaker().getSCMRegistry().get(getProjectName());
+		@SuppressWarnings("unchecked")
+		SCMOperator<Git> operator = (SCMOperator<Git>) ClassMakerPlugin.getClassMaker().getSCMRegistry()
+				.get(getProjectName());
 		try {
 			Git git = operator.getRepositorySCM();
 
@@ -678,6 +692,8 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 		try {
 			return revision.make(monitor);
 		} catch (JGitInternalException e) {
+		} catch (OperationCanceledException e) {
+			monitor.setCanceled(true);
 		} catch (Exception e) {
 			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 		}
@@ -722,16 +738,22 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 			if (getProjectName().isEmpty())
 				return;
 			Git git = null;
-			SCMOperator<Git> operator = ClassMakerPlugin.getClassMaker().getSCMRegistry().get(getProjectName());
+			@SuppressWarnings("unchecked")
+			SCMOperator<Git> operator = (SCMOperator<Git>) ClassMakerPlugin.getClassMaker().getSCMRegistry()
+					.get(getProjectName());
+			Ref ref = null;
 			try {
 				git = operator.getRepositorySCM();
-				Ref ref = git.getRepository().findRef(version.toString());
+				ref = git.getRepository().findRef(version.toString());
 				if (ref != null)
 					git.checkout().setName(ref.getName()).call();
 			} catch (CheckoutConflictException e) {
 				if (git != null) {
 					try {
-						git.reset().setMode(ResetType.HARD).call();
+						ResetCommand reset = git.reset().setMode(ResetType.HARD);
+						if (ref != null)
+							reset.setRef(ref.getName());
+						reset.call();
 					} catch (CheckoutConflictException ex) {
 						ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(ex));
 					} catch (GitAPIException ex) {
@@ -988,8 +1010,11 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	@Override
 	public EList<Object> getChildren() {
-		if (children == null) {
-			children = new LoadingEList(getModelResourceAdapter().getResource());
+		if (children == null || children.isEmpty()) {
+			if (getModelResourceAdapter() != null)
+				children = new LoadingEList(getModelResourceAdapter().getResource());
+			else
+				children = new LoadingEList(null);
 			eAdapters().remove(modelAdapter);
 			eAdapters().add(modelAdapter);
 		}
@@ -1021,8 +1046,10 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 			public void notifyChanged(Notification msg) {
 				super.notifyChanged(msg);
 				if (msg.getFeatureID(ResourceAdapter.class) == ClassMakerPackage.RESOURCE_ADAPTER__RESOURCE
-						&& msg.getEventType() == Notification.SET && msg.getNewValue() != null)
-					fill((Resource) msg.getNotifier());
+						&& msg.getEventType() == Notification.SET && msg.getNewValue() != null) {
+					LoadingEList.this.object = (Resource) msg.getNewValue();
+					fill((Resource) msg.getNewValue());
+				}
 			}
 
 		};
@@ -1063,7 +1090,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	 * @generated NOT
 	 */
 	public State getState(int timestamp) {
-		if (getRevision().getStateHistory().containsKey(timestamp))
+		if (isRevisionSet() && getRevision().getStateHistory().containsKey(timestamp))
 			return getRevision().getStateHistory().get((Integer) timestamp);
 		return getState();
 	}
@@ -1087,7 +1114,9 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 		if (isRevisionSet()) {
 			if (create) {
 				try {
-					SCMOperator<Git> operator = ClassMakerPlugin.getClassMaker().getSCMRegistry().get(getProjectName());
+					@SuppressWarnings("unchecked")
+					SCMOperator<Git> operator = (SCMOperator<Git>) ClassMakerPlugin.getClassMaker().getSCMRegistry()
+							.get(getProjectName());
 					operator.add(".");
 					operator.commit(getProjectName());
 				} catch (Exception e) {
@@ -1119,18 +1148,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	public void delete(EList<Object> objects) {
 		if (!isStateSet())
 			return;
-		boolean removed = false;
-		for (Object object : objects) {
-			if (object instanceof EObject) {
-				ModelPair model = getDomainModel();
-				EPackage deletedEPackage = ModelUtil.getEPackage((EObject) object);
-				if ((model != null && ModelUtil.ePackagesAreEqual(model.getGenerated(), deletedEPackage, true)
-						|| model != null && ModelUtil.ePackagesAreEqual(model.getDynamic(), deletedEPackage, true))) {
-					model.setDynamic(null);
-					removed = true;
-				}
-			}
-		}
+		boolean removed = ((Resource) getChildren().get(0)).getContents().removeAll(objects);
 		if (removed)
 			return;
 
@@ -1158,6 +1176,8 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 			return ((InternalEList<?>) getCustomizers()).basicRemove(otherEnd, msgs);
 		case ClassMakerPackage.CONTRIBUTION__REVISIONS:
 			return ((InternalEList<?>) getRevisions()).basicRemove(otherEnd, msgs);
+		case ClassMakerPackage.CONTRIBUTION__MODEL_RESOURCE_ADAPTER:
+			return basicSetModelResourceAdapter(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -1213,9 +1233,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 		case ClassMakerPackage.CONTRIBUTION__LATEST_VERSION:
 			return getLatestVersion();
 		case ClassMakerPackage.CONTRIBUTION__MODEL_RESOURCE_ADAPTER:
-			if (resolve)
-				return getModelResourceAdapter();
-			return basicGetModelResourceAdapter();
+			return getModelResourceAdapter();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

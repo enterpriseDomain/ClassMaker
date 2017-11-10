@@ -35,12 +35,12 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
 
 /**
- * This is the item provider adapter for a {@link org.enterprisedomain.classmaker.ClassMakerPlant} object.
+ * This is the item provider adapter for a {@link org.enterprisedomain.classmaker.ClassMakerService} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ClassMakerPlantItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
+public class ClassMakerServiceItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
 		IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -48,7 +48,7 @@ public class ClassMakerPlantItemProvider extends ItemProviderAdapter implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassMakerPlantItemProvider(AdapterFactory adapterFactory) {
+	public ClassMakerServiceItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -76,12 +76,12 @@ public class ClassMakerPlantItemProvider extends ItemProviderAdapter implements 
 	 * @generated
 	 */
 	protected void addWorkspacePropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_ClassMakerPlant_workspace_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_ClassMakerPlant_workspace_feature",
-								"_UI_ClassMakerPlant_type"),
-						ClassMakerPackage.Literals.CLASS_MAKER_PLANT__WORKSPACE, true, false, true, null, null, null));
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
+				getString("_UI_ClassMakerService_workspace_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_ClassMakerService_workspace_feature",
+						"_UI_ClassMakerService_type"),
+				ClassMakerPackage.Literals.CLASS_MAKER_SERVICE__WORKSPACE, true, false, true, null, null, null));
 	}
 
 	/**
@@ -91,24 +91,23 @@ public class ClassMakerPlantItemProvider extends ItemProviderAdapter implements 
 	 * @generated
 	 */
 	protected void addSCMRegistryPropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_ClassMakerPlant_SCMRegistry_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_ClassMakerPlant_SCMRegistry_feature",
-								"_UI_ClassMakerPlant_type"),
-						ClassMakerPackage.Literals.CLASS_MAKER_PLANT__SCM_REGISTRY, false, false, false, null, null,
-						null));
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
+				getString("_UI_ClassMakerService_SCMRegistry_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_ClassMakerService_SCMRegistry_feature",
+						"_UI_ClassMakerService_type"),
+				ClassMakerPackage.Literals.CLASS_MAKER_SERVICE__SCM_REGISTRY, false, false, false, null, null, null));
 	}
 
 	/**
-	 * This returns ClassMakerPlant.gif.
+	 * This returns ClassMakerService.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ClassMakerPlant"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ClassMakerService"));
 	}
 
 	/**
@@ -119,7 +118,7 @@ public class ClassMakerPlantItemProvider extends ItemProviderAdapter implements 
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_ClassMakerPlant_type");
+		return getString("_UI_ClassMakerService_type");
 	}
 
 	/**

@@ -17,8 +17,9 @@ package org.enterprisedomain.ecp;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Plugin;
-import org.enterprisedomain.classmaker.ClassMakerPlant;
-import org.enterprisedomain.classmaker.impl.ClassMakerPlantImpl;
+import org.enterprisedomain.classmaker.ClassMakerService;
+import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
+import org.enterprisedomain.classmaker.impl.ClassMakerServiceImpl;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
@@ -27,9 +28,9 @@ public class Activator extends Plugin implements BundleActivator {
 
 	private static Activator instance;
 
-	private static ServiceTracker<ClassMakerPlant, ClassMakerPlantImpl> classMaker;
+	private static ServiceTracker<ClassMakerService, ClassMakerServiceImpl> classMaker;
 
-	public static ClassMakerPlant getClassMaker() {
+	public static ClassMakerService getClassMaker() {
 		if (classMaker != null)
 			return classMaker.getService();
 		return null;
@@ -38,7 +39,8 @@ public class Activator extends Plugin implements BundleActivator {
 	@Override
 	public void start(BundleContext context) throws Exception {
 		instance = this;
-		classMaker = new ServiceTracker<ClassMakerPlant, ClassMakerPlantImpl>(context, ClassMakerPlant.class, null);
+		classMaker = new ServiceTracker<ClassMakerService, ClassMakerServiceImpl>(context, ClassMakerService.class,
+				null);
 		classMaker.open();
 	}
 
@@ -51,6 +53,10 @@ public class Activator extends Plugin implements BundleActivator {
 
 	public static void log(CoreException e) {
 		instance.getLog().log(e.getStatus());
+	}
+
+	public static void log(Throwable e) {
+		instance.getLog().log(ClassMakerPlugin.createErrorStatus(e));
 	}
 
 }

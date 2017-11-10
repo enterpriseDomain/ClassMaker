@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.eclipse.core.internal.resources.ResourceException;
 import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
@@ -33,8 +34,9 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.preferences.IPreferencesService;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.pde.internal.core.ICoreConstants;
@@ -220,14 +222,18 @@ public class ResourceUtils {
 		IProgressMonitor pm = null;
 		boolean autoBuilding = project.getWorkspace().isAutoBuilding();
 		try {
-			pm = new SubProgressMonitor(monitor, 1);
+			pm = SubMonitor.convert(monitor, 3);
 			project.create(pm);
-			project.open(pm);
-			if (nature != null && !nature.isEmpty()) {
-				IProjectDescription description = project.getDescription();
-				description.setNatureIds(ResourceUtils.addElement(description.getNatureIds(), nature));
-				project.setDescription(description, pm);
+			try {
+				project.open(pm);
+				if (nature != null && !nature.isEmpty()) {
+					IProjectDescription description = project.getDescription();
+					description.setNatureIds(ResourceUtils.addElement(description.getNatureIds(), nature));
+					project.setDescription(description, pm);
+				}
+			} catch (OperationCanceledException e) {
 			}
+		} catch (ResourceException e) {
 		} finally {
 			if (pm != null)
 				pm.done();

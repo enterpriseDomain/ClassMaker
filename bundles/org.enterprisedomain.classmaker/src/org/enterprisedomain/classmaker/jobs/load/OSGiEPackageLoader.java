@@ -91,9 +91,6 @@ public class OSGiEPackageLoader extends ContainerJob {
 			} else
 				return ClassMakerPlugin.createErrorStatus(NLS.bind(Messages.BundleNotFound, getProject().getName()));
 
-			if (monitor.isCanceled()) {
-				return Status.CANCEL_STATUS;
-			}
 			try {
 				loaded.acquire();
 			} catch (InterruptedException e) {
@@ -164,7 +161,7 @@ public class OSGiEPackageLoader extends ContainerJob {
 			setException(e);
 		} finally {
 			loaded.release();
-			getContributionState().getContribution().setNeedsCompletionNotification(true);
+			getContributionState().getContribution().setNeedCompletionNotification(true);
 		}
 	}
 

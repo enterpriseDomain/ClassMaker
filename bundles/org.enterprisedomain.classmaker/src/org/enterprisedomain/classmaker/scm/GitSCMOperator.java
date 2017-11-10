@@ -12,6 +12,7 @@ import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.InitCommand;
 import org.eclipse.jgit.errors.RepositoryNotFoundException;
 import org.eclipse.jgit.revwalk.RevCommit;
+import org.enterprisedomain.classmaker.SCMRegistry;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.impl.SCMOperatorImpl;
@@ -41,7 +42,7 @@ public class GitSCMOperator extends SCMOperatorImpl<Git> {
 		} catch (IOException e) {
 			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createWarningStatus(e));
 		}
-		ClassMakerPlugin.getClassMaker().getSCMRegistry().putSCM(dir.getName(), git);
+		((SCMRegistry<Git>) ClassMakerPlugin.getClassMaker().getSCMRegistry()).putSCM(dir.getName(), git);
 		return git;
 	}
 

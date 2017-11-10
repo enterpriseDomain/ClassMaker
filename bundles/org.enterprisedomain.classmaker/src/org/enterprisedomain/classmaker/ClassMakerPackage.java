@@ -32,46 +32,43 @@ import org.eclipse.emf.ecore.EReference;
  * <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * 
  * @see org.enterprisedomain.classmaker.ClassMakerFactory
  * @model kind="package"
  * @generated
  */
 public interface ClassMakerPackage extends EPackage {
 	/**
-	 * The package name. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The package name.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	String eNAME = "classmaker";
 
 	/**
-	 * The package namespace URI. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The package namespace URI.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	String eNS_URI = "http://org/enterprisedomain/ClassMaker/0.7.902";
 
 	/**
-	 * The package namespace name. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The package namespace name.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	String eNS_PREFIX = "ClassMaker";
 
 	/**
-	 * The singleton instance of the package. <!-- begin-user-doc --> <!--
+	 * The singleton instance of the package.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	ClassMakerPackage eINSTANCE = org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl.init();
 
 	/**
-	 * The meta object id for the
-	 * '{@link org.eclipse.core.runtime.jobs.ISchedulingRule <em>IScheduling
-	 * Rule</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The meta object id for the '{@link org.eclipse.core.runtime.jobs.ISchedulingRule <em>IScheduling Rule</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see org.eclipse.core.runtime.jobs.ISchedulingRule
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getISchedulingRule()
 	 * @generated
@@ -81,17 +78,14 @@ public interface ClassMakerPackage extends EPackage {
 	/**
 	 * The number of structural features of the '<em>IScheduling Rule</em>' class.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int ISCHEDULING_RULE_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the
-	 * '{@link org.enterprisedomain.classmaker.impl.ProjectImpl <em>Project</em>}'
-	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The meta object id for the '{@link org.enterprisedomain.classmaker.impl.ProjectImpl <em>Project</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see org.enterprisedomain.classmaker.impl.ProjectImpl
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getProject()
 	 * @generated
@@ -99,9 +93,9 @@ public interface ClassMakerPackage extends EPackage {
 	int PROJECT = 15;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute. <!-- begin-user-doc
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -126,9 +120,9 @@ public interface ClassMakerPackage extends EPackage {
 	int PROJECT__CHILDREN = ISCHEDULING_RULE_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Dirty</b></em>' attribute. <!-- begin-user-doc
+	 * The feature id for the '<em><b>Dirty</b></em>' attribute.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -144,18 +138,16 @@ public interface ClassMakerPackage extends EPackage {
 	int PROJECT__WORKSPACE = ISCHEDULING_RULE_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Needs Completion Notification</b></em>'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The feature id for the '<em><b>Need Completion Notification</b></em>' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROJECT__NEEDS_COMPLETION_NOTIFICATION = ISCHEDULING_RULE_FEATURE_COUNT + 5;
+	int PROJECT__NEED_COMPLETION_NOTIFICATION = ISCHEDULING_RULE_FEATURE_COUNT + 5;
 
 	/**
-	 * The feature id for the '<em><b>Completion Notification Adapter</b></em>'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The feature id for the '<em><b>Completion Notification Adapter</b></em>' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -171,10 +163,8 @@ public interface ClassMakerPackage extends EPackage {
 	int PROJECT_FEATURE_COUNT = ISCHEDULING_RULE_FEATURE_COUNT + 7;
 
 	/**
-	 * The meta object id for the
-	 * '{@link org.enterprisedomain.classmaker.impl.ContributionImpl
-	 * <em>Contribution</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The meta object id for the '{@link org.enterprisedomain.classmaker.impl.ContributionImpl <em>Contribution</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see org.enterprisedomain.classmaker.impl.ContributionImpl
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getContribution()
 	 * @generated
@@ -182,9 +172,9 @@ public interface ClassMakerPackage extends EPackage {
 	int CONTRIBUTION = 0;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute. <!-- begin-user-doc
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -209,9 +199,9 @@ public interface ClassMakerPackage extends EPackage {
 	int CONTRIBUTION__CHILDREN = PROJECT__CHILDREN;
 
 	/**
-	 * The feature id for the '<em><b>Dirty</b></em>' attribute. <!-- begin-user-doc
+	 * The feature id for the '<em><b>Dirty</b></em>' attribute.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -227,18 +217,16 @@ public interface ClassMakerPackage extends EPackage {
 	int CONTRIBUTION__WORKSPACE = PROJECT__WORKSPACE;
 
 	/**
-	 * The feature id for the '<em><b>Needs Completion Notification</b></em>'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The feature id for the '<em><b>Need Completion Notification</b></em>' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__NEEDS_COMPLETION_NOTIFICATION = PROJECT__NEEDS_COMPLETION_NOTIFICATION;
+	int CONTRIBUTION__NEED_COMPLETION_NOTIFICATION = PROJECT__NEED_COMPLETION_NOTIFICATION;
 
 	/**
-	 * The feature id for the '<em><b>Completion Notification Adapter</b></em>'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The feature id for the '<em><b>Completion Notification Adapter</b></em>' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -254,9 +242,9 @@ public interface ClassMakerPackage extends EPackage {
 	int CONTRIBUTION__MODEL_NAME = PROJECT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Phase</b></em>' attribute. <!-- begin-user-doc
+	 * The feature id for the '<em><b>Phase</b></em>' attribute.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -283,16 +271,15 @@ public interface ClassMakerPackage extends EPackage {
 	/**
 	 * The feature id for the '<em><b>Domain Model</b></em>' containment reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int CONTRIBUTION__DOMAIN_MODEL = PROJECT_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Customizers</b></em>' map. <!-- begin-user-doc
+	 * The feature id for the '<em><b>Customizers</b></em>' map.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -344,18 +331,18 @@ public interface ClassMakerPackage extends EPackage {
 	int CONTRIBUTION__REVISION = PROJECT_FEATURE_COUNT + 10;
 
 	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' map. <!-- begin-user-doc
+	 * The feature id for the '<em><b>Revisions</b></em>' map.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int CONTRIBUTION__REVISIONS = PROJECT_FEATURE_COUNT + 11;
 
 	/**
-	 * The feature id for the '<em><b>State</b></em>' reference. <!-- begin-user-doc
+	 * The feature id for the '<em><b>State</b></em>' reference.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -371,9 +358,8 @@ public interface ClassMakerPackage extends EPackage {
 	int CONTRIBUTION__LATEST_VERSION = PROJECT_FEATURE_COUNT + 13;
 
 	/**
-	 * The feature id for the '<em><b>Model Resource Adapter</b></em>' reference.
+	 * The feature id for the '<em><b>Model Resource Adapter</b></em>' containment reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -389,10 +375,8 @@ public interface ClassMakerPackage extends EPackage {
 	int CONTRIBUTION_FEATURE_COUNT = PROJECT_FEATURE_COUNT + 15;
 
 	/**
-	 * The meta object id for the
-	 * '{@link org.enterprisedomain.classmaker.impl.ItemImpl <em>Item</em>}' class.
+	 * The meta object id for the '{@link org.enterprisedomain.classmaker.impl.ItemImpl <em>Item</em>}' class.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see org.enterprisedomain.classmaker.impl.ItemImpl
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getItem()
 	 * @generated
@@ -409,9 +393,9 @@ public interface ClassMakerPackage extends EPackage {
 	int ITEM__MODEL_NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Phase</b></em>' attribute. <!-- begin-user-doc
+	 * The feature id for the '<em><b>Phase</b></em>' attribute.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -438,16 +422,15 @@ public interface ClassMakerPackage extends EPackage {
 	/**
 	 * The feature id for the '<em><b>Domain Model</b></em>' containment reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int ITEM__DOMAIN_MODEL = 4;
 
 	/**
-	 * The feature id for the '<em><b>Customizers</b></em>' map. <!-- begin-user-doc
+	 * The feature id for the '<em><b>Customizers</b></em>' map.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -490,10 +473,8 @@ public interface ClassMakerPackage extends EPackage {
 	int ITEM_FEATURE_COUNT = 9;
 
 	/**
-	 * The meta object id for the
-	 * '{@link org.enterprisedomain.classmaker.impl.RevisionImpl <em>Revision</em>}'
-	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The meta object id for the '{@link org.enterprisedomain.classmaker.impl.RevisionImpl <em>Revision</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see org.enterprisedomain.classmaker.impl.RevisionImpl
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getRevision()
 	 * @generated
@@ -510,9 +491,9 @@ public interface ClassMakerPackage extends EPackage {
 	int REVISION__MODEL_NAME = ITEM__MODEL_NAME;
 
 	/**
-	 * The feature id for the '<em><b>Phase</b></em>' attribute. <!-- begin-user-doc
+	 * The feature id for the '<em><b>Phase</b></em>' attribute.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -539,16 +520,15 @@ public interface ClassMakerPackage extends EPackage {
 	/**
 	 * The feature id for the '<em><b>Domain Model</b></em>' containment reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int REVISION__DOMAIN_MODEL = ITEM__DOMAIN_MODEL;
 
 	/**
-	 * The feature id for the '<em><b>Customizers</b></em>' map. <!-- begin-user-doc
+	 * The feature id for the '<em><b>Customizers</b></em>' map.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -582,9 +562,9 @@ public interface ClassMakerPackage extends EPackage {
 	int REVISION__CONTRIBUTION = ITEM__CONTRIBUTION;
 
 	/**
-	 * The feature id for the '<em><b>State</b></em>' reference. <!-- begin-user-doc
+	 * The feature id for the '<em><b>State</b></em>' reference.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -627,10 +607,8 @@ public interface ClassMakerPackage extends EPackage {
 	int REVISION_FEATURE_COUNT = ITEM_FEATURE_COUNT + 4;
 
 	/**
-	 * The meta object id for the
-	 * '{@link org.enterprisedomain.classmaker.impl.StateImpl <em>State</em>}'
-	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The meta object id for the '{@link org.enterprisedomain.classmaker.impl.StateImpl <em>State</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see org.enterprisedomain.classmaker.impl.StateImpl
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getState()
 	 * @generated
@@ -647,9 +625,9 @@ public interface ClassMakerPackage extends EPackage {
 	int STATE__MODEL_NAME = ITEM__MODEL_NAME;
 
 	/**
-	 * The feature id for the '<em><b>Phase</b></em>' attribute. <!-- begin-user-doc
+	 * The feature id for the '<em><b>Phase</b></em>' attribute.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -676,16 +654,15 @@ public interface ClassMakerPackage extends EPackage {
 	/**
 	 * The feature id for the '<em><b>Domain Model</b></em>' containment reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int STATE__DOMAIN_MODEL = ITEM__DOMAIN_MODEL;
 
 	/**
-	 * The feature id for the '<em><b>Customizers</b></em>' map. <!-- begin-user-doc
+	 * The feature id for the '<em><b>Customizers</b></em>' map.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -730,7 +707,6 @@ public interface ClassMakerPackage extends EPackage {
 	/**
 	 * The feature id for the '<em><b>Required Plugins</b></em>' attribute list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -836,9 +812,8 @@ public interface ClassMakerPackage extends EPackage {
 	int STATE_FEATURE_COUNT = ITEM_FEATURE_COUNT + 12;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.common.notify.Adapter
-	 * <em>Adapter</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The meta object id for the '{@link org.eclipse.emf.common.notify.Adapter <em>Adapter</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see org.eclipse.emf.common.notify.Adapter
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getAdapter()
 	 * @generated
@@ -855,10 +830,8 @@ public interface ClassMakerPackage extends EPackage {
 	int ADAPTER_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the
-	 * '{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl
-	 * <em>Workspace</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The meta object id for the '{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl <em>Workspace</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see org.enterprisedomain.classmaker.impl.WorkspaceImpl
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getWorkspace()
 	 * @generated
@@ -868,7 +841,6 @@ public interface ClassMakerPackage extends EPackage {
 	/**
 	 * The feature id for the '<em><b>Projects</b></em>' containment reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -884,9 +856,9 @@ public interface ClassMakerPackage extends EPackage {
 	int WORKSPACE__RESOURCE_SET = ISCHEDULING_RULE_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Customizers</b></em>' map. <!-- begin-user-doc
+	 * The feature id for the '<em><b>Customizers</b></em>' map.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -902,11 +874,9 @@ public interface ClassMakerPackage extends EPackage {
 	int WORKSPACE_FEATURE_COUNT = ISCHEDULING_RULE_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the
-	 * '{@link org.enterprisedomain.classmaker.impl.IntegerToStateMapEntryImpl
-	 * <em>Integer To State Map Entry</em>}' class. <!-- begin-user-doc --> <!--
+	 * The meta object id for the '{@link org.enterprisedomain.classmaker.impl.IntegerToStateMapEntryImpl <em>Integer To State Map Entry</em>}' class.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @see org.enterprisedomain.classmaker.impl.IntegerToStateMapEntryImpl
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getIntegerToStateMapEntry()
 	 * @generated
@@ -914,9 +884,9 @@ public interface ClassMakerPackage extends EPackage {
 	int INTEGER_TO_STATE_MAP_ENTRY = 6;
 
 	/**
-	 * The feature id for the '<em><b>Key</b></em>' attribute. <!-- begin-user-doc
+	 * The feature id for the '<em><b>Key</b></em>' attribute.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -932,20 +902,17 @@ public interface ClassMakerPackage extends EPackage {
 	int INTEGER_TO_STATE_MAP_ENTRY__VALUE = 1;
 
 	/**
-	 * The number of structural features of the '<em>Integer To State Map
-	 * Entry</em>' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The number of structural features of the '<em>Integer To State Map Entry</em>' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
 	int INTEGER_TO_STATE_MAP_ENTRY_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the
-	 * '{@link org.enterprisedomain.classmaker.impl.VersionToRevisionMapEntryImpl
-	 * <em>Version To Revision Map Entry</em>}' class. <!-- begin-user-doc --> <!--
+	 * The meta object id for the '{@link org.enterprisedomain.classmaker.impl.VersionToRevisionMapEntryImpl <em>Version To Revision Map Entry</em>}' class.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @see org.enterprisedomain.classmaker.impl.VersionToRevisionMapEntryImpl
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getVersionToRevisionMapEntry()
 	 * @generated
@@ -953,9 +920,9 @@ public interface ClassMakerPackage extends EPackage {
 	int VERSION_TO_REVISION_MAP_ENTRY = 7;
 
 	/**
-	 * The feature id for the '<em><b>Key</b></em>' attribute. <!-- begin-user-doc
+	 * The feature id for the '<em><b>Key</b></em>' attribute.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -971,18 +938,16 @@ public interface ClassMakerPackage extends EPackage {
 	int VERSION_TO_REVISION_MAP_ENTRY__VALUE = 1;
 
 	/**
-	 * The number of structural features of the '<em>Version To Revision Map
-	 * Entry</em>' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The number of structural features of the '<em>Version To Revision Map Entry</em>' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
 	int VERSION_TO_REVISION_MAP_ENTRY_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link java.util.concurrent.Executor
-	 * <em>Executor</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The meta object id for the '{@link java.util.concurrent.Executor <em>Executor</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see java.util.concurrent.Executor
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getExecutor()
 	 * @generated
@@ -999,9 +964,8 @@ public interface ClassMakerPackage extends EPackage {
 	int EXECUTOR_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link java.util.concurrent.Future
-	 * <em>Future</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The meta object id for the '{@link java.util.concurrent.Future <em>Future</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see java.util.concurrent.Future
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getFuture()
 	 * @generated
@@ -1031,17 +995,14 @@ public interface ClassMakerPackage extends EPackage {
 	/**
 	 * The number of structural features of the '<em>IAdapter Factory</em>' class.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int IADAPTER_FACTORY_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the
-	 * '{@link org.enterprisedomain.classmaker.impl.CustomizerImpl
-	 * <em>Customizer</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The meta object id for the '{@link org.enterprisedomain.classmaker.impl.CustomizerImpl <em>Customizer</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see org.enterprisedomain.classmaker.impl.CustomizerImpl
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getCustomizer()
 	 * @generated
@@ -1049,9 +1010,9 @@ public interface ClassMakerPackage extends EPackage {
 	int CUSTOMIZER = 12;
 
 	/**
-	 * The feature id for the '<em><b>Rank</b></em>' attribute. <!-- begin-user-doc
+	 * The feature id for the '<em><b>Rank</b></em>' attribute.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -1067,10 +1028,8 @@ public interface ClassMakerPackage extends EPackage {
 	int CUSTOMIZER_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the
-	 * '{@link org.enterprisedomain.classmaker.impl.StageQualifierImpl <em>Stage
-	 * Qualifier</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The meta object id for the '{@link org.enterprisedomain.classmaker.impl.StageQualifierImpl <em>Stage Qualifier</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see org.enterprisedomain.classmaker.impl.StageQualifierImpl
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getStageQualifier()
 	 * @generated
@@ -1078,18 +1037,18 @@ public interface ClassMakerPackage extends EPackage {
 	int STAGE_QUALIFIER = 13;
 
 	/**
-	 * The feature id for the '<em><b>Stage</b></em>' attribute. <!-- begin-user-doc
+	 * The feature id for the '<em><b>Stage</b></em>' attribute.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int STAGE_QUALIFIER__STAGE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Step</b></em>' attribute. <!-- begin-user-doc
+	 * The feature id for the '<em><b>Step</b></em>' attribute.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -1098,18 +1057,15 @@ public interface ClassMakerPackage extends EPackage {
 	/**
 	 * The number of structural features of the '<em>Stage Qualifier</em>' class.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int STAGE_QUALIFIER_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the
-	 * '{@link org.enterprisedomain.classmaker.impl.StageQualifierToCustomizerMapEntryImpl
-	 * <em>Stage Qualifier To Customizer Map Entry</em>}' class. <!-- begin-user-doc
+	 * The meta object id for the '{@link org.enterprisedomain.classmaker.impl.StageQualifierToCustomizerMapEntryImpl <em>Stage Qualifier To Customizer Map Entry</em>}' class.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @see org.enterprisedomain.classmaker.impl.StageQualifierToCustomizerMapEntryImpl
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getStageQualifierToCustomizerMapEntry()
 	 * @generated
@@ -1117,9 +1073,9 @@ public interface ClassMakerPackage extends EPackage {
 	int STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY = 14;
 
 	/**
-	 * The feature id for the '<em><b>Key</b></em>' reference. <!-- begin-user-doc
+	 * The feature id for the '<em><b>Key</b></em>' reference.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -1135,19 +1091,16 @@ public interface ClassMakerPackage extends EPackage {
 	int STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY__VALUE = 1;
 
 	/**
-	 * The number of structural features of the '<em>Stage Qualifier To Customizer
-	 * Map Entry</em>' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The number of structural features of the '<em>Stage Qualifier To Customizer Map Entry</em>' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
 	int STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the
-	 * '{@link org.enterprisedomain.classmaker.impl.ModelPairImpl <em>Model
-	 * Pair</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The meta object id for the '{@link org.enterprisedomain.classmaker.impl.ModelPairImpl <em>Model Pair</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see org.enterprisedomain.classmaker.impl.ModelPairImpl
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getModelPair()
 	 * @generated
@@ -1191,10 +1144,8 @@ public interface ClassMakerPackage extends EPackage {
 	int MODEL_PAIR_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the
-	 * '{@link org.enterprisedomain.classmaker.impl.SCMOperatorImpl <em>SCM
-	 * Operator</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The meta object id for the '{@link org.enterprisedomain.classmaker.impl.SCMOperatorImpl <em>SCM Operator</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see org.enterprisedomain.classmaker.impl.SCMOperatorImpl
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getSCMOperator()
 	 * @generated
@@ -1220,10 +1171,8 @@ public interface ClassMakerPackage extends EPackage {
 	int SCM_OPERATOR_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the
-	 * '{@link org.enterprisedomain.classmaker.impl.SCMRegistryImpl <em>SCM
-	 * Registry</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The meta object id for the '{@link org.enterprisedomain.classmaker.impl.SCMRegistryImpl <em>SCM Registry</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see org.enterprisedomain.classmaker.impl.SCMRegistryImpl
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getSCMRegistry()
 	 * @generated
@@ -1240,9 +1189,8 @@ public interface ClassMakerPackage extends EPackage {
 	int SCM_REGISTRY_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.ecore.resource.Resource
-	 * <em>Resource</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The meta object id for the '{@link org.eclipse.emf.ecore.resource.Resource <em>Resource</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.resource.Resource
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getResource()
 	 * @generated
@@ -1259,11 +1207,9 @@ public interface ClassMakerPackage extends EPackage {
 	int RESOURCE_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the
-	 * '{@link org.enterprisedomain.classmaker.impl.CompletionListenerImpl
-	 * <em>Completion Listener</em>}' class. <!-- begin-user-doc --> <!--
+	 * The meta object id for the '{@link org.enterprisedomain.classmaker.impl.CompletionListenerImpl <em>Completion Listener</em>}' class.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @see org.enterprisedomain.classmaker.impl.CompletionListenerImpl
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getCompletionListener()
 	 * @generated
@@ -1271,30 +1217,25 @@ public interface ClassMakerPackage extends EPackage {
 	int COMPLETION_LISTENER = 20;
 
 	/**
-	 * The number of structural features of the '<em>Completion Listener</em>'
-	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The number of structural features of the '<em>Completion Listener</em>' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
 	int COMPLETION_LISTENER_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the
-	 * '{@link org.enterprisedomain.classmaker.jobs.Worker <em>Worker</em>}' class.
+	 * The meta object id for the '{@link org.enterprisedomain.classmaker.jobs.Worker <em>Worker</em>}' class.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see org.enterprisedomain.classmaker.jobs.Worker
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getWorker()
 	 * @generated
 	 */
-	int WORKER = 24;
+	int WORKER = 25;
 
 	/**
-	 * The meta object id for the
-	 * '{@link org.enterprisedomain.classmaker.impl.ResourceAdapterImpl <em>Resource
-	 * Adapter</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The meta object id for the '{@link org.enterprisedomain.classmaker.impl.ResourceAdapterImpl <em>Resource Adapter</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see org.enterprisedomain.classmaker.impl.ResourceAdapterImpl
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getResourceAdapter()
 	 * @generated
@@ -1320,24 +1261,30 @@ public interface ClassMakerPackage extends EPackage {
 	int RESOURCE_ADAPTER__FILENAME = ADAPTER_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the '<em>Resource Adapter</em>' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The feature id for the '<em><b>Project</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE_ADAPTER_FEATURE_COUNT = ADAPTER_FEATURE_COUNT + 2;
+	int RESOURCE_ADAPTER__PROJECT = ADAPTER_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the
-	 * '{@link org.enterprisedomain.classmaker.impl.ClassMakerPlantImpl
-	 * <em>Plant</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPlantImpl
-	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getClassMakerPlant()
+	 * The number of structural features of the '<em>Resource Adapter</em>' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOURCE_ADAPTER_FEATURE_COUNT = ADAPTER_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link org.enterprisedomain.classmaker.impl.ClassMakerServiceImpl <em>Service</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see org.enterprisedomain.classmaker.impl.ClassMakerServiceImpl
+	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getClassMakerService()
 	 * @generated
 	 */
-	int CLASS_MAKER_PLANT = 22;
+	int CLASS_MAKER_SERVICE = 22;
 
 	/**
 	 * The feature id for the '<em><b>Workspace</b></em>' reference. <!--
@@ -1346,51 +1293,93 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_MAKER_PLANT__WORKSPACE = 0;
+	int CLASS_MAKER_SERVICE__WORKSPACE = 0;
 
 	/**
-	 * The feature id for the '<em><b>SCM Registry</b></em>' attribute. <!--
+	 * The feature id for the '<em><b>SCM Registry</b></em>' reference. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_MAKER_PLANT__SCM_REGISTRY = 1;
+	int CLASS_MAKER_SERVICE__SCM_REGISTRY = 1;
 
 	/**
-	 * The number of structural features of the '<em>Plant</em>' class. <!--
+	 * The number of structural features of the '<em>Service</em>' class. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_MAKER_PLANT_FEATURE_COUNT = 2;
+	int CLASS_MAKER_SERVICE_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the
-	 * '{@link org.enterprisedomain.classmaker.impl.CompletionNotificationAdapterImpl
-	 * <em>Completion Notification Adapter</em>}' class. <!-- begin-user-doc -->
+	 * The meta object id for the '{@link org.enterprisedomain.classmaker.impl.BlueprintImpl <em>Blueprint</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see org.enterprisedomain.classmaker.impl.BlueprintImpl
+	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getBlueprint()
+	 * @generated
+	 */
+	int BLUEPRINT = 23;
+
+	/**
+	 * The feature id for the '<em><b>Dynamic Model</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int BLUEPRINT__DYNAMIC_MODEL = 0;
+
+	/**
+	 * The feature id for the '<em><b>Dependencies</b></em>' attribute list. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int BLUEPRINT__DEPENDENCIES = 1;
+
+	/**
+	 * The feature id for the '<em><b>Completion Listeners</b></em>' reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BLUEPRINT__COMPLETION_LISTENERS = 2;
+
+	/**
+	 * The number of structural features of the '<em>Blueprint</em>' class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int BLUEPRINT_FEATURE_COUNT = 3;
+
+	/**
+	 * The meta object id for the '{@link org.enterprisedomain.classmaker.impl.CompletionNotificationAdapterImpl <em>Completion Notification Adapter</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see org.enterprisedomain.classmaker.impl.CompletionNotificationAdapterImpl
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getCompletionNotificationAdapter()
 	 * @generated
 	 */
-	int COMPLETION_NOTIFICATION_ADAPTER = 23;
+	int COMPLETION_NOTIFICATION_ADAPTER = 24;
 
 	/**
-	 * The feature id for the '<em><b>Error</b></em>' attribute. <!-- begin-user-doc
+	 * The feature id for the '<em><b>Error</b></em>' attribute.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
 	int COMPLETION_NOTIFICATION_ADAPTER__ERROR = ADAPTER_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Completion Notification
-	 * Adapter</em>' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The number of structural features of the '<em>Completion Notification Adapter</em>' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1406,24 +1395,23 @@ public interface ClassMakerPackage extends EPackage {
 	int WORKER_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the '<em>Locale</em>' data type. <!-- begin-user-doc
+	 * The meta object id for the '<em>Locale</em>' data type.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @see java.util.Locale
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getLocale()
 	 * @generated
 	 */
-	int LOCALE = 35;
+	int LOCALE = 36;
 
 	/**
-	 * The meta object id for the '{@link org.enterprisedomain.classmaker.Stage
-	 * <em>Stage</em>}' enum. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The meta object id for the '{@link org.enterprisedomain.classmaker.Stage <em>Stage</em>}' enum.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see org.enterprisedomain.classmaker.Stage
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getStage()
 	 * @generated
 	 */
-	int STAGE = 25;
+	int STAGE = 26;
 
 	/**
 	 * The meta object id for the '<em>Properties</em>' data type. <!--
@@ -1433,7 +1421,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getProperties()
 	 * @generated
 	 */
-	int PROPERTIES = 26;
+	int PROPERTIES = 27;
 
 	/**
 	 * The meta object id for the '<em>IProgress Monitor</em>' data type. <!--
@@ -1443,7 +1431,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getIProgressMonitor()
 	 * @generated
 	 */
-	int IPROGRESS_MONITOR = 27;
+	int IPROGRESS_MONITOR = 28;
 
 	/**
 	 * The meta object id for the '<em>OS Gi Version</em>' data type. <!--
@@ -1453,7 +1441,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getOSGiVersion()
 	 * @generated
 	 */
-	int OS_GI_VERSION = 28;
+	int OS_GI_VERSION = 29;
 
 	/**
 	 * The meta object id for the '<em>Semaphore</em>' data type. <!--
@@ -1463,7 +1451,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getSemaphore()
 	 * @generated
 	 */
-	int SEMAPHORE = 29;
+	int SEMAPHORE = 30;
 
 	/**
 	 * The meta object id for the '<em>Core Exception</em>' data type. <!--
@@ -1473,37 +1461,36 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getCoreException()
 	 * @generated
 	 */
-	int CORE_EXCEPTION = 30;
+	int CORE_EXCEPTION = 31;
 
 	/**
 	 * The meta object id for the '<em>Invocation Target Exception</em>' data type.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see java.lang.reflect.InvocationTargetException
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getInvocationTargetException()
 	 * @generated
 	 */
-	int INVOCATION_TARGET_EXCEPTION = 31;
+	int INVOCATION_TARGET_EXCEPTION = 32;
 
 	/**
-	 * The meta object id for the '<em>IStatus</em>' data type. <!-- begin-user-doc
+	 * The meta object id for the '<em>IStatus</em>' data type.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @see org.eclipse.core.runtime.IStatus
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getIStatus()
 	 * @generated
 	 */
-	int ISTATUS = 32;
+	int ISTATUS = 33;
 
 	/**
-	 * The meta object id for the '<em>URI</em>' data type. <!-- begin-user-doc -->
+	 * The meta object id for the '<em>URI</em>' data type.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see org.eclipse.emf.common.util.URI
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getURI()
 	 * @generated
 	 */
-	int URI = 33;
+	int URI = 34;
 
 	/**
 	 * The meta object id for the '<em>Exception</em>' data type. <!--
@@ -1513,13 +1500,11 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getException()
 	 * @generated
 	 */
-	int EXCEPTION = 34;
+	int EXCEPTION = 35;
 
 	/**
-	 * Returns the meta object for class
-	 * '{@link org.enterprisedomain.classmaker.Contribution <em>Contribution</em>}'.
+	 * Returns the meta object for class '{@link org.enterprisedomain.classmaker.Contribution <em>Contribution</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @return the meta object for class '<em>Contribution</em>'.
 	 * @see org.enterprisedomain.classmaker.Contribution
 	 * @generated
@@ -1527,10 +1512,8 @@ public interface ClassMakerPackage extends EPackage {
 	EClass getContribution();
 
 	/**
-	 * Returns the meta object for the attribute list
-	 * '{@link org.enterprisedomain.classmaker.Contribution#getDependencies
-	 * <em>Dependencies</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the attribute list '{@link org.enterprisedomain.classmaker.Contribution#getDependencies <em>Dependencies</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute list '<em>Dependencies</em>'.
 	 * @see org.enterprisedomain.classmaker.Contribution#getDependencies()
 	 * @see #getContribution()
@@ -1539,10 +1522,8 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getContribution_Dependencies();
 
 	/**
-	 * Returns the meta object for the reference
-	 * '{@link org.enterprisedomain.classmaker.Contribution#getRevision
-	 * <em>Revision</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the reference '{@link org.enterprisedomain.classmaker.Contribution#getRevision <em>Revision</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Revision</em>'.
 	 * @see org.enterprisedomain.classmaker.Contribution#getRevision()
 	 * @see #getContribution()
@@ -1551,10 +1532,8 @@ public interface ClassMakerPackage extends EPackage {
 	EReference getContribution_Revision();
 
 	/**
-	 * Returns the meta object for the map
-	 * '{@link org.enterprisedomain.classmaker.Contribution#getRevisions
-	 * <em>Revisions</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the map '{@link org.enterprisedomain.classmaker.Contribution#getRevisions <em>Revisions</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the map '<em>Revisions</em>'.
 	 * @see org.enterprisedomain.classmaker.Contribution#getRevisions()
 	 * @see #getContribution()
@@ -1563,10 +1542,8 @@ public interface ClassMakerPackage extends EPackage {
 	EReference getContribution_Revisions();
 
 	/**
-	 * Returns the meta object for the reference
-	 * '{@link org.enterprisedomain.classmaker.Contribution#getState
-	 * <em>State</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the reference '{@link org.enterprisedomain.classmaker.Contribution#getState <em>State</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>State</em>'.
 	 * @see org.enterprisedomain.classmaker.Contribution#getState()
 	 * @see #getContribution()
@@ -1575,10 +1552,8 @@ public interface ClassMakerPackage extends EPackage {
 	EReference getContribution_State();
 
 	/**
-	 * Returns the meta object for the attribute
-	 * '{@link org.enterprisedomain.classmaker.Contribution#getLatestVersion
-	 * <em>Latest Version</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the attribute '{@link org.enterprisedomain.classmaker.Contribution#getLatestVersion <em>Latest Version</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Latest Version</em>'.
 	 * @see org.enterprisedomain.classmaker.Contribution#getLatestVersion()
 	 * @see #getContribution()
@@ -1611,10 +1586,8 @@ public interface ClassMakerPackage extends EPackage {
 	EClass getRevision();
 
 	/**
-	 * Returns the meta object for the reference
-	 * '{@link org.enterprisedomain.classmaker.Revision#getState <em>State</em>}'.
+	 * Returns the meta object for the reference '{@link org.enterprisedomain.classmaker.Revision#getState <em>State</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @return the meta object for the reference '<em>State</em>'.
 	 * @see org.enterprisedomain.classmaker.Revision#getState()
 	 * @see #getRevision()
@@ -1623,10 +1596,8 @@ public interface ClassMakerPackage extends EPackage {
 	EReference getRevision_State();
 
 	/**
-	 * Returns the meta object for the attribute
-	 * '{@link org.enterprisedomain.classmaker.Revision#getTimestamp
-	 * <em>Timestamp</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the attribute '{@link org.enterprisedomain.classmaker.Revision#getTimestamp <em>Timestamp</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Timestamp</em>'.
 	 * @see org.enterprisedomain.classmaker.Revision#getTimestamp()
 	 * @see #getRevision()
@@ -1635,10 +1606,8 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getRevision_Timestamp();
 
 	/**
-	 * Returns the meta object for the map
-	 * '{@link org.enterprisedomain.classmaker.Revision#getStateHistory <em>State
-	 * History</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the map '{@link org.enterprisedomain.classmaker.Revision#getStateHistory <em>State History</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the map '<em>State History</em>'.
 	 * @see org.enterprisedomain.classmaker.Revision#getStateHistory()
 	 * @see #getRevision()
@@ -1647,10 +1616,8 @@ public interface ClassMakerPackage extends EPackage {
 	EReference getRevision_StateHistory();
 
 	/**
-	 * Returns the meta object for the attribute
-	 * '{@link org.enterprisedomain.classmaker.Revision#getLatestTimestamp
-	 * <em>Latest Timestamp</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the attribute '{@link org.enterprisedomain.classmaker.Revision#getLatestTimestamp <em>Latest Timestamp</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Latest Timestamp</em>'.
 	 * @see org.enterprisedomain.classmaker.Revision#getLatestTimestamp()
 	 * @see #getRevision()
@@ -1670,10 +1637,8 @@ public interface ClassMakerPackage extends EPackage {
 	EClass getState();
 
 	/**
-	 * Returns the meta object for the attribute
-	 * '{@link org.enterprisedomain.classmaker.State#getPackageClassName <em>Package
-	 * Class Name</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the attribute '{@link org.enterprisedomain.classmaker.State#getPackageClassName <em>Package Class Name</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Package Class Name</em>'.
 	 * @see org.enterprisedomain.classmaker.State#getPackageClassName()
 	 * @see #getState()
@@ -1682,10 +1647,8 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getState_PackageClassName();
 
 	/**
-	 * Returns the meta object for the attribute list
-	 * '{@link org.enterprisedomain.classmaker.State#getRequiredPlugins <em>Required
-	 * Plugins</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the attribute list '{@link org.enterprisedomain.classmaker.State#getRequiredPlugins <em>Required Plugins</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute list '<em>Required Plugins</em>'.
 	 * @see org.enterprisedomain.classmaker.State#getRequiredPlugins()
 	 * @see #getState()
@@ -1694,10 +1657,8 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getState_RequiredPlugins();
 
 	/**
-	 * Returns the meta object for the reference
-	 * '{@link org.enterprisedomain.classmaker.State#getRevision
-	 * <em>Revision</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the reference '{@link org.enterprisedomain.classmaker.State#getRevision <em>Revision</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Revision</em>'.
 	 * @see org.enterprisedomain.classmaker.State#getRevision()
 	 * @see #getState()
@@ -1706,10 +1667,8 @@ public interface ClassMakerPackage extends EPackage {
 	EReference getState_Revision();
 
 	/**
-	 * Returns the meta object for the attribute
-	 * '{@link org.enterprisedomain.classmaker.State#getTimestamp
-	 * <em>Timestamp</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the attribute '{@link org.enterprisedomain.classmaker.State#getTimestamp <em>Timestamp</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Timestamp</em>'.
 	 * @see org.enterprisedomain.classmaker.State#getTimestamp()
 	 * @see #getState()
@@ -1731,10 +1690,8 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getState_DeployableUnitName();
 
 	/**
-	 * Returns the meta object for the attribute
-	 * '{@link org.enterprisedomain.classmaker.State#getJobFamily <em>Job
-	 * Family</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the attribute '{@link org.enterprisedomain.classmaker.State#getJobFamily <em>Job Family</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Job Family</em>'.
 	 * @see org.enterprisedomain.classmaker.State#getJobFamily()
 	 * @see #getState()
@@ -1743,10 +1700,8 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getState_JobFamily();
 
 	/**
-	 * Returns the meta object for the reference
-	 * '{@link org.enterprisedomain.classmaker.State#getResource
-	 * <em>Resource</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the reference '{@link org.enterprisedomain.classmaker.State#getResource <em>Resource</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Resource</em>'.
 	 * @see org.enterprisedomain.classmaker.State#getResource()
 	 * @see #getState()
@@ -1755,10 +1710,8 @@ public interface ClassMakerPackage extends EPackage {
 	EReference getState_Resource();
 
 	/**
-	 * Returns the meta object for the attribute list
-	 * '{@link org.enterprisedomain.classmaker.State#getCommitIds <em>Commit
-	 * Ids</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the attribute list '{@link org.enterprisedomain.classmaker.State#getCommitIds <em>Commit Ids</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute list '<em>Commit Ids</em>'.
 	 * @see org.enterprisedomain.classmaker.State#getCommitIds()
 	 * @see #getState()
@@ -1767,10 +1720,8 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getState_CommitIds();
 
 	/**
-	 * Returns the meta object for the attribute
-	 * '{@link org.enterprisedomain.classmaker.State#getCommitId <em>Commit
-	 * Id</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the attribute '{@link org.enterprisedomain.classmaker.State#getCommitId <em>Commit Id</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Commit Id</em>'.
 	 * @see org.enterprisedomain.classmaker.State#getCommitId()
 	 * @see #getState()
@@ -1779,10 +1730,8 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getState_CommitId();
 
 	/**
-	 * Returns the meta object for the map
-	 * '{@link org.enterprisedomain.classmaker.State#getStateCustomizers <em>State
-	 * Customizers</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the map '{@link org.enterprisedomain.classmaker.State#getStateCustomizers <em>State Customizers</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the map '<em>State Customizers</em>'.
 	 * @see org.enterprisedomain.classmaker.State#getStateCustomizers()
 	 * @see #getState()
@@ -1791,10 +1740,8 @@ public interface ClassMakerPackage extends EPackage {
 	EReference getState_StateCustomizers();
 
 	/**
-	 * Returns the meta object for the attribute
-	 * '{@link org.enterprisedomain.classmaker.State#getProjectName <em>Project
-	 * Name</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the attribute '{@link org.enterprisedomain.classmaker.State#getProjectName <em>Project Name</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Project Name</em>'.
 	 * @see org.enterprisedomain.classmaker.State#getProjectName()
 	 * @see #getState()
@@ -1803,10 +1750,8 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getState_ProjectName();
 
 	/**
-	 * Returns the meta object for the attribute
-	 * '{@link org.enterprisedomain.classmaker.State#isMaking <em>Making</em>}'.
+	 * Returns the meta object for the attribute '{@link org.enterprisedomain.classmaker.State#isMaking <em>Making</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @return the meta object for the attribute '<em>Making</em>'.
 	 * @see org.enterprisedomain.classmaker.State#isMaking()
 	 * @see #getState()
@@ -1826,10 +1771,8 @@ public interface ClassMakerPackage extends EPackage {
 	EClass getItem();
 
 	/**
-	 * Returns the meta object for the attribute
-	 * '{@link org.enterprisedomain.classmaker.Item#getModelName <em>Model
-	 * Name</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the attribute '{@link org.enterprisedomain.classmaker.Item#getModelName <em>Model Name</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Model Name</em>'.
 	 * @see org.enterprisedomain.classmaker.Item#getModelName()
 	 * @see #getItem()
@@ -1850,10 +1793,8 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getItem_Phase();
 
 	/**
-	 * Returns the meta object for the attribute
-	 * '{@link org.enterprisedomain.classmaker.Item#getVersion <em>Version</em>}'.
+	 * Returns the meta object for the attribute '{@link org.enterprisedomain.classmaker.Item#getVersion <em>Version</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @return the meta object for the attribute '<em>Version</em>'.
 	 * @see org.enterprisedomain.classmaker.Item#getVersion()
 	 * @see #getItem()
@@ -1862,10 +1803,8 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getItem_Version();
 
 	/**
-	 * Returns the meta object for the attribute
-	 * '{@link org.enterprisedomain.classmaker.Item#getLanguage <em>Language</em>}'.
+	 * Returns the meta object for the attribute '{@link org.enterprisedomain.classmaker.Item#getLanguage <em>Language</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @return the meta object for the attribute '<em>Language</em>'.
 	 * @see org.enterprisedomain.classmaker.Item#getLanguage()
 	 * @see #getItem()
@@ -1874,12 +1813,9 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getItem_Language();
 
 	/**
-	 * Returns the meta object for the containment reference
-	 * '{@link org.enterprisedomain.classmaker.Item#getDomainModel <em>Domain
-	 * Model</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for the containment reference '<em>Domain
-	 *         Model</em>'.
+	 * Returns the meta object for the containment reference '{@link org.enterprisedomain.classmaker.Item#getDomainModel <em>Domain Model</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Domain Model</em>'.
 	 * @see org.enterprisedomain.classmaker.Item#getDomainModel()
 	 * @see #getItem()
 	 * @generated
@@ -1887,10 +1823,8 @@ public interface ClassMakerPackage extends EPackage {
 	EReference getItem_DomainModel();
 
 	/**
-	 * Returns the meta object for the map
-	 * '{@link org.enterprisedomain.classmaker.Item#getCustomizers
-	 * <em>Customizers</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the map '{@link org.enterprisedomain.classmaker.Item#getCustomizers <em>Customizers</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the map '<em>Customizers</em>'.
 	 * @see org.enterprisedomain.classmaker.Item#getCustomizers()
 	 * @see #getItem()
@@ -1899,10 +1833,8 @@ public interface ClassMakerPackage extends EPackage {
 	EReference getItem_Customizers();
 
 	/**
-	 * Returns the meta object for the reference
-	 * '{@link org.enterprisedomain.classmaker.Item#getParent <em>Parent</em>}'.
+	 * Returns the meta object for the reference '{@link org.enterprisedomain.classmaker.Item#getParent <em>Parent</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @return the meta object for the reference '<em>Parent</em>'.
 	 * @see org.enterprisedomain.classmaker.Item#getParent()
 	 * @see #getItem()
@@ -1911,10 +1843,8 @@ public interface ClassMakerPackage extends EPackage {
 	EReference getItem_Parent();
 
 	/**
-	 * Returns the meta object for the attribute
-	 * '{@link org.enterprisedomain.classmaker.Item#getLocale <em>Locale</em>}'.
+	 * Returns the meta object for the attribute '{@link org.enterprisedomain.classmaker.Item#getLocale <em>Locale</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @return the meta object for the attribute '<em>Locale</em>'.
 	 * @see org.enterprisedomain.classmaker.Item#getLocale()
 	 * @see #getItem()
@@ -1923,10 +1853,8 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getItem_Locale();
 
 	/**
-	 * Returns the meta object for the reference
-	 * '{@link org.enterprisedomain.classmaker.Item#getContribution
-	 * <em>Contribution</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the reference '{@link org.enterprisedomain.classmaker.Item#getContribution <em>Contribution</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Contribution</em>'.
 	 * @see org.enterprisedomain.classmaker.Item#getContribution()
 	 * @see #getItem()
@@ -1958,12 +1886,9 @@ public interface ClassMakerPackage extends EPackage {
 	EClass getWorkspace();
 
 	/**
-	 * Returns the meta object for the containment reference list
-	 * '{@link org.enterprisedomain.classmaker.Workspace#getProjects
-	 * <em>Projects</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for the containment reference list
-	 *         '<em>Projects</em>'.
+	 * Returns the meta object for the containment reference list '{@link org.enterprisedomain.classmaker.Workspace#getProjects <em>Projects</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Projects</em>'.
 	 * @see org.enterprisedomain.classmaker.Workspace#getProjects()
 	 * @see #getWorkspace()
 	 * @generated
@@ -1971,10 +1896,8 @@ public interface ClassMakerPackage extends EPackage {
 	EReference getWorkspace_Projects();
 
 	/**
-	 * Returns the meta object for the attribute
-	 * '{@link org.enterprisedomain.classmaker.Workspace#getResourceSet <em>Resource
-	 * Set</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the attribute '{@link org.enterprisedomain.classmaker.Workspace#getResourceSet <em>Resource Set</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Resource Set</em>'.
 	 * @see org.enterprisedomain.classmaker.Workspace#getResourceSet()
 	 * @see #getWorkspace()
@@ -1983,10 +1906,8 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getWorkspace_ResourceSet();
 
 	/**
-	 * Returns the meta object for the map
-	 * '{@link org.enterprisedomain.classmaker.Workspace#getCustomizers
-	 * <em>Customizers</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the map '{@link org.enterprisedomain.classmaker.Workspace#getCustomizers <em>Customizers</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the map '<em>Customizers</em>'.
 	 * @see org.enterprisedomain.classmaker.Workspace#getCustomizers()
 	 * @see #getWorkspace()
@@ -1995,22 +1916,19 @@ public interface ClassMakerPackage extends EPackage {
 	EReference getWorkspace_Customizers();
 
 	/**
-	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Integer To
-	 * State Map Entry</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Integer To State Map Entry</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Integer To State Map Entry</em>'.
 	 * @see java.util.Map.Entry
 	 * @model keyDataType="org.eclipse.emf.ecore.EIntegerObject"
-	 *        valueType="org.enterprisedomain.classmaker.State"
-	 *        valueContainment="true"
+	 *        valueType="org.enterprisedomain.classmaker.State" valueContainment="true"
 	 * @generated
 	 */
 	EClass getIntegerToStateMapEntry();
 
 	/**
-	 * Returns the meta object for the attribute '{@link java.util.Map.Entry
-	 * <em>Key</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Key</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Key</em>'.
 	 * @see java.util.Map.Entry
 	 * @see #getIntegerToStateMapEntry()
@@ -2019,10 +1937,9 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getIntegerToStateMapEntry_Key();
 
 	/**
-	 * Returns the meta object for the containment reference
-	 * '{@link java.util.Map.Entry <em>Value</em>}'. <!-- begin-user-doc --> <!--
+	 * Returns the meta object for the containment reference '{@link java.util.Map.Entry <em>Value</em>}'.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @return the meta object for the containment reference '<em>Value</em>'.
 	 * @see java.util.Map.Entry
 	 * @see #getIntegerToStateMapEntry()
@@ -2031,22 +1948,19 @@ public interface ClassMakerPackage extends EPackage {
 	EReference getIntegerToStateMapEntry_Value();
 
 	/**
-	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Version To
-	 * Revision Map Entry</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Version To Revision Map Entry</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Version To Revision Map Entry</em>'.
 	 * @see java.util.Map.Entry
 	 * @model keyDataType="org.enterprisedomain.classmaker.OSGiVersion"
-	 *        valueType="org.enterprisedomain.classmaker.Revision"
-	 *        valueContainment="true"
+	 *        valueType="org.enterprisedomain.classmaker.Revision" valueContainment="true"
 	 * @generated
 	 */
 	EClass getVersionToRevisionMapEntry();
 
 	/**
-	 * Returns the meta object for the attribute '{@link java.util.Map.Entry
-	 * <em>Key</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Key</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Key</em>'.
 	 * @see java.util.Map.Entry
 	 * @see #getVersionToRevisionMapEntry()
@@ -2055,10 +1969,9 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getVersionToRevisionMapEntry_Key();
 
 	/**
-	 * Returns the meta object for the containment reference
-	 * '{@link java.util.Map.Entry <em>Value</em>}'. <!-- begin-user-doc --> <!--
+	 * Returns the meta object for the containment reference '{@link java.util.Map.Entry <em>Value</em>}'.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @return the meta object for the containment reference '<em>Value</em>'.
 	 * @see java.util.Map.Entry
 	 * @see #getVersionToRevisionMapEntry()
@@ -2067,10 +1980,8 @@ public interface ClassMakerPackage extends EPackage {
 	EReference getVersionToRevisionMapEntry_Value();
 
 	/**
-	 * Returns the meta object for class
-	 * '{@link org.eclipse.core.runtime.jobs.ISchedulingRule <em>IScheduling
-	 * Rule</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for class '{@link org.eclipse.core.runtime.jobs.ISchedulingRule <em>IScheduling Rule</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for class '<em>IScheduling Rule</em>'.
 	 * @see org.eclipse.core.runtime.jobs.ISchedulingRule
 	 * @model instanceClass="org.eclipse.core.runtime.jobs.ISchedulingRule"
@@ -2079,9 +1990,8 @@ public interface ClassMakerPackage extends EPackage {
 	EClass getISchedulingRule();
 
 	/**
-	 * Returns the meta object for class '{@link java.util.concurrent.Executor
-	 * <em>Executor</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for class '{@link java.util.concurrent.Executor <em>Executor</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Executor</em>'.
 	 * @see java.util.concurrent.Executor
 	 * @model instanceClass="java.util.concurrent.Executor"
@@ -2090,9 +2000,8 @@ public interface ClassMakerPackage extends EPackage {
 	EClass getExecutor();
 
 	/**
-	 * Returns the meta object for class '{@link java.util.concurrent.Future
-	 * <em>Future</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for class '{@link java.util.concurrent.Future <em>Future</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Future</em>'.
 	 * @see java.util.concurrent.Future
 	 * @model instanceClass="java.util.concurrent.Future" typeParameters="V"
@@ -2101,10 +2010,8 @@ public interface ClassMakerPackage extends EPackage {
 	EClass getFuture();
 
 	/**
-	 * Returns the meta object for class
-	 * '{@link org.eclipse.core.runtime.IAdapterFactory <em>IAdapter Factory</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.core.runtime.IAdapterFactory <em>IAdapter Factory</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @return the meta object for class '<em>IAdapter Factory</em>'.
 	 * @see org.eclipse.core.runtime.IAdapterFactory
 	 * @model instanceClass="org.eclipse.core.runtime.IAdapterFactory"
@@ -2113,10 +2020,8 @@ public interface ClassMakerPackage extends EPackage {
 	EClass getIAdapterFactory();
 
 	/**
-	 * Returns the meta object for class
-	 * '{@link org.enterprisedomain.classmaker.Customizer <em>Customizer</em>}'.
+	 * Returns the meta object for class '{@link org.enterprisedomain.classmaker.Customizer <em>Customizer</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @return the meta object for class '<em>Customizer</em>'.
 	 * @see org.enterprisedomain.classmaker.Customizer
 	 * @generated
@@ -2124,10 +2029,8 @@ public interface ClassMakerPackage extends EPackage {
 	EClass getCustomizer();
 
 	/**
-	 * Returns the meta object for the attribute
-	 * '{@link org.enterprisedomain.classmaker.Customizer#getRank <em>Rank</em>}'.
+	 * Returns the meta object for the attribute '{@link org.enterprisedomain.classmaker.Customizer#getRank <em>Rank</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @return the meta object for the attribute '<em>Rank</em>'.
 	 * @see org.enterprisedomain.classmaker.Customizer#getRank()
 	 * @see #getCustomizer()
@@ -2136,10 +2039,8 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getCustomizer_Rank();
 
 	/**
-	 * Returns the meta object for class
-	 * '{@link org.enterprisedomain.classmaker.StageQualifier <em>Stage
-	 * Qualifier</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for class '{@link org.enterprisedomain.classmaker.StageQualifier <em>Stage Qualifier</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Stage Qualifier</em>'.
 	 * @see org.enterprisedomain.classmaker.StageQualifier
 	 * @generated
@@ -2147,10 +2048,8 @@ public interface ClassMakerPackage extends EPackage {
 	EClass getStageQualifier();
 
 	/**
-	 * Returns the meta object for the attribute
-	 * '{@link org.enterprisedomain.classmaker.StageQualifier#getStage
-	 * <em>Stage</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the attribute '{@link org.enterprisedomain.classmaker.StageQualifier#getStage <em>Stage</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Stage</em>'.
 	 * @see org.enterprisedomain.classmaker.StageQualifier#getStage()
 	 * @see #getStageQualifier()
@@ -2159,10 +2058,8 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getStageQualifier_Stage();
 
 	/**
-	 * Returns the meta object for the attribute
-	 * '{@link org.enterprisedomain.classmaker.StageQualifier#getStep
-	 * <em>Step</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the attribute '{@link org.enterprisedomain.classmaker.StageQualifier#getStep <em>Step</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Step</em>'.
 	 * @see org.enterprisedomain.classmaker.StageQualifier#getStep()
 	 * @see #getStageQualifier()
@@ -2171,24 +2068,20 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getStageQualifier_Step();
 
 	/**
-	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Stage
-	 * Qualifier To Customizer Map Entry</em>}'. <!-- begin-user-doc --> <!--
+	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Stage Qualifier To Customizer Map Entry</em>}'.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
-	 * @return the meta object for class '<em>Stage Qualifier To Customizer Map
-	 *         Entry</em>'.
+	 * @return the meta object for class '<em>Stage Qualifier To Customizer Map Entry</em>'.
 	 * @see java.util.Map.Entry
 	 * @model keyType="org.enterprisedomain.classmaker.StageQualifier"
-	 *        valueType="org.enterprisedomain.classmaker.Customizer"
-	 *        valueContainment="true"
+	 *        valueType="org.enterprisedomain.classmaker.Customizer" valueContainment="true"
 	 * @generated
 	 */
 	EClass getStageQualifierToCustomizerMapEntry();
 
 	/**
-	 * Returns the meta object for the reference '{@link java.util.Map.Entry
-	 * <em>Key</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the reference '{@link java.util.Map.Entry <em>Key</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Key</em>'.
 	 * @see java.util.Map.Entry
 	 * @see #getStageQualifierToCustomizerMapEntry()
@@ -2197,10 +2090,9 @@ public interface ClassMakerPackage extends EPackage {
 	EReference getStageQualifierToCustomizerMapEntry_Key();
 
 	/**
-	 * Returns the meta object for the containment reference
-	 * '{@link java.util.Map.Entry <em>Value</em>}'. <!-- begin-user-doc --> <!--
+	 * Returns the meta object for the containment reference '{@link java.util.Map.Entry <em>Value</em>}'.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @return the meta object for the containment reference '<em>Value</em>'.
 	 * @see java.util.Map.Entry
 	 * @see #getStageQualifierToCustomizerMapEntry()
@@ -2232,10 +2124,8 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getProject_Name();
 
 	/**
-	 * Returns the meta object for the attribute
-	 * '{@link org.enterprisedomain.classmaker.Project#getProjectName <em>Project
-	 * Name</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the attribute '{@link org.enterprisedomain.classmaker.Project#getProjectName <em>Project Name</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Project Name</em>'.
 	 * @see org.enterprisedomain.classmaker.Project#getProjectName()
 	 * @see #getProject()
@@ -2244,10 +2134,8 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getProject_ProjectName();
 
 	/**
-	 * Returns the meta object for the attribute list
-	 * '{@link org.enterprisedomain.classmaker.Project#getChildren
-	 * <em>Children</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the attribute list '{@link org.enterprisedomain.classmaker.Project#getChildren <em>Children</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute list '<em>Children</em>'.
 	 * @see org.enterprisedomain.classmaker.Project#getChildren()
 	 * @see #getProject()
@@ -2256,10 +2144,8 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getProject_Children();
 
 	/**
-	 * Returns the meta object for the attribute
-	 * '{@link org.enterprisedomain.classmaker.Project#isDirty <em>Dirty</em>}'.
+	 * Returns the meta object for the attribute '{@link org.enterprisedomain.classmaker.Project#isDirty <em>Dirty</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @return the meta object for the attribute '<em>Dirty</em>'.
 	 * @see org.enterprisedomain.classmaker.Project#isDirty()
 	 * @see #getProject()
@@ -2268,10 +2154,8 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getProject_Dirty();
 
 	/**
-	 * Returns the meta object for the container reference
-	 * '{@link org.enterprisedomain.classmaker.Project#getWorkspace
-	 * <em>Workspace</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the container reference '{@link org.enterprisedomain.classmaker.Project#getWorkspace <em>Workspace</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the container reference '<em>Workspace</em>'.
 	 * @see org.enterprisedomain.classmaker.Project#getWorkspace()
 	 * @see #getProject()
@@ -2280,27 +2164,21 @@ public interface ClassMakerPackage extends EPackage {
 	EReference getProject_Workspace();
 
 	/**
-	 * Returns the meta object for the attribute
-	 * '{@link org.enterprisedomain.classmaker.Project#isNeedsCompletionNotification
-	 * <em>Needs Completion Notification</em>}'. <!-- begin-user-doc --> <!--
+	 * Returns the meta object for the attribute '{@link org.enterprisedomain.classmaker.Project#isNeedCompletionNotification <em>Need Completion Notification</em>}'.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
-	 * @return the meta object for the attribute '<em>Needs Completion
-	 *         Notification</em>'.
-	 * @see org.enterprisedomain.classmaker.Project#isNeedsCompletionNotification()
+	 * @return the meta object for the attribute '<em>Need Completion Notification</em>'.
+	 * @see org.enterprisedomain.classmaker.Project#isNeedCompletionNotification()
 	 * @see #getProject()
 	 * @generated
 	 */
-	EAttribute getProject_NeedsCompletionNotification();
+	EAttribute getProject_NeedCompletionNotification();
 
 	/**
-	 * Returns the meta object for the containment reference
-	 * '{@link org.enterprisedomain.classmaker.Project#getCompletionNotificationAdapter
-	 * <em>Completion Notification Adapter</em>}'. <!-- begin-user-doc --> <!--
+	 * Returns the meta object for the containment reference '{@link org.enterprisedomain.classmaker.Project#getCompletionNotificationAdapter <em>Completion Notification Adapter</em>}'.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
-	 * @return the meta object for the containment reference '<em>Completion
-	 *         Notification Adapter</em>'.
+	 * @return the meta object for the containment reference '<em>Completion Notification Adapter</em>'.
 	 * @see org.enterprisedomain.classmaker.Project#getCompletionNotificationAdapter()
 	 * @see #getProject()
 	 * @generated
@@ -2319,10 +2197,8 @@ public interface ClassMakerPackage extends EPackage {
 	EClass getModelPair();
 
 	/**
-	 * Returns the meta object for the reference
-	 * '{@link org.enterprisedomain.classmaker.ModelPair#getDynamic
-	 * <em>Dynamic</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the reference '{@link org.enterprisedomain.classmaker.ModelPair#getDynamic <em>Dynamic</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Dynamic</em>'.
 	 * @see org.enterprisedomain.classmaker.ModelPair#getDynamic()
 	 * @see #getModelPair()
@@ -2331,10 +2207,8 @@ public interface ClassMakerPackage extends EPackage {
 	EReference getModelPair_Dynamic();
 
 	/**
-	 * Returns the meta object for the reference
-	 * '{@link org.enterprisedomain.classmaker.ModelPair#getGenerated
-	 * <em>Generated</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the reference '{@link org.enterprisedomain.classmaker.ModelPair#getGenerated <em>Generated</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Generated</em>'.
 	 * @see org.enterprisedomain.classmaker.ModelPair#getGenerated()
 	 * @see #getModelPair()
@@ -2343,10 +2217,8 @@ public interface ClassMakerPackage extends EPackage {
 	EReference getModelPair_Generated();
 
 	/**
-	 * Returns the meta object for the container reference
-	 * '{@link org.enterprisedomain.classmaker.ModelPair#getParent
-	 * <em>Parent</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the container reference '{@link org.enterprisedomain.classmaker.ModelPair#getParent <em>Parent</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the container reference '<em>Parent</em>'.
 	 * @see org.enterprisedomain.classmaker.ModelPair#getParent()
 	 * @see #getModelPair()
@@ -2355,10 +2227,8 @@ public interface ClassMakerPackage extends EPackage {
 	EReference getModelPair_Parent();
 
 	/**
-	 * Returns the meta object for class
-	 * '{@link org.enterprisedomain.classmaker.SCMOperator <em>SCM Operator</em>}'.
+	 * Returns the meta object for class '{@link org.enterprisedomain.classmaker.SCMOperator <em>SCM Operator</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @return the meta object for class '<em>SCM Operator</em>'.
 	 * @see org.enterprisedomain.classmaker.SCMOperator
 	 * @generated
@@ -2366,10 +2236,8 @@ public interface ClassMakerPackage extends EPackage {
 	EClass getSCMOperator();
 
 	/**
-	 * Returns the meta object for the attribute
-	 * '{@link org.enterprisedomain.classmaker.SCMOperator#getProjectName
-	 * <em>Project Name</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the attribute '{@link org.enterprisedomain.classmaker.SCMOperator#getProjectName <em>Project Name</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Project Name</em>'.
 	 * @see org.enterprisedomain.classmaker.SCMOperator#getProjectName()
 	 * @see #getSCMOperator()
@@ -2378,10 +2246,8 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getSCMOperator_ProjectName();
 
 	/**
-	 * Returns the meta object for class
-	 * '{@link org.enterprisedomain.classmaker.SCMRegistry <em>SCM Registry</em>}'.
+	 * Returns the meta object for class '{@link org.enterprisedomain.classmaker.SCMRegistry <em>SCM Registry</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @return the meta object for class '<em>SCM Registry</em>'.
 	 * @see org.enterprisedomain.classmaker.SCMRegistry
 	 * @generated
@@ -2401,10 +2267,8 @@ public interface ClassMakerPackage extends EPackage {
 	EClass getResource();
 
 	/**
-	 * Returns the meta object for class
-	 * '{@link org.enterprisedomain.classmaker.CompletionListener <em>Completion
-	 * Listener</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for class '{@link org.enterprisedomain.classmaker.CompletionListener <em>Completion Listener</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Completion Listener</em>'.
 	 * @see org.enterprisedomain.classmaker.CompletionListener
 	 * @generated
@@ -2424,10 +2288,8 @@ public interface ClassMakerPackage extends EPackage {
 	EClass getWorker();
 
 	/**
-	 * Returns the meta object for class
-	 * '{@link org.enterprisedomain.classmaker.ResourceAdapter <em>Resource
-	 * Adapter</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for class '{@link org.enterprisedomain.classmaker.ResourceAdapter <em>Resource Adapter</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Resource Adapter</em>'.
 	 * @see org.enterprisedomain.classmaker.ResourceAdapter
 	 * @generated
@@ -2435,10 +2297,8 @@ public interface ClassMakerPackage extends EPackage {
 	EClass getResourceAdapter();
 
 	/**
-	 * Returns the meta object for the reference
-	 * '{@link org.enterprisedomain.classmaker.ResourceAdapter#getResource
-	 * <em>Resource</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the reference '{@link org.enterprisedomain.classmaker.ResourceAdapter#getResource <em>Resource</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Resource</em>'.
 	 * @see org.enterprisedomain.classmaker.ResourceAdapter#getResource()
 	 * @see #getResourceAdapter()
@@ -2447,10 +2307,8 @@ public interface ClassMakerPackage extends EPackage {
 	EReference getResourceAdapter_Resource();
 
 	/**
-	 * Returns the meta object for the attribute
-	 * '{@link org.enterprisedomain.classmaker.ResourceAdapter#getFilename
-	 * <em>Filename</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the attribute '{@link org.enterprisedomain.classmaker.ResourceAdapter#getFilename <em>Filename</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Filename</em>'.
 	 * @see org.enterprisedomain.classmaker.ResourceAdapter#getFilename()
 	 * @see #getResourceAdapter()
@@ -2459,46 +2317,91 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getResourceAdapter_Filename();
 
 	/**
-	 * Returns the meta object for class
-	 * '{@link org.enterprisedomain.classmaker.ClassMakerPlant <em>Plant</em>}'.
+	 * Returns the meta object for the container reference '{@link org.enterprisedomain.classmaker.ResourceAdapter#getProject <em>Project</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Project</em>'.
+	 * @see org.enterprisedomain.classmaker.ResourceAdapter#getProject()
+	 * @see #getResourceAdapter()
+	 * @generated
+	 */
+	EReference getResourceAdapter_Project();
+
+	/**
+	 * Returns the meta object for class '{@link org.enterprisedomain.classmaker.ClassMakerService <em>Service</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for class '<em>Plant</em>'.
-	 * @see org.enterprisedomain.classmaker.ClassMakerPlant
+	 * @return the meta object for class '<em>Service</em>'.
+	 * @see org.enterprisedomain.classmaker.ClassMakerService
 	 * @generated
 	 */
-	EClass getClassMakerPlant();
+	EClass getClassMakerService();
 
 	/**
-	 * Returns the meta object for the reference
-	 * '{@link org.enterprisedomain.classmaker.ClassMakerPlant#getWorkspace
-	 * <em>Workspace</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the reference '{@link org.enterprisedomain.classmaker.ClassMakerService#getWorkspace <em>Workspace</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Workspace</em>'.
-	 * @see org.enterprisedomain.classmaker.ClassMakerPlant#getWorkspace()
-	 * @see #getClassMakerPlant()
+	 * @see org.enterprisedomain.classmaker.ClassMakerService#getWorkspace()
+	 * @see #getClassMakerService()
 	 * @generated
 	 */
-	EReference getClassMakerPlant_Workspace();
+	EReference getClassMakerService_Workspace();
 
 	/**
-	 * Returns the meta object for the reference
-	 * '{@link org.enterprisedomain.classmaker.ClassMakerPlant#getSCMRegistry
-	 * <em>SCM Registry</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the reference '{@link org.enterprisedomain.classmaker.ClassMakerService#getSCMRegistry <em>SCM Registry</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>SCM Registry</em>'.
-	 * @see org.enterprisedomain.classmaker.ClassMakerPlant#getSCMRegistry()
-	 * @see #getClassMakerPlant()
+	 * @see org.enterprisedomain.classmaker.ClassMakerService#getSCMRegistry()
+	 * @see #getClassMakerService()
 	 * @generated
 	 */
-	EReference getClassMakerPlant_SCMRegistry();
+	EReference getClassMakerService_SCMRegistry();
 
 	/**
 	 * Returns the meta object for class
-	 * '{@link org.enterprisedomain.classmaker.CompletionNotificationAdapter
-	 * <em>Completion Notification Adapter</em>}'. <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * '{@link org.enterprisedomain.classmaker.Blueprint <em>Blueprint</em>}'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
+	 * @return the meta object for class '<em>Blueprint</em>'.
+	 * @see org.enterprisedomain.classmaker.Blueprint
+	 * @generated
+	 */
+	EClass getBlueprint();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.enterprisedomain.classmaker.Blueprint#getDynamicModel <em>Dynamic Model</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Dynamic Model</em>'.
+	 * @see org.enterprisedomain.classmaker.Blueprint#getDynamicModel()
+	 * @see #getBlueprint()
+	 * @generated
+	 */
+	EReference getBlueprint_DynamicModel();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.enterprisedomain.classmaker.Blueprint#getDependencies <em>Dependencies</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Dependencies</em>'.
+	 * @see org.enterprisedomain.classmaker.Blueprint#getDependencies()
+	 * @see #getBlueprint()
+	 * @generated
+	 */
+	EAttribute getBlueprint_Dependencies();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.enterprisedomain.classmaker.Blueprint#getCompletionListeners <em>Completion Listeners</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Completion Listeners</em>'.
+	 * @see org.enterprisedomain.classmaker.Blueprint#getCompletionListeners()
+	 * @see #getBlueprint()
+	 * @generated
+	 */
+	EReference getBlueprint_CompletionListeners();
+
+	/**
+	 * Returns the meta object for class '{@link org.enterprisedomain.classmaker.CompletionNotificationAdapter <em>Completion Notification Adapter</em>}'.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @return the meta object for class '<em>Completion Notification Adapter</em>'.
 	 * @see org.enterprisedomain.classmaker.CompletionNotificationAdapter
 	 * @generated
@@ -2506,10 +2409,8 @@ public interface ClassMakerPackage extends EPackage {
 	EClass getCompletionNotificationAdapter();
 
 	/**
-	 * Returns the meta object for the attribute
-	 * '{@link org.enterprisedomain.classmaker.CompletionNotificationAdapter#getError
-	 * <em>Error</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the attribute '{@link org.enterprisedomain.classmaker.CompletionNotificationAdapter#getError <em>Error</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Error</em>'.
 	 * @see org.enterprisedomain.classmaker.CompletionNotificationAdapter#getError()
 	 * @see #getCompletionNotificationAdapter()
@@ -2518,9 +2419,8 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getCompletionNotificationAdapter_Error();
 
 	/**
-	 * Returns the meta object for data type '{@link java.util.Locale
-	 * <em>Locale</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for data type '{@link java.util.Locale <em>Locale</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Locale</em>'.
 	 * @see java.util.Locale
 	 * @model instanceClass="java.util.Locale"
@@ -2540,9 +2440,8 @@ public interface ClassMakerPackage extends EPackage {
 	EEnum getStage();
 
 	/**
-	 * Returns the meta object for data type '{@link java.util.Properties
-	 * <em>Properties</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for data type '{@link java.util.Properties <em>Properties</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Properties</em>'.
 	 * @see java.util.Properties
 	 * @model instanceClass="java.util.Properties"
@@ -2551,10 +2450,8 @@ public interface ClassMakerPackage extends EPackage {
 	EDataType getProperties();
 
 	/**
-	 * Returns the meta object for data type
-	 * '{@link org.eclipse.core.runtime.IProgressMonitor <em>IProgress
-	 * Monitor</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for data type '{@link org.eclipse.core.runtime.IProgressMonitor <em>IProgress Monitor</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>IProgress Monitor</em>'.
 	 * @see org.eclipse.core.runtime.IProgressMonitor
 	 * @model instanceClass="org.eclipse.core.runtime.IProgressMonitor"
@@ -2563,9 +2460,8 @@ public interface ClassMakerPackage extends EPackage {
 	EDataType getIProgressMonitor();
 
 	/**
-	 * Returns the meta object for data type '{@link org.osgi.framework.Version
-	 * <em>OS Gi Version</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for data type '{@link org.osgi.framework.Version <em>OS Gi Version</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>OS Gi Version</em>'.
 	 * @see org.osgi.framework.Version
 	 * @model instanceClass="org.osgi.framework.Version"
@@ -2574,9 +2470,8 @@ public interface ClassMakerPackage extends EPackage {
 	EDataType getOSGiVersion();
 
 	/**
-	 * Returns the meta object for data type '{@link java.util.concurrent.Semaphore
-	 * <em>Semaphore</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for data type '{@link java.util.concurrent.Semaphore <em>Semaphore</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Semaphore</em>'.
 	 * @see java.util.concurrent.Semaphore
 	 * @model instanceClass="java.util.concurrent.Semaphore"
@@ -2585,10 +2480,8 @@ public interface ClassMakerPackage extends EPackage {
 	EDataType getSemaphore();
 
 	/**
-	 * Returns the meta object for data type
-	 * '{@link org.eclipse.core.runtime.CoreException <em>Core Exception</em>}'.
+	 * Returns the meta object for data type '{@link org.eclipse.core.runtime.CoreException <em>Core Exception</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @return the meta object for data type '<em>Core Exception</em>'.
 	 * @see org.eclipse.core.runtime.CoreException
 	 * @model instanceClass="org.eclipse.core.runtime.CoreException"
@@ -2597,10 +2490,8 @@ public interface ClassMakerPackage extends EPackage {
 	EDataType getCoreException();
 
 	/**
-	 * Returns the meta object for data type
-	 * '{@link java.lang.reflect.InvocationTargetException <em>Invocation Target
-	 * Exception</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for data type '{@link java.lang.reflect.InvocationTargetException <em>Invocation Target Exception</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Invocation Target Exception</em>'.
 	 * @see java.lang.reflect.InvocationTargetException
 	 * @model instanceClass="java.lang.reflect.InvocationTargetException"
@@ -2621,9 +2512,8 @@ public interface ClassMakerPackage extends EPackage {
 	EDataType getIStatus();
 
 	/**
-	 * Returns the meta object for data type '{@link org.eclipse.emf.common.util.URI
-	 * <em>URI</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for data type '{@link org.eclipse.emf.common.util.URI <em>URI</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>URI</em>'.
 	 * @see org.eclipse.emf.common.util.URI
 	 * @model instanceClass="org.eclipse.emf.common.util.URI"
@@ -2632,9 +2522,8 @@ public interface ClassMakerPackage extends EPackage {
 	EDataType getURI();
 
 	/**
-	 * Returns the meta object for data type '{@link java.lang.Exception
-	 * <em>Exception</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for data type '{@link java.lang.Exception <em>Exception</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Exception</em>'.
 	 * @see java.lang.Exception
 	 * @model instanceClass="java.lang.Exception"
@@ -2660,15 +2549,12 @@ public interface ClassMakerPackage extends EPackage {
 	 * <li>and each data type</li>
 	 * </ul>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the
-		 * '{@link org.enterprisedomain.classmaker.impl.ContributionImpl
-		 * <em>Contribution</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '{@link org.enterprisedomain.classmaker.impl.ContributionImpl <em>Contribution</em>}' class.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @see org.enterprisedomain.classmaker.impl.ContributionImpl
 		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getContribution()
 		 * @generated
@@ -2676,9 +2562,8 @@ public interface ClassMakerPackage extends EPackage {
 		EClass CONTRIBUTION = eINSTANCE.getContribution();
 
 		/**
-		 * The meta object literal for the '<em><b>Dependencies</b></em>' attribute list
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Dependencies</b></em>' attribute list feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute CONTRIBUTION__DEPENDENCIES = eINSTANCE.getContribution_Dependencies();
@@ -2686,7 +2571,6 @@ public interface ClassMakerPackage extends EPackage {
 		/**
 		 * The meta object literal for the '<em><b>Revision</b></em>' reference feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		EReference CONTRIBUTION__REVISION = eINSTANCE.getContribution_Revision();
@@ -2702,32 +2586,27 @@ public interface ClassMakerPackage extends EPackage {
 		/**
 		 * The meta object literal for the '<em><b>State</b></em>' reference feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		EReference CONTRIBUTION__STATE = eINSTANCE.getContribution_State();
 
 		/**
-		 * The meta object literal for the '<em><b>Latest Version</b></em>' attribute
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Latest Version</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute CONTRIBUTION__LATEST_VERSION = eINSTANCE.getContribution_LatestVersion();
 
 		/**
-		 * The meta object literal for the '<em><b>Model Resource Adapter</b></em>'
-		 * reference feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Model Resource Adapter</b></em>' containment reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference CONTRIBUTION__MODEL_RESOURCE_ADAPTER = eINSTANCE.getContribution_ModelResourceAdapter();
 
 		/**
-		 * The meta object literal for the
-		 * '{@link org.enterprisedomain.classmaker.impl.RevisionImpl <em>Revision</em>}'
-		 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '{@link org.enterprisedomain.classmaker.impl.RevisionImpl <em>Revision</em>}' class.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @see org.enterprisedomain.classmaker.impl.RevisionImpl
 		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getRevision()
 		 * @generated
@@ -2737,15 +2616,13 @@ public interface ClassMakerPackage extends EPackage {
 		/**
 		 * The meta object literal for the '<em><b>State</b></em>' reference feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		EReference REVISION__STATE = eINSTANCE.getRevision_State();
 
 		/**
-		 * The meta object literal for the '<em><b>Timestamp</b></em>' attribute
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Timestamp</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute REVISION__TIMESTAMP = eINSTANCE.getRevision_Timestamp();
@@ -2753,24 +2630,20 @@ public interface ClassMakerPackage extends EPackage {
 		/**
 		 * The meta object literal for the '<em><b>State History</b></em>' map feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		EReference REVISION__STATE_HISTORY = eINSTANCE.getRevision_StateHistory();
 
 		/**
-		 * The meta object literal for the '<em><b>Latest Timestamp</b></em>' attribute
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Latest Timestamp</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute REVISION__LATEST_TIMESTAMP = eINSTANCE.getRevision_LatestTimestamp();
 
 		/**
-		 * The meta object literal for the
-		 * '{@link org.enterprisedomain.classmaker.impl.StateImpl <em>State</em>}'
-		 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '{@link org.enterprisedomain.classmaker.impl.StateImpl <em>State</em>}' class.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @see org.enterprisedomain.classmaker.impl.StateImpl
 		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getState()
 		 * @generated
@@ -2778,17 +2651,15 @@ public interface ClassMakerPackage extends EPackage {
 		EClass STATE = eINSTANCE.getState();
 
 		/**
-		 * The meta object literal for the '<em><b>Package Class Name</b></em>'
-		 * attribute feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Package Class Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute STATE__PACKAGE_CLASS_NAME = eINSTANCE.getState_PackageClassName();
 
 		/**
-		 * The meta object literal for the '<em><b>Required Plugins</b></em>' attribute
-		 * list feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Required Plugins</b></em>' attribute list feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute STATE__REQUIRED_PLUGINS = eINSTANCE.getState_RequiredPlugins();
@@ -2796,31 +2667,27 @@ public interface ClassMakerPackage extends EPackage {
 		/**
 		 * The meta object literal for the '<em><b>Revision</b></em>' reference feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		EReference STATE__REVISION = eINSTANCE.getState_Revision();
 
 		/**
-		 * The meta object literal for the '<em><b>Timestamp</b></em>' attribute
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Timestamp</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute STATE__TIMESTAMP = eINSTANCE.getState_Timestamp();
 
 		/**
-		 * The meta object literal for the '<em><b>Deployable Unit Name</b></em>'
-		 * attribute feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Deployable Unit Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute STATE__DEPLOYABLE_UNIT_NAME = eINSTANCE.getState_DeployableUnitName();
 
 		/**
-		 * The meta object literal for the '<em><b>Job Family</b></em>' attribute
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Job Family</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute STATE__JOB_FAMILY = eINSTANCE.getState_JobFamily();
@@ -2828,39 +2695,34 @@ public interface ClassMakerPackage extends EPackage {
 		/**
 		 * The meta object literal for the '<em><b>Resource</b></em>' reference feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		EReference STATE__RESOURCE = eINSTANCE.getState_Resource();
 
 		/**
-		 * The meta object literal for the '<em><b>Commit Ids</b></em>' attribute list
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Commit Ids</b></em>' attribute list feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute STATE__COMMIT_IDS = eINSTANCE.getState_CommitIds();
 
 		/**
-		 * The meta object literal for the '<em><b>Commit Id</b></em>' attribute
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Commit Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute STATE__COMMIT_ID = eINSTANCE.getState_CommitId();
 
 		/**
-		 * The meta object literal for the '<em><b>State Customizers</b></em>' map
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>State Customizers</b></em>' map feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference STATE__STATE_CUSTOMIZERS = eINSTANCE.getState_StateCustomizers();
 
 		/**
-		 * The meta object literal for the '<em><b>Project Name</b></em>' attribute
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Project Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute STATE__PROJECT_NAME = eINSTANCE.getState_ProjectName();
@@ -2868,16 +2730,13 @@ public interface ClassMakerPackage extends EPackage {
 		/**
 		 * The meta object literal for the '<em><b>Making</b></em>' attribute feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		EAttribute STATE__MAKING = eINSTANCE.getState_Making();
 
 		/**
-		 * The meta object literal for the
-		 * '{@link org.enterprisedomain.classmaker.impl.ItemImpl <em>Item</em>}' class.
+		 * The meta object literal for the '{@link org.enterprisedomain.classmaker.impl.ItemImpl <em>Item</em>}' class.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @see org.enterprisedomain.classmaker.impl.ItemImpl
 		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getItem()
 		 * @generated
@@ -2885,9 +2744,8 @@ public interface ClassMakerPackage extends EPackage {
 		EClass ITEM = eINSTANCE.getItem();
 
 		/**
-		 * The meta object literal for the '<em><b>Model Name</b></em>' attribute
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Model Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute ITEM__MODEL_NAME = eINSTANCE.getItem_ModelName();
@@ -2895,7 +2753,6 @@ public interface ClassMakerPackage extends EPackage {
 		/**
 		 * The meta object literal for the '<em><b>Phase</b></em>' attribute feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		EAttribute ITEM__PHASE = eINSTANCE.getItem_Phase();
@@ -2903,7 +2760,6 @@ public interface ClassMakerPackage extends EPackage {
 		/**
 		 * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		EAttribute ITEM__VERSION = eINSTANCE.getItem_Version();
@@ -2911,15 +2767,13 @@ public interface ClassMakerPackage extends EPackage {
 		/**
 		 * The meta object literal for the '<em><b>Language</b></em>' attribute feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		EAttribute ITEM__LANGUAGE = eINSTANCE.getItem_Language();
 
 		/**
-		 * The meta object literal for the '<em><b>Domain Model</b></em>' containment
-		 * reference feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Domain Model</b></em>' containment reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference ITEM__DOMAIN_MODEL = eINSTANCE.getItem_DomainModel();
@@ -2927,7 +2781,6 @@ public interface ClassMakerPackage extends EPackage {
 		/**
 		 * The meta object literal for the '<em><b>Customizers</b></em>' map feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		EReference ITEM__CUSTOMIZERS = eINSTANCE.getItem_Customizers();
@@ -2935,7 +2788,6 @@ public interface ClassMakerPackage extends EPackage {
 		/**
 		 * The meta object literal for the '<em><b>Parent</b></em>' reference feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		EReference ITEM__PARENT = eINSTANCE.getItem_Parent();
@@ -2943,23 +2795,20 @@ public interface ClassMakerPackage extends EPackage {
 		/**
 		 * The meta object literal for the '<em><b>Locale</b></em>' attribute feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		EAttribute ITEM__LOCALE = eINSTANCE.getItem_Locale();
 
 		/**
-		 * The meta object literal for the '<em><b>Contribution</b></em>' reference
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Contribution</b></em>' reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference ITEM__CONTRIBUTION = eINSTANCE.getItem_Contribution();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.common.notify.Adapter
-		 * <em>Adapter</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '{@link org.eclipse.emf.common.notify.Adapter <em>Adapter</em>}' class.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @see org.eclipse.emf.common.notify.Adapter
 		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getAdapter()
 		 * @generated
@@ -2967,10 +2816,8 @@ public interface ClassMakerPackage extends EPackage {
 		EClass ADAPTER = eINSTANCE.getAdapter();
 
 		/**
-		 * The meta object literal for the
-		 * '{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl
-		 * <em>Workspace</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl <em>Workspace</em>}' class.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @see org.enterprisedomain.classmaker.impl.WorkspaceImpl
 		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getWorkspace()
 		 * @generated
@@ -2978,17 +2825,15 @@ public interface ClassMakerPackage extends EPackage {
 		EClass WORKSPACE = eINSTANCE.getWorkspace();
 
 		/**
-		 * The meta object literal for the '<em><b>Projects</b></em>' containment
-		 * reference list feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Projects</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference WORKSPACE__PROJECTS = eINSTANCE.getWorkspace_Projects();
 
 		/**
-		 * The meta object literal for the '<em><b>Resource Set</b></em>' attribute
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Resource Set</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute WORKSPACE__RESOURCE_SET = eINSTANCE.getWorkspace_ResourceSet();
@@ -2996,17 +2841,14 @@ public interface ClassMakerPackage extends EPackage {
 		/**
 		 * The meta object literal for the '<em><b>Customizers</b></em>' map feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		EReference WORKSPACE__CUSTOMIZERS = eINSTANCE.getWorkspace_Customizers();
 
 		/**
-		 * The meta object literal for the
-		 * '{@link org.enterprisedomain.classmaker.impl.IntegerToStateMapEntryImpl
-		 * <em>Integer To State Map Entry</em>}' class. <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '{@link org.enterprisedomain.classmaker.impl.IntegerToStateMapEntryImpl <em>Integer To State Map Entry</em>}' class.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
-		 * 
 		 * @see org.enterprisedomain.classmaker.impl.IntegerToStateMapEntryImpl
 		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getIntegerToStateMapEntry()
 		 * @generated
@@ -3022,19 +2864,16 @@ public interface ClassMakerPackage extends EPackage {
 		EAttribute INTEGER_TO_STATE_MAP_ENTRY__KEY = eINSTANCE.getIntegerToStateMapEntry_Key();
 
 		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' containment reference
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference INTEGER_TO_STATE_MAP_ENTRY__VALUE = eINSTANCE.getIntegerToStateMapEntry_Value();
 
 		/**
-		 * The meta object literal for the
-		 * '{@link org.enterprisedomain.classmaker.impl.VersionToRevisionMapEntryImpl
-		 * <em>Version To Revision Map Entry</em>}' class. <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '{@link org.enterprisedomain.classmaker.impl.VersionToRevisionMapEntryImpl <em>Version To Revision Map Entry</em>}' class.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
-		 * 
 		 * @see org.enterprisedomain.classmaker.impl.VersionToRevisionMapEntryImpl
 		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getVersionToRevisionMapEntry()
 		 * @generated
@@ -3050,18 +2889,15 @@ public interface ClassMakerPackage extends EPackage {
 		EAttribute VERSION_TO_REVISION_MAP_ENTRY__KEY = eINSTANCE.getVersionToRevisionMapEntry_Key();
 
 		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' containment reference
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference VERSION_TO_REVISION_MAP_ENTRY__VALUE = eINSTANCE.getVersionToRevisionMapEntry_Value();
 
 		/**
-		 * The meta object literal for the
-		 * '{@link org.eclipse.core.runtime.jobs.ISchedulingRule <em>IScheduling
-		 * Rule</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '{@link org.eclipse.core.runtime.jobs.ISchedulingRule <em>IScheduling Rule</em>}' class.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @see org.eclipse.core.runtime.jobs.ISchedulingRule
 		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getISchedulingRule()
 		 * @generated
@@ -3069,9 +2905,8 @@ public interface ClassMakerPackage extends EPackage {
 		EClass ISCHEDULING_RULE = eINSTANCE.getISchedulingRule();
 
 		/**
-		 * The meta object literal for the '{@link java.util.concurrent.Executor
-		 * <em>Executor</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '{@link java.util.concurrent.Executor <em>Executor</em>}' class.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @see java.util.concurrent.Executor
 		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getExecutor()
 		 * @generated
@@ -3079,9 +2914,8 @@ public interface ClassMakerPackage extends EPackage {
 		EClass EXECUTOR = eINSTANCE.getExecutor();
 
 		/**
-		 * The meta object literal for the '{@link java.util.concurrent.Future
-		 * <em>Future</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '{@link java.util.concurrent.Future <em>Future</em>}' class.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @see java.util.concurrent.Future
 		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getFuture()
 		 * @generated
@@ -3089,10 +2923,8 @@ public interface ClassMakerPackage extends EPackage {
 		EClass FUTURE = eINSTANCE.getFuture();
 
 		/**
-		 * The meta object literal for the
-		 * '{@link org.eclipse.core.runtime.IAdapterFactory <em>IAdapter Factory</em>}'
-		 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '{@link org.eclipse.core.runtime.IAdapterFactory <em>IAdapter Factory</em>}' class.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @see org.eclipse.core.runtime.IAdapterFactory
 		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getIAdapterFactory()
 		 * @generated
@@ -3100,10 +2932,8 @@ public interface ClassMakerPackage extends EPackage {
 		EClass IADAPTER_FACTORY = eINSTANCE.getIAdapterFactory();
 
 		/**
-		 * The meta object literal for the
-		 * '{@link org.enterprisedomain.classmaker.impl.CustomizerImpl
-		 * <em>Customizer</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '{@link org.enterprisedomain.classmaker.impl.CustomizerImpl <em>Customizer</em>}' class.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @see org.enterprisedomain.classmaker.impl.CustomizerImpl
 		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getCustomizer()
 		 * @generated
@@ -3113,16 +2943,13 @@ public interface ClassMakerPackage extends EPackage {
 		/**
 		 * The meta object literal for the '<em><b>Rank</b></em>' attribute feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		EAttribute CUSTOMIZER__RANK = eINSTANCE.getCustomizer_Rank();
 
 		/**
-		 * The meta object literal for the
-		 * '{@link org.enterprisedomain.classmaker.impl.StageQualifierImpl <em>Stage
-		 * Qualifier</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '{@link org.enterprisedomain.classmaker.impl.StageQualifierImpl <em>Stage Qualifier</em>}' class.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @see org.enterprisedomain.classmaker.impl.StageQualifierImpl
 		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getStageQualifier()
 		 * @generated
@@ -3132,7 +2959,6 @@ public interface ClassMakerPackage extends EPackage {
 		/**
 		 * The meta object literal for the '<em><b>Stage</b></em>' attribute feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		EAttribute STAGE_QUALIFIER__STAGE = eINSTANCE.getStageQualifier_Stage();
@@ -3140,17 +2966,14 @@ public interface ClassMakerPackage extends EPackage {
 		/**
 		 * The meta object literal for the '<em><b>Step</b></em>' attribute feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		EAttribute STAGE_QUALIFIER__STEP = eINSTANCE.getStageQualifier_Step();
 
 		/**
-		 * The meta object literal for the
-		 * '{@link org.enterprisedomain.classmaker.impl.StageQualifierToCustomizerMapEntryImpl
-		 * <em>Stage Qualifier To Customizer Map Entry</em>}' class. <!-- begin-user-doc
+		 * The meta object literal for the '{@link org.enterprisedomain.classmaker.impl.StageQualifierToCustomizerMapEntryImpl <em>Stage Qualifier To Customizer Map Entry</em>}' class.
+		 * <!-- begin-user-doc
 		 * --> <!-- end-user-doc -->
-		 * 
 		 * @see org.enterprisedomain.classmaker.impl.StageQualifierToCustomizerMapEntryImpl
 		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getStageQualifierToCustomizerMapEntry()
 		 * @generated
@@ -3166,19 +2989,16 @@ public interface ClassMakerPackage extends EPackage {
 		EReference STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY__KEY = eINSTANCE.getStageQualifierToCustomizerMapEntry_Key();
 
 		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' containment reference
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY__VALUE = eINSTANCE
 				.getStageQualifierToCustomizerMapEntry_Value();
 
 		/**
-		 * The meta object literal for the
-		 * '{@link org.enterprisedomain.classmaker.impl.ProjectImpl <em>Project</em>}'
-		 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '{@link org.enterprisedomain.classmaker.impl.ProjectImpl <em>Project</em>}' class.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @see org.enterprisedomain.classmaker.impl.ProjectImpl
 		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getProject()
 		 * @generated
@@ -3188,23 +3008,20 @@ public interface ClassMakerPackage extends EPackage {
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		EAttribute PROJECT__NAME = eINSTANCE.getProject_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Project Name</b></em>' attribute
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Project Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute PROJECT__PROJECT_NAME = eINSTANCE.getProject_ProjectName();
 
 		/**
-		 * The meta object literal for the '<em><b>Children</b></em>' attribute list
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Children</b></em>' attribute list feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute PROJECT__CHILDREN = eINSTANCE.getProject_Children();
@@ -3212,42 +3029,36 @@ public interface ClassMakerPackage extends EPackage {
 		/**
 		 * The meta object literal for the '<em><b>Dirty</b></em>' attribute feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		EAttribute PROJECT__DIRTY = eINSTANCE.getProject_Dirty();
 
 		/**
-		 * The meta object literal for the '<em><b>Workspace</b></em>' container
-		 * reference feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Workspace</b></em>' container reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference PROJECT__WORKSPACE = eINSTANCE.getProject_Workspace();
 
 		/**
-		 * The meta object literal for the '<em><b>Needs Completion
-		 * Notification</b></em>' attribute feature. <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '<em><b>Need Completion Notification</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
-		 * 
 		 * @generated
 		 */
-		EAttribute PROJECT__NEEDS_COMPLETION_NOTIFICATION = eINSTANCE.getProject_NeedsCompletionNotification();
+		EAttribute PROJECT__NEED_COMPLETION_NOTIFICATION = eINSTANCE.getProject_NeedCompletionNotification();
 
 		/**
-		 * The meta object literal for the '<em><b>Completion Notification
-		 * Adapter</b></em>' containment reference feature. <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '<em><b>Completion Notification Adapter</b></em>' containment reference feature.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		EReference PROJECT__COMPLETION_NOTIFICATION_ADAPTER = eINSTANCE.getProject_CompletionNotificationAdapter();
 
 		/**
-		 * The meta object literal for the
-		 * '{@link org.enterprisedomain.classmaker.impl.ModelPairImpl <em>Model
-		 * Pair</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '{@link org.enterprisedomain.classmaker.impl.ModelPairImpl <em>Model Pair</em>}' class.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @see org.enterprisedomain.classmaker.impl.ModelPairImpl
 		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getModelPair()
 		 * @generated
@@ -3257,32 +3068,27 @@ public interface ClassMakerPackage extends EPackage {
 		/**
 		 * The meta object literal for the '<em><b>Dynamic</b></em>' reference feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		EReference MODEL_PAIR__DYNAMIC = eINSTANCE.getModelPair_Dynamic();
 
 		/**
-		 * The meta object literal for the '<em><b>Generated</b></em>' reference
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Generated</b></em>' reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference MODEL_PAIR__GENERATED = eINSTANCE.getModelPair_Generated();
 
 		/**
-		 * The meta object literal for the '<em><b>Parent</b></em>' container reference
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Parent</b></em>' container reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference MODEL_PAIR__PARENT = eINSTANCE.getModelPair_Parent();
 
 		/**
-		 * The meta object literal for the
-		 * '{@link org.enterprisedomain.classmaker.impl.SCMOperatorImpl <em>SCM
-		 * Operator</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '{@link org.enterprisedomain.classmaker.impl.SCMOperatorImpl <em>SCM Operator</em>}' class.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @see org.enterprisedomain.classmaker.impl.SCMOperatorImpl
 		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getSCMOperator()
 		 * @generated
@@ -3290,18 +3096,15 @@ public interface ClassMakerPackage extends EPackage {
 		EClass SCM_OPERATOR = eINSTANCE.getSCMOperator();
 
 		/**
-		 * The meta object literal for the '<em><b>Project Name</b></em>' attribute
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Project Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute SCM_OPERATOR__PROJECT_NAME = eINSTANCE.getSCMOperator_ProjectName();
 
 		/**
-		 * The meta object literal for the
-		 * '{@link org.enterprisedomain.classmaker.impl.SCMRegistryImpl <em>SCM
-		 * Registry</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '{@link org.enterprisedomain.classmaker.impl.SCMRegistryImpl <em>SCM Registry</em>}' class.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @see org.enterprisedomain.classmaker.impl.SCMRegistryImpl
 		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getSCMRegistry()
 		 * @generated
@@ -3309,10 +3112,8 @@ public interface ClassMakerPackage extends EPackage {
 		EClass SCM_REGISTRY = eINSTANCE.getSCMRegistry();
 
 		/**
-		 * The meta object literal for the
-		 * '{@link org.eclipse.emf.ecore.resource.Resource <em>Resource</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.emf.ecore.resource.Resource <em>Resource</em>}' class.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @see org.eclipse.emf.ecore.resource.Resource
 		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getResource()
 		 * @generated
@@ -3320,11 +3121,9 @@ public interface ClassMakerPackage extends EPackage {
 		EClass RESOURCE = eINSTANCE.getResource();
 
 		/**
-		 * The meta object literal for the
-		 * '{@link org.enterprisedomain.classmaker.impl.CompletionListenerImpl
-		 * <em>Completion Listener</em>}' class. <!-- begin-user-doc --> <!--
+		 * The meta object literal for the '{@link org.enterprisedomain.classmaker.impl.CompletionListenerImpl <em>Completion Listener</em>}' class.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
-		 * 
 		 * @see org.enterprisedomain.classmaker.impl.CompletionListenerImpl
 		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getCompletionListener()
 		 * @generated
@@ -3332,10 +3131,8 @@ public interface ClassMakerPackage extends EPackage {
 		EClass COMPLETION_LISTENER = eINSTANCE.getCompletionListener();
 
 		/**
-		 * The meta object literal for the
-		 * '{@link org.enterprisedomain.classmaker.jobs.Worker <em>Worker</em>}' class.
+		 * The meta object literal for the '{@link org.enterprisedomain.classmaker.jobs.Worker <em>Worker</em>}' class.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @see org.enterprisedomain.classmaker.jobs.Worker
 		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getWorker()
 		 * @generated
@@ -3343,10 +3140,8 @@ public interface ClassMakerPackage extends EPackage {
 		EClass WORKER = eINSTANCE.getWorker();
 
 		/**
-		 * The meta object literal for the
-		 * '{@link org.enterprisedomain.classmaker.impl.ResourceAdapterImpl <em>Resource
-		 * Adapter</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '{@link org.enterprisedomain.classmaker.impl.ResourceAdapterImpl <em>Resource Adapter</em>}' class.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @see org.enterprisedomain.classmaker.impl.ResourceAdapterImpl
 		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getResourceAdapter()
 		 * @generated
@@ -3356,7 +3151,6 @@ public interface ClassMakerPackage extends EPackage {
 		/**
 		 * The meta object literal for the '<em><b>Resource</b></em>' reference feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		EReference RESOURCE_ADAPTER__RESOURCE = eINSTANCE.getResourceAdapter_Resource();
@@ -3364,44 +3158,76 @@ public interface ClassMakerPackage extends EPackage {
 		/**
 		 * The meta object literal for the '<em><b>Filename</b></em>' attribute feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		EAttribute RESOURCE_ADAPTER__FILENAME = eINSTANCE.getResourceAdapter_Filename();
 
 		/**
-		 * The meta object literal for the
-		 * '{@link org.enterprisedomain.classmaker.impl.ClassMakerPlantImpl
-		 * <em>Plant</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
-		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPlantImpl
-		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getClassMakerPlant()
-		 * @generated
-		 */
-		EClass CLASS_MAKER_PLANT = eINSTANCE.getClassMakerPlant();
-
-		/**
-		 * The meta object literal for the '<em><b>Workspace</b></em>' reference
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
-		 * @generated
-		 */
-		EReference CLASS_MAKER_PLANT__WORKSPACE = eINSTANCE.getClassMakerPlant_Workspace();
-
-		/**
-		 * The meta object literal for the '<em><b>SCM Registry</b></em>' reference
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
-		 * @generated
-		 */
-		EReference CLASS_MAKER_PLANT__SCM_REGISTRY = eINSTANCE.getClassMakerPlant_SCMRegistry();
-
-		/**
-		 * The meta object literal for the
-		 * '{@link org.enterprisedomain.classmaker.impl.CompletionNotificationAdapterImpl
-		 * <em>Completion Notification Adapter</em>}' class. <!-- begin-user-doc -->
+		 * The meta object literal for the '<em><b>Project</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * 
+		 * @generated
+		 */
+		EReference RESOURCE_ADAPTER__PROJECT = eINSTANCE.getResourceAdapter_Project();
+
+		/**
+		 * The meta object literal for the '{@link org.enterprisedomain.classmaker.impl.ClassMakerServiceImpl <em>Service</em>}' class.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * @see org.enterprisedomain.classmaker.impl.ClassMakerServiceImpl
+		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getClassMakerService()
+		 * @generated
+		 */
+		EClass CLASS_MAKER_SERVICE = eINSTANCE.getClassMakerService();
+
+		/**
+		 * The meta object literal for the '<em><b>Workspace</b></em>' reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS_MAKER_SERVICE__WORKSPACE = eINSTANCE.getClassMakerService_Workspace();
+
+		/**
+		 * The meta object literal for the '<em><b>SCM Registry</b></em>' reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS_MAKER_SERVICE__SCM_REGISTRY = eINSTANCE.getClassMakerService_SCMRegistry();
+
+		/**
+		 * The meta object literal for the '{@link org.enterprisedomain.classmaker.impl.BlueprintImpl <em>Blueprint</em>}' class.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * @see org.enterprisedomain.classmaker.impl.BlueprintImpl
+		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getBlueprint()
+		 * @generated
+		 */
+		EClass BLUEPRINT = eINSTANCE.getBlueprint();
+
+		/**
+		 * The meta object literal for the '<em><b>Dynamic Model</b></em>' reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BLUEPRINT__DYNAMIC_MODEL = eINSTANCE.getBlueprint_DynamicModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Dependencies</b></em>' attribute list feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BLUEPRINT__DEPENDENCIES = eINSTANCE.getBlueprint_Dependencies();
+
+		/**
+		 * The meta object literal for the '<em><b>Completion Listeners</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BLUEPRINT__COMPLETION_LISTENERS = eINSTANCE.getBlueprint_CompletionListeners();
+
+		/**
+		 * The meta object literal for the '{@link org.enterprisedomain.classmaker.impl.CompletionNotificationAdapterImpl <em>Completion Notification Adapter</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see org.enterprisedomain.classmaker.impl.CompletionNotificationAdapterImpl
 		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getCompletionNotificationAdapter()
 		 * @generated
@@ -3411,7 +3237,6 @@ public interface ClassMakerPackage extends EPackage {
 		/**
 		 * The meta object literal for the '<em><b>Error</b></em>' attribute feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		EAttribute COMPLETION_NOTIFICATION_ADAPTER__ERROR = eINSTANCE.getCompletionNotificationAdapter_Error();
@@ -3427,9 +3252,8 @@ public interface ClassMakerPackage extends EPackage {
 		EDataType LOCALE = eINSTANCE.getLocale();
 
 		/**
-		 * The meta object literal for the '{@link org.enterprisedomain.classmaker.Stage
-		 * <em>Stage</em>}' enum. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '{@link org.enterprisedomain.classmaker.Stage <em>Stage</em>}' enum.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @see org.enterprisedomain.classmaker.Stage
 		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getStage()
 		 * @generated
@@ -3487,9 +3311,8 @@ public interface ClassMakerPackage extends EPackage {
 		EDataType CORE_EXCEPTION = eINSTANCE.getCoreException();
 
 		/**
-		 * The meta object literal for the '<em>Invocation Target Exception</em>' data
-		 * type. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em>Invocation Target Exception</em>' data type.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @see java.lang.reflect.InvocationTargetException
 		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getInvocationTargetException()
 		 * @generated
@@ -3507,9 +3330,9 @@ public interface ClassMakerPackage extends EPackage {
 		EDataType ISTATUS = eINSTANCE.getIStatus();
 
 		/**
-		 * The meta object literal for the '<em>URI</em>' data type. <!-- begin-user-doc
+		 * The meta object literal for the '<em>URI</em>' data type.
+		 * <!-- begin-user-doc
 		 * --> <!-- end-user-doc -->
-		 * 
 		 * @see org.eclipse.emf.common.util.URI
 		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getURI()
 		 * @generated

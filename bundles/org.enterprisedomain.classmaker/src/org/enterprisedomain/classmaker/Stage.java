@@ -33,9 +33,9 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum Stage implements Enumerator {
 	/**
-	 * The '<em><b>DEFINED</b></em>' literal object. <!-- begin-user-doc --> <!--
+	 * The '<em><b>DEFINED</b></em>' literal object.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @see #DEFINED_VALUE
 	 * @generated
 	 * @ordered
@@ -43,9 +43,9 @@ public enum Stage implements Enumerator {
 	DEFINED(0, "DEFINED", "DEFINED"),
 
 	/**
-	 * The '<em><b>MODELED</b></em>' literal object. <!-- begin-user-doc --> <!--
+	 * The '<em><b>MODELED</b></em>' literal object.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @see #MODELED_VALUE
 	 * @generated
 	 * @ordered
@@ -53,9 +53,9 @@ public enum Stage implements Enumerator {
 	MODELED(1, "MODELED", "MODELED"),
 
 	/**
-	 * The '<em><b>GENERATED</b></em>' literal object. <!-- begin-user-doc --> <!--
+	 * The '<em><b>GENERATED</b></em>' literal object.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @see #GENERATED_VALUE
 	 * @generated
 	 * @ordered
@@ -63,9 +63,9 @@ public enum Stage implements Enumerator {
 	GENERATED(2, "GENERATED", "GENERATED"),
 
 	/**
-	 * The '<em><b>EXPORTED</b></em>' literal object. <!-- begin-user-doc --> <!--
+	 * The '<em><b>EXPORTED</b></em>' literal object.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @see #EXPORTED_VALUE
 	 * @generated
 	 * @ordered
@@ -73,9 +73,9 @@ public enum Stage implements Enumerator {
 	EXPORTED(3, "EXPORTED", "EXPORTED"),
 
 	/**
-	 * The '<em><b>INSTALLED</b></em>' literal object. <!-- begin-user-doc --> <!--
+	 * The '<em><b>INSTALLED</b></em>' literal object.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @see #INSTALLED_VALUE
 	 * @generated
 	 * @ordered
@@ -83,9 +83,9 @@ public enum Stage implements Enumerator {
 	INSTALLED(4, "INSTALLED", "INSTALLED"),
 
 	/**
-	 * The '<em><b>LOADED</b></em>' literal object. <!-- begin-user-doc --> <!--
+	 * The '<em><b>LOADED</b></em>' literal object.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @see #LOADED_VALUE
 	 * @generated
 	 * @ordered
@@ -189,9 +189,9 @@ public enum Stage implements Enumerator {
 	public static final int LOADED_VALUE = 5;
 
 	/**
-	 * An array of all the '<em><b>Stage</b></em>' enumerators. <!-- begin-user-doc
+	 * An array of all the '<em><b>Stage</b></em>' enumerators.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private static final Stage[] VALUES_ARRAY = new Stage[] { DEFINED, MODELED, GENERATED, EXPORTED, INSTALLED,
@@ -208,9 +208,7 @@ public enum Stage implements Enumerator {
 	/**
 	 * Returns the '<em><b>Stage</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param literal
-	 *            the literal.
+	 * @param literal the literal.
 	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
@@ -246,9 +244,7 @@ public enum Stage implements Enumerator {
 	/**
 	 * Returns the '<em><b>Stage</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the integer value.
+	 * @param value the integer value.
 	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
@@ -272,29 +268,26 @@ public enum Stage implements Enumerator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private final int value;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private final String name;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private final String literal;
 
 	/**
-	 * Only this class can construct instances. <!-- begin-user-doc --> <!--
+	 * Only this class can construct instances.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private Stage(int value, String name, String literal) {
@@ -305,7 +298,6 @@ public enum Stage implements Enumerator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public int getValue() {
@@ -314,7 +306,6 @@ public enum Stage implements Enumerator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getName() {
@@ -323,7 +314,6 @@ public enum Stage implements Enumerator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getLiteral() {
@@ -331,9 +321,8 @@ public enum Stage implements Enumerator {
 	}
 
 	/**
-	 * Returns the literal value of the enumerator, which is its string
-	 * representation. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the literal value of the enumerator, which is its string representation.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override

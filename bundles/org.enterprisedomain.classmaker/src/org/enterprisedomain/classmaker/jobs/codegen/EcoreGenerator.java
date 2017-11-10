@@ -27,6 +27,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.codegen.ecore.Generator;
 import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
@@ -38,7 +39,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.osgi.util.NLS;
-import org.enterprisedomain.classmaker.ClassMakerPlant;
+import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.Messages;
 import org.enterprisedomain.classmaker.SCMOperator;
 import org.enterprisedomain.classmaker.Stage;
@@ -148,7 +149,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 	protected class CodeGenerationJob extends GeneratorJob {
 
 		public CodeGenerationJob(int stateTimestamp) {
-			super(Messages.JobNameCodeGeneration, stateTimestamp);
+			super(NLS.bind(Messages.JobNameCodeGeneration, "Model Code"), stateTimestamp);
 			setChangeRule(false);
 		}
 
@@ -156,13 +157,17 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 		public IStatus work(IProgressMonitor monitor) throws CoreException {
 			try {
 				ResourceUtils.cleanupDir(getProject(), SOURCE_FOLDER_NAME);
-				getProject().refreshLocal(IResource.DEPTH_INFINITE, monitor);
+				try {
+					getProject().refreshLocal(IResource.DEPTH_INFINITE, monitor);
+				} catch (OperationCanceledException e) {
+				}
 				int result = (Integer) getGenerator().run(new String[] { "-forceOverwrite", "-codeFormatting", //$NON-NLS-1$ //$NON-NLS-2$
 						"default", "-model", //$NON-NLS-1$ //$NON-NLS-2$
 						EcorePlugin.getWorkspaceRoot().getRawLocation().append(getGenModelLocation()).toString() });
 				getContributionState().setProjectVersion(monitor);
 				try {
-					SCMOperator<Git> operator = ClassMakerPlugin.getClassMaker().getSCMRegistry()
+					@SuppressWarnings("unchecked")
+					SCMOperator<Git> operator = (SCMOperator<Git>) ClassMakerPlugin.getClassMaker().getSCMRegistry()
 							.get(getProject().getName());
 					operator.add(".");
 				} catch (Exception e) {
@@ -254,8 +259,8 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 			genModel.setLanguage(getContributionState().getLanguage());
 			genModel.setModelPluginID(EcoreGenerator.this.getProject().getName());
 			for (StageQualifier filter : getContributionState().getCustomizers().keySet())
-				if (filter.equals(
-						ClassMakerPlant.Stages.lookup(ClassMakerPlant.Stages.ID_PREFIX + "generation.genmodel.setup")))
+				if (filter.equals(ClassMakerService.Stages
+						.lookup(ClassMakerService.Stages.ID_PREFIX + "generation.genmodel.setup")))
 					getContributionState().getCustomizers().get(filter)
 							.customize(ECollections.asEList(projectPath, genModel, ePackages));
 			getContributionState().setPackageClassName(genModel.getGenPackages().get(0).getBasicPackageName());

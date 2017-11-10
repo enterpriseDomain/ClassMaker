@@ -106,7 +106,7 @@ limitations under the License.
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.emf.ecp.e4.feature"
+         id="org.eclipse.emf.ecp.e3.feature"
          version="0.0.0"/>
 
    <plugin

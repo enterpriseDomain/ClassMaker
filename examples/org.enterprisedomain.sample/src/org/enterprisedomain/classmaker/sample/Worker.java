@@ -13,13 +13,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.enterprisedomain.classmaker.ClassMakerPlant;
+import org.enterprisedomain.classmaker.ClassMakerService;
+import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.osgi.framework.FrameworkUtil;
 
 public class Worker implements Runnable {
 
 	@Inject
-	private ClassMakerPlant m;
+	private ClassMakerService m;
 
 	private EPackage ePackage;
 
@@ -45,7 +46,7 @@ public class Worker implements Runnable {
 		c.getEStructuralFeatures().add(a);
 		p.getEClassifiers().add(c);
 		try {
-			ePackage = m.make(p);
+			ePackage = m.make(p, ClassMakerPlugin.getProgressMonitor());
 			EClass e = (EClass) ePackage.getEClassifier(c.getName());
 			System.out.println(e.getName());
 			EObject o = ePackage.getEFactoryInstance().create(e);

@@ -15,11 +15,14 @@
  */
 package org.enterprisedomain.ecp;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.Semaphore;
 
 import org.eclipse.core.runtime.CoreException;
@@ -41,26 +44,33 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecp.core.ECPProject;
 import org.eclipse.emf.ecp.core.ECPRepository;
 import org.eclipse.emf.ecp.core.util.ECPContainer;
 import org.eclipse.emf.ecp.core.util.ECPModelContextAdapter;
+import org.eclipse.emf.ecp.core.util.ECPModelContextProvider;
 import org.eclipse.emf.ecp.core.util.ECPUtil;
 import org.eclipse.emf.ecp.core.util.observer.ECPProjectContentChangedObserver;
+import org.eclipse.emf.ecp.core.util.observer.ECPRepositoriesChangedObserver;
 import org.eclipse.emf.ecp.spi.core.DefaultProvider;
 import org.eclipse.emf.ecp.spi.core.InternalProject;
 import org.eclipse.emf.ecp.spi.core.InternalProvider;
+import org.eclipse.emf.ecp.spi.core.InternalRepository;
 import org.eclipse.emf.ecp.spi.core.ProviderChangeListener;
 import org.eclipse.emf.ecp.spi.core.util.InternalChildrenList;
 import org.eclipse.emf.edit.command.ChangeCommand;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
-import org.enterprisedomain.classmaker.ClassMakerPlant;
+import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.enterprisedomain.classmaker.Blueprint;
+import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Project;
+import org.enterprisedomain.classmaker.ResourceAdapter;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.impl.CompletionListenerImpl;
 import org.enterprisedomain.classmaker.util.ClassMakerAdapterFactory;
@@ -73,6 +83,10 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 	public static final String NAME = "org.enterprisedomain.ecp.provider";
 
 	public static final String PROP_CONTRIBUTION = "isContribution";
+
+	private static Set<String> visiblePackages = new HashSet<String>();
+
+	private Blueprint blueprint;
 
 	public EnterpriseDomainProvider() {
 		super(NAME);
@@ -90,6 +104,11 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 	}
 
 	@Override
+	public boolean hasCreateRepositorySupport() {
+		return false;
+	}
+
+	@Override
 	public EList<? extends Object> getElements(InternalProject project) {
 		Project domainProject = (Project) Activator.getClassMaker().getWorkspace().getProject(project.getName());
 		return domainProject.getChildren();
@@ -104,7 +123,6 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 	@Override
 	public void handleLifecycle(ECPContainer context, LifecycleEvent event) {
 		super.handleLifecycle(context, event);
-
 		if (context instanceof InternalProject) {
 			final InternalProject project = (InternalProject) context;
 			switch (event) {
@@ -113,7 +131,6 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 				break;
 
 			case CREATE:
-				createProject(project);
 				break;
 
 			case DISPOSE:
@@ -130,13 +147,13 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 		}
 	}
 
-	protected void initProject(InternalProject project) {
+	protected void initProject(final InternalProject project) {
 		final EditingDomain editingDomain = project.getEditingDomain();
 		editingDomain.getResourceSet().eAdapters().add(new EnterpriseDomainProjectObserver(project, this));
-		ClassMakerPlant plant = Activator.getClassMaker();
-		if (plant != null) {
-			Project domainProject = plant.getWorkspace().getProject(project.getName());
-			if (domainProject != null)
+		final ClassMakerService classMaker = Activator.getClassMaker();
+		if (classMaker != null) {
+			Project domainProject = classMaker.getWorkspace().getProject(project.getName());
+			if (domainProject != null) {
 				try {
 					IProgressMonitor monitor = null;
 					if (getUIProvider() != null)
@@ -147,6 +164,79 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 				} catch (CoreException e) {
 					Activator.log(e);
 				}
+				addVisiblePackages(project);
+				domainProject.initialize(false);
+			} else {
+				boolean contribution = false;
+				if (project.getProperties().getKeys().contains(PROP_CONTRIBUTION))
+					contribution = Boolean.valueOf(project.getProperties().getValue(PROP_CONTRIBUTION));
+				IProgressMonitor monitor = getUIProvider().getAdapter(project, IProgressMonitor.class);
+				if (contribution) {
+					EcoreFactory ecoreFactory = EcoreFactory.eINSTANCE;
+					EPackage model = ecoreFactory.createEPackage();
+					model.setName(project.getName());
+					model.setNsPrefix(CodeGenUtil.capName(project.getName().replaceAll(" ", "").toLowerCase()));
+					model.setNsURI("http://" + project.getName().replaceAll(" ", "") + "/1.0");
+					EClass dummyEClass = ecoreFactory.createEClass();
+					dummyEClass.setName("MyObject");
+					EAttribute dummyEAttribute = ecoreFactory.createEAttribute();
+					dummyEAttribute.setName("value");
+					dummyEAttribute.setEType(EcorePackage.Literals.EJAVA_OBJECT);
+					dummyEClass.getEStructuralFeatures().add(dummyEAttribute);
+					model.getEClassifiers().add(dummyEClass);
+					try {
+						blueprint = classMaker.createBlueprint();
+						blueprint.setDynamicModel(model);
+						blueprint.getCompletionListeners().add(new VisiblePackagesListener(project));
+						blueprint.getCompletionListeners().add(new CompletionListenerImpl() {
+
+							@SuppressWarnings("unchecked")
+							@Override
+							public void completed(Project result) throws Exception {
+								project.notifyObjectsChanged(
+										(Collection<Object>) (Collection<?>) Arrays.asList(project), true);
+								ECPUtil.getECPObserverBus().notify(ECPRepositoriesChangedObserver.class)
+										.repositoriesChanged(
+												(Collection<ECPRepository>) (Collection<?>) Arrays
+														.asList(project.getRepository()),
+												(Collection<ECPRepository>) (Collection<?>) Arrays
+														.asList(project.getRepository()));
+							}
+
+						});
+
+						ClassMakerPlugin.runWithProgress(new IRunnableWithProgress() {
+
+							@Override
+							public void run(IProgressMonitor monitor)
+									throws InvocationTargetException, InterruptedException {
+								try {
+									classMaker.make(blueprint, monitor);
+								} catch (CoreException e) {
+									throw new InvocationTargetException(e);
+								}
+							}
+
+						});
+						domainProject = classMaker.getWorkspace().getContribution(model);
+					} catch (InvocationTargetException e) {
+						Activator.log(e.getTargetException());
+					} catch (InterruptedException e) {
+						monitor.setCanceled(true);
+						return;
+					}
+					project.getVisiblePackages().add(EcorePackage.eINSTANCE);
+				} else
+					try {
+						domainProject = classMaker.getWorkspace().createProject(project.getName(), monitor);
+						addVisiblePackages(project);
+						domainProject.initialize(true);
+					} catch (CoreException e) {
+						Activator.log(e);
+					}
+				classMaker.getWorkspace().getResourceSet().eAdapters()
+						.add(new AdapterFactoryEditingDomain.EditingDomainProvider(project.getEditingDomain()));
+			}
 		}
 		registerChangeListener(new ProviderChangeListener() {
 
@@ -183,43 +273,71 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 		});
 	}
 
-	protected void createProject(InternalProject project) {
-		Project domainProject = null;
-		domainProject = Activator.getClassMaker().getWorkspace().getProject(project.getName());
-		if (domainProject != null)
-			return;
-		boolean contribution = false;
-		if (project.getProperties().getKeys().contains(PROP_CONTRIBUTION))
-			contribution = Boolean.valueOf(project.getProperties().getValue(PROP_CONTRIBUTION));
-		if (contribution) {
-			EcoreFactory ecoreFactory = EcoreFactory.eINSTANCE;
-			EPackage model = ecoreFactory.createEPackage();
-			model.setName(project.getName());
-			model.setNsPrefix(CodeGenUtil.capName(project.getName().replaceAll(" ", "").toLowerCase()));
-			model.setNsURI("http://" + project.getName().replaceAll(" ", "") + "/1.0");
-			EClass dummyEClass = ecoreFactory.createEClass();
-			dummyEClass.setName("MyObject");
-			EAttribute dummyEAttribute = ecoreFactory.createEAttribute();
-			dummyEAttribute.setName("value");
-			dummyEAttribute.setEType(EcorePackage.Literals.EJAVA_OBJECT);
-			dummyEClass.getEStructuralFeatures().add(dummyEAttribute);
-			model.getEClassifiers().add(dummyEClass);
-			try {
-				Activator.getClassMaker().make(model, getUIProvider().getAdapter(project, IProgressMonitor.class));
-				domainProject = Activator.getClassMaker().getWorkspace().getContribution(model);
-			} catch (CoreException e) {
-				Activator.log(e);
+	@SuppressWarnings("unchecked")
+	@Override
+	public ECPContainer getModelContext(Object element) {
+		if (element instanceof ECPContainer) {
+			return (ECPContainer) element;
+		}
+
+		if (element instanceof ECPModelContextProvider) {
+			return ((ECPModelContextProvider) element).getModelContext(element);
+		}
+
+		if (element instanceof Project) {
+			for (InternalProject project : getOpenProjects()) {
+				if (project.getName().equals(((Project) element).getName()))
+					return project;
 			}
-			project.getVisiblePackages().add(EcorePackage.eINSTANCE);
-			domainProject.addCompletionListener(new VisiblePackagesListener(project));
-		} else
-			domainProject = Activator.getClassMaker().getWorkspace().getProject(project.getName());
-		domainProject.getWorkspace().getResourceSet().eAdapters()
-				.add(new AdapterFactoryEditingDomain.EditingDomainProvider(project.getEditingDomain()));
+		}
+
+		if (element instanceof EList<?>)
+			return getModelContext(((EList<?>) element).get(0));
+
+		if (element instanceof ResourceAdapter)
+			return getModelContext(((ResourceAdapter) element).getProject());
+
+		if (element instanceof EObject) {
+			for (InternalProject project : getOpenProjects()) {
+				Project domainProject = Activator.getClassMaker().getWorkspace().getProject((EObject) element);
+				if (domainProject != null && project.getName().equals(domainProject.getName()))
+					return project;
+			}
+		}
+
+		if (element instanceof Resource) {
+			for (InternalProject project : getOpenProjects()) {
+				Project domainProject = Activator.getClassMaker().getWorkspace().getProject((Resource) element);
+				if (project.getName().equals(domainProject.getName()))
+					return project;
+			}
+			element = ((Resource) element).getResourceSet();
+		}
+
+		if (element instanceof ResourceSet) {
+			ResourceSet resourceSet = Activator.getClassMaker().getWorkspace().getResourceSet();
+			ECPContainer context = getModelContextFromAdapter(resourceSet);
+			if (context != null && context instanceof ECPProject) {
+				for (InternalProject project : getOpenProjects()) {
+					Project domainProject = Activator.getClassMaker().getWorkspace()
+							.getProject(((ECPProject) context).getName());
+					if (project.getName().equals(domainProject.getName()))
+						return project;
+				}
+			}
+		}
+
+		return null;
+	}
+
+	private void addVisiblePackages(InternalProject project) {
+		for (EPackage visiblePackage : getVisiblePackages(project)) {
+			project.getVisiblePackages().add(visiblePackage);
+		}
 	}
 
 	protected void disposeProject(InternalProject project) {
-		ClassMakerPlant plant = Activator.getClassMaker();
+		ClassMakerService plant = Activator.getClassMaker();
 		if (plant != null) {
 			Project domainProject = plant.getWorkspace().getProject(project.getName());
 			if (domainProject != null)
@@ -248,6 +366,25 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 	}
 
 	@Override
+	public Set<EPackage> getUnsupportedEPackages(Collection<EPackage> packages, InternalRepository repository) {
+		Set<EPackage> results = new HashSet<EPackage>();
+		results.addAll(packages);
+		for (InternalProject project : getOpenProjects())
+			results.removeAll(getVisiblePackages(project));
+		return results;
+	}
+
+	public Set<EPackage> getVisiblePackages(InternalProject project) {
+		Set<EPackage> results = new HashSet<EPackage>();
+		for (String packageNsURI : visiblePackages) {
+			EPackage ePackage = project.getEditingDomain().getResourceSet().getPackageRegistry()
+					.getEPackage(packageNsURI);
+			results.add(ePackage);
+		}
+		return results;
+	}
+
+	@Override
 	public boolean contains(InternalProject project, Object object) {
 		if (object instanceof EObject)
 			return Activator.getClassMaker().getWorkspace().contains((EObject) object);
@@ -257,10 +394,12 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 	@Override
 	public void fillChildren(ECPContainer context, Object parent, InternalChildrenList childrenList) {
 		if (parent instanceof ECPRepository) {
+			childrenList.addChildren(Activator.getClassMaker().getWorkspace().getProjects());
 		} else if (parent instanceof ECPProject) {
 			final ECPProject project = (ECPProject) parent;
 			final Project domainProject = Activator.getClassMaker().getWorkspace().getProject(project.getName());
-			childrenList.addChildren(domainProject.getChildren());
+			if (domainProject != null)
+				childrenList.addChildren(domainProject.getChildren());
 		} else if (parent instanceof Resource) {
 			Resource resource = (Resource) parent;
 			childrenList.addChildren(resource.getContents());
@@ -287,7 +426,6 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 				commandStack, Activator.getClassMaker().getWorkspace().getResourceSet());
 
 		editingDomain.getResourceSet().eAdapters().add(new ECPModelContextAdapter(project));
-
 		return editingDomain;
 	}
 
@@ -301,8 +439,8 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 
 		@Override
 		public void completed(Project result) {
-			project.getVisiblePackages().add(project.getEditingDomain().getResourceSet().getPackageRegistry()
-					.getEPackage(((Contribution) result).getDomainModel().getGenerated().getNsURI()));
+			visiblePackages.add(((Contribution) result).getDomainModel().getGenerated().getNsURI());
+			addVisiblePackages(project);
 		}
 
 	};

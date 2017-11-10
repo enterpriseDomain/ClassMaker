@@ -23,19 +23,17 @@ import org.eclipse.emf.ecore.resource.Resource;
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Resource
  * Adapter</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc --> {@link org.eclipse.emf.ecore.EObject EObject}
- * {@link org.eclipse.emf.common.notify.Adapter adapter} for
- * {@link org.eclipse.emf.ecore.resource.Resource Resource}. <!-- end-model-doc
- * -->
+ * <!-- begin-model-doc -->
+ * {@link org.eclipse.emf.ecore.EObject EObject} {@link org.eclipse.emf.common.notify.Adapter adapter} for {@link org.eclipse.emf.ecore.resource.Resource Resource}.
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.ResourceAdapter#getResource
- * <em>Resource</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.ResourceAdapter#getFilename
- * <em>Filename</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.ResourceAdapter#getResource <em>Resource</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.ResourceAdapter#getFilename <em>Filename</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.ResourceAdapter#getProject <em>Project</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getResourceAdapter()
@@ -62,12 +60,9 @@ public interface ResourceAdapter extends EObject, Adapter {
 	Resource getResource();
 
 	/**
-	 * Sets the value of the
-	 * '{@link org.enterprisedomain.classmaker.ResourceAdapter#getResource
-	 * <em>Resource</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Resource</em>' reference.
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.ResourceAdapter#getResource <em>Resource</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Resource</em>' reference.
 	 * @see #getResource()
 	 * @generated
 	 */
@@ -88,4 +83,32 @@ public interface ResourceAdapter extends EObject, Adapter {
 	 * @generated
 	 */
 	String getFilename();
+
+	/**
+	 * Returns the value of the '<em><b>Project</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.enterprisedomain.classmaker.Contribution#getModelResourceAdapter <em>Model Resource Adapter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Project</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Project</em>' container reference.
+	 * @see #setProject(Contribution)
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getResourceAdapter_Project()
+	 * @see org.enterprisedomain.classmaker.Contribution#getModelResourceAdapter
+	 * @model opposite="modelResourceAdapter" transient="false"
+	 * @generated
+	 */
+	Contribution getProject();
+
+	/**
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.ResourceAdapter#getProject <em>Project</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Project</em>' container reference.
+	 * @see #getProject()
+	 * @generated
+	 */
+	void setProject(Contribution value);
 } // ResourceAdapter

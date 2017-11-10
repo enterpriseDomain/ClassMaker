@@ -385,26 +385,49 @@ public class ClassMakerItemProviderAdapterFactory extends ClassMakerAdapterFacto
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.enterprisedomain.classmaker.ClassMakerPlant} instances.
+	 * This keeps track of the one adapter used for all {@link org.enterprisedomain.classmaker.ClassMakerService} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ClassMakerPlantItemProvider classMakerPlantItemProvider;
+	protected ClassMakerServiceItemProvider classMakerServiceItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.enterprisedomain.classmaker.ClassMakerPlant}.
+	 * This creates an adapter for a {@link org.enterprisedomain.classmaker.ClassMakerService}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createClassMakerPlantAdapter() {
-		if (classMakerPlantItemProvider == null) {
-			classMakerPlantItemProvider = new ClassMakerPlantItemProvider(this);
+	public Adapter createClassMakerServiceAdapter() {
+		if (classMakerServiceItemProvider == null) {
+			classMakerServiceItemProvider = new ClassMakerServiceItemProvider(this);
 		}
 
-		return classMakerPlantItemProvider;
+		return classMakerServiceItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.enterprisedomain.classmaker.Blueprint} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BlueprintItemProvider blueprintItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.enterprisedomain.classmaker.Blueprint}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBlueprintAdapter() {
+		if (blueprintItemProvider == null) {
+			blueprintItemProvider = new BlueprintItemProvider(this);
+		}
+
+		return blueprintItemProvider;
 	}
 
 	/**
@@ -555,8 +578,10 @@ public class ClassMakerItemProviderAdapterFactory extends ClassMakerAdapterFacto
 			scmRegistryItemProvider.dispose();
 		if (resourceAdapterItemProvider != null)
 			resourceAdapterItemProvider.dispose();
-		if (classMakerPlantItemProvider != null)
-			classMakerPlantItemProvider.dispose();
+		if (classMakerServiceItemProvider != null)
+			classMakerServiceItemProvider.dispose();
+		if (blueprintItemProvider != null)
+			blueprintItemProvider.dispose();
 		if (completionNotificationAdapterItemProvider != null)
 			completionNotificationAdapterItemProvider.dispose();
 	}

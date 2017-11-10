@@ -47,9 +47,11 @@ import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
 import org.eclipse.m2m.qvt.oml.ExecutionDiagnostic;
 import org.eclipse.m2m.qvt.oml.ModelExtent;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
+import org.enterprisedomain.classmaker.Blueprint;
 import org.enterprisedomain.classmaker.ClassMakerFactory;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
-import org.enterprisedomain.classmaker.ClassMakerPlant;
+import org.enterprisedomain.classmaker.ClassMakerService;
+import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Revision;
 import org.enterprisedomain.classmaker.SCMRegistry;
@@ -62,24 +64,21 @@ import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object
- * '<em><b>Plant</b></em>'. <!-- end-user-doc -->
+ * '<em><b>Service</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.impl.ClassMakerPlantImpl#getWorkspace
- * <em>Workspace</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ClassMakerPlantImpl#getSCMRegistry
- * <em>SCM Registry</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ClassMakerServiceImpl#getWorkspace <em>Workspace</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ClassMakerServiceImpl#getSCMRegistry <em>SCM Registry</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant {
+public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerService {
 	/**
-	 * The cached value of the '{@link #getWorkspace() <em>Workspace</em>}'
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getWorkspace() <em>Workspace</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getWorkspace()
 	 * @generated
 	 * @ordered
@@ -87,38 +86,35 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	protected Workspace workspace;
 
 	/**
-	 * The cached value of the '{@link #getSCMRegistry() <em>SCM Registry</em>}'
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getSCMRegistry() <em>SCM Registry</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getSCMRegistry()
 	 * @generated
 	 * @ordered
 	 */
-	protected SCMRegistry scmRegistry;
+	protected SCMRegistry<?> scmRegistry;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
 	 */
-	public ClassMakerPlantImpl() {
+	public ClassMakerServiceImpl() {
 		super();
 		workspace = ClassMakerFactory.eINSTANCE.createWorkspace();
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ClassMakerPackage.Literals.CLASS_MAKER_PLANT;
+		return ClassMakerPackage.Literals.CLASS_MAKER_SERVICE;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Workspace getWorkspace() {
@@ -128,7 +124,7 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 			if (workspace != oldWorkspace) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							ClassMakerPackage.CLASS_MAKER_PLANT__WORKSPACE, oldWorkspace, workspace));
+							ClassMakerPackage.CLASS_MAKER_SERVICE__WORKSPACE, oldWorkspace, workspace));
 			}
 		}
 		return workspace;
@@ -136,7 +132,6 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Workspace basicGetWorkspace() {
@@ -145,14 +140,13 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setWorkspace(Workspace newWorkspace) {
 		Workspace oldWorkspace = workspace;
 		workspace = newWorkspace;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.CLASS_MAKER_PLANT__WORKSPACE,
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.CLASS_MAKER_SERVICE__WORKSPACE,
 					oldWorkspace, workspace));
 	}
 
@@ -168,7 +162,7 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 			if (scmRegistry != oldSCMRegistry) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							ClassMakerPackage.CLASS_MAKER_PLANT__SCM_REGISTRY, oldSCMRegistry, scmRegistry));
+							ClassMakerPackage.CLASS_MAKER_SERVICE__SCM_REGISTRY, oldSCMRegistry, scmRegistry));
 			}
 		}
 		if (scmRegistry == null)
@@ -178,10 +172,9 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
-	public SCMRegistry basicGetSCMRegistry() {
+	public SCMRegistry<?> basicGetSCMRegistry() {
 		return scmRegistry;
 	}
 
@@ -190,9 +183,10 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * 
 	 * @generated NOT
 	 */
-	public EPackage make(EPackage dynamicModel) throws CoreException {
-		IProgressMonitor monitor = ClassMakerPlugin.getProgressMonitor();
-		return make(dynamicModel, monitor);
+	public EPackage make(EPackage input, IProgressMonitor monitor) throws CoreException {
+		Blueprint blueprint = createBlueprint();
+		blueprint.setDynamicModel(input);
+		return make(blueprint, monitor);
 	}
 
 	/**
@@ -200,86 +194,18 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * 
 	 * @generated NOT
 	 */
-	public Future<? extends EPackage> make(final EPackage dynamicModel, Executor executor) throws CoreException {
-		return asyncExecute(new Callable<EPackage>() {
-
-			@Override
-			public EPackage call() throws Exception {
-				return make(dynamicModel);
-			}
-		}, executor);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public EPackage make(EPackage dynamicModel, IProgressMonitor monitor) throws CoreException {
-		EList<String> dependencies = ECollections.emptyEList();
-		return make(dynamicModel, dependencies, monitor);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public Future<? extends EPackage> make(final EPackage dynamicModel, Executor executor,
-			final IProgressMonitor monitor) throws CoreException {
-		return asyncExecute(new Callable<EPackage>() {
-
-			@Override
-			public EPackage call() throws Exception {
-				return make(dynamicModel, monitor);
-			}
-		}, executor);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public EPackage make(EPackage dynamicModel, EList<String> dependencies) throws CoreException {
-		IProgressMonitor monitor = ClassMakerPlugin.getProgressMonitor();
-		return make(dynamicModel, dependencies, monitor);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public Future<? extends EPackage> make(final EPackage dynamicModel, final EList<String> dependencies,
-			Executor executor) throws CoreException {
-		return asyncExecute(new Callable<EPackage>() {
-
-			@Override
-			public EPackage call() throws Exception {
-				return make(dynamicModel, dependencies);
-			}
-		}, executor);
-
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public EPackage make(EPackage dynamicModel, EList<String> dependencies, IProgressMonitor monitor)
-			throws CoreException {
+	public EPackage make(Blueprint input, IProgressMonitor monitor) throws CoreException {
 		try {
-			Contribution contrib = getWorkspace().createContribution(dynamicModel, monitor);
-			contrib.getDependencies().addAll(dependencies);
+			Contribution contrib = getWorkspace().createContribution(input.getDynamicModel(), monitor);
+			contrib.getDependencies().addAll(input.getDependencies());
+			for (CompletionListener listener : input.getCompletionListeners())
+				contrib.addCompletionListener(listener);
 			contrib.make(monitor);
 			return contrib.getDomainModel().getGenerated();
 		} catch (CoreException e) {
 			ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
 			throw e;
 		}
-
 	}
 
 	/**
@@ -287,15 +213,8 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * 
 	 * @generated NOT
 	 */
-	public Future<? extends EPackage> make(final EPackage dynamicModel, final EList<String> dependencies,
-			Executor executor, final IProgressMonitor monitor) throws CoreException {
-		return asyncExecute(new Callable<EPackage>() {
-
-			@Override
-			public EPackage call() throws Exception {
-				return make(dynamicModel, dependencies, monitor);
-			}
-		}, executor);
+	public EPackage replace(EPackage source, EPackage target, IProgressMonitor monitor) throws CoreException {
+		return replace(source, target, true, monitor);
 	}
 
 	/**
@@ -303,8 +222,8 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * 
 	 * @generated NOT
 	 */
-	public EPackage replace(EPackage queryModel, EPackage dynamicModel) throws CoreException {
-		return replace(queryModel, dynamicModel, true);
+	public EPackage replace(Blueprint source, Blueprint target, IProgressMonitor monitor) throws CoreException {
+		return replace(source, target, true, monitor);
 	}
 
 	/**
@@ -312,15 +231,13 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * 
 	 * @generated NOT
 	 */
-	public Future<? extends EPackage> replace(final EPackage queryModel, final EPackage dynamicModel, Executor executor)
+	public EPackage replace(EPackage source, EPackage target, boolean changeVersion, IProgressMonitor monitor)
 			throws CoreException {
-		return asyncExecute(new Callable<EPackage>() {
-
-			@Override
-			public EPackage call() throws Exception {
-				return replace(queryModel, dynamicModel);
-			}
-		}, executor);
+		Blueprint sourceBlueprint = createBlueprint();
+		sourceBlueprint.setDynamicModel(source);
+		Blueprint targetBlueprint = createBlueprint();
+		targetBlueprint.setDynamicModel(target);
+		return replace(sourceBlueprint, targetBlueprint, changeVersion, monitor);
 	}
 
 	/**
@@ -328,64 +245,13 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * 
 	 * @generated NOT
 	 */
-	public EPackage replace(EPackage queryModel, EPackage dynamicModel, IProgressMonitor monitor) throws CoreException {
-		return replace(queryModel, dynamicModel, false, monitor);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public Future<? extends EPackage> replace(final EPackage queryModel, final EPackage dynamicModel,
-			final IProgressMonitor monitor, Executor executor) throws CoreException {
-		return asyncExecute(new Callable<EPackage>() {
-
-			@Override
-			public EPackage call() throws Exception {
-				return replace(queryModel, dynamicModel, monitor);
-			}
-		}, executor);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public EPackage replace(EPackage queryModel, EPackage dynamicModel, boolean changeVersion) throws CoreException {
-		IProgressMonitor monitor = ClassMakerPlugin.getProgressMonitor();
-		return replace(queryModel, dynamicModel, changeVersion, monitor);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public Future<? extends EPackage> replace(final EPackage queryModel, final EPackage dynamicModel,
-			final boolean changeVersion, Executor executor) throws CoreException {
-		return asyncExecute(new Callable<EPackage>() {
-
-			@Override
-			public EPackage call() throws Exception {
-				return replace(queryModel, dynamicModel, changeVersion);
-			}
-		}, executor);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public EPackage replace(EPackage queryModel, EPackage dynamicModel, boolean changeVersion, IProgressMonitor monitor)
+	public EPackage replace(Blueprint source, Blueprint target, boolean changeVersion, IProgressMonitor monitor)
 			throws CoreException {
 		try {
 			Version version = null;
-			Contribution contribution = getWorkspace().getContribution(queryModel, false);
+			Contribution contribution = getWorkspace().getContribution(source.getDynamicModel(), false);
 			if (contribution == null) {
-				contribution = getWorkspace().getContribution(queryModel, true);
+				contribution = getWorkspace().getContribution(source.getDynamicModel(), true);
 				if (contribution != null) {
 					version = contribution.getVersion();
 					if (changeVersion)
@@ -396,12 +262,11 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 				version = contribution.nextVersion();
 			else
 				version = contribution.getVersion();
-			return replace(queryModel, dynamicModel, version, monitor);
+			return replace(source, target, version, monitor);
 		} catch (CoreException e) {
 			ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
 			throw e;
 		}
-
 	}
 
 	/**
@@ -409,56 +274,28 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * 
 	 * @generated NOT
 	 */
-	public Future<? extends EPackage> replace(final EPackage queryModel, final EPackage dynamicModel,
-			final boolean changeVersion, final IProgressMonitor monitor, Executor executor) throws CoreException {
-		return asyncExecute(new Callable<EPackage>() {
-
-			@Override
-			public EPackage call() throws Exception {
-				return replace(queryModel, dynamicModel, changeVersion, monitor);
-			}
-		}, executor);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public EPackage replace(EPackage queryModel, EPackage dynamicModel, Version version) throws CoreException {
-		IProgressMonitor monitor = ClassMakerPlugin.getProgressMonitor();
-		return replace(queryModel, dynamicModel, version, monitor);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public Future<? extends EPackage> replace(final EPackage queryModel, final EPackage dynamicModel,
-			final Version version, Executor executor) throws CoreException {
-		return asyncExecute(new Callable<EPackage>() {
-
-			@Override
-			public EPackage call() throws Exception {
-				return replace(queryModel, dynamicModel, version);
-			}
-		}, executor);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public EPackage replace(EPackage queryModel, EPackage dynamicModel, Version version, IProgressMonitor monitor)
+	public EPackage replace(EPackage source, EPackage target, Version version, IProgressMonitor monitor)
 			throws CoreException {
-		Contribution contribution = getWorkspace().getContribution(queryModel, false);
+		Blueprint sourceBlueprint = createBlueprint();
+		sourceBlueprint.setDynamicModel(source);
+		Blueprint targetBlueprint = createBlueprint();
+		targetBlueprint.setDynamicModel(target);
+		return replace(sourceBlueprint, targetBlueprint, version, monitor);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public EPackage replace(Blueprint source, Blueprint target, Version version, IProgressMonitor monitor)
+			throws CoreException {
+		Contribution contribution = getWorkspace().getContribution(source.getDynamicModel(), false);
 		if (contribution == null) {
-			contribution = getWorkspace().getContribution(queryModel, true);
+			contribution = getWorkspace().getContribution(source.getDynamicModel(), true);
 			if (contribution != null) {
 				EPackage existingModel = contribution.getDomainModel().getDynamic();
-				if (ModelUtil.ePackagesAreEqual(existingModel, queryModel, false)) {
+				if (ModelUtil.ePackagesAreEqual(existingModel, source.getDynamicModel(), false)) {
 					Revision revision = null;
 					if (version.compareTo(contribution.getVersion()) < 0) {
 						if (!contribution.getRevisions().containsKey(version))
@@ -467,13 +304,13 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 						contribution.checkout(revision.getVersion());
 					} else
 						revision = contribution.createRevision(monitor);
-					revision.getDomainModel().setDynamic(EcoreUtil.copy(dynamicModel));
+					revision.getDomainModel().setDynamic(EcoreUtil.copy(target.getDynamicModel()));
 				}
 			} else
 				return null;
 		} else {
 			EPackage existingModel = contribution.getDomainModel().getDynamic();
-			if (ModelUtil.ePackagesAreEqual(existingModel, queryModel, true)) {
+			if (ModelUtil.ePackagesAreEqual(existingModel, source.getDynamicModel(), true)) {
 				Revision revision = contribution.getRevision();
 				if (version.compareTo(contribution.getVersion()) > 0) {
 					revision = contribution.newRevision(version);
@@ -488,9 +325,11 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 					revision = contribution.getRevisions().get(version);
 					contribution.checkout(revision.getVersion());
 				}
-				revision.getDomainModel().setDynamic(EcoreUtil.copy(dynamicModel));
+				revision.getDomainModel().setDynamic(EcoreUtil.copy(target.getDynamicModel()));
 			}
 		}
+		contribution.getDependencies().clear();
+		contribution.getDependencies().addAll(target.getDependencies());
 		contribution.make(monitor);
 		return contribution.getDomainModel().getGenerated();
 	}
@@ -500,13 +339,133 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * 
 	 * @generated NOT
 	 */
-	public Future<? extends EPackage> replace(final EPackage queryModel, final EPackage dynamicModel,
-			final Version version, final IProgressMonitor monitor, Executor executor) throws CoreException {
+	public Future<? extends EPackage> make(final Blueprint input, Executor executor, final IProgressMonitor monitor)
+			throws CoreException {
 		return asyncExecute(new Callable<EPackage>() {
 
 			@Override
 			public EPackage call() throws Exception {
-				return replace(queryModel, dynamicModel, version, monitor);
+				return make(input, monitor);
+			}
+		}, executor);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Future<? extends EPackage> replace(EPackage source, EPackage target, Executor executor,
+			final IProgressMonitor monitor) throws CoreException {
+		final Blueprint sourceBlueprint = createBlueprint();
+		sourceBlueprint.setDynamicModel(source);
+		final Blueprint targetBlueprint = createBlueprint();
+		targetBlueprint.setDynamicModel(target);
+		return asyncExecute(new Callable<EPackage>() {
+
+			@Override
+			public EPackage call() throws Exception {
+				return replace(sourceBlueprint, targetBlueprint, monitor);
+			}
+		}, executor);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Future<? extends EPackage> make(EPackage input, Executor executor, IProgressMonitor monitor)
+			throws CoreException {
+		Blueprint blueprint = createBlueprint();
+		blueprint.setDynamicModel(input);
+		return make(blueprint, executor, monitor);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Future<? extends EPackage> replace(final Blueprint source, final Blueprint target, Executor executor,
+			final IProgressMonitor monitor) throws CoreException {
+		return asyncExecute(new Callable<EPackage>() {
+
+			@Override
+			public EPackage call() throws Exception {
+				return replace(source, target, monitor);
+			}
+		}, executor);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Future<? extends EPackage> replace(EPackage source, EPackage target, final boolean changeVersion,
+			Executor executor, final IProgressMonitor monitor) throws CoreException {
+		final Blueprint sourceBlueprint = createBlueprint();
+		sourceBlueprint.setDynamicModel(source);
+		final Blueprint targetBlueprint = createBlueprint();
+		targetBlueprint.setDynamicModel(target);
+		return asyncExecute(new Callable<EPackage>() {
+
+			@Override
+			public EPackage call() throws Exception {
+				return replace(sourceBlueprint, targetBlueprint, changeVersion, monitor);
+			}
+		}, executor);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Future<? extends EPackage> replace(final Blueprint source, final Blueprint target,
+			final boolean changeVersion, Executor executor, final IProgressMonitor monitor) throws CoreException {
+		return asyncExecute(new Callable<EPackage>() {
+
+			@Override
+			public EPackage call() throws Exception {
+				return replace(source, target, changeVersion, monitor);
+			}
+		}, executor);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Future<? extends EPackage> replace(EPackage source, EPackage target, final Version version,
+			Executor executor, final IProgressMonitor monitor) throws CoreException {
+		final Blueprint sourceBlueprint = createBlueprint();
+		sourceBlueprint.setDynamicModel(source);
+		final Blueprint targetBlueprint = createBlueprint();
+		targetBlueprint.setDynamicModel(target);
+		return asyncExecute(new Callable<EPackage>() {
+
+			@Override
+			public EPackage call() throws Exception {
+				return replace(sourceBlueprint, targetBlueprint, version, monitor);
+			}
+		}, executor);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Future<? extends EPackage> replace(final Blueprint source, final Blueprint target, final Version version,
+			Executor executor, final IProgressMonitor monitor) throws CoreException {
+		return asyncExecute(new Callable<EPackage>() {
+
+			@Override
+			public EPackage call() throws Exception {
+				return replace(source, target, version, monitor);
 			}
 		}, executor);
 	}
@@ -521,9 +480,14 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 		return transform(source, transformationURI, monitor);
 	}
 
-	private Future<? extends EPackage> asyncExecute(Callable<EPackage> callable, Executor executor) {
+	private Future<? extends EPackage> asyncExecute(Callable<EPackage> callable, Executor executor)
+			throws CoreException {
 		FutureTask<? extends EPackage> future = new FutureTask<EPackage>(callable);
-		executor.execute(future);
+		try {
+			executor.execute(future);
+		} catch (Exception e) {
+			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
+		}
 		return future;
 	}
 
@@ -607,6 +571,15 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	 * 
 	 * @generated NOT
 	 */
+	public Blueprint createBlueprint() {
+		return ClassMakerFactory.eINSTANCE.createBlueprint();
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
 	public String computeProjectName(String packageName) {
 		return CodeGenUtil.safeName(packageName.toLowerCase());
 	}
@@ -614,16 +587,24 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
+	 * @generated NOT
+	 */
+	public <T extends EObject> T copy(T original) {
+		return EcoreUtil.copy(original);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case ClassMakerPackage.CLASS_MAKER_PLANT__WORKSPACE:
+		case ClassMakerPackage.CLASS_MAKER_SERVICE__WORKSPACE:
 			if (resolve)
 				return getWorkspace();
 			return basicGetWorkspace();
-		case ClassMakerPackage.CLASS_MAKER_PLANT__SCM_REGISTRY:
+		case ClassMakerPackage.CLASS_MAKER_SERVICE__SCM_REGISTRY:
 			if (resolve)
 				return getSCMRegistry();
 			return basicGetSCMRegistry();
@@ -633,13 +614,12 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case ClassMakerPackage.CLASS_MAKER_PLANT__WORKSPACE:
+		case ClassMakerPackage.CLASS_MAKER_SERVICE__WORKSPACE:
 			setWorkspace((Workspace) newValue);
 			return;
 		}
@@ -648,13 +628,12 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case ClassMakerPackage.CLASS_MAKER_PLANT__WORKSPACE:
+		case ClassMakerPackage.CLASS_MAKER_SERVICE__WORKSPACE:
 			setWorkspace((Workspace) null);
 			return;
 		}
@@ -663,18 +642,17 @@ public class ClassMakerPlantImpl extends EObjectImpl implements ClassMakerPlant 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case ClassMakerPackage.CLASS_MAKER_PLANT__WORKSPACE:
+		case ClassMakerPackage.CLASS_MAKER_SERVICE__WORKSPACE:
 			return workspace != null;
-		case ClassMakerPackage.CLASS_MAKER_PLANT__SCM_REGISTRY:
+		case ClassMakerPackage.CLASS_MAKER_SERVICE__SCM_REGISTRY:
 			return scmRegistry != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} // ClassMakerPlantImpl
+} // ClassMakerServiceImpl

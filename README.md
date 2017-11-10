@@ -24,8 +24,8 @@ Here is how you can use it:
     BundleContext bundleContext = FrameworkUtil.getBundle(this.getClass())
                                 .getBundleContext();
     ServiceReference<?> serviceReference = bundleContext
-                                .getServiceReference(ClassMakerPlant.class);
-    ClassMakerPlant classMaker = (ClassMakerPlant) bundleContext
+                                .getServiceReference(ClassMakerService.class);
+    ClassMakerService classMaker = (ClassMakerService) bundleContext
                                 .getService(serviceReference);
 
     // Produce result by combining them

@@ -197,7 +197,6 @@ public class ItemItemProvider extends ItemProviderAdapter implements IEditingDom
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ClassMakerPackage.Literals.ITEM__DOMAIN_MODEL);
-			childrenFeatures.add(ClassMakerPackage.Literals.ITEM__CUSTOMIZERS);
 		}
 		return childrenFeatures;
 	}
@@ -244,11 +243,11 @@ public class ItemItemProvider extends ItemProviderAdapter implements IEditingDom
 		case ClassMakerPackage.ITEM__PHASE:
 		case ClassMakerPackage.ITEM__VERSION:
 		case ClassMakerPackage.ITEM__LANGUAGE:
+		case ClassMakerPackage.ITEM__CUSTOMIZERS:
 		case ClassMakerPackage.ITEM__LOCALE:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case ClassMakerPackage.ITEM__DOMAIN_MODEL:
-		case ClassMakerPackage.ITEM__CUSTOMIZERS:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}

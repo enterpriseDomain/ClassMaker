@@ -37,7 +37,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.enterprisedomain.classmaker.ClassMakerPlant;
+import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.junit.Before;
@@ -45,7 +45,7 @@ import org.junit.BeforeClass;
 
 public abstract class AbstractTest {
 
-	protected static ClassMakerPlant service;
+	protected static ClassMakerService service;
 
 	private static CountDownLatch latch = new CountDownLatch(1);
 
@@ -57,9 +57,13 @@ public abstract class AbstractTest {
 
 	protected EDataType attributeType;
 
+	protected static String DEFAULT_ATTR_NAME = "a";
+
+	protected static String ANOTHER_DEFAULT_ATTR_NAME = "b";
+
 	private static Map<Future<? extends EPackage>, EPackage> currentDynamics;
 
-	public void setReference(ClassMakerPlant dependency) {
+	public void setReference(ClassMakerService dependency) {
 		service = dependency;
 		latch.countDown();
 	}
@@ -141,53 +145,53 @@ public abstract class AbstractTest {
 		return createEAttribute(getAttributeName(), getAttributeType());
 	}
 
-	protected EPackage createAndTestEPackage() throws CoreException, InterruptedException {
+	protected EPackage createAndTestEPackage(IProgressMonitor monitor) throws CoreException, InterruptedException {
 		EPackage p = createEPackage(getPackageName(), "0");
 		EClass c = createEClass(getClassName());
-		c.getEStructuralFeatures().add(createEAttribute("a", EcorePackage.Literals.EBOOLEAN));
+		c.getEStructuralFeatures().add(createEAttribute(DEFAULT_ATTR_NAME, EcorePackage.Literals.EBOOLEAN));
 		c.getEStructuralFeatures().add(createEAttribute(getAttributeName(), getAttributeType()));
 		p.getEClassifiers().add(c);
-		return saveAndTest(p, "a", true);
+		return saveAndTest(p, DEFAULT_ATTR_NAME, true, monitor);
 	}
 
-	protected Future<? extends EPackage> createAndSaveEPackage(Executor executor)
+	protected Future<? extends EPackage> createAndSaveEPackage(Executor executor, IProgressMonitor monitor)
 			throws CoreException, InterruptedException {
 		EPackage p = createEPackage(getPackageName(), "0");
 		EClass c = createEClass(getClassName());
-		c.getEStructuralFeatures().add(createEAttribute("a", EcorePackage.Literals.EBOOLEAN));
+		c.getEStructuralFeatures().add(createEAttribute(DEFAULT_ATTR_NAME, EcorePackage.Literals.EBOOLEAN));
 		c.getEStructuralFeatures().add(createEAttribute(getAttributeName(), getAttributeType()));
 		p.getEClassifiers().add(c);
-		Future<? extends EPackage> r = save(p, executor);
+		Future<? extends EPackage> r = save(p, executor, monitor);
 		currentDynamics.put(r, p);
 		return r;
 	}
 
 	protected Future<? extends EPackage> updateAndSaveEPackage(Future<? extends EPackage> previousResult,
-			Executor executor) throws CoreException {
+			Executor executor, IProgressMonitor monitor) throws CoreException {
 		EPackage previousEPackage = currentDynamics.get(previousResult);
 		EPackage p = EcoreUtil.copy(previousEPackage);
 		EClass c = createEClass("Another" + getClassName());
-		c.getEStructuralFeatures().add(createEAttribute("b", EcorePackage.Literals.EBOOLEAN));
+		c.getEStructuralFeatures().add(createEAttribute(ANOTHER_DEFAULT_ATTR_NAME, EcorePackage.Literals.EBOOLEAN));
 		c.getEStructuralFeatures().add(createEAttribute(getAttributeName(), getAttributeType()));
 		p.getEClassifiers().add(c);
-		return updateAndSave(previousEPackage, p, executor);
+		return updateAndSave(previousEPackage, p, executor, monitor);
 	}
 
-	protected EPackage createAndTestAPI() throws CoreException, InterruptedException {
+	protected EPackage createAndTestAPI(IProgressMonitor monitor) throws CoreException, InterruptedException {
 		EPackage p = createEPackage(getPackageName(), "0");
 		EClass c = createEClass(getClassName());
-		c.getEStructuralFeatures().add(createEAttribute("a", EcorePackage.Literals.EBOOLEAN));
+		c.getEStructuralFeatures().add(createEAttribute(DEFAULT_ATTR_NAME, EcorePackage.Literals.EBOOLEAN));
 		c.getEStructuralFeatures().add(createEAttribute(getAttributeName(), getAttributeType()));
 		p.getEClassifiers().add(c);
-		EPackage e = testAPICreate(p, "a", EcorePackage.Literals.EBOOLEAN, true);
+		EPackage e = testAPICreate(p, DEFAULT_ATTR_NAME, EcorePackage.Literals.EBOOLEAN, true, monitor);
 		assertNotNull(e);
 		return p;
 	}
 
 	protected EPackage testAPICreate(EPackage ePackage, String attributeName, EDataType attributeType,
-			Object attributeValue) throws CoreException, InterruptedException {
+			Object attributeValue, IProgressMonitor monitor) throws CoreException, InterruptedException {
 		try {
-			EPackage result = service.make(ePackage);
+			EPackage result = service.make(ePackage, monitor);
 			return testResult(result, attributeName, attributeType, attributeValue);
 		} catch (CoreException e) {
 			fail(e.getLocalizedMessage());
@@ -197,9 +201,10 @@ public abstract class AbstractTest {
 	}
 
 	protected EPackage testAPIUpdate(EPackage originalEPackage, EPackage ePackage, String attributeName,
-			EDataType attributeType, Object attributeValue) throws CoreException, InterruptedException {
+			EDataType attributeType, Object attributeValue, IProgressMonitor monitor)
+			throws CoreException, InterruptedException {
 		try {
-			EPackage result = service.replace(originalEPackage, ePackage);
+			EPackage result = service.replace(originalEPackage, ePackage, monitor);
 			return testResult(result, attributeName, attributeType, attributeValue);
 		} catch (CoreException e) {
 			fail(e.getLocalizedMessage());
@@ -223,20 +228,20 @@ public abstract class AbstractTest {
 		return result;
 	}
 
-	protected EPackage saveAndTest(EPackage ePackage, String attributeName, Object attributeValue)
-			throws CoreException, InterruptedException {
-		EPackage e = service.make(ePackage);
+	protected EPackage saveAndTest(EPackage ePackage, String attributeName, Object attributeValue,
+			IProgressMonitor monitor) throws CoreException, InterruptedException {
+		EPackage e = service.make(ePackage, monitor);
 		return test(e, attributeName, attributeValue);
 	}
 
-	private Future<? extends EPackage> save(final EPackage ePackage, Executor executor)
+	private Future<? extends EPackage> save(final EPackage ePackage, Executor executor, IProgressMonitor monitor)
 			throws CoreException, InterruptedException {
-		return service.make(ePackage, executor);
+		return service.make(ePackage, executor, monitor);
 	}
 
-	private Future<? extends EPackage> updateAndSave(EPackage ePackage, EPackage updated, Executor executor)
-			throws CoreException {
-		return service.replace(ePackage, updated, executor);
+	private Future<? extends EPackage> updateAndSave(EPackage ePackage, EPackage updated, Executor executor,
+			IProgressMonitor monitor) throws CoreException {
+		return service.replace(ePackage, updated, executor, monitor);
 	}
 
 	protected EPackage test(EPackage ePackage, String className, String attributeName, Object attributeValue) {
@@ -298,7 +303,7 @@ public abstract class AbstractTest {
 	}
 
 	protected IProgressMonitor getProgressMonitor() {
-		return ClassMakerPlugin.getInstance().getProgressMonitor();
+		return ClassMakerPlugin.getProgressMonitor();
 	}
 
 }

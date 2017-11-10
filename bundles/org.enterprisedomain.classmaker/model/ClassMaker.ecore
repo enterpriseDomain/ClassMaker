@@ -95,7 +95,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="modelResourceAdapter" eType="#//ResourceAdapter"
-        changeable="false" derived="true">
+        changeable="false" containment="true" eOpposite="#//ResourceAdapter/project">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A {@link ResourceAdapter &lt;em>&lt;b>ResourceAdapter&lt;/b>&lt;/em>} for  &lt;em>Contibution&lt;/em>."/>
       </eAnnotations>
@@ -407,6 +407,18 @@
       </eAnnotations>
       <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
+    <eOperations name="getProject" eType="#//Project">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Lookup project by name."/>
+      </eAnnotations>
+      <eParameters name="eObject" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    </eOperations>
+    <eOperations name="getProject" eType="#//Project">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Lookup project by name."/>
+      </eAnnotations>
+      <eParameters name="resource" eType="#//Resource"/>
+    </eOperations>
     <eOperations name="registerProject">
       <eParameters name="project" eType="#//Project"/>
     </eOperations>
@@ -681,7 +693,7 @@
         <details key="documentation" value="Reference to &lt;em>&lt;b>Project&lt;/b>&lt;/em>'s containing {@link Workspace Workspace}."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="needsCompletionNotification"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="needCompletionNotification"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Set to {@code true} when completion notification is needed."/>
@@ -844,8 +856,10 @@
         <details key="documentation" value="{@link org.eclipse.emf.ecore.resource.Resource Resource} file's path."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="project" eType="#//Contribution"
+        eOpposite="#//Contribution/modelResourceAdapter"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ClassMakerPlant">
+  <eClassifiers xsi:type="ecore:EClass" name="ClassMakerService">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="ClassMaker API facade service."/>
     </eAnnotations>
@@ -854,83 +868,81 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Performs {@link org.eclipse.emf.ecore.EPackage EPackage} instance generation, build and export, then installs the result into OSGi container, and then loads a generated {@link org.eclipse.emf.ecore.EPackage EPackage} class."/>
       </eAnnotations>
-      <eParameters name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-    </eOperations>
-    <eOperations name="make" eExceptions="#//CoreException">
-      <eGenericType eClassifier="#//Future">
-        <eTypeArguments>
-          <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-        </eTypeArguments>
-      </eGenericType>
-      <eParameters name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="executor" eType="#//Executor"/>
-    </eOperations>
-    <eOperations name="make" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
-        eExceptions="#//CoreException">
-      <eParameters name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="monitor" eType="#//IProgressMonitor"/>
-    </eOperations>
-    <eOperations name="make" eExceptions="#//CoreException">
-      <eGenericType eClassifier="#//Future">
-        <eTypeArguments>
-          <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-        </eTypeArguments>
-      </eGenericType>
-      <eParameters name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="executor" eType="#//Executor"/>
+      <eParameters name="input" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
     <eOperations name="make" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
         eExceptions="#//CoreException">
-      <eParameters name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="dependencies" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Performs {@link org.eclipse.emf.ecore.EPackage EPackage} instance generation, build and export, then installs the result into OSGi container, and then loads a generated {@link org.eclipse.emf.ecore.EPackage EPackage} class."/>
+      </eAnnotations>
+      <eParameters name="input" eType="#//Blueprint"/>
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
+    <eOperations name="replace" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
+        eExceptions="#//CoreException">
+      <eParameters name="source" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="target" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
+    <eOperations name="replace" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
+        eExceptions="#//CoreException">
+      <eParameters name="source" eType="#//Blueprint"/>
+      <eParameters name="target" eType="#//Blueprint"/>
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
+    <eOperations name="replace" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
+        eExceptions="#//CoreException">
+      <eParameters name="source" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="target" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="changeVersion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
+    <eOperations name="replace" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
+        eExceptions="#//CoreException">
+      <eParameters name="source" eType="#//Blueprint"/>
+      <eParameters name="target" eType="#//Blueprint"/>
+      <eParameters name="changeVersion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
+    <eOperations name="replace" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
+        eExceptions="#//CoreException">
+      <eParameters name="source" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="target" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="version" eType="#//OSGiVersion"/>
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
+    <eOperations name="replace" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
+        eExceptions="#//CoreException">
+      <eParameters name="source" eType="#//Blueprint"/>
+      <eParameters name="target" eType="#//Blueprint"/>
+      <eParameters name="version" eType="#//OSGiVersion"/>
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
     <eOperations name="make" eExceptions="#//CoreException">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Performs {@link org.eclipse.emf.ecore.EPackage EPackage} instance generation, build and export, then installs the result into OSGi container, and then loads a generated {@link org.eclipse.emf.ecore.EPackage EPackage} class."/>
+      </eAnnotations>
       <eGenericType eClassifier="#//Future">
         <eTypeArguments>
           <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
         </eTypeArguments>
       </eGenericType>
-      <eParameters name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="dependencies" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="input" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
       <eParameters name="executor" eType="#//Executor"/>
-    </eOperations>
-    <eOperations name="make" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
-        eExceptions="#//CoreException">
-      <eParameters name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="dependencies" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
     <eOperations name="make" eExceptions="#//CoreException">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Performs {@link org.eclipse.emf.ecore.EPackage EPackage} instance generation, build and export, then installs the result into OSGi container, and then loads a generated {@link org.eclipse.emf.ecore.EPackage EPackage} class."/>
+      </eAnnotations>
       <eGenericType eClassifier="#//Future">
         <eTypeArguments>
           <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
         </eTypeArguments>
       </eGenericType>
-      <eParameters name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="dependencies" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="input" eType="#//Blueprint"/>
       <eParameters name="executor" eType="#//Executor"/>
-      <eParameters name="monitor" eType="#//IProgressMonitor"/>
-    </eOperations>
-    <eOperations name="replace" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
-        eExceptions="#//CoreException">
-      <eParameters name="queryModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-    </eOperations>
-    <eOperations name="replace" eExceptions="#//CoreException">
-      <eGenericType eClassifier="#//Future">
-        <eTypeArguments>
-          <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-        </eTypeArguments>
-      </eGenericType>
-      <eParameters name="queryModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="executor" eType="#//Executor"/>
-    </eOperations>
-    <eOperations name="replace" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
-        eExceptions="#//CoreException">
-      <eParameters name="queryModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
     <eOperations name="replace" eExceptions="#//CoreException">
@@ -939,16 +951,10 @@
           <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
         </eTypeArguments>
       </eGenericType>
-      <eParameters name="queryModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+      <eParameters name="source" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="target" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
       <eParameters name="executor" eType="#//Executor"/>
-    </eOperations>
-    <eOperations name="replace" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
-        eExceptions="#//CoreException">
-      <eParameters name="queryModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="changeVersion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
     <eOperations name="replace" eExceptions="#//CoreException">
       <eGenericType eClassifier="#//Future">
@@ -956,16 +962,33 @@
           <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
         </eTypeArguments>
       </eGenericType>
-      <eParameters name="queryModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="source" eType="#//Blueprint"/>
+      <eParameters name="target" eType="#//Blueprint"/>
+      <eParameters name="executor" eType="#//Executor"/>
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
+    <eOperations name="replace" eExceptions="#//CoreException">
+      <eGenericType eClassifier="#//Future">
+        <eTypeArguments>
+          <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+        </eTypeArguments>
+      </eGenericType>
+      <eParameters name="source" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="target" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
       <eParameters name="changeVersion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
       <eParameters name="executor" eType="#//Executor"/>
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
-    <eOperations name="replace" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
-        eExceptions="#//CoreException">
-      <eParameters name="queryModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+    <eOperations name="replace" eExceptions="#//CoreException">
+      <eGenericType eClassifier="#//Future">
+        <eTypeArguments>
+          <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+        </eTypeArguments>
+      </eGenericType>
+      <eParameters name="source" eType="#//Blueprint"/>
+      <eParameters name="target" eType="#//Blueprint"/>
       <eParameters name="changeVersion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eParameters name="executor" eType="#//Executor"/>
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
     <eOperations name="replace" eExceptions="#//CoreException">
@@ -974,34 +997,10 @@
           <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
         </eTypeArguments>
       </eGenericType>
-      <eParameters name="queryModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="changeVersion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-      <eParameters name="monitor" eType="#//IProgressMonitor"/>
-      <eParameters name="executor" eType="#//Executor"/>
-    </eOperations>
-    <eOperations name="replace" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
-        eExceptions="#//CoreException">
-      <eParameters name="queryModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="version" eType="#//OSGiVersion"/>
-    </eOperations>
-    <eOperations name="replace" eExceptions="#//CoreException">
-      <eGenericType eClassifier="#//Future">
-        <eTypeArguments>
-          <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-        </eTypeArguments>
-      </eGenericType>
-      <eParameters name="queryModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="source" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="target" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
       <eParameters name="version" eType="#//OSGiVersion"/>
       <eParameters name="executor" eType="#//Executor"/>
-    </eOperations>
-    <eOperations name="replace" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
-        eExceptions="#//CoreException">
-      <eParameters name="queryModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="version" eType="#//OSGiVersion"/>
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
     <eOperations name="replace" eExceptions="#//CoreException">
@@ -1010,11 +1009,11 @@
           <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
         </eTypeArguments>
       </eGenericType>
-      <eParameters name="queryModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="source" eType="#//Blueprint"/>
+      <eParameters name="target" eType="#//Blueprint"/>
       <eParameters name="version" eType="#//OSGiVersion"/>
-      <eParameters name="monitor" eType="#//IProgressMonitor"/>
       <eParameters name="executor" eType="#//Executor"/>
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
     <eOperations name="transform" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
         eExceptions="#//CoreException">
@@ -1041,20 +1040,50 @@
       <eParameters name="model1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
       <eParameters name="model2" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
     </eOperations>
+    <eOperations name="createBlueprint" eType="#//Blueprint"/>
     <eOperations name="computeProjectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eParameters name="packageName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="copy">
+      <eGenericType eTypeParameter="#//ClassMakerService/copy/T"/>
+      <eTypeParameters name="T">
+        <eBounds eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      </eTypeParameters>
+      <eParameters name="original">
+        <eGenericType eTypeParameter="#//ClassMakerService/copy/T"/>
+      </eParameters>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="workspace" eType="#//Workspace">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The {@link Workspace &lt;em>&lt;b>Workspace&lt;/b>&lt;/em>} containing the {@link Project &lt;em>Projects&lt;/em>}."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="SCMRegistry" eType="#//SCMRegistry"
-        changeable="false">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="SCMRegistry" changeable="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The {@link SCMRegistry &lt;em>SCMRegistry&lt;/em>}."/>
       </eAnnotations>
+      <eGenericType eClassifier="#//SCMRegistry">
+        <eTypeArguments/>
+      </eGenericType>
     </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Blueprint">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Model object wrapper and input specification for {@link #make() making}."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Model {@link org.eclipse.emf.ecore.EPackage EPackage} object."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dependencies" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;em>Contribution's&lt;/em> {@link Contribution#getDependencies() dependencies}."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="completionListeners" upperBound="-1"
+        eType="#//CompletionListener"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Locale" instanceClassName="java.util.Locale">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

@@ -15,6 +15,7 @@
  */
 package org.enterprisedomain.classmaker.core;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.SortedSet;
@@ -25,13 +26,15 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.core.runtime.jobs.ProgressProvider;
 import org.eclipse.e4.core.contexts.IContextFunction;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
+import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.enterprisedomain.classmaker.ClassMakerFactory;
-import org.enterprisedomain.classmaker.ClassMakerPlant;
+import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.Customizer;
-import org.enterprisedomain.classmaker.impl.ClassMakerPlantImpl;
-import org.enterprisedomain.classmaker.jobs.ProgressMonitorFactory;
+import org.enterprisedomain.classmaker.impl.ClassMakerServiceImpl;
+import org.enterprisedomain.classmaker.util.ReflectiveFactory;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleEvent;
@@ -57,24 +60,34 @@ public class ClassMakerPlugin extends Plugin {
 
 	private static ClassMakerPlugin instance;
 
+	private static Object lock = new Object();
+
 	private static Class<? extends IProgressMonitor> monitorClass;
 
 	private static Object[] monitorParameters;
 
-	private static ServiceTracker<ClassMakerPlant, ClassMakerPlantImpl> tracker;
+	private static IProgressRunner runner;
 
-	private ServiceRegistration<ClassMakerPlant> reg;
+	private static IProgressMonitor progressMonitor;
+
+	private static IRunWrapper wrapper;
+	
+	private static ProgressProvider previousProgressProvider;
+
+	private static ServiceTracker<ClassMakerService, ClassMakerServiceImpl> tracker;
+
+	private ServiceRegistration<ClassMakerService> reg;
 
 	public static ClassMakerPlugin getInstance() {
 		return instance;
 	}
 
 	/**
-	 * Only for internal use.
+	 * ClassMaker facade service. Only for internal use.
 	 * 
-	 * @return enterpriseDomain service instance
+	 * @return ClassMakerService service instance
 	 */
-	public static ClassMakerPlant getClassMaker() {
+	public static ClassMakerService getClassMaker() {
 		return tracker.getService();
 	}
 
@@ -102,11 +115,12 @@ public class ClassMakerPlugin extends Plugin {
 	public void start(BundleContext context) throws Exception {
 		instance = this;
 
-		reg = context.registerService(ClassMakerPlant.class, ClassMakerFactory.eINSTANCE.createClassMakerPlant(), null);
+		reg = context.registerService(ClassMakerService.class, ClassMakerFactory.eINSTANCE.createClassMakerService(),
+				null);
 		Dictionary<String, String> properties = new Hashtable<String, String>();
-		properties.put(IContextFunction.SERVICE_CONTEXT_KEY, ClassMakerPlant.class.getName());
+		properties.put(IContextFunction.SERVICE_CONTEXT_KEY, ClassMakerService.class.getName());
 		context.registerService(IContextFunction.SERVICE_NAME, new ServiceFactory(), properties);
-		tracker = new ServiceTracker<ClassMakerPlant, ClassMakerPlantImpl>(context, ClassMakerPlant.class, null);
+		tracker = new ServiceTracker<ClassMakerService, ClassMakerServiceImpl>(context, ClassMakerService.class, null);
 		tracker.open();
 		context.addBundleListener(new BundleListener() {
 
@@ -115,13 +129,13 @@ public class ClassMakerPlugin extends Plugin {
 				if (event.getBundle().getSymbolicName().equals(PLUGIN_ID))
 					if (event.getType() == BundleEvent.STARTED) {
 						getClassMaker().getWorkspace().initialize();
-						ClassMakerPlant.Stages.contributeStages();
-						for (String id : ClassMakerPlant.Stages.ids()) {
-							SortedSet<Customizer> customizers = ClassMakerPlant.Stages.createCustomizers(id);
+						ClassMakerService.Stages.contributeStages();
+						for (String id : ClassMakerService.Stages.ids()) {
+							SortedSet<Customizer> customizers = ClassMakerService.Stages.createCustomizers(id);
 							if (!customizers.isEmpty())
 								for (Customizer customizer : customizers)
 									getClassMaker().getWorkspace().getCustomizers()
-											.put(ClassMakerPlant.Stages.lookup(id), customizer);
+											.put(ClassMakerService.Stages.lookup(id), customizer);
 						}
 						event.getBundle().getBundleContext().removeBundleListener(this);
 					}
@@ -142,18 +156,55 @@ public class ClassMakerPlugin extends Plugin {
 		ResourcesPlugin.getWorkspace().save(true, monitor);
 		tracker.close();
 		reg.unregister();
+		progressMonitor = null;
 		instance = null;
+	}
 
+	public static void setProgressRunner(IProgressRunner progressRunner) {
+		ClassMakerPlugin.runner = progressRunner;
+	}
+
+	public static void runWithProgress(IRunnableWithProgress runnable)
+			throws InvocationTargetException, InterruptedException {
+		if (runner == null)
+			return;
+		runner.run(runnable);
 	}
 
 	public static IProgressMonitor getProgressMonitor() {
-		return createProgressMonitor();
+		if (progressMonitor == null)
+			progressMonitor = createProgressMonitor();
+		return progressMonitor;
 	}
 
+	public static void setProgressMonitor(IProgressMonitor monitor) {
+		progressMonitor = new WrappingProgressMonitor(monitor);
+	}
+
+	public static void setClientRunWrapper(IRunWrapper wrapper) {
+		ClassMakerPlugin.wrapper = wrapper;
+	}
+
+	public static void wrapRun(Runnable runnable) {
+		if (wrapper == null)
+			wrapper = new DefaultRunWrapper();
+		wrapper.wrapRun(runnable);
+	}
+
+	public static ProgressProvider getPreviousProgressProvider() {
+		return previousProgressProvider;
+	}
+
+	public static void setPreviousProgressProvider(ProgressProvider previousProgressProvider) {
+		ClassMakerPlugin.previousProgressProvider = previousProgressProvider;
+	}
+	
 	public static <T extends IProgressMonitor> void setMonitorParameters(Class<T> monitorClass,
 			Object... constructorParameters) {
-		ClassMakerPlugin.monitorClass = monitorClass;
-		ClassMakerPlugin.monitorParameters = constructorParameters;
+		synchronized (lock) {
+			ClassMakerPlugin.monitorClass = monitorClass;
+			ClassMakerPlugin.monitorParameters = constructorParameters;
+		}
 	}
 
 	public static Class<? extends IProgressMonitor> getProgressMonitorClass() {
@@ -167,7 +218,7 @@ public class ClassMakerPlugin extends Plugin {
 	private static IProgressMonitor createProgressMonitor() {
 		if (monitorClass == null || monitorParameters == null)
 			setMonitorParameters(CodeGenUtil.EclipseUtil.StreamProgressMonitor.class, System.out);
-		return ProgressMonitorFactory.create(monitorClass, monitorParameters);
+		return new WrappingProgressMonitor(ReflectiveFactory.create(monitorClass, monitorParameters));
 	}
 
 	public static IStatus createOKStatus(String message) {

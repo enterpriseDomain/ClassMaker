@@ -31,6 +31,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.enterprisedomain.classmaker.ClassMakerFactory;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.Revision;
+import org.osgi.framework.Version;
 
 /**
  * This is the item provider adapter for a {@link org.enterprisedomain.classmaker.Revision} object.
@@ -163,9 +164,8 @@ public class RevisionItemProvider extends ItemItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Revision) object).getModelName();
-		return label == null || label.length() == 0 ? getString("_UI_Revision_type")
-				: getString("_UI_Revision_type") + " " + label;
+		Revision revision = (Revision) object;
+		return getString("_UI_Revision_type") + " " + revision.getTimestamp();
 	}
 
 	/**

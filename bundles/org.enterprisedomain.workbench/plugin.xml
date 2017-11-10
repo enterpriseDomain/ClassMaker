@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.enterprisedomain.workbench.application"
+            description="enterpriseDomain Workbench Application"
+            name="enterpriseDomain Workbench">
+         <property
+               name="windowImages"
+               value="platform:/plugin/org.eclipse.emf.ecp.ui.e3/icons/bricks.png">
+         </property>
+      </product>
+   </extension>
+   <extension
+         id="application"
+         point="org.eclipse.core.runtime.applications">
+      <application
+            cardinality="singleton-global"
+            icon="platform:/plugin/org.eclipse.emf.ecp.ui.e3/icons/bricks.png"
+            thread="main"
+            visible="true">
+         <run
+               class="org.enterprisedomain.workplace.Application">
+         </run>
+      </application>
+   </extension>
+   <extension
+         point="org.eclipse.emf.ecp.ui.modelElementOpener">
+      <modelElementOpener
+            class="org.enterprisedomain.workplace.ModelElementOpener">
+         <dynamicTester
+               tester="org.enterprisedomain.workplace.ModelElementOpenTester">
+         </dynamicTester>
+      </modelElementOpener>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+   </extension>
+
+</plugin>

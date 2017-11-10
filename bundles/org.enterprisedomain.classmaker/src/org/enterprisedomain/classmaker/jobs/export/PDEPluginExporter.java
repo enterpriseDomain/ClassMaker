@@ -22,8 +22,13 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.core.runtime.jobs.JobChangeAdapter;
+import org.eclipse.core.runtime.jobs.ProgressProvider;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.pde.core.IEditableModel;
 import org.eclipse.pde.core.build.IBuild;
@@ -54,9 +59,6 @@ public class PDEPluginExporter extends AbstractExporter {
 
 	@Override
 	public IStatus work(final IProgressMonitor monitor) throws CoreException {
-		if (monitor.isCanceled()) {
-			return Status.CANCEL_STATUS;
-		}
 		cleanup(monitor);
 
 		State contribution = getContributionState();
@@ -88,26 +90,53 @@ public class PDEPluginExporter extends AbstractExporter {
 					job.join();
 				} catch (InterruptedException e) {
 				}
+		final SubMonitor pm = SubMonitor.convert(monitor);
+		pm.setTaskName("Plug-in Export");
+		pm.subTask("Exporting plug-in");
+		final SubMonitor m = pm.newChild(9, SubMonitor.SUPPRESS_ISCANCELED);
 		PluginExportOperation op = new PluginExportOperation(info, Messages.JobNamePDEExport);
 		DelegatingJob delegate = new DelegatingJob(op, getStateTimestamp());
+		delegate.setProgressProvider(new ProgressProvider() {
+
+			@Override
+			public IProgressMonitor createMonitor(Job job) {
+				return m;
+			}
+		});
 		delegate.setNextJob(getNextJob());
 		delegate.setResultStage(getResultStage());
 		delegate.setDirtyStage(getDirtyStage());
 		setNextJob(delegate);
+		delegate.addJobChangeListener(new JobChangeAdapter() {
+
+			@Override
+			public void done(IJobChangeEvent event) {
+				if (event.getJob().getName().equals(Messages.JobNamePDEExport)) {
+					m.done();
+					pm.done();
+				}
+			}
+
+		});
 		contribution.setPhase(getResultStage());
-		monitor.worked(1);
 		return Status.OK_STATUS;
 	}
 
 	private void cleanup(IProgressMonitor monitor) throws CoreException {
 		ResourceUtils.cleanupDir(getProject(), ResourceUtils.getTargetFolderName());
 		try {
-			SCMOperator<Git> operator = ClassMakerPlugin.getClassMaker().getSCMRegistry().get(getProject().getName());
+			@SuppressWarnings("unchecked")
+			SCMOperator<Git> operator = (SCMOperator<Git>) ClassMakerPlugin.getClassMaker().getSCMRegistry()
+					.get(getProject().getName());
 			operator.add(".");
 		} catch (Exception e) {
 			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 		}
-		getProject().refreshLocal(IResource.DEPTH_INFINITE, monitor);
+		try {
+			IProgressMonitor pm = SubMonitor.convert(monitor, 1);
+			getProject().refreshLocal(IResource.DEPTH_INFINITE, pm);
+		} catch (OperationCanceledException e) {
+		}
 	}
 
 	private void updateBuildProperties(IPluginModelBase model) throws CoreException {

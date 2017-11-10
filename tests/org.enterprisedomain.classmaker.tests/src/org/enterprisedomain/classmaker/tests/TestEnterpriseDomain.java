@@ -58,7 +58,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.enterprisedomain.classmaker.ClassMakerPlant;
+import org.enterprisedomain.classmaker.Blueprint;
+import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Customizer;
@@ -106,12 +107,12 @@ public class TestEnterpriseDomain extends AbstractTest {
 		an.getDetails().put("body", "setPagesRead(getPagesRead() + pagesRead);");
 		operation.getEAnnotations().add(an);
 		EAnnotation invocation = ecoreFactory.createEAnnotation();
-		invocation.setSource(ClassMakerPlant.INVOCATION_DELEGATE_URI);
+		invocation.setSource(ClassMakerService.INVOCATION_DELEGATE_URI);
 		operation.getEAnnotations().add(invocation);
 		eClass.getEOperations().add(operation);
 		invocation = ecoreFactory.createEAnnotation();
 		invocation.setSource(EcorePackage.eNS_URI);
-		invocation.getDetails().put("invocationDelegates", ClassMakerPlant.INVOCATION_DELEGATE_URI);
+		invocation.getDetails().put("invocationDelegates", ClassMakerService.INVOCATION_DELEGATE_URI);
 		readerEPackage.getEAnnotations().add(invocation);
 		readerEPackage.getEClassifiers().add(eClass);
 
@@ -164,25 +165,25 @@ public class TestEnterpriseDomain extends AbstractTest {
 		checkedExistance.setEType(EcorePackage.Literals.ESTRING);
 		version.getEStructuralFeatures().add(checkedExistance);
 		dynamicEPackage.getEClassifiers().add(version);
-		EPackage first = service.make(dynamicEPackage);
-		EPackage newDynamicEPackage = EcoreUtil.copy(dynamicEPackage);
+		EPackage first = service.make(dynamicEPackage, getProgressMonitor());
+		EPackage newDynamicEPackage = service.copy(dynamicEPackage);
 		EClass newVersion = (EClass) newDynamicEPackage.getEClassifier(version.getName());
 		newVersion.getEStructuralFeature(checkedType.getName())
 				.setEType(newDynamicEPackage.getEClassifier(specific.getName()));
-		EPackage second = service.replace(dynamicEPackage, newDynamicEPackage);
+		EPackage second = service.replace(dynamicEPackage, newDynamicEPackage, getProgressMonitor());
 		assertFalse(service.checkEquals(first, second));
-		EPackage newerDynamicEPackage = EcoreUtil.copy(newDynamicEPackage);
+		EPackage newerDynamicEPackage = service.copy(newDynamicEPackage);
 		EClass newerVersion = (EClass) newerDynamicEPackage.getEClassifier(version.getName());
 		newerVersion.getEStructuralFeatures().remove(newerVersion.getEStructuralFeature(checkedExistance.getName()));
-		EPackage third = service.replace(newDynamicEPackage, newerDynamicEPackage);
+		EPackage third = service.replace(newDynamicEPackage, newerDynamicEPackage, getProgressMonitor());
 		assertFalse(service.checkEquals(second, third));
 		assertFalse(service.checkEquals(first, third));
-		EPackage newestDynamicEPackage = EcoreUtil.copy(newerDynamicEPackage);
+		EPackage newestDynamicEPackage = service.copy(newerDynamicEPackage);
 		EClass newestVersion = (EClass) newestDynamicEPackage.getEClassifier(version.getName());
-		newestVersion.getEStructuralFeatures().add(EcoreUtil.copy(checkedExistance));
+		newestVersion.getEStructuralFeatures().add(service.copy(checkedExistance));
 		newestVersion.getEStructuralFeature(checkedType.getName())
 				.setEType(newestDynamicEPackage.getEClassifier(base.getName()));
-		EPackage fourth = service.replace(newerDynamicEPackage, newestDynamicEPackage);
+		EPackage fourth = service.replace(newerDynamicEPackage, newestDynamicEPackage, getProgressMonitor());
 		assertFalse(service.checkEquals(second, fourth));
 		assertFalse(service.checkEquals(third, fourth));
 		assertTrue(service.checkEquals(first, fourth));
@@ -192,17 +193,17 @@ public class TestEnterpriseDomain extends AbstractTest {
 	public void async() throws ExecutionException, InterruptedException, CoreException {
 		Executor executor = Executors.newFixedThreadPool(2);
 		setPackageName("few");
-		Future<? extends EPackage> ePackage = createAndSaveEPackage(executor);
-		test(ePackage.get(), "a", true);
-		ePackage = updateAndSaveEPackage(ePackage, executor);
+		Future<? extends EPackage> ePackage = createAndSaveEPackage(executor, getProgressMonitor());
+		test(ePackage.get(), DEFAULT_ATTR_NAME, true);
+		ePackage = updateAndSaveEPackage(ePackage, executor, getProgressMonitor());
 		testAnother(ePackage.get(), "b", true);
 	}
 
 	@Test
 	public void osgiService() throws Exception {
 		BundleContext bundleContext = FrameworkUtil.getBundle(this.getClass()).getBundleContext();
-		ServiceReference<?> serviceReference = bundleContext.getServiceReference(ClassMakerPlant.class);
-		ClassMakerPlant tested = (ClassMakerPlant) bundleContext.getService(serviceReference);
+		ServiceReference<?> serviceReference = bundleContext.getServiceReference(ClassMakerService.class);
+		ClassMakerService tested = (ClassMakerService) bundleContext.getService(serviceReference);
 		assertNotNull(tested);
 		EPackage ePackage = createEPackage("deeds", "0.2");
 		EClass eClass = EcoreFactory.eINSTANCE.createEClass();
@@ -246,13 +247,13 @@ public class TestEnterpriseDomain extends AbstractTest {
 		an.getDetails().put("body", "return <%meta.MetaFactory%>.eINSTANCE.createMetaObject();");
 		op.getEAnnotations().add(an);
 		EAnnotation invocation = factory.createEAnnotation();
-		invocation.setSource(ClassMakerPlant.INVOCATION_DELEGATE_URI);
+		invocation.setSource(ClassMakerService.INVOCATION_DELEGATE_URI);
 		op.getEAnnotations().add(invocation);
 		metaClass.getEOperations().add(op);
 		metaPackage.getEClassifiers().add(metaClass);
 		EAnnotation invocationDelegate = factory.createEAnnotation();
 		invocationDelegate.setSource(EcorePackage.eNS_URI);
-		invocationDelegate.getDetails().put("invocationDelegates", ClassMakerPlant.INVOCATION_DELEGATE_URI);
+		invocationDelegate.getDetails().put("invocationDelegates", ClassMakerService.INVOCATION_DELEGATE_URI);
 		metaPackage.getEAnnotations().add(invocationDelegate);
 		EClass modelClass = factory.createEClass();
 		modelClass.setName("MetaModel");
@@ -267,7 +268,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		modelClass.getEStructuralFeatures().add(objectsReference);
 		metaPackage.getEClassifiers().add(modelClass);
 
-		EPackage ePackage = service.make(metaPackage);
+		EPackage ePackage = service.make(metaPackage, getProgressMonitor());
 		assertNotNull(ePackage);
 		EClass resultClass = (EClass) ePackage.getEClassifier(metaClass.getName());
 		EObject metaClassObject = ePackage.getEFactoryInstance().create(resultClass);
@@ -318,7 +319,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 				+ "\teType := type;\n}\n");
 		EPackage metaModel = (EPackage) service.transform(nativeModel, URI.createFileURI(qvt.toString()));
 		assertNotNull(metaModel);
-		EPackage resultMetaModel = service.make(metaModel);
+		EPackage resultMetaModel = service.make(metaModel, getProgressMonitor());
 		assertNotNull(resultMetaModel);
 		EObject o = resultMetaModel.getEFactoryInstance()
 				.create((EClass) resultMetaModel.getEClassifier(domainClassName));
@@ -357,7 +358,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 						+ "setProduct(effect);\nreturn this;");
 		opSet.getEAnnotations().add(a);
 		a = f.createEAnnotation();
-		a.setSource(ClassMakerPlant.INVOCATION_DELEGATE_URI);
+		a.setSource(ClassMakerService.INVOCATION_DELEGATE_URI);
 		opSet.getEAnnotations().add(a);
 		c.getEOperations().add(opSet);
 		EOperation opClass = f.createEOperation();
@@ -373,7 +374,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 				+ "effect.setName(name);\ngetProduct().getEClassifiers().add(effect);\nreturn this;");
 		opClass.getEAnnotations().add(a);
 		a = f.createEAnnotation();
-		a.setSource(ClassMakerPlant.INVOCATION_DELEGATE_URI);
+		a.setSource(ClassMakerService.INVOCATION_DELEGATE_URI);
 		opClass.getEAnnotations().add(a);
 		c.getEOperations().add(opClass);
 		EOperation opBuild = f.createEOperation();
@@ -382,15 +383,16 @@ public class TestEnterpriseDomain extends AbstractTest {
 		a = f.createEAnnotation();
 		a.setSource("http://www.eclipse.org/emf/2002/GenModel");
 		a.getDetails().put("body", "return <%org.enterprisedomain.classmaker.core.ClassMakerPlugin%>"
-				+ ".getClassMaker().make(getProduct());\n");
+				+ ".getClassMaker().make(getProduct(), <%org.enterprisedomain.classmaker.core.ClassMakerPlugin%>"
+				+ ".getProgressMonitor());\n");
 		opBuild.getEAnnotations().add(a);
 		a = f.createEAnnotation();
-		a.setSource(ClassMakerPlant.INVOCATION_DELEGATE_URI);
+		a.setSource(ClassMakerService.INVOCATION_DELEGATE_URI);
 		opBuild.getEAnnotations().add(a);
 		c.getEOperations().add(opBuild);
 		a = f.createEAnnotation();
 		a.setSource(EcorePackage.eNS_URI);
-		a.getDetails().put("invocationDelegates", ClassMakerPlant.INVOCATION_DELEGATE_URI);
+		a.getDetails().put("invocationDelegates", ClassMakerService.INVOCATION_DELEGATE_URI);
 		p.getEAnnotations().add(a);
 		EDataType e = f.createEDataType();
 		e.setName("CoreException");
@@ -401,7 +403,10 @@ public class TestEnterpriseDomain extends AbstractTest {
 
 		EList<String> dependencies = ECollections.newBasicEList();
 		dependencies.add(ClassMakerPlugin.PLUGIN_ID);
-		EPackage creator = service.make(p, dependencies);
+		Blueprint b = service.createBlueprint();
+		b.setDynamicModel(p);
+		b.getDependencies().addAll(dependencies);
+		EPackage creator = service.make(b, getProgressMonitor());
 		EObject builder = (EObject) creator.getEFactoryInstance().create((EClass) creator.getEClassifier(c.getName()));
 		EList<Object> args = ECollections.newBasicEList();
 		args.add("world");
@@ -425,7 +430,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		p = createEPackage("0.1");
 		final EClass cl = f.createEClass();
 		cl.setName(getClassName());
-		setAttributeName("a");
+		setAttributeName(DEFAULT_ATTR_NAME);
 		final EAttribute a = f.createEAttribute();
 		a.setName(getAttributeName());
 		a.setEType(EcorePackage.Literals.EJAVA_OBJECT);
@@ -447,7 +452,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		b.setName(getAttributeName());
 		b.setEType(EcorePackage.Literals.EINT);
 		((EClass) p2.getEClassifier(cl.getName())).getEStructuralFeatures().add(b);
-		EPackage e1 = service.replace(p, p2);
+		EPackage e1 = service.replace(p, p2, getProgressMonitor());
 		EClass cla = (EClass) e1.getEClassifier(cl.getName());
 		o = e1.getEFactoryInstance().create(cla);
 		assertEquals(cla.getName(), o.getClass().getSimpleName());
@@ -466,7 +471,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 
 		service.getWorkspace().getContribution(service.computeProjectName(p.getName())).checkout(v1);
 		EPackage p3 = updateEPackage(p, "0.3");
-		EPackage e2 = service.replace(p, p3, false);
+		EPackage e2 = service.replace(p, p3, false, getProgressMonitor());
 		assertEquals("http://" + e2.getName() + "/0.3", e2.getNsURI());
 		cleanup();
 	}
@@ -477,7 +482,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		setClassName("C");
 		setAttributeName("x");
 		setAttributeType(EcorePackage.Literals.EJAVA_OBJECT);
-		EPackage p = createAndTestEPackage();
+		EPackage p = createAndTestEPackage(getProgressMonitor());
 		assertNotNull(p);
 		Contribution c = service.getWorkspace().getContribution(p, Stage.LOADED);
 		p = c.getDomainModel().getDynamic();
@@ -486,18 +491,22 @@ public class TestEnterpriseDomain extends AbstractTest {
 		EPackage p2 = updateEPackage(p, "1");
 		EClass clazz = (EClass) p2.getEClassifier(getClassName());
 		clazz.getEStructuralFeatures().remove(clazz.getEStructuralFeature(getAttributeName()));
-		EPackage g = service.replace(p, p2);
+		EPackage g = service.replace(p, p2, getProgressMonitor());
 		EClass gClazz = (EClass) g.getEClassifier(getClassName());
 		EObject o = g.getEFactoryInstance().create(gClazz);
 		assertNull(gClazz.getEStructuralFeature(getAttributeName()));
 		assertEquals(getClassName(), o.getClass().getSimpleName());
 
-		g = service.replace(p, p, v);
+		EPackage p1 = service.copy(p);
+		EClass clazz1 = (EClass) p1.getEClassifier(getClassName());
+		clazz1.getEStructuralFeatures().remove(clazz1.getEStructuralFeature(DEFAULT_ATTR_NAME));
+		g = service.replace(p, p1, v, getProgressMonitor());
 		gClazz = (EClass) g.getEClassifier(getClassName());
 		o = g.getEFactoryInstance().create(gClazz);
-		EAttribute a = (EAttribute) gClazz.getEStructuralFeature(getAttributeName());
-		assertNotNull(a);
-		assertEquals(getAttributeType(), a.getEType());
+		EAttribute x = (EAttribute) gClazz.getEStructuralFeature(getAttributeName());
+		assertNotNull(x);
+		assertEquals(getAttributeType(), x.getEType());
+		assertNull(gClazz.getEStructuralFeature(DEFAULT_ATTR_NAME));
 		assertEquals(getClassName(), o.getClass().getSimpleName());
 		cleanup();
 	}
@@ -519,7 +528,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		Resource resource0 = resourceSet.createResource(resourceURI);
 		resource0.getContents().add(p0);
 		resource0.save(Collections.emptyMap());
-		EPackage r = service.make(p0);
+		EPackage r = service.make(p0, getProgressMonitor());
 		assertNotNull(r);
 
 		String modelName = "MetaModel";
@@ -528,7 +537,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 				true);
 		resource1.load(new HashMap<String, String>());
 		EPackage p1 = (EPackage) resource1.getContents().get(0);
-		EPackage ePackage = service.make(p1);
+		EPackage ePackage = service.make(p1, getProgressMonitor());
 		assertNotNull(ePackage);
 		assertEquals(modelName, ePackage.getNsPrefix());
 	}
@@ -539,9 +548,10 @@ public class TestEnterpriseDomain extends AbstractTest {
 		setClassName("File");
 		setAttributeName("data");
 		setAttributeType(EcorePackage.Literals.EJAVA_OBJECT);
-		Contribution c = service.getWorkspace().getContribution(createAndTestEPackage(), Stage.LOADED);
+		Contribution c = service.getWorkspace().getContribution(createAndTestEPackage(getProgressMonitor()),
+				Stage.LOADED);
 		c.delete(getProgressMonitor());
-		createAndTestEPackage();
+		createAndTestEPackage(getProgressMonitor());
 		cleanup();
 	}
 
@@ -551,14 +561,14 @@ public class TestEnterpriseDomain extends AbstractTest {
 		setClassName("C");
 		setAttributeName("c");
 		setAttributeType(EcorePackage.Literals.EJAVA_OBJECT);
-		EPackage p = createAndTestEPackage();
+		EPackage p = createAndTestEPackage(getProgressMonitor());
 		Contribution c = service.getWorkspace().getContribution(p, Stage.LOADED);
 		Version oldVersion = c.getRevision().getVersion();
 		Version newVersion = c.nextVersion();
-		EPackage g = service.replace(p, p, newVersion);
+		EPackage g = service.replace(p, p, newVersion, getProgressMonitor());
 		assertNotNull(g);
 		test(g, "c", new Object());
-		g = service.replace(p, p, oldVersion);
+		g = service.replace(p, p, oldVersion, getProgressMonitor());
 		assertNotNull(g);
 		test(g, "c", new Object());
 		cleanup();
@@ -571,7 +581,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		setClassName("T");
 		setAttributeName("t");
 		setAttributeType(EcorePackage.Literals.EJAVA_OBJECT);
-		EPackage p = createAndTestAPI();
+		EPackage p = createAndTestAPI(getProgressMonitor());
 		setPackageName("another");
 		EPackage p2 = updateEPackage(p, "1");
 		p2.setName("another");
@@ -580,7 +590,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		setClassName("P");
 		cl.setName(getClassName());
 		cl.getEStructuralFeature(getAttributeName());
-		testAPIUpdate(p, p2, "t", EcorePackage.Literals.EJAVA_OBJECT, new Object());
+		testAPIUpdate(p, p2, "t", EcorePackage.Literals.EJAVA_OBJECT, new Object(), getProgressMonitor());
 		cleanup();
 	}
 
@@ -610,7 +620,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 
 		};
 		c.getCustomizers().put(
-				ClassMakerPlant.Stages.lookup(ClassMakerPlant.Stages.ID_PREFIX + "generation.genmodel.setup"),
+				ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "generation.genmodel.setup"),
 				customizer);
 
 		final Semaphore complete = new Semaphore(0);
@@ -653,7 +663,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 	@Test
 	public void package_() throws OperationCanceledException, InterruptedException, ExecutionException, CoreException {
 		setPackageName("package");
-		createAndTestEPackage();
+		createAndTestEPackage(getProgressMonitor());
 		cleanup();
 	}
 }

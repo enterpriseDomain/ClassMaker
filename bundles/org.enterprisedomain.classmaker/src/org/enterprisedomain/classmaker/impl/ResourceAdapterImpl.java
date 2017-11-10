@@ -19,13 +19,17 @@ import java.net.MalformedURLException;
 
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
+import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.ResourceAdapter;
 
 /**
@@ -39,6 +43,8 @@ import org.enterprisedomain.classmaker.ResourceAdapter;
  * <em>Resource</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.ResourceAdapterImpl#getFilename
  * <em>Filename</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ResourceAdapterImpl#getProject
+ * <em>Project</em>}</li>
  * </ul>
  *
  * @generated
@@ -142,6 +148,96 @@ public class ResourceAdapterImpl extends EObjectImpl implements ResourceAdapter 
 	 * 
 	 * @generated
 	 */
+	public Contribution getProject() {
+		if (eContainerFeatureID() != ClassMakerPackage.RESOURCE_ADAPTER__PROJECT)
+			return null;
+		return (Contribution) eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public NotificationChain basicSetProject(Contribution newProject, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject) newProject, ClassMakerPackage.RESOURCE_ADAPTER__PROJECT, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public void setProject(Contribution newProject) {
+		if (newProject != eInternalContainer()
+				|| (eContainerFeatureID() != ClassMakerPackage.RESOURCE_ADAPTER__PROJECT && newProject != null)) {
+			if (EcoreUtil.isAncestor(this, newProject))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newProject != null)
+				msgs = ((InternalEObject) newProject).eInverseAdd(this,
+						ClassMakerPackage.CONTRIBUTION__MODEL_RESOURCE_ADAPTER, Contribution.class, msgs);
+			msgs = basicSetProject(newProject, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.RESOURCE_ADAPTER__PROJECT,
+					newProject, newProject));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+		case ClassMakerPackage.RESOURCE_ADAPTER__PROJECT:
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			return basicSetProject((Contribution) otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+		case ClassMakerPackage.RESOURCE_ADAPTER__PROJECT:
+			return basicSetProject(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+		case ClassMakerPackage.RESOURCE_ADAPTER__PROJECT:
+			return eInternalContainer().eInverseRemove(this, ClassMakerPackage.CONTRIBUTION__MODEL_RESOURCE_ADAPTER,
+					Contribution.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -151,6 +247,8 @@ public class ResourceAdapterImpl extends EObjectImpl implements ResourceAdapter 
 			return basicGetResource();
 		case ClassMakerPackage.RESOURCE_ADAPTER__FILENAME:
 			return getFilename();
+		case ClassMakerPackage.RESOURCE_ADAPTER__PROJECT:
+			return getProject();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -166,6 +264,9 @@ public class ResourceAdapterImpl extends EObjectImpl implements ResourceAdapter 
 		case ClassMakerPackage.RESOURCE_ADAPTER__RESOURCE:
 			setResource((Resource) newValue);
 			return;
+		case ClassMakerPackage.RESOURCE_ADAPTER__PROJECT:
+			setProject((Contribution) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -180,6 +281,9 @@ public class ResourceAdapterImpl extends EObjectImpl implements ResourceAdapter 
 		switch (featureID) {
 		case ClassMakerPackage.RESOURCE_ADAPTER__RESOURCE:
 			setResource((Resource) null);
+			return;
+		case ClassMakerPackage.RESOURCE_ADAPTER__PROJECT:
+			setProject((Contribution) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -197,6 +301,8 @@ public class ResourceAdapterImpl extends EObjectImpl implements ResourceAdapter 
 			return resource != null;
 		case ClassMakerPackage.RESOURCE_ADAPTER__FILENAME:
 			return FILENAME_EDEFAULT == null ? getFilename() != null : !FILENAME_EDEFAULT.equals(getFilename());
+		case ClassMakerPackage.RESOURCE_ADAPTER__PROJECT:
+			return getProject() != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -19,6 +19,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.ecp.core.ECPProject;
 import org.eclipse.emf.ecp.core.ECPRepository;
+import org.eclipse.emf.ecp.core.util.ECPContainer;
 import org.eclipse.emf.ecp.core.util.ECPProperties;
 import org.eclipse.emf.ecp.spi.core.InternalProvider;
 import org.eclipse.emf.ecp.spi.ui.CompositeStateObserver;
@@ -26,7 +27,10 @@ import org.eclipse.emf.ecp.spi.ui.DefaultUIProvider;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.viewers.DecoratingLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -36,10 +40,16 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.ui.internal.progress.ProgressManager;
+import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
+import org.enterprisedomain.classmaker.core.IProgressRunner;
+import org.enterprisedomain.classmaker.core.IRunWrapper;
 import org.enterprisedomain.classmaker.provider.ClassMakerItemProviderAdapterFactory;
 import org.enterprisedomain.classmaker.util.ClassMakerAdapterFactory;
+import org.enterprisedomain.ecp.Activator;
 import org.enterprisedomain.ecp.EnterpriseDomainProvider;
+import org.enterprisedomain.ecp.ui.actions.MakeAction;
 
 public class EnterpriseDomainUIProvider extends DefaultUIProvider {
 
@@ -47,8 +57,9 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider {
 			new AdapterFactory[] { new ClassMakerItemProviderAdapterFactory(), new ClassMakerAdapterFactory(),
 					InternalProvider.EMF_ADAPTER_FACTORY });
 
-	private static final ILabelProvider ENTERPRISE_DOMAIN_LABEL_PROVIDER = new AdapterFactoryLabelProvider(
-			ENTERPRISE_DOMAIN_ITEM_PROVIDER_ADAPTER_FACTORY);
+	private static final ILabelProvider ENTERPRISE_DOMAIN_LABEL_PROVIDER = new DecoratingLabelProvider(
+			new AdapterFactoryLabelProvider(ENTERPRISE_DOMAIN_ITEM_PROVIDER_ADAPTER_FACTORY),
+			new EnterpriseDomainECPDecorator());
 
 	private Button isContributionButton;
 	private boolean isContribution;
@@ -64,9 +75,12 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider {
 			return (T) ClassMakerPlugin.getProgressMonitor();
 		if (ComposeableAdapterFactory.class.isAssignableFrom(adapterType))
 			return (T) ENTERPRISE_DOMAIN_ITEM_PROVIDER_ADAPTER_FACTORY;
+		if (EnterpriseDomainUIProvider.class.isAssignableFrom(adapterType))
+			return (T) this;
 		return (T) getProvider().getAdapter(adaptable, adapterType);
 	}
 
+	@SuppressWarnings("restriction")
 	@Override
 	public Control createNewProjectUI(Composite parent, CompositeStateObserver observer,
 			final ECPProperties projectProperties) {
@@ -90,6 +104,7 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider {
 
 		});
 		observer.compositeChangedState(control, true, projectProperties);
+		ClassMakerPlugin.setPreviousProgressProvider(ProgressManager.getInstance());
 		return control;
 	}
 
@@ -164,6 +179,30 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider {
 	// }
 
 	@Override
+	public void fillContextMenu(IMenuManager manager, ECPContainer context, Object[] elements) {
+		super.fillContextMenu(manager, context, elements);
+		if (elements.length == 1) {
+			final Object element = elements[0];
+			if (context instanceof ECPProject) {
+				ECPProject project = (ECPProject) context;
+				manager.add(new MakeAction(project.getEditingDomain(), new StructuredSelection(element), project));
+			}
+		}
+	}
+
+	public void setProgressMonitor(IProgressMonitor progressMonitor) {
+		ClassMakerPlugin.setProgressMonitor(progressMonitor);
+	}
+
+	public void setClientRunWrapper(IRunWrapper wrapper) {
+		ClassMakerPlugin.setClientRunWrapper(wrapper);
+	}
+
+	public void setProgressRunner(IProgressRunner progressRunner) {
+		ClassMakerPlugin.setProgressRunner(progressRunner);
+	}
+
+	@Override
 	public Image getImage(Object element) {
 		// Image image = null;
 		// try {
@@ -178,6 +217,12 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider {
 
 	@Override
 	public String getText(Object element) {
+		if (element instanceof ECPProject) {
+			Contribution domainProject = Activator.getClassMaker().getWorkspace()
+					.getContribution(((ECPProject) element).getName());
+			if (domainProject != null)
+				return super.getText(element) + " [" + domainProject.getPhase().toString().toLowerCase() + "]";
+		}
 		return super.getText(element);
 	}
 

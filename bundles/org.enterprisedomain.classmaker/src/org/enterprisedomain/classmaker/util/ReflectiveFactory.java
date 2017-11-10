@@ -1,16 +1,15 @@
-package org.enterprisedomain.classmaker.jobs;
+package org.enterprisedomain.classmaker.util;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 
-public class ProgressMonitorFactory {
+public class ReflectiveFactory {
 
-	public static <T extends IProgressMonitor> IProgressMonitor create(Class<T> monitorClass, Object... parameters) {
+	public static <T> T create(Class<T> clazz, Object... parameters) {
 		Constructor<?> constructor = null;
-		ctr: for (Constructor<?> c : monitorClass.getConstructors())
+		ctr: for (Constructor<?> c : clazz.getConstructors())
 			if (parameters.length == c.getParameterTypes().length) {
 				constructor = c;
 				for (int i = 0; i < parameters.length; i++)
@@ -19,7 +18,7 @@ public class ProgressMonitorFactory {
 			}
 		if (constructor != null)
 			try {
-				return (IProgressMonitor) constructor.newInstance(parameters);
+				return (T) constructor.newInstance(parameters);
 			} catch (InstantiationException e) {
 				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createWarningStatus(e));
 			} catch (IllegalAccessException e) {

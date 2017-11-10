@@ -75,7 +75,7 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 			addProjectNamePropertyDescriptor(object);
 			addChildrenPropertyDescriptor(object);
 			addDirtyPropertyDescriptor(object);
-			addNeedsCompletionNotificationPropertyDescriptor(object);
+			addNeedCompletionNotificationPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -123,7 +123,8 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 						getResourceLocator(), getString("_UI_Project_children_feature"),
 						getString("_UI_PropertyDescriptor_description", "_UI_Project_children_feature",
 								"_UI_Project_type"),
-						ClassMakerPackage.Literals.PROJECT__CHILDREN, false, false, false, null, null, null));
+						ClassMakerPackage.Literals.PROJECT__CHILDREN, false, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -143,18 +144,18 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 	}
 
 	/**
-	 * This adds a property descriptor for the Needs Completion Notification feature.
+	 * This adds a property descriptor for the Need Completion Notification feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addNeedsCompletionNotificationPropertyDescriptor(Object object) {
+	protected void addNeedCompletionNotificationPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
 				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_Project_needsCompletionNotification_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_Project_needsCompletionNotification_feature",
+				getString("_UI_Project_needCompletionNotification_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_Project_needCompletionNotification_feature",
 						"_UI_Project_type"),
-				ClassMakerPackage.Literals.PROJECT__NEEDS_COMPLETION_NOTIFICATION, true, false, false,
+				ClassMakerPackage.Literals.PROJECT__NEED_COMPLETION_NOTIFICATION, true, false, false,
 				ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
 	}
 
@@ -171,7 +172,6 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ClassMakerPackage.Literals.PROJECT__CHILDREN);
-			childrenFeatures.add(ClassMakerPackage.Literals.PROJECT__COMPLETION_NOTIFICATION_ADAPTER);
 		}
 		return childrenFeatures;
 	}
@@ -228,11 +228,11 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 		case ClassMakerPackage.PROJECT__NAME:
 		case ClassMakerPackage.PROJECT__PROJECT_NAME:
 		case ClassMakerPackage.PROJECT__DIRTY:
-		case ClassMakerPackage.PROJECT__NEEDS_COMPLETION_NOTIFICATION:
+		case ClassMakerPackage.PROJECT__NEED_COMPLETION_NOTIFICATION:
+		case ClassMakerPackage.PROJECT__COMPLETION_NOTIFICATION_ADAPTER:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case ClassMakerPackage.PROJECT__CHILDREN:
-		case ClassMakerPackage.PROJECT__COMPLETION_NOTIFICATION_ADAPTER:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
@@ -251,120 +251,7 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
 		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				ClassMakerFactory.eINSTANCE.createProject()));
-
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				ClassMakerFactory.eINSTANCE.createContribution()));
-
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				ClassMakerFactory.eINSTANCE.createRevision()));
-
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				ClassMakerFactory.eINSTANCE.createState()));
-
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				ClassMakerFactory.eINSTANCE.createWorkspace()));
-
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				ClassMakerFactory.eINSTANCE.create(ClassMakerPackage.Literals.INTEGER_TO_STATE_MAP_ENTRY)));
-
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				ClassMakerFactory.eINSTANCE.create(ClassMakerPackage.Literals.VERSION_TO_REVISION_MAP_ENTRY)));
-
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				ClassMakerFactory.eINSTANCE.createCustomizer()));
-
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				ClassMakerFactory.eINSTANCE.createStageQualifier()));
-
-		newChildDescriptors
-				.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN, ClassMakerFactory.eINSTANCE
-						.create(ClassMakerPackage.Literals.STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY)));
-
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				ClassMakerFactory.eINSTANCE.createModelPair()));
-
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				ClassMakerFactory.eINSTANCE.createSCMRegistry()));
-
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				ClassMakerFactory.eINSTANCE.createResourceAdapter()));
-
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				ClassMakerFactory.eINSTANCE.createClassMakerPlant()));
-
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				ClassMakerFactory.eINSTANCE.createCompletionNotificationAdapter()));
-
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				EcoreFactory.eINSTANCE.createEAttribute()));
-
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				EcoreFactory.eINSTANCE.createEAnnotation()));
-
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				EcoreFactory.eINSTANCE.createEClass()));
-
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				EcoreFactory.eINSTANCE.createEDataType()));
-
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				EcoreFactory.eINSTANCE.createEEnum()));
-
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				EcoreFactory.eINSTANCE.createEEnumLiteral()));
-
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				EcoreFactory.eINSTANCE.createEFactory()));
-
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				EcoreFactory.eINSTANCE.createEObject()));
-
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				EcoreFactory.eINSTANCE.createEOperation()));
-
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				EcoreFactory.eINSTANCE.createEPackage()));
-
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				EcoreFactory.eINSTANCE.createEParameter()));
-
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				EcoreFactory.eINSTANCE.createEReference()));
-
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				EcoreFactory.eINSTANCE.create(EcorePackage.Literals.ESTRING_TO_STRING_MAP_ENTRY)));
-
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				EcoreFactory.eINSTANCE.createEGenericType()));
-
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				EcoreFactory.eINSTANCE.createETypeParameter()));
-
-		newChildDescriptors
-				.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__COMPLETION_NOTIFICATION_ADAPTER,
-						ClassMakerFactory.eINSTANCE.createCompletionNotificationAdapter()));
-	}
-
-	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
-
-		boolean qualify = childFeature == ClassMakerPackage.Literals.PROJECT__CHILDREN
-				|| childFeature == ClassMakerPackage.Literals.PROJECT__COMPLETION_NOTIFICATION_ADAPTER;
-
-		if (qualify) {
-			return getString("_UI_CreateChild_text2",
-					new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
+				EcoreFactory.eINSTANCE.createFromString(EcorePackage.Literals.EJAVA_OBJECT, null))); // TODO: ensure this is a valid literal value
 	}
 
 	/**
