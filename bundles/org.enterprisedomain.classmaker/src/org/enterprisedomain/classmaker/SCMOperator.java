@@ -24,15 +24,15 @@ import org.osgi.framework.Version;
  * <!-- begin-user-doc --> A representation of the model object '<em><b>SCM
  * Operator</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc -->
- * Operator of Source Code Management system.
- * <!-- end-model-doc -->
+ * <!-- begin-model-doc --> Operator of Source Code Management system. <!--
+ * end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.SCMOperator#getProjectName <em>Project Name</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.SCMOperator#getProjectName
+ * <em>Project Name</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getSCMOperator()
@@ -77,13 +77,16 @@ public interface SCMOperator<T> extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model kind="operation" exceptions="org.enterprisedomain.classmaker.Exception"
+	 * 
+	 * @model kind="operation"
+	 *        exceptions="org.enterprisedomain.classmaker.Exception"
 	 * @generated
 	 */
 	T getRepositorySCM() throws Exception;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model exceptions="org.enterprisedomain.classmaker.Exception"
 	 * @generated
 	 */
@@ -91,6 +94,7 @@ public interface SCMOperator<T> extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model exceptions="org.enterprisedomain.classmaker.Exception"
 	 * @generated
 	 */
@@ -98,6 +102,7 @@ public interface SCMOperator<T> extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model exceptions="org.enterprisedomain.classmaker.Exception"
 	 * @generated
 	 */
@@ -105,6 +110,7 @@ public interface SCMOperator<T> extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -112,6 +118,7 @@ public interface SCMOperator<T> extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model dataType="org.enterprisedomain.classmaker.OSGiVersion"
 	 * @generated
 	 */
@@ -119,6 +126,7 @@ public interface SCMOperator<T> extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -126,6 +134,7 @@ public interface SCMOperator<T> extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -133,6 +142,7 @@ public interface SCMOperator<T> extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model exceptions="org.enterprisedomain.classmaker.Exception"
 	 * @generated
 	 */
@@ -140,6 +150,7 @@ public interface SCMOperator<T> extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model exceptions="org.enterprisedomain.classmaker.Exception"
 	 * @generated
 	 */

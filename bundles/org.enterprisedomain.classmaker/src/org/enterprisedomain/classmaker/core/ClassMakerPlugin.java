@@ -71,7 +71,7 @@ public class ClassMakerPlugin extends Plugin {
 	private static IProgressMonitor progressMonitor;
 
 	private static IRunWrapper wrapper;
-	
+
 	private static ProgressProvider previousProgressProvider;
 
 	private static ServiceTracker<ClassMakerService, ClassMakerServiceImpl> tracker;
@@ -198,7 +198,7 @@ public class ClassMakerPlugin extends Plugin {
 	public static void setPreviousProgressProvider(ProgressProvider previousProgressProvider) {
 		ClassMakerPlugin.previousProgressProvider = previousProgressProvider;
 	}
-	
+
 	public static <T extends IProgressMonitor> void setMonitorParameters(Class<T> monitorClass,
 			Object... constructorParameters) {
 		synchronized (lock) {

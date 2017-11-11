@@ -19,7 +19,6 @@ import org.eclipse.osgi.util.NLS;
 
 public class Messages extends NLS {
 	private static final String BUNDLE_NAME = "org.enterprisedomain.classmaker.messages"; //$NON-NLS-1$
-	public static String APINoResult;
 	public static String JobNameExport;
 	public static String BundleNotFound;
 	public static String BundleNotInstalled;
@@ -37,7 +36,6 @@ public class Messages extends NLS {
 	public static String ModelNotSpecified;
 	public static String JobNameModelResource;
 	public static String BundleNo;
-	public static String ContributionStageNotEnough;
 	public static String JobNamePDEExport;
 	public static String ProjectNotExist;
 	public static String DefaultResourceExt;
@@ -45,6 +43,10 @@ public class Messages extends NLS {
 	public static String OK;
 	public static String ResourceImported;
 	public static String Save;
+	public static String SubTaskNamePluginExport;
+	public static String SubTaskNameSetProjectVersion;
+	public static String TaskNamePluginExport;
+	public static String TaskNameSetProjectVersion;
 	public static String VersionNotExists;
 	public static String WarningEPackageNoClassifiers;
 

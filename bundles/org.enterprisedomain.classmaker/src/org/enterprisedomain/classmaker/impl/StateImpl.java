@@ -31,7 +31,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.emf.common.notify.Adapter;
@@ -91,18 +90,30 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getPackageClassName <em>Package Class Name</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getRequiredPlugins <em>Required Plugins</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getRevision <em>Revision</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getTimestamp <em>Timestamp</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getDeployableUnitName <em>Deployable Unit Name</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getJobFamily <em>Job Family</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getResource <em>Resource</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getCommitIds <em>Commit Ids</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getCommitId <em>Commit Id</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getStateCustomizers <em>State Customizers</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getProjectName <em>Project Name</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#isMaking <em>Making</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getPackageClassName
+ * <em>Package Class Name</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getRequiredPlugins
+ * <em>Required Plugins</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getRevision
+ * <em>Revision</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getTimestamp
+ * <em>Timestamp</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getDeployableUnitName
+ * <em>Deployable Unit Name</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getJobFamily
+ * <em>Job Family</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getResource
+ * <em>Resource</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getCommitIds
+ * <em>Commit Ids</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getCommitId
+ * <em>Commit Id</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getStateCustomizers
+ * <em>State Customizers</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getProjectName
+ * <em>Project Name</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#isMaking
+ * <em>Making</em>}</li>
  * </ul>
  *
  * @generated
@@ -110,8 +121,9 @@ import org.osgi.framework.Version;
 public class StateImpl extends ItemImpl implements State {
 
 	/**
-	 * The default value of the '{@link #getPackageClassName() <em>Package Class Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getPackageClassName() <em>Package Class
+	 * Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getPackageClassName()
 	 * @generated
 	 * @ordered
@@ -119,8 +131,9 @@ public class StateImpl extends ItemImpl implements State {
 	protected static final String PACKAGE_CLASS_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getPackageClassName() <em>Package Class Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getPackageClassName() <em>Package Class
+	 * Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getPackageClassName()
 	 * @generated
 	 * @ordered
@@ -128,8 +141,9 @@ public class StateImpl extends ItemImpl implements State {
 	protected String packageClassName = PACKAGE_CLASS_NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getRequiredPlugins() <em>Required Plugins</em>}' attribute list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getRequiredPlugins() <em>Required
+	 * Plugins</em>}' attribute list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getRequiredPlugins()
 	 * @generated
 	 * @ordered
@@ -162,8 +176,9 @@ public class StateImpl extends ItemImpl implements State {
 	}
 
 	/**
-	 * The default value of the '{@link #getTimestamp() <em>Timestamp</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getTimestamp() <em>Timestamp</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getTimestamp()
 	 * @generated
 	 * @ordered
@@ -171,8 +186,9 @@ public class StateImpl extends ItemImpl implements State {
 	protected static final int TIMESTAMP_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getTimestamp() <em>Timestamp</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getTimestamp() <em>Timestamp</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getTimestamp()
 	 * @generated
 	 * @ordered
@@ -190,8 +206,9 @@ public class StateImpl extends ItemImpl implements State {
 	protected static final Version VERSION_EDEFAULT = Version.emptyVersion;
 
 	/**
-	 * The default value of the '{@link #getDeployableUnitName() <em>Deployable Unit Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getDeployableUnitName() <em>Deployable Unit
+	 * Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getDeployableUnitName()
 	 * @generated
 	 * @ordered
@@ -199,8 +216,9 @@ public class StateImpl extends ItemImpl implements State {
 	protected static final String DEPLOYABLE_UNIT_NAME_EDEFAULT = ""; //$NON-NLS-1$
 
 	/**
-	 * The default value of the '{@link #getJobFamily() <em>Job Family</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getJobFamily() <em>Job Family</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getJobFamily()
 	 * @generated
 	 * @ordered
@@ -208,8 +226,9 @@ public class StateImpl extends ItemImpl implements State {
 	protected static final String JOB_FAMILY_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getJobFamily() <em>Job Family</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getJobFamily() <em>Job Family</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getJobFamily()
 	 * @generated
 	 * @ordered
@@ -219,6 +238,7 @@ public class StateImpl extends ItemImpl implements State {
 	/**
 	 * The cached value of the '{@link #getResource() <em>Resource</em>}' reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getResource()
 	 * @generated
 	 * @ordered
@@ -226,8 +246,9 @@ public class StateImpl extends ItemImpl implements State {
 	protected Resource resource;
 
 	/**
-	 * The cached value of the '{@link #getCommitIds() <em>Commit Ids</em>}' attribute list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getCommitIds() <em>Commit Ids</em>}'
+	 * attribute list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getCommitIds()
 	 * @generated
 	 * @ordered
@@ -235,8 +256,9 @@ public class StateImpl extends ItemImpl implements State {
 	protected EList<String> commitIds;
 
 	/**
-	 * The default value of the '{@link #getCommitId() <em>Commit Id</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getCommitId() <em>Commit Id</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getCommitId()
 	 * @generated
 	 * @ordered
@@ -244,8 +266,9 @@ public class StateImpl extends ItemImpl implements State {
 	protected static final String COMMIT_ID_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getCommitId() <em>Commit Id</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getCommitId() <em>Commit Id</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getCommitId()
 	 * @generated
 	 * @ordered
@@ -253,8 +276,9 @@ public class StateImpl extends ItemImpl implements State {
 	protected String commitId = COMMIT_ID_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getStateCustomizers() <em>State Customizers</em>}' map.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getStateCustomizers() <em>State
+	 * Customizers</em>}' map. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getStateCustomizers()
 	 * @generated
 	 * @ordered
@@ -262,8 +286,9 @@ public class StateImpl extends ItemImpl implements State {
 	protected EMap<StageQualifier, Customizer> stateCustomizers;
 
 	/**
-	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getProjectName()
 	 * @generated
 	 * @ordered
@@ -273,6 +298,7 @@ public class StateImpl extends ItemImpl implements State {
 	/**
 	 * The default value of the '{@link #isMaking() <em>Making</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #isMaking()
 	 * @generated
 	 * @ordered
@@ -311,6 +337,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -320,6 +347,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String getPackageClassName() {
@@ -328,6 +356,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setPackageClassName(String newPackageClassName) {
@@ -340,6 +369,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EList<String> getRequiredPlugins() {
@@ -352,6 +382,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public int getTimestamp() {
@@ -360,6 +391,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setTimestamp(int newTimestamp) {
@@ -530,7 +562,7 @@ public class StateImpl extends ItemImpl implements State {
 	 * @generated NOT
 	 */
 	public Worker createGenerator() {
-		return create(ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "create.generator"),
+		return create(ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "create.generator"), //$NON-NLS-1$
 				getProject(), getTimestamp());
 	}
 
@@ -540,7 +572,7 @@ public class StateImpl extends ItemImpl implements State {
 	 * @generated NOT
 	 */
 	public Worker createExporter() {
-		return create(ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "create.exporter"),
+		return create(ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "create.exporter"), //$NON-NLS-1$
 				Integer.valueOf(getTimestamp()));
 	}
 
@@ -550,7 +582,7 @@ public class StateImpl extends ItemImpl implements State {
 	 * @generated NOT
 	 */
 	public Worker createInstaller() {
-		return create(ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "create.installer"),
+		return create(ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "create.installer"), //$NON-NLS-1$
 				Integer.valueOf(getTimestamp()));
 	}
 
@@ -560,7 +592,7 @@ public class StateImpl extends ItemImpl implements State {
 	 * @generated NOT
 	 */
 	public Worker createModelLoader() {
-		return create(ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "create.loader"),
+		return create(ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "create.loader"), //$NON-NLS-1$
 				Integer.valueOf(getTimestamp()));
 	}
 
@@ -658,7 +690,7 @@ public class StateImpl extends ItemImpl implements State {
 					generatorJob.join();
 					exporterJob.join();
 					installJob.join();
-					add(".");
+					add("."); //$NON-NLS-1$
 					loadJob.join();
 				} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -769,6 +801,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -889,6 +922,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Revision getRevision() {
@@ -929,6 +963,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setJobFamily(String newJobFamily) {
@@ -941,6 +976,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Resource getResource() {
@@ -949,6 +985,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setResource(Resource newResource) {
@@ -961,6 +998,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EList<String> getCommitIds() {
@@ -972,6 +1010,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String getCommitId() {
@@ -980,6 +1019,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setCommitId(String newCommitId) {
@@ -997,6 +1037,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EMap<StageQualifier, Customizer> getStateCustomizers() {
@@ -1028,6 +1069,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean isMaking() {
@@ -1036,6 +1078,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setMaking(boolean newMaking) {
@@ -1051,7 +1094,10 @@ public class StateImpl extends ItemImpl implements State {
 	 * @generated NOT
 	 */
 	public void setProjectVersion(IProgressMonitor monitor) throws CoreException {
-		IProgressMonitor pm = SubMonitor.convert(monitor, 1);
+		SubMonitor pm = SubMonitor.convert(monitor, 1);
+		pm.setTaskName(Messages.TaskNameSetProjectVersion);
+		pm.subTask(Messages.SubTaskNameSetProjectVersion);
+		SubMonitor m = pm.newChild(1, SubMonitor.SUPPRESS_ISCANCELED);
 		try {
 			IBundleProjectService service = ((IBundleProjectService) ClassMakerPlugin
 					.getService(IBundleProjectService.class.getName()));
@@ -1059,11 +1105,9 @@ public class StateImpl extends ItemImpl implements State {
 			IProject project = workspace.getRoot().getProject(getProjectName());
 			IBundleProjectDescription bundleProjectDescription = service.getDescription(project);
 			bundleProjectDescription.setBundleVersion(getVersion());
-			try {
-				bundleProjectDescription.apply(pm);
-			} catch (OperationCanceledException e) {
-			}
+			bundleProjectDescription.apply(m);
 		} finally {
+			m.done();
 			pm.done();
 		}
 	}
@@ -1113,6 +1157,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1153,6 +1198,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -1200,6 +1246,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1244,6 +1291,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1282,6 +1330,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

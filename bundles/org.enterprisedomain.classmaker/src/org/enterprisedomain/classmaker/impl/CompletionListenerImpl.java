@@ -30,6 +30,7 @@ import org.enterprisedomain.classmaker.Project;
 public abstract class CompletionListenerImpl extends EObjectImpl implements CompletionListener {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected CompletionListenerImpl() {
@@ -38,6 +39,7 @@ public abstract class CompletionListenerImpl extends EObjectImpl implements Comp
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

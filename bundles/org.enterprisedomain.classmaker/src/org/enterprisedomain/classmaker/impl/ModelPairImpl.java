@@ -39,9 +39,12 @@ import org.enterprisedomain.classmaker.State;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ModelPairImpl#getDynamic <em>Dynamic</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ModelPairImpl#getGenerated <em>Generated</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ModelPairImpl#getParent <em>Parent</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ModelPairImpl#getDynamic
+ * <em>Dynamic</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ModelPairImpl#getGenerated
+ * <em>Generated</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ModelPairImpl#getParent
+ * <em>Parent</em>}</li>
  * </ul>
  *
  * @generated
@@ -109,6 +112,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 	/**
 	 * The cached value of the '{@link #getDynamic() <em>Dynamic</em>}' reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getDynamic()
 	 * @generated
 	 * @ordered
@@ -116,8 +120,9 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 	protected EPackage dynamic;
 
 	/**
-	 * The cached value of the '{@link #getGenerated() <em>Generated</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getGenerated() <em>Generated</em>}'
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getGenerated()
 	 * @generated
 	 * @ordered
@@ -136,6 +141,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -145,6 +151,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EPackage getDynamic() {
@@ -162,6 +169,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EPackage basicGetDynamic() {
@@ -170,6 +178,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setDynamic(EPackage newDynamic) {
@@ -182,6 +191,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EPackage getGenerated() {
@@ -199,6 +209,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EPackage basicGetGenerated() {
@@ -207,6 +218,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setGenerated(EPackage newGenerated) {
@@ -219,6 +231,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Item getParent() {
@@ -229,6 +242,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetParent(Item newParent, NotificationChain msgs) {
@@ -238,6 +252,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setParent(Item newParent) {
@@ -261,6 +276,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -276,6 +292,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -289,6 +306,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -302,6 +320,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -323,6 +342,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -343,6 +363,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -363,6 +384,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

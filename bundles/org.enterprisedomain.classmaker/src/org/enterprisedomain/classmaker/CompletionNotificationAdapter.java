@@ -23,15 +23,15 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- begin-user-doc --> A representation of the model object
  * '<em><b>Completion Notification Adapter</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc -->
- * {@link org.eclipse.emf.common.notify.Adapter Adapter} for notification about process completion.
- * <!-- end-model-doc -->
+ * <!-- begin-model-doc --> {@link org.eclipse.emf.common.notify.Adapter
+ * Adapter} for notification about process completion. <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.CompletionNotificationAdapter#getError <em>Error</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.CompletionNotificationAdapter#getError
+ * <em>Error</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getCompletionNotificationAdapter()

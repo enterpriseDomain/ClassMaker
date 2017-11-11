@@ -34,8 +34,10 @@ import org.enterprisedomain.classmaker.State;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.impl.IntegerToStateMapEntryImpl#getTypedKey <em>Key</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.IntegerToStateMapEntryImpl#getTypedValue <em>Value</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.IntegerToStateMapEntryImpl#getTypedKey
+ * <em>Key</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.IntegerToStateMapEntryImpl#getTypedValue
+ * <em>Value</em>}</li>
  * </ul>
  *
  * @generated
@@ -44,6 +46,7 @@ public class IntegerToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 	/**
 	 * The default value of the '{@link #getTypedKey() <em>Key</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getTypedKey()
 	 * @generated
 	 * @ordered
@@ -61,8 +64,9 @@ public class IntegerToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 	protected Integer key = KEY_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getTypedValue() <em>Value</em>}' containment reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getTypedValue() <em>Value</em>}' containment
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getTypedValue()
 	 * @generated
 	 * @ordered
@@ -71,6 +75,7 @@ public class IntegerToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected IntegerToStateMapEntryImpl() {
@@ -79,6 +84,7 @@ public class IntegerToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -88,6 +94,7 @@ public class IntegerToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Integer getTypedKey() {
@@ -96,6 +103,7 @@ public class IntegerToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setTypedKey(Integer newKey) {
@@ -108,6 +116,7 @@ public class IntegerToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public State getTypedValue() {
@@ -116,6 +125,7 @@ public class IntegerToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetTypedValue(State newValue, NotificationChain msgs) {
@@ -134,6 +144,7 @@ public class IntegerToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setTypedValue(State newValue) {
@@ -155,6 +166,7 @@ public class IntegerToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -168,6 +180,7 @@ public class IntegerToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -183,6 +196,7 @@ public class IntegerToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -200,6 +214,7 @@ public class IntegerToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -217,6 +232,7 @@ public class IntegerToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -232,6 +248,7 @@ public class IntegerToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -248,12 +265,14 @@ public class IntegerToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected int hash = -1;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public int getHash() {
@@ -266,6 +285,7 @@ public class IntegerToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setHash(int hash) {
@@ -274,6 +294,7 @@ public class IntegerToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Integer getKey() {
@@ -282,6 +303,7 @@ public class IntegerToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setKey(Integer key) {
@@ -290,6 +312,7 @@ public class IntegerToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public State getValue() {
@@ -298,6 +321,7 @@ public class IntegerToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public State setValue(State value) {
@@ -308,6 +332,7 @@ public class IntegerToStateMapEntryImpl extends EObjectImpl implements BasicEMap
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")

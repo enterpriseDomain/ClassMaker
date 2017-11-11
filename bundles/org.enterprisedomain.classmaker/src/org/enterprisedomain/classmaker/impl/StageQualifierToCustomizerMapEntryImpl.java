@@ -35,8 +35,10 @@ import org.enterprisedomain.classmaker.StageQualifier;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StageQualifierToCustomizerMapEntryImpl#getTypedKey <em>Key</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StageQualifierToCustomizerMapEntryImpl#getTypedValue <em>Value</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StageQualifierToCustomizerMapEntryImpl#getTypedKey
+ * <em>Key</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StageQualifierToCustomizerMapEntryImpl#getTypedValue
+ * <em>Value</em>}</li>
  * </ul>
  *
  * @generated
@@ -54,8 +56,9 @@ public class StageQualifierToCustomizerMapEntryImpl extends EObjectImpl
 	protected StageQualifier key;
 
 	/**
-	 * The cached value of the '{@link #getTypedValue() <em>Value</em>}' containment reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getTypedValue() <em>Value</em>}' containment
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getTypedValue()
 	 * @generated
 	 * @ordered
@@ -64,6 +67,7 @@ public class StageQualifierToCustomizerMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected StageQualifierToCustomizerMapEntryImpl() {
@@ -72,6 +76,7 @@ public class StageQualifierToCustomizerMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -81,6 +86,7 @@ public class StageQualifierToCustomizerMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public StageQualifier getTypedKey() {
@@ -98,6 +104,7 @@ public class StageQualifierToCustomizerMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public StageQualifier basicGetTypedKey() {
@@ -106,6 +113,7 @@ public class StageQualifierToCustomizerMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setTypedKey(StageQualifier newKey) {
@@ -118,6 +126,7 @@ public class StageQualifierToCustomizerMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Customizer getTypedValue() {
@@ -126,6 +135,7 @@ public class StageQualifierToCustomizerMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetTypedValue(Customizer newValue, NotificationChain msgs) {
@@ -144,6 +154,7 @@ public class StageQualifierToCustomizerMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setTypedValue(Customizer newValue) {
@@ -167,6 +178,7 @@ public class StageQualifierToCustomizerMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -180,6 +192,7 @@ public class StageQualifierToCustomizerMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -197,6 +210,7 @@ public class StageQualifierToCustomizerMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -214,6 +228,7 @@ public class StageQualifierToCustomizerMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -231,6 +246,7 @@ public class StageQualifierToCustomizerMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -246,12 +262,14 @@ public class StageQualifierToCustomizerMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected int hash = -1;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public int getHash() {
@@ -264,6 +282,7 @@ public class StageQualifierToCustomizerMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setHash(int hash) {
@@ -272,6 +291,7 @@ public class StageQualifierToCustomizerMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public StageQualifier getKey() {
@@ -280,6 +300,7 @@ public class StageQualifierToCustomizerMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setKey(StageQualifier key) {
@@ -288,6 +309,7 @@ public class StageQualifierToCustomizerMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Customizer getValue() {
@@ -296,6 +318,7 @@ public class StageQualifierToCustomizerMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Customizer setValue(Customizer value) {
@@ -306,6 +329,7 @@ public class StageQualifierToCustomizerMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")

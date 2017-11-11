@@ -25,20 +25,26 @@ import org.osgi.framework.Version;
  * <!-- begin-user-doc --> A representation of the model object
  * '<em><b>Contribution</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc -->
- * Software contribution project item. Basically, it contibutes the software piece to the body of main program.
- * <!-- end-model-doc -->
+ * <!-- begin-model-doc --> Software contribution project item. Basically, it
+ * contibutes the software piece to the body of main program. <!-- end-model-doc
+ * -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.Contribution#getDependencies <em>Dependencies</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Contribution#getRevision <em>Revision</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Contribution#getRevisions <em>Revisions</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Contribution#getState <em>State</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Contribution#getLatestVersion <em>Latest Version</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Contribution#getModelResourceAdapter <em>Model Resource Adapter</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Contribution#getDependencies
+ * <em>Dependencies</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Contribution#getRevision
+ * <em>Revision</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Contribution#getRevisions
+ * <em>Revisions</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Contribution#getState
+ * <em>State</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Contribution#getLatestVersion
+ * <em>Latest Version</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Contribution#getModelResourceAdapter
+ * <em>Model Resource Adapter</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getContribution()
@@ -82,9 +88,12 @@ public interface Contribution extends Project, Item {
 	Revision getRevision();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Contribution#getRevision <em>Revision</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Revision</em>' reference.
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Contribution#getRevision
+	 * <em>Revision</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Revision</em>' reference.
 	 * @see #getRevision()
 	 * @generated
 	 */
@@ -163,13 +172,16 @@ public interface Contribution extends Project, Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	Revision createRevision(IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
 	 * @generated
 	 */
@@ -177,6 +189,7 @@ public interface Contribution extends Project, Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
 	 * @generated
 	 */
@@ -184,6 +197,7 @@ public interface Contribution extends Project, Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
 	 * @generated
 	 */
@@ -191,6 +205,7 @@ public interface Contribution extends Project, Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -198,6 +213,7 @@ public interface Contribution extends Project, Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -205,6 +221,7 @@ public interface Contribution extends Project, Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -212,6 +229,7 @@ public interface Contribution extends Project, Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
 	 * @generated
 	 */
@@ -219,6 +237,7 @@ public interface Contribution extends Project, Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
 	 * @generated
 	 */
@@ -226,14 +245,19 @@ public interface Contribution extends Project, Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model dataType="org.enterprisedomain.classmaker.OSGiVersion" exceptions="org.enterprisedomain.classmaker.CoreException"
+	 * 
+	 * @model dataType="org.enterprisedomain.classmaker.OSGiVersion"
+	 *        exceptions="org.enterprisedomain.classmaker.CoreException"
 	 * @generated
 	 */
 	Version newVersion(boolean incrementMajor, boolean incrementMinor, boolean incrementMicro) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model dataType="org.enterprisedomain.classmaker.OSGiVersion" exceptions="org.enterprisedomain.classmaker.CoreException" baseDataType="org.enterprisedomain.classmaker.OSGiVersion"
+	 * 
+	 * @model dataType="org.enterprisedomain.classmaker.OSGiVersion"
+	 *        exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        baseDataType="org.enterprisedomain.classmaker.OSGiVersion"
 	 * @generated
 	 */
 	Version newVersion(Version base, boolean incrementMajor, boolean incrementMinor, boolean incrementMicro)
@@ -241,27 +265,34 @@ public interface Contribution extends Project, Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model dataType="org.enterprisedomain.classmaker.OSGiVersion" exceptions="org.enterprisedomain.classmaker.CoreException"
+	 * 
+	 * @model dataType="org.enterprisedomain.classmaker.OSGiVersion"
+	 *        exceptions="org.enterprisedomain.classmaker.CoreException"
 	 * @generated
 	 */
 	Version nextVersion() throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	void delete(IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	String make(Revision revision, IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -269,6 +300,7 @@ public interface Contribution extends Project, Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */

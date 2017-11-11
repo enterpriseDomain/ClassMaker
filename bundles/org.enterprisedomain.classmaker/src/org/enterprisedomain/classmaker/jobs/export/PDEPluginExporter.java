@@ -69,8 +69,8 @@ public class PDEPluginExporter extends AbstractExporter {
 		info.useJarFormat = true;
 		info.exportMetadata = true;
 		info.useWorkspaceCompiledClasses = false;
-		info.targets = new String[][] { { "os", TargetPlatform.getOS() }, { "ws", TargetPlatform.getWS() },
-				{ "arch", TargetPlatform.getOSArch() }, { "nl", TargetPlatform.getNL() } };
+		info.targets = new String[][] { { "os", TargetPlatform.getOS() }, { "ws", TargetPlatform.getWS() }, //$NON-NLS-1$ //$NON-NLS-2$
+				{ "arch", TargetPlatform.getOSArch() }, { "nl", TargetPlatform.getNL() } }; //$NON-NLS-1$ //$NON-NLS-2$
 		if (!version.equals(Version.emptyVersion))
 			info.qualifier = (String) version.getQualifier();
 		PluginModelManager modelManager = PDECore.getDefault().getModelManager();
@@ -91,8 +91,8 @@ public class PDEPluginExporter extends AbstractExporter {
 				} catch (InterruptedException e) {
 				}
 		final SubMonitor pm = SubMonitor.convert(monitor);
-		pm.setTaskName("Plug-in Export");
-		pm.subTask("Exporting plug-in");
+		pm.setTaskName(Messages.TaskNamePluginExport);
+		pm.subTask(Messages.SubTaskNamePluginExport);
 		final SubMonitor m = pm.newChild(9, SubMonitor.SUPPRESS_ISCANCELED);
 		PluginExportOperation op = new PluginExportOperation(info, Messages.JobNamePDEExport);
 		DelegatingJob delegate = new DelegatingJob(op, getStateTimestamp());
@@ -128,7 +128,7 @@ public class PDEPluginExporter extends AbstractExporter {
 			@SuppressWarnings("unchecked")
 			SCMOperator<Git> operator = (SCMOperator<Git>) ClassMakerPlugin.getClassMaker().getSCMRegistry()
 					.get(getProject().getName());
-			operator.add(".");
+			operator.add("."); //$NON-NLS-1$
 		} catch (Exception e) {
 			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 		}

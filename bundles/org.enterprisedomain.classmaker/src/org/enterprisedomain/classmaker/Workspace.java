@@ -29,17 +29,21 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Workspace</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc -->
- * Maps {@link org.eclipse.emf.ecore.resource.ResourceSet ResourceSet} to {@link org.eclipse.core.resources.IWorkspaceRoot IWorkspaceRoot}.
- * <!-- end-model-doc -->
+ * <!-- begin-model-doc --> Maps
+ * {@link org.eclipse.emf.ecore.resource.ResourceSet ResourceSet} to
+ * {@link org.eclipse.core.resources.IWorkspaceRoot IWorkspaceRoot}. <!--
+ * end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.Workspace#getProjects <em>Projects</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Workspace#getResourceSet <em>Resource Set</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Workspace#getCustomizers <em>Customizers</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Workspace#getProjects
+ * <em>Projects</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Workspace#getResourceSet
+ * <em>Resource Set</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Workspace#getCustomizers
+ * <em>Customizers</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getWorkspace()
@@ -235,6 +239,7 @@ public interface Workspace extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -242,6 +247,7 @@ public interface Workspace extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -249,6 +255,7 @@ public interface Workspace extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -256,6 +263,7 @@ public interface Workspace extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -263,7 +271,9 @@ public interface Workspace extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	void delete(Object object, IProgressMonitor monitor) throws CoreException;

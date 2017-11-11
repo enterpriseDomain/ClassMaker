@@ -39,6 +39,7 @@ public class SCMRegistryImpl<T> extends EObjectImpl implements SCMRegistry<T> {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected SCMRegistryImpl() {
@@ -47,6 +48,7 @@ public class SCMRegistryImpl<T> extends EObjectImpl implements SCMRegistry<T> {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

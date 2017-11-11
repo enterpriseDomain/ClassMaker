@@ -23,17 +23,19 @@ import org.eclipse.emf.ecore.EPackage;
  * <!-- begin-user-doc --> A representation of the model object
  * '<em><b>Blueprint</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc -->
- * Model object wrapper and input specification for {@link #make() making}.
- * <!-- end-model-doc -->
+ * <!-- begin-model-doc --> Model object wrapper and input specification for
+ * {@link #make() making}. <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.Blueprint#getDynamicModel <em>Dynamic Model</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Blueprint#getDependencies <em>Dependencies</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Blueprint#getCompletionListeners <em>Completion Listeners</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Blueprint#getDynamicModel
+ * <em>Dynamic Model</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Blueprint#getDependencies
+ * <em>Dependencies</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Blueprint#getCompletionListeners
+ * <em>Completion Listeners</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getBlueprint()
@@ -56,9 +58,12 @@ public interface Blueprint extends EObject {
 	EPackage getDynamicModel();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Blueprint#getDynamicModel <em>Dynamic Model</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Dynamic Model</em>' reference.
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Blueprint#getDynamicModel <em>Dynamic
+	 * Model</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Dynamic Model</em>' reference.
 	 * @see #getDynamicModel()
 	 * @generated
 	 */
@@ -78,14 +83,16 @@ public interface Blueprint extends EObject {
 	EList<String> getDependencies();
 
 	/**
-	 * Returns the value of the '<em><b>Completion Listeners</b></em>' reference list.
-	 * The list contents are of type {@link org.enterprisedomain.classmaker.CompletionListener}.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Completion Listeners</b></em>' reference
+	 * list. The list contents are of type
+	 * {@link org.enterprisedomain.classmaker.CompletionListener}. <!--
+	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Completion Listeners</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Completion Listeners</em>' reference list.
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getBlueprint_CompletionListeners()
 	 * @model

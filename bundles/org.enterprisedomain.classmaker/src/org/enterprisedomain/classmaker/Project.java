@@ -25,21 +25,26 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Project</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc -->
- * Default project class.
- * <!-- end-model-doc -->
+ * <!-- begin-model-doc --> Default project class. <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.Project#getName <em>Name</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Project#getProjectName <em>Project Name</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Project#getChildren <em>Children</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Project#isDirty <em>Dirty</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Project#getWorkspace <em>Workspace</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Project#isNeedCompletionNotification <em>Need Completion Notification</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Project#getCompletionNotificationAdapter <em>Completion Notification Adapter</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Project#getName
+ * <em>Name</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Project#getProjectName <em>Project
+ * Name</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Project#getChildren
+ * <em>Children</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Project#isDirty
+ * <em>Dirty</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Project#getWorkspace
+ * <em>Workspace</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Project#isNeedCompletionNotification
+ * <em>Need Completion Notification</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Project#getCompletionNotificationAdapter
+ * <em>Completion Notification Adapter</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject()
@@ -66,9 +71,11 @@ public interface Project extends EObject, ISchedulingRule {
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Project#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Project#getName
+	 * <em>Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Name</em>' attribute.
 	 * @see #getName()
 	 * @generated
 	 */
@@ -94,9 +101,12 @@ public interface Project extends EObject, ISchedulingRule {
 	String getProjectName();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Project#getProjectName <em>Project Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Project Name</em>' attribute.
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Project#getProjectName <em>Project
+	 * Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Project Name</em>' attribute.
 	 * @see #getProjectName()
 	 * @generated
 	 */
@@ -158,10 +168,13 @@ public interface Project extends EObject, ISchedulingRule {
 	Workspace getWorkspace();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Project#getWorkspace <em>Workspace</em>}' container reference.
-	 * <!-- begin-user-doc --> <!--
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Project#getWorkspace
+	 * <em>Workspace</em>}' container reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * @param value the new value of the '<em>Workspace</em>' container reference.
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Workspace</em>' container reference.
 	 * @see #getWorkspace()
 	 * @generated
 	 */
@@ -182,10 +195,14 @@ public interface Project extends EObject, ISchedulingRule {
 	boolean isNeedCompletionNotification();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Project#isNeedCompletionNotification <em>Need Completion Notification</em>}' attribute.
-	 * <!-- begin-user-doc -->
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Project#isNeedCompletionNotification
+	 * <em>Need Completion Notification</em>}' attribute. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Need Completion Notification</em>' attribute.
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Need Completion Notification</em>'
+	 *            attribute.
 	 * @see #isNeedCompletionNotification()
 	 * @generated
 	 */
@@ -227,20 +244,25 @@ public interface Project extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	void create(IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	void delete(IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model objectsMany="true"
 	 * @generated
 	 */
@@ -248,21 +270,27 @@ public interface Project extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	String make(IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	boolean open(IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	void close(IProgressMonitor monitor) throws CoreException;
@@ -282,6 +310,7 @@ public interface Project extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -289,6 +318,7 @@ public interface Project extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -296,6 +326,7 @@ public interface Project extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model exceptions="org.enterprisedomain.classmaker.Exception"
 	 * @generated
 	 */
