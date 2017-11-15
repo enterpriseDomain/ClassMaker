@@ -20,6 +20,8 @@
 							<!-- set property so that the filter condition on the p2 dependencies 
 								from org.eclipse.swt to the fragments does not match -->
 							<org.eclipse.swt.buildtime>true</org.eclipse.swt.buildtime>
+							<executionEnvironment>JavaSE-1.8</executionEnvironment>
+							<executionEnvironment>JavaSE-1.7</executionEnvironment>							
 						</profileProperties>
 						<extraRequirements>
 							<requirement>

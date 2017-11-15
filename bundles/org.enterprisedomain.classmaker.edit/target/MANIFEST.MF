@@ -9,9 +9,10 @@ Bundle-ManifestVersion: 2
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
-Export-Package: org.enterprisedomain.classmaker.provider
+Export-Package: org.enterprisedomain.classmaker.edit.command,org.enter
+ prisedomain.classmaker.provider
 Bundle-Name: %pluginName
-Bundle-Version: 1.0.0.201704030908
+Bundle-Version: 1.0.0.201711111125
 Bundle-ClassPath: .
 Bundle-Localization: plugin
 Bundle-Activator: org.enterprisedomain.classmaker.provider.ClassMakerE
