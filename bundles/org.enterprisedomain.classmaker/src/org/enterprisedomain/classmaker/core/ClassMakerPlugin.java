@@ -21,6 +21,7 @@ import java.util.Hashtable;
 import java.util.SortedSet;
 
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Plugin;
@@ -248,6 +249,10 @@ public class ClassMakerPlugin extends Plugin {
 
 	public static IStatus createErrorStatus(Throwable exception) {
 		return new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, exception.getLocalizedMessage(), exception);
+	}
+
+	public static IStatus createErrorStatus(CoreException exception) {
+		return exception.getStatus();
 	}
 
 	public static String bundleStateAsString(int state) {

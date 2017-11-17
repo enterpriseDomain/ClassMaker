@@ -1,19 +1,22 @@
 package org.enterprisedomain.classmaker.edit.command;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.command.Command;
-import org.eclipse.emf.common.command.CommandWrapper;
+import org.eclipse.emf.edit.command.ChangeCommand;
 import org.eclipse.emf.edit.command.CommandActionDelegate;
 import org.eclipse.emf.edit.command.CommandParameter;
-import org.eclipse.emf.edit.command.CreateChildCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.enterprisedomain.classmaker.ClassMakerService;
+import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
-import org.enterprisedomain.classmaker.provider.ClassMakerEditPlugin;
 
-public class MakeProjectCommand extends CommandWrapper implements CommandActionDelegate {
+public class MakeProjectCommand extends ChangeCommand implements CommandActionDelegate {
 
 	private Object projectName;
 
@@ -27,33 +30,44 @@ public class MakeProjectCommand extends CommandWrapper implements CommandActionD
 	}
 
 	public MakeProjectCommand(EditingDomain domain, CommandParameter commandParameter) {
-		super();
+		super(ClassMakerPlugin.getClassMaker().getWorkspace().getProject((String) commandParameter.getValue()));
 		projectName = commandParameter.getValue();
+
 	}
 
 	@Override
 	public boolean canExecute() {
-		super.canExecute();
-		return projectName != null;
+		return projectName != null && super.canExecute();
 	}
 
 	@Override
-	public void execute() {
-		super.execute();
+	protected void doExecute() {
 		if (projectName == null)
 			return;
+		final ClassMakerService classMaker = ClassMakerPlugin.getClassMaker();
 		try {
-			ClassMakerPlugin.getClassMaker().getWorkspace().getProject((String) projectName)
-					.make(ClassMakerPlugin.getProgressMonitor());
-		} catch (CoreException e) {
-			ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
+			ClassMakerPlugin.runWithProgress(new IRunnableWithProgress() {
+
+				@Override
+				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
+					try {
+						Project project = classMaker.getWorkspace().getProject((String) projectName);
+						project.make(monitor);
+					} catch (CoreException e) {
+						throw new InvocationTargetException(e);
+					}
+				}
+
+			});
+		} catch (InvocationTargetException e) {
+			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e.getTargetException()));
+		} catch (InterruptedException e) {
 		}
 	}
 
 	@Override
 	public Object getImage() {
-		return ClassMakerEditPlugin.INSTANCE
-				.getImage("platform:/plugin/org.enterprisedomain.classmaker.edit/full/obj16/ClassMakerService");
+		return null;
 	}
 
 	@Override

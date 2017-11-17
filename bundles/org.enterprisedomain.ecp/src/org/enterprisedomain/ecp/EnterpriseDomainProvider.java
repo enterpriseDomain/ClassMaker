@@ -188,22 +188,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 						blueprint = classMaker.createBlueprint();
 						blueprint.setDynamicModel(model);
 						blueprint.getCompletionListeners().add(new VisiblePackagesListener(project));
-						blueprint.getCompletionListeners().add(new CompletionListenerImpl() {
-
-							@SuppressWarnings("unchecked")
-							@Override
-							public void completed(Project result) throws Exception {
-								project.notifyObjectsChanged(
-										(Collection<Object>) (Collection<?>) Arrays.asList(project), true);
-								ECPUtil.getECPObserverBus().notify(ECPRepositoriesChangedObserver.class)
-										.repositoriesChanged(
-												(Collection<ECPRepository>) (Collection<?>) Arrays
-														.asList(project.getRepository()),
-												(Collection<ECPRepository>) (Collection<?>) Arrays
-														.asList(project.getRepository()));
-							}
-
-						});
+						blueprint.getCompletionListeners().add(new RefreshViewersListnener(project));
 
 						ClassMakerPlugin.runWithProgress(new IRunnableWithProgress() {
 
@@ -429,7 +414,26 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 		return editingDomain;
 	}
 
-	private class VisiblePackagesListener extends CompletionListenerImpl {
+	public static class RefreshViewersListnener extends CompletionListenerImpl {
+
+		private InternalProject project;
+
+		public RefreshViewersListnener(InternalProject project) {
+			this.project = project;
+		}
+
+		@SuppressWarnings("unchecked")
+		@Override
+		public void completed(Project result) throws Exception {
+			project.notifyObjectsChanged((Collection<Object>) (Collection<?>) Arrays.asList(project), true);
+			ECPUtil.getECPObserverBus().notify(ECPRepositoriesChangedObserver.class).repositoriesChanged(
+					(Collection<ECPRepository>) (Collection<?>) Arrays.asList(project.getRepository()),
+					(Collection<ECPRepository>) (Collection<?>) Arrays.asList(project.getRepository()));
+		}
+
+	}
+
+	public class VisiblePackagesListener extends CompletionListenerImpl {
 
 		private InternalProject project;
 
@@ -440,7 +444,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 		@Override
 		public void completed(Project result) {
 			visiblePackages.add(((Contribution) result).getDomainModel().getGenerated().getNsURI());
-			addVisiblePackages(project);
+			addVisiblePackages(project);			
 		}
 
 	};

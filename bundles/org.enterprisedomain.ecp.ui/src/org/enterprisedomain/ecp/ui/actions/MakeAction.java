@@ -23,10 +23,10 @@ public class MakeAction extends StaticSelectionCommandAction {
 	@Override
 	protected Command createActionCommand(EditingDomain editingDomain, Collection<?> collection) {
 		if (collection.size() == 1) {
-			Object owner = collection.iterator().next();
-			return MakeProjectCommand.create(editingDomain, owner, ((ECPProject) project).getName(), collection);
+			// Object owner = collection.iterator().next();
+			return MakeProjectCommand.create(editingDomain, null, ((ECPProject) project).getName(), collection);
 		}
 		return UnexecutableCommand.INSTANCE;
 	}
-	
+
 }
