@@ -52,3 +52,6 @@ Feedback
 ---------
 If you have anything to complain or suggest, please feel free to file a [bug](https://github.com/enterpriseDomain/ClassMaker/issues) at [GitHub](https://help.github.com/articles/creating-an-issue/). 
 
+Donations
+---------
+[![Click here to lend your support to: ClassMaker and make a donation at pledgie.com !](https://pledgie.com/campaigns/35162.png?skin_name=chrome)](https://pledgie.com/campaigns/35162)
