@@ -29,7 +29,7 @@ Here is how you can use it:
                                 .getService(serviceReference);
 
     // Produce result by combining them
-    EPackage jPackage = classMaker.produce(ePackage);
+    EPackage jPackage = classMaker.make(ePackage);
     
     ...
     // Use the generated model at runtime
