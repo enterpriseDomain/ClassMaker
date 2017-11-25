@@ -46,7 +46,7 @@ There is more [code](/tests/org.enterprisedomain.classmaker.tests/src/org/enterp
 
 Download
 ---------
-Please, use [the update site](https://dl.bintray.com/enterprisedomain/ClassMaker/) to install ClassMaker. [See](https://github.com/enterpriseDomain/ClassMaker/wiki/HowToRun#usage) how to use it.
+Please, use the [update site](https://dl.bintray.com/enterprisedomain/ClassMaker/) to install ClassMaker. [See](https://github.com/enterpriseDomain/ClassMaker/wiki/HowToRun#usage) how to use it.
 
 Feedback
 ---------
