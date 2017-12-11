@@ -27,13 +27,15 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
-import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.notify.impl.NotificationImpl;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
@@ -48,6 +50,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.util.NotifyingInternalEListImpl;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.ListBranchCommand;
 import org.eclipse.jgit.api.ResetCommand;
@@ -249,11 +252,11 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	 * @ordered
 	 */
 	protected ResourceAdapter modelResourceAdapter;
-	protected CompletionListener modelListener = new CompletionListenerImpl() {
+	protected CompletionListener completionListener = new CompletionListenerImpl() {
 
 		@Override
 		public void completed(Project result) throws Exception {
-			getModelResourceAdapter();
+			addResourceChangeListener(getResourceReloadListener());
 		}
 
 	};
@@ -280,7 +283,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @generated NOT
+	 * @generated
 	 */
 	protected ContributionImpl() {
 		super();
@@ -659,6 +662,8 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 			String commitId = getRevision().initialize(commit);
 			if (currentBranch.equals(SCMOperator.MASTER_BRANCH))
 				checkout(getVersion());
+			getWorkspace().getResourceSet().eAdapters().add(resourceAdapter);
+			addResourceChangeListener(getResourceReloadListener());
 			return commitId;
 		} catch (Exception e) {
 			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
@@ -670,6 +675,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 			}
 		}
+
 	}
 
 	@Override
@@ -700,6 +706,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	@Override
 	public String make(IProgressMonitor monitor) throws CoreException {
+		removeResourceChangeListener(getResourceReloadListener());
 		return make(getRevision(), monitor);
 	}
 
@@ -1006,6 +1013,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 					version));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public EList<Object> getChildren() {
 		if (children == null || children.isEmpty()) {
@@ -1016,7 +1024,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 			eAdapters().remove(modelAdapter);
 			eAdapters().add(modelAdapter);
 		}
-		return (EList<Object>) children;
+		return (EList<Object>) (EList<?>) children;
 	}
 
 	private LoadingEList children;
@@ -1034,10 +1042,10 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	};
 
-	private class LoadingEList extends BasicEList<Object> {
+	private class LoadingEList extends NotifyingInternalEListImpl<Notifier> {
 
 		private static final long serialVersionUID = 164926149524632079L;
-		private Resource object;
+		private Notifier object;
 		private Adapter adapter = new AdapterImpl() {
 
 			@Override
@@ -1045,20 +1053,76 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 				super.notifyChanged(msg);
 				if (msg.getFeatureID(ResourceAdapter.class) == ClassMakerPackage.RESOURCE_ADAPTER__RESOURCE
 						&& msg.getEventType() == Notification.SET && msg.getNewValue() != null) {
-					LoadingEList.this.object = (Resource) msg.getNewValue();
-					fill((Resource) msg.getNewValue());
+					LoadingEList.this.object = (Notifier) msg.getNewValue();
+					fill((Notifier) msg.getNewValue());
 				}
 			}
 
 		};
 
-		public LoadingEList(Resource object) {
+		public LoadingEList(Notifier object) {
 			setContents(object);
 		}
 
-		private void fill(Resource object) {
+		private class ResourceNotificationImpl extends NotificationImpl {
+
+			public ResourceNotificationImpl(int eventType, Object oldValue, Object newValue) {
+				super(eventType, oldValue, newValue);
+			}
+
+			public ResourceNotificationImpl(int eventType, Object oldValue, Object newValue, int position) {
+				super(eventType, oldValue, newValue, position);
+			}
+
+			@Override
+			public int getFeatureID(Class<?> expectedClass) {
+				if (expectedClass.isAssignableFrom(Resource.class))
+					return Resource.RESOURCE__CONTENTS;
+				return super.getFeatureID(expectedClass);
+			}
+
+		}
+
+		private void fill(Notifier object) {
 			clear();
 			add(object);
+		}
+
+		@Override
+		protected void didSet(int index, Notifier newObject, Notifier oldObject) {
+			detachAdapter();
+			setObject(newObject);
+			super.didSet(index, newObject, oldObject);
+			attachAdapter();
+			if (eNotificationRequired())
+				eNotify(new ResourceNotificationImpl(Notification.SET, oldObject, newObject, index));
+		}
+
+		@Override
+		protected void didAdd(int index, Notifier newObject) {
+			super.didAdd(index, newObject);
+			attachAdapter();
+			setObject(newObject);
+			if (eNotificationRequired())
+				eNotify(new ResourceNotificationImpl(Notification.ADD, null, newObject, index));
+		}
+
+		@Override
+		protected void didRemove(int index, Notifier oldObject) {
+			detachAdapter();
+			setObject(null);
+			super.didRemove(index, oldObject);
+			if (eNotificationRequired())
+				eNotify(new ResourceNotificationImpl(Notification.REMOVE, oldObject, null, index));
+		}
+
+		@Override
+		protected void didClear(int size, Object[] oldObjects) {
+			detachAdapter();
+			setObject(null);
+			super.didClear(size, oldObjects);
+			if (eNotificationRequired())
+				eNotify(new ResourceNotificationImpl(Notification.REMOVE_MANY, oldObjects, null));
 		}
 
 		private void attachAdapter() {
@@ -1073,13 +1137,24 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 			object.eAdapters().remove(adapter);
 		}
 
-		public void setContents(Resource object) {
+		public void setContents(Notifier object) {
 			detachAdapter();
-			this.object = object;
+			setObject(object);
 			attachAdapter();
 			fill(object);
 		}
 
+		private void setObject(Notifier object) {
+			this.object = object;
+			getState().setResource((Resource) object);
+		}
+
+	}
+
+	@Override
+	public String getResourcePath() {
+		return IPath.SEPARATOR + getProjectName() + IPath.SEPARATOR + ResourceUtils.getModelFolderName()
+				+ IPath.SEPARATOR + ResourceUtils.getFileName(getModelName());
 	}
 
 	/**
@@ -1099,6 +1174,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	 * @generated NOT
 	 */
 	public void initAdapters(Revision revision) {
+		addCompletionListener(completionListener);
 		revision.addAdapters(ECollections.singletonEList(stateModelAdapter));
 	}
 

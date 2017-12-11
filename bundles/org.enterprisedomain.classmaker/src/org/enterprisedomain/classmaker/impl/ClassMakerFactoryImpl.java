@@ -43,6 +43,7 @@ import org.enterprisedomain.classmaker.Customizer;
 import org.enterprisedomain.classmaker.ModelPair;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.ResourceAdapter;
+import org.enterprisedomain.classmaker.ResourceChangeListener;
 import org.enterprisedomain.classmaker.Revision;
 import org.enterprisedomain.classmaker.SCMRegistry;
 import org.enterprisedomain.classmaker.Stage;
@@ -120,6 +121,8 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 			return createModelPair();
 		case ClassMakerPackage.SCM_REGISTRY:
 			return createSCMRegistry();
+		case ClassMakerPackage.RESOURCE_CHANGE_LISTENER:
+			return createResourceChangeListener();
 		case ClassMakerPackage.RESOURCE_ADAPTER:
 			return createResourceAdapter();
 		case ClassMakerPackage.CLASS_MAKER_SERVICE:
@@ -321,6 +324,16 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 	public <T> SCMRegistry<T> createSCMRegistry() {
 		SCMRegistryImpl<T> scmRegistry = new SCMRegistryImpl<T>();
 		return scmRegistry;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public ResourceChangeListener createResourceChangeListener() {
+		ResourceChangeListenerImpl resourceChangeListener = new ResourceChangeListenerImpl();
+		return resourceChangeListener;
 	}
 
 	/**

@@ -18,6 +18,7 @@ package org.enterprisedomain.classmaker.impl;
 import java.net.MalformedURLException;
 
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.notify.Notifier;
@@ -27,6 +28,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.Contribution;
@@ -124,8 +126,11 @@ public class ResourceAdapterImpl extends EObjectImpl implements ResourceAdapter 
 	private void copyAdapters(Resource resource) {
 		eAdapters().clear();
 		eAdapters().addAll(resource.eAdapters());
-		eAdapters().addAll(resource.getResourceSet().eAdapters());
-		eSetResource((org.eclipse.emf.ecore.resource.Resource.Internal) resource, null);
+		for (Adapter adapter : resource.getResourceSet().eAdapters())
+			if (!(adapter instanceof EContentAdapter))
+				eAdapters().add(adapter);
+		// eSetResource((org.eclipse.emf.ecore.resource.Resource.Internal) resource,
+		// null);
 	}
 
 	/**

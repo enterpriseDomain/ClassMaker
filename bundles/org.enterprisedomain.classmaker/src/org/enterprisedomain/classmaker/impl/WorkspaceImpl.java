@@ -31,6 +31,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.MultiRule;
@@ -455,8 +456,16 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		try {
 			if (!project.exists())
 				return contribution;
-			if (!project.isOpen())
-				project.open(monitor);
+			if (!project.isOpen()) {
+				SubMonitor pm = SubMonitor.convert(monitor);
+				SubMonitor m = pm.newChild(1, SubMonitor.SUPPRESS_ISCANCELED);
+				try {
+					project.open(m);
+				} finally {
+					m.done();
+					pm.done();
+				}
+			}
 			if (project.hasNature(ClassMakerPlugin.NATURE_ID)) {
 				if (contribution == null) {
 					contribution = (ContributionImpl) ClassMakerFactory.eINSTANCE.createContribution();

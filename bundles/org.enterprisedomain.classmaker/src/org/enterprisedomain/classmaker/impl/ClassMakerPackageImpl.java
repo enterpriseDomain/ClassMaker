@@ -32,6 +32,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -56,6 +57,7 @@ import org.enterprisedomain.classmaker.Item;
 import org.enterprisedomain.classmaker.ModelPair;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.ResourceAdapter;
+import org.enterprisedomain.classmaker.ResourceChangeListener;
 import org.enterprisedomain.classmaker.Revision;
 import org.enterprisedomain.classmaker.SCMOperator;
 import org.enterprisedomain.classmaker.SCMRegistry;
@@ -212,6 +214,20 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	private EClass resourceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private EClass resourceChangeListenerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private EClass notificationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -982,7 +998,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * 
 	 * @generated
 	 */
-	public EAttribute getProject_NeedCompletionNotification() {
+	public EAttribute getProject_ResourcePath() {
 		return (EAttribute) projectEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -991,8 +1007,26 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * 
 	 * @generated
 	 */
+	public EAttribute getProject_NeedCompletionNotification() {
+		return (EAttribute) projectEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	public EReference getProject_CompletionNotificationAdapter() {
-		return (EReference) projectEClass.getEStructuralFeatures().get(6);
+		return (EReference) projectEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EReference getProject_ResourceReloadListener() {
+		return (EReference) projectEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -1065,6 +1099,24 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	public EClass getResource() {
 		return resourceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EClass getResourceChangeListener() {
+		return resourceChangeListenerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EClass getNotification() {
+		return notificationEClass;
 	}
 
 	/**
@@ -1409,8 +1461,10 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		createEAttribute(projectEClass, PROJECT__CHILDREN);
 		createEAttribute(projectEClass, PROJECT__DIRTY);
 		createEReference(projectEClass, PROJECT__WORKSPACE);
+		createEAttribute(projectEClass, PROJECT__RESOURCE_PATH);
 		createEAttribute(projectEClass, PROJECT__NEED_COMPLETION_NOTIFICATION);
 		createEReference(projectEClass, PROJECT__COMPLETION_NOTIFICATION_ADAPTER);
+		createEReference(projectEClass, PROJECT__RESOURCE_RELOAD_LISTENER);
 
 		modelPairEClass = createEClass(MODEL_PAIR);
 		createEReference(modelPairEClass, MODEL_PAIR__DYNAMIC);
@@ -1423,6 +1477,10 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		scmRegistryEClass = createEClass(SCM_REGISTRY);
 
 		resourceEClass = createEClass(RESOURCE);
+
+		resourceChangeListenerEClass = createEClass(RESOURCE_CHANGE_LISTENER);
+
+		notificationEClass = createEClass(NOTIFICATION);
 
 		completionListenerEClass = createEClass(COMPLETION_LISTENER);
 
@@ -1875,12 +1933,17 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEReference(getProject_Workspace(), this.getWorkspace(), this.getWorkspace_Projects(), "workspace", null, 0,
 				1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProject_ResourcePath(), ecorePackage.getEString(), "resourcePath", null, 0, 1, Project.class,
+				IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getProject_NeedCompletionNotification(), ecorePackage.getEBoolean(),
 				"needCompletionNotification", null, 0, 1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getProject_CompletionNotificationAdapter(), this.getCompletionNotificationAdapter(), null,
 				"completionNotificationAdapter", null, 0, 1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProject_ResourceReloadListener(), this.getResourceChangeListener(), null,
+				"resourceReloadListener", null, 0, 1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE,
+				!IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(projectEClass, null, "create", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1916,6 +1979,16 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 		op = addEOperation(projectEClass, null, "notifyCompletion", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEException(op, this.getException());
+
+		op = addEOperation(projectEClass, null, "notifyResourceChanged", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getNotification(), "notification", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEException(op, this.getException());
+
+		op = addEOperation(projectEClass, null, "addResourceChangeListener", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getResourceChangeListener(), "resourceListener", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(projectEClass, null, "removeResourceChangeListener", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getResourceChangeListener(), "resourceListener", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(modelPairEClass, ModelPair.class, "ModelPair", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
@@ -2018,6 +2091,16 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEOperation(op, g1);
 
 		initEClass(resourceEClass, Resource.class, "Resource", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(resourceChangeListenerEClass, ResourceChangeListener.class, "ResourceChangeListener", !IS_ABSTRACT,
+				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		op = addEOperation(resourceChangeListenerEClass, null, "changed", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getNotification(), "resource", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEException(op, this.getException());
+
+		initEClass(notificationEClass, Notification.class, "Notification", IS_ABSTRACT, IS_INTERFACE,
+				!IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(completionListenerEClass, CompletionListener.class, "CompletionListener", IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);

@@ -39,6 +39,15 @@
    </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.eclipse.emf.ecp.application3x.perspective">
+         <view
+               id="org.eclipse.ui.console.ConsoleView"
+               minimized="false"
+               relationship="stack"
+               relative="org.eclipse.emf.ecp.ui.ModelRepositoriesView">
+         </view>
+      </perspectiveExtension>
    </extension>
 
 </plugin>

@@ -22,6 +22,7 @@ import java.util.concurrent.Future;
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
@@ -37,6 +38,7 @@ import org.enterprisedomain.classmaker.Item;
 import org.enterprisedomain.classmaker.ModelPair;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.ResourceAdapter;
+import org.enterprisedomain.classmaker.ResourceChangeListener;
 import org.enterprisedomain.classmaker.Revision;
 import org.enterprisedomain.classmaker.SCMOperator;
 import org.enterprisedomain.classmaker.SCMRegistry;
@@ -199,6 +201,16 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseResource(Resource object) {
 			return createResourceAdapter();
+		}
+
+		@Override
+		public Adapter caseResourceChangeListener(ResourceChangeListener object) {
+			return createResourceChangeListenerAdapter();
+		}
+
+		@Override
+		public Adapter caseNotification(Notification object) {
+			return createNotificationAdapter();
 		}
 
 		@Override
@@ -548,6 +560,36 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createResourceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class
+	 * '{@link org.enterprisedomain.classmaker.ResourceChangeListener <em>Resource
+	 * Change Listener</em>}'. <!-- begin-user-doc --> This default implementation
+	 * returns null so that we can easily ignore cases; it's useful to ignore a case
+	 * when inheritance will catch all the cases anyway. <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see org.enterprisedomain.classmaker.ResourceChangeListener
+	 * @generated
+	 */
+	public Adapter createResourceChangeListenerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class
+	 * '{@link org.eclipse.emf.common.notify.Notification <em>Notification</em>}'.
+	 * <!-- begin-user-doc --> This default implementation returns null so that we
+	 * can easily ignore cases; it's useful to ignore a case when inheritance will
+	 * catch all the cases anyway. <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see org.eclipse.emf.common.notify.Notification
+	 * @generated
+	 */
+	public Adapter createNotificationAdapter() {
 		return null;
 	}
 

@@ -49,6 +49,7 @@ import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.CompletionNotificationAdapter;
 import org.enterprisedomain.classmaker.Project;
+import org.enterprisedomain.classmaker.ResourceChangeListener;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
@@ -71,28 +72,19 @@ import org.enterprisedomain.classmaker.util.ResourceUtils;
  * <em>Dirty</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getWorkspace
  * <em>Workspace</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getResourcePath
+ * <em>Resource Path</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#isNeedCompletionNotification
  * <em>Need Completion Notification</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getCompletionNotificationAdapter
  * <em>Completion Notification Adapter</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getResourceReloadListener
+ * <em>Resource Reload Listener</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ProjectImpl extends EObjectImpl implements Project {
-
-	protected ListenerList<CompletionListener> listeners = new ListenerList<CompletionListener>();
-
-	public class ProjectNameAdapter extends AdapterImpl {
-
-		@Override
-		public void notifyChanged(Notification msg) {
-			if (msg.getFeatureID(State.class) == ClassMakerPackage.PROJECT__NAME
-					&& msg.getEventType() == Notification.SET && msg.getNewStringValue() != null)
-				setProjectName(ClassMakerPlugin.getClassMaker().computeProjectName(msg.getNewStringValue()));
-		}
-
-	}
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute. <!--
@@ -145,6 +137,16 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	protected static final boolean DIRTY_EDEFAULT = false;
 
 	/**
+	 * The default value of the '{@link #getResourcePath() <em>Resource Path</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getResourcePath()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String RESOURCE_PATH_EDEFAULT = null;
+
+	/**
 	 * The default value of the '{@link #isNeedCompletionNotification() <em>Need
 	 * Completion Notification</em>}' attribute. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
@@ -177,7 +179,35 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 */
 	protected CompletionNotificationAdapter completionNotificationAdapter;
 
+	/**
+	 * The cached value of the '{@link #getResourceReloadListener() <em>Resource
+	 * Reload Listener</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
+	 * @see #getResourceReloadListener()
+	 * @generated
+	 * @ordered
+	 */
+	protected ResourceChangeListener resourceReloadListener;
+
+	protected ListenerList<CompletionListener> completionListeners = new ListenerList<CompletionListener>();
+
+	protected ListenerList<ResourceChangeListener> resourceChangeListeners = new ListenerList<ResourceChangeListener>();
+
 	protected EList<Object> children;
+
+	protected ResourceChangeAdapter resourceAdapter = new ResourceChangeAdapter(this);
+
+	public class ProjectNameAdapter extends AdapterImpl {
+
+		@Override
+		public void notifyChanged(Notification msg) {
+			if (msg.getFeatureID(State.class) == ClassMakerPackage.PROJECT__NAME
+					&& msg.getEventType() == Notification.SET && msg.getNewStringValue() != null)
+				setProjectName(ClassMakerPlugin.getClassMaker().computeProjectName(msg.getNewStringValue()));
+		}
+
+	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -313,6 +343,15 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
+	 * @generated NOT
+	 */
+	public String getResourcePath() {
+		return IPath.SEPARATOR + getProjectName() + IPath.SEPARATOR + ResourceUtils.getFileName(getName());
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean isNeedCompletionNotification() {
@@ -393,6 +432,38 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * 
 	 * @generated NOT
 	 */
+	public ResourceChangeListener getResourceReloadListener() {
+		if (resourceReloadListener == null) {
+			resourceReloadListener = new ResourceChangeListenerImpl() {
+
+				private boolean loading = false;
+
+				@Override
+				public void changed(Notification notification) throws Exception {
+					final Resource theResource = (Resource) getChildren().get(0);
+					Resource resource = (Resource) notification.getNotifier();
+					if (!loading && getFileName(resource.getURI()).equals(getFileName(theResource.getURI()))
+							&& !theResource.isModified() && theResource.isLoaded()) {
+						loading = true;
+						getChildren().set(0, resource);
+						((Resource) getChildren().get(0)).setURI(getResourceURI());
+						loading = false;
+					}
+				}
+
+				private String getFileName(URI uri) {
+					return uri.segment(uri.segmentCount() - 2);
+				}
+			};
+		}
+		return resourceReloadListener;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
 	public void create(IProgressMonitor monitor) throws CoreException {
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		String projectName = getProjectName();
@@ -406,8 +477,10 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * @generated NOT
 	 */
 	public void delete(IProgressMonitor monitor) throws CoreException {
-		if (eIsSet(ClassMakerPackage.PROJECT__WORKSPACE))
+		if (eIsSet(ClassMakerPackage.PROJECT__WORKSPACE)) {
+			getWorkspace().getResourceSet().eAdapters().remove(resourceAdapter);
 			getWorkspace().unregisterProject(this);
+		}
 		String projectName = getProjectName();
 		if (projectName.isEmpty())
 			return;
@@ -434,7 +507,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	}
 
 	public void notifyCompletion() throws Exception {
-		for (Object listener : listeners.getListeners())
+		for (Object listener : completionListeners.getListeners())
 			((CompletionListener) listener).completed(this);
 		setNeedCompletionNotification(false);
 	}
@@ -444,8 +517,42 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * 
 	 * @generated NOT
 	 */
+	public void addResourceChangeListener(ResourceChangeListener resourceListener) {
+		for (Object listener : resourceChangeListeners.getListeners())
+			if (listener.equals(resourceListener))
+				return;
+		resourceChangeListeners.add(resourceListener);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public void removeResourceChangeListener(ResourceChangeListener resourceListener) {
+		resourceChangeListeners.remove(resourceListener);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public void notifyResourceChanged(Notification notification) throws Exception {
+		for (Object listener : resourceChangeListeners.getListeners())
+			((ResourceChangeListener) listener).changed(notification);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
 	public String make(IProgressMonitor monitor) throws CoreException {
-		return "You made it!"; //$NON-NLS-1$
+		removeResourceChangeListener(getResourceReloadListener());
+		String result = "You made it!"; //$NON-NLS-1$
+		addResourceChangeListener(getResourceReloadListener());
+		return result;
 	}
 
 	/**
@@ -486,7 +593,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * @generated NOT
 	 */
 	public String initialize(boolean commit) {
-		URI uri = createResourceURI();
+		URI uri = getResourceURI();
 		Resource resource = null;
 		if (new File(uri.toFileString()).exists()) {
 			getWorkspace().getResourceSet().getResource(uri, false);
@@ -504,15 +611,16 @@ public class ProjectImpl extends EObjectImpl implements Project {
 					ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 				}
 		}
+		getWorkspace().getResourceSet().eAdapters().add(resourceAdapter);
+		addResourceChangeListener(getResourceReloadListener());
 		getChildren().add(resource);
 		// TODO Add SCM support if commit
 		return ""; //$NON-NLS-1$
 	}
 
-	private URI createResourceURI() {
-		IPath workspacePath = ResourcesPlugin.getWorkspace().getRoot().getLocation();
-		return URI.createFileURI(workspacePath.toString() + IPath.SEPARATOR + getProjectName() + IPath.SEPARATOR
-				+ getName() + "." + ResourceUtils.getModelFileExt()); //$NON-NLS-1$
+	private URI getResourceURI() {
+		IPath workspacePath = ResourcesPlugin.getWorkspace().getRoot().getRawLocation();
+		return URI.createFileURI(workspacePath.append(getResourcePath()).toString());
 	}
 
 	/**
@@ -521,7 +629,10 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * @generated NOT
 	 */
 	public void addCompletionListener(CompletionListener resultListener) {
-		listeners.add(resultListener);
+		for (Object listener : completionListeners.getListeners())
+			if (listener.equals(resultListener))
+				return;
+		completionListeners.add(resultListener);
 	}
 
 	/**
@@ -530,7 +641,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * @generated NOT
 	 */
 	public void removeCompletionListener(CompletionListener resultListener) {
-		listeners.remove(resultListener);
+		completionListeners.remove(resultListener);
 	}
 
 	/**
@@ -635,10 +746,14 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			return isDirty();
 		case ClassMakerPackage.PROJECT__WORKSPACE:
 			return getWorkspace();
+		case ClassMakerPackage.PROJECT__RESOURCE_PATH:
+			return getResourcePath();
 		case ClassMakerPackage.PROJECT__NEED_COMPLETION_NOTIFICATION:
 			return isNeedCompletionNotification();
 		case ClassMakerPackage.PROJECT__COMPLETION_NOTIFICATION_ADAPTER:
 			return getCompletionNotificationAdapter();
+		case ClassMakerPackage.PROJECT__RESOURCE_RELOAD_LISTENER:
+			return getResourceReloadListener();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -715,10 +830,15 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			return isDirty() != DIRTY_EDEFAULT;
 		case ClassMakerPackage.PROJECT__WORKSPACE:
 			return getWorkspace() != null;
+		case ClassMakerPackage.PROJECT__RESOURCE_PATH:
+			return RESOURCE_PATH_EDEFAULT == null ? getResourcePath() != null
+					: !RESOURCE_PATH_EDEFAULT.equals(getResourcePath());
 		case ClassMakerPackage.PROJECT__NEED_COMPLETION_NOTIFICATION:
 			return needCompletionNotification != NEED_COMPLETION_NOTIFICATION_EDEFAULT;
 		case ClassMakerPackage.PROJECT__COMPLETION_NOTIFICATION_ADAPTER:
 			return completionNotificationAdapter != null;
+		case ClassMakerPackage.PROJECT__RESOURCE_RELOAD_LISTENER:
+			return resourceReloadListener != null;
 		}
 		return super.eIsSet(featureID);
 	}

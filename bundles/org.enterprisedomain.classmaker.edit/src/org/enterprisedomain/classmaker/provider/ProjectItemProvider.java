@@ -75,6 +75,7 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 			addProjectNamePropertyDescriptor(object);
 			addChildrenPropertyDescriptor(object);
 			addDirtyPropertyDescriptor(object);
+			addResourcePathPropertyDescriptor(object);
 			addNeedCompletionNotificationPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -141,6 +142,22 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 								"_UI_Project_type"),
 						ClassMakerPackage.Literals.PROJECT__DIRTY, false, false, false,
 						ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Resource Path feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addResourcePathPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Project_resourcePath_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Project_resourcePath_feature",
+								"_UI_Project_type"),
+						ClassMakerPackage.Literals.PROJECT__RESOURCE_PATH, false, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -228,6 +245,7 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 		case ClassMakerPackage.PROJECT__NAME:
 		case ClassMakerPackage.PROJECT__PROJECT_NAME:
 		case ClassMakerPackage.PROJECT__DIRTY:
+		case ClassMakerPackage.PROJECT__RESOURCE_PATH:
 		case ClassMakerPackage.PROJECT__NEED_COMPLETION_NOTIFICATION:
 		case ClassMakerPackage.PROJECT__COMPLETION_NOTIFICATION_ADAPTER:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));

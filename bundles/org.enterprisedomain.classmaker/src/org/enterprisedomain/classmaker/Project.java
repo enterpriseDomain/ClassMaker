@@ -18,6 +18,7 @@ package org.enterprisedomain.classmaker;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
@@ -41,10 +42,14 @@ import org.eclipse.emf.ecore.EObject;
  * <em>Dirty</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.Project#getWorkspace
  * <em>Workspace</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Project#getResourcePath
+ * <em>Resource Path</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.Project#isNeedCompletionNotification
  * <em>Need Completion Notification</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.Project#getCompletionNotificationAdapter
  * <em>Completion Notification Adapter</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Project#getResourceReloadListener
+ * <em>Resource Reload Listener</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject()
@@ -181,6 +186,22 @@ public interface Project extends EObject, ISchedulingRule {
 	void setWorkspace(Workspace value);
 
 	/**
+	 * Returns the value of the '<em><b>Resource Path</b></em>' attribute. <!--
+	 * begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Resource Path</em>' attribute isn't clear, there
+	 * really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Resource Path</em>' attribute.
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject_ResourcePath()
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	String getResourcePath();
+
+	/**
 	 * Returns the value of the '<em><b>Need Completion Notification</b></em>'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc
 	 * --> Set to {@code true} when completion notification is needed. <!--
@@ -241,6 +262,22 @@ public interface Project extends EObject, ISchedulingRule {
 	 * @generated
 	 */
 	void setCompletionNotificationAdapter(CompletionNotificationAdapter value);
+
+	/**
+	 * Returns the value of the '<em><b>Resource Reload Listener</b></em>'
+	 * reference. <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Resource Reload Listener</em>' reference isn't
+	 * clear, there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Resource Reload Listener</em>' reference.
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject_ResourceReloadListener()
+	 * @model resolveProxies="false" changeable="false"
+	 * @generated
+	 */
+	ResourceChangeListener getResourceReloadListener();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -331,5 +368,30 @@ public interface Project extends EObject, ISchedulingRule {
 	 * @generated
 	 */
 	void notifyCompletion() throws Exception;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.Exception"
+	 *        notificationType="org.enterprisedomain.classmaker.Notification"
+	 * @generated
+	 */
+	void notifyResourceChanged(Notification notification) throws Exception;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model
+	 * @generated
+	 */
+	void addResourceChangeListener(ResourceChangeListener resourceListener);
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model
+	 * @generated
+	 */
+	void removeResourceChangeListener(ResourceChangeListener resourceListener);
 
 } // Project

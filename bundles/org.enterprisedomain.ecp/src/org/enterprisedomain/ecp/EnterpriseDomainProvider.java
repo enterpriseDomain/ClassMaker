@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.Semaphore;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -33,6 +32,7 @@ import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.ui.viewer.IViewerProvider;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
@@ -65,14 +65,19 @@ import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.part.ISetSelectionTarget;
 import org.enterprisedomain.classmaker.Blueprint;
 import org.enterprisedomain.classmaker.ClassMakerService;
-import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.ResourceAdapter;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.impl.CompletionListenerImpl;
+import org.enterprisedomain.classmaker.impl.ResourceChangeListenerImpl;
 import org.enterprisedomain.classmaker.util.ClassMakerAdapterFactory;
 
 public class EnterpriseDomainProvider extends DefaultProvider {
@@ -187,8 +192,10 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 					try {
 						blueprint = classMaker.createBlueprint();
 						blueprint.setDynamicModel(model);
+						// blueprint.getCompletionListeners().add(new TrackingModificationListener());
+						blueprint.getCompletionListeners().add(new ResourceListenerListener(project));
 						blueprint.getCompletionListeners().add(new VisiblePackagesListener(project));
-						blueprint.getCompletionListeners().add(new RefreshViewersListnener(project));
+						blueprint.getCompletionListeners().add(new RefreshViewersListener(project));
 
 						ClassMakerPlugin.runWithProgress(new IRunnableWithProgress() {
 
@@ -222,6 +229,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 				classMaker.getWorkspace().getResourceSet().eAdapters()
 						.add(new AdapterFactoryEditingDomain.EditingDomainProvider(project.getEditingDomain()));
 			}
+
 		}
 		registerChangeListener(new ProviderChangeListener() {
 
@@ -255,6 +263,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 			public boolean canDelete(EObject objectToBeDeleted) {
 				return true;
 			}
+
 		});
 	}
 
@@ -322,9 +331,9 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 	}
 
 	protected void disposeProject(InternalProject project) {
-		ClassMakerService plant = Activator.getClassMaker();
-		if (plant != null) {
-			Project domainProject = plant.getWorkspace().getProject(project.getName());
+		ClassMakerService service = Activator.getClassMaker();
+		if (service != null) {
+			Project domainProject = service.getWorkspace().getProject(project.getName());
 			if (domainProject != null)
 				try {
 					IProgressMonitor monitor = null;
@@ -332,6 +341,8 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 						monitor = ClassMakerPlugin.getProgressMonitor();
 					else
 						monitor = getUIProvider().getAdapter(project, IProgressMonitor.class);
+					// ((Resource)
+					// domainProject.getChildren().get(0)).setTrackingModification(false);
 					domainProject.close(monitor);
 				} catch (CoreException e) {
 					Activator.log(e);
@@ -409,16 +420,79 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 		final BasicCommandStack commandStack = new BasicCommandStack();
 		final EditingDomain editingDomain = new AdapterFactoryEditingDomain(ENTERPRISE_DOMAIN_ADAPTER_FACTORY,
 				commandStack, Activator.getClassMaker().getWorkspace().getResourceSet());
-
 		editingDomain.getResourceSet().eAdapters().add(new ECPModelContextAdapter(project));
 		return editingDomain;
 	}
 
-	public static class RefreshViewersListnener extends CompletionListenerImpl {
+	// public class TrackingModificationListener extends CompletionListenerImpl {
+	//
+	// @Override
+	// public void completed(Project result) throws Exception {
+	// ((Resource) result.getChildren().get(0)).setTrackingModification(true);
+	// }
+	//
+	// }
+
+	public class ResourceListenerListener extends CompletionListenerImpl {
 
 		private InternalProject project;
 
-		public RefreshViewersListnener(InternalProject project) {
+		public ResourceListenerListener(InternalProject project) {
+			this.project = project;
+		}
+
+		@Override
+		public void completed(final Project result) throws Exception {
+			// ((Notifier) result.getChildren().get(0)).eAdapters()
+			// .add(new ResourceItemProvider(new ViewItemProviderAdapterFactory()));
+			// ResourcesPlugin.getWorkspace().addResourceChangeListener(new
+			// IResourceChangeListener() {
+			//
+			// @Override
+			// public void resourceChanged(IResourceChangeEvent event) {
+			// if (event.getResource().getType() == IResource.FILE
+			// &&
+			// event.getResource().getProject().getName().equals(result.getProjectName()))
+			// try {
+			// event.getDelta().accept(new IResourceDeltaVisitor() {
+			//
+			// @Override
+			// public boolean visit(IResourceDelta delta) throws CoreException {
+			// if (delta.getKind() == IResourceDelta.CHANGED) {
+			// URI uri = URI.createPlatformResourceURI(
+			// delta.getResource().getFullPath().toString(), false);
+			// Resource resource = Activator.getClassMaker().getWorkspace().getResourceSet()
+			// .getResource(uri, false);
+			// result.getChildren().set(0, resource);
+			// }
+			// return true;
+			// }
+			// });
+			// } catch (CoreException e) {
+			// Activator.log(e);
+			// }
+			//
+			// }
+			// }, IResourceChangeEvent.POST_CHANGE);
+
+			result.addResourceChangeListener(new ResourceChangeListenerImpl() {
+
+				@SuppressWarnings("unchecked")
+				@Override
+				public void changed(Notification notification) throws Exception {
+					// project.saveContents();
+					project.notifyObjectsChanged(((Collection<Object>) (Collection<?>) Arrays.asList(project)), true);
+				}
+
+			});
+		}
+	}
+
+	public class RefreshViewersListener extends CompletionListenerImpl {
+
+		private InternalProject project;
+
+		public RefreshViewersListener(InternalProject project) {
 			this.project = project;
 		}
 
@@ -444,7 +518,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 		@Override
 		public void completed(Project result) {
 			visiblePackages.add(((Contribution) result).getDomainModel().getGenerated().getNsURI());
-			addVisiblePackages(project);			
+			addVisiblePackages(project);
 		}
 
 	};
@@ -500,6 +574,10 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 				return;
 			}
 
+			if (notification.getNotifier() instanceof Resource) {
+				project.notifyObjectsChanged(
+						(Collection<Object>) (Collection<?>) Collections.singleton(notification.getNotifier()), true);
+			}
 			// if (notification.getNotifier() instanceof Notifier) {
 			// provider.notifyProviderChangeListeners(notification);
 			//
@@ -528,45 +606,49 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 		boolean result = false;
 		for (Object child : Activator.getClassMaker().getWorkspace().getProject(project.getName()).getChildren())
 			if (child instanceof Resource)
-				result &= ((Resource) child).isModified();
+				result |= ((Resource) child).isModified();
 		return result;
 	}
 
 	@Override
 	public void doSave(InternalProject project) {
-		IProgressMonitor monitor = null;
-		try {
-			monitor = getUIProvider().getAdapter(project, IProgressMonitor.class);
-			final Semaphore saved = new Semaphore(0);
-			CompletionListener saveListener = new CompletionListenerImpl() {
-
-				@Override
-				public void completed(Project result) {
-					saved.release();
-				}
-
-			};
-			Project domainProject = Activator.getClassMaker().getWorkspace().getProject(project.getName());
-			if (domainProject instanceof Contribution) {
-				Contribution contrib = (Contribution) domainProject;
-				contrib.addCompletionListener(saveListener);
-				contrib.make(monitor);
-				try {
-					saved.acquire();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-					if (monitor != null)
-						monitor.setCanceled(true);
-				}
-				contrib.removeCompletionListener(saveListener);
-			} else
-				domainProject.make(monitor);
-			((BasicCommandStack) project.getEditingDomain().getCommandStack()).saveIsDone();
-		} catch (CoreException e) {
-			e.printStackTrace();
-			if (monitor != null)
-				monitor.setCanceled(true);
+		// IProgressMonitor monitor = null;
+		// try {
+		// monitor = getUIProvider().getAdapter(project, IProgressMonitor.class);
+		// final Semaphore saved = new Semaphore(0);
+		// CompletionListener saveListener = new CompletionListenerImpl() {
+		//
+		// @Override
+		// public void completed(Project result) {
+		// saved.release();
+		// }
+		//
+		// };
+		ClassMakerService classMaker = Activator.getClassMaker();
+		Project domainProject = classMaker.getWorkspace().getProject(project.getName());
+		// Blueprint blueprint = classMaker.createBlueprint();
+		// blueprint.getCompletionListeners().add(saveListener);
+		if (domainProject instanceof Contribution) {
+			((Contribution) domainProject).getState().saveResource();
+			// blueprint.setDynamicModel(
+			// ((Contribution)
+			// domainProject).getContribution().getDomainModel().getDynamic());
 		}
+		// classMaker.make(blueprint, monitor);
+		// try {
+		// saved.acquire();
+		// } catch (InterruptedException e) {
+		// e.printStackTrace();
+		// if (monitor != null)
+		// monitor.setCanceled(true);
+		// }
+		// domainProject.removeCompletionListener(saveListener);
+		((BasicCommandStack) project.getEditingDomain().getCommandStack()).saveIsDone();
+		// } catch (CoreException e) {
+		// e.printStackTrace();
+		// if (monitor != null)
+		// monitor.setCanceled(true);
+		// }
 		super.doSave(project);
 	}
 
