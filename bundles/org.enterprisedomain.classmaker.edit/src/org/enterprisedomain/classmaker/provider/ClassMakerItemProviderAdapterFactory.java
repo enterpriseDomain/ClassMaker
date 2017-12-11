@@ -362,6 +362,29 @@ public class ClassMakerItemProviderAdapterFactory extends ClassMakerAdapterFacto
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.enterprisedomain.classmaker.ResourceChangeListener} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ResourceChangeListenerItemProvider resourceChangeListenerItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.enterprisedomain.classmaker.ResourceChangeListener}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createResourceChangeListenerAdapter() {
+		if (resourceChangeListenerItemProvider == null) {
+			resourceChangeListenerItemProvider = new ResourceChangeListenerItemProvider(this);
+		}
+
+		return resourceChangeListenerItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.enterprisedomain.classmaker.ResourceAdapter} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -576,6 +599,8 @@ public class ClassMakerItemProviderAdapterFactory extends ClassMakerAdapterFacto
 			modelPairItemProvider.dispose();
 		if (scmRegistryItemProvider != null)
 			scmRegistryItemProvider.dispose();
+		if (resourceChangeListenerItemProvider != null)
+			resourceChangeListenerItemProvider.dispose();
 		if (resourceAdapterItemProvider != null)
 			resourceAdapterItemProvider.dispose();
 		if (classMakerServiceItemProvider != null)

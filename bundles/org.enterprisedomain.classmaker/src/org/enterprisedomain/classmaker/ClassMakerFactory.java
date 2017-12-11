@@ -115,6 +115,15 @@ public interface ClassMakerFactory extends EFactory {
 	<T> SCMRegistry<T> createSCMRegistry();
 
 	/**
+	 * Returns a new object of class '<em>Resource Change Listener</em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return a new object of class '<em>Resource Change Listener</em>'.
+	 * @generated
+	 */
+	ResourceChangeListener createResourceChangeListener();
+
+	/**
 	 * Returns a new object of class '<em>Resource Adapter</em>'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 

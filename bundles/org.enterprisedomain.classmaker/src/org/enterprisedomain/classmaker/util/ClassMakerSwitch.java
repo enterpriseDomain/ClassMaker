@@ -22,6 +22,7 @@ import java.util.concurrent.Future;
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -37,6 +38,7 @@ import org.enterprisedomain.classmaker.Item;
 import org.enterprisedomain.classmaker.ModelPair;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.ResourceAdapter;
+import org.enterprisedomain.classmaker.ResourceChangeListener;
 import org.enterprisedomain.classmaker.Revision;
 import org.enterprisedomain.classmaker.SCMOperator;
 import org.enterprisedomain.classmaker.SCMRegistry;
@@ -257,6 +259,20 @@ public class ClassMakerSwitch<T1> extends Switch<T1> {
 		case ClassMakerPackage.RESOURCE: {
 			Resource resource = (Resource) theEObject;
 			T1 result = caseResource(resource);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ClassMakerPackage.RESOURCE_CHANGE_LISTENER: {
+			ResourceChangeListener resourceChangeListener = (ResourceChangeListener) theEObject;
+			T1 result = caseResourceChangeListener(resourceChangeListener);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ClassMakerPackage.NOTIFICATION: {
+			Notification notification = (Notification) theEObject;
+			T1 result = caseNotification(notification);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -639,6 +655,40 @@ public class ClassMakerSwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public T1 caseResource(Resource object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Resource
+	 * Change Listener</em>'. <!-- begin-user-doc --> This implementation returns
+	 * null; returning a non-null result will terminate the switch. <!--
+	 * end-user-doc -->
+	 * 
+	 * @param object
+	 *            the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Resource
+	 *         Change Listener</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseResourceChangeListener(ResourceChangeListener object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of
+	 * '<em>Notification</em>'. <!-- begin-user-doc --> This implementation returns
+	 * null; returning a non-null result will terminate the switch. <!--
+	 * end-user-doc -->
+	 * 
+	 * @param object
+	 *            the target of the switch.
+	 * @return the result of interpreting the object as an instance of
+	 *         '<em>Notification</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseNotification(Notification object) {
 		return null;
 	}
 

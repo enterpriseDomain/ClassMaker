@@ -149,7 +149,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 	protected class CodeGenerationJob extends GeneratorJob {
 
 		public CodeGenerationJob(int stateTimestamp) {
-			super(NLS.bind(Messages.JobNameCodeGeneration, "Model Code"), stateTimestamp);
+			super(NLS.bind(Messages.JobNameCodeGeneration, "Code"), stateTimestamp);
 			setChangeRule(false);
 		}
 

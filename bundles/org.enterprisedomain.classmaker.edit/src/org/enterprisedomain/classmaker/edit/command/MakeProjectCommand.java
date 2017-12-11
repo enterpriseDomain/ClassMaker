@@ -54,6 +54,7 @@ public class MakeProjectCommand extends ChangeCommand implements CommandActionDe
 						Project project = classMaker.getWorkspace().getProject((String) projectName);
 						project.make(monitor);
 					} catch (CoreException e) {
+						monitor.setCanceled(true);
 						throw new InvocationTargetException(e);
 					}
 				}

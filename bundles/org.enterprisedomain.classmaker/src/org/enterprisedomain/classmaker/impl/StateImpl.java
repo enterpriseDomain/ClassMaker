@@ -28,7 +28,6 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.SubMonitor;
@@ -319,8 +318,6 @@ public class StateImpl extends ItemImpl implements State {
 
 	private boolean loading = false;
 
-	private boolean saving = false;
-
 	private boolean savingResource = false;
 
 	private Object makingLock = new Object();
@@ -472,8 +469,7 @@ public class StateImpl extends ItemImpl implements State {
 					monitor.done();
 				}
 			}
-			IPath modelPath = ResourceUtils.getModelResourcePath(project, getModelName());
-			modelURI = URI.createFileURI(root.getRawLocation().append(modelPath).toString());
+			modelURI = URI.createFileURI(root.getRawLocation().append(getContribution().getResourcePath()).toString());
 		}
 		return modelURI;
 	}
@@ -516,7 +512,7 @@ public class StateImpl extends ItemImpl implements State {
 		loading = false;
 	}
 
-	private boolean saveResourceWhileMaking = false;
+	private boolean saveResourceDuringMaking = false;
 
 	public void saveResource() {
 		if (savingResource || isMaking())
@@ -549,7 +545,7 @@ public class StateImpl extends ItemImpl implements State {
 		} catch (IOException e) {
 			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createWarningStatus(e));
 		} finally {
-			if (!saveResourceWhileMaking)
+			if (!saveResourceDuringMaking)
 				setMaking(false);
 			savingResource = false;
 		}
@@ -643,7 +639,7 @@ public class StateImpl extends ItemImpl implements State {
 						return ListUtil.getLast(getCommitIds());
 					else
 						return ""; //$NON-NLS-1$
-				saveResourceWhileMaking = true;
+				saveResourceDuringMaking = true;
 				saveResource();
 
 				try {

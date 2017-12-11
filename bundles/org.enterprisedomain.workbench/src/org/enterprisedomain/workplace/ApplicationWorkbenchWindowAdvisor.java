@@ -1,27 +1,35 @@
 package org.enterprisedomain.workplace;
 
+import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IProgressMonitorWithBlocking;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecp.core.util.ECPUtil;
 import org.eclipse.emf.ecp.spi.core.DefaultProvider;
+import org.eclipse.emf.ecp.spi.ui.DefaultUIProvider;
 import org.eclipse.emf.ecp.spi.ui.UIProvider;
 import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.IEditorReference;
+import org.eclipse.ui.ISaveablePart;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
 import org.eclipse.ui.application.IWorkbenchWindowConfigurer;
 import org.eclipse.ui.application.WorkbenchWindowAdvisor;
-import org.eclipse.ui.progress.UIJob;
+import org.eclipse.ui.console.ConsolePlugin;
+import org.eclipse.ui.console.IConsole;
+import org.eclipse.ui.console.MessageConsole;
 import org.enterprisedomain.classmaker.core.IProgressRunner;
 import org.enterprisedomain.classmaker.core.IRunWrapper;
+import org.enterprisedomain.ecp.EnterpriseDomainProvider;
 import org.enterprisedomain.ecp.ui.EnterpriseDomainUIProvider;
 
 public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
+
+	private PrintStream oldOut;
 
 	public ApplicationWorkbenchWindowAdvisor(IWorkbenchWindowConfigurer configurer) {
 		super(configurer);
@@ -43,11 +51,11 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 
 	@Override
 	public void postWindowOpen() {
-		final String ecpProviderName = "org.enterprisedomain.ecp.provider";
-		UIProvider uiProvider = (UIProvider) ((DefaultProvider) ECPUtil.getECPProviderRegistry()
-				.getProvider(ecpProviderName).getAdapter(DefaultProvider.class)).getUIProvider();
-		EnterpriseDomainUIProvider enterpriseDomainUIProvider = ((EnterpriseDomainUIProvider) uiProvider
-				.getAdapter(uiProvider, EnterpriseDomainUIProvider.class));
+		final EnterpriseDomainProvider provider = (EnterpriseDomainProvider) ECPUtil.getECPProviderRegistry()
+				.getProvider(EnterpriseDomainProvider.NAME).getAdapter(DefaultProvider.class);
+		UIProvider uiProvider = (UIProvider) provider.getUIProvider();
+		EnterpriseDomainUIProvider enterpriseDomainUIProvider = (EnterpriseDomainUIProvider) uiProvider
+				.getAdapter(uiProvider, DefaultUIProvider.class);
 		enterpriseDomainUIProvider.setClientRunWrapper(new IRunWrapper() {
 
 			@Override
@@ -55,7 +63,7 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 				Display display = Display.getCurrent() != null ? Display.getCurrent() : Display.getDefault();
 				display.asyncExec(runnable);
 			}
-			
+
 		});
 
 		enterpriseDomainUIProvider.setProgressRunner(new IProgressRunner() {
@@ -81,6 +89,20 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 		});
 		enterpriseDomainUIProvider.setProgressMonitor(
 				getWindowConfigurer().getActionBarConfigurer().getStatusLineManager().getProgressMonitor());
+	}
+
+	@Override
+	public void postWindowCreate() {
+		oldOut = System.out;
+		MessageConsole out = new MessageConsole("Output", null);
+		System.setOut(new PrintStream(out.newOutputStream()));
+		ConsolePlugin.getDefault().getConsoleManager().addConsoles(new IConsole[] { out });
+		ConsolePlugin.getDefault().getConsoleManager().refresh(out);
+	}
+
+	@Override
+	public void postWindowClose() {
+		System.setOut(oldOut);
 	}
 
 }

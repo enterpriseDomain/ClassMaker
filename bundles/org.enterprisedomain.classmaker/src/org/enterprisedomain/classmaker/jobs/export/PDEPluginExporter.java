@@ -132,9 +132,13 @@ public class PDEPluginExporter extends AbstractExporter {
 		} catch (Exception e) {
 			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 		}
+		refreshLocal(getProject(), IResource.DEPTH_ONE, monitor);
+	}
+
+	private void refreshLocal(IResource resource, int depth, IProgressMonitor monitor) throws CoreException {
 		try {
 			IProgressMonitor pm = SubMonitor.convert(monitor, 1);
-			getProject().refreshLocal(IResource.DEPTH_INFINITE, pm);
+			resource.refreshLocal(depth, pm);
 		} catch (OperationCanceledException e) {
 		}
 	}

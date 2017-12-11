@@ -28,6 +28,7 @@ import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.viewers.DecoratingLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -57,9 +58,8 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider {
 			new AdapterFactory[] { new ClassMakerItemProviderAdapterFactory(), new ClassMakerAdapterFactory(),
 					InternalProvider.EMF_ADAPTER_FACTORY });
 
-	private static final ILabelProvider ENTERPRISE_DOMAIN_LABEL_PROVIDER = new DecoratingLabelProvider(
-			new AdapterFactoryLabelProvider(ENTERPRISE_DOMAIN_ITEM_PROVIDER_ADAPTER_FACTORY),
-			new EnterpriseDomainECPDecorator());
+	private static final ILabelProvider ENTERPRISE_DOMAIN_LABEL_PROVIDER = new AdapterFactoryLabelProvider(
+			ENTERPRISE_DOMAIN_ITEM_PROVIDER_ADAPTER_FACTORY);
 
 	private Button isContributionButton;
 	private boolean isContribution;
@@ -75,7 +75,7 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider {
 			return (T) ClassMakerPlugin.getProgressMonitor();
 		if (ComposeableAdapterFactory.class.isAssignableFrom(adapterType))
 			return (T) ENTERPRISE_DOMAIN_ITEM_PROVIDER_ADAPTER_FACTORY;
-		if (EnterpriseDomainUIProvider.class.isAssignableFrom(adapterType))
+		if (DefaultUIProvider.class.isAssignableFrom(adapterType))
 			return (T) this;
 		return (T) getProvider().getAdapter(adaptable, adapterType);
 	}
@@ -185,6 +185,7 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider {
 			final Object element = elements[0];
 			if (context instanceof ECPProject) {
 				ECPProject project = (ECPProject) context;
+				manager.add(new Separator());
 				manager.add(new MakeAction(project.getEditingDomain(), new StructuredSelection(element), project));
 			}
 		}

@@ -144,13 +144,22 @@ public interface ClassMakerPackage extends EPackage {
 	int PROJECT__WORKSPACE = ISCHEDULING_RULE_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Resource Path</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECT__RESOURCE_PATH = ISCHEDULING_RULE_FEATURE_COUNT + 5;
+
+	/**
 	 * The feature id for the '<em><b>Need Completion Notification</b></em>'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int PROJECT__NEED_COMPLETION_NOTIFICATION = ISCHEDULING_RULE_FEATURE_COUNT + 5;
+	int PROJECT__NEED_COMPLETION_NOTIFICATION = ISCHEDULING_RULE_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Completion Notification Adapter</b></em>'
@@ -159,7 +168,16 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROJECT__COMPLETION_NOTIFICATION_ADAPTER = ISCHEDULING_RULE_FEATURE_COUNT + 6;
+	int PROJECT__COMPLETION_NOTIFICATION_ADAPTER = ISCHEDULING_RULE_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Resource Reload Listener</b></em>' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECT__RESOURCE_RELOAD_LISTENER = ISCHEDULING_RULE_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Project</em>' class. <!--
@@ -168,7 +186,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROJECT_FEATURE_COUNT = ISCHEDULING_RULE_FEATURE_COUNT + 7;
+	int PROJECT_FEATURE_COUNT = ISCHEDULING_RULE_FEATURE_COUNT + 9;
 
 	/**
 	 * The meta object id for the
@@ -227,6 +245,15 @@ public interface ClassMakerPackage extends EPackage {
 	int CONTRIBUTION__WORKSPACE = PROJECT__WORKSPACE;
 
 	/**
+	 * The feature id for the '<em><b>Resource Path</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CONTRIBUTION__RESOURCE_PATH = PROJECT__RESOURCE_PATH;
+
+	/**
 	 * The feature id for the '<em><b>Need Completion Notification</b></em>'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -243,6 +270,15 @@ public interface ClassMakerPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONTRIBUTION__COMPLETION_NOTIFICATION_ADAPTER = PROJECT__COMPLETION_NOTIFICATION_ADAPTER;
+
+	/**
+	 * The feature id for the '<em><b>Resource Reload Listener</b></em>' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CONTRIBUTION__RESOURCE_RELOAD_LISTENER = PROJECT__RESOURCE_RELOAD_LISTENER;
 
 	/**
 	 * The feature id for the '<em><b>Model Name</b></em>' attribute. <!--
@@ -1260,6 +1296,46 @@ public interface ClassMakerPackage extends EPackage {
 
 	/**
 	 * The meta object id for the
+	 * '{@link org.enterprisedomain.classmaker.impl.ResourceChangeListenerImpl
+	 * <em>Resource Change Listener</em>}' class. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @see org.enterprisedomain.classmaker.impl.ResourceChangeListenerImpl
+	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getResourceChangeListener()
+	 * @generated
+	 */
+	int RESOURCE_CHANGE_LISTENER = 20;
+
+	/**
+	 * The number of structural features of the '<em>Resource Change Listener</em>'
+	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int RESOURCE_CHANGE_LISTENER_FEATURE_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.emf.common.notify.Notification
+	 * <em>Notification</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see org.eclipse.emf.common.notify.Notification
+	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getNotification()
+	 * @generated
+	 */
+	int NOTIFICATION = 21;
+
+	/**
+	 * The number of structural features of the '<em>Notification</em>' class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int NOTIFICATION_FEATURE_COUNT = 0;
+
+	/**
+	 * The meta object id for the
 	 * '{@link org.enterprisedomain.classmaker.impl.CompletionListenerImpl
 	 * <em>Completion Listener</em>}' class. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
@@ -1268,7 +1344,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getCompletionListener()
 	 * @generated
 	 */
-	int COMPLETION_LISTENER = 20;
+	int COMPLETION_LISTENER = 22;
 
 	/**
 	 * The number of structural features of the '<em>Completion Listener</em>'
@@ -1288,7 +1364,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getWorker()
 	 * @generated
 	 */
-	int WORKER = 25;
+	int WORKER = 27;
 
 	/**
 	 * The meta object id for the
@@ -1299,7 +1375,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getResourceAdapter()
 	 * @generated
 	 */
-	int RESOURCE_ADAPTER = 21;
+	int RESOURCE_ADAPTER = 23;
 
 	/**
 	 * The feature id for the '<em><b>Resource</b></em>' reference. <!--
@@ -1346,7 +1422,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getClassMakerService()
 	 * @generated
 	 */
-	int CLASS_MAKER_SERVICE = 22;
+	int CLASS_MAKER_SERVICE = 24;
 
 	/**
 	 * The feature id for the '<em><b>Workspace</b></em>' reference. <!--
@@ -1384,7 +1460,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getBlueprint()
 	 * @generated
 	 */
-	int BLUEPRINT = 23;
+	int BLUEPRINT = 25;
 
 	/**
 	 * The feature id for the '<em><b>Dynamic Model</b></em>' reference. <!--
@@ -1432,7 +1508,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getCompletionNotificationAdapter()
 	 * @generated
 	 */
-	int COMPLETION_NOTIFICATION_ADAPTER = 24;
+	int COMPLETION_NOTIFICATION_ADAPTER = 26;
 
 	/**
 	 * The feature id for the '<em><b>Error</b></em>' attribute. <!-- begin-user-doc
@@ -1469,7 +1545,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getLocale()
 	 * @generated
 	 */
-	int LOCALE = 36;
+	int LOCALE = 38;
 
 	/**
 	 * The meta object id for the '{@link org.enterprisedomain.classmaker.Stage
@@ -1479,7 +1555,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getStage()
 	 * @generated
 	 */
-	int STAGE = 26;
+	int STAGE = 28;
 
 	/**
 	 * The meta object id for the '<em>Properties</em>' data type. <!--
@@ -1489,7 +1565,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getProperties()
 	 * @generated
 	 */
-	int PROPERTIES = 27;
+	int PROPERTIES = 29;
 
 	/**
 	 * The meta object id for the '<em>IProgress Monitor</em>' data type. <!--
@@ -1499,7 +1575,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getIProgressMonitor()
 	 * @generated
 	 */
-	int IPROGRESS_MONITOR = 28;
+	int IPROGRESS_MONITOR = 30;
 
 	/**
 	 * The meta object id for the '<em>OS Gi Version</em>' data type. <!--
@@ -1509,7 +1585,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getOSGiVersion()
 	 * @generated
 	 */
-	int OS_GI_VERSION = 29;
+	int OS_GI_VERSION = 31;
 
 	/**
 	 * The meta object id for the '<em>Semaphore</em>' data type. <!--
@@ -1519,7 +1595,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getSemaphore()
 	 * @generated
 	 */
-	int SEMAPHORE = 30;
+	int SEMAPHORE = 32;
 
 	/**
 	 * The meta object id for the '<em>Core Exception</em>' data type. <!--
@@ -1529,7 +1605,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getCoreException()
 	 * @generated
 	 */
-	int CORE_EXCEPTION = 31;
+	int CORE_EXCEPTION = 33;
 
 	/**
 	 * The meta object id for the '<em>Invocation Target Exception</em>' data type.
@@ -1539,7 +1615,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getInvocationTargetException()
 	 * @generated
 	 */
-	int INVOCATION_TARGET_EXCEPTION = 32;
+	int INVOCATION_TARGET_EXCEPTION = 34;
 
 	/**
 	 * The meta object id for the '<em>IStatus</em>' data type. <!-- begin-user-doc
@@ -1549,7 +1625,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getIStatus()
 	 * @generated
 	 */
-	int ISTATUS = 33;
+	int ISTATUS = 35;
 
 	/**
 	 * The meta object id for the '<em>URI</em>' data type. <!-- begin-user-doc -->
@@ -1559,7 +1635,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getURI()
 	 * @generated
 	 */
-	int URI = 34;
+	int URI = 36;
 
 	/**
 	 * The meta object id for the '<em>Exception</em>' data type. <!--
@@ -1569,7 +1645,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getException()
 	 * @generated
 	 */
-	int EXCEPTION = 35;
+	int EXCEPTION = 37;
 
 	/**
 	 * Returns the meta object for class
@@ -2337,6 +2413,18 @@ public interface ClassMakerPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute
+	 * '{@link org.enterprisedomain.classmaker.Project#getResourcePath <em>Resource
+	 * Path</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the attribute '<em>Resource Path</em>'.
+	 * @see org.enterprisedomain.classmaker.Project#getResourcePath()
+	 * @see #getProject()
+	 * @generated
+	 */
+	EAttribute getProject_ResourcePath();
+
+	/**
+	 * Returns the meta object for the attribute
 	 * '{@link org.enterprisedomain.classmaker.Project#isNeedCompletionNotification
 	 * <em>Need Completion Notification</em>}'. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
@@ -2362,6 +2450,20 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getProject_CompletionNotificationAdapter();
+
+	/**
+	 * Returns the meta object for the reference
+	 * '{@link org.enterprisedomain.classmaker.Project#getResourceReloadListener
+	 * <em>Resource Reload Listener</em>}'. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @return the meta object for the reference '<em>Resource Reload
+	 *         Listener</em>'.
+	 * @see org.enterprisedomain.classmaker.Project#getResourceReloadListener()
+	 * @see #getProject()
+	 * @generated
+	 */
+	EReference getProject_ResourceReloadListener();
 
 	/**
 	 * Returns the meta object for class
@@ -2455,6 +2557,29 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getResource();
+
+	/**
+	 * Returns the meta object for class
+	 * '{@link org.enterprisedomain.classmaker.ResourceChangeListener <em>Resource
+	 * Change Listener</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for class '<em>Resource Change Listener</em>'.
+	 * @see org.enterprisedomain.classmaker.ResourceChangeListener
+	 * @generated
+	 */
+	EClass getResourceChangeListener();
+
+	/**
+	 * Returns the meta object for class
+	 * '{@link org.eclipse.emf.common.notify.Notification <em>Notification</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for class '<em>Notification</em>'.
+	 * @see org.eclipse.emf.common.notify.Notification
+	 * @model instanceClass="org.eclipse.emf.common.notify.Notification"
+	 * @generated
+	 */
+	EClass getNotification();
 
 	/**
 	 * Returns the meta object for class
@@ -3343,6 +3468,14 @@ public interface ClassMakerPackage extends EPackage {
 		EReference PROJECT__WORKSPACE = eINSTANCE.getProject_Workspace();
 
 		/**
+		 * The meta object literal for the '<em><b>Resource Path</b></em>' attribute
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EAttribute PROJECT__RESOURCE_PATH = eINSTANCE.getProject_ResourcePath();
+
+		/**
 		 * The meta object literal for the '<em><b>Need Completion
 		 * Notification</b></em>' attribute feature. <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
@@ -3359,6 +3492,14 @@ public interface ClassMakerPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PROJECT__COMPLETION_NOTIFICATION_ADAPTER = eINSTANCE.getProject_CompletionNotificationAdapter();
+
+		/**
+		 * The meta object literal for the '<em><b>Resource Reload Listener</b></em>'
+		 * reference feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference PROJECT__RESOURCE_RELOAD_LISTENER = eINSTANCE.getProject_ResourceReloadListener();
 
 		/**
 		 * The meta object literal for the
@@ -3435,6 +3576,29 @@ public interface ClassMakerPackage extends EPackage {
 		 * @generated
 		 */
 		EClass RESOURCE = eINSTANCE.getResource();
+
+		/**
+		 * The meta object literal for the
+		 * '{@link org.enterprisedomain.classmaker.impl.ResourceChangeListenerImpl
+		 * <em>Resource Change Listener</em>}' class. <!-- begin-user-doc --> <!--
+		 * end-user-doc -->
+		 * 
+		 * @see org.enterprisedomain.classmaker.impl.ResourceChangeListenerImpl
+		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getResourceChangeListener()
+		 * @generated
+		 */
+		EClass RESOURCE_CHANGE_LISTENER = eINSTANCE.getResourceChangeListener();
+
+		/**
+		 * The meta object literal for the
+		 * '{@link org.eclipse.emf.common.notify.Notification <em>Notification</em>}'
+		 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @see org.eclipse.emf.common.notify.Notification
+		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getNotification()
+		 * @generated
+		 */
+		EClass NOTIFICATION = eINSTANCE.getNotification();
 
 		/**
 		 * The meta object literal for the

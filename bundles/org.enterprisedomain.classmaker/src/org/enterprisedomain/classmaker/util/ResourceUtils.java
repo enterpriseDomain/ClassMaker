@@ -72,10 +72,6 @@ public class ResourceUtils {
 		PROJECT_DELETE_MASK.add(IProjectDescription.DESCRIPTION_FILE_NAME);
 	}
 
-	public static IPath getModelResourcePath(IProject project, String modelName) {
-		return project.getFullPath().append(getModelFolderName()).append(getFileName(modelName));
-	}
-
 	public static IPath getModelTransformationPath(IProject project,
 			org.eclipse.emf.common.util.URI transformationURI) {
 		return project.getFullPath().append(getModelFolderName()).append(transformationURI.lastSegment());
