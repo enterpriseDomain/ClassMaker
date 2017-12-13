@@ -29,7 +29,6 @@ import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.Separator;
-import org.eclipse.jface.viewers.DecoratingLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
@@ -205,14 +204,8 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider {
 
 	@Override
 	public Image getImage(Object element) {
-		// Image image = null;
-		// try {
 		if (element instanceof ECPProject || element instanceof ECPRepository)
 			return super.getImage(element);
-		// } catch (Exception e) {
-		// }
-		// if (image != null)
-		// return image;
 		return ENTERPRISE_DOMAIN_LABEL_PROVIDER.getImage(element);
 	}
 

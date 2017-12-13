@@ -67,8 +67,6 @@
             </annotation>
             <simpleType>
                <restriction base="string">
-                  <enumeration value="0">
-                  </enumeration>
                   <enumeration value="1">
                   </enumeration>
                   <enumeration value="2">
@@ -86,6 +84,8 @@
                   <enumeration value="8">
                   </enumeration>
                   <enumeration value="9">
+                  </enumeration>
+                  <enumeration value="10">
                   </enumeration>
                </restriction>
             </simpleType>

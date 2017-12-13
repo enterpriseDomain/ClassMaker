@@ -263,7 +263,7 @@
       <genTypeParameters ecoreTypeParameter="ClassMaker.ecore#//Future/V"/>
     </genClasses>
     <genClasses image="false" ecoreClass="ClassMaker.ecore#//IAdapterFactory"/>
-    <genClasses image="false" ecoreClass="ClassMaker.ecore#//Customizer">
+    <genClasses ecoreClass="ClassMaker.ecore#//Customizer">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Customizer/rank"/>
       <genOperations ecoreOperation="ClassMaker.ecore#//Customizer/customize">
         <genParameters ecoreParameter="ClassMaker.ecore#//Customizer/customize/args"/>
@@ -283,8 +283,10 @@
       <genFeatures property="Readonly" children="true" createChild="true" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Project/children"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Project/dirty"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ClassMaker.ecore#//Project/workspace"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Project/resourcePath"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Project/needCompletionNotification"/>
       <genFeatures property="None" createChild="false" ecoreFeature="ecore:EReference ClassMaker.ecore#//Project/completionNotificationAdapter"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference ClassMaker.ecore#//Project/resourceReloadListener"/>
       <genOperations ecoreOperation="ClassMaker.ecore#//Project/create">
         <genParameters ecoreParameter="ClassMaker.ecore#//Project/create/monitor"/>
       </genOperations>
@@ -313,6 +315,15 @@
         <genParameters ecoreParameter="ClassMaker.ecore#//Project/removeCompletionListener/resultListener"/>
       </genOperations>
       <genOperations ecoreOperation="ClassMaker.ecore#//Project/notifyCompletion"/>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Project/notifyResourceChanged">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Project/notifyResourceChanged/notification"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Project/addResourceChangeListener">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Project/addResourceChangeListener/resourceListener"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Project/removeResourceChangeListener">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Project/removeResourceChangeListener/resourceListener"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="ClassMaker.ecore#//ModelPair">
       <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//ModelPair/dynamic"/>
@@ -381,6 +392,12 @@
       </genOperations>
     </genClasses>
     <genClasses image="false" ecoreClass="ClassMaker.ecore#//Resource"/>
+    <genClasses ecoreClass="ClassMaker.ecore#//ResourceChangeListener">
+      <genOperations ecoreOperation="ClassMaker.ecore#//ResourceChangeListener/changed">
+        <genParameters ecoreParameter="ClassMaker.ecore#//ResourceChangeListener/changed/resource"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="ClassMaker.ecore#//Notification"/>
     <genClasses image="false" ecoreClass="ClassMaker.ecore#//CompletionListener">
       <genOperations ecoreOperation="ClassMaker.ecore#//CompletionListener/completed">
         <genParameters ecoreParameter="ClassMaker.ecore#//CompletionListener/completed/result"/>
@@ -389,6 +406,7 @@
     <genClasses ecoreClass="ClassMaker.ecore#//ResourceAdapter">
       <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//ResourceAdapter/resource"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//ResourceAdapter/filename"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ClassMaker.ecore#//ResourceAdapter/project"/>
     </genClasses>
     <genClasses ecoreClass="ClassMaker.ecore#//ClassMakerService">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//ClassMakerService/workspace"/>

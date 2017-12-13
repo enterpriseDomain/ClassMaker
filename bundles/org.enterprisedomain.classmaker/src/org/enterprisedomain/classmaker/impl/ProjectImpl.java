@@ -80,6 +80,8 @@ import org.enterprisedomain.classmaker.util.ResourceUtils;
  * <em>Completion Notification Adapter</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getResourceReloadListener
  * <em>Resource Reload Listener</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#isSavingResource
+ * <em>Saving Resource</em>}</li>
  * </ul>
  *
  * @generated
@@ -189,6 +191,26 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * @ordered
 	 */
 	protected ResourceChangeListener resourceReloadListener;
+
+	/**
+	 * The default value of the '{@link #isSavingResource() <em>Saving
+	 * Resource</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #isSavingResource()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean SAVING_RESOURCE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isSavingResource() <em>Saving
+	 * Resource</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #isSavingResource()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean savingResource = SAVING_RESOURCE_EDEFAULT;
 
 	protected ListenerList<CompletionListener> completionListeners = new ListenerList<CompletionListener>();
 
@@ -440,13 +462,17 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 				@Override
 				public void changed(Notification notification) throws Exception {
-					final Resource theResource = (Resource) getChildren().get(0);
+					Resource theResource = (Resource) getChildren().get(0);
 					Resource resource = (Resource) notification.getNotifier();
-					if (!loading && getFileName(resource.getURI()).equals(getFileName(theResource.getURI()))
+					if (!loading && !isSavingResource()
+							&& getFileName(resource.getURI()).equals(getFileName(theResource.getURI()))
 							&& !theResource.isModified() && theResource.isLoaded()) {
 						loading = true;
 						getChildren().set(0, resource);
-						((Resource) getChildren().get(0)).setURI(getResourceURI());
+						theResource = ((Resource) getChildren().get(0));
+						theResource.setURI(getResourceURI());
+						theResource.unload();
+						theResource.load(Collections.emptyMap());
 						loading = false;
 					}
 				}
@@ -457,6 +483,28 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			};
 		}
 		return resourceReloadListener;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public boolean isSavingResource() {
+		return savingResource;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public void setSavingResource(boolean newSavingResource) {
+		boolean oldSavingResource = savingResource;
+		savingResource = newSavingResource;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.PROJECT__SAVING_RESOURCE,
+					oldSavingResource, savingResource));
 	}
 
 	/**
@@ -754,6 +802,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			return getCompletionNotificationAdapter();
 		case ClassMakerPackage.PROJECT__RESOURCE_RELOAD_LISTENER:
 			return getResourceReloadListener();
+		case ClassMakerPackage.PROJECT__SAVING_RESOURCE:
+			return isSavingResource();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -781,6 +831,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		case ClassMakerPackage.PROJECT__COMPLETION_NOTIFICATION_ADAPTER:
 			setCompletionNotificationAdapter((CompletionNotificationAdapter) newValue);
 			return;
+		case ClassMakerPackage.PROJECT__SAVING_RESOURCE:
+			setSavingResource((Boolean) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -807,6 +860,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			return;
 		case ClassMakerPackage.PROJECT__COMPLETION_NOTIFICATION_ADAPTER:
 			setCompletionNotificationAdapter((CompletionNotificationAdapter) null);
+			return;
+		case ClassMakerPackage.PROJECT__SAVING_RESOURCE:
+			setSavingResource(SAVING_RESOURCE_EDEFAULT);
 			return;
 		}
 		super.eUnset(featureID);
@@ -839,6 +895,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			return completionNotificationAdapter != null;
 		case ClassMakerPackage.PROJECT__RESOURCE_RELOAD_LISTENER:
 			return resourceReloadListener != null;
+		case ClassMakerPackage.PROJECT__SAVING_RESOURCE:
+			return savingResource != SAVING_RESOURCE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -885,6 +943,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		result.append(projectName);
 		result.append(", needCompletionNotification: ");
 		result.append(needCompletionNotification);
+		result.append(", savingResource: ");
+		result.append(savingResource);
 		result.append(')');
 		return result.toString();
 	}

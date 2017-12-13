@@ -129,8 +129,6 @@ public class ResourceAdapterImpl extends EObjectImpl implements ResourceAdapter 
 		for (Adapter adapter : resource.getResourceSet().eAdapters())
 			if (!(adapter instanceof EContentAdapter))
 				eAdapters().add(adapter);
-		// eSetResource((org.eclipse.emf.ecore.resource.Resource.Internal) resource,
-		// null);
 	}
 
 	/**

@@ -287,10 +287,7 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	 * 
 	 * @generated NOT
 	 */
-	public Contribution basicGetContribution() {
-		// all sub-classes should override
-		throw new UnsupportedOperationException();
-	}
+	public abstract Contribution basicGetContribution();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

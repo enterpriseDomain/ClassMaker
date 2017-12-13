@@ -226,15 +226,6 @@ public class ClassMakerSwitch<T1> extends Switch<T1> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case ClassMakerPackage.PROJECT: {
-			Project project = (Project) theEObject;
-			T1 result = caseProject(project);
-			if (result == null)
-				result = caseISchedulingRule(project);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		case ClassMakerPackage.MODEL_PAIR: {
 			ModelPair modelPair = (ModelPair) theEObject;
 			T1 result = caseModelPair(modelPair);
@@ -252,6 +243,15 @@ public class ClassMakerSwitch<T1> extends Switch<T1> {
 		case ClassMakerPackage.SCM_REGISTRY: {
 			SCMRegistry<?> scmRegistry = (SCMRegistry<?>) theEObject;
 			T1 result = caseSCMRegistry(scmRegistry);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ClassMakerPackage.PROJECT: {
+			Project project = (Project) theEObject;
+			T1 result = caseProject(project);
+			if (result == null)
+				result = caseISchedulingRule(project);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;

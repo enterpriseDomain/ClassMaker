@@ -96,7 +96,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getProject()
 	 * @generated
 	 */
-	int PROJECT = 15;
+	int PROJECT = 18;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute. <!-- begin-user-doc
@@ -180,13 +180,22 @@ public interface ClassMakerPackage extends EPackage {
 	int PROJECT__RESOURCE_RELOAD_LISTENER = ISCHEDULING_RULE_FEATURE_COUNT + 8;
 
 	/**
+	 * The feature id for the '<em><b>Saving Resource</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECT__SAVING_RESOURCE = ISCHEDULING_RULE_FEATURE_COUNT + 9;
+
+	/**
 	 * The number of structural features of the '<em>Project</em>' class. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int PROJECT_FEATURE_COUNT = ISCHEDULING_RULE_FEATURE_COUNT + 9;
+	int PROJECT_FEATURE_COUNT = ISCHEDULING_RULE_FEATURE_COUNT + 10;
 
 	/**
 	 * The meta object id for the
@@ -279,6 +288,15 @@ public interface ClassMakerPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONTRIBUTION__RESOURCE_RELOAD_LISTENER = PROJECT__RESOURCE_RELOAD_LISTENER;
+
+	/**
+	 * The feature id for the '<em><b>Saving Resource</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CONTRIBUTION__SAVING_RESOURCE = PROJECT__SAVING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Model Name</b></em>' attribute. <!--
@@ -1188,7 +1206,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getModelPair()
 	 * @generated
 	 */
-	int MODEL_PAIR = 16;
+	int MODEL_PAIR = 15;
 
 	/**
 	 * The feature id for the '<em><b>Dynamic</b></em>' reference. <!--
@@ -1235,7 +1253,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getSCMOperator()
 	 * @generated
 	 */
-	int SCM_OPERATOR = 17;
+	int SCM_OPERATOR = 16;
 
 	/**
 	 * The feature id for the '<em><b>Project Name</b></em>' attribute. <!--
@@ -1264,7 +1282,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getSCMRegistry()
 	 * @generated
 	 */
-	int SCM_REGISTRY = 18;
+	int SCM_REGISTRY = 17;
 
 	/**
 	 * The number of structural features of the '<em>SCM Registry</em>' class. <!--
@@ -2466,6 +2484,18 @@ public interface ClassMakerPackage extends EPackage {
 	EReference getProject_ResourceReloadListener();
 
 	/**
+	 * Returns the meta object for the attribute
+	 * '{@link org.enterprisedomain.classmaker.Project#isSavingResource <em>Saving
+	 * Resource</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the attribute '<em>Saving Resource</em>'.
+	 * @see org.enterprisedomain.classmaker.Project#isSavingResource()
+	 * @see #getProject()
+	 * @generated
+	 */
+	EAttribute getProject_SavingResource();
+
+	/**
 	 * Returns the meta object for class
 	 * '{@link org.enterprisedomain.classmaker.ModelPair <em>Model Pair</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -3500,6 +3530,14 @@ public interface ClassMakerPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PROJECT__RESOURCE_RELOAD_LISTENER = eINSTANCE.getProject_ResourceReloadListener();
+
+		/**
+		 * The meta object literal for the '<em><b>Saving Resource</b></em>' attribute
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EAttribute PROJECT__SAVING_RESOURCE = eINSTANCE.getProject_SavingResource();
 
 		/**
 		 * The meta object literal for the

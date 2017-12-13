@@ -50,6 +50,8 @@ import org.eclipse.emf.ecore.EObject;
  * <em>Completion Notification Adapter</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.Project#getResourceReloadListener
  * <em>Resource Reload Listener</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Project#isSavingResource
+ * <em>Saving Resource</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject()
@@ -278,6 +280,35 @@ public interface Project extends EObject, ISchedulingRule {
 	 * @generated
 	 */
 	ResourceChangeListener getResourceReloadListener();
+
+	/**
+	 * Returns the value of the '<em><b>Saving Resource</b></em>' attribute. The
+	 * default value is <code>"false"</code>. <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Saving Resource</em>' attribute isn't clear, there
+	 * really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Saving Resource</em>' attribute.
+	 * @see #setSavingResource(boolean)
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject_SavingResource()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isSavingResource();
+
+	/**
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Project#isSavingResource <em>Saving
+	 * Resource</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Saving Resource</em>' attribute.
+	 * @see #isSavingResource()
+	 * @generated
+	 */
+	void setSavingResource(boolean value);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

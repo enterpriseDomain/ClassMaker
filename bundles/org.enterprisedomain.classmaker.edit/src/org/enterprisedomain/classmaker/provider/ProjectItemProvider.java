@@ -77,6 +77,8 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 			addDirtyPropertyDescriptor(object);
 			addResourcePathPropertyDescriptor(object);
 			addNeedCompletionNotificationPropertyDescriptor(object);
+			addResourceReloadListenerPropertyDescriptor(object);
+			addSavingResourcePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -177,6 +179,38 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 	}
 
 	/**
+	 * This adds a property descriptor for the Resource Reload Listener feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addResourceReloadListenerPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Project_resourceReloadListener_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Project_resourceReloadListener_feature",
+								"_UI_Project_type"),
+						ClassMakerPackage.Literals.PROJECT__RESOURCE_RELOAD_LISTENER, false, false, false, null, null,
+						null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Saving Resource feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSavingResourcePropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Project_savingResource_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Project_savingResource_feature",
+								"_UI_Project_type"),
+						ClassMakerPackage.Literals.PROJECT__SAVING_RESOURCE, true, false, false,
+						ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -248,6 +282,7 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 		case ClassMakerPackage.PROJECT__RESOURCE_PATH:
 		case ClassMakerPackage.PROJECT__NEED_COMPLETION_NOTIFICATION:
 		case ClassMakerPackage.PROJECT__COMPLETION_NOTIFICATION_ADAPTER:
+		case ClassMakerPackage.PROJECT__SAVING_RESOURCE:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case ClassMakerPackage.PROJECT__CHILDREN:
