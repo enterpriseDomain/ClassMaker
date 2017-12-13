@@ -115,12 +115,12 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 			return createStageQualifier();
 		case ClassMakerPackage.STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY:
 			return (EObject) createStageQualifierToCustomizerMapEntry();
-		case ClassMakerPackage.PROJECT:
-			return createProject();
 		case ClassMakerPackage.MODEL_PAIR:
 			return createModelPair();
 		case ClassMakerPackage.SCM_REGISTRY:
 			return createSCMRegistry();
+		case ClassMakerPackage.PROJECT:
+			return createProject();
 		case ClassMakerPackage.RESOURCE_CHANGE_LISTENER:
 			return createResourceChangeListener();
 		case ClassMakerPackage.RESOURCE_ADAPTER:

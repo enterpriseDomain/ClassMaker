@@ -629,96 +629,6 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Project" eSuperTypes="#//ISchedulingRule">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Default project class."/>
-    </eAnnotations>
-    <eOperations name="create" eExceptions="#//CoreException">
-      <eParameters name="monitor" eType="#//IProgressMonitor"/>
-    </eOperations>
-    <eOperations name="delete" eExceptions="#//CoreException">
-      <eParameters name="monitor" eType="#//IProgressMonitor"/>
-    </eOperations>
-    <eOperations name="delete">
-      <eParameters name="objects" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
-    </eOperations>
-    <eOperations name="make" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        eExceptions="#//CoreException">
-      <eParameters name="monitor" eType="#//IProgressMonitor"/>
-    </eOperations>
-    <eOperations name="open" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        eExceptions="#//CoreException">
-      <eParameters name="monitor" eType="#//IProgressMonitor"/>
-    </eOperations>
-    <eOperations name="close" eExceptions="#//CoreException">
-      <eParameters name="monitor" eType="#//IProgressMonitor"/>
-    </eOperations>
-    <eOperations name="initialize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Initializes &lt;em>Project&lt;/em>. Calls {@link #initialize() &lt;em>initialize&lt;/em>} on contained &lt;em>Item&lt;/em>s.&#xA;&#xA;@param commit whether to perform commit&#xA;@return commit Id"/>
-      </eAnnotations>
-      <eParameters name="commit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    </eOperations>
-    <eOperations name="addCompletionListener">
-      <eParameters name="resultListener" eType="#//CompletionListener"/>
-    </eOperations>
-    <eOperations name="removeCompletionListener">
-      <eParameters name="resultListener" eType="#//CompletionListener"/>
-    </eOperations>
-    <eOperations name="notifyCompletion" eExceptions="#//Exception"/>
-    <eOperations name="notifyResourceChanged" eExceptions="#//Exception">
-      <eParameters name="notification" eType="#//Notification"/>
-    </eOperations>
-    <eOperations name="addResourceChangeListener">
-      <eParameters name="resourceListener" eType="#//ResourceChangeListener"/>
-    </eOperations>
-    <eOperations name="removeResourceChangeListener">
-      <eParameters name="resourceListener" eType="#//ResourceChangeListener"/>
-    </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        defaultValueLiteral="">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A name of the &lt;em>&lt;b>Project&lt;/b>&lt;/em>."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="projectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        defaultValueLiteral="">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A name of the {@link org.eclipse.core.resources.IProject IProject} to which the &lt;em>&lt;b>Project&lt;/b>&lt;/em> is mapped to."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="children" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"
-        changeable="false" volatile="true" transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dirty" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        changeable="false" volatile="true" transient="true" derived="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Whether &lt;em>&lt;b>Project&lt;/b>&lt;/em>'s contents is modified."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="workspace" eType="#//Workspace"
-        eOpposite="#//Workspace/projects">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Reference to &lt;em>&lt;b>Project&lt;/b>&lt;/em>'s containing {@link Workspace Workspace}."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourcePath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        changeable="false" volatile="true" transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="needCompletionNotification"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Set to {@code true} when completion notification is needed."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="completionNotificationAdapter"
-        eType="#//CompletionNotificationAdapter" containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;em>CompletionNotificationAdapter&lt;/em> for &lt;em>&lt;b>Project&lt;/b>&lt;/em>'s operations."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="resourceReloadListener"
-        eType="#//ResourceChangeListener" changeable="false" resolveProxies="false"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="URI" instanceClassName="org.eclipse.emf.common.util.URI">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="{@link org.eclipse.emf.common.util.URI} datatype import."/>
@@ -831,6 +741,98 @@
       </eGenericType>
       <eParameters name="projectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Project" eSuperTypes="#//ISchedulingRule">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Default project class."/>
+    </eAnnotations>
+    <eOperations name="create" eExceptions="#//CoreException">
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
+    <eOperations name="delete" eExceptions="#//CoreException">
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
+    <eOperations name="delete">
+      <eParameters name="objects" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    </eOperations>
+    <eOperations name="make" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        eExceptions="#//CoreException">
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
+    <eOperations name="open" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        eExceptions="#//CoreException">
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
+    <eOperations name="close" eExceptions="#//CoreException">
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
+    <eOperations name="initialize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Initializes &lt;em>Project&lt;/em>. Calls {@link #initialize() &lt;em>initialize&lt;/em>} on contained &lt;em>Item&lt;/em>s.&#xA;&#xA;@param commit whether to perform commit&#xA;@return commit Id"/>
+      </eAnnotations>
+      <eParameters name="commit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="addCompletionListener">
+      <eParameters name="resultListener" eType="#//CompletionListener"/>
+    </eOperations>
+    <eOperations name="removeCompletionListener">
+      <eParameters name="resultListener" eType="#//CompletionListener"/>
+    </eOperations>
+    <eOperations name="notifyCompletion" eExceptions="#//Exception"/>
+    <eOperations name="notifyResourceChanged" eExceptions="#//Exception">
+      <eParameters name="notification" eType="#//Notification"/>
+    </eOperations>
+    <eOperations name="addResourceChangeListener">
+      <eParameters name="resourceListener" eType="#//ResourceChangeListener"/>
+    </eOperations>
+    <eOperations name="removeResourceChangeListener">
+      <eParameters name="resourceListener" eType="#//ResourceChangeListener"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A name of the &lt;em>&lt;b>Project&lt;/b>&lt;/em>."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="projectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A name of the {@link org.eclipse.core.resources.IProject IProject} to which the &lt;em>&lt;b>Project&lt;/b>&lt;/em> is mapped to."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="children" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dirty" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Whether &lt;em>&lt;b>Project&lt;/b>&lt;/em>'s contents is modified."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="workspace" eType="#//Workspace"
+        eOpposite="#//Workspace/projects">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Reference to &lt;em>&lt;b>Project&lt;/b>&lt;/em>'s containing {@link Workspace Workspace}."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourcePath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="needCompletionNotification"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Set to {@code true} when completion notification is needed."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="completionNotificationAdapter"
+        eType="#//CompletionNotificationAdapter" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;em>CompletionNotificationAdapter&lt;/em> for &lt;em>&lt;b>Project&lt;/b>&lt;/em>'s operations."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resourceReloadListener"
+        eType="#//ResourceChangeListener" changeable="false" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="savingResource" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Resource" instanceClassName="org.eclipse.emf.ecore.resource.Resource"
       abstract="true" interface="true">

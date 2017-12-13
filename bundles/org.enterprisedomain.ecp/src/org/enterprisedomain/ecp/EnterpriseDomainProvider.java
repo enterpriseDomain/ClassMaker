@@ -32,7 +32,6 @@ import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.emf.common.ui.viewer.IViewerProvider;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
@@ -65,11 +64,6 @@ import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.jface.operation.IRunnableWithProgress;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.part.ISetSelectionTarget;
 import org.enterprisedomain.classmaker.Blueprint;
 import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.Contribution;
@@ -192,11 +186,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 					try {
 						blueprint = classMaker.createBlueprint();
 						blueprint.setDynamicModel(model);
-						// blueprint.getCompletionListeners().add(new TrackingModificationListener());
-						blueprint.getCompletionListeners().add(new ResourceListenerListener(project));
-						blueprint.getCompletionListeners().add(new VisiblePackagesListener(project));
-						blueprint.getCompletionListeners().add(new RefreshViewersListener(project));
-
+						blueprint.getCompletionListeners().add(new ProviderCompletionListener(project));
 						ClassMakerPlugin.runWithProgress(new IRunnableWithProgress() {
 
 							@Override
@@ -341,8 +331,6 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 						monitor = ClassMakerPlugin.getProgressMonitor();
 					else
 						monitor = getUIProvider().getAdapter(project, IProgressMonitor.class);
-					// ((Resource)
-					// domainProject.getChildren().get(0)).setTrackingModification(false);
 					domainProject.close(monitor);
 				} catch (CoreException e) {
 					Activator.log(e);
@@ -424,104 +412,35 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 		return editingDomain;
 	}
 
-	// public class TrackingModificationListener extends CompletionListenerImpl {
-	//
-	// @Override
-	// public void completed(Project result) throws Exception {
-	// ((Resource) result.getChildren().get(0)).setTrackingModification(true);
-	// }
-	//
-	// }
-
-	public class ResourceListenerListener extends CompletionListenerImpl {
+	public class ProviderCompletionListener extends CompletionListenerImpl {
 
 		private InternalProject project;
 
-		public ResourceListenerListener(InternalProject project) {
-			this.project = project;
-		}
-
-		@Override
-		public void completed(final Project result) throws Exception {
-			// ((Notifier) result.getChildren().get(0)).eAdapters()
-			// .add(new ResourceItemProvider(new ViewItemProviderAdapterFactory()));
-			// ResourcesPlugin.getWorkspace().addResourceChangeListener(new
-			// IResourceChangeListener() {
-			//
-			// @Override
-			// public void resourceChanged(IResourceChangeEvent event) {
-			// if (event.getResource().getType() == IResource.FILE
-			// &&
-			// event.getResource().getProject().getName().equals(result.getProjectName()))
-			// try {
-			// event.getDelta().accept(new IResourceDeltaVisitor() {
-			//
-			// @Override
-			// public boolean visit(IResourceDelta delta) throws CoreException {
-			// if (delta.getKind() == IResourceDelta.CHANGED) {
-			// URI uri = URI.createPlatformResourceURI(
-			// delta.getResource().getFullPath().toString(), false);
-			// Resource resource = Activator.getClassMaker().getWorkspace().getResourceSet()
-			// .getResource(uri, false);
-			// result.getChildren().set(0, resource);
-			// }
-			// return true;
-			// }
-			// });
-			// } catch (CoreException e) {
-			// Activator.log(e);
-			// }
-			//
-			// }
-			// }, IResourceChangeEvent.POST_CHANGE);
-
-			result.addResourceChangeListener(new ResourceChangeListenerImpl() {
-
-				@SuppressWarnings("unchecked")
-				@Override
-				public void changed(Notification notification) throws Exception {
-					// project.saveContents();
-					project.notifyObjectsChanged(((Collection<Object>) (Collection<?>) Arrays.asList(project)), true);
-				}
-
-			});
-		}
-	}
-
-	public class RefreshViewersListener extends CompletionListenerImpl {
-
-		private InternalProject project;
-
-		public RefreshViewersListener(InternalProject project) {
+		public ProviderCompletionListener(InternalProject project) {
 			this.project = project;
 		}
 
 		@SuppressWarnings("unchecked")
 		@Override
-		public void completed(Project result) throws Exception {
+		public void completed(final Project result) throws Exception {
+			result.addResourceChangeListener(new ResourceChangeListenerImpl() {
+
+				@SuppressWarnings("unchecked")
+				@Override
+				public void changed(Notification notification) throws Exception {
+					project.notifyObjectsChanged(((Collection<Object>) (Collection<?>) Arrays.asList(project)), true);
+				}
+
+			});
+			visiblePackages.add(((Contribution) result).getDomainModel().getGenerated().getNsURI());
+			addVisiblePackages(project);
 			project.notifyObjectsChanged((Collection<Object>) (Collection<?>) Arrays.asList(project), true);
 			ECPUtil.getECPObserverBus().notify(ECPRepositoriesChangedObserver.class).repositoriesChanged(
 					(Collection<ECPRepository>) (Collection<?>) Arrays.asList(project.getRepository()),
 					(Collection<ECPRepository>) (Collection<?>) Arrays.asList(project.getRepository()));
-		}
 
+		}
 	}
-
-	public class VisiblePackagesListener extends CompletionListenerImpl {
-
-		private InternalProject project;
-
-		public VisiblePackagesListener(InternalProject project) {
-			this.project = project;
-		}
-
-		@Override
-		public void completed(Project result) {
-			visiblePackages.add(((Contribution) result).getDomainModel().getGenerated().getNsURI());
-			addVisiblePackages(project);
-		}
-
-	};
 
 	@Override
 	public Notifier getRoot(InternalProject project) {

@@ -593,12 +593,12 @@ public class ClassMakerItemProviderAdapterFactory extends ClassMakerAdapterFacto
 			stageQualifierItemProvider.dispose();
 		if (stageQualifierToCustomizerMapEntryItemProvider != null)
 			stageQualifierToCustomizerMapEntryItemProvider.dispose();
-		if (projectItemProvider != null)
-			projectItemProvider.dispose();
 		if (modelPairItemProvider != null)
 			modelPairItemProvider.dispose();
 		if (scmRegistryItemProvider != null)
 			scmRegistryItemProvider.dispose();
+		if (projectItemProvider != null)
+			projectItemProvider.dispose();
 		if (resourceChangeListenerItemProvider != null)
 			resourceChangeListenerItemProvider.dispose();
 		if (resourceAdapterItemProvider != null)

@@ -35,6 +35,6 @@ public interface ResourceChangeListener extends EObject {
 	 *        resourceType="org.enterprisedomain.classmaker.Notification"
 	 * @generated
 	 */
-	void changed(Notification notification) throws Exception;
+	void changed(Notification resource) throws Exception;
 
 } // ResourceChangeListener

@@ -50,11 +50,9 @@ public class ResourceChangeListenerImpl extends EObjectImpl implements ResourceC
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @generated
+	 * @generated NOT
 	 */
 	public void changed(Notification notification) throws Exception {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
 	}
 

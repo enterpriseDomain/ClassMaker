@@ -64,15 +64,11 @@ public interface ClassMakerService extends EObject {
 
 		public static final String ID_PREFIX = "org.enterprisedomain.classmaker.customization.stages.";
 
-		private static final String STAGE_ELEMENT = "stage";
-
 		private static final String PHASE_ATTR = "phase";
 
 		private static final String ID_ATTR = "id";
 
 		private static final String STEP_ATTR = "step";
-
-		private static final String CUSTOMIZER_ELEMENT = "customizer";
 
 		private static final String STAGE_ATTR = "stage";
 

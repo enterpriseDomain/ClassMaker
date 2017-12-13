@@ -318,8 +318,6 @@ public class StateImpl extends ItemImpl implements State {
 
 	private boolean loading = false;
 
-	private boolean savingResource = false;
-
 	private Object makingLock = new Object();
 
 	/**
@@ -515,9 +513,9 @@ public class StateImpl extends ItemImpl implements State {
 	private boolean saveResourceDuringMaking = false;
 
 	public void saveResource() {
-		if (savingResource || isMaking())
+		if (getContribution().isSavingResource() || isMaking())
 			return;
-		savingResource = true;
+		getContribution().setSavingResource(true);
 		setMaking(true);
 		if (!eIsSet(ClassMakerPackage.STATE__RESOURCE))
 			return;
@@ -547,7 +545,7 @@ public class StateImpl extends ItemImpl implements State {
 		} finally {
 			if (!saveResourceDuringMaking)
 				setMaking(false);
-			savingResource = false;
+			getContribution().setSavingResource(false);
 		}
 
 	}
@@ -708,7 +706,8 @@ public class StateImpl extends ItemImpl implements State {
 				setMaking(false);
 				wrappingMonitor.done();
 			}
-			makingLock.wait();
+			if (!monitor.isCanceled())
+				makingLock.wait();
 			getContribution().removeCompletionListener(completionListener);
 			String result = commit(); // $NON-NLS-1$
 			monitor.done();

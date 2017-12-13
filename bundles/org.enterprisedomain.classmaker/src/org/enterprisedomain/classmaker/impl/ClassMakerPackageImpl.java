@@ -1034,6 +1034,15 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * 
 	 * @generated
 	 */
+	public EAttribute getProject_SavingResource() {
+		return (EAttribute) projectEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	public EClass getModelPair() {
 		return modelPairEClass;
 	}
@@ -1455,6 +1464,16 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		createEReference(stageQualifierToCustomizerMapEntryEClass, STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY__KEY);
 		createEReference(stageQualifierToCustomizerMapEntryEClass, STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY__VALUE);
 
+		modelPairEClass = createEClass(MODEL_PAIR);
+		createEReference(modelPairEClass, MODEL_PAIR__DYNAMIC);
+		createEReference(modelPairEClass, MODEL_PAIR__GENERATED);
+		createEReference(modelPairEClass, MODEL_PAIR__PARENT);
+
+		scmOperatorEClass = createEClass(SCM_OPERATOR);
+		createEAttribute(scmOperatorEClass, SCM_OPERATOR__PROJECT_NAME);
+
+		scmRegistryEClass = createEClass(SCM_REGISTRY);
+
 		projectEClass = createEClass(PROJECT);
 		createEAttribute(projectEClass, PROJECT__NAME);
 		createEAttribute(projectEClass, PROJECT__PROJECT_NAME);
@@ -1465,16 +1484,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		createEAttribute(projectEClass, PROJECT__NEED_COMPLETION_NOTIFICATION);
 		createEReference(projectEClass, PROJECT__COMPLETION_NOTIFICATION_ADAPTER);
 		createEReference(projectEClass, PROJECT__RESOURCE_RELOAD_LISTENER);
-
-		modelPairEClass = createEClass(MODEL_PAIR);
-		createEReference(modelPairEClass, MODEL_PAIR__DYNAMIC);
-		createEReference(modelPairEClass, MODEL_PAIR__GENERATED);
-		createEReference(modelPairEClass, MODEL_PAIR__PARENT);
-
-		scmOperatorEClass = createEClass(SCM_OPERATOR);
-		createEAttribute(scmOperatorEClass, SCM_OPERATOR__PROJECT_NAME);
-
-		scmRegistryEClass = createEClass(SCM_REGISTRY);
+		createEAttribute(projectEClass, PROJECT__SAVING_RESOURCE);
 
 		resourceEClass = createEClass(RESOURCE);
 
@@ -1921,75 +1931,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 				Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(projectEClass, Project.class, "Project", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getProject_Name(), ecorePackage.getEString(), "name", "", 0, 1, Project.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getProject_ProjectName(), ecorePackage.getEString(), "projectName", "", 0, 1, Project.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getProject_Children(), ecorePackage.getEJavaObject(), "children", null, 0, -1, Project.class,
-				IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getProject_Dirty(), ecorePackage.getEBoolean(), "dirty", null, 0, 1, Project.class, IS_TRANSIENT,
-				IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getProject_Workspace(), this.getWorkspace(), this.getWorkspace_Projects(), "workspace", null, 0,
-				1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getProject_ResourcePath(), ecorePackage.getEString(), "resourcePath", null, 0, 1, Project.class,
-				IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getProject_NeedCompletionNotification(), ecorePackage.getEBoolean(),
-				"needCompletionNotification", null, 0, 1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getProject_CompletionNotificationAdapter(), this.getCompletionNotificationAdapter(), null,
-				"completionNotificationAdapter", null, 0, 1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getProject_ResourceReloadListener(), this.getResourceChangeListener(), null,
-				"resourceReloadListener", null, 0, 1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE,
-				!IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		op = addEOperation(projectEClass, null, "create", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEException(op, this.getCoreException());
-
-		op = addEOperation(projectEClass, null, "delete", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEException(op, this.getCoreException());
-
-		op = addEOperation(projectEClass, null, "delete", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEJavaObject(), "objects", 0, -1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(projectEClass, ecorePackage.getEString(), "make", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEException(op, this.getCoreException());
-
-		op = addEOperation(projectEClass, ecorePackage.getEBoolean(), "open", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEException(op, this.getCoreException());
-
-		op = addEOperation(projectEClass, null, "close", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEException(op, this.getCoreException());
-
-		op = addEOperation(projectEClass, ecorePackage.getEString(), "initialize", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEBoolean(), "commit", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(projectEClass, null, "addCompletionListener", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getCompletionListener(), "resultListener", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(projectEClass, null, "removeCompletionListener", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getCompletionListener(), "resultListener", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(projectEClass, null, "notifyCompletion", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEException(op, this.getException());
-
-		op = addEOperation(projectEClass, null, "notifyResourceChanged", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getNotification(), "notification", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEException(op, this.getException());
-
-		op = addEOperation(projectEClass, null, "addResourceChangeListener", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getResourceChangeListener(), "resourceListener", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(projectEClass, null, "removeResourceChangeListener", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getResourceChangeListener(), "resourceListener", 0, 1, IS_UNIQUE, IS_ORDERED);
-
 		initEClass(modelPairEClass, ModelPair.class, "ModelPair", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getModelPair_Dynamic(), ecorePackage.getEPackage(), null, "dynamic", null, 0, 1, ModelPair.class,
@@ -2089,6 +2030,78 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		g2 = createEGenericType(scmRegistryEClass_T);
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
+
+		initEClass(projectEClass, Project.class, "Project", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getProject_Name(), ecorePackage.getEString(), "name", "", 0, 1, Project.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProject_ProjectName(), ecorePackage.getEString(), "projectName", "", 0, 1, Project.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProject_Children(), ecorePackage.getEJavaObject(), "children", null, 0, -1, Project.class,
+				IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProject_Dirty(), ecorePackage.getEBoolean(), "dirty", null, 0, 1, Project.class, IS_TRANSIENT,
+				IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getProject_Workspace(), this.getWorkspace(), this.getWorkspace_Projects(), "workspace", null, 0,
+				1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProject_ResourcePath(), ecorePackage.getEString(), "resourcePath", null, 0, 1, Project.class,
+				IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProject_NeedCompletionNotification(), ecorePackage.getEBoolean(),
+				"needCompletionNotification", null, 0, 1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProject_CompletionNotificationAdapter(), this.getCompletionNotificationAdapter(), null,
+				"completionNotificationAdapter", null, 0, 1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProject_ResourceReloadListener(), this.getResourceChangeListener(), null,
+				"resourceReloadListener", null, 0, 1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE,
+				!IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProject_SavingResource(), ecorePackage.getEBoolean(), "savingResource", "false", 0, 1,
+				Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(projectEClass, null, "create", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEException(op, this.getCoreException());
+
+		op = addEOperation(projectEClass, null, "delete", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEException(op, this.getCoreException());
+
+		op = addEOperation(projectEClass, null, "delete", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEJavaObject(), "objects", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(projectEClass, ecorePackage.getEString(), "make", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEException(op, this.getCoreException());
+
+		op = addEOperation(projectEClass, ecorePackage.getEBoolean(), "open", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEException(op, this.getCoreException());
+
+		op = addEOperation(projectEClass, null, "close", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEException(op, this.getCoreException());
+
+		op = addEOperation(projectEClass, ecorePackage.getEString(), "initialize", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEBoolean(), "commit", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(projectEClass, null, "addCompletionListener", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getCompletionListener(), "resultListener", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(projectEClass, null, "removeCompletionListener", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getCompletionListener(), "resultListener", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(projectEClass, null, "notifyCompletion", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEException(op, this.getException());
+
+		op = addEOperation(projectEClass, null, "notifyResourceChanged", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getNotification(), "notification", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEException(op, this.getException());
+
+		op = addEOperation(projectEClass, null, "addResourceChangeListener", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getResourceChangeListener(), "resourceListener", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(projectEClass, null, "removeResourceChangeListener", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getResourceChangeListener(), "resourceListener", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(resourceEClass, Resource.class, "Resource", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 

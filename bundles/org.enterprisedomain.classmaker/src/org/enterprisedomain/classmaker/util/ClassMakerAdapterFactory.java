@@ -179,11 +179,6 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseProject(Project object) {
-			return createProjectAdapter();
-		}
-
-		@Override
 		public Adapter caseModelPair(ModelPair object) {
 			return createModelPairAdapter();
 		}
@@ -196,6 +191,11 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public <T> Adapter caseSCMRegistry(SCMRegistry<T> object) {
 			return createSCMRegistryAdapter();
+		}
+
+		@Override
+		public Adapter caseProject(Project object) {
+			return createProjectAdapter();
 		}
 
 		@Override
