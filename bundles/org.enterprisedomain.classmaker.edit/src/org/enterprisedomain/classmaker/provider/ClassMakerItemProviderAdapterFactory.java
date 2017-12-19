@@ -477,6 +477,29 @@ public class ClassMakerItemProviderAdapterFactory extends ClassMakerAdapterFacto
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.enterprisedomain.classmaker.SelectRevealHandler} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SelectRevealHandlerItemProvider selectRevealHandlerItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.enterprisedomain.classmaker.SelectRevealHandler}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createSelectRevealHandlerAdapter() {
+		if (selectRevealHandlerItemProvider == null) {
+			selectRevealHandlerItemProvider = new SelectRevealHandlerItemProvider(this);
+		}
+
+		return selectRevealHandlerItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -609,6 +632,8 @@ public class ClassMakerItemProviderAdapterFactory extends ClassMakerAdapterFacto
 			blueprintItemProvider.dispose();
 		if (completionNotificationAdapterItemProvider != null)
 			completionNotificationAdapterItemProvider.dispose();
+		if (selectRevealHandlerItemProvider != null)
+			selectRevealHandlerItemProvider.dispose();
 	}
 
 }

@@ -189,13 +189,49 @@ public interface ClassMakerPackage extends EPackage {
 	int PROJECT__SAVING_RESOURCE = ISCHEDULING_RULE_FEATURE_COUNT + 9;
 
 	/**
+	 * The feature id for the '<em><b>Revision</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECT__REVISION = ISCHEDULING_RULE_FEATURE_COUNT + 10;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' map. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECT__REVISIONS = ISCHEDULING_RULE_FEATURE_COUNT + 11;
+
+	/**
+	 * The feature id for the '<em><b>Project Version</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECT__PROJECT_VERSION = ISCHEDULING_RULE_FEATURE_COUNT + 12;
+
+	/**
+	 * The feature id for the '<em><b>Select Reveal Handler</b></em>' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECT__SELECT_REVEAL_HANDLER = ISCHEDULING_RULE_FEATURE_COUNT + 13;
+
+	/**
 	 * The number of structural features of the '<em>Project</em>' class. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int PROJECT_FEATURE_COUNT = ISCHEDULING_RULE_FEATURE_COUNT + 10;
+	int PROJECT_FEATURE_COUNT = ISCHEDULING_RULE_FEATURE_COUNT + 14;
 
 	/**
 	 * The meta object id for the
@@ -299,6 +335,42 @@ public interface ClassMakerPackage extends EPackage {
 	int CONTRIBUTION__SAVING_RESOURCE = PROJECT__SAVING_RESOURCE;
 
 	/**
+	 * The feature id for the '<em><b>Revision</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CONTRIBUTION__REVISION = PROJECT__REVISION;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' map. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CONTRIBUTION__REVISIONS = PROJECT__REVISIONS;
+
+	/**
+	 * The feature id for the '<em><b>Project Version</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CONTRIBUTION__PROJECT_VERSION = PROJECT__PROJECT_VERSION;
+
+	/**
+	 * The feature id for the '<em><b>Select Reveal Handler</b></em>' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CONTRIBUTION__SELECT_REVEAL_HANDLER = PROJECT__SELECT_REVEAL_HANDLER;
+
+	/**
 	 * The feature id for the '<em><b>Model Name</b></em>' attribute. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -389,31 +461,13 @@ public interface ClassMakerPackage extends EPackage {
 	int CONTRIBUTION__DEPENDENCIES = PROJECT_FEATURE_COUNT + 9;
 
 	/**
-	 * The feature id for the '<em><b>Revision</b></em>' reference. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int CONTRIBUTION__REVISION = PROJECT_FEATURE_COUNT + 10;
-
-	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' map. <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int CONTRIBUTION__REVISIONS = PROJECT_FEATURE_COUNT + 11;
-
-	/**
 	 * The feature id for the '<em><b>State</b></em>' reference. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__STATE = PROJECT_FEATURE_COUNT + 12;
+	int CONTRIBUTION__STATE = PROJECT_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Latest Version</b></em>' attribute. <!--
@@ -422,7 +476,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__LATEST_VERSION = PROJECT_FEATURE_COUNT + 13;
+	int CONTRIBUTION__LATEST_VERSION = PROJECT_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Model Resource Adapter</b></em>' containment
@@ -431,7 +485,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__MODEL_RESOURCE_ADAPTER = PROJECT_FEATURE_COUNT + 14;
+	int CONTRIBUTION__MODEL_RESOURCE_ADAPTER = PROJECT_FEATURE_COUNT + 12;
 
 	/**
 	 * The number of structural features of the '<em>Contribution</em>' class. <!--
@@ -440,7 +494,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION_FEATURE_COUNT = PROJECT_FEATURE_COUNT + 15;
+	int CONTRIBUTION_FEATURE_COUNT = PROJECT_FEATURE_COUNT + 13;
 
 	/**
 	 * The meta object id for the
@@ -1556,6 +1610,27 @@ public interface ClassMakerPackage extends EPackage {
 	int WORKER_FEATURE_COUNT = 0;
 
 	/**
+	 * The meta object id for the
+	 * '{@link org.enterprisedomain.classmaker.impl.SelectRevealHandlerImpl
+	 * <em>Select Reveal Handler</em>}' class. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @see org.enterprisedomain.classmaker.impl.SelectRevealHandlerImpl
+	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getSelectRevealHandler()
+	 * @generated
+	 */
+	int SELECT_REVEAL_HANDLER = 28;
+
+	/**
+	 * The number of structural features of the '<em>Select Reveal Handler</em>'
+	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int SELECT_REVEAL_HANDLER_FEATURE_COUNT = 0;
+
+	/**
 	 * The meta object id for the '<em>Locale</em>' data type. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
@@ -1563,7 +1638,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getLocale()
 	 * @generated
 	 */
-	int LOCALE = 38;
+	int LOCALE = 39;
 
 	/**
 	 * The meta object id for the '{@link org.enterprisedomain.classmaker.Stage
@@ -1573,7 +1648,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getStage()
 	 * @generated
 	 */
-	int STAGE = 28;
+	int STAGE = 29;
 
 	/**
 	 * The meta object id for the '<em>Properties</em>' data type. <!--
@@ -1583,7 +1658,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getProperties()
 	 * @generated
 	 */
-	int PROPERTIES = 29;
+	int PROPERTIES = 30;
 
 	/**
 	 * The meta object id for the '<em>IProgress Monitor</em>' data type. <!--
@@ -1593,7 +1668,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getIProgressMonitor()
 	 * @generated
 	 */
-	int IPROGRESS_MONITOR = 30;
+	int IPROGRESS_MONITOR = 31;
 
 	/**
 	 * The meta object id for the '<em>OS Gi Version</em>' data type. <!--
@@ -1603,7 +1678,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getOSGiVersion()
 	 * @generated
 	 */
-	int OS_GI_VERSION = 31;
+	int OS_GI_VERSION = 32;
 
 	/**
 	 * The meta object id for the '<em>Semaphore</em>' data type. <!--
@@ -1613,7 +1688,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getSemaphore()
 	 * @generated
 	 */
-	int SEMAPHORE = 32;
+	int SEMAPHORE = 33;
 
 	/**
 	 * The meta object id for the '<em>Core Exception</em>' data type. <!--
@@ -1623,7 +1698,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getCoreException()
 	 * @generated
 	 */
-	int CORE_EXCEPTION = 33;
+	int CORE_EXCEPTION = 34;
 
 	/**
 	 * The meta object id for the '<em>Invocation Target Exception</em>' data type.
@@ -1633,7 +1708,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getInvocationTargetException()
 	 * @generated
 	 */
-	int INVOCATION_TARGET_EXCEPTION = 34;
+	int INVOCATION_TARGET_EXCEPTION = 35;
 
 	/**
 	 * The meta object id for the '<em>IStatus</em>' data type. <!-- begin-user-doc
@@ -1643,7 +1718,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getIStatus()
 	 * @generated
 	 */
-	int ISTATUS = 35;
+	int ISTATUS = 36;
 
 	/**
 	 * The meta object id for the '<em>URI</em>' data type. <!-- begin-user-doc -->
@@ -1653,7 +1728,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getURI()
 	 * @generated
 	 */
-	int URI = 36;
+	int URI = 37;
 
 	/**
 	 * The meta object id for the '<em>Exception</em>' data type. <!--
@@ -1663,7 +1738,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getException()
 	 * @generated
 	 */
-	int EXCEPTION = 37;
+	int EXCEPTION = 38;
 
 	/**
 	 * Returns the meta object for class
@@ -1687,30 +1762,6 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getContribution_Dependencies();
-
-	/**
-	 * Returns the meta object for the reference
-	 * '{@link org.enterprisedomain.classmaker.Contribution#getRevision
-	 * <em>Revision</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for the reference '<em>Revision</em>'.
-	 * @see org.enterprisedomain.classmaker.Contribution#getRevision()
-	 * @see #getContribution()
-	 * @generated
-	 */
-	EReference getContribution_Revision();
-
-	/**
-	 * Returns the meta object for the map
-	 * '{@link org.enterprisedomain.classmaker.Contribution#getRevisions
-	 * <em>Revisions</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for the map '<em>Revisions</em>'.
-	 * @see org.enterprisedomain.classmaker.Contribution#getRevisions()
-	 * @see #getContribution()
-	 * @generated
-	 */
-	EReference getContribution_Revisions();
 
 	/**
 	 * Returns the meta object for the reference
@@ -2496,6 +2547,55 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getProject_SavingResource();
 
 	/**
+	 * Returns the meta object for the reference
+	 * '{@link org.enterprisedomain.classmaker.Project#getRevision
+	 * <em>Revision</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the reference '<em>Revision</em>'.
+	 * @see org.enterprisedomain.classmaker.Project#getRevision()
+	 * @see #getProject()
+	 * @generated
+	 */
+	EReference getProject_Revision();
+
+	/**
+	 * Returns the meta object for the map
+	 * '{@link org.enterprisedomain.classmaker.Project#getRevisions
+	 * <em>Revisions</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the map '<em>Revisions</em>'.
+	 * @see org.enterprisedomain.classmaker.Project#getRevisions()
+	 * @see #getProject()
+	 * @generated
+	 */
+	EReference getProject_Revisions();
+
+	/**
+	 * Returns the meta object for the attribute
+	 * '{@link org.enterprisedomain.classmaker.Project#getProjectVersion <em>Project
+	 * Version</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the attribute '<em>Project Version</em>'.
+	 * @see org.enterprisedomain.classmaker.Project#getProjectVersion()
+	 * @see #getProject()
+	 * @generated
+	 */
+	EAttribute getProject_ProjectVersion();
+
+	/**
+	 * Returns the meta object for the reference
+	 * '{@link org.enterprisedomain.classmaker.Project#getSelectRevealHandler
+	 * <em>Select Reveal Handler</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
+	 * @return the meta object for the reference '<em>Select Reveal Handler</em>'.
+	 * @see org.enterprisedomain.classmaker.Project#getSelectRevealHandler()
+	 * @see #getProject()
+	 * @generated
+	 */
+	EReference getProject_SelectRevealHandler();
+
+	/**
 	 * Returns the meta object for class
 	 * '{@link org.enterprisedomain.classmaker.ModelPair <em>Model Pair</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -2633,6 +2733,17 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getWorker();
+
+	/**
+	 * Returns the meta object for class
+	 * '{@link org.enterprisedomain.classmaker.SelectRevealHandler <em>Select Reveal
+	 * Handler</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for class '<em>Select Reveal Handler</em>'.
+	 * @see org.enterprisedomain.classmaker.SelectRevealHandler
+	 * @generated
+	 */
+	EClass getSelectRevealHandler();
 
 	/**
 	 * Returns the meta object for class
@@ -2954,22 +3065,6 @@ public interface ClassMakerPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CONTRIBUTION__DEPENDENCIES = eINSTANCE.getContribution_Dependencies();
-
-		/**
-		 * The meta object literal for the '<em><b>Revision</b></em>' reference feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
-		 * @generated
-		 */
-		EReference CONTRIBUTION__REVISION = eINSTANCE.getContribution_Revision();
-
-		/**
-		 * The meta object literal for the '<em><b>Revisions</b></em>' map feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
-		 * @generated
-		 */
-		EReference CONTRIBUTION__REVISIONS = eINSTANCE.getContribution_Revisions();
 
 		/**
 		 * The meta object literal for the '<em><b>State</b></em>' reference feature.
@@ -3540,6 +3635,38 @@ public interface ClassMakerPackage extends EPackage {
 		EAttribute PROJECT__SAVING_RESOURCE = eINSTANCE.getProject_SavingResource();
 
 		/**
+		 * The meta object literal for the '<em><b>Revision</b></em>' reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference PROJECT__REVISION = eINSTANCE.getProject_Revision();
+
+		/**
+		 * The meta object literal for the '<em><b>Revisions</b></em>' map feature. <!--
+		 * begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference PROJECT__REVISIONS = eINSTANCE.getProject_Revisions();
+
+		/**
+		 * The meta object literal for the '<em><b>Project Version</b></em>' attribute
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EAttribute PROJECT__PROJECT_VERSION = eINSTANCE.getProject_ProjectVersion();
+
+		/**
+		 * The meta object literal for the '<em><b>Select Reveal Handler</b></em>'
+		 * reference feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference PROJECT__SELECT_REVEAL_HANDLER = eINSTANCE.getProject_SelectRevealHandler();
+
+		/**
 		 * The meta object literal for the
 		 * '{@link org.enterprisedomain.classmaker.impl.ModelPairImpl <em>Model
 		 * Pair</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -3660,6 +3787,18 @@ public interface ClassMakerPackage extends EPackage {
 		 * @generated
 		 */
 		EClass WORKER = eINSTANCE.getWorker();
+
+		/**
+		 * The meta object literal for the
+		 * '{@link org.enterprisedomain.classmaker.impl.SelectRevealHandlerImpl
+		 * <em>Select Reveal Handler</em>}' class. <!-- begin-user-doc --> <!--
+		 * end-user-doc -->
+		 * 
+		 * @see org.enterprisedomain.classmaker.impl.SelectRevealHandlerImpl
+		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getSelectRevealHandler()
+		 * @generated
+		 */
+		EClass SELECT_REVEAL_HANDLER = eINSTANCE.getSelectRevealHandler();
 
 		/**
 		 * The meta object literal for the

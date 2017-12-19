@@ -18,7 +18,6 @@ package org.enterprisedomain.classmaker.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -47,7 +46,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.util.NotifyingInternalEListImpl;
@@ -107,10 +105,6 @@ import org.osgi.framework.Version;
  * <em>Contribution</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getDependencies
  * <em>Dependencies</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getRevision
- * <em>Revision</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getRevisions
- * <em>Revisions</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getState
  * <em>State</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getLatestVersion
@@ -225,15 +219,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	 */
 	protected Locale locale = LOCALE_EDEFAULT;
 	/**
-	 * The cached value of the '{@link #getRevisions() <em>Revisions</em>}' map.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #getRevisions()
-	 * @generated
-	 * @ordered
-	 */
-	protected EMap<Version, Revision> revisions;
-	/**
 	 * The default value of the '{@link #getLatestVersion() <em>Latest
 	 * Version</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -252,6 +237,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	 * @ordered
 	 */
 	protected ResourceAdapter modelResourceAdapter;
+
 	protected CompletionListener completionListener = new CompletionListenerImpl() {
 
 		@Override
@@ -279,6 +265,8 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 			}
 		}
 	};
+
+	private LoadingEList children;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -582,50 +570,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @generated
-	 */
-	public Revision getRevision() {
-		Revision revision = basicGetRevision();
-		return revision != null && revision.eIsProxy() ? (Revision) eResolveProxy((InternalEObject) revision)
-				: revision;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public Revision basicGetRevision() {
-		return getRevisions().get(getVersion());
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public void setRevision(Revision newRevision) {
-		if (!getRevisions().containsKey(newRevision.getVersion()))
-			getRevisions().put(newRevision.getVersion(), newRevision);
-		setVersion(newRevision.getVersion());
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public EMap<Version, Revision> getRevisions() {
-		if (revisions == null) {
-			revisions = new EcoreEMap<Version, Revision>(ClassMakerPackage.Literals.VERSION_TO_REVISION_MAP_ENTRY,
-					VersionToRevisionMapEntryImpl.class, this, ClassMakerPackage.CONTRIBUTION__REVISIONS);
-		}
-		return revisions;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated NOT
 	 */
 	public String initialize(boolean commit) {
@@ -723,7 +667,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 				if (!revision.getStateHistory().isEmpty())
 					checkout(version, ListUtil.getLast(revision.getStateHistory()).getKey());
 				else {
-					setVersion(version);
+					super.checkout(version);
 					return;
 				}
 			checkout(version, revision.getTimestamp());
@@ -739,7 +683,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	public void checkout(Version version, int time) {
 		Revision revision = null;
 		if (getRevisions().containsKey(version)) {
-			setVersion(version);
+			setProjectVersion(version);
 			if (getProjectName().isEmpty())
 				return;
 			Git git = null;
@@ -794,7 +738,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	 */
 	public void checkout(Version version, int time, String commitId) {
 		if (version.equals(VERSION_EDEFAULT)) {
-			setVersion(version);
+			setProjectVersion(version);
 			return;
 		}
 		checkout(version, time);
@@ -834,77 +778,13 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 			getState().checkout(commitId);
 	}
 
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public Revision newRevision(Version version) {
-		if (getRevisions().containsKey(version))
-			return getRevisions().get(version);
-
-		Revision newRevision = newBareRevision(version);
+	@Override
+	public void doNewRevision(Revision newRevision) {
 		State newState = newRevision.newState();
 		if (isStateSet())
 			newState.copyModel(getState());
 		initAdapters(newRevision);
 		newRevision.setTimestamp(newState.getTimestamp());
-		return newRevision;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public Revision newBareRevision(Version version) {
-		Revision newRevision = ClassMakerFactory.eINSTANCE.createRevision();
-		newRevision.setVersion(version);
-		getRevisions().put(version, newRevision);
-		return newRevision;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public Version nextVersion() throws CoreException {
-		if (!eIsSet(ClassMakerPackage.Literals.ITEM__VERSION))
-			return newVersion(true, false, false);
-		return newVersion(getVersion(), false, false, true);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public Version newVersion(boolean incrementMajor, boolean incrementMinor, boolean incrementMicro)
-			throws CoreException {
-		return newVersion(Version.emptyVersion, incrementMajor, incrementMinor, incrementMicro);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public Version newVersion(Version base, boolean incrementMajor, boolean incrementMinor, boolean incrementMicro)
-			throws CoreException {
-		int major = base.getMajor();
-		if (incrementMajor)
-			++major;
-		int minor = base.getMinor();
-		if (incrementMinor)
-			++minor;
-		int micro = base.getMicro();
-		if (incrementMicro)
-			++micro;
-		for (Version version : getRevisions().keySet())
-			if (version.getMajor() == major && version.getMinor() == minor && version.getMicro() == micro)
-				return version;
-		return new Version(major, minor, micro, Revision.VERSION_QUALIFIER_FORMAT.format(new Date()));
 	}
 
 	/**
@@ -1013,6 +893,16 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 					version));
 	}
 
+	/**
+	 * ({@inheritDoc}) Should be used instead of {@link #getVersion()}.
+	 * 
+	 */
+	@Override
+	public void setProjectVersion(Version newProjectVersion) {
+		super.setProjectVersion(newProjectVersion);
+		setVersion(newProjectVersion);
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public EList<Object> getChildren() {
@@ -1026,8 +916,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 		}
 		return (EList<Object>) (EList<?>) children;
 	}
-
-	private LoadingEList children;
 
 	private Adapter modelAdapter = new AdapterImpl() {
 
@@ -1046,7 +934,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 		private static final long serialVersionUID = 164926149524632079L;
 		private Notifier object;
-		private Adapter adapter = new AdapterImpl() {
+		private Adapter initAdapter = new AdapterImpl() {
 
 			@Override
 			public void notifyChanged(Notification msg) {
@@ -1090,10 +978,10 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 		@Override
 		protected void didSet(int index, Notifier newObject, Notifier oldObject) {
-			detachAdapter();
+			detachInitAdapter();
 			setObject(newObject);
 			super.didSet(index, newObject, oldObject);
-			attachAdapter();
+			attachInitAdapter();
 			if (eNotificationRequired())
 				eNotify(new ResourceNotificationImpl(Notification.SET, oldObject, newObject, index));
 		}
@@ -1101,7 +989,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 		@Override
 		protected void didAdd(int index, Notifier newObject) {
 			super.didAdd(index, newObject);
-			attachAdapter();
+			attachInitAdapter();
 			setObject(newObject);
 			if (eNotificationRequired())
 				eNotify(new ResourceNotificationImpl(Notification.ADD, null, newObject, index));
@@ -1109,7 +997,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 		@Override
 		protected void didRemove(int index, Notifier oldObject) {
-			detachAdapter();
+			detachInitAdapter();
 			setObject(null);
 			super.didRemove(index, oldObject);
 			if (eNotificationRequired())
@@ -1118,35 +1006,35 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 		@Override
 		protected void didClear(int size, Object[] oldObjects) {
-			detachAdapter();
+			detachInitAdapter();
 			setObject(null);
 			super.didClear(size, oldObjects);
 			if (eNotificationRequired())
 				eNotify(new ResourceNotificationImpl(Notification.REMOVE_MANY, oldObjects, null));
 		}
 
-		private void attachAdapter() {
+		private void attachInitAdapter() {
 			if (object == null)
 				return;
-			object.eAdapters().add(adapter);
+			object.eAdapters().add(initAdapter);
 		}
 
-		private void detachAdapter() {
+		private void detachInitAdapter() {
 			if (object == null)
 				return;
-			object.eAdapters().remove(adapter);
+			object.eAdapters().remove(initAdapter);
 		}
 
 		public void setContents(Notifier object) {
-			detachAdapter();
+			detachInitAdapter();
 			setObject(object);
-			attachAdapter();
+			attachInitAdapter();
 			fill(object);
 		}
 
 		private void setObject(Notifier object) {
 			this.object = object;
-			getState().setResource((Resource) object);
+			// getState().setResource((Resource) object);
 		}
 
 	}
@@ -1248,8 +1136,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 			return basicSetDomainModel(null, msgs);
 		case ClassMakerPackage.CONTRIBUTION__CUSTOMIZERS:
 			return ((InternalEList<?>) getCustomizers()).basicRemove(otherEnd, msgs);
-		case ClassMakerPackage.CONTRIBUTION__REVISIONS:
-			return ((InternalEList<?>) getRevisions()).basicRemove(otherEnd, msgs);
 		case ClassMakerPackage.CONTRIBUTION__MODEL_RESOURCE_ADAPTER:
 			return basicSetModelResourceAdapter(null, msgs);
 		}
@@ -1291,15 +1177,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 			return basicGetContribution();
 		case ClassMakerPackage.CONTRIBUTION__DEPENDENCIES:
 			return getDependencies();
-		case ClassMakerPackage.CONTRIBUTION__REVISION:
-			if (resolve)
-				return getRevision();
-			return basicGetRevision();
-		case ClassMakerPackage.CONTRIBUTION__REVISIONS:
-			if (coreType)
-				return getRevisions();
-			else
-				return getRevisions().map();
 		case ClassMakerPackage.CONTRIBUTION__STATE:
 			if (resolve)
 				return getState();
@@ -1341,12 +1218,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 		case ClassMakerPackage.CONTRIBUTION__CONTRIBUTION:
 			setContribution((Contribution) newValue);
 			return;
-		case ClassMakerPackage.CONTRIBUTION__REVISION:
-			setRevision((Revision) newValue);
-			return;
-		case ClassMakerPackage.CONTRIBUTION__REVISIONS:
-			((EStructuralFeature.Setting) getRevisions()).set(newValue);
-			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -1380,12 +1251,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 		case ClassMakerPackage.CONTRIBUTION__CONTRIBUTION:
 			setContribution((Contribution) null);
 			return;
-		case ClassMakerPackage.CONTRIBUTION__REVISION:
-			setRevision((Revision) null);
-			return;
-		case ClassMakerPackage.CONTRIBUTION__REVISIONS:
-			getRevisions().clear();
-			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1418,10 +1283,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 			return basicGetContribution() != null;
 		case ClassMakerPackage.CONTRIBUTION__DEPENDENCIES:
 			return !getDependencies().isEmpty();
-		case ClassMakerPackage.CONTRIBUTION__REVISION:
-			return basicGetRevision() != null;
-		case ClassMakerPackage.CONTRIBUTION__REVISIONS:
-			return revisions != null && !revisions.isEmpty();
 		case ClassMakerPackage.CONTRIBUTION__STATE:
 			return basicGetState() != null;
 		case ClassMakerPackage.CONTRIBUTION__LATEST_VERSION:

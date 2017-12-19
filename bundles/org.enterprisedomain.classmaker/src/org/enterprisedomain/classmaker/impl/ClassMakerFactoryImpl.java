@@ -46,6 +46,7 @@ import org.enterprisedomain.classmaker.ResourceAdapter;
 import org.enterprisedomain.classmaker.ResourceChangeListener;
 import org.enterprisedomain.classmaker.Revision;
 import org.enterprisedomain.classmaker.SCMRegistry;
+import org.enterprisedomain.classmaker.SelectRevealHandler;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
@@ -131,6 +132,8 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 			return createBlueprint();
 		case ClassMakerPackage.COMPLETION_NOTIFICATION_ADAPTER:
 			return createCompletionNotificationAdapter();
+		case ClassMakerPackage.SELECT_REVEAL_HANDLER:
+			return createSelectRevealHandler();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -374,6 +377,16 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 	public CompletionNotificationAdapter createCompletionNotificationAdapter() {
 		CompletionNotificationAdapterImpl completionNotificationAdapter = new CompletionNotificationAdapterImpl();
 		return completionNotificationAdapter;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public SelectRevealHandler createSelectRevealHandler() {
+		SelectRevealHandlerImpl selectRevealHandler = new SelectRevealHandlerImpl();
+		return selectRevealHandler;
 	}
 
 	/**

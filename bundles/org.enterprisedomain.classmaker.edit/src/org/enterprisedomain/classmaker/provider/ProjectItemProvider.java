@@ -79,6 +79,9 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 			addNeedCompletionNotificationPropertyDescriptor(object);
 			addResourceReloadListenerPropertyDescriptor(object);
 			addSavingResourcePropertyDescriptor(object);
+			addRevisionPropertyDescriptor(object);
+			addProjectVersionPropertyDescriptor(object);
+			addSelectRevealHandlerPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -211,6 +214,53 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 	}
 
 	/**
+	 * This adds a property descriptor for the Revision feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addRevisionPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Project_revision_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Project_revision_feature",
+								"_UI_Project_type"),
+						ClassMakerPackage.Literals.PROJECT__REVISION, true, false, true, null, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Project Version feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addProjectVersionPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Project_projectVersion_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Project_projectVersion_feature",
+								"_UI_Project_type"),
+						ClassMakerPackage.Literals.PROJECT__PROJECT_VERSION, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Select Reveal Handler feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSelectRevealHandlerPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Project_selectRevealHandler_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Project_selectRevealHandler_feature",
+								"_UI_Project_type"),
+						ClassMakerPackage.Literals.PROJECT__SELECT_REVEAL_HANDLER, true, false, true, null, null,
+						null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -223,6 +273,7 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ClassMakerPackage.Literals.PROJECT__CHILDREN);
+			childrenFeatures.add(ClassMakerPackage.Literals.PROJECT__REVISIONS);
 		}
 		return childrenFeatures;
 	}
@@ -283,9 +334,11 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 		case ClassMakerPackage.PROJECT__NEED_COMPLETION_NOTIFICATION:
 		case ClassMakerPackage.PROJECT__COMPLETION_NOTIFICATION_ADAPTER:
 		case ClassMakerPackage.PROJECT__SAVING_RESOURCE:
+		case ClassMakerPackage.PROJECT__PROJECT_VERSION:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case ClassMakerPackage.PROJECT__CHILDREN:
+		case ClassMakerPackage.PROJECT__REVISIONS:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
@@ -305,6 +358,9 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 
 		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
 				EcoreFactory.eINSTANCE.createFromString(EcorePackage.Literals.EJAVA_OBJECT, null))); // TODO: ensure this is a valid literal value
+
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__REVISIONS,
+				ClassMakerFactory.eINSTANCE.create(ClassMakerPackage.Literals.VERSION_TO_REVISION_MAP_ENTRY)));
 	}
 
 	/**

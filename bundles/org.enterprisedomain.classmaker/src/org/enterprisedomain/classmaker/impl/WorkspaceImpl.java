@@ -298,7 +298,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 				registerProject(result);
 				return result;
 			}
-			// Contribution not exist. Create
+			// Contribution not exists. Create
 			result = ClassMakerFactory.eINSTANCE.createContribution();
 			result.setName(blueprint.getName());
 			registerProject(result);

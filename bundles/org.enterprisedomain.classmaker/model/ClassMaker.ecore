@@ -11,9 +11,6 @@
     </eOperations>
     <eOperations name="checkout">
       <eParameters name="version" eType="#//OSGiVersion"/>
-    </eOperations>
-    <eOperations name="checkout">
-      <eParameters name="version" eType="#//OSGiVersion"/>
       <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     </eOperations>
     <eOperations name="checkout">
@@ -31,24 +28,6 @@
     <eOperations name="checkout">
       <eParameters name="commitId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
-    <eOperations name="newRevision" eType="#//Revision">
-      <eParameters name="version" eType="#//OSGiVersion"/>
-    </eOperations>
-    <eOperations name="newBareRevision" eType="#//Revision">
-      <eParameters name="version" eType="#//OSGiVersion"/>
-    </eOperations>
-    <eOperations name="newVersion" eType="#//OSGiVersion" eExceptions="#//CoreException">
-      <eParameters name="base" eType="#//OSGiVersion"/>
-      <eParameters name="incrementMajor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-      <eParameters name="incrementMinor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-      <eParameters name="incrementMicro" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    </eOperations>
-    <eOperations name="newVersion" eType="#//OSGiVersion" eExceptions="#//CoreException">
-      <eParameters name="incrementMajor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-      <eParameters name="incrementMinor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-      <eParameters name="incrementMicro" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    </eOperations>
-    <eOperations name="nextVersion" eType="#//OSGiVersion" eExceptions="#//CoreException"/>
     <eOperations name="delete" eExceptions="#//CoreException">
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
@@ -68,18 +47,6 @@
         volatile="true" defaultValueLiteral="" derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;em>&lt;b>Contribution&lt;/b>&lt;/em> bundle's required plugins."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="revision" eType="#//Revision"
-        volatile="true" transient="true" derived="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Currently checked out &lt;em>Revision&lt;/em>."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="revisions" upperBound="-1"
-        eType="#//VersionToRevisionMapEntry" containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Collection of &lt;em>&lt;b>Contribution&lt;/b>&lt;/em>'s &lt;em>&lt;b>Revision&lt;/b>&lt;/em>'s"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//State"
@@ -788,6 +755,30 @@
     <eOperations name="removeResourceChangeListener">
       <eParameters name="resourceListener" eType="#//ResourceChangeListener"/>
     </eOperations>
+    <eOperations name="newRevision" eType="#//Revision">
+      <eParameters name="version" eType="#//OSGiVersion"/>
+    </eOperations>
+    <eOperations name="newBareRevision" eType="#//Revision">
+      <eParameters name="version" eType="#//OSGiVersion"/>
+    </eOperations>
+    <eOperations name="doNewRevision">
+      <eParameters name="newRevision" eType="#//Revision"/>
+    </eOperations>
+    <eOperations name="newVersion" eType="#//OSGiVersion" eExceptions="#//CoreException">
+      <eParameters name="base" eType="#//OSGiVersion"/>
+      <eParameters name="incrementMajor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eParameters name="incrementMinor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eParameters name="incrementMicro" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="newVersion" eType="#//OSGiVersion" eExceptions="#//CoreException">
+      <eParameters name="incrementMajor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eParameters name="incrementMinor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eParameters name="incrementMicro" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="nextVersion" eType="#//OSGiVersion" eExceptions="#//CoreException"/>
+    <eOperations name="checkout">
+      <eParameters name="version" eType="#//OSGiVersion"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -833,6 +824,24 @@
         eType="#//ResourceChangeListener" changeable="false" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="savingResource" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="revision" eType="#//Revision"
+        volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Currently checked out &lt;em>Revision&lt;/em>."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="revisions" upperBound="-1"
+        eType="#//VersionToRevisionMapEntry" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Collection of &lt;em>&lt;b>Contribution&lt;/b>&lt;/em>'s &lt;em>&lt;b>Revision&lt;/b>&lt;/em>'s"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="projectVersion" eType="#//OSGiVersion">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A {@link org.osgi.framework.Version Version} of the &lt;em>&lt;b>Item&lt;/b>&lt;/em>."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="selectRevealHandler" eType="#//SelectRevealHandler"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Resource" instanceClassName="org.eclipse.emf.ecore.resource.Resource"
       abstract="true" interface="true">
@@ -842,7 +851,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ResourceChangeListener">
     <eOperations name="changed" eExceptions="#//Exception">
-      <eParameters name="resource" eType="#//Notification"/>
+      <eParameters name="notification" eType="#//Notification"/>
     </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Notification" instanceClassName="org.eclipse.emf.common.notify.Notification"
@@ -1128,5 +1137,11 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Process work unit."/>
     </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SelectRevealHandler">
+    <eOperations name="prepare"/>
+    <eOperations name="selectReveal">
+      <eParameters name="newResource" eType="#//Resource"/>
+    </eOperations>
   </eClassifiers>
 </ecore:EPackage>

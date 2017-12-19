@@ -15,26 +15,33 @@
  */
 package org.enterprisedomain.classmaker;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '<em><b>Resource
- * Change Listener</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object '<em><b>Select
+ * Reveal Handler</b></em>'. <!-- end-user-doc -->
  *
  *
- * @see org.enterprisedomain.classmaker.ClassMakerPackage#getResourceChangeListener()
+ * @see org.enterprisedomain.classmaker.ClassMakerPackage#getSelectRevealHandler()
  * @model
  * @generated
  */
-public interface ResourceChangeListener extends EObject {
+public interface SelectRevealHandler extends EObject {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @model exceptions="org.enterprisedomain.classmaker.Exception"
-	 *        notificationType="org.enterprisedomain.classmaker.Notification"
+	 * @model
 	 * @generated
 	 */
-	void changed(Notification notification) throws Exception;
+	void prepare();
 
-} // ResourceChangeListener
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model newResourceType="org.enterprisedomain.classmaker.Resource"
+	 * @generated
+	 */
+	void selectReveal(Resource newResource);
+
+} // SelectRevealHandler

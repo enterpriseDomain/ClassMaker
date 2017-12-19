@@ -18,6 +18,7 @@ package org.enterprisedomain.classmaker.impl;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Date;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
@@ -37,23 +38,30 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.notify.impl.NotificationImpl;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.enterprisedomain.classmaker.ClassMakerFactory;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.CompletionNotificationAdapter;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.ResourceChangeListener;
+import org.enterprisedomain.classmaker.Revision;
+import org.enterprisedomain.classmaker.SelectRevealHandler;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
+import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -82,6 +90,14 @@ import org.enterprisedomain.classmaker.util.ResourceUtils;
  * <em>Resource Reload Listener</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#isSavingResource
  * <em>Saving Resource</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getRevision
+ * <em>Revision</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getRevisions
+ * <em>Revisions</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getProjectVersion
+ * <em>Project Version</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getSelectRevealHandler
+ * <em>Select Reveal Handler</em>}</li>
  * </ul>
  *
  * @generated
@@ -211,6 +227,46 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * @ordered
 	 */
 	protected boolean savingResource = SAVING_RESOURCE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getRevisions() <em>Revisions</em>}' map.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getRevisions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EMap<Version, Revision> revisions;
+
+	/**
+	 * The default value of the '{@link #getProjectVersion() <em>Project
+	 * Version</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getProjectVersion()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Version PROJECT_VERSION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getProjectVersion() <em>Project
+	 * Version</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getProjectVersion()
+	 * @generated
+	 * @ordered
+	 */
+	protected Version projectVersion = PROJECT_VERSION_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getSelectRevealHandler() <em>Select Reveal
+	 * Handler</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getSelectRevealHandler()
+	 * @generated
+	 * @ordered
+	 */
+	protected SelectRevealHandler selectRevealHandler;
 
 	protected ListenerList<CompletionListener> completionListeners = new ListenerList<CompletionListener>();
 
@@ -468,11 +524,15 @@ public class ProjectImpl extends EObjectImpl implements Project {
 							&& getFileName(resource.getURI()).equals(getFileName(theResource.getURI()))
 							&& !theResource.isModified() && theResource.isLoaded()) {
 						loading = true;
+						if (ProjectImpl.this.eIsSet(ClassMakerPackage.PROJECT__SELECT_REVEAL_HANDLER))
+							getSelectRevealHandler().prepare();
 						getChildren().set(0, resource);
 						theResource = ((Resource) getChildren().get(0));
 						theResource.setURI(getResourceURI());
 						theResource.unload();
 						theResource.load(Collections.emptyMap());
+						if (ProjectImpl.this.eIsSet(ClassMakerPackage.PROJECT__SELECT_REVEAL_HANDLER))
+							getSelectRevealHandler().selectReveal(theResource);
 						loading = false;
 					}
 				}
@@ -505,6 +565,113 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.PROJECT__SAVING_RESOURCE,
 					oldSavingResource, savingResource));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public Revision getRevision() {
+		Revision revision = basicGetRevision();
+		return revision != null && revision.eIsProxy() ? (Revision) eResolveProxy((InternalEObject) revision)
+				: revision;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Revision basicGetRevision() {
+		return getRevisions().get(getProjectVersion());
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public void setRevision(Revision newRevision) {
+		if (!getRevisions().containsKey(newRevision.getVersion()))
+			getRevisions().put(newRevision.getVersion(), newRevision);
+		setProjectVersion(newRevision.getVersion());
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EMap<Version, Revision> getRevisions() {
+		if (revisions == null) {
+			revisions = new EcoreEMap<Version, Revision>(ClassMakerPackage.Literals.VERSION_TO_REVISION_MAP_ENTRY,
+					VersionToRevisionMapEntryImpl.class, this, ClassMakerPackage.PROJECT__REVISIONS);
+		}
+		return revisions;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public Version getProjectVersion() {
+		return projectVersion;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public void setProjectVersion(Version newProjectVersion) {
+		Version oldProjectVersion = projectVersion;
+		projectVersion = newProjectVersion;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.PROJECT__PROJECT_VERSION,
+					oldProjectVersion, projectVersion));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public SelectRevealHandler getSelectRevealHandler() {
+		if (selectRevealHandler != null && selectRevealHandler.eIsProxy()) {
+			InternalEObject oldSelectRevealHandler = (InternalEObject) selectRevealHandler;
+			selectRevealHandler = (SelectRevealHandler) eResolveProxy(oldSelectRevealHandler);
+			if (selectRevealHandler != oldSelectRevealHandler) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							ClassMakerPackage.PROJECT__SELECT_REVEAL_HANDLER, oldSelectRevealHandler,
+							selectRevealHandler));
+			}
+		}
+		return selectRevealHandler;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public SelectRevealHandler basicGetSelectRevealHandler() {
+		return selectRevealHandler;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public void setSelectRevealHandler(SelectRevealHandler newSelectRevealHandler) {
+		SelectRevealHandler oldSelectRevealHandler = selectRevealHandler;
+		selectRevealHandler = newSelectRevealHandler;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.PROJECT__SELECT_REVEAL_HANDLER,
+					oldSelectRevealHandler, selectRevealHandler));
 	}
 
 	/**
@@ -586,9 +753,97 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * 
 	 * @generated NOT
 	 */
+	public Revision newRevision(Version version) {
+		if (getRevisions().containsKey(version))
+			return getRevisions().get(version);
+
+		Revision newRevision = newBareRevision(version);
+		doNewRevision(newRevision);
+		return newRevision;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Revision newBareRevision(Version version) {
+		Revision newRevision = ClassMakerFactory.eINSTANCE.createRevision();
+		newRevision.setVersion(version);
+		getRevisions().put(version, newRevision);
+		return newRevision;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> Sub-classes may implement. <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public void doNewRevision(Revision newRevision) {
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Version newVersion(boolean incrementMajor, boolean incrementMinor, boolean incrementMicro)
+			throws CoreException {
+		return newVersion(Version.emptyVersion, incrementMajor, incrementMinor, incrementMicro);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Version newVersion(Version base, boolean incrementMajor, boolean incrementMinor, boolean incrementMicro)
+			throws CoreException {
+		int major = base.getMajor();
+		if (incrementMajor)
+			++major;
+		int minor = base.getMinor();
+		if (incrementMinor)
+			++minor;
+		int micro = base.getMicro();
+		if (incrementMicro)
+			++micro;
+		for (Version version : getRevisions().keySet())
+			if (version.getMajor() == major && version.getMinor() == minor && version.getMicro() == micro)
+				return version;
+		return new Version(major, minor, micro, Revision.VERSION_QUALIFIER_FORMAT.format(new Date()));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Version nextVersion() throws CoreException {
+		if (!eIsSet(ClassMakerPackage.Literals.PROJECT__PROJECT_VERSION))
+			return newVersion(true, false, false);
+		return newVersion(getProjectVersion(), false, false, true);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public void checkout(Version version) {
+		if (getRevisions().containsKey(version))
+			setProjectVersion(version);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
 	public void notifyResourceChanged(Notification notification) throws Exception {
-		for (Object listener : resourceChangeListeners.getListeners())
+		for (Object listener : resourceChangeListeners.getListeners()) {
 			((ResourceChangeListener) listener).changed(notification);
+		}
 	}
 
 	/**
@@ -732,6 +987,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			return basicSetWorkspace(null, msgs);
 		case ClassMakerPackage.PROJECT__COMPLETION_NOTIFICATION_ADAPTER:
 			return basicSetCompletionNotificationAdapter(null, msgs);
+		case ClassMakerPackage.PROJECT__REVISIONS:
+			return ((InternalEList<?>) getRevisions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -804,6 +1061,21 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			return getResourceReloadListener();
 		case ClassMakerPackage.PROJECT__SAVING_RESOURCE:
 			return isSavingResource();
+		case ClassMakerPackage.PROJECT__REVISION:
+			if (resolve)
+				return getRevision();
+			return basicGetRevision();
+		case ClassMakerPackage.PROJECT__REVISIONS:
+			if (coreType)
+				return getRevisions();
+			else
+				return getRevisions().map();
+		case ClassMakerPackage.PROJECT__PROJECT_VERSION:
+			return getProjectVersion();
+		case ClassMakerPackage.PROJECT__SELECT_REVEAL_HANDLER:
+			if (resolve)
+				return getSelectRevealHandler();
+			return basicGetSelectRevealHandler();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -834,6 +1106,18 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		case ClassMakerPackage.PROJECT__SAVING_RESOURCE:
 			setSavingResource((Boolean) newValue);
 			return;
+		case ClassMakerPackage.PROJECT__REVISION:
+			setRevision((Revision) newValue);
+			return;
+		case ClassMakerPackage.PROJECT__REVISIONS:
+			((EStructuralFeature.Setting) getRevisions()).set(newValue);
+			return;
+		case ClassMakerPackage.PROJECT__PROJECT_VERSION:
+			setProjectVersion((Version) newValue);
+			return;
+		case ClassMakerPackage.PROJECT__SELECT_REVEAL_HANDLER:
+			setSelectRevealHandler((SelectRevealHandler) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -863,6 +1147,18 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			return;
 		case ClassMakerPackage.PROJECT__SAVING_RESOURCE:
 			setSavingResource(SAVING_RESOURCE_EDEFAULT);
+			return;
+		case ClassMakerPackage.PROJECT__REVISION:
+			setRevision((Revision) null);
+			return;
+		case ClassMakerPackage.PROJECT__REVISIONS:
+			getRevisions().clear();
+			return;
+		case ClassMakerPackage.PROJECT__PROJECT_VERSION:
+			setProjectVersion(PROJECT_VERSION_EDEFAULT);
+			return;
+		case ClassMakerPackage.PROJECT__SELECT_REVEAL_HANDLER:
+			setSelectRevealHandler((SelectRevealHandler) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -897,6 +1193,15 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			return resourceReloadListener != null;
 		case ClassMakerPackage.PROJECT__SAVING_RESOURCE:
 			return savingResource != SAVING_RESOURCE_EDEFAULT;
+		case ClassMakerPackage.PROJECT__REVISION:
+			return basicGetRevision() != null;
+		case ClassMakerPackage.PROJECT__REVISIONS:
+			return revisions != null && !revisions.isEmpty();
+		case ClassMakerPackage.PROJECT__PROJECT_VERSION:
+			return PROJECT_VERSION_EDEFAULT == null ? projectVersion != null
+					: !PROJECT_VERSION_EDEFAULT.equals(projectVersion);
+		case ClassMakerPackage.PROJECT__SELECT_REVEAL_HANDLER:
+			return selectRevealHandler != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -945,6 +1250,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		result.append(needCompletionNotification);
 		result.append(", savingResource: ");
 		result.append(savingResource);
+		result.append(", projectVersion: ");
+		result.append(projectVersion);
 		result.append(')');
 		return result.toString();
 	}
