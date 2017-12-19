@@ -18,7 +18,6 @@ package org.enterprisedomain.classmaker;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.EMap;
 import org.osgi.framework.Version;
 
 /**
@@ -35,10 +34,6 @@ import org.osgi.framework.Version;
  * <ul>
  * <li>{@link org.enterprisedomain.classmaker.Contribution#getDependencies
  * <em>Dependencies</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Contribution#getRevision
- * <em>Revision</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Contribution#getRevisions
- * <em>Revisions</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.Contribution#getState
  * <em>State</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.Contribution#getLatestVersion
@@ -69,55 +64,6 @@ public interface Contribution extends Project, Item {
 	 * @generated
 	 */
 	EList<String> getDependencies();
-
-	/**
-	 * Returns the value of the '<em><b>Revision</b></em>' reference. <!--
-	 * begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Revision</em>' reference isn't clear, there really
-	 * should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Revision</em>' reference.
-	 * @see #setRevision(Revision)
-	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getContribution_Revision()
-	 * @model transient="true" volatile="true" derived="true"
-	 * @generated
-	 */
-	Revision getRevision();
-
-	/**
-	 * Sets the value of the
-	 * '{@link org.enterprisedomain.classmaker.Contribution#getRevision
-	 * <em>Revision</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Revision</em>' reference.
-	 * @see #getRevision()
-	 * @generated
-	 */
-	void setRevision(Revision value);
-
-	/**
-	 * Returns the value of the '<em><b>Revisions</b></em>' map. The key is of type
-	 * {@link org.osgi.framework.Version}, and the value is of type
-	 * {@link org.enterprisedomain.classmaker.Revision}, <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Revision History</em>' map isn't clear, there
-	 * really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc --> <!-- begin-model-doc --> Collection of
-	 * <em><b>Contribution</b></em>'s <em><b>Revision</b></em>'s <!-- end-model-doc
-	 * -->
-	 * 
-	 * @return the value of the '<em>Revisions</em>' map.
-	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getContribution_Revisions()
-	 * @model mapType="org.enterprisedomain.classmaker.VersionToRevisionMapEntry&lt;org.enterprisedomain.classmaker.OSGiVersion,
-	 *        org.enterprisedomain.classmaker.Revision&gt;"
-	 * @generated
-	 */
-	EMap<Version, Revision> getRevisions();
 
 	/**
 	 * Returns the value of the '<em><b>State</b></em>' reference. <!--
@@ -185,14 +131,6 @@ public interface Contribution extends Project, Item {
 	 * @model versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
 	 * @generated
 	 */
-	void checkout(Version version);
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
-	 * @generated
-	 */
 	void checkout(Version version, int timestamp);
 
 	/**
@@ -226,51 +164,6 @@ public interface Contribution extends Project, Item {
 	 * @generated
 	 */
 	void checkout(String commitId);
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
-	 * @generated
-	 */
-	Revision newRevision(Version version);
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
-	 * @generated
-	 */
-	Revision newBareRevision(Version version);
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model dataType="org.enterprisedomain.classmaker.OSGiVersion"
-	 *        exceptions="org.enterprisedomain.classmaker.CoreException"
-	 * @generated
-	 */
-	Version newVersion(boolean incrementMajor, boolean incrementMinor, boolean incrementMicro) throws CoreException;
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model dataType="org.enterprisedomain.classmaker.OSGiVersion"
-	 *        exceptions="org.enterprisedomain.classmaker.CoreException"
-	 *        baseDataType="org.enterprisedomain.classmaker.OSGiVersion"
-	 * @generated
-	 */
-	Version newVersion(Version base, boolean incrementMajor, boolean incrementMinor, boolean incrementMicro)
-			throws CoreException;
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model dataType="org.enterprisedomain.classmaker.OSGiVersion"
-	 *        exceptions="org.enterprisedomain.classmaker.CoreException"
-	 * @generated
-	 */
-	Version nextVersion() throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

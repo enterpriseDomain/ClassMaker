@@ -409,7 +409,7 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	 * @generated NOT
 	 */
 	public String initialize(boolean commit) {
-		if (!eIsSet(ClassMakerPackage.ITEM__PARENT))
+		if (!eIsSet(ClassMakerPackage.Literals.ITEM__PARENT))
 			return null;
 		copyModel(getParent());
 		return "";
@@ -426,7 +426,7 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 		EPackage ePackage = null;
 		if (from.getDomainModel() != null)
 			ePackage = from.getDomainModel().getDynamic();
-		if (ePackage != null)
+		if (ePackage != null && !getDomainModel().eIsSet(ClassMakerPackage.Literals.MODEL_PAIR__DYNAMIC))
 			getDomainModel().setDynamic(EcoreUtil.copy(ePackage));
 	}
 

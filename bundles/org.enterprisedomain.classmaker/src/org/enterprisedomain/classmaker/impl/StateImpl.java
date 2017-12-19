@@ -149,13 +149,23 @@ public class StateImpl extends ItemImpl implements State {
 	 */
 	protected EList<String> requiredPlugins;
 
-	public class PropertiesAdapter extends AdapterImpl {
+	public class StateAdapter extends AdapterImpl {
 
 		@Override
 		public void notifyChanged(Notification msg) {
 			if (msg.getFeatureID(State.class) == ClassMakerPackage.STATE__MODEL_NAME
 					&& msg.getEventType() == Notification.SET && msg.getNewStringValue() != null)
 				setProjectName(ClassMakerPlugin.getClassMaker().computeProjectName(msg.getNewStringValue()));
+			// if (eContainer() != null && eIsSet(ClassMakerPackage.STATE__REVISION)
+			// && eIsSet(ClassMakerPackage.STATE__CONTRIBUTION) &&
+			// !getContribution().isSavingResource()
+			// && msg.getFeatureID(State.class) == ClassMakerPackage.STATE__RESOURCE
+			// && msg.getEventType() == Notification.SET && msg.getNewValue() != null) {
+			// Resource resource = (Resource) msg.getNewValue();
+			// resource.eAdapters().remove(resourceToModelsAdapter);
+			// resource.eAdapters().add(resourceToModelsAdapter);
+			// }
+
 		}
 
 	}
@@ -327,7 +337,7 @@ public class StateImpl extends ItemImpl implements State {
 	 */
 	protected StateImpl() {
 		super();
-		eAdapters().add(new PropertiesAdapter());
+		eAdapters().add(new StateAdapter());
 	}
 
 	/**

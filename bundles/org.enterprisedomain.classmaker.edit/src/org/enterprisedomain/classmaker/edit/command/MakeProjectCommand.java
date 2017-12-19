@@ -7,6 +7,8 @@ import java.util.Collection;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.command.ChangeCommand;
 import org.eclipse.emf.edit.command.CommandActionDelegate;
 import org.eclipse.emf.edit.command.CommandParameter;
@@ -14,6 +16,7 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.Project;
+import org.enterprisedomain.classmaker.Revision;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 
 public class MakeProjectCommand extends ChangeCommand implements CommandActionDelegate {
@@ -52,6 +55,11 @@ public class MakeProjectCommand extends ChangeCommand implements CommandActionDe
 				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 					try {
 						Project project = classMaker.getWorkspace().getProject((String) projectName);
+						Revision newRevision = project.newRevision(project.nextVersion());
+						newRevision.create(monitor);
+						EPackage ePackage = (EPackage) ((Resource) project.getChildren().get(0)).getContents().get(0);
+						project.checkout(newRevision.getVersion());
+						newRevision.getState().getDomainModel().setDynamic(ePackage);
 						project.make(monitor);
 					} catch (CoreException e) {
 						monitor.setCanceled(true);

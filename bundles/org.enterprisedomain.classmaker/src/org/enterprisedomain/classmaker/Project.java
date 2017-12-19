@@ -20,7 +20,9 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EObject;
+import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '
@@ -52,6 +54,14 @@ import org.eclipse.emf.ecore.EObject;
  * <em>Resource Reload Listener</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.Project#isSavingResource
  * <em>Saving Resource</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Project#getRevision
+ * <em>Revision</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Project#getRevisions
+ * <em>Revisions</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Project#getProjectVersion
+ * <em>Project Version</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Project#getSelectRevealHandler
+ * <em>Select Reveal Handler</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject()
@@ -311,6 +321,103 @@ public interface Project extends EObject, ISchedulingRule {
 	void setSavingResource(boolean value);
 
 	/**
+	 * Returns the value of the '<em><b>Revision</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc --> Currently
+	 * checked out <em>Revision</em>. <!-- end-model-doc -->
+	 * 
+	 * @return the value of the '<em>Revision</em>' reference.
+	 * @see #setRevision(Revision)
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject_Revision()
+	 * @model transient="true" volatile="true" derived="true"
+	 * @generated
+	 */
+	Revision getRevision();
+
+	/**
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Project#getRevision
+	 * <em>Revision</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Revision</em>' reference.
+	 * @see #getRevision()
+	 * @generated
+	 */
+	void setRevision(Revision value);
+
+	/**
+	 * Returns the value of the '<em><b>Revisions</b></em>' map. The key is of type
+	 * {@link org.osgi.framework.Version}, and the value is of type
+	 * {@link org.enterprisedomain.classmaker.Revision}, <!-- begin-user-doc -->
+	 * <!-- end-user-doc --> <!-- begin-model-doc --> Collection of
+	 * <em><b>Contribution</b></em>'s <em><b>Revision</b></em>'s <!-- end-model-doc
+	 * -->
+	 * 
+	 * @return the value of the '<em>Revisions</em>' map.
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject_Revisions()
+	 * @model mapType="org.enterprisedomain.classmaker.VersionToRevisionMapEntry&lt;org.enterprisedomain.classmaker.OSGiVersion,
+	 *        org.enterprisedomain.classmaker.Revision&gt;"
+	 * @generated
+	 */
+	EMap<Version, Revision> getRevisions();
+
+	/**
+	 * Returns the value of the '<em><b>Project Version</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc --> A
+	 * {@link org.osgi.framework.Version Version} of the <em><b>Item</b></em>. <!--
+	 * end-model-doc -->
+	 * 
+	 * @return the value of the '<em>Project Version</em>' attribute.
+	 * @see #setProjectVersion(Version)
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject_ProjectVersion()
+	 * @model dataType="org.enterprisedomain.classmaker.OSGiVersion"
+	 * @generated
+	 */
+	Version getProjectVersion();
+
+	/**
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Project#getProjectVersion <em>Project
+	 * Version</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Project Version</em>' attribute.
+	 * @see #getProjectVersion()
+	 * @generated
+	 */
+	void setProjectVersion(Version value);
+
+	/**
+	 * Returns the value of the '<em><b>Select Reveal Handler</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Select Reveal Handler</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Select Reveal Handler</em>' reference.
+	 * @see #setSelectRevealHandler(SelectRevealHandler)
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject_SelectRevealHandler()
+	 * @model
+	 * @generated
+	 */
+	SelectRevealHandler getSelectRevealHandler();
+
+	/**
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Project#getSelectRevealHandler
+	 * <em>Select Reveal Handler</em>}' reference. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Select Reveal Handler</em>' reference.
+	 * @see #getSelectRevealHandler()
+	 * @generated
+	 */
+	void setSelectRevealHandler(SelectRevealHandler value);
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
@@ -424,5 +531,66 @@ public interface Project extends EObject, ISchedulingRule {
 	 * @generated
 	 */
 	void removeResourceChangeListener(ResourceChangeListener resourceListener);
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
+	 * @generated
+	 */
+	Revision newRevision(Version version);
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
+	 * @generated
+	 */
+	Revision newBareRevision(Version version);
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model
+	 * @generated
+	 */
+	void doNewRevision(Revision newRevision);
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model dataType="org.enterprisedomain.classmaker.OSGiVersion"
+	 *        exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        baseDataType="org.enterprisedomain.classmaker.OSGiVersion"
+	 * @generated
+	 */
+	Version newVersion(Version base, boolean incrementMajor, boolean incrementMinor, boolean incrementMicro)
+			throws CoreException;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model dataType="org.enterprisedomain.classmaker.OSGiVersion"
+	 *        exceptions="org.enterprisedomain.classmaker.CoreException"
+	 * @generated
+	 */
+	Version newVersion(boolean incrementMajor, boolean incrementMinor, boolean incrementMicro) throws CoreException;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model dataType="org.enterprisedomain.classmaker.OSGiVersion"
+	 *        exceptions="org.enterprisedomain.classmaker.CoreException"
+	 * @generated
+	 */
+	Version nextVersion() throws CoreException;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
+	 * @generated
+	 */
+	void checkout(Version version);
 
 } // Project

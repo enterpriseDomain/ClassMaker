@@ -42,6 +42,7 @@ import org.enterprisedomain.classmaker.ResourceChangeListener;
 import org.enterprisedomain.classmaker.Revision;
 import org.enterprisedomain.classmaker.SCMOperator;
 import org.enterprisedomain.classmaker.SCMRegistry;
+import org.enterprisedomain.classmaker.SelectRevealHandler;
 import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
@@ -241,6 +242,11 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseWorker(Worker object) {
 			return createWorkerAdapter();
+		}
+
+		@Override
+		public Adapter caseSelectRevealHandler(SelectRevealHandler object) {
+			return createSelectRevealHandlerAdapter();
 		}
 
 		@Override
@@ -620,6 +626,21 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createWorkerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class
+	 * '{@link org.enterprisedomain.classmaker.SelectRevealHandler <em>Select Reveal
+	 * Handler</em>}'. <!-- begin-user-doc --> This default implementation returns
+	 * null so that we can easily ignore cases; it's useful to ignore a case when
+	 * inheritance will catch all the cases anyway. <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see org.enterprisedomain.classmaker.SelectRevealHandler
+	 * @generated
+	 */
+	public Adapter createSelectRevealHandlerAdapter() {
 		return null;
 	}
 

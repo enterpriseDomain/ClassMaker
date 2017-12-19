@@ -69,6 +69,7 @@ import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.ResourceAdapter;
+import org.enterprisedomain.classmaker.SelectRevealHandler;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.impl.CompletionListenerImpl;
 import org.enterprisedomain.classmaker.impl.ResourceChangeListenerImpl;
@@ -382,11 +383,12 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 		} else if (parent instanceof ECPProject) {
 			final ECPProject project = (ECPProject) parent;
 			final Project domainProject = Activator.getClassMaker().getWorkspace().getProject(project.getName());
-			if (domainProject != null)
-				childrenList.addChildren(domainProject.getChildren());
-		} else if (parent instanceof Resource) {
-			Resource resource = (Resource) parent;
-			childrenList.addChildren(resource.getContents());
+			if (domainProject != null && !domainProject.getChildren().isEmpty()
+					&& domainProject.getChildren().get(0) instanceof Resource)
+				childrenList.addChildren(((Resource) domainProject.getChildren().get(0)).getContents());
+			// } else if (parent instanceof Resource) {
+			// Resource resource = (Resource) parent;
+			// childrenList.addChildren(resource.getContents());
 		} else if (parent instanceof EObject) {
 			final EObject eObject = (EObject) parent;
 			childrenList.addChildren(eObject.eContents());
@@ -423,6 +425,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 		@SuppressWarnings("unchecked")
 		@Override
 		public void completed(final Project result) throws Exception {
+			result.setSelectRevealHandler(getUIProvider().getAdapter(project, SelectRevealHandler.class));
 			result.addResourceChangeListener(new ResourceChangeListenerImpl() {
 
 				@SuppressWarnings("unchecked")

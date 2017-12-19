@@ -68,7 +68,6 @@ public class ContributionItemProvider extends ProjectItemProvider {
 			addLocalePropertyDescriptor(object);
 			addContributionPropertyDescriptor(object);
 			addDependenciesPropertyDescriptor(object);
-			addRevisionPropertyDescriptor(object);
 			addStatePropertyDescriptor(object);
 			addLatestVersionPropertyDescriptor(object);
 			addModelResourceAdapterPropertyDescriptor(object);
@@ -197,21 +196,6 @@ public class ContributionItemProvider extends ProjectItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Revision feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addRevisionPropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_Contribution_revision_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_Contribution_revision_feature",
-								"_UI_Contribution_type"),
-						ClassMakerPackage.Literals.CONTRIBUTION__REVISION, true, false, true, null, null, null));
-	}
-
-	/**
 	 * This adds a property descriptor for the State feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -271,7 +255,6 @@ public class ContributionItemProvider extends ProjectItemProvider {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ClassMakerPackage.Literals.ITEM__DOMAIN_MODEL);
-			childrenFeatures.add(ClassMakerPackage.Literals.CONTRIBUTION__REVISIONS);
 		}
 		return childrenFeatures;
 	}
@@ -336,7 +319,6 @@ public class ContributionItemProvider extends ProjectItemProvider {
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case ClassMakerPackage.CONTRIBUTION__DOMAIN_MODEL:
-		case ClassMakerPackage.CONTRIBUTION__REVISIONS:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
@@ -357,9 +339,6 @@ public class ContributionItemProvider extends ProjectItemProvider {
 		newChildDescriptors
 				.add(createChildParameter(ClassMakerPackage.Literals.ITEM__CUSTOMIZERS, ClassMakerFactory.eINSTANCE
 						.create(ClassMakerPackage.Literals.STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY)));
-
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.CONTRIBUTION__REVISIONS,
-				ClassMakerFactory.eINSTANCE.create(ClassMakerPackage.Literals.VERSION_TO_REVISION_MAP_ENTRY)));
 	}
 
 }

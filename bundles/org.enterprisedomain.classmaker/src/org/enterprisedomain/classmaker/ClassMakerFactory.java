@@ -160,6 +160,15 @@ public interface ClassMakerFactory extends EFactory {
 	CompletionNotificationAdapter createCompletionNotificationAdapter();
 
 	/**
+	 * Returns a new object of class '<em>Select Reveal Handler</em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return a new object of class '<em>Select Reveal Handler</em>'.
+	 * @generated
+	 */
+	SelectRevealHandler createSelectRevealHandler();
+
+	/**
 	 * Returns the package supported by this factory. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 

@@ -162,7 +162,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 				} catch (OperationCanceledException e) {
 				}
 				int result = (Integer) getGenerator().run(new String[] { "-forceOverwrite", "-codeFormatting", //$NON-NLS-1$ //$NON-NLS-2$
-						"default", "-model", //$NON-NLS-1$ //$NON-NLS-2$
+						"default", "-model", "-reconcile", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 						EcorePlugin.getWorkspaceRoot().getRawLocation().append(getGenModelLocation()).toString() });
 				getContributionState().setProjectVersion(monitor);
 				try {
@@ -244,6 +244,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 		}
 		genModel.reconcile();
 		genModel.initialize(ePackages);
+		genModel.setCanGenerate(true);
 		genModel.setComplianceLevel(GenJDKLevel.JDK70_LITERAL);
 		genModel.setUpdateClasspath(true);
 		genModel.setModelDirectory(projectPath.append(SOURCE_FOLDER_NAME).toString());
@@ -265,6 +266,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 							.customize(ECollections.asEList(projectPath, genModel, ePackages));
 			getContributionState().setPackageClassName(genModel.getGenPackages().get(0).getBasicPackageName());
 		}
+
 		genModel.setValidateModel(true);
 	}
 

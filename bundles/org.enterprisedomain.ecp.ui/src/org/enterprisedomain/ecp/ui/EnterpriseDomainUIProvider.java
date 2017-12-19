@@ -42,6 +42,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.internal.progress.ProgressManager;
 import org.enterprisedomain.classmaker.Contribution;
+import org.enterprisedomain.classmaker.SelectRevealHandler;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.core.IProgressRunner;
 import org.enterprisedomain.classmaker.core.IRunWrapper;
@@ -51,6 +52,7 @@ import org.enterprisedomain.ecp.Activator;
 import org.enterprisedomain.ecp.EnterpriseDomainProvider;
 import org.enterprisedomain.ecp.ui.actions.MakeAction;
 
+@SuppressWarnings("restriction")
 public class EnterpriseDomainUIProvider extends DefaultUIProvider {
 
 	public static final ComposeableAdapterFactory ENTERPRISE_DOMAIN_ITEM_PROVIDER_ADAPTER_FACTORY = new ComposedAdapterFactory(
@@ -63,6 +65,8 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider {
 	private Button isContributionButton;
 	private boolean isContribution;
 
+	private SelectRevealHandler selectRevealHandler = new SelectResourceHandler();
+
 	public EnterpriseDomainUIProvider() {
 		super(EnterpriseDomainProvider.NAME);
 	}
@@ -70,6 +74,8 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T getAdapter(Object adaptable, Class<T> adapterType) {
+		if (SelectRevealHandler.class.isAssignableFrom(adapterType))
+			return (T) selectRevealHandler;
 		if (IProgressMonitor.class.isAssignableFrom(adapterType))
 			return (T) ClassMakerPlugin.getProgressMonitor();
 		if (ComposeableAdapterFactory.class.isAssignableFrom(adapterType))
