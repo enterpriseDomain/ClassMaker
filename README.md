@@ -3,7 +3,7 @@ ClassMaker [![Code Triagers Badge](https://www.codetriage.com/kyrillzotkin/class
 
 ClassMaker is an Eclipse plug-in that allows to create classes programmatically, providing them to client bundle.  
 
-ClassMaker, automatically, generates the source code for provided model, compiles and releases binary, then installs it into its own runtime, and loads classes, making available to client's code through model reflective API.  
+ClassMaker, automatically, generates the source code from provided model, compiles and releases binary, then installs it into its own runtime, and loads classes, making available to client's code through model reflective API.  
 
 Here is how you can use it:  
 
