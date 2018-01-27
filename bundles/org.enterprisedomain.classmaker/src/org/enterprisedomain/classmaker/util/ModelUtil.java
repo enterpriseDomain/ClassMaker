@@ -35,28 +35,30 @@ public class ModelUtil {
 	 * @param conjunction
 	 *            true if exact matching is required, false if at least one of
 	 *            features are equal
-	 * @return whether the first and the second are a same EPackages
+	 * @return whether the first and second are the same EPackages
 	 */
 	public static boolean ePackagesAreEqual(EPackage first, EPackage second, boolean conjunction) {
-		if (first == null ^ second == null)
+		if (first == null || second == null)
 			return false;
-		return conjunction
-				? (first.eIsSet(EcorePackage.Literals.EPACKAGE__NS_URI)
-						&& second.eIsSet(EcorePackage.Literals.EPACKAGE__NS_URI)
-								? first.getNsURI().equals(second.getNsURI())
-								: false)
-						&& (first.eIsSet(EcorePackage.Literals.ENAMED_ELEMENT__NAME)
-								&& second.eIsSet(EcorePackage.Literals.ENAMED_ELEMENT__NAME)
-										? first.getName().equals(second.getName()) ? true : first.equals(second)
-										: false)
-				: (first.eIsSet(EcorePackage.Literals.EPACKAGE__NS_URI)
-						&& second.eIsSet(EcorePackage.Literals.EPACKAGE__NS_URI)
-								? first.getNsURI().equals(second.getNsURI())
-								: false)
-						|| (first.eIsSet(EcorePackage.Literals.ENAMED_ELEMENT__NAME)
-								&& second.eIsSet(EcorePackage.Literals.ENAMED_ELEMENT__NAME)
-										? first.getName().equals(second.getName()) ? true : first.equals(second)
-										: false);
+		else
+			return conjunction
+					? (first.eIsSet(EcorePackage.Literals.EPACKAGE__NS_URI)
+							&& second.eIsSet(EcorePackage.Literals.EPACKAGE__NS_URI)
+									? first.getNsURI().equals(second.getNsURI())
+									: false)
+							&& (first.eIsSet(EcorePackage.Literals.ENAMED_ELEMENT__NAME)
+									&& second.eIsSet(EcorePackage.Literals.ENAMED_ELEMENT__NAME)
+											? first.getName().equals(second.getName()) ? true : first.equals(second)
+											: false)
+					: (first.eIsSet(EcorePackage.Literals.EPACKAGE__NS_URI)
+							&& second.eIsSet(EcorePackage.Literals.EPACKAGE__NS_URI)
+									? first.getNsURI().equals(second.getNsURI())
+									: false)
+							|| (first.eIsSet(EcorePackage.Literals.ENAMED_ELEMENT__NAME)
+									&& second.eIsSet(EcorePackage.Literals.ENAMED_ELEMENT__NAME)
+											? first.getName().equals(second.getName()) ? true : first.equals(second)
+											: false);
+
 	}
 
 	public static boolean ePackagesAreEqual(EPackage first, EList<EPackage> second, boolean conjunction) {

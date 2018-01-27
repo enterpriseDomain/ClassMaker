@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ Copyright 2017 Kyrill Zotkin
+ 
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ 
+     http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<plugin>
+
+   <extension
+         point="org.eclipse.core.runtime.applications"
+         id="ClassMakerEditorAdvisorApplication">
+      <!-- @generated ClassMaker -->
+      <application>
+         <run class="org.enterprisedomain.classmaker.presentation.ClassMakerEditorAdvisor$Application"/>
+      </application>
+   </extension>
+
+   <extension point="org.eclipse.ui.perspectives">
+      <!-- @generated ClassMaker -->
+      <perspective
+            name="%_UI_Perspective_label"
+            class="org.enterprisedomain.classmaker.presentation.ClassMakerEditorAdvisor$Perspective"
+            id="org.enterprisedomain.classmaker.presentation.ClassMakerEditorAdvisorPerspective">
+      </perspective>
+   </extension>
+
+   <extension point="org.eclipse.ui.commands">
+      <!-- @generated ClassMaker -->
+      <command
+            name="%_UI_Menu_OpenURI_label"
+            description="%_UI_Menu_OpenURI_description"
+            categoryId="org.eclipse.ui.category.file"
+            id="org.enterprisedomain.classmaker.presentation.ClassMakerEditorAdvisorOpenURICommand"/>
+      <command
+            name="%_UI_Menu_Open_label"
+            description="%_UI_Menu_Open_description"
+            categoryId="org.eclipse.ui.category.file"
+            id="org.enterprisedomain.classmaker.presentation.ClassMakerEditorAdvisorOpenCommand"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.bindings">
+      <!-- @generated ClassMaker -->
+      <key
+            commandId="org.enterprisedomain.classmaker.presentation.ClassMakerEditorAdvisorOpenURICommand"
+            sequence="M1+U"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+      <key
+            commandId="org.enterprisedomain.classmaker.presentation.ClassMakerEditorAdvisorOpenCommand"
+            sequence="M1+O"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.actionSets">
+      <!-- @generated ClassMaker -->
+      <actionSet
+            label="%_UI_ClassMakerEditorAdvisor_ActionSet_label"
+            visible="true"
+            id="ClassMakerEditorAdvisorActionSet">
+         <action
+               label="%_UI_Menu_About_label"
+               class="org.enterprisedomain.classmaker.presentation.ClassMakerEditorAdvisor$AboutAction"
+               menubarPath="help/additions"
+               id="org.enterprisedomain.classmaker.presentation.ClassMakerEditorAdvisorAboutAction"/>
+         <action
+               label="%_UI_Menu_OpenURI_label"
+               definitionId="org.enterprisedomain.classmaker.presentation.ClassMakerEditorAdvisorOpenURICommand"
+               class="org.enterprisedomain.classmaker.presentation.ClassMakerEditorAdvisor$OpenURIAction"
+               menubarPath="file/additions"
+               id="org.enterprisedomain.classmaker.presentation.ClassMakerEditorAdvisorOpenURIAction"/>
+         <action
+               label="%_UI_Menu_Open_label"
+               definitionId="org.enterprisedomain.classmaker.presentation.ClassMakerEditorAdvisorOpenCommand"
+               class="org.enterprisedomain.classmaker.presentation.ClassMakerEditorAdvisor$OpenAction"
+               menubarPath="file/additions"
+               id="org.enterprisedomain.classmaker.presentation.ClassMakerEditorAdvisorOpenAction"/>
+      </actionSet>
+   </extension>
+
+   <extension point="org.eclipse.ui.actionSets">
+      <!-- @generated ClassMaker -->
+      <actionSet
+            label="%_UI_ClassMakerModelWizard_ActionSet_label"
+            visible="true"
+            id="org.enterprisedomain.classmaker.presentation.ClassMakerActionBarContributorActionSet">
+         <action
+               label="%_UI_ClassMakerModelWizard_label"
+               class="org.enterprisedomain.classmaker.presentation.ClassMakerActionBarContributor$NewAction"
+               menubarPath="file/new/additions"
+               id="org.enterprisedomain.classmaker.presentation.ClassMakerActionBarContributorNewAction"/>
+      </actionSet>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated ClassMaker -->
+      <editor
+            id="org.enterprisedomain.classmaker.presentation.ClassMakerEditorID"
+            name="%_UI_ClassMakerEditor_label"
+            icon="icons/full/obj16/ClassMakerModelFile.gif"
+            extensions="domainmodel"
+            class="org.enterprisedomain.classmaker.presentation.ClassMakerEditor"
+            contributorClass="org.enterprisedomain.classmaker.presentation.ClassMakerActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>

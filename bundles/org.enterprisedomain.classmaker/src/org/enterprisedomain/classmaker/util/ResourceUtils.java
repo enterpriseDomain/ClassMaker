@@ -216,7 +216,6 @@ public class ResourceUtils {
 		if (project.exists())
 			return;
 		IProgressMonitor pm = null;
-		boolean autoBuilding = project.getWorkspace().isAutoBuilding();
 		try {
 			pm = SubMonitor.convert(monitor, 3);
 			project.create(pm);
@@ -233,7 +232,6 @@ public class ResourceUtils {
 		} finally {
 			if (pm != null)
 				pm.done();
-			ResourceUtils.setAutoBuilding(project.getWorkspace(), autoBuilding);
 		}
 	}
 
@@ -247,10 +245,20 @@ public class ResourceUtils {
 		}
 	}
 
+	private static boolean oldAutoBuilding;
+
 	public static void setAutoBuilding(IWorkspace workspace, boolean value) throws CoreException {
 		IWorkspaceDescription d = workspace.getDescription();
 		d.setAutoBuilding(value);
 		workspace.setDescription(d);
+	}
+
+	public static void saveAutoBuilding(IWorkspace workspace) {
+		oldAutoBuilding = workspace.isAutoBuilding();
+	}
+
+	public static void restoreAutoBuilding(IWorkspace workspace) throws CoreException {
+		setAutoBuilding(workspace, oldAutoBuilding);
 	}
 
 	public static void cleanupDir(IProject project) throws CoreException {

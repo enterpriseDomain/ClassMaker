@@ -520,8 +520,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 				public void changed(Notification notification) throws Exception {
 					Resource theResource = (Resource) getChildren().get(0);
 					Resource resource = (Resource) notification.getNotifier();
-					if (!loading && !isSavingResource()
-							&& getFileName(resource.getURI()).equals(getFileName(theResource.getURI()))
+					if (!loading && !isSavingResource() && resource.getURI().equals(theResource.getURI())
 							&& !theResource.isModified() && theResource.isLoaded()) {
 						loading = true;
 						if (ProjectImpl.this.eIsSet(ClassMakerPackage.PROJECT__SELECT_REVEAL_HANDLER))
@@ -537,9 +536,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 					}
 				}
 
-				private String getFileName(URI uri) {
-					return uri.segment(uri.segmentCount() - 2);
-				}
 			};
 		}
 		return resourceReloadListener;
@@ -869,6 +865,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			return false;
 		initialize(false);
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
+		if (ClassMakerPlugin.getInstance().isTurnOffAutoBuilding() && workspace.isAutoBuilding()) {
+			ResourceUtils.setAutoBuilding(workspace, false);
+		}
 		IProject project = workspace.getRoot().getProject(projectName);
 		if (project.isOpen())
 			return true;
@@ -888,6 +887,11 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		IProject project = workspace.getRoot().getProject(projectName);
 		project.close(monitor);
+		if (ClassMakerPlugin.getInstance().isTurnOffAutoBuilding())
+			try {
+				ResourceUtils.restoreAutoBuilding(workspace);
+			} catch (IllegalArgumentException e) {
+			}
 	}
 
 	/**

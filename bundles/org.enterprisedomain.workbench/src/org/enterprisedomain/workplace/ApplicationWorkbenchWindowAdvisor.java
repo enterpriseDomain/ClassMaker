@@ -8,12 +8,8 @@ import org.eclipse.emf.ecp.spi.core.DefaultProvider;
 import org.eclipse.emf.ecp.spi.ui.DefaultUIProvider;
 import org.eclipse.emf.ecp.spi.ui.UIProvider;
 import org.eclipse.jface.operation.IRunnableWithProgress;
-import org.eclipse.jface.util.IPropertyChangeListener;
-import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.IEditorReference;
-import org.eclipse.ui.ISaveablePart;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
@@ -22,8 +18,9 @@ import org.eclipse.ui.application.WorkbenchWindowAdvisor;
 import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.MessageConsole;
-import org.enterprisedomain.classmaker.core.IProgressRunner;
+import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.core.IRunWrapper;
+import org.enterprisedomain.classmaker.core.IRunnerWithProgress;
 import org.enterprisedomain.ecp.EnterpriseDomainProvider;
 import org.enterprisedomain.ecp.ui.EnterpriseDomainUIProvider;
 
@@ -47,6 +44,7 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 		configurer.setTitle("enterpriseDomain Workbench"); //$NON-NLS-1$
 
 		configurer.setShowProgressIndicator(true);
+		ClassMakerPlugin.getInstance().setTurnOffAutoBuilding(true);
 	}
 
 	@Override
@@ -66,7 +64,7 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 
 		});
 
-		enterpriseDomainUIProvider.setProgressRunner(new IProgressRunner() {
+		enterpriseDomainUIProvider.setRunnerWithProgress(new IRunnerWithProgress() {
 
 			@Override
 			public void run(final IRunnableWithProgress runnable)

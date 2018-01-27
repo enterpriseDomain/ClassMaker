@@ -19,7 +19,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.jface.operation.IRunnableWithProgress;
 
-public interface IProgressRunner {
+public interface IRunnerWithProgress {
 
 	void run(IRunnableWithProgress runnable) throws InvocationTargetException, InterruptedException;
 
