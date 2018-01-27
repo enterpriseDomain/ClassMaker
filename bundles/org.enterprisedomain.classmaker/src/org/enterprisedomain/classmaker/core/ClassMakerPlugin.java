@@ -24,6 +24,8 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
@@ -36,6 +38,7 @@ import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.Customizer;
 import org.enterprisedomain.classmaker.impl.ClassMakerServiceImpl;
 import org.enterprisedomain.classmaker.util.ReflectiveFactory;
+import org.enterprisedomain.classmaker.util.ResourceUtils;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleEvent;
@@ -59,6 +62,8 @@ public class ClassMakerPlugin extends Plugin {
 
 	public static final String MODEL_RESOURCE_EXT_PREF_KEY = "resourceExtension"; //$NON-NLS-1$
 
+	public static final String TURN_OFF_AUTO_BUILDING_PREF_KEY = "turnOffAutoBuilding"; //$NON-NLS-1$
+
 	private static ClassMakerPlugin instance;
 
 	private static Object lock = new Object();
@@ -67,7 +72,7 @@ public class ClassMakerPlugin extends Plugin {
 
 	private static Object[] monitorParameters;
 
-	private static IProgressRunner runner;
+	private static IRunnerWithProgress runner;
 
 	private static IProgressMonitor progressMonitor;
 
@@ -78,6 +83,9 @@ public class ClassMakerPlugin extends Plugin {
 	private static ServiceTracker<ClassMakerService, ClassMakerServiceImpl> tracker;
 
 	private ServiceRegistration<ClassMakerService> reg;
+
+	private boolean turnOffAutoBuilding = Platform.getPreferencesService().getBoolean(PLUGIN_ID,
+			TURN_OFF_AUTO_BUILDING_PREF_KEY, false, null);
 
 	public static ClassMakerPlugin getInstance() {
 		return instance;
@@ -143,6 +151,7 @@ public class ClassMakerPlugin extends Plugin {
 
 			}
 		});
+		ResourceUtils.saveAutoBuilding(ResourcesPlugin.getWorkspace());
 	}
 
 	/*
@@ -153,16 +162,19 @@ public class ClassMakerPlugin extends Plugin {
 	 */
 	public void stop(BundleContext context) throws Exception {
 		IProgressMonitor monitor = getProgressMonitor();
-		Job.getJobManager().join(ResourcesPlugin.FAMILY_MANUAL_BUILD, monitor);
-		ResourcesPlugin.getWorkspace().save(true, monitor);
+		try {
+			Job.getJobManager().join(ResourcesPlugin.FAMILY_MANUAL_BUILD, monitor);
+			ResourcesPlugin.getWorkspace().save(true, monitor);
+		} catch (OperationCanceledException e) {
+		}
 		tracker.close();
 		reg.unregister();
 		progressMonitor = null;
 		instance = null;
 	}
 
-	public static void setProgressRunner(IProgressRunner progressRunner) {
-		ClassMakerPlugin.runner = progressRunner;
+	public static void setRunnerWithProgress(IRunnerWithProgress runner) {
+		ClassMakerPlugin.runner = runner;
 	}
 
 	public static void runWithProgress(IRunnableWithProgress runnable)
@@ -173,7 +185,7 @@ public class ClassMakerPlugin extends Plugin {
 	}
 
 	public static IProgressMonitor getProgressMonitor() {
-		if (progressMonitor == null)
+		if (progressMonitor == null || (progressMonitor != null && progressMonitor.isCanceled()))
 			progressMonitor = createProgressMonitor();
 		return progressMonitor;
 	}
@@ -220,6 +232,14 @@ public class ClassMakerPlugin extends Plugin {
 		if (monitorClass == null || monitorParameters == null)
 			setMonitorParameters(CodeGenUtil.EclipseUtil.StreamProgressMonitor.class, System.out);
 		return new WrappingProgressMonitor(ReflectiveFactory.create(monitorClass, monitorParameters));
+	}
+
+	public boolean isTurnOffAutoBuilding() {
+		return turnOffAutoBuilding;
+	}
+
+	public void setTurnOffAutoBuilding(boolean turnOffAutoBuilding) {
+		this.turnOffAutoBuilding = turnOffAutoBuilding;
 	}
 
 	public static IStatus createOKStatus(String message) {

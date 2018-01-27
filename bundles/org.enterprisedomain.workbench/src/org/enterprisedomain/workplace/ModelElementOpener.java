@@ -37,7 +37,8 @@ import org.enterprisedomain.ecp.EnterpriseDomainProvider;
 
 public class ModelElementOpener implements ECPModelElementOpener {
 
-	public static final String[] EDITOR_IDS = { "EcoreEditor", "org.eclipse.emfforms.editor.ecore.genericxmieditor" }; //$NON-NLS-1$ //$NON-NLS-2$
+	public static final String[] EDITOR_IDS = { "EcoreEditor", "org.eclipse.emfforms.editor.ecore.genericxmieditor", //$NON-NLS-1$ //$NON-NLS-2$
+			"org.enterprisedomain.workbench.modelEditor" }; //$NON-NLS-1$
 	private Resource resource;
 
 	public ModelElementOpener() {
@@ -77,10 +78,11 @@ public class ModelElementOpener implements ECPModelElementOpener {
 	}
 
 	private IEditorPart open(URI uri) {
-		if (uri.lastSegment().equals("ecore")) //$NON-NLS-1$
-			return openEditor(uri, EDITOR_IDS[0]);
-		else
-			return openEditor(uri, EDITOR_IDS[1]);
+		return openEditor(uri, EDITOR_IDS[2]);
+		// if (uri.lastSegment().equals("ecore")) //$NON-NLS-1$
+		// return openEditor(uri, EDITOR_IDS[0]);
+		// else
+		// return openEditor(uri, EDITOR_IDS[1]);
 	}
 
 	private IEditorPart openEditor(URI uri, String editorId) {
@@ -91,7 +93,8 @@ public class ModelElementOpener implements ECPModelElementOpener {
 					new java.net.URI(
 							"file" + IPath.DEVICE_SEPARATOR + IPath.SEPARATOR + IPath.SEPARATOR + uri.toFileString()), //$NON-NLS-1$
 					editorId, true);
-			EList<Adapter> target = ((GenericEditor) result).getEditingDomain().getResourceSet().eAdapters();
+			EList<Adapter> target = ((ModelEditor) result).getGenericEditor().getEditingDomain().getResourceSet()
+					.eAdapters();
 			for (Adapter adapter : Activator.getClassMaker().getWorkspace().getResourceSet().eAdapters())
 				if (adapter instanceof EContentAdapter && !target.contains(adapter))
 					target.add(adapter);

@@ -20,6 +20,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
+import java.util.concurrent.Semaphore;
 
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -53,6 +54,7 @@ import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.Contribution;
+import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.Revision;
 import org.enterprisedomain.classmaker.SCMRegistry;
 import org.enterprisedomain.classmaker.State;
@@ -207,9 +209,22 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 		try {
 			Contribution contrib = getWorkspace().createContribution(input.getDynamicModel(), monitor);
 			contrib.getDependencies().addAll(input.getDependencies());
+			final Semaphore wait = new Semaphore(0);
+			input.getCompletionListeners().add(new CompletionListenerImpl() {
+
+				@Override
+				public void completed(Project result) throws Exception {
+					wait.release();
+				}
+
+			});
 			for (CompletionListener listener : input.getCompletionListeners())
 				contrib.addCompletionListener(listener);
 			contrib.make(monitor);
+			try {
+				wait.acquire();
+			} catch (InterruptedException e) {
+			}
 			return contrib.getDomainModel().getGenerated();
 		} catch (CoreException e) {
 			ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
@@ -339,7 +354,23 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 		}
 		contribution.getDependencies().clear();
 		contribution.getDependencies().addAll(target.getDependencies());
+		final Semaphore wait = new Semaphore(0);
+		CompletionListener waitListener = new CompletionListenerImpl() {
+
+			@Override
+			public void completed(Project result) throws Exception {
+				wait.release();
+			}
+
+		};
+		target.getCompletionListeners().add(waitListener);
+		for (CompletionListener listener : target.getCompletionListeners())
+			contribution.addCompletionListener(listener);
 		contribution.make(monitor);
+		try {
+			wait.acquire();
+		} catch (InterruptedException e) {
+		}
 		return contribution.getDomainModel().getGenerated();
 	}
 

@@ -44,8 +44,8 @@ import org.eclipse.ui.internal.progress.ProgressManager;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.SelectRevealHandler;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
-import org.enterprisedomain.classmaker.core.IProgressRunner;
 import org.enterprisedomain.classmaker.core.IRunWrapper;
+import org.enterprisedomain.classmaker.core.IRunnerWithProgress;
 import org.enterprisedomain.classmaker.provider.ClassMakerItemProviderAdapterFactory;
 import org.enterprisedomain.classmaker.util.ClassMakerAdapterFactory;
 import org.enterprisedomain.ecp.Activator;
@@ -204,8 +204,8 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider {
 		ClassMakerPlugin.setClientRunWrapper(wrapper);
 	}
 
-	public void setProgressRunner(IProgressRunner progressRunner) {
-		ClassMakerPlugin.setProgressRunner(progressRunner);
+	public void setRunnerWithProgress(IRunnerWithProgress runner) {
+		ClassMakerPlugin.setRunnerWithProgress(runner);
 	}
 
 	@Override

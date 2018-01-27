@@ -97,30 +97,40 @@ public class OSGiEPackageLoader extends ContainerJob {
 				return Status.CANCEL_STATUS;
 			}
 			if (exception == null) {
-				return getOKStatus(osgiBundle);
+				return getStatus(osgiBundle);
 			} else {
 				throw new CoreException(ClassMakerPlugin.createErrorStatus(exception));
 			}
-		} finally {
+		} finally
+
+		{
 			monitor.done();
 			setException(null);
 			getContext().removeBundleListener(listener);
 		}
 	}
 
-	private IStatus getOKStatus(Bundle osgiBundle) {
+	private IStatus getStatus(Bundle osgiBundle) {
 		String ePackagesMsg = ""; //$NON-NLS-1$
-		if (getContributionState().getDomainModel().getGenerated() == null)
+		boolean warning = false;
+		if (getContributionState().getDomainModel().getGenerated() == null) {
 			ePackagesMsg = Messages.EPackageNo;
-		else {
+			warning = true;
+		} else {
 			EPackage ePackage = getContributionState().getDomainModel().getGenerated();
 			if (ePackage != null)
 				ePackagesMsg = ePackagesMsg + ePackage.getNsURI() + ", "; //$NON-NLS-1$
 			if (ePackagesMsg.length() > 2)
 				ePackagesMsg = ePackagesMsg.subSequence(0, ePackagesMsg.length() - 2).toString();
-			else
+			else {
 				ePackagesMsg = Messages.EPackageNo;
+				warning = true;
+			}
 		}
+		if (warning)
+			return ClassMakerPlugin.createWarningStatus(
+					NLS.bind(Messages.EPackageClassLoadComplete, new Object[] { osgiBundle.getSymbolicName(),
+							osgiBundle.getHeaders().get(Constants.BUNDLE_VERSION), ePackagesMsg }));
 		return ClassMakerPlugin.createOKStatus(Messages.OK + " " //$NON-NLS-1$
 				+ NLS.bind(Messages.EPackageClassLoadComplete, new Object[] { osgiBundle.getSymbolicName(),
 						osgiBundle.getHeaders().get(Constants.BUNDLE_VERSION), ePackagesMsg }));
@@ -146,7 +156,7 @@ public class OSGiEPackageLoader extends ContainerJob {
 			}
 			EPackage ePackage = null;
 			try {
-				ePackage = (EPackage) packageClass.getField("eINSTANCE").get(packageClass); // $NON-NLS-1$ //$NON-NLS-1$
+				ePackage = (EPackage) packageClass.getField("eINSTANCE").get(null); // $NON-NLS-1$ //$NON-NLS-1$
 				if (ePackage != null)
 					getContributionState().getDomainModel().setGenerated(ePackage);
 			} catch (ClassCastException e) {

@@ -49,5 +49,14 @@
          </view>
       </perspectiveExtension>
    </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.enterprisedomain.workplace.ModelEditor"
+            default="false"
+            id="org.enterprisedomain.workbench.modelEditor"
+            name="Model Editor">
+      </editor>
+   </extension>
 
 </plugin>

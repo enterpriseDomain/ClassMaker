@@ -524,7 +524,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		p0.getEClassifiers().add(c);
 		URI resourceURI = URI.createFileURI(ClassMakerTestsPlugin.getInstance().getStateLocation().append(p0.getName())
 				.append(p0.getNsPrefix()).addFileExtension("xmi").toString());
-		ResourceSet resourceSet = new ResourceSetImpl();
+		ResourceSet resourceSet = service.getWorkspace().getResourceSet();
 		Resource resource0 = resourceSet.createResource(resourceURI);
 		resource0.getContents().add(p0);
 		resource0.save(Collections.emptyMap());

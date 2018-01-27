@@ -520,8 +520,6 @@ public class StateImpl extends ItemImpl implements State {
 		loading = false;
 	}
 
-	private boolean saveResourceDuringMaking = false;
-
 	public void saveResource() {
 		if (getContribution().isSavingResource() || isMaking())
 			return;
@@ -537,7 +535,12 @@ public class StateImpl extends ItemImpl implements State {
 			} catch (IOException e) {
 				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createWarningStatus(e));
 			}
-			resource.getContents().addAll(importSource.getContents());
+			boolean deliver = resource.eDeliver();
+			resource.eSetDeliver(false);
+			resource.getContents().clear();
+			resource.getContents().addAll(EcoreUtil.copyAll(importSource.getContents()));
+			importSource.unload();
+			resource.eSetDeliver(deliver);
 			ClassMakerPlugin.getInstance().getLog()
 					.log(ClassMakerPlugin.createInfoStatus(NLS.bind(Messages.ResourceImported, importSource.getURI())));
 		} else if (getPhase().getValue() >= Stage.MODELED_VALUE && getDomainModel().getDynamic() != null
@@ -553,7 +556,7 @@ public class StateImpl extends ItemImpl implements State {
 		} catch (IOException e) {
 			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createWarningStatus(e));
 		} finally {
-			if (!saveResourceDuringMaking)
+			if (isMaking())
 				setMaking(false);
 			getContribution().setSavingResource(false);
 		}
@@ -647,7 +650,6 @@ public class StateImpl extends ItemImpl implements State {
 						return ListUtil.getLast(getCommitIds());
 					else
 						return ""; //$NON-NLS-1$
-				saveResourceDuringMaking = true;
 				saveResource();
 
 				try {

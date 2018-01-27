@@ -308,9 +308,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			result.checkout(revision.getVersion());
 			result.load(true);
 			EPackage model = EcoreUtil.copy(blueprint);
-			result.getDomainModel().setDynamic(model);
-			if (blueprint.eResource() != null)
-				blueprint.eResource().getContents().add(model);
+			result.getDomainModel().setDynamic(model);			
 			result.getState().saveResource();
 			return result;
 		} finally {

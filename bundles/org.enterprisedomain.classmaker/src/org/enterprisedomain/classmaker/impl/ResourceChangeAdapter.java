@@ -24,13 +24,15 @@ class ResourceChangeAdapter extends EContentAdapter {
 	public void notifyChanged(Notification notification) {
 		super.notifyChanged(notification);
 		if (notification.getFeatureID(Resource.class) == Resource.RESOURCE__IS_MODIFIED
-				&& notification.getEventType() == Notification.SET)
-			if (notification.getNotifier() instanceof Resource && !notification.getNewBooleanValue())
-				try {
-					project.notifyResourceChanged(notification);
-				} catch (Exception e) {
-					ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
-				}
+				&& notification.getEventType() == Notification.SET && notification.getNotifier() instanceof Resource
+				&& ((Resource) project.getChildren().get(0)).getURI()
+						.equals(((Resource) notification.getNotifier()).getURI())
+				&& !notification.getNewBooleanValue())
+			try {
+				project.notifyResourceChanged(notification);
+			} catch (Exception e) {
+				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
+			}
 	}
 
 }
