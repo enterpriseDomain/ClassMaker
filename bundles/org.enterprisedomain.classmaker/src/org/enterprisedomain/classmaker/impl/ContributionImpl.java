@@ -1090,6 +1090,11 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	}
 
 	@Override
+	protected void setResource(Resource resource) {
+		getChildren().set(0, resource);
+	}
+	
+	@Override
 	public boolean isDirty() {
 		if (isStateSet())
 			return getState().getResource().isModified();

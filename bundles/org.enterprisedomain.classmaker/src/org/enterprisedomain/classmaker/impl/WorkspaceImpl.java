@@ -308,7 +308,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			result.checkout(revision.getVersion());
 			result.load(true);
 			EPackage model = EcoreUtil.copy(blueprint);
-			result.getDomainModel().setDynamic(model);			
+			result.getDomainModel().setDynamic(model);
 			result.getState().saveResource();
 			return result;
 		} finally {
@@ -491,6 +491,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			project.setName(name);
 			registerProject(project);
 			project.create(monitor);
+			Revision revision = project.newRevision(project.nextVersion());
+			project.checkout(revision.getVersion());
 			return project;
 		} finally {
 			monitor.done();
@@ -520,11 +522,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * @generated NOT
 	 */
 	public Project getProject(EObject eObject) {
-		for (Project project : getProjects()) {
-			if (eObject.eResource().equals(project.getChildren().get(0)))
-				return project;
-		}
-		return null;
+		return getProject(eObject.eResource());
 	}
 
 	/**
@@ -534,8 +532,13 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 */
 	public Project getProject(Resource resource) {
 		for (Project project : getProjects()) {
-			if (resource.equals(project.getChildren().get(0)))
-				return project;
+			if (project.getChildren().get(0) instanceof Resource) {
+				if (resource.equals(project.getChildren().get(0)))
+					return project;
+			} else if (project.getChildren().get(0) instanceof EObject) {
+				if (resource.equals(((EObject) project.getChildren().get(0)).eResource()))
+					return project;
+			}
 		}
 		return null;
 	}
