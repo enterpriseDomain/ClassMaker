@@ -1,11 +1,7 @@
 package org.enterprisedomain.workplace;
 
 import java.net.URISyntaxException;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
@@ -14,26 +10,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecp.core.ECPProject;
-import org.eclipse.emf.ecp.core.util.ECPUtil;
-import org.eclipse.emf.ecp.core.util.observer.ECPProjectContentChangedObserver;
-import org.eclipse.emf.ecp.core.util.observer.ECPProjectContentTouchedObserver;
-import org.eclipse.emf.ecp.core.util.observer.ECPProvidersChangedObserver;
-import org.eclipse.emf.ecp.spi.core.DefaultProvider;
-import org.eclipse.emf.ecp.spi.core.InternalProject;
 import org.eclipse.emf.ecp.ui.util.ECPModelElementOpener;
-import org.eclipse.emf.edit.domain.IEditingDomainProvider;
-import org.eclipse.emfforms.spi.editor.GenericEditor;
-import org.eclipse.jface.util.IPropertyChangeListener;
-import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IEditorReference;
-import org.eclipse.ui.IPropertyListener;
-import org.eclipse.ui.ISaveablePart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
-import org.enterprisedomain.ecp.EnterpriseDomainProvider;
+import org.enterprisedomain.classmaker.Contribution;
+import org.enterprisedomain.classmaker.Project;
 
 public class ModelElementOpener implements ECPModelElementOpener {
 
@@ -53,9 +37,13 @@ public class ModelElementOpener implements ECPModelElementOpener {
 		if (modelElement instanceof EObject) {
 			if (((EObject) modelElement).eResource() != null)
 				resource = ((EObject) modelElement).eResource();
-			else
-				resource = (Resource) Activator.getClassMaker().getWorkspace().getProject(ecpProject.getName())
-						.getChildren().get(0);
+			else {
+				Project project = Activator.getClassMaker().getWorkspace().getProject(ecpProject.getName());
+				if (project instanceof Contribution)
+					resource = (Resource) project.getChildren().get(0);
+				else
+					resource = ((EObject) project.getChildren().get(0)).eResource();
+			}
 		}
 		if (resource != null)
 			editor = open(resource.getURI());

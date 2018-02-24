@@ -66,19 +66,16 @@
             step="generation.genmodel.setup">
       </stage>
       <stage
-            customizer="org.enterprisedomain.classmaker.jobs.export.CreateExporterCustomizer"
             id="org.enterprisedomain.classmaker.customization.stages.create.exporter"
             phase="exported"
             step="create.exporter">
       </stage>
       <stage
-            customizer="org.enterprisedomain.classmaker.jobs.install.CreateInstallerCustomizer"
             id="org.enterprisedomain.classmaker.customization.stages.create.installer"
             phase="installed"
             step="create.installer">
       </stage>
       <stage
-            customizer="org.enterprisedomain.classmaker.jobs.load.CreateLoaderCustomizer"
             id="org.enterprisedomain.classmaker.customization.stages.create.loader"
             phase="loaded"
             step="create.loader">

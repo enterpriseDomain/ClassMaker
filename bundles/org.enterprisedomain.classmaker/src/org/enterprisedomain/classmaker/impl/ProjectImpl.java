@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Date;
 
+import org.apache.tools.ant.taskdefs.condition.IsReachable;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -41,6 +42,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -357,10 +359,13 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * 
 	 * @generated NOT
 	 */
+	@SuppressWarnings("unchecked")
 	public EList<Object> getChildren() {
-		if (children == null) {
+		if (eIsSet(ClassMakerPackage.Literals.PROJECT__REVISION)
+				&& getRevision().eIsSet(ClassMakerPackage.Literals.REVISION__STATE))
+			return (EList<Object>) (EList<?>) getRevision().getState().getResource().getContents();
+		if (children == null)
 			children = ECollections.newBasicEList();
-		}
 		return children;
 	}
 
@@ -525,11 +530,11 @@ public class ProjectImpl extends EObjectImpl implements Project {
 						loading = true;
 						if (ProjectImpl.this.eIsSet(ClassMakerPackage.PROJECT__SELECT_REVEAL_HANDLER))
 							getSelectRevealHandler().prepare();
-						getChildren().set(0, resource);
-						theResource = ((Resource) getChildren().get(0));
-						theResource.setURI(getResourceURI());
-						theResource.unload();
-						theResource.load(Collections.emptyMap());
+						setResource(resource);
+						// theResource = ((Resource) getChildren().get(0));
+						// theResource.setURI(getResourceURI());
+						// theResource.unload();
+						// theResource.load(Collections.emptyMap());
 						if (ProjectImpl.this.eIsSet(ClassMakerPackage.PROJECT__SELECT_REVEAL_HANDLER))
 							getSelectRevealHandler().selectReveal(theResource);
 						loading = false;
@@ -539,6 +544,10 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			};
 		}
 		return resourceReloadListener;
+	}
+
+	protected void setResource(Resource resource) {
+		getRevision().getState().setResource(resource);
 	}
 
 	/**
@@ -714,7 +723,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * @generated NOT
 	 */
 	public void delete(EList<Object> objects) {
-		((Resource) getChildren().get(0)).getContents().removeAll(objects);
+		((EObject) getChildren().get(0)).eResource().getContents().removeAll(objects);
 	}
 
 	public void notifyCompletion() throws Exception {
@@ -776,6 +785,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * @generated NOT
 	 */
 	public void doNewRevision(Revision newRevision) {
+		State newState = newRevision.newState();
+		newRevision.setTimestamp(newState.getTimestamp());
 	}
 
 	/**
@@ -920,7 +931,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		}
 		getWorkspace().getResourceSet().eAdapters().add(resourceAdapter);
 		addResourceChangeListener(getResourceReloadListener());
-		getChildren().add(resource);
+		getRevision().getState().setResource(resource);
 		// TODO Add SCM support if commit
 		return ""; //$NON-NLS-1$
 	}

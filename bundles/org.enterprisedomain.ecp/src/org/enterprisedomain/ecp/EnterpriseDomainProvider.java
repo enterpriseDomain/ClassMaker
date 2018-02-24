@@ -15,6 +15,7 @@
  */
 package org.enterprisedomain.ecp;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Collection;
@@ -29,6 +30,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.command.BasicCommandStack;
 import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
@@ -88,8 +90,44 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 
 	private Blueprint blueprint;
 
+	private Adapter adapter = new EContentAdapter() {
+
+		@Override
+		public void notifyChanged(Notification notification) {
+			super.notifyChanged(notification);
+			Resource resource = null;
+			if (notification.getEventType() == Notification.ADD
+					&& notification.getFeatureID(Resource.class) == Resource.RESOURCE__CONTENTS
+					&& notification.getNotifier() instanceof Resource) {
+				resource = (Resource) notification.getNotifier();
+			} else if (notification.getEventType() == Notification.ADD
+					&& notification.getNotifier() instanceof EObject) {
+				final Object feature = notification.getFeature();
+				if (feature instanceof EReference) {
+					final EReference eReference = (EReference) feature;
+					if (eReference.isContainment()) {
+						resource = ((EObject) notification.getNewValue()).eResource();
+					}
+				}
+			}
+			if (resource == null) {
+				return;
+			}
+			Project domainProject = Activator.getClassMaker().getWorkspace().getProject(resource);
+			if (domainProject != null && !(domainProject instanceof Contribution)) {
+				try {
+					resource.save(Collections.emptyMap());
+				} catch (final IOException ex) {
+					Activator.log(ex);
+				}
+			}
+		}
+
+	};
+
 	public EnterpriseDomainProvider() {
 		super(NAME);
+		Activator.getClassMaker().getWorkspace().getResourceSet().eAdapters().add(adapter);
 	}
 
 	@Override
@@ -282,14 +320,6 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 		if (element instanceof ResourceAdapter)
 			return getModelContext(((ResourceAdapter) element).getProject());
 
-		if (element instanceof EObject) {
-			for (InternalProject project : getOpenProjects()) {
-				Project domainProject = Activator.getClassMaker().getWorkspace().getProject((EObject) element);
-				if (domainProject != null && project.getName().equals(domainProject.getName()))
-					return project;
-			}
-		}
-
 		if (element instanceof Resource) {
 			for (InternalProject project : getOpenProjects()) {
 				Project domainProject = Activator.getClassMaker().getWorkspace().getProject((Resource) element);
@@ -310,6 +340,10 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 						return project;
 				}
 			}
+		}
+
+		if (element instanceof EObject) {
+			return getModelContext(((EObject) element).eResource());
 		}
 
 		return null;
@@ -383,9 +417,11 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 		} else if (parent instanceof ECPProject) {
 			final ECPProject project = (ECPProject) parent;
 			final Project domainProject = Activator.getClassMaker().getWorkspace().getProject(project.getName());
-			if (domainProject != null && !domainProject.getChildren().isEmpty()
-					&& domainProject.getChildren().get(0) instanceof Resource)
-				childrenList.addChildren(((Resource) domainProject.getChildren().get(0)).getContents());
+			if (domainProject != null && !domainProject.getChildren().isEmpty())
+				if (domainProject instanceof Contribution && domainProject.getChildren().get(0) instanceof Resource)
+					childrenList.addChildren(((Resource) domainProject.getChildren().get(0)).getContents());
+				else if (domainProject instanceof Project && !(domainProject instanceof Contribution))
+					childrenList.addChildren(domainProject.getChildren());
 			// } else if (parent instanceof Resource) {
 			// Resource resource = (Resource) parent;
 			// childrenList.addChildren(resource.getContents());
@@ -529,6 +565,8 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 		for (Object child : Activator.getClassMaker().getWorkspace().getProject(project.getName()).getChildren())
 			if (child instanceof Resource)
 				result |= ((Resource) child).isModified();
+			else if (child instanceof EObject)
+				result |= ((EObject) child).eResource().isModified();
 		return result;
 	}
 
