@@ -114,6 +114,7 @@ public class ModelPairItemProvider extends ItemProviderAdapter implements IEditi
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(ClassMakerPackage.Literals.MODEL_PAIR__DYNAMIC);
 			childrenFeatures.add(ClassMakerPackage.Literals.MODEL_PAIR__GENERATED);
 		}
 		return childrenFeatures;
@@ -167,8 +168,6 @@ public class ModelPairItemProvider extends ItemProviderAdapter implements IEditi
 
 		switch (notification.getFeatureID(ModelPair.class)) {
 		case ClassMakerPackage.MODEL_PAIR__DYNAMIC:
-			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-			return;
 		case ClassMakerPackage.MODEL_PAIR__GENERATED:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;

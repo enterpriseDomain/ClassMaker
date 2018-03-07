@@ -110,8 +110,8 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 	}
 
 	/**
-	 * The cached value of the '{@link #getDynamic() <em>Dynamic</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getDynamic() <em>Dynamic</em>}' containment
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getDynamic()
 	 * @generated
@@ -155,15 +155,6 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 	 * @generated
 	 */
 	public EPackage getDynamic() {
-		if (dynamic != null && dynamic.eIsProxy()) {
-			InternalEObject oldDynamic = (InternalEObject) dynamic;
-			dynamic = (EPackage) eResolveProxy(oldDynamic);
-			if (dynamic != oldDynamic) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassMakerPackage.MODEL_PAIR__DYNAMIC,
-							oldDynamic, dynamic));
-			}
-		}
 		return dynamic;
 	}
 
@@ -172,8 +163,18 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 	 * 
 	 * @generated
 	 */
-	public EPackage basicGetDynamic() {
-		return dynamic;
+	public NotificationChain basicSetDynamic(EPackage newDynamic, NotificationChain msgs) {
+		EPackage oldDynamic = dynamic;
+		dynamic = newDynamic;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					ClassMakerPackage.MODEL_PAIR__DYNAMIC, oldDynamic, newDynamic);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -182,11 +183,20 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 	 * @generated
 	 */
 	public void setDynamic(EPackage newDynamic) {
-		EPackage oldDynamic = dynamic;
-		dynamic = newDynamic;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.MODEL_PAIR__DYNAMIC, oldDynamic,
-					dynamic));
+		if (newDynamic != dynamic) {
+			NotificationChain msgs = null;
+			if (dynamic != null)
+				msgs = ((InternalEObject) dynamic).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - ClassMakerPackage.MODEL_PAIR__DYNAMIC, null, msgs);
+			if (newDynamic != null)
+				msgs = ((InternalEObject) newDynamic).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - ClassMakerPackage.MODEL_PAIR__DYNAMIC, null, msgs);
+			msgs = basicSetDynamic(newDynamic, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.MODEL_PAIR__DYNAMIC, newDynamic,
+					newDynamic));
 	}
 
 	/**
@@ -298,6 +308,8 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+		case ClassMakerPackage.MODEL_PAIR__DYNAMIC:
+			return basicSetDynamic(null, msgs);
 		case ClassMakerPackage.MODEL_PAIR__PARENT:
 			return basicSetParent(null, msgs);
 		}
@@ -327,9 +339,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 		case ClassMakerPackage.MODEL_PAIR__DYNAMIC:
-			if (resolve)
-				return getDynamic();
-			return basicGetDynamic();
+			return getDynamic();
 		case ClassMakerPackage.MODEL_PAIR__GENERATED:
 			if (resolve)
 				return getGenerated();

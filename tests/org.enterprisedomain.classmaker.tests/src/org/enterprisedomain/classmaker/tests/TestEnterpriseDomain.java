@@ -436,6 +436,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		cl.getEStructuralFeatures().add(a);
 		p.getEClassifiers().add(cl);
 		EPackage e0 = service.make(p, getProgressMonitor());
+		assertEquals("http://" + e0.getName() + "/0.1", e0.getNsURI());
 		EClass c0 = (EClass) e0.getEClassifier(cl.getName());
 		o = e0.getEFactoryInstance().create(c0);
 		assertEquals(c0.getName(), o.getClass().getSimpleName());
@@ -452,6 +453,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		b.setEType(EcorePackage.Literals.EINT);
 		((EClass) p2.getEClassifier(cl.getName())).getEStructuralFeatures().add(b);
 		EPackage e1 = service.replace(p, p2, getProgressMonitor());
+		assertEquals("http://" + e1.getName() + "/0.2", e1.getNsURI());
 		EClass cla = (EClass) e1.getEClassifier(cl.getName());
 		o = e1.getEFactoryInstance().create(cla);
 		assertEquals(cla.getName(), o.getClass().getSimpleName());
