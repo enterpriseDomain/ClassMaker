@@ -9,6 +9,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.command.ChangeCommand;
 import org.eclipse.emf.edit.command.CommandActionDelegate;
 import org.eclipse.emf.edit.command.CommandParameter;
@@ -55,11 +56,11 @@ public class MakeProjectCommand extends ChangeCommand implements CommandActionDe
 				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 					try {
 						Project project = classMaker.getWorkspace().getProject((String) projectName);
+						EPackage ePackage = project.getRevision().getState().getDomainModel().getDynamic();
 						Revision newRevision = project.newRevision(project.nextVersion());
 						newRevision.create(monitor);
-						EPackage ePackage = (EPackage) ((Resource) project.getChildren().get(0)).getContents().get(0);
 						project.checkout(newRevision.getVersion());
-						newRevision.getState().getDomainModel().setDynamic(ePackage);
+						newRevision.getState().getDomainModel().setDynamic(EcoreUtil.copy(ePackage));
 						project.make(monitor);
 					} catch (CoreException e) {
 						monitor.setCanceled(true);

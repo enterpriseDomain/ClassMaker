@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Date;
 
-import org.apache.tools.ant.taskdefs.condition.IsReachable;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;

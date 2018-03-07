@@ -62,10 +62,11 @@ public interface ModelPair extends EObject {
 	/**
 	 * Sets the value of the
 	 * '{@link org.enterprisedomain.classmaker.ModelPair#getDynamic
-	 * <em>Dynamic</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <em>Dynamic</em>}' containment reference. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @param value
-	 *            the new value of the '<em>Dynamic</em>' reference.
+	 *            the new value of the '<em>Dynamic</em>' containment reference.
 	 * @see #getDynamic()
 	 * @generated
 	 */

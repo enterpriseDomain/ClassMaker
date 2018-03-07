@@ -2607,11 +2607,11 @@ public interface ClassMakerPackage extends EPackage {
 	EClass getModelPair();
 
 	/**
-	 * Returns the meta object for the reference
+	 * Returns the meta object for the containment reference
 	 * '{@link org.enterprisedomain.classmaker.ModelPair#getDynamic
 	 * <em>Dynamic</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the reference '<em>Dynamic</em>'.
+	 * @return the meta object for the containment reference '<em>Dynamic</em>'.
 	 * @see org.enterprisedomain.classmaker.ModelPair#getDynamic()
 	 * @see #getModelPair()
 	 * @generated
@@ -3678,8 +3678,8 @@ public interface ClassMakerPackage extends EPackage {
 		EClass MODEL_PAIR = eINSTANCE.getModelPair();
 
 		/**
-		 * The meta object literal for the '<em><b>Dynamic</b></em>' reference feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Dynamic</b></em>' containment
+		 * reference feature. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
