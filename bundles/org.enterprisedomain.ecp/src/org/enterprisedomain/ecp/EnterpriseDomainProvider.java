@@ -92,6 +92,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 
 	private Adapter adapter = new EContentAdapter() {
 
+		@SuppressWarnings("unchecked")
 		@Override
 		public void notifyChanged(Notification notification) {
 			super.notifyChanged(notification);
@@ -121,6 +122,9 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 					Activator.log(ex);
 				}
 			}
+			InternalProject project = (InternalProject) getModelContext(resource);
+			if (project != null)
+				project.notifyObjectsChanged((Collection<Object>) (Collection<?>) Arrays.asList(project), true);
 		}
 
 	};
@@ -323,7 +327,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 		if (element instanceof Resource) {
 			for (InternalProject project : getOpenProjects()) {
 				Project domainProject = Activator.getClassMaker().getWorkspace().getProject((Resource) element);
-				if (project.getName().equals(domainProject.getName()))
+				if (domainProject != null && project.getName().equals(domainProject.getName()))
 					return project;
 			}
 			element = ((Resource) element).getResourceSet();
