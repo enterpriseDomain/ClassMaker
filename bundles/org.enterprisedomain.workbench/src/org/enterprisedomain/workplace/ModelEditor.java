@@ -39,7 +39,10 @@ public class ModelEditor extends MultiPageEditorPart {
 
 	@Override
 	public boolean isSaveAsAllowed() {
-		return getActiveEditor().isSaveAsAllowed();
+		if (getActiveEditor() == null)
+			return getGenericEditor().isSaveAsAllowed();
+		else
+			return getActiveEditor().isSaveAsAllowed();
 	}
 
 }
