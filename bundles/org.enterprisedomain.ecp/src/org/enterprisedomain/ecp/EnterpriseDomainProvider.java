@@ -478,10 +478,10 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 			visiblePackages.add(((Contribution) result).getDomainModel().getGenerated().getNsURI());
 			addVisiblePackages(project);
 			project.notifyObjectsChanged((Collection<Object>) (Collection<?>) Arrays.asList(project), true);
-			ECPUtil.getECPObserverBus().notify(ECPRepositoriesChangedObserver.class).repositoriesChanged(
-					(Collection<ECPRepository>) (Collection<?>) Arrays.asList(project.getRepository()),
-					(Collection<ECPRepository>) (Collection<?>) Arrays.asList(project.getRepository()));
-
+			Collection<ECPRepository> repositories = (Collection<ECPRepository>) (Collection<?>) Arrays
+					.asList(project.getRepository());
+			ECPUtil.getECPObserverBus().notify(ECPRepositoriesChangedObserver.class).repositoriesChanged(repositories,
+					repositories);
 		}
 	}
 
