@@ -269,8 +269,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 					monitor.setCanceled(true);
 					e.printStackTrace();
 				}
+				PDECore.getDefault().getModelManager().targetReloaded(monitor);
 			}
-			PDECore.getDefault().getModelManager().targetReloaded(monitor);
 		} catch (OperationCanceledException e) {
 			monitor.setCanceled(true);
 			return;
@@ -532,10 +532,10 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 */
 	public Project getProject(Resource resource) {
 		for (Project project : getProjects()) {
-			if (project.getChildren().get(0) instanceof Resource) {
+			if (!project.getChildren().isEmpty() && project.getChildren().get(0) instanceof Resource) {
 				if (resource.equals(project.getChildren().get(0)))
 					return project;
-			} else if (project.getChildren().get(0) instanceof EObject) {
+			} else if (!project.getChildren().isEmpty() && project.getChildren().get(0) instanceof EObject) {
 				if (resource.equals(((EObject) project.getChildren().get(0)).eResource()))
 					return project;
 			}
