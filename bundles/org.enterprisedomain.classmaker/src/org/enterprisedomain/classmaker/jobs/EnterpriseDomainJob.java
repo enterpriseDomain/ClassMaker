@@ -105,8 +105,6 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 
 	private Properties properties;
 
-	private ProgressProvider previousProgressProvider = null;
-
 	public EnterpriseDomainJob(String name, int stateTimestamp) {
 		super(name);
 		setStateTimestamp(stateTimestamp);

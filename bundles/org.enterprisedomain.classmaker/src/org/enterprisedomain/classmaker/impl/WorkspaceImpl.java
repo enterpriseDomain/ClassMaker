@@ -76,6 +76,7 @@ import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.util.ClassMakerSwitch;
 import org.enterprisedomain.classmaker.util.ModelUtil;
 import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.Version;
 
 /**
@@ -223,6 +224,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		}
 	}
 
+	private static boolean targetPlatformAlreadySet = false;
+
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -230,46 +233,49 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 */
 	@SuppressWarnings("restriction")
 	public void provision(IProgressMonitor monitor) throws CoreException {
+		if (System.getProperty("buildingWithTycho") != null) {
+			if (targetPlatformAlreadySet) {
+				return;
+			}
+			targetPlatformAlreadySet = true;
+		} else {
+			return;
+		}
 		try {
-			IPath targetPlatformLocation = ClassMakerPlugin.getInstance().getStateLocation().append("target")
-					.append("workspace").addFileExtension("target");
+			Bundle currentBundle = FrameworkUtil.getBundle(getClass());
 			ITargetPlatformService targetPlatformService = TargetPlatformService.getDefault();
 			ITargetDefinition targetDefinition = null;
-			if (targetPlatformLocation.toFile().exists())
-				targetDefinition = targetPlatformService.getTarget(targetPlatformLocation.toFile().toURI())
-						.getTargetDefinition();
-			if (targetDefinition == null) {
-				targetDefinition = targetPlatformService.newTarget();
-				targetDefinition.setName("Platform");
-				Bundle[] bundles = Platform.getBundle("org.eclipse.core.runtime").getBundleContext().getBundles();
-				List<ITargetLocation> bundleContainers = new ArrayList<ITargetLocation>();
-				Set<File> dirs = new HashSet<File>();
-				for (Bundle bundle : bundles) {
-					EquinoxBundle bundleImpl = (EquinoxBundle) bundle;
-					Generation generation = (Generation) bundleImpl.getModule().getCurrentRevision().getRevisionInfo();
-					File file = generation.getBundleFile().getBaseFile();
-					File folder = file.getParentFile();
-					if (!dirs.contains(folder)) {
-						dirs.add(folder);
-						bundleContainers.add(targetPlatformService.newDirectoryLocation(folder.getAbsolutePath()));
-					}
+			targetDefinition = targetPlatformService.newTarget();
+			targetDefinition.setName("Platform");
+			Bundle[] bundles = Platform.getBundle("org.eclipse.core.runtime").getBundleContext().getBundles();
+			List<ITargetLocation> bundleContainers = new ArrayList<ITargetLocation>();
+			Set<File> dirs = new HashSet<File>();
+			for (Bundle bundle : bundles) {
+				if (bundle.equals(currentBundle)) {
+					continue;
 				}
-				targetDefinition
-						.setTargetLocations(bundleContainers.toArray(new ITargetLocation[bundleContainers.size()]));
-				targetDefinition.setArch(Platform.getOSArch());
-				targetDefinition.setOS(Platform.getOS());
-				targetDefinition.setWS(Platform.getWS());
-				targetDefinition.setNL(Platform.getNL());
-				targetPlatformService.saveTargetDefinition(targetDefinition);
-				Job job = new LoadTargetDefinitionJob(targetDefinition);
-				job.schedule();
-				try {
-					job.join();
-				} catch (InterruptedException e) {
-					monitor.setCanceled(true);
-					e.printStackTrace();
+				EquinoxBundle bundleImpl = (EquinoxBundle) bundle;
+				Generation generation = (Generation) bundleImpl.getModule().getCurrentRevision().getRevisionInfo();
+				File file = generation.getBundleFile().getBaseFile();
+				File folder = file.getParentFile();
+				if (!dirs.contains(folder)) {
+					dirs.add(folder);
+					bundleContainers.add(targetPlatformService.newDirectoryLocation(folder.getAbsolutePath()));
 				}
-				PDECore.getDefault().getModelManager().targetReloaded(monitor);
+			}
+			targetDefinition.setTargetLocations(bundleContainers.toArray(new ITargetLocation[bundleContainers.size()]));
+			targetDefinition.setArch(Platform.getOSArch());
+			targetDefinition.setOS(Platform.getOS());
+			targetDefinition.setWS(Platform.getWS());
+			targetDefinition.setNL(Platform.getNL());
+			targetPlatformService.saveTargetDefinition(targetDefinition);
+			LoadTargetDefinitionJob job = new LoadTargetDefinitionJob(targetDefinition);
+			job.schedule();
+			try {
+				job.join();
+			} catch (InterruptedException e) {
+				monitor.setCanceled(true);
+				e.printStackTrace();
 			}
 		} catch (OperationCanceledException e) {
 			monitor.setCanceled(true);

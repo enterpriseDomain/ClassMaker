@@ -22,7 +22,7 @@
    <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
       <!-- @generated ClassMaker -->
       <factory
-            uri="http://org/enterprisedomain/ClassMaker/0.7.902"
+            uri="http://org/enterprisedomain/ClassMaker/0.7.911"
             class="org.enterprisedomain.classmaker.provider.ClassMakerItemProviderAdapterFactory"
             supportedTypes=
               "org.eclipse.emf.edit.provider.IEditingDomainItemProvider

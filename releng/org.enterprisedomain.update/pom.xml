@@ -3,9 +3,9 @@
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
 		<artifactId>org.enterprisedomain.releng</artifactId>
-		<version>0.7.902-SNAPSHOT</version>
+		<version>0.7.911-SNAPSHOT</version>
 	</parent>
 	<artifactId>org.enterprisedomain.update</artifactId>
-	<version>0.7.902-SNAPSHOT</version>
+	<version>0.7.911-SNAPSHOT</version>
 	<packaging>eclipse-update-site</packaging>
 </project>

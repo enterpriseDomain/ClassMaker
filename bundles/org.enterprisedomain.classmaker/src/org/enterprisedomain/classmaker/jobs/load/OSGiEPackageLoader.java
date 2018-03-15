@@ -90,20 +90,17 @@ public class OSGiEPackageLoader extends ContainerJob {
 				}
 			} else
 				return ClassMakerPlugin.createErrorStatus(NLS.bind(Messages.BundleNotFound, getProject().getName()));
-
-			try {
-				loaded.acquire();
-			} catch (InterruptedException e) {
-				return Status.CANCEL_STATUS;
-			}
 			if (exception == null) {
+				try {
+					loaded.acquire();
+				} catch (InterruptedException e) {
+					return Status.CANCEL_STATUS;
+				}
 				return getStatus(osgiBundle);
 			} else {
 				throw new CoreException(ClassMakerPlugin.createErrorStatus(exception));
 			}
-		} finally
-
-		{
+		} finally {
 			monitor.done();
 			setException(null);
 			getContext().removeBundleListener(listener);

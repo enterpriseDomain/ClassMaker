@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
 		<artifactId>org.enterprisedomain.releng</artifactId>
-		<version>0.7.902-SNAPSHOT</version>
+		<version>0.7.911-SNAPSHOT</version>
 	</parent>
 	<artifactId>org.enterprisedomain.target</artifactId>
 	<packaging>eclipse-target-definition</packaging>
@@ -15,19 +15,24 @@
 				<artifactId>target-platform-configuration</artifactId>
 				<version>${tycho.version}</version>
 				<configuration>
+					<executionEnvironment>JavaSE-1.8</executionEnvironment>
 					<dependency-resolution>
 						<profileProperties>
 							<!-- set property so that the filter condition on the p2 dependencies 
 								from org.eclipse.swt to the fragments does not match -->
 							<org.eclipse.swt.buildtime>true</org.eclipse.swt.buildtime>
 							<executionEnvironment>JavaSE-1.8</executionEnvironment>
-							<executionEnvironment>JavaSE-1.7</executionEnvironment>							
 						</profileProperties>
 						<extraRequirements>
 							<requirement>
 								<type>eclipse-plugin</type>
 								<id>org.eclipse.osgi.compatibility.state</id>
 								<versionRange>0.0.0</versionRange>
+							</requirement>
+							<requirement>
+								<type>eclipse-plugin</type>
+								<artifactId>org.enterprisedomain.classmaker.osgi.systemextension</artifactId>
+								<version>0.7.911-SNAPSHOT</version>
 							</requirement>
 						</extraRequirements>
 					</dependency-resolution>
