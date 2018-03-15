@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <?artifactRepository version='1.1.0'?>
 <artifacts size='1'>
-  <artifact classifier='osgi.bundle' id='org.enterprisedomain.classmaker.edit' version='1.0.0.201711111125'>
+  <artifact classifier='osgi.bundle' id='org.enterprisedomain.classmaker.edit' version='1.0.0.201803151513'>
     <properties size='5'>
-      <property name='artifact.size' value='80627'/>
-      <property name='download.size' value='80627'/>
+      <property name='artifact.size' value='86533'/>
+      <property name='download.size' value='86533'/>
       <property name='maven-groupId' value='org.enterprisedomain'/>
       <property name='maven-artifactId' value='org.enterprisedomain.classmaker.edit'/>
       <property name='maven-version' value='1.0.0-SNAPSHOT'/>

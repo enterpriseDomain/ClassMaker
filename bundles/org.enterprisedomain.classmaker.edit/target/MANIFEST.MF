@@ -4,7 +4,7 @@ Bundle-SymbolicName: org.enterprisedomain.classmaker.edit;singleton:=t
 Require-Bundle: org.eclipse.core.runtime,org.enterprisedomain.classmak
  er;visibility:=reexport,org.eclipse.emf.edit;visibility:=reexport,org
  .eclipse.emf.ecore;visibility:=reexport,org.eclipse.emf.ecore.edit;vi
- sibility:=reexport
+ sibility:=reexport,org.eclipse.jface
 Bundle-ManifestVersion: 2
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
@@ -12,7 +12,7 @@ Bundle-Vendor: %providerName
 Export-Package: org.enterprisedomain.classmaker.edit.command,org.enter
  prisedomain.classmaker.provider
 Bundle-Name: %pluginName
-Bundle-Version: 1.0.0.201711111125
+Bundle-Version: 1.0.0.201803151513
 Bundle-ClassPath: .
 Bundle-Localization: plugin
 Bundle-Activator: org.enterprisedomain.classmaker.provider.ClassMakerE
