@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
 		<artifactId>org.enterprisedomain.bundles</artifactId>
-		<version>0.7.902-SNAPSHOT</version>
+		<version>0.7.911-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>org.enterprisedomain.classmaker.osgi.systemextension</artifactId>

@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
 		<artifactId>org.enterprisedomain.root</artifactId>
-		<version>0.7.902-SNAPSHOT</version>
+		<version>0.7.911-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
@@ -19,6 +19,9 @@
 				<artifactId>tycho-surefire-plugin</artifactId>
 				<version>${tycho.version}</version>
 				<configuration>
+					<systemProperties>
+						<buildingWithTycho>true</buildingWithTycho>
+					</systemProperties>
 					<useSystemClassLoader>true</useSystemClassLoader>
 					<useManifestOnlyJar>false</useManifestOnlyJar>
 					<dependency>
@@ -26,8 +29,15 @@
 						<artifactId>org.eclipse.core.runtime.compatibility.registry</artifactId>
 						<version>0.0.0</version>
 					</dependency>
+					<frameworkExtensions>
+						<frameworkExtension>
+							<groupId>org.enterprisedomain</groupId>
+							<artifactId>org.enterprisedomain.classmaker.osgi.systemextension</artifactId>
+							<version>0.7.911-SNAPSHOT</version>
+						</frameworkExtension>
+					</frameworkExtensions>
 				</configuration>
-			</plugin>			
+			</plugin>
 		</plugins>
 	</build>
 
