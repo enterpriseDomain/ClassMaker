@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <units size='1'>
-  <unit id='org.enterprisedomain.classmaker.edit' version='1.0.0.201711111125'>
-    <update id='org.enterprisedomain.classmaker.edit' range='[0.0.0,1.0.0.201711111125)' severity='0'/>
+  <unit id='org.enterprisedomain.classmaker.edit' version='1.0.0.201803151513'>
+    <update id='org.enterprisedomain.classmaker.edit' range='[0.0.0,1.0.0.201803151513)' severity='0'/>
     <properties size='8'>
       <property name='df_LT.pluginName' value='ClassMaker Edit Support'/>
       <property name='df_LT.providerName' value='www.example.org'/>
@@ -13,28 +13,29 @@
       <property name='maven-version' value='1.0.0-SNAPSHOT'/>
     </properties>
     <provides size='6'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='org.enterprisedomain.classmaker.edit' version='1.0.0.201711111125'/>
-      <provided namespace='osgi.bundle' name='org.enterprisedomain.classmaker.edit' version='1.0.0.201711111125'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='org.enterprisedomain.classmaker.edit' version='1.0.0.201803151513'/>
+      <provided namespace='osgi.bundle' name='org.enterprisedomain.classmaker.edit' version='1.0.0.201803151513'/>
       <provided namespace='java.package' name='org.enterprisedomain.classmaker.edit.command' version='0.0.0'/>
       <provided namespace='java.package' name='org.enterprisedomain.classmaker.provider' version='0.0.0'/>
       <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
       <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
     </provides>
-    <requires size='5'>
+    <requires size='6'>
       <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='0.0.0'/>
       <required namespace='osgi.bundle' name='org.enterprisedomain.classmaker' range='0.0.0'/>
       <required namespace='osgi.bundle' name='org.eclipse.emf.edit' range='0.0.0'/>
       <required namespace='osgi.bundle' name='org.eclipse.emf.ecore' range='0.0.0'/>
       <required namespace='osgi.bundle' name='org.eclipse.emf.ecore.edit' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.jface' range='0.0.0'/>
     </requires>
     <artifacts size='1'>
-      <artifact classifier='osgi.bundle' id='org.enterprisedomain.classmaker.edit' version='1.0.0.201711111125'/>
+      <artifact classifier='osgi.bundle' id='org.enterprisedomain.classmaker.edit' version='1.0.0.201803151513'/>
     </artifacts>
     <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
     <touchpointData size='1'>
       <instructions size='1'>
         <instruction key='manifest'>
-          Bundle-SymbolicName: org.enterprisedomain.classmaker.edit;singleton:=true&#xA;Bundle-Version: 1.0.0.201711111125&#xA;
+          Bundle-SymbolicName: org.enterprisedomain.classmaker.edit;singleton:=true&#xA;Bundle-Version: 1.0.0.201803151513&#xA;
         </instruction>
       </instructions>
     </touchpointData>
