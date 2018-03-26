@@ -23,7 +23,7 @@
 
     "files":
         [
-        {"includePattern": "build/releng/org.enterprisedomain.update/target/site/*", "excludePattern": ".gitignore", "uploadPattern": "gems/$2"},
+        {"includePattern": "build/releng/org.enterprisedomain.update/target/site/(.*/)*", "excludePattern": ".gitignore", "uploadPattern": "gems/$2"},
         {"includePattern": "build/docs/(.*)", "uploadPattern": "docs/$1"}
         ],
     "publish": true
