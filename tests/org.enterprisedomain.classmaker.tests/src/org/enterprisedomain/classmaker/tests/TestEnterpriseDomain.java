@@ -475,7 +475,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 
 		service.getWorkspace().getContribution(service.computeProjectName(p.getName())).checkout(v1);
 		EPackage p3 = updateEPackage(p, "0.3");
-		EPackage e2 = service.replace(p, p3, false, getProgressMonitor());
+		EPackage e2 = service.replace(p, p3, true, getProgressMonitor());
 		assertEquals("http://" + e2.getName() + "/0.3", e2.getNsURI());
 		cleanup();
 	}
