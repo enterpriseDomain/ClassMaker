@@ -332,6 +332,8 @@ public class TestEnterpriseDomain extends AbstractTest {
 
 	@Test
 	public void requiredPlugins() throws CoreException, InvocationTargetException {
+		if (System.getProperty("buildingWithTycho") != null)
+			return;
 		setPackageName("creator");
 		setClassName("Builder");
 		EPackage p = createEPackage("0.1");
@@ -406,6 +408,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		b.setDynamicModel(p);
 		b.getDependencies().addAll(dependencies);
 		EPackage creator = service.make(b, getProgressMonitor());
+		assertNotNull(creator);
 		EObject builder = (EObject) creator.getEFactoryInstance().create((EClass) creator.getEClassifier(c.getName()));
 		EList<Object> args = ECollections.newBasicEList();
 		args.add("world");

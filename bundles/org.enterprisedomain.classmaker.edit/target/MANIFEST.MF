@@ -12,7 +12,7 @@ Bundle-Vendor: %providerName
 Export-Package: org.enterprisedomain.classmaker.edit.command,org.enter
  prisedomain.classmaker.provider
 Bundle-Name: %pluginName
-Bundle-Version: 1.0.0.201803151513
+Bundle-Version: 1.0.0.201803260944
 Bundle-ClassPath: .
 Bundle-Localization: plugin
 Bundle-Activator: org.enterprisedomain.classmaker.provider.ClassMakerE

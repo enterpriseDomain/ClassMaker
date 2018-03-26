@@ -102,7 +102,6 @@ public class OSGiEPackageLoader extends ContainerJob {
 			}
 		} finally {
 			monitor.done();
-			setException(null);
 			getContext().removeBundleListener(listener);
 		}
 	}

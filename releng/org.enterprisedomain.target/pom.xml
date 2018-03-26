@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
 		<artifactId>org.enterprisedomain.releng</artifactId>
-		<version>0.7.911-SNAPSHOT</version>
+		<version>0.7.920-SNAPSHOT</version>
 	</parent>
 	<artifactId>org.enterprisedomain.target</artifactId>
 	<packaging>eclipse-target-definition</packaging>
@@ -32,7 +32,7 @@
 							<requirement>
 								<type>eclipse-plugin</type>
 								<artifactId>org.enterprisedomain.classmaker.osgi.systemextension</artifactId>
-								<version>0.7.911-SNAPSHOT</version>
+								<version>0.7.920-SNAPSHOT</version>
 							</requirement>
 						</extraRequirements>
 					</dependency-resolution>
