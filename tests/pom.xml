@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
 		<artifactId>org.enterprisedomain.root</artifactId>
-		<version>0.7.911-SNAPSHOT</version>
+		<version>0.7.920-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
@@ -33,7 +33,7 @@
 						<frameworkExtension>
 							<groupId>org.enterprisedomain</groupId>
 							<artifactId>org.enterprisedomain.classmaker.osgi.systemextension</artifactId>
-							<version>0.7.911-SNAPSHOT</version>
+							<version>0.7.920-SNAPSHOT</version>
 						</frameworkExtension>
 					</frameworkExtensions>
 				</configuration>

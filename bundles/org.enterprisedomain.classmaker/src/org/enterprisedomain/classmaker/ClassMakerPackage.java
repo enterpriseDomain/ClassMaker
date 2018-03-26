@@ -50,7 +50,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * 
 	 * @generated
 	 */
-	String eNS_URI = "http://org/enterprisedomain/ClassMaker/0.7.911";
+	String eNS_URI = "http://org/enterprisedomain/ClassMaker/0.7.920";
 
 	/**
 	 * The package namespace name. <!-- begin-user-doc --> <!-- end-user-doc -->

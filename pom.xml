@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
 		<artifactId>org.enterprisedomain.configuration</artifactId>
-		<version>0.7.911-SNAPSHOT</version>
+		<version>0.7.920-SNAPSHOT</version>
 		<relativePath>./releng/org.enterprisedomain.configuration</relativePath>
 	</parent>
 
