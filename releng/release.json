@@ -23,9 +23,9 @@
 
     "files":
         [
-        {"includePattern": "build/enterpriseDomain/ClassMaker/releng/org.enterprisedomain.update/target/site/(.*)", "excludePattern": ".gitignore", "uploadPattern": "$1"},
-        {"includePattern": "build/enterpriseDomain/ClassMaker/releng/org.enterprisedomain.update/target/site/plugins/(.*)", "excludePattern": ".gitignore", "uploadPattern": "plugins/$1"},
-        {"includePattern": "build/enterpriseDomain/ClassMaker/releng/org.enterprisedomain.update/target/site/features/(.*)", "excludePattern": ".gitignore", "uploadPattern": "features/$1"},
+        {"includePattern": "build/enterpriseDomain/ClassMaker/releng/org.enterprisedomain.update/target/repository/(.*)", "excludePattern": ".gitignore", "uploadPattern": "$1"},
+        {"includePattern": "build/enterpriseDomain/ClassMaker/releng/org.enterprisedomain.update/target/repository/plugins/(.*)", "excludePattern": ".gitignore", "uploadPattern": "plugins/$1"},
+        {"includePattern": "build/enterpriseDomain/ClassMaker/releng/org.enterprisedomain.update/target/repository/features/(.*)", "excludePattern": ".gitignore", "uploadPattern": "features/$1"},
 {"includePattern": "build/docs/(.*)", "uploadPattern": "docs/$2"}
         ],
     "publish": true
