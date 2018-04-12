@@ -7,5 +7,26 @@
 	</parent>
 	<artifactId>org.enterprisedomain.update</artifactId>
 	<version>0.7.920-SNAPSHOT</version>
-	<packaging>eclipse-update-site</packaging>
+	<packaging>eclipse-repository</packaging>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-p2-publisher-plugin</artifactId>
+					<version>1.0.0</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-publisher-plugin</artifactId>
+				<version>1.0.0</version>
+				<configuration>
+					<publish-categories>true</publish-categories>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

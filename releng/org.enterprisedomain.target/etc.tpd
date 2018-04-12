@@ -18,7 +18,7 @@ location "http://download.eclipse.org/emfstore/releases_18" {
 	org.eclipse.emf.emfstore.ecore.feature.feature.group
 }
 
-location ecp "http://download.eclipse.org/ecp/releases/releases_target_115/" {
+location ecp "http://download.eclipse.org/ecp/releases/releases_target_116/" {
 	org.eclipse.emf.ecp.application.e3 [1.13.1,2.0.0)
 	org.eclipse.emf.ecp.e3.feature.feature.group [1.13.1,2.0.0)
 	org.eclipse.emf.ecp.ecore.feature.feature.group [1.13.1,2.0.0)
