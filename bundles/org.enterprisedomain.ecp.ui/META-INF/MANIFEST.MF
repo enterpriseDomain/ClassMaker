@@ -10,7 +10,10 @@ Require-Bundle: org.enterprisedomain.ecp;bundle-version="0.0.1";visibility:=reex
  org.eclipse.swt;bundle-version="3.104.1",
  org.enterprisedomain.classmaker.edit;bundle-version="1.0.0",
  org.eclipse.emf.edit.ui,
- org.eclipse.emf.common.ui
+ org.eclipse.emf.common.ui,
+ org.eclipse.ui.navigator;bundle-version="[3.7.0,4.0.0)",
+ org.eclipse.emf.ecp.ui.e3;bundle-version="[1.16.0,2.0.0)"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.enterprisedomain.ecp.ui
 Bundle-ActivationPolicy: lazy
+Bundle-Activator: org.enterprisedomain.ecp.ui.Activator

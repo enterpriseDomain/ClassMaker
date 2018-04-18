@@ -1034,7 +1034,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 		private void setObject(Notifier object) {
 			this.object = object;
-			// getState().setResource((Resource) object);
 		}
 
 	}

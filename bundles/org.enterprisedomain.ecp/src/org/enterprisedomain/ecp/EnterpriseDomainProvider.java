@@ -17,6 +17,8 @@ package org.enterprisedomain.ecp;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -25,8 +27,16 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceChangeEvent;
+import org.eclipse.core.resources.IResourceChangeListener;
+import org.eclipse.core.resources.IResourceDelta;
+import org.eclipse.core.resources.IResourceDeltaVisitor;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.codegen.ecore.genmodel.impl.GenTypedElementImpl;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.command.BasicCommandStack;
 import org.eclipse.emf.common.command.Command;
@@ -36,6 +46,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -47,6 +58,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EContentAdapter;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecp.core.ECPProject;
 import org.eclipse.emf.ecp.core.ECPRepository;
 import org.eclipse.emf.ecp.core.util.ECPContainer;
@@ -54,6 +66,7 @@ import org.eclipse.emf.ecp.core.util.ECPModelContextAdapter;
 import org.eclipse.emf.ecp.core.util.ECPModelContextProvider;
 import org.eclipse.emf.ecp.core.util.ECPUtil;
 import org.eclipse.emf.ecp.core.util.observer.ECPProjectContentChangedObserver;
+import org.eclipse.emf.ecp.core.util.observer.ECPProjectContentTouchedObserver;
 import org.eclipse.emf.ecp.core.util.observer.ECPRepositoriesChangedObserver;
 import org.eclipse.emf.ecp.spi.core.DefaultProvider;
 import org.eclipse.emf.ecp.spi.core.InternalProject;
@@ -76,6 +89,7 @@ import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.impl.CompletionListenerImpl;
 import org.enterprisedomain.classmaker.impl.ResourceChangeListenerImpl;
 import org.enterprisedomain.classmaker.util.ClassMakerAdapterFactory;
+import org.enterprisedomain.classmaker.util.ResourceUtils;
 
 public class EnterpriseDomainProvider extends DefaultProvider {
 
@@ -89,6 +103,8 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 	private static Set<String> visiblePackages = new HashSet<String>();
 
 	private Blueprint blueprint;
+
+	private final IResourceChangeListener resourceChangeListener = new EnterpriseDomainResourceListener();
 
 	private Adapter adapter = new EContentAdapter() {
 
@@ -132,6 +148,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 	public EnterpriseDomainProvider() {
 		super(NAME);
 		Activator.getClassMaker().getWorkspace().getResourceSet().eAdapters().add(adapter);
+		ResourcesPlugin.getWorkspace().addResourceChangeListener(resourceChangeListener);
 	}
 
 	@Override
@@ -327,22 +344,8 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 		if (element instanceof Resource) {
 			for (InternalProject project : getOpenProjects()) {
 				Project domainProject = Activator.getClassMaker().getWorkspace().getProject((Resource) element);
-				if (domainProject != null && project.getName().equals(domainProject.getName()))
+				if (domainProject != null && domainProject.getName().equals(project.getName()))
 					return project;
-			}
-			element = ((Resource) element).getResourceSet();
-		}
-
-		if (element instanceof ResourceSet) {
-			ResourceSet resourceSet = Activator.getClassMaker().getWorkspace().getResourceSet();
-			ECPContainer context = getModelContextFromAdapter(resourceSet);
-			if (context != null && context instanceof ECPProject) {
-				for (InternalProject project : getOpenProjects()) {
-					Project domainProject = Activator.getClassMaker().getWorkspace()
-							.getProject(((ECPProject) context).getName());
-					if (project.getName().equals(domainProject.getName()))
-						return project;
-				}
 			}
 		}
 
@@ -488,6 +491,78 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 	@Override
 	public Notifier getRoot(InternalProject project) {
 		return Activator.getClassMaker().getWorkspace();
+	}
+
+	private class EnterpriseDomainResourceListener implements IResourceChangeListener {
+
+		@Override
+		public void resourceChanged(IResourceChangeEvent event) {
+			final Collection<Resource> changedResources = new ArrayList<Resource>();
+			final Collection<Resource> removedResources = new ArrayList<Resource>();
+			final IResourceDelta delta = event.getDelta();
+
+			if (delta == null) {
+				return;
+			}
+
+			try {
+				delta.accept(new EnterpriseDomainEditorResourceDeltaVisitor(removedResources, changedResources));
+			} catch (final CoreException ex) {
+				Activator.log(ex);
+			}
+			if (changedResources.isEmpty() && removedResources.isEmpty()) {
+				return;
+			}
+			String projectName = ResourceUtils.parseProjectName(changedResources.iterator().next().getURI());
+			ECPProject project = ECPUtil.getECPProjectManager().getProject(projectName);
+			((IResourceHandler) getUIProvider().getAdapter(this, IResourceHandler.class)).handleResourceChange(project,
+					changedResources, removedResources);
+		}
+
+	}
+
+	private final class EnterpriseDomainEditorResourceDeltaVisitor implements IResourceDeltaVisitor {
+		private final Collection<Resource> removedResources;
+		private final Collection<Resource> changedResources;
+
+		EnterpriseDomainEditorResourceDeltaVisitor(Collection<Resource> removedResources,
+				Collection<Resource> changedResources) {
+			this.removedResources = removedResources;
+			this.changedResources = changedResources;
+		}
+
+		@Override
+		public boolean visit(final IResourceDelta delta) {
+			if (delta.getResource().getType() == IResource.FILE
+					&& (delta.getKind() == IResourceDelta.REMOVED || delta.getKind() == IResourceDelta.CHANGED)) {
+				final ResourceSet resourceSet = Activator.getClassMaker().getWorkspace().getResourceSet();
+				if (resourceSet == null) {
+					return false;
+				}
+				Resource resource = null;
+
+				final URI uri = URI.createPlatformResourceURI(delta.getFullPath().toString(), true);
+				resource = resourceSet.getResource(uri, false);
+				if (resource == null) {
+					try {
+						final URL fileURL = FileLocator.resolve(new URL(uri.toString()));
+						resource = resourceSet.getResource(URI.createFileURI(fileURL.getPath()), false);
+					} catch (final IOException ex) {
+						return false;
+					}
+				}
+
+				if (resource != null) {
+					if (delta.getKind() == IResourceDelta.REMOVED) {
+						removedResources.add(resource);
+					} else {
+						changedResources.add(resource);
+					}
+				}
+				return false;
+			}
+			return true;
+		}
 	}
 
 	public class EnterpriseDomainProjectObserver extends EContentAdapter {

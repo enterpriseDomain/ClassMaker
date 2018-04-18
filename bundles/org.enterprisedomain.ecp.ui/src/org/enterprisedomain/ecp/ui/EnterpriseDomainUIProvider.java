@@ -15,15 +15,25 @@
  */
 package org.enterprisedomain.ecp.ui;
 
+import java.io.IOException;
+import java.util.Collection;
+
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.codegen.ecore.genmodel.impl.GenTypedElementImpl;
 import org.eclipse.emf.common.notify.AdapterFactory;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecp.core.ECPProject;
 import org.eclipse.emf.ecp.core.ECPRepository;
 import org.eclipse.emf.ecp.core.util.ECPContainer;
 import org.eclipse.emf.ecp.core.util.ECPProperties;
+import org.eclipse.emf.ecp.spi.core.DefaultProvider;
+import org.eclipse.emf.ecp.spi.core.InternalProject;
 import org.eclipse.emf.ecp.spi.core.InternalProvider;
 import org.eclipse.emf.ecp.spi.ui.CompositeStateObserver;
 import org.eclipse.emf.ecp.spi.ui.DefaultUIProvider;
+import org.eclipse.emf.ecp.ui.views.ModelExplorerView;
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
@@ -40,7 +50,11 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.IViewPart;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.internal.progress.ProgressManager;
+import org.eclipse.ui.navigator.CommonNavigator;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.SelectRevealHandler;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
@@ -48,12 +62,12 @@ import org.enterprisedomain.classmaker.core.IRunWrapper;
 import org.enterprisedomain.classmaker.core.IRunnerWithProgress;
 import org.enterprisedomain.classmaker.provider.ClassMakerItemProviderAdapterFactory;
 import org.enterprisedomain.classmaker.util.ClassMakerAdapterFactory;
-import org.enterprisedomain.ecp.Activator;
 import org.enterprisedomain.ecp.EnterpriseDomainProvider;
+import org.enterprisedomain.ecp.IResourceHandler;
 import org.enterprisedomain.ecp.ui.actions.MakeAction;
 
 @SuppressWarnings("restriction")
-public class EnterpriseDomainUIProvider extends DefaultUIProvider {
+public class EnterpriseDomainUIProvider extends DefaultUIProvider implements IResourceHandler {
 
 	public static final ComposeableAdapterFactory ENTERPRISE_DOMAIN_ITEM_PROVIDER_ADAPTER_FACTORY = new ComposedAdapterFactory(
 			new AdapterFactory[] { new ClassMakerItemProviderAdapterFactory(), new ClassMakerAdapterFactory(),
@@ -66,6 +80,8 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider {
 	private boolean isContribution;
 
 	private SelectRevealHandler selectRevealHandler = new SelectResourceHandler();
+
+	private boolean reloading;
 
 	public EnterpriseDomainUIProvider() {
 		super(EnterpriseDomainProvider.NAME);
@@ -80,6 +96,8 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider {
 			return (T) ClassMakerPlugin.getProgressMonitor();
 		if (ComposeableAdapterFactory.class.isAssignableFrom(adapterType))
 			return (T) ENTERPRISE_DOMAIN_ITEM_PROVIDER_ADAPTER_FACTORY;
+		if (IResourceHandler.class.isAssignableFrom(adapterType))
+			return (T) this;
 		if (DefaultUIProvider.class.isAssignableFrom(adapterType))
 			return (T) this;
 		return (T) getProvider().getAdapter(adaptable, adapterType);
@@ -182,6 +200,48 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider {
 	// private String produceNsURI(String name) {
 	// return "http://" + name.replaceAll(" ", "") + "/1.0";
 	// }
+
+	public void handleResourceChange(final ECPProject project, final Collection<Resource> changedResources,
+			final Collection<Resource> removedResources) {
+		if (!getProvider().isDirty((InternalProject) project)) {
+			final Display display = Display.getCurrent() != null ? Display.getCurrent() : Display.getDefault();
+			display.asyncExec(new Runnable() {
+				@Override
+				public void run() {
+					ResourceSet resourceSet = Activator.getClassMaker().getWorkspace().getResourceSet();
+					if (resourceSet == null || display.isDisposed()) {
+						return;
+					}
+					reloading = true;
+					resourceSet.getResources().removeAll(removedResources);
+					for (final Resource changed : changedResources) {
+						changed.unload();
+						try {
+							changed.load(null);
+						} catch (final IOException ex) {
+						}
+					}
+
+					IViewPart modelExplorerView = null;
+					try {
+						modelExplorerView = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
+								.showView("org.eclipse.emf.ecp.ui.ModelExplorerView");
+						if (modelExplorerView instanceof ModelExplorerView) {
+							final ModelExplorerView modelExplorer = (ModelExplorerView) modelExplorerView;
+							selectRevealHandler.prepare();
+							modelExplorer.getViewer().refresh(project);							
+							selectRevealHandler.selectReveal(changedResources.iterator().next());
+						}
+					} catch (Exception e) {
+						Activator.log(e);
+
+					}
+					reloading = false;
+					project.getEditingDomain().getCommandStack().flush();
+				}
+			});
+		}
+	}
 
 	@Override
 	public void fillContextMenu(IMenuManager manager, ECPContainer context, Object[] elements) {

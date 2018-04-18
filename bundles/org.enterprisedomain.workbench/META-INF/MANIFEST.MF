@@ -26,7 +26,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.workbench,
  org.eclipse.jface,
  org.eclipse.sirius;bundle-version="5.1.0",
- org.enterprisedomain.classmaker.edit;bundle-version="1.0.0"
+ org.enterprisedomain.classmaker.edit;bundle-version="1.0.0",
+ org.eclipse.emf.edit.ui;bundle-version="2.13.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.ui,
