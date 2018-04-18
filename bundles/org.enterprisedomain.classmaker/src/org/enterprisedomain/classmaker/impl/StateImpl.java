@@ -839,14 +839,16 @@ public class StateImpl extends ItemImpl implements State {
 					if (msg.getOldValue() != null && msg.getOldValue() instanceof EPackage)
 						getDomainModel().setDynamic(null);
 					if (msg.getNewValue() != null && msg.getNewValue() instanceof EPackage)
-						if (findExistingEPackage((EPackage) msg.getNewValue()) == null)
+						if (findExistingEPackage((EPackage) msg.getNewValue()) == null) {
 							getDomainModel().setDynamic(copyEPackage((EPackage) msg.getNewValue()));
+						}
 					break;
 				case Notification.REMOVE_MANY:
 					if (msg.getOldValue() != null) {
 						for (Object object : (Iterable<?>) msg.getOldValue())
-							if (object instanceof EPackage)
+							if (object instanceof EPackage) {
 								getDomainModel().setDynamic(null);
+							}
 					}
 					break;
 				case Notification.REMOVE:
@@ -891,9 +893,9 @@ public class StateImpl extends ItemImpl implements State {
 								toRemove.add(eObject);
 						getResource().getContents().removeAll(toRemove);
 					}
-					if (notification.getNewValue() != null) {
+					if (notification.getNewValue() != null && notification.getPosition() > notification.NO_INDEX) {
 						EPackage dynamicEPackage = (EPackage) notification.getNewValue();
-						getResource().getContents().add(EcoreUtil.copy(dynamicEPackage));
+						getResource().getContents().set(notification.getPosition(), EcoreUtil.copy(dynamicEPackage));
 					}
 				}
 				getResource().eSetDeliver(deliver);

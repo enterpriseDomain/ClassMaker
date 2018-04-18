@@ -1,9 +1,23 @@
 package org.enterprisedomain.workplace;
 
+import java.util.Arrays;
+import java.util.Collection;
+
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EContentAdapter;
+import org.eclipse.emf.ecp.core.util.ECPUtil;
+import org.eclipse.emf.ecp.spi.core.InternalProject;
+import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
+import org.eclipse.emf.edit.ui.util.EditUIUtil;
 import org.eclipse.emfforms.spi.editor.GenericEditor;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.MultiPageEditorPart;
+import org.enterprisedomain.classmaker.Project;
+import org.enterprisedomain.classmaker.util.ResourceUtils;
 
 public class ModelEditor extends MultiPageEditorPart {
 
@@ -17,6 +31,25 @@ public class ModelEditor extends MultiPageEditorPart {
 		try {
 			genericEditorIndex = addPage(new GenericEditor(), getEditorInput());
 			setPageText(genericEditorIndex, "Form"); //$NON-NLS-1$
+			getGenericEditor().getResourceSet().eAdapters()
+					.add(new AdapterFactoryEditingDomain.EditingDomainProvider(getGenericEditor().getEditingDomain()));
+			URI uri = EditUIUtil.getURI(getEditorInput());
+			uri = URI.createFileURI(ResourceUtils.getWorkspaceLocation()
+					.append(uri.deresolve(URI.createPlatformResourceURI("/", false)).toString()).toString());
+			final Resource resource = Activator.getClassMaker().getWorkspace().getResourceSet().getResource(uri, true);
+			final Project project = Activator.getClassMaker().getWorkspace().getProject(resource);
+			final InternalProject ecpProject = (InternalProject) ECPUtil.getECPProjectManager()
+					.getProject(project.getProjectName());
+			getGenericEditor().getResourceSet().eAdapters().add(new EContentAdapter() {
+
+				@Override
+				public void notifyChanged(Notification notification) {
+					super.notifyChanged(notification);
+					Collection<Object> objects = (Collection<Object>) (Collection<?>) Arrays.asList(ecpProject);
+					ecpProject.notifyObjectsChanged(objects, true);
+				}
+
+			});
 		} catch (PartInitException e) {
 			Activator.log(e);
 		}
@@ -29,12 +62,23 @@ public class ModelEditor extends MultiPageEditorPart {
 	@Override
 	public void doSave(IProgressMonitor monitor) {
 		getActiveEditor().doSave(monitor);
+		// for (Resource editedResource :
+		// getGenericEditor().getResourceSet().getResources())
+		// for (Resource resource :
+		// Activator.getClassMaker().getWorkspace().getResourceSet().getResources())
+		// if (editedResource.getURI().equals(resource.getURI())) {
+		// resource.unload();
+		// try {
+		// resource.load(Collections.emptyMap());
+		// } catch (IOException e) {
+		// Activator.log(e);
+		// }
+		// }
 	}
 
 	@Override
 	public void doSaveAs() {
 		getActiveEditor().doSaveAs();
-
 	}
 
 	@Override

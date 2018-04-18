@@ -38,6 +38,7 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.preferences.IPreferencesService;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.pde.internal.core.ICoreConstants;
 import org.enterprisedomain.classmaker.Messages;
@@ -106,6 +107,10 @@ public class ResourceUtils {
 
 	public static String getFileName(String name) {
 		return name + '.' + getModelFileExt();
+	}
+
+	public static String parseProjectName(URI modelURI) {
+		return modelURI.trimFileExtension().segments()[modelURI.segmentCount() - 3];
 	}
 
 	public static IPath getWorkspaceLocation() {

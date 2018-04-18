@@ -27,13 +27,11 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.MultiRule;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.ECollections;
@@ -48,6 +46,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreEMap;
@@ -59,7 +58,6 @@ import org.eclipse.pde.core.target.ITargetDefinition;
 import org.eclipse.pde.core.target.ITargetLocation;
 import org.eclipse.pde.core.target.ITargetPlatformService;
 import org.eclipse.pde.core.target.LoadTargetDefinitionJob;
-import org.eclipse.pde.internal.core.PDECore;
 import org.eclipse.pde.internal.core.target.TargetPlatformService;
 import org.enterprisedomain.classmaker.ClassMakerFactory;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
@@ -537,12 +535,15 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * @generated NOT
 	 */
 	public Project getProject(Resource resource) {
+		URIConverter uriConverter = resource.getResourceSet().getURIConverter();
 		for (Project project : getProjects()) {
 			if (!project.getChildren().isEmpty() && project.getChildren().get(0) instanceof Resource) {
-				if (resource.equals(project.getChildren().get(0)))
+				if (uriConverter.normalize(resource.getURI())
+						.equals(uriConverter.normalize(((Resource) project.getChildren().get(0)).getURI())))
 					return project;
 			} else if (!project.getChildren().isEmpty() && project.getChildren().get(0) instanceof EObject) {
-				if (resource.equals(((EObject) project.getChildren().get(0)).eResource()))
+				if (uriConverter.normalize(resource.getURI())
+						.equals(uriConverter.normalize(((EObject) project.getChildren().get(0)).eResource().getURI())))
 					return project;
 			}
 		}

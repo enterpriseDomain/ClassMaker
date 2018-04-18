@@ -530,7 +530,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 						if (ProjectImpl.this.eIsSet(ClassMakerPackage.PROJECT__SELECT_REVEAL_HANDLER))
 							getSelectRevealHandler().prepare();
 						setResource(resource);
-						// theResource = ((Resource) getChildren().get(0));
+						theResource = ((Resource) getChildren().get(0));
 						// theResource.setURI(getResourceURI());
 						// theResource.unload();
 						// theResource.load(Collections.emptyMap());
@@ -737,9 +737,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * @generated NOT
 	 */
 	public void addResourceChangeListener(ResourceChangeListener resourceListener) {
-		for (Object listener : resourceChangeListeners.getListeners())
-			if (listener.equals(resourceListener))
-				return;
+		// for (Object listener : resourceChangeListeners.getListeners())
+		// if (listener.equals(resourceListener))
+		// return;
 		resourceChangeListeners.add(resourceListener);
 	}
 
