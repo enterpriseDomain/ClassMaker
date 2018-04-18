@@ -1,4 +1,4 @@
-ClassMaker [![Code Triagers Badge](https://www.codetriage.com/kyrillzotkin/classmaker/badges/users.svg)](https://www.codetriage.com/kyrillzotkin/classmaker)
+ClassMaker [![Build Status](https://travis-ci.org/enterpriseDomain/ClassMaker.svg?branch=master)](https://travis-ci.org/enterpriseDomain/ClassMaker) [![Code Triagers Badge](https://www.codetriage.com/kyrillzotkin/classmaker/badges/users.svg)](https://www.codetriage.com/kyrillzotkin/classmaker)
 ===========
 
 ClassMaker is an Eclipse plug-in that allows to create classes programmatically, providing them to client bundle.  
