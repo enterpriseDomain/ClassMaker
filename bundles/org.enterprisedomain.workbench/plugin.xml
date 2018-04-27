@@ -13,6 +13,10 @@
                name="windowImages"
                value="platform:/plugin/org.eclipse.emf.ecp.ui.e3/icons/bricks.png">
          </property>
+         <property
+               name="appName"
+               value="enterpriseDomain Workbench">
+         </property>
       </product>
    </extension>
    <extension

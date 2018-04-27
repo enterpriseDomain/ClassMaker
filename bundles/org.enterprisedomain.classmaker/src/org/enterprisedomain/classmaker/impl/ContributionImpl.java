@@ -603,7 +603,9 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 			if (!getRevisions().isEmpty() && getVersion().equals(Version.emptyVersion))
 				setVersion(ListUtil.getLast(getRevisions()).getKey());
 
-			String commitId = getRevision().initialize(commit);
+			String commitId = "";
+			if (eIsSet(ClassMakerPackage.Literals.PROJECT__REVISION))
+				commitId = getRevision().initialize(commit);
 			if (currentBranch.equals(SCMOperator.MASTER_BRANCH))
 				checkout(getVersion());
 			getWorkspace().getResourceSet().eAdapters().add(resourceAdapter);

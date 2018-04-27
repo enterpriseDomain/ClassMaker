@@ -34,8 +34,6 @@ public class ModelEditor extends MultiPageEditorPart {
 			getGenericEditor().getResourceSet().eAdapters()
 					.add(new AdapterFactoryEditingDomain.EditingDomainProvider(getGenericEditor().getEditingDomain()));
 			URI uri = EditUIUtil.getURI(getEditorInput());
-			uri = URI.createFileURI(ResourceUtils.getWorkspaceLocation()
-					.append(uri.deresolve(URI.createPlatformResourceURI("/", false)).toString()).toString());
 			final Resource resource = Activator.getClassMaker().getWorkspace().getResourceSet().getResource(uri, true);
 			final Project project = Activator.getClassMaker().getWorkspace().getProject(resource);
 			final InternalProject ecpProject = (InternalProject) ECPUtil.getECPProjectManager()
