@@ -27,6 +27,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Platform;
@@ -536,6 +537,13 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 */
 	public Project getProject(Resource resource) {
 		URIConverter uriConverter = resource.getResourceSet().getURIConverter();
+		IPath workspaceRootPath = ResourcesPlugin.getWorkspace().getRoot().getFullPath().addTrailingSeparator();
+		URI workspaceRootURI = URI.createPlatformResourceURI(workspaceRootPath.toString(), true);
+		IPath workspaceRootLocation = ResourcesPlugin.getWorkspace().getRoot().getLocation().addTrailingSeparator();
+		URI workspaceRootLocationURI = URI.createURI(workspaceRootLocation.toString(), true);
+		URI workspaceRootLocationFileURI = URI.createFileURI(workspaceRootLocation.toString());
+		uriConverter.getURIMap().put(workspaceRootLocationURI, workspaceRootURI);
+		uriConverter.getURIMap().put(workspaceRootLocationFileURI, workspaceRootURI);
 		for (Project project : getProjects()) {
 			if (!project.getChildren().isEmpty() && project.getChildren().get(0) instanceof Resource) {
 				if (uriConverter.normalize(resource.getURI())

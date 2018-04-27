@@ -30,9 +30,16 @@ location oxygen "http://download.eclipse.org/releases/oxygen" {
 	org.eclipse.ocl.all.sdk.feature.group
 	org.eclipse.m2m.qvt.oml.sdk.feature.group
 	org.eclipse.xtend.sdk.feature.group
-	org.eclipse.emf.ecp.sdk.e4.feature.feature.group
-	org.eclipse.sirius.runtime.feature.group
-	org.eclipse.sirius.diagram.ui
-	org.eclipse.sirius.diagram.ui.ext
+	org.eclipse.emf.ecp.sdk.e4.feature.feature.group	
 }
 
+location "http://download.eclipse.org/sirius/updates/releases/5.1.0/oxygen" {
+	org.eclipse.sirius
+	org.eclipse.sirius.aql.feature.group
+	org.eclipse.sirius.common
+	org.eclipse.sirius.common.acceleo.aql
+	org.eclipse.sirius.diagram
+	org.eclipse.sirius.diagram.ui
+	org.eclipse.sirius.runtime.feature.group
+	org.eclipse.sirius.properties.feature.feature.group	
+}

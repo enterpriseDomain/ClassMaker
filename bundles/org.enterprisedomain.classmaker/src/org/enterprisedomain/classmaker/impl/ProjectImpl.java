@@ -20,7 +20,9 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Date;
 
+import org.eclipse.core.internal.localstore.IsSynchronizedVisitor;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.ISavedState;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -930,7 +932,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		}
 		getWorkspace().getResourceSet().eAdapters().add(resourceAdapter);
 		addResourceChangeListener(getResourceReloadListener());
-		getRevision().getState().setResource(resource);
+		if (eIsSet(ClassMakerPackage.PROJECT__REVISION)
+				&& getRevision().eIsSet(ClassMakerPackage.Literals.REVISION__STATE))
+			getRevision().getState().setResource(resource);
 		// TODO Add SCM support if commit
 		return ""; //$NON-NLS-1$
 	}
