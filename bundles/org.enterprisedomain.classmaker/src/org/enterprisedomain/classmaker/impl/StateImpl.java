@@ -820,10 +820,15 @@ public class StateImpl extends ItemImpl implements State {
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
+	private boolean resourceModelsSynchronized = false;
+
 	protected Adapter resourceToModelsAdapter = new AdapterImpl() {
 
 		@Override
 		public void notifyChanged(Notification msg) {
+			if (resourceModelsSynchronized)
+				return;
+			resourceModelsSynchronized = false;
 			boolean deliver = eDeliver();
 			eSetDeliver(false);
 			if (msg.getFeatureID(Resource.class) == Resource.RESOURCE__CONTENTS)
@@ -858,6 +863,7 @@ public class StateImpl extends ItemImpl implements State {
 					break;
 				}
 			eSetDeliver(deliver);
+			resourceModelsSynchronized = true;
 		}
 
 		private EPackage copyEPackage(EPackage ePackage) {
@@ -879,6 +885,8 @@ public class StateImpl extends ItemImpl implements State {
 		@Override
 		public void notifyChanged(Notification notification) {
 			super.notifyChanged(notification);
+			if (resourceModelsSynchronized)
+				return;
 			if (notification.getNotifier() instanceof ModelPair
 					&& notification.getFeatureID(ModelPair.class) == ClassMakerPackage.MODEL_PAIR__DYNAMIC) {
 				boolean deliver = getResource().eDeliver();
@@ -893,12 +901,17 @@ public class StateImpl extends ItemImpl implements State {
 								toRemove.add(eObject);
 						getResource().getContents().removeAll(toRemove);
 					}
-					if (notification.getNewValue() != null && notification.getPosition() > notification.NO_INDEX) {
+					if (notification.getNewValue() != null && notification.getPosition() >= Notification.NO_INDEX) {
 						EPackage dynamicEPackage = (EPackage) notification.getNewValue();
-						getResource().getContents().set(notification.getPosition(), EcoreUtil.copy(dynamicEPackage));
+						if (getResource().getContents().isEmpty()) {
+							resourceModelsSynchronized = false;
+							getResource().getContents().add(EcoreUtil.copy(dynamicEPackage));
+						} else
+							getResource().getContents().set(0, EcoreUtil.copy(dynamicEPackage));
 					}
 				}
 				getResource().eSetDeliver(deliver);
+				resourceModelsSynchronized = true;
 			}
 		}
 
