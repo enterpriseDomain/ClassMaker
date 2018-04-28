@@ -250,7 +250,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			List<ITargetLocation> bundleContainers = new ArrayList<ITargetLocation>();
 			Set<File> dirs = new HashSet<File>();
 			for (Bundle bundle : bundles) {
-				if (bundle.equals(currentBundle) || bundle.equals(Platform.getBundle("org.apache.felix.scr"))) {
+				if (bundle.equals(currentBundle) || bundle.equals(Platform.getBundle("org.apache.felix.gogo.runtime"))) {
 					continue;
 				}
 				EquinoxBundle bundleImpl = (EquinoxBundle) bundle;
