@@ -54,4 +54,5 @@ If you have anything to complain or suggest, please feel free to file a [bug](ht
 
 Donations
 ---------
-[![Click here to lend your support to: ClassMaker and make a donation at pledgie.com !](https://pledgie.com/campaigns/35162.png?skin_name=chrome)](https://pledgie.com/campaigns/35162)
+[Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=5U2B8G9H72CQG&lc=RU&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted)
+
