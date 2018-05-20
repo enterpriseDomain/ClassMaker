@@ -30,6 +30,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.ECollections;
@@ -56,7 +57,6 @@ import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.Revision;
-import org.enterprisedomain.classmaker.SCMRegistry;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
@@ -73,8 +73,6 @@ import org.osgi.framework.Version;
  * <ul>
  * <li>{@link org.enterprisedomain.classmaker.impl.ClassMakerServiceImpl#getWorkspace
  * <em>Workspace</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ClassMakerServiceImpl#getSCMRegistry
- * <em>SCM Registry</em>}</li>
  * </ul>
  *
  * @generated
@@ -82,23 +80,13 @@ import org.osgi.framework.Version;
 public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerService {
 	/**
 	 * The cached value of the '{@link #getWorkspace() <em>Workspace</em>}'
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getWorkspace()
 	 * @generated
 	 * @ordered
 	 */
 	protected Workspace workspace;
-
-	/**
-	 * The cached value of the '{@link #getSCMRegistry() <em>SCM Registry</em>}'
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #getSCMRegistry()
-	 * @generated
-	 * @ordered
-	 */
-	protected SCMRegistry<?> scmRegistry;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -126,15 +114,6 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 	 * @generated
 	 */
 	public Workspace getWorkspace() {
-		if (workspace != null && workspace.eIsProxy()) {
-			InternalEObject oldWorkspace = (InternalEObject) workspace;
-			workspace = (Workspace) eResolveProxy(oldWorkspace);
-			if (workspace != oldWorkspace) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							ClassMakerPackage.CLASS_MAKER_SERVICE__WORKSPACE, oldWorkspace, workspace));
-			}
-		}
 		return workspace;
 	}
 
@@ -143,8 +122,18 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 	 * 
 	 * @generated
 	 */
-	public Workspace basicGetWorkspace() {
-		return workspace;
+	public NotificationChain basicSetWorkspace(Workspace newWorkspace, NotificationChain msgs) {
+		Workspace oldWorkspace = workspace;
+		workspace = newWorkspace;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					ClassMakerPackage.CLASS_MAKER_SERVICE__WORKSPACE, oldWorkspace, newWorkspace);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -153,40 +142,20 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 	 * @generated
 	 */
 	public void setWorkspace(Workspace newWorkspace) {
-		Workspace oldWorkspace = workspace;
-		workspace = newWorkspace;
-		if (eNotificationRequired())
+		if (newWorkspace != workspace) {
+			NotificationChain msgs = null;
+			if (workspace != null)
+				msgs = ((InternalEObject) workspace).eInverseRemove(this, ClassMakerPackage.WORKSPACE__SERVICE,
+						Workspace.class, msgs);
+			if (newWorkspace != null)
+				msgs = ((InternalEObject) newWorkspace).eInverseAdd(this, ClassMakerPackage.WORKSPACE__SERVICE,
+						Workspace.class, msgs);
+			msgs = basicSetWorkspace(newWorkspace, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.CLASS_MAKER_SERVICE__WORKSPACE,
-					oldWorkspace, workspace));
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public SCMRegistry getSCMRegistry() {
-		if (scmRegistry != null && scmRegistry.eIsProxy()) {
-			InternalEObject oldSCMRegistry = (InternalEObject) scmRegistry;
-			scmRegistry = (SCMRegistry) eResolveProxy(oldSCMRegistry);
-			if (scmRegistry != oldSCMRegistry) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							ClassMakerPackage.CLASS_MAKER_SERVICE__SCM_REGISTRY, oldSCMRegistry, scmRegistry));
-			}
-		}
-		if (scmRegistry == null)
-			scmRegistry = ClassMakerFactory.eINSTANCE.createSCMRegistry();
-		return scmRegistry;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public SCMRegistry<?> basicGetSCMRegistry() {
-		return scmRegistry;
+					newWorkspace, newWorkspace));
 	}
 
 	/**
@@ -636,19 +605,54 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
+	 * @generated NOT
+	 */
+	public void initialize() {
+		getWorkspace().setService(this);
+		getWorkspace().initialize();
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+		case ClassMakerPackage.CLASS_MAKER_SERVICE__WORKSPACE:
+			if (workspace != null)
+				msgs = ((InternalEObject) workspace).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - ClassMakerPackage.CLASS_MAKER_SERVICE__WORKSPACE, null, msgs);
+			return basicSetWorkspace((Workspace) otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+		case ClassMakerPackage.CLASS_MAKER_SERVICE__WORKSPACE:
+			return basicSetWorkspace(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 		case ClassMakerPackage.CLASS_MAKER_SERVICE__WORKSPACE:
-			if (resolve)
-				return getWorkspace();
-			return basicGetWorkspace();
-		case ClassMakerPackage.CLASS_MAKER_SERVICE__SCM_REGISTRY:
-			if (resolve)
-				return getSCMRegistry();
-			return basicGetSCMRegistry();
+			return getWorkspace();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -693,8 +697,6 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 		switch (featureID) {
 		case ClassMakerPackage.CLASS_MAKER_SERVICE__WORKSPACE:
 			return workspace != null;
-		case ClassMakerPackage.CLASS_MAKER_SERVICE__SCM_REGISTRY:
-			return scmRegistry != null;
 		}
 		return super.eIsSet(featureID);
 	}

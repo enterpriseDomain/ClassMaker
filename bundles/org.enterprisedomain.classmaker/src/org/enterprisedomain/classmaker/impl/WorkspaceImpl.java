@@ -34,6 +34,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.core.runtime.jobs.MultiRule;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
@@ -44,6 +45,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -62,11 +64,13 @@ import org.eclipse.pde.core.target.LoadTargetDefinitionJob;
 import org.eclipse.pde.internal.core.target.TargetPlatformService;
 import org.enterprisedomain.classmaker.ClassMakerFactory;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
+import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Customizer;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.ResourceAdapter;
 import org.enterprisedomain.classmaker.Revision;
+import org.enterprisedomain.classmaker.SCMRegistry;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
@@ -91,6 +95,10 @@ import org.osgi.framework.Version;
  * <em>Resource Set</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl#getCustomizers
  * <em>Customizers</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl#getService
+ * <em>Service</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl#getSCMRegistry
+ * <em>SCM Registry</em>}</li>
  * </ul>
  *
  * @generated
@@ -135,6 +143,16 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * @ordered
 	 */
 	protected EMap<StageQualifier, Customizer> customizers;
+
+	/**
+	 * The cached value of the '{@link #getSCMRegistry() <em>SCM Registry</em>}'
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getSCMRegistry()
+	 * @generated
+	 * @ordered
+	 */
+	protected SCMRegistry<?> scmRegistry;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -197,6 +215,80 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 					StageQualifierToCustomizerMapEntryImpl.class, this, ClassMakerPackage.WORKSPACE__CUSTOMIZERS);
 		}
 		return customizers;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public ClassMakerService getService() {
+		if (eContainerFeatureID() != ClassMakerPackage.WORKSPACE__SERVICE)
+			return null;
+		return (ClassMakerService) eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public NotificationChain basicSetService(ClassMakerService newService, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject) newService, ClassMakerPackage.WORKSPACE__SERVICE, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public void setService(ClassMakerService newService) {
+		if (newService != eInternalContainer()
+				|| (eContainerFeatureID() != ClassMakerPackage.WORKSPACE__SERVICE && newService != null)) {
+			if (EcoreUtil.isAncestor(this, newService))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newService != null)
+				msgs = ((InternalEObject) newService).eInverseAdd(this,
+						ClassMakerPackage.CLASS_MAKER_SERVICE__WORKSPACE, ClassMakerService.class, msgs);
+			msgs = basicSetService(newService, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.WORKSPACE__SERVICE, newService,
+					newService));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public SCMRegistry<?> getSCMRegistry() {
+		if (scmRegistry != null && scmRegistry.eIsProxy()) {
+			InternalEObject oldSCMRegistry = (InternalEObject) scmRegistry;
+			scmRegistry = (SCMRegistry<?>) eResolveProxy(oldSCMRegistry);
+			if (scmRegistry != oldSCMRegistry) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassMakerPackage.WORKSPACE__SCM_REGISTRY,
+							oldSCMRegistry, scmRegistry));
+			}
+		}
+		if (scmRegistry == null)
+			scmRegistry = ClassMakerFactory.eINSTANCE.createSCMRegistry();
+		return scmRegistry;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public SCMRegistry<?> basicGetSCMRegistry() {
+		return scmRegistry;
 	}
 
 	/**
@@ -305,8 +397,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			}
 			// Contribution not exists. Create
 			result = ClassMakerFactory.eINSTANCE.createContribution();
-			result.setName(blueprint.getName());
 			registerProject(result);
+			result.setName(blueprint.getName());
 			result.create(monitor);
 			Version version = result.nextVersion();
 			Revision revision = result.newRevision(version);
@@ -493,8 +585,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	public Project createProject(String name, IProgressMonitor monitor) throws CoreException {
 		try {
 			Project project = ClassMakerFactory.eINSTANCE.createProject();
-			project.setName(name);
 			registerProject(project);
+			project.setName(name);
 			project.create(monitor);
 			Revision revision = project.newRevision(project.nextVersion());
 			project.checkout(revision.getVersion());
@@ -511,7 +603,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 */
 	public Project getProject(String name) {
 		String projectName = name;
-		Contribution contribution = getContribution(ClassMakerPlugin.getClassMaker().computeProjectName(projectName));
+		Contribution contribution = getContribution(getService().computeProjectName(projectName));
 		if (contribution != null)
 			projectName = contribution.getProjectName();
 		for (Project project : getProjects()) {
@@ -611,6 +703,10 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		switch (featureID) {
 		case ClassMakerPackage.WORKSPACE__PROJECTS:
 			return ((InternalEList<InternalEObject>) (InternalEList<?>) getProjects()).basicAdd(otherEnd, msgs);
+		case ClassMakerPackage.WORKSPACE__SERVICE:
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			return basicSetService((ClassMakerService) otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -627,8 +723,25 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			return ((InternalEList<?>) getProjects()).basicRemove(otherEnd, msgs);
 		case ClassMakerPackage.WORKSPACE__CUSTOMIZERS:
 			return ((InternalEList<?>) getCustomizers()).basicRemove(otherEnd, msgs);
+		case ClassMakerPackage.WORKSPACE__SERVICE:
+			return basicSetService(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+		case ClassMakerPackage.WORKSPACE__SERVICE:
+			return eInternalContainer().eInverseRemove(this, ClassMakerPackage.CLASS_MAKER_SERVICE__WORKSPACE,
+					ClassMakerService.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -648,6 +761,12 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 				return getCustomizers();
 			else
 				return getCustomizers().map();
+		case ClassMakerPackage.WORKSPACE__SERVICE:
+			return getService();
+		case ClassMakerPackage.WORKSPACE__SCM_REGISTRY:
+			if (resolve)
+				return getSCMRegistry();
+			return basicGetSCMRegistry();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -668,6 +787,9 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		case ClassMakerPackage.WORKSPACE__CUSTOMIZERS:
 			((EStructuralFeature.Setting) getCustomizers()).set(newValue);
 			return;
+		case ClassMakerPackage.WORKSPACE__SERVICE:
+			setService((ClassMakerService) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -685,6 +807,9 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			return;
 		case ClassMakerPackage.WORKSPACE__CUSTOMIZERS:
 			getCustomizers().clear();
+			return;
+		case ClassMakerPackage.WORKSPACE__SERVICE:
+			setService((ClassMakerService) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -704,6 +829,10 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			return RESOURCE_SET_EDEFAULT == null ? resourceSet != null : !RESOURCE_SET_EDEFAULT.equals(resourceSet);
 		case ClassMakerPackage.WORKSPACE__CUSTOMIZERS:
 			return customizers != null && !customizers.isEmpty();
+		case ClassMakerPackage.WORKSPACE__SERVICE:
+			return getService() != null;
+		case ClassMakerPackage.WORKSPACE__SCM_REGISTRY:
+			return scmRegistry != null;
 		}
 		return super.eIsSet(featureID);
 	}

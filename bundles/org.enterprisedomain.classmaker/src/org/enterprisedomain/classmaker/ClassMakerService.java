@@ -48,8 +48,6 @@ import org.osgi.framework.Version;
  * <ul>
  * <li>{@link org.enterprisedomain.classmaker.ClassMakerService#getWorkspace
  * <em>Workspace</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.ClassMakerService#getSCMRegistry
- * <em>SCM Registry</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getClassMakerService()
@@ -140,26 +138,15 @@ public interface ClassMakerService extends EObject {
 	/**
 	 * Sets the value of the
 	 * '{@link org.enterprisedomain.classmaker.ClassMakerService#getWorkspace
-	 * <em>Workspace</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <em>Workspace</em>}' containment reference. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @param value
-	 *            the new value of the '<em>Workspace</em>' reference.
+	 *            the new value of the '<em>Workspace</em>' containment reference.
 	 * @see #getWorkspace()
 	 * @generated
 	 */
 	void setWorkspace(Workspace value);
-
-	/**
-	 * Returns the value of the '<em><b>SCM Registry</b></em>' reference. <!--
-	 * begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc --> The
-	 * {@link SCMRegistry <em>SCMRegistry</em>}. <!-- end-model-doc -->
-	 * 
-	 * @return the value of the '<em>SCM Registry</em>' reference.
-	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getClassMakerService_SCMRegistry()
-	 * @model changeable="false"
-	 * @generated
-	 */
-	SCMRegistry<?> getSCMRegistry();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
@@ -426,5 +413,13 @@ public interface ClassMakerService extends EObject {
 	 * @generated
 	 */
 	<T extends EObject> T copy(T original);
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model
+	 * @generated
+	 */
+	void initialize();
 
 } // ClassMakerService

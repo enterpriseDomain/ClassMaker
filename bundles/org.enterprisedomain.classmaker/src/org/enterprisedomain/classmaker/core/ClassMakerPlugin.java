@@ -137,7 +137,6 @@ public class ClassMakerPlugin extends Plugin {
 			public void bundleChanged(BundleEvent event) {
 				if (event.getBundle().getSymbolicName().equals(PLUGIN_ID))
 					if (event.getType() == BundleEvent.STARTED) {
-						getClassMaker().getWorkspace().initialize();
 						ClassMakerService.Stages.contributeStages();
 						for (String id : ClassMakerService.Stages.ids()) {
 							SortedSet<Customizer> customizers = ClassMakerService.Stages.createCustomizers(id);

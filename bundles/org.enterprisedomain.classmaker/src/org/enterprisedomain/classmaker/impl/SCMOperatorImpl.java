@@ -19,10 +19,12 @@ import java.io.IOException;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.SCMOperator;
+import org.enterprisedomain.classmaker.SCMRegistry;
 import org.enterprisedomain.classmaker.State;
 import org.osgi.framework.Version;
 
@@ -35,6 +37,8 @@ import org.osgi.framework.Version;
  * <ul>
  * <li>{@link org.enterprisedomain.classmaker.impl.SCMOperatorImpl#getProjectName
  * <em>Project Name</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.SCMOperatorImpl#getRegistry
+ * <em>Registry</em>}</li>
  * </ul>
  *
  * @generated
@@ -59,6 +63,16 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 	 * @ordered
 	 */
 	protected String projectName = PROJECT_NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getRegistry() <em>Registry</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getRegistry()
+	 * @generated
+	 * @ordered
+	 */
+	protected SCMRegistry registry;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -99,6 +113,46 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.SCM_OPERATOR__PROJECT_NAME,
 					oldProjectName, projectName));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public SCMRegistry getRegistry() {
+		if (registry != null && registry.eIsProxy()) {
+			InternalEObject oldRegistry = (InternalEObject) registry;
+			registry = (SCMRegistry) eResolveProxy(oldRegistry);
+			if (registry != oldRegistry) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassMakerPackage.SCM_OPERATOR__REGISTRY,
+							oldRegistry, registry));
+			}
+		}
+		return registry;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public SCMRegistry basicGetRegistry() {
+		return registry;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public void setRegistry(SCMRegistry newRegistry) {
+		SCMRegistry oldRegistry = registry;
+		registry = newRegistry;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.SCM_OPERATOR__REGISTRY, oldRegistry,
+					registry));
 	}
 
 	/**
@@ -148,7 +202,7 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 	 * 
 	 * @generated NOT
 	 */
-	public abstract String encodeCommitMessage(State state, int timestamp);
+	public abstract String encodeCommitMessage(State state);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -191,6 +245,10 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 		switch (featureID) {
 		case ClassMakerPackage.SCM_OPERATOR__PROJECT_NAME:
 			return getProjectName();
+		case ClassMakerPackage.SCM_OPERATOR__REGISTRY:
+			if (resolve)
+				return getRegistry();
+			return basicGetRegistry();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -205,6 +263,9 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 		switch (featureID) {
 		case ClassMakerPackage.SCM_OPERATOR__PROJECT_NAME:
 			setProjectName((String) newValue);
+			return;
+		case ClassMakerPackage.SCM_OPERATOR__REGISTRY:
+			setRegistry((SCMRegistry) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -221,6 +282,9 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 		case ClassMakerPackage.SCM_OPERATOR__PROJECT_NAME:
 			setProjectName(PROJECT_NAME_EDEFAULT);
 			return;
+		case ClassMakerPackage.SCM_OPERATOR__REGISTRY:
+			setRegistry((SCMRegistry) null);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -235,6 +299,8 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 		switch (featureID) {
 		case ClassMakerPackage.SCM_OPERATOR__PROJECT_NAME:
 			return PROJECT_NAME_EDEFAULT == null ? projectName != null : !PROJECT_NAME_EDEFAULT.equals(projectName);
+		case ClassMakerPackage.SCM_OPERATOR__REGISTRY:
+			return registry != null;
 		}
 		return super.eIsSet(featureID);
 	}
