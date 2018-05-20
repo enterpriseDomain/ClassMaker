@@ -22,17 +22,17 @@ public class GitSCMOperator extends SCMOperatorImpl<Git> {
 
 	@Override
 	public synchronized Git getRepositorySCM() throws Exception {
-		Git git = (Git) ClassMakerPlugin.getClassMaker().getSCMRegistry().getSCM(getProjectName());
+		Git git = (Git) getRegistry().getSCM(getProjectName());
 		if (git != null)
 			return git;
 		IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 		IPath projectGitPath = workspaceRoot.getLocation()
 				.append(workspaceRoot.getProject(getProjectName()).getFullPath());
-		return getRepositorySCM(projectGitPath.toFile());
+		return getRepositorySCM(projectGitPath.toFile(), getRegistry());
 	}
 
-	public static synchronized Git getRepositorySCM(File dir) throws Exception {
-		Git git = (Git) ClassMakerPlugin.getClassMaker().getSCMRegistry().getSCM(dir.getName());
+	public static synchronized Git getRepositorySCM(File dir, SCMRegistry<Git> registry) throws Exception {
+		Git git = (Git) registry.getSCM(dir.getName());
 		try {
 			git = Git.open(dir);
 		} catch (RepositoryNotFoundException e) {
@@ -42,17 +42,19 @@ public class GitSCMOperator extends SCMOperatorImpl<Git> {
 		} catch (IOException e) {
 			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createWarningStatus(e));
 		}
-		((SCMRegistry<Git>) ClassMakerPlugin.getClassMaker().getSCMRegistry()).putSCM(dir.getName(), git);
+		((SCMRegistry<Git>) registry).putSCM(dir.getName(), git);
 		return git;
 	}
 
 	@Override
 	public synchronized void ungetRepositorySCM() throws Exception {
-		Git git = (Git) ClassMakerPlugin.getClassMaker().getSCMRegistry().getSCM(getProjectName());
+		if (ClassMakerPlugin.getClassMaker() == null)
+			return;
+		Git git = (Git) getRegistry().getSCM(getProjectName());
 		if (git == null)
 			return;
 		git.close();
-		ClassMakerPlugin.getClassMaker().getSCMRegistry().removeSCM(getProjectName());
+		getRegistry().removeSCM(getProjectName());
 	}
 
 	@Override
@@ -92,6 +94,8 @@ public class GitSCMOperator extends SCMOperatorImpl<Git> {
 			String[] parts = commitMessage.split(" ");
 			if (parts.length == 2)
 				return Integer.parseInt(parts[1]);
+			if (parts.length == 3)
+				return Integer.parseInt(parts[2]);
 			else
 				return -1;
 		} catch (NumberFormatException e) {
@@ -105,14 +109,15 @@ public class GitSCMOperator extends SCMOperatorImpl<Git> {
 	}
 
 	@Override
-	public String encodeCommitMessage(State state, int timestamp) {
-		return state.getDeployableUnitName() + " " + timestamp;
+	public String encodeCommitMessage(State state) {
+		return state.getDeployableUnitName() + " " + state.getTimestamp()
+				+ (state.getCommitId() != null ? " " + state.getCommitId() : "");
 	}
 
 	@Override
 	public synchronized void deleteProject() {
-		if (ClassMakerPlugin.getClassMaker().getSCMRegistry().containsSCM(getProjectName()))
-			ClassMakerPlugin.getClassMaker().getSCMRegistry().removeSCM(getProjectName());
+		if (getRegistry().containsSCM(getProjectName()))
+			getRegistry().removeSCM(getProjectName());
 	}
 
 	@Override

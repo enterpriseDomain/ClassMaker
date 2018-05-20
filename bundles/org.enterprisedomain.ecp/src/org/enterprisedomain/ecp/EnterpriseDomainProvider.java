@@ -244,29 +244,36 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 					dummyEClass.getEStructuralFeatures().add(dummyEAttribute);
 					model.getEClassifiers().add(dummyEClass);
 					try {
-						blueprint = classMaker.createBlueprint();
-						blueprint.setDynamicModel(model);
-						blueprint.getCompletionListeners().add(new ProviderCompletionListener(project));
-						ClassMakerPlugin.runWithProgress(new IRunnableWithProgress() {
-
-							@Override
-							public void run(IProgressMonitor monitor)
-									throws InvocationTargetException, InterruptedException {
-								try {
-									classMaker.make(blueprint, monitor);
-								} catch (CoreException e) {
-									throw new InvocationTargetException(e);
-								}
-							}
-
-						});
-						domainProject = classMaker.getWorkspace().getContribution(model);
-					} catch (InvocationTargetException e) {
-						Activator.log(e.getTargetException());
-					} catch (InterruptedException e) {
-						monitor.setCanceled(true);
-						return;
+						domainProject = classMaker.getWorkspace().createContribution(model, monitor);
+						domainProject.addCompletionListener(new ProviderCompletionListener(project));
+					} catch (CoreException e) {
+						Activator.log(e);
 					}
+					// try {
+					// blueprint = classMaker.createBlueprint();
+					// blueprint.setDynamicModel(model);
+					// blueprint.getCompletionListeners().add(new
+					// ProviderCompletionListener(project));
+					// ClassMakerPlugin.runWithProgress(new IRunnableWithProgress() {
+					//
+					// @Override
+					// public void run(IProgressMonitor monitor)
+					// throws InvocationTargetException, InterruptedException {
+					// try {
+					// classMaker.make(blueprint, monitor);
+					// } catch (CoreException e) {
+					// throw new InvocationTargetException(e);
+					// }
+					// }
+					//
+					// });
+					// domainProject = classMaker.getWorkspace().getContribution(model);
+					// } catch (InvocationTargetException e) {
+					// Activator.log(e.getTargetException());
+					// } catch (InterruptedException e) {
+					// monitor.setCanceled(true);
+					// return;
+					// }
 					project.getVisiblePackages().add(EcorePackage.eINSTANCE);
 				} else
 					try {

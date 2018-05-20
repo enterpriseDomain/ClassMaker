@@ -33,6 +33,8 @@ import org.osgi.framework.Version;
  * <ul>
  * <li>{@link org.enterprisedomain.classmaker.SCMOperator#getProjectName
  * <em>Project Name</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.SCMOperator#getRegistry
+ * <em>Registry</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getSCMOperator()
@@ -74,6 +76,35 @@ public interface SCMOperator<T> extends EObject {
 	 * @generated
 	 */
 	void setProjectName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Registry</b></em>' reference. <!--
+	 * begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Registry</em>' reference isn't clear, there really
+	 * should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Registry</em>' reference.
+	 * @see #setRegistry(SCMRegistry)
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getSCMOperator_Registry()
+	 * @model
+	 * @generated
+	 */
+	SCMRegistry getRegistry();
+
+	/**
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.SCMOperator#getRegistry
+	 * <em>Registry</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Registry</em>' reference.
+	 * @see #getRegistry()
+	 * @generated
+	 */
+	void setRegistry(SCMRegistry value);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -130,7 +161,7 @@ public interface SCMOperator<T> extends EObject {
 	 * @model
 	 * @generated
 	 */
-	String encodeCommitMessage(State state, int timestamp);
+	String encodeCommitMessage(State state);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

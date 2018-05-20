@@ -1001,13 +1001,31 @@ public interface ClassMakerPackage extends EPackage {
 	int WORKSPACE__CUSTOMIZERS = ISCHEDULING_RULE_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Service</b></em>' container reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int WORKSPACE__SERVICE = ISCHEDULING_RULE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>SCM Registry</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int WORKSPACE__SCM_REGISTRY = ISCHEDULING_RULE_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Workspace</em>' class. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int WORKSPACE_FEATURE_COUNT = ISCHEDULING_RULE_FEATURE_COUNT + 3;
+	int WORKSPACE_FEATURE_COUNT = ISCHEDULING_RULE_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the
@@ -1319,13 +1337,22 @@ public interface ClassMakerPackage extends EPackage {
 	int SCM_OPERATOR__PROJECT_NAME = 0;
 
 	/**
+	 * The feature id for the '<em><b>Registry</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int SCM_OPERATOR__REGISTRY = 1;
+
+	/**
 	 * The number of structural features of the '<em>SCM Operator</em>' class. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int SCM_OPERATOR_FEATURE_COUNT = 1;
+	int SCM_OPERATOR_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the
@@ -1506,22 +1533,13 @@ public interface ClassMakerPackage extends EPackage {
 	int CLASS_MAKER_SERVICE__WORKSPACE = 0;
 
 	/**
-	 * The feature id for the '<em><b>SCM Registry</b></em>' reference. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_MAKER_SERVICE__SCM_REGISTRY = 1;
-
-	/**
 	 * The number of structural features of the '<em>Service</em>' class. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_MAKER_SERVICE_FEATURE_COUNT = 2;
+	int CLASS_MAKER_SERVICE_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the
@@ -2196,6 +2214,30 @@ public interface ClassMakerPackage extends EPackage {
 	EReference getWorkspace_Customizers();
 
 	/**
+	 * Returns the meta object for the container reference
+	 * '{@link org.enterprisedomain.classmaker.Workspace#getService
+	 * <em>Service</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the container reference '<em>Service</em>'.
+	 * @see org.enterprisedomain.classmaker.Workspace#getService()
+	 * @see #getWorkspace()
+	 * @generated
+	 */
+	EReference getWorkspace_Service();
+
+	/**
+	 * Returns the meta object for the reference
+	 * '{@link org.enterprisedomain.classmaker.Workspace#getSCMRegistry <em>SCM
+	 * Registry</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the reference '<em>SCM Registry</em>'.
+	 * @see org.enterprisedomain.classmaker.Workspace#getSCMRegistry()
+	 * @see #getWorkspace()
+	 * @generated
+	 */
+	EReference getWorkspace_SCMRegistry();
+
+	/**
 	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Integer To
 	 * State Map Entry</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -2666,6 +2708,18 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getSCMOperator_ProjectName();
 
 	/**
+	 * Returns the meta object for the reference
+	 * '{@link org.enterprisedomain.classmaker.SCMOperator#getRegistry
+	 * <em>Registry</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the reference '<em>Registry</em>'.
+	 * @see org.enterprisedomain.classmaker.SCMOperator#getRegistry()
+	 * @see #getSCMOperator()
+	 * @generated
+	 */
+	EReference getSCMOperator_Registry();
+
+	/**
 	 * Returns the meta object for class
 	 * '{@link org.enterprisedomain.classmaker.SCMRegistry <em>SCM Registry</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -2804,28 +2858,16 @@ public interface ClassMakerPackage extends EPackage {
 	EClass getClassMakerService();
 
 	/**
-	 * Returns the meta object for the reference
+	 * Returns the meta object for the containment reference
 	 * '{@link org.enterprisedomain.classmaker.ClassMakerService#getWorkspace
 	 * <em>Workspace</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the reference '<em>Workspace</em>'.
+	 * @return the meta object for the containment reference '<em>Workspace</em>'.
 	 * @see org.enterprisedomain.classmaker.ClassMakerService#getWorkspace()
 	 * @see #getClassMakerService()
 	 * @generated
 	 */
 	EReference getClassMakerService_Workspace();
-
-	/**
-	 * Returns the meta object for the reference
-	 * '{@link org.enterprisedomain.classmaker.ClassMakerService#getSCMRegistry
-	 * <em>SCM Registry</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for the reference '<em>SCM Registry</em>'.
-	 * @see org.enterprisedomain.classmaker.ClassMakerService#getSCMRegistry()
-	 * @see #getClassMakerService()
-	 * @generated
-	 */
-	EReference getClassMakerService_SCMRegistry();
 
 	/**
 	 * Returns the meta object for class
@@ -3369,6 +3411,22 @@ public interface ClassMakerPackage extends EPackage {
 		EReference WORKSPACE__CUSTOMIZERS = eINSTANCE.getWorkspace_Customizers();
 
 		/**
+		 * The meta object literal for the '<em><b>Service</b></em>' container reference
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference WORKSPACE__SERVICE = eINSTANCE.getWorkspace_Service();
+
+		/**
+		 * The meta object literal for the '<em><b>SCM Registry</b></em>' reference
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference WORKSPACE__SCM_REGISTRY = eINSTANCE.getWorkspace_SCMRegistry();
+
+		/**
 		 * The meta object literal for the
 		 * '{@link org.enterprisedomain.classmaker.impl.IntegerToStateMapEntryImpl
 		 * <em>Integer To State Map Entry</em>}' class. <!-- begin-user-doc --> <!--
@@ -3721,6 +3779,14 @@ public interface ClassMakerPackage extends EPackage {
 		EAttribute SCM_OPERATOR__PROJECT_NAME = eINSTANCE.getSCMOperator_ProjectName();
 
 		/**
+		 * The meta object literal for the '<em><b>Registry</b></em>' reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference SCM_OPERATOR__REGISTRY = eINSTANCE.getSCMOperator_Registry();
+
+		/**
 		 * The meta object literal for the
 		 * '{@link org.enterprisedomain.classmaker.impl.SCMRegistryImpl <em>SCM
 		 * Registry</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -3847,20 +3913,12 @@ public interface ClassMakerPackage extends EPackage {
 		EClass CLASS_MAKER_SERVICE = eINSTANCE.getClassMakerService();
 
 		/**
-		 * The meta object literal for the '<em><b>Workspace</b></em>' reference
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Workspace</b></em>' containment
+		 * reference feature. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
 		EReference CLASS_MAKER_SERVICE__WORKSPACE = eINSTANCE.getClassMakerService_Workspace();
-
-		/**
-		 * The meta object literal for the '<em><b>SCM Registry</b></em>' reference
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
-		 * @generated
-		 */
-		EReference CLASS_MAKER_SERVICE__SCM_REGISTRY = eINSTANCE.getClassMakerService_SCMRegistry();
 
 		/**
 		 * The meta object literal for the

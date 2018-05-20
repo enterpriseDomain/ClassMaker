@@ -126,8 +126,8 @@ public class PDEPluginExporter extends AbstractExporter {
 		ResourceUtils.cleanupDir(getProject(), ResourceUtils.getTargetFolderName());
 		try {
 			@SuppressWarnings("unchecked")
-			SCMOperator<Git> operator = (SCMOperator<Git>) ClassMakerPlugin.getClassMaker().getSCMRegistry()
-					.get(getProject().getName());
+			SCMOperator<Git> operator = (SCMOperator<Git>) getContributionState().getContribution().getWorkspace()
+					.getSCMRegistry().get(getProject().getName());
 			operator.add("."); //$NON-NLS-1$
 		} catch (Exception e) {
 			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));

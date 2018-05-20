@@ -44,6 +44,10 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
  * <em>Resource Set</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.Workspace#getCustomizers
  * <em>Customizers</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Workspace#getService
+ * <em>Service</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Workspace#getSCMRegistry <em>SCM
+ * Registry</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getWorkspace()
@@ -103,6 +107,51 @@ public interface Workspace extends EObject, ISchedulingRule {
 	 * @generated
 	 */
 	EMap<StageQualifier, Customizer> getCustomizers();
+
+	/**
+	 * Returns the value of the '<em><b>Service</b></em>' container reference. It is
+	 * bidirectional and its opposite is
+	 * '{@link org.enterprisedomain.classmaker.ClassMakerService#getWorkspace
+	 * <em>Workspace</em>}'. <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Service</em>' reference isn't clear, there really
+	 * should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Service</em>' container reference.
+	 * @see #setService(ClassMakerService)
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getWorkspace_Service()
+	 * @see org.enterprisedomain.classmaker.ClassMakerService#getWorkspace
+	 * @model opposite="workspace" transient="false"
+	 * @generated
+	 */
+	ClassMakerService getService();
+
+	/**
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Workspace#getService
+	 * <em>Service</em>}' container reference. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>Service</em>' container reference.
+	 * @see #getService()
+	 * @generated
+	 */
+	void setService(ClassMakerService value);
+
+	/**
+	 * Returns the value of the '<em><b>SCM Registry</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc --> The
+	 * {@link SCMRegistry <em>SCMRegistry</em>}. <!-- end-model-doc -->
+	 * 
+	 * @return the value of the '<em>SCM Registry</em>' reference.
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getWorkspace_SCMRegistry()
+	 * @model changeable="false"
+	 * @generated
+	 */
+	SCMRegistry<?> getSCMRegistry();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->

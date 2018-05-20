@@ -131,6 +131,7 @@ public class SCMRegistryImpl<T> extends EObjectImpl implements SCMRegistry<T> {
 	public SCMOperator<T> createSCMOperator(String projectName) {
 		SCMOperator<T> operator = (SCMOperator<T>) (new GitSCMOperator());
 		operator.setProjectName(projectName);
+		operator.setRegistry(this);
 		return operator;
 	}
 

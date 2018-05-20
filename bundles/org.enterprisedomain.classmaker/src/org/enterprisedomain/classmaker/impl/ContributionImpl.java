@@ -51,12 +51,14 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.util.NotifyingInternalEListImpl;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.ListBranchCommand;
+import org.eclipse.jgit.api.ReflogCommand;
 import org.eclipse.jgit.api.ResetCommand;
 import org.eclipse.jgit.api.ResetCommand.ResetType;
 import org.eclipse.jgit.api.errors.CheckoutConflictException;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.JGitInternalException;
 import org.eclipse.jgit.lib.Ref;
+import org.eclipse.jgit.lib.ReflogEntry;
 import org.eclipse.osgi.util.NLS;
 import org.enterprisedomain.classmaker.ClassMakerFactory;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
@@ -574,17 +576,19 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	 */
 	public String initialize(boolean commit) {
 		@SuppressWarnings("unchecked")
-		SCMOperator<Git> operator = (SCMOperator<Git>) ClassMakerPlugin.getClassMaker().getSCMRegistry()
-				.get(getProjectName());
+		SCMOperator<Git> operator = (SCMOperator<Git>) getWorkspace().getSCMRegistry().get(getProjectName());
 		try {
 			Git git = operator.getRepositorySCM();
-
+			// if (git == null)
+			// return "";
 			String currentBranch = git.getRepository().getBranch();
 
 			ListBranchCommand listBranches = git.branchList();
 			List<Ref> branches = listBranches.call();
 			Iterator<Ref> it = branches.iterator();
 			Ref branch = null;
+			int timestamp = -1;
+			String commitId = "";
 			do {
 				Version version = null;
 				if (it.hasNext()) {
@@ -592,22 +596,28 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 					String[] name = branch.getName().split("/"); //$NON-NLS-1$
 					try {
 						version = operator.decodeVersion(name[name.length - 1]);
+						ReflogCommand reflog = git.reflog();
+						reflog.setRef(branch.getName().toString());
+						Collection<ReflogEntry> refs = reflog.call();
+						for (ReflogEntry ref : refs)
+							if (ref.getNewId().equals(branch.getObjectId()))
+								timestamp = operator.decodeTimestamp(ref.getComment());
 					} catch (IllegalArgumentException e) {
 						continue;
 					}
 				}
 				if (version != null && !getRevisions().containsKey(version)) {
-					newBareRevision(version);
+					Revision newRevision = newBareRevision(version);
+					newRevision.setTimestamp(timestamp);
+					commitId = newRevision.initialize(commit);
 				}
 			} while (it.hasNext());
 			if (!getRevisions().isEmpty() && getVersion().equals(Version.emptyVersion))
 				setVersion(ListUtil.getLast(getRevisions()).getKey());
-
-			String commitId = "";
-			if (eIsSet(ClassMakerPackage.Literals.PROJECT__REVISION))
-				commitId = getRevision().initialize(commit);
+			else if (!getVersion().equals(Version.emptyVersion))
+				checkout(getVersion(), timestamp);
 			if (currentBranch.equals(SCMOperator.MASTER_BRANCH))
-				checkout(getVersion());
+				checkout(getVersion(), timestamp);
 			getWorkspace().getResourceSet().eAdapters().add(resourceAdapter);
 			addResourceChangeListener(getResourceReloadListener());
 			return commitId;
@@ -690,8 +700,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 				return;
 			Git git = null;
 			@SuppressWarnings("unchecked")
-			SCMOperator<Git> operator = (SCMOperator<Git>) ClassMakerPlugin.getClassMaker().getSCMRegistry()
-					.get(getProjectName());
+			SCMOperator<Git> operator = (SCMOperator<Git>) getWorkspace().getSCMRegistry().get(getProjectName());
 			Ref ref = null;
 			try {
 				git = operator.getRepositorySCM();
@@ -1078,7 +1087,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 			if (create) {
 				try {
 					@SuppressWarnings("unchecked")
-					SCMOperator<Git> operator = (SCMOperator<Git>) ClassMakerPlugin.getClassMaker().getSCMRegistry()
+					SCMOperator<Git> operator = (SCMOperator<Git>) getWorkspace().getSCMRegistry()
 							.get(getProjectName());
 					operator.add(".");
 					operator.commit(getProjectName());

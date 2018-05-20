@@ -269,7 +269,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	public String initialize(boolean commit) {
 		super.initialize(commit);
 		@SuppressWarnings("unchecked")
-		SCMOperator<Git> operator = (SCMOperator<Git>) ClassMakerPlugin.getClassMaker().getSCMRegistry()
+		SCMOperator<Git> operator = (SCMOperator<Git>) getContribution().getWorkspace().getSCMRegistry()
 				.get(getContribution().getProjectName());
 		try {
 			Git git = operator.getRepositorySCM();
@@ -298,6 +298,8 @@ public class RevisionImpl extends ItemImpl implements Revision {
 					setTimestamp(timestamp);
 					state.initialize(commit);
 				}
+				if (getStateHistory().isEmpty())
+					return null;
 				checkout(ListUtil.getLast(getStateHistory()).getKey());
 			}
 		} catch (NoHeadException e) {
@@ -323,7 +325,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	public void create(IProgressMonitor monitor) throws CoreException {
 		if (isStateSet()) {
 			@SuppressWarnings("unchecked")
-			SCMOperator<Git> operator = (SCMOperator<Git>) ClassMakerPlugin.getClassMaker().getSCMRegistry()
+			SCMOperator<Git> operator = (SCMOperator<Git>) getContribution().getWorkspace().getSCMRegistry()
 					.get(getContribution().getProjectName());
 			try {
 				Git git = operator.getRepositorySCM();
@@ -405,7 +407,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 		getContribution().initAdapters(this);
 		if (create && isStateSet()) {
 			@SuppressWarnings("unchecked")
-			SCMOperator<Git> operator = (SCMOperator<Git>) ClassMakerPlugin.getClassMaker().getSCMRegistry()
+			SCMOperator<Git> operator = (SCMOperator<Git>) getContribution().getWorkspace().getSCMRegistry()
 					.get(getContribution().getProjectName());
 			Git git = null;
 			try {

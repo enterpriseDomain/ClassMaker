@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <units size='1'>
-  <unit id='org.enterprisedomain.classmaker.edit' version='1.0.0.201805020833'>
-    <update id='org.enterprisedomain.classmaker.edit' range='[0.0.0,1.0.0.201805020833)' severity='0'/>
+  <unit id='org.enterprisedomain.classmaker.edit' version='1.0.0.201805201516'>
+    <update id='org.enterprisedomain.classmaker.edit' range='[0.0.0,1.0.0.201805201516)' severity='0'/>
     <properties size='8'>
       <property name='df_LT.pluginName' value='ClassMaker Edit Support'/>
       <property name='df_LT.providerName' value='www.example.org'/>
@@ -13,8 +13,8 @@
       <property name='maven-version' value='1.0.0-SNAPSHOT'/>
     </properties>
     <provides size='6'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='org.enterprisedomain.classmaker.edit' version='1.0.0.201805020833'/>
-      <provided namespace='osgi.bundle' name='org.enterprisedomain.classmaker.edit' version='1.0.0.201805020833'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='org.enterprisedomain.classmaker.edit' version='1.0.0.201805201516'/>
+      <provided namespace='osgi.bundle' name='org.enterprisedomain.classmaker.edit' version='1.0.0.201805201516'/>
       <provided namespace='java.package' name='org.enterprisedomain.classmaker.edit.command' version='0.0.0'/>
       <provided namespace='java.package' name='org.enterprisedomain.classmaker.provider' version='0.0.0'/>
       <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
@@ -29,13 +29,13 @@
       <required namespace='osgi.bundle' name='org.eclipse.jface' range='0.0.0'/>
     </requires>
     <artifacts size='1'>
-      <artifact classifier='osgi.bundle' id='org.enterprisedomain.classmaker.edit' version='1.0.0.201805020833'/>
+      <artifact classifier='osgi.bundle' id='org.enterprisedomain.classmaker.edit' version='1.0.0.201805201516'/>
     </artifacts>
     <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
     <touchpointData size='1'>
       <instructions size='1'>
         <instruction key='manifest'>
-          Bundle-SymbolicName: org.enterprisedomain.classmaker.edit;singleton:=true&#xA;Bundle-Version: 1.0.0.201805020833&#xA;
+          Bundle-SymbolicName: org.enterprisedomain.classmaker.edit;singleton:=true&#xA;Bundle-Version: 1.0.0.201805201516&#xA;
         </instruction>
       </instructions>
     </touchpointData>

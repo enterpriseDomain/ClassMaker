@@ -64,7 +64,6 @@ public class ClassMakerServiceItemProvider extends ItemProviderAdapter implement
 			super.getPropertyDescriptors(object);
 
 			addWorkspacePropertyDescriptor(object);
-			addSCMRegistryPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -82,21 +81,6 @@ public class ClassMakerServiceItemProvider extends ItemProviderAdapter implement
 				getString("_UI_PropertyDescriptor_description", "_UI_ClassMakerService_workspace_feature",
 						"_UI_ClassMakerService_type"),
 				ClassMakerPackage.Literals.CLASS_MAKER_SERVICE__WORKSPACE, true, false, true, null, null, null));
-	}
-
-	/**
-	 * This adds a property descriptor for the SCM Registry feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSCMRegistryPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_ClassMakerService_SCMRegistry_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_ClassMakerService_SCMRegistry_feature",
-						"_UI_ClassMakerService_type"),
-				ClassMakerPackage.Literals.CLASS_MAKER_SERVICE__SCM_REGISTRY, false, false, false, null, null, null));
 	}
 
 	/**

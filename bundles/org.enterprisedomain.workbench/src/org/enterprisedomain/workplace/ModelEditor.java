@@ -15,6 +15,7 @@ import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.ui.util.EditUIUtil;
 import org.eclipse.emfforms.spi.editor.GenericEditor;
 import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.MultiPageEditorPart;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
@@ -54,6 +55,8 @@ public class ModelEditor extends MultiPageEditorPart {
 	}
 
 	public GenericEditor getGenericEditor() {
+		if (!PlatformUI.isWorkbenchRunning())
+			return null;
 		return (GenericEditor) getEditor(genericEditorIndex);
 	}
 
@@ -82,7 +85,10 @@ public class ModelEditor extends MultiPageEditorPart {
 	@Override
 	public boolean isSaveAsAllowed() {
 		if (getActiveEditor() == null)
-			return getGenericEditor().isSaveAsAllowed();
+			if (getGenericEditor() == null)
+				return false;
+			else
+				return getGenericEditor().isSaveAsAllowed();
 		else
 			return getActiveEditor().isSaveAsAllowed();
 	}
