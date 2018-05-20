@@ -72,6 +72,7 @@ public class WorkspaceItemProvider extends ItemProviderAdapter implements IEditi
 			super.getPropertyDescriptors(object);
 
 			addResourceSetPropertyDescriptor(object);
+			addSCMRegistryPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -90,6 +91,21 @@ public class WorkspaceItemProvider extends ItemProviderAdapter implements IEditi
 								"_UI_Workspace_type"),
 						ClassMakerPackage.Literals.WORKSPACE__RESOURCE_SET, false, false, false,
 						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the SCM Registry feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSCMRegistryPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Workspace_SCMRegistry_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Workspace_SCMRegistry_feature",
+								"_UI_Workspace_type"),
+						ClassMakerPackage.Literals.WORKSPACE__SCM_REGISTRY, false, false, false, null, null, null));
 	}
 
 	/**

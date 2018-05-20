@@ -772,6 +772,24 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * 
 	 * @generated
 	 */
+	public EReference getWorkspace_Service() {
+		return (EReference) workspaceEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EReference getWorkspace_SCMRegistry() {
+		return (EReference) workspaceEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	public EClass getIntegerToStateMapEntry() {
 		return integerToStateMapEntryEClass;
 	}
@@ -1123,6 +1141,15 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * 
 	 * @generated
 	 */
+	public EReference getSCMOperator_Registry() {
+		return (EReference) scmOperatorEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	public EClass getSCMRegistry() {
 		return scmRegistryEClass;
 	}
@@ -1233,15 +1260,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	public EReference getClassMakerService_Workspace() {
 		return (EReference) classMakerServiceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public EReference getClassMakerService_SCMRegistry() {
-		return (EReference) classMakerServiceEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1469,6 +1487,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		createEReference(workspaceEClass, WORKSPACE__PROJECTS);
 		createEAttribute(workspaceEClass, WORKSPACE__RESOURCE_SET);
 		createEReference(workspaceEClass, WORKSPACE__CUSTOMIZERS);
+		createEReference(workspaceEClass, WORKSPACE__SERVICE);
+		createEReference(workspaceEClass, WORKSPACE__SCM_REGISTRY);
 
 		integerToStateMapEntryEClass = createEClass(INTEGER_TO_STATE_MAP_ENTRY);
 		createEAttribute(integerToStateMapEntryEClass, INTEGER_TO_STATE_MAP_ENTRY__KEY);
@@ -1504,6 +1524,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 		scmOperatorEClass = createEClass(SCM_OPERATOR);
 		createEAttribute(scmOperatorEClass, SCM_OPERATOR__PROJECT_NAME);
+		createEReference(scmOperatorEClass, SCM_OPERATOR__REGISTRY);
 
 		scmRegistryEClass = createEClass(SCM_REGISTRY);
 
@@ -1538,7 +1559,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 		classMakerServiceEClass = createEClass(CLASS_MAKER_SERVICE);
 		createEReference(classMakerServiceEClass, CLASS_MAKER_SERVICE__WORKSPACE);
-		createEReference(classMakerServiceEClass, CLASS_MAKER_SERVICE__SCM_REGISTRY);
 
 		blueprintEClass = createEClass(BLUEPRINT);
 		createEReference(blueprintEClass, BLUEPRINT__DYNAMIC_MODEL);
@@ -1823,6 +1843,15 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEReference(getWorkspace_Customizers(), this.getStageQualifierToCustomizerMapEntry(), null, "customizers",
 				null, 0, -1, Workspace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getWorkspace_Service(), this.getClassMakerService(), this.getClassMakerService_Workspace(),
+				"service", null, 0, 1, Workspace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		EGenericType g1 = createEGenericType(this.getSCMRegistry());
+		EGenericType g2 = createEGenericType();
+		g1.getETypeArguments().add(g2);
+		initEReference(getWorkspace_SCMRegistry(), g1, null, "SCMRegistry", null, 0, 1, Workspace.class, !IS_TRANSIENT,
+				!IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
 
 		addEOperation(workspaceEClass, null, "initialize", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -1956,10 +1985,13 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEAttribute(getSCMOperator_ProjectName(), ecorePackage.getEString(), "projectName", "", 0, 1,
 				SCMOperator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
+		initEReference(getSCMOperator_Registry(), this.getSCMRegistry(), null, "registry", null, 0, 1,
+				SCMOperator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(scmOperatorEClass, null, "getRepositorySCM", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEException(op, this.getException());
-		EGenericType g1 = createEGenericType(scmOperatorEClass_T);
+		g1 = createEGenericType(scmOperatorEClass_T);
 		initEOperation(op, g1);
 
 		op = addEOperation(scmOperatorEClass, null, "ungetRepositorySCM", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1982,7 +2014,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		op = addEOperation(scmOperatorEClass, ecorePackage.getEString(), "encodeCommitMessage", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
 		addEParameter(op, this.getState(), "state", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEInt(), "timestamp", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(scmOperatorEClass, null, "deleteProject", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -2005,7 +2036,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		op = addEOperation(scmRegistryEClass, null, "get", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "projectName", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(this.getSCMOperator());
-		EGenericType g2 = createEGenericType(scmRegistryEClass_T);
+		g2 = createEGenericType(scmRegistryEClass_T);
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 
@@ -2184,15 +2215,9 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 		initEClass(classMakerServiceEClass, ClassMakerService.class, "ClassMakerService", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getClassMakerService_Workspace(), this.getWorkspace(), null, "workspace", null, 0, 1,
-				ClassMakerService.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		g1 = createEGenericType(this.getSCMRegistry());
-		g2 = createEGenericType();
-		g1.getETypeArguments().add(g2);
-		initEReference(getClassMakerService_SCMRegistry(), g1, null, "SCMRegistry", null, 0, 1, ClassMakerService.class,
-				!IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClassMakerService_Workspace(), this.getWorkspace(), this.getWorkspace_Service(), "workspace",
+				null, 0, 1, ClassMakerService.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(classMakerServiceEClass, ecorePackage.getEPackage(), "make", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEPackage(), "input", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -2394,6 +2419,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		addEParameter(op, g1, "original", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(t1);
 		initEOperation(op, g1);
+
+		addEOperation(classMakerServiceEClass, null, "initialize", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(blueprintEClass, Blueprint.class, "Blueprint", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);

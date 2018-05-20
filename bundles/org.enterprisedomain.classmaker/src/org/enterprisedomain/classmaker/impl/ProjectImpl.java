@@ -20,9 +20,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Date;
 
-import org.eclipse.core.internal.localstore.IsSynchronizedVisitor;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.ISavedState;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -285,7 +283,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		public void notifyChanged(Notification msg) {
 			if (msg.getFeatureID(State.class) == ClassMakerPackage.PROJECT__NAME
 					&& msg.getEventType() == Notification.SET && msg.getNewStringValue() != null)
-				setProjectName(ClassMakerPlugin.getClassMaker().computeProjectName(msg.getNewStringValue()));
+				setProjectName(getWorkspace().getService().computeProjectName(msg.getNewStringValue()));
 		}
 
 	}

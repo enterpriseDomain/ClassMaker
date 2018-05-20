@@ -54,7 +54,10 @@ import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.LogCommand;
 import org.eclipse.jgit.api.errors.CheckoutConflictException;
+import org.eclipse.jgit.lib.Ref;
+import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.m2m.internal.qvt.oml.cst.parser.NLS;
 import org.eclipse.pde.core.project.IBundleProjectDescription;
 import org.eclipse.pde.core.project.IBundleProjectService;
@@ -155,7 +158,8 @@ public class StateImpl extends ItemImpl implements State {
 		public void notifyChanged(Notification msg) {
 			if (msg.getFeatureID(State.class) == ClassMakerPackage.STATE__MODEL_NAME
 					&& msg.getEventType() == Notification.SET && msg.getNewStringValue() != null)
-				setProjectName(ClassMakerPlugin.getClassMaker().computeProjectName(msg.getNewStringValue()));
+				setProjectName(
+						getContribution().getWorkspace().getService().computeProjectName(msg.getNewStringValue()));
 			// if (eContainer() != null && eIsSet(ClassMakerPackage.STATE__REVISION)
 			// && eIsSet(ClassMakerPackage.STATE__CONTRIBUTION) &&
 			// !getContribution().isSavingResource()
@@ -454,8 +458,32 @@ public class StateImpl extends ItemImpl implements State {
 					ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 					return null;
 				}
-			else
-				getContribution().checkout(getRevision().getVersion());
+			else {
+				SCMOperator<Git> operator = (SCMOperator<Git>) getContribution().getWorkspace().getSCMRegistry()
+						.get(getProjectName());
+				try {
+					Git git = operator.getRepositorySCM();
+					Ref branch = git.getRepository().findRef(getRevision().getVersion().toString());
+					LogCommand log = git.log();
+					log.add(branch.getObjectId());
+					Iterable<RevCommit> commits = log.call();
+					for (RevCommit c : commits) {
+						if (operator.decodeTimestamp(c.getShortMessage()) == getTimestamp()) {
+							String id = c.getId().toString();
+							getCommitIds().add(id);
+							setCommitId(id);
+						}
+					}
+				} catch (Exception e) {
+				} finally {
+					try {
+						operator.ungetRepositorySCM();
+					} catch (Exception e) {
+						ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
+					}
+				}
+				getContribution().checkout(getRevision().getVersion(), getTimestamp(), getCommitId());
+			}
 		}
 		return getCommitId(); // $NON-NLS-1$
 	}
@@ -494,7 +522,7 @@ public class StateImpl extends ItemImpl implements State {
 			return;
 		loading = true;
 		boolean created = false;
-		ResourceSet resourceSet = ClassMakerPlugin.getClassMaker().getWorkspace().getResourceSet();
+		ResourceSet resourceSet = getContribution().getWorkspace().getResourceSet();
 		File modelFile = new File(modelURI.toFileString());
 		if (modelFile.exists())
 			setResource(resourceSet.getResource(modelURI, loadOnDemand));
@@ -762,7 +790,7 @@ public class StateImpl extends ItemImpl implements State {
 	public void checkout(String commitId) {
 		try {
 			@SuppressWarnings("unchecked")
-			SCMOperator<Git> operator = (SCMOperator<Git>) ClassMakerPlugin.getClassMaker().getSCMRegistry()
+			SCMOperator<Git> operator = (SCMOperator<Git>) getContribution().getWorkspace().getSCMRegistry()
 					.get(getProjectName());
 			setCommitId(commitId);
 			operator.checkout(getVersion().toString(), getCommitId());
@@ -785,7 +813,7 @@ public class StateImpl extends ItemImpl implements State {
 	 */
 	public void add(String filepattern) throws Exception {
 		@SuppressWarnings("unchecked")
-		SCMOperator<Git> operator = (SCMOperator<Git>) ClassMakerPlugin.getClassMaker().getSCMRegistry()
+		SCMOperator<Git> operator = (SCMOperator<Git>) getContribution().getWorkspace().getSCMRegistry()
 				.get(getProjectName());
 		operator.add(filepattern);
 	}
@@ -797,10 +825,10 @@ public class StateImpl extends ItemImpl implements State {
 	 */
 	public String commit() throws Exception {
 		@SuppressWarnings("unchecked")
-		SCMOperator<Git> operator = (SCMOperator<Git>) ClassMakerPlugin.getClassMaker().getSCMRegistry()
+		SCMOperator<Git> operator = (SCMOperator<Git>) ClassMakerPlugin.getClassMaker().getWorkspace().getSCMRegistry()
 				.get(getProjectName());
 		String commitId = null;
-		commitId = operator.commit(operator.encodeCommitMessage(this, getTimestamp()));
+		commitId = operator.commit(operator.encodeCommitMessage(this));
 		getCommitIds().add(commitId);
 		setCommitId(commitId);
 		return commitId;
@@ -1141,7 +1169,7 @@ public class StateImpl extends ItemImpl implements State {
 	 */
 	public void delete(IProgressMonitor monitor) throws CoreException {
 		@SuppressWarnings("unchecked")
-		SCMOperator<Git> operator = (SCMOperator<Git>) ClassMakerPlugin.getClassMaker().getSCMRegistry()
+		SCMOperator<Git> operator = (SCMOperator<Git>) ClassMakerPlugin.getClassMaker().getWorkspace().getSCMRegistry()
 				.get(getProjectName());
 		try {
 			operator.deleteProject();

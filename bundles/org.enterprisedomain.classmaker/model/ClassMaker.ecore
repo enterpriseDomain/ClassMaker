@@ -420,6 +420,16 @@
         <details key="documentation" value="{@link Customizer Customizers} collection."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="service" eType="#//ClassMakerService"
+        eOpposite="#//ClassMakerService/workspace"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="SCMRegistry" changeable="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The {@link SCMRegistry &lt;em>SCMRegistry&lt;/em>}."/>
+      </eAnnotations>
+      <eGenericType eClassifier="#//SCMRegistry">
+        <eTypeArguments/>
+      </eGenericType>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Properties" instanceClassName="java.util.Properties">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -647,7 +657,6 @@
     </eOperations>
     <eOperations name="encodeCommitMessage" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eParameters name="state" eType="#//State"/>
-      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     </eOperations>
     <eOperations name="deleteProject"/>
     <eOperations name="checkout" eExceptions="#//Exception">
@@ -664,6 +673,7 @@
         <details key="documentation" value="A name of the {@link org.eclipse.core.resources.IProject IProject} contained in SCM repo."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="registry" eType="#//SCMRegistry"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SCMRegistry">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1085,18 +1095,12 @@
         <eGenericType eTypeParameter="#//ClassMakerService/copy/T"/>
       </eParameters>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="workspace" eType="#//Workspace">
+    <eOperations name="initialize"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="workspace" eType="#//Workspace"
+        containment="true" eOpposite="#//Workspace/service">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The {@link Workspace &lt;em>&lt;b>Workspace&lt;/b>&lt;/em>} containing the {@link Project &lt;em>Projects&lt;/em>}."/>
       </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="SCMRegistry" changeable="false">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The {@link SCMRegistry &lt;em>SCMRegistry&lt;/em>}."/>
-      </eAnnotations>
-      <eGenericType eClassifier="#//SCMRegistry">
-        <eTypeArguments/>
-      </eGenericType>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Blueprint">
