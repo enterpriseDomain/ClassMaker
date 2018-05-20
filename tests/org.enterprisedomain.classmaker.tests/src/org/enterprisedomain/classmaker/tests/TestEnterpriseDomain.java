@@ -593,7 +593,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		EClass cl = (EClass) p2.getEClassifier(getClassName());
 		setClassName("P");
 		cl.setName(getClassName());
-		cl.getEStructuralFeature(getAttributeName());
+		assertNotNull(cl.getEStructuralFeature(getAttributeName()));
 		testAPIUpdate(p, p2, "t", EcorePackage.Literals.EJAVA_OBJECT, new Object(), getProgressMonitor());
 		cleanup();
 	}
