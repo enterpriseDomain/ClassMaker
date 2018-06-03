@@ -32,7 +32,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated ClassMaker -->
       <package
-            uri="http://org/enterprisedomain/ClassMaker/0.7.920"
+            uri="http://org/enterprisedomain/ClassMaker/0.7.929"
             class="org.enterprisedomain.classmaker.ClassMakerPackage"
             genModel="model/ClassMaker.genmodel"/>
    </extension>

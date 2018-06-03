@@ -2,17 +2,18 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.enterprisedomain</groupId>
 	<artifactId>org.enterprisedomain.features</artifactId>
-	<version>0.7.920-SNAPSHOT</version>
+	<version>0.7.929-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
 		<artifactId>org.enterprisedomain.root</artifactId>
-		<version>0.7.920-SNAPSHOT</version>
+		<version>0.7.929-SNAPSHOT</version>
 	</parent>
 
 	<modules>
 		<module>org.enterprisedomain.classmaker.feature</module>
 		<module>org.enterprisedomain.classmaker.osgi.resolverhooks.feature</module>
+		<module>org.enterprisedomain.ui.workbench.rcp.feature</module>
 	</modules>
 </project>

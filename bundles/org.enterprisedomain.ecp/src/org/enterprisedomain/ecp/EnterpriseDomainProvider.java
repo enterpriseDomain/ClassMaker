@@ -49,6 +49,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
@@ -100,7 +101,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 
 	public static final String PROP_CONTRIBUTION = "isContribution";
 
-	private static Set<String> visiblePackages = new HashSet<String>();
+	private static Map<String, HashSet<String>> visiblePackagesToClasses = new HashMap<String, HashSet<String>>();
 
 	private Blueprint blueprint;
 
@@ -223,7 +224,8 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 				} catch (CoreException e) {
 					Activator.log(e);
 				}
-				addVisiblePackages(project);
+				for (InternalProject ecpProject : getOpenProjects())
+					addVisiblePackages(ecpProject);
 				domainProject.initialize(false);
 			} else {
 				boolean contribution = false;
@@ -278,7 +280,8 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 				} else
 					try {
 						domainProject = classMaker.getWorkspace().createProject(project.getName(), monitor);
-						addVisiblePackages(project);
+						for (InternalProject ecpProject : getOpenProjects())
+							addVisiblePackages(ecpProject);
 						domainProject.initialize(true);
 					} catch (CoreException e) {
 						Activator.log(e);
@@ -364,9 +367,18 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 	}
 
 	private void addVisiblePackages(InternalProject project) {
+		Set<EClass> eClasses = new HashSet<EClass>();
 		for (EPackage visiblePackage : getVisiblePackages(project)) {
 			project.getVisiblePackages().add(visiblePackage);
+
+			for (EClassifier eClass : visiblePackage.getEClassifiers()) {
+				if (eClass instanceof EClass
+						&& visiblePackagesToClasses.get(visiblePackage.getNsURI()).contains(eClass.getName()))
+					eClasses.add((EClass) eClass);
+			}
 		}
+		project.setVisibleEClasses(eClasses);
+
 	}
 
 	protected void disposeProject(InternalProject project) {
@@ -409,7 +421,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 
 	public Set<EPackage> getVisiblePackages(InternalProject project) {
 		Set<EPackage> results = new HashSet<EPackage>();
-		for (String packageNsURI : visiblePackages) {
+		for (String packageNsURI : visiblePackagesToClasses.keySet()) {
 			EPackage ePackage = project.getEditingDomain().getResourceSet().getPackageRegistry()
 					.getEPackage(packageNsURI);
 			results.add(ePackage);
@@ -485,8 +497,9 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 				}
 
 			});
-			visiblePackages.add(((Contribution) result).getDomainModel().getGenerated().getNsURI());
-			addVisiblePackages(project);
+			addVisiblePackage(((Contribution) result).getDomainModel().getGenerated());
+			for (InternalProject ecpProject : getOpenProjects())
+				addVisiblePackages(ecpProject);
 			project.notifyObjectsChanged((Collection<Object>) (Collection<?>) Arrays.asList(project), true);
 			Collection<ECPRepository> repositories = (Collection<ECPRepository>) (Collection<?>) Arrays
 					.asList(project.getRepository());
@@ -498,6 +511,18 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 	@Override
 	public Notifier getRoot(InternalProject project) {
 		return Activator.getClassMaker().getWorkspace();
+	}
+
+	public void addVisiblePackage(EPackage ePackage) {
+		HashSet<String> eClasses = null;
+		if (visiblePackagesToClasses.containsKey(ePackage.getNsURI()))
+			eClasses = visiblePackagesToClasses.get(ePackage.getNsURI());
+		else
+			eClasses = new HashSet<String>();
+		for (EClassifier eClass : ePackage.getEClassifiers())
+			if (eClass instanceof EClass)
+				eClasses.add(eClass.getName());
+		visiblePackagesToClasses.put(ePackage.getNsURI(), eClasses);
 	}
 
 	private class EnterpriseDomainResourceListener implements IResourceChangeListener {
