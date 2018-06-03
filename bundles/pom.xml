@@ -2,18 +2,19 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.enterprisedomain</groupId>
 	<artifactId>org.enterprisedomain.bundles</artifactId>
-	<version>0.7.920-SNAPSHOT</version>
+	<version>0.7.929-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
 		<artifactId>org.enterprisedomain.root</artifactId>
-		<version>0.7.920-SNAPSHOT</version>
+		<version>0.7.929-SNAPSHOT</version>
 	</parent>
 
 	<modules>
 		<module>org.enterprisedomain.classmaker</module>
 		<module>org.enterprisedomain.classmaker.osgi.systemextension</module>
 		<module>org.enterprisedomain.classmaker.edit</module>
+		<module>org.enterprisedomain.workbench</module>
 	</modules>
 </project>

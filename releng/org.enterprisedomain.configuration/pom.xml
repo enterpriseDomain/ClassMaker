@@ -3,9 +3,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.enterprisedomain</groupId>
 	<artifactId>org.enterprisedomain.configuration</artifactId>
-	<version>0.7.920-SNAPSHOT</version>
+	<version>0.7.929-SNAPSHOT</version>
 	<properties>
-		<product.version>0.7.920-SNAPSHOT</product.version>
+		<product.version>0.7.929-SNAPSHOT</product.version>
 		<tycho.version>1.0.0</tycho.version>
 		<tycho.extras.version>${tycho.version}</tycho.extras.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -37,7 +37,7 @@
 						<artifact>
 							<groupId>org.enterprisedomain</groupId>
 							<artifactId>org.enterprisedomain.target</artifactId>
-							<version>0.7.920-SNAPSHOT</version>
+							<version>0.7.929-SNAPSHOT</version>
 						</artifact>
 					</target>
 					<dependency-resolution>
