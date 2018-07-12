@@ -22,6 +22,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.SortedSet;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
@@ -31,7 +32,6 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.core.runtime.jobs.MultiRule;
 import org.eclipse.emf.common.notify.Notification;
@@ -206,13 +206,19 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @generated
+	 * @generated NOT
 	 */
 	public EMap<StageQualifier, Customizer> getCustomizers() {
 		if (customizers == null) {
 			customizers = new EcoreEMap<StageQualifier, Customizer>(
 					ClassMakerPackage.Literals.STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY,
 					StageQualifierToCustomizerMapEntryImpl.class, this, ClassMakerPackage.WORKSPACE__CUSTOMIZERS);
+			for (String id : ClassMakerService.Stages.ids()) {
+				SortedSet<Customizer> customizers = ClassMakerService.Stages.createCustomizers(id);
+				if (!customizers.isEmpty())
+					for (Customizer customizer : customizers)
+						this.customizers.put(ClassMakerService.Stages.lookup(id), customizer);
+			}
 		}
 		return customizers;
 	}
@@ -220,11 +226,11 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @generated
+	 * @generated NOT
 	 */
 	public ClassMakerService getService() {
 		if (eContainerFeatureID() != ClassMakerPackage.WORKSPACE__SERVICE)
-			return null;
+			return ClassMakerPlugin.getClassMaker();
 		return (ClassMakerService) eInternalContainer();
 	}
 
@@ -545,35 +551,38 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			if (contribution.getProjectName() != null && contribution.getProjectName().equals(projectName))
 				return contribution;
 		}
-		IProgressMonitor monitor = ClassMakerPlugin.getProgressMonitor();
-		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
-		Contribution contribution = null;
-		try {
-			if (!project.exists())
-				return contribution;
-			if (!project.isOpen()) {
-				SubMonitor pm = SubMonitor.convert(monitor);
-				SubMonitor m = pm.newChild(1, SubMonitor.SUPPRESS_ISCANCELED);
-				try {
-					project.open(m);
-				} finally {
-					m.done();
-					pm.done();
-				}
-			}
-			if (project.hasNature(ClassMakerPlugin.NATURE_ID)) {
-				if (contribution == null) {
-					contribution = (ContributionImpl) ClassMakerFactory.eINSTANCE.createContribution();
-					contribution.setProjectName(project.getName());
-				}
-				registerProject(contribution);
-			}
-		} catch (CoreException e) {
-			ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
-		} finally {
-			monitor.done();
-		}
-		return contribution;
+		// IProgressMonitor monitor = ClassMakerPlugin.getProgressMonitor();
+		// IProject project =
+		// ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
+		// Contribution contribution = null;
+		// try {
+		// if (!project.exists())
+		// return contribution;
+		// if (!project.isOpen()) {
+		// SubMonitor pm = SubMonitor.convert(monitor);
+		// SubMonitor m = pm.newChild(1, SubMonitor.SUPPRESS_ISCANCELED);
+		// try {
+		// project.open(m);
+		// } finally {
+		// m.done();
+		// pm.done();
+		// }
+		// }
+		// if (project.hasNature(ClassMakerPlugin.NATURE_ID)) {
+		// if (contribution == null) {
+		// contribution = (ContributionImpl)
+		// ClassMakerFactory.eINSTANCE.createContribution();
+		// contribution.setProjectName(project.getName());
+		// }
+		// registerProject(contribution);
+		// }
+		// } catch (CoreException e) {
+		// ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
+		// } finally {
+		// monitor.done();
+		// }
+		// return contribution;
+		return null;
 
 	}
 
@@ -606,11 +615,45 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		Contribution contribution = getContribution(getService().computeProjectName(projectName));
 		if (contribution != null)
 			projectName = contribution.getProjectName();
-		for (Project project : getProjects()) {
-			if (project.getProjectName() != null && project.getProjectName().equals(projectName))
-				return project;
+		Project project = contribution;
+		for (Project theProject : getProjects()) {
+			if (theProject.getProjectName() != null && theProject.getProjectName().equals(projectName))
+				project = theProject;
 		}
-		return contribution;
+		// IProgressMonitor monitor = ClassMakerPlugin.getProgressMonitor();
+		// IProject eProject =
+		// ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
+		// try {
+		// if (!eProject.exists())
+		// return project;
+		// if (!eProject.isOpen()) {
+		// SubMonitor pm = SubMonitor.convert(monitor);
+		// SubMonitor m = pm.newChild(1, SubMonitor.SUPPRESS_ISCANCELED);
+		// try {
+		// eProject.open(m);
+		// } finally {
+		// m.done();
+		// pm.done();
+		// }
+		// }
+		// if (eProject.hasNature(ClassMakerPlugin.NATURE_ID)) {
+		// if (contribution == null) {
+		// contribution = (ContributionImpl)
+		// ClassMakerFactory.eINSTANCE.createContribution();
+		// contribution.setProjectName(eProject.getName());
+		// }
+		// registerProject(contribution);
+		// } else {
+		// project = ClassMakerFactory.eINSTANCE.createProject();
+		// project.setName(eProject.getName());
+		// registerProject(project);
+		// }
+		// } catch (CoreException e) {
+		// ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
+		// } finally {
+		// monitor.done();
+		// }
+		return project;
 	}
 
 	/**

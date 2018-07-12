@@ -374,7 +374,14 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * @generated NOT
 	 */
 	public boolean isDirty() {
-		return false;
+		boolean result = true;
+		for (Object child : getChildren())
+			if (child instanceof Resource) {
+				result &= ((Resource) child).isModified();
+			} else if (child instanceof EObject) {
+				result &= ((EObject) child).eResource().isModified();
+			}
+		return result;
 	}
 
 	/**

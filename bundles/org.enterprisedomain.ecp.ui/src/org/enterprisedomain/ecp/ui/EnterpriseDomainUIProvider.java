@@ -16,36 +16,43 @@
 package org.enterprisedomain.ecp.ui;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
+import java.util.Properties;
 
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceChangeEvent;
+import org.eclipse.core.resources.IResourceChangeListener;
+import org.eclipse.core.resources.IResourceDelta;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.notify.AdapterFactory;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecp.core.ECPProject;
-import org.eclipse.emf.ecp.core.ECPProvider;
 import org.eclipse.emf.ecp.core.ECPRepository;
 import org.eclipse.emf.ecp.core.util.ECPContainer;
 import org.eclipse.emf.ecp.core.util.ECPProperties;
 import org.eclipse.emf.ecp.core.util.ECPUtil;
-import org.eclipse.emf.ecp.internal.wizards.CreateProjectWizard;
-import org.eclipse.emf.ecp.spi.common.ui.ECPWizard;
 import org.eclipse.emf.ecp.spi.core.InternalProject;
 import org.eclipse.emf.ecp.spi.core.InternalProvider;
 import org.eclipse.emf.ecp.spi.ui.CompositeStateObserver;
 import org.eclipse.emf.ecp.spi.ui.DefaultUIProvider;
-import org.eclipse.emf.ecp.spi.ui.util.ECPHandlerHelper;
-import org.eclipse.emf.ecp.ui.common.CreateProjectComposite;
-import org.eclipse.emf.ecp.ui.common.CreateProjectComposite.CreateProjectChangeListener;
+import org.eclipse.emf.ecp.ui.tester.ECPSavePropertySource;
+import org.eclipse.emf.ecp.ui.tester.SaveButtonEnablementObserver;
 import org.eclipse.emf.ecp.ui.views.ModelExplorerView;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.Separator;
+import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -59,6 +66,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.internal.progress.ProgressManager;
+import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.SelectRevealHandler;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
@@ -68,6 +76,7 @@ import org.enterprisedomain.classmaker.provider.ClassMakerItemProviderAdapterFac
 import org.enterprisedomain.classmaker.util.ClassMakerAdapterFactory;
 import org.enterprisedomain.ecp.EnterpriseDomainProvider;
 import org.enterprisedomain.ecp.IResourceHandler;
+import org.enterprisedomain.ecp.ui.actions.ExecuteOperationAction;
 import org.enterprisedomain.ecp.ui.actions.MakeAction;
 
 @SuppressWarnings("restriction")
@@ -87,8 +96,43 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider implements IRe
 
 	private Composite control;
 
+	private final IResourceChangeListener resourceChangeListener = new EnterpriseDomainUIResourceListener();
+
 	public EnterpriseDomainUIProvider() {
 		super(EnterpriseDomainProvider.NAME);
+		ResourcesPlugin.getWorkspace().addResourceChangeListener(resourceChangeListener);
+		setClientRunWrapper(new IRunWrapper() {
+
+			@Override
+			public void wrapRun(Runnable runnable) {
+				Display display = Display.getCurrent() != null ? Display.getCurrent() : Display.getDefault();
+				display.asyncExec(runnable);
+			}
+
+		});
+
+		setRunnerWithProgress(new IRunnerWithProgress() {
+
+			@Override
+			public void run(final IRunnableWithProgress runnable)
+					throws InvocationTargetException, InterruptedException {
+				Display display = Display.getCurrent() != null ? Display.getCurrent() : Display.getDefault();
+				display.asyncExec(new Runnable() {
+
+					@Override
+					public void run() {
+						try {
+							PlatformUI.getWorkbench().getActiveWorkbenchWindow().run(true, true, runnable);
+						} catch (InvocationTargetException e) {
+							Activator.log(e.getTargetException());
+						} catch (InterruptedException e) {
+							return;
+						}
+					}
+				});
+
+			}
+		});
 	}
 
 	@SuppressWarnings("unchecked")
@@ -133,6 +177,16 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider implements IRe
 
 		ClassMakerPlugin.setPreviousProgressProvider(ProgressManager.getInstance());
 		observer.compositeChangedState(control, true, projectProperties);
+		// Activator.getClassMaker().getWorkspace().getResourceSet().eAdapters().add(new
+		// EContentAdapter() {
+		//
+		// @Override
+		// public void notifyChanged(Notification notification) {
+		// super.notifyChanged(notification);
+		//
+		// }
+		//
+		// });
 		return control;
 	}
 
@@ -185,12 +239,32 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider implements IRe
 	@Override
 	public void fillContextMenu(IMenuManager manager, ECPContainer context, Object[] elements) {
 		super.fillContextMenu(manager, context, elements);
-		if (elements.length == 1) {
-			final Object element = elements[0];
-			if (context instanceof ECPProject) {
-				ECPProject project = (ECPProject) context;
-				manager.add(new Separator());
-				manager.add(new MakeAction(project.getEditingDomain(), new StructuredSelection(element), project));
+		if (context instanceof ECPProject) {
+			ECPProject project = (ECPProject) context;
+			if (elements.length == 1) {
+				final Object element = elements[0];
+				if (ClassMakerPlugin.getClassMaker().getWorkspace()
+						.getProject(project.getName()) instanceof Contribution) {
+					manager.add(new Separator());
+					manager.add(new MakeAction(project.getEditingDomain(), new StructuredSelection(element), project));
+				}
+			}
+			for (Object element : elements) {
+				if (element instanceof EObject) {
+					if (EcoreUtil.getAnnotation(((EObject) element).eClass().getEPackage(), EcorePackage.eNS_URI,
+							"invocationDelegates").equals(ClassMakerService.INVOCATION_DELEGATE_URI)) {
+						for (EOperation eOperation : ((EObject) element).eClass().getEOperations())
+							if (eOperation.getEAnnotation(ClassMakerService.INVOCATION_DELEGATE_URI) != null
+									&& !EcoreUtil.getAnnotation(eOperation, "http://www.eclipse.org/emf/2002/GenModel",
+											"body").isEmpty()) {
+								manager.add(
+										new ExecuteOperationAction(project.getEditingDomain(),
+												new StructuredSelection(
+														new Object[] { element, eOperation, control.getShell() }),
+												project));
+							}
+					}
+				}
 			}
 		}
 	}
@@ -223,6 +297,23 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider implements IRe
 				return super.getText(element) + " [" + domainProject.getPhase().toString().toLowerCase() + "]";
 		}
 		return super.getText(element);
+	}
+
+	public class EnterpriseDomainUIResourceListener implements IResourceChangeListener {
+
+		@Override
+		public void resourceChanged(IResourceChangeEvent event) {
+			if (event.getResource() != null && event.getResource().getType() == IResource.PROJECT
+					&& event.getDelta().getKind() == IResourceDelta.CHANGED) {
+				ECPProject project = ECPSavePropertySource.getProjectToSave();
+				if (project != null) {
+					ECPUtil.getECPObserverBus().notify(SaveButtonEnablementObserver.class)
+							.notifyChangeButtonState(project, project.hasDirtyContents());
+				}
+			}
+
+		}
+
 	}
 
 }

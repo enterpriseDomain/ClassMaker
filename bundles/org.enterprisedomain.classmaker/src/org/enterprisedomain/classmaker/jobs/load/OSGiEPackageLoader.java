@@ -176,11 +176,6 @@ public class OSGiEPackageLoader extends ContainerJob {
 	}
 
 	@Override
-	public Stage getPrerequisiteStage() {
-		return Stage.INSTALLED;
-	}
-
-	@Override
 	public Stage getResultStage() {
 		return Stage.LOADED;
 	}

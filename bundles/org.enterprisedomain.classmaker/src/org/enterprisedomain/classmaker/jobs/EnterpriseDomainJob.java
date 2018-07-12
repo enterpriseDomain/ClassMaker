@@ -110,16 +110,13 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 		setStateTimestamp(stateTimestamp);
 		setUser(true);
 		setPriority(Job.BUILD);
-		setRule(getWorkspace());
+		setRule(ClassMakerPlugin.getClassMaker().getWorkspace());
 		setChangeRule(true);
 		setJobGroup(new JobGroup("ClassMaker", 0, 1)); //$NON-NLS-1$
 	}
 
 	@Override
 	public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
-		Contribution contribution = getWorkspace().getContribution(getProject().getName());
-		contributionState = contribution.getState(getStateTimestamp());
-		checkStage();
 		IStatus result = Status.OK_STATUS;
 		monitor.subTask(getName());
 		if (getBuildKind() == IncrementalProjectBuilder.INCREMENTAL_BUILD
@@ -192,7 +189,10 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 	}
 
 	protected ISchedulingRule calcSchedulingRule(IProject project) {
-		ISchedulingRule rule = getWorkspace().getContribution(project.getName()).getState(getStateTimestamp());
+		Contribution contribution = ClassMakerPlugin.getClassMaker().getWorkspace().getContribution(project.getName());
+		ISchedulingRule rule = null;
+		if (contribution != null)
+			rule = contribution.getState(getStateTimestamp());
 		return MultiRule.combine(project, rule);
 	}
 
@@ -218,7 +218,18 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 
 	private State contributionState;
 
+	public void setContributionState(State state) {
+		contributionState = state;
+	}
+
 	public State getContributionState() {
+		if (contributionState == null) {
+			Contribution contribution = ClassMakerPlugin.getClassMaker().getWorkspace()
+					.getContribution(getProject().getName());
+			if (contribution == null)
+				return contributionState;
+			contributionState = contribution.getState(getStateTimestamp());
+		}
 		return contributionState;
 	}
 
@@ -238,24 +249,11 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 	public abstract Stage getResultStage();
 
 	/**
-	 * Returns stage required for execution of this job.
-	 * 
-	 * @return prerequisite stage
-	 */
-	public abstract Stage getPrerequisiteStage();
-
-	/**
 	 * Returns an earliest stage that becomes dirty after execution of this job.
 	 * 
 	 * @return dirty stage
 	 */
 	public abstract Stage getDirtyStage();
-
-	public void checkStage() {
-		while (getContributionState().getProjectName().equals(getProject().getName())
-				&& getContributionState().getPhase().getValue() < getPrerequisiteStage().getValue())
-			Thread.yield();
-	}
 
 	public int getStateTimestamp() {
 		return stateTimestamp;

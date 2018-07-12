@@ -1,4 +1,4 @@
-target "org.enterprisedomain.target.oxygen" with allEnvironments configurePhase
+target "org.enterprisedomain.target.mars" with allEnvironments configurePhase
 
 location "http://download.eclipse.org/eclipse/updates/4.5" {
 	org.eclipse.platform.feature.group

@@ -609,6 +609,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 	 */
 	public void initialize() {
 		getWorkspace().setService(this);
+		ClassMakerService.Stages.contributeStages();
 		getWorkspace().initialize();
 	}
 

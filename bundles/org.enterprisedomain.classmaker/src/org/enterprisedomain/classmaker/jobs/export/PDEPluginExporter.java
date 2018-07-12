@@ -103,6 +103,7 @@ public class PDEPluginExporter extends AbstractExporter {
 				return m;
 			}
 		});
+		delegate.setContributionState(getContributionState());
 		delegate.setNextJob(getNextJob());
 		delegate.setResultStage(getResultStage());
 		delegate.setDirtyStage(getDirtyStage());
@@ -155,11 +156,6 @@ public class PDEPluginExporter extends AbstractExporter {
 			entry.addToken("-proc:none"); //$NON-NLS-1$
 		if (buildModel instanceof IEditableModel)
 			((IEditableModel) buildModel).save();
-	}
-
-	@Override
-	public Stage getPrerequisiteStage() {
-		return Stage.GENERATED;
 	}
 
 	@Override
