@@ -65,6 +65,8 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 
 	private CodeGenerationJob codeGeneration = new CodeGenerationJob(getStateTimestamp());
 
+	private String modelName;
+
 	protected static abstract class GeneratorJob extends EnterpriseDomainJob {
 
 		private org.eclipse.emf.codegen.ecore.Generator generator;
@@ -104,11 +106,6 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 		}
 
 		@Override
-		public Stage getPrerequisiteStage() {
-			return Stage.MODELED;
-		}
-
-		@Override
 		public Stage getResultStage() {
 			return Stage.GENERATED;
 		}
@@ -132,7 +129,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 			final IPath modelFullPath = root.getRawLocation().append(getModelLocation());
 			int result = (Integer) getGenerator().run(new String[] { "-ecore2GenModel", modelFullPath.toString(), "", //$NON-NLS-1$ //$NON-NLS-2$
-					getContributionState().getModelName() });
+					modelName });
 			if (result == 1)
 				throw new CoreException(ClassMakerPlugin.createErrorStatus("GenModel generation failed."));
 			else {
@@ -191,11 +188,15 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 
 	@Override
 	public IStatus work(IProgressMonitor monitor) throws CoreException {
-		IPath modelPath = ensureModelResourcePathExists(getProject(), getContributionState().getModelName(), monitor);
+		modelName = getProject().getName();
+		if (getContributionState() != null)
+			modelName = getContributionState().getModelName();
+		IPath modelPath = ensureModelResourcePathExists(getProject(), modelName, monitor);
 		IPath genModelPath = getGenModelResourcePath(modelPath);
 		final org.eclipse.emf.codegen.ecore.Generator generator = new Generator();
 
 		codeGeneration.setResourceSet(getResourceSet());
+		codeGeneration.setContributionState(getContributionState());
 		codeGeneration.setProject(getProject());
 		codeGeneration.setGenerator(generator);
 		codeGeneration.setGenModelLocation(genModelPath);
@@ -203,12 +204,14 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 		setNextJob(null);
 
 		genModelSetup.setResourceSet(getResourceSet());
+		genModelSetup.setContributionState(getContributionState());
 		genModelSetup.setProject(getProject());
 		genModelSetup.setModelLocation(modelPath);
 		genModelSetup.setGenModelLocation(genModelPath);
 		genModelSetup.setNextJob(codeGeneration);
 
 		genModelGeneration.setResourceSet(getResourceSet());
+		genModelGeneration.setContributionState(getContributionState());
 		genModelGeneration.setProject(getProject());
 		genModelGeneration.setGenerator(generator);
 		genModelGeneration.setModelLocation(modelPath);
@@ -268,11 +271,6 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 		}
 
 		genModel.setValidateModel(true);
-	}
-
-	@Override
-	public Stage getPrerequisiteStage() {
-		return Stage.MODELED;
 	}
 
 	@Override

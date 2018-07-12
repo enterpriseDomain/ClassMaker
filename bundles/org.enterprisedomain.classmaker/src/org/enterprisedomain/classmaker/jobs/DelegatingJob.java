@@ -46,11 +46,6 @@ public class DelegatingJob extends EnterpriseDomainJob {
 		return delegate.getResult();
 	}
 
-	@Override
-	public Stage getPrerequisiteStage() {
-		return Stage.DEFINED;
-	}
-
 	public void setResultStage(Stage resultStage) {
 		this.jobStage = resultStage;
 	}

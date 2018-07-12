@@ -2,6 +2,7 @@ package org.enterprisedomain.workplace;
 
 import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.IStatusLineManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.ui.IWorkbenchActionConstants;
@@ -11,6 +12,7 @@ import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 import org.eclipse.ui.actions.ContributionItemFactory;
 import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
+import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 
 public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 
@@ -20,6 +22,12 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 
 	public ApplicationActionBarAdvisor(IActionBarConfigurer configurer) {
 		super(configurer);
+	}
+
+	@Override
+	protected void fillStatusLine(IStatusLineManager statusLine) {
+		super.fillStatusLine(statusLine);
+		ClassMakerPlugin.setProgressMonitor(statusLine.getProgressMonitor());
 	}
 
 	protected void makeActions(IWorkbenchWindow window) {

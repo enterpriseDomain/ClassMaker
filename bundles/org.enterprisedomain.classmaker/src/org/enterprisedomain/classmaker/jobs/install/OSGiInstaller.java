@@ -25,8 +25,11 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.osgi.util.NLS;
+import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.Messages;
+import org.enterprisedomain.classmaker.Revision;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
@@ -105,6 +108,15 @@ public class OSGiInstaller extends ContainerJob {
 		try {
 			context.addBundleListener(listener);
 			if (existingBundle != null) {
+				for (Revision revision : getContributionState().getContribution().getRevisions().values())
+					if (!versionsAreEqual(existingBundle.getVersion(), revision.getVersion(), false)
+							&& revision.eIsSet(ClassMakerPackage.Literals.REVISION__STATE_HISTORY)
+							&& !revision.getStateHistory().isEmpty())
+						for (State state : revision.getStateHistory().values())
+							if (state.getDomainModel().getGenerated() != null && EPackage.Registry.INSTANCE.getEPackage(
+									getContributionState().getDomainModel().getGenerated().getNsURI()) != null)
+								EPackage.Registry.INSTANCE
+										.remove(getContributionState().getDomainModel().getGenerated().getNsURI());
 				existingBundle.uninstall();
 				uninstalled.acquire();
 				refreshBundle(null, context);
@@ -163,11 +175,6 @@ public class OSGiInstaller extends ContainerJob {
 						ClassMakerPlugin.bundleStateAsString(existingBundle.getState()), bundle.getSymbolicName(),
 						bundle.getHeaders().get(Constants.BUNDLE_VERSION),
 						ClassMakerPlugin.bundleStateAsString(bundle.getState()) });
-	}
-
-	@Override
-	public Stage getPrerequisiteStage() {
-		return Stage.EXPORTED;
 	}
 
 	@Override

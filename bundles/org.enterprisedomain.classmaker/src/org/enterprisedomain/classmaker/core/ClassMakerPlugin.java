@@ -16,9 +16,6 @@
 package org.enterprisedomain.classmaker.core;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Dictionary;
-import java.util.Hashtable;
-import java.util.SortedSet;
 
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -30,19 +27,14 @@ import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.ProgressProvider;
-import org.eclipse.e4.core.contexts.IContextFunction;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.jface.operation.IRunnableWithProgress;
-import org.enterprisedomain.classmaker.ClassMakerFactory;
 import org.enterprisedomain.classmaker.ClassMakerService;
-import org.enterprisedomain.classmaker.Customizer;
 import org.enterprisedomain.classmaker.impl.ClassMakerServiceImpl;
 import org.enterprisedomain.classmaker.util.ReflectiveFactory;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.BundleEvent;
-import org.osgi.framework.BundleListener;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.util.tracker.ServiceTracker;
 
@@ -97,6 +89,8 @@ public class ClassMakerPlugin extends Plugin {
 	 * @return ClassMakerService service instance
 	 */
 	public static ClassMakerService getClassMaker() {
+		if (tracker.getTrackingCount() == -1)
+			tracker.open();
 		return tracker.getService();
 	}
 
@@ -124,32 +118,44 @@ public class ClassMakerPlugin extends Plugin {
 	public void start(BundleContext context) throws Exception {
 		instance = this;
 
-		reg = context.registerService(ClassMakerService.class, ClassMakerFactory.eINSTANCE.createClassMakerService(),
-				null);
-		Dictionary<String, String> properties = new Hashtable<String, String>();
-		properties.put(IContextFunction.SERVICE_CONTEXT_KEY, ClassMakerService.class.getName());
-		context.registerService(IContextFunction.SERVICE_NAME, new ServiceFactory(), properties);
+		// reg = context.registerService(ClassMakerService.class,
+		// ClassMakerFactory.eINSTANCE.createClassMakerService(),
+		// null);
+		// Dictionary<String, String> properties = new Hashtable<String, String>();
+		// properties.put(IContextFunction.SERVICE_CONTEXT_KEY,
+		// ClassMakerService.class.getName());
+		// context.registerService(IContextFunction.SERVICE_NAME, new ServiceFactory(),
+		// properties);
 		tracker = new ServiceTracker<ClassMakerService, ClassMakerServiceImpl>(context, ClassMakerService.class, null);
-		tracker.open();
-		context.addBundleListener(new BundleListener() {
-
-			@Override
-			public void bundleChanged(BundleEvent event) {
-				if (event.getBundle().getSymbolicName().equals(PLUGIN_ID))
-					if (event.getType() == BundleEvent.STARTED) {
-						ClassMakerService.Stages.contributeStages();
-						for (String id : ClassMakerService.Stages.ids()) {
-							SortedSet<Customizer> customizers = ClassMakerService.Stages.createCustomizers(id);
-							if (!customizers.isEmpty())
-								for (Customizer customizer : customizers)
-									getClassMaker().getWorkspace().getCustomizers()
-											.put(ClassMakerService.Stages.lookup(id), customizer);
-						}
-						event.getBundle().getBundleContext().removeBundleListener(this);
-					}
-
-			}
-		});
+		// context.addBundleListener(new BundleListener() {
+		//
+		// @Override
+		// public void bundleChanged(BundleEvent event) {
+		// if (event.getBundle().getSymbolicName().equals(PLUGIN_ID))
+		// if (event.getType() == BundleEvent.STARTED) {
+		// ClassMakerService.Stages.contributeStages();
+		// for (String id : ClassMakerService.Stages.ids()) {
+		// SortedSet<Customizer> customizers =
+		// ClassMakerService.Stages.createCustomizers(id);
+		// if (!customizers.isEmpty())
+		// for (Customizer customizer : customizers)
+		// getClassMaker().getWorkspace().getCustomizers()
+		// .put(ClassMakerService.Stages.lookup(id), customizer);
+		// }
+		// event.getBundle().getBundleContext().removeBundleListener(this);
+		// }
+		//
+		// }
+		// });
+		// ClassMakerService.Stages.contributeStages();
+		// for (String id : ClassMakerService.Stages.ids()) {
+		// SortedSet<Customizer> customizers =
+		// ClassMakerService.Stages.createCustomizers(id);
+		// if (!customizers.isEmpty())
+		// for (Customizer customizer : customizers)
+		// getClassMaker().getWorkspace().getCustomizers()
+		// .put(ClassMakerService.Stages.lookup(id), customizer);
+		// }
 		ResourceUtils.saveAutoBuilding(ResourcesPlugin.getWorkspace());
 	}
 
@@ -167,7 +173,7 @@ public class ClassMakerPlugin extends Plugin {
 		} catch (OperationCanceledException e) {
 		}
 		tracker.close();
-		reg.unregister();
+		// reg.unregister();
 		progressMonitor = null;
 		instance = null;
 	}

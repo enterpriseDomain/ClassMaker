@@ -696,6 +696,7 @@ public class StateImpl extends ItemImpl implements State {
 
 				Worker exporter = createExporter();
 				EnterpriseDomainJob exporterJob = (EnterpriseDomainJob) exporter.getAdapter(EnterpriseDomainJob.class);
+				exporterJob.setContributionState(this);
 				exporterJob.setProject(getProject());
 				exporter.getProperties().put(AbstractExporter.EXPORT_DESTINATION_PROP,
 						ResourceUtils.getExportDestination(getProject()).toString());
@@ -704,16 +705,19 @@ public class StateImpl extends ItemImpl implements State {
 				EnterpriseDomainJob generatorJob = ((EnterpriseDomainJob) generator
 						.getAdapter(EnterpriseDomainJob.class));
 				generatorJob.setResourceSet(getContribution().getWorkspace().getResourceSet());
+				generatorJob.setContributionState(this);
 				generatorJob.setProject(getProject());
 				generatorJob.setProgressGroup(wrappingMonitor, 1);
 				generatorJob.setNextJob(exporterJob);
 
 				EnterpriseDomainJob installJob = (EnterpriseDomainJob) createInstaller()
 						.getAdapter(EnterpriseDomainJob.class);
+				installJob.setContributionState(this);
 				exporterJob.setNextJob(installJob);
 
 				EnterpriseDomainJob loadJob = (EnterpriseDomainJob) createModelLoader()
 						.getAdapter(EnterpriseDomainJob.class);
+				loadJob.setContributionState(this);
 				loadJob.addListener();
 
 				installJob.setNextJob(loadJob);

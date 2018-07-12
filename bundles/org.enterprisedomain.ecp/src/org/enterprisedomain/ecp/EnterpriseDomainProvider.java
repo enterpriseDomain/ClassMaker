@@ -16,7 +16,6 @@
 package org.enterprisedomain.ecp;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,7 +35,6 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.codegen.ecore.genmodel.impl.GenTypedElementImpl;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.command.BasicCommandStack;
 import org.eclipse.emf.common.command.Command;
@@ -67,7 +65,6 @@ import org.eclipse.emf.ecp.core.util.ECPModelContextAdapter;
 import org.eclipse.emf.ecp.core.util.ECPModelContextProvider;
 import org.eclipse.emf.ecp.core.util.ECPUtil;
 import org.eclipse.emf.ecp.core.util.observer.ECPProjectContentChangedObserver;
-import org.eclipse.emf.ecp.core.util.observer.ECPProjectContentTouchedObserver;
 import org.eclipse.emf.ecp.core.util.observer.ECPRepositoriesChangedObserver;
 import org.eclipse.emf.ecp.spi.core.DefaultProvider;
 import org.eclipse.emf.ecp.spi.core.InternalProject;
@@ -79,8 +76,6 @@ import org.eclipse.emf.edit.command.ChangeCommand;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
-import org.eclipse.jface.operation.IRunnableWithProgress;
-import org.enterprisedomain.classmaker.Blueprint;
 import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Project;
@@ -103,7 +98,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 
 	private static Map<String, HashSet<String>> visiblePackagesToClasses = new HashMap<String, HashSet<String>>();
 
-	private Blueprint blueprint;
+	// private Blueprint blueprint;
 
 	private final IResourceChangeListener resourceChangeListener = new EnterpriseDomainResourceListener();
 
@@ -146,6 +141,8 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 
 	};
 
+	private BasicCommandStack commandStack;
+
 	public EnterpriseDomainProvider() {
 		super(NAME);
 		Activator.getClassMaker().getWorkspace().getResourceSet().eAdapters().add(adapter);
@@ -176,8 +173,9 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 
 	@Override
 	public void cloneProject(InternalProject projectToClone, InternalProject targetProject) {
-		// TODO Auto-generated method stub
-
+		Project domainProjectToClone = Activator.getClassMaker().getWorkspace().getProject(projectToClone.getName());
+		Project domainTargetProject = Activator.getClassMaker().getWorkspace().getProject(targetProject.getName());
+		domainTargetProject.getChildren().addAll(EcoreUtil.copyAll(domainProjectToClone.getChildren()));
 	}
 
 	@Override
@@ -286,6 +284,16 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 					} catch (CoreException e) {
 						Activator.log(e);
 					}
+				// domainProject.eAdapters().add(new AdapterImpl() {
+				//
+				// @Override
+				// public void notifyChanged(Notification msg) {
+				// if (msg.getFeatureID(Resource.class) == Resource.RESOURCE__IS_MODIFIED
+				// && msg.getNewBooleanValue())
+				// project.hasDirtyContents();
+				// }
+				//
+				// });
 				classMaker.getWorkspace().getResourceSet().eAdapters()
 						.add(new AdapterFactoryEditingDomain.EditingDomainProvider(project.getEditingDomain()));
 			}
@@ -469,7 +477,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 
 	@Override
 	public EditingDomain createEditingDomain(final InternalProject project) {
-		final BasicCommandStack commandStack = new BasicCommandStack();
+		commandStack = (BasicCommandStack) createCommandStack(project);
 		final EditingDomain editingDomain = new AdapterFactoryEditingDomain(ENTERPRISE_DOMAIN_ADAPTER_FACTORY,
 				commandStack, Activator.getClassMaker().getWorkspace().getResourceSet());
 		editingDomain.getResourceSet().eAdapters().add(new ECPModelContextAdapter(project));
@@ -672,13 +680,10 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 
 	@Override
 	public boolean isDirty(InternalProject project) {
-		boolean result = false;
-		for (Object child : Activator.getClassMaker().getWorkspace().getProject(project.getName()).getChildren())
-			if (child instanceof Resource)
-				result |= ((Resource) child).isModified();
-			else if (child instanceof EObject)
-				result |= ((EObject) child).eResource().isModified();
-		return result;
+		if (commandStack != null)
+			return commandStack.isSaveNeeded();
+		Project domainProject = Activator.getClassMaker().getWorkspace().getProject(project.getName());
+		return domainProject.isDirty();
 	}
 
 	@Override

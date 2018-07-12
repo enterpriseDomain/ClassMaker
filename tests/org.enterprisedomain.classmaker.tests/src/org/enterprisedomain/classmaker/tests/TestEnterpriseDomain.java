@@ -385,7 +385,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		a.setSource("http://www.eclipse.org/emf/2002/GenModel");
 		a.getDetails().put("body", "return <%org.enterprisedomain.classmaker.core.ClassMakerPlugin%>"
 				+ ".getClassMaker().make(getProduct(), <%org.enterprisedomain.classmaker.core.ClassMakerPlugin%>"
-				+ ".getProgressMonitor());\n");
+				+ ".getProgressMonitor());");
 		opBuild.getEAnnotations().add(a);
 		a = f.createEAnnotation();
 		a.setSource(ClassMakerService.INVOCATION_DELEGATE_URI);
@@ -417,7 +417,8 @@ public class TestEnterpriseDomain extends AbstractTest {
 		String n = "Picture";
 		args.add(n);
 		builder = (EObject) service.invoke(opClass, builder, args);
-		EPackage result = (EPackage) service.invoke(opBuild, builder, ECollections.newBasicEList());
+		args = ECollections.newBasicEList();
+		EPackage result = (EPackage) service.invoke(opBuild, builder, args);
 		assertNotNull(result);
 		EObject o = result.getEFactoryInstance().create((EClass) result.getEClassifier(n));
 		assertEquals(n, o.eClass().getName());
