@@ -171,30 +171,15 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider implements IRe
 				projectProperties.addProperty(EnterpriseDomainProvider.PROP_CONTRIBUTION,
 						String.valueOf(isContribution));
 				super.widgetSelected(e);
+				observer.compositeChangedState(control, true, projectProperties);
 			}
 
 		});
 
 		ClassMakerPlugin.setPreviousProgressProvider(ProgressManager.getInstance());
 		observer.compositeChangedState(control, true, projectProperties);
-		// Activator.getClassMaker().getWorkspace().getResourceSet().eAdapters().add(new
-		// EContentAdapter() {
-		//
-		// @Override
-		// public void notifyChanged(Notification notification) {
-		// super.notifyChanged(notification);
-		//
-		// }
-		//
-		// });
 		return control;
 	}
-
-	// private boolean isInputComplete(String projectName) {
-	// return !projectName.matches("[a-zA-Z_]\\w*");
-	// }
-	//
-	// observer.compositeChangedState(this, complete, projectProperties);
 
 	public void handleResourceChange(final ECPProject project, final Collection<Resource> changedResources,
 			final Collection<Resource> removedResources) {
