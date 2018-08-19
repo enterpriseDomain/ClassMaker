@@ -21,6 +21,7 @@ import org.enterprisedomain.classmaker.Project;
 public class ModelEditor extends MultiPageEditorPart {
 
 	private int genericEditorIndex;
+	private InternalProject ecpProject;
 
 	public ModelEditor() {
 	}
@@ -35,15 +36,19 @@ public class ModelEditor extends MultiPageEditorPart {
 			URI uri = EditUIUtil.getURI(getEditorInput());
 			final Resource resource = Activator.getClassMaker().getWorkspace().getResourceSet().getResource(uri, true);
 			final Project project = Activator.getClassMaker().getWorkspace().getProject(resource);
-			final InternalProject ecpProject = (InternalProject) ECPUtil.getECPProjectManager()
-					.getProject(project.getProjectName());
+			try {
+				ecpProject = (InternalProject) ECPUtil.getECPProjectManager().getProject(project.getProjectName());
+			} catch (RuntimeException e) {
+			}
 			getGenericEditor().getResourceSet().eAdapters().add(new EContentAdapter() {
 
 				@Override
 				public void notifyChanged(Notification notification) {
 					super.notifyChanged(notification);
 					Collection<Object> objects = (Collection<Object>) (Collection<?>) Arrays.asList(ecpProject);
-					ecpProject.notifyObjectsChanged(objects, true);
+					if (ecpProject != null) {
+						ecpProject.notifyObjectsChanged(objects, true);
+					}
 				}
 
 			});

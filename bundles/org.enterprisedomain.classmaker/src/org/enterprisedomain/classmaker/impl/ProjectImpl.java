@@ -926,8 +926,14 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			} catch (IOException e) {
 				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 			}
+			if (eIsSet(ClassMakerPackage.PROJECT__REVISION)
+					&& getRevision().eIsSet(ClassMakerPackage.Literals.REVISION__STATE))
+				getRevision().getState().setResource(resource);
 		} else {
 			resource = getWorkspace().getResourceSet().createResource(uri);
+			if (eIsSet(ClassMakerPackage.PROJECT__REVISION)
+					&& getRevision().eIsSet(ClassMakerPackage.Literals.REVISION__STATE))
+				getRevision().getState().setResource(resource);
 			if (commit)
 				try {
 					resource.save(Collections.emptyMap());
@@ -937,9 +943,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		}
 		getWorkspace().getResourceSet().eAdapters().add(resourceAdapter);
 		addResourceChangeListener(getResourceReloadListener());
-		if (eIsSet(ClassMakerPackage.PROJECT__REVISION)
-				&& getRevision().eIsSet(ClassMakerPackage.Literals.REVISION__STATE))
-			getRevision().getState().setResource(resource);
 		// TODO Add SCM support if commit
 		return ""; //$NON-NLS-1$
 	}

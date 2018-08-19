@@ -3,6 +3,7 @@ package org.enterprisedomain.workplace;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecp.core.util.ECPUtil;
 import org.eclipse.emf.ecp.spi.core.DefaultProvider;
 import org.eclipse.emf.ecp.spi.ui.DefaultUIProvider;
@@ -118,7 +119,7 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 		MessageConsole out = new MessageConsole("Output", null);
 		System.setOut(new PrintStream(out.newOutputStream()));
 		ConsolePlugin.getDefault().getConsoleManager().addConsoles(new IConsole[] { out });
-		ConsolePlugin.getDefault().getConsoleManager().refresh(out);
+		ConsolePlugin.getDefault().getConsoleManager().refresh(out);	
 	}
 
 	@Override

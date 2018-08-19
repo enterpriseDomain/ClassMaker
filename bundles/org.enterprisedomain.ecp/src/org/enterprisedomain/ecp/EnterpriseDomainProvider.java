@@ -102,6 +102,8 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 
 	private final IResourceChangeListener resourceChangeListener = new EnterpriseDomainResourceListener();
 
+	private static Map<InternalProject, Boolean> initing = new HashMap<InternalProject, Boolean>();
+
 	private Adapter adapter = new EContentAdapter() {
 
 		@SuppressWarnings("unchecked")
@@ -206,6 +208,9 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 	}
 
 	protected void initProject(final InternalProject project) {
+		if (initing.containsKey(project) && initing.get(project))
+			return;
+		initing.put(project, true);
 		final EditingDomain editingDomain = project.getEditingDomain();
 		editingDomain.getResourceSet().eAdapters().add(new EnterpriseDomainProjectObserver(project, this));
 		final ClassMakerService classMaker = Activator.getClassMaker();
@@ -333,9 +338,9 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 			}
 
 		});
+		initing.put(project, false);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public ECPContainer getModelContext(Object element) {
 		if (element instanceof ECPContainer) {
@@ -360,7 +365,13 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 			return getModelContext(((ResourceAdapter) element).getProject());
 
 		if (element instanceof Resource) {
-			for (InternalProject project : getOpenProjects()) {
+			Collection<InternalProject> projects = null;
+			try {
+				projects = getOpenProjects();
+			} catch (RuntimeException e) {
+				return null;
+			}
+			for (InternalProject project : projects) {
 				Project domainProject = Activator.getClassMaker().getWorkspace().getProject((Resource) element);
 				if (domainProject != null && domainProject.getName().equals(project.getName()))
 					return project;
@@ -390,6 +401,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 	}
 
 	protected void disposeProject(InternalProject project) {
+		initing.remove(project);
 		ClassMakerService service = Activator.getClassMaker();
 		if (service != null) {
 			Project domainProject = service.getWorkspace().getProject(project.getName());
@@ -409,6 +421,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 	}
 
 	protected void removeProject(InternalProject project) {
+		initing.remove(project);
 		Project domainProject = (Project) Activator.getClassMaker().getWorkspace().getProject(project.getName());
 		try {
 			domainProject.delete(getUIProvider().getAdapter(project, IProgressMonitor.class));
