@@ -1,0 +1,13 @@
+instructions.install = \
+ addJvmArg(jvmArg:-Dds.delayed.keepInstances=true);
+ 
+ instructions.install.import = \
+  org.eclipse.equinox.p2.touchpoint.eclipse.addJvmArg, \
+  org.eclipse.equinox.p2.touchpoint.eclipse.removeJvmArg;
+
+instructions.uninstall = \
+ removeJvmArg(jvmArg:-Dds.delayed.keepInstances=true);
+
+instructions.uninstall.import = \
+  org.eclipse.equinox.p2.touchpoint.eclipse.addJvmArg, \
+  org.eclipse.equinox.p2.touchpoint.eclipse.removeJvmArg; 

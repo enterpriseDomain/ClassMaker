@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/mbarbero/fr.obeo.releng.targetplatform -->
-<target name="org.enterprisedomain.target" sequenceNumber="1531391091">
+<target name="org.enterprisedomain.target" sequenceNumber="1533486210">
   <locations>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.eclipse.platform.feature.group" version="4.7.3.v20180330-0640"/>
@@ -56,31 +56,31 @@
       <repository location="http://download.eclipse.org/emfstore/releases_18"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
-      <unit id="org.eclipse.emf.ecp.application.e3" version="1.17.0.20180611-0706"/>
-      <unit id="org.eclipse.emf.ecp.e3.feature.feature.group" version="1.17.0.20180611-0706"/>
-      <unit id="org.eclipse.emf.ecp.ecore.feature.feature.group" version="1.17.0.20180611-0706"/>
-      <unit id="org.eclipse.emf.ecp.emfforms.runtime.feature.feature.group" version="1.17.0.20180611-0706"/>
-      <unit id="org.eclipse.emfforms.setup.base" version="1.17.0.20180611-0706"/>
-      <unit id="org.eclipse.emf.ecp.feature.feature.group" version="1.17.0.20180611-0706"/>
-      <unit id="org.eclipse.emf.ecp.validation.view.feature.feature.group" version="1.17.0.20180611-0706"/>
-      <unit id="org.eclipse.emf.ecp.view.table.validation" version="1.17.0.20180611-0706"/>
-      <unit id="org.eclipse.emf.ecp.view.treemasterdetail.validation" version="1.17.0.20180611-0706"/>
-      <unit id="org.eclipse.emfforms.core.services.databinding.index" version="1.17.0.20180611-0706"/>
-      <unit id="org.eclipse.emfforms.core.services.databinding.mapping" version="1.17.0.20180611-0706"/>
-      <unit id="org.eclipse.emfforms.core.services.domainexpander.index" version="1.17.0.20180611-0706"/>
-      <unit id="org.eclipse.emfforms.core.services.domainexpander.mapping" version="1.17.0.20180611-0706"/>
-      <unit id="org.eclipse.emfforms.core.services.structuralchange.index" version="1.17.0.20180611-0706"/>
-      <unit id="org.eclipse.emfforms.core.services.structuralchange.mapping" version="1.17.0.20180611-0706"/>
-      <unit id="org.eclipse.emf.ecp.view.indexdmr.model" version="1.17.0.20180611-0706"/>
-      <unit id="org.eclipse.emf.ecp.view.mappingdmr.model" version="1.17.0.20180611-0706"/>
-      <unit id="org.eclipse.emfforms.swt.control.multiattribute" version="1.17.0.20180611-0706"/>
-      <unit id="org.eclipse.emfforms.editor.feature.feature.group" version="1.17.0.20180611-0706"/>
+      <unit id="org.eclipse.emf.ecp.application.e3" version="1.17.1.20180714-1935"/>
+      <unit id="org.eclipse.emf.ecp.e3.feature.feature.group" version="1.17.1.20180714-1935"/>
+      <unit id="org.eclipse.emf.ecp.ecore.feature.feature.group" version="1.17.1.20180714-1935"/>
+      <unit id="org.eclipse.emf.ecp.emfforms.runtime.feature.feature.group" version="1.17.1.20180714-1935"/>
+      <unit id="org.eclipse.emfforms.setup.base" version="1.17.1.20180714-1935"/>
+      <unit id="org.eclipse.emf.ecp.feature.feature.group" version="1.17.1.20180714-1935"/>
+      <unit id="org.eclipse.emf.ecp.validation.view.feature.feature.group" version="1.17.1.20180714-1935"/>
+      <unit id="org.eclipse.emf.ecp.view.table.validation" version="1.17.1.20180714-1935"/>
+      <unit id="org.eclipse.emf.ecp.view.treemasterdetail.validation" version="1.17.1.20180714-1935"/>
+      <unit id="org.eclipse.emfforms.core.services.databinding.index" version="1.17.1.20180714-1935"/>
+      <unit id="org.eclipse.emfforms.core.services.databinding.mapping" version="1.17.1.20180714-1935"/>
+      <unit id="org.eclipse.emfforms.core.services.domainexpander.index" version="1.17.1.20180714-1935"/>
+      <unit id="org.eclipse.emfforms.core.services.domainexpander.mapping" version="1.17.1.20180714-1935"/>
+      <unit id="org.eclipse.emfforms.core.services.structuralchange.index" version="1.17.1.20180714-1935"/>
+      <unit id="org.eclipse.emfforms.core.services.structuralchange.mapping" version="1.17.1.20180714-1935"/>
+      <unit id="org.eclipse.emf.ecp.view.indexdmr.model" version="1.17.1.20180714-1935"/>
+      <unit id="org.eclipse.emf.ecp.view.mappingdmr.model" version="1.17.1.20180714-1935"/>
+      <unit id="org.eclipse.emfforms.swt.control.multiattribute" version="1.17.1.20180714-1935"/>
+      <unit id="org.eclipse.emfforms.editor.feature.feature.group" version="1.17.1.20180714-1935"/>
       <repository id="ecp" location="http://download.eclipse.org/ecp/releases/releases_target_117/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
-      <unit id="org.eclipse.jgit.feature.group" version="5.0.1.201806211838-r"/>
-      <unit id="org.eclipse.jgit.http.apache.feature.group" version="5.0.1.201806211838-r"/>
-      <unit id="org.eclipse.jgit.pgm.feature.group" version="5.0.1.201806211838-r"/>
+      <unit id="org.eclipse.jgit.feature.group" version="5.0.2.201807311906-r"/>
+      <unit id="org.eclipse.jgit.http.apache.feature.group" version="5.0.2.201807311906-r"/>
+      <unit id="org.eclipse.jgit.pgm.feature.group" version="5.0.2.201807311906-r"/>
       <repository location="http://download.eclipse.org/egit/updates/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">

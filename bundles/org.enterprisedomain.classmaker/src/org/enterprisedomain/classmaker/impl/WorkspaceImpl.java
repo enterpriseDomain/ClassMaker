@@ -124,6 +124,10 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 */
 	protected static final ResourceSet RESOURCE_SET_EDEFAULT = new ResourceSetImpl();
 
+	static {
+		RESOURCE_SET_EDEFAULT.setURIConverter(new ResourceSetURIConverter());
+	}
+
 	/**
 	 * The cached value of the '{@link #getResourceSet() <em>Resource Set</em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -344,7 +348,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			ITargetDefinition targetDefinition = null;
 			targetDefinition = targetPlatformService.newTarget();
 			targetDefinition.setName("Platform");
-			Bundle[] bundles = Platform.getBundle("org.eclipse.core.runtime").getBundleContext().getBundles();
+			Bundle[] bundles = Platform.getBundle(Platform.PI_RUNTIME).getBundleContext().getBundles();
 			List<ITargetLocation> bundleContainers = new ArrayList<ITargetLocation>();
 			Set<File> dirs = new HashSet<File>();
 			for (Bundle bundle : bundles) {

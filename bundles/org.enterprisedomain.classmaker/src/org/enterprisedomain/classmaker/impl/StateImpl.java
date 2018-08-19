@@ -543,8 +543,9 @@ public class StateImpl extends ItemImpl implements State {
 		} catch (IOException e) {
 			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createWarningStatus(e));
 		}
-		if (!getResource().getContents().isEmpty())
+		if (!getResource().getContents().isEmpty()) {
 			getDomainModel().setDynamic(EcoreUtil.copy((EPackage) getResource().getContents().get(0)));
+		}
 		loading = false;
 	}
 

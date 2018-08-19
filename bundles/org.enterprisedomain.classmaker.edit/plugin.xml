@@ -33,14 +33,4 @@
    </extension>
 
 
-<extension
-      point="org.eclipse.emf.ecp.view.model.provider.xmi.file">
-   <file
-         filePath="src/org/enterprisedomain/classmaker/edit/dialogs/EOperation.view">
-      <filter
-            key="detail"
-            value="true">
-      </filter>
-   </file>
-</extension>
 </plugin>
