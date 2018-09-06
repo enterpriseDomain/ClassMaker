@@ -3,12 +3,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<packaging>pom</packaging>
+	<packaging>eclipse-feature</packaging>
 	<groupId>org.enterprisedomain</groupId>
+	<artifactId>org.enterprisedomain.ui.workbench.rcp.feature</artifactId>
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
-		<version>0.7.929-SNAPSHOT</version>
+		<version>0.7.992-SNAPSHOT</version>
 		<artifactId>org.enterprisedomain.features</artifactId>
-	</parent>
-	<artifactId>org.enterprisedomain.ui.workbench.rcp.feature</artifactId>
+	</parent>	
 </project>

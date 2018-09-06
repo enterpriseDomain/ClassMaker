@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.enterprisedomain.ecp.feature"
+      id="org.enterprisedomain.classmaker.ecp.feature"
       label="Enterprise Domain ECP Provider Feature"
-      version="0.0.1.qualifier"
+      version="0.7.992.qualifier"
       provider-name="Kyrill Zotkin">
 
    <description url="http://www.example.com/description">
@@ -103,16 +103,65 @@ limitations under the License.
          version="0.0.0"/>
 
    <requires>
-      <import plugin="org.enterprisedomain.ecp" version="0.0.1" match="greaterOrEqual"/>
-      <import feature="org.eclipse.emf.ecp.feature" version="1.8.0.20160216-1319" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.emf.ecp.core" version="1.7.1" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.ecp.view.model"/>
-      <import plugin="org.eclipse.ui"/>
-      <import plugin="org.eclipse.core.runtime" version="3.11.1" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.ecp.ui" version="1.7.1" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.swt" version="3.104.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecp.core" version="1.17.0" match="equivalent"/>
+      <import plugin="org.eclipse.emf.ecp.view.model" version="1.17.0" match="equivalent"/>
+      <import plugin="org.eclipse.emf.edit.ui" version="2.13.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.jface" version="3.11.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.enterprisedomain.classmaker" version="0.7.8" match="equivalent"/>
+      <import plugin="org.enterprisedomain.classmaker.edit" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.runtime" version="3.11.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecp.ui" version="1.17.0" match="equivalent"/>
+      <import plugin="org.eclipse.swt" version="3.104.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.common.ui"/>
+      <import plugin="org.eclipse.ui.navigator" version="3.7.0" match="compatible"/>
+      <import plugin="org.eclipse.emf.ecp.ui.e3" version="1.17.0" match="equivalent"/>
+      <import plugin="org.eclipse.emf.ecp.common.ui" version="1.17.0" match="equivalent"/>
+      <import plugin="org.eclipse.core.runtime" version="3.12.0" match="compatible"/>
+      <import plugin="org.eclipse.emf.ecore" version="2.12.0" match="compatible"/>
+      <import plugin="org.eclipse.emf.ecore.xmi" version="2.12.0" match="compatible"/>
+      <import plugin="org.eclipse.emf.codegen.ecore" version="2.12.0" match="compatible"/>
+      <import plugin="org.eclipse.osgi" version="3.11.1" match="compatible"/>
+      <import plugin="org.eclipse.osgi.services" version="3.5.100" match="compatible"/>
+      <import plugin="org.eclipse.equinox.ds" version="1.4.400" match="compatible"/>
+      <import plugin="org.eclipse.e4.core.contexts" version="1.5.0" match="compatible"/>
+      <import plugin="org.eclipse.e4.core.di" version="1.6.1" match="compatible"/>
+      <import plugin="org.eclipse.core.resources" version="3.11.0" match="compatible"/>
+      <import plugin="org.eclipse.pde.core" version="3.11.0" match="compatible"/>
+      <import plugin="org.apache.ant" version="1.9.6" match="compatible"/>
+      <import plugin="org.eclipse.jdt.core" version="3.12.1" match="compatible"/>
+      <import plugin="org.eclipse.pde.launching" version="3.6.400" match="compatible"/>
+      <import plugin="org.eclipse.equinox.launcher" version="1.3.200" match="compatible"/>
+      <import plugin="org.eclipse.pde.api.tools" version="1.1.1" match="compatible"/>
+      <import plugin="org.eclipse.jdt.launching" version="3.8.100" match="compatible"/>
+      <import plugin="org.eclipse.jgit" version="5.0.1" match="compatible"/>
+      <import plugin="org.eclipse.jgit.pgm" version="5.0.1" match="compatible"/>
+      <import plugin="org.eclipse.equinox.concurrent" version="1.1.0" match="compatible"/>
+      <import plugin="org.eclipse.equinox.p2.core" version="2.4.100" match="compatible"/>
+      <import plugin="org.eclipse.equinox.p2.repository" version="2.3.200" match="compatible"/>
+      <import plugin="org.eclipse.equinox.p2.metadata" version="2.3.100" match="compatible"/>
+      <import plugin="org.eclipse.equinox.p2.metadata.repository" version="1.2.300" match="compatible"/>
+      <import plugin="org.eclipse.equinox.p2.artifact.repository" version="1.1.500" match="compatible"/>
+      <import plugin="org.eclipse.equinox.p2.publisher" version="1.4.100" match="compatible"/>
+      <import plugin="org.eclipse.equinox.p2.publisher.eclipse" version="1.2.100" match="compatible"/>
+      <import plugin="org.eclipse.equinox.p2.repository.tools" version="2.1.300" match="compatible"/>
+      <import plugin="org.eclipse.equinox.p2.operations" version="2.4.200" match="compatible"/>
+      <import plugin="org.eclipse.equinox.p2.engine" version="2.4.100" match="compatible"/>
+      <import plugin="org.eclipse.equinox.p2.transport.ecf" version="1.1.200" match="compatible"/>
+      <import plugin="org.eclipse.ecf" version="3.8.0" match="compatible"/>
+      <import plugin="org.eclipse.ecf.filetransfer" version="5.0.0" match="compatible"/>
+      <import plugin="org.eclipse.equinox.p2.director.app" version="1.0.500" match="compatible"/>
+      <import plugin="org.eclipse.equinox.p2.touchpoint.natives" version="1.2.100" match="compatible"/>
+      <import plugin="org.eclipse.m2m.qvt.oml" version="3.6.0" match="compatible"/>
+      <import plugin="org.eclipse.m2m.qvt.oml.ocl" version="3.6.0" match="compatible"/>
+      <import plugin="org.eclipse.m2m.qvt.oml.project" version="3.6.0" match="compatible"/>
+      <import plugin="org.eclipse.m2m.qvt.oml.runtime" version="3.6.0" match="compatible"/>
+      <import plugin="org.eclipse.swt" version="3.100.0" match="compatible"/>
+      <import plugin="org.eclipse.jface" version="3.13.1" match="compatible"/>
+      <import plugin="org.eclipse.core.jobs" version="3.9.1" match="compatible"/>
+      <import feature="org.eclipse.emf.ecp.feature" version="1.8.0.20160216-1319" match="greaterOrEqual"/>
+      <import plugin="org.enterprisedomain.ecp" version="0.7.992" match="greaterOrEqual"/>
    </requires>
 
    <plugin

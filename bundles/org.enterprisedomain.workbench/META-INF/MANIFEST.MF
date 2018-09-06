@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: enterpriseDomain Workplace Appication
+Bundle-Name: enterpriseDomain Workbench Appication
 Bundle-SymbolicName: org.enterprisedomain.workbench;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 0.7.992.qualifier
 Bundle-Activator: org.enterprisedomain.workplace.Activator
 Bundle-Vendor: Kyrill Zotkin
 Require-Bundle: org.eclipse.ui,
@@ -16,7 +16,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.console;bundle-version="[3.7.0,4.0.0)",
  org.eclipse.emf.ecp.view.model.provider.generator;bundle-version="[1.17.0,1.18.0)",
  org.eclipse.emf.ecp.view.model.provider.xmi;bundle-version="[1.17.0,1.18.0)",
- org.enterprisedomain.classmaker;bundle-version="0.7.929",
+ org.enterprisedomain.classmaker;bundle-version="0.7.992",
  org.eclipse.emf.ecore,
  org.eclipse.swt,
  org.eclipse.ui.workbench,

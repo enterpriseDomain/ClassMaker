@@ -14,10 +14,10 @@
     },
 
     "version": {
-        "name": "0.7.929",
+        "name": "0.7.992",
         "desc": "This is a service version",
         "released": "2018-03-26",
-        "vcs_tag": "0.7.929",
+        "vcs_tag": "0.7.992",
         "gpgSign": false
     },
 
