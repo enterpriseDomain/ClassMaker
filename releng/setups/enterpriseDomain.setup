@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setup:ProductCatalog
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:pde="http://www.eclipse.org/oomph/setup/pde/1.0"
+    xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
+    xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
+    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/pde/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/PDE.ecore"
+    name="org.enterprisedomain"
+    label="enterpriseDomain">
+  <setupTask
+      xsi:type="setup:InstallationTask"
+      id="installation"/>
+  <setupTask
+      xsi:type="setup.p2:P2Task">
+    <requirement
+        name="org.eclipse.oomph.setup.feature.group"/>
+    <repository
+        url="${oomph.update.url}"/>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:RedirectionTask"
+      id="oomph.redirection.edsetups"
+      sourceURL="http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/"
+      targetURL="https://github.com/enterpriseDomain/ClassMaker/tree/master/releng/setups/">
+    <description></description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:WorkspaceTask"
+      id="workspace">
+    <description></description>
+  </setupTask>
+  <product name="workbench"
+      label="enterpriseDomain Workbench">
+    <annotation
+        source="http://www.eclipse.org/oomph/setup/BrandingInfo">
+      <detail
+          key="folderName">
+        <value>eclipse</value>
+      </detail>
+      <detail
+          key="folderName.macosx">
+        <value>Eclipse</value>
+      </detail>
+    </annotation>
+    <version
+        name="oxygen"
+        label="Oxygen"
+        requiredJavaVersion="1.8">
+      <setupTask
+          xsi:type="setup.p2:P2Task"
+          label="${scope.product.label} (${scope.product.version.label})">
+        <requirement
+            name="org.enterprisedomain.ui.workbench.rcp.feature.feature.group"/>
+        <requirement
+            name="org.eclipse.platform.ide"/>
+        <requirement
+            name="org.eclipse.platform.feature.group"/>
+        <requirement
+            name="org.eclipse.rcp.feature.group"/>
+        <repository
+            url="http://download.eclipse.org/sirius/updates/releases/5.1.0/oxygen"/>
+        <repository
+            url="http://download.eclipse.org/tools/orbit/downloads/drops/R20180606145124/repository"/>
+        <repository
+            url="http://download.eclipse.org/ecp/releases/releases_target_117/"/>
+        <repository
+            url="http://download.eclipse.org/edapt/releases/13x"/>
+        <repository
+            url="http://download.eclipse.org/releases/oxygen"/>
+        <repository
+            url="https://dl.bintray.com/enterprisedomain/ClassMaker/"/>
+        <repository
+            url="http://download.eclipse.org/eclipse/updates/4.7"/>
+        <repository
+            url="http://download.eclipse.org/rt/ecf/3.14.0/site.p2"/>
+        <repository
+            url="http://download.eclipse.org/egit/updates/"/>
+        <repository
+            url="http://download.eclipse.org/emfstore/releases_18"/>
+      </setupTask>
+      <setupTask
+          xsi:type="pde:TargetPlatformTask"
+          id="org.enterprisedomain.target"
+          name="org.enterprisedomain.target">
+        <description></description>
+      </setupTask>
+      <description>enterpriseDomain Workbench for Oxygen.</description>
+    </version>
+    <description>enterpriseDomain Workbench provides model and meta-model management.</description>
+  </product>
+  <description>enterpriseDomain provides cool products.</description>
+</setup:ProductCatalog>
