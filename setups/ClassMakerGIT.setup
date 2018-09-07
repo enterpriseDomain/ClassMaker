@@ -16,7 +16,8 @@
   <setupTask
       xsi:type="jdt:JRETask"
       version="JavaSE-1.8"
-      location="${jre.location-1.8}">
+      location="${jre.location-1.8}"
+      name="JRE for JavaSE-1.8">
     <description>Define the JRE needed to compile and run the Java projects of ${scope.project.label}</description>
   </setupTask>
   <setupTask
@@ -46,8 +47,7 @@
   <setupTask
       xsi:type="git:GitCloneTask"
       id="git.clone.ClassMaker.git"
-      remoteURI="enterpriseDomain/ClassMaker.git"
-      pushURI="">
+      remoteURI="enterpriseDomain/ClassMaker.git">
     <annotation
         source="http://www.eclipse.org/oomph/setup/InducedChoices">
       <detail
@@ -115,14 +115,15 @@
     </targlet>
   </setupTask>
   <setupTask
-      xsi:type="setup.workingsets:WorkingSetTask">
+      xsi:type="setup.workingsets:WorkingSetTask"
+      prefix="com.github.ClassMaker.git-">
     <workingSet
         name="${scope.project.name}">
       <predicate
           xsi:type="predicates:AndPredicate">
         <operand
             xsi:type="predicates:RepositoryPredicate"
-            project="org.enterprisedomain.releng"/>
+            project="org.enterprisedomain.root"/>
       </predicate>
     </workingSet>
     <description>The dynamic working sets for ${scope.project.label}</description>

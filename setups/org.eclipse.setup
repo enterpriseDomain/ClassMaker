@@ -164,7 +164,7 @@
               xsi:type="predicates:AndPredicate">
             <operand
                 xsi:type="predicates:RepositoryPredicate"
-                project="org.enterprisedomain.releng"/>
+                project="org.enterprisedomain.root"/>
           </predicate>
         </workingSet>
         <description>The dynamic working sets for ${scope.project.label}</description>
