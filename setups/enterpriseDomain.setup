@@ -23,12 +23,13 @@
       xsi:type="setup:RedirectionTask"
       id="oomph.redirection.edsetups"
       sourceURL="http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/"
-      targetURL="https://github.com/enterpriseDomain/ClassMaker/tree/master/releng/setups/">
+      targetURL="https://github.com/enterpriseDomain/ClassMaker/tree/master/setups/">
     <description></description>
   </setupTask>
   <setupTask
       xsi:type="setup:WorkspaceTask"
-      id="workspace">
+      id="workspace"
+      location="${installation.location/ws}">
     <description></description>
   </setupTask>
   <product name="workbench"
