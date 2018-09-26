@@ -19,5 +19,5 @@
 		<module>org.enterprisedomain.ecp.filter</module>
 		<module>org.enterprisedomain.ecp.ui</module>
 		<module>org.enterprisedomain.workbench</module>
-	</modules>
+	</modules>	
 </project>
