@@ -1,4 +1,4 @@
 target "org.enterprisedomain.target" with allEnvironments configurePhase
 
-include "oxygen.tpd"
+include "photon.tpd"
 include "etc.tpd"
