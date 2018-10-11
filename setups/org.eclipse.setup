@@ -79,7 +79,7 @@
       <setupTask
           xsi:type="setup:VariableTask"
           name="eclipse.target.platform"
-          defaultValue="Oxygen"
+          defaultValue="Photon"
           storageURI="scope://Workspace"/>
       <setupTask
           xsi:type="setup.p2:P2Task">
@@ -88,6 +88,7 @@
       <setupTask
           xsi:type="git:GitCloneTask"
           id="git.clone.ClassMaker.git"
+          location="https://github.com/enterpriseDomain/ClassMaker.git"
           remoteURI="enterpriseDomain/ClassMaker.git"
           pushURI="">
         <annotation

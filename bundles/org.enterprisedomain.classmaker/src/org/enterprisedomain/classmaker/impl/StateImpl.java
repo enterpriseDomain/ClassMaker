@@ -459,6 +459,7 @@ public class StateImpl extends ItemImpl implements State {
 					return null;
 				}
 			else {
+				@SuppressWarnings("unchecked")
 				SCMOperator<Git> operator = (SCMOperator<Git>) getContribution().getWorkspace().getSCMRegistry()
 						.get(getProjectName());
 				try {
@@ -751,7 +752,8 @@ public class StateImpl extends ItemImpl implements State {
 				setMaking(false);
 				wrappingMonitor.done();
 			}
-			if (!monitor.isCanceled())
+			if (!monitor.isCanceled() || (!getPhase().equals(Stage.LOADED)
+					&& !getDomainModel().eIsSet(ClassMakerPackage.Literals.MODEL_PAIR__GENERATED)))
 				makingLock.wait();
 			getContribution().removeCompletionListener(completionListener);
 			String result = commit(); // $NON-NLS-1$
@@ -914,6 +916,43 @@ public class StateImpl extends ItemImpl implements State {
 	};
 
 	protected Adapter modelsToResourceAdapter = new EContentAdapter() {
+
+		protected Adapter modelsToResourceAdapter = new EContentAdapter() {
+		
+			@Override
+			public void notifyChanged(Notification notification) {
+				super.notifyChanged(notification);
+				if (resourceModelsSynchronizing)
+					return;
+				if (notification.getNotifier() instanceof ModelPair
+						&& notification.getFeatureID(ModelPair.class) == ClassMakerPackage.MODEL_PAIR__DYNAMIC) {
+					resourceModelsSynchronizing = true;
+					boolean deliver = getResource().eDeliver();
+					getResource().eSetDeliver(false);
+					if (notification.getEventType() == Notification.SET) {
+						if (notification.getOldValue() != null) {
+							EPackage dynamicEPackage = (EPackage) notification.getOldValue();
+							EList<EObject> toRemove = ECollections.newBasicEList();
+							for (EObject eObject : getResource().getContents())
+								if (eObject instanceof EPackage
+										&& ModelUtil.ePackagesAreEqual((EPackage) eObject, dynamicEPackage, true))
+									toRemove.add(eObject);
+							getResource().getContents().removeAll(toRemove);
+						}
+						if (notification.getNewValue() != null && notification.getPosition() >= Notification.NO_INDEX) {
+							EPackage dynamicEPackage = (EPackage) notification.getNewValue();
+							if (getResource().getContents().isEmpty()) {
+								getResource().getContents().add(EcoreUtil.copy(dynamicEPackage));
+							} else
+								getResource().getContents().set(0, EcoreUtil.copy(dynamicEPackage));
+						}
+					}
+					getResource().eSetDeliver(deliver);
+					resourceModelsSynchronizing = false;
+				}
+			}
+		
+		};
 
 		@Override
 		public void notifyChanged(Notification notification) {

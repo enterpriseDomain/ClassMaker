@@ -311,6 +311,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		for (IProject eProject : workspace.getRoot().getProjects()) {
 			Project project = null;
 			try {
+				eProject.open(ClassMakerPlugin.getProgressMonitor());
 				if (eProject.hasNature(ClassMakerPlugin.NATURE_ID)) {
 					project = ClassMakerFactory.eINSTANCE.createContribution();
 				} else {

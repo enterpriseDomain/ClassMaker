@@ -46,6 +46,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.util.NotifyingInternalEListImpl;
@@ -577,6 +578,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	public String initialize(boolean commit) {
 		@SuppressWarnings("unchecked")
 		SCMOperator<Git> operator = (SCMOperator<Git>) getWorkspace().getSCMRegistry().get(getProjectName());
+		setName(getProjectName());
 		try {
 			Git git = operator.getRepositorySCM();
 			// if (git == null)
@@ -600,8 +602,11 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 						reflog.setRef(branch.getName().toString());
 						Collection<ReflogEntry> refs = reflog.call();
 						for (ReflogEntry ref : refs)
-							if (ref.getNewId().equals(branch.getObjectId()))
+							if (ref.getNewId().equals(branch.getObjectId())) {
 								timestamp = operator.decodeTimestamp(ref.getComment());
+								if (timestamp == -1)
+									timestamp = operator.decodeTimestamp(version.getQualifier());
+							}
 					} catch (IllegalArgumentException e) {
 						continue;
 					}
@@ -609,6 +614,8 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 				if (version != null && !getRevisions().containsKey(version)) {
 					Revision newRevision = newBareRevision(version);
 					newRevision.setTimestamp(timestamp);
+					newRevision.setContribution(this);
+					doNewRevision(newRevision);
 					commitId = newRevision.initialize(commit);
 				}
 			} while (it.hasNext());

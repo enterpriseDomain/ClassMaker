@@ -2,6 +2,9 @@ package org.enterprisedomain.classmaker.scm;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.util.Calendar;
+import java.util.Date;
 
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -12,6 +15,7 @@ import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.InitCommand;
 import org.eclipse.jgit.errors.RepositoryNotFoundException;
 import org.eclipse.jgit.revwalk.RevCommit;
+import org.enterprisedomain.classmaker.Revision;
 import org.enterprisedomain.classmaker.SCMRegistry;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
@@ -92,6 +96,12 @@ public class GitSCMOperator extends SCMOperatorImpl<Git> {
 	public int decodeTimestamp(String commitMessage) {
 		try {
 			String[] parts = commitMessage.split(" ");
+			if (parts.length == 1)
+				try {
+					return (int) Revision.VERSION_QUALIFIER_FORMAT.parse(parts[0]).getTime();
+				} catch (ParseException e) {
+					return -1;
+				}
 			if (parts.length == 2)
 				return Integer.parseInt(parts[1]);
 			if (parts.length == 3)

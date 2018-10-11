@@ -191,6 +191,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 				break;
 
 			case CREATE:
+				createProject(project);
 				break;
 
 			case DISPOSE:
@@ -339,6 +340,12 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 
 		});
 		initing.put(project, false);
+	}
+
+	protected void createProject(final InternalProject project) {
+		project.open();
+		final EditingDomain editingDomain = project.getEditingDomain();
+		editingDomain.getResourceSet().eAdapters().add(new EnterpriseDomainProjectObserver(project, this));
 	}
 
 	@Override

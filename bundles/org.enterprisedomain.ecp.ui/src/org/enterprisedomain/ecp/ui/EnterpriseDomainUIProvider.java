@@ -228,6 +228,8 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider implements IRe
 			ECPProject project = (ECPProject) context;
 			if (elements.length == 1) {
 				final Object element = elements[0];
+				if (ClassMakerPlugin.getClassMaker() == null)
+					return;
 				if (ClassMakerPlugin.getClassMaker().getWorkspace()
 						.getProject(project.getName()) instanceof Contribution) {
 					manager.add(new Separator());

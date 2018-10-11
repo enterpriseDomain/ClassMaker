@@ -11,5 +11,5 @@
 		<groupId>org.enterprisedomain</groupId>
 		<artifactId>org.enterprisedomain.bundles</artifactId>
 		<version>0.7.992-SNAPSHOT</version>
-	</parent>
+	</parent>	
 </project>

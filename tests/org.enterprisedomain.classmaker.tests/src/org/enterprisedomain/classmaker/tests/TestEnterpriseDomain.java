@@ -1,5 +1,5 @@
 /**
- * Copyright 2012-2017 Kyrill Zotkin
+ * Copyright 2012-2018 Kyrill Zotkin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -475,8 +475,8 @@ public class TestEnterpriseDomain extends AbstractTest {
 		assertNotNull(packageRegistry.getEPackage(p2.getNsURI()));
 
 		service.getWorkspace().getContribution(service.computeProjectName(p.getName())).checkout(v1);
-		EPackage p3 = updateEPackage(p, "0.3");
-		EPackage e2 = service.replace(p, p3, true, getProgressMonitor());
+		EPackage p3 = updateEPackage(p2, "0.3");
+		EPackage e2 = service.replace(p2, p3, true, getProgressMonitor());
 		assertEquals("http://" + e2.getName() + "/0.3", e2.getNsURI());
 		cleanup();
 	}
