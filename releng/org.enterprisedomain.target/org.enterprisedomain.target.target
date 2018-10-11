@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="org.enterprisedomain.target" sequenceNumber="1538213174">
+<target name="org.enterprisedomain.target" sequenceNumber="1539232592">
   <locations>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.eclipse.platform.feature.group" version="4.8.0.v20180611-0656"/>
@@ -39,10 +39,10 @@
       <repository id="photon" location="http://download.eclipse.org/releases/photon"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
-      <unit id="org.eclipse.jgit.feature.group" version="5.1.1.201809181055-r"/>
-      <unit id="org.eclipse.jgit.http.apache.feature.group" version="5.1.1.201809181055-r"/>
-      <unit id="org.eclipse.jgit.lfs.feature.group" version="5.1.1.201809181055-r"/>
-      <unit id="org.eclipse.jgit.pgm.feature.group" version="5.1.1.201809181055-r"/>
+      <unit id="org.eclipse.jgit.feature.group" version="5.1.2.201810061102-r"/>
+      <unit id="org.eclipse.jgit.http.apache.feature.group" version="5.1.2.201810061102-r"/>
+      <unit id="org.eclipse.jgit.lfs.feature.group" version="5.1.2.201810061102-r"/>
+      <unit id="org.eclipse.jgit.pgm.feature.group" version="5.1.2.201810061102-r"/>
       <repository location="http://download.eclipse.org/egit/updates/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
