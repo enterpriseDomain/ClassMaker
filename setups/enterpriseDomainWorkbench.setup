@@ -20,9 +20,8 @@
       <value>Eclipse</value>
     </detail>
   </annotation>
-  <version name="oxygen"
-      label="Oxygen"
-      requiredJavaVersion="1.8">
+  <version name="photon"
+      label="Photon">
     <setupTask
         xsi:type="setup.p2:P2Task"
         label="${scope.product.label} (${scope.product.version.label})">
@@ -35,7 +34,7 @@
       <requirement
           name="org.eclipse.rcp.feature.group"/>
       <repository
-          url="http://download.eclipse.org/sirius/updates/releases/5.1.0/oxygen"/>
+          url="http://download.eclipse.org/sirius/updates/releases/6.0.0/photon/"/>
       <repository
           url="http://download.eclipse.org/tools/orbit/downloads/drops/R20180606145124/repository"/>
       <repository
@@ -43,11 +42,11 @@
       <repository
           url="http://download.eclipse.org/edapt/releases/13x"/>
       <repository
-          url="http://download.eclipse.org/releases/oxygen"/>
+          url="http://download.eclipse.org/releases/photon"/>
       <repository
           url="https://dl.bintray.com/enterprisedomain/ClassMaker/"/>
       <repository
-          url="http://download.eclipse.org/eclipse/updates/4.7"/>
+          url="http://download.eclipse.org/eclipse/updates/4.8"/>
       <repository
           url="http://download.eclipse.org/rt/ecf/3.14.0/site.p2"/>
       <repository
@@ -61,7 +60,7 @@
         name="org.enterprisedomain.target">
       <description></description>
     </setupTask>
-    <description>enterpriseDomain Workbench for Oxygen.</description>
+    <description>enterpriseDomain Workbench for Photon.</description>
   </version>
   <description>enterpriseDomain Workbench provides model and meta-model management.</description>
 </setup:Product>

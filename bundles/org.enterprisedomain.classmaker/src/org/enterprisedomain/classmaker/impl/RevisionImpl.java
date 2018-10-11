@@ -281,8 +281,11 @@ public class RevisionImpl extends ItemImpl implements Revision {
 				Iterable<RevCommit> commits = log.call();
 				for (RevCommit c : commits) {
 					int timestamp = operator.decodeTimestamp(c.getShortMessage());
-					if (timestamp == -1)
-						continue;
+					if (timestamp == -1) {
+						timestamp = operator.decodeTimestamp(getVersion().getQualifier());
+						if (timestamp == -1)
+							continue;
+					}
 					State state = null;
 					if (getStateHistory().containsKey(timestamp))
 						state = (State) getStateHistory().get((Object) timestamp);
@@ -350,6 +353,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	 */
 	public void checkout(int stateTime, String commitId) {
 		setTimestamp(stateTime);
+		getContribution().initAdapters(this);
 		if (isStateSet())
 			getState().checkout(commitId);
 	}
@@ -361,6 +365,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	 */
 	public void checkout(int stateTime) {
 		setTimestamp(stateTime);
+		getContribution().initAdapters(this);
 		if (isStateSet())
 			getState().checkout();
 	}

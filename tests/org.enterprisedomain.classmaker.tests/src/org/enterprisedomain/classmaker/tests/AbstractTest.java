@@ -31,6 +31,7 @@ import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -248,7 +249,10 @@ public abstract class AbstractTest {
 		if (ePackage == null)
 			return ePackage;
 		EClass s = (EClass) ePackage.getEClassifier(className);
-		EObject o = ePackage.getEFactoryInstance().create(s);
+		EFactory eFactory = ePackage.getEFactoryInstance();
+		if (eFactory == null)
+			return ePackage;
+		EObject o = eFactory.create(s);
 		assertEquals(className, o.getClass().getSimpleName());
 		EStructuralFeature a = s.getEStructuralFeature(attributeName);
 		o.eSet(a, attributeValue);

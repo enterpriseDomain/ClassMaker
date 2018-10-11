@@ -36,6 +36,7 @@
 							<version>0.7.992-SNAPSHOT</version>
 						</frameworkExtension>
 					</frameworkExtensions>
+					<argLine>${surefire.moduleProperties}</argLine>
 				</configuration>
 			</plugin>
 		</plugins>

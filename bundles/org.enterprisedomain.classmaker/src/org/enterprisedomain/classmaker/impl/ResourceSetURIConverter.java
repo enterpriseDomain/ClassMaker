@@ -14,6 +14,8 @@ public class ResourceSetURIConverter extends ExtensibleURIConverterImpl implemen
 	@Override
 	public Map<URI, URI> getURIMap() {
 		Map<URI, URI> results = super.getURIMap();
+		if (ClassMakerPlugin.getClassMaker() == null || ClassMakerPlugin.getClassMaker().getWorkspace() == null)
+			return results;
 		for (Project project : ClassMakerPlugin.getClassMaker().getWorkspace().getProjects()) {
 			Revision revision = project.getRevision();
 			if (revision.getDomainModel().getDynamic() != null && revision.getState().getResource() != null)
