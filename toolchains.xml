@@ -7,7 +7,7 @@
       <vendor>openjdk</vendor>     
     </provides>
     <configuration>
-        <jdkHome>/usr/lib64/jvm/java-10-openjdk-10</jdkHome>
+        <jdkHome>/home/travis/openjdk10</jdkHome>
     </configuration>
   </toolchain>
 </toolchains>
