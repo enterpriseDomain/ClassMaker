@@ -46,7 +46,7 @@ There is more [code](/tests/org.enterprisedomain.classmaker.tests/src/org/enterp
 
 Download
 ---------
-###enterpriseDomain Workbench
+### enterpriseDomain Workbench
 
 To install enterpriseDomain Workbench RCP, please, follow these steps:
 * download the [Oomph installer](https://wiki.eclipse.org/Eclipse_Installer)
@@ -58,7 +58,7 @@ To install enterpriseDomain Workbench RCP, please, follow these steps:
 
 * start the Oomph installer
  
-###ClassMaker
+### ClassMaker
 Please, use the [update site](https://dl.bintray.com/enterprisedomain/ClassMaker/) to install ClassMaker. [See](https://github.com/enterpriseDomain/ClassMaker/wiki/HowToRun#usage) how to use it.
 
 Feedback
