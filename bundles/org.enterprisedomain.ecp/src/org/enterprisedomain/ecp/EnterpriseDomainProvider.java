@@ -472,13 +472,10 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 			final ECPProject project = (ECPProject) parent;
 			final Project domainProject = Activator.getClassMaker().getWorkspace().getProject(project.getName());
 			if (domainProject != null && !domainProject.getChildren().isEmpty())
-				if (domainProject instanceof Contribution && domainProject.getChildren().get(0) instanceof Resource)
-					childrenList.addChildren(((Resource) domainProject.getChildren().get(0)).getContents());
-				else if (domainProject instanceof Project && !(domainProject instanceof Contribution))
-					childrenList.addChildren(domainProject.getChildren());
-			// } else if (parent instanceof Resource) {
-			// Resource resource = (Resource) parent;
-			// childrenList.addChildren(resource.getContents());
+				childrenList.addChildren(domainProject.getChildren());									
+		} else if (parent instanceof Resource) {
+			Resource resource = (Resource) parent;
+			childrenList.addChildren(resource.getContents());
 		} else if (parent instanceof EObject) {
 			final EObject eObject = (EObject) parent;
 			childrenList.addChildren(eObject.eContents());
