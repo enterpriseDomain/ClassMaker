@@ -3,6 +3,7 @@
 
 <product name="enterpriseDomain Workbench" uid="workbench" id="org.enterprisedomain.workbench.product" application="org.enterprisedomain.workbench.application" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
 
+
    <configIni use="default">
    </configIni>
 
@@ -12,6 +13,10 @@
    </launcherArgs>
 
    <windowImages i16="platform:/plugin/org.eclipse.emf.ecp.ui.e3/icons/bricks.png"/>
+
+   <splash
+      location="org.enterprisedomain.workbench" />
+
 
    <plugins>
       <plugin id="com.google.gson"/>
@@ -346,5 +351,16 @@
       <plugin id="org.eclipse.equinox.event" autoStart="true" startLevel="2" />
       <plugin id="org.eclipse.equinox.simpleconfigurator" autoStart="true" startLevel="1" />
    </configurations>
+
+   <repositories>
+      <repository location="http://https://dl.bintray.com/enterprisedomain/ClassMaker/" enabled="true" />
+   </repositories>
+
+   <preferencesInfo>
+      <targetfile overwrite="false"/>
+   </preferencesInfo>
+
+   <cssInfo>
+   </cssInfo>
 
 </product>
