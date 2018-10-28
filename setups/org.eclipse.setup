@@ -88,7 +88,7 @@
       <setupTask
           xsi:type="git:GitCloneTask"
           id="git.clone.ClassMaker.git"
-          remoteURI="enterpriseDomain/ClassMaker.git"
+          remoteURI="https://github.com/enterpriseDomain/ClassMaker.git"
           pushURI="">
         <annotation
             source="http://www.eclipse.org/oomph/setup/InducedChoices">
