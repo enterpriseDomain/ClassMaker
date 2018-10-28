@@ -235,7 +235,11 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 				boolean contribution = false;
 				if (project.getProperties().getKeys().contains(PROP_CONTRIBUTION))
 					contribution = Boolean.valueOf(project.getProperties().getValue(PROP_CONTRIBUTION));
-				IProgressMonitor monitor = getUIProvider().getAdapter(project, IProgressMonitor.class);
+				IProgressMonitor monitor = null;
+				if (getUIProvider() == null)
+					monitor = ClassMakerPlugin.getProgressMonitor();
+				else
+					monitor = getUIProvider().getAdapter(project, IProgressMonitor.class);
 				if (contribution) {
 					EcoreFactory ecoreFactory = EcoreFactory.eINSTANCE;
 					EPackage model = ecoreFactory.createEPackage();
@@ -472,7 +476,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 			final ECPProject project = (ECPProject) parent;
 			final Project domainProject = Activator.getClassMaker().getWorkspace().getProject(project.getName());
 			if (domainProject != null && !domainProject.getChildren().isEmpty())
-				childrenList.addChildren(domainProject.getChildren());									
+				childrenList.addChildren(domainProject.getChildren());
 		} else if (parent instanceof Resource) {
 			Resource resource = (Resource) parent;
 			childrenList.addChildren(resource.getContents());
@@ -572,8 +576,9 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 			}
 			String projectName = ResourceUtils.parseProjectName(changedResources.iterator().next().getURI());
 			ECPProject project = ECPUtil.getECPProjectManager().getProject(projectName);
-			((IResourceHandler) getUIProvider().getAdapter(this, IResourceHandler.class)).handleResourceChange(project,
-					changedResources, removedResources);
+			if (getUIProvider() != null)
+				((IResourceHandler) getUIProvider().getAdapter(this, IResourceHandler.class))
+						.handleResourceChange(project, changedResources, removedResources);
 		}
 
 	}

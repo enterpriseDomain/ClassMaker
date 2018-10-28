@@ -17,6 +17,7 @@ package org.enterprisedomain.classmaker.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -382,7 +383,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 			return Version.emptyVersion;
 		List<org.osgi.framework.Version> sorted = new ArrayList<org.osgi.framework.Version>();
 		sorted.addAll((Collection<? extends org.osgi.framework.Version>) getRevisions().keySet());
-		sorted.sort(new Comparator<org.osgi.framework.Version>() {
+		Collections.sort(sorted, new Comparator<org.osgi.framework.Version>() {
 
 			@Override
 			public int compare(org.osgi.framework.Version o1, org.osgi.framework.Version o2) {
