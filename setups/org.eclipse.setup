@@ -88,7 +88,6 @@
       <setupTask
           xsi:type="git:GitCloneTask"
           id="git.clone.ClassMaker.git"
-          location="enterpriseDomain/ClassMaker.git"
           remoteURI="https://github.com/enterpriseDomain/ClassMaker.git"
           pushURI="">
         <annotation
