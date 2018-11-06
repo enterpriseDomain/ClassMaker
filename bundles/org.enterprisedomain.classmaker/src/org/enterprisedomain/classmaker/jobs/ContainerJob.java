@@ -35,14 +35,14 @@ public abstract class ContainerJob extends EnterpriseDomainJob {
 			return null;
 		List<Bundle> results = new ArrayList<Bundle>();
 		for (Bundle bundle : context.getBundles())
-			if (bundle.getSymbolicName().equals(symbolicName) && versionsAreEqual(version, bundle.getVersion(), true))
+			if (bundle.getSymbolicName().equals(symbolicName) && (versionsAreEqual(version, bundle.getVersion(), true)
+					|| versionAreLess(version, bundle.getVersion(), true)))
 				results.add(bundle);
 		return results;
 	}
 
 	public Collection<Bundle> getBundles(String symbolicName, Version version) {
 		return getBundles(symbolicName, version, getContext());
-
 	}
 
 	public Collection<Bundle> getBundles() {
@@ -58,6 +58,12 @@ public abstract class ContainerJob extends EnterpriseDomainJob {
 		return (version.getMajor() == version2.getMajor()) && (version.getMinor() == version2.getMinor())
 				&& (version.getMicro() == version2.getMicro())
 				&& (ignoreQualifier ? true : version.getQualifier().equals(version2.getQualifier()));
+	}
+
+	protected boolean versionAreLess(Version version, Version version2, boolean ignoreQualifier) {
+		return (version.getMajor() < version2.getMajor()) || (version.getMinor() < version2.getMinor())
+				|| (version.getMicro() < version2.getMicro())
+						&& (ignoreQualifier ? true : version.getQualifier().equals(version2.getQualifier()));
 	}
 
 }
