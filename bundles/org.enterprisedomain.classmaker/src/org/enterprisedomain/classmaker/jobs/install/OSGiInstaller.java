@@ -15,6 +15,8 @@
  */
 package org.enterprisedomain.classmaker.jobs.install;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.concurrent.Semaphore;
@@ -53,11 +55,17 @@ public class OSGiInstaller extends ContainerJob {
 		public void bundleChanged(BundleEvent event) {
 			if (event.getBundle() == null)
 				return;
-			if (event.getBundle().getSymbolicName().equals(getProject().getName()) && versionsAreEqual(
+			if (event.getBundle().getSymbolicName().equals(getProject().getName()) && (versionsAreEqual(
 					Version.parseVersion(event.getBundle().getHeaders().get(Constants.BUNDLE_VERSION)),
-					getContributionState().getVersion(), false))
+					getContributionState().getVersion(), false)
+					|| versionAreLess(
+							Version.parseVersion(event.getBundle().getHeaders().get(Constants.BUNDLE_VERSION)),
+							getContributionState().getVersion(), true)))
 				switch (event.getType()) {
 				case BundleEvent.INSTALLED:
+					installed.release();
+					break;
+				case BundleEvent.UPDATED:
 					installed.release();
 					break;
 				case BundleEvent.UNINSTALLED:
@@ -89,6 +97,13 @@ public class OSGiInstaller extends ContainerJob {
 				if (versionsAreEqual(Version.parseVersion(bundle.getHeaders().get(Constants.BUNDLE_VERSION)),
 						getContributionState().getVersion(), false))
 					existingBundle = bundle;
+				else if (versionAreLess(Version.parseVersion(bundle.getHeaders().get(Constants.BUNDLE_VERSION)),
+						getContributionState().getVersion(), false)) {
+					existingBundle = bundle;
+					IStatus result = updateBundle(existingBundle, jarPath, bundleContext);
+					if (result.isOK())
+						return result;
+				}
 			return installBundle(existingBundle, jarPath, bundleContext);
 		} catch (IllegalArgumentException e) {
 			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
@@ -99,6 +114,31 @@ public class OSGiInstaller extends ContainerJob {
 			return Status.CANCEL_STATUS;
 		} finally {
 			monitor.worked(1);
+		}
+	}
+
+	private IStatus updateBundle(Bundle existingBundle, IPath jarPath, BundleContext context) {
+		if (existingBundle == null)
+			return getWarningStatus(existingBundle, null);
+		try {
+			context.addBundleListener(listener);
+			existingBundle.update(new FileInputStream(jarPath.toFile()));
+			installed.acquire();
+			getContributionState().setPhase(getResultStage());
+			refreshBundle(existingBundle, context);
+			return getOKStatus(existingBundle);
+		} catch (BundleException e) {
+			if (e.getType() == BundleException.RESOLVE_ERROR)
+				return getWarningStatus(existingBundle, e);
+			else if (e.getType() == BundleException.DUPLICATE_BUNDLE_ERROR)
+				return getOKStatus(existingBundle);
+			return getWarningStatus(existingBundle, e);
+		} catch (FileNotFoundException e) {
+			return getWarningStatus(existingBundle, e);
+		} catch (InterruptedException e) {
+			return Status.CANCEL_STATUS;
+		} finally {
+			getContext().removeBundleListener(listener);
 		}
 	}
 
@@ -147,7 +187,7 @@ public class OSGiInstaller extends ContainerJob {
 		return bundles;
 	}
 
-	private IStatus getWarningStatus(Bundle bundle, BundleException e) {
+	private IStatus getWarningStatus(Bundle bundle, Exception e) {
 		if (bundle == null)
 			return ClassMakerPlugin.createWarningStatus(NLS.bind(Messages.BundleNo, getProject().getName()), e);
 		else
