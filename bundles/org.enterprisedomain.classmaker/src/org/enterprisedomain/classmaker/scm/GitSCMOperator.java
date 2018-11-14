@@ -52,8 +52,6 @@ public class GitSCMOperator extends SCMOperatorImpl<Git> {
 
 	@Override
 	public synchronized void ungetRepositorySCM() throws Exception {
-		if (ClassMakerPlugin.getClassMaker() == null)
-			return;
 		Git git = (Git) getRegistry().getSCM(getProjectName());
 		if (git == null)
 			return;

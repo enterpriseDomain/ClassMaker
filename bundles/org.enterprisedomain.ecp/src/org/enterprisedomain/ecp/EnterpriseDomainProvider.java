@@ -147,7 +147,9 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 
 	public EnterpriseDomainProvider() {
 		super(NAME);
-		Activator.getClassMaker().getWorkspace().getResourceSet().eAdapters().add(adapter);
+		if (Activator.getClassMaker() != null) {
+			Activator.getClassMaker().getWorkspace().getResourceSet().eAdapters().add(adapter);
+		}
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(resourceChangeListener);
 	}
 
