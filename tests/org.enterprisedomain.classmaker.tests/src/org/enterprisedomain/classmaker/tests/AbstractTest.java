@@ -67,7 +67,6 @@ public abstract class AbstractTest {
 	public void setReference(ClassMakerService dependency) {
 		service = dependency;
 		latch.countDown();
-		service.initialize();
 	}
 
 	@BeforeClass

@@ -17,15 +17,4 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 		return PERSPECTIVE_ID;
 	}
 
-	@Override
-	public void postStartup() {
-		super.postStartup();
-		ClassMakerPlugin.getClassMaker().initialize();
-	}
-
-	@Override
-	public boolean preShutdown() {
-		return super.preShutdown();
-	}
-
 }

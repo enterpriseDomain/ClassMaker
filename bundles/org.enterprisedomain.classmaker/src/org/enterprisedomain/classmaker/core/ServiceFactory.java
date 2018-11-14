@@ -24,7 +24,6 @@ public class ServiceFactory extends ContextFunction {
 	@Override
 	public Object compute(IEclipseContext context) {
 		ClassMakerService plant = ClassMakerPlugin.getClassMaker();
-		plant.initialize();
 		context.set(ClassMakerService.class, plant);
 		return plant;
 	}

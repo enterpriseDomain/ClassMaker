@@ -62,7 +62,11 @@ public class MakeProjectCommand extends ChangeCommand implements CommandActionDe
 						newRevision.getState().getDomainModel().setDynamic(EcoreUtil.copy(ePackage));
 						project.make(monitor);
 					} catch (CoreException e) {
-						monitor.setCanceled(true);
+						ClassMakerPlugin.wrapRun(new Runnable() {
+							public void run() {
+								monitor.setCanceled(true);
+							}
+						});
 						throw new InvocationTargetException(e);
 					}
 				}

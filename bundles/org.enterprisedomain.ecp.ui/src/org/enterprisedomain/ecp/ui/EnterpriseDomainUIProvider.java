@@ -27,6 +27,7 @@ import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.notify.AdapterFactory;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -238,8 +239,9 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider implements IRe
 			}
 			for (Object element : elements) {
 				if (element instanceof EObject) {
-					if (EcoreUtil.getAnnotation(((EObject) element).eClass().getEPackage(), EcorePackage.eNS_URI,
-							"invocationDelegates").equals(ClassMakerService.INVOCATION_DELEGATE_URI)) {
+					String eA = EcoreUtil.getAnnotation(((EObject) element).eClass().getEPackage(),
+							EcorePackage.eNS_URI, "invocationDelegates");
+					if (eA.equals(ClassMakerService.INVOCATION_DELEGATE_URI)) {
 						for (EOperation eOperation : ((EObject) element).eClass().getEOperations())
 							if (eOperation.getEAnnotation(ClassMakerService.INVOCATION_DELEGATE_URI) != null
 									&& !EcoreUtil.getAnnotation(eOperation, "http://www.eclipse.org/emf/2002/GenModel",

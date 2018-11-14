@@ -362,7 +362,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	public EList<Object> getChildren() {
 		if (eIsSet(ClassMakerPackage.Literals.PROJECT__REVISION)
 				&& getRevision().eIsSet(ClassMakerPackage.Literals.REVISION__STATE))
-			return (EList<Object>) (EList<?>) getRevision().getState().getResource().getContents();
+			return (EList<Object>) (EList<?>) ECollections.asEList(getRevision().getState().getResource());
 		if (children == null)
 			children = ECollections.newBasicEList();
 		return children;
@@ -921,7 +921,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		URI uri = getResourceURI();
 		Resource resource = null;
 		if (new File(uri.toFileString()).exists()) {
-			getWorkspace().getResourceSet().getResource(uri, false);
+			resource = getWorkspace().getResourceSet().getResource(uri, false);
 			try {
 				resource.load(Collections.emptyMap());
 			} catch (IOException e) {
