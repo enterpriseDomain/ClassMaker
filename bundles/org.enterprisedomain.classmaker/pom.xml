@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.enterprisedomain</groupId>
 	<artifactId>org.enterprisedomain.classmaker</artifactId>
-	<version>0.7.992-SNAPSHOT</version>
+	<version>0.8.0-SNAPSHOT</version>
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
 		<artifactId>org.enterprisedomain.bundles</artifactId>
-		<version>0.7.992-SNAPSHOT</version>
+		<version>0.8.0-SNAPSHOT</version>
 	</parent>
 	<packaging>eclipse-plugin</packaging>
 </project>

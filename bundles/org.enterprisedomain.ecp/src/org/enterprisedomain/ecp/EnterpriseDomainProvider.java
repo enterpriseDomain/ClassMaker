@@ -128,6 +128,8 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 			if (resource == null) {
 				return;
 			}
+			if (Activator.getClassMaker() == null)
+				return;
 			Project domainProject = Activator.getClassMaker().getWorkspace().getProject(resource);
 			if (domainProject != null && !(domainProject instanceof Contribution)) {
 				try {

@@ -52,7 +52,7 @@ public class MakeProjectCommand extends ChangeCommand implements CommandActionDe
 			ClassMakerPlugin.runWithProgress(new IRunnableWithProgress() {
 
 				@Override
-				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
+				public void run(final IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 					try {
 						Project project = classMaker.getWorkspace().getProject((String) projectName);
 						EPackage ePackage = project.getRevision().getState().getDomainModel().getDynamic();

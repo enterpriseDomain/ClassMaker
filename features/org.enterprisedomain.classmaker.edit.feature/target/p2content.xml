@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <units size='2'>
-  <unit id='org.enterprisedomain.classmaker.edit.feature.feature.group' version='0.7.992.201810311113' singleton='false'>
-    <update id='org.enterprisedomain.classmaker.edit.feature.feature.group' range='[0.0.0,0.7.992.201810311113)' severity='0'/>
+  <unit id='org.enterprisedomain.classmaker.edit.feature.feature.group' version='0.8.0.201810311113' singleton='false'>
+    <update id='org.enterprisedomain.classmaker.edit.feature.feature.group' range='[0.0.0,0.8.0.201810311113)' severity='0'/>
     <properties size='7'>
       <property name='org.eclipse.equinox.p2.name' value='enterpriseDomain ClassMaker Edit Feature'/>
       <property name='org.eclipse.equinox.p2.description' value='enterpriseDomain ClassMaker Edit Feature'/>
@@ -9,10 +9,10 @@
       <property name='org.eclipse.equinox.p2.type.group' value='true'/>
       <property name='maven-groupId' value='org.enterprisedomain'/>
       <property name='maven-artifactId' value='org.enterprisedomain.classmaker.edit.feature'/>
-      <property name='maven-version' value='0.7.992-SNAPSHOT'/>
+      <property name='maven-version' value='0.8.0-SNAPSHOT'/>
     </properties>
     <provides size='1'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='org.enterprisedomain.classmaker.edit.feature.feature.group' version='0.7.992.201810311113'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='org.enterprisedomain.classmaker.edit.feature.feature.group' version='0.8.0.201810311113'/>
     </provides>
     <requires size='11'>
       <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.core.runtime' range='0.0.0'/>
@@ -24,8 +24,8 @@
       <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.emf.ecp.view.util.swt' range='[1.16.0,2.0.0)'/>
       <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.emf.ecp.ui.view.swt' range='0.0.0'/>
       <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.swt' range='0.0.0'/>
-      <required namespace='org.eclipse.equinox.p2.iu' name='org.enterprisedomain.classmaker.edit' range='[0.7.992.201810311113,0.7.992.201810311113]'/>
-      <required namespace='org.eclipse.equinox.p2.iu' name='org.enterprisedomain.classmaker.edit.feature.feature.jar' range='[0.7.992.201810311113,0.7.992.201810311113]'>
+      <required namespace='org.eclipse.equinox.p2.iu' name='org.enterprisedomain.classmaker.edit' range='[0.8.0.201810311113,0.8.0.201810311113]'/>
+      <required namespace='org.eclipse.equinox.p2.iu' name='org.enterprisedomain.classmaker.edit.feature.feature.jar' range='[0.8.0.201810311113,0.8.0.201810311113]'>
         <filter>
           (org.eclipse.update.install.features=true)
         </filter>
@@ -41,25 +41,25 @@
       Copyright 2018 Kyrill Zotkin&#xA;Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);&#xA;you may not use this file except in compliance with the License.&#xA;You may obtain a copy of the License at&#xA;http://www.apache.org/licenses/LICENSE-2.0&#xA;Unless required by applicable law or agreed to in writing, software&#xA;distributed under the License is distributed on an &quot;AS IS&quot; BASIS,&#xA;WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express&#xA;or implied.&#xA;See the License for the specific language governing permissions&#xA;and&#xA;limitations under the License.
     </copyright>
   </unit>
-  <unit id='org.enterprisedomain.classmaker.edit.feature.feature.jar' version='0.7.992.201810311113'>
+  <unit id='org.enterprisedomain.classmaker.edit.feature.feature.jar' version='0.8.0.201810311113'>
     <properties size='6'>
       <property name='org.eclipse.equinox.p2.name' value='enterpriseDomain ClassMaker Edit Feature'/>
       <property name='org.eclipse.equinox.p2.description' value='enterpriseDomain ClassMaker Edit Feature'/>
       <property name='org.eclipse.equinox.p2.description.url' value='https://www.enterprisedomain.org/'/>
       <property name='maven-groupId' value='org.enterprisedomain'/>
       <property name='maven-artifactId' value='org.enterprisedomain.classmaker.edit.feature'/>
-      <property name='maven-version' value='0.7.992-SNAPSHOT'/>
+      <property name='maven-version' value='0.8.0-SNAPSHOT'/>
     </properties>
     <provides size='3'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='org.enterprisedomain.classmaker.edit.feature.feature.jar' version='0.7.992.201810311113'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='org.enterprisedomain.classmaker.edit.feature.feature.jar' version='0.8.0.201810311113'/>
       <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='feature' version='1.0.0'/>
-      <provided namespace='org.eclipse.update.feature' name='org.enterprisedomain.classmaker.edit.feature' version='0.7.992.201810311113'/>
+      <provided namespace='org.eclipse.update.feature' name='org.enterprisedomain.classmaker.edit.feature' version='0.8.0.201810311113'/>
     </provides>
     <filter>
       (org.eclipse.update.install.features=true)
     </filter>
     <artifacts size='1'>
-      <artifact classifier='org.eclipse.update.feature' id='org.enterprisedomain.classmaker.edit.feature' version='0.7.992.201810311113'/>
+      <artifact classifier='org.eclipse.update.feature' id='org.enterprisedomain.classmaker.edit.feature' version='0.8.0.201810311113'/>
     </artifacts>
     <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
     <touchpointData size='1'>

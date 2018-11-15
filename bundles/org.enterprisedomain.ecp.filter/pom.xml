@@ -4,12 +4,12 @@
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
 		<artifactId>org.enterprisedomain.bundles</artifactId>
-		<version>0.7.992-SNAPSHOT</version>
+		<version>0.8.0-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>org.enterprisedomain.ecp.filter</artifactId>
 	
 	<packaging>eclipse-plugin</packaging>
-	<version>0.7.992-SNAPSHOT</version>
+	<version>0.8.0-SNAPSHOT</version>
 	<groupId>org.enterprisedomain</groupId>
 </project>

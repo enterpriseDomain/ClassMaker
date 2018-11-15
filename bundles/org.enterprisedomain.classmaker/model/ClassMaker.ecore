@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="classmaker" nsURI="http://org/enterprisedomain/ClassMaker/0.7.992"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="classmaker" nsURI="http://org/enterprisedomain/ClassMaker/0.8.0"
     nsPrefix="ClassMaker">
   <eClassifiers xsi:type="ecore:EClass" name="Contribution" eSuperTypes="#//Project #//Item">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -187,7 +187,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="resource" eType="#//Resource"
-        resolveProxies="false">
+        transient="true" resolveProxies="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A model {@link org.eclipse.emf.ecore.resource.Resource Resource}."/>
       </eAnnotations>
@@ -1096,6 +1096,7 @@
       </eParameters>
     </eOperations>
     <eOperations name="initialize"/>
+    <eOperations name="dispose"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="workspace" eType="#//Workspace"
         containment="true" eOpposite="#//Workspace/service">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

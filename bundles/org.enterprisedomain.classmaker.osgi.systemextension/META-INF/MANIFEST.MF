@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: ClassMaker OSGi System Extension
 Bundle-SymbolicName: org.enterprisedomain.classmaker.osgi.systemextension
-Bundle-Version: 0.7.992.qualifier
+Bundle-Version: 0.8.0.qualifier
 Bundle-Vendor: Kyrill Zotkin
 Fragment-Host: org.eclipse.osgi;bundle-version="[3.11.2,4.0.0)"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

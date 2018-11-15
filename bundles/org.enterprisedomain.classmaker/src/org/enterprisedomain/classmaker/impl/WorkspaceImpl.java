@@ -16,11 +16,15 @@
 package org.enterprisedomain.classmaker.impl;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
 
@@ -36,6 +40,7 @@ import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.core.runtime.jobs.MultiRule;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
@@ -55,6 +60,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.osgi.internal.framework.EquinoxBundle;
 import org.eclipse.osgi.storage.BundleInfo.Generation;
 import org.eclipse.pde.core.target.ITargetDefinition;
@@ -78,6 +84,7 @@ import org.enterprisedomain.classmaker.Workspace;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.util.ClassMakerSwitch;
 import org.enterprisedomain.classmaker.util.ModelUtil;
+import org.enterprisedomain.classmaker.util.ResourceUtils;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.Version;
@@ -307,6 +314,31 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * @generated NOT
 	 */
 	public void initialize() {
+		final URI uri = URI.createFileURI(ResourceUtils.WORKSPACE_RESOURCE_PATH.toString());
+		getService().eAdapters().add(new AdapterImpl() {
+
+			@Override
+			public void notifyChanged(Notification msg) {
+				if (msg.getFeatureID(ClassMakerService.class) == ClassMakerPackage.CLASS_MAKER_SERVICE__WORKSPACE
+						&& msg.getNewValue() == null) {
+					Resource workspaceResource = getResourceSet().getResource(uri, false);
+					if (workspaceResource == null) {
+						workspaceResource = getResourceSet().createResource(uri);
+					}
+					workspaceResource.getContents().add(EcoreUtil.copy((EObject) msg.getOldValue()));
+					try {
+						Map<String, String> options = new HashMap<String, String>();
+						options.put(XMLResource.OPTION_PROCESS_DANGLING_HREF,
+								XMLResource.OPTION_PROCESS_DANGLING_HREF_DISCARD);
+						workspaceResource.save(options);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+
+				}
+			}
+
+		});
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		for (IProject eProject : workspace.getRoot().getProjects()) {
 			Project project = null;
@@ -895,7 +927,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		if (eIsProxy())
 			return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (resourceSet: ");
 		result.append(resourceSet);
 		result.append(')');

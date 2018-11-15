@@ -2,7 +2,7 @@
 <feature
       id="org.enterprisedomain.classmaker.edit.feature"
       label="enterpriseDomain ClassMaker Edit Feature"
-      version="0.7.992.201810311113">
+      version="0.8.0.201810311113">
 
    <description url="https://www.enterprisedomain.org/">
 enterpriseDomain ClassMaker Edit Feature
@@ -112,7 +112,7 @@ limitations under the License.
          id="org.enterprisedomain.classmaker.edit"
          download-size="88"
          install-size="163"
-         version="0.7.992.201810311113"
+         version="0.8.0.201810311113"
          unpack="false"/>
 
 </feature>
