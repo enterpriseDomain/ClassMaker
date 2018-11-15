@@ -56,14 +56,10 @@ import org.enterprisedomain.classmaker.util.ListUtil;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.impl.RevisionImpl#getState
- * <em>State</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.RevisionImpl#getTimestamp
- * <em>Timestamp</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.RevisionImpl#getStateHistory
- * <em>State History</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.RevisionImpl#getLatestTimestamp
- * <em>Latest Timestamp</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.RevisionImpl#getState <em>State</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.RevisionImpl#getTimestamp <em>Timestamp</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.RevisionImpl#getStateHistory <em>State History</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.RevisionImpl#getLatestTimestamp <em>Latest Timestamp</em>}</li>
  * </ul>
  *
  * @generated
@@ -75,9 +71,8 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	}
 
 	/**
-	 * The default value of the '{@link #getTimestamp() <em>Timestamp</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getTimestamp() <em>Timestamp</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getTimestamp()
 	 * @generated
 	 * @ordered
@@ -85,9 +80,8 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	protected static final int TIMESTAMP_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getTimestamp() <em>Timestamp</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getTimestamp() <em>Timestamp</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getTimestamp()
 	 * @generated
 	 * @ordered
@@ -95,9 +89,8 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	protected int timestamp = TIMESTAMP_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getStateHistory() <em>State History</em>}'
-	 * map. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getStateHistory() <em>State History</em>}' map.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getStateHistory()
 	 * @generated
 	 * @ordered
@@ -105,9 +98,8 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	protected EMap<Integer, State> stateHistory;
 
 	/**
-	 * The default value of the '{@link #getLatestTimestamp() <em>Latest
-	 * Timestamp</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getLatestTimestamp() <em>Latest Timestamp</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getLatestTimestamp()
 	 * @generated
 	 * @ordered
@@ -116,7 +108,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected RevisionImpl() {
@@ -125,7 +116,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -154,7 +144,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public State getState() {
@@ -184,7 +173,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public int getTimestamp() {
@@ -193,7 +181,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setTimestamp(int newTimestamp) {
@@ -206,7 +193,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EMap<Integer, State> getStateHistory() {
@@ -471,7 +457,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -485,7 +470,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -510,7 +494,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -531,7 +514,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -552,7 +534,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -572,7 +553,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -580,7 +560,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 		if (eIsProxy())
 			return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (timestamp: ");
 		result.append(timestamp);
 		result.append(')');

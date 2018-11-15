@@ -72,300 +72,259 @@ import org.osgi.framework.Version;
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Package</b>. <!--
  * end-user-doc -->
- * 
  * @generated
  */
 public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPackage {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass contributionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass revisionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass stateEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass itemEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass adapterEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass workspaceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass integerToStateMapEntryEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass versionToRevisionMapEntryEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass iSchedulingRuleEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass executorEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass futureEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass iAdapterFactoryEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass customizerEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass stageQualifierEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass stageQualifierToCustomizerMapEntryEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass projectEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass modelPairEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass scmOperatorEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass scmRegistryEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass resourceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass resourceChangeListenerEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass notificationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass completionListenerEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass workerEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass selectRevealHandlerEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass resourceAdapterEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass classMakerServiceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass blueprintEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass completionNotificationAdapterEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EEnum stageEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EDataType propertiesEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EDataType iProgressMonitorEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EDataType osGiVersionEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EDataType semaphoreEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EDataType coreExceptionEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EDataType invocationTargetExceptionEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EDataType iStatusEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EDataType uriEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EDataType exceptionEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EDataType localeEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
-	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the
-	 * package package URI value.
-	 * <p>
-	 * Note: the correct way to create the package is via the static factory method
-	 * {@link #init init()}, which also performs initialization of the package, or
-	 * returns the registered package, if one already exists. <!-- begin-user-doc
+	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
+	 * package URI value.
+	 * <p>Note: the correct way to create the package is via the static
+	 * factory method {@link #init init()}, which also performs
+	 * initialization of the package, or returns the registered package,
+	 * if one already exists.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#eNS_URI
 	 * @see #init()
@@ -377,21 +336,17 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private static boolean isInited = false;
 
 	/**
-	 * Creates, registers, and initializes the <b>Package</b> for this model, and
-	 * for any others upon which it depends.
-	 * 
-	 * <p>
-	 * This method is used to initialize {@link ClassMakerPackage#eINSTANCE} when
-	 * that field is accessed. Clients should not invoke it directly. Instead, they
-	 * should simply access that field to obtain the package. <!-- begin-user-doc
+	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
+	 *
+	 * <p>This method is used to initialize {@link ClassMakerPackage#eINSTANCE} when that field is accessed.
+	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @see #eNS_URI
 	 * @see #createPackageContents()
 	 * @see #initializePackageContents()
@@ -402,9 +357,10 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 			return (ClassMakerPackage) EPackage.Registry.INSTANCE.getEPackage(ClassMakerPackage.eNS_URI);
 
 		// Obtain or create and register package
-		ClassMakerPackageImpl theClassMakerPackage = (ClassMakerPackageImpl) (EPackage.Registry.INSTANCE
-				.get(eNS_URI) instanceof ClassMakerPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI)
-						: new ClassMakerPackageImpl());
+		Object registeredClassMakerPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		ClassMakerPackageImpl theClassMakerPackage = registeredClassMakerPackage instanceof ClassMakerPackageImpl
+				? (ClassMakerPackageImpl) registeredClassMakerPackage
+				: new ClassMakerPackageImpl();
 
 		isInited = true;
 
@@ -427,7 +383,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getContribution() {
@@ -436,7 +391,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getContribution_Dependencies() {
@@ -445,7 +399,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getContribution_State() {
@@ -454,7 +407,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getContribution_LatestVersion() {
@@ -463,7 +415,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getContribution_ModelResourceAdapter() {
@@ -472,7 +423,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getRevision() {
@@ -481,7 +431,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getRevision_State() {
@@ -490,7 +439,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getRevision_Timestamp() {
@@ -499,7 +447,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getRevision_StateHistory() {
@@ -508,7 +455,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getRevision_LatestTimestamp() {
@@ -517,7 +463,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getState() {
@@ -526,7 +471,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getState_PackageClassName() {
@@ -535,7 +479,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getState_RequiredPlugins() {
@@ -544,7 +487,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getState_Revision() {
@@ -553,7 +495,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getState_Timestamp() {
@@ -562,7 +503,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getState_DeployableUnitName() {
@@ -571,7 +511,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getState_JobFamily() {
@@ -580,7 +519,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getState_Resource() {
@@ -589,7 +527,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getState_CommitIds() {
@@ -598,7 +535,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getState_CommitId() {
@@ -607,7 +543,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getState_StateCustomizers() {
@@ -616,7 +551,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getState_ProjectName() {
@@ -625,7 +559,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getState_Making() {
@@ -634,7 +567,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getItem() {
@@ -643,7 +575,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getItem_ModelName() {
@@ -652,7 +583,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getItem_Phase() {
@@ -661,7 +591,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getItem_Version() {
@@ -670,7 +599,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getItem_Language() {
@@ -679,7 +607,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getItem_DomainModel() {
@@ -688,7 +615,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getItem_Customizers() {
@@ -697,7 +623,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getItem_Parent() {
@@ -706,7 +631,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getItem_Locale() {
@@ -715,7 +639,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getItem_Contribution() {
@@ -724,7 +647,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getAdapter() {
@@ -733,7 +655,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getWorkspace() {
@@ -742,7 +663,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getWorkspace_Projects() {
@@ -751,7 +671,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getWorkspace_ResourceSet() {
@@ -760,7 +679,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getWorkspace_Customizers() {
@@ -769,7 +687,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getWorkspace_Service() {
@@ -778,7 +695,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getWorkspace_SCMRegistry() {
@@ -787,7 +703,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getIntegerToStateMapEntry() {
@@ -796,7 +711,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getIntegerToStateMapEntry_Key() {
@@ -805,7 +719,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getIntegerToStateMapEntry_Value() {
@@ -814,7 +727,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getVersionToRevisionMapEntry() {
@@ -823,7 +735,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getVersionToRevisionMapEntry_Key() {
@@ -832,7 +743,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getVersionToRevisionMapEntry_Value() {
@@ -841,7 +751,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getISchedulingRule() {
@@ -850,7 +759,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getExecutor() {
@@ -859,7 +767,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getFuture() {
@@ -868,7 +775,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getIAdapterFactory() {
@@ -877,7 +783,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getCustomizer() {
@@ -886,7 +791,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getCustomizer_Rank() {
@@ -895,7 +799,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getStageQualifier() {
@@ -904,7 +807,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getStageQualifier_Stage() {
@@ -913,7 +815,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getStageQualifier_Step() {
@@ -922,7 +823,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getStageQualifierToCustomizerMapEntry() {
@@ -931,7 +831,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getStageQualifierToCustomizerMapEntry_Key() {
@@ -940,7 +839,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getStageQualifierToCustomizerMapEntry_Value() {
@@ -949,7 +847,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getProject() {
@@ -958,7 +855,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getProject_Name() {
@@ -967,7 +863,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getProject_ProjectName() {
@@ -976,7 +871,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getProject_Children() {
@@ -985,7 +879,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getProject_Dirty() {
@@ -994,7 +887,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getProject_Workspace() {
@@ -1003,7 +895,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getProject_ResourcePath() {
@@ -1012,7 +903,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getProject_NeedCompletionNotification() {
@@ -1021,7 +911,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getProject_CompletionNotificationAdapter() {
@@ -1030,7 +919,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getProject_ResourceReloadListener() {
@@ -1039,7 +927,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getProject_SavingResource() {
@@ -1048,7 +935,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getProject_Revision() {
@@ -1057,7 +943,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getProject_Revisions() {
@@ -1066,7 +951,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getProject_ProjectVersion() {
@@ -1075,7 +959,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getProject_SelectRevealHandler() {
@@ -1084,7 +967,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getModelPair() {
@@ -1093,7 +975,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getModelPair_Dynamic() {
@@ -1102,7 +983,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getModelPair_Generated() {
@@ -1111,7 +991,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getModelPair_Parent() {
@@ -1120,7 +999,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getSCMOperator() {
@@ -1129,7 +1007,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getSCMOperator_ProjectName() {
@@ -1138,7 +1015,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getSCMOperator_Registry() {
@@ -1147,7 +1023,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getSCMRegistry() {
@@ -1156,7 +1031,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getResource() {
@@ -1165,7 +1039,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getResourceChangeListener() {
@@ -1174,7 +1047,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getNotification() {
@@ -1183,7 +1055,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getCompletionListener() {
@@ -1192,7 +1063,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getWorker() {
@@ -1201,7 +1071,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getSelectRevealHandler() {
@@ -1210,7 +1079,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getResourceAdapter() {
@@ -1219,7 +1087,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getResourceAdapter_Resource() {
@@ -1228,7 +1095,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getResourceAdapter_Filename() {
@@ -1237,7 +1103,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getResourceAdapter_Project() {
@@ -1246,7 +1111,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getClassMakerService() {
@@ -1255,7 +1119,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getClassMakerService_Workspace() {
@@ -1264,7 +1127,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getBlueprint() {
@@ -1273,7 +1135,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getBlueprint_DynamicModel() {
@@ -1282,7 +1143,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getBlueprint_Dependencies() {
@@ -1291,7 +1151,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getBlueprint_CompletionListeners() {
@@ -1300,7 +1159,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getCompletionNotificationAdapter() {
@@ -1309,7 +1167,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getCompletionNotificationAdapter_Error() {
@@ -1318,7 +1175,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EDataType getLocale() {
@@ -1327,7 +1183,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EEnum getStage() {
@@ -1336,7 +1191,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EDataType getProperties() {
@@ -1345,7 +1199,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EDataType getIProgressMonitor() {
@@ -1354,7 +1207,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EDataType getOSGiVersion() {
@@ -1363,7 +1215,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EDataType getSemaphore() {
@@ -1372,7 +1223,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EDataType getCoreException() {
@@ -1381,7 +1231,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EDataType getInvocationTargetException() {
@@ -1390,7 +1239,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EDataType getIStatus() {
@@ -1399,7 +1247,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EDataType getURI() {
@@ -1408,7 +1255,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EDataType getException() {
@@ -1417,7 +1263,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ClassMakerFactory getClassMakerFactory() {
@@ -1426,16 +1271,15 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private boolean isCreated = false;
 
 	/**
-	 * Creates the meta-model objects for the package. This method is guarded to
-	 * have no affect on any invocation but its first. <!-- begin-user-doc --> <!--
+	 * Creates the meta-model objects for the package.  This method is
+	 * guarded to have no affect on any invocation but its first.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void createPackageContents() {
@@ -1590,7 +1434,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private boolean isInitialized = false;
@@ -1743,9 +1586,9 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 				IS_ORDERED);
 		initEAttribute(getState_JobFamily(), ecorePackage.getEString(), "jobFamily", null, 0, 1, State.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getState_Resource(), this.getResource(), null, "resource", null, 0, 1, State.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getState_Resource(), this.getResource(), null, "resource", null, 0, 1, State.class, IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
 		initEAttribute(getState_CommitIds(), ecorePackage.getEString(), "commitIds", null, 0, -1, State.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getState_CommitId(), ecorePackage.getEString(), "commitId", null, 0, 1, State.class,
@@ -2421,6 +2264,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEOperation(op, g1);
 
 		addEOperation(classMakerServiceEClass, null, "initialize", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(classMakerServiceEClass, null, "dispose", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(blueprintEClass, Blueprint.class, "Blueprint", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);

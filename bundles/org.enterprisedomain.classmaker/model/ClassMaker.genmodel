@@ -165,6 +165,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//Workspace/projects"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Workspace/resourceSet"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//Workspace/customizers"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ClassMaker.ecore#//Workspace/service"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference ClassMaker.ecore#//Workspace/SCMRegistry"/>
       <genOperations ecoreOperation="ClassMaker.ecore#//Workspace/initialize"/>
       <genOperations ecoreOperation="ClassMaker.ecore#//Workspace/provision">
         <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/provision/monitor"/>
@@ -263,6 +265,7 @@
     <genClasses image="false" ecoreClass="ClassMaker.ecore#//SCMOperator">
       <genTypeParameters ecoreTypeParameter="ClassMaker.ecore#//SCMOperator/T"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//SCMOperator/projectName"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//SCMOperator/registry"/>
       <genOperations ecoreOperation="ClassMaker.ecore#//SCMOperator/getRepositorySCM"/>
       <genOperations ecoreOperation="ClassMaker.ecore#//SCMOperator/ungetRepositorySCM"/>
       <genOperations ecoreOperation="ClassMaker.ecore#//SCMOperator/add">
@@ -279,7 +282,6 @@
       </genOperations>
       <genOperations ecoreOperation="ClassMaker.ecore#//SCMOperator/encodeCommitMessage">
         <genParameters ecoreParameter="ClassMaker.ecore#//SCMOperator/encodeCommitMessage/state"/>
-        <genParameters ecoreParameter="ClassMaker.ecore#//SCMOperator/encodeCommitMessage/timestamp"/>
       </genOperations>
       <genOperations ecoreOperation="ClassMaker.ecore#//SCMOperator/deleteProject"/>
       <genOperations ecoreOperation="ClassMaker.ecore#//SCMOperator/checkout">
@@ -416,7 +418,6 @@
     </genClasses>
     <genClasses ecoreClass="ClassMaker.ecore#//ClassMakerService">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//ClassMakerService/workspace"/>
-      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference ClassMaker.ecore#//ClassMakerService/SCMRegistry"/>
       <genOperations ecoreOperation="ClassMaker.ecore#//ClassMakerService/make">
         <genParameters ecoreParameter="ClassMaker.ecore#//ClassMakerService/make/input"/>
         <genParameters ecoreParameter="ClassMaker.ecore#//ClassMakerService/make/monitor"/>
@@ -539,6 +540,8 @@
         <genParameters ecoreParameter="ClassMaker.ecore#//ClassMakerService/copy/original"/>
         <genTypeParameters ecoreTypeParameter="ClassMaker.ecore#//ClassMakerService/copy/T"/>
       </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//ClassMakerService/initialize"/>
+      <genOperations ecoreOperation="ClassMaker.ecore#//ClassMakerService/dispose"/>
     </genClasses>
     <genClasses ecoreClass="ClassMaker.ecore#//Blueprint">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//Blueprint/dynamicModel"/>

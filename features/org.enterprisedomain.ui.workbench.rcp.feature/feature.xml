@@ -2,7 +2,7 @@
 <feature
       id="org.enterprisedomain.ui.workbench.rcp.feature"
       label="Domain Workplace RCP UI Feature"
-      version="0.7.992.qualifier"
+      version="0.8.0.qualifier"
       provider-name="Kyrill Zotkin">
 
    <description url="https://www.enterprisedomain.org/">
@@ -122,7 +122,7 @@ limitations under the License.
       <import plugin="org.eclipse.ui.console" version="3.7.0" match="compatible"/>
       <import plugin="org.eclipse.emf.ecp.view.model.provider.generator" version="1.17.0" match="equivalent"/>
       <import plugin="org.eclipse.emf.ecp.view.model.provider.xmi" version="1.17.0" match="equivalent"/>
-      <import plugin="org.enterprisedomain.classmaker" version="0.7.992" match="greaterOrEqual"/>
+      <import plugin="org.enterprisedomain.classmaker" version="0.8.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.eclipse.ui.workbench"/>
       <import plugin="org.eclipse.jface"/>

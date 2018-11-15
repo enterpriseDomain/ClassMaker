@@ -20,95 +20,94 @@ import org.eclipse.emf.ecore.EFactory;
 /**
  * <!-- begin-user-doc --> The <b>Factory</b> for the model. It provides a
  * create method for each non-abstract class of the model. <!-- end-user-doc -->
- * 
  * @see org.enterprisedomain.classmaker.ClassMakerPackage
  * @generated
  */
 public interface ClassMakerFactory extends EFactory {
 	/**
-	 * The singleton instance of the factory. <!-- begin-user-doc --> <!--
+	 * The singleton instance of the factory.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	ClassMakerFactory eINSTANCE = org.enterprisedomain.classmaker.impl.ClassMakerFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Contribution</em>'. <!-- begin-user-doc
+	 * Returns a new object of class '<em>Contribution</em>'.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @return a new object of class '<em>Contribution</em>'.
 	 * @generated
 	 */
 	Contribution createContribution();
 
 	/**
-	 * Returns a new object of class '<em>Revision</em>'. <!-- begin-user-doc -->
+	 * Returns a new object of class '<em>Revision</em>'.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return a new object of class '<em>Revision</em>'.
 	 * @generated
 	 */
 	Revision createRevision();
 
 	/**
-	 * Returns a new object of class '<em>State</em>'. <!-- begin-user-doc --> <!--
+	 * Returns a new object of class '<em>State</em>'.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @return a new object of class '<em>State</em>'.
 	 * @generated
 	 */
 	State createState();
 
 	/**
-	 * Returns a new object of class '<em>Workspace</em>'. <!-- begin-user-doc -->
+	 * Returns a new object of class '<em>Workspace</em>'.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return a new object of class '<em>Workspace</em>'.
 	 * @generated
 	 */
 	Workspace createWorkspace();
 
 	/**
-	 * Returns a new object of class '<em>Customizer</em>'. <!-- begin-user-doc -->
+	 * Returns a new object of class '<em>Customizer</em>'.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return a new object of class '<em>Customizer</em>'.
 	 * @generated
 	 */
 	Customizer createCustomizer();
 
 	/**
-	 * Returns a new object of class '<em>Stage Qualifier</em>'. <!-- begin-user-doc
+	 * Returns a new object of class '<em>Stage Qualifier</em>'.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @return a new object of class '<em>Stage Qualifier</em>'.
 	 * @generated
 	 */
 	StageQualifier createStageQualifier();
 
 	/**
-	 * Returns a new object of class '<em>Project</em>'. <!-- begin-user-doc -->
+	 * Returns a new object of class '<em>Project</em>'.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return a new object of class '<em>Project</em>'.
 	 * @generated
 	 */
 	Project createProject();
 
 	/**
-	 * Returns a new object of class '<em>Model Pair</em>'. <!-- begin-user-doc -->
+	 * Returns a new object of class '<em>Model Pair</em>'.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return a new object of class '<em>Model Pair</em>'.
 	 * @generated
 	 */
 	ModelPair createModelPair();
 
 	/**
-	 * Returns a new object of class '<em>SCM Registry</em>'. <!-- begin-user-doc
+	 * Returns a new object of class '<em>SCM Registry</em>'.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @return a new object of class '<em>SCM Registry</em>'.
 	 * @generated
 	 */
@@ -133,18 +132,18 @@ public interface ClassMakerFactory extends EFactory {
 	ResourceAdapter createResourceAdapter();
 
 	/**
-	 * Returns a new object of class '<em>Service</em>'. <!-- begin-user-doc -->
+	 * Returns a new object of class '<em>Service</em>'.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return a new object of class '<em>Service</em>'.
 	 * @generated
 	 */
 	ClassMakerService createClassMakerService();
 
 	/**
-	 * Returns a new object of class '<em>Blueprint</em>'. <!-- begin-user-doc -->
+	 * Returns a new object of class '<em>Blueprint</em>'.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return a new object of class '<em>Blueprint</em>'.
 	 * @generated
 	 */
@@ -153,7 +152,6 @@ public interface ClassMakerFactory extends EFactory {
 	/**
 	 * Returns a new object of class '<em>Completion Notification Adapter</em>'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @return a new object of class '<em>Completion Notification Adapter</em>'.
 	 * @generated
 	 */
@@ -169,9 +167,9 @@ public interface ClassMakerFactory extends EFactory {
 	SelectRevealHandler createSelectRevealHandler();
 
 	/**
-	 * Returns the package supported by this factory. <!-- begin-user-doc --> <!--
+	 * Returns the package supported by this factory.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @return the package supported by this factory.
 	 * @generated
 	 */

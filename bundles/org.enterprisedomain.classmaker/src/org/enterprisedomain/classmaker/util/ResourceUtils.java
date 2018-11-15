@@ -52,6 +52,9 @@ public class ResourceUtils {
 
 	private static final String PLUGIN_PROPS_FILENAME_DESCRIPTOR = "plugin.properties";
 
+	public static final IPath WORKSPACE_RESOURCE_PATH = Platform
+			.getStateLocation(ClassMakerPlugin.getInstance().getBundle()).append("workspace.xmi");
+
 	private static final IPreferencesService preferencesService = Platform.getPreferencesService();
 
 	private static String modelFolderName = preferencesService.getString(ClassMakerPlugin.PLUGIN_ID,

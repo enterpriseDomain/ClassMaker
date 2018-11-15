@@ -17,8 +17,7 @@ import org.enterprisedomain.classmaker.Customizer;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.impl.CustomizerImpl#getRank
- * <em>Rank</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.CustomizerImpl#getRank <em>Rank</em>}</li>
  * </ul>
  *
  * @generated
@@ -54,7 +53,6 @@ public class CustomizerImpl extends EObjectImpl implements Customizer {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -64,7 +62,6 @@ public class CustomizerImpl extends EObjectImpl implements Customizer {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public int getRank() {
@@ -73,7 +70,6 @@ public class CustomizerImpl extends EObjectImpl implements Customizer {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setRank(int newRank) {
@@ -94,7 +90,6 @@ public class CustomizerImpl extends EObjectImpl implements Customizer {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -108,7 +103,6 @@ public class CustomizerImpl extends EObjectImpl implements Customizer {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -123,7 +117,6 @@ public class CustomizerImpl extends EObjectImpl implements Customizer {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -138,7 +131,6 @@ public class CustomizerImpl extends EObjectImpl implements Customizer {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -152,7 +144,6 @@ public class CustomizerImpl extends EObjectImpl implements Customizer {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -160,7 +151,7 @@ public class CustomizerImpl extends EObjectImpl implements Customizer {
 		if (eIsProxy())
 			return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (rank: ");
 		result.append(rank);
 		result.append(')');
