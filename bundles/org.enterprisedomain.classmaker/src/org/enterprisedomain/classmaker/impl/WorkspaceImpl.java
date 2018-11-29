@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -332,9 +331,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 								XMLResource.OPTION_PROCESS_DANGLING_HREF_DISCARD);
 						workspaceResource.save(options);
 					} catch (IOException e) {
-						e.printStackTrace();
+						ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 					}
-
 				}
 			}
 
