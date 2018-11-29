@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            category="org.enterprisedomain.workbench.ide.ecp"
+            class="org.enterprisedomain.workbench.ide.NewECPProjectWizard"
+            icon="platform:/plugin/org.eclipse.emf.ecp.ui/icons/checkout_project_old.gif"
+            id="org.enterprisedomain.workbench.ide.newProjectWizard"
+            name="ECP Project"
+            project="true">
+      </wizard>
+      <category
+            id="org.enterprisedomain.workbench.ide.ecp"
+            name="ECP">
+      </category>
+   </extension>
+
+</plugin>
