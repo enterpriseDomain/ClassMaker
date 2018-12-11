@@ -62,5 +62,11 @@
             name="Model Editor">
       </editor>
    </extension>
+   <extension
+         point="org.eclipse.ui.activities">
+      <defaultEnablement
+            id="org.eclipse.emf.ecp.application.e3.enablement">
+      </defaultEnablement>
+   </extension>
 
 </plugin>
