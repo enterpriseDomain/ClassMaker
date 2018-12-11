@@ -17,5 +17,16 @@
             name="ECP">
       </category>
    </extension>
+   <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+      <file-association
+            content-type="org.eclipse.emf.ecore.xmi"
+            file-extensions="xmi">
+      </file-association>
+      <file-association
+            content-type="org.eclipse.emf.ecore"
+            file-extensions="ecore,xmi">
+      </file-association>
+   </extension>
 
 </plugin>
