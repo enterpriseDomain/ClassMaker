@@ -31,7 +31,7 @@ public class ModelEditor extends MultiPageEditorPart {
 		try {
 			genericEditorIndex = addPage(new GenericEditor(), getEditorInput());
 			setPageText(genericEditorIndex, "Form"); //$NON-NLS-1$
-			if (getGenericEditor().getResourceSet() != null)
+			if (getGenericEditor().getResourceSet() == null)
 				getGenericEditor().getResourceSet().eAdapters().add(
 						new AdapterFactoryEditingDomain.EditingDomainProvider(getGenericEditor().getEditingDomain()));
 			URI uri = EditUIUtil.getURI(getEditorInput());
