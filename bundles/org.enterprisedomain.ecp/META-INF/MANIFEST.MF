@@ -6,9 +6,9 @@ Bundle-Version: 0.8.0.qualifier
 Bundle-Activator: org.enterprisedomain.ecp.Activator
 Bundle-Vendor: Kyrill Zotkin
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecp.core;bundle-version="[1.18.0,1.19.0)",
+ org.eclipse.emf.ecp.core;bundle-version="[1.19.0,1.20.0)",
  org.enterprisedomain.classmaker;visibility:=reexport,
- org.eclipse.emf.ecp.view.model;bundle-version="[1.18.0,1.19.0)",
+ org.eclipse.emf.ecp.view.model;bundle-version="[1.19.0,1.20.0)",
  org.eclipse.emf.edit.ui;bundle-version="2.13.0",
  org.eclipse.jface
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
