@@ -571,7 +571,7 @@ public class StateImpl extends ItemImpl implements State {
 	 * @generated NOT
 	 */
 	public Worker createGenerator() {
-		return create(ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "create.generator"), //$NON-NLS-1$
+		return create(ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "project.create.generator"), //$NON-NLS-1$
 				getProject(), getTimestamp());
 	}
 
@@ -581,7 +581,7 @@ public class StateImpl extends ItemImpl implements State {
 	 * @generated NOT
 	 */
 	public Worker createExporter() {
-		return create(ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "create.exporter"), //$NON-NLS-1$
+		return create(ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "project.create.exporter"), //$NON-NLS-1$
 				Integer.valueOf(getTimestamp()));
 	}
 
@@ -591,7 +591,7 @@ public class StateImpl extends ItemImpl implements State {
 	 * @generated NOT
 	 */
 	public Worker createInstaller() {
-		return create(ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "create.installer"), //$NON-NLS-1$
+		return create(ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "project.create.installer"), //$NON-NLS-1$
 				Integer.valueOf(getTimestamp()));
 	}
 
@@ -601,14 +601,14 @@ public class StateImpl extends ItemImpl implements State {
 	 * @generated NOT
 	 */
 	public Worker createModelLoader() {
-		return create(ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "create.loader"), //$NON-NLS-1$
+		return create(ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "project.create.loader"), //$NON-NLS-1$
 				Integer.valueOf(getTimestamp()));
 	}
 
 	private Worker create(StageQualifier stage, Object... customizerArgs) {
 		SortedSet<Customizer> customizer = new TreeSet<Customizer>(new Customizer.CustomizerComparator());
 		for (StageQualifier filter : getStateCustomizers().keySet())
-			if (filter.equals(stage))
+			if (stage.equals(filter))
 				customizer.add(getStateCustomizers().get(filter));
 		for (StageQualifier filter : getContribution().getWorkspace().getCustomizers().keySet())
 			if (filter.equals(stage))

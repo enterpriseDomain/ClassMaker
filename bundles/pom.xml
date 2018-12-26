@@ -15,6 +15,7 @@
 		<module>org.enterprisedomain.classmaker</module>
 		<module>org.enterprisedomain.classmaker.osgi.systemextension</module>
 		<module>org.enterprisedomain.classmaker.edit</module>
+		<module>org.enterprisedomain.emfstore</module>
 		<module>org.enterprisedomain.ecp</module>
 		<module>org.enterprisedomain.ecp.filter</module>
 		<module>org.enterprisedomain.ecp.ui</module>
