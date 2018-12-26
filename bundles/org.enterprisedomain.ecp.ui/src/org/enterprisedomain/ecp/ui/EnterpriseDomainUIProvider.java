@@ -241,7 +241,7 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider implements IRe
 				if (element instanceof EObject) {
 					String eA = EcoreUtil.getAnnotation(((EObject) element).eClass().getEPackage(),
 							EcorePackage.eNS_URI, "invocationDelegates");
-					if (eA.equals(ClassMakerService.INVOCATION_DELEGATE_URI)) {
+					if (eA != null && eA.equals(ClassMakerService.INVOCATION_DELEGATE_URI)) {
 						for (EOperation eOperation : ((EObject) element).eClass().getEOperations())
 							if (eOperation.getEAnnotation(ClassMakerService.INVOCATION_DELEGATE_URI) != null
 									&& !EcoreUtil.getAnnotation(eOperation, "http://www.eclipse.org/emf/2002/GenModel",

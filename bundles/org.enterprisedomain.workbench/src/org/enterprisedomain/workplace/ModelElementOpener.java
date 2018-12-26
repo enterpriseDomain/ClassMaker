@@ -2,12 +2,14 @@ package org.enterprisedomain.workplace;
 
 import java.net.URISyntaxException;
 
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecp.core.ECPProject;
 import org.eclipse.emf.ecp.ui.util.ECPModelElementOpener;
@@ -18,6 +20,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Project;
+import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 
 public class ModelElementOpener implements ECPModelElementOpener {
 
@@ -46,7 +49,7 @@ public class ModelElementOpener implements ECPModelElementOpener {
 			}
 		}
 		if (resource != null)
-			editor = open(resource.getURI());
+			editor = open(resource.getURI(), resource.getResourceSet());
 		// if (editor != null)
 		// editor.addPropertyListener(new IPropertyListener() {
 		//
@@ -65,21 +68,19 @@ public class ModelElementOpener implements ECPModelElementOpener {
 
 	}
 
-	private IEditorPart open(URI uri) {
-		return openEditor(uri, EDITOR_IDS[2]);
+	private IEditorPart open(URI uri, ResourceSet resourceSet) {
+		return openEditor(uri, EDITOR_IDS[2], resourceSet);
 		// if (uri.lastSegment().equals("ecore")) //$NON-NLS-1$
 		// return openEditor(uri, EDITOR_IDS[0]);
 		// else
 		// return openEditor(uri, EDITOR_IDS[1]);
 	}
 
-	private IEditorPart openEditor(URI uri, String editorId) {
+	private IEditorPart openEditor(URI uri, String editorId, ResourceSet resourceSet) {
 		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 		IEditorPart result = null;
 		try {
-			result = IDE.openEditor(page,
-					new java.net.URI(
-							"file" + IPath.DEVICE_SEPARATOR + IPath.SEPARATOR + IPath.SEPARATOR + uri.toFileString()), //$NON-NLS-1$
+			result = IDE.openEditor(page, new java.net.URI(resourceSet.getURIConverter().normalize(uri).toString()),
 					editorId, true);
 			EList<Adapter> target = ((ModelEditor) result).getGenericEditor().getEditingDomain().getResourceSet()
 					.eAdapters();

@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -129,10 +130,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * @ordered
 	 */
 	protected static final ResourceSet RESOURCE_SET_EDEFAULT = new ResourceSetImpl();
-
-	static {
-		RESOURCE_SET_EDEFAULT.setURIConverter(new ResourceSetURIConverter());
-	}
 
 	/**
 	 * The cached value of the '{@link #getResourceSet() <em>Resource Set</em>}'
@@ -354,6 +351,19 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 				ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
 			}
 		}
+		EList<Customizer> customizers = ECollections.newBasicEList();
+		for (StageQualifier filter : getCustomizers().keySet())
+			if (filter.equals(ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "workspace.init")))
+				customizers.add(getCustomizers().get(filter));
+		ECollections.sort(customizers, new Comparator<Customizer>() {
+
+			@Override
+			public int compare(Customizer arg0, Customizer arg1) {
+				return arg0.getRank() - arg1.getRank();
+			}
+
+		});
+		customizers.get(0).customize((EList<Object>) (EList<?>) ECollections.newBasicEList(this));
 	}
 
 	private static boolean targetPlatformAlreadySet = false;
@@ -707,13 +717,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 */
 	public Project getProject(Resource resource) {
 		URIConverter uriConverter = resource.getResourceSet().getURIConverter();
-		IPath workspaceRootPath = ResourcesPlugin.getWorkspace().getRoot().getFullPath().addTrailingSeparator();
-		URI workspaceRootURI = URI.createPlatformResourceURI(workspaceRootPath.toString(), true);
-		IPath workspaceRootLocation = ResourcesPlugin.getWorkspace().getRoot().getLocation().addTrailingSeparator();
-		URI workspaceRootLocationURI = URI.createURI(workspaceRootLocation.toString(), true);
-		URI workspaceRootLocationFileURI = URI.createFileURI(workspaceRootLocation.toString());
-		uriConverter.getURIMap().put(workspaceRootLocationURI, workspaceRootURI);
-		uriConverter.getURIMap().put(workspaceRootLocationFileURI, workspaceRootURI);
 		for (Project project : getProjects()) {
 			if (!project.getChildren().isEmpty() && project.getChildren().get(0) instanceof Resource) {
 				if (uriConverter.normalize(resource.getURI())

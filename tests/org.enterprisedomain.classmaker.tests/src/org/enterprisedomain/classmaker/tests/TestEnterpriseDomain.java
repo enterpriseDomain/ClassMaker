@@ -625,7 +625,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 
 		};
 		c.getCustomizers().put(
-				ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "generation.genmodel.setup"),
+				ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "project.generation.genmodel.setup"),
 				customizer);
 
 		final Semaphore complete = new Semaphore(0);

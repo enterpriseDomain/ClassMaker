@@ -263,8 +263,9 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 			genModel.setLanguage(getContributionState().getLanguage());
 			genModel.setModelPluginID(EcoreGenerator.this.getProject().getName());
 			for (StageQualifier filter : getContributionState().getCustomizers().keySet())
-				if (filter.equals(ClassMakerService.Stages
-						.lookup(ClassMakerService.Stages.ID_PREFIX + "generation.genmodel.setup")))
+				if (ClassMakerService.Stages
+						.lookup(ClassMakerService.Stages.ID_PREFIX + "project.generation.genmodel.setup")
+						.equals(filter))
 					getContributionState().getCustomizers().get(filter)
 							.customize(ECollections.asEList(projectPath, genModel, ePackages));
 			getContributionState().setPackageClassName(genModel.getGenPackages().get(0).getBasicPackageName());
