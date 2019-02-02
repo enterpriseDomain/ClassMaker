@@ -3,7 +3,6 @@
 
 <product name="enterpriseDomain Workbench" uid="workbench" id="org.enterprisedomain.workbench.product" application="org.enterprisedomain.workbench.application" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
 
-
    <configIni use="default">
    </configIni>
 
@@ -16,18 +15,27 @@
 
    <splash
       location="org.enterprisedomain.workbench" />
+   <launcher>
+      <win useIco="false">
+         <bmp/>
+      </win>
+   </launcher>
 
+   <vm>
+   </vm>
 
    <plugins>
       <plugin id="com.google.gson"/>
       <plugin id="com.google.guava"/>
       <plugin id="com.ibm.icu"/>
       <plugin id="com.jcraft.jsch"/>
+      <plugin id="com.jcraft.jzlib"/>
       <plugin id="javaewah"/>
       <plugin id="javax.annotation"/>
       <plugin id="javax.inject"/>
       <plugin id="javax.servlet"/>
       <plugin id="lpg.runtime.java"/>
+      <plugin id="net.i2p.crypto.eddsa"/>
       <plugin id="org.apache.ant"/>
       <plugin id="org.apache.batik.css"/>
       <plugin id="org.apache.batik.util"/>
@@ -36,10 +44,17 @@
       <plugin id="org.apache.commons.compress"/>
       <plugin id="org.apache.commons.jxpath"/>
       <plugin id="org.apache.commons.logging"/>
+      <plugin id="org.apache.felix.gogo.runtime"/>
       <plugin id="org.apache.felix.scr"/>
       <plugin id="org.apache.httpcomponents.httpclient"/>
       <plugin id="org.apache.httpcomponents.httpcore"/>
       <plugin id="org.apache.log4j"/>
+      <plugin id="org.apache.lucene.analyzers-common"/>
+      <plugin id="org.apache.lucene.analyzers-smartcn"/>
+      <plugin id="org.apache.lucene.core"/>
+      <plugin id="org.apache.sshd.core"/>
+      <plugin id="org.apache.sshd.sftp"/>
+      <plugin id="org.apiguardian"/>
       <plugin id="org.eclipse.ant.core"/>
       <plugin id="org.eclipse.compare"/>
       <plugin id="org.eclipse.compare.core"/>
@@ -114,11 +129,16 @@
       <plugin id="org.eclipse.emf.ecp.core"/>
       <plugin id="org.eclipse.emf.ecp.edit"/>
       <plugin id="org.eclipse.emf.ecp.edit.swt"/>
+      <plugin id="org.eclipse.emf.ecp.emfstore.core"/>
+      <plugin id="org.eclipse.emf.ecp.emfstore.ui"/>
+      <plugin id="org.eclipse.emf.ecp.emfstore.ui.e3"/>
+      <plugin id="org.eclipse.emf.ecp.emfstore.ui.search"/>
       <plugin id="org.eclipse.emf.ecp.ui"/>
       <plugin id="org.eclipse.emf.ecp.ui.e3"/>
+      <plugin id="org.eclipse.emf.ecp.ui.e4"/>
       <plugin id="org.eclipse.emf.ecp.ui.rcp"/>
       <plugin id="org.eclipse.emf.ecp.ui.view"/>
-      <plugin id="org.eclipse.emf.ecp.ui.view.swt"/>
+      <plugin id="org.eclipse.emf.ecp.ui.view.swt" version="1.19.0"/>
       <plugin id="org.eclipse.emf.ecp.view.categorization.model"/>
       <plugin id="org.eclipse.emf.ecp.view.categorization.model.edit"/>
       <plugin id="org.eclipse.emf.ecp.view.categorization.swt"/>
@@ -152,6 +172,17 @@
       <plugin id="org.eclipse.emf.ecp.view.vertical.ui.swt"/>
       <plugin id="org.eclipse.emf.edit"/>
       <plugin id="org.eclipse.emf.edit.ui"/>
+      <plugin id="org.eclipse.emf.emfstore.client"/>
+      <plugin id="org.eclipse.emf.emfstore.client.model.edit"/>
+      <plugin id="org.eclipse.emf.emfstore.client.ui"/>
+      <plugin id="org.eclipse.emf.emfstore.client.ui.rcp" fragment="true"/>
+      <plugin id="org.eclipse.emf.emfstore.common"/>
+      <plugin id="org.eclipse.emf.emfstore.common.model"/>
+      <plugin id="org.eclipse.emf.emfstore.common.model.edit"/>
+      <plugin id="org.eclipse.emf.emfstore.migration"/>
+      <plugin id="org.eclipse.emf.emfstore.server"/>
+      <plugin id="org.eclipse.emf.emfstore.server.model"/>
+      <plugin id="org.eclipse.emf.emfstore.server.model.edit"/>
       <plugin id="org.eclipse.emf.transaction"/>
       <plugin id="org.eclipse.emf.validation"/>
       <plugin id="org.eclipse.emf.workspace"/>
@@ -173,6 +204,9 @@
       <plugin id="org.eclipse.emfforms.core.services.locale.default"/>
       <plugin id="org.eclipse.emfforms.core.services.mappingprovider.default"/>
       <plugin id="org.eclipse.emfforms.core.services.mappingprovider.table"/>
+      <plugin id="org.eclipse.emfforms.core.services.segments"/>
+      <plugin id="org.eclipse.emfforms.core.services.segments.index"/>
+      <plugin id="org.eclipse.emfforms.core.services.segments.mapping"/>
       <plugin id="org.eclipse.emfforms.core.services.structuralchange"/>
       <plugin id="org.eclipse.emfforms.core.services.structuralchange.default"/>
       <plugin id="org.eclipse.emfforms.core.services.structuralchange.index"/>
@@ -191,15 +225,21 @@
       <plugin id="org.eclipse.emfforms.swt.treemasterdetail"/>
       <plugin id="org.eclipse.emfforms.swt.treemasterdetail.decorator.validation.default"/>
       <plugin id="org.eclipse.emfforms.view.annotation.model"/>
+      <plugin id="org.eclipse.emfforms.view.indexsegment.model"/>
+      <plugin id="org.eclipse.emfforms.view.mappingsegment.model"/>
       <plugin id="org.eclipse.emfforms.view.model.localization"/>
+      <plugin id="org.eclipse.emfforms.view.multisegment.model"/>
       <plugin id="org.eclipse.equinox.app"/>
       <plugin id="org.eclipse.equinox.bidi"/>
       <plugin id="org.eclipse.equinox.common"/>
       <plugin id="org.eclipse.equinox.concurrent"/>
+      <plugin id="org.eclipse.equinox.console.jaas.fragment" fragment="true"/>
       <plugin id="org.eclipse.equinox.ds"/>
       <plugin id="org.eclipse.equinox.event"/>
       <plugin id="org.eclipse.equinox.frameworkadmin"/>
       <plugin id="org.eclipse.equinox.frameworkadmin.equinox"/>
+      <plugin id="org.eclipse.equinox.http.jetty"/>
+      <plugin id="org.eclipse.equinox.http.servlet"/>
       <plugin id="org.eclipse.equinox.launcher"/>
       <plugin id="org.eclipse.equinox.launcher.cocoa.macosx.x86_64" fragment="true"/>
       <plugin id="org.eclipse.equinox.launcher.gtk.linux.ppc64" fragment="true"/>
@@ -225,6 +265,7 @@
       <plugin id="org.eclipse.equinox.p2.touchpoint.eclipse"/>
       <plugin id="org.eclipse.equinox.p2.touchpoint.natives"/>
       <plugin id="org.eclipse.equinox.p2.transport.ecf"/>
+      <plugin id="org.eclipse.equinox.p2.updatesite"/>
       <plugin id="org.eclipse.equinox.preferences"/>
       <plugin id="org.eclipse.equinox.region" fragment="true"/>
       <plugin id="org.eclipse.equinox.registry"/>
@@ -240,6 +281,8 @@
       <plugin id="org.eclipse.equinox.util"/>
       <plugin id="org.eclipse.equinox.weaving.hook" fragment="true"/>
       <plugin id="org.eclipse.help"/>
+      <plugin id="org.eclipse.help.base"/>
+      <plugin id="org.eclipse.help.ui"/>
       <plugin id="org.eclipse.jdt.compiler.apt" fragment="true"/>
       <plugin id="org.eclipse.jdt.compiler.tool" fragment="true"/>
       <plugin id="org.eclipse.jdt.core"/>
@@ -263,6 +306,7 @@
       <plugin id="org.eclipse.jgit.lfs"/>
       <plugin id="org.eclipse.jgit.lfs.server"/>
       <plugin id="org.eclipse.jgit.pgm"/>
+      <plugin id="org.eclipse.jgit.ssh.apache"/>
       <plugin id="org.eclipse.jgit.ui"/>
       <plugin id="org.eclipse.ltk.core.refactoring"/>
       <plugin id="org.eclipse.ltk.ui.refactoring"/>
@@ -289,6 +333,7 @@
       <plugin id="org.eclipse.pde.build"/>
       <plugin id="org.eclipse.pde.core"/>
       <plugin id="org.eclipse.pde.launching"/>
+      <plugin id="org.eclipse.platform"/>
       <plugin id="org.eclipse.sirius"/>
       <plugin id="org.eclipse.sirius.common"/>
       <plugin id="org.eclipse.sirius.ecore.extender"/>
@@ -307,12 +352,14 @@
       <plugin id="org.eclipse.team.ui"/>
       <plugin id="org.eclipse.text"/>
       <plugin id="org.eclipse.ui"/>
+      <plugin id="org.eclipse.ui.cheatsheets"/>
       <plugin id="org.eclipse.ui.cocoa" fragment="true"/>
       <plugin id="org.eclipse.ui.console"/>
       <plugin id="org.eclipse.ui.editors"/>
       <plugin id="org.eclipse.ui.forms"/>
       <plugin id="org.eclipse.ui.ide"/>
       <plugin id="org.eclipse.ui.ide.application"/>
+      <plugin id="org.eclipse.ui.intro"/>
       <plugin id="org.eclipse.ui.navigator"/>
       <plugin id="org.eclipse.ui.navigator.resources"/>
       <plugin id="org.eclipse.ui.views"/>
@@ -323,6 +370,7 @@
       <plugin id="org.eclipse.update.configurator"/>
       <plugin id="org.enterprisedomain.classmaker"/>
       <plugin id="org.enterprisedomain.classmaker.edit"/>
+      <plugin id="org.enterprisedomain.classmaker.emfstore"/>
       <plugin id="org.enterprisedomain.classmaker.osgi.systemextension" fragment="true"/>
       <plugin id="org.enterprisedomain.ecp"/>
       <plugin id="org.enterprisedomain.ecp.filter"/>
@@ -330,9 +378,13 @@
       <plugin id="org.enterprisedomain.workbench"/>
       <plugin id="org.hamcrest.core"/>
       <plugin id="org.junit"/>
+      <plugin id="org.junit.platform.commons"/>
+      <plugin id="org.junit.platform.engine"/>
+      <plugin id="org.junit.platform.launcher"/>
       <plugin id="org.kohsuke.args4j"/>
       <plugin id="org.objectweb.asm"/>
       <plugin id="org.objectweb.asm.tree"/>
+      <plugin id="org.opentest4j"/>
       <plugin id="org.sat4j.core"/>
       <plugin id="org.sat4j.pb"/>
       <plugin id="org.slf4j.api"/>

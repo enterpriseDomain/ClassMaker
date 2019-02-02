@@ -362,13 +362,17 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 			return (ECPContainer) element;
 		}
 
-		if (element instanceof ECPModelContextProvider) {
-			return ((ECPModelContextProvider) element).getModelContext(element);
-		}
+//		if (element instanceof ECPModelContextProvider) {
+//			ECPContainer container = ((ECPModelContextProvider) element).getModelContext(element);
+//			if (container.equals(element))
+//				return null;
+//			return container;
+//		}
 
 		if (element instanceof Project) {
 			for (InternalProject project : getOpenProjects()) {
-				if (project.getName().equals(((Project) element).getName()))
+				if (project.getName().equals(((Project) element).getName())
+						&& !project.getContents().equals(((Project) element).getChildren()))
 					return project;
 			}
 		}

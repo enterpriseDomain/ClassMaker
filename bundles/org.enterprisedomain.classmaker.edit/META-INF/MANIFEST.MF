@@ -16,7 +16,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.ecore.edit;visibility:=reexport,
  org.eclipse.jface,
- org.eclipse.emf.ecp.view.util.swt;bundle-version="[1.16.0,2.0.0)",
- org.eclipse.emf.ecp.ui.view.swt,
+ org.eclipse.emf.ecp.view.util.swt;bundle-version="[1.19.0,2.0.0)",
+ org.eclipse.emf.ecp.ui.view.swt;bundle-version="[1.19.0,2.0.0)",
  org.eclipse.swt
 Bundle-ActivationPolicy: lazy

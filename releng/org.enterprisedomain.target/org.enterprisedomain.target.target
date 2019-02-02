@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="org.enterprisedomain.target" sequenceNumber="1545400111">
+<target name="org.enterprisedomain.target" sequenceNumber="1548670340">
   <locations>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.eclipse.platform.feature.group" version="4.8.0.v20180611-0656"/>
@@ -40,9 +40,9 @@
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.eclipse.jgit.feature.group" version="5.2.0.201812061821-r"/>
-      <unit id="org.eclipse.jgit.http.apache.feature.group" version="5.2.0.201812061821-r"/>
       <unit id="org.eclipse.jgit.lfs.feature.group" version="5.2.0.201812061821-r"/>
       <unit id="org.eclipse.jgit.pgm.feature.group" version="5.2.0.201812061821-r"/>
+      <unit id="org.eclipse.jgit.http.apache.feature.group" version="5.2.0.201812061821-r"/>
       <unit id="org.eclipse.jgit.ssh.apache.feature.group" version="5.2.0.201812061821-r"/>
       <repository location="http://download.eclipse.org/egit/updates/"/>
     </location>

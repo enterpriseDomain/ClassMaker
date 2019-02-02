@@ -4,7 +4,7 @@ Bundle-Name: enterpriseDomain ECP UI
 Bundle-SymbolicName: org.enterprisedomain.ecp.ui;singleton:=true
 Bundle-Version: 0.8.0.qualifier
 Bundle-Vendor: Kyrill Zotkin
-Require-Bundle: org.enterprisedomain.ecp;bundle-version="0.0.1";visibility:=reexport,
+Require-Bundle: org.enterprisedomain.ecp;bundle-version="0.8.0";visibility:=reexport,
  org.eclipse.core.runtime;bundle-version="3.11.1",
  org.eclipse.emf.ecp.ui;bundle-version="[1.19.0,1.20.0)",
  org.eclipse.swt;bundle-version="3.104.1",
@@ -14,8 +14,8 @@ Require-Bundle: org.enterprisedomain.ecp;bundle-version="0.0.1";visibility:=reex
  org.eclipse.ui.navigator;bundle-version="[3.7.0,4.0.0)",
  org.eclipse.emf.ecp.ui.e3;bundle-version="[1.19.0,1.20.0)",
  org.eclipse.emf.ecp.common.ui;bundle-version="[1.19.0,1.20.0)",
- org.eclipse.emf.ecp.ui,
- org.eclipse.emf.ecp.ui.e3
+ org.eclipse.emf.ecp.ui;bundle-version="[1.19.0,2.0.0)",
+ org.eclipse.emf.ecp.ui.e3;bundle-version="[1.19.0,2.0.0)"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.enterprisedomain.ecp.ui
 Bundle-ActivationPolicy: lazy
