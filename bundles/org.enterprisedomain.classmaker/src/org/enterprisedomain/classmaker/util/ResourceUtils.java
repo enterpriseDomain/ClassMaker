@@ -15,6 +15,7 @@
  */
 package org.enterprisedomain.classmaker.util;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -306,9 +307,9 @@ public class ResourceUtils {
 		File file = location.toFile();
 		try {
 			file.createNewFile();
-			FileWriter writer = null;
+			BufferedWriter writer = null;
 			try {
-				writer = new FileWriter(file);
+				writer = new BufferedWriter(new FileWriter(file));
 				writer.append(contents);
 				writer.flush();
 			} finally {
