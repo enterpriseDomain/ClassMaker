@@ -251,10 +251,10 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 					model.setNsPrefix(CodeGenUtil.capName(project.getName().replaceAll(" ", "").toLowerCase()));
 					model.setNsURI("http://" + project.getName().replaceAll(" ", "") + "/1.0");
 					EClass dummyEClass = ecoreFactory.createEClass();
-					dummyEClass.setName("MyObject");
+					dummyEClass.setName("TheObject");
 					EAttribute dummyEAttribute = ecoreFactory.createEAttribute();
 					dummyEAttribute.setName("value");
-					dummyEAttribute.setEType(EcorePackage.Literals.EJAVA_OBJECT);
+					dummyEAttribute.setEType(EcorePackage.Literals.ESTRING);
 					dummyEClass.getEStructuralFeatures().add(dummyEAttribute);
 					model.getEClassifiers().add(dummyEClass);
 					try {
@@ -263,31 +263,6 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 					} catch (CoreException e) {
 						Activator.log(e);
 					}
-					// try {
-					// blueprint = classMaker.createBlueprint();
-					// blueprint.setDynamicModel(model);
-					// blueprint.getCompletionListeners().add(new
-					// ProviderCompletionListener(project));
-					// ClassMakerPlugin.runWithProgress(new IRunnableWithProgress() {
-					//
-					// @Override
-					// public void run(IProgressMonitor monitor)
-					// throws InvocationTargetException, InterruptedException {
-					// try {
-					// classMaker.make(blueprint, monitor);
-					// } catch (CoreException e) {
-					// throw new InvocationTargetException(e);
-					// }
-					// }
-					//
-					// });
-					// domainProject = classMaker.getWorkspace().getContribution(model);
-					// } catch (InvocationTargetException e) {
-					// Activator.log(e.getTargetException());
-					// } catch (InterruptedException e) {
-					// monitor.setCanceled(true);
-					// return;
-					// }
 					project.getVisiblePackages().add(EcorePackage.eINSTANCE);
 				} else
 					try {
@@ -298,16 +273,6 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 					} catch (CoreException e) {
 						Activator.log(e);
 					}
-				// domainProject.eAdapters().add(new AdapterImpl() {
-				//
-				// @Override
-				// public void notifyChanged(Notification msg) {
-				// if (msg.getFeatureID(Resource.class) == Resource.RESOURCE__IS_MODIFIED
-				// && msg.getNewBooleanValue())
-				// project.hasDirtyContents();
-				// }
-				//
-				// });
 				classMaker.getWorkspace().getResourceSet().eAdapters()
 						.add(new AdapterFactoryEditingDomain.EditingDomainProvider(project.getEditingDomain()));
 			}
