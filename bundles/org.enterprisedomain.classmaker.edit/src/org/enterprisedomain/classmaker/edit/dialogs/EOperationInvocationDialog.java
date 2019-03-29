@@ -43,7 +43,7 @@ public class EOperationInvocationDialog /* extends Dialog */ {
 		// super(shell);
 		this.eOperation = eOperation;
 	}
-
+	// TODO shell dependency in RAP
 //	@Override
 //	protected void configureShell(Shell shell) {
 //		super.configureShell(shell);
@@ -56,7 +56,7 @@ public class EOperationInvocationDialog /* extends Dialog */ {
 	}
 
 //	@Override
-	protected Control createDialogArea(Composite parent) {
+/*	protected Control createDialogArea(Composite parent) {
 		final Composite composite = (Composite) super.createDialogArea(parent);
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).hint(450, 250).applyTo(composite);
 
@@ -84,7 +84,7 @@ public class EOperationInvocationDialog /* extends Dialog */ {
 
 		return composite;
 	}
-
+*/
 	public EOperation getEOperation() {
 		return eOperation;
 	}
