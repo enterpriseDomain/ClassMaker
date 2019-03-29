@@ -27,7 +27,6 @@ import org.eclipse.emf.edit.command.ChangeCommand;
 import org.eclipse.emf.edit.command.CommandActionDelegate;
 import org.eclipse.emf.edit.command.CommandParameter;
 import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.swt.widgets.Shell;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 
 public class ExecuteOperationCommand extends ChangeCommand implements CommandActionDelegate {
