@@ -1,7 +1,7 @@
 target "org.enterprisedomain.target.photon" with allEnvironments configurePhase
 
 
-location updates4_8 "http://download.eclipse.org/eclipse/updates/4.8" {
+location updates4_11 "http://download.eclipse.org/eclipse/updates/4.11" {
 	org.eclipse.platform.feature.group
 	org.eclipse.rcp.feature.group
 	org.eclipse.rcp.configuration.feature.group
