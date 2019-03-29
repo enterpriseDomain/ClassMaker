@@ -32,7 +32,6 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Platform;
@@ -185,6 +184,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * 
 	 * @generated
 	 */
+	@Override
 	public EList<Project> getProjects() {
 		if (projects == null) {
 			projects = new EObjectContainmentWithInverseEList<Project>(Project.class, this,
@@ -206,6 +206,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * 
 	 * @generated
 	 */
+	@Override
 	public ResourceSet getResourceSet() {
 		return resourceSet;
 	}
@@ -256,6 +257,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * 
 	 * @generated
 	 */
+	@Override
 	public void setService(ClassMakerService newService) {
 		if (newService != eInternalContainer()
 				|| (eContainerFeatureID() != ClassMakerPackage.WORKSPACE__SERVICE && newService != null)) {

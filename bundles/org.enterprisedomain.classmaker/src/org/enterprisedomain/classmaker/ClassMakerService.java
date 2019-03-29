@@ -39,15 +39,15 @@ import org.osgi.framework.Version;
  * <!-- begin-user-doc --> A representation of the model object
  * '<em><b>Service</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc -->
- * ClassMaker API facade service.
- * <!-- end-model-doc -->
+ * <!-- begin-model-doc --> ClassMaker API facade service. <!-- end-model-doc
+ * -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.ClassMakerService#getWorkspace <em>Workspace</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.ClassMakerService#getWorkspace
+ * <em>Workspace</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getClassMakerService()
@@ -136,9 +136,11 @@ public interface ClassMakerService extends EObject {
 	Workspace getWorkspace();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.ClassMakerService#getWorkspace <em>Workspace</em>}' containment reference.
-	 * <!-- begin-user-doc --> <!--
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.ClassMakerService#getWorkspace
+	 * <em>Workspace</em>}' containment reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Workspace</em>' containment reference.
 	 * @see #getWorkspace()
 	 * @generated
@@ -173,21 +175,27 @@ public interface ClassMakerService extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	EPackage replace(EPackage source, EPackage target, IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	EPackage replace(Blueprint source, Blueprint target, IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	EPackage replace(EPackage source, EPackage target, boolean changeVersion, IProgressMonitor monitor)
@@ -195,7 +203,9 @@ public interface ClassMakerService extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	EPackage replace(Blueprint source, Blueprint target, boolean changeVersion, IProgressMonitor monitor)
@@ -203,14 +213,20 @@ public interface ClassMakerService extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" versionDataType="org.enterprisedomain.classmaker.OSGiVersion" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	EPackage replace(EPackage source, EPackage target, Version version, IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" versionDataType="org.enterprisedomain.classmaker.OSGiVersion" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	EPackage replace(Blueprint source, Blueprint target, Version version, IProgressMonitor monitor)
@@ -250,7 +266,12 @@ public interface ClassMakerService extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model type="org.enterprisedomain.classmaker.Future&lt;? extends org.eclipse.emf.ecore.EPackage&gt;" exceptions="org.enterprisedomain.classmaker.CoreException" executorType="org.enterprisedomain.classmaker.Executor" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * 
+	 * @model type="org.enterprisedomain.classmaker.Future&lt;? extends
+	 *        org.eclipse.emf.ecore.EPackage&gt;"
+	 *        exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        executorType="org.enterprisedomain.classmaker.Executor"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	Future<? extends EPackage> replace(EPackage source, EPackage target, Executor executor, IProgressMonitor monitor)
@@ -258,7 +279,12 @@ public interface ClassMakerService extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model type="org.enterprisedomain.classmaker.Future&lt;? extends org.eclipse.emf.ecore.EPackage&gt;" exceptions="org.enterprisedomain.classmaker.CoreException" executorType="org.enterprisedomain.classmaker.Executor" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * 
+	 * @model type="org.enterprisedomain.classmaker.Future&lt;? extends
+	 *        org.eclipse.emf.ecore.EPackage&gt;"
+	 *        exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        executorType="org.enterprisedomain.classmaker.Executor"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	Future<? extends EPackage> replace(Blueprint source, Blueprint target, Executor executor, IProgressMonitor monitor)
@@ -266,7 +292,12 @@ public interface ClassMakerService extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model type="org.enterprisedomain.classmaker.Future&lt;? extends org.eclipse.emf.ecore.EPackage&gt;" exceptions="org.enterprisedomain.classmaker.CoreException" executorType="org.enterprisedomain.classmaker.Executor" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * 
+	 * @model type="org.enterprisedomain.classmaker.Future&lt;? extends
+	 *        org.eclipse.emf.ecore.EPackage&gt;"
+	 *        exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        executorType="org.enterprisedomain.classmaker.Executor"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	Future<? extends EPackage> replace(EPackage source, EPackage target, boolean changeVersion, Executor executor,
@@ -274,7 +305,12 @@ public interface ClassMakerService extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model type="org.enterprisedomain.classmaker.Future&lt;? extends org.eclipse.emf.ecore.EPackage&gt;" exceptions="org.enterprisedomain.classmaker.CoreException" executorType="org.enterprisedomain.classmaker.Executor" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * 
+	 * @model type="org.enterprisedomain.classmaker.Future&lt;? extends
+	 *        org.eclipse.emf.ecore.EPackage&gt;"
+	 *        exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        executorType="org.enterprisedomain.classmaker.Executor"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	Future<? extends EPackage> replace(Blueprint source, Blueprint target, boolean changeVersion, Executor executor,
@@ -282,7 +318,13 @@ public interface ClassMakerService extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model type="org.enterprisedomain.classmaker.Future&lt;? extends org.eclipse.emf.ecore.EPackage&gt;" exceptions="org.enterprisedomain.classmaker.CoreException" versionDataType="org.enterprisedomain.classmaker.OSGiVersion" executorType="org.enterprisedomain.classmaker.Executor" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * 
+	 * @model type="org.enterprisedomain.classmaker.Future&lt;? extends
+	 *        org.eclipse.emf.ecore.EPackage&gt;"
+	 *        exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
+	 *        executorType="org.enterprisedomain.classmaker.Executor"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	Future<? extends EPackage> replace(EPackage source, EPackage target, Version version, Executor executor,
@@ -290,7 +332,13 @@ public interface ClassMakerService extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model type="org.enterprisedomain.classmaker.Future&lt;? extends org.eclipse.emf.ecore.EPackage&gt;" exceptions="org.enterprisedomain.classmaker.CoreException" versionDataType="org.enterprisedomain.classmaker.OSGiVersion" executorType="org.enterprisedomain.classmaker.Executor" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * 
+	 * @model type="org.enterprisedomain.classmaker.Future&lt;? extends
+	 *        org.eclipse.emf.ecore.EPackage&gt;"
+	 *        exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
+	 *        executorType="org.enterprisedomain.classmaker.Executor"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	Future<? extends EPackage> replace(Blueprint source, Blueprint target, Version version, Executor executor,
@@ -298,34 +346,44 @@ public interface ClassMakerService extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" transformationURIDataType="org.enterprisedomain.classmaker.URI"
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        transformationURIDataType="org.enterprisedomain.classmaker.URI"
 	 * @generated
 	 */
 	EObject transform(EObject source, URI transformationURI) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" transformationURIDataType="org.enterprisedomain.classmaker.URI" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        transformationURIDataType="org.enterprisedomain.classmaker.URI"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	EObject transform(EObject source, URI transformationURI, IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.InvocationTargetException" argumentsMany="true"
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.InvocationTargetException"
+	 *        argumentsMany="true"
 	 * @generated
 	 */
 	Object invoke(EOperation operation, EObject object, EList<Object> arguments) throws InvocationTargetException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	void delete(String packageName, IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -333,6 +391,7 @@ public interface ClassMakerService extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -340,6 +399,7 @@ public interface ClassMakerService extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -347,6 +407,7 @@ public interface ClassMakerService extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -354,14 +415,15 @@ public interface ClassMakerService extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
 	void initialize();
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */

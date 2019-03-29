@@ -158,6 +158,7 @@ public class ClassMakerModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.workbench = workbench;
 		this.selection = selection;
@@ -224,6 +225,7 @@ public class ClassMakerModelWizard extends Wizard implements INewWizard {
 			// Do the work within an operation.
 			//
 			IRunnableWithProgress operation = new IRunnableWithProgress() {
+				@Override
 				public void run(IProgressMonitor progressMonitor) {
 					try {
 						// Create a resource set
@@ -313,6 +315,7 @@ public class ClassMakerModelWizard extends Wizard implements INewWizard {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+		@Override
 		public void createControl(Composite parent) {
 			Composite composite = new Composite(parent, SWT.NONE);
 			{
@@ -362,20 +365,6 @@ public class ClassMakerModelWizard extends Wizard implements INewWizard {
 
 			fileField.addModifyListener(validator);
 
-			Button resourceURIBrowseFileSystemButton = new Button(fileComposite, SWT.PUSH);
-			resourceURIBrowseFileSystemButton.setText(ClassMakerEditorPlugin.INSTANCE.getString("_UI_Browse_label"));
-
-			resourceURIBrowseFileSystemButton.addSelectionListener(new SelectionAdapter() {
-				@Override
-				public void widgetSelected(SelectionEvent event) {
-					String[] filters = ClassMakerEditor.FILE_EXTENSION_FILTERS
-							.toArray(new String[ClassMakerEditor.FILE_EXTENSION_FILTERS.size()]);
-					String[] files = ClassMakerEditorAdvisor.openFilePathDialog(getShell(), SWT.SAVE, filters);
-					if (files.length > 0) {
-						fileField.setText(files[0]);
-					}
-				}
-			});
 			Label containerLabel = new Label(composite, SWT.LEFT);
 			{
 				containerLabel.setText(ClassMakerEditorPlugin.INSTANCE.getString("_UI_ModelObject"));
@@ -435,6 +424,7 @@ public class ClassMakerModelWizard extends Wizard implements INewWizard {
 		 * @generated
 		 */
 		protected ModifyListener validator = new ModifyListener() {
+			@Override
 			public void modifyText(ModifyEvent e) {
 				setPageComplete(validatePage());
 			}

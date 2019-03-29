@@ -66,6 +66,7 @@ import org.eclipse.swt.events.ControlEvent;
 
 import org.eclipse.swt.graphics.Point;
 
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Tree;
@@ -106,6 +107,7 @@ import org.eclipse.emf.common.util.URI;
 
 import org.eclipse.emf.ecore.resource.Resource;
 
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
@@ -138,6 +140,7 @@ import org.enterprisedomain.classmaker.provider.ClassMakerItemProviderAdapterFac
 
 import org.eclipse.emf.common.ui.URIEditorInput;
 
+import org.eclipse.emf.common.ui.dialogs.ResourceDialog;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
 
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -269,6 +272,7 @@ public class ClassMakerEditor extends MultiPageEditorPart
 	 * @generated
 	 */
 	protected IPartListener partListener = new IPartListener() {
+		@Override
 		public void partActivated(IWorkbenchPart p) {
 			if (p instanceof ContentOutline) {
 				if (((ContentOutline) p).getCurrentPage() == contentOutlinePage) {
@@ -286,18 +290,22 @@ public class ClassMakerEditor extends MultiPageEditorPart
 			}
 		}
 
+		@Override
 		public void partBroughtToTop(IWorkbenchPart p) {
 			// Ignore.
 		}
 
+		@Override
 		public void partClosed(IWorkbenchPart p) {
 			// Ignore.
 		}
 
+		@Override
 		public void partDeactivated(IWorkbenchPart p) {
 			// Ignore.
 		}
 
+		@Override
 		public void partOpened(IWorkbenchPart p) {
 			// Ignore.
 		}
@@ -379,6 +387,7 @@ public class ClassMakerEditor extends MultiPageEditorPart
 			if (updateProblemIndication && !dispatching) {
 				dispatching = true;
 				getSite().getShell().getDisplay().asyncExec(new Runnable() {
+					@Override
 					public void run() {
 						dispatching = false;
 						updateProblemIndication();
@@ -441,8 +450,9 @@ public class ClassMakerEditor extends MultiPageEditorPart
 	 */
 	protected void handleChangedResources() {
 		if (!changedResources.isEmpty() && (!isDirty() || handleDirtyConflict())) {
+			ResourceSet resourceSet = editingDomain.getResourceSet();
 			if (isDirty()) {
-				changedResources.addAll(editingDomain.getResourceSet().getResources());
+				changedResources.addAll(resourceSet.getResources());
 			}
 			editingDomain.getCommandStack().flush();
 
@@ -451,7 +461,7 @@ public class ClassMakerEditor extends MultiPageEditorPart
 				if (resource.isLoaded()) {
 					resource.unload();
 					try {
-						resource.load(Collections.EMPTY_MAP);
+						resource.load(resourceSet.getLoadOptions());
 					} catch (IOException exception) {
 						if (!resourceToDiagnosticMap.containsKey(resource)) {
 							resourceToDiagnosticMap.put(resource, analyzeResourceProblems(resource, exception));
@@ -551,8 +561,10 @@ public class ClassMakerEditor extends MultiPageEditorPart
 		// Add a listener to set the most recent command's affected objects to be the selection of the viewer with focus.
 		//
 		commandStack.addCommandStackListener(new CommandStackListener() {
+			@Override
 			public void commandStackChanged(final EventObject event) {
 				getContainer().getDisplay().asyncExec(new Runnable() {
+					@Override
 					public void run() {
 						firePropertyChange(IEditorPart.PROP_DIRTY);
 
@@ -603,6 +615,7 @@ public class ClassMakerEditor extends MultiPageEditorPart
 		//
 		if (theSelection != null && !theSelection.isEmpty()) {
 			Runnable runnable = new Runnable() {
+				@Override
 				public void run() {
 					// Try to select the items in the current content viewer of the editor.
 					//
@@ -623,6 +636,7 @@ public class ClassMakerEditor extends MultiPageEditorPart
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EditingDomain getEditingDomain() {
 		return editingDomain;
 	}
@@ -703,6 +717,7 @@ public class ClassMakerEditor extends MultiPageEditorPart
 				selectionChangedListener = new ISelectionChangedListener() {
 					// This just notifies those things that are affected by the section.
 					//
+					@Override
 					public void selectionChanged(SelectionChangedEvent selectionChangedEvent) {
 						setSelection(selectionChangedEvent.getSelection());
 					}
@@ -737,6 +752,7 @@ public class ClassMakerEditor extends MultiPageEditorPart
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Viewer getViewer() {
 		return currentViewer;
 	}
@@ -847,8 +863,11 @@ public class ClassMakerEditor extends MultiPageEditorPart
 			setPageText(pageIndex, getString("_UI_SelectionPage_label"));
 
 			getSite().getShell().getDisplay().asyncExec(new Runnable() {
+				@Override
 				public void run() {
-					setActivePage(0);
+					if (!getContainer().isDisposed()) {
+						setActivePage(0);
+					}
 				}
 			});
 		}
@@ -870,6 +889,7 @@ public class ClassMakerEditor extends MultiPageEditorPart
 		});
 
 		getSite().getShell().getDisplay().asyncExec(new Runnable() {
+			@Override
 			public void run() {
 				updateProblemIndication();
 			}
@@ -887,9 +907,9 @@ public class ClassMakerEditor extends MultiPageEditorPart
 		if (getPageCount() <= 1) {
 			setPageText(0, "");
 			if (getContainer() instanceof CTabFolder) {
-				((CTabFolder) getContainer()).setTabHeight(1);
 				Point point = getContainer().getSize();
-				getContainer().setSize(point.x, point.y + 6);
+				Rectangle clientArea = getContainer().getClientArea();
+				getContainer().setSize(point.x, 2 * point.y - clientArea.height - clientArea.y);
 			}
 		}
 	}
@@ -905,9 +925,9 @@ public class ClassMakerEditor extends MultiPageEditorPart
 		if (getPageCount() > 1) {
 			setPageText(0, getString("_UI_SelectionPage_label"));
 			if (getContainer() instanceof CTabFolder) {
-				((CTabFolder) getContainer()).setTabHeight(SWT.DEFAULT);
 				Point point = getContainer().getSize();
-				getContainer().setSize(point.x, point.y - 6);
+				Rectangle clientArea = getContainer().getClientArea();
+				getContainer().setSize(point.x, clientArea.height + clientArea.y);
 			}
 		}
 	}
@@ -935,11 +955,11 @@ public class ClassMakerEditor extends MultiPageEditorPart
 	 */
 	@SuppressWarnings("rawtypes")
 	@Override
-	public Object getAdapter(Class key) {
+	public <T> T getAdapter(Class<T> key) {
 		if (key.equals(IContentOutlinePage.class)) {
-			return showOutlineView() ? getContentOutlinePage() : null;
+			return showOutlineView() ? key.cast(getContentOutlinePage()) : null;
 		} else if (key.equals(IPropertySheetPage.class)) {
-			return getPropertySheetPage();
+			return key.cast(getPropertySheetPage());
 		} else {
 			return super.getAdapter(key);
 		}
@@ -1002,6 +1022,7 @@ public class ClassMakerEditor extends MultiPageEditorPart
 			contentOutlinePage.addSelectionChangedListener(new ISelectionChangedListener() {
 				// This ensures that we handle selections correctly.
 				//
+				@Override
 				public void selectionChanged(SelectionChangedEvent event) {
 					handleContentOutlineSelection(event.getSelection());
 				}
@@ -1018,7 +1039,8 @@ public class ClassMakerEditor extends MultiPageEditorPart
 	 * @generated
 	 */
 	public IPropertySheetPage getPropertySheetPage() {
-		PropertySheetPage propertySheetPage = new ExtendedPropertySheetPage(editingDomain) {
+		PropertySheetPage propertySheetPage = new ExtendedPropertySheetPage(editingDomain,
+				ExtendedPropertySheetPage.Decoration.NONE, null, 0, false) {
 			@Override
 			public void setSelectionToViewer(List<?> selection) {
 				ClassMakerEditor.this.setSelectionToViewer(selection);
@@ -1094,6 +1116,7 @@ public class ClassMakerEditor extends MultiPageEditorPart
 		IRunnableWithProgress operation = new IRunnableWithProgress() {
 			// This is the method that gets invoked when the operation runs.
 			//
+			@Override
 			public void run(IProgressMonitor monitor) {
 				// Save the resources to the file system.
 				//
@@ -1177,12 +1200,24 @@ public class ClassMakerEditor extends MultiPageEditorPart
 	 */
 	@Override
 	public void doSaveAs() {
-		String[] filters = FILE_EXTENSION_FILTERS.toArray(new String[FILE_EXTENSION_FILTERS.size()]);
-		String[] files = ClassMakerEditorAdvisor.openFilePathDialog(getSite().getShell(), SWT.SAVE, filters);
-		if (files.length > 0) {
-			URI uri = URI.createFileURI(files[0]);
-			doSaveAs(uri, new URIEditorInput(uri));
-		}
+		new ResourceDialog(getSite().getShell(), null, SWT.NONE) {
+			@Override
+			protected boolean isSave() {
+				return true;
+			}
+
+			@Override
+			protected boolean processResources() {
+				List<URI> uris = getURIs();
+				if (uris.size() > 0) {
+					URI uri = uris.get(0);
+					doSaveAs(uri, new URIEditorInput(uri));
+					return true;
+				} else {
+					return false;
+				}
+			}
+		}.open();
 	}
 
 	/**
@@ -1231,6 +1266,7 @@ public class ClassMakerEditor extends MultiPageEditorPart
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void addSelectionChangedListener(ISelectionChangedListener listener) {
 		selectionChangedListeners.add(listener);
 	}
@@ -1241,6 +1277,7 @@ public class ClassMakerEditor extends MultiPageEditorPart
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void removeSelectionChangedListener(ISelectionChangedListener listener) {
 		selectionChangedListeners.remove(listener);
 	}
@@ -1251,6 +1288,7 @@ public class ClassMakerEditor extends MultiPageEditorPart
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ISelection getSelection() {
 		return editorSelection;
 	}
@@ -1262,6 +1300,7 @@ public class ClassMakerEditor extends MultiPageEditorPart
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSelection(ISelection selection) {
 		editorSelection = selection;
 
@@ -1332,6 +1371,7 @@ public class ClassMakerEditor extends MultiPageEditorPart
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void menuAboutToShow(IMenuManager menuManager) {
 		((IMenuListener) getEditorSite().getActionBarContributor()).menuAboutToShow(menuManager);
 	}

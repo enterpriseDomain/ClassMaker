@@ -68,15 +68,6 @@ import org.enterprisedomain.classmaker.presentation.ClassMakerEditorPlugin;
  */
 public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 	/**
-	 * The default file extension filters for use in dialogs.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private static final String[] FILE_EXTENSION_FILTERS = ClassMakerEditor.FILE_EXTENSION_FILTERS
-			.toArray(new String[0]);
-
-	/**
 	 * This looks up a string in the plugin's plugin.properties file.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -110,6 +101,7 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+		@Override
 		public Object start(IApplicationContext context) throws Exception {
 			WorkbenchAdvisor workbenchAdvisor = new ClassMakerEditorAdvisor();
 			Display display = PlatformUI.createDisplay();
@@ -131,6 +123,7 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+		@Override
 		public void stop() {
 			// Do nothing.
 		}
@@ -157,6 +150,7 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+		@Override
 		public void createInitialLayout(IPageLayout layout) {
 			layout.setEditorAreaVisible(true);
 			layout.addPerspectiveShortcut(ID_PERSPECTIVE);
@@ -318,7 +312,6 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 
 			addToMenuAndRegister(menu, ActionFactory.OPEN_NEW_WINDOW.create(window));
 			menu.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
-			menu.add(ContributionItemFactory.OPEN_WINDOWS.create(window));
 
 			return menu;
 		}
@@ -366,30 +359,10 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+		@Override
 		public void run(IAction action) {
 			MessageDialog.openInformation(getWindow().getShell(), getString("_UI_About_title"),
 					getString("_UI_About_text"));
-		}
-	}
-
-	/**
-	 * Open action for the objects from the ClassMaker model.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static class OpenAction extends WorkbenchWindowActionDelegate {
-		/**
-		 * Opens the editors for the files selected using the file dialog.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		public void run(IAction action) {
-			String[] filePaths = openFilePathDialog(getWindow().getShell(), SWT.OPEN, null);
-			if (filePaths.length > 0) {
-				openEditor(getWindow().getWorkbench(), URI.createFileURI(filePaths[0]));
-			}
 		}
 	}
 
@@ -406,6 +379,7 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+		@Override
 		public void run(IAction action) {
 			LoadResourceAction.LoadResourceDialog loadResourceDialog = new LoadResourceAction.LoadResourceDialog(
 					getWindow().getShell());
@@ -415,96 +389,6 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 				}
 			}
 		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static String[] openFilePathDialog(Shell shell, int style, String[] fileExtensionFilters) {
-		return openFilePathDialog(shell, style, fileExtensionFilters, (style & SWT.OPEN) != 0, (style & SWT.OPEN) != 0,
-				(style & SWT.SAVE) != 0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static String[] openFilePathDialog(Shell shell, int style, String[] fileExtensionFilters,
-			boolean includeGroupFilter, boolean includeAllFilter, boolean addExtension) {
-		FileDialog fileDialog = new FileDialog(shell, style);
-		if (fileExtensionFilters == null) {
-			fileExtensionFilters = FILE_EXTENSION_FILTERS;
-		}
-
-		// If requested, augment the file extension filters by adding a group of all the other filters (*.ext1;*.ext2;...)
-		// at the beginning and/or an all files wildcard (*.*) at the end.
-		//
-		includeGroupFilter &= fileExtensionFilters.length > 1;
-		int offset = includeGroupFilter ? 1 : 0;
-
-		if (includeGroupFilter || includeAllFilter) {
-			int size = fileExtensionFilters.length + offset + (includeAllFilter ? 1 : 0);
-			String[] allFilters = new String[size];
-			StringBuilder group = includeGroupFilter ? new StringBuilder() : null;
-
-			for (int i = 0; i < fileExtensionFilters.length; i++) {
-				if (includeGroupFilter) {
-					if (i != 0) {
-						group.append(';');
-					}
-					group.append(fileExtensionFilters[i]);
-				}
-				allFilters[i + offset] = fileExtensionFilters[i];
-			}
-
-			if (includeGroupFilter) {
-				allFilters[0] = group.toString();
-			}
-			if (includeAllFilter) {
-				allFilters[allFilters.length - 1] = "*.*";
-			}
-
-			fileDialog.setFilterExtensions(allFilters);
-		} else {
-			fileDialog.setFilterExtensions(fileExtensionFilters);
-		}
-		fileDialog.open();
-
-		String[] filenames = fileDialog.getFileNames();
-		String[] result = new String[filenames.length];
-		String path = fileDialog.getFilterPath() + File.separator;
-		String extension = null;
-
-		// If extension adding requested, get the dotted extension corresponding to the selected filter.
-		//
-		if (addExtension) {
-			int i = fileDialog.getFilterIndex();
-			if (i != -1 && (!includeAllFilter || i != fileExtensionFilters.length)) {
-				i = includeGroupFilter && i == 0 ? 0 : i - offset;
-				String filter = fileExtensionFilters[i];
-				int dot = filter.lastIndexOf('.');
-				if (dot == 1 && filter.charAt(0) == '*') {
-					extension = filter.substring(dot);
-				}
-			}
-		}
-
-		// Build the result by adding the selected path and, if needed, auto-appending the extension.
-		//
-		for (int i = 0; i < filenames.length; i++) {
-			String filename = path + filenames[i];
-			if (extension != null) {
-				int dot = filename.lastIndexOf('.');
-				if (dot == -1 || !Arrays.asList(fileExtensionFilters).contains("*" + filename.substring(dot))) {
-					filename += extension;
-				}
-			}
-			result[i] = filename;
-		}
-		return result;
 	}
 
 	/**

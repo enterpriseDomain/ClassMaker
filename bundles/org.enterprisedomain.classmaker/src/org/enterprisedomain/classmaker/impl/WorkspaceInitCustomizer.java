@@ -11,7 +11,7 @@ public class WorkspaceInitCustomizer extends CustomizerImpl implements Customize
 
 	@Override
 	public Object customize(EList<Object> args) {
-		Workspace workspace=(Workspace) args.get(0);
+		Workspace workspace = (Workspace) args.get(0);
 		workspace.getResourceSet().setURIConverter(new ResourceSetURIConverter());
 		return super.customize(args);
 	}

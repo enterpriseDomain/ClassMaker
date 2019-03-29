@@ -56,8 +56,7 @@ public interface Localizable extends EObject {
 	 * '{@link org.enterprisedomain.classmaker.Localizable#getLanguage
 	 * <em>Language</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Language</em>' attribute.
+	 * @param value the new value of the '<em>Language</em>' attribute.
 	 * @see #getLanguage()
 	 * @generated
 	 */

@@ -7,7 +7,7 @@
     modelName="ClassMaker" modelPluginClass="" codeFormatting="true" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="6.0" copyrightFields="false" editPluginID="org.enterprisedomain.classmaker.edit"
     editorPluginID="org.enterprisedomain.editor" language="" usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore"
-    interfaceNamePattern="" runtimePlatform="RCP" pluginKey="ClassMaker">
+    interfaceNamePattern="" runtimePlatform="RAP" pluginKey="ClassMaker">
   <foreignModel>ClassMaker.ecore</foreignModel>
   <genPackages prefix="ClassMaker" basePackage="org.enterprisedomain" resource="XMI"
       disposableProviderFactory="true" generateExampleClass="false" multipleEditorPages="false"

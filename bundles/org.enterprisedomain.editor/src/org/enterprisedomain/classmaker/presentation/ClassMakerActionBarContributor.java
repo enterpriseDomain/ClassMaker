@@ -82,6 +82,7 @@ public class ClassMakerActionBarContributor extends EditingDomainActionBarContri
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+		@Override
 		public void run(IAction action) {
 			ClassMakerModelWizard wizard = new ClassMakerModelWizard();
 			wizard.init(getWindow().getWorkbench(), StructuredSelection.EMPTY);
@@ -220,6 +221,7 @@ public class ClassMakerActionBarContributor extends EditingDomainActionBarContri
 	 */
 	@Override
 	public void contributeToToolBar(IToolBarManager toolBarManager) {
+		super.contributeToToolBar(toolBarManager);
 		toolBarManager.add(new Separator("classmaker-settings"));
 		toolBarManager.add(new Separator("classmaker-additions"));
 	}
@@ -259,6 +261,7 @@ public class ClassMakerActionBarContributor extends EditingDomainActionBarContri
 		// Force an update because Eclipse hides empty menus now.
 		//
 		submenuManager.addMenuListener(new IMenuListener() {
+			@Override
 			public void menuAboutToShow(IMenuManager menuManager) {
 				menuManager.updateAll(true);
 			}
@@ -305,6 +308,7 @@ public class ClassMakerActionBarContributor extends EditingDomainActionBarContri
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void selectionChanged(SelectionChangedEvent event) {
 		// Remove any menu items for old selection.
 		//
@@ -506,7 +510,7 @@ public class ClassMakerActionBarContributor extends EditingDomainActionBarContri
 				if (contributionItem instanceof MenuManager) {
 					MenuManager submenuManager = (MenuManager) contributionItem;
 					if (submenuActions.containsKey(submenuManager.getMenuText())) {
-						depopulateManager(submenuManager, submenuActions.get(contributionItem));
+						depopulateManager(submenuManager, submenuActions.get(submenuManager.getMenuText()));
 						manager.remove(contributionItem);
 					}
 				}

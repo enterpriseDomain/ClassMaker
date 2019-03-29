@@ -13,6 +13,7 @@ import org.eclipse.emf.ecp.spi.core.InternalProject;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.ui.util.EditUIUtil;
 import org.eclipse.emfforms.spi.editor.GenericEditor;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.MultiPageEditorPart;
@@ -29,7 +30,17 @@ public class ModelEditor extends MultiPageEditorPart {
 	@Override
 	protected void createPages() {
 		try {
-			genericEditorIndex = addPage(new GenericEditor(), getEditorInput());
+			genericEditorIndex = addPage(new GenericEditor()
+//			{
+//
+//				@Override
+//				protected TreeMasterDetailComposite createTreeMasterDetail(final Composite composite,
+//						Object editorInput, final CreateElementCallback createElementCallback) {
+//					return composite;
+//				}
+//
+//			}
+			, getEditorInput());
 			setPageText(genericEditorIndex, "Form"); //$NON-NLS-1$
 			if (getGenericEditor().getResourceSet() != null)
 				getGenericEditor().getResourceSet().eAdapters().add(

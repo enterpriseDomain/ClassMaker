@@ -131,13 +131,7 @@
   </setupTask>
   <stream name="master"
       label="Master">
-    <setupTask
-        xsi:type="setup:EclipseIniTask"
-        option="-Doomph.redirection.ClassMaker.git"
-        value="=https://raw.githubusercontent.com/enterpriseDomain/ClassMaker.git/master/setups/ClassMakerGIT.setup->${git.clone.ClassMaker.git.location|uri}/setups/ClassMakerGIT.setup"
-        vm="true">
-      <description>Set an Oomph redirection system property to redirect the logical location of this setup to its physical location in the Git clone.</description>
-    </setupTask>
+    <description>Master branch stream</description>
   </stream>
   <logicalProjectContainer
       xsi:type="setup:Project"

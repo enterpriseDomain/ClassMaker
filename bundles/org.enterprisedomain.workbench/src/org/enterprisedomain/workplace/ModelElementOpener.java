@@ -42,10 +42,7 @@ public class ModelElementOpener implements ECPModelElementOpener {
 				resource = ((EObject) modelElement).eResource();
 			else {
 				Project project = Activator.getClassMaker().getWorkspace().getProject(ecpProject.getName());
-				if (project instanceof Contribution)
-					resource = (Resource) project.getChildren().get(0);
-				else
-					resource = ((EObject) project.getChildren().get(0)).eResource();
+				resource = (Resource) project.getChildren().get(0);
 			}
 		}
 		if (resource != null)
