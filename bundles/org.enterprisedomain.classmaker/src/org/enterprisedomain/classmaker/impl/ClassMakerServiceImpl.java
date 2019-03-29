@@ -75,15 +75,17 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ClassMakerServiceImpl#getWorkspace <em>Workspace</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ClassMakerServiceImpl#getWorkspace
+ * <em>Workspace</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerService {
 	/**
-	 * The cached value of the '{@link #getWorkspace() <em>Workspace</em>}' containment reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getWorkspace() <em>Workspace</em>}'
+	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getWorkspace()
 	 * @generated
 	 * @ordered
@@ -102,6 +104,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -111,14 +114,17 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public Workspace getWorkspace() {
 		return workspace;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetWorkspace(Workspace newWorkspace, NotificationChain msgs) {
@@ -137,8 +143,10 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public void setWorkspace(Workspace newWorkspace) {
 		if (newWorkspace != workspace) {
 			NotificationChain msgs = null;
@@ -634,6 +642,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -650,6 +659,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -663,6 +673,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -676,6 +687,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -690,6 +702,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -704,6 +717,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

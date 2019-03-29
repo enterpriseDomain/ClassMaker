@@ -35,8 +35,10 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.impl.VersionToRevisionMapEntryImpl#getTypedKey <em>Key</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.VersionToRevisionMapEntryImpl#getTypedValue <em>Value</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.VersionToRevisionMapEntryImpl#getTypedKey
+ * <em>Key</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.VersionToRevisionMapEntryImpl#getTypedValue
+ * <em>Value</em>}</li>
  * </ul>
  *
  * @generated
@@ -45,6 +47,7 @@ public class VersionToRevisionMapEntryImpl extends EObjectImpl implements BasicE
 	/**
 	 * The default value of the '{@link #getTypedKey() <em>Key</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getTypedKey()
 	 * @generated
 	 * @ordered
@@ -62,8 +65,9 @@ public class VersionToRevisionMapEntryImpl extends EObjectImpl implements BasicE
 	protected Version key = KEY_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getTypedValue() <em>Value</em>}' containment reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getTypedValue() <em>Value</em>}' containment
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getTypedValue()
 	 * @generated
 	 * @ordered
@@ -72,6 +76,7 @@ public class VersionToRevisionMapEntryImpl extends EObjectImpl implements BasicE
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected VersionToRevisionMapEntryImpl() {
@@ -80,6 +85,7 @@ public class VersionToRevisionMapEntryImpl extends EObjectImpl implements BasicE
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -89,6 +95,7 @@ public class VersionToRevisionMapEntryImpl extends EObjectImpl implements BasicE
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Version getTypedKey() {
@@ -97,6 +104,7 @@ public class VersionToRevisionMapEntryImpl extends EObjectImpl implements BasicE
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setTypedKey(Version newKey) {
@@ -109,6 +117,7 @@ public class VersionToRevisionMapEntryImpl extends EObjectImpl implements BasicE
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Revision getTypedValue() {
@@ -117,6 +126,7 @@ public class VersionToRevisionMapEntryImpl extends EObjectImpl implements BasicE
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetTypedValue(Revision newValue, NotificationChain msgs) {
@@ -135,6 +145,7 @@ public class VersionToRevisionMapEntryImpl extends EObjectImpl implements BasicE
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setTypedValue(Revision newValue) {
@@ -156,6 +167,7 @@ public class VersionToRevisionMapEntryImpl extends EObjectImpl implements BasicE
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -169,6 +181,7 @@ public class VersionToRevisionMapEntryImpl extends EObjectImpl implements BasicE
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -184,6 +197,7 @@ public class VersionToRevisionMapEntryImpl extends EObjectImpl implements BasicE
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -201,6 +215,7 @@ public class VersionToRevisionMapEntryImpl extends EObjectImpl implements BasicE
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -218,6 +233,7 @@ public class VersionToRevisionMapEntryImpl extends EObjectImpl implements BasicE
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -233,6 +249,7 @@ public class VersionToRevisionMapEntryImpl extends EObjectImpl implements BasicE
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -249,14 +266,17 @@ public class VersionToRevisionMapEntryImpl extends EObjectImpl implements BasicE
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected int hash = -1;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public int getHash() {
 		if (hash == -1) {
 			Object theKey = getKey();
@@ -267,40 +287,50 @@ public class VersionToRevisionMapEntryImpl extends EObjectImpl implements BasicE
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public void setHash(int hash) {
 		this.hash = hash;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public Version getKey() {
 		return getTypedKey();
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public void setKey(Version key) {
 		setTypedKey(key);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public Revision getValue() {
 		return getTypedValue();
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public Revision setValue(Revision value) {
 		Revision oldValue = getValue();
 		setTypedValue(value);
@@ -309,6 +339,7 @@ public class VersionToRevisionMapEntryImpl extends EObjectImpl implements BasicE
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")

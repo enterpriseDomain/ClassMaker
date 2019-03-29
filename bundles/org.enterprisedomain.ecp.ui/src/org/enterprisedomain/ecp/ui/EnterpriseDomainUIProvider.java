@@ -293,7 +293,7 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider implements IRe
 		@Override
 		public void resourceChanged(IResourceChangeEvent event) {
 			if (event.getResource() != null && event.getResource().getType() == IResource.PROJECT
-					&& event.getDelta().getKind() == IResourceDelta.CHANGED) {
+					&& event.getDelta() != null && event.getDelta().getKind() == IResourceDelta.CHANGED) {
 				ECPProject project = ECPSavePropertySource.getProjectToSave();
 				if (project != null) {
 					ECPUtil.getECPObserverBus().notify(SaveButtonEnablementObserver.class)

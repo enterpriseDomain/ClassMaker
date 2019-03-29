@@ -71,6 +71,7 @@ public class ExecuteOperationCommand extends ChangeCommand implements CommandAct
 
 	@Override
 	protected void doExecute() {
+		// TODO implement arguments request dialog
 		// EOperationInvocationDialog dialog = new EOperationInvocationDialog(shell,
 		// eOperation);
 		// EList<?> arguments = null;

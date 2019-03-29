@@ -44,7 +44,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -361,6 +360,7 @@ public class StateImpl extends ItemImpl implements State {
 	 * 
 	 * @generated
 	 */
+	@Override
 	public String getPackageClassName() {
 		return packageClassName;
 	}
@@ -370,6 +370,7 @@ public class StateImpl extends ItemImpl implements State {
 	 * 
 	 * @generated
 	 */
+	@Override
 	public void setPackageClassName(String newPackageClassName) {
 		String oldPackageClassName = packageClassName;
 		packageClassName = newPackageClassName;
@@ -383,6 +384,7 @@ public class StateImpl extends ItemImpl implements State {
 	 * 
 	 * @generated
 	 */
+	@Override
 	public EList<String> getRequiredPlugins() {
 		if (requiredPlugins == null) {
 			requiredPlugins = new EDataTypeUniqueEList<String>(String.class, this,
@@ -396,6 +398,7 @@ public class StateImpl extends ItemImpl implements State {
 	 * 
 	 * @generated
 	 */
+	@Override
 	public int getTimestamp() {
 		return timestamp;
 	}
@@ -405,6 +408,7 @@ public class StateImpl extends ItemImpl implements State {
 	 * 
 	 * @generated
 	 */
+	@Override
 	public void setTimestamp(int newTimestamp) {
 		int oldTimestamp = timestamp;
 		timestamp = newTimestamp;
@@ -1032,6 +1036,7 @@ public class StateImpl extends ItemImpl implements State {
 	 * 
 	 * @generated
 	 */
+	@Override
 	public Revision getRevision() {
 		Revision revision = basicGetRevision();
 		return revision != null && revision.eIsProxy() ? (Revision) eResolveProxy((InternalEObject) revision)
@@ -1076,6 +1081,7 @@ public class StateImpl extends ItemImpl implements State {
 	 * 
 	 * @generated
 	 */
+	@Override
 	public void setJobFamily(String newJobFamily) {
 		String oldJobFamily = jobFamily;
 		jobFamily = newJobFamily;
@@ -1089,6 +1095,7 @@ public class StateImpl extends ItemImpl implements State {
 	 * 
 	 * @generated
 	 */
+	@Override
 	public Resource getResource() {
 		return resource;
 	}
@@ -1098,6 +1105,7 @@ public class StateImpl extends ItemImpl implements State {
 	 * 
 	 * @generated
 	 */
+	@Override
 	public void setResource(Resource newResource) {
 		Resource oldResource = resource;
 		resource = newResource;
@@ -1111,6 +1119,7 @@ public class StateImpl extends ItemImpl implements State {
 	 * 
 	 * @generated
 	 */
+	@Override
 	public EList<String> getCommitIds() {
 		if (commitIds == null) {
 			commitIds = new EDataTypeUniqueEList<String>(String.class, this, ClassMakerPackage.STATE__COMMIT_IDS);
@@ -1123,6 +1132,7 @@ public class StateImpl extends ItemImpl implements State {
 	 * 
 	 * @generated
 	 */
+	@Override
 	public String getCommitId() {
 		return commitId;
 	}
@@ -1132,6 +1142,7 @@ public class StateImpl extends ItemImpl implements State {
 	 * 
 	 * @generated
 	 */
+	@Override
 	public void setCommitId(String newCommitId) {
 		String oldCommitId = commitId;
 		commitId = newCommitId;
@@ -1150,6 +1161,7 @@ public class StateImpl extends ItemImpl implements State {
 	 * 
 	 * @generated
 	 */
+	@Override
 	public EMap<StageQualifier, Customizer> getStateCustomizers() {
 		if (stateCustomizers == null) {
 			stateCustomizers = new EcoreEMap<StageQualifier, Customizer>(
@@ -1185,6 +1197,7 @@ public class StateImpl extends ItemImpl implements State {
 	 * 
 	 * @generated
 	 */
+	@Override
 	public boolean isMaking() {
 		return making;
 	}
@@ -1194,6 +1207,7 @@ public class StateImpl extends ItemImpl implements State {
 	 * 
 	 * @generated
 	 */
+	@Override
 	public void setMaking(boolean newMaking) {
 		boolean oldMaking = making;
 		making = newMaking;

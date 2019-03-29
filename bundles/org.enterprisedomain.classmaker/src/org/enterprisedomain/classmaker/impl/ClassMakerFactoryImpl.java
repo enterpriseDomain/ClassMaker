@@ -33,7 +33,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.enterprisedomain.classmaker.*;
 import org.enterprisedomain.classmaker.Blueprint;
 import org.enterprisedomain.classmaker.ClassMakerFactory;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
@@ -58,13 +57,14 @@ import org.osgi.framework.Version;
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
  * end-user-doc -->
+ * 
  * @generated
  */
 public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFactory {
 	/**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc --> <!--
+	 * Creates the default factory implementation. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static ClassMakerFactory init() {
@@ -92,6 +92,7 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -140,6 +141,7 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -174,6 +176,7 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -208,8 +211,10 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public Contribution createContribution() {
 		ContributionImpl contribution = new ContributionImpl();
 		return contribution;
@@ -217,8 +222,10 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public Revision createRevision() {
 		RevisionImpl revision = new RevisionImpl();
 		return revision;
@@ -226,8 +233,10 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public State createState() {
 		StateImpl state = new StateImpl();
 		return state;
@@ -235,8 +244,10 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public Workspace createWorkspace() {
 		WorkspaceImpl workspace = new WorkspaceImpl();
 		return workspace;
@@ -244,6 +255,7 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Map.Entry<Integer, State> createIntegerToStateMapEntry() {
@@ -253,6 +265,7 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Map.Entry<Version, Revision> createVersionToRevisionMapEntry() {
@@ -262,8 +275,10 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public Customizer createCustomizer() {
 		CustomizerImpl customizer = new CustomizerImpl();
 		return customizer;
@@ -271,8 +286,10 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public StageQualifier createStageQualifier() {
 		StageQualifierImpl stageQualifier = new StageQualifierImpl();
 		return stageQualifier;
@@ -280,6 +297,7 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Map.Entry<StageQualifier, Customizer> createStageQualifierToCustomizerMapEntry() {
@@ -289,8 +307,10 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public Project createProject() {
 		ProjectImpl project = new ProjectImpl();
 		return project;
@@ -298,8 +318,10 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public ModelPair createModelPair() {
 		ModelPairImpl modelPair = new ModelPairImpl();
 		return modelPair;
@@ -307,8 +329,10 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public <T> SCMRegistry<T> createSCMRegistry() {
 		SCMRegistryImpl<T> scmRegistry = new SCMRegistryImpl<T>();
 		return scmRegistry;
@@ -316,8 +340,10 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public ResourceChangeListener createResourceChangeListener() {
 		ResourceChangeListenerImpl resourceChangeListener = new ResourceChangeListenerImpl();
 		return resourceChangeListener;
@@ -325,8 +351,10 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public ResourceAdapter createResourceAdapter() {
 		ResourceAdapterImpl resourceAdapter = new ResourceAdapterImpl();
 		return resourceAdapter;
@@ -334,8 +362,10 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public ClassMakerService createClassMakerService() {
 		ClassMakerServiceImpl classMakerService = new ClassMakerServiceImpl();
 		return classMakerService;
@@ -343,8 +373,10 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public Blueprint createBlueprint() {
 		BlueprintImpl blueprint = new BlueprintImpl();
 		return blueprint;
@@ -352,8 +384,10 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public CompletionNotificationAdapter createCompletionNotificationAdapter() {
 		CompletionNotificationAdapterImpl completionNotificationAdapter = new CompletionNotificationAdapterImpl();
 		return completionNotificationAdapter;
@@ -361,8 +395,10 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public SelectRevealHandler createSelectRevealHandler() {
 		SelectRevealHandlerImpl selectRevealHandler = new SelectRevealHandlerImpl();
 		return selectRevealHandler;
@@ -370,6 +406,7 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Stage createStageFromString(EDataType eDataType, String initialValue) {
@@ -382,6 +419,7 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String convertStageToString(EDataType eDataType, Object instanceValue) {
@@ -406,6 +444,7 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String convertPropertiesToString(EDataType eDataType, Object instanceValue) {
@@ -414,6 +453,7 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public IProgressMonitor createIProgressMonitorFromString(EDataType eDataType, String initialValue) {
@@ -422,6 +462,7 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String convertIProgressMonitorToString(EDataType eDataType, Object instanceValue) {
@@ -430,6 +471,7 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Version createOSGiVersionFromString(EDataType eDataType, String initialValue) {
@@ -438,6 +480,7 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String convertOSGiVersionToString(EDataType eDataType, Object instanceValue) {
@@ -446,6 +489,7 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Semaphore createSemaphoreFromString(EDataType eDataType, String initialValue) {
@@ -454,6 +498,7 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String convertSemaphoreToString(EDataType eDataType, Object instanceValue) {
@@ -462,6 +507,7 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public CoreException createCoreExceptionFromString(EDataType eDataType, String initialValue) {
@@ -470,6 +516,7 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String convertCoreExceptionToString(EDataType eDataType, Object instanceValue) {
@@ -478,6 +525,7 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public InvocationTargetException createInvocationTargetExceptionFromString(EDataType eDataType,
@@ -487,6 +535,7 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String convertInvocationTargetExceptionToString(EDataType eDataType, Object instanceValue) {
@@ -495,6 +544,7 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public IStatus createIStatusFromString(EDataType eDataType, String initialValue) {
@@ -503,6 +553,7 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String convertIStatusToString(EDataType eDataType, Object instanceValue) {
@@ -511,6 +562,7 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public URI createURIFromString(EDataType eDataType, String initialValue) {
@@ -519,6 +571,7 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String convertURIToString(EDataType eDataType, Object instanceValue) {
@@ -527,6 +580,7 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Exception createExceptionFromString(EDataType eDataType, String initialValue) {
@@ -535,6 +589,7 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String convertExceptionToString(EDataType eDataType, Object instanceValue) {
@@ -543,6 +598,7 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Locale createLocaleFromString(EDataType eDataType, String initialValue) {
@@ -551,6 +607,7 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String convertLocaleToString(EDataType eDataType, Object instanceValue) {
@@ -559,14 +616,17 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public ClassMakerPackage getClassMakerPackage() {
 		return (ClassMakerPackage) getEPackage();
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @deprecated
 	 * @generated
 	 */

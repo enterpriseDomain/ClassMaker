@@ -2,6 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.enterprisedomain.editor;singleton:=true
+Automatic-Module-Name: org.enterprisedomain.editor
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.enterprisedomain.classmaker.presentation.ClassMakerEditorPlugin$Implementation
@@ -12,6 +13,42 @@ Export-Package: org.enterprisedomain.classmaker.presentation
 Require-Bundle: org.eclipse.core.runtime,
  org.enterprisedomain.classmaker.edit;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
+ org.eclipse.core.commands;visibility:=reexport,
  org.eclipse.emf.edit.ui;visibility:=reexport,
  org.eclipse.emf.ecore.edit;visibility:=reexport
+Import-Package: org.eclipse.emf.common.ui,
+ org.eclipse.emf.common.ui.action,
+ org.eclipse.emf.common.ui.dialogs,
+ org.eclipse.emf.common.ui.editor,
+ org.eclipse.emf.common.ui.viewer,
+ org.eclipse.emf.edit.ui,
+ org.eclipse.emf.edit.ui.action,
+ org.eclipse.emf.edit.ui.celleditor,
+ org.eclipse.emf.edit.ui.dnd,
+ org.eclipse.emf.edit.ui.provider,
+ org.eclipse.emf.edit.ui.util,
+ org.eclipse.emf.edit.ui.view,
+ org.eclipse.jface.action,
+ org.eclipse.jface.dialogs,
+ org.eclipse.jface.operation,
+ org.eclipse.jface.text,
+ org.eclipse.jface.util,
+ org.eclipse.jface.viewers,
+ org.eclipse.jface.window,
+ org.eclipse.jface.wizard,
+ org.eclipse.swt,
+ org.eclipse.swt.custom,
+ org.eclipse.swt.dnd,
+ org.eclipse.swt.events,
+ org.eclipse.swt.graphics,
+ org.eclipse.swt.layout,
+ org.eclipse.swt.widgets,
+ org.eclipse.ui;ui.workbench=split,
+ org.eclipse.ui.actions;ui.workbench=split,
+ org.eclipse.ui.application,
+ org.eclipse.ui.part;ui.workbench=split,
+ org.eclipse.ui.plugin,
+ org.eclipse.ui.views,
+ org.eclipse.ui.views.contentoutline,
+ org.eclipse.ui.views.properties;ui.views=split
 Bundle-ActivationPolicy: lazy
