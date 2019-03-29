@@ -15,6 +15,8 @@
  */
 package org.enterprisedomain.classmaker.edit.dialogs;
 
+import javax.inject.Named;
+import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecp.ui.view.ECPRendererException;
 import org.eclipse.emf.ecp.ui.view.swt.ECPSWTViewRenderer;
@@ -33,27 +35,27 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 
-public class EOperationInvocationDialog extends Dialog {
+public class EOperationInvocationDialog /* extends Dialog */ {
 
 	private final EOperation eOperation;
-	
-	public EOperationInvocationDialog(Shell shell, EOperation eOperation) {
-		super(shell);
+
+	public EOperationInvocationDialog(/* @Named(IServiceConstants.ACTIVE_SHELL) Shell shell, */EOperation eOperation) {
+		// super(shell);
 		this.eOperation = eOperation;
 	}
 
-	@Override
-	protected void configureShell(Shell shell) {
-		super.configureShell(shell);
-		shell.setText(eOperation.getName());
-	}
+//	@Override
+//	protected void configureShell(Shell shell) {
+//		super.configureShell(shell);
+//		shell.setText(eOperation.getName());
+//	}
 
-	@Override
+//	@Override
 	protected boolean isResizable() {
 		return true;
 	}
 
-	@Override
+//	@Override
 	protected Control createDialogArea(Composite parent) {
 		final Composite composite = (Composite) super.createDialogArea(parent);
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).hint(450, 250).applyTo(composite);
