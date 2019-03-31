@@ -13,7 +13,7 @@
          id="org.enterprisedomain.classmaker.osgi.systemextension"
          os="linux,macosx,win32"
          ws="carbon,cocoa,gtk,win32"
-         arch="x86,x86_64"
+         arch="x86_64"
          download-size="0"
          install-size="0"
          version="0.0.0"
