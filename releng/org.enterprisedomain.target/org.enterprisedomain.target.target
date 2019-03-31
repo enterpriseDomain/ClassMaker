@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="org.enterprisedomain.target" sequenceNumber="1553859435">
+<target name="org.enterprisedomain.target" sequenceNumber="1554026981">
   <locations>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.eclipse.platform.feature.group" version="4.11.0.v20190307-0500"/>
@@ -16,27 +16,31 @@
       <repository id="updates4_11" location="http://download.eclipse.org/eclipse/updates/4.11"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
-      <unit id="org.eclipse.jdt.feature.group" version="3.14.0.v20180611-0500"/>
-      <unit id="org.eclipse.emf.sdk.feature.group" version="2.14.0.v20180529-1157"/>
+      <unit id="org.eclipse.jdt.feature.group" version="3.17.0.v20190307-0500"/>
+      <unit id="org.eclipse.emf.sdk.feature.group" version="2.17.0.v20190301-1325"/>
       <unit id="org.eclipse.gef.sdk.feature.group" version="3.11.0.201606061308"/>
       <unit id="org.eclipse.graphiti.feature.feature.group" version="0.15.0.201806050830"/>
       <unit id="org.eclipse.graphiti.export.feature.feature.group" version="0.15.0.201806050830"/>
-      <unit id="org.eclipse.emf.validation.sdk.feature.group" version="1.12.0.201805030717"/>
+      <unit id="org.eclipse.emf.validation.sdk.feature.group" version="1.12.1.201812070911"/>
       <unit id="org.eclipse.emf.transaction.sdk.feature.group" version="1.12.0.201805140824"/>
       <unit id="org.eclipse.net4j.sdk.feature.group" version="4.7.0.v20180530-1201"/>
       <unit id="org.eclipse.emf.cdo.sdk.feature.group" version="5.0.0.v20180530-1201"/>
-      <unit id="org.eclipse.pde.feature.group" version="3.13.100.v20180611-0826"/>
-      <unit id="org.eclipse.pde.api.tools.ee.javase16" version="1.1.100.v20171201-1034"/>
-      <unit id="org.eclipse.pde.api.tools.ee.javase17" version="1.1.100.v20171201-1034"/>
-      <unit id="org.eclipse.pde.api.tools.ee.javase18" version="1.1.100.v20171201-1034"/>
-      <unit id="org.eclipse.equinox.weaving.caching" version="1.1.100.v20171221-2204"/>
-      <unit id="org.eclipse.equinox.weaving.caching.j9" version="1.1.100.v20171221-2204"/>
-      <unit id="org.eclipse.equinox.weaving.hook" version="1.2.100.v20171221-2204"/>
-      <unit id="org.eclipse.ocl.all.sdk.feature.group" version="5.4.0.v20180611-1119"/>
-      <unit id="org.eclipse.m2m.qvt.oml.sdk.feature.group" version="3.8.0.v20180612-0940"/>
-      <unit id="org.eclipse.xtend.sdk.feature.group" version="2.14.0.v20180523-0937"/>
-      <unit id="org.eclipse.emf.ecp.sdk.e4.feature.feature.group" version="1.17.0.20180611-0706"/>
-      <repository id="photon" location="http://download.eclipse.org/releases/photon"/>
+      <unit id="org.eclipse.swt" version="3.110.0.v20190305-0602"/>
+      <unit id="org.eclipse.swt.cocoa.macosx.x86_64" version="3.110.0.v20190305-0602"/>
+      <unit id="org.eclipse.swt.gtk.linux.x86_64" version="3.110.0.v20190305-0602"/>
+      <unit id="org.eclipse.swt.win32.win32.x86_64" version="3.110.0.v20190305-0602"/>
+      <unit id="org.eclipse.pde.feature.group" version="3.13.400.v20190307-0943"/>
+      <unit id="org.eclipse.pde.api.tools.ee.javase16" version="1.1.200.v20180827-1618"/>
+      <unit id="org.eclipse.pde.api.tools.ee.javase17" version="1.1.200.v20180827-1618"/>
+      <unit id="org.eclipse.pde.api.tools.ee.javase18" version="1.1.200.v20180829-0709"/>
+      <unit id="org.eclipse.equinox.weaving.caching" version="1.1.200.v20180827-1235"/>
+      <unit id="org.eclipse.equinox.weaving.caching.j9" version="1.1.200.v20180827-1235"/>
+      <unit id="org.eclipse.equinox.weaving.hook" version="1.2.200.v20180827-1235"/>
+      <unit id="org.eclipse.ocl.all.sdk.feature.group" version="5.8.0.v20190311-1843"/>
+      <unit id="org.eclipse.m2m.qvt.oml.sdk.feature.group" version="3.9.2.v20190313-0834"/>
+      <unit id="org.eclipse.xtend.sdk.feature.group" version="2.17.0.v20190304-1445"/>
+      <unit id="org.eclipse.emf.ecp.sdk.e4.feature.feature.group" version="1.20.0.20190311-1236"/>
+      <repository id="photon" location="https://download.eclipse.org/releases/2019-03/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.eclipse.jgit.feature.group" version="5.3.0.201903130848-r"/>
