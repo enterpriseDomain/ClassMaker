@@ -246,11 +246,10 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider implements IRe
 							if (eOperation.getEAnnotation(ClassMakerService.INVOCATION_DELEGATE_URI) != null
 									&& !EcoreUtil.getAnnotation(eOperation, "http://www.eclipse.org/emf/2002/GenModel",
 											"body").isEmpty()) {
-								manager.add(
-										new ExecuteOperationAction(project.getEditingDomain(),
-												new StructuredSelection(
-														new Object[] { element, eOperation, control.getShell() }),
-												project));
+								manager.add(new ExecuteOperationAction(project.getEditingDomain(),
+										new StructuredSelection(
+												new Object[] { element, eOperation/* , control.getShell() */ }),
+										project));
 							}
 					}
 				}

@@ -46,7 +46,7 @@ public class ExecuteOperationCommand extends ChangeCommand implements CommandAct
 		commandParameter.getCollection().toArray(collection);
 		eObject = (EObject) collection[0];
 		eOperation = (EOperation) collection[1];
-//		shell = (Shell) collection[2];
+		//		shell = (Shell) collection[2];
 	}
 
 	public static Command create(EditingDomain editingDomain, Object owner, String name, Collection<?> collection) {
