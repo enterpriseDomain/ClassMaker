@@ -488,7 +488,6 @@ public class TestEnterpriseDomain extends AbstractTest {
 		setAttributeName("x");
 		setAttributeType(EcorePackage.Literals.EJAVA_OBJECT);
 		EPackage p = createAndTestEPackage(getProgressMonitor());
-		assertNotNull(p);
 		Contribution c = service.getWorkspace().getContribution(p, Stage.LOADED);
 		p = c.getDomainModel().getDynamic();
 		Version v = c.getVersion();

@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <?artifactRepository version='1.1.0'?>
 <artifacts size='1'>
-  <artifact classifier='org.eclipse.update.feature' id='org.enterprisedomain.classmaker.edit.feature' version='0.8.0.201903021438'>
+  <artifact classifier='org.eclipse.update.feature' id='org.enterprisedomain.classmaker.edit.feature' version='0.8.0.201903311222'>
     <properties size='6'>
-      <property name='artifact.size' value='4598'/>
-      <property name='download.size' value='4598'/>
+      <property name='artifact.size' value='4601'/>
+      <property name='download.size' value='4601'/>
       <property name='maven-groupId' value='org.enterprisedomain'/>
       <property name='maven-artifactId' value='org.enterprisedomain.classmaker.edit.feature'/>
       <property name='maven-version' value='0.8.0-SNAPSHOT'/>
