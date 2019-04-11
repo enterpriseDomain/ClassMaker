@@ -1,0 +1,10 @@
+org.enterprisedomain.classmaker
+org.enterprisedomain.classmaker.core
+org.enterprisedomain.classmaker.impl
+org.enterprisedomain.classmaker.jobs
+org.enterprisedomain.classmaker.jobs.codegen
+org.enterprisedomain.classmaker.jobs.export
+org.enterprisedomain.classmaker.jobs.install
+org.enterprisedomain.classmaker.jobs.load
+org.enterprisedomain.classmaker.scm
+org.enterprisedomain.classmaker.util
