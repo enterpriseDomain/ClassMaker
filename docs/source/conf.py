@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'CLassMaker'
+project = 'ClassMaker'
 copyright = '2019, Kyrill Zotkin'
 author = 'Kyrill Zotkin'
 
