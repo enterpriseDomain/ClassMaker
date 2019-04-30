@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="org.enterprisedomain.target" sequenceNumber="1554033664">
+<target name="org.enterprisedomain.target" sequenceNumber="1556612135">
   <locations>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.eclipse.rcp.feature.group" version="4.11.0.v20190307-0500"/>
@@ -65,7 +65,7 @@
       <unit id="org.eclipse.emf.emfstore.server.feature.feature.group" version="1.9.0.v20170530-0703"/>
       <unit id="org.eclipse.emf.emfstore.example.feature.feature.group" version="1.9.0.v20170530-0703"/>
       <unit id="org.eclipse.emf.emfstore.client.ui.feature.feature.group" version="1.9.0.v20170530-0703"/>
-      <repository location="http://download.eclipse.org/emfstore/releases_19"/>
+      <repository location="http://download.eclipse.org/emfstore/releases_19/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.eclipse.emf.ecp.application.e3" version="1.20.0.20190311-1236"/>
@@ -121,7 +121,7 @@
       <unit id="org.hamcrest.core" version="1.3.0.v20180420-1519"/>
       <unit id="org.hamcrest.library" version="1.3.0.v20180524-2246"/>
       <unit id="org.hamcrest.library.source" version="1.3.0.v20180524-2246"/>
-      <repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20180606145124/repository"/>
+      <repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20180606145124/repository/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.eclipse.emf.edapt.runtime.feature.feature.group" version="1.3.1.201812130816"/>
