@@ -16,11 +16,11 @@
 				<artifactId>target-platform-configuration</artifactId>
 				<version>${tycho.version}</version>
 				<configuration>
-					<executionEnvironment>JavaSE-1.8</executionEnvironment>
+					<executionEnvironment>JavaSE-1.11</executionEnvironment>
 					<dependency-resolution>
 						<profileProperties>
 							<org.eclipse.swt.buildtime>true</org.eclipse.swt.buildtime>
-							<executionEnvironment>JavaSE-1.8</executionEnvironment>
+							<executionEnvironment>JavaSE-1.11</executionEnvironment>
 						</profileProperties>
 						<extraRequirements>
 							<requirement>

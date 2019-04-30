@@ -129,7 +129,8 @@ public class GitSCMOperator extends SCMOperatorImpl<Git> {
 	@Override
 	public void checkout(String branch, String commitId) throws Exception {
 		try {
-			getRepositorySCM().checkout().setName(branch).setStartPoint(commitId).setForce(true).call();
+			getRepositorySCM().checkout().setName(branch).setStartPoint(commitId).setForced(true)
+					.setForceRefUpdate(true).call();
 		} finally {
 			ungetRepositorySCM();
 		}
