@@ -710,28 +710,26 @@ public class StateImpl extends ItemImpl implements State {
 				}
 
 				Worker exporter = createExporter();
-				EnterpriseDomainJob exporterJob = (EnterpriseDomainJob) exporter.getAdapter(EnterpriseDomainJob.class);
+
+				EnterpriseDomainJob exporterJob = getJob(exporter);
 				exporterJob.setContributionState(this);
 				exporterJob.setProject(getProject());
 				exporter.getProperties().put(AbstractExporter.EXPORT_DESTINATION_PROP,
 						ResourceUtils.getExportDestination(getProject()).toString());
 
 				Worker generator = createGenerator();
-				EnterpriseDomainJob generatorJob = ((EnterpriseDomainJob) generator
-						.getAdapter(EnterpriseDomainJob.class));
+				EnterpriseDomainJob generatorJob = getJob(generator);
 				generatorJob.setResourceSet(getContribution().getWorkspace().getResourceSet());
 				generatorJob.setContributionState(this);
 				generatorJob.setProject(getProject());
 				generatorJob.setProgressGroup(wrappingMonitor, 1);
 				generatorJob.setNextJob(exporterJob);
 
-				EnterpriseDomainJob installJob = (EnterpriseDomainJob) createInstaller()
-						.getAdapter(EnterpriseDomainJob.class);
+				EnterpriseDomainJob installJob = getJob(createInstaller());
 				installJob.setContributionState(this);
 				exporterJob.setNextJob(installJob);
 
-				EnterpriseDomainJob loadJob = (EnterpriseDomainJob) createModelLoader()
-						.getAdapter(EnterpriseDomainJob.class);
+				EnterpriseDomainJob loadJob = getJob(createModelLoader());
 				loadJob.setContributionState(this);
 				loadJob.addListener();
 
@@ -775,6 +773,10 @@ public class StateImpl extends ItemImpl implements State {
 			return result;
 		}
 
+	}
+
+	private EnterpriseDomainJob getJob(Worker worker) {
+		return (EnterpriseDomainJob) worker.getAdapter(EnterpriseDomainJob.class);
 	}
 
 	private IProject getProject() {
@@ -1469,12 +1471,10 @@ public class StateImpl extends ItemImpl implements State {
 	@Override
 	public void build(IProgressMonitor monitor) throws CoreException {
 		if (getPhase().equals(Stage.LOADED)) {
-			EnterpriseDomainJob installJob = (EnterpriseDomainJob) createInstaller()
-					.getAdapter(EnterpriseDomainJob.class);
+			EnterpriseDomainJob installJob = getJob(createInstaller());
 			installJob.setContributionState(this);
 
-			EnterpriseDomainJob loadJob = (EnterpriseDomainJob) createModelLoader()
-					.getAdapter(EnterpriseDomainJob.class);
+			EnterpriseDomainJob loadJob = getJob(createModelLoader());
 			loadJob.setContributionState(this);
 			loadJob.addListener();
 

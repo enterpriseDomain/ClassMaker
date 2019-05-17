@@ -427,7 +427,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 
 	@Test
 	public void update() throws OperationCanceledException, InterruptedException, CoreException, ExecutionException {
-		setPackageName("updateable");
+		setPackageName("updatable");
 		setClassName("Same");
 		EcoreFactory f = EcoreFactory.eINSTANCE;
 		p = createEPackage("0.1");
