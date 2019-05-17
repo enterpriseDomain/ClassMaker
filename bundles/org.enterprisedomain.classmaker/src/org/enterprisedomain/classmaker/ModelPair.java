@@ -22,19 +22,17 @@ import org.eclipse.emf.ecore.EPackage;
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Model
  * Pair</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc --> A holder of pair of references. To blueprint dynamic
- * model instance, and to a resulting generated one. <!-- end-model-doc -->
+ * <!-- begin-model-doc -->
+ * A holder of pair of references. To blueprint dynamic model instance, and to a resulting generated one.
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.ModelPair#getDynamic
- * <em>Dynamic</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.ModelPair#getGenerated
- * <em>Generated</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.ModelPair#getParent
- * <em>Parent</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.ModelPair#getDynamic <em>Dynamic</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.ModelPair#getGenerated <em>Generated</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.ModelPair#getParent <em>Parent</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getModelPair()
@@ -60,11 +58,9 @@ public interface ModelPair extends EObject {
 	EPackage getDynamic();
 
 	/**
-	 * Sets the value of the
-	 * '{@link org.enterprisedomain.classmaker.ModelPair#getDynamic
-	 * <em>Dynamic</em>}' containment reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.ModelPair#getDynamic <em>Dynamic</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @param value the new value of the '<em>Dynamic</em>' containment reference.
 	 * @see #getDynamic()
 	 * @generated
@@ -89,10 +85,8 @@ public interface ModelPair extends EObject {
 	EPackage getGenerated();
 
 	/**
-	 * Sets the value of the
-	 * '{@link org.enterprisedomain.classmaker.ModelPair#getGenerated
-	 * <em>Generated</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.ModelPair#getGenerated <em>Generated</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Generated</em>' reference.
 	 * @see #getGenerated()
 	 * @generated
@@ -121,10 +115,8 @@ public interface ModelPair extends EObject {
 	Item getParent();
 
 	/**
-	 * Sets the value of the
-	 * '{@link org.enterprisedomain.classmaker.ModelPair#getParent <em>Parent</em>}'
-	 * container reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.ModelPair#getParent <em>Parent</em>}' container reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Parent</em>' container reference.
 	 * @see #getParent()
 	 * @generated

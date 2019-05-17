@@ -166,7 +166,7 @@ public class ResourceUtils {
 		return null;
 	}
 
-	public void addToBuildSpec(IProject project, String builderID) throws CoreException {
+	public static void addToBuildSpec(IProject project, String builderID) throws CoreException {
 		IProjectDescription description = project.getDescription();
 		int commandIndex = getCommandIndex(description.getBuildSpec(), builderID);
 
@@ -177,7 +177,7 @@ public class ResourceUtils {
 		}
 	}
 
-	public void removeFromBuildSpec(IProject project, String builderID) throws CoreException {
+	public static void removeFromBuildSpec(IProject project, String builderID) throws CoreException {
 		IProjectDescription description = project.getDescription();
 		ICommand[] commands = description.getBuildSpec();
 		for (int i = 0; i < commands.length; ++i) {
@@ -192,7 +192,7 @@ public class ResourceUtils {
 		}
 	}
 
-	private void setCommand(IProject project, IProjectDescription description, ICommand newCommand)
+	private static void setCommand(IProject project, IProjectDescription description, ICommand newCommand)
 			throws CoreException {
 		ICommand[] oldBuildSpec = description.getBuildSpec();
 		int oldBuilderCommandIndex = getCommandIndex(oldBuildSpec, newCommand.getBuilderName());
@@ -211,7 +211,7 @@ public class ResourceUtils {
 		project.setDescription(description, null);
 	}
 
-	private int getCommandIndex(ICommand[] buildSpec, String builderID) {
+	private static int getCommandIndex(ICommand[] buildSpec, String builderID) {
 		for (int i = 0; i < buildSpec.length; ++i) {
 			if (buildSpec[i].getBuilderName().equals(builderID)) {
 				return i;

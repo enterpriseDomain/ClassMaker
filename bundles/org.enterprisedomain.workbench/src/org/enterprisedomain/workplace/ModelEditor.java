@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.impl.NotificationImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EContentAdapter;
@@ -14,6 +15,7 @@ import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.ui.util.EditUIUtil;
 import org.eclipse.emfforms.spi.editor.GenericEditor;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.MultiPageEditorPart;
@@ -40,11 +42,39 @@ public class ModelEditor extends MultiPageEditorPart {
 //				}
 //
 //			}
-			, getEditorInput());
+					, getEditorInput());
 			setPageText(genericEditorIndex, "Form"); //$NON-NLS-1$
-			if (getGenericEditor().getResourceSet() != null)
+			if (getGenericEditor().getResourceSet() != null) {
 				getGenericEditor().getResourceSet().eAdapters().add(
 						new AdapterFactoryEditingDomain.EditingDomainProvider(getGenericEditor().getEditingDomain()));
+				getGenericEditor().getResourceSet().eAdapters().add(new EContentAdapter() {
+
+					@Override
+					public void notifyChanged(Notification notification) {
+						super.notifyChanged(notification);
+						Display display = Display.getCurrent();
+						if (display == null)
+							display = Display.getDefault();
+						if (display != null)
+							display.asyncExec(new Runnable() {
+
+								@Override
+								public void run() {
+									try {
+										if (Activator.getClassMaker().getWorkspace().getResourceSet().eDeliver())
+											Activator.getClassMaker().getWorkspace().getResourceSet()
+													.eNotify(new NotificationImpl(notification.getEventType(),
+															notification.getNewValue(), notification.getOldValue(),
+															notification.getPosition()));
+									} catch (Exception e) {
+										return;
+									}
+								}
+							});
+					}
+
+				});
+			}
 			URI uri = EditUIUtil.getURI(getEditorInput());
 			Resource resource = null;
 			if (getGenericEditor().getResourceSet() != null)
