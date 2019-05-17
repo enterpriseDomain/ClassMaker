@@ -931,43 +931,6 @@ public class StateImpl extends ItemImpl implements State {
 
 	protected Adapter modelsToResourceAdapter = new EContentAdapter() {
 
-		protected Adapter modelsToResourceAdapter = new EContentAdapter() {
-
-			@Override
-			public void notifyChanged(Notification notification) {
-				super.notifyChanged(notification);
-				if (resourceModelsSynchronizing)
-					return;
-				if (notification.getNotifier() instanceof ModelPair
-						&& notification.getFeatureID(ModelPair.class) == ClassMakerPackage.MODEL_PAIR__DYNAMIC) {
-					resourceModelsSynchronizing = true;
-					boolean deliver = getResource().eDeliver();
-					getResource().eSetDeliver(false);
-					if (notification.getEventType() == Notification.SET) {
-						if (notification.getOldValue() != null) {
-							EPackage dynamicEPackage = (EPackage) notification.getOldValue();
-							EList<EObject> toRemove = ECollections.newBasicEList();
-							for (EObject eObject : getResource().getContents())
-								if (eObject instanceof EPackage
-										&& ModelUtil.ePackagesAreEqual((EPackage) eObject, dynamicEPackage, true))
-									toRemove.add(eObject);
-							getResource().getContents().removeAll(toRemove);
-						}
-						if (notification.getNewValue() != null && notification.getPosition() >= Notification.NO_INDEX) {
-							EPackage dynamicEPackage = (EPackage) notification.getNewValue();
-							if (getResource().getContents().isEmpty()) {
-								getResource().getContents().add(EcoreUtil.copy(dynamicEPackage));
-							} else
-								getResource().getContents().set(0, EcoreUtil.copy(dynamicEPackage));
-						}
-					}
-					getResource().eSetDeliver(deliver);
-					resourceModelsSynchronizing = false;
-				}
-			}
-
-		};
-
 		@Override
 		public void notifyChanged(Notification notification) {
 			super.notifyChanged(notification);
@@ -1501,6 +1464,40 @@ public class StateImpl extends ItemImpl implements State {
 					&& getTimestamp() == ((State) otherRule).getTimestamp()
 					&& getCommitId() == ((State) otherRule).getCommitId();
 		return false;
+	}
+
+	@Override
+	public void build(IProgressMonitor monitor) throws CoreException {
+		if (getPhase().equals(Stage.LOADED)) {
+			EnterpriseDomainJob installJob = (EnterpriseDomainJob) createInstaller()
+					.getAdapter(EnterpriseDomainJob.class);
+			installJob.setContributionState(this);
+
+			EnterpriseDomainJob loadJob = (EnterpriseDomainJob) createModelLoader()
+					.getAdapter(EnterpriseDomainJob.class);
+			loadJob.setContributionState(this);
+			loadJob.addListener();
+
+			installJob.setNextJob(loadJob);
+
+			installJob.schedule();
+			try {
+				installJob.join();
+				add("."); //$NON-NLS-1$
+				loadJob.join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+				monitor.setCanceled(true);
+			} catch (NullPointerException e) {
+				try {
+					make(monitor);
+				} catch (Exception ex) {
+					throw new CoreException(ClassMakerPlugin.createErrorStatus(ex));
+				}
+			} catch (Exception e) {
+				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
+			}
+		}
 	}
 
 } // StateImpl

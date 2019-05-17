@@ -22,6 +22,16 @@
       </runtime>
    </extension>
    <extension
+         id="projectBuilder"
+         name="enterpriseDomain Project Builder"
+         point="org.eclipse.core.resources.builders">
+         <builder>
+            <run 
+                class="org.enterprisedomain.classmaker.core.ClassMakerBuilder">            
+            </run>
+         </builder>
+   </extension>
+   <extension
          point="org.eclipse.emf.ecore.invocation_delegate">
       <factory
             class="org.enterprisedomain.classmaker.ReflectiveInvocationDelegateFactory"

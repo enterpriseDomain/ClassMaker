@@ -3,7 +3,6 @@ package org.enterprisedomain.workplace;
 import org.eclipse.ui.application.IWorkbenchWindowConfigurer;
 import org.eclipse.ui.application.WorkbenchAdvisor;
 import org.eclipse.ui.application.WorkbenchWindowAdvisor;
-import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 
 public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 

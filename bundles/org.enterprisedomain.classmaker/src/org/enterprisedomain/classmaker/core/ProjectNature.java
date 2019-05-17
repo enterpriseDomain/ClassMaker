@@ -27,11 +27,12 @@ public class ProjectNature implements IProjectNature {
 	@Override
 	public void configure() throws CoreException {
 		ResourceUtils.addProjectNature(project, ClassMakerPlugin.PDE_PLUGIN_NATURE);
-
+		ResourceUtils.addToBuildSpec(project, ClassMakerBuilder.BUILDER_ID);
 	}
 
 	@Override
 	public void deconfigure() throws CoreException {
+		ResourceUtils.removeFromBuildSpec(project, ClassMakerBuilder.BUILDER_ID);
 	}
 
 	@Override

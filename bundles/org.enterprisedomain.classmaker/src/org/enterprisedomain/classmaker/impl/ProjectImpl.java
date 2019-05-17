@@ -747,7 +747,12 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * @generated NOT
 	 */
 	public void delete(EList<Object> objects) {
-		((EObject) getChildren().get(0)).eResource().getContents().removeAll(objects);
+		((Resource) getChildren().get(0)).getContents().removeAll(objects);
+		try {
+			((Resource) getChildren().get(0)).save(Collections.emptyMap());
+		} catch (IOException e) {
+			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
+		}
 	}
 
 	public void notifyCompletion() throws Exception {
@@ -762,9 +767,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * @generated NOT
 	 */
 	public void addResourceChangeListener(ResourceChangeListener resourceListener) {
-		// for (Object listener : resourceChangeListeners.getListeners())
-		// if (listener.equals(resourceListener))
-		// return;
 		resourceChangeListeners.add(resourceListener);
 	}
 
@@ -886,6 +888,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		removeResourceChangeListener(getResourceReloadListener());
 		String result = "You made it!"; //$NON-NLS-1$
 		addResourceChangeListener(getResourceReloadListener());
+		setNeedCompletionNotification(true);
 		return result;
 	}
 
@@ -940,30 +943,38 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		Resource resource = null;
 		if (new File(uri.toFileString()).exists()) {
 			resource = getWorkspace().getResourceSet().getResource(uri, false);
-			try {
-				resource.load(Collections.emptyMap());
-			} catch (IOException e) {
-				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
-			}
-			if (eIsSet(ClassMakerPackage.PROJECT__REVISION)
-					&& getRevision().eIsSet(ClassMakerPackage.Literals.REVISION__STATE))
-				getRevision().getState().setResource(resource);
-		} else {
-			resource = getWorkspace().getResourceSet().createResource(uri);
-			if (eIsSet(ClassMakerPackage.PROJECT__REVISION)
-					&& getRevision().eIsSet(ClassMakerPackage.Literals.REVISION__STATE))
-				getRevision().getState().setResource(resource);
-			if (commit)
+			if (resource != null) {
 				try {
-					resource.save(Collections.emptyMap());
+					resource.load(Collections.emptyMap());
 				} catch (IOException e) {
 					ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 				}
+				if (eIsSet(ClassMakerPackage.PROJECT__REVISION)
+						&& getRevision().eIsSet(ClassMakerPackage.Literals.REVISION__STATE))
+					getRevision().getState().setResource(resource);
+			} else {
+				createResource(uri, commit);
+			}
+		} else {
+			createResource(uri, commit);
 		}
 		getWorkspace().getResourceSet().eAdapters().add(resourceAdapter);
 		addResourceChangeListener(getResourceReloadListener());
 		// TODO Add SCM support if commit
 		return ""; //$NON-NLS-1$
+	}
+
+	private void createResource(URI uri, boolean commit) {
+		Resource resource = getWorkspace().getResourceSet().createResource(uri);
+		if (eIsSet(ClassMakerPackage.PROJECT__REVISION)
+				&& getRevision().eIsSet(ClassMakerPackage.Literals.REVISION__STATE))
+			getRevision().getState().setResource(resource);
+		if (commit)
+			try {
+				resource.save(Collections.emptyMap());
+			} catch (IOException e) {
+				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
+			}
 	}
 
 	private URI getResourceURI() {

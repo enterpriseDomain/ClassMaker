@@ -380,8 +380,8 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 					eClasses.add((EClass) eClass);
 			}
 		}
-		project.setVisibleEClasses(eClasses);
-
+		if (!eClasses.isEmpty())
+			project.setVisibleEClasses(eClasses);
 	}
 
 	protected void disposeProject(InternalProject project) {
