@@ -64,8 +64,3 @@ Please, use the [update site](https://dl.bintray.com/enterprisedomain/ClassMaker
 Feedback
 ---------
 If you have anything to complain or suggest, please feel free to file a [bug](https://github.com/enterpriseDomain/ClassMaker/issues) at [GitHub](https://help.github.com/articles/creating-an-issue/). 
-
-Donations
----------
-[Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=5U2B8G9H72CQG&lc=RU&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted)
-
