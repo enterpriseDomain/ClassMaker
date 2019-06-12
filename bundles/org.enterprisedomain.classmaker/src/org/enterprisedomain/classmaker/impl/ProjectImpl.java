@@ -790,6 +790,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 		Revision newRevision = newBareRevision(version);
 		doNewRevision(newRevision);
+		newRevision.initialize(false);
 		return newRevision;
 	}
 
