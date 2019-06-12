@@ -1485,6 +1485,7 @@ public class StateImpl extends ItemImpl implements State {
 				installJob.join();
 				add("."); //$NON-NLS-1$
 				loadJob.join();
+				Thread.yield();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 				monitor.setCanceled(true);

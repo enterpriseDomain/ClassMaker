@@ -197,7 +197,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 			case CREATE:
 				createProject(project);
 				break;
-
+				
 			case DISPOSE:
 				disposeProject(project);
 				break;

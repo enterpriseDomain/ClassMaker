@@ -9,5 +9,19 @@
             stage="org.enterprisedomain.classmaker.customization.stages.workspace.init">
       </customizer>
    </extension>
+   <extension
+         point="org.eclipse.emf.emfstore.client.resourceSetProvider">
+      <resourceSetProvider
+            class="org.enterprisedomain.classmaker.emfstore.EDClientResourceSetProvider"
+            priority="4">
+      </resourceSetProvider>
+   </extension>
+   <extension
+         point="org.eclipse.emf.emfstore.server.resourceSetProvider">
+      <resourceSetProvider
+            class="org.enterprisedomain.classmaker.emfstore.EDServerResourceSetProvider"
+            priority="4">
+      </resourceSetProvider>
+   </extension>
 
 </plugin>
