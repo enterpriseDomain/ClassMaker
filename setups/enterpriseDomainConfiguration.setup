@@ -8,12 +8,14 @@
       name="org.enterprisedomain.installation"
       label="enterpriseDomain Installation">
     <productVersion
-        href="index:/org.eclipse.setup#//@productCatalogs[name='self']/@products[name='empty.product']/@versions[name='version']"/>
+        href="index:/enterpriseDomain.setup#//@products[name='workbench']/@versions[name='2019-06']"/>
     <description>The enterpriseDomain installation provides cool stuff.</description>
   </installation>
   <workspace
-      name="enterprisedomain.workspace"
+      name="org.enterprisedomain.workspace"
       label="enterpriseDomain Workspace">
+    <stream
+        href="index:/org.eclipse.setup#//@projectCatalogs[name='org.enterprisedomain']/@projects[name='classmaker']/@streams[name='master']"/>
     <description>The enterpriseDomain workspace provides cool stuff.</description>
   </workspace>
   <description>The enterpriseDomain configuration provides cool stuff.</description>
