@@ -19,7 +19,6 @@
 		<module>org.enterprisedomain.ecp</module>
 		<module>org.enterprisedomain.ecp.filter</module>
 		<module>org.enterprisedomain.ecp.ui</module>
-		<module>org.enterprisedomain.workbench</module>
 		<module>org.enterprisedomain.workbench.ide</module>
 	</modules>	
 </project>

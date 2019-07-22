@@ -39,21 +39,77 @@
       <perspectiveExtension
             targetID="*">
          <perspectiveShortcut
-               id="org.eclipse.emf.ecp.application3x.perspective">
+               id="org.enterprisedomain.ecp.perspective">
          </perspectiveShortcut>
       </perspectiveExtension>
    </extension>
    <extension
+         point="org.eclipse.ui.startup">
+      <startup
+            class="org.enterprisedomain.workbench.ide.Startup">
+      </startup>
+   </extension>
+   <extension
+         point="org.eclipse.emf.ecp.ui.modelElementOpener">
+      <modelElementOpener
+            class="org.enterprisedomain.workbench.ide.ModelElementOpener">
+         <dynamicTester
+               tester="org.enterprisedomain.workbench.ide.ModelElementOpenTester">
+         </dynamicTester>
+      </modelElementOpener>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.enterprisedomain.workbench.ide.ModelEditor"
+            default="false"
+            id="org.enterprisedomain.workbench.ide.modelEditor"
+            name="Model Editor">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.eclipse.emf.ecp.application3x.perspective">
+         <view
+               id="org.eclipse.ui.console.ConsoleView"
+               minimized="false"
+               relationship="stack"
+               relative="org.eclipse.emf.ecp.ui.ModelRepositoriesView">
+         </view>
+      </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.ui.ide.editorAssociationOverride">
+         <editorAssociationOverride
+            id="org.enterprisedomain.workbench.ide.modelEditorAssociation"
+            class="org.enterprisedomain.workbench.ide.ModelEditorAssociationOverride">
+         </editorAssociationOverride>
+   </extension>
+   <extension
+         id="product"
          point="org.eclipse.core.runtime.products">
       <product
             application="org.eclipse.ui.ide.workbench"
-            description="enterpriseDomain Workbench Application"
             name="enterpriseDomain Workbench">
          <property
-               name="preferenceCustomization"
-               value="plugin_customization.ini">
+               name="windowImages"
+               value="platform:/plugin/org.eclipse.emf.ecp.ui.e3/icons/bricks.png">
+         </property>
+         <property
+               name="appName"
+               value="enterpriseDomain Workbench">
          </property>
       </product>
    </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="org.eclipse.emf.ecp.ui.perspective.ECPPerspectiveFactory"
+            id="org.enterprisedomain.ecp.perspective"
+            name="ECP">
+      </perspective>
+   </extension>
+   
 
 </plugin>

@@ -111,41 +111,17 @@ limitations under the License.
 
    <requires>
       <import plugin="org.eclipse.swt" version="3.7.0" match="compatible"/>
-      <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.equinox.ds"/>
-      <import plugin="org.eclipse.equinox.util"/>
-      <import plugin="org.eclipse.equinox.event"/>
-      <import plugin="org.enterprisedomain.ecp.ui" version="0.0.1" match="compatible"/>
-      <import plugin="org.enterprisedomain.ecp.filter" version="0.0.1" match="compatible"/>
-      <import plugin="org.eclipse.ui.console" version="3.7.0" match="compatible"/>
       <import plugin="org.enterprisedomain.classmaker" version="0.8.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="org.eclipse.ui.workbench"/>
-      <import plugin="org.eclipse.jface"/>
-      <import plugin="org.eclipse.ui.ide"/>
-      <import plugin="org.eclipse.emf.ecp.ui" version="1.20.0" match="equivalent"/>
-      <import plugin="org.eclipse.emf.ecp.view.model.provider.generator" version="1.20.0" match="equivalent"/>
-      <import plugin="org.eclipse.emf.ecp.view.model.provider.xmi" version="1.20.0" match="equivalent"/>
-      <import plugin="org.eclipse.sirius" version="6.0.0" match="greaterOrEqual"/>
-      <import plugin="org.enterprisedomain.classmaker.edit" version="0.8.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.edit.ui" version="2.14.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.ecp.ui.view.swt" version="1.20.0" match="equivalent"/>
-      <import plugin="org.eclipse.emf.ecp.edit" version="1.20.0" match="equivalent"/>
-      <import plugin="org.eclipse.emfforms.editor" version="1.20.0" match="equivalent"/>
-      <import plugin="org.eclipse.emfforms.editor.ecore" version="1.20.0" match="equivalent"/>
-      <import plugin="org.eclipse.emf.ecp.ui.rcp" version="1.20.0" match="equivalent"/>
-      <import plugin="org.eclipse.emf.ecp.application.e3" version="1.20.0" match="equivalent"/>
-      <import plugin="org.eclipse.emfforms.setup.base" version="1.20.0" match="equivalent"/>
-      <import plugin="org.apache.batik.css" version="1.10.0" match="greaterOrEqual"/>
-      <import plugin="org.apache.commons.logging" version="1.2.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.ecp.ui.e3" version="1.20.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.ecp.ui.e4" version="1.20.0" match="greaterOrEqual"/>
-      <import plugin="org.enterprisedomain.classmaker.emfstore" version="0.8.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.edit"/>
+      <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.eclipse.emf.ecore.edit"/>
       <import plugin="org.eclipse.emf.ecp.view.util.swt" version="1.19.0" match="compatible"/>
       <import plugin="org.eclipse.emf.ecp.ui.view.swt" version="1.19.0" match="compatible"/>
+      <import plugin="org.eclipse.jface"/>
+      <import plugin="org.eclipse.emf.ecp.ui" version="1.21.0" match="equivalent"/>
+      <import plugin="org.eclipse.e4.ui.services"/>
+      <import plugin="org.eclipse.ui" version="3.112.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
@@ -156,14 +132,14 @@ limitations under the License.
          unpack="false"/>
 
    <plugin
-         id="org.enterprisedomain.workbench"
+         id="org.enterprisedomain.classmaker.edit"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.enterprisedomain.classmaker.edit"
+         id="org.enterprisedomain.workbench.ide"
          download-size="0"
          install-size="0"
          version="0.0.0"
