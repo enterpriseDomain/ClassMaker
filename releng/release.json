@@ -16,6 +16,7 @@
     "version": {
         "name": "0.8.0",
         "desc": "This is a release version",
+       branch 'master' of https://github.com/enterpriseDomain/ClassMaker.git
         "released": "2019-07-22",
         "vcs_tag": "0.8.0",
         "gpgSign": false
@@ -25,7 +26,8 @@
         [
         {"includePattern": "build/enterpriseDomain/ClassMaker/releng/org.enterprisedomain.update/target/repository/(.*)", "excludePattern": ".gitignore", "uploadPattern": "$1"},
         {"includePattern": "build/enterpriseDomain/ClassMaker/releng/org.enterprisedomain.update/target/repository/plugins/(.*)", "excludePattern": ".gitignore", "uploadPattern": "plugins/$1"},
-        {"includePattern": "build/enterpriseDomain/ClassMaker/releng/org.enterprisedomain.update/target/repository/features/(.*)", "excludePattern": ".gitignore", "uploadPattern": "features/$1"},{"includePattern": "build/docs/(.*)", "uploadPattern": "docs/$2"}
+        {"includePattern": "build/enterpriseDomain/ClassMaker/releng/org.enterprisedomain.update/target/repository/features/(.*)", "excludePattern": ".gitignore", "uploadPattern": "features/$1"},
+        {"includePattern": "build/docs/(.*)", "uploadPattern": "docs/$2"}
         ],
     "publish": true
 }
