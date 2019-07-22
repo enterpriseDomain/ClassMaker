@@ -16,7 +16,6 @@
 		<module>org.enterprisedomain.classmaker.osgi.resolverhooks.feature</module>
 		<module>org.enterprisedomain.classmaker.edit.feature</module>
 		<module>org.enterprisedomain.classmaker.ecp.feature</module>
-		<module>org.enterprisedomain.ui.workbench.rcp.feature</module>
-		<module>org.enterprisedomain.ui.workbench.ide.feature</module>		
+		<module>org.enterprisedomain.ui.workbench.rcp.feature</module>	
 	</modules>
 </project>

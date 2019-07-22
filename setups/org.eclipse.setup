@@ -79,7 +79,7 @@
       <setupTask
           xsi:type="setup:VariableTask"
           name="eclipse.target.platform"
-          defaultValue="Photon"
+          defaultValue="2019-06"
           storageURI="scope://Workspace"/>
       <setupTask
           xsi:type="setup.p2:P2Task">
@@ -88,6 +88,7 @@
       <setupTask
           xsi:type="git:GitCloneTask"
           id="git.clone.ClassMaker.git"
+          location="${workspace.location}/git"
           remoteURI="https://github.com/enterpriseDomain/ClassMaker.git"
           pushURI="">
         <annotation
@@ -173,12 +174,12 @@
           name="master"
           label="Master">
         <setupTask
-            xsi:type="setup:EclipseIniTask"
-            option="-Doomph.redirection.ClassMaker.git"
-            value="=https://raw.githubusercontent.com/enterpriseDomain/ClassMaker.git/master/setups/ClassMakerGIT.setup->${git.clone.ClassMaker.git.location|uri}/setups/ClassMakerGIT.setup"
-            vm="true">
-          <description>Set an Oomph redirection system property to redirect the logical location of this setup to its physical location in the Git clone.</description>
-        </setupTask>
+            xsi:type="setup:VariableTask"
+            type="PROJECT"
+            name="ClassMaker"
+            value="{$git.clone.ClassMaker.git}"
+            storageURI="scope://Workspace"
+            label="enterpriseDomain ClassMaker"/>
       </stream>
       <description></description>
     </project>

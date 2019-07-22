@@ -17,7 +17,7 @@
     </detail>
     <detail
         key="siteURI">
-      <value>https://projects.eclipse.org/</value>
+      <value>https://github.com/enterpriseDomain/</value>
     </detail>
   </annotation>
   <setupTask
@@ -112,7 +112,7 @@
   </setupTask>
   <setupTask
       xsi:type="setup:WorkspaceTask"
-      id="enterprisedomain.workspace">
+      id="org.enterprisedomain.workspace">
     <description></description>
   </setupTask>
   <setupTask
@@ -266,7 +266,7 @@
       sourceURL="index:/projects/"
       targetURL="workspace/"/>
   <project href="user:/enterpriseDomainProjects.setup?name='user.project',label='&lt;User>',description='A container project for local user projects that are virtual members of the enterpriseDomain Projects project catalog'#/"/>
-  <project name="classmaker"
+  <project name="ClassMaker"
       label="ClassMaker"
       logicalProjectContainer="/">
     <description></description>
