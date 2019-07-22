@@ -11,6 +11,7 @@
 	<modules>
 		<module>org.enterprisedomain.configuration</module>
 		<module>org.enterprisedomain.update</module>
+		<module>org.enterprisedomain.workbench.ide.product</module>
 		<module>org.enterprisedomain.target</module>
 	</modules>
 </project>
