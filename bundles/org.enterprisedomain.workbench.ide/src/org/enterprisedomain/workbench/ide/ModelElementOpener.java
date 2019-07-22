@@ -25,7 +25,7 @@ import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 public class ModelElementOpener implements ECPModelElementOpener {
 
 	public static final String[] EDITOR_IDS = { "EcoreEditor", "org.eclipse.emfforms.editor.ecore.genericxmieditor", //$NON-NLS-1$ //$NON-NLS-2$
-			"org.enterprisedomain.workbench.modelEditor" }; //$NON-NLS-1$
+			"org.enterprisedomain.workbench.ide.modelEditor" }; //$NON-NLS-1$
 	private Resource resource;
 
 	public ModelElementOpener() {
