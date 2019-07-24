@@ -227,16 +227,16 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider implements IRe
 		super.fillContextMenu(manager, context, elements);
 		if (context instanceof ECPProject) {
 			ECPProject project = (ECPProject) context;
-			if (elements.length == 1) {
-				final Object element = elements[0];
-//				if (ClassMakerPlugin.getClassMaker() == null)
-//					return;
-				if (ClassMakerPlugin.getClassMaker().getWorkspace()
-						.getProject(project.getName()) instanceof Contribution) {
-					manager.add(new Separator());
-					manager.add(new MakeAction(project.getEditingDomain(), new StructuredSelection(element), project));
-				}
-			}
+//			if (elements.length == 1) {
+//				final Object element = elements[0];
+////				if (ClassMakerPlugin.getClassMaker() == null)
+////					return;
+//				if (ClassMakerPlugin.getClassMaker().getWorkspace()
+//						.getProject(project.getName()) instanceof Contribution) {
+//					manager.add(new Separator());
+//					manager.add(new MakeAction(project.getEditingDomain(), new StructuredSelection(element), project));
+//				}
+//			}
 			for (Object element : elements) {
 				if (element instanceof EObject) {
 					String eA = EcoreUtil.getAnnotation(((EObject) element).eClass().getEPackage(),
