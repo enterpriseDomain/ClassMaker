@@ -35,8 +35,10 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.impl.SCMOperatorImpl#getProjectName <em>Project Name</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.SCMOperatorImpl#getRegistry <em>Registry</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.SCMOperatorImpl#getProjectName
+ * <em>Project Name</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.SCMOperatorImpl#getRegistry
+ * <em>Registry</em>}</li>
  * </ul>
  *
  * @generated
@@ -44,16 +46,18 @@ import org.osgi.framework.Version;
 public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOperator<T> {
 
 	/**
-	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getProjectName()
 	 * @generated
 	 * @ordered
 	 */
 	protected static final String PROJECT_NAME_EDEFAULT = "";
 	/**
-	 * The cached value of the '{@link #getProjectName() <em>Project Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getProjectName() <em>Project Name</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getProjectName()
 	 * @generated
 	 * @ordered
@@ -63,14 +67,16 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 	/**
 	 * The cached value of the '{@link #getRegistry() <em>Registry</em>}' reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getRegistry()
 	 * @generated
 	 * @ordered
 	 */
-	protected SCMRegistry registry;
+	protected SCMRegistry<T> registry;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected SCMOperatorImpl() {
@@ -79,6 +85,7 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -88,6 +95,7 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -97,6 +105,7 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -110,13 +119,15 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public SCMRegistry getRegistry() {
+	public SCMRegistry<T> getRegistry() {
 		if (registry != null && registry.eIsProxy()) {
 			InternalEObject oldRegistry = (InternalEObject) registry;
-			registry = (SCMRegistry) eResolveProxy(oldRegistry);
+			registry = (SCMRegistry<T>) eResolveProxy(oldRegistry);
 			if (registry != oldRegistry) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassMakerPackage.SCM_OPERATOR__REGISTRY,
@@ -128,19 +139,21 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public SCMRegistry basicGetRegistry() {
+	public SCMRegistry<T> basicGetRegistry() {
 		return registry;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
-	public void setRegistry(SCMRegistry newRegistry) {
-		SCMRegistry oldRegistry = registry;
+	public void setRegistry(SCMRegistry<T> newRegistry) {
+		SCMRegistry<T> oldRegistry = registry;
 		registry = newRegistry;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.SCM_OPERATOR__REGISTRY, oldRegistry,
@@ -180,7 +193,7 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 	 * 
 	 * @generated NOT
 	 */
-	public abstract int decodeTimestamp(String commitMessage);
+	public abstract long decodeTimestamp(String commitMessage);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -221,10 +234,11 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 	 * 
 	 * @generated NOT
 	 */
-	public abstract void checkoutOrphan(String branch, int timestamp) throws Exception;
+	public abstract void checkoutOrphan(String branch, long timestamp) throws Exception;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -242,8 +256,10 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -251,7 +267,7 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 			setProjectName((String) newValue);
 			return;
 		case ClassMakerPackage.SCM_OPERATOR__REGISTRY:
-			setRegistry((SCMRegistry) newValue);
+			setRegistry((SCMRegistry<T>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -259,6 +275,7 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -268,7 +285,7 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 			setProjectName(PROJECT_NAME_EDEFAULT);
 			return;
 		case ClassMakerPackage.SCM_OPERATOR__REGISTRY:
-			setRegistry((SCMRegistry) null);
+			setRegistry((SCMRegistry<T>) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -276,6 +293,7 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -291,6 +309,7 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

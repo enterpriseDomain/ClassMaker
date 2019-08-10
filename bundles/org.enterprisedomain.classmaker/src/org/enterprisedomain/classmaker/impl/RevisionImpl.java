@@ -82,7 +82,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int TIMESTAMP_EDEFAULT = 0;
+	protected static final long TIMESTAMP_EDEFAULT = 0L;
 
 	/**
 	 * The cached value of the '{@link #getTimestamp() <em>Timestamp</em>}'
@@ -92,7 +92,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	 * @generated
 	 * @ordered
 	 */
-	protected int timestamp = TIMESTAMP_EDEFAULT;
+	protected long timestamp = TIMESTAMP_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getStateHistory() <em>State History</em>}'
@@ -102,7 +102,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	 * @generated
 	 * @ordered
 	 */
-	protected EMap<Integer, State> stateHistory;
+	protected EMap<Long, State> stateHistory;
 
 	/**
 	 * The default value of the '{@link #getLatestTimestamp() <em>Latest
@@ -112,7 +112,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int LATEST_TIMESTAMP_EDEFAULT = 0;
+	protected static final long LATEST_TIMESTAMP_EDEFAULT = 0L;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -192,7 +192,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	 * @generated
 	 */
 	@Override
-	public int getTimestamp() {
+	public long getTimestamp() {
 		return timestamp;
 	}
 
@@ -202,8 +202,8 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	 * @generated
 	 */
 	@Override
-	public void setTimestamp(int newTimestamp) {
-		int oldTimestamp = timestamp;
+	public void setTimestamp(long newTimestamp) {
+		long oldTimestamp = timestamp;
 		timestamp = newTimestamp;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.REVISION__TIMESTAMP, oldTimestamp,
@@ -216,10 +216,10 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	 * @generated
 	 */
 	@Override
-	public EMap<Integer, State> getStateHistory() {
+	public EMap<Long, State> getStateHistory() {
 		if (stateHistory == null) {
-			stateHistory = new EcoreEMap<Integer, State>(ClassMakerPackage.Literals.INTEGER_TO_STATE_MAP_ENTRY,
-					IntegerToStateMapEntryImpl.class, this, ClassMakerPackage.REVISION__STATE_HISTORY);
+			stateHistory = new EcoreEMap<Long, State>(ClassMakerPackage.Literals.LONG_TO_STATE_MAP_ENTRY,
+					LongToStateMapEntryImpl.class, this, ClassMakerPackage.REVISION__STATE_HISTORY);
 		}
 		return stateHistory;
 	}
@@ -229,7 +229,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	 * 
 	 * @generated NOT
 	 */
-	public int getLatestTimestamp() {
+	public long getLatestTimestamp() {
 		if (!getStateHistory().isEmpty())
 			return ListUtil.getLast(getStateHistory()).getKey();
 		return StateImpl.TIMESTAMP_EDEFAULT;
@@ -287,7 +287,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 				log.add(branch.getObjectId());
 				Iterable<RevCommit> commits = log.call();
 				for (RevCommit c : commits) {
-					int timestamp = operator.decodeTimestamp(c.getShortMessage());
+					long timestamp = operator.decodeTimestamp(c.getShortMessage());
 					if (timestamp == -1) {
 						timestamp = operator.decodeTimestamp(getVersion().getQualifier());
 						if (timestamp == -1)
@@ -358,7 +358,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	 * 
 	 * @generated NOT
 	 */
-	public void checkout(int stateTime, String commitId) {
+	public void checkout(long stateTime, String commitId) {
 		setTimestamp(stateTime);
 		getContribution().initAdapters(this);
 		if (isStateSet())
@@ -370,7 +370,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	 * 
 	 * @generated NOT
 	 */
-	public void checkout(int stateTime) {
+	public void checkout(long stateTime) {
 		setTimestamp(stateTime);
 		getContribution().initAdapters(this);
 		if (isStateSet())
@@ -396,7 +396,8 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	public State newState() {
 		State newState = ClassMakerFactory.eINSTANCE.createState();
 		newState.setTimestamp(
-				(int) (Calendar.getInstance(Revision.VERSION_QUALIFIER_FORMAT.getTimeZone()).getTimeInMillis() / 1000));
+				(long) (Calendar.getInstance(Revision.VERSION_QUALIFIER_FORMAT.getTimeZone()).getTimeInMillis()
+						/ 1000));
 		getStateHistory().put(newState.getTimestamp(), newState);
 		newState.setVersion(getVersion());
 		return newState;
@@ -528,7 +529,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 			setState((State) newValue);
 			return;
 		case ClassMakerPackage.REVISION__TIMESTAMP:
-			setTimestamp((Integer) newValue);
+			setTimestamp((Long) newValue);
 			return;
 		case ClassMakerPackage.REVISION__STATE_HISTORY:
 			((EStructuralFeature.Setting) getStateHistory()).set(newValue);

@@ -95,19 +95,25 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl#getProjects <em>Projects</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl#getResourceSet <em>Resource Set</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl#getCustomizers <em>Customizers</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl#getService <em>Service</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl#getSCMRegistry <em>SCM Registry</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl#getProjects
+ * <em>Projects</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl#getResourceSet
+ * <em>Resource Set</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl#getCustomizers
+ * <em>Customizers</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl#getService
+ * <em>Service</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl#getSCMRegistry
+ * <em>SCM Registry</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	/**
-	 * The cached value of the '{@link #getProjects() <em>Projects</em>}' containment reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getProjects() <em>Projects</em>}'
+	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getProjects()
 	 * @generated
 	 * @ordered
@@ -125,8 +131,9 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	protected static final ResourceSet RESOURCE_SET_EDEFAULT = new ResourceSetImpl();
 
 	/**
-	 * The cached value of the '{@link #getResourceSet() <em>Resource Set</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getResourceSet() <em>Resource Set</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getResourceSet()
 	 * @generated
 	 * @ordered
@@ -136,6 +143,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	/**
 	 * The cached value of the '{@link #getCustomizers() <em>Customizers</em>}' map.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getCustomizers()
 	 * @generated
 	 * @ordered
@@ -143,8 +151,9 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	protected EMap<StageQualifier, Customizer> customizers;
 
 	/**
-	 * The cached value of the '{@link #getSCMRegistry() <em>SCM Registry</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getSCMRegistry() <em>SCM Registry</em>}'
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getSCMRegistry()
 	 * @generated
 	 * @ordered
@@ -153,6 +162,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected WorkspaceImpl() {
@@ -161,6 +171,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -170,6 +181,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -191,6 +203,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -231,6 +244,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetService(ClassMakerService newService, NotificationChain msgs) {
@@ -240,6 +254,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -284,6 +299,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public SCMRegistry<?> basicGetSCMRegistry() {
@@ -761,6 +777,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -779,6 +796,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -796,6 +814,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -810,6 +829,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -836,6 +856,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -858,6 +879,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -878,6 +900,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -899,6 +922,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

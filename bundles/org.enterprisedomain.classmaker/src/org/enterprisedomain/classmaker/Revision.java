@@ -28,18 +28,21 @@ import org.eclipse.emf.common.util.EMap;
  * <!-- begin-user-doc --> A representation of the model object
  * '<em><b>Revision</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc -->
- * A revision of <em>Contribution</em>. Identified by {@link #getVersion() <em>Version</em>}.
- * <!-- end-model-doc -->
+ * <!-- begin-model-doc --> A revision of <em>Contribution</em>. Identified by
+ * {@link #getVersion() <em>Version</em>}. <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.Revision#getState <em>State</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Revision#getTimestamp <em>Timestamp</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Revision#getStateHistory <em>State History</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Revision#getLatestTimestamp <em>Latest Timestamp</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Revision#getState
+ * <em>State</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Revision#getTimestamp
+ * <em>Timestamp</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Revision#getStateHistory <em>State
+ * History</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Revision#getLatestTimestamp
+ * <em>Latest Timestamp</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getRevision()
@@ -68,8 +71,10 @@ public interface Revision extends Item {
 	State getState();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Revision#getState <em>State</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Revision#getState <em>State</em>}'
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>State</em>' reference.
 	 * @see #getState()
 	 * @generated
@@ -91,20 +96,22 @@ public interface Revision extends Item {
 	 * @model id="true"
 	 * @generated
 	 */
-	int getTimestamp();
+	long getTimestamp();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Revision#getTimestamp <em>Timestamp</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Revision#getTimestamp
+	 * <em>Timestamp</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Timestamp</em>' attribute.
 	 * @see #getTimestamp()
 	 * @generated
 	 */
-	void setTimestamp(int value);
+	void setTimestamp(long value);
 
 	/**
 	 * Returns the value of the '<em><b>State History</b></em>' map. The key is of
-	 * type {@link java.lang.Integer}, and the value is of type
+	 * type {@link java.lang.Long}, and the value is of type
 	 * {@link org.enterprisedomain.classmaker.State}, <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>State History</em>' map isn't clear, there really
@@ -115,11 +122,11 @@ public interface Revision extends Item {
 	 * 
 	 * @return the value of the '<em>State History</em>' map.
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getRevision_StateHistory()
-	 * @model mapType="org.enterprisedomain.classmaker.IntegerToStateMapEntry&lt;org.eclipse.emf.ecore.EIntegerObject,
+	 * @model mapType="org.enterprisedomain.classmaker.LongToStateMapEntry&lt;org.eclipse.emf.ecore.ELongObject,
 	 *        org.enterprisedomain.classmaker.State&gt;"
 	 * @generated
 	 */
-	EMap<Integer, State> getStateHistory();
+	EMap<Long, State> getStateHistory();
 
 	/**
 	 * Returns the value of the '<em><b>Latest Timestamp</b></em>' attribute. <!--
@@ -135,31 +142,36 @@ public interface Revision extends Item {
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
-	int getLatestTimestamp();
+	long getLatestTimestamp();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	void create(IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
-	void checkout(int timestamp, String commitId);
+	void checkout(long timestamp, String commitId);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
-	void checkout(int timestamp);
+	void checkout(long timestamp);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -167,6 +179,7 @@ public interface Revision extends Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -174,20 +187,25 @@ public interface Revision extends Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	void delete(IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model adaptersType="org.enterprisedomain.classmaker.Adapter" adaptersMany="true"
+	 * 
+	 * @model adaptersType="org.enterprisedomain.classmaker.Adapter"
+	 *        adaptersMany="true"
 	 * @generated
 	 */
 	void addAdapters(EList<Adapter> adapters);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */

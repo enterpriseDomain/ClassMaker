@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Kyrill Zotkin
+ * Copyright 2019 Kyrill Zotkin
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,9 +39,10 @@ import org.enterprisedomain.classmaker.ClassMakerPackage;
 /**
  * This is the item provider adapter for a {@link java.util.Map.Entry} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  */
-public class IntegerToStateMapEntryItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
+public class LongToStateMapEntryItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
 		IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
@@ -49,7 +50,7 @@ public class IntegerToStateMapEntryItemProvider extends ItemProviderAdapter impl
 	 * 
 	 * @generated
 	 */
-	public IntegerToStateMapEntryItemProvider(AdapterFactory adapterFactory) {
+	public LongToStateMapEntryItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -70,76 +71,81 @@ public class IntegerToStateMapEntryItemProvider extends ItemProviderAdapter impl
 	}
 
 	/**
-	 * This adds a property descriptor for the Key feature.
-	 * <!-- begin-user-doc -->
+	 * This adds a property descriptor for the Key feature. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addKeyPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
 				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_IntegerToStateMapEntry_key_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_IntegerToStateMapEntry_key_feature",
-						"_UI_IntegerToStateMapEntry_type"),
-				ClassMakerPackage.Literals.INTEGER_TO_STATE_MAP_ENTRY__KEY, true, false, false,
+				getString("_UI_LongToStateMapEntry_key_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_LongToStateMapEntry_key_feature",
+						"_UI_LongToStateMapEntry_type"),
+				ClassMakerPackage.Literals.LONG_TO_STATE_MAP_ENTRY__KEY, true, false, false,
 				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an
+	 * appropriate feature for an {@link org.eclipse.emf.edit.command.AddCommand},
+	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(ClassMakerPackage.Literals.INTEGER_TO_STATE_MAP_ENTRY__VALUE);
+			childrenFeatures.add(ClassMakerPackage.Literals.LONG_TO_STATE_MAP_ENTRY__VALUE);
 		}
 		return childrenFeatures;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
+		// Check the type of the specified child object and return the proper feature to
+		// use for
 		// adding (see {@link AddCommand}) it as a child.
 
 		return super.getChildFeature(object, child);
 	}
 
 	/**
-	 * This returns IntegerToStateMapEntry.gif.
-	 * <!-- begin-user-doc --> <!--
+	 * This returns LongToStateMapEntry.gif. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/IntegerToStateMapEntry"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/LongToStateMapEntry"));
 	}
 
 	/**
-	 * This returns the label text for the adapted class.
-	 * <!-- begin-user-doc -->
+	 * This returns the label text for the adapted class. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public String getText(Object object) {
-		Map.Entry<?, ?> integerToStateMapEntry = (Map.Entry<?, ?>) object;
-		return "" + integerToStateMapEntry.getKey() + " -> " + integerToStateMapEntry.getValue();
+		Map.Entry<?, ?> longToStateMapEntry = (Map.Entry<?, ?>) object;
+		return "" + longToStateMapEntry.getKey() + " -> " + longToStateMapEntry.getValue();
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This handles model notifications by calling {@link #updateChildren} to update
+	 * any cached children and by creating a viewer notification, which it passes to
+	 * {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -147,10 +153,10 @@ public class IntegerToStateMapEntryItemProvider extends ItemProviderAdapter impl
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Map.Entry.class)) {
-		case ClassMakerPackage.INTEGER_TO_STATE_MAP_ENTRY__KEY:
+		case ClassMakerPackage.LONG_TO_STATE_MAP_ENTRY__KEY:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
-		case ClassMakerPackage.INTEGER_TO_STATE_MAP_ENTRY__VALUE:
+		case ClassMakerPackage.LONG_TO_STATE_MAP_ENTRY__VALUE:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
@@ -158,17 +164,17 @@ public class IntegerToStateMapEntryItemProvider extends ItemProviderAdapter impl
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-	 * that can be created under this object.
-	 * <!-- begin-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing
+	 * the children that can be created under this object. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.INTEGER_TO_STATE_MAP_ENTRY__VALUE,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.LONG_TO_STATE_MAP_ENTRY__VALUE,
 				ClassMakerFactory.eINSTANCE.createState()));
 	}
 

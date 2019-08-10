@@ -53,7 +53,7 @@ import org.osgi.framework.Version;
 @SuppressWarnings("restriction")
 public class PDEPluginExporter extends AbstractExporter {
 
-	public PDEPluginExporter(int stateTimestamp) {
+	public PDEPluginExporter(long stateTimestamp) {
 		super(stateTimestamp);
 	}
 

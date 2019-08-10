@@ -11,18 +11,18 @@
     </eOperations>
     <eOperations name="checkout">
       <eParameters name="version" eType="#//OSGiVersion"/>
-      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
     </eOperations>
     <eOperations name="checkout">
       <eParameters name="version" eType="#//OSGiVersion"/>
-      <eParameters name="time" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
       <eParameters name="commitId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eOperations name="checkout">
-      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
     </eOperations>
     <eOperations name="checkout">
-      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
       <eParameters name="commitId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eOperations name="checkout">
@@ -37,7 +37,7 @@
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
     <eOperations name="getState" eType="#//State">
-      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
     </eOperations>
     <eOperations name="initAdapters">
       <eParameters name="revision" eType="#//Revision"/>
@@ -76,11 +76,11 @@
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
     <eOperations name="checkout">
-      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
       <eParameters name="commitId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eOperations name="checkout">
-      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
     </eOperations>
     <eOperations name="checkout">
       <eParameters name="commitId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -101,19 +101,19 @@
         <details key="documentation" value="Currently checked out &lt;em>State&lt;/em>."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
         iD="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A timestamp of last checked out state."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="stateHistory" upperBound="-1"
-        eType="#//IntegerToStateMapEntry" containment="true">
+        eType="#//LongToStateMapEntry" containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A {@link State}s history."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="latestTimestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="latestTimestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
         changeable="false" volatile="true" transient="true" derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Latest {@link  State#getTimestamp() &lt;em>Timestamp&lt;/em>} of all {@link  #getStateHistory() &lt;em>States&lt;/em>}."/>
@@ -169,7 +169,7 @@
         <details key="documentation" value="&lt;em>&lt;b>State&lt;/b>&lt;/em>'s containing {@link Revision &lt;em>Revision&lt;/em>}."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
         iD="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Uniquily identifies the &lt;em>&lt;b>State&lt;/b>&lt;/em> in a &lt;em>&lt;b>Revision&lt;/b>&lt;/em>."/>
@@ -449,11 +449,11 @@
       <details key="documentation" value="{@link org.osgi.framework.Version} datatype import."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="IntegerToStateMapEntry" instanceClassName="java.util.Map$Entry">
+  <eClassifiers xsi:type="ecore:EClass" name="LongToStateMapEntry" instanceClassName="java.util.Map$Entry">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="{@inheritDoc}"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELongObject">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A {@link State#getTimestamp() &lt;em>Timestamp&lt;/em>} key."/>
       </eAnnotations>
@@ -652,7 +652,7 @@
         eExceptions="#//Exception">
       <eParameters name="commitMessage" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
-    <eOperations name="decodeTimestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+    <eOperations name="decodeTimestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong">
       <eParameters name="commitMessage" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eOperations name="decodeVersion" eType="#//OSGiVersion">
@@ -668,7 +668,7 @@
     </eOperations>
     <eOperations name="checkoutOrphan" eExceptions="#//Exception">
       <eParameters name="branch" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="projectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="">
@@ -676,7 +676,11 @@
         <details key="documentation" value="A name of the {@link org.eclipse.core.resources.IProject IProject} contained in SCM repo."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="registry" eType="#//SCMRegistry"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="registry">
+      <eGenericType eClassifier="#//SCMRegistry">
+        <eTypeArguments eTypeParameter="#//SCMOperator/T"/>
+      </eGenericType>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SCMRegistry">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

@@ -26,7 +26,7 @@ import org.osgi.framework.Version;
 
 public abstract class ContainerJob extends EnterpriseDomainJob {
 
-	public ContainerJob(String name, int stateTimestamp) {
+	public ContainerJob(String name, long stateTimestamp) {
 		super(name, stateTimestamp);
 	}
 

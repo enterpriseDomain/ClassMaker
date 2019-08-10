@@ -37,17 +37,21 @@ import org.enterprisedomain.classmaker.CompletionListener;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.impl.BlueprintImpl#getDynamicModel <em>Dynamic Model</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.BlueprintImpl#getDependencies <em>Dependencies</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.BlueprintImpl#getCompletionListeners <em>Completion Listeners</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.BlueprintImpl#getDynamicModel
+ * <em>Dynamic Model</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.BlueprintImpl#getDependencies
+ * <em>Dependencies</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.BlueprintImpl#getCompletionListeners
+ * <em>Completion Listeners</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class BlueprintImpl extends EObjectImpl implements Blueprint {
 	/**
-	 * The cached value of the '{@link #getDynamicModel() <em>Dynamic Model</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getDynamicModel() <em>Dynamic Model</em>}'
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getDynamicModel()
 	 * @generated
 	 * @ordered
@@ -55,8 +59,9 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 	protected EPackage dynamicModel;
 
 	/**
-	 * The cached value of the '{@link #getDependencies() <em>Dependencies</em>}' attribute list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getDependencies() <em>Dependencies</em>}'
+	 * attribute list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getDependencies()
 	 * @generated
 	 * @ordered
@@ -76,6 +81,7 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected BlueprintImpl() {
@@ -84,6 +90,7 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -93,6 +100,7 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -111,6 +119,7 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EPackage basicGetDynamicModel() {
@@ -119,6 +128,7 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -132,6 +142,7 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -145,6 +156,7 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -158,6 +170,7 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -177,6 +190,7 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -200,6 +214,7 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -220,6 +235,7 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -237,6 +253,7 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

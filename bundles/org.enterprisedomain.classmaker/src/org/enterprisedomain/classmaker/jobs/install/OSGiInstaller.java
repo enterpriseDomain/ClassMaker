@@ -78,7 +78,7 @@ public class OSGiInstaller extends ContainerJob {
 	private Semaphore uninstalled;
 	private FrameworkWiring frameworkWiring;
 
-	public OSGiInstaller(int stateTimestamp) {
+	public OSGiInstaller(long stateTimestamp) {
 		super(Messages.JobNameInstaller, stateTimestamp);
 		installed = new Semaphore(0);
 		uninstalled = new Semaphore(0);

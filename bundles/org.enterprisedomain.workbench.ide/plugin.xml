@@ -113,13 +113,6 @@
    <extension
          point="org.eclipse.core.runtime.adapters">
       <factory
-            adaptableType="org.eclipse.core.resources.IProject"
-            class="org.enterprisedomain.workbench.ide.ProjectAdapterFactory">
-         <adapter
-               type="org.enterprisedomain.classmaker.Contribution">
-         </adapter>
-      </factory>
-      <factory
             adaptableType="org.eclipse.emf.ecp.core.ECPProject"
             class="org.enterprisedomain.workbench.ide.ProjectAdapterFactory">
          <adapter

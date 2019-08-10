@@ -8,7 +8,7 @@ public class CreateGeneratorCustomizer extends CustomizerImpl {
 
 	@Override
 	public Object customize(EList<Object> args) {
-		EcoreGenerator generator = new EcoreGenerator((Integer) args.get(1));
+		EcoreGenerator generator = new EcoreGenerator((Long) args.get(1));
 		generator.setProject((IProject) args.get(0));
 		return generator;
 	}

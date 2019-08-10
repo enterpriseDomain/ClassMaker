@@ -44,7 +44,7 @@ public class ClassMakerBuilder extends IncrementalProjectBuilder implements IBui
 		Project project = ClassMakerPlugin.getInstance().getClassMaker().getWorkspace()
 				.getProject(getProject().getName());
 		if (project instanceof Contribution)
-			((Contribution) project).build(monitor);		
+			((Contribution) project).build(monitor);
 		return null;
 	}
 

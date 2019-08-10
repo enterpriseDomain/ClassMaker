@@ -7,7 +7,7 @@ public class CreateInstallerCustomizer extends CustomizerImpl {
 
 	@Override
 	public Object customize(EList<Object> args) {
-		return new OSGiInstaller((Integer) args.get(0));
+		return new OSGiInstaller((Long) args.get(0));
 	}
 
 }

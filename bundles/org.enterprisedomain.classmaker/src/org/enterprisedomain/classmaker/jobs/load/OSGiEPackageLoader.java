@@ -62,7 +62,7 @@ public class OSGiEPackageLoader extends ContainerJob {
 		}
 	};
 
-	public OSGiEPackageLoader(int stateTimestamp) {
+	public OSGiEPackageLoader(long stateTimestamp) {
 		super(Messages.JobNameLoader, stateTimestamp);
 	}
 
