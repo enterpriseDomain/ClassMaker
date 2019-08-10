@@ -36,7 +36,6 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.ECollections;
@@ -80,15 +79,17 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ClassMakerServiceImpl#getWorkspace <em>Workspace</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ClassMakerServiceImpl#getWorkspace
+ * <em>Workspace</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerService {
 	/**
-	 * The cached value of the '{@link #getWorkspace() <em>Workspace</em>}' containment reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getWorkspace() <em>Workspace</em>}'
+	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getWorkspace()
 	 * @generated
 	 * @ordered
@@ -140,6 +141,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -149,6 +151,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -158,6 +161,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetWorkspace(Workspace newWorkspace, NotificationChain msgs) {
@@ -176,6 +180,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -674,6 +679,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -690,6 +696,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -703,6 +710,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -716,6 +724,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -730,6 +739,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -744,6 +754,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

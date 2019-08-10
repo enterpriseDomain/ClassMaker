@@ -51,7 +51,7 @@ import org.enterprisedomain.classmaker.util.ResourceUtils;
 
 public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 
-	public EcoreGenerator(int stateTimestamp) {
+	public EcoreGenerator(long stateTimestamp) {
 		super(Messages.JobNameCodeGenerator, stateTimestamp);
 	}
 
@@ -73,7 +73,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 		private IPath modelPath;
 		private IPath genModelPath;
 
-		public GeneratorJob(String jobName, int stateTimestamp) {
+		public GeneratorJob(String jobName, long stateTimestamp) {
 			super(jobName, stateTimestamp);
 		}
 
@@ -119,7 +119,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 
 	protected class GenModelGenerationJob extends GeneratorJob {
 
-		public GenModelGenerationJob(int stateTimestamp) {
+		public GenModelGenerationJob(long stateTimestamp) {
 			super(Messages.JobNameGenModelGeneration, stateTimestamp);
 			setChangeRule(false);
 		}
@@ -145,7 +145,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 
 	protected class CodeGenerationJob extends GeneratorJob {
 
-		public CodeGenerationJob(int stateTimestamp) {
+		public CodeGenerationJob(long stateTimestamp) {
 			super(NLS.bind(Messages.JobNameCodeGeneration, "Code"), stateTimestamp);
 			setChangeRule(false);
 		}

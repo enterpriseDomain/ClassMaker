@@ -18,7 +18,6 @@ package org.enterprisedomain.ecp.ui;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
-import java.util.Properties;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
@@ -27,7 +26,6 @@ import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.notify.AdapterFactory;
-import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -50,7 +48,6 @@ import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.action.IMenuManager;
-import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -78,7 +75,6 @@ import org.enterprisedomain.classmaker.util.ClassMakerAdapterFactory;
 import org.enterprisedomain.ecp.EnterpriseDomainProvider;
 import org.enterprisedomain.ecp.IResourceHandler;
 import org.enterprisedomain.ecp.ui.actions.ExecuteOperationAction;
-import org.enterprisedomain.ecp.ui.actions.MakeAction;
 
 @SuppressWarnings("restriction")
 public class EnterpriseDomainUIProvider extends DefaultUIProvider implements IResourceHandler {

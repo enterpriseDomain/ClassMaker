@@ -33,8 +33,8 @@ public class GitSCMOperator extends SCMOperatorImpl<Git> {
 		return getRepositorySCM(projectGitPath.toFile(), getRegistry());
 	}
 
-	public static synchronized Git getRepositorySCM(File dir, SCMRegistry<Git> registry) throws Exception {
-		Git git = (Git) registry.getSCM(dir.getName());
+	public static synchronized Git getRepositorySCM(File dir, SCMRegistry<Git> scmRegistry) throws Exception {
+		Git git = (Git) scmRegistry.getSCM(dir.getName());
 		try {
 			git = Git.open(dir);
 		} catch (RepositoryNotFoundException e) {
@@ -44,7 +44,7 @@ public class GitSCMOperator extends SCMOperatorImpl<Git> {
 		} catch (IOException e) {
 			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createWarningStatus(e));
 		}
-		((SCMRegistry<Git>) registry).putSCM(dir.getName(), git);
+		((SCMRegistry<Git>) scmRegistry).putSCM(dir.getName(), git);
 		return git;
 	}
 
@@ -89,19 +89,19 @@ public class GitSCMOperator extends SCMOperatorImpl<Git> {
 	}
 
 	@Override
-	public int decodeTimestamp(String commitMessage) {
+	public long decodeTimestamp(String commitMessage) {
 		try {
 			String[] parts = commitMessage.split(" ");
 			if (parts.length == 1)
 				try {
-					return (int) Revision.VERSION_QUALIFIER_FORMAT.parse(parts[0]).getTime();
+					return (long) Revision.VERSION_QUALIFIER_FORMAT.parse(parts[0]).getTime();
 				} catch (ParseException e) {
 					return -1;
 				}
 			if (parts.length == 2)
-				return Integer.parseInt(parts[1]);
+				return Long.parseLong(parts[1]);
 			if (parts.length == 3)
-				return Integer.parseInt(parts[2]);
+				return Long.parseLong(parts[2]);
 			else
 				return -1;
 		} catch (NumberFormatException e) {
@@ -138,7 +138,7 @@ public class GitSCMOperator extends SCMOperatorImpl<Git> {
 	}
 
 	@Override
-	public void checkoutOrphan(String branch, int timestamp) throws Exception {
+	public void checkoutOrphan(String branch, long timestamp) throws Exception {
 		try {
 			Git git = getRepositorySCM();
 			synchronized (git) {

@@ -12,10 +12,7 @@ public class ProjectAdapterFactory implements IAdapterFactory {
 	@Override
 	public <T> T getAdapter(Object adaptableObject, Class<T> adapterType) {
 		if (Contribution.class.isAssignableFrom(adapterType)) {
-			if (adaptableObject instanceof IProject)
-				return (T) ClassMakerPlugin.getClassMaker().getWorkspace()
-						.getContribution(((IProject) adaptableObject).getName());
-			else if (adaptableObject instanceof ECPProject)
+			if (adaptableObject instanceof ECPProject)
 				return (T) ClassMakerPlugin.getClassMaker().getWorkspace()
 						.getContribution(((ECPProject) adaptableObject).getName());
 		}

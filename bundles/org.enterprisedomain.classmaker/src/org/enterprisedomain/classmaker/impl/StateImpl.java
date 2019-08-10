@@ -197,7 +197,7 @@ public class StateImpl extends ItemImpl implements State {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int TIMESTAMP_EDEFAULT = 0;
+	protected static final long TIMESTAMP_EDEFAULT = 0L;
 
 	/**
 	 * The cached value of the '{@link #getTimestamp() <em>Timestamp</em>}'
@@ -207,7 +207,7 @@ public class StateImpl extends ItemImpl implements State {
 	 * @generated
 	 * @ordered
 	 */
-	protected int timestamp = TIMESTAMP_EDEFAULT;
+	protected long timestamp = TIMESTAMP_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
@@ -399,7 +399,7 @@ public class StateImpl extends ItemImpl implements State {
 	 * @generated
 	 */
 	@Override
-	public int getTimestamp() {
+	public long getTimestamp() {
 		return timestamp;
 	}
 
@@ -409,8 +409,8 @@ public class StateImpl extends ItemImpl implements State {
 	 * @generated
 	 */
 	@Override
-	public void setTimestamp(int newTimestamp) {
-		int oldTimestamp = timestamp;
+	public void setTimestamp(long newTimestamp) {
+		long oldTimestamp = timestamp;
 		timestamp = newTimestamp;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.STATE__TIMESTAMP, oldTimestamp,
@@ -619,7 +619,7 @@ public class StateImpl extends ItemImpl implements State {
 	 */
 	public Worker createExporter() {
 		return create(ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "project.create.exporter"), //$NON-NLS-1$
-				Integer.valueOf(getTimestamp()));
+				Long.valueOf(getTimestamp()));
 	}
 
 	/**
@@ -629,7 +629,7 @@ public class StateImpl extends ItemImpl implements State {
 	 */
 	public Worker createInstaller() {
 		return create(ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "project.create.installer"), //$NON-NLS-1$
-				Integer.valueOf(getTimestamp()));
+				Long.valueOf(getTimestamp()));
 	}
 
 	/**
@@ -639,7 +639,7 @@ public class StateImpl extends ItemImpl implements State {
 	 */
 	public Worker createModelLoader() {
 		return create(ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "project.create.loader"), //$NON-NLS-1$
-				Integer.valueOf(getTimestamp()));
+				Long.valueOf(getTimestamp()));
 	}
 
 	private Worker create(StageQualifier stage, Object... customizerArgs) {
@@ -1308,7 +1308,7 @@ public class StateImpl extends ItemImpl implements State {
 			setRevision((Revision) newValue);
 			return;
 		case ClassMakerPackage.STATE__TIMESTAMP:
-			setTimestamp((Integer) newValue);
+			setTimestamp((Long) newValue);
 			return;
 		case ClassMakerPackage.STATE__JOB_FAMILY:
 			setJobFamily((String) newValue);

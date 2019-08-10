@@ -95,7 +95,7 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 
 	private ResourceSet resourceSet;
 
-	private int stateTimestamp = -1;
+	private long stateTimestamp = -1;
 
 	private boolean commitState = false;
 
@@ -105,7 +105,7 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 
 	private Properties properties;
 
-	public EnterpriseDomainJob(String name, int stateTimestamp) {
+	public EnterpriseDomainJob(String name, long stateTimestamp) {
 		super(name);
 		setStateTimestamp(stateTimestamp);
 		setUser(true);
@@ -255,11 +255,11 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 	 */
 	public abstract Stage getDirtyStage();
 
-	public int getStateTimestamp() {
+	public long getStateTimestamp() {
 		return stateTimestamp;
 	}
 
-	public void setStateTimestamp(int stateTimestamp) {
+	public void setStateTimestamp(long stateTimestamp) {
 		this.stateTimestamp = stateTimestamp;
 	}
 

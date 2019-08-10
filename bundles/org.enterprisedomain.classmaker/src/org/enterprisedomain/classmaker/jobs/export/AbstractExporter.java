@@ -24,7 +24,7 @@ public abstract class AbstractExporter extends ContainerJob implements Worker {
 
 	public static final String EXPORT_DESTINATION_PROP = "export.destination";
 
-	public AbstractExporter(int stateTimestamp) {
+	public AbstractExporter(long stateTimestamp) {
 		super(Messages.JobNameExport, stateTimestamp);
 	}
 

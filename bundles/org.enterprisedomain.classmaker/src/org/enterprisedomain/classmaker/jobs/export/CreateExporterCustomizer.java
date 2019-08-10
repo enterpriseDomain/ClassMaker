@@ -7,7 +7,7 @@ public class CreateExporterCustomizer extends CustomizerImpl {
 
 	@Override
 	public Object customize(EList<Object> args) {
-		return new PDEPluginExporter((Integer) args.get(0));
+		return new PDEPluginExporter((Long) args.get(0));
 	}
 
 }

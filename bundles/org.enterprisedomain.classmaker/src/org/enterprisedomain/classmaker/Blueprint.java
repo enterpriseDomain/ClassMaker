@@ -23,17 +23,19 @@ import org.eclipse.emf.ecore.EPackage;
  * <!-- begin-user-doc --> A representation of the model object
  * '<em><b>Blueprint</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc -->
- * Model object wrapper and input specification for {@link #make() making}.
- * <!-- end-model-doc -->
+ * <!-- begin-model-doc --> Model object wrapper and input specification for
+ * {@link #make() making}. <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.Blueprint#getDynamicModel <em>Dynamic Model</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Blueprint#getDependencies <em>Dependencies</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Blueprint#getCompletionListeners <em>Completion Listeners</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Blueprint#getDynamicModel
+ * <em>Dynamic Model</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Blueprint#getDependencies
+ * <em>Dependencies</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Blueprint#getCompletionListeners
+ * <em>Completion Listeners</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getBlueprint()
@@ -56,8 +58,10 @@ public interface Blueprint extends EObject {
 	EPackage getDynamicModel();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Blueprint#getDynamicModel <em>Dynamic Model</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Blueprint#getDynamicModel <em>Dynamic
+	 * Model</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Dynamic Model</em>' reference.
 	 * @see #getDynamicModel()
 	 * @generated

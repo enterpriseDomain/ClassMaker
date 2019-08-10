@@ -365,8 +365,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	@SuppressWarnings("unchecked")
 	public EList<Object> getChildren() {
 		if (eIsSet(ClassMakerPackage.Literals.PROJECT__REVISION)
-				&& getRevision().eIsSet(ClassMakerPackage.Literals.REVISION__STATE))
-			return (EList<Object>) (EList<?>) ECollections.asEList(getRevision().getState().getResource());
+				&& getRevision().eIsSet(ClassMakerPackage.Literals.REVISION__STATE)) {
+			children = (EList<Object>) (EList<?>) ECollections.asEList(getRevision().getState().getResource());
+		}
 		if (children == null)
 			children = ECollections.newBasicEList();
 		return children;

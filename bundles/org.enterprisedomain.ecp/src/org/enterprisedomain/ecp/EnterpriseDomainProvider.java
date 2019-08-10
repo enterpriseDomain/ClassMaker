@@ -197,7 +197,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 			case CREATE:
 				createProject(project);
 				break;
-				
+
 			case DISPOSE:
 				disposeProject(project);
 				break;
@@ -517,9 +517,10 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 
 	public void addVisiblePackage(EPackage ePackage) {
 		HashSet<String> eClasses = null;
-		if (visiblePackagesToClasses.containsKey(ePackage.getNsURI()))
+		if (visiblePackagesToClasses.containsKey(ePackage.getNsURI())) {
 			eClasses = visiblePackagesToClasses.get(ePackage.getNsURI());
-		else
+			eClasses.clear();
+		} else
 			eClasses = new HashSet<String>();
 		for (EClassifier eClass : ePackage.getEClassifiers())
 			if (eClass instanceof EClass)

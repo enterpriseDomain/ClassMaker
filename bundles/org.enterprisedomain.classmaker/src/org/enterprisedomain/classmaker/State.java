@@ -30,30 +30,43 @@ import org.enterprisedomain.classmaker.jobs.Worker;
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>State</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc -->
- * A complete unit, representing the state of <b>Contribution</b>. Identified by {@link  State#getTimestamp() <em>Timestamp</em>}.
- * <!-- end-model-doc -->
+ * <!-- begin-model-doc --> A complete unit, representing the state of
+ * <b>Contribution</b>. Identified by {@link State#getTimestamp()
+ * <em>Timestamp</em>}. <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.State#getPackageClassName <em>Package Class Name</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.State#getRequiredPlugins <em>Required Plugins</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.State#getRevision <em>Revision</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.State#getTimestamp <em>Timestamp</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.State#getDeployableUnitName <em>Deployable Unit Name</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.State#getJobFamily <em>Job Family</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.State#getResource <em>Resource</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.State#getCommitIds <em>Commit Ids</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.State#getCommitId <em>Commit Id</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.State#getStateCustomizers <em>State Customizers</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.State#getProjectName <em>Project Name</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.State#isMaking <em>Making</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.State#getPackageClassName
+ * <em>Package Class Name</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.State#getRequiredPlugins
+ * <em>Required Plugins</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.State#getRevision
+ * <em>Revision</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.State#getTimestamp
+ * <em>Timestamp</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.State#getDeployableUnitName
+ * <em>Deployable Unit Name</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.State#getJobFamily <em>Job
+ * Family</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.State#getResource
+ * <em>Resource</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.State#getCommitIds <em>Commit
+ * Ids</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.State#getCommitId <em>Commit
+ * Id</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.State#getStateCustomizers
+ * <em>State Customizers</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.State#getProjectName <em>Project
+ * Name</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.State#isMaking
+ * <em>Making</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getState()
- * @model superTypes="org.enterprisedomain.classmaker.Item org.enterprisedomain.classmaker.ISchedulingRule"
+ * @model superTypes="org.enterprisedomain.classmaker.Item
+ *        org.enterprisedomain.classmaker.ISchedulingRule"
  * @generated
  */
 public interface State extends Item, ISchedulingRule {
@@ -73,8 +86,10 @@ public interface State extends Item, ISchedulingRule {
 	String getPackageClassName();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.State#getPackageClassName <em>Package Class Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.State#getPackageClassName <em>Package
+	 * Class Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Package Class Name</em>' attribute.
 	 * @see #getPackageClassName()
 	 * @generated
@@ -114,16 +129,18 @@ public interface State extends Item, ISchedulingRule {
 	 * @model id="true"
 	 * @generated
 	 */
-	int getTimestamp();
+	long getTimestamp();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.State#getTimestamp <em>Timestamp</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.State#getTimestamp
+	 * <em>Timestamp</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Timestamp</em>' attribute.
 	 * @see #getTimestamp()
 	 * @generated
 	 */
-	void setTimestamp(int value);
+	void setTimestamp(long value);
 
 	/**
 	 * Returns the value of the '<em><b>Deployable Unit Name</b></em>' attribute.
@@ -160,8 +177,10 @@ public interface State extends Item, ISchedulingRule {
 	Revision getRevision();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.State#getRevision <em>Revision</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.State#getRevision <em>Revision</em>}'
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Revision</em>' reference.
 	 * @see #getRevision()
 	 * @generated
@@ -186,8 +205,10 @@ public interface State extends Item, ISchedulingRule {
 	String getJobFamily();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.State#getJobFamily <em>Job Family</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.State#getJobFamily <em>Job
+	 * Family</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Job Family</em>' attribute.
 	 * @see #getJobFamily()
 	 * @generated
@@ -212,8 +233,10 @@ public interface State extends Item, ISchedulingRule {
 	Resource getResource();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.State#getResource <em>Resource</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.State#getResource <em>Resource</em>}'
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Resource</em>' reference.
 	 * @see #getResource()
 	 * @generated
@@ -256,8 +279,10 @@ public interface State extends Item, ISchedulingRule {
 	String getCommitId();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.State#getCommitId <em>Commit Id</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.State#getCommitId <em>Commit
+	 * Id</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Commit Id</em>' attribute.
 	 * @see #getCommitId()
 	 * @generated
@@ -303,8 +328,10 @@ public interface State extends Item, ISchedulingRule {
 	String getProjectName();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.State#getProjectName <em>Project Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.State#getProjectName <em>Project
+	 * Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Project Name</em>' attribute.
 	 * @see #getProjectName()
 	 * @generated
@@ -330,8 +357,9 @@ public interface State extends Item, ISchedulingRule {
 	boolean isMaking();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.State#isMaking <em>Making</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.State#isMaking
+	 * <em>Making</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Making</em>' attribute.
 	 * @see #isMaking()
 	 * @generated
@@ -340,20 +368,25 @@ public interface State extends Item, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	void setProjectVersion(IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	void delete(IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -361,6 +394,7 @@ public interface State extends Item, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -368,6 +402,7 @@ public interface State extends Item, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -375,6 +410,7 @@ public interface State extends Item, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model exceptions="org.enterprisedomain.classmaker.Exception"
 	 * @generated
 	 */
@@ -392,6 +428,7 @@ public interface State extends Item, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -399,6 +436,7 @@ public interface State extends Item, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model type="org.enterprisedomain.classmaker.Worker"
 	 * @generated
 	 */
@@ -406,6 +444,7 @@ public interface State extends Item, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model type="org.enterprisedomain.classmaker.Worker"
 	 * @generated
 	 */
@@ -413,6 +452,7 @@ public interface State extends Item, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model type="org.enterprisedomain.classmaker.Worker"
 	 * @generated
 	 */
@@ -420,6 +460,7 @@ public interface State extends Item, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model type="org.enterprisedomain.classmaker.Worker"
 	 * @generated
 	 */

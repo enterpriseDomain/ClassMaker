@@ -44,7 +44,7 @@
       </genOperations>
       <genOperations ecoreOperation="ClassMaker.ecore#//Contribution/checkout.1">
         <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/checkout.1/version"/>
-        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/checkout.1/time"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/checkout.1/timestamp"/>
         <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/checkout.1/commitId"/>
       </genOperations>
       <genOperations ecoreOperation="ClassMaker.ecore#//Contribution/checkout.2">
@@ -230,9 +230,9 @@
         <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/delete/monitor"/>
       </genOperations>
     </genClasses>
-    <genClasses ecoreClass="ClassMaker.ecore#//IntegerToStateMapEntry">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//IntegerToStateMapEntry/key"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//IntegerToStateMapEntry/value"/>
+    <genClasses ecoreClass="ClassMaker.ecore#//LongToStateMapEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//LongToStateMapEntry/key"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//LongToStateMapEntry/value"/>
     </genClasses>
     <genClasses ecoreClass="ClassMaker.ecore#//VersionToRevisionMapEntry">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//VersionToRevisionMapEntry/key"/>

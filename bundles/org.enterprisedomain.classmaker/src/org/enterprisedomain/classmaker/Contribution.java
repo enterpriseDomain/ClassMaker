@@ -24,18 +24,22 @@ import org.osgi.framework.Version;
  * <!-- begin-user-doc --> A representation of the model object
  * '<em><b>Contribution</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc -->
- * Software contribution project item. Basically, it contibutes the software piece to the body of main program.
- * <!-- end-model-doc -->
+ * <!-- begin-model-doc --> Software contribution project item. Basically, it
+ * contibutes the software piece to the body of main program. <!-- end-model-doc
+ * -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.Contribution#getDependencies <em>Dependencies</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Contribution#getState <em>State</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Contribution#getLatestVersion <em>Latest Version</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Contribution#getModelResourceAdapter <em>Model Resource Adapter</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Contribution#getDependencies
+ * <em>Dependencies</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Contribution#getState
+ * <em>State</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Contribution#getLatestVersion
+ * <em>Latest Version</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Contribution#getModelResourceAdapter
+ * <em>Model Resource Adapter</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getContribution()
@@ -114,41 +118,48 @@ public interface Contribution extends Project, Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	Revision createRevision(IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
 	 * @generated
 	 */
-	void checkout(Version version, int timestamp);
+	void checkout(Version version, long timestamp);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
 	 * @generated
 	 */
-	void checkout(Version version, int time, String commitId);
+	void checkout(Version version, long timestamp, String commitId);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
-	void checkout(int timestamp);
+	void checkout(long timestamp);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
-	void checkout(int timestamp, String commitId);
+	void checkout(long timestamp, String commitId);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
@@ -156,27 +167,33 @@ public interface Contribution extends Project, Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	void delete(IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	String make(Revision revision, IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
-	State getState(int timestamp);
+	State getState(long timestamp);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
