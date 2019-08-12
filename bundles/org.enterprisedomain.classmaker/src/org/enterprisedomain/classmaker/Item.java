@@ -21,7 +21,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EObject;
-import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object
@@ -37,8 +36,6 @@ import org.osgi.framework.Version;
  * <li>{@link org.enterprisedomain.classmaker.Item#getModelName <em>Model
  * Name</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.Item#getPhase <em>Phase</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Item#getVersion
- * <em>Version</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.Item#getLanguage
  * <em>Language</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.Item#getDomainModel <em>Domain
@@ -49,8 +46,8 @@ import org.osgi.framework.Version;
  * <em>Parent</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.Item#getLocale
  * <em>Locale</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Item#getContribution
- * <em>Contribution</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Item#getProject
+ * <em>Project</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getItem()
@@ -116,33 +113,6 @@ public interface Item extends EObject {
 	 * @generated
 	 */
 	void setPhase(Stage value);
-
-	/**
-	 * Returns the value of the '<em><b>Version</b></em>' attribute. <!--
-	 * begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Version</em>' attribute isn't clear, there really
-	 * should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Version</em>' attribute.
-	 * @see #setVersion(Version)
-	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getItem_Version()
-	 * @model dataType="org.enterprisedomain.classmaker.OSGiVersion"
-	 * @generated
-	 */
-	Version getVersion();
-
-	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Item#getVersion
-	 * <em>Version</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value the new value of the '<em>Version</em>' attribute.
-	 * @see #getVersion()
-	 * @generated
-	 */
-	void setVersion(Version value);
 
 	/**
 	 * Returns the value of the '<em><b>Language</b></em>' attribute. The default
@@ -298,32 +268,27 @@ public interface Item extends EObject {
 	Locale getLocale();
 
 	/**
-	 * Returns the value of the '<em><b>Contribution</b></em>' reference. <!--
-	 * begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Contribution</em>' reference isn't clear, there
-	 * really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
+	 * Returns the value of the '<em><b>Project</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
+	 * <em>Contribution</em> associated with the <em><b>Item</b></em>. <!--
+	 * end-model-doc -->
 	 * 
-	 * @return the value of the '<em>Contribution</em>' reference.
-	 * @see #setContribution(Contribution)
-	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getItem_Contribution()
+	 * @return the value of the '<em>Project</em>' reference.
+	 * @see #setProject(Project)
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getItem_Project()
 	 * @model transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
-	Contribution getContribution();
+	Project getProject();
 
 	/**
-	 * Sets the value of the
-	 * '{@link org.enterprisedomain.classmaker.Item#getContribution
-	 * <em>Contribution</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Item#getProject
+	 * <em>Project</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @param value the new value of the '<em>Contribution</em>' reference.
-	 * @see #getContribution()
+	 * @param value the new value of the '<em>Project</em>' reference.
+	 * @see #getProject()
 	 * @generated
 	 */
-	void setContribution(Contribution value);
+	void setProject(Project value);
 
 } // Item

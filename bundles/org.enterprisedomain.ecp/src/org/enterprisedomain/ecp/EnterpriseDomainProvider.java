@@ -138,6 +138,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 					Activator.log(ex);
 				}
 			}
+			propagatePackagesVisibility();
 			InternalProject project = (InternalProject) getModelContext(resource);
 			if (project != null)
 				project.notifyObjectsChanged((Collection<Object>) (Collection<?>) Arrays.asList(project), true);
@@ -232,8 +233,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 				} catch (CoreException e) {
 					Activator.log(e);
 				}
-				for (InternalProject ecpProject : getOpenProjects())
-					addVisiblePackages(ecpProject);
+				addVisiblePackage(domainProject.getRevision().getState().getDomainModel().getGenerated());
 				domainProject.initialize(false);
 			} else {
 				boolean contribution = false;
@@ -263,13 +263,12 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 					} catch (CoreException e) {
 						Activator.log(e);
 					}
-					project.getVisiblePackages().add(EcorePackage.eINSTANCE);
+					addVisiblePackage(EcorePackage.eINSTANCE);
 				} else
 					try {
 						domainProject = classMaker.getWorkspace().createProject(project.getName(), monitor);
-						for (InternalProject ecpProject : getOpenProjects())
-							addVisiblePackages(ecpProject);
 						domainProject.initialize(true);
+						propagatePackagesVisibility();
 					} catch (CoreException e) {
 						Activator.log(e);
 					}
@@ -303,7 +302,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 
 			@Override
 			public void notify(Notification notification) {
-
+				propagatePackagesVisibility();
 			}
 
 			@Override
@@ -367,21 +366,6 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 		}
 
 		return null;
-	}
-
-	private void addVisiblePackages(InternalProject project) {
-		Set<EClass> eClasses = new HashSet<EClass>();
-		for (EPackage visiblePackage : getVisiblePackages(project)) {
-			project.getVisiblePackages().add(visiblePackage);
-
-			for (EClassifier eClass : visiblePackage.getEClassifiers()) {
-				if (eClass instanceof EClass
-						&& visiblePackagesToClasses.get(visiblePackage.getNsURI()).contains(eClass.getName()))
-					eClasses.add((EClass) eClass);
-			}
-		}
-		if (!eClasses.isEmpty())
-			project.setVisibleEClasses(eClasses);
 	}
 
 	protected void disposeProject(InternalProject project) {
@@ -500,8 +484,6 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 
 			});
 			addVisiblePackage(((Contribution) result).getDomainModel().getGenerated());
-			for (InternalProject ecpProject : getOpenProjects())
-				addVisiblePackages(ecpProject);
 			project.notifyObjectsChanged((Collection<Object>) (Collection<?>) Arrays.asList(project), true);
 			Collection<ECPRepository> repositories = (Collection<ECPRepository>) (Collection<?>) Arrays
 					.asList(project.getRepository());
@@ -526,6 +508,30 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 			if (eClass instanceof EClass)
 				eClasses.add(eClass.getName());
 		visiblePackagesToClasses.put(ePackage.getNsURI(), eClasses);
+		propagatePackagesVisibility();
+	}
+
+	private void propagatePackagesVisibility() {
+		for (InternalProject project : getOpenProjects()) {
+			for (String ePackageNsURI : visiblePackagesToClasses.keySet()) {
+				EPackage eP = project.getEditingDomain().getResourceSet().getPackageRegistry()
+						.getEPackage(ePackageNsURI);
+				Set<EPackage> ePs = new HashSet<EPackage>();
+				ePs.addAll(project.getVisiblePackages());
+				ePs.add(eP);
+				project.setVisiblePackages(ePs);
+				for (Map.Entry<String, HashSet<String>> eClassNames : visiblePackagesToClasses.entrySet())
+					if (eClassNames.getKey().equals(ePackageNsURI))
+						for (String eClassName : eClassNames.getValue()) {
+							Set<EClass> eCls = new HashSet<EClass>();
+							eCls.addAll(project.getVisibleEClasses());
+							eCls.add((EClass) eP.getEClassifier(eClassName));
+							project.setVisibleEClasses(eCls);
+						}
+			}
+
+		}
+
 	}
 
 	private class EnterpriseDomainResourceListener implements IResourceChangeListener {
@@ -651,6 +657,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 				project.notifyObjectsChanged(
 						(Collection<Object>) (Collection<?>) Collections.singleton(notification.getNotifier()), true);
 			}
+			propagatePackagesVisibility();
 			// if (notification.getNotifier() instanceof Notifier) {
 			// provider.notifyProviderChangeListeners(notification);
 			//

@@ -46,7 +46,7 @@ public abstract class ContainerJob extends EnterpriseDomainJob {
 	}
 
 	public Collection<Bundle> getBundles() {
-		return getBundles(getContributionState().getProjectName(), getContributionState().getVersion());
+		return getBundles(getContributionState().getProjectName(), getContributionState().getProject().getVersion());
 
 	}
 

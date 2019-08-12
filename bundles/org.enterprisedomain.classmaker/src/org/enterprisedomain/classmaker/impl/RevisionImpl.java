@@ -42,12 +42,14 @@ import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Customizer;
 import org.enterprisedomain.classmaker.Item;
 import org.enterprisedomain.classmaker.ModelPair;
+import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.Revision;
 import org.enterprisedomain.classmaker.SCMOperator;
 import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.util.ListUtil;
+import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -64,6 +66,8 @@ import org.enterprisedomain.classmaker.util.ListUtil;
  * <em>State History</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.RevisionImpl#getLatestTimestamp
  * <em>Latest Timestamp</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.RevisionImpl#getVersion
+ * <em>Version</em>}</li>
  * </ul>
  *
  * @generated
@@ -115,6 +119,26 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	protected static final long LATEST_TIMESTAMP_EDEFAULT = 0L;
 
 	/**
+	 * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getVersion()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Version VERSION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getVersion()
+	 * @generated
+	 * @ordered
+	 */
+	protected Version version = VERSION_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -138,21 +162,9 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	 * 
 	 * @generated NOT
 	 */
-	public Contribution basicGetContribution() {
-		if (eContainer().eContainer() instanceof Contribution)
-			return (Contribution) eContainer().eContainer();
-		else
-			return null;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public void setContribution(Contribution newContribution) {
-		if (newContribution != null)
-			newContribution.getRevisions().put(getVersion(), this);
+	public void setProject(Project newProject) {
+		if (newProject != null)
+			newProject.getRevisions().put(getVersion(), this);
 	}
 
 	/**
@@ -235,6 +247,30 @@ public class RevisionImpl extends ItemImpl implements Revision {
 		return StateImpl.TIMESTAMP_EDEFAULT;
 	}
 
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public Version getVersion() {
+		return version;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public void setVersion(Version newVersion) {
+		Version oldVersion = version;
+		version = newVersion;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.REVISION__VERSION, oldVersion,
+					version));
+	}
+
 	@Override
 	public String getLanguage() {
 		return getState().getLanguage();
@@ -262,7 +298,9 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	@Override
 	public Item basicGetParent() {
-		return getContribution();
+		if (getProject() instanceof Item)
+			return (Item) getProject();
+		return null;
 	}
 
 	@Override
@@ -276,8 +314,8 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	public String initialize(boolean commit) {
 		super.initialize(commit);
 		@SuppressWarnings("unchecked")
-		SCMOperator<Git> operator = (SCMOperator<Git>) getContribution().getWorkspace().getSCMRegistry()
-				.get(getContribution().getProjectName());
+		SCMOperator<Git> operator = (SCMOperator<Git>) getProject().getWorkspace().getSCMRegistry()
+				.get(getProject().getProjectName());
 		try {
 			Git git = operator.getRepositorySCM();
 
@@ -300,7 +338,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 						state = ClassMakerFactory.eINSTANCE.createState();
 						state.setTimestamp(timestamp);
 						getStateHistory().put(timestamp, state);
-						state.setVersion(getVersion());
+						state.getProject().setVersion(getVersion());
 					}
 					String commitId = c.getId().toString();
 					state.getCommitIds().add(commitId);
@@ -335,8 +373,8 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	public void create(IProgressMonitor monitor) throws CoreException {
 		if (isStateSet()) {
 			@SuppressWarnings("unchecked")
-			SCMOperator<Git> operator = (SCMOperator<Git>) getContribution().getWorkspace().getSCMRegistry()
-					.get(getContribution().getProjectName());
+			SCMOperator<Git> operator = (SCMOperator<Git>) getProject().getWorkspace().getSCMRegistry()
+					.get(getProject().getProjectName());
 			try {
 				Git git = operator.getRepositorySCM();
 				git.branchCreate().setForce(true).setName(getVersion().toString()).call();
@@ -360,7 +398,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	 */
 	public void checkout(long stateTime, String commitId) {
 		setTimestamp(stateTime);
-		getContribution().initAdapters(this);
+		getProject().initAdapters(this);
 		if (isStateSet())
 			getState().checkout(commitId);
 	}
@@ -372,7 +410,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	 */
 	public void checkout(long stateTime) {
 		setTimestamp(stateTime);
-		getContribution().initAdapters(this);
+		getProject().initAdapters(this);
 		if (isStateSet())
 			getState().checkout();
 	}
@@ -399,7 +437,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 				(long) (Calendar.getInstance(Revision.VERSION_QUALIFIER_FORMAT.getTimeZone()).getTimeInMillis()
 						/ 1000));
 		getStateHistory().put(newState.getTimestamp(), newState);
-		newState.setVersion(getVersion());
+		newState.getProject().setVersion(getVersion());
 		return newState;
 	}
 
@@ -410,18 +448,18 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	 * @generated NOT
 	 */
 	public String make(IProgressMonitor monitor) throws Exception {
-		getState().copyModel(getContribution());
+		getState().copyModel(getParent());
 		return getState().make(monitor);
 	}
 
 	@Override
 	public void load(boolean create) throws CoreException {
 		initialize(false);
-		getContribution().initAdapters(this);
+		getProject().initAdapters(this);
 		if (create && isStateSet()) {
 			@SuppressWarnings("unchecked")
-			SCMOperator<Git> operator = (SCMOperator<Git>) getContribution().getWorkspace().getSCMRegistry()
-					.get(getContribution().getProjectName());
+			SCMOperator<Git> operator = (SCMOperator<Git>) getProject().getWorkspace().getSCMRegistry()
+					.get(getProject().getProjectName());
 			Git git = null;
 			try {
 				git = operator.getRepositorySCM();
@@ -513,6 +551,8 @@ public class RevisionImpl extends ItemImpl implements Revision {
 				return getStateHistory().map();
 		case ClassMakerPackage.REVISION__LATEST_TIMESTAMP:
 			return getLatestTimestamp();
+		case ClassMakerPackage.REVISION__VERSION:
+			return getVersion();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -533,6 +573,9 @@ public class RevisionImpl extends ItemImpl implements Revision {
 			return;
 		case ClassMakerPackage.REVISION__STATE_HISTORY:
 			((EStructuralFeature.Setting) getStateHistory()).set(newValue);
+			return;
+		case ClassMakerPackage.REVISION__VERSION:
+			setVersion((Version) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -555,6 +598,9 @@ public class RevisionImpl extends ItemImpl implements Revision {
 		case ClassMakerPackage.REVISION__STATE_HISTORY:
 			getStateHistory().clear();
 			return;
+		case ClassMakerPackage.REVISION__VERSION:
+			setVersion(VERSION_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -575,6 +621,8 @@ public class RevisionImpl extends ItemImpl implements Revision {
 			return stateHistory != null && !stateHistory.isEmpty();
 		case ClassMakerPackage.REVISION__LATEST_TIMESTAMP:
 			return getLatestTimestamp() != LATEST_TIMESTAMP_EDEFAULT;
+		case ClassMakerPackage.REVISION__VERSION:
+			return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -592,6 +640,8 @@ public class RevisionImpl extends ItemImpl implements Revision {
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (timestamp: ");
 		result.append(timestamp);
+		result.append(", version: ");
+		result.append(version);
 		result.append(')');
 		return result.toString();
 	}
@@ -599,6 +649,14 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	@Override
 	public void build(IProgressMonitor monitor) throws CoreException {
 		getState().build(monitor);
+	}
+
+	@Override
+	public Project basicGetProject() {
+		if (eContainer().eContainer() instanceof Project)
+			return (Project) eContainer().eContainer();
+		else
+			return null;
 	}
 
 } // RevisionImpl

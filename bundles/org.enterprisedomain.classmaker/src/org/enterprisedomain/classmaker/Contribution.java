@@ -34,8 +34,6 @@ import org.osgi.framework.Version;
  * <ul>
  * <li>{@link org.enterprisedomain.classmaker.Contribution#getDependencies
  * <em>Dependencies</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Contribution#getState
- * <em>State</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.Contribution#getLatestVersion
  * <em>Latest Version</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.Contribution#getModelResourceAdapter
@@ -64,22 +62,6 @@ public interface Contribution extends Project, Item {
 	 * @generated
 	 */
 	EList<String> getDependencies();
-
-	/**
-	 * Returns the value of the '<em><b>State</b></em>' reference. <!--
-	 * begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>State</em>' reference isn't clear, there really
-	 * should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>State</em>' reference.
-	 * @see org.enterprisedomain.classmaker.EnterpriseDomainPackage#getSoftwareContribution_State()
-	 * @model transient="true" changeable="false" volatile="true" derived="true"
-	 * @generated
-	 */
-	State getState();
 
 	/**
 	 * Returns the value of the '<em><b>Latest Version</b></em>' attribute. <!--
@@ -128,46 +110,6 @@ public interface Contribution extends Project, Item {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @model versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
-	 * @generated
-	 */
-	void checkout(Version version, long timestamp);
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
-	 * @generated
-	 */
-	void checkout(Version version, long timestamp, String commitId);
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model
-	 * @generated
-	 */
-	void checkout(long timestamp);
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model
-	 * @generated
-	 */
-	void checkout(long timestamp, String commitId);
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model
-	 * @generated
-	 */
-	void checkout(String commitId);
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
 	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
@@ -190,13 +132,5 @@ public interface Contribution extends Project, Item {
 	 * @generated
 	 */
 	State getState(long timestamp);
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model
-	 * @generated
-	 */
-	void initAdapters(Revision revision);
 
 } // Contribution

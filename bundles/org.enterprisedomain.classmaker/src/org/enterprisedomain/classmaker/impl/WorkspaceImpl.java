@@ -481,7 +481,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 			@Override
 			public Contribution caseRevision(Revision object) {
-				return object.getContribution();
+				return (Contribution) object.getParent();
 			}
 
 			@Override
@@ -498,7 +498,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 			@Override
 			public Contribution caseState(State object) {
-				return object.getContribution();
+				return (Contribution) object.getParent();
 			}
 
 			@Override

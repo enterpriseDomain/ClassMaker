@@ -489,6 +489,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		setAttributeType(EcorePackage.Literals.EJAVA_OBJECT);
 		EPackage p = createAndTestEPackage(getProgressMonitor());
 		Contribution c = service.getWorkspace().getContribution(p, Stage.LOADED);
+		c.getDependencies().add("org.eclipse.emf.common");
 		p = c.getDomainModel().getDynamic();
 		Version v = c.getVersion();
 
@@ -554,6 +555,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		setAttributeType(EcorePackage.Literals.EJAVA_OBJECT);
 		Contribution c = service.getWorkspace().getContribution(createAndTestEPackage(getProgressMonitor()),
 				Stage.LOADED);
+		c.getDependencies().add("org.eclipse.emf.common");
 		c.delete(getProgressMonitor());		
 		createAndTestEPackage(getProgressMonitor());
 		cleanup();
@@ -567,6 +569,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		setAttributeType(EcorePackage.Literals.EJAVA_OBJECT);
 		EPackage p = createAndTestEPackage(getProgressMonitor());
 		Contribution c = service.getWorkspace().getContribution(p, Stage.LOADED);
+		c.getDependencies().add("org.eclipse.emf.common");
 		Version oldVersion = c.getRevision().getVersion();
 		Version newVersion = c.nextVersion();
 		EPackage g = service.replace(p, p, newVersion, getProgressMonitor());

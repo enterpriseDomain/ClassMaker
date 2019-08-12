@@ -32,10 +32,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.enterprisedomain.classmaker.ClassMakerFactory;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
-import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Customizer;
 import org.enterprisedomain.classmaker.Item;
 import org.enterprisedomain.classmaker.ModelPair;
+import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.StageQualifier;
 import org.osgi.framework.Version;
@@ -51,8 +51,6 @@ import org.osgi.framework.Version;
  * <em>Model Name</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getPhase
  * <em>Phase</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getVersion
- * <em>Version</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getLanguage
  * <em>Language</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getDomainModel
@@ -63,8 +61,8 @@ import org.osgi.framework.Version;
  * <em>Parent</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getLocale
  * <em>Locale</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getContribution
- * <em>Contribution</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getProject
+ * <em>Project</em>}</li>
  * </ul>
  *
  * @generated
@@ -119,16 +117,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	 * @ordered
 	 */
 	protected static final Version VERSION_EDEFAULT = Version.emptyVersion;
-
-	/**
-	 * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #getVersion()
-	 * @generated
-	 * @ordered
-	 */
-	protected Version version = VERSION_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getLanguage() <em>Language</em>}'
@@ -240,30 +228,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.ITEM__PHASE, oldPhase, phase));
 	}
 
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public Version getVersion() {
-		return version;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public void setVersion(Version newVersion) {
-		Version oldVersion = version;
-		version = newVersion;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.ITEM__VERSION, oldVersion,
-					version));
-	}
-
 	public Locale getLocale() {
 		if (locale == null) {
 			String language = getLanguage();
@@ -282,11 +246,9 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	 * @generated
 	 */
 	@Override
-	public Contribution getContribution() {
-		Contribution contribution = basicGetContribution();
-		return contribution != null && contribution.eIsProxy()
-				? (Contribution) eResolveProxy((InternalEObject) contribution)
-				: contribution;
+	public Project getProject() {
+		Project project = basicGetProject();
+		return project != null && project.eIsProxy() ? (Project) eResolveProxy((InternalEObject) project) : project;
 	}
 
 	/**
@@ -294,14 +256,15 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	 * 
 	 * @generated NOT
 	 */
-	public abstract Contribution basicGetContribution();
+	public abstract Project basicGetProject();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
 	 */
-	public void setContribution(Contribution newContribution) {
+	@Override
+	public void setProject(Project newProject) {
 		// not supported in base class
 		throw new UnsupportedOperationException();
 	}
@@ -495,8 +458,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 			return getModelName();
 		case ClassMakerPackage.ITEM__PHASE:
 			return getPhase();
-		case ClassMakerPackage.ITEM__VERSION:
-			return getVersion();
 		case ClassMakerPackage.ITEM__LANGUAGE:
 			return getLanguage();
 		case ClassMakerPackage.ITEM__DOMAIN_MODEL:
@@ -512,10 +473,10 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 			return basicGetParent();
 		case ClassMakerPackage.ITEM__LOCALE:
 			return getLocale();
-		case ClassMakerPackage.ITEM__CONTRIBUTION:
+		case ClassMakerPackage.ITEM__PROJECT:
 			if (resolve)
-				return getContribution();
-			return basicGetContribution();
+				return getProject();
+			return basicGetProject();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -534,9 +495,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 		case ClassMakerPackage.ITEM__PHASE:
 			setPhase((Stage) newValue);
 			return;
-		case ClassMakerPackage.ITEM__VERSION:
-			setVersion((Version) newValue);
-			return;
 		case ClassMakerPackage.ITEM__LANGUAGE:
 			setLanguage((String) newValue);
 			return;
@@ -546,8 +504,8 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 		case ClassMakerPackage.ITEM__PARENT:
 			setParent((Item) newValue);
 			return;
-		case ClassMakerPackage.ITEM__CONTRIBUTION:
-			setContribution((Contribution) newValue);
+		case ClassMakerPackage.ITEM__PROJECT:
+			setProject((Project) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -567,9 +525,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 		case ClassMakerPackage.ITEM__PHASE:
 			setPhase(PHASE_EDEFAULT);
 			return;
-		case ClassMakerPackage.ITEM__VERSION:
-			setVersion(VERSION_EDEFAULT);
-			return;
 		case ClassMakerPackage.ITEM__LANGUAGE:
 			setLanguage(LANGUAGE_EDEFAULT);
 			return;
@@ -579,8 +534,8 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 		case ClassMakerPackage.ITEM__PARENT:
 			setParent((Item) null);
 			return;
-		case ClassMakerPackage.ITEM__CONTRIBUTION:
-			setContribution((Contribution) null);
+		case ClassMakerPackage.ITEM__PROJECT:
+			setProject((Project) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -598,8 +553,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 			return MODEL_NAME_EDEFAULT == null ? modelName != null : !MODEL_NAME_EDEFAULT.equals(modelName);
 		case ClassMakerPackage.ITEM__PHASE:
 			return phase != PHASE_EDEFAULT;
-		case ClassMakerPackage.ITEM__VERSION:
-			return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
 		case ClassMakerPackage.ITEM__LANGUAGE:
 			return LANGUAGE_EDEFAULT == null ? language != null : !LANGUAGE_EDEFAULT.equals(language);
 		case ClassMakerPackage.ITEM__DOMAIN_MODEL:
@@ -610,8 +563,8 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 			return basicGetParent() != null;
 		case ClassMakerPackage.ITEM__LOCALE:
 			return LOCALE_EDEFAULT == null ? locale != null : !LOCALE_EDEFAULT.equals(locale);
-		case ClassMakerPackage.ITEM__CONTRIBUTION:
-			return basicGetContribution() != null;
+		case ClassMakerPackage.ITEM__PROJECT:
+			return basicGetProject() != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -631,8 +584,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 		result.append(modelName);
 		result.append(", phase: ");
 		result.append(phase);
-		result.append(", version: ");
-		result.append(version);
 		result.append(", language: ");
 		result.append(language);
 		result.append(", locale: ");

@@ -225,13 +225,31 @@ public interface ClassMakerPackage extends EPackage {
 	int PROJECT__SELECT_REVEAL_HANDLER = ISCHEDULING_RULE_FEATURE_COUNT + 13;
 
 	/**
+	 * The feature id for the '<em><b>Version</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECT__VERSION = ISCHEDULING_RULE_FEATURE_COUNT + 14;
+
+	/**
+	 * The feature id for the '<em><b>State</b></em>' reference. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECT__STATE = ISCHEDULING_RULE_FEATURE_COUNT + 15;
+
+	/**
 	 * The number of structural features of the '<em>Project</em>' class. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int PROJECT_FEATURE_COUNT = ISCHEDULING_RULE_FEATURE_COUNT + 14;
+	int PROJECT_FEATURE_COUNT = ISCHEDULING_RULE_FEATURE_COUNT + 16;
 
 	/**
 	 * The meta object id for the
@@ -371,6 +389,24 @@ public interface ClassMakerPackage extends EPackage {
 	int CONTRIBUTION__SELECT_REVEAL_HANDLER = PROJECT__SELECT_REVEAL_HANDLER;
 
 	/**
+	 * The feature id for the '<em><b>Version</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CONTRIBUTION__VERSION = PROJECT__VERSION;
+
+	/**
+	 * The feature id for the '<em><b>State</b></em>' reference. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CONTRIBUTION__STATE = PROJECT__STATE;
+
+	/**
 	 * The feature id for the '<em><b>Model Name</b></em>' attribute. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -389,22 +425,13 @@ public interface ClassMakerPackage extends EPackage {
 	int CONTRIBUTION__PHASE = PROJECT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Version</b></em>' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int CONTRIBUTION__VERSION = PROJECT_FEATURE_COUNT + 2;
-
-	/**
 	 * The feature id for the '<em><b>Language</b></em>' attribute. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__LANGUAGE = PROJECT_FEATURE_COUNT + 3;
+	int CONTRIBUTION__LANGUAGE = PROJECT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Domain Model</b></em>' containment reference.
@@ -413,7 +440,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__DOMAIN_MODEL = PROJECT_FEATURE_COUNT + 4;
+	int CONTRIBUTION__DOMAIN_MODEL = PROJECT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Customizers</b></em>' map. <!-- begin-user-doc
@@ -422,7 +449,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__CUSTOMIZERS = PROJECT_FEATURE_COUNT + 5;
+	int CONTRIBUTION__CUSTOMIZERS = PROJECT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference. <!--
@@ -431,7 +458,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__PARENT = PROJECT_FEATURE_COUNT + 6;
+	int CONTRIBUTION__PARENT = PROJECT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Locale</b></em>' attribute. <!--
@@ -440,16 +467,16 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__LOCALE = PROJECT_FEATURE_COUNT + 7;
+	int CONTRIBUTION__LOCALE = PROJECT_FEATURE_COUNT + 6;
 
 	/**
-	 * The feature id for the '<em><b>Contribution</b></em>' reference. <!--
+	 * The feature id for the '<em><b>Project</b></em>' reference. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__CONTRIBUTION = PROJECT_FEATURE_COUNT + 8;
+	int CONTRIBUTION__PROJECT = PROJECT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Dependencies</b></em>' attribute list. <!--
@@ -458,16 +485,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__DEPENDENCIES = PROJECT_FEATURE_COUNT + 9;
-
-	/**
-	 * The feature id for the '<em><b>State</b></em>' reference. <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int CONTRIBUTION__STATE = PROJECT_FEATURE_COUNT + 10;
+	int CONTRIBUTION__DEPENDENCIES = PROJECT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Latest Version</b></em>' attribute. <!--
@@ -476,7 +494,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__LATEST_VERSION = PROJECT_FEATURE_COUNT + 11;
+	int CONTRIBUTION__LATEST_VERSION = PROJECT_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Model Resource Adapter</b></em>' containment
@@ -485,7 +503,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__MODEL_RESOURCE_ADAPTER = PROJECT_FEATURE_COUNT + 12;
+	int CONTRIBUTION__MODEL_RESOURCE_ADAPTER = PROJECT_FEATURE_COUNT + 10;
 
 	/**
 	 * The number of structural features of the '<em>Contribution</em>' class. <!--
@@ -494,7 +512,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION_FEATURE_COUNT = PROJECT_FEATURE_COUNT + 13;
+	int CONTRIBUTION_FEATURE_COUNT = PROJECT_FEATURE_COUNT + 11;
 
 	/**
 	 * The meta object id for the
@@ -526,22 +544,13 @@ public interface ClassMakerPackage extends EPackage {
 	int ITEM__PHASE = 1;
 
 	/**
-	 * The feature id for the '<em><b>Version</b></em>' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int ITEM__VERSION = 2;
-
-	/**
 	 * The feature id for the '<em><b>Language</b></em>' attribute. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int ITEM__LANGUAGE = 3;
+	int ITEM__LANGUAGE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Domain Model</b></em>' containment reference.
@@ -550,7 +559,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ITEM__DOMAIN_MODEL = 4;
+	int ITEM__DOMAIN_MODEL = 3;
 
 	/**
 	 * The feature id for the '<em><b>Customizers</b></em>' map. <!-- begin-user-doc
@@ -559,7 +568,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ITEM__CUSTOMIZERS = 5;
+	int ITEM__CUSTOMIZERS = 4;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference. <!--
@@ -568,7 +577,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ITEM__PARENT = 6;
+	int ITEM__PARENT = 5;
 
 	/**
 	 * The feature id for the '<em><b>Locale</b></em>' attribute. <!--
@@ -577,16 +586,16 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ITEM__LOCALE = 7;
+	int ITEM__LOCALE = 6;
 
 	/**
-	 * The feature id for the '<em><b>Contribution</b></em>' reference. <!--
+	 * The feature id for the '<em><b>Project</b></em>' reference. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int ITEM__CONTRIBUTION = 8;
+	int ITEM__PROJECT = 7;
 
 	/**
 	 * The number of structural features of the '<em>Item</em>' class. <!--
@@ -595,7 +604,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ITEM_FEATURE_COUNT = 9;
+	int ITEM_FEATURE_COUNT = 8;
 
 	/**
 	 * The meta object id for the
@@ -625,15 +634,6 @@ public interface ClassMakerPackage extends EPackage {
 	 * @ordered
 	 */
 	int REVISION__PHASE = ITEM__PHASE;
-
-	/**
-	 * The feature id for the '<em><b>Version</b></em>' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int REVISION__VERSION = ITEM__VERSION;
 
 	/**
 	 * The feature id for the '<em><b>Language</b></em>' attribute. <!--
@@ -681,13 +681,13 @@ public interface ClassMakerPackage extends EPackage {
 	int REVISION__LOCALE = ITEM__LOCALE;
 
 	/**
-	 * The feature id for the '<em><b>Contribution</b></em>' reference. <!--
+	 * The feature id for the '<em><b>Project</b></em>' reference. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int REVISION__CONTRIBUTION = ITEM__CONTRIBUTION;
+	int REVISION__PROJECT = ITEM__PROJECT;
 
 	/**
 	 * The feature id for the '<em><b>State</b></em>' reference. <!-- begin-user-doc
@@ -726,13 +726,22 @@ public interface ClassMakerPackage extends EPackage {
 	int REVISION__LATEST_TIMESTAMP = ITEM_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Version</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int REVISION__VERSION = ITEM_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Revision</em>' class. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int REVISION_FEATURE_COUNT = ITEM_FEATURE_COUNT + 4;
+	int REVISION_FEATURE_COUNT = ITEM_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the
@@ -762,15 +771,6 @@ public interface ClassMakerPackage extends EPackage {
 	 * @ordered
 	 */
 	int STATE__PHASE = ITEM__PHASE;
-
-	/**
-	 * The feature id for the '<em><b>Version</b></em>' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int STATE__VERSION = ITEM__VERSION;
 
 	/**
 	 * The feature id for the '<em><b>Language</b></em>' attribute. <!--
@@ -818,13 +818,13 @@ public interface ClassMakerPackage extends EPackage {
 	int STATE__LOCALE = ITEM__LOCALE;
 
 	/**
-	 * The feature id for the '<em><b>Contribution</b></em>' reference. <!--
+	 * The feature id for the '<em><b>Project</b></em>' reference. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__CONTRIBUTION = ITEM__CONTRIBUTION;
+	int STATE__PROJECT = ITEM__PROJECT;
 
 	/**
 	 * The feature id for the '<em><b>Package Class Name</b></em>' attribute. <!--
@@ -1782,18 +1782,6 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getContribution_Dependencies();
 
 	/**
-	 * Returns the meta object for the reference
-	 * '{@link org.enterprisedomain.classmaker.Contribution#getState
-	 * <em>State</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for the reference '<em>State</em>'.
-	 * @see org.enterprisedomain.classmaker.Contribution#getState()
-	 * @see #getContribution()
-	 * @generated
-	 */
-	EReference getContribution_State();
-
-	/**
 	 * Returns the meta object for the attribute
 	 * '{@link org.enterprisedomain.classmaker.Contribution#getLatestVersion
 	 * <em>Latest Version</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -1876,6 +1864,18 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getRevision_LatestTimestamp();
+
+	/**
+	 * Returns the meta object for the attribute
+	 * '{@link org.enterprisedomain.classmaker.Revision#getVersion
+	 * <em>Version</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the attribute '<em>Version</em>'.
+	 * @see org.enterprisedomain.classmaker.Revision#getVersion()
+	 * @see #getRevision()
+	 * @generated
+	 */
+	EAttribute getRevision_Version();
 
 	/**
 	 * Returns the meta object for class
@@ -2070,18 +2070,6 @@ public interface ClassMakerPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute
-	 * '{@link org.enterprisedomain.classmaker.Item#getVersion <em>Version</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for the attribute '<em>Version</em>'.
-	 * @see org.enterprisedomain.classmaker.Item#getVersion()
-	 * @see #getItem()
-	 * @generated
-	 */
-	EAttribute getItem_Version();
-
-	/**
-	 * Returns the meta object for the attribute
 	 * '{@link org.enterprisedomain.classmaker.Item#getLanguage <em>Language</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -2143,15 +2131,15 @@ public interface ClassMakerPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference
-	 * '{@link org.enterprisedomain.classmaker.Item#getContribution
-	 * <em>Contribution</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * '{@link org.enterprisedomain.classmaker.Item#getProject <em>Project</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the reference '<em>Contribution</em>'.
-	 * @see org.enterprisedomain.classmaker.Item#getContribution()
+	 * @return the meta object for the reference '<em>Project</em>'.
+	 * @see org.enterprisedomain.classmaker.Item#getProject()
 	 * @see #getItem()
 	 * @generated
 	 */
-	EReference getItem_Contribution();
+	EReference getItem_Project();
 
 	/**
 	 * Returns the meta object for class
@@ -2636,6 +2624,30 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getProject_SelectRevealHandler();
+
+	/**
+	 * Returns the meta object for the attribute
+	 * '{@link org.enterprisedomain.classmaker.Project#getVersion
+	 * <em>Version</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the attribute '<em>Version</em>'.
+	 * @see org.enterprisedomain.classmaker.Project#getVersion()
+	 * @see #getProject()
+	 * @generated
+	 */
+	EAttribute getProject_Version();
+
+	/**
+	 * Returns the meta object for the reference
+	 * '{@link org.enterprisedomain.classmaker.Project#getState <em>State</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the reference '<em>State</em>'.
+	 * @see org.enterprisedomain.classmaker.Project#getState()
+	 * @see #getProject()
+	 * @generated
+	 */
+	EReference getProject_State();
 
 	/**
 	 * Returns the meta object for class
@@ -3127,14 +3139,6 @@ public interface ClassMakerPackage extends EPackage {
 		EAttribute CONTRIBUTION__DEPENDENCIES = eINSTANCE.getContribution_Dependencies();
 
 		/**
-		 * The meta object literal for the '<em><b>State</b></em>' reference feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
-		 * @generated
-		 */
-		EReference CONTRIBUTION__STATE = eINSTANCE.getContribution_State();
-
-		/**
 		 * The meta object literal for the '<em><b>Latest Version</b></em>' attribute
 		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
@@ -3192,6 +3196,14 @@ public interface ClassMakerPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute REVISION__LATEST_TIMESTAMP = eINSTANCE.getRevision_LatestTimestamp();
+
+		/**
+		 * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EAttribute REVISION__VERSION = eINSTANCE.getRevision_Version();
 
 		/**
 		 * The meta object literal for the
@@ -3328,14 +3340,6 @@ public interface ClassMakerPackage extends EPackage {
 		EAttribute ITEM__PHASE = eINSTANCE.getItem_Phase();
 
 		/**
-		 * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
-		 * @generated
-		 */
-		EAttribute ITEM__VERSION = eINSTANCE.getItem_Version();
-
-		/**
 		 * The meta object literal for the '<em><b>Language</b></em>' attribute feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
@@ -3376,12 +3380,12 @@ public interface ClassMakerPackage extends EPackage {
 		EAttribute ITEM__LOCALE = eINSTANCE.getItem_Locale();
 
 		/**
-		 * The meta object literal for the '<em><b>Contribution</b></em>' reference
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Project</b></em>' reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
-		EReference ITEM__CONTRIBUTION = eINSTANCE.getItem_Contribution();
+		EReference ITEM__PROJECT = eINSTANCE.getItem_Project();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.emf.common.notify.Adapter
@@ -3741,6 +3745,22 @@ public interface ClassMakerPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PROJECT__SELECT_REVEAL_HANDLER = eINSTANCE.getProject_SelectRevealHandler();
+
+		/**
+		 * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EAttribute PROJECT__VERSION = eINSTANCE.getProject_Version();
+
+		/**
+		 * The meta object literal for the '<em><b>State</b></em>' reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference PROJECT__STATE = eINSTANCE.getProject_State();
 
 		/**
 		 * The meta object literal for the

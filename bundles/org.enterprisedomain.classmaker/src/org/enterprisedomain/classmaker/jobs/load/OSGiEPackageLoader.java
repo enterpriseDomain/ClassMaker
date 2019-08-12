@@ -74,7 +74,7 @@ public class OSGiEPackageLoader extends ContainerJob {
 		try {
 			for (Bundle bundle : getBundles())
 				if (versionsAreEqual(Version.parseVersion(bundle.getHeaders().get(Constants.BUNDLE_VERSION)),
-						getContributionState().getVersion(), false))
+						getContributionState().getProject().getVersion(), false))
 					osgiBundle = bundle;
 			if (osgiBundle != null) {
 				if (osgiBundle.getHeaders().get(Constants.FRAGMENT_HOST) == null) {
@@ -167,7 +167,7 @@ public class OSGiEPackageLoader extends ContainerJob {
 			setException(e);
 		} finally {
 			loaded.release();
-			getContributionState().getContribution().setNeedCompletionNotification(true);
+			getContributionState().getProject().setNeedCompletionNotification(true);
 		}
 	}
 

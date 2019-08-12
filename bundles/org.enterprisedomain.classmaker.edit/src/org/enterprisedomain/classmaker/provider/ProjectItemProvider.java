@@ -39,10 +39,9 @@ import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.Project;
 
 /**
- * This is the item provider adapter for a
- * {@link org.enterprisedomain.classmaker.Project} object. <!-- begin-user-doc
+ * This is the item provider adapter for a {@link org.enterprisedomain.classmaker.Project} object.
+ * <!-- begin-user-doc
  * --> <!-- end-user-doc -->
- * 
  * @generated
  */
 public class ProjectItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
@@ -79,14 +78,16 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 			addRevisionPropertyDescriptor(object);
 			addProjectVersionPropertyDescriptor(object);
 			addSelectRevealHandlerPropertyDescriptor(object);
+			addVersionPropertyDescriptor(object);
+			addStatePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Name feature. <!-- begin-user-doc -->
+	 * This adds a property descriptor for the Name feature.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addNamePropertyDescriptor(Object object) {
@@ -115,9 +116,9 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 	}
 
 	/**
-	 * This adds a property descriptor for the Children feature. <!-- begin-user-doc
+	 * This adds a property descriptor for the Children feature.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addChildrenPropertyDescriptor(Object object) {
@@ -131,9 +132,9 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 	}
 
 	/**
-	 * This adds a property descriptor for the Dirty feature. <!-- begin-user-doc
+	 * This adds a property descriptor for the Dirty feature.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addDirtyPropertyDescriptor(Object object) {
@@ -165,7 +166,6 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 	/**
 	 * This adds a property descriptor for the Need Completion Notification feature.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addNeedCompletionNotificationPropertyDescriptor(Object object) {
@@ -181,7 +181,6 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 	/**
 	 * This adds a property descriptor for the Resource Reload Listener feature.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addResourceReloadListenerPropertyDescriptor(Object object) {
@@ -211,9 +210,9 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 	}
 
 	/**
-	 * This adds a property descriptor for the Revision feature. <!-- begin-user-doc
+	 * This adds a property descriptor for the Revision feature.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addRevisionPropertyDescriptor(Object object) {
@@ -258,12 +257,41 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an
-	 * appropriate feature for an {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * This adds a property descriptor for the Version feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addVersionPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Project_version_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Project_version_feature",
+								"_UI_Project_type"),
+						ClassMakerPackage.Literals.PROJECT__VERSION, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the State feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addStatePropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Project_state_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Project_state_feature",
+								"_UI_Project_type"),
+						ClassMakerPackage.Literals.PROJECT__STATE, false, false, false, null, null, null));
+	}
+
+	/**
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -278,21 +306,19 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to
-		// use for
+		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
 		return super.getChildFeature(object, child);
 	}
 
 	/**
-	 * This returns Project.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This returns Project.gif.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -301,9 +327,9 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 	}
 
 	/**
-	 * This returns the label text for the adapted class. <!-- begin-user-doc -->
+	 * This returns the label text for the adapted class.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -314,10 +340,9 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update
-	 * any cached children and by creating a viewer notification, which it passes to
-	 * {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -333,6 +358,7 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 		case ClassMakerPackage.PROJECT__COMPLETION_NOTIFICATION_ADAPTER:
 		case ClassMakerPackage.PROJECT__SAVING_RESOURCE:
 		case ClassMakerPackage.PROJECT__PROJECT_VERSION:
+		case ClassMakerPackage.PROJECT__VERSION:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case ClassMakerPackage.PROJECT__CHILDREN:
@@ -344,10 +370,10 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing
-	 * the children that can be created under this object. <!-- begin-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+	 * that can be created under this object.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -355,10 +381,7 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
 		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				EcoreFactory.eINSTANCE.createFromString(EcorePackage.Literals.EJAVA_OBJECT, null))); // TODO: ensure
-																										// this is a
-																										// valid literal
-																										// value
+				EcoreFactory.eINSTANCE.createFromString(EcorePackage.Literals.EJAVA_OBJECT, null))); // TODO: ensure this is a valid literal value
 
 		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__REVISIONS,
 				ClassMakerFactory.eINSTANCE.create(ClassMakerPackage.Literals.VERSION_TO_REVISION_MAP_ENTRY)));

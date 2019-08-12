@@ -60,13 +60,11 @@ public class ContributionItemProvider extends ProjectItemProvider {
 
 			addModelNamePropertyDescriptor(object);
 			addPhasePropertyDescriptor(object);
-			addVersionPropertyDescriptor(object);
 			addLanguagePropertyDescriptor(object);
 			addParentPropertyDescriptor(object);
 			addLocalePropertyDescriptor(object);
-			addContributionPropertyDescriptor(object);
+			addProjectPropertyDescriptor(object);
 			addDependenciesPropertyDescriptor(object);
-			addStatePropertyDescriptor(object);
 			addLatestVersionPropertyDescriptor(object);
 			addModelResourceAdapterPropertyDescriptor(object);
 		}
@@ -89,9 +87,9 @@ public class ContributionItemProvider extends ProjectItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Phase feature. <!-- begin-user-doc
+	 * This adds a property descriptor for the Phase feature.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addPhasePropertyDescriptor(Object object) {
@@ -104,24 +102,9 @@ public class ContributionItemProvider extends ProjectItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Version feature. <!-- begin-user-doc
+	 * This adds a property descriptor for the Language feature.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	protected void addVersionPropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_Item_version_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_Item_version_feature", "_UI_Item_type"),
-						ClassMakerPackage.Literals.ITEM__VERSION, true, false, false,
-						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Language feature. <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addLanguagePropertyDescriptor(Object object) {
@@ -134,9 +117,9 @@ public class ContributionItemProvider extends ProjectItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Parent feature. <!-- begin-user-doc
+	 * This adds a property descriptor for the Parent feature.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addParentPropertyDescriptor(Object object) {
@@ -148,9 +131,9 @@ public class ContributionItemProvider extends ProjectItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Locale feature. <!-- begin-user-doc
+	 * This adds a property descriptor for the Locale feature.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addLocalePropertyDescriptor(Object object) {
@@ -163,18 +146,17 @@ public class ContributionItemProvider extends ProjectItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Contribution feature. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This adds a property descriptor for the Project feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addContributionPropertyDescriptor(Object object) {
+	protected void addProjectPropertyDescriptor(Object object) {
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_Item_contribution_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_Item_contribution_feature",
-								"_UI_Item_type"),
-						ClassMakerPackage.Literals.ITEM__CONTRIBUTION, true, false, true, null, null, null));
+						getResourceLocator(), getString("_UI_Item_project_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Item_project_feature", "_UI_Item_type"),
+						ClassMakerPackage.Literals.ITEM__PROJECT, true, false, true, null, null, null));
 	}
 
 	/**
@@ -191,21 +173,6 @@ public class ContributionItemProvider extends ProjectItemProvider {
 								"_UI_Contribution_type"),
 						ClassMakerPackage.Literals.CONTRIBUTION__DEPENDENCIES, false, false, false,
 						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
-	}
-
-	/**
-	 * This adds a property descriptor for the State feature. <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	protected void addStatePropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_Contribution_state_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_Contribution_state_feature",
-								"_UI_Contribution_type"),
-						ClassMakerPackage.Literals.CONTRIBUTION__STATE, false, false, false, null, null, null));
 	}
 
 	/**
@@ -241,12 +208,10 @@ public class ContributionItemProvider extends ProjectItemProvider {
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an
-	 * appropriate feature for an {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -260,21 +225,19 @@ public class ContributionItemProvider extends ProjectItemProvider {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to
-		// use for
+		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
 		return super.getChildFeature(object, child);
 	}
 
 	/**
-	 * This returns Contribution.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This returns Contribution.gif.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -283,9 +246,9 @@ public class ContributionItemProvider extends ProjectItemProvider {
 	}
 
 	/**
-	 * This returns the label text for the adapted class. <!-- begin-user-doc -->
+	 * This returns the label text for the adapted class.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -296,10 +259,9 @@ public class ContributionItemProvider extends ProjectItemProvider {
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update
-	 * any cached children and by creating a viewer notification, which it passes to
-	 * {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -309,7 +271,6 @@ public class ContributionItemProvider extends ProjectItemProvider {
 		switch (notification.getFeatureID(Contribution.class)) {
 		case ClassMakerPackage.CONTRIBUTION__MODEL_NAME:
 		case ClassMakerPackage.CONTRIBUTION__PHASE:
-		case ClassMakerPackage.CONTRIBUTION__VERSION:
 		case ClassMakerPackage.CONTRIBUTION__LANGUAGE:
 		case ClassMakerPackage.CONTRIBUTION__CUSTOMIZERS:
 		case ClassMakerPackage.CONTRIBUTION__LOCALE:
@@ -325,10 +286,10 @@ public class ContributionItemProvider extends ProjectItemProvider {
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing
-	 * the children that can be created under this object. <!-- begin-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+	 * that can be created under this object.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

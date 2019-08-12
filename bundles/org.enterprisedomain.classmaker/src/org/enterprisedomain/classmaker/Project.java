@@ -62,6 +62,10 @@ import org.osgi.framework.Version;
  * <em>Project Version</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.Project#getSelectRevealHandler
  * <em>Select Reveal Handler</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Project#getVersion
+ * <em>Version</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Project#getState
+ * <em>State</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject()
@@ -409,6 +413,43 @@ public interface Project extends EObject, ISchedulingRule {
 	void setSelectRevealHandler(SelectRevealHandler value);
 
 	/**
+	 * Returns the value of the '<em><b>Version</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc --> A
+	 * {@link org.osgi.framework.Version Version} of the <em><b>Item</b></em>. <!--
+	 * end-model-doc -->
+	 * 
+	 * @return the value of the '<em>Version</em>' attribute.
+	 * @see #setVersion(Version)
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject_Version()
+	 * @model dataType="org.enterprisedomain.classmaker.OSGiVersion"
+	 * @generated
+	 */
+	Version getVersion();
+
+	/**
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Project#getVersion <em>Version</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value the new value of the '<em>Version</em>' attribute.
+	 * @see #getVersion()
+	 * @generated
+	 */
+	void setVersion(Version value);
+
+	/**
+	 * Returns the value of the '<em><b>State</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc --> Currently
+	 * checked out <em>State</em>. <!-- end-model-doc -->
+	 * 
+	 * @return the value of the '<em>State</em>' reference.
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject_State()
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	State getState();
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
@@ -582,5 +623,53 @@ public interface Project extends EObject, ISchedulingRule {
 	 * @generated
 	 */
 	void checkout(Version version);
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
+	 * @generated
+	 */
+	void checkout(Version version, long timestamp);
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
+	 * @generated
+	 */
+	void checkout(Version version, long timestamp, String commitId);
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model
+	 * @generated
+	 */
+	void checkout(long timestamp);
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model
+	 * @generated
+	 */
+	void checkout(long timestamp, String commitId);
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model
+	 * @generated
+	 */
+	void checkout(String commitId);
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model
+	 * @generated
+	 */
+	void initAdapters(Revision revision);
 
 } // Project

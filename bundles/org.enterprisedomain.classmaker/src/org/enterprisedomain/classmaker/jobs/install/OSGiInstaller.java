@@ -57,10 +57,10 @@ public class OSGiInstaller extends ContainerJob {
 				return;
 			if (event.getBundle().getSymbolicName().equals(getProject().getName()) && (versionsAreEqual(
 					Version.parseVersion(event.getBundle().getHeaders().get(Constants.BUNDLE_VERSION)),
-					getContributionState().getVersion(), false)
+					getContributionState().getProject().getVersion(), false)
 					|| versionAreLess(
 							Version.parseVersion(event.getBundle().getHeaders().get(Constants.BUNDLE_VERSION)),
-							getContributionState().getVersion(), true)))
+							getContributionState().getProject().getVersion(), true)))
 				switch (event.getType()) {
 				case BundleEvent.INSTALLED:
 					installed.release();
@@ -95,10 +95,10 @@ public class OSGiInstaller extends ContainerJob {
 			Bundle existingBundle = null;
 			for (Bundle bundle : getBundles())
 				if (versionsAreEqual(Version.parseVersion(bundle.getHeaders().get(Constants.BUNDLE_VERSION)),
-						getContributionState().getVersion(), false))
+						getContributionState().getProject().getVersion(), false))
 					existingBundle = bundle;
 				else if (versionAreLess(Version.parseVersion(bundle.getHeaders().get(Constants.BUNDLE_VERSION)),
-						getContributionState().getVersion(), false)) {
+						getContributionState().getProject().getVersion(), false)) {
 					existingBundle = bundle;
 					IStatus result = updateBundle(existingBundle, jarPath, bundleContext);
 					if (result.isOK())
@@ -148,7 +148,7 @@ public class OSGiInstaller extends ContainerJob {
 		try {
 			context.addBundleListener(listener);
 			if (existingBundle != null) {
-				for (Revision revision : getContributionState().getContribution().getRevisions().values())
+				for (Revision revision : getContributionState().getProject().getRevisions().values())
 					if (!versionsAreEqual(existingBundle.getVersion(), revision.getVersion(), false)
 							&& revision.eIsSet(ClassMakerPackage.Literals.REVISION__STATE_HISTORY)
 							&& !revision.getStateHistory().isEmpty())

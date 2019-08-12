@@ -50,17 +50,27 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.ResetCommand;
+import org.eclipse.jgit.api.ResetCommand.ResetType;
+import org.eclipse.jgit.api.errors.CheckoutConflictException;
+import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.lib.Ref;
+import org.eclipse.osgi.util.NLS;
 import org.enterprisedomain.classmaker.ClassMakerFactory;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.CompletionNotificationAdapter;
+import org.enterprisedomain.classmaker.Messages;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.ResourceChangeListener;
 import org.enterprisedomain.classmaker.Revision;
+import org.enterprisedomain.classmaker.SCMOperator;
 import org.enterprisedomain.classmaker.SelectRevealHandler;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
+import org.enterprisedomain.classmaker.util.ListUtil;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
 import org.osgi.framework.Version;
 
@@ -99,6 +109,10 @@ import org.osgi.framework.Version;
  * <em>Project Version</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getSelectRevealHandler
  * <em>Select Reveal Handler</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getVersion
+ * <em>Version</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getState
+ * <em>State</em>}</li>
  * </ul>
  *
  * @generated
@@ -269,11 +283,31 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 */
 	protected SelectRevealHandler selectRevealHandler;
 
+	/**
+	 * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getVersion()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Version VERSION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getVersion()
+	 * @generated
+	 * @ordered
+	 */
+	protected Version version = VERSION_EDEFAULT;
+
 	protected ListenerList<CompletionListener> completionListeners = new ListenerList<CompletionListener>();
 
 	protected ListenerList<ResourceChangeListener> resourceChangeListeners = new ListenerList<ResourceChangeListener>();
 
-	protected EList<Object> children;
+	protected EList<Object> children = ECollections.newBasicEList();
 
 	protected ResourceChangeAdapter resourceAdapter = new ResourceChangeAdapter(this);
 
@@ -366,10 +400,11 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	public EList<Object> getChildren() {
 		if (eIsSet(ClassMakerPackage.Literals.PROJECT__REVISION)
 				&& getRevision().eIsSet(ClassMakerPackage.Literals.REVISION__STATE)) {
-			children = (EList<Object>) (EList<?>) ECollections.asEList(getRevision().getState().getResource());
+			if (children.isEmpty())
+				children.add(getRevision().getState().getResource());
+			else
+				children.set(0, getRevision().getState().getResource());
 		}
-		if (children == null)
-			children = ECollections.newBasicEList();
 		return children;
 	}
 
@@ -707,6 +742,50 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
+	 * @generated
+	 */
+	@Override
+	public Version getVersion() {
+		return version;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public void setVersion(Version newVersion) {
+		Version oldVersion = version;
+		version = newVersion;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.PROJECT__VERSION, oldVersion,
+					version));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public State getState() {
+		State state = basicGetState();
+		return state != null && state.eIsProxy() ? (State) eResolveProxy((InternalEObject) state) : state;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public State basicGetState() {
+		return getRevision().getState();
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	public void create(IProgressMonitor monitor) throws CoreException {
@@ -866,8 +945,130 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * @generated NOT
 	 */
 	public void checkout(Version version) {
-		if (getRevisions().containsKey(version))
+		Revision revision = null;
+		if (getRevisions().containsKey(version)) {
 			setProjectVersion(version);
+			revision = getRevisions().get(version);
+			if (!revision.eIsSet(ClassMakerPackage.Literals.REVISION__TIMESTAMP))
+				if (!revision.getStateHistory().isEmpty())
+					checkout(version, ListUtil.getLast(revision.getStateHistory()).getKey());
+				else {
+					return;
+				}
+			checkout(version, revision.getTimestamp());
+		} else if (!getRevisions().isEmpty() && (version == null || version.equals(Version.emptyVersion)))
+			checkout(ListUtil.getLast(getRevisions()).getKey());
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public void checkout(Version version, long time) {
+		Revision revision = null;
+		if (getRevisions().containsKey(version)) {
+			setProjectVersion(version);
+			if (getProjectName().isEmpty())
+				return;
+			Git git = null;
+			@SuppressWarnings("unchecked")
+			SCMOperator<Git> operator = (SCMOperator<Git>) getWorkspace().getSCMRegistry().get(getProjectName());
+			Ref ref = null;
+			try {
+				git = operator.getRepositorySCM();
+				ref = git.getRepository().findRef(version.toString());
+				if (ref != null)
+					git.checkout().setName(ref.getName()).call();
+			} catch (CheckoutConflictException e) {
+				if (git != null) {
+					try {
+						ResetCommand reset = git.reset().setMode(ResetType.HARD);
+						if (ref != null)
+							reset.setRef(ref.getName());
+						reset.call();
+					} catch (CheckoutConflictException ex) {
+						ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(ex));
+					} catch (GitAPIException ex) {
+						ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(ex));
+					}
+				}
+			} catch (Exception e) {
+				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
+			} finally {
+				try {
+					operator.ungetRepositorySCM();
+				} catch (Exception e) {
+					ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
+				}
+			}
+			revision = getRevisions().get(version);
+			if (revision.getStateHistory().containsKey(time)) {
+				State state = revision.getStateHistory().get((Object) time);
+				EList<String> commits = state.getCommitIds();
+				if (!commits.isEmpty()) {
+					revision.checkout(time, state.getCommitId());
+				} else
+					revision.checkout(time);
+			}
+		} else
+			throw new IllegalStateException(NLS.bind(Messages.VersionNotExists, version));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public void checkout(Version version, long time, String commitId) {
+		if (version.equals(VERSION_EDEFAULT)) {
+			setProjectVersion(version);
+			return;
+		}
+		checkout(version, time);
+		getRevision().checkout(time, commitId);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public void checkout(long time) {
+		if (getRevision().getStateHistory().containsKey(time))
+			getRevision().checkout(time);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public void checkout(long time, String commitId) {
+		if (getRevision().getStateHistory().containsKey(time)) {
+			State state = getRevision().getStateHistory().get((Object) time);
+			if (state.getCommitIds().contains(commitId))
+				getRevision().checkout(time, commitId);
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public void checkout(String commitId) {
+		if (getState().getCommitIds().contains(commitId))
+			getState().checkout(commitId);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public void initAdapters(Revision revision) {
 	}
 
 	/**
@@ -1134,6 +1335,12 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			if (resolve)
 				return getSelectRevealHandler();
 			return basicGetSelectRevealHandler();
+		case ClassMakerPackage.PROJECT__VERSION:
+			return getVersion();
+		case ClassMakerPackage.PROJECT__STATE:
+			if (resolve)
+				return getState();
+			return basicGetState();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1175,6 +1382,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			return;
 		case ClassMakerPackage.PROJECT__SELECT_REVEAL_HANDLER:
 			setSelectRevealHandler((SelectRevealHandler) newValue);
+			return;
+		case ClassMakerPackage.PROJECT__VERSION:
+			setVersion((Version) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -1218,6 +1428,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		case ClassMakerPackage.PROJECT__SELECT_REVEAL_HANDLER:
 			setSelectRevealHandler((SelectRevealHandler) null);
 			return;
+		case ClassMakerPackage.PROJECT__VERSION:
+			setVersion(VERSION_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1260,6 +1473,10 @@ public class ProjectImpl extends EObjectImpl implements Project {
 					: !PROJECT_VERSION_EDEFAULT.equals(projectVersion);
 		case ClassMakerPackage.PROJECT__SELECT_REVEAL_HANDLER:
 			return selectRevealHandler != null;
+		case ClassMakerPackage.PROJECT__VERSION:
+			return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
+		case ClassMakerPackage.PROJECT__STATE:
+			return basicGetState() != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1310,6 +1527,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		result.append(savingResource);
 		result.append(", projectVersion: ");
 		result.append(projectVersion);
+		result.append(", version: ");
+		result.append(version);
 		result.append(')');
 		return result.toString();
 	}

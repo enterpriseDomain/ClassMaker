@@ -61,8 +61,8 @@ public class PDEPluginExporter extends AbstractExporter {
 	public IStatus work(final IProgressMonitor monitor) throws CoreException {
 		cleanup(monitor);
 
-		State contribution = getContributionState();
-		Version version = contribution.getVersion();
+		State state = getContributionState();
+		Version version = state.getProject().getVersion();
 		final FeatureExportInfo info = new FeatureExportInfo();
 		info.destinationDirectory = getProperties().getProperty(EXPORT_DESTINATION_PROP);
 		info.toDirectory = true;
@@ -119,7 +119,7 @@ public class PDEPluginExporter extends AbstractExporter {
 			}
 
 		});
-		contribution.setPhase(getResultStage());
+		state.setPhase(getResultStage());
 		return Status.OK_STATUS;
 	}
 
@@ -127,7 +127,7 @@ public class PDEPluginExporter extends AbstractExporter {
 		ResourceUtils.cleanupDir(getProject(), ResourceUtils.getTargetFolderName());
 		try {
 			@SuppressWarnings("unchecked")
-			SCMOperator<Git> operator = (SCMOperator<Git>) getContributionState().getContribution().getWorkspace()
+			SCMOperator<Git> operator = (SCMOperator<Git>) getContributionState().getProject().getWorkspace()
 					.getSCMRegistry().get(getProject().getName());
 			operator.add("."); //$NON-NLS-1$
 		} catch (Exception e) {
