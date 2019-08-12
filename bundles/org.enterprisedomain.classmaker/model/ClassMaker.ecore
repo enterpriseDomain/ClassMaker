@@ -9,25 +9,6 @@
     <eOperations name="createRevision" eType="#//Revision" eExceptions="#//CoreException">
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
-    <eOperations name="checkout">
-      <eParameters name="version" eType="#//OSGiVersion"/>
-      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
-    </eOperations>
-    <eOperations name="checkout">
-      <eParameters name="version" eType="#//OSGiVersion"/>
-      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
-      <eParameters name="commitId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eOperations>
-    <eOperations name="checkout">
-      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
-    </eOperations>
-    <eOperations name="checkout">
-      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
-      <eParameters name="commitId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eOperations>
-    <eOperations name="checkout">
-      <eParameters name="commitId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eOperations>
     <eOperations name="delete" eExceptions="#//CoreException">
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
@@ -39,20 +20,11 @@
     <eOperations name="getState" eType="#//State">
       <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
     </eOperations>
-    <eOperations name="initAdapters">
-      <eParameters name="revision" eType="#//Revision"/>
-    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="dependencies" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" changeable="false"
         volatile="true" defaultValueLiteral="" derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;em>&lt;b>Contribution&lt;/b>&lt;/em> bundle's required plugins."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//State"
-        changeable="false" volatile="true" transient="true" derived="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Currently checked out &lt;em>State&lt;/em>."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="latestVersion" eType="#//OSGiVersion"
@@ -117,6 +89,11 @@
         changeable="false" volatile="true" transient="true" derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Latest {@link  State#getTimestamp() &lt;em>Timestamp&lt;/em>} of all {@link  #getStateHistory() &lt;em>States&lt;/em>}."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="#//OSGiVersion">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A {@link org.osgi.framework.Version Version} of the &lt;em>&lt;b>Item&lt;/b>&lt;/em>."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -253,11 +230,6 @@
         <details key="documentation" value="A &lt;em>&lt;b>Stage&lt;/b>&lt;/em> of em>&lt;b>Item&lt;/b>&lt;/em>'s model."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="#//OSGiVersion">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A {@link org.osgi.framework.Version Version} of the &lt;em>&lt;b>Item&lt;/b>&lt;/em>."/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -289,7 +261,7 @@
         <details key="documentation" value="A {@link java.util.Locale Locale}."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="contribution" eType="#//Contribution"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="project" eType="#//Project"
         volatile="true" transient="true" derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;em>Contribution&lt;/em> associated with the &lt;em>&lt;b>Item&lt;/b>&lt;/em>."/>
@@ -797,6 +769,28 @@
     <eOperations name="checkout">
       <eParameters name="version" eType="#//OSGiVersion"/>
     </eOperations>
+    <eOperations name="checkout">
+      <eParameters name="version" eType="#//OSGiVersion"/>
+      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+    </eOperations>
+    <eOperations name="checkout">
+      <eParameters name="version" eType="#//OSGiVersion"/>
+      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+      <eParameters name="commitId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="checkout">
+      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+    </eOperations>
+    <eOperations name="checkout">
+      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+      <eParameters name="commitId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="checkout">
+      <eParameters name="commitId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="initAdapters">
+      <eParameters name="revision" eType="#//Revision"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -860,6 +854,17 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="selectRevealHandler" eType="#//SelectRevealHandler"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="#//OSGiVersion">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A {@link org.osgi.framework.Version Version} of the &lt;em>&lt;b>Item&lt;/b>&lt;/em>."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//State"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Currently checked out &lt;em>State&lt;/em>."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Resource" instanceClassName="org.eclipse.emf.ecore.resource.Resource"
       abstract="true" interface="true">

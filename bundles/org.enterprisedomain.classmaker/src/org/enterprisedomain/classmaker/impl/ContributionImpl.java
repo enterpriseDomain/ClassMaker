@@ -53,21 +53,15 @@ import org.eclipse.emf.ecore.util.NotifyingInternalEListImpl;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.ListBranchCommand;
 import org.eclipse.jgit.api.ReflogCommand;
-import org.eclipse.jgit.api.ResetCommand;
-import org.eclipse.jgit.api.ResetCommand.ResetType;
-import org.eclipse.jgit.api.errors.CheckoutConflictException;
-import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.JGitInternalException;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.ReflogEntry;
-import org.eclipse.osgi.util.NLS;
 import org.enterprisedomain.classmaker.ClassMakerFactory;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Customizer;
 import org.enterprisedomain.classmaker.Item;
-import org.enterprisedomain.classmaker.Messages;
 import org.enterprisedomain.classmaker.ModelPair;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.ResourceAdapter;
@@ -92,8 +86,6 @@ import org.osgi.framework.Version;
  * <em>Model Name</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getPhase
  * <em>Phase</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getVersion
- * <em>Version</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getLanguage
  * <em>Language</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getDomainModel
@@ -104,12 +96,10 @@ import org.osgi.framework.Version;
  * <em>Parent</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getLocale
  * <em>Locale</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getContribution
- * <em>Contribution</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getProject
+ * <em>Project</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getDependencies
  * <em>Dependencies</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getState
- * <em>State</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getLatestVersion
  * <em>Latest Version</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getModelResourceAdapter
@@ -156,24 +146,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	 * @ordered
 	 */
 	protected Stage phase = PHASE_EDEFAULT;
-	/**
-	 * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #getVersion()
-	 * @generated NOT
-	 * @ordered
-	 */
-	protected static final Version VERSION_EDEFAULT = Version.emptyVersion;
-	/**
-	 * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #getVersion()
-	 * @generated
-	 * @ordered
-	 */
-	protected Version version = VERSION_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getLanguage() <em>Language</em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -484,11 +457,9 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	 * @generated
 	 */
 	@Override
-	public Contribution getContribution() {
-		Contribution contribution = basicGetContribution();
-		return contribution != null && contribution.eIsProxy()
-				? (Contribution) eResolveProxy((InternalEObject) contribution)
-				: contribution;
+	public Project getProject() {
+		Project project = basicGetProject();
+		return project != null && project.eIsProxy() ? (Project) eResolveProxy((InternalEObject) project) : project;
 	}
 
 	/**
@@ -496,7 +467,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	 * 
 	 * @generated NOT
 	 */
-	public Contribution basicGetContribution() {
+	public Project basicGetProject() {
 		return this;
 	}
 
@@ -505,7 +476,8 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	 * 
 	 * @generated NOT
 	 */
-	public void setContribution(Contribution newContribution) {
+	@Override
+	public void setProject(Project newProject) {
 		// no-op
 	}
 
@@ -620,7 +592,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 				if (version != null && !getRevisions().containsKey(version)) {
 					Revision newRevision = newBareRevision(version);
 					newRevision.setTimestamp(timestamp);
-					newRevision.setContribution(this);
+					newRevision.setProject(this);
 					doNewRevision(newRevision);
 					commitId = newRevision.initialize(commit);
 				}
@@ -677,129 +649,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	public String make(IProgressMonitor monitor) throws CoreException {
 		removeResourceChangeListener(getResourceReloadListener());
 		return make(getRevision(), monitor);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public void checkout(Version version) {
-		Revision revision = null;
-		if (getRevisions().containsKey(version)) {
-			revision = getRevisions().get(version);
-			if (!revision.eIsSet(ClassMakerPackage.Literals.REVISION__TIMESTAMP))
-				if (!revision.getStateHistory().isEmpty())
-					checkout(version, ListUtil.getLast(revision.getStateHistory()).getKey());
-				else {
-					super.checkout(version);
-					return;
-				}
-			checkout(version, revision.getTimestamp());
-		} else if (!getRevisions().isEmpty() && (version == null || version.equals(Version.emptyVersion)))
-			checkout(ListUtil.getLast(getRevisions()).getKey());
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public void checkout(Version version, long time) {
-		Revision revision = null;
-		if (getRevisions().containsKey(version)) {
-			setProjectVersion(version);
-			if (getProjectName().isEmpty())
-				return;
-			Git git = null;
-			@SuppressWarnings("unchecked")
-			SCMOperator<Git> operator = (SCMOperator<Git>) getWorkspace().getSCMRegistry().get(getProjectName());
-			Ref ref = null;
-			try {
-				git = operator.getRepositorySCM();
-				ref = git.getRepository().findRef(version.toString());
-				if (ref != null)
-					git.checkout().setName(ref.getName()).call();
-			} catch (CheckoutConflictException e) {
-				if (git != null) {
-					try {
-						ResetCommand reset = git.reset().setMode(ResetType.HARD);
-						if (ref != null)
-							reset.setRef(ref.getName());
-						reset.call();
-					} catch (CheckoutConflictException ex) {
-						ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(ex));
-					} catch (GitAPIException ex) {
-						ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(ex));
-					}
-				}
-			} catch (Exception e) {
-				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
-			} finally {
-				try {
-					operator.ungetRepositorySCM();
-				} catch (Exception e) {
-					ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
-				}
-			}
-			revision = getRevisions().get(version);
-			if (revision.getStateHistory().containsKey(time)) {
-				State state = revision.getStateHistory().get((Object) time);
-				EList<String> commits = state.getCommitIds();
-				if (!commits.isEmpty()) {
-					revision.checkout(time, state.getCommitId());
-				} else
-					revision.checkout(time);
-			}
-		} else
-			throw new IllegalStateException(NLS.bind(Messages.VersionNotExists, version));
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public void checkout(Version version, long time, String commitId) {
-		if (version.equals(VERSION_EDEFAULT)) {
-			setProjectVersion(version);
-			return;
-		}
-		checkout(version, time);
-		getRevision().checkout(time, commitId);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public void checkout(long time) {
-		if (getRevision().getStateHistory().containsKey(time))
-			getRevision().checkout(time);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public void checkout(long time, String commitId) {
-		if (getRevision().getStateHistory().containsKey(time)) {
-			State state = getRevision().getStateHistory().get((Object) time);
-			if (state.getCommitIds().contains(commitId))
-				getRevision().checkout(time, commitId);
-		}
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public void checkout(String commitId) {
-		if (getState().getCommitIds().contains(commitId))
-			getState().checkout(commitId);
 	}
 
 	@Override
@@ -893,30 +742,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 				msgs.add(notification);
 		}
 		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public Version getVersion() {
-		return version;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public void setVersion(Version newVersion) {
-		Version oldVersion = version;
-		version = newVersion;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.CONTRIBUTION__VERSION, oldVersion,
-					version));
 	}
 
 	/**
@@ -1194,8 +1019,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 			return getModelName();
 		case ClassMakerPackage.CONTRIBUTION__PHASE:
 			return getPhase();
-		case ClassMakerPackage.CONTRIBUTION__VERSION:
-			return getVersion();
 		case ClassMakerPackage.CONTRIBUTION__LANGUAGE:
 			return getLanguage();
 		case ClassMakerPackage.CONTRIBUTION__DOMAIN_MODEL:
@@ -1211,16 +1034,12 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 			return basicGetParent();
 		case ClassMakerPackage.CONTRIBUTION__LOCALE:
 			return getLocale();
-		case ClassMakerPackage.CONTRIBUTION__CONTRIBUTION:
+		case ClassMakerPackage.CONTRIBUTION__PROJECT:
 			if (resolve)
-				return getContribution();
-			return basicGetContribution();
+				return getProject();
+			return basicGetProject();
 		case ClassMakerPackage.CONTRIBUTION__DEPENDENCIES:
 			return getDependencies();
-		case ClassMakerPackage.CONTRIBUTION__STATE:
-			if (resolve)
-				return getState();
-			return basicGetState();
 		case ClassMakerPackage.CONTRIBUTION__LATEST_VERSION:
 			return getLatestVersion();
 		case ClassMakerPackage.CONTRIBUTION__MODEL_RESOURCE_ADAPTER:
@@ -1243,9 +1062,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 		case ClassMakerPackage.CONTRIBUTION__PHASE:
 			setPhase((Stage) newValue);
 			return;
-		case ClassMakerPackage.CONTRIBUTION__VERSION:
-			setVersion((Version) newValue);
-			return;
 		case ClassMakerPackage.CONTRIBUTION__LANGUAGE:
 			setLanguage((String) newValue);
 			return;
@@ -1255,8 +1071,8 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 		case ClassMakerPackage.CONTRIBUTION__PARENT:
 			setParent((Item) newValue);
 			return;
-		case ClassMakerPackage.CONTRIBUTION__CONTRIBUTION:
-			setContribution((Contribution) newValue);
+		case ClassMakerPackage.CONTRIBUTION__PROJECT:
+			setProject((Project) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -1276,9 +1092,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 		case ClassMakerPackage.CONTRIBUTION__PHASE:
 			setPhase(PHASE_EDEFAULT);
 			return;
-		case ClassMakerPackage.CONTRIBUTION__VERSION:
-			setVersion(VERSION_EDEFAULT);
-			return;
 		case ClassMakerPackage.CONTRIBUTION__LANGUAGE:
 			setLanguage(LANGUAGE_EDEFAULT);
 			return;
@@ -1288,8 +1101,8 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 		case ClassMakerPackage.CONTRIBUTION__PARENT:
 			setParent((Item) null);
 			return;
-		case ClassMakerPackage.CONTRIBUTION__CONTRIBUTION:
-			setContribution((Contribution) null);
+		case ClassMakerPackage.CONTRIBUTION__PROJECT:
+			setProject((Project) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -1307,8 +1120,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 			return MODEL_NAME_EDEFAULT == null ? modelName != null : !MODEL_NAME_EDEFAULT.equals(modelName);
 		case ClassMakerPackage.CONTRIBUTION__PHASE:
 			return phase != PHASE_EDEFAULT;
-		case ClassMakerPackage.CONTRIBUTION__VERSION:
-			return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
 		case ClassMakerPackage.CONTRIBUTION__LANGUAGE:
 			return LANGUAGE_EDEFAULT == null ? language != null : !LANGUAGE_EDEFAULT.equals(language);
 		case ClassMakerPackage.CONTRIBUTION__DOMAIN_MODEL:
@@ -1319,12 +1130,10 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 			return basicGetParent() != null;
 		case ClassMakerPackage.CONTRIBUTION__LOCALE:
 			return LOCALE_EDEFAULT == null ? locale != null : !LOCALE_EDEFAULT.equals(locale);
-		case ClassMakerPackage.CONTRIBUTION__CONTRIBUTION:
-			return basicGetContribution() != null;
+		case ClassMakerPackage.CONTRIBUTION__PROJECT:
+			return basicGetProject() != null;
 		case ClassMakerPackage.CONTRIBUTION__DEPENDENCIES:
 			return !getDependencies().isEmpty();
-		case ClassMakerPackage.CONTRIBUTION__STATE:
-			return basicGetState() != null;
 		case ClassMakerPackage.CONTRIBUTION__LATEST_VERSION:
 			return LATEST_VERSION_EDEFAULT == null ? getLatestVersion() != null
 					: !LATEST_VERSION_EDEFAULT.equals(getLatestVersion());
@@ -1347,8 +1156,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 				return ClassMakerPackage.ITEM__MODEL_NAME;
 			case ClassMakerPackage.CONTRIBUTION__PHASE:
 				return ClassMakerPackage.ITEM__PHASE;
-			case ClassMakerPackage.CONTRIBUTION__VERSION:
-				return ClassMakerPackage.ITEM__VERSION;
 			case ClassMakerPackage.CONTRIBUTION__LANGUAGE:
 				return ClassMakerPackage.ITEM__LANGUAGE;
 			case ClassMakerPackage.CONTRIBUTION__DOMAIN_MODEL:
@@ -1359,8 +1166,8 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 				return ClassMakerPackage.ITEM__PARENT;
 			case ClassMakerPackage.CONTRIBUTION__LOCALE:
 				return ClassMakerPackage.ITEM__LOCALE;
-			case ClassMakerPackage.CONTRIBUTION__CONTRIBUTION:
-				return ClassMakerPackage.ITEM__CONTRIBUTION;
+			case ClassMakerPackage.CONTRIBUTION__PROJECT:
+				return ClassMakerPackage.ITEM__PROJECT;
 			default:
 				return -1;
 			}
@@ -1381,8 +1188,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 				return ClassMakerPackage.CONTRIBUTION__MODEL_NAME;
 			case ClassMakerPackage.ITEM__PHASE:
 				return ClassMakerPackage.CONTRIBUTION__PHASE;
-			case ClassMakerPackage.ITEM__VERSION:
-				return ClassMakerPackage.CONTRIBUTION__VERSION;
 			case ClassMakerPackage.ITEM__LANGUAGE:
 				return ClassMakerPackage.CONTRIBUTION__LANGUAGE;
 			case ClassMakerPackage.ITEM__DOMAIN_MODEL:
@@ -1393,8 +1198,8 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 				return ClassMakerPackage.CONTRIBUTION__PARENT;
 			case ClassMakerPackage.ITEM__LOCALE:
 				return ClassMakerPackage.CONTRIBUTION__LOCALE;
-			case ClassMakerPackage.ITEM__CONTRIBUTION:
-				return ClassMakerPackage.CONTRIBUTION__CONTRIBUTION;
+			case ClassMakerPackage.ITEM__PROJECT:
+				return ClassMakerPackage.CONTRIBUTION__PROJECT;
 			default:
 				return -1;
 			}
@@ -1417,8 +1222,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 		result.append(modelName);
 		result.append(", phase: ");
 		result.append(phase);
-		result.append(", version: ");
-		result.append(version);
 		result.append(", language: ");
 		result.append(language);
 		result.append(", locale: ");

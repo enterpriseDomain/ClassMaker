@@ -23,6 +23,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
+import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object
@@ -43,6 +44,8 @@ import org.eclipse.emf.common.util.EMap;
  * History</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.Revision#getLatestTimestamp
  * <em>Latest Timestamp</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Revision#getVersion
+ * <em>Version</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getRevision()
@@ -143,6 +146,31 @@ public interface Revision extends Item {
 	 * @generated
 	 */
 	long getLatestTimestamp();
+
+	/**
+	 * Returns the value of the '<em><b>Version</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc --> A
+	 * {@link org.osgi.framework.Version Version} of the <em><b>Item</b></em>. <!--
+	 * end-model-doc -->
+	 * 
+	 * @return the value of the '<em>Version</em>' attribute.
+	 * @see #setVersion(Version)
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getRevision_Version()
+	 * @model dataType="org.enterprisedomain.classmaker.OSGiVersion"
+	 * @generated
+	 */
+	Version getVersion();
+
+	/**
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Revision#getVersion
+	 * <em>Version</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value the new value of the '<em>Version</em>' attribute.
+	 * @see #getVersion()
+	 * @generated
+	 */
+	void setVersion(Version value);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

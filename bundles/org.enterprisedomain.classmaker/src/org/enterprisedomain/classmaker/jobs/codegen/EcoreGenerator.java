@@ -164,8 +164,8 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 				getContributionState().setProjectVersion(monitor);
 				try {
 					@SuppressWarnings("unchecked")
-					SCMOperator<Git> operator = (SCMOperator<Git>) getContributionState().getContribution()
-							.getWorkspace().getSCMRegistry().get(getProject().getName());
+					SCMOperator<Git> operator = (SCMOperator<Git>) getContributionState().getProject().getWorkspace()
+							.getSCMRegistry().get(getProject().getName());
 					operator.add(".");
 				} catch (Exception e) {
 					throw new CoreException(ClassMakerPlugin.createErrorStatus(e));

@@ -235,7 +235,7 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 
 	protected Workspace getWorkspace() {
 		if (getContributionState() != null)
-			return getContributionState().getContribution().getWorkspace();
+			return getContributionState().getProject().getWorkspace();
 		else
 			return ClassMakerPlugin.getClassMaker().getWorkspace();
 	}

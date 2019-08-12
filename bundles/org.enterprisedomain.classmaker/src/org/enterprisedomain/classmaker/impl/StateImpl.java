@@ -158,9 +158,8 @@ public class StateImpl extends ItemImpl implements State {
 		public void notifyChanged(Notification msg) {
 			if (msg.getFeatureID(State.class) == ClassMakerPackage.STATE__MODEL_NAME
 					&& msg.getEventType() == Notification.SET && msg.getNewStringValue() != null
-					&& eIsSet(ClassMakerPackage.STATE__CONTRIBUTION))
-				setProjectName(
-						getContribution().getWorkspace().getService().computeProjectName(msg.getNewStringValue()));
+					&& eIsSet(ClassMakerPackage.STATE__PROJECT))
+				setProjectName(getProject().getWorkspace().getService().computeProjectName(msg.getNewStringValue()));
 			// if (eContainer() != null && eIsSet(ClassMakerPackage.STATE__REVISION)
 			// && eIsSet(ClassMakerPackage.STATE__CONTRIBUTION) &&
 			// !getContribution().isSavingResource()
@@ -424,7 +423,7 @@ public class StateImpl extends ItemImpl implements State {
 	 */
 	public String getDeployableUnitName() {
 		String separator = "_"; //$NON-NLS-1$
-		return getProjectName() + separator + getVersion().toString();
+		return getProjectName() + separator + getRevision().getVersion().toString();
 	}
 
 	@Override
@@ -443,8 +442,8 @@ public class StateImpl extends ItemImpl implements State {
 	public String initialize(boolean commit) {
 		if (!eIsSet(ClassMakerPackage.STATE__MODEL_NAME))
 			super.initialize(commit);
-		if (eIsSet(ClassMakerPackage.STATE__CONTRIBUTION)
-				&& getContribution().eIsSet(ClassMakerPackage.Literals.PROJECT__PROJECT_NAME)
+		if (eIsSet(ClassMakerPackage.STATE__PROJECT)
+				&& getProject().eIsSet(ClassMakerPackage.Literals.PROJECT__PROJECT_NAME)
 				&& ResourceUtils.isProjectExists(getProjectName())) {
 			URI modelURI = getModelURI();
 			loadResource(modelURI, !eIsSet(ClassMakerPackage.STATE__RESOURCE), true);
@@ -466,7 +465,7 @@ public class StateImpl extends ItemImpl implements State {
 				}
 			else {
 				@SuppressWarnings("unchecked")
-				SCMOperator<Git> operator = (SCMOperator<Git>) getContribution().getWorkspace().getSCMRegistry()
+				SCMOperator<Git> operator = (SCMOperator<Git>) getProject().getWorkspace().getSCMRegistry()
 						.get(getProjectName());
 				try {
 					Git git = operator.getRepositorySCM();
@@ -489,7 +488,7 @@ public class StateImpl extends ItemImpl implements State {
 						ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 					}
 				}
-				getContribution().checkout(getRevision().getVersion(), getTimestamp(), getCommitId());
+				getProject().checkout(getRevision().getVersion(), getTimestamp(), getCommitId());
 			}
 		}
 		return getCommitId(); // $NON-NLS-1$
@@ -513,7 +512,7 @@ public class StateImpl extends ItemImpl implements State {
 					monitor.done();
 				}
 			}
-			modelURI = URI.createFileURI(root.getRawLocation().append(getContribution().getResourcePath()).toString());
+			modelURI = URI.createFileURI(root.getRawLocation().append(getProject().getResourcePath()).toString());
 		}
 		return modelURI;
 	}
@@ -532,7 +531,7 @@ public class StateImpl extends ItemImpl implements State {
 			return;
 		loading = true;
 		boolean created = false;
-		ResourceSet resourceSet = getContribution().getWorkspace().getResourceSet();
+		ResourceSet resourceSet = getProject().getWorkspace().getResourceSet();
 		File modelFile = new File(modelURI.toFileString());
 		if (modelFile.exists())
 			setResource(resourceSet.getResource(modelURI, loadOnDemand));
@@ -560,9 +559,9 @@ public class StateImpl extends ItemImpl implements State {
 	}
 
 	public void saveResource() {
-		if (getContribution().isSavingResource() || isMaking())
+		if (getProject().isSavingResource() || isMaking())
 			return;
-		getContribution().setSavingResource(true);
+		getProject().setSavingResource(true);
 		setMaking(true);
 		if (!eIsSet(ClassMakerPackage.STATE__RESOURCE))
 			return;
@@ -597,7 +596,7 @@ public class StateImpl extends ItemImpl implements State {
 		} finally {
 			if (isMaking())
 				setMaking(false);
-			getContribution().setSavingResource(false);
+			getProject().setSavingResource(false);
 		}
 
 	}
@@ -609,7 +608,7 @@ public class StateImpl extends ItemImpl implements State {
 	 */
 	public Worker createGenerator() {
 		return create(ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "project.create.generator"), //$NON-NLS-1$
-				getProject(), getTimestamp());
+				getEclipseProject(), getTimestamp());
 	}
 
 	/**
@@ -647,9 +646,9 @@ public class StateImpl extends ItemImpl implements State {
 		for (StageQualifier filter : getStateCustomizers().keySet())
 			if (stage.equals(filter))
 				customizer.add(getStateCustomizers().get(filter));
-		for (StageQualifier filter : getContribution().getWorkspace().getCustomizers().keySet())
+		for (StageQualifier filter : getProject().getWorkspace().getCustomizers().keySet())
 			if (filter.equals(stage))
-				customizer.add(getContribution().getWorkspace().getCustomizers().get(filter));
+				customizer.add(getProject().getWorkspace().getCustomizers().get(filter));
 		if (customizer.isEmpty())
 			return null;
 		return (Worker) (customizer.last().customize(ECollections.asEList(customizerArgs)));
@@ -681,7 +680,7 @@ public class StateImpl extends ItemImpl implements State {
 		synchronized (makingLock) {
 			IProgressMonitor wrappingMonitor = new WrappingProgressMonitor(monitor);
 			CompletionListener completionListener = new MakingCompletionListener();
-			getContribution().addCompletionListener(completionListener);
+			getProject().addCompletionListener(completionListener);
 			Stage oldStage = getPhase();
 			try {
 				if (isMaking())
@@ -692,7 +691,7 @@ public class StateImpl extends ItemImpl implements State {
 				saveResource();
 
 				try {
-					getContribution().getWorkspace().provision(wrappingMonitor);
+					getProject().getWorkspace().provision(wrappingMonitor);
 				} catch (CoreException e) {
 					ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
 				}
@@ -713,15 +712,15 @@ public class StateImpl extends ItemImpl implements State {
 
 				EnterpriseDomainJob exporterJob = getJob(exporter);
 				exporterJob.setContributionState(this);
-				exporterJob.setProject(getProject());
+				exporterJob.setProject(getEclipseProject());
 				exporter.getProperties().put(AbstractExporter.EXPORT_DESTINATION_PROP,
-						ResourceUtils.getExportDestination(getProject()).toString());
+						ResourceUtils.getExportDestination(getEclipseProject()).toString());
 
 				Worker generator = createGenerator();
 				EnterpriseDomainJob generatorJob = getJob(generator);
-				generatorJob.setResourceSet(getContribution().getWorkspace().getResourceSet());
+				generatorJob.setResourceSet(getProject().getWorkspace().getResourceSet());
 				generatorJob.setContributionState(this);
-				generatorJob.setProject(getProject());
+				generatorJob.setProject(getEclipseProject());
 				generatorJob.setProgressGroup(wrappingMonitor, 1);
 				generatorJob.setNextJob(exporterJob);
 
@@ -767,7 +766,7 @@ public class StateImpl extends ItemImpl implements State {
 				makingLock.wait(7000);
 				Thread.yield();
 			}
-			getContribution().removeCompletionListener(completionListener);
+			getProject().removeCompletionListener(completionListener);
 			String result = commit(); // $NON-NLS-1$
 			monitor.done();
 			return result;
@@ -779,7 +778,7 @@ public class StateImpl extends ItemImpl implements State {
 		return (EnterpriseDomainJob) worker.getAdapter(EnterpriseDomainJob.class);
 	}
 
-	private IProject getProject() {
+	private IProject getEclipseProject() {
 		return ResourceUtils.getProject(getProjectName());
 	}
 
@@ -813,11 +812,11 @@ public class StateImpl extends ItemImpl implements State {
 	public void checkout(String commitId) {
 		try {
 			@SuppressWarnings("unchecked")
-			SCMOperator<Git> operator = (SCMOperator<Git>) getContribution().getWorkspace().getSCMRegistry()
+			SCMOperator<Git> operator = (SCMOperator<Git>) getProject().getWorkspace().getSCMRegistry()
 					.get(getProjectName());
 			setCommitId(commitId);
-			operator.checkout(getVersion().toString(), getCommitId());
-			copyModel(getContribution());
+			operator.checkout(getProject().getVersion().toString(), getCommitId());
+			copyModel(getParent());
 			load(false);
 		} catch (CheckoutConflictException e) {
 			e.getConflictingPaths().clear();
@@ -836,7 +835,7 @@ public class StateImpl extends ItemImpl implements State {
 	 */
 	public void add(String filepattern) throws Exception {
 		@SuppressWarnings("unchecked")
-		SCMOperator<Git> operator = (SCMOperator<Git>) getContribution().getWorkspace().getSCMRegistry()
+		SCMOperator<Git> operator = (SCMOperator<Git>) getProject().getWorkspace().getSCMRegistry()
 				.get(getProjectName());
 		operator.add(filepattern);
 	}
@@ -980,9 +979,9 @@ public class StateImpl extends ItemImpl implements State {
 	 * 
 	 * @generated NOT
 	 */
-	public Contribution basicGetContribution() {
+	public Project basicGetProject() {
 		if (eIsSet(ClassMakerPackage.STATE__REVISION))
-			return getRevision().getContribution();
+			return getRevision().getProject();
 		else
 			return null;
 	}
@@ -992,8 +991,8 @@ public class StateImpl extends ItemImpl implements State {
 	 * 
 	 * @generated NOT
 	 */
-	public void setContribution(Contribution newContribution) {
-		newContribution.getRevision().getStateHistory().put(getTimestamp(), this);
+	public void setProject(Project newProject) {
+		newProject.getRevision().getStateHistory().put(getTimestamp(), this);
 	}
 
 	/**
@@ -1142,8 +1141,8 @@ public class StateImpl extends ItemImpl implements State {
 	 * @generated NOT
 	 */
 	public String getProjectName() {
-		if (eIsSet(ClassMakerPackage.STATE__CONTRIBUTION))
-			return getContribution().getProjectName();
+		if (eIsSet(ClassMakerPackage.STATE__PROJECT))
+			return getProject().getProjectName();
 		else
 			return null;
 	}
@@ -1154,7 +1153,7 @@ public class StateImpl extends ItemImpl implements State {
 	 * @generated NOT
 	 */
 	public void setProjectName(String newProjectName) {
-		getContribution().setProjectName(newProjectName);
+		getProject().setProjectName(newProjectName);
 	}
 
 	/**
@@ -1196,7 +1195,7 @@ public class StateImpl extends ItemImpl implements State {
 			IWorkspace workspace = ResourcesPlugin.getWorkspace();
 			IProject project = workspace.getRoot().getProject(getProjectName());
 			IBundleProjectDescription bundleProjectDescription = service.getDescription(project);
-			bundleProjectDescription.setBundleVersion(getVersion());
+			bundleProjectDescription.setBundleVersion(getProject().getVersion());
 			bundleProjectDescription.apply(m);
 		} finally {
 			m.done();
@@ -1216,7 +1215,7 @@ public class StateImpl extends ItemImpl implements State {
 		try {
 			operator.deleteProject();
 			try {
-				operator.checkoutOrphan(getVersion().toString(), getTimestamp());
+				operator.checkoutOrphan(getProject().getVersion().toString(), getTimestamp());
 			} catch (Exception e) {
 				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 			}
@@ -1452,7 +1451,7 @@ public class StateImpl extends ItemImpl implements State {
 	@Override
 	public boolean contains(ISchedulingRule otherRule) {
 		if (otherRule instanceof State)
-			return getVersion().equals(((State) otherRule).getVersion())
+			return getRevision().getVersion().equals(((State) otherRule).getRevision().getVersion())
 					&& getRevision().equals(((State) otherRule).getRevision())
 					&& getTimestamp() == ((State) otherRule).getTimestamp();
 		return false;
@@ -1461,7 +1460,7 @@ public class StateImpl extends ItemImpl implements State {
 	@Override
 	public boolean isConflicting(ISchedulingRule otherRule) {
 		if (otherRule instanceof State)
-			return getVersion().equals(((State) otherRule).getVersion())
+			return getRevision().getVersion().equals(((State) otherRule).getRevision().getVersion())
 					&& getRevision().equals(((State) otherRule).getRevision())
 					&& getTimestamp() == ((State) otherRule).getTimestamp()
 					&& getCommitId() == ((State) otherRule).getCommitId();

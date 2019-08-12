@@ -452,18 +452,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
-	public EReference getContribution_State() {
-		return (EReference) contributionEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
 	public EAttribute getContribution_LatestVersion() {
-		return (EAttribute) contributionEClass.getEStructuralFeatures().get(2);
+		return (EAttribute) contributionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -473,7 +463,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EReference getContribution_ModelResourceAdapter() {
-		return (EReference) contributionEClass.getEStructuralFeatures().get(3);
+		return (EReference) contributionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -524,6 +514,16 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	@Override
 	public EAttribute getRevision_LatestTimestamp() {
 		return (EAttribute) revisionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public EAttribute getRevision_Version() {
+		return (EAttribute) revisionEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -692,7 +692,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
-	public EAttribute getItem_Version() {
+	public EAttribute getItem_Language() {
 		return (EAttribute) itemEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -702,18 +702,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
-	public EAttribute getItem_Language() {
-		return (EAttribute) itemEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
 	public EReference getItem_DomainModel() {
-		return (EReference) itemEClass.getEStructuralFeatures().get(4);
+		return (EReference) itemEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -723,7 +713,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EReference getItem_Customizers() {
-		return (EReference) itemEClass.getEStructuralFeatures().get(5);
+		return (EReference) itemEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -733,7 +723,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EReference getItem_Parent() {
-		return (EReference) itemEClass.getEStructuralFeatures().get(6);
+		return (EReference) itemEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -743,7 +733,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EAttribute getItem_Locale() {
-		return (EAttribute) itemEClass.getEStructuralFeatures().get(7);
+		return (EAttribute) itemEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -752,8 +742,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
-	public EReference getItem_Contribution() {
-		return (EReference) itemEClass.getEStructuralFeatures().get(8);
+	public EReference getItem_Project() {
+		return (EReference) itemEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -1162,6 +1152,26 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
+	public EAttribute getProject_Version() {
+		return (EAttribute) projectEClass.getEStructuralFeatures().get(14);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public EReference getProject_State() {
+		return (EReference) projectEClass.getEStructuralFeatures().get(15);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
 	public EClass getModelPair() {
 		return modelPairEClass;
 	}
@@ -1558,7 +1568,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		// Create classes and their features
 		contributionEClass = createEClass(CONTRIBUTION);
 		createEAttribute(contributionEClass, CONTRIBUTION__DEPENDENCIES);
-		createEReference(contributionEClass, CONTRIBUTION__STATE);
 		createEAttribute(contributionEClass, CONTRIBUTION__LATEST_VERSION);
 		createEReference(contributionEClass, CONTRIBUTION__MODEL_RESOURCE_ADAPTER);
 
@@ -1567,6 +1576,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		createEAttribute(revisionEClass, REVISION__TIMESTAMP);
 		createEReference(revisionEClass, REVISION__STATE_HISTORY);
 		createEAttribute(revisionEClass, REVISION__LATEST_TIMESTAMP);
+		createEAttribute(revisionEClass, REVISION__VERSION);
 
 		stateEClass = createEClass(STATE);
 		createEAttribute(stateEClass, STATE__PACKAGE_CLASS_NAME);
@@ -1585,13 +1595,12 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		itemEClass = createEClass(ITEM);
 		createEAttribute(itemEClass, ITEM__MODEL_NAME);
 		createEAttribute(itemEClass, ITEM__PHASE);
-		createEAttribute(itemEClass, ITEM__VERSION);
 		createEAttribute(itemEClass, ITEM__LANGUAGE);
 		createEReference(itemEClass, ITEM__DOMAIN_MODEL);
 		createEReference(itemEClass, ITEM__CUSTOMIZERS);
 		createEReference(itemEClass, ITEM__PARENT);
 		createEAttribute(itemEClass, ITEM__LOCALE);
-		createEReference(itemEClass, ITEM__CONTRIBUTION);
+		createEReference(itemEClass, ITEM__PROJECT);
 
 		adapterEClass = createEClass(ADAPTER);
 
@@ -1655,6 +1664,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		createEReference(projectEClass, PROJECT__REVISIONS);
 		createEAttribute(projectEClass, PROJECT__PROJECT_VERSION);
 		createEReference(projectEClass, PROJECT__SELECT_REVEAL_HANDLER);
+		createEAttribute(projectEClass, PROJECT__VERSION);
+		createEReference(projectEClass, PROJECT__STATE);
 
 		resourceEClass = createEClass(RESOURCE);
 
@@ -1748,9 +1759,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEAttribute(getContribution_Dependencies(), ecorePackage.getEString(), "dependencies", "", 0, -1,
 				Contribution.class, !IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				IS_DERIVED, IS_ORDERED);
-		initEReference(getContribution_State(), this.getState(), null, "state", null, 0, 1, Contribution.class,
-				IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
-				IS_DERIVED, IS_ORDERED);
 		initEAttribute(getContribution_LatestVersion(), this.getOSGiVersion(), "latestVersion", null, 0, 1,
 				Contribution.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				IS_DERIVED, IS_ORDERED);
@@ -1764,25 +1772,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEException(op, this.getCoreException());
 
-		op = addEOperation(contributionEClass, null, "checkout", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getOSGiVersion(), "version", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getELong(), "timestamp", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(contributionEClass, null, "checkout", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getOSGiVersion(), "version", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getELong(), "timestamp", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "commitId", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(contributionEClass, null, "checkout", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getELong(), "timestamp", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(contributionEClass, null, "checkout", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getELong(), "timestamp", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "commitId", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(contributionEClass, null, "checkout", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "commitId", 0, 1, IS_UNIQUE, IS_ORDERED);
-
 		op = addEOperation(contributionEClass, null, "delete", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEException(op, this.getCoreException());
@@ -1794,9 +1783,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 		op = addEOperation(contributionEClass, this.getState(), "getState", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getELong(), "timestamp", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(contributionEClass, null, "initAdapters", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getRevision(), "revision", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(revisionEClass, Revision.class, "Revision", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
@@ -1811,6 +1797,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEAttribute(getRevision_LatestTimestamp(), ecorePackage.getELong(), "latestTimestamp", null, 0, 1,
 				Revision.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRevision_Version(), this.getOSGiVersion(), "version", null, 0, 1, Revision.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(revisionEClass, null, "create", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1909,8 +1897,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getItem_Phase(), this.getStage(), "phase", "DEFINED", 0, 1, Item.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getItem_Version(), this.getOSGiVersion(), "version", null, 0, 1, Item.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getItem_Language(), ecorePackage.getEString(), "language", "", 0, 1, Item.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getItem_DomainModel(), this.getModelPair(), this.getModelPair_Parent(), "domainModel", null, 0,
@@ -1924,9 +1910,9 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 				IS_ORDERED);
 		initEAttribute(getItem_Locale(), this.getLocale(), "locale", "", 0, 1, Item.class, !IS_TRANSIENT, !IS_VOLATILE,
 				!IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getItem_Contribution(), this.getContribution(), null, "contribution", null, 0, 1, Item.class,
-				IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
-				IS_DERIVED, IS_ORDERED);
+		initEReference(getItem_Project(), this.getProject(), null, "project", null, 0, 1, Item.class, IS_TRANSIENT,
+				IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED,
+				IS_ORDERED);
 
 		op = addEOperation(itemEClass, null, "load", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEBoolean(), "create", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -2225,6 +2211,11 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEReference(getProject_SelectRevealHandler(), this.getSelectRevealHandler(), null, "selectRevealHandler",
 				null, 0, 1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
 				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProject_Version(), this.getOSGiVersion(), "version", null, 0, 1, Project.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProject_State(), this.getState(), null, "state", null, 0, 1, Project.class, IS_TRANSIENT,
+				IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED,
+				IS_ORDERED);
 
 		op = addEOperation(projectEClass, null, "create", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -2298,6 +2289,28 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 		op = addEOperation(projectEClass, null, "checkout", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getOSGiVersion(), "version", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(projectEClass, null, "checkout", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getOSGiVersion(), "version", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getELong(), "timestamp", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(projectEClass, null, "checkout", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getOSGiVersion(), "version", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getELong(), "timestamp", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "commitId", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(projectEClass, null, "checkout", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getELong(), "timestamp", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(projectEClass, null, "checkout", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getELong(), "timestamp", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "commitId", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(projectEClass, null, "checkout", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "commitId", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(projectEClass, null, "initAdapters", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getRevision(), "revision", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(resourceEClass, Resource.class, "Resource", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 
