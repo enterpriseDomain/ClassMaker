@@ -946,7 +946,8 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	 */
 	@Override
 	public void build(IProgressMonitor monitor) throws CoreException {
-		getRevision().build(monitor);
+		if (isRevisionSet())
+			getRevision().build(monitor);
 	}
 
 	@Override

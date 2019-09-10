@@ -39,6 +39,7 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.enterprisedomain.classmaker.ClassMakerService;
+import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.junit.Before;
@@ -146,13 +147,14 @@ public abstract class AbstractTest {
 		return createEAttribute(getAttributeName(), getAttributeType());
 	}
 
-	protected EPackage createAndTestEPackage(IProgressMonitor monitor) throws CoreException, InterruptedException {
+	protected EPackage createAndTestEPackage(IProgressMonitor monitor, String... dependencies)
+			throws CoreException, InterruptedException {
 		EPackage p = createEPackage(getPackageName(), "0");
 		EClass c = createEClass(getClassName());
 		c.getEStructuralFeatures().add(createEAttribute(DEFAULT_ATTR_NAME, EcorePackage.Literals.EBOOLEAN));
 		c.getEStructuralFeatures().add(createEAttribute(getAttributeName(), getAttributeType()));
 		p.getEClassifiers().add(c);
-		return saveAndTest(p, DEFAULT_ATTR_NAME, true, monitor);
+		return saveAndTest(p, DEFAULT_ATTR_NAME, true, monitor, dependencies);
 	}
 
 	protected Future<? extends EPackage> createAndSaveEPackage(Executor executor, IProgressMonitor monitor)
@@ -230,8 +232,11 @@ public abstract class AbstractTest {
 	}
 
 	protected EPackage saveAndTest(EPackage ePackage, String attributeName, Object attributeValue,
-			IProgressMonitor monitor) throws CoreException, InterruptedException {
+			IProgressMonitor monitor, String[] dependencies) throws CoreException, InterruptedException {
 		EPackage e = service.make(ePackage, monitor);
+		Contribution c = service.getWorkspace().getContribution(ePackage);
+		for (String dependency : dependencies)
+			c.getDependencies().add(dependency);
 		return test(e, attributeName, attributeValue);
 	}
 

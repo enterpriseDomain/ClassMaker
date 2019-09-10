@@ -556,8 +556,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		Contribution c = service.getWorkspace().getContribution(createAndTestEPackage(getProgressMonitor()),
 				Stage.LOADED);
 		c.delete(getProgressMonitor());
-		c.getDependencies().add("org.eclipse.emf.common");
-		createAndTestEPackage(getProgressMonitor());
+		createAndTestEPackage(getProgressMonitor(), "org.eclipse.emf.common");
 		cleanup();
 	}
 
@@ -626,9 +625,8 @@ public class TestEnterpriseDomain extends AbstractTest {
 			}
 
 		};
-		c.getCustomizers().put(
-				ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "project.generation.genmodel.setup"),
-				customizer);
+		c.getCustomizers().put(ClassMakerService.Stages
+				.lookup(ClassMakerService.Stages.ID_PREFIX + "project.generation.genmodel.setup"), customizer);
 
 		final Semaphore complete = new Semaphore(0);
 		CompletionListener l = new CompletionListenerImpl() {
