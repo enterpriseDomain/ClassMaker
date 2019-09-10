@@ -316,6 +316,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 		sourceBlueprint.setDynamicModel(source);
 		Blueprint targetBlueprint = createBlueprint();
 		targetBlueprint.setDynamicModel(target);
+		targetBlueprint.getDependencies().addAll(getWorkspace().getContribution(source).getDependencies());
 		return replace(sourceBlueprint, targetBlueprint, version, monitor);
 	}
 
