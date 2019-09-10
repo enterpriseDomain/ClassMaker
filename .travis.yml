@@ -1,0 +1,21 @@
+language: java
+dist: xenial
+sudo: required
+jdk:
+- openjdk11
+cache:
+  directories:
+  - "$HOME/.m2"
+before_install:
+- cp toolchains.xml ~/.m2/toolchains.xml
+script: mvn clean verify
+deploy:
+  provider: bintray
+  file: releng/release.json
+  on:
+    repo: enterpriseDomain/ClassMaker
+    branch: master
+  user: kyrillzotkin
+  key:
+    secure: V5PYXqvYP95mFxKw8eFqI9swYqdAgEg3AzyIxefjjBO+UGUjcKlw41R2qyYAlV+1Al9d6ZJ+nRLOE+v7yOUbC3+htGBaMdL22XE3te75aA5Sooc2VSEEDwtGtxdKKIUN2lgsPgKSff/DcOmWhLmpy56G3WMwq8S3cKrrrQnAE7oArljBL50OARJkY8Psdfy7PseJEptZ3Clm0geJjKTC2MGHaRBOKbCTBN2ZfbVGIKHN7jbDUN98glOmObIYnYMKEJsfhIBFP+Bxp+mTsGCntzZMNv5E4aghVC2N9yif4sLX/ZshSWSHkwkSdE42/ORfsH6KYsCegQD5frdDUAvib0nO/RiK0KfISNPJAl58Nnh1UvLVcPEVP5BQXJRfGfdrqjfZwCoUM5TI02lLaW1dykPZT4d6JbQ/3BG5FuAynU0IfgZDAFCDKjucowLy8np8nDO19dwqwB0Zu8uxg+4ke43oYU9AxuQAQ1yT2h+rSrquXB9WDcTLt8AxNsTELvs/Hqf6Fc8UQafBh4HY618dgaABxJKPCItpwXHrNTjd8PczQBv1URfU/2azg5urt2MBf0xW0ZE6lOPvWTadBjN9x/RORi9xh1THhPsA4bj0LP95dQ535EpaR4eoeQv4hjp6msfDq04oKA/sKYqrtXLG1f4NiMAB9BfnKAlV5dmvjLA=
+  skip_cleanup: true
