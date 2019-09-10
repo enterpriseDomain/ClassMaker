@@ -555,8 +555,8 @@ public class TestEnterpriseDomain extends AbstractTest {
 		setAttributeType(EcorePackage.Literals.EJAVA_OBJECT);
 		Contribution c = service.getWorkspace().getContribution(createAndTestEPackage(getProgressMonitor()),
 				Stage.LOADED);
+		c.delete(getProgressMonitor());
 		c.getDependencies().add("org.eclipse.emf.common");
-		c.delete(getProgressMonitor());		
 		createAndTestEPackage(getProgressMonitor());
 		cleanup();
 	}
