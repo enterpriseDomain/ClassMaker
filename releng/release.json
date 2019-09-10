@@ -23,10 +23,18 @@
 
     "files":
         [
-        {"includePattern": "releng/org.enterprisedomain.update/target/repository/(.*)", "excludePattern": ".gitignore", "uploadPattern": "$1"},
-        {"includePattern": "releng/org.enterprisedomain.update/target/repository/plugins/(.*)", "excludePattern": ".gitignore", "uploadPattern": "plugins/$1"},
-        {"includePattern": "releng/org.enterprisedomain.update/target/repository/features/(.*)", "excludePattern": ".gitignore", "uploadPattern": "features/$1"},
-        {"includePattern": "docs/(.*)", "uploadPattern": "docs/$1"}
+        {"includePattern": "releng/org.enterprisedomain.update/target/repository/(.*)", "excludePattern": ".gitignore", "uploadPattern": "$1", "matrixParams": {
+        "override": 1 }
+        },
+        {"includePattern": "releng/org.enterprisedomain.update/target/repository/plugins/(.*)", "excludePattern": ".gitignore", "uploadPattern": "plugins/$1", "matrixParams": {
+        "override": 1 }
+        }
+        {"includePattern": "releng/org.enterprisedomain.update/target/repository/features/(.*)", "excludePattern": ".gitignore", "uploadPattern": "features/$1", "matrixParams": {
+        "override": 1 }
+        },
+        {"includePattern": "docs/(.*)", "uploadPattern": "docs/$1", "matrixParams": {
+        "override": 1 }
+        }
         ],
     "publish": true
 }
