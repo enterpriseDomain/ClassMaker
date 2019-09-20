@@ -23,7 +23,7 @@
 
     "files":
         [
-        {"includePattern": "org.enterprisedomain.workbench.ide.product/target/repository/(.*)", "excludePattern": ".gitignore", "uploadPattern": "$1", "matrixParams": {
+        {"includePattern": "releng/org.enterprisedomain.workbench.ide.product/target/repository/(.*)", "excludePattern": ".gitignore", "uploadPattern": "$1", "matrixParams": {
         "override": 1 }
         },        
         [
