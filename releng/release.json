@@ -26,7 +26,6 @@
         {"includePattern": "releng/org.enterprisedomain.workbench.ide.product/target/repository/(.*)", "excludePattern": ".gitignore", "uploadPattern": "$1", "matrixParams": {
         "override": 1 }
         },        
-        [
         {"includePattern": "releng/org.enterprisedomain.update/target/repository/(.*)", "excludePattern": ".gitignore", "uploadPattern": "$1", "matrixParams": {
         "override": 1 }
         },
