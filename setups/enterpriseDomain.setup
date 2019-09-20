@@ -7,7 +7,6 @@
     xmlns:pde="http://www.eclipse.org/oomph/setup/pde/1.0"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
     xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
-    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/setup/pde/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/PDE.ecore"
     name="org.enterprisedomain"
     label="enterpriseDomain">
   <setupTask
@@ -57,7 +56,7 @@
         <repository
             url="http://download.eclipse.org/releases/2019-06"/>
         <repository
-            url="file:///home/kyrill/development/git/ClassMaker/releng/org.enterprisedomain.workbench.ide.product/target/repository/"/>
+            url="https://dl.bintray.com/enterprisedomain/ClassMaker/"/>
         <repository
             url="http://download.eclipse.org/eclipse/updates/4.12"/>
         <repository
@@ -75,8 +74,8 @@
           name="org.enterprisedomain.target"/>
       <setupTask
           xsi:type="jdt:JRETask"
-          version="JavaSE-1.8"
-          location="${jre.location-1.8}"/>
+          version="JavaSE-11"
+          location="${jre.location-11}"/>
       <setupTask
           xsi:type="setup:EclipseIniTask"
           option="-Dosgi.instance.area"
