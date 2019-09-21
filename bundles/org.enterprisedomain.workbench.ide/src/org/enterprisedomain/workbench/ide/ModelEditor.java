@@ -27,6 +27,8 @@ public class ModelEditor extends MultiPageEditorPart {
 	private int genericEditorIndex;
 	private InternalProject ecpProject;
 
+	private boolean to = true;
+
 	public ModelEditor() {
 	}
 
@@ -52,11 +54,14 @@ public class ModelEditor extends MultiPageEditorPart {
 								@Override
 								public void run() {
 									try {
-										if (Activator.getClassMaker().getWorkspace().getResourceSet().eDeliver())
+										if (Activator.getClassMaker().getWorkspace().getResourceSet().eDeliver()
+												&& to) {
 											Activator.getClassMaker().getWorkspace().getResourceSet()
 													.eNotify(new NotificationImpl(notification.getEventType(),
 															notification.getNewValue(), notification.getOldValue(),
 															notification.getPosition()));
+											to = !to;
+										}
 									} catch (Exception e) {
 										return;
 									}
@@ -66,6 +71,35 @@ public class ModelEditor extends MultiPageEditorPart {
 
 				});
 			}
+			Activator.getClassMaker().getWorkspace().getResourceSet().eAdapters().add(new EContentAdapter() {
+
+				@Override
+				public void notifyChanged(final Notification notification) {
+					super.notifyChanged(notification);
+					Display display = Display.getCurrent();
+					if (display == null)
+						display = Display.getDefault();
+					if (display != null)
+						display.asyncExec(new Runnable() {
+
+							@Override
+							public void run() {
+								try {
+									if (getGenericEditor().getResourceSet().eDeliver() && !to) {
+										getGenericEditor().getResourceSet()
+												.eNotify(new NotificationImpl(notification.getEventType(),
+														notification.getNewValue(), notification.getOldValue(),
+														notification.getPosition()));
+										to = !to;
+									}
+								} catch (Exception e) {
+									return;
+								}
+							}
+						});
+				}
+
+			});
 			URI uri = EditUIUtil.getURI(getEditorInput());
 			Resource resource = null;
 			if (getGenericEditor().getResourceSet() != null)

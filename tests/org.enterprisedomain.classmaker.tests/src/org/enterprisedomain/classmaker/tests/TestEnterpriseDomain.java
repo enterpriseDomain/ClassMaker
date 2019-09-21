@@ -139,6 +139,11 @@ public class TestEnterpriseDomain extends AbstractTest {
 		assertEquals(readPagesCount, theObject.eGet(state));
 
 		assertEquals(eClass.getName(), theObject.getClass().getSimpleName());
+
+		Project project = service.getWorkspace().createProject(readerEPackage.getName() + "Instance",
+				getProgressMonitor());
+		((Resource) project.getChildren().get(0)).getContents().add(theObject);
+		assertEquals(theObject, ((Resource) project.getChildren().get(0)).getContents().get(0));;
 		cleanup();
 	}
 

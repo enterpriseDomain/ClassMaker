@@ -600,6 +600,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	protected void setResource(Resource resource) {
 		getRevision().getState().setResource(resource);
+		getChildren().set(0, resource);
 	}
 
 	/**
@@ -1155,6 +1156,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 				if (eIsSet(ClassMakerPackage.PROJECT__REVISION)
 						&& getRevision().eIsSet(ClassMakerPackage.Literals.REVISION__STATE))
 					getRevision().getState().setResource(resource);
+				onModelResourceCreate(resource);
 			} else {
 				createResource(uri, commit);
 			}
@@ -1178,6 +1180,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			} catch (IOException e) {
 				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 			}
+		onModelResourceCreate(resource);
 	}
 
 	private URI getResourceURI() {
