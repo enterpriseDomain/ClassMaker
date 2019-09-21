@@ -22,6 +22,13 @@ class ResourceChangeAdapter extends EContentAdapter {
 	}
 
 	@Override
+	public boolean isAdapterForType(Object type) {
+		if (type instanceof Class<?> && Resource.class.isAssignableFrom((Class<?>) type))
+			return true;
+		return super.isAdapterForType(type);
+	}
+
+	@Override
 	public void notifyChanged(Notification notification) {
 		super.notifyChanged(notification);
 		if (notification.getFeatureID(Resource.class) == Resource.RESOURCE__IS_MODIFIED

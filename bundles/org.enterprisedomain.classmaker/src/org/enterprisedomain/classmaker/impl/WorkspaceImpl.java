@@ -646,6 +646,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			project.create(monitor);
 			Revision revision = project.newRevision(project.nextVersion());
 			project.checkout(revision.getVersion());
+			project.initialize(true);
 			return project;
 		} finally {
 			monitor.done();
