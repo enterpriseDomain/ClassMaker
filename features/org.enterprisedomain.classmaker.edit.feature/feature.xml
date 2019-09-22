@@ -5,7 +5,7 @@
       version="0.8.1.qualifier">
 
    <description url="https://www.enterprisedomain.org/">
-enterpriseDomain ClassMaker Edit Feature
+      enterpriseDomain ClassMaker Edit Feature
    </description>
 
    <copyright>
@@ -103,9 +103,10 @@ limitations under the License.
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.eclipse.emf.ecore.edit"/>
       <import plugin="org.eclipse.jface"/>
-      <import plugin="org.eclipse.emf.ecp.view.util.swt" version="1.16.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.ecp.ui.view.swt"/>
-      <import plugin="org.eclipse.swt"/>
+      <import plugin="org.eclipse.emf.ecp.view.util.swt" version="1.19.0" match="compatible"/>
+      <import plugin="org.eclipse.emf.ecp.ui.view.swt" version="1.19.0" match="compatible"/>
+      <import plugin="org.eclipse.e4.ui.services"/>
+      <import plugin="org.eclipse.ui" version="3.112.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
