@@ -33,7 +33,7 @@
 						<frameworkExtension>
 							<groupId>org.enterprisedomain</groupId>
 							<artifactId>org.enterprisedomain.classmaker.osgi.systemextension</artifactId>
-							<version>0.8.0-SNAPSHOT</version>
+							<version>0.8.1-SNAPSHOT</version>
 						</frameworkExtension>
 					</frameworkExtensions>
 					<argLine>${surefire.moduleProperties}</argLine>
