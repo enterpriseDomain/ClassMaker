@@ -46,6 +46,7 @@ There is more [code](/tests/org.enterprisedomain.classmaker.tests/src/org/enterp
 
 Download
 ---------
+ 
 ### enterpriseDomain Workbench
 
 To install enterpriseDomain Workbench RCP, please, follow these steps:
