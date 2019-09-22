@@ -23,11 +23,11 @@ deploy:
   api_key:
     secure: p5pca9njDZoLAV7g69psgp3sDAEvY0mZTzStwnKVOWpSigG5N4wb8SuITmNa3NRF9P/uWfIAD23T43Jcxa72IH3FLCPZVZlIQDAHk+Qkk6QthjaUae/+aVMpaJ0EVR6OtimUD5ECi5aL+Qn8K8y7dFq1ZgOlYBovTK1TtPigsBnIDnOXO9Rr9IEDObsOZp03kCIUiy8YP9ir9K6dOWGmi2+fgPBM9CpowFVihEgc9/inwULf51lFzsg3iIxUpbxGAnIprUnBQd3uJag0a4YtImH/70x15cCsi01hgRfBh7Xba2FVfYVH/OncpzFAbQpUFka/k48fPYxoXFux3gpLCd0S9ZUgdF2RkDu48RQGQLdDw2V8mSSZ3W5Fds5V+p2QV2eB2dFmUhujLbsMOzx+5/+s2HIinOZh6nHDgfNWqQvRN3jXWiVHTvsL7TDjOitQCRMUyk2vic+3uHJRjPg+li1vFVlepCKyGRWT55vPP9UVtV1vsjD+nIFtkSQk/D+dcn6TMB4S/eA7cxEVafQtrUHhSDX+Mo/0zl8Di8aX6A8m5+J1CE7MX23cGvvXcyplWd53ihvIgZCZVV+u1dlnlkCLeuS7WHyKavqxDepC+d3GflLlclS78/bCaEwiXdXATYveORP3OKfhqEYRLQp0/ALKzQgE/p9xdiqtRq8j+PY=
   file:
+  - releng/org.enterprisedomain.update/target/org.enterprisedomain.update-0.8.1-SNAPSHOT.zip
   - releng/org.enterprisedomain.workbench.ide.product/target/products/workbench-linux.gtk.x86_64.zip
   - releng/org.enterprisedomain.workbench.ide.product/target/products/workbench-macosx.cocoa.x86_64.zip
   - releng/org.enterprisedomain.workbench.ide.product/target/products/workbench-win32.win32.x86_64.zip
   on:
-    repo: enterpriseDomain/ClassMaker
-    tags: true     
+    repo: enterpriseDomain/ClassMaker        
   skip_cleanup: true
 
