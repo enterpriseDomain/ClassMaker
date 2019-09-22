@@ -4,7 +4,7 @@
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:git="http://www.eclipse.org/oomph/setup/git/1.0"
-    xmlns:jdt="http://www.eclipse.org/oomph/setup/jdt/1.0"
+    xmlns:jdt_1.0="http://www.eclipse.org/oomph/setup/jdt/1.0"
     xmlns:predicates="http://www.eclipse.org/oomph/predicates/1.0"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
     xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
@@ -56,12 +56,6 @@
         label="ClassMaker"
         logicalProjectContainer="//@projectCatalogs[name='org.enterprisedomain']">
       <setupTask
-          xsi:type="jdt:JRETask"
-          version="JavaSE-11"
-          location="${jre.location-11}">
-        <description>Define the JRE needed to compile and run the Java projects of ${scope.project.label}</description>
-      </setupTask>
-      <setupTask
           xsi:type="setup:EclipseIniTask"
           option="-Xmx"
           value="1024m"
@@ -79,7 +73,7 @@
       <setupTask
           xsi:type="setup:VariableTask"
           name="eclipse.target.platform"
-          defaultValue="2019-06"
+          defaultValue="2019-09"
           storageURI="scope://Workspace"/>
       <setupTask
           xsi:type="setup.p2:P2Task">
@@ -182,6 +176,12 @@
             label="enterpriseDomain ClassMaker"/>
       </stream>
       <description></description>
+      <setupTask
+          xsi:type="jdt_1.0:JRETask"
+          version="JavaSE-11"
+          location="${jre.location-11}">
+        <description>Define the JRE needed to compile and run the Java projects of ${scope.project.label}</description>
+      </setupTask>
     </project>
     <description></description>
   </projectCatalog>

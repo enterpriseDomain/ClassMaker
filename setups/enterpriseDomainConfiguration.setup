@@ -8,7 +8,7 @@
       name="org.enterprisedomain.installation"
       label="enterpriseDomain Installation">
     <productVersion
-        href="index:/enterpriseDomain.setup#//@products[name='workbench']/@versions[name='2019-06']"/>
+        href="index:/org.eclipse.setup#//@productCatalogs[name='org.eclipse.products']/@products[name='org.eclipse.platform.ide']/@versions[name='2019-09']"/>
     <description>The enterpriseDomain installation provides cool stuff.</description>
   </installation>
   <workspace
