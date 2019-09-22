@@ -48,8 +48,9 @@ Download
 ---------
  
 ### enterpriseDomain Workbench
-
 To install enterpriseDomain Workbench RCP, please, follow these steps:
+
+
 * download the [Oomph installer](https://wiki.eclipse.org/Eclipse_Installer)
 
 
