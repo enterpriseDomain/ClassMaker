@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.enterprisedomain.classmaker;singleton:=true
 Automatic-Module-Name: org.enterprisedomain.classmaker
-Bundle-Version: 0.8.0.qualifier
+Bundle-Version: 0.8.1.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
@@ -35,7 +35,7 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.12.0,4.0.0)";visibil
  org.eclipse.pde.api.tools;bundle-version="[1.1.1,2.0.0)",
  org.eclipse.jdt.launching;bundle-version="[3.8.100,4.0.0)",
  org.eclipse.jgit;bundle-version="[5.0.1,6.0.0)";visibility:=reexport,
- org.eclipse.jgit.pgm;bundle-version="[5.4.2,6.0.0)",
+ org.eclipse.jgit.pgm;bundle-version="[5.5.0,6.0.0)",
  org.eclipse.equinox.concurrent;bundle-version="[1.1.0,2.0.0)";visibility:=reexport,
  org.eclipse.equinox.p2.core;bundle-version="[2.4.100,3.0.0)",
  org.eclipse.equinox.p2.repository;bundle-version="[2.3.200,3.0.0)",
@@ -52,10 +52,10 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.12.0,4.0.0)";visibil
  org.eclipse.ecf.filetransfer;bundle-version="[5.0.0,6.0.0)",
  org.eclipse.equinox.p2.director.app;bundle-version="[1.0.500,2.0.0)",
  org.eclipse.equinox.p2.touchpoint.natives;bundle-version="[1.2.100,2.0.0)",
- org.eclipse.m2m.qvt.oml;bundle-version="[3.6.0,4.0.0)";visibility:=reexport,
- org.eclipse.m2m.qvt.oml.ocl;bundle-version="[3.6.0,4.0.0)";visibility:=reexport,
- org.eclipse.m2m.qvt.oml.project;bundle-version="[3.6.0,4.0.0)";visibility:=reexport,
- org.eclipse.m2m.qvt.oml.runtime;bundle-version="[3.6.0,4.0.0)";visibility:=reexport,
+ org.eclipse.m2m.qvt.oml;bundle-version="[3.9.3,4.0.0)";visibility:=reexport,
+ org.eclipse.m2m.qvt.oml.ocl;bundle-version="[3.9.0,4.0.0)";visibility:=reexport,
+ org.eclipse.m2m.qvt.oml.project;bundle-version="[3.9.2,4.0.0)";visibility:=reexport,
+ org.eclipse.m2m.qvt.oml.runtime;bundle-version="[3.9.2,4.0.0)";visibility:=reexport,
  org.eclipse.swt;bundle-version="[3.110.0,4.0.0)",
  org.eclipse.jface;bundle-version="[3.13.1,4.0.0)",
  org.eclipse.core.jobs;bundle-version="[3.9.1,4.0.0)",

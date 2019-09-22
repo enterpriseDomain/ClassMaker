@@ -5,12 +5,12 @@
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
 		<artifactId>org.enterprisedomain.bundles</artifactId>
-		<version>0.8.0-SNAPSHOT</version>
+		<version>0.8.1-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>org.enterprisedomain.ecp.ui</artifactId>
 
 	<packaging>eclipse-plugin</packaging>
-	<version>0.8.0-SNAPSHOT</version>
+	<version>0.8.1-SNAPSHOT</version>
 	<groupId>org.enterprisedomain</groupId>
 </project>
