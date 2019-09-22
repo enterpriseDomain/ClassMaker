@@ -1,7 +1,7 @@
 target "org.enterprisedomain.target.photon" with allEnvironments configurePhase
 
 
-location updates4_11 "http://download.eclipse.org/eclipse/updates/4.12/" {
+location updates4_13 "http://download.eclipse.org/eclipse/updates/4.13/" {
 	org.eclipse.rcp.feature.group
 	org.eclipse.rcp.configuration.feature.group
 	org.eclipse.rcp.source.feature.group
@@ -12,7 +12,7 @@ location updates4_11 "http://download.eclipse.org/eclipse/updates/4.12/" {
 	org.eclipse.pde.core
 }
 
-location photon "https://download.eclipse.org/releases/2019-06/" {
+location photon "https://download.eclipse.org/releases/2019-09/" {
 	org.eclipse.jdt.feature.group
 	org.eclipse.emf.sdk.feature.group
 	org.eclipse.gef.sdk.feature.group
