@@ -19,7 +19,17 @@
 			<url>http://download.eclipse.org/edapt/releases/12x</url>
 			<layout>p2</layout>
 		</repository>		
-	</repositories>
+		<repository>
+		    <id>2019-09</id>
+		    <layout>p2</layout>
+		    <url>http://download.eclipse.org/releases/2019-09</url>
+		</repository>
+		<repository>
+		    <id>ecp1.22</id>
+		    <layout>p2</layout>
+		    <url>http://download.eclipse.org/ecp/releases/releases_target_122</url>
+		</repository>
+  	</repositories>
 	<build>
 		<plugins>
 			<plugin>
