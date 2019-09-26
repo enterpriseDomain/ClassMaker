@@ -48,17 +48,7 @@ Download
 ---------
  
 ### enterpriseDomain Workbench
-To install enterpriseDomain Workbench RCP, please, follow these steps:
-
-
-* download the [Oomph installer](https://wiki.eclipse.org/Eclipse_Installer)
-
-
-* add the following line to the installer's eclipse-inst.ini  
-`-Doomph.redirection.setups=http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/->https://raw.githubusercontent.com/enterpriseDomain/ClassMaker/master/setups/`  
-
-
-* start the Oomph installer
+Please, download [the latest release](https://github.com/enterpriseDomain/ClassMaker/releases) for your platform, then extract it and launch the workbench executable.
  
 ### ClassMaker
 Please, use the [update site](https://dl.bintray.com/enterprisedomain/ClassMaker/) to install ClassMaker. [See](https://github.com/enterpriseDomain/ClassMaker/wiki/HowToRun#usage) how to use it.
