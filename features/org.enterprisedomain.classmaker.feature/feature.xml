@@ -95,10 +95,10 @@ limitations under the License.
 
    <includes
          id="org.enterprisedomain.classmaker.osgi.resolverhooks.feature"
-         version="0.0.0"/>
+         version="0.0.0"
+         search-location="both"/>
 
    <requires>
-      <import feature="org.eclipse.e4.rcp" version="1.6.3.v20180214-0345"/>
       <import plugin="org.eclipse.core.runtime" version="3.12.0" match="compatible"/>
       <import plugin="org.eclipse.emf.ecore" version="2.12.0" match="compatible"/>
       <import plugin="org.eclipse.emf.ecore.xmi" version="2.12.0" match="compatible"/>
@@ -144,11 +144,12 @@ limitations under the License.
       <import plugin="org.eclipse.pde.ds.core" version="1.1.500" match="greaterOrEqual"/>
       <import plugin="org.eclipse.pde.ds.lib" version="1.1.300" match="greaterOrEqual"/>
       <import plugin="org.enterprisedomain.classmaker" version="0.8.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.ecp.emfstore.core" version="1.21.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.ecp.emfstore.ui" version="1.21.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.ecp.emfstore.ui.e3" version="1.21.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.ecp.emfstore.ui.search" version="1.21.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.emfstore.client" version="1.9.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.e4.rcp" version="1.6.3.v20180214-0345"/>
+      <import plugin="org.eclipse.emf.ecp.emfstore.core" version="1.22.0" match="equivalent"/>
+      <import plugin="org.eclipse.emf.ecp.emfstore.ui" version="1.22.0" match="equivalent"/>
+      <import plugin="org.eclipse.emf.ecp.emfstore.ui.e3" version="1.22.0" match="equivalent"/>
+      <import plugin="org.eclipse.emf.ecp.emfstore.ui.search" version="1.22.0" match="equivalent"/>
    </requires>
 
    <plugin

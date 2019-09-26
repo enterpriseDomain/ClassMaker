@@ -24,15 +24,19 @@
     "files":
         [
         {"includePattern": "releng/org.enterprisedomain.workbench.ide.product/target/repository/(.*)", "excludePattern": ".gitignore", "uploadPattern": "$1", "matrixParams": {
+        "publish": 1,
         "override": 1 }
         },        
         {"includePattern": "releng/org.enterprisedomain.update/target/repository/(.*)", "excludePattern": ".gitignore", "uploadPattern": "$1", "matrixParams": {
+        "publish": 1,
         "override": 1 }
         },
         {"includePattern": "releng/org.enterprisedomain.update/target/repository/plugins/(.*)", "excludePattern": ".gitignore", "uploadPattern": "plugins/$1", "matrixParams": {
+        "publish": 1,
         "override": 1 }
         },
         {"includePattern": "releng/org.enterprisedomain.update/target/repository/features/(.*)", "excludePattern": ".gitignore", "uploadPattern": "features/$1", "matrixParams": {
+        "publish": 1,
         "override": 1 }
         }
         ],
