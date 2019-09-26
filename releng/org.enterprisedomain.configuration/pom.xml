@@ -25,7 +25,7 @@
 		    <url>http://download.eclipse.org/releases/2019-09</url>
 		</repository>
 		<repository>
-		    <id>ecp1.22</id>
+		    <id>ecp</id>
 		    <layout>p2</layout>
 		    <url>http://download.eclipse.org/ecp/releases/releases_target_122</url>
 		</repository>
