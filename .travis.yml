@@ -1,14 +1,21 @@
 language: java
 dist: xenial
 sudo: required
+
 jdk:
 - openjdk11
+
+install: true
+
 cache:
   directories:
   - "$HOME/.m2"
 before_install:
 - cp toolchains.xml ~/.m2/toolchains.xml
 script: mvn clean verify
+before_deploy:
+  - mvn versions:set -DnewVersion=$TRAVIS_TAG
+  - mvn package -Dmaven.test.skip=true
 deploy:
 - provider: bintray
   file: releng/release.json
