@@ -33,4 +33,12 @@
 		</profile>
 	</profiles>
 <version>0.8.1-SNAPSHOT</version>
+<distributionManagement>
+    <repository>
+      <id>bintray-classmaker-maven</id>
+      <name>diversit-eu-maven</name>
+      <url>https://api.bintray.com/maven/enterprisedomain/maven/classmaker/;publish=1</url>
+    </repository>
+</distributionManagement>
+
 </project>

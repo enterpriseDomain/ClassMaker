@@ -34,9 +34,6 @@
         },
         {"includePattern": "releng/org.enterprisedomain.update/target/repository/features/(.*)", "excludePattern": ".gitignore", "uploadPattern": "features/$1", "matrixParams": {
         "override": 1 }
-        },
-        {"includePattern": "docs/(.*)", "uploadPattern": "docs/$1", "matrixParams": {
-        "override": 1 }
         }
         ],
     "publish": true
