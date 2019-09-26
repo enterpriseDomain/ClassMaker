@@ -14,7 +14,6 @@ before_install:
 - cp toolchains.xml ~/.m2/toolchains.xml
 script: mvn clean verify
 before_deploy:
-  - mvn versions:set -DnewVersion=$TRAVIS_TAG
   - mvn package -Dmaven.test.skip=true
 deploy:
 - provider: bintray
