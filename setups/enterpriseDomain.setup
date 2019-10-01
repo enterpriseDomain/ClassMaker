@@ -39,7 +39,8 @@
           xsi:type="setup.p2:P2Task"
           label="${scope.product.label} (${scope.product.version.label})">
         <requirement
-            name="org.enterprisedomain.workbench.ide"/>
+            name="org.enterprisedomain.workbench.ide"
+            versionRange="0.8.1"/>
         <requirement
             name="org.eclipse.platform.ide"/>
         <requirement
