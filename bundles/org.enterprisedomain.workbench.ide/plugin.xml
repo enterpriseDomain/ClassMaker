@@ -91,6 +91,7 @@
          point="org.eclipse.core.runtime.products">
       <product
             application="org.eclipse.ui.ide.workbench"
+            description="enterpriseDomain Workbench Application"
             name="enterpriseDomain Workbench">
          <property
                name="windowImages"

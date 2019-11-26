@@ -165,6 +165,19 @@ public interface Item extends EObject {
 	ModelPair getDomainModel();
 
 	/**
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Item#getDomainModel <em>Domain
+	 * Model</em>}' containment reference. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
+	 * @param value the new value of the '<em>Domain Model</em>' containment
+	 *              reference.
+	 * @see #getDomainModel()
+	 * @generated
+	 */
+	void setDomainModel(ModelPair value);
+
+	/**
 	 * Returns the value of the '<em><b>Customizers</b></em>' map. The key is of
 	 * type {@link org.enterprisedomain.classmaker.StageQualifier}, and the value is
 	 * of type {@link org.enterprisedomain.classmaker.Customizer}, <!--
@@ -266,6 +279,16 @@ public interface Item extends EObject {
 	 * @generated
 	 */
 	Locale getLocale();
+
+	/**
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Item#getLocale
+	 * <em>Locale</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value the new value of the '<em>Locale</em>' attribute.
+	 * @see #getLocale()
+	 * @generated
+	 */
+	void setLocale(Locale value);
 
 	/**
 	 * Returns the value of the '<em><b>Project</b></em>' reference. <!--

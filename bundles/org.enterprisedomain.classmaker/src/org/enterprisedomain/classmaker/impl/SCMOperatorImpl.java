@@ -224,7 +224,7 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 	 * 
 	 * @generated NOT
 	 */
-	public abstract void checkout(String branch, String commitId) throws Exception, IOException;
+	public abstract void checkout(String branch, String commitId, boolean forced) throws Exception, IOException;
 
 	/**
 	 * <!-- begin-user-doc -->

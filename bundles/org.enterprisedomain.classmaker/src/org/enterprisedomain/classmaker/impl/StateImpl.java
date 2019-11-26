@@ -40,6 +40,7 @@ import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -53,6 +54,7 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.xmi.PackageNotFoundException;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.LogCommand;
 import org.eclipse.jgit.api.errors.CheckoutConflictException;
@@ -426,6 +428,15 @@ public class StateImpl extends ItemImpl implements State {
 		return getProjectName() + separator + getRevision().getVersion().toString();
 	}
 
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public void setDeployableUnitName(String newDeployableUnitName) {
+	}
+
 	@Override
 	public Item basicGetParent() {
 		return getRevision();
@@ -448,7 +459,8 @@ public class StateImpl extends ItemImpl implements State {
 			URI modelURI = getModelURI();
 			loadResource(modelURI, !eIsSet(ClassMakerPackage.STATE__RESOURCE), true);
 			saveResource();
-			setPhase(Stage.MODELED);
+			if (!getPhase().equals(Stage.LOADED))
+				setPhase(Stage.MODELED);
 			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 			if (commit)
 				try {
@@ -533,9 +545,24 @@ public class StateImpl extends ItemImpl implements State {
 		boolean created = false;
 		ResourceSet resourceSet = getProject().getWorkspace().getResourceSet();
 		File modelFile = new File(modelURI.toFileString());
-		if (modelFile.exists())
-			setResource(resourceSet.getResource(modelURI, loadOnDemand));
-		else if (create && !eIsSet(ClassMakerPackage.STATE__RESOURCE)) {
+		if (modelFile.exists()) {
+			try {
+				setResource(resourceSet.getResource(modelURI, loadOnDemand));
+			} catch (WrappedException e) {
+				if (e.exception() instanceof PackageNotFoundException) {
+					Contribution contribution = getProject().getWorkspace()
+							.getContribution(((PackageNotFoundException) e.exception()).uri(), Stage.MODELED);
+					try {
+						contribution.build(ClassMakerPlugin.getProgressMonitor());
+					} catch (CoreException e1) {
+						ClassMakerPlugin.getInstance().getLog().log(e1.getStatus());
+					}
+					EPackage ePackage = contribution.getDomainModel().getGenerated();
+					resourceSet.getPackageRegistry().put(ePackage.getNsURI(), ePackage);
+					setResource(resourceSet.getResource(modelURI, loadOnDemand));
+				}
+			}
+		} else if (create && !eIsSet(ClassMakerPackage.STATE__RESOURCE)) {
 			setResource(resourceSet.createResource(modelURI));
 			created = true;
 		}
@@ -801,7 +828,7 @@ public class StateImpl extends ItemImpl implements State {
 		}
 		if (!eIsSet(ClassMakerPackage.STATE__COMMIT_ID))
 			setCommitId(ListUtil.getLast(getCommitIds()));
-		checkout(getCommitId());
+		checkout(getCommitId(), true);
 	}
 
 	/**
@@ -809,13 +836,13 @@ public class StateImpl extends ItemImpl implements State {
 	 * 
 	 * @generated NOT
 	 */
-	public void checkout(String commitId) {
+	public void checkout(String commitId, boolean forced) {
 		try {
 			@SuppressWarnings("unchecked")
 			SCMOperator<Git> operator = (SCMOperator<Git>) getProject().getWorkspace().getSCMRegistry()
 					.get(getProjectName());
 			setCommitId(commitId);
-			operator.checkout(getProject().getVersion().toString(), getCommitId());
+			operator.checkout(getProject().getVersion().toString(), getCommitId(), forced);
 			copyModel(getParent());
 			load(false);
 		} catch (CheckoutConflictException e) {
@@ -1309,6 +1336,9 @@ public class StateImpl extends ItemImpl implements State {
 		case ClassMakerPackage.STATE__TIMESTAMP:
 			setTimestamp((Long) newValue);
 			return;
+		case ClassMakerPackage.STATE__DEPLOYABLE_UNIT_NAME:
+			setDeployableUnitName((String) newValue);
+			return;
 		case ClassMakerPackage.STATE__JOB_FAMILY:
 			setJobFamily((String) newValue);
 			return;
@@ -1354,6 +1384,9 @@ public class StateImpl extends ItemImpl implements State {
 			return;
 		case ClassMakerPackage.STATE__TIMESTAMP:
 			setTimestamp(TIMESTAMP_EDEFAULT);
+			return;
+		case ClassMakerPackage.STATE__DEPLOYABLE_UNIT_NAME:
+			setDeployableUnitName(DEPLOYABLE_UNIT_NAME_EDEFAULT);
 			return;
 		case ClassMakerPackage.STATE__JOB_FAMILY:
 			setJobFamily(JOB_FAMILY_EDEFAULT);
@@ -1470,6 +1503,13 @@ public class StateImpl extends ItemImpl implements State {
 	@Override
 	public void build(IProgressMonitor monitor) throws CoreException {
 		if (getPhase().equals(Stage.LOADED)) {
+			Worker exporter = createExporter();
+			EnterpriseDomainJob exportJob = getJob(exporter);
+			exportJob.setContributionState(this);
+			exportJob.setProject(getEclipseProject());
+			exporter.getProperties().put(AbstractExporter.EXPORT_DESTINATION_PROP,
+					ResourceUtils.getExportDestination(getEclipseProject()).toString());
+
 			EnterpriseDomainJob installJob = getJob(createInstaller());
 			installJob.setContributionState(this);
 
@@ -1477,10 +1517,12 @@ public class StateImpl extends ItemImpl implements State {
 			loadJob.setContributionState(this);
 			loadJob.addListener();
 
+			exportJob.setNextJob(installJob);
 			installJob.setNextJob(loadJob);
 
-			installJob.schedule();
+			exportJob.schedule();
 			try {
+				exportJob.join();
 				installJob.join();
 				add("."); //$NON-NLS-1$
 				loadJob.join();

@@ -104,6 +104,7 @@
       <genOperations ecoreOperation="ClassMaker.ecore#//State/checkout"/>
       <genOperations ecoreOperation="ClassMaker.ecore#//State/checkout.1">
         <genParameters ecoreParameter="ClassMaker.ecore#//State/checkout.1/commitId"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//State/checkout.1/forced"/>
       </genOperations>
       <genOperations ecoreOperation="ClassMaker.ecore#//State/add">
         <genParameters ecoreParameter="ClassMaker.ecore#//State/add/filepattern"/>
@@ -180,6 +181,10 @@
       </genOperations>
       <genOperations ecoreOperation="ClassMaker.ecore#//Workspace/getContribution.5">
         <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/getContribution.5/projectName"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Workspace/getContribution.6">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/getContribution.6/nsURI"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/getContribution.6/filter"/>
       </genOperations>
       <genOperations ecoreOperation="ClassMaker.ecore#//Workspace/getProject">
         <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/getProject/name"/>
@@ -267,6 +272,7 @@
       <genOperations ecoreOperation="ClassMaker.ecore#//SCMOperator/checkout">
         <genParameters ecoreParameter="ClassMaker.ecore#//SCMOperator/checkout/branch"/>
         <genParameters ecoreParameter="ClassMaker.ecore#//SCMOperator/checkout/commitId"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//SCMOperator/checkout/forced"/>
       </genOperations>
       <genOperations ecoreOperation="ClassMaker.ecore#//SCMOperator/checkoutOrphan">
         <genParameters ecoreParameter="ClassMaker.ecore#//SCMOperator/checkoutOrphan/branch"/>
@@ -310,7 +316,7 @@
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ClassMaker.ecore#//Project/workspace"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Project/resourcePath"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Project/needCompletionNotification"/>
-      <genFeatures property="None" createChild="false" ecoreFeature="ecore:EReference ClassMaker.ecore#//Project/completionNotificationAdapter"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ClassMaker.ecore#//Project/completionNotificationAdapter"/>
       <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference ClassMaker.ecore#//Project/resourceReloadListener"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Project/savingResource"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//Project/revision"/>
@@ -553,7 +559,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//Blueprint/completionListeners"/>
     </genClasses>
     <genClasses ecoreClass="ClassMaker.ecore#//CompletionNotificationAdapter">
-      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//CompletionNotificationAdapter/error"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//CompletionNotificationAdapter/error"/>
     </genClasses>
     <genClasses image="false" ecoreClass="ClassMaker.ecore#//Worker"/>
     <genClasses ecoreClass="ClassMaker.ecore#//SelectRevealHandler">
