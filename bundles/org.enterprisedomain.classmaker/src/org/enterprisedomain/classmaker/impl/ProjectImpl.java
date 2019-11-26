@@ -17,8 +17,11 @@ package org.enterprisedomain.classmaker.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
@@ -40,6 +43,7 @@ import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -50,23 +54,29 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.xmi.PackageNotFoundException;
 import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.ListBranchCommand;
+import org.eclipse.jgit.api.ReflogCommand;
 import org.eclipse.jgit.api.ResetCommand;
 import org.eclipse.jgit.api.ResetCommand.ResetType;
 import org.eclipse.jgit.api.errors.CheckoutConflictException;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Ref;
+import org.eclipse.jgit.lib.ReflogEntry;
 import org.eclipse.osgi.util.NLS;
 import org.enterprisedomain.classmaker.ClassMakerFactory;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.CompletionNotificationAdapter;
+import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Messages;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.ResourceChangeListener;
 import org.enterprisedomain.classmaker.Revision;
 import org.enterprisedomain.classmaker.SCMOperator;
 import org.enterprisedomain.classmaker.SelectRevealHandler;
+import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
@@ -288,10 +298,10 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getVersion()
-	 * @generated
+	 * @generated NOT
 	 * @ordered
 	 */
-	protected static final Version VERSION_EDEFAULT = null;
+	protected static final Version VERSION_EDEFAULT = Version.emptyVersion;
 
 	/**
 	 * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
@@ -1004,7 +1014,12 @@ public class ProjectImpl extends EObjectImpl implements Project {
 				}
 			}
 			revision = getRevisions().get(version);
-			if (revision.getStateHistory().containsKey(time)) {
+			if (revision == null) {
+				revision = newBareRevision(version);
+				doNewRevision(revision);
+				revision.initialize(false);
+				revision.checkout(time);
+			} else if (revision.getStateHistory().containsKey(time)) {
 				State state = revision.getStateHistory().get((Object) time);
 				EList<String> commits = state.getCommitIds();
 				if (!commits.isEmpty()) {
@@ -1060,7 +1075,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 */
 	public void checkout(String commitId) {
 		if (getState().getCommitIds().contains(commitId))
-			getState().checkout(commitId);
+			getState().checkout(commitId, true);
 	}
 
 	/**
@@ -1146,17 +1161,90 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		URI uri = getResourceURI();
 		Resource resource = null;
 		if (new File(uri.toFileString()).exists()) {
-			resource = getWorkspace().getResourceSet().getResource(uri, false);
+			try {
+				resource = getWorkspace().getResourceSet().getResource(uri, true);
+			} catch (WrappedException e) {
+				if (e.exception() instanceof PackageNotFoundException) {
+					Contribution contribution = getWorkspace()
+							.getContribution(((PackageNotFoundException) e.exception()).uri(), Stage.MODELED);
+					if (contribution.getPhase().getValue() >= Stage.INSTALLED_VALUE)
+						try {
+							contribution.build(ClassMakerPlugin.getProgressMonitor());
+							resource = getWorkspace().getResourceSet().getResource(uri, true);
+						} catch (CoreException e1) {
+							e1.printStackTrace();
+						}
+				}
+			}
 			if (resource != null) {
 				try {
 					resource.load(Collections.emptyMap());
 				} catch (IOException e) {
 					ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 				}
-				if (eIsSet(ClassMakerPackage.PROJECT__REVISION)
-						&& getRevision().eIsSet(ClassMakerPackage.Literals.REVISION__STATE))
-					getRevision().getState().setResource(resource);
-				onModelResourceCreate(resource);
+				@SuppressWarnings("unchecked")
+				SCMOperator<Git> operator = (SCMOperator<Git>) getWorkspace().getSCMRegistry().get(getProjectName());
+				setName(getProjectName());
+				try {
+					Git git = operator.getRepositorySCM();
+					String currentBranch = git.getRepository().getBranch();
+					ListBranchCommand listBranches = git.branchList();
+					List<Ref> branches = listBranches.call();
+					Iterator<Ref> it = branches.iterator();
+					Ref branch = null;
+					long timestamp = -1;
+					String commitId = "";
+					do {
+						Version version = null;
+						if (it.hasNext()) {
+							branch = it.next();
+							String[] name = branch.getName().split("/"); //$NON-NLS-1$
+							try {
+								version = operator.decodeVersion(name[name.length - 1]);
+								ReflogCommand reflog = git.reflog();
+								reflog.setRef(branch.getName().toString());
+								Collection<ReflogEntry> refs = reflog.call();
+								for (ReflogEntry ref : refs)
+									if (ref.getNewId().equals(branch.getObjectId())) {
+										timestamp = operator.decodeTimestamp(ref.getComment());
+										if (timestamp == -1)
+											timestamp = operator.decodeTimestamp(version.getQualifier());
+									}
+							} catch (IllegalArgumentException e) {
+								continue;
+							}
+						}
+						if (version != null && !getRevisions().containsKey(version)) {
+							Revision newRevision = newBareRevision(version);
+							newRevision.setTimestamp(timestamp);
+							newRevision.setProject(this);
+							doNewRevision(newRevision);
+							commitId = newRevision.initialize(commit);
+						}
+					} while (it.hasNext());
+					if (!getRevisions().isEmpty() && getVersion().equals(Version.emptyVersion))
+						setVersion(ListUtil.getLast(getRevisions()).getKey());
+					else if (!getVersion().equals(Version.emptyVersion))
+						checkout(getVersion(), timestamp);
+					if (currentBranch.equals(SCMOperator.MASTER_BRANCH))
+						checkout(getVersion(), timestamp);
+					if (eIsSet(ClassMakerPackage.PROJECT__REVISION)
+							&& getRevision().eIsSet(ClassMakerPackage.Literals.REVISION__STATE))
+						getRevision().getState().setResource(resource);
+					onModelResourceCreate(resource);
+					getWorkspace().getResourceSet().eAdapters().add(resourceAdapter);
+					addResourceChangeListener(getResourceReloadListener());
+					return commitId;
+				} catch (Exception e) {
+					ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
+					return null;
+				} finally {
+					try {
+						operator.ungetRepositorySCM();
+					} catch (Exception e) {
+						ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
+					}
+				}
 			} else {
 				createResource(uri, commit);
 			}
@@ -1165,7 +1253,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		}
 		getWorkspace().getResourceSet().eAdapters().add(resourceAdapter);
 		addResourceChangeListener(getResourceReloadListener());
-		// TODO Add SCM support if commit
 		return ""; //$NON-NLS-1$
 	}
 

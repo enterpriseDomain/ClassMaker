@@ -35,6 +35,7 @@ import org.eclipse.core.runtime.jobs.JobGroup;
 import org.eclipse.core.runtime.jobs.MultiRule;
 import org.eclipse.core.runtime.jobs.ProgressProvider;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.State;
@@ -110,7 +111,12 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 		setStateTimestamp(stateTimestamp);
 		setUser(true);
 		setPriority(Job.BUILD);
-		setRule(ClassMakerPlugin.getClassMaker().getWorkspace());
+		try {
+			if (ClassMakerPlugin.getClassMaker() != null)
+				setRule(ClassMakerPlugin.getClassMaker().getWorkspace());
+		} catch (Exception e) {
+			setRule(project);
+		}
 		setChangeRule(true);
 		setJobGroup(new JobGroup("ClassMaker", 0, 1)); //$NON-NLS-1$
 	}
@@ -189,7 +195,10 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 	}
 
 	protected ISchedulingRule calcSchedulingRule(IProject project) {
-		Contribution contribution = ClassMakerPlugin.getClassMaker().getWorkspace().getContribution(project.getName());
+		ClassMakerService service = ClassMakerPlugin.getClassMaker();
+		if (service == null)
+			return project;
+		Contribution contribution = service.getWorkspace().getContribution(project.getName());
 		ISchedulingRule rule = null;
 		if (contribution != null)
 			rule = contribution.getState(getStateTimestamp());

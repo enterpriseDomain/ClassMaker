@@ -457,6 +457,20 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	 * @generated
 	 */
 	@Override
+	public void setLocale(Locale newLocale) {
+		Locale oldLocale = locale;
+		locale = newLocale;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.CONTRIBUTION__LOCALE, oldLocale,
+					locale));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
 	public Project getProject() {
 		Project project = basicGetProject();
 		return project != null && project.eIsProxy() ? (Project) eResolveProxy((InternalEObject) project) : project;
@@ -616,7 +630,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 			}
 		}
-
 	}
 
 	@Override
@@ -742,6 +755,29 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 				msgs.add(notification);
 		}
 		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public void setDomainModel(ModelPair newDomainModel) {
+		if (newDomainModel != domainModel) {
+			NotificationChain msgs = null;
+			if (domainModel != null)
+				msgs = ((InternalEObject) domainModel).eInverseRemove(this, ClassMakerPackage.MODEL_PAIR__PARENT,
+						ModelPair.class, msgs);
+			if (newDomainModel != null)
+				msgs = ((InternalEObject) newDomainModel).eInverseAdd(this, ClassMakerPackage.MODEL_PAIR__PARENT,
+						ModelPair.class, msgs);
+			msgs = basicSetDomainModel(newDomainModel, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.CONTRIBUTION__DOMAIN_MODEL,
+					newDomainModel, newDomainModel));
 	}
 
 	/**
@@ -1061,11 +1097,17 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 		case ClassMakerPackage.CONTRIBUTION__LANGUAGE:
 			setLanguage((String) newValue);
 			return;
+		case ClassMakerPackage.CONTRIBUTION__DOMAIN_MODEL:
+			setDomainModel((ModelPair) newValue);
+			return;
 		case ClassMakerPackage.CONTRIBUTION__CUSTOMIZERS:
 			((EStructuralFeature.Setting) getCustomizers()).set(newValue);
 			return;
 		case ClassMakerPackage.CONTRIBUTION__PARENT:
 			setParent((Item) newValue);
+			return;
+		case ClassMakerPackage.CONTRIBUTION__LOCALE:
+			setLocale((Locale) newValue);
 			return;
 		case ClassMakerPackage.CONTRIBUTION__PROJECT:
 			setProject((Project) newValue);
@@ -1091,11 +1133,17 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 		case ClassMakerPackage.CONTRIBUTION__LANGUAGE:
 			setLanguage(LANGUAGE_EDEFAULT);
 			return;
+		case ClassMakerPackage.CONTRIBUTION__DOMAIN_MODEL:
+			setDomainModel((ModelPair) null);
+			return;
 		case ClassMakerPackage.CONTRIBUTION__CUSTOMIZERS:
 			getCustomizers().clear();
 			return;
 		case ClassMakerPackage.CONTRIBUTION__PARENT:
 			setParent((Item) null);
+			return;
+		case ClassMakerPackage.CONTRIBUTION__LOCALE:
+			setLocale(LOCALE_EDEFAULT);
 			return;
 		case ClassMakerPackage.CONTRIBUTION__PROJECT:
 			setProject((Project) null);

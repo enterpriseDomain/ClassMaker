@@ -105,6 +105,7 @@ public class CompletionNotificationAdapterImpl extends EObjectImpl implements Co
 			error = ERROR_EDEFAULT;
 			try {
 				((Project) eContainer()).notifyCompletion();
+			} catch (NullPointerException e) {
 			} catch (Exception e) {
 				error = ClassMakerPlugin.createErrorStatus(e);
 				ClassMakerPlugin.getInstance().getLog().log(getError());

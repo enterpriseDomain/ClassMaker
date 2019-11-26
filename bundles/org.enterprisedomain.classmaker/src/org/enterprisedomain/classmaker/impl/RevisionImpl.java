@@ -23,6 +23,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EClass;
@@ -273,7 +274,9 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	@Override
 	public String getLanguage() {
-		return getState().getLanguage();
+		if (isStateSet())
+			return getState().getLanguage();
+		return LANGUAGE_EDEFAULT;
 	}
 
 	@Override
@@ -284,12 +287,16 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	@Override
 	public ModelPair getDomainModel() {
-		return getState().getDomainModel();
+		if (isStateSet())
+			return getState().getDomainModel();
+		return null;
 	}
 
 	@Override
 	public EMap<StageQualifier, Customizer> getCustomizers() {
-		return getState().getCustomizers();
+		if (isStateSet())
+			return getState().getCustomizers();
+		return ECollections.emptyEMap();
 	}
 
 	protected boolean isStateSet() {
@@ -400,7 +407,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 		setTimestamp(stateTime);
 		getProject().initAdapters(this);
 		if (isStateSet())
-			getState().checkout(commitId);
+			getState().checkout(commitId, true);
 	}
 
 	/**

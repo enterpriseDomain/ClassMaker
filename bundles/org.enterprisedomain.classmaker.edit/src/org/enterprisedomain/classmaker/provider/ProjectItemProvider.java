@@ -355,7 +355,6 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 		case ClassMakerPackage.PROJECT__DIRTY:
 		case ClassMakerPackage.PROJECT__RESOURCE_PATH:
 		case ClassMakerPackage.PROJECT__NEED_COMPLETION_NOTIFICATION:
-		case ClassMakerPackage.PROJECT__COMPLETION_NOTIFICATION_ADAPTER:
 		case ClassMakerPackage.PROJECT__SAVING_RESOURCE:
 		case ClassMakerPackage.PROJECT__PROJECT_VERSION:
 		case ClassMakerPackage.PROJECT__VERSION:
