@@ -246,6 +246,19 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	 * @generated
 	 */
 	@Override
+	public void setLocale(Locale newLocale) {
+		Locale oldLocale = locale;
+		locale = newLocale;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.ITEM__LOCALE, oldLocale, locale));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
 	public Project getProject() {
 		Project project = basicGetProject();
 		return project != null && project.eIsProxy() ? (Project) eResolveProxy((InternalEObject) project) : project;
@@ -320,6 +333,29 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 				msgs.add(notification);
 		}
 		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public void setDomainModel(ModelPair newDomainModel) {
+		if (newDomainModel != domainModel) {
+			NotificationChain msgs = null;
+			if (domainModel != null)
+				msgs = ((InternalEObject) domainModel).eInverseRemove(this, ClassMakerPackage.MODEL_PAIR__PARENT,
+						ModelPair.class, msgs);
+			if (newDomainModel != null)
+				msgs = ((InternalEObject) newDomainModel).eInverseAdd(this, ClassMakerPackage.MODEL_PAIR__PARENT,
+						ModelPair.class, msgs);
+			msgs = basicSetDomainModel(newDomainModel, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.ITEM__DOMAIN_MODEL, newDomainModel,
+					newDomainModel));
 	}
 
 	/**
@@ -498,11 +534,17 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 		case ClassMakerPackage.ITEM__LANGUAGE:
 			setLanguage((String) newValue);
 			return;
+		case ClassMakerPackage.ITEM__DOMAIN_MODEL:
+			setDomainModel((ModelPair) newValue);
+			return;
 		case ClassMakerPackage.ITEM__CUSTOMIZERS:
 			((EStructuralFeature.Setting) getCustomizers()).set(newValue);
 			return;
 		case ClassMakerPackage.ITEM__PARENT:
 			setParent((Item) newValue);
+			return;
+		case ClassMakerPackage.ITEM__LOCALE:
+			setLocale((Locale) newValue);
 			return;
 		case ClassMakerPackage.ITEM__PROJECT:
 			setProject((Project) newValue);
@@ -528,11 +570,17 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 		case ClassMakerPackage.ITEM__LANGUAGE:
 			setLanguage(LANGUAGE_EDEFAULT);
 			return;
+		case ClassMakerPackage.ITEM__DOMAIN_MODEL:
+			setDomainModel((ModelPair) null);
+			return;
 		case ClassMakerPackage.ITEM__CUSTOMIZERS:
 			getCustomizers().clear();
 			return;
 		case ClassMakerPackage.ITEM__PARENT:
 			setParent((Item) null);
+			return;
+		case ClassMakerPackage.ITEM__LOCALE:
+			setLocale(LOCALE_EDEFAULT);
 			return;
 		case ClassMakerPackage.ITEM__PROJECT:
 			setProject((Project) null);

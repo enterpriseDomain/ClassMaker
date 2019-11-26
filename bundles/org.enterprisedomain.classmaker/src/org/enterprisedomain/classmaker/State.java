@@ -160,6 +160,18 @@ public interface State extends Item, ISchedulingRule {
 	String getDeployableUnitName();
 
 	/**
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.State#getDeployableUnitName
+	 * <em>Deployable Unit Name</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @param value the new value of the '<em>Deployable Unit Name</em>' attribute.
+	 * @see #getDeployableUnitName()
+	 * @generated
+	 */
+	void setDeployableUnitName(String value);
+
+	/**
 	 * Returns the value of the '<em><b>Revision</b></em>' reference. <!--
 	 * begin-user-doc -->
 	 * <p>
@@ -406,7 +418,7 @@ public interface State extends Item, ISchedulingRule {
 	 * @model
 	 * @generated
 	 */
-	void checkout(String commitId);
+	void checkout(String commitId, boolean forced);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

@@ -108,12 +108,16 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 				final URI uri = URI.createFileURI(ResourceUtils.WORKSPACE_RESOURCE_PATH.toString());
 				Resource workspaceResource = WorkspaceImpl.RESOURCE_SET_EDEFAULT.getResource(uri, false);
 				Map<String, String> options = new HashMap<String, String>();
-				options.put(XMLResource.OPTION_PROCESS_DANGLING_HREF, XMLResource.OPTION_PROCESS_DANGLING_HREF_DISCARD);
+				options.put(XMLResource.OPTION_PROCESS_DANGLING_HREF, XMLResource.OPTION_PROCESS_DANGLING_HREF_RECORD);
+				options.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
 				if (workspaceResource != null) {
-					try {
-						workspaceResource.save(options);
-					} catch (IOException e) {
-						e.printStackTrace();
+					if (getWorkspace().eIsSet(ClassMakerPackage.Literals.WORKSPACE__PROJECTS)) {
+						workspaceResource.getContents().set(0, EcoreUtil.copy(getWorkspace()));
+						try {
+							workspaceResource.save(options);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
 					}
 				} else {
 					workspaceResource = WorkspaceImpl.RESOURCE_SET_EDEFAULT.createResource(uri);
@@ -656,17 +660,23 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 		ClassMakerService.Stages.contributeStages();
 		final URI uri = URI.createFileURI(ResourceUtils.WORKSPACE_RESOURCE_PATH.toString());
 		if (uri.isFile() && new File(uri.toFileString()).exists()) {
-			Resource workspaceResource = WorkspaceImpl.RESOURCE_SET_EDEFAULT.getResource(uri, false);
-			if (workspaceResource != null) {
+			try {
+				Resource workspaceResource = WorkspaceImpl.RESOURCE_SET_EDEFAULT.getResource(uri, true);
 				try {
 					workspaceResource.load(Collections.emptyMap());
-					setWorkspace((Workspace) workspaceResource.getContents().get(0));
+					setWorkspace(EcoreUtil.copy((Workspace) workspaceResource.getContents().get(0)));
+					for (Project project : getWorkspace().getProjects()) {
+						if (project.eIsSet(ClassMakerPackage.Literals.PROJECT__STATE))
+							project.getState().load(false);
+					}
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		}
-		getWorkspace().initialize();
+		} else
+			getWorkspace().initialize();
 	}
 
 	/**

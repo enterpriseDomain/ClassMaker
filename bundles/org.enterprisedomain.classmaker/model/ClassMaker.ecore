@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="classmaker" nsURI="http://org/enterprisedomain/ClassMaker/0.8.0"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="classmaker" nsURI="http://org/enterprisedomain/ClassMaker/0.8.1"
     nsPrefix="ClassMaker">
   <eClassifiers xsi:type="ecore:EClass" name="Contribution" eSuperTypes="#//Project #//Item">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -114,6 +114,7 @@
     <eOperations name="checkout"/>
     <eOperations name="checkout">
       <eParameters name="commitId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="forced" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eOperations>
     <eOperations name="add" eExceptions="#//Exception">
       <eParameters name="filepattern" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -153,7 +154,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="deployableUnitName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        changeable="false" volatile="true" defaultValueLiteral="" derived="true">
+        volatile="true" defaultValueLiteral="" derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A name of the deployed bundle."/>
       </eAnnotations>
@@ -237,7 +238,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="domainModel" eType="#//ModelPair"
-        changeable="false" derived="true" containment="true" eOpposite="#//ModelPair/parent">
+        derived="true" containment="true" eOpposite="#//ModelPair/parent">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Subject &lt;em>ModelPair&lt;/em> for &lt;em>&lt;b>Item&lt;/b>&lt;/em> {@link ClassMakerPlant#make() making}."/>
       </eAnnotations>
@@ -256,7 +257,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="locale" eType="#//Locale"
-        changeable="false" defaultValueLiteral="" derived="true">
+        transient="true" defaultValueLiteral="" derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A {@link java.util.Locale Locale}."/>
       </eAnnotations>
@@ -343,6 +344,13 @@
       </eAnnotations>
       <eParameters name="projectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
+    <eOperations name="getContribution" eType="#//Contribution">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Lookup Contribution by underlying project resource name."/>
+      </eAnnotations>
+      <eParameters name="nsURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="filter" eType="#//Stage"/>
+    </eOperations>
     <eOperations name="getProject" eType="#//Project">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Lookup project by name."/>
@@ -390,7 +398,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="customizers" upperBound="-1"
-        eType="#//StageQualifierToCustomizerMapEntry" containment="true">
+        eType="#//StageQualifierToCustomizerMapEntry" transient="true" containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="{@link Customizer Customizers} collection."/>
       </eAnnotations>
@@ -637,6 +645,7 @@
     <eOperations name="checkout" eExceptions="#//Exception">
       <eParameters name="branch" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eParameters name="commitId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="forced" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eOperations>
     <eOperations name="checkoutOrphan" eExceptions="#//Exception">
       <eParameters name="branch" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -827,9 +836,10 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="completionNotificationAdapter"
-        eType="#//CompletionNotificationAdapter" containment="true">
+        eType="#//CompletionNotificationAdapter" transient="true" containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;em>CompletionNotificationAdapter&lt;/em> for &lt;em>&lt;b>Project&lt;/b>&lt;/em>'s operations."/>
+        <details key="notify" value="false"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="resourceReloadListener"

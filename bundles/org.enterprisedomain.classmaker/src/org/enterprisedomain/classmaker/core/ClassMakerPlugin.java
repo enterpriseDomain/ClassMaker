@@ -35,7 +35,7 @@ import org.enterprisedomain.classmaker.util.ReflectiveFactory;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceRegistration;
+import org.osgi.framework.ServiceException;
 import org.osgi.util.tracker.ServiceTracker;
 
 public class ClassMakerPlugin extends Plugin {
@@ -76,7 +76,7 @@ public class ClassMakerPlugin extends Plugin {
 
 	private static ServiceTracker<ClassMakerService, ClassMakerServiceImpl> tracker;
 
-	private ServiceRegistration<ClassMakerService> reg;
+	private static ClassMakerService service;
 
 	private boolean turnOffAutoBuilding = Platform.getPreferencesService().getBoolean(PLUGIN_ID,
 			TURN_OFF_AUTO_BUILDING_PREF_KEY, false, null);
@@ -91,9 +91,16 @@ public class ClassMakerPlugin extends Plugin {
 	 * @return ClassMakerService service instance
 	 */
 	public static ClassMakerService getClassMaker() {
-		if (tracker.getTrackingCount() == -1)
-			tracker.open();
-		return tracker.getService();
+		if (service == null) {
+			try {
+				if (tracker.getTrackingCount() == -1)
+					tracker.open();
+				service = tracker.getService();
+			} catch (ServiceException e) {
+			} catch (Exception e) {
+			}
+		}
+		return service;
 	}
 
 	public static <T> T getService(String serviceClass) {
@@ -119,45 +126,7 @@ public class ClassMakerPlugin extends Plugin {
 	 */
 	public void start(BundleContext context) throws Exception {
 		instance = this;
-
-		// reg = context.registerService(ClassMakerService.class,
-		// ClassMakerFactory.eINSTANCE.createClassMakerService(),
-		// null);
-		// Dictionary<String, String> properties = new Hashtable<String, String>();
-		// properties.put(IContextFunction.SERVICE_CONTEXT_KEY,
-		// ClassMakerService.class.getName());
-		// context.registerService(IContextFunction.SERVICE_NAME, new ServiceFactory(),
-		// properties);
 		tracker = new ServiceTracker<ClassMakerService, ClassMakerServiceImpl>(context, ClassMakerService.class, null);
-		// context.addBundleListener(new BundleListener() {
-		//
-		// @Override
-		// public void bundleChanged(BundleEvent event) {
-		// if (event.getBundle().getSymbolicName().equals(PLUGIN_ID))
-		// if (event.getType() == BundleEvent.STARTED) {
-		// ClassMakerService.Stages.contributeStages();
-		// for (String id : ClassMakerService.Stages.ids()) {
-		// SortedSet<Customizer> customizers =
-		// ClassMakerService.Stages.createCustomizers(id);
-		// if (!customizers.isEmpty())
-		// for (Customizer customizer : customizers)
-		// getClassMaker().getWorkspace().getCustomizers()
-		// .put(ClassMakerService.Stages.lookup(id), customizer);
-		// }
-		// event.getBundle().getBundleContext().removeBundleListener(this);
-		// }
-		//
-		// }
-		// });
-		// ClassMakerService.Stages.contributeStages();
-		// for (String id : ClassMakerService.Stages.ids()) {
-		// SortedSet<Customizer> customizers =
-		// ClassMakerService.Stages.createCustomizers(id);
-		// if (!customizers.isEmpty())
-		// for (Customizer customizer : customizers)
-		// getClassMaker().getWorkspace().getCustomizers()
-		// .put(ClassMakerService.Stages.lookup(id), customizer);
-		// }
 		ResourceUtils.saveAutoBuilding(ResourcesPlugin.getWorkspace());
 	}
 
@@ -175,7 +144,7 @@ public class ClassMakerPlugin extends Plugin {
 		} catch (OperationCanceledException e) {
 		}
 		tracker.close();
-		// reg.unregister();
+		service = null;
 		progressMonitor = null;
 		instance = null;
 	}

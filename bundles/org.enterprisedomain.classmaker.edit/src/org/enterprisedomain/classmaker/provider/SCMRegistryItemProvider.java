@@ -93,6 +93,7 @@ public class SCMRegistryItemProvider extends ItemProviderAdapter implements IEdi
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+		super.notifyChanged(notification);
 	}
 
 	/**
