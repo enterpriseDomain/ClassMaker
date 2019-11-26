@@ -22,8 +22,10 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Project;
+import org.osgi.framework.ServiceException;
 
 public class ClassMakerBuilder extends IncrementalProjectBuilder implements IBuildConfiguration {
 
@@ -41,8 +43,15 @@ public class ClassMakerBuilder extends IncrementalProjectBuilder implements IBui
 
 	@Override
 	protected IProject[] build(int kind, Map<String, String> options, IProgressMonitor monitor) throws CoreException {
-		Project project = ClassMakerPlugin.getInstance().getClassMaker().getWorkspace()
-				.getProject(getProject().getName());
+		ClassMakerService service = null;
+		try {
+			service = ClassMakerPlugin.getClassMaker();
+		} catch (ServiceException e) {
+			return null;
+		}
+		if (service == null)
+			return null;
+		Project project = service.getWorkspace().getProject(getProject().getName());
 		if (project instanceof Contribution)
 			((Contribution) project).build(monitor);
 		return null;

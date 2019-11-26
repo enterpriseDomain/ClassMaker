@@ -94,6 +94,7 @@ public class SelectRevealHandlerItemProvider extends ItemProviderAdapter impleme
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+		super.notifyChanged(notification);
 	}
 
 	/**

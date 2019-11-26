@@ -15,8 +15,6 @@
  */
 package org.enterprisedomain.classmaker;
 
-import java.io.IOException;
-
 import org.eclipse.emf.ecore.EObject;
 import org.osgi.framework.Version;
 
@@ -175,7 +173,7 @@ public interface SCMOperator<T> extends EObject {
 	 * @model exceptions="org.enterprisedomain.classmaker.Exception"
 	 * @generated
 	 */
-	void checkout(String branch, String commitId) throws Exception, IOException;
+	void checkout(String branch, String commitId, boolean forced) throws Exception;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

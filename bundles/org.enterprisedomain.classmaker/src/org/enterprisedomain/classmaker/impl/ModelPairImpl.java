@@ -86,7 +86,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 				switch (msg.getFeatureID(ModelPair.class)) {
 				case ClassMakerPackage.MODEL_PAIR__DYNAMIC:
 					ePackage = (EPackage) msg.getNewValue();
-					if (ePackage != null) {
+					if (ePackage != null && !getParent().getPhase().equals(Stage.LOADED)) {
 						getParent().setPhase(Stage.MODELED);
 					}
 					onDynamicEPackage((EPackage) msg.getOldValue(), ePackage);

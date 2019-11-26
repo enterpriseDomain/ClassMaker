@@ -62,7 +62,6 @@ import org.eclipse.emf.ecp.core.ECPProject;
 import org.eclipse.emf.ecp.core.ECPRepository;
 import org.eclipse.emf.ecp.core.util.ECPContainer;
 import org.eclipse.emf.ecp.core.util.ECPModelContextAdapter;
-import org.eclipse.emf.ecp.core.util.ECPModelContextProvider;
 import org.eclipse.emf.ecp.core.util.ECPUtil;
 import org.eclipse.emf.ecp.core.util.observer.ECPProjectContentChangedObserver;
 import org.eclipse.emf.ecp.core.util.observer.ECPRepositoriesChangedObserver;
@@ -97,8 +96,6 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 	public static final String PROP_CONTRIBUTION = "isContribution";
 
 	private static Map<String, HashSet<String>> visiblePackagesToClasses = new HashMap<String, HashSet<String>>();
-
-	// private Blueprint blueprint;
 
 	private final IResourceChangeListener resourceChangeListener = new EnterpriseDomainResourceListener();
 
@@ -138,10 +135,11 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 					Activator.log(ex);
 				}
 			}
-			propagatePackagesVisibility();
 			InternalProject project = (InternalProject) getModelContext(resource);
-			if (project != null)
+			if (project != null) {
+				propagatePackagesVisibility(project);
 				project.notifyObjectsChanged((Collection<Object>) (Collection<?>) Arrays.asList(project), true);
+			}
 		}
 
 	};
@@ -233,7 +231,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 				} catch (CoreException e) {
 					Activator.log(e);
 				}
-				addVisiblePackage(domainProject.getRevision().getState().getDomainModel().getGenerated());
+				addVisiblePackage(project, domainProject.getRevision().getState().getDomainModel().getGenerated());
 				domainProject.initialize(false);
 			} else {
 				boolean contribution = false;
@@ -263,12 +261,12 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 					} catch (CoreException e) {
 						Activator.log(e);
 					}
-					addVisiblePackage(EcorePackage.eINSTANCE);
+					addVisiblePackage(project, EcorePackage.eINSTANCE);
 				} else
 					try {
 						domainProject = classMaker.getWorkspace().createProject(project.getName(), monitor);
 						domainProject.initialize(true);
-						propagatePackagesVisibility();
+						propagatePackagesVisibility(project);
 					} catch (CoreException e) {
 						Activator.log(e);
 					}
@@ -302,7 +300,6 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 
 			@Override
 			public void notify(Notification notification) {
-				propagatePackagesVisibility();
 			}
 
 			@Override
@@ -483,7 +480,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 				}
 
 			});
-			addVisiblePackage(((Contribution) result).getDomainModel().getGenerated());
+			addVisiblePackage(project, ((Contribution) result).getDomainModel().getGenerated());
 			project.notifyObjectsChanged((Collection<Object>) (Collection<?>) Arrays.asList(project), true);
 			Collection<ECPRepository> repositories = (Collection<ECPRepository>) (Collection<?>) Arrays
 					.asList(project.getRepository());
@@ -497,41 +494,38 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 		return Activator.getClassMaker().getWorkspace();
 	}
 
-	public void addVisiblePackage(EPackage ePackage) {
+	public void addVisiblePackage(InternalProject project, EPackage ePackage) {
 		HashSet<String> eClasses = null;
-		if (visiblePackagesToClasses.containsKey(ePackage.getNsURI())) {
+		if (ePackage != null && visiblePackagesToClasses.containsKey(ePackage.getNsURI())) {
 			eClasses = visiblePackagesToClasses.get(ePackage.getNsURI());
 			eClasses.clear();
 		} else
 			eClasses = new HashSet<String>();
-		for (EClassifier eClass : ePackage.getEClassifiers())
-			if (eClass instanceof EClass)
-				eClasses.add(eClass.getName());
-		visiblePackagesToClasses.put(ePackage.getNsURI(), eClasses);
-		propagatePackagesVisibility();
+		if (ePackage != null) {
+			for (EClassifier eClass : ePackage.getEClassifiers())
+				if (eClass instanceof EClass)
+					eClasses.add(eClass.getName());
+			visiblePackagesToClasses.put(ePackage.getNsURI(), eClasses);
+		}
+		propagatePackagesVisibility(project);
 	}
 
-	private void propagatePackagesVisibility() {
-		for (InternalProject project : getOpenProjects()) {
-			for (String ePackageNsURI : visiblePackagesToClasses.keySet()) {
-				EPackage eP = project.getEditingDomain().getResourceSet().getPackageRegistry()
-						.getEPackage(ePackageNsURI);
-				Set<EPackage> ePs = new HashSet<EPackage>();
-				ePs.addAll(project.getVisiblePackages());
-				ePs.add(eP);
-				project.setVisiblePackages(ePs);
-				for (Map.Entry<String, HashSet<String>> eClassNames : visiblePackagesToClasses.entrySet())
-					if (eClassNames.getKey().equals(ePackageNsURI))
-						for (String eClassName : eClassNames.getValue()) {
-							Set<EClass> eCls = new HashSet<EClass>();
-							eCls.addAll(project.getVisibleEClasses());
-							eCls.add((EClass) eP.getEClassifier(eClassName));
-							project.setVisibleEClasses(eCls);
-						}
-			}
-
+	private void propagatePackagesVisibility(InternalProject project) {
+		for (String ePackageNsURI : visiblePackagesToClasses.keySet()) {
+			EPackage eP = project.getEditingDomain().getResourceSet().getPackageRegistry().getEPackage(ePackageNsURI);
+			Set<EPackage> ePs = new HashSet<EPackage>();
+			ePs.addAll(project.getVisiblePackages());
+			ePs.add(eP);
+			project.setVisiblePackages(ePs);
+			for (Map.Entry<String, HashSet<String>> eClassNames : visiblePackagesToClasses.entrySet())
+				if (eClassNames.getKey().equals(ePackageNsURI))
+					for (String eClassName : eClassNames.getValue()) {
+						Set<EClass> eCls = new HashSet<EClass>();
+						eCls.addAll(project.getVisibleEClasses());
+						eCls.add((EClass) eP.getEClassifier(eClassName));
+						project.setVisibleEClasses(eCls);
+					}
 		}
-
 	}
 
 	private class EnterpriseDomainResourceListener implements IResourceChangeListener {
@@ -657,7 +651,6 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 				project.notifyObjectsChanged(
 						(Collection<Object>) (Collection<?>) Collections.singleton(notification.getNotifier()), true);
 			}
-			propagatePackagesVisibility();
 			// if (notification.getNotifier() instanceof Notifier) {
 			// provider.notifyProviderChangeListeners(notification);
 			//

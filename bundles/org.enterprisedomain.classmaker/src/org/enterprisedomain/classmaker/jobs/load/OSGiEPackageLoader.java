@@ -23,6 +23,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.osgi.util.NLS;
 import org.enterprisedomain.classmaker.Messages;
 import org.enterprisedomain.classmaker.Stage;
@@ -153,11 +154,19 @@ public class OSGiEPackageLoader extends ContainerJob {
 			EPackage ePackage = null;
 			try {
 				ePackage = (EPackage) packageClass.getField("eINSTANCE").get(null); // $NON-NLS-1$ //$NON-NLS-1$
-				if (ePackage != null)
+				if (ePackage != null) {
 					getContributionState().getDomainModel().setGenerated(ePackage);
+					registerEPackage(Registry.INSTANCE, ePackage);
+					registerEPackage(getContributionState().getRevision().getProject().getWorkspace().getResourceSet()
+							.getPackageRegistry(), ePackage);
+				}
 			} catch (ClassCastException e) {
-				if (ePackage != null)
+				if (ePackage != null) {
 					getContributionState().getDomainModel().setGenerated(ePackage);
+					registerEPackage(Registry.INSTANCE, ePackage);
+					registerEPackage(getContributionState().getRevision().getProject().getWorkspace().getResourceSet()
+							.getPackageRegistry(), ePackage);
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 				setException(e);
@@ -169,6 +178,10 @@ public class OSGiEPackageLoader extends ContainerJob {
 			loaded.release();
 			getContributionState().getProject().setNeedCompletionNotification(true);
 		}
+	}
+
+	private void registerEPackage(Registry registry, EPackage ePackage) {
+		registry.put(ePackage.getNsURI(), ePackage);
 	}
 
 	public void setException(Throwable exception) {

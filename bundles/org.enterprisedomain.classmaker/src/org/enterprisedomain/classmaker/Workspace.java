@@ -221,6 +221,15 @@ public interface Workspace extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc --> Lookup
+	 * Contribution by underlying project resource name. <!-- end-model-doc -->
+	 * 
+	 * @model
+	 * @generated
+	 */
+	Contribution getContribution(String nsURI, Stage filter);
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc --> Lookup
 	 * project by name. <!-- end-model-doc -->
 	 * 
 	 * @model

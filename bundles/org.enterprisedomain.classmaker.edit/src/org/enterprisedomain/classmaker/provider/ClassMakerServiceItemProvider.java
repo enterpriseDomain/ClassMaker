@@ -112,6 +112,7 @@ public class ClassMakerServiceItemProvider extends ItemProviderAdapter implement
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+		super.notifyChanged(notification);
 	}
 
 	/**

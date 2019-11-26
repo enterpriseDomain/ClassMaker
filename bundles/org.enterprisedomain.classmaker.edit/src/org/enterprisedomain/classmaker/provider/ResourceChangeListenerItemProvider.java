@@ -94,6 +94,7 @@ public class ResourceChangeListenerItemProvider extends ItemProviderAdapter impl
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+		super.notifyChanged(notification);
 	}
 
 	/**
