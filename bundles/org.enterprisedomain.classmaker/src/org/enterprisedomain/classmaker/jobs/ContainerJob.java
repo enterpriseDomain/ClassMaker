@@ -35,8 +35,11 @@ public abstract class ContainerJob extends EnterpriseDomainJob {
 			return null;
 		List<Bundle> results = new ArrayList<Bundle>();
 		for (Bundle bundle : context.getBundles())
-			if (bundle.getSymbolicName().equals(symbolicName) && (versionsAreEqual(version, bundle.getVersion(), true)
-					|| versionAreLess(version, bundle.getVersion(), true)))
+			if ((bundle.getSymbolicName().equals(symbolicName)
+					|| (getContributionState().isEdit() && bundle.getSymbolicName().equals(symbolicName + ".edit"))
+					|| (getContributionState().isEditor() && bundle.getSymbolicName().equals(symbolicName + ".editor")))
+					&& (versionsAreEqual(version, bundle.getVersion(), true)
+							|| versionAreLess(version, bundle.getVersion(), true)))
 				results.add(bundle);
 		return results;
 	}

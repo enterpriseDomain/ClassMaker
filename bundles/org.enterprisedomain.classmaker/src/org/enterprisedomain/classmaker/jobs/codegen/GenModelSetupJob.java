@@ -71,4 +71,8 @@ public class GenModelSetupJob extends EcoreGenerator.GeneratorJob {
 		return Status.OK_STATUS;
 	}
 
+	@Override
+	protected boolean excludeOnNextJobJoin() {
+		return true;
+	}
 }

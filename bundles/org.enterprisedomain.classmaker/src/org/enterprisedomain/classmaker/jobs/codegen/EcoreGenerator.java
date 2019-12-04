@@ -15,7 +15,9 @@
  */
 package org.enterprisedomain.classmaker.jobs.codegen;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -55,7 +57,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 		super(Messages.JobNameCodeGenerator, stateTimestamp);
 	}
 
-	protected static final String SOURCE_FOLDER_NAME = "src/main/java"; //$NON-NLS-1$
+	protected static final String SOURCE_FOLDER_NAME = "src"; /// main/java"; //$NON-NLS-1$
 
 	public static final String GENMODEL_EXT = "genmodel"; //$NON-NLS-1$
 
@@ -158,9 +160,18 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 					getProject().refreshLocal(IResource.DEPTH_INFINITE, monitor);
 				} catch (OperationCanceledException e) {
 				}
-				int result = (Integer) getGenerator().run(new String[] { "-forceOverwrite", "-codeFormatting", //$NON-NLS-1$ //$NON-NLS-2$
-						"default", "-model", "-reconcile", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						EcorePlugin.getWorkspaceRoot().getRawLocation().append(getGenModelLocation()).toString() });
+				List<String> args = new ArrayList<String>();
+				args.add("-forceOverwrite");
+				args.add("-codeFormatting");
+				args.add("default");
+				args.add("-model");
+				if (getContributionState().isEdit())
+					args.add("-edit");
+				if (getContributionState().isEditor())
+					args.add("-editor");
+				args.add("-reconcile");
+				args.add(EcorePlugin.getWorkspaceRoot().getRawLocation().append(getGenModelLocation()).toString());
+				int result = (Integer) getGenerator().run((String[]) args.toArray(new String[args.size()]));
 				getContributionState().setProjectVersion(monitor);
 				try {
 					@SuppressWarnings("unchecked")
@@ -269,6 +280,9 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 					getContributionState().getCustomizers().get(filter)
 							.customize(ECollections.asEList(projectPath, genModel, ePackages));
 			getContributionState().setPackageClassName(genModel.getGenPackages().get(0).getBasicPackageName());
+			getContributionState().setEditPluginClassName(genModel.getGenPackages().get(0).getEditPluginClassName());
+			getContributionState()
+					.setEditorPluginClassName(genModel.getGenPackages().get(0).getEditorPluginClassName());
 		}
 
 		genModel.setValidateModel(true);

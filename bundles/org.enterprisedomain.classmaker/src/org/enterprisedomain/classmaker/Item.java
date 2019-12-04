@@ -26,28 +26,22 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- begin-user-doc --> A representation of the model object
  * '<em><b>Item</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc --> Common denominator for <em><b>Project</b></em>'s and
- * they parts. <!-- end-model-doc -->
+ * <!-- begin-model-doc -->
+ * Common denominator for <em><b>Project</b></em>'s and they parts.
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.Item#getModelName <em>Model
- * Name</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Item#getPhase <em>Phase</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Item#getLanguage
- * <em>Language</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Item#getDomainModel <em>Domain
- * Model</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Item#getCustomizers
- * <em>Customizers</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Item#getParent
- * <em>Parent</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Item#getLocale
- * <em>Locale</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Item#getProject
- * <em>Project</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Item#getModelName <em>Model Name</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Item#getPhase <em>Phase</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Item#getLanguage <em>Language</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Item#getDomainModel <em>Domain Model</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Item#getCustomizers <em>Customizers</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Item#getParent <em>Parent</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Item#getLocale <em>Locale</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Item#getProject <em>Project</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getItem()
@@ -73,10 +67,8 @@ public interface Item extends EObject {
 	String getModelName();
 
 	/**
-	 * Sets the value of the
-	 * '{@link org.enterprisedomain.classmaker.Item#getModelName <em>Model
-	 * Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Item#getModelName <em>Model Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Model Name</em>' attribute.
 	 * @see #getModelName()
 	 * @generated
@@ -104,9 +96,8 @@ public interface Item extends EObject {
 	Stage getPhase();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Item#getPhase
-	 * <em>Phase</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Item#getPhase <em>Phase</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Phase</em>' attribute.
 	 * @see org.enterprisedomain.classmaker.Stage
 	 * @see #getPhase()
@@ -133,10 +124,8 @@ public interface Item extends EObject {
 	String getLanguage();
 
 	/**
-	 * Sets the value of the
-	 * '{@link org.enterprisedomain.classmaker.Item#getLanguage <em>Language</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Item#getLanguage <em>Language</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Language</em>' attribute.
 	 * @see #getLanguage()
 	 * @generated
@@ -216,9 +205,8 @@ public interface Item extends EObject {
 	Item getParent();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Item#getParent
-	 * <em>Parent</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Item#getParent <em>Parent</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Parent</em>' reference.
 	 * @see #getParent()
 	 * @generated
@@ -227,7 +215,6 @@ public interface Item extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
 	 * @generated
 	 */
@@ -235,25 +222,20 @@ public interface Item extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model exceptions="org.enterprisedomain.classmaker.Exception"
-	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * @model exceptions="org.enterprisedomain.classmaker.Exception" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	String make(IProgressMonitor monitor) throws Exception;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
-	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	void build(IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model
 	 * @generated
 	 */
@@ -261,7 +243,6 @@ public interface Item extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model
 	 * @generated
 	 */
@@ -281,9 +262,8 @@ public interface Item extends EObject {
 	Locale getLocale();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Item#getLocale
-	 * <em>Locale</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Item#getLocale <em>Locale</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Locale</em>' attribute.
 	 * @see #getLocale()
 	 * @generated
@@ -305,9 +285,8 @@ public interface Item extends EObject {
 	Project getProject();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Item#getProject
-	 * <em>Project</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Item#getProject <em>Project</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Project</em>' reference.
 	 * @see #getProject()
 	 * @generated

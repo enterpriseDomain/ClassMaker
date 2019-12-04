@@ -28,44 +28,30 @@ import org.osgi.framework.Version;
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Project</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc --> Default project class. <!-- end-model-doc -->
+ * <!-- begin-model-doc -->
+ * Default project class.
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.Project#getName
- * <em>Name</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Project#getProjectName <em>Project
- * Name</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Project#getChildren
- * <em>Children</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Project#isDirty
- * <em>Dirty</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Project#getWorkspace
- * <em>Workspace</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Project#getResourcePath
- * <em>Resource Path</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Project#isNeedCompletionNotification
- * <em>Need Completion Notification</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Project#getCompletionNotificationAdapter
- * <em>Completion Notification Adapter</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Project#getResourceReloadListener
- * <em>Resource Reload Listener</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Project#isSavingResource
- * <em>Saving Resource</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Project#getRevision
- * <em>Revision</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Project#getRevisions
- * <em>Revisions</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Project#getProjectVersion
- * <em>Project Version</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Project#getSelectRevealHandler
- * <em>Select Reveal Handler</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Project#getVersion
- * <em>Version</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Project#getState
- * <em>State</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Project#getName <em>Name</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Project#getProjectName <em>Project Name</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Project#getChildren <em>Children</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Project#isDirty <em>Dirty</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Project#getWorkspace <em>Workspace</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Project#getResourcePath <em>Resource Path</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Project#isNeedCompletionNotification <em>Need Completion Notification</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Project#getCompletionNotificationAdapter <em>Completion Notification Adapter</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Project#getResourceReloadListener <em>Resource Reload Listener</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Project#isSavingResource <em>Saving Resource</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Project#getRevision <em>Revision</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Project#getRevisions <em>Revisions</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Project#getProjectVersion <em>Project Version</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Project#getSelectRevealHandler <em>Select Reveal Handler</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Project#getVersion <em>Version</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Project#getState <em>State</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject()
@@ -92,9 +78,8 @@ public interface Project extends EObject, ISchedulingRule {
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Project#getName
-	 * <em>Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Project#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Name</em>' attribute.
 	 * @see #getName()
 	 * @generated
@@ -121,10 +106,8 @@ public interface Project extends EObject, ISchedulingRule {
 	String getProjectName();
 
 	/**
-	 * Sets the value of the
-	 * '{@link org.enterprisedomain.classmaker.Project#getProjectName <em>Project
-	 * Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Project#getProjectName <em>Project Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Project Name</em>' attribute.
 	 * @see #getProjectName()
 	 * @generated
@@ -187,11 +170,9 @@ public interface Project extends EObject, ISchedulingRule {
 	Workspace getWorkspace();
 
 	/**
-	 * Sets the value of the
-	 * '{@link org.enterprisedomain.classmaker.Project#getWorkspace
-	 * <em>Workspace</em>}' container reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Project#getWorkspace <em>Workspace</em>}' container reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @param value the new value of the '<em>Workspace</em>' container reference.
 	 * @see #getWorkspace()
 	 * @generated
@@ -229,13 +210,10 @@ public interface Project extends EObject, ISchedulingRule {
 	boolean isNeedCompletionNotification();
 
 	/**
-	 * Sets the value of the
-	 * '{@link org.enterprisedomain.classmaker.Project#isNeedCompletionNotification
-	 * <em>Need Completion Notification</em>}' attribute. <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Project#isNeedCompletionNotification <em>Need Completion Notification</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
-	 * @param value the new value of the '<em>Need Completion Notification</em>'
-	 *              attribute.
+	 * @param value the new value of the '<em>Need Completion Notification</em>' attribute.
 	 * @see #isNeedCompletionNotification()
 	 * @generated
 	 */
@@ -275,14 +253,13 @@ public interface Project extends EObject, ISchedulingRule {
 	void setCompletionNotificationAdapter(CompletionNotificationAdapter value);
 
 	/**
-	 * Returns the value of the '<em><b>Resource Reload Listener</b></em>'
-	 * reference. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Resource Reload Listener</b></em>' reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Resource Reload Listener</em>' reference isn't
 	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Resource Reload Listener</em>' reference.
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject_ResourceReloadListener()
 	 * @model resolveProxies="false" changeable="false"
@@ -291,14 +268,14 @@ public interface Project extends EObject, ISchedulingRule {
 	ResourceChangeListener getResourceReloadListener();
 
 	/**
-	 * Returns the value of the '<em><b>Saving Resource</b></em>' attribute. The
-	 * default value is <code>"false"</code>. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Saving Resource</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Saving Resource</em>' attribute isn't clear, there
 	 * really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Saving Resource</em>' attribute.
 	 * @see #setSavingResource(boolean)
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject_SavingResource()
@@ -308,10 +285,8 @@ public interface Project extends EObject, ISchedulingRule {
 	boolean isSavingResource();
 
 	/**
-	 * Sets the value of the
-	 * '{@link org.enterprisedomain.classmaker.Project#isSavingResource <em>Saving
-	 * Resource</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Project#isSavingResource <em>Saving Resource</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Saving Resource</em>' attribute.
 	 * @see #isSavingResource()
 	 * @generated
@@ -332,10 +307,8 @@ public interface Project extends EObject, ISchedulingRule {
 	Revision getRevision();
 
 	/**
-	 * Sets the value of the
-	 * '{@link org.enterprisedomain.classmaker.Project#getRevision
-	 * <em>Revision</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Project#getRevision <em>Revision</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Revision</em>' reference.
 	 * @see #getRevision()
 	 * @generated
@@ -373,10 +346,8 @@ public interface Project extends EObject, ISchedulingRule {
 	Version getProjectVersion();
 
 	/**
-	 * Sets the value of the
-	 * '{@link org.enterprisedomain.classmaker.Project#getProjectVersion <em>Project
-	 * Version</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Project#getProjectVersion <em>Project Version</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Project Version</em>' attribute.
 	 * @see #getProjectVersion()
 	 * @generated
@@ -391,7 +362,6 @@ public interface Project extends EObject, ISchedulingRule {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Select Reveal Handler</em>' reference.
 	 * @see #setSelectRevealHandler(SelectRevealHandler)
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject_SelectRevealHandler()
@@ -401,11 +371,9 @@ public interface Project extends EObject, ISchedulingRule {
 	SelectRevealHandler getSelectRevealHandler();
 
 	/**
-	 * Sets the value of the
-	 * '{@link org.enterprisedomain.classmaker.Project#getSelectRevealHandler
-	 * <em>Select Reveal Handler</em>}' reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Project#getSelectRevealHandler <em>Select Reveal Handler</em>}' reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @param value the new value of the '<em>Select Reveal Handler</em>' reference.
 	 * @see #getSelectRevealHandler()
 	 * @generated
@@ -427,10 +395,8 @@ public interface Project extends EObject, ISchedulingRule {
 	Version getVersion();
 
 	/**
-	 * Sets the value of the
-	 * '{@link org.enterprisedomain.classmaker.Project#getVersion <em>Version</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Project#getVersion <em>Version</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Version</em>' attribute.
 	 * @see #getVersion()
 	 * @generated
@@ -451,25 +417,20 @@ public interface Project extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
-	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	void create(IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
-	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	void delete(IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model objectsMany="true"
 	 * @generated
 	 */
@@ -477,27 +438,21 @@ public interface Project extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
-	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	String make(IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
-	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	boolean open(IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
-	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	void close(IProgressMonitor monitor) throws CoreException;
@@ -516,7 +471,6 @@ public interface Project extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model
 	 * @generated
 	 */
@@ -524,7 +478,6 @@ public interface Project extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model
 	 * @generated
 	 */
@@ -532,7 +485,6 @@ public interface Project extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model exceptions="org.enterprisedomain.classmaker.Exception"
 	 * @generated
 	 */
@@ -540,16 +492,13 @@ public interface Project extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model exceptions="org.enterprisedomain.classmaker.Exception"
-	 *        notificationType="org.enterprisedomain.classmaker.Notification"
+	 * @model exceptions="org.enterprisedomain.classmaker.Exception" notificationType="org.enterprisedomain.classmaker.Notification"
 	 * @generated
 	 */
 	void notifyResourceChanged(Notification notification) throws Exception;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model
 	 * @generated
 	 */
@@ -557,7 +506,6 @@ public interface Project extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model
 	 * @generated
 	 */
@@ -565,7 +513,6 @@ public interface Project extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
 	 * @generated
 	 */
@@ -573,7 +520,6 @@ public interface Project extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
 	 * @generated
 	 */
@@ -581,7 +527,6 @@ public interface Project extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model
 	 * @generated
 	 */
@@ -589,10 +534,7 @@ public interface Project extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model dataType="org.enterprisedomain.classmaker.OSGiVersion"
-	 *        exceptions="org.enterprisedomain.classmaker.CoreException"
-	 *        baseDataType="org.enterprisedomain.classmaker.OSGiVersion"
+	 * @model dataType="org.enterprisedomain.classmaker.OSGiVersion" exceptions="org.enterprisedomain.classmaker.CoreException" baseDataType="org.enterprisedomain.classmaker.OSGiVersion"
 	 * @generated
 	 */
 	Version newVersion(Version base, boolean incrementMajor, boolean incrementMinor, boolean incrementMicro)
@@ -600,25 +542,20 @@ public interface Project extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model dataType="org.enterprisedomain.classmaker.OSGiVersion"
-	 *        exceptions="org.enterprisedomain.classmaker.CoreException"
+	 * @model dataType="org.enterprisedomain.classmaker.OSGiVersion" exceptions="org.enterprisedomain.classmaker.CoreException"
 	 * @generated
 	 */
 	Version newVersion(boolean incrementMajor, boolean incrementMinor, boolean incrementMicro) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model dataType="org.enterprisedomain.classmaker.OSGiVersion"
-	 *        exceptions="org.enterprisedomain.classmaker.CoreException"
+	 * @model dataType="org.enterprisedomain.classmaker.OSGiVersion" exceptions="org.enterprisedomain.classmaker.CoreException"
 	 * @generated
 	 */
 	Version nextVersion() throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
 	 * @generated
 	 */
@@ -626,7 +563,6 @@ public interface Project extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
 	 * @generated
 	 */
@@ -634,7 +570,6 @@ public interface Project extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
 	 * @generated
 	 */
@@ -642,7 +577,6 @@ public interface Project extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model
 	 * @generated
 	 */
@@ -650,7 +584,6 @@ public interface Project extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model
 	 * @generated
 	 */
@@ -658,7 +591,6 @@ public interface Project extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model
 	 * @generated
 	 */
@@ -666,7 +598,6 @@ public interface Project extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model
 	 * @generated
 	 */

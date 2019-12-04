@@ -59,16 +59,11 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.impl.RevisionImpl#getState
- * <em>State</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.RevisionImpl#getTimestamp
- * <em>Timestamp</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.RevisionImpl#getStateHistory
- * <em>State History</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.RevisionImpl#getLatestTimestamp
- * <em>Latest Timestamp</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.RevisionImpl#getVersion
- * <em>Version</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.RevisionImpl#getState <em>State</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.RevisionImpl#getTimestamp <em>Timestamp</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.RevisionImpl#getStateHistory <em>State History</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.RevisionImpl#getLatestTimestamp <em>Latest Timestamp</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.RevisionImpl#getVersion <em>Version</em>}</li>
  * </ul>
  *
  * @generated
@@ -80,9 +75,8 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	}
 
 	/**
-	 * The default value of the '{@link #getTimestamp() <em>Timestamp</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getTimestamp() <em>Timestamp</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getTimestamp()
 	 * @generated
 	 * @ordered
@@ -90,9 +84,8 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	protected static final long TIMESTAMP_EDEFAULT = 0L;
 
 	/**
-	 * The cached value of the '{@link #getTimestamp() <em>Timestamp</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getTimestamp() <em>Timestamp</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getTimestamp()
 	 * @generated
 	 * @ordered
@@ -100,9 +93,8 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	protected long timestamp = TIMESTAMP_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getStateHistory() <em>State History</em>}'
-	 * map. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getStateHistory() <em>State History</em>}' map.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getStateHistory()
 	 * @generated
 	 * @ordered
@@ -110,9 +102,8 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	protected EMap<Long, State> stateHistory;
 
 	/**
-	 * The default value of the '{@link #getLatestTimestamp() <em>Latest
-	 * Timestamp</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getLatestTimestamp() <em>Latest Timestamp</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getLatestTimestamp()
 	 * @generated
 	 * @ordered
@@ -122,7 +113,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	/**
 	 * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getVersion()
 	 * @generated
 	 * @ordered
@@ -132,7 +122,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	/**
 	 * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getVersion()
 	 * @generated
 	 * @ordered
@@ -141,7 +130,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected RevisionImpl() {
@@ -150,7 +138,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -170,7 +157,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -201,7 +187,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -211,7 +196,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -225,7 +209,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -250,7 +233,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -260,7 +242,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -525,7 +506,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -539,7 +519,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -566,7 +545,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -590,7 +568,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -614,7 +591,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -636,7 +612,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

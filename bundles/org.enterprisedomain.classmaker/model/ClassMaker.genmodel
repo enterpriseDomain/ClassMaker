@@ -80,10 +80,14 @@
     </genClasses>
     <genClasses ecoreClass="ClassMaker.ecore#//State" labelFeature="#//classmaker/State/timestamp">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/packageClassName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/editPluginClassName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/editorPluginClassName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/requiredPlugins"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//State/revision"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/timestamp"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/deployableUnitName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/editDeployableUnitName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/editorDeployableUnitName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/jobFamily"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//State/resource"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/commitIds"/>
@@ -91,6 +95,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//State/stateCustomizers"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/projectName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/making"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/edit"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/editor"/>
       <genOperations ecoreOperation="ClassMaker.ecore#//State/setProjectVersion">
         <genParameters ecoreParameter="ClassMaker.ecore#//State/setProjectVersion/monitor"/>
       </genOperations>
@@ -557,6 +563,8 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//Blueprint/dynamicModel"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Blueprint/dependencies"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//Blueprint/completionListeners"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Blueprint/edit"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Blueprint/editor"/>
     </genClasses>
     <genClasses ecoreClass="ClassMaker.ecore#//CompletionNotificationAdapter">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//CompletionNotificationAdapter/error"/>

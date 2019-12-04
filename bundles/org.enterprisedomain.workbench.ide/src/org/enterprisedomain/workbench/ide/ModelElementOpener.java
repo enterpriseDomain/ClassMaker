@@ -8,6 +8,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.presentation.EcoreEditor;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EContentAdapter;
@@ -24,8 +25,7 @@ import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 
 public class ModelElementOpener implements ECPModelElementOpener {
 
-	public static final String[] EDITOR_IDS = { "EcoreEditor", "org.eclipse.emfforms.editor.ecore.genericxmieditor", //$NON-NLS-1$ //$NON-NLS-2$
-			"org.enterprisedomain.workbench.ide.modelEditor" }; //$NON-NLS-1$
+	public static final String EDITOR_ID = "org.eclipse.emf.ecore.presentation.EcoreEditorID"; //$NON-NLS-1$
 	private Resource resource;
 
 	public ModelElementOpener() {
@@ -33,7 +33,6 @@ public class ModelElementOpener implements ECPModelElementOpener {
 
 	@Override
 	public void openModelElement(Object modelElement, final ECPProject ecpProject) {
-		IEditorPart editor = null;
 		resource = null;
 		if (modelElement instanceof Resource)
 			resource = (Resource) modelElement;
@@ -46,31 +45,11 @@ public class ModelElementOpener implements ECPModelElementOpener {
 			}
 		}
 		if (resource != null)
-			editor = open(resource.getURI(), resource.getResourceSet());
-		// if (editor != null)
-		// editor.addPropertyListener(new IPropertyListener() {
-		//
-		// @SuppressWarnings("unchecked")
-		// @Override
-		// public void propertyChanged(Object source, int propId) {
-		// if (propId == ISaveablePart.PROP_DIRTY) {
-		// if (!((IEditorPart) source).isDirty())
-		// ((InternalProject) ecpProject).notifyObjectsChanged(
-		// (Collection<Object>) (Collection<?>) Collections.singleton(ecpProject),
-		// true);
-		// }
-		//
-		// }
-		// });
-
+			open(resource.getURI(), resource.getResourceSet());
 	}
 
 	private IEditorPart open(URI uri, ResourceSet resourceSet) {
-		return openEditor(uri, EDITOR_IDS[2], resourceSet);
-		// if (uri.lastSegment().equals("ecore")) //$NON-NLS-1$
-		// return openEditor(uri, EDITOR_IDS[0]);
-		// else
-		// return openEditor(uri, EDITOR_IDS[1]);
+		return openEditor(uri, EDITOR_ID, resourceSet);
 	}
 
 	private IEditorPart openEditor(URI uri, String editorId, ResourceSet resourceSet) {
@@ -79,8 +58,7 @@ public class ModelElementOpener implements ECPModelElementOpener {
 		try {
 			result = IDE.openEditor(page, new java.net.URI(resourceSet.getURIConverter().normalize(uri).toString()),
 					editorId, true);
-			EList<Adapter> target = ((ModelEditor) result).getGenericEditor().getEditingDomain().getResourceSet()
-					.eAdapters();
+			EList<Adapter> target = ((EcoreEditor) result).getEditingDomain().getResourceSet().eAdapters();
 			for (Adapter adapter : Activator.getClassMaker().getWorkspace().getResourceSet().eAdapters())
 				if (adapter instanceof EContentAdapter && !target.contains(adapter))
 					target.add(adapter);

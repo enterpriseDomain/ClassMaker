@@ -35,12 +35,16 @@ import org.eclipse.core.runtime.jobs.JobGroup;
 import org.eclipse.core.runtime.jobs.MultiRule;
 import org.eclipse.core.runtime.jobs.ProgressProvider;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
+import org.enterprisedomain.classmaker.jobs.codegen.GenModelSetupJob;
+import org.enterprisedomain.classmaker.jobs.install.OSGiInstaller;
+import org.enterprisedomain.classmaker.jobs.load.OSGiEPackageLoader;
 import org.enterprisedomain.classmaker.util.ReflectiveFactory;
 
 public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker {
@@ -74,6 +78,8 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 
 			Status result = new Status(event.getResult().getSeverity(), ClassMakerPlugin.PLUGIN_ID,
 					event.getJob().getName() + ": " + event.getResult().getMessage()); //$NON-NLS-1$
+			if (ClassMakerPlugin.getInstance() == null)
+				return;
 			ClassMakerPlugin.getInstance().getLog().log(result);
 
 			if (getNextJob() == null) {
@@ -86,7 +92,8 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 			getNextJob().setProject(getProject());
 			getNextJob().schedule();
 			try {
-				getNextJob().join();
+				if (!excludeOnNextJobJoin())
+					getNextJob().join();
 			} catch (InterruptedException e) {
 				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createWarningStatus(e));
 			}
@@ -121,6 +128,19 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 		setJobGroup(new JobGroup("ClassMaker", 0, 1)); //$NON-NLS-1$
 	}
 
+	public static boolean joinJob(String name) {
+		Job[] jobs = Job.getJobManager().find(null);
+		boolean joined = false;
+		for (Job job : jobs)
+			if (job.getName().equals(name))
+				try {
+					job.join();
+					joined = true;
+				} catch (InterruptedException e) {
+				}
+		return joined;
+	}
+
 	@Override
 	public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
 		IStatus result = Status.OK_STATUS;
@@ -146,6 +166,10 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 			return ClassMakerPlugin.getProgressMonitor();
 		}
 	};
+
+	protected boolean excludeOnNextJobJoin() {
+		return false;
+	}
 
 	@Override
 	public boolean belongsTo(Object family) {
@@ -198,10 +222,17 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 		ClassMakerService service = ClassMakerPlugin.getClassMaker();
 		if (service == null)
 			return project;
-		Contribution contribution = service.getWorkspace().getContribution(project.getName());
 		ISchedulingRule rule = null;
-		if (contribution != null)
-			rule = contribution.getState(getStateTimestamp());
+		if (!service.eIsSet(ClassMakerPackage.Literals.CLASS_MAKER_SERVICE__WORKSPACE))
+			if (contributionState != null)
+				rule = contributionState;
+			else
+				return project;
+		else {
+			Contribution contribution = service.getWorkspace().getContribution(project.getName());
+			if (contribution != null)
+				rule = contribution.getState(getStateTimestamp());
+		}
 		return MultiRule.combine(project, rule);
 	}
 
@@ -232,7 +263,7 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 	}
 
 	public State getContributionState() {
-		if (contributionState == null) {
+		if (contributionState == null || contributionState.getTimestamp() != getStateTimestamp()) {
 			Contribution contribution = ClassMakerPlugin.getClassMaker().getWorkspace()
 					.getContribution(getProject().getName());
 			if (contribution == null)

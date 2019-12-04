@@ -52,6 +52,8 @@ public class ClassMakerPlugin extends Plugin {
 
 	public static final String PDE_PLUGIN_NATURE = "org.eclipse.pde.PluginNature"; //$NON-NLS-1$
 
+	public static final String JAVA_NATURE = "org.eclipse.jdt.core.javanature";
+
 	public static final String MODEL_FOLDER_PREF_KEY = "modelFolder"; //$NON-NLS-1$
 
 	public static final String MODEL_RESOURCE_EXT_PREF_KEY = "resourceExtension"; //$NON-NLS-1$

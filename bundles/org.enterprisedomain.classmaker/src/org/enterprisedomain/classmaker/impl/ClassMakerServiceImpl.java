@@ -79,17 +79,15 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.impl.ClassMakerServiceImpl#getWorkspace
- * <em>Workspace</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ClassMakerServiceImpl#getWorkspace <em>Workspace</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerService {
 	/**
-	 * The cached value of the '{@link #getWorkspace() <em>Workspace</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getWorkspace() <em>Workspace</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getWorkspace()
 	 * @generated
 	 * @ordered
@@ -145,7 +143,6 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -155,7 +152,6 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -165,7 +161,6 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetWorkspace(Workspace newWorkspace, NotificationChain msgs) {
@@ -184,7 +179,6 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -225,6 +219,8 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 		try {
 			Contribution contrib = getWorkspace().createContribution(input.getDynamicModel(), monitor);
 			contrib.getDependencies().addAll(input.getDependencies());
+			contrib.getState().setEdit(input.isEdit());
+			contrib.getState().setEditor(input.isEditor());
 			final Semaphore wait = new Semaphore(0);
 			input.getCompletionListeners().add(new CompletionListenerImpl() {
 
@@ -369,7 +365,6 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 				revision.getDomainModel().setDynamic(EcoreUtil.copy(target.getDynamicModel()));
 			}
 		}
-		contribution.getDependencies().clear();
 		contribution.getDependencies().addAll(target.getDependencies());
 		final Semaphore wait = new Semaphore(0);
 		CompletionListener waitListener = new CompletionListenerImpl() {
@@ -690,7 +685,6 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -707,7 +701,6 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -721,7 +714,6 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -735,7 +727,6 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -750,7 +741,6 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -765,7 +755,6 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

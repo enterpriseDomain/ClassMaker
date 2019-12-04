@@ -66,6 +66,8 @@ public class BlueprintItemProvider extends ItemProviderAdapter implements IEditi
 			addDynamicModelPropertyDescriptor(object);
 			addDependenciesPropertyDescriptor(object);
 			addCompletionListenersPropertyDescriptor(object);
+			addEditPropertyDescriptor(object);
+			addEditorPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -118,6 +120,38 @@ public class BlueprintItemProvider extends ItemProviderAdapter implements IEditi
 	}
 
 	/**
+	 * This adds a property descriptor for the Edit feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addEditPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Blueprint_edit_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Blueprint_edit_feature",
+								"_UI_Blueprint_type"),
+						ClassMakerPackage.Literals.BLUEPRINT__EDIT, false, false, false,
+						ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Editor feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addEditorPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Blueprint_editor_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Blueprint_editor_feature",
+								"_UI_Blueprint_type"),
+						ClassMakerPackage.Literals.BLUEPRINT__EDITOR, true, false, false,
+						ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+	}
+
+	/**
 	 * This returns Blueprint.gif.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
@@ -135,7 +169,8 @@ public class BlueprintItemProvider extends ItemProviderAdapter implements IEditi
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Blueprint_type");
+		Blueprint blueprint = (Blueprint) object;
+		return getString("_UI_Blueprint_type") + " " + blueprint.isEdit();
 	}
 
 	/**
@@ -150,6 +185,8 @@ public class BlueprintItemProvider extends ItemProviderAdapter implements IEditi
 
 		switch (notification.getFeatureID(Blueprint.class)) {
 		case ClassMakerPackage.BLUEPRINT__DEPENDENCIES:
+		case ClassMakerPackage.BLUEPRINT__EDIT:
+		case ClassMakerPackage.BLUEPRINT__EDITOR:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		}

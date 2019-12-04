@@ -24,15 +24,15 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Customizer</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc --> Allows to customize the process. <!-- end-model-doc
- * -->
+ * <!-- begin-model-doc -->
+ * Allows to customize the process.
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.Customizer#getRank
- * <em>Rank</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Customizer#getRank <em>Rank</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getCustomizer()
@@ -68,10 +68,8 @@ public interface Customizer extends EObject {
 	int getRank();
 
 	/**
-	 * Sets the value of the
-	 * '{@link org.enterprisedomain.classmaker.Customizer#getRank <em>Rank</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Customizer#getRank <em>Rank</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Rank</em>' attribute.
 	 * @see #getRank()
 	 * @generated

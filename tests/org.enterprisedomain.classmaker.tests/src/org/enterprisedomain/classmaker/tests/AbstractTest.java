@@ -237,6 +237,7 @@ public abstract class AbstractTest {
 		Contribution c = service.getWorkspace().getContribution(ePackage);
 		for (String dependency : dependencies)
 			c.getDependencies().add(dependency);
+		c.make(monitor);
 		return test(e, attributeName, attributeValue);
 	}
 
@@ -257,7 +258,12 @@ public abstract class AbstractTest {
 		EFactory eFactory = ePackage.getEFactoryInstance();
 		if (eFactory == null)
 			return ePackage;
-		EObject o = eFactory.create(s);
+		EObject o = null;
+		try {
+			o = eFactory.create(s);
+		} catch (NoClassDefFoundError e) {
+			fail(e.getLocalizedMessage());
+		}
 		assertEquals(className, o.getClass().getSimpleName());
 		EStructuralFeature a = s.getEStructuralFeature(attributeName);
 		o.eSet(a, attributeValue);

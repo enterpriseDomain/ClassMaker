@@ -50,16 +50,36 @@ public class OSGiEPackageLoader extends ContainerJob {
 		public void bundleChanged(BundleEvent event) {
 			if (event.getBundle() == null)
 				return;
-			if (event.getBundle().getSymbolicName().equals(getProject().getName()))
+			if (event.getBundle().getSymbolicName().equals(getProject().getName())) {
 				if ((event.getType() == BundleEvent.STARTED || event.getType() == BundleEvent.RESOLVED
 						|| event.getType() == BundleEvent.LAZY_ACTIVATION)
 						&& event.getBundle().getState() == Bundle.ACTIVE)
 					try {
-						doLoad(getContributionState(), event.getBundle());
+						doLoad(getContributionState(), event.getBundle(), 0);
 					} catch (Exception e) {
 						setException(e);
 					}
-
+			} else if (getContributionState().isEdit()
+					&& event.getBundle().getSymbolicName().equals(getProject().getName() + ".edit")) {
+				if ((event.getType() == BundleEvent.STARTED || event.getType() == BundleEvent.RESOLVED
+						|| event.getType() == BundleEvent.LAZY_ACTIVATION)
+						&& event.getBundle().getState() == Bundle.ACTIVE)
+					try {
+						doLoad(getContributionState(), event.getBundle(), 1);
+					} catch (Exception e) {
+						setException(e);
+					}
+			} else if (getContributionState().isEditor()
+					&& event.getBundle().getSymbolicName().equals(getProject().getName() + ".editor")) {
+				if ((event.getType() == BundleEvent.STARTED || event.getType() == BundleEvent.RESOLVED
+						|| event.getType() == BundleEvent.LAZY_ACTIVATION)
+						&& event.getBundle().getState() == Bundle.ACTIVE)
+					try {
+						doLoad(getContributionState(), event.getBundle(), 2);
+					} catch (Exception e) {
+						setException(e);
+					}
+			}
 		}
 	};
 
@@ -72,23 +92,26 @@ public class OSGiEPackageLoader extends ContainerJob {
 		if (contribution.getPhase() == Stage.DEFINED)
 			return ClassMakerPlugin.createErrorStatus(Messages.ModelNotSpecified);
 		Bundle osgiBundle = null;
+		Bundle editBundle = null;
+		Bundle editorBundle = null;
 		try {
 			for (Bundle bundle : getBundles())
 				if (versionsAreEqual(Version.parseVersion(bundle.getHeaders().get(Constants.BUNDLE_VERSION)),
-						getContributionState().getProject().getVersion(), false))
+						getContributionState().getProject().getVersion(), false)) {
 					osgiBundle = bundle;
-			if (osgiBundle != null) {
-				if (osgiBundle.getHeaders().get(Constants.FRAGMENT_HOST) == null) {
-					getContext().removeBundleListener(listener);
-					getContext().addBundleListener(listener);
-					if (osgiBundle.getBundleId() != 0)
-						osgiBundle.adapt(BundleStartLevel.class).setStartLevel(4);
-					try {
-						osgiBundle.start(getOptions(false));
-					} catch (BundleException e) {
-						setException(e);
-					}
+					if (getContributionState().isEdit()
+							&& bundle.getSymbolicName().equals(getProject().getName() + ".edit"))
+						editBundle = bundle;
+					if (getContributionState().isEditor()
+							&& bundle.getSymbolicName().equals(getProject().getName() + ".editor"))
+						editorBundle = bundle;
 				}
+			if (osgiBundle != null) {
+				start(osgiBundle);
+				if (editBundle != null)
+					start(editBundle);
+				if (editorBundle != null)
+					start(editorBundle);
 			} else
 				return ClassMakerPlugin.createErrorStatus(NLS.bind(Messages.BundleNotFound, getProject().getName()));
 			if (exception == null) {
@@ -105,6 +128,25 @@ public class OSGiEPackageLoader extends ContainerJob {
 			monitor.done();
 			getContext().removeBundleListener(listener);
 		}
+	}
+
+	private void start(Bundle osgiBundle) {
+		if (osgiBundle.getHeaders().get(Constants.FRAGMENT_HOST) == null) {
+			getContext().removeBundleListener(listener);
+			getContext().addBundleListener(listener);
+			if (osgiBundle.getBundleId() != 0)
+				osgiBundle.adapt(BundleStartLevel.class).setStartLevel(4);
+			try {
+				osgiBundle.start(getOptions(false));
+			} catch (BundleException e) {
+				setException(e);
+			}
+		}
+	}	
+
+	@Override
+	protected boolean excludeOnNextJobJoin() {
+		return true;
 	}
 
 	private IStatus getStatus(Bundle osgiBundle) {
@@ -138,45 +180,87 @@ public class OSGiEPackageLoader extends ContainerJob {
 		return autoStart ? Bundle.START_TRANSIENT : 0;
 	}
 
-	private synchronized void doLoad(State state, Bundle osgiBundle) throws Exception {
-		try {
-			EPackage model = state.getDomainModel().getDynamic();
-			String packageClassName = CodeGenUtil.safeName(model.getName()) + "." //$NON-NLS-1$
-					+ state.getPackageClassName();
-			Class<?> packageClass = null;
+	private synchronized void doLoad(State state, Bundle osgiBundle, int kind) throws Exception {
+		switch (kind) {
+		case 0:
 			try {
-				packageClass = osgiBundle.loadClass(packageClassName);
+				EPackage model = state.getDomainModel().getDynamic();
+				String packageClassName = CodeGenUtil.safeName(model.getName()) + "." //$NON-NLS-1$
+						+ state.getPackageClassName();
+				Class<?> packageClass = null;
+				try {
+					packageClass = osgiBundle.loadClass(packageClassName);
+				} catch (Exception e) {
+					e.printStackTrace();
+					setException(e);
+					throw e;
+				}
+				EPackage ePackage = null;
+				try {
+					ePackage = (EPackage) packageClass.getField("eINSTANCE").get(null); // $NON-NLS-1$ //$NON-NLS-1$
+					if (ePackage != null) {
+						getContributionState().getDomainModel().setGenerated(ePackage);
+						registerEPackage(Registry.INSTANCE, ePackage);
+						registerEPackage(getContributionState().getRevision().getProject().getWorkspace()
+								.getResourceSet().getPackageRegistry(), ePackage);
+					}
+				} catch (ClassCastException e) {
+					if (ePackage != null) {
+						getContributionState().getDomainModel().setGenerated(ePackage);
+						registerEPackage(Registry.INSTANCE, ePackage);
+						registerEPackage(getContributionState().getRevision().getProject().getWorkspace()
+								.getResourceSet().getPackageRegistry(), ePackage);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+					setException(e);
+				}
+			} catch (NullPointerException e) {
+				e.printStackTrace();
+				setException(e);
+			} finally {
+				loaded.release();
+				getContributionState().getProject().setNeedCompletionNotification(true);
+			}
+			break;
+		case 1:
+			EPackage model = state.getDomainModel().getDynamic();
+			String pluginClassName = CodeGenUtil.safeName(model.getName()) + "." //$NON-NLS-1$
+					+ state.getEditPluginClassName();
+			Class<?> pluginClass = null;
+			try {
+				pluginClass = osgiBundle.loadClass(pluginClassName);
 			} catch (Exception e) {
 				e.printStackTrace();
 				setException(e);
 				throw e;
 			}
-			EPackage ePackage = null;
 			try {
-				ePackage = (EPackage) packageClass.getField("eINSTANCE").get(null); // $NON-NLS-1$ //$NON-NLS-1$
-				if (ePackage != null) {
-					getContributionState().getDomainModel().setGenerated(ePackage);
-					registerEPackage(Registry.INSTANCE, ePackage);
-					registerEPackage(getContributionState().getRevision().getProject().getWorkspace().getResourceSet()
-							.getPackageRegistry(), ePackage);
-				}
-			} catch (ClassCastException e) {
-				if (ePackage != null) {
-					getContributionState().getDomainModel().setGenerated(ePackage);
-					registerEPackage(Registry.INSTANCE, ePackage);
-					registerEPackage(getContributionState().getRevision().getProject().getWorkspace().getResourceSet()
-							.getPackageRegistry(), ePackage);
-				}
+				pluginClass.getField("INSTANCE").get(null);
 			} catch (Exception e) {
 				e.printStackTrace();
 				setException(e);
 			}
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-			setException(e);
-		} finally {
-			loaded.release();
-			getContributionState().getProject().setNeedCompletionNotification(true);
+			break;
+		case 2:
+			EPackage model1 = state.getDomainModel().getDynamic();
+			String pluginClassName1 = CodeGenUtil.safeName(model1.getName()) + "." //$NON-NLS-1$
+					+ state.getEditorPluginClassName();
+			Class<?> pluginClass1 = null;
+			try {
+				pluginClass1 = osgiBundle.loadClass(pluginClassName1);
+			} catch (Exception e) {
+				e.printStackTrace();
+				setException(e);
+				throw e;
+			}
+			try {
+				pluginClass1.getField("INSTANCE").get(null);
+			} catch (Exception e) {
+				e.printStackTrace();
+				setException(e);
+			}
+			break;
 		}
 	}
 

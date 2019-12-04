@@ -23,19 +23,19 @@ import org.eclipse.emf.ecore.EPackage;
  * <!-- begin-user-doc --> A representation of the model object
  * '<em><b>Blueprint</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc --> Model object wrapper and input specification for
- * {@link #make() making}. <!-- end-model-doc -->
+ * <!-- begin-model-doc -->
+ * Model object wrapper and input specification for {@link #make() making}.
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.Blueprint#getDynamicModel
- * <em>Dynamic Model</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Blueprint#getDependencies
- * <em>Dependencies</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Blueprint#getCompletionListeners
- * <em>Completion Listeners</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Blueprint#getDynamicModel <em>Dynamic Model</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Blueprint#getDependencies <em>Dependencies</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Blueprint#getCompletionListeners <em>Completion Listeners</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Blueprint#isEdit <em>Edit</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Blueprint#isEditor <em>Editor</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getBlueprint()
@@ -58,10 +58,8 @@ public interface Blueprint extends EObject {
 	EPackage getDynamicModel();
 
 	/**
-	 * Sets the value of the
-	 * '{@link org.enterprisedomain.classmaker.Blueprint#getDynamicModel <em>Dynamic
-	 * Model</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Blueprint#getDynamicModel <em>Dynamic Model</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Dynamic Model</em>' reference.
 	 * @see #getDynamicModel()
 	 * @generated
@@ -98,5 +96,47 @@ public interface Blueprint extends EObject {
 	 * @generated
 	 */
 	EList<CompletionListener> getCompletionListeners();
+
+	/**
+	 * Returns the value of the '<em><b>Edit</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Edit</em>' attribute.
+	 * @see #setEdit(boolean)
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getBlueprint_Edit()
+	 * @model
+	 * @generated
+	 */
+	boolean isEdit();
+
+	/**
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Blueprint#isEdit <em>Edit</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Edit</em>' attribute.
+	 * @see #isEdit()
+	 * @generated
+	 */
+	void setEdit(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Editor</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Editor</em>' attribute.
+	 * @see #setEditor(boolean)
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getBlueprint_Editor()
+	 * @model
+	 * @generated
+	 */
+	boolean isEditor();
+
+	/**
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Blueprint#isEditor <em>Editor</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Editor</em>' attribute.
+	 * @see #isEditor()
+	 * @generated
+	 */
+	void setEditor(boolean value);
 
 } // Blueprint
