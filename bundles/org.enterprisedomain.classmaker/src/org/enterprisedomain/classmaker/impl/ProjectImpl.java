@@ -433,7 +433,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 				result |= ((EObject) child).eResource().isModified();
 			}
 		result |= !ResourcesPlugin.getWorkspace().getRoot().getProject(getProjectName())
-				.isSynchronized(IResource.DEPTH_INFINITE);
+				.isSynchronized(IResource.DEPTH_ONE);
 		return result;
 	}
 
