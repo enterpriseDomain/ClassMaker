@@ -52,8 +52,10 @@ public class ClassMakerBuilder extends IncrementalProjectBuilder implements IBui
 		if (service == null)
 			return null;
 		Project project = service.getWorkspace().getProject(getProject().getName());
-		if (project instanceof Contribution && project.isDirty())
+		if (project instanceof Contribution && project.isDirty()) {
 			((Contribution) project).build(monitor);
+			project.setDirty(false);
+		}
 		return null;
 	}
 
