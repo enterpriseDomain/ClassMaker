@@ -989,7 +989,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	@Override
 	public boolean isDirty() {
 		if (isStateSet())
-			return getState().getResource().isModified();
+			return getState().getResource().isModified() || super.isDirty();
 		return super.isDirty();
 	}
 
