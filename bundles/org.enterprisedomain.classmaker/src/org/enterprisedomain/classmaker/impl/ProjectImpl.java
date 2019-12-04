@@ -24,7 +24,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -46,7 +45,6 @@ import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -179,6 +177,16 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * @ordered
 	 */
 	protected static final boolean DIRTY_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isDirty() <em>Dirty</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #isDirty()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean dirty = DIRTY_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getResourcePath() <em>Resource Path</em>}'
@@ -422,19 +430,24 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @generated NOT
+	 * @generated
 	 */
+	@Override
 	public boolean isDirty() {
-		boolean result = false;
-		for (Object child : getChildren())
-			if (child instanceof Resource) {
-				result |= ((Resource) child).isModified();
-			} else if (child instanceof EObject) {
-				result |= ((EObject) child).eResource().isModified();
-			}
-		result |= !ResourcesPlugin.getWorkspace().getRoot().getProject(getProjectName())
-				.isSynchronized(IResource.DEPTH_ONE);
-		return result;
+		return dirty;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public void setDirty(boolean newDirty) {
+		boolean oldDirty = dirty;
+		dirty = newDirty;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.PROJECT__DIRTY, oldDirty, dirty));
 	}
 
 	/**
@@ -1088,6 +1101,16 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 */
 	@Override
 	public void initAdapters(Revision revision) {
+		eAdapters().add(new AdapterImpl() {
+
+			@Override
+			public void notifyChanged(Notification msg) {
+				if (msg.getFeatureID(Resource.class) == Resource.RESOURCE__IS_MODIFIED)
+					setDirty(msg.getNewBooleanValue());
+			}
+
+		});
+
 	}
 
 	/**
@@ -1107,6 +1130,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * @generated NOT
 	 */
 	public String make(IProgressMonitor monitor) throws CoreException {
+		setDirty(true);
 		removeResourceChangeListener(getResourceReloadListener());
 		String result = "You made it!"; //$NON-NLS-1$
 		addResourceChangeListener(getResourceReloadListener());
@@ -1459,6 +1483,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		case ClassMakerPackage.PROJECT__PROJECT_NAME:
 			setProjectName((String) newValue);
 			return;
+		case ClassMakerPackage.PROJECT__DIRTY:
+			setDirty((Boolean) newValue);
+			return;
 		case ClassMakerPackage.PROJECT__WORKSPACE:
 			setWorkspace((Workspace) newValue);
 			return;
@@ -1503,6 +1530,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			return;
 		case ClassMakerPackage.PROJECT__PROJECT_NAME:
 			setProjectName(PROJECT_NAME_EDEFAULT);
+			return;
+		case ClassMakerPackage.PROJECT__DIRTY:
+			setDirty(DIRTY_EDEFAULT);
 			return;
 		case ClassMakerPackage.PROJECT__WORKSPACE:
 			setWorkspace((Workspace) null);
@@ -1550,7 +1580,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		case ClassMakerPackage.PROJECT__CHILDREN:
 			return !getChildren().isEmpty();
 		case ClassMakerPackage.PROJECT__DIRTY:
-			return isDirty() != DIRTY_EDEFAULT;
+			return dirty != DIRTY_EDEFAULT;
 		case ClassMakerPackage.PROJECT__WORKSPACE:
 			return getWorkspace() != null;
 		case ClassMakerPackage.PROJECT__RESOURCE_PATH:
@@ -1621,6 +1651,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		result.append(name);
 		result.append(", projectName: ");
 		result.append(projectName);
+		result.append(", dirty: ");
+		result.append(dirty);
 		result.append(", needCompletionNotification: ");
 		result.append(needCompletionNotification);
 		result.append(", savingResource: ");

@@ -647,6 +647,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	 * @generated NOT
 	 */
 	public String make(Revision revision, IProgressMonitor monitor) throws CoreException {
+		setDirty(true);
 		try {
 			return revision.make(monitor);
 		} catch (JGitInternalException e) {
@@ -984,13 +985,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	public void build(IProgressMonitor monitor) throws CoreException {
 		if (isRevisionSet())
 			getRevision().build(monitor);
-	}
-
-	@Override
-	public boolean isDirty() {
-		if (isStateSet())
-			return getState().getResource().isModified() || super.isDirty();
-		return super.isDirty();
+		setDirty(false);
 	}
 
 	/**
