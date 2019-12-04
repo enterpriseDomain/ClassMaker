@@ -165,6 +165,16 @@ public interface Project extends EObject, ISchedulingRule {
 	boolean isDirty();
 
 	/**
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Project#isDirty
+	 * <em>Dirty</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value the new value of the '<em>Dirty</em>' attribute.
+	 * @see #isDirty()
+	 * @generated
+	 */
+	void setDirty(boolean value);
+
+	/**
 	 * Returns the value of the '<em><b>Workspace</b></em>' container reference. It
 	 * is bidirectional and its opposite is
 	 * '{@link org.enterprisedomain.classmaker.Workspace#getProjects
