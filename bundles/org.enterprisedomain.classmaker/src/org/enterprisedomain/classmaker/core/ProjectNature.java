@@ -26,6 +26,7 @@ public class ProjectNature implements IProjectNature {
 
 	@Override
 	public void configure() throws CoreException {
+		ResourceUtils.addProjectNature(project, ClassMakerPlugin.JAVA_NATURE);
 		ResourceUtils.addProjectNature(project, ClassMakerPlugin.PDE_PLUGIN_NATURE);
 		ResourceUtils.addToBuildSpec(project, ClassMakerBuilder.BUILDER_ID);
 	}

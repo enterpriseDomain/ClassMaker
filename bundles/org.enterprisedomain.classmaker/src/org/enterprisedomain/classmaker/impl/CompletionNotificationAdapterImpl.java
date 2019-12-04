@@ -32,8 +32,7 @@ import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.impl.CompletionNotificationAdapterImpl#getError
- * <em>Error</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.CompletionNotificationAdapterImpl#getError <em>Error</em>}</li>
  * </ul>
  *
  * @generated
@@ -61,7 +60,6 @@ public class CompletionNotificationAdapterImpl extends EObjectImpl implements Co
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected CompletionNotificationAdapterImpl() {
@@ -70,7 +68,6 @@ public class CompletionNotificationAdapterImpl extends EObjectImpl implements Co
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -80,7 +77,6 @@ public class CompletionNotificationAdapterImpl extends EObjectImpl implements Co
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -130,7 +126,6 @@ public class CompletionNotificationAdapterImpl extends EObjectImpl implements Co
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -144,7 +139,6 @@ public class CompletionNotificationAdapterImpl extends EObjectImpl implements Co
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -158,7 +152,6 @@ public class CompletionNotificationAdapterImpl extends EObjectImpl implements Co
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

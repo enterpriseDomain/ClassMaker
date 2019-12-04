@@ -37,21 +37,19 @@ import org.enterprisedomain.classmaker.CompletionListener;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.impl.BlueprintImpl#getDynamicModel
- * <em>Dynamic Model</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.BlueprintImpl#getDependencies
- * <em>Dependencies</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.BlueprintImpl#getCompletionListeners
- * <em>Completion Listeners</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.BlueprintImpl#getDynamicModel <em>Dynamic Model</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.BlueprintImpl#getDependencies <em>Dependencies</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.BlueprintImpl#getCompletionListeners <em>Completion Listeners</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.BlueprintImpl#isEdit <em>Edit</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.BlueprintImpl#isEditor <em>Editor</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class BlueprintImpl extends EObjectImpl implements Blueprint {
 	/**
-	 * The cached value of the '{@link #getDynamicModel() <em>Dynamic Model</em>}'
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getDynamicModel() <em>Dynamic Model</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getDynamicModel()
 	 * @generated
 	 * @ordered
@@ -59,9 +57,8 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 	protected EPackage dynamicModel;
 
 	/**
-	 * The cached value of the '{@link #getDependencies() <em>Dependencies</em>}'
-	 * attribute list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getDependencies() <em>Dependencies</em>}' attribute list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getDependencies()
 	 * @generated
 	 * @ordered
@@ -80,8 +77,46 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 	protected EList<CompletionListener> completionListeners;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #isEdit() <em>Edit</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
+	 * @see #isEdit()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean EDIT_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isEdit() <em>Edit</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #isEdit()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean edit = EDIT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isEditor() <em>Editor</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #isEditor()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean EDITOR_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isEditor() <em>Editor</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #isEditor()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean editor = EDITOR_EDEFAULT;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected BlueprintImpl() {
@@ -90,7 +125,6 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -100,7 +134,6 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -119,7 +152,6 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EPackage basicGetDynamicModel() {
@@ -128,7 +160,6 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -142,7 +173,6 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -156,7 +186,6 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -170,7 +199,49 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * @generated
+	 */
+	@Override
+	public boolean isEdit() {
+		return edit;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setEdit(boolean newEdit) {
+		boolean oldEdit = edit;
+		edit = newEdit;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.BLUEPRINT__EDIT, oldEdit, edit));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isEditor() {
+		return editor;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setEditor(boolean newEditor) {
+		boolean oldEditor = editor;
+		editor = newEditor;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.BLUEPRINT__EDITOR, oldEditor,
+					editor));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -184,13 +255,16 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 			return getDependencies();
 		case ClassMakerPackage.BLUEPRINT__COMPLETION_LISTENERS:
 			return getCompletionListeners();
+		case ClassMakerPackage.BLUEPRINT__EDIT:
+			return isEdit();
+		case ClassMakerPackage.BLUEPRINT__EDITOR:
+			return isEditor();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -208,13 +282,18 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 			getCompletionListeners().clear();
 			getCompletionListeners().addAll((Collection<? extends CompletionListener>) newValue);
 			return;
+		case ClassMakerPackage.BLUEPRINT__EDIT:
+			setEdit((Boolean) newValue);
+			return;
+		case ClassMakerPackage.BLUEPRINT__EDITOR:
+			setEditor((Boolean) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -229,13 +308,18 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 		case ClassMakerPackage.BLUEPRINT__COMPLETION_LISTENERS:
 			getCompletionListeners().clear();
 			return;
+		case ClassMakerPackage.BLUEPRINT__EDIT:
+			setEdit(EDIT_EDEFAULT);
+			return;
+		case ClassMakerPackage.BLUEPRINT__EDITOR:
+			setEditor(EDITOR_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -247,13 +331,16 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 			return dependencies != null && !dependencies.isEmpty();
 		case ClassMakerPackage.BLUEPRINT__COMPLETION_LISTENERS:
 			return completionListeners != null && !completionListeners.isEmpty();
+		case ClassMakerPackage.BLUEPRINT__EDIT:
+			return edit != EDIT_EDEFAULT;
+		case ClassMakerPackage.BLUEPRINT__EDITOR:
+			return editor != EDITOR_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -264,6 +351,10 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (dependencies: ");
 		result.append(dependencies);
+		result.append(", edit: ");
+		result.append(edit);
+		result.append(", editor: ");
+		result.append(editor);
 		result.append(')');
 		return result.toString();
 	}

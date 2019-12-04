@@ -23,6 +23,8 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.internal.resources.ResourceException;
@@ -35,7 +37,6 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.preferences.IPreferencesService;
@@ -89,6 +90,16 @@ public class ResourceUtils {
 	public static IPath getTargetResourcePath(IProject project, State state) {
 		return getExportDestination(project).append("plugins").addTrailingSeparator() //$NON-NLS-1$
 				.append(state.getDeployableUnitName()).addFileExtension("jar"); //$NON-NLS-1$
+	}
+
+	public static IPath getEditTargetResourcePath(IProject project, State state) {
+		return getExportDestination(project).append("plugins").addTrailingSeparator() //$NON-NLS-1$
+				.append(state.getEditDeployableUnitName()).addFileExtension("jar"); //$NON-NLS-1$
+	}
+
+	public static IPath getEditorTargetResourcePath(IProject project, State state) {
+		return getExportDestination(project).append("plugins").addTrailingSeparator() //$NON-NLS-1$
+				.append(state.getEditorDeployableUnitName()).addFileExtension("jar"); //$NON-NLS-1$
 	}
 
 	/**
@@ -220,25 +231,27 @@ public class ResourceUtils {
 		return -1;
 	}
 
-	@SuppressWarnings("deprecation")
 	public static void createProject(IProject project, String nature, IProgressMonitor monitor) throws CoreException {
 		if (project.exists())
 			return;
-		IProgressMonitor pm = null;
+		SubMonitor pm = null;
+		SubMonitor m = null;
 		try {
 			pm = SubMonitor.convert(monitor, 3);
-			project.create(pm);
-			try {
-				project.open(pm);
-				if (nature != null && !nature.isEmpty()) {
-					IProjectDescription description = project.getDescription();
-					description.setNatureIds(ResourceUtils.addElement(description.getNatureIds(), nature));
-					project.setDescription(description, pm);
-				}
-			} catch (OperationCanceledException e) {
+			pm.setTaskName("Create Project");
+			pm.subTask("Creating project...");
+			m = pm.newChild(1, SubMonitor.SUPPRESS_ISCANCELED);
+			project.create(m);
+			project.open(m);
+			if (nature != null && !nature.isEmpty()) {
+				IProjectDescription description = project.getDescription();
+				description.setNatureIds(ResourceUtils.addElement(description.getNatureIds(), nature));
+				project.setDescription(description, m);
 			}
 		} catch (ResourceException e) {
 		} finally {
+			if (m != null)
+				m.done();
 			if (pm != null)
 				pm.done();
 		}
@@ -294,7 +307,11 @@ public class ResourceUtils {
 	}
 
 	public static void delete(File fileOrDir, String[] excluding) {
-		List<String> excludingList = Arrays.asList(excluding);
+		List<String> excludingList = null;
+		if (excluding == null)
+			excludingList = Collections.emptyList();
+		else
+			excludingList = Arrays.asList(excluding);
 		if (fileOrDir.isDirectory())
 			for (File file : fileOrDir.listFiles())
 				delete(file, excluding);

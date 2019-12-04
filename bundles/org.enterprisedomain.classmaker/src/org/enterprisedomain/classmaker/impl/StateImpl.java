@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import org.eclipse.core.internal.jobs.JobManager;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
@@ -30,8 +31,11 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
+import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.core.runtime.jobs.MultiRule;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -94,30 +98,24 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getPackageClassName
- * <em>Package Class Name</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getRequiredPlugins
- * <em>Required Plugins</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getRevision
- * <em>Revision</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getTimestamp
- * <em>Timestamp</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getDeployableUnitName
- * <em>Deployable Unit Name</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getJobFamily
- * <em>Job Family</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getResource
- * <em>Resource</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getCommitIds
- * <em>Commit Ids</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getCommitId
- * <em>Commit Id</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getStateCustomizers
- * <em>State Customizers</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getProjectName
- * <em>Project Name</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#isMaking
- * <em>Making</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getPackageClassName <em>Package Class Name</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getEditPluginClassName <em>Edit Plugin Class Name</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getEditorPluginClassName <em>Editor Plugin Class Name</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getRequiredPlugins <em>Required Plugins</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getRevision <em>Revision</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getTimestamp <em>Timestamp</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getDeployableUnitName <em>Deployable Unit Name</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getEditDeployableUnitName <em>Edit Deployable Unit Name</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getEditorDeployableUnitName <em>Editor Deployable Unit Name</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getJobFamily <em>Job Family</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getResource <em>Resource</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getCommitIds <em>Commit Ids</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getCommitId <em>Commit Id</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getStateCustomizers <em>State Customizers</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getProjectName <em>Project Name</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#isMaking <em>Making</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#isEdit <em>Edit</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#isEditor <em>Editor</em>}</li>
  * </ul>
  *
  * @generated
@@ -125,9 +123,8 @@ import org.osgi.framework.Version;
 public class StateImpl extends ItemImpl implements State {
 
 	/**
-	 * The default value of the '{@link #getPackageClassName() <em>Package Class
-	 * Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getPackageClassName() <em>Package Class Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getPackageClassName()
 	 * @generated
 	 * @ordered
@@ -135,9 +132,8 @@ public class StateImpl extends ItemImpl implements State {
 	protected static final String PACKAGE_CLASS_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getPackageClassName() <em>Package Class
-	 * Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getPackageClassName() <em>Package Class Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getPackageClassName()
 	 * @generated
 	 * @ordered
@@ -145,9 +141,46 @@ public class StateImpl extends ItemImpl implements State {
 	protected String packageClassName = PACKAGE_CLASS_NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getRequiredPlugins() <em>Required
-	 * Plugins</em>}' attribute list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getEditPluginClassName() <em>Edit Plugin Class Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getEditPluginClassName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String EDIT_PLUGIN_CLASS_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getEditPluginClassName() <em>Edit Plugin Class Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getEditPluginClassName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String editPluginClassName = EDIT_PLUGIN_CLASS_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getEditorPluginClassName() <em>Editor
+	 * Plugin Class Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
 	 * 
+	 * @see #getEditorPluginClassName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String EDITOR_PLUGIN_CLASS_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getEditorPluginClassName() <em>Editor Plugin Class Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getEditorPluginClassName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String editorPluginClassName = EDITOR_PLUGIN_CLASS_NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getRequiredPlugins() <em>Required Plugins</em>}' attribute list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getRequiredPlugins()
 	 * @generated
 	 * @ordered
@@ -160,18 +193,16 @@ public class StateImpl extends ItemImpl implements State {
 		public void notifyChanged(Notification msg) {
 			if (msg.getFeatureID(State.class) == ClassMakerPackage.STATE__MODEL_NAME
 					&& msg.getEventType() == Notification.SET && msg.getNewStringValue() != null
-					&& eIsSet(ClassMakerPackage.STATE__PROJECT))
+					&& eIsSet(ClassMakerPackage.STATE__PROJECT)) {
 				setProjectName(getProject().getWorkspace().getService().computeProjectName(msg.getNewStringValue()));
-			// if (eContainer() != null && eIsSet(ClassMakerPackage.STATE__REVISION)
-			// && eIsSet(ClassMakerPackage.STATE__CONTRIBUTION) &&
-			// !getContribution().isSavingResource()
-			// && msg.getFeatureID(State.class) == ClassMakerPackage.STATE__RESOURCE
-			// && msg.getEventType() == Notification.SET && msg.getNewValue() != null) {
-			// Resource resource = (Resource) msg.getNewValue();
-			// resource.eAdapters().remove(resourceToModelsAdapter);
-			// resource.eAdapters().add(resourceToModelsAdapter);
-			// }
-
+			} else if (msg.getFeatureID(State.class) == ClassMakerPackage.STATE__EDIT
+					&& msg.getEventType() == Notification.SET && msg.getNewBooleanValue()) {
+				getRequiredPlugins().add("org.eclipse.emf.edit");
+			}
+			if (msg.getFeatureID(State.class) == ClassMakerPackage.STATE__EDITOR
+					&& msg.getEventType() == Notification.SET && msg.getNewBooleanValue()) {
+				getRequiredPlugins().add("org.eclipse.emf.edit.ui");
+			}
 		}
 
 	}
@@ -191,9 +222,8 @@ public class StateImpl extends ItemImpl implements State {
 	}
 
 	/**
-	 * The default value of the '{@link #getTimestamp() <em>Timestamp</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getTimestamp() <em>Timestamp</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getTimestamp()
 	 * @generated
 	 * @ordered
@@ -201,9 +231,8 @@ public class StateImpl extends ItemImpl implements State {
 	protected static final long TIMESTAMP_EDEFAULT = 0L;
 
 	/**
-	 * The cached value of the '{@link #getTimestamp() <em>Timestamp</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getTimestamp() <em>Timestamp</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getTimestamp()
 	 * @generated
 	 * @ordered
@@ -221,9 +250,8 @@ public class StateImpl extends ItemImpl implements State {
 	protected static final Version VERSION_EDEFAULT = Version.emptyVersion;
 
 	/**
-	 * The default value of the '{@link #getDeployableUnitName() <em>Deployable Unit
-	 * Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getDeployableUnitName() <em>Deployable Unit Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getDeployableUnitName()
 	 * @generated
 	 * @ordered
@@ -231,9 +259,28 @@ public class StateImpl extends ItemImpl implements State {
 	protected static final String DEPLOYABLE_UNIT_NAME_EDEFAULT = ""; //$NON-NLS-1$
 
 	/**
-	 * The default value of the '{@link #getJobFamily() <em>Job Family</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getEditDeployableUnitName() <em>Edit Deployable Unit Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @see #getEditDeployableUnitName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String EDIT_DEPLOYABLE_UNIT_NAME_EDEFAULT = "";
+
+	/**
+	 * The default value of the '{@link #getEditorDeployableUnitName() <em>Editor Deployable Unit Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * @see #getEditorDeployableUnitName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String EDITOR_DEPLOYABLE_UNIT_NAME_EDEFAULT = "";
+
+	/**
+	 * The default value of the '{@link #getJobFamily() <em>Job Family</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getJobFamily()
 	 * @generated
 	 * @ordered
@@ -241,9 +288,8 @@ public class StateImpl extends ItemImpl implements State {
 	protected static final String JOB_FAMILY_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getJobFamily() <em>Job Family</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getJobFamily() <em>Job Family</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getJobFamily()
 	 * @generated
 	 * @ordered
@@ -253,7 +299,6 @@ public class StateImpl extends ItemImpl implements State {
 	/**
 	 * The cached value of the '{@link #getResource() <em>Resource</em>}' reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getResource()
 	 * @generated
 	 * @ordered
@@ -261,9 +306,8 @@ public class StateImpl extends ItemImpl implements State {
 	protected Resource resource;
 
 	/**
-	 * The cached value of the '{@link #getCommitIds() <em>Commit Ids</em>}'
-	 * attribute list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getCommitIds() <em>Commit Ids</em>}' attribute list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getCommitIds()
 	 * @generated
 	 * @ordered
@@ -271,9 +315,8 @@ public class StateImpl extends ItemImpl implements State {
 	protected EList<String> commitIds;
 
 	/**
-	 * The default value of the '{@link #getCommitId() <em>Commit Id</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getCommitId() <em>Commit Id</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getCommitId()
 	 * @generated
 	 * @ordered
@@ -281,9 +324,8 @@ public class StateImpl extends ItemImpl implements State {
 	protected static final String COMMIT_ID_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getCommitId() <em>Commit Id</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getCommitId() <em>Commit Id</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getCommitId()
 	 * @generated
 	 * @ordered
@@ -291,9 +333,8 @@ public class StateImpl extends ItemImpl implements State {
 	protected String commitId = COMMIT_ID_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getStateCustomizers() <em>State
-	 * Customizers</em>}' map. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getStateCustomizers() <em>State Customizers</em>}' map.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getStateCustomizers()
 	 * @generated
 	 * @ordered
@@ -301,9 +342,8 @@ public class StateImpl extends ItemImpl implements State {
 	protected EMap<StageQualifier, Customizer> stateCustomizers;
 
 	/**
-	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getProjectName()
 	 * @generated
 	 * @ordered
@@ -313,7 +353,6 @@ public class StateImpl extends ItemImpl implements State {
 	/**
 	 * The default value of the '{@link #isMaking() <em>Making</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #isMaking()
 	 * @generated
 	 * @ordered
@@ -329,6 +368,45 @@ public class StateImpl extends ItemImpl implements State {
 	 * @ordered
 	 */
 	protected boolean making = MAKING_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isEdit() <em>Edit</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #isEdit()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean EDIT_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isEdit() <em>Edit</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #isEdit()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean edit = EDIT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isEditor() <em>Editor</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #isEditor()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean EDITOR_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isEditor() <em>Editor</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #isEditor()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean editor = EDITOR_EDEFAULT;
 
 	protected String language = LANGUAGE_EDEFAULT;
 
@@ -348,7 +426,6 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -358,7 +435,6 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -368,7 +444,6 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -382,21 +457,66 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
+	 */
+	@Override
+	public String getEditPluginClassName() {
+		return editPluginClassName;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setEditPluginClassName(String newEditPluginClassName) {
+		String oldEditPluginClassName = editPluginClassName;
+		editPluginClassName = newEditPluginClassName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.STATE__EDIT_PLUGIN_CLASS_NAME,
+					oldEditPluginClassName, editPluginClassName));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getEditorPluginClassName() {
+		return editorPluginClassName;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setEditorPluginClassName(String newEditorPluginClassName) {
+		String oldEditorPluginClassName = editorPluginClassName;
+		editorPluginClassName = newEditorPluginClassName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.STATE__EDITOR_PLUGIN_CLASS_NAME,
+					oldEditorPluginClassName, editorPluginClassName));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
 	 */
 	@Override
 	public EList<String> getRequiredPlugins() {
 		if (requiredPlugins == null) {
 			requiredPlugins = new EDataTypeUniqueEList<String>(String.class, this,
 					ClassMakerPackage.STATE__REQUIRED_PLUGINS);
+			requiredPlugins.add("org.eclipse.emf.common");
+			requiredPlugins.add("org.eclipse.emf.ecore");
 		}
 		return requiredPlugins;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -406,7 +526,6 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -435,6 +554,44 @@ public class StateImpl extends ItemImpl implements State {
 	 */
 	@Override
 	public void setDeployableUnitName(String newDeployableUnitName) {
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public String getEditDeployableUnitName() {
+		String separator = "_"; //$NON-NLS-1$
+		return getProjectName() + ".edit" + separator + getRevision().getVersion().toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public void setEditDeployableUnitName(String newDeployableUnitName) {
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public String getEditorDeployableUnitName() {
+		String separator = "_"; //$NON-NLS-1$
+		return getProjectName() + ".editor" + separator + getRevision().getVersion().toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public void setEditorDeployableUnitName(String newDeployableUnitName) {
 	}
 
 	@Override
@@ -515,12 +672,23 @@ public class StateImpl extends ItemImpl implements State {
 					eIsSet(ClassMakerPackage.STATE__PROJECT_NAME) ? getProjectName() : getModelName().toLowerCase());
 			IProgressMonitor monitor = ClassMakerPlugin.getProgressMonitor();
 			IFolder folder = project.getFolder(ResourceUtils.getModelFolderName());
+
 			if (!folder.exists()) {
+				SubMonitor pm = null;
+				SubMonitor m = null;
 				try {
-					folder.create(true, true, monitor);
+					pm = SubMonitor.convert(monitor);
+					pm.setTaskName("Create Folder");
+					pm.subTask("Creating folder...");
+					m = pm.newChild(1, SubMonitor.SUPPRESS_ISCANCELED);
+					folder.create(true, true, m);
 				} catch (CoreException e) {
 					ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
 				} finally {
+					if (m != null)
+						m.done();
+					if (pm != null)
+						pm.done();
 					monitor.done();
 				}
 			}
@@ -709,6 +877,8 @@ public class StateImpl extends ItemImpl implements State {
 			CompletionListener completionListener = new MakingCompletionListener();
 			getProject().addCompletionListener(completionListener);
 			Stage oldStage = getPhase();
+			SubMonitor pm = null;
+			SubMonitor m = null;
 			try {
 				if (isMaking())
 					if (!getCommitIds().isEmpty())
@@ -729,8 +899,13 @@ public class StateImpl extends ItemImpl implements State {
 				else
 					projectName = getModelName().toLowerCase();
 				IProject project = workspace.getRoot().getProject(projectName);
+				pm = SubMonitor.convert(wrappingMonitor, 3);
+				pm.setTaskName("Open Project");
+				pm.subTask("Opening project...");
+				m = pm.newChild(1, SubMonitor.SUPPRESS_ISCANCELED);
 				if (project.exists()) {
-					project.open(wrappingMonitor);
+					if (!project.isOpen())
+						project.open(m);
 				} else {
 					ResourceUtils.createProject(project, ClassMakerPlugin.NATURE_ID, wrappingMonitor);
 				}
@@ -780,12 +955,19 @@ public class StateImpl extends ItemImpl implements State {
 				ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
 				wrappingMonitor.setCanceled(true);
 				throw e;
+			} catch (OperationCanceledException e) {
+				wrappingMonitor.setCanceled(true);
+				setPhase(oldStage);
+				throw e;
 			} catch (Exception e) {
 				setPhase(oldStage);
-				wrappingMonitor.setCanceled(true);
 				throw e;
 			} finally {
 				setMaking(false);
+				if (m != null)
+					m.done();
+				if (pm != null)
+					pm.done();
 				wrappingMonitor.done();
 			}
 			if (!monitor.isCanceled() || (!getPhase().equals(Stage.LOADED)
@@ -798,7 +980,6 @@ public class StateImpl extends ItemImpl implements State {
 			monitor.done();
 			return result;
 		}
-
 	}
 
 	private EnterpriseDomainJob getJob(Worker worker) {
@@ -885,7 +1066,6 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1024,7 +1204,6 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1069,7 +1248,6 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1083,7 +1261,6 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1093,7 +1270,6 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1107,7 +1283,6 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1120,7 +1295,6 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1130,7 +1304,6 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1149,7 +1322,6 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1185,7 +1357,6 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1195,7 +1366,6 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1204,6 +1374,48 @@ public class StateImpl extends ItemImpl implements State {
 		making = newMaking;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.STATE__MAKING, oldMaking, making));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isEdit() {
+		return edit;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setEdit(boolean newEdit) {
+		boolean oldEdit = edit;
+		edit = newEdit;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.STATE__EDIT, oldEdit, edit));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isEditor() {
+		return editor;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setEditor(boolean newEditor) {
+		boolean oldEditor = editor;
+		editor = newEditor;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.STATE__EDITOR, oldEditor, editor));
 	}
 
 	/**
@@ -1275,7 +1487,6 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1283,6 +1494,10 @@ public class StateImpl extends ItemImpl implements State {
 		switch (featureID) {
 		case ClassMakerPackage.STATE__PACKAGE_CLASS_NAME:
 			return getPackageClassName();
+		case ClassMakerPackage.STATE__EDIT_PLUGIN_CLASS_NAME:
+			return getEditPluginClassName();
+		case ClassMakerPackage.STATE__EDITOR_PLUGIN_CLASS_NAME:
+			return getEditorPluginClassName();
 		case ClassMakerPackage.STATE__REQUIRED_PLUGINS:
 			return getRequiredPlugins();
 		case ClassMakerPackage.STATE__REVISION:
@@ -1293,6 +1508,10 @@ public class StateImpl extends ItemImpl implements State {
 			return getTimestamp();
 		case ClassMakerPackage.STATE__DEPLOYABLE_UNIT_NAME:
 			return getDeployableUnitName();
+		case ClassMakerPackage.STATE__EDIT_DEPLOYABLE_UNIT_NAME:
+			return getEditDeployableUnitName();
+		case ClassMakerPackage.STATE__EDITOR_DEPLOYABLE_UNIT_NAME:
+			return getEditorDeployableUnitName();
 		case ClassMakerPackage.STATE__JOB_FAMILY:
 			return getJobFamily();
 		case ClassMakerPackage.STATE__RESOURCE:
@@ -1310,13 +1529,16 @@ public class StateImpl extends ItemImpl implements State {
 			return getProjectName();
 		case ClassMakerPackage.STATE__MAKING:
 			return isMaking();
+		case ClassMakerPackage.STATE__EDIT:
+			return isEdit();
+		case ClassMakerPackage.STATE__EDITOR:
+			return isEditor();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -1325,6 +1547,12 @@ public class StateImpl extends ItemImpl implements State {
 		switch (featureID) {
 		case ClassMakerPackage.STATE__PACKAGE_CLASS_NAME:
 			setPackageClassName((String) newValue);
+			return;
+		case ClassMakerPackage.STATE__EDIT_PLUGIN_CLASS_NAME:
+			setEditPluginClassName((String) newValue);
+			return;
+		case ClassMakerPackage.STATE__EDITOR_PLUGIN_CLASS_NAME:
+			setEditorPluginClassName((String) newValue);
 			return;
 		case ClassMakerPackage.STATE__REQUIRED_PLUGINS:
 			getRequiredPlugins().clear();
@@ -1338,6 +1566,12 @@ public class StateImpl extends ItemImpl implements State {
 			return;
 		case ClassMakerPackage.STATE__DEPLOYABLE_UNIT_NAME:
 			setDeployableUnitName((String) newValue);
+			return;
+		case ClassMakerPackage.STATE__EDIT_DEPLOYABLE_UNIT_NAME:
+			setEditDeployableUnitName((String) newValue);
+			return;
+		case ClassMakerPackage.STATE__EDITOR_DEPLOYABLE_UNIT_NAME:
+			setEditorDeployableUnitName((String) newValue);
 			return;
 		case ClassMakerPackage.STATE__JOB_FAMILY:
 			setJobFamily((String) newValue);
@@ -1361,13 +1595,18 @@ public class StateImpl extends ItemImpl implements State {
 		case ClassMakerPackage.STATE__MAKING:
 			setMaking((Boolean) newValue);
 			return;
+		case ClassMakerPackage.STATE__EDIT:
+			setEdit((Boolean) newValue);
+			return;
+		case ClassMakerPackage.STATE__EDITOR:
+			setEditor((Boolean) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1375,6 +1614,12 @@ public class StateImpl extends ItemImpl implements State {
 		switch (featureID) {
 		case ClassMakerPackage.STATE__PACKAGE_CLASS_NAME:
 			setPackageClassName(PACKAGE_CLASS_NAME_EDEFAULT);
+			return;
+		case ClassMakerPackage.STATE__EDIT_PLUGIN_CLASS_NAME:
+			setEditPluginClassName(EDIT_PLUGIN_CLASS_NAME_EDEFAULT);
+			return;
+		case ClassMakerPackage.STATE__EDITOR_PLUGIN_CLASS_NAME:
+			setEditorPluginClassName(EDITOR_PLUGIN_CLASS_NAME_EDEFAULT);
 			return;
 		case ClassMakerPackage.STATE__REQUIRED_PLUGINS:
 			getRequiredPlugins().clear();
@@ -1387,6 +1632,12 @@ public class StateImpl extends ItemImpl implements State {
 			return;
 		case ClassMakerPackage.STATE__DEPLOYABLE_UNIT_NAME:
 			setDeployableUnitName(DEPLOYABLE_UNIT_NAME_EDEFAULT);
+			return;
+		case ClassMakerPackage.STATE__EDIT_DEPLOYABLE_UNIT_NAME:
+			setEditDeployableUnitName(EDIT_DEPLOYABLE_UNIT_NAME_EDEFAULT);
+			return;
+		case ClassMakerPackage.STATE__EDITOR_DEPLOYABLE_UNIT_NAME:
+			setEditorDeployableUnitName(EDITOR_DEPLOYABLE_UNIT_NAME_EDEFAULT);
 			return;
 		case ClassMakerPackage.STATE__JOB_FAMILY:
 			setJobFamily(JOB_FAMILY_EDEFAULT);
@@ -1409,13 +1660,18 @@ public class StateImpl extends ItemImpl implements State {
 		case ClassMakerPackage.STATE__MAKING:
 			setMaking(MAKING_EDEFAULT);
 			return;
+		case ClassMakerPackage.STATE__EDIT:
+			setEdit(EDIT_EDEFAULT);
+			return;
+		case ClassMakerPackage.STATE__EDITOR:
+			setEditor(EDITOR_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1424,6 +1680,12 @@ public class StateImpl extends ItemImpl implements State {
 		case ClassMakerPackage.STATE__PACKAGE_CLASS_NAME:
 			return PACKAGE_CLASS_NAME_EDEFAULT == null ? packageClassName != null
 					: !PACKAGE_CLASS_NAME_EDEFAULT.equals(packageClassName);
+		case ClassMakerPackage.STATE__EDIT_PLUGIN_CLASS_NAME:
+			return EDIT_PLUGIN_CLASS_NAME_EDEFAULT == null ? editPluginClassName != null
+					: !EDIT_PLUGIN_CLASS_NAME_EDEFAULT.equals(editPluginClassName);
+		case ClassMakerPackage.STATE__EDITOR_PLUGIN_CLASS_NAME:
+			return EDITOR_PLUGIN_CLASS_NAME_EDEFAULT == null ? editorPluginClassName != null
+					: !EDITOR_PLUGIN_CLASS_NAME_EDEFAULT.equals(editorPluginClassName);
 		case ClassMakerPackage.STATE__REQUIRED_PLUGINS:
 			return requiredPlugins != null && !requiredPlugins.isEmpty();
 		case ClassMakerPackage.STATE__REVISION:
@@ -1433,6 +1695,12 @@ public class StateImpl extends ItemImpl implements State {
 		case ClassMakerPackage.STATE__DEPLOYABLE_UNIT_NAME:
 			return DEPLOYABLE_UNIT_NAME_EDEFAULT == null ? getDeployableUnitName() != null
 					: !DEPLOYABLE_UNIT_NAME_EDEFAULT.equals(getDeployableUnitName());
+		case ClassMakerPackage.STATE__EDIT_DEPLOYABLE_UNIT_NAME:
+			return EDIT_DEPLOYABLE_UNIT_NAME_EDEFAULT == null ? getEditDeployableUnitName() != null
+					: !EDIT_DEPLOYABLE_UNIT_NAME_EDEFAULT.equals(getEditDeployableUnitName());
+		case ClassMakerPackage.STATE__EDITOR_DEPLOYABLE_UNIT_NAME:
+			return EDITOR_DEPLOYABLE_UNIT_NAME_EDEFAULT == null ? getEditorDeployableUnitName() != null
+					: !EDITOR_DEPLOYABLE_UNIT_NAME_EDEFAULT.equals(getEditorDeployableUnitName());
 		case ClassMakerPackage.STATE__JOB_FAMILY:
 			return JOB_FAMILY_EDEFAULT == null ? jobFamily != null : !JOB_FAMILY_EDEFAULT.equals(jobFamily);
 		case ClassMakerPackage.STATE__RESOURCE:
@@ -1448,13 +1716,16 @@ public class StateImpl extends ItemImpl implements State {
 					: !PROJECT_NAME_EDEFAULT.equals(getProjectName());
 		case ClassMakerPackage.STATE__MAKING:
 			return making != MAKING_EDEFAULT;
+		case ClassMakerPackage.STATE__EDIT:
+			return edit != EDIT_EDEFAULT;
+		case ClassMakerPackage.STATE__EDITOR:
+			return editor != EDITOR_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1465,6 +1736,10 @@ public class StateImpl extends ItemImpl implements State {
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (packageClassName: ");
 		result.append(packageClassName);
+		result.append(", editPluginClassName: ");
+		result.append(editPluginClassName);
+		result.append(", editorPluginClassName: ");
+		result.append(editorPluginClassName);
 		result.append(", requiredPlugins: ");
 		result.append(requiredPlugins);
 		result.append(", timestamp: ");
@@ -1477,6 +1752,10 @@ public class StateImpl extends ItemImpl implements State {
 		result.append(commitId);
 		result.append(", making: ");
 		result.append(making);
+		result.append(", edit: ");
+		result.append(edit);
+		result.append(", editor: ");
+		result.append(editor);
 		result.append(')');
 		return result.toString();
 	}
@@ -1487,7 +1766,14 @@ public class StateImpl extends ItemImpl implements State {
 			return getRevision().getVersion().equals(((State) otherRule).getRevision().getVersion())
 					&& getRevision().equals(((State) otherRule).getRevision())
 					&& getTimestamp() == ((State) otherRule).getTimestamp();
-		return false;
+		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+		if (otherRule instanceof MultiRule)
+			return ((MultiRule) otherRule).contains(root.getProject(getProjectName()))
+					|| ((MultiRule) otherRule).contains(root.getProject(getProjectName() + ".edit"))
+					|| ((MultiRule) otherRule).contains(root.getProject(getProjectName() + ".editor"));
+		return root.getProject(getProjectName()).contains(otherRule)
+				|| root.getProject(getProjectName() + ".edit").contains(otherRule)
+				|| root.getProject(getProjectName() + ".editor").contains(otherRule) || root.contains(otherRule);
 	}
 
 	@Override
@@ -1497,7 +1783,15 @@ public class StateImpl extends ItemImpl implements State {
 					&& getRevision().equals(((State) otherRule).getRevision())
 					&& getTimestamp() == ((State) otherRule).getTimestamp()
 					&& getCommitId() == ((State) otherRule).getCommitId();
-		return false;
+		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+		if (otherRule instanceof MultiRule)
+			return ((MultiRule) otherRule).isConflicting(root.getProject(getProjectName()))
+					|| ((MultiRule) otherRule).isConflicting(root.getProject(getProjectName() + ".edit"))
+					|| ((MultiRule) otherRule).isConflicting(root.getProject(getProjectName() + ".editor"));
+		return root.getProject(getProjectName()).isConflicting(otherRule)
+				|| root.getProject(getProjectName() + ".edit").isConflicting(otherRule)
+				|| root.getProject(getProjectName() + ".editor").isConflicting(otherRule)
+				|| root.isConflicting(otherRule);
 	}
 
 	@Override

@@ -16,19 +16,28 @@
 package org.enterprisedomain.classmaker.jobs.export;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.core.runtime.jobs.ProgressProvider;
+import org.eclipse.jdt.core.IClasspathEntry;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.pde.core.IEditableModel;
 import org.eclipse.pde.core.build.IBuild;
@@ -60,6 +69,7 @@ public class PDEPluginExporter extends AbstractExporter {
 	@Override
 	public IStatus work(final IProgressMonitor monitor) throws CoreException {
 		cleanup(monitor);
+		updateClassPath(monitor);
 
 		State state = getContributionState();
 		Version version = state.getProject().getVersion();
@@ -79,17 +89,31 @@ public class PDEPluginExporter extends AbstractExporter {
 		IPluginModelBase model = modelManager.findModel(getProject());
 		if (model != null) {
 			models.add(model);
-			updateBuildProperties(model);
-			info.items = models.toArray();
+			updateBuildProperties(model, true);
 		}
-
-		Job[] jobs = Job.getJobManager().find(null);
-		for (Job job : jobs)
-			if (job.getName().equals(Messages.JobNamePDEExport))
-				try {
-					job.join();
-				} catch (InterruptedException e) {
-				}
+		if (getContributionState().isEdit()) {
+			IPluginModelBase edit = modelManager.findModel(getProject().getName() + ".edit");
+			if (edit != null) {
+				models.add(edit);
+				updateBuildProperties(edit, false);
+				IPluginModelBase emfEdit = modelManager.findModel("org.eclipse.emf.edit");
+				if (emfEdit != null)
+					models.add(emfEdit);
+			}
+		}
+		if (getContributionState().isEditor()) {
+			IPluginModelBase editor = modelManager.findModel(getProject().getName() + ".editor");
+			if (editor != null) {
+				models.add(editor);
+				updateBuildProperties(editor, false);
+				IPluginModelBase emfEditor = modelManager.findModel("org.eclipse.emf.edit.ui");
+				if (emfEditor != null)
+					models.add(emfEditor);
+			}
+		}
+		if (!models.isEmpty())
+			info.items = models.toArray();
+		joinJob(Messages.JobNamePDEExport);
 		final SubMonitor pm = SubMonitor.convert(monitor);
 		pm.setTaskName(Messages.TaskNamePluginExport);
 		pm.subTask(Messages.SubTaskNamePluginExport);
@@ -144,9 +168,18 @@ public class PDEPluginExporter extends AbstractExporter {
 		}
 	}
 
-	private void updateBuildProperties(IPluginModelBase model) throws CoreException {
+	private void updateBuildProperties(IPluginModelBase model, boolean src) throws CoreException {
 		IBuildModel buildModel = PluginRegistry.createBuildModel(model);
 		IBuild build = buildModel.getBuild();
+		if (src) {
+			IBuildEntry entry = build.getEntry("source.."); //$NON-NLS-1$
+			if (entry == null) {
+				entry = buildModel.getFactory().createEntry("source.."); //$NON-NLS-1$
+				build.add(entry);
+			}
+			if (!entry.contains("src" + IPath.SEPARATOR)) //$NON-NLS-1$
+				entry.addToken("src" + IPath.SEPARATOR); //$NON-NLS-1$
+		}
 		IBuildEntry entry = build.getEntry("compilerArg"); //$NON-NLS-1$
 		if (entry == null) {
 			entry = buildModel.getFactory().createEntry("compilerArg"); //$NON-NLS-1$
@@ -156,6 +189,42 @@ public class PDEPluginExporter extends AbstractExporter {
 			entry.addToken("-proc:none"); //$NON-NLS-1$
 		if (buildModel instanceof IEditableModel)
 			((IEditableModel) buildModel).save();
+	}
+
+	private void updateClassPath(IProgressMonitor monitor) throws CoreException {
+		final SubMonitor pm = SubMonitor.convert(monitor);
+		pm.setTaskName("Update Classpath");
+		pm.subTask("Setting Classpath...");
+		final SubMonitor m = pm.newChild(1, SubMonitor.SUPPRESS_ISCANCELED);
+		try {
+			IJavaProject javaProject = null;
+			try {
+				javaProject = JavaCore
+						.create(ResourcesPlugin.getWorkspace().getRoot().getProject(getProject().getName()));
+			} catch (IllegalStateException e) {
+				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
+			}
+			Set<IClasspathEntry> entries = new HashSet<IClasspathEntry>();
+			for (IClasspathEntry e : javaProject.getRawClasspath())
+				if (!e.getPath().equals(new Path(IPath.SEPARATOR + getProject().getName())))
+					entries.add(e);
+			entries.add(JavaCore.newSourceEntry(
+					new Path(IPath.SEPARATOR + getProject().getName() + IPath.SEPARATOR + "src" + IPath.SEPARATOR),
+					null,
+					new Path(IPath.SEPARATOR + getProject().getName() + IPath.SEPARATOR + "bin" + IPath.SEPARATOR)));
+			entries.add(
+					JavaCore.newContainerEntry(new Path("org.eclipse.jdt.launching.JRE_CONTAINER"), null, null, false));
+			entries.add(
+					JavaCore.newContainerEntry(new Path("org.eclipse.pde.core.requiredPlugins"), null, null, false));
+			javaProject.setRawClasspath((IClasspathEntry[]) entries.toArray(new IClasspathEntry[entries.size()]), m);
+			javaProject.getResolvedClasspath(false);
+		} catch (JavaModelException e) {
+			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
+		} finally {
+			m.done();
+			pm.done();
+		}
+		refreshLocal(getProject(), IResource.DEPTH_ONE, monitor);
 	}
 
 	@Override

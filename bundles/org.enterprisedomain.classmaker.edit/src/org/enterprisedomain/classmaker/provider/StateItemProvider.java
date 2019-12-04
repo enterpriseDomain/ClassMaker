@@ -58,16 +58,22 @@ public class StateItemProvider extends ItemItemProvider {
 			super.getPropertyDescriptors(object);
 
 			addPackageClassNamePropertyDescriptor(object);
+			addEditPluginClassNamePropertyDescriptor(object);
+			addEditorPluginClassNamePropertyDescriptor(object);
 			addRequiredPluginsPropertyDescriptor(object);
 			addRevisionPropertyDescriptor(object);
 			addTimestampPropertyDescriptor(object);
 			addDeployableUnitNamePropertyDescriptor(object);
+			addEditDeployableUnitNamePropertyDescriptor(object);
+			addEditorDeployableUnitNamePropertyDescriptor(object);
 			addJobFamilyPropertyDescriptor(object);
 			addResourcePropertyDescriptor(object);
 			addCommitIdsPropertyDescriptor(object);
 			addCommitIdPropertyDescriptor(object);
 			addProjectNamePropertyDescriptor(object);
 			addMakingPropertyDescriptor(object);
+			addEditPropertyDescriptor(object);
+			addEditorPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -85,6 +91,38 @@ public class StateItemProvider extends ItemItemProvider {
 						getString("_UI_PropertyDescriptor_description", "_UI_State_packageClassName_feature",
 								"_UI_State_type"),
 						ClassMakerPackage.Literals.STATE__PACKAGE_CLASS_NAME, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Edit Plugin Class Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addEditPluginClassNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_State_editPluginClassName_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_State_editPluginClassName_feature",
+								"_UI_State_type"),
+						ClassMakerPackage.Literals.STATE__EDIT_PLUGIN_CLASS_NAME, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Editor Plugin Class Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addEditorPluginClassNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_State_editorPluginClassName_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_State_editorPluginClassName_feature",
+								"_UI_State_type"),
+						ClassMakerPackage.Literals.STATE__EDITOR_PLUGIN_CLASS_NAME, true, false, false,
 						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
@@ -147,6 +185,38 @@ public class StateItemProvider extends ItemItemProvider {
 						getString("_UI_PropertyDescriptor_description", "_UI_State_deployableUnitName_feature",
 								"_UI_State_type"),
 						ClassMakerPackage.Literals.STATE__DEPLOYABLE_UNIT_NAME, false, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Edit Deployable Unit Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addEditDeployableUnitNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_State_editDeployableUnitName_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_State_editDeployableUnitName_feature",
+								"_UI_State_type"),
+						ClassMakerPackage.Literals.STATE__EDIT_DEPLOYABLE_UNIT_NAME, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Editor Deployable Unit Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addEditorDeployableUnitNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_State_editorDeployableUnitName_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_State_editorDeployableUnitName_feature",
+								"_UI_State_type"),
+						ClassMakerPackage.Literals.STATE__EDITOR_DEPLOYABLE_UNIT_NAME, true, false, false,
 						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
@@ -243,6 +313,36 @@ public class StateItemProvider extends ItemItemProvider {
 	}
 
 	/**
+	 * This adds a property descriptor for the Edit feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addEditPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_State_edit_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_State_edit_feature", "_UI_State_type"),
+						ClassMakerPackage.Literals.STATE__EDIT, true, false, false,
+						ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Editor feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addEditorPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_State_editor_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_State_editor_feature", "_UI_State_type"),
+						ClassMakerPackage.Literals.STATE__EDITOR, true, false, false,
+						ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -304,14 +404,20 @@ public class StateItemProvider extends ItemItemProvider {
 
 		switch (notification.getFeatureID(State.class)) {
 		case ClassMakerPackage.STATE__PACKAGE_CLASS_NAME:
+		case ClassMakerPackage.STATE__EDIT_PLUGIN_CLASS_NAME:
+		case ClassMakerPackage.STATE__EDITOR_PLUGIN_CLASS_NAME:
 		case ClassMakerPackage.STATE__REQUIRED_PLUGINS:
 		case ClassMakerPackage.STATE__TIMESTAMP:
 		case ClassMakerPackage.STATE__DEPLOYABLE_UNIT_NAME:
+		case ClassMakerPackage.STATE__EDIT_DEPLOYABLE_UNIT_NAME:
+		case ClassMakerPackage.STATE__EDITOR_DEPLOYABLE_UNIT_NAME:
 		case ClassMakerPackage.STATE__JOB_FAMILY:
 		case ClassMakerPackage.STATE__COMMIT_IDS:
 		case ClassMakerPackage.STATE__COMMIT_ID:
 		case ClassMakerPackage.STATE__PROJECT_NAME:
 		case ClassMakerPackage.STATE__MAKING:
+		case ClassMakerPackage.STATE__EDIT:
+		case ClassMakerPackage.STATE__EDITOR:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case ClassMakerPackage.STATE__STATE_CUSTOMIZERS:

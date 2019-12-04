@@ -257,6 +257,8 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 					model.getEClassifiers().add(dummyEClass);
 					try {
 						domainProject = classMaker.getWorkspace().createContribution(model, monitor);
+						domainProject.getState().setEdit(true);
+						domainProject.getState().setEditor(true);
 						domainProject.addCompletionListener(new ProviderCompletionListener(project));
 					} catch (CoreException e) {
 						Activator.log(e);

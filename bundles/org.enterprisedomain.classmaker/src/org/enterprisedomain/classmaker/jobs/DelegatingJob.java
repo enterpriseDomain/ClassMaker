@@ -46,6 +46,11 @@ public class DelegatingJob extends EnterpriseDomainJob {
 		return delegate.getResult();
 	}
 
+	@Override
+	protected boolean excludeOnNextJobJoin() {
+		return true;
+	}
+
 	public void setResultStage(Stage resultStage) {
 		this.jobStage = resultStage;
 	}

@@ -20,7 +20,7 @@ public class ModelEditorAssociationOverride implements IEditorAssociationOverrid
 			IEditorDescriptor editorDescriptor) {
 		if (contentType.equals(Platform.getContentTypeManager().getContentType("org.eclipse.emf.ecore.xmi"))
 				|| contentType.equals(Platform.getContentTypeManager().getContentType("org.eclipse.emf.ecore")))
-			return PlatformUI.getWorkbench().getEditorRegistry().findEditor(ModelEditor.EDITOR_ID);
+			return PlatformUI.getWorkbench().getEditorRegistry().findEditor(ModelElementOpener.EDITOR_ID);
 		return null;
 	}
 
@@ -28,7 +28,7 @@ public class ModelEditorAssociationOverride implements IEditorAssociationOverrid
 	public IEditorDescriptor overrideDefaultEditor(String fileName, IContentType contentType,
 			IEditorDescriptor editorDescriptor) {
 		if (fileName.endsWith("xmi") || fileName.endsWith("ecore"))
-			return PlatformUI.getWorkbench().getEditorRegistry().findEditor(ModelEditor.EDITOR_ID);
+			return PlatformUI.getWorkbench().getEditorRegistry().findEditor(ModelElementOpener.EDITOR_ID);
 		return null;
 	}
 
@@ -40,7 +40,7 @@ public class ModelEditorAssociationOverride implements IEditorAssociationOverrid
 			results.add(e);
 		if (contentType.equals(Platform.getContentTypeManager().getContentType("org.eclipse.emf.ecore.xmi"))
 				|| contentType.equals(Platform.getContentTypeManager().getContentType("org.eclipse.emf.ecore"))) {
-			results.add(PlatformUI.getWorkbench().getEditorRegistry().findEditor(ModelEditor.EDITOR_ID));
+			results.add(PlatformUI.getWorkbench().getEditorRegistry().findEditor(ModelElementOpener.EDITOR_ID));
 		}
 		return results.toArray(new IEditorDescriptor[results.size()]);
 	}
@@ -52,7 +52,7 @@ public class ModelEditorAssociationOverride implements IEditorAssociationOverrid
 		for (IEditorDescriptor e : editorDescriptors)
 			results.add(e);
 		if (fileName.endsWith("xmi") || fileName.endsWith("ecore")) {
-			results.add(PlatformUI.getWorkbench().getEditorRegistry().findEditor(ModelEditor.EDITOR_ID));
+			results.add(PlatformUI.getWorkbench().getEditorRegistry().findEditor(ModelElementOpener.EDITOR_ID));
 		}
 		return results.toArray(new IEditorDescriptor[results.size()]);
 	}

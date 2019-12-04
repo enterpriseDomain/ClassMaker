@@ -27,6 +27,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.enterprisedomain.classmaker.*;
 import org.enterprisedomain.classmaker.Blueprint;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.ClassMakerService;
@@ -53,22 +54,21 @@ import org.osgi.framework.Version;
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides
  * an adapter <code>createXXX</code> method for each class of the model. <!--
  * end-user-doc -->
- * 
  * @see org.enterprisedomain.classmaker.ClassMakerPackage
  * @generated
  */
 public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	/**
-	 * The cached model package. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached model package.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected static ClassMakerPackage modelPackage;
 
 	/**
-	 * Creates an instance of the adapter factory. <!-- begin-user-doc --> <!--
+	 * Creates an instance of the adapter factory.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ClassMakerAdapterFactory() {
@@ -256,9 +256,9 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	};
 
 	/**
-	 * Creates an adapter for the <code>target</code>. <!-- begin-user-doc --> <!--
+	 * Creates an adapter for the <code>target</code>.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @param target the object to adapt.
 	 * @return the adapter for the <code>target</code>.
 	 * @generated
@@ -269,12 +269,10 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class
-	 * '{@link org.enterprisedomain.classmaker.Contribution <em>Contribution</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.enterprisedomain.classmaker.Contribution <em>Contribution</em>}'.
 	 * <!-- begin-user-doc --> This default implementation returns null so that we
 	 * can easily ignore cases; it's useful to ignore a case when inheritance will
 	 * catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.enterprisedomain.classmaker.Contribution
 	 * @generated
@@ -359,12 +357,11 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry
-	 * <em>Long To State Map Entry</em>}'. <!-- begin-user-doc --> This default
+	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>Long To State Map Entry</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's useful
 	 * to ignore a case when inheritance will catch all the cases anyway. <!--
 	 * end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see java.util.Map.Entry
 	 * @generated
@@ -374,12 +371,11 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry
-	 * <em>Version To Revision Map Entry</em>}'. <!-- begin-user-doc --> This
+	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>Version To Revision Map Entry</em>}'.
+	 * <!-- begin-user-doc --> This
 	 * default implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see java.util.Map.Entry
 	 * @generated
@@ -389,12 +385,10 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class
-	 * '{@link org.eclipse.core.runtime.jobs.ISchedulingRule <em>IScheduling
-	 * Rule</em>}'. <!-- begin-user-doc --> This default implementation returns null
+	 * Creates a new adapter for an object of class '{@link org.eclipse.core.runtime.jobs.ISchedulingRule <em>IScheduling Rule</em>}'.
+	 * <!-- begin-user-doc --> This default implementation returns null
 	 * so that we can easily ignore cases; it's useful to ignore a case when
 	 * inheritance will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.eclipse.core.runtime.jobs.ISchedulingRule
 	 * @generated
@@ -419,12 +413,11 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class
-	 * '{@link java.util.concurrent.Future <em>Future</em>}'. <!-- begin-user-doc
+	 * Creates a new adapter for an object of class '{@link java.util.concurrent.Future <em>Future</em>}'.
+	 * <!-- begin-user-doc
 	 * --> This default implementation returns null so that we can easily ignore
 	 * cases; it's useful to ignore a case when inheritance will catch all the cases
 	 * anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see java.util.concurrent.Future
 	 * @generated
@@ -434,12 +427,10 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class
-	 * '{@link org.eclipse.core.runtime.IAdapterFactory <em>IAdapter Factory</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.core.runtime.IAdapterFactory <em>IAdapter Factory</em>}'.
 	 * <!-- begin-user-doc --> This default implementation returns null so that we
 	 * can easily ignore cases; it's useful to ignore a case when inheritance will
 	 * catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.eclipse.core.runtime.IAdapterFactory
 	 * @generated
@@ -449,12 +440,10 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class
-	 * '{@link org.enterprisedomain.classmaker.Customizer <em>Customizer</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.enterprisedomain.classmaker.Customizer <em>Customizer</em>}'.
 	 * <!-- begin-user-doc --> This default implementation returns null so that we
 	 * can easily ignore cases; it's useful to ignore a case when inheritance will
 	 * catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.enterprisedomain.classmaker.Customizer
 	 * @generated
@@ -464,12 +453,10 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class
-	 * '{@link org.enterprisedomain.classmaker.StageQualifier <em>Stage
-	 * Qualifier</em>}'. <!-- begin-user-doc --> This default implementation returns
+	 * Creates a new adapter for an object of class '{@link org.enterprisedomain.classmaker.StageQualifier <em>Stage Qualifier</em>}'.
+	 * <!-- begin-user-doc --> This default implementation returns
 	 * null so that we can easily ignore cases; it's useful to ignore a case when
 	 * inheritance will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.enterprisedomain.classmaker.StageQualifier
 	 * @generated
@@ -479,12 +466,11 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry
-	 * <em>Stage Qualifier To Customizer Map Entry</em>}'. <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>Stage Qualifier To Customizer Map Entry</em>}'.
+	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases
 	 * anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see java.util.Map.Entry
 	 * @generated
@@ -524,12 +510,10 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class
-	 * '{@link org.enterprisedomain.classmaker.SCMOperator <em>SCM Operator</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.enterprisedomain.classmaker.SCMOperator <em>SCM Operator</em>}'.
 	 * <!-- begin-user-doc --> This default implementation returns null so that we
 	 * can easily ignore cases; it's useful to ignore a case when inheritance will
 	 * catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.enterprisedomain.classmaker.SCMOperator
 	 * @generated
@@ -539,12 +523,10 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class
-	 * '{@link org.enterprisedomain.classmaker.SCMRegistry <em>SCM Registry</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.enterprisedomain.classmaker.SCMRegistry <em>SCM Registry</em>}'.
 	 * <!-- begin-user-doc --> This default implementation returns null so that we
 	 * can easily ignore cases; it's useful to ignore a case when inheritance will
 	 * catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.enterprisedomain.classmaker.SCMRegistry
 	 * @generated
@@ -569,12 +551,10 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class
-	 * '{@link org.enterprisedomain.classmaker.ResourceChangeListener <em>Resource
-	 * Change Listener</em>}'. <!-- begin-user-doc --> This default implementation
+	 * Creates a new adapter for an object of class '{@link org.enterprisedomain.classmaker.ResourceChangeListener <em>Resource Change Listener</em>}'.
+	 * <!-- begin-user-doc --> This default implementation
 	 * returns null so that we can easily ignore cases; it's useful to ignore a case
 	 * when inheritance will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.enterprisedomain.classmaker.ResourceChangeListener
 	 * @generated
@@ -584,12 +564,10 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class
-	 * '{@link org.eclipse.emf.common.notify.Notification <em>Notification</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.common.notify.Notification <em>Notification</em>}'.
 	 * <!-- begin-user-doc --> This default implementation returns null so that we
 	 * can easily ignore cases; it's useful to ignore a case when inheritance will
 	 * catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.eclipse.emf.common.notify.Notification
 	 * @generated
@@ -599,12 +577,10 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class
-	 * '{@link org.enterprisedomain.classmaker.CompletionListener <em>Completion
-	 * Listener</em>}'. <!-- begin-user-doc --> This default implementation returns
+	 * Creates a new adapter for an object of class '{@link org.enterprisedomain.classmaker.CompletionListener <em>Completion Listener</em>}'.
+	 * <!-- begin-user-doc --> This default implementation returns
 	 * null so that we can easily ignore cases; it's useful to ignore a case when
 	 * inheritance will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.enterprisedomain.classmaker.CompletionListener
 	 * @generated
@@ -629,12 +605,10 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class
-	 * '{@link org.enterprisedomain.classmaker.SelectRevealHandler <em>Select Reveal
-	 * Handler</em>}'. <!-- begin-user-doc --> This default implementation returns
+	 * Creates a new adapter for an object of class '{@link org.enterprisedomain.classmaker.SelectRevealHandler <em>Select Reveal Handler</em>}'.
+	 * <!-- begin-user-doc --> This default implementation returns
 	 * null so that we can easily ignore cases; it's useful to ignore a case when
 	 * inheritance will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.enterprisedomain.classmaker.SelectRevealHandler
 	 * @generated
@@ -644,12 +618,10 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class
-	 * '{@link org.enterprisedomain.classmaker.ResourceAdapter <em>Resource
-	 * Adapter</em>}'. <!-- begin-user-doc --> This default implementation returns
+	 * Creates a new adapter for an object of class '{@link org.enterprisedomain.classmaker.ResourceAdapter <em>Resource Adapter</em>}'.
+	 * <!-- begin-user-doc --> This default implementation returns
 	 * null so that we can easily ignore cases; it's useful to ignore a case when
 	 * inheritance will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.enterprisedomain.classmaker.ResourceAdapter
 	 * @generated
@@ -659,12 +631,10 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class
-	 * '{@link org.enterprisedomain.classmaker.ClassMakerService <em>Service</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.enterprisedomain.classmaker.ClassMakerService <em>Service</em>}'.
 	 * <!-- begin-user-doc --> This default implementation returns null so that we
 	 * can easily ignore cases; it's useful to ignore a case when inheritance will
 	 * catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.enterprisedomain.classmaker.ClassMakerService
 	 * @generated
@@ -689,13 +659,11 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class
-	 * '{@link org.enterprisedomain.classmaker.CompletionNotificationAdapter
-	 * <em>Completion Notification Adapter</em>}'. <!-- begin-user-doc --> This
+	 * Creates a new adapter for an object of class '{@link org.enterprisedomain.classmaker.CompletionNotificationAdapter <em>Completion Notification Adapter</em>}'.
+	 * <!-- begin-user-doc --> This
 	 * default implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.enterprisedomain.classmaker.CompletionNotificationAdapter
 	 * @generated
@@ -705,9 +673,9 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for the default case. <!-- begin-user-doc --> This
+	 * Creates a new adapter for the default case.
+	 * <!-- begin-user-doc --> This
 	 * default implementation returns null. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @generated
 	 */

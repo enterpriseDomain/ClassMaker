@@ -19,12 +19,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.Semaphore;
 
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
@@ -89,22 +90,40 @@ public class OSGiInstaller extends ContainerJob {
 		State contribution = getContributionState();
 		if (contribution.getPhase() == Stage.DEFINED)
 			return ClassMakerPlugin.createErrorStatus(Messages.ModelNotSpecified);
-		IPath jarPath = ResourceUtils.getTargetResourcePath(getProject(), contribution);
 		BundleContext bundleContext = getContext();
+		IStatus result = new MultiStatus(ClassMakerPlugin.PLUGIN_ID, IStatus.OK, "", null);
 		try {
 			Bundle existingBundle = null;
-			for (Bundle bundle : getBundles())
+			int kind = -1;
+			for (Bundle bundle : getBundles()) {
 				if (versionsAreEqual(Version.parseVersion(bundle.getHeaders().get(Constants.BUNDLE_VERSION)),
-						getContributionState().getProject().getVersion(), false))
-					existingBundle = bundle;
-				else if (versionAreLess(Version.parseVersion(bundle.getHeaders().get(Constants.BUNDLE_VERSION)),
 						getContributionState().getProject().getVersion(), false)) {
 					existingBundle = bundle;
-					IStatus result = updateBundle(existingBundle, jarPath, bundleContext);
+					kind = 0;
+					if (getContributionState().isEdit()
+							&& bundle.getSymbolicName().equals(bundle.getSymbolicName() + ".edit")) {
+						kind = 1;
+					}
+					if (getContributionState().isEditor()
+							&& bundle.getSymbolicName().equals(bundle.getSymbolicName() + ".editor")) {
+						kind = 2;
+					}
+				} else if (versionAreLess(Version.parseVersion(bundle.getHeaders().get(Constants.BUNDLE_VERSION)),
+						getContributionState().getProject().getVersion(), false)) {
+					existingBundle = bundle;
+					kind = 0;
+					if (getContributionState().isEdit()
+							&& bundle.getSymbolicName().equals(bundle.getSymbolicName() + ".edit"))
+						kind = 1;
+					if (getContributionState().isEditor()
+							&& bundle.getSymbolicName().equals(bundle.getSymbolicName() + ".editor"))
+						kind = 2;
+					result = addStatus(updateBundle(existingBundle, kind, bundleContext), result);
 					if (result.isOK())
 						return result;
 				}
-			return installBundle(existingBundle, jarPath, bundleContext);
+			}
+			result = addStatus(installBundle(existingBundle, kind, bundleContext), result);
 		} catch (IllegalArgumentException e) {
 			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 		} catch (SecurityException e) {
@@ -115,19 +134,52 @@ public class OSGiInstaller extends ContainerJob {
 		} finally {
 			monitor.worked(1);
 		}
+		return result;
+	}
+	
+	private IStatus addStatus(IStatus status, IStatus parent) {
+		List<IStatus> statuses = new ArrayList<IStatus>();
+		for (IStatus st : parent.getChildren())
+			statuses.add(st);
+		statuses.add(status);
+		parent = new MultiStatus(ClassMakerPlugin.PLUGIN_ID, IStatus.INFO,
+				(IStatus[]) statuses.toArray(new IStatus[statuses.size()]), status.getMessage(), status.getException());
+		return parent;
 	}
 
-	private IStatus updateBundle(Bundle existingBundle, IPath jarPath, BundleContext context) {
+	@Override
+	protected boolean excludeOnNextJobJoin() {
+		return true;
+	}
+	
+	private IStatus updateBundle(Bundle existingBundle, int kind, BundleContext context) {
 		if (existingBundle == null)
 			return getWarningStatus(existingBundle, null);
 		try {
 			context.addBundleListener(listener);
-			existingBundle.update(new FileInputStream(jarPath.toFile()));
+			switch (kind) {
+			case 0:
+				existingBundle.update(new FileInputStream(
+						ResourceUtils.getTargetResourcePath(getProject(), getContributionState()).toFile()));
+				break;
+			case 1:
+				if (getContributionState().isEdit())
+					existingBundle.update(new FileInputStream(
+							ResourceUtils.getEditTargetResourcePath(getProject(), getContributionState()).toFile()));
+				break;
+			case 2:
+				if (getContributionState().isEditor())
+					existingBundle.update(new FileInputStream(
+							ResourceUtils.getEditorTargetResourcePath(getProject(), getContributionState()).toFile()));
+				break;
+			}
+			refreshBundle(existingBundle, context);
 			installed.acquire();
 			getContributionState().setPhase(getResultStage());
-			refreshBundle(existingBundle, context);
 			return getOKStatus(existingBundle);
-		} catch (BundleException e) {
+		} catch (
+
+		BundleException e) {
 			if (e.getType() == BundleException.RESOLVE_ERROR)
 				return getWarningStatus(existingBundle, e);
 			else if (e.getType() == BundleException.DUPLICATE_BUNDLE_ERROR)
@@ -142,8 +194,8 @@ public class OSGiInstaller extends ContainerJob {
 		}
 	}
 
-	private IStatus installBundle(Bundle existingBundle, IPath jarPath, BundleContext context)
-			throws InterruptedException {
+	private IStatus installBundle(Bundle existingBundle, int kind, BundleContext context)
+			throws InterruptedException, CoreException {
 		Bundle bundle = null;
 		try {
 			context.addBundleListener(listener);
@@ -161,13 +213,36 @@ public class OSGiInstaller extends ContainerJob {
 				uninstalled.acquire();
 				refreshBundle(null, context);
 			}
-			bundle = context.installBundle(URI.createFileURI(jarPath.toString()).toString());
+			switch (kind) {
+			case -1:
+			case 0:
+				bundle = context.installBundle(URI
+						.createFileURI(
+								ResourceUtils.getTargetResourcePath(getProject(), getContributionState()).toString())
+						.toString());
+				break;
+			case 1:
+				if (getContributionState().isEdit())
+					bundle = context
+							.installBundle(URI
+									.createFileURI(ResourceUtils
+											.getEditTargetResourcePath(getProject(), getContributionState()).toString())
+									.toString());
+				break;
+			case 2:
+				if (getContributionState().isEditor())
+					bundle = context.installBundle(URI
+							.createFileURI(ResourceUtils
+									.getEditorTargetResourcePath(getProject(), getContributionState()).toString())
+							.toString());
+				break;
+			}
 			if (bundle == null)
 				return ClassMakerPlugin
 						.createErrorStatus(NLS.bind(Messages.BundleNotInstalled, getProject().getName()));
+			refreshBundle(bundle, context);
 			installed.acquire();
 			getContributionState().setPhase(getResultStage());
-			refreshBundle(bundle, context);
 			return getOKStatus(bundle);
 		} catch (BundleException e) {
 			if (e.getType() == BundleException.DUPLICATE_BUNDLE_ERROR)
@@ -184,6 +259,11 @@ public class OSGiInstaller extends ContainerJob {
 			bundles.add(bundle);
 		frameworkWiring = context.getBundle(0).adapt(FrameworkWiring.class);
 		frameworkWiring.refreshBundles(bundles, new FrameworkListener[0]);
+		try {
+			notifyAll();
+		} catch (IllegalMonitorStateException e) {
+		}
+		installed.release();
 		return bundles;
 	}
 
