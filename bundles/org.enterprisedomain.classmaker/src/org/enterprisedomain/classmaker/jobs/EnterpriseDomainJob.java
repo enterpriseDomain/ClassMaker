@@ -42,9 +42,6 @@ import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
-import org.enterprisedomain.classmaker.jobs.codegen.GenModelSetupJob;
-import org.enterprisedomain.classmaker.jobs.install.OSGiInstaller;
-import org.enterprisedomain.classmaker.jobs.load.OSGiEPackageLoader;
 import org.enterprisedomain.classmaker.util.ReflectiveFactory;
 
 public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker {
