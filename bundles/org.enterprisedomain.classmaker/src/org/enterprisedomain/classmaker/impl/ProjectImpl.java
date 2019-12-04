@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -424,13 +425,15 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * @generated NOT
 	 */
 	public boolean isDirty() {
-		boolean result = true;
+		boolean result = false;
 		for (Object child : getChildren())
 			if (child instanceof Resource) {
-				result &= ((Resource) child).isModified();
+				result |= ((Resource) child).isModified();
 			} else if (child instanceof EObject) {
-				result &= ((EObject) child).eResource().isModified();
+				result |= ((EObject) child).eResource().isModified();
 			}
+		result |= !ResourcesPlugin.getWorkspace().getRoot().getProject(getProjectName())
+				.isSynchronized(IResource.DEPTH_INFINITE);
 		return result;
 	}
 
