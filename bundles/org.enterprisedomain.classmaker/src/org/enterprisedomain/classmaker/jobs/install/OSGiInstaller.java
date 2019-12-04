@@ -136,7 +136,7 @@ public class OSGiInstaller extends ContainerJob {
 		}
 		return result;
 	}
-	
+
 	private IStatus addStatus(IStatus status, IStatus parent) {
 		List<IStatus> statuses = new ArrayList<IStatus>();
 		for (IStatus st : parent.getChildren())
@@ -151,7 +151,7 @@ public class OSGiInstaller extends ContainerJob {
 	protected boolean excludeOnNextJobJoin() {
 		return true;
 	}
-	
+
 	private IStatus updateBundle(Bundle existingBundle, int kind, BundleContext context) {
 		if (existingBundle == null)
 			return getWarningStatus(existingBundle, null);

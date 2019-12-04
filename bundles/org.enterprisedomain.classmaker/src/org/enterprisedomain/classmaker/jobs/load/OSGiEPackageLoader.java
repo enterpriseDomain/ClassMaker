@@ -142,7 +142,7 @@ public class OSGiEPackageLoader extends ContainerJob {
 				setException(e);
 			}
 		}
-	}	
+	}
 
 	@Override
 	protected boolean excludeOnNextJobJoin() {
