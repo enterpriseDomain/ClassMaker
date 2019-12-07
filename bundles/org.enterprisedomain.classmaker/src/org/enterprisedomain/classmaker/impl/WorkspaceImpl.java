@@ -34,8 +34,10 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.core.runtime.jobs.MultiRule;
 import org.eclipse.emf.common.notify.Notification;
@@ -336,7 +338,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 								Resource.OPTION_SAVE_ONLY_IF_CHANGED_FILE_BUFFER);
 						workspaceResource.save(options);
 					} catch (IOException e) {
-						ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
+						ClassMakerPlugin.getInstance().getLog()
+								.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 					}
 				}
 			}

@@ -33,6 +33,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -544,7 +545,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 		try {
 			executor.execute(future);
 		} catch (Exception e) {
-			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
+			throw new CoreException(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 		}
 		return future;
 	}

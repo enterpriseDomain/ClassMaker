@@ -17,20 +17,26 @@ package org.enterprisedomain.classmaker.jobs.codegen;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.codegen.ecore.Generator;
 import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
@@ -39,6 +45,10 @@ import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.jdt.core.IClasspathEntry;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.osgi.util.NLS;
 import org.enterprisedomain.classmaker.ClassMakerService;
@@ -130,6 +140,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 		public IStatus work(IProgressMonitor monitor) throws CoreException {
 			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 			final IPath modelFullPath = root.getRawLocation().append(getModelLocation());
+			ResourceUtils.delete(getGenModelResourcePath(modelFullPath).toFile(), null);
 			int result = (Integer) getGenerator().run(new String[] { "-ecore2GenModel", modelFullPath.toString(), "", //$NON-NLS-1$ //$NON-NLS-2$
 					modelName });
 			if (result == 1)
@@ -153,7 +164,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 		}
 
 		@Override
-		public IStatus work(IProgressMonitor monitor) throws CoreException {
+		public IStatus work(final IProgressMonitor monitor) throws CoreException {
 			try {
 				ResourceUtils.cleanupDir(getProject(), SOURCE_FOLDER_NAME);
 				try {
@@ -173,6 +184,21 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 				args.add(EcorePlugin.getWorkspaceRoot().getRawLocation().append(getGenModelLocation()).toString());
 				int result = (Integer) getGenerator().run((String[]) args.toArray(new String[args.size()]));
 				getContributionState().setProjectVersion(monitor);
+
+				updateClassPath(monitor);
+
+				ICommand command = ResourceUtils.getBuildSpec(getProject().getDescription(), JavaCore.BUILDER_ID);
+				try {
+					getProject().build(IncrementalProjectBuilder.FULL_BUILD, JavaCore.BUILDER_ID,
+							command.getArguments(), monitor);
+				} catch (OperationCanceledException e) {
+					monitor.setCanceled(true);
+				} catch (CoreException e) {
+					ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
+					throw e;
+				} catch (Exception e) {
+					throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
+				}
 				try {
 					@SuppressWarnings("unchecked")
 					SCMOperator<Git> operator = (SCMOperator<Git>) getContributionState().getProject().getWorkspace()
@@ -192,7 +218,43 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 			} finally {
 				monitor.done();
 			}
+		}
 
+		private void updateClassPath(IProgressMonitor monitor) throws CoreException {
+			final SubMonitor pm = SubMonitor.convert(monitor);
+			pm.setTaskName("Update Classpath");
+			pm.subTask("Setting Classpath...");
+			final SubMonitor m = pm.newChild(1, SubMonitor.SUPPRESS_ISCANCELED);
+			try {
+				IJavaProject javaProject = null;
+				try {
+					javaProject = JavaCore
+							.create(ResourcesPlugin.getWorkspace().getRoot().getProject(getProject().getName()));
+				} catch (IllegalStateException e) {
+					throw new CoreException(
+							new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+				}
+				Set<IClasspathEntry> entries = new HashSet<IClasspathEntry>();
+				for (IClasspathEntry e : javaProject.getRawClasspath())
+					if (!e.getPath().equals(new Path(IPath.SEPARATOR + getProject().getName())))
+						entries.add(e);
+				entries.add(JavaCore.newSourceEntry(
+						new Path(IPath.SEPARATOR + getProject().getName() + IPath.SEPARATOR + "src" + IPath.SEPARATOR),
+						null, new Path(
+								IPath.SEPARATOR + getProject().getName() + IPath.SEPARATOR + "bin" + IPath.SEPARATOR)));
+				entries.add(JavaCore.newContainerEntry(new Path("org.eclipse.jdt.launching.JRE_CONTAINER"), null, null,
+						false));
+				entries.add(JavaCore.newContainerEntry(new Path("org.eclipse.pde.core.requiredPlugins"), null, null,
+						false));
+				javaProject.setRawClasspath((IClasspathEntry[]) entries.toArray(new IClasspathEntry[entries.size()]),
+						m);
+				javaProject.getResolvedClasspath(false);
+			} catch (JavaModelException e) {
+				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
+			} finally {
+				m.done();
+				pm.done();
+			}
 		}
 
 	}

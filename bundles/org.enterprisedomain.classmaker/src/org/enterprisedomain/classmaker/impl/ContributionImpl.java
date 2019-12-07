@@ -29,7 +29,9 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -621,13 +623,15 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 			addResourceChangeListener(getResourceReloadListener());
 			return commitId;
 		} catch (Exception e) {
-			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
+			ClassMakerPlugin.getInstance().getLog()
+					.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 			return null;
 		} finally {
 			try {
 				operator.ungetRepositorySCM();
 			} catch (Exception e) {
-				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
+				ClassMakerPlugin.getInstance().getLog()
+						.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 			}
 		}
 	}
@@ -647,14 +651,13 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	 * @generated NOT
 	 */
 	public String make(Revision revision, IProgressMonitor monitor) throws CoreException {
-		setDirty(true);
 		try {
 			return revision.make(monitor);
 		} catch (JGitInternalException e) {
 		} catch (OperationCanceledException e) {
 			monitor.setCanceled(true);
 		} catch (Exception e) {
-			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
+			throw new CoreException(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 		}
 		return revision.getState().getCommitId();
 	}
@@ -662,7 +665,9 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	@Override
 	public String make(IProgressMonitor monitor) throws CoreException {
 		removeResourceChangeListener(getResourceReloadListener());
-		return make(getRevision(), monitor);
+		String result = make(getRevision(), monitor);
+		setDirty(false);
+		return result;
 	}
 
 	@Override
@@ -969,7 +974,8 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 					operator.add(".");
 					operator.commit(getProjectName());
 				} catch (Exception e) {
-					throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
+					throw new CoreException(
+							new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 				}
 			}
 			getRevision().load(create);
@@ -985,7 +991,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	public void build(IProgressMonitor monitor) throws CoreException {
 		if (isRevisionSet())
 			getRevision().build(monitor);
-		setDirty(false);
 	}
 
 	/**

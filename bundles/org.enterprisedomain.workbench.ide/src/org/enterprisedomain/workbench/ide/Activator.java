@@ -1,6 +1,8 @@
 package org.enterprisedomain.workbench.ide;
 
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
@@ -57,7 +59,7 @@ public class Activator extends AbstractUIPlugin {
 	}
 
 	public static void log(Throwable e) {
-		plugin.getLog().log(ClassMakerPlugin.createErrorStatus(e));
+		plugin.getLog().log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 	}
 
 }

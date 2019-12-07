@@ -31,6 +31,8 @@ public class ClassMakerBuilder extends IncrementalProjectBuilder implements IBui
 
 	public static final String BUILDER_ID = ClassMakerPlugin.BUILDER_ID;
 
+	private boolean buildRunning = false;
+
 	@Override
 	public <T> T getAdapter(Class<T> adapter) {
 		return null;
@@ -52,9 +54,10 @@ public class ClassMakerBuilder extends IncrementalProjectBuilder implements IBui
 		if (service == null)
 			return null;
 		Project project = service.getWorkspace().getProject(getProject().getName());
-		if (project instanceof Contribution && project.isDirty()) {
+		if (project instanceof Contribution && project.isDirty() && !buildRunning) {
+			buildRunning = true;
 			((Contribution) project).build(monitor);
-			project.setDirty(false);
+			buildRunning = false;
 		}
 		return null;
 	}

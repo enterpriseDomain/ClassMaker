@@ -125,9 +125,9 @@ public class OSGiInstaller extends ContainerJob {
 			}
 			result = addStatus(installBundle(existingBundle, kind, bundleContext), result);
 		} catch (IllegalArgumentException e) {
-			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
+			throw new CoreException(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 		} catch (SecurityException e) {
-			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
+			throw new CoreException(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 		} catch (InterruptedException e) {
 			monitor.setCanceled(true);
 			return Status.CANCEL_STATUS;
@@ -145,11 +145,6 @@ public class OSGiInstaller extends ContainerJob {
 		parent = new MultiStatus(ClassMakerPlugin.PLUGIN_ID, IStatus.INFO,
 				(IStatus[]) statuses.toArray(new IStatus[statuses.size()]), status.getMessage(), status.getException());
 		return parent;
-	}
-
-	@Override
-	protected boolean excludeOnNextJobJoin() {
-		return true;
 	}
 
 	private IStatus updateBundle(Bundle existingBundle, int kind, BundleContext context) {
@@ -263,7 +258,6 @@ public class OSGiInstaller extends ContainerJob {
 			notifyAll();
 		} catch (IllegalMonitorStateException e) {
 		}
-		installed.release();
 		return bundles;
 	}
 

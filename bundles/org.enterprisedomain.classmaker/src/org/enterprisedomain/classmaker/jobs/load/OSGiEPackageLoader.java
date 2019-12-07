@@ -144,11 +144,6 @@ public class OSGiEPackageLoader extends ContainerJob {
 		}
 	}
 
-	@Override
-	protected boolean excludeOnNextJobJoin() {
-		return true;
-	}
-
 	private IStatus getStatus(Bundle osgiBundle) {
 		String ePackagesMsg = ""; //$NON-NLS-1$
 		boolean warning = false;
@@ -201,15 +196,17 @@ public class OSGiEPackageLoader extends ContainerJob {
 					if (ePackage != null) {
 						getContributionState().getDomainModel().setGenerated(ePackage);
 						registerEPackage(Registry.INSTANCE, ePackage);
-						registerEPackage(getContributionState().getRevision().getProject().getWorkspace()
-								.getResourceSet().getPackageRegistry(), ePackage);
+						if (getContributionState().getRevision().getProject().getWorkspace().getResourceSet() != null)
+							registerEPackage(getContributionState().getRevision().getProject().getWorkspace()
+									.getResourceSet().getPackageRegistry(), ePackage);
 					}
 				} catch (ClassCastException e) {
 					if (ePackage != null) {
 						getContributionState().getDomainModel().setGenerated(ePackage);
 						registerEPackage(Registry.INSTANCE, ePackage);
-						registerEPackage(getContributionState().getRevision().getProject().getWorkspace()
-								.getResourceSet().getPackageRegistry(), ePackage);
+						if (getContributionState().getRevision().getProject().getWorkspace().getResourceSet() != null)
+							registerEPackage(getContributionState().getRevision().getProject().getWorkspace()
+									.getResourceSet().getPackageRegistry(), ePackage);
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
