@@ -89,8 +89,7 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 			getNextJob().setProject(getProject());
 			getNextJob().schedule();
 			try {
-				if (!excludeOnNextJobJoin())
-					getNextJob().join();
+				getNextJob().join();
 			} catch (InterruptedException e) {
 				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createWarningStatus(e));
 			}
@@ -148,7 +147,18 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 		if (progressProvider == null)
 			setProgressProvider(DEFAULT_PROGRESS_PROVIDER);
 		result = work(monitor);
+		if (hasErrors(result)) {
+			setNextJob(getJob(getContributionState().getReturnWorker()));
+		}
 		return result;
+	}
+
+	public boolean hasErrors(IStatus status) {
+		return status.getException() != null;
+	}
+
+	private EnterpriseDomainJob getJob(Worker worker) {
+		return (EnterpriseDomainJob) worker.getAdapter(EnterpriseDomainJob.class);
 	}
 
 	public abstract IStatus work(IProgressMonitor monitor) throws CoreException;
@@ -163,10 +173,6 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 			return ClassMakerPlugin.getProgressMonitor();
 		}
 	};
-
-	protected boolean excludeOnNextJobJoin() {
-		return false;
-	}
 
 	@Override
 	public boolean belongsTo(Object family) {

@@ -36,7 +36,9 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.preferences.IPreferencesService;
 import org.eclipse.emf.common.util.URI;
@@ -262,7 +264,7 @@ public class ResourceUtils {
 					ResourcesPlugin.getWorkspace().getRoot().getRawLocation().append(targetPath).toFile().toPath(),
 					StandardCopyOption.REPLACE_EXISTING);
 		} catch (IOException e) {
-			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
+			throw new CoreException(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 		}
 	}
 
@@ -333,7 +335,7 @@ public class ResourceUtils {
 					writer.close();
 			}
 		} catch (IOException e) {
-			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
+			throw new CoreException(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 		}
 	}
 

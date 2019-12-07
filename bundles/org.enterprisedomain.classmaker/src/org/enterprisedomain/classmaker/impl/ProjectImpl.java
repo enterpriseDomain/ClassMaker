@@ -29,7 +29,9 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.ListenerList;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.core.runtime.jobs.MultiRule;
@@ -858,7 +860,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		try {
 			((Resource) getChildren().get(0)).save(Collections.emptyMap());
 		} catch (IOException e) {
-			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
+			ClassMakerPlugin.getInstance().getLog()
+					.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 		}
 	}
 
@@ -1015,18 +1018,22 @@ public class ProjectImpl extends EObjectImpl implements Project {
 							reset.setRef(ref.getName());
 						reset.call();
 					} catch (CheckoutConflictException ex) {
-						ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(ex));
+						ClassMakerPlugin.getInstance().getLog().log(
+								new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, ex.getLocalizedMessage(), ex));
 					} catch (GitAPIException ex) {
-						ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(ex));
+						ClassMakerPlugin.getInstance().getLog().log(
+								new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, ex.getLocalizedMessage(), ex));
 					}
 				}
 			} catch (Exception e) {
-				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
+				ClassMakerPlugin.getInstance().getLog()
+						.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 			} finally {
 				try {
 					operator.ungetRepositorySCM();
 				} catch (Exception e) {
-					ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
+					ClassMakerPlugin.getInstance().getLog()
+							.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 				}
 			}
 			revision = getRevisions().get(version);
@@ -1105,8 +1112,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 			@Override
 			public void notifyChanged(Notification msg) {
-				if (msg.getFeatureID(Resource.class) == Resource.RESOURCE__IS_MODIFIED)
-					setDirty(msg.getNewBooleanValue());
+				if (msg.getFeatureID(Resource.class) == Resource.RESOURCE__IS_MODIFIED && msg.getNewBooleanValue()) {
+					setDirty(true);
+				}
 			}
 
 		});
@@ -1130,11 +1138,11 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * @generated NOT
 	 */
 	public String make(IProgressMonitor monitor) throws CoreException {
-		setDirty(true);
 		removeResourceChangeListener(getResourceReloadListener());
 		String result = "You made it!"; //$NON-NLS-1$
 		addResourceChangeListener(getResourceReloadListener());
 		setNeedCompletionNotification(true);
+		setDirty(false);
 		return result;
 	}
 
@@ -1207,7 +1215,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 				try {
 					resource.load(Collections.emptyMap());
 				} catch (IOException e) {
-					ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
+					ClassMakerPlugin.getInstance().getLog()
+							.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 				}
 				@SuppressWarnings("unchecked")
 				SCMOperator<Git> operator = (SCMOperator<Git>) getWorkspace().getSCMRegistry().get(getProjectName());
@@ -1263,13 +1272,15 @@ public class ProjectImpl extends EObjectImpl implements Project {
 					addResourceChangeListener(getResourceReloadListener());
 					return commitId;
 				} catch (Exception e) {
-					ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
+					ClassMakerPlugin.getInstance().getLog()
+							.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 					return null;
 				} finally {
 					try {
 						operator.ungetRepositorySCM();
 					} catch (Exception e) {
-						ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
+						ClassMakerPlugin.getInstance().getLog()
+								.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 					}
 				}
 			} else {
@@ -1292,7 +1303,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			try {
 				resource.save(Collections.emptyMap());
 			} catch (IOException e) {
-				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
+				ClassMakerPlugin.getInstance().getLog()
+						.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 			}
 		onModelResourceCreate(resource);
 	}

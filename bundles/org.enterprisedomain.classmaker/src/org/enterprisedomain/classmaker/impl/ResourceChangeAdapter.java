@@ -1,5 +1,7 @@
 package org.enterprisedomain.classmaker.impl;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EContentAdapter;
@@ -40,7 +42,8 @@ class ResourceChangeAdapter extends EContentAdapter {
 			try {
 				project.notifyResourceChanged(notification);
 			} catch (Exception e) {
-				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
+				ClassMakerPlugin.getInstance().getLog()
+						.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 			}
 	}
 

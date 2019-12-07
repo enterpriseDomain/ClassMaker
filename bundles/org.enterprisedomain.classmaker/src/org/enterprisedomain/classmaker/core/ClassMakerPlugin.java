@@ -245,7 +245,7 @@ public class ClassMakerPlugin extends Plugin {
 		return new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, message);
 	}
 
-	public static IStatus createErrorStatus(Throwable exception) {
+	public static Status createErrorStatus(Throwable exception) {
 		return new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, exception.getLocalizedMessage(), exception);
 	}
 

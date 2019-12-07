@@ -1,7 +1,9 @@
 package org.enterprisedomain.ecp.ui;
 
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Plugin;
+import org.eclipse.core.runtime.Status;
 import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.impl.ClassMakerServiceImpl;
@@ -39,7 +41,7 @@ public class Activator extends Plugin implements BundleActivator {
 	}
 
 	public static void log(Throwable e) {
-		instance.getLog().log(ClassMakerPlugin.createErrorStatus(e));
+		instance.getLog().log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 	}
 
 }

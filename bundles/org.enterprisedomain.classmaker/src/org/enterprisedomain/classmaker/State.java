@@ -38,6 +38,14 @@ import org.enterprisedomain.classmaker.jobs.Worker;
  * The following features are supported:
  * </p>
  * <ul>
+ * <li>{@link org.enterprisedomain.classmaker.State#getGenerator
+ * <em>Generator</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.State#getExporter
+ * <em>Exporter</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.State#getInstaller
+ * <em>Installer</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.State#getLoader
+ * <em>Loader</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.State#getPackageClassName
  * <em>Package Class Name</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.State#getEditPluginClassName
@@ -81,6 +89,101 @@ import org.enterprisedomain.classmaker.jobs.Worker;
  * @generated
  */
 public interface State extends Item, ISchedulingRule {
+	/**
+	 * Returns the value of the '<em><b>Generator</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Generator</em>' reference.
+	 * @see #setGenerator(Worker)
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getState_Generator()
+	 * @model type="org.enterprisedomain.classmaker.Worker" resolveProxies="false"
+	 *        transient="true"
+	 * @generated
+	 */
+	Worker getGenerator();
+
+	/**
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.State#getGenerator
+	 * <em>Generator</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value the new value of the '<em>Generator</em>' reference.
+	 * @see #getGenerator()
+	 * @generated
+	 */
+	void setGenerator(Worker value);
+
+	/**
+	 * Returns the value of the '<em><b>Exporter</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Exporter</em>' reference.
+	 * @see #setExporter(Worker)
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getState_Exporter()
+	 * @model type="org.enterprisedomain.classmaker.Worker" resolveProxies="false"
+	 *        transient="true"
+	 * @generated
+	 */
+	Worker getExporter();
+
+	/**
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.State#getExporter <em>Exporter</em>}'
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value the new value of the '<em>Exporter</em>' reference.
+	 * @see #getExporter()
+	 * @generated
+	 */
+	void setExporter(Worker value);
+
+	/**
+	 * Returns the value of the '<em><b>Installer</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Installer</em>' reference.
+	 * @see #setInstaller(Worker)
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getState_Installer()
+	 * @model type="org.enterprisedomain.classmaker.Worker" resolveProxies="false"
+	 *        transient="true"
+	 * @generated
+	 */
+	Worker getInstaller();
+
+	/**
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.State#getInstaller
+	 * <em>Installer</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value the new value of the '<em>Installer</em>' reference.
+	 * @see #getInstaller()
+	 * @generated
+	 */
+	void setInstaller(Worker value);
+
+	/**
+	 * Returns the value of the '<em><b>Loader</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Loader</em>' reference.
+	 * @see #setLoader(Worker)
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getState_Loader()
+	 * @model type="org.enterprisedomain.classmaker.Worker" resolveProxies="false"
+	 *        transient="true"
+	 * @generated
+	 */
+	Worker getLoader();
+
+	/**
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.State#getLoader
+	 * <em>Loader</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value the new value of the '<em>Loader</em>' reference.
+	 * @see #getLoader()
+	 * @generated
+	 */
+	void setLoader(Worker value);
+
 	/**
 	 * Returns the value of the '<em><b>Package Class Name</b></em>' attribute. <!--
 	 * begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc --> Generated
@@ -642,5 +745,13 @@ public interface State extends Item, ISchedulingRule {
 	 * @generated
 	 */
 	Worker createModelLoader();
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model kind="operation" type="org.enterprisedomain.classmaker.Worker"
+	 * @generated
+	 */
+	Worker getReturnWorker();
 
 } // State

@@ -20,6 +20,8 @@ import java.util.TimeZone;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -360,13 +362,15 @@ public class RevisionImpl extends ItemImpl implements Revision {
 		} catch (NoHeadException e) {
 			return null;
 		} catch (Exception e) {
-			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
+			ClassMakerPlugin.getInstance().getLog()
+					.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 			return null;
 		} finally {
 			try {
 				operator.ungetRepositorySCM();
 			} catch (Exception e) {
-				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
+				ClassMakerPlugin.getInstance().getLog()
+						.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 			}
 		}
 		return getState().getCommitId();
@@ -386,12 +390,14 @@ public class RevisionImpl extends ItemImpl implements Revision {
 				Git git = operator.getRepositorySCM();
 				git.branchCreate().setForce(true).setName(getVersion().toString()).call();
 			} catch (Exception e) {
-				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
+				throw new CoreException(
+						new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 			} finally {
 				try {
 					operator.ungetRepositorySCM();
 				} catch (Exception e) {
-					throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
+					throw new CoreException(
+							new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 				}
 			}
 		}
@@ -407,7 +413,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 		setTimestamp(stateTime);
 		getProject().initAdapters(this);
 		if (isStateSet())
-			getState().checkout(commitId, true);
+			getState().checkout(commitId, false);
 	}
 
 	/**
@@ -478,12 +484,14 @@ public class RevisionImpl extends ItemImpl implements Revision {
 					getState().initialize(false);
 				}
 			} catch (Exception e) {
-				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
+				throw new CoreException(
+						new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 			} finally {
 				try {
 					operator.ungetRepositorySCM();
 				} catch (Exception e) {
-					throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
+					throw new CoreException(
+							new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 				}
 			}
 		}

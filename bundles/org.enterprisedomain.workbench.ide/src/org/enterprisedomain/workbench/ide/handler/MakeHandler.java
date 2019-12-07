@@ -9,6 +9,8 @@ import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecp.core.ECPProject;
@@ -61,8 +63,9 @@ public class MakeHandler extends AbstractHandler implements IHandler {
 
 					});
 				} catch (InvocationTargetException e) {
+					Throwable exception = e.getTargetException();
 					ClassMakerPlugin.getInstance().getLog()
-							.log(ClassMakerPlugin.createErrorStatus(e.getTargetException()));
+							.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, exception.getLocalizedMessage(), exception));
 					throw new ExecutionException(e.getLocalizedMessage(), e.getTargetException());
 				} catch (InterruptedException e) {
 				}

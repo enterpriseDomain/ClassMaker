@@ -169,6 +169,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		final EReference checkedExistance = ecoreFactory.createEReference();
 		checkedExistance.setName("name");
 		checkedExistance.setEType(EcorePackage.Literals.ESTRING);
+		checkedExistance.setResolveProxies(false);
 		version.getEStructuralFeatures().add(checkedExistance);
 		dynamicEPackage.getEClassifiers().add(version);
 		EPackage first = service.make(dynamicEPackage, getProgressMonitor());

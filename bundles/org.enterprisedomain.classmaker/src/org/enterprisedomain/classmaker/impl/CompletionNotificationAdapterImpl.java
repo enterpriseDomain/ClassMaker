@@ -16,6 +16,7 @@
 package org.enterprisedomain.classmaker.impl;
 
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EClass;
@@ -107,7 +108,7 @@ public class CompletionNotificationAdapterImpl extends EObjectImpl implements Co
 				((Project) eContainer()).notifyCompletion();
 			} catch (NullPointerException e) {
 			} catch (Exception e) {
-				error = ClassMakerPlugin.createErrorStatus(e);
+				error = new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e);
 				ClassMakerPlugin.getInstance().getLog().log(getError());
 			}
 		}

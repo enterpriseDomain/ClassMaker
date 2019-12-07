@@ -16,28 +16,20 @@
 package org.enterprisedomain.classmaker.jobs.export;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.core.runtime.jobs.ProgressProvider;
-import org.eclipse.jdt.core.IClasspathEntry;
-import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.pde.core.IEditableModel;
 import org.eclipse.pde.core.build.IBuild;
@@ -62,6 +54,8 @@ import org.osgi.framework.Version;
 @SuppressWarnings("restriction")
 public class PDEPluginExporter extends AbstractExporter {
 
+	private PluginExportOperation op = null;
+
 	public PDEPluginExporter(long stateTimestamp) {
 		super(stateTimestamp);
 	}
@@ -69,7 +63,6 @@ public class PDEPluginExporter extends AbstractExporter {
 	@Override
 	public IStatus work(final IProgressMonitor monitor) throws CoreException {
 		cleanup(monitor);
-		updateClassPath(monitor);
 
 		State state = getContributionState();
 		Version version = state.getProject().getVersion();
@@ -118,7 +111,7 @@ public class PDEPluginExporter extends AbstractExporter {
 		pm.setTaskName(Messages.TaskNamePluginExport);
 		pm.subTask(Messages.SubTaskNamePluginExport);
 		final SubMonitor m = pm.newChild(9, SubMonitor.SUPPRESS_ISCANCELED);
-		PluginExportOperation op = new PluginExportOperation(info, Messages.JobNamePDEExport);
+		op = new PluginExportOperation(info, Messages.JobNamePDEExport);
 		DelegatingJob delegate = new DelegatingJob(op, getStateTimestamp());
 		delegate.setProgressProvider(new ProgressProvider() {
 
@@ -147,6 +140,13 @@ public class PDEPluginExporter extends AbstractExporter {
 		return Status.OK_STATUS;
 	}
 
+	@Override
+	public boolean hasErrors(IStatus status) {
+		if (op != null)
+			return op.hasAntErrors();
+		return super.hasErrors(status);
+	}
+
 	private void cleanup(IProgressMonitor monitor) throws CoreException {
 		ResourceUtils.cleanupDir(getProject(), ResourceUtils.getTargetFolderName());
 		try {
@@ -155,7 +155,7 @@ public class PDEPluginExporter extends AbstractExporter {
 					.getSCMRegistry().get(getProject().getName());
 			operator.add("."); //$NON-NLS-1$
 		} catch (Exception e) {
-			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
+			throw new CoreException(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 		}
 		refreshLocal(getProject(), IResource.DEPTH_ONE, monitor);
 	}
@@ -189,42 +189,6 @@ public class PDEPluginExporter extends AbstractExporter {
 			entry.addToken("-proc:none"); //$NON-NLS-1$
 		if (buildModel instanceof IEditableModel)
 			((IEditableModel) buildModel).save();
-	}
-
-	private void updateClassPath(IProgressMonitor monitor) throws CoreException {
-		final SubMonitor pm = SubMonitor.convert(monitor);
-		pm.setTaskName("Update Classpath");
-		pm.subTask("Setting Classpath...");
-		final SubMonitor m = pm.newChild(1, SubMonitor.SUPPRESS_ISCANCELED);
-		try {
-			IJavaProject javaProject = null;
-			try {
-				javaProject = JavaCore
-						.create(ResourcesPlugin.getWorkspace().getRoot().getProject(getProject().getName()));
-			} catch (IllegalStateException e) {
-				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
-			}
-			Set<IClasspathEntry> entries = new HashSet<IClasspathEntry>();
-			for (IClasspathEntry e : javaProject.getRawClasspath())
-				if (!e.getPath().equals(new Path(IPath.SEPARATOR + getProject().getName())))
-					entries.add(e);
-			entries.add(JavaCore.newSourceEntry(
-					new Path(IPath.SEPARATOR + getProject().getName() + IPath.SEPARATOR + "src" + IPath.SEPARATOR),
-					null,
-					new Path(IPath.SEPARATOR + getProject().getName() + IPath.SEPARATOR + "bin" + IPath.SEPARATOR)));
-			entries.add(
-					JavaCore.newContainerEntry(new Path("org.eclipse.jdt.launching.JRE_CONTAINER"), null, null, false));
-			entries.add(
-					JavaCore.newContainerEntry(new Path("org.eclipse.pde.core.requiredPlugins"), null, null, false));
-			javaProject.setRawClasspath((IClasspathEntry[]) entries.toArray(new IClasspathEntry[entries.size()]), m);
-			javaProject.getResolvedClasspath(false);
-		} catch (JavaModelException e) {
-			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
-		} finally {
-			m.done();
-			pm.done();
-		}
-		refreshLocal(getProject(), IResource.DEPTH_ONE, monitor);
 	}
 
 	@Override
