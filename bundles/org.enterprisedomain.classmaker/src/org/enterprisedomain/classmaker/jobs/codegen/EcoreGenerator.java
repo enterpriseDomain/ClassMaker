@@ -200,6 +200,10 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 					throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 				}
 				try {
+					notifyAll();
+				} catch (IllegalMonitorStateException e) {
+				}
+				try {
 					@SuppressWarnings("unchecked")
 					SCMOperator<Git> operator = (SCMOperator<Git>) getContributionState().getProject().getWorkspace()
 							.getSCMRegistry().get(getProject().getName());

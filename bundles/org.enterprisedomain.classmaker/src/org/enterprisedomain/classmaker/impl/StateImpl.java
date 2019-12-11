@@ -1044,18 +1044,20 @@ public class StateImpl extends ItemImpl implements State {
 	 */
 	@Override
 	public Worker getReturnWorker() {
-		EnterpriseDomainJob generatorJob = getJob(getGenerator());
-		EnterpriseDomainJob exporterJob = getJob(getExporter());
-		EnterpriseDomainJob installerJob = getJob(getInstaller());
-		EnterpriseDomainJob loaderJob = getJob(getLoader());
+		EnterpriseDomainJob generatorJob = EnterpriseDomainJob.getJob(getGenerator());
+		EnterpriseDomainJob exporterJob =EnterpriseDomainJob. getJob(getExporter());
+		EnterpriseDomainJob installerJob = EnterpriseDomainJob.getJob(getInstaller());
+		EnterpriseDomainJob loaderJob = EnterpriseDomainJob.getJob(getLoader());
 		switch (getPhase().getValue()) {
+		case Stage.DEFINED_VALUE:
+			saveResource();
 		case Stage.MODELED_VALUE:
 			installerJob.setNextJob(loaderJob);
 			exporterJob.setNextJob(installerJob);
 			generatorJob.setNextJob(exporterJob);
 			return generatorJob;
 		case Stage.GENERATED_VALUE:
-			installerJob.setNextJob(getJob(getLoader()));
+			installerJob.setNextJob(loaderJob);
 			EnterpriseDomainJob job = exporterJob.getNextJob();
 			job.setNextJob(installerJob);
 			exporterJob.setNextJob(job);
@@ -1146,25 +1148,25 @@ public class StateImpl extends ItemImpl implements State {
 
 				Worker exporter = createExporter();
 
-				EnterpriseDomainJob exporterJob = getJob(exporter);
+				EnterpriseDomainJob exporterJob = EnterpriseDomainJob.getJob(exporter);
 				exporterJob.setContributionState(this);
 				exporterJob.setProject(getEclipseProject());
 				exporter.getProperties().put(AbstractExporter.EXPORT_DESTINATION_PROP,
 						ResourceUtils.getExportDestination(getEclipseProject()).toString());
 
 				Worker generator = createGenerator();
-				EnterpriseDomainJob generatorJob = getJob(generator);
+				EnterpriseDomainJob generatorJob = EnterpriseDomainJob.getJob(generator);
 				generatorJob.setResourceSet(getProject().getWorkspace().getResourceSet());
 				generatorJob.setContributionState(this);
 				generatorJob.setProject(getEclipseProject());
 				generatorJob.setProgressGroup(wrappingMonitor, 1);
 				generatorJob.setNextJob(exporterJob);
 
-				EnterpriseDomainJob installJob = getJob(createInstaller());
+				EnterpriseDomainJob installJob = EnterpriseDomainJob.getJob(createInstaller());
 				installJob.setContributionState(this);
 				exporterJob.setNextJob(installJob);
 
-				EnterpriseDomainJob loadJob = getJob(createModelLoader());
+				EnterpriseDomainJob loadJob = EnterpriseDomainJob.getJob(createModelLoader());
 				loadJob.setContributionState(this);
 				loadJob.addListener();
 
@@ -1229,10 +1231,6 @@ public class StateImpl extends ItemImpl implements State {
 			monitor.done();
 			return result;
 		}
-	}
-
-	private EnterpriseDomainJob getJob(Worker worker) {
-		return (EnterpriseDomainJob) worker.getAdapter(EnterpriseDomainJob.class);
 	}
 
 	private IProject getEclipseProject() {
@@ -2108,24 +2106,24 @@ public class StateImpl extends ItemImpl implements State {
 	@Override
 	public void build(IProgressMonitor monitor) throws CoreException {
 		Worker exporter = createExporter();
-		EnterpriseDomainJob exportJob = getJob(exporter);
+		EnterpriseDomainJob exportJob = EnterpriseDomainJob.getJob(exporter);
 		exportJob.setContributionState(this);
 		exportJob.setProject(getEclipseProject());
 		exporter.getProperties().put(AbstractExporter.EXPORT_DESTINATION_PROP,
 				ResourceUtils.getExportDestination(getEclipseProject()).toString());
 
 		Worker generator = createGenerator();
-		EnterpriseDomainJob generatorJob = getJob(generator);
+		EnterpriseDomainJob generatorJob = EnterpriseDomainJob.getJob(generator);
 		generatorJob.setResourceSet(getProject().getWorkspace().getResourceSet());
 		generatorJob.setContributionState(this);
 		generatorJob.setProject(getEclipseProject());
 		generatorJob.setProgressGroup(monitor, 1);
 		generatorJob.setNextJob(exportJob);
 
-		EnterpriseDomainJob installJob = getJob(createInstaller());
+		EnterpriseDomainJob installJob = EnterpriseDomainJob.getJob(createInstaller());
 		installJob.setContributionState(this);
 
-		EnterpriseDomainJob loadJob = getJob(createModelLoader());
+		EnterpriseDomainJob loadJob = EnterpriseDomainJob.getJob(createModelLoader());
 		loadJob.setContributionState(this);
 		loadJob.addListener();
 
@@ -2133,6 +2131,8 @@ public class StateImpl extends ItemImpl implements State {
 		installJob.setNextJob(loadJob);
 
 		switch (getPhase().getValue()) {
+		case Stage.DEFINED_VALUE:
+			saveResource();
 		case Stage.MODELED_VALUE:
 			generatorJob.schedule();
 			break;

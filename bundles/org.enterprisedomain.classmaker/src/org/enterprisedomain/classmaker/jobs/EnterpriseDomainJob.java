@@ -157,7 +157,7 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 		return status.getException() != null;
 	}
 
-	private EnterpriseDomainJob getJob(Worker worker) {
+	public static EnterpriseDomainJob getJob(Worker worker) {
 		return (EnterpriseDomainJob) worker.getAdapter(EnterpriseDomainJob.class);
 	}
 
