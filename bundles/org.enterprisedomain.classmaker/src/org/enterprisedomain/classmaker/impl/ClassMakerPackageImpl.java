@@ -542,7 +542,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
-	public EReference getState_Generator() {
+	public EReference getState_Generators() {
 		return (EReference) stateEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -552,7 +552,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
-	public EReference getState_Exporter() {
+	public EReference getState_Exporters() {
 		return (EReference) stateEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -562,7 +562,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
-	public EReference getState_Installer() {
+	public EReference getState_Installers() {
 		return (EReference) stateEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -572,7 +572,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
-	public EReference getState_Loader() {
+	public EReference getState_Loaders() {
 		return (EReference) stateEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -1699,10 +1699,10 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		createEAttribute(revisionEClass, REVISION__VERSION);
 
 		stateEClass = createEClass(STATE);
-		createEReference(stateEClass, STATE__GENERATOR);
-		createEReference(stateEClass, STATE__EXPORTER);
-		createEReference(stateEClass, STATE__INSTALLER);
-		createEReference(stateEClass, STATE__LOADER);
+		createEReference(stateEClass, STATE__GENERATORS);
+		createEReference(stateEClass, STATE__EXPORTERS);
+		createEReference(stateEClass, STATE__INSTALLERS);
+		createEReference(stateEClass, STATE__LOADERS);
 		createEAttribute(stateEClass, STATE__PACKAGE_CLASS_NAME);
 		createEAttribute(stateEClass, STATE__EDIT_PLUGIN_CLASS_NAME);
 		createEAttribute(stateEClass, STATE__EDITOR_PLUGIN_CLASS_NAME);
@@ -1959,16 +1959,16 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		addEParameter(op, this.getRevision(), "from", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(stateEClass, State.class, "State", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getState_Generator(), this.getWorker(), null, "generator", null, 0, 1, State.class, IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEReference(getState_Exporter(), this.getWorker(), null, "exporter", null, 0, 1, State.class, IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEReference(getState_Installer(), this.getWorker(), null, "installer", null, 0, 1, State.class, IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEReference(getState_Loader(), this.getWorker(), null, "loader", null, 0, 1, State.class, IS_TRANSIENT,
+		initEReference(getState_Generators(), this.getWorker(), null, "generators", null, 0, -1, State.class,
+				IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getState_Exporters(), this.getWorker(), null, "exporters", null, 0, -1, State.class,
+				IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getState_Installers(), this.getWorker(), null, "installers", null, 0, -1, State.class,
+				IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getState_Loaders(), this.getWorker(), null, "loaders", null, 0, -1, State.class, IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
 		initEAttribute(getState_PackageClassName(), ecorePackage.getEString(), "packageClassName", null, 0, 1,
@@ -2054,6 +2054,10 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		addEOperation(stateEClass, this.getWorker(), "createModelLoader", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(stateEClass, this.getWorker(), "getReturnWorker", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(stateEClass, ecorePackage.getEInt(), "configureJobs", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEBoolean(), "create", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(itemEClass, Item.class, "Item", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getItem_ModelName(), ecorePackage.getEString(), "modelName", null, 0, 1, Item.class,

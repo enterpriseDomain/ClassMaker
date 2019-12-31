@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreSwitch;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 public class ModelUtil {
 
@@ -38,22 +39,23 @@ public class ModelUtil {
 		if (first == null || second == null)
 			return false;
 		else
-			return conjunction
-					? (first.eIsSet(EcorePackage.Literals.EPACKAGE__NS_URI)
-							&& second.eIsSet(EcorePackage.Literals.EPACKAGE__NS_URI)
-									? first.getNsURI().equals(second.getNsURI())
+			return conjunction ? (first.eIsSet(EcorePackage.Literals.EPACKAGE__NS_URI)
+					&& second.eIsSet(EcorePackage.Literals.EPACKAGE__NS_URI)
+							? first.getNsURI().equals(second.getNsURI()) ? EcoreUtil.equals(first, second) : false
+							: false)
+					&& (first.eIsSet(EcorePackage.Literals.ENAMED_ELEMENT__NAME)
+							&& second.eIsSet(EcorePackage.Literals.ENAMED_ELEMENT__NAME)
+									? first.getName().equals(second.getName()) ? EcoreUtil.equals(first, second) : false
 									: false)
-							&& (first.eIsSet(EcorePackage.Literals.ENAMED_ELEMENT__NAME)
-									&& second.eIsSet(EcorePackage.Literals.ENAMED_ELEMENT__NAME)
-											? first.getName().equals(second.getName()) ? true : first.equals(second)
-											: false)
 					: (first.eIsSet(EcorePackage.Literals.EPACKAGE__NS_URI)
 							&& second.eIsSet(EcorePackage.Literals.EPACKAGE__NS_URI)
-									? first.getNsURI().equals(second.getNsURI())
+									? first.getNsURI().equals(second.getNsURI()) ? true
+											: EcoreUtil.equals(first, second)
 									: false)
 							|| (first.eIsSet(EcorePackage.Literals.ENAMED_ELEMENT__NAME)
 									&& second.eIsSet(EcorePackage.Literals.ENAMED_ELEMENT__NAME)
-											? first.getName().equals(second.getName()) ? true : first.equals(second)
+											? first.getName().equals(second.getName()) ? true
+													: EcoreUtil.equals(first, second)
 											: false);
 
 	}

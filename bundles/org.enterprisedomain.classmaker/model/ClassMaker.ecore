@@ -131,14 +131,18 @@
     <eOperations name="createInstaller" eType="#//Worker"/>
     <eOperations name="createModelLoader" eType="#//Worker"/>
     <eOperations name="getReturnWorker" eType="#//Worker"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="generator" eType="#//Worker"
-        transient="true" resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="exporter" eType="#//Worker"
-        transient="true" resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="installer" eType="#//Worker"
-        transient="true" resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="loader" eType="#//Worker"
-        transient="true" resolveProxies="false"/>
+    <eOperations name="configureJobs" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eParameters name="create" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="generators" upperBound="-1"
+        eType="#//Worker" transient="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exporters" upperBound="-1"
+        eType="#//Worker" transient="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="installers" upperBound="-1"
+        eType="#//Worker" transient="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="loaders" upperBound="-1"
+        eType="#//Worker" transient="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="packageClassName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Generated {@link org.eclipse.emf.ecore.EPackage EPackage} class name set in a {@link org.eclipse.emf.codegen.ecore.genmodel.GenModel GenModel}."/>

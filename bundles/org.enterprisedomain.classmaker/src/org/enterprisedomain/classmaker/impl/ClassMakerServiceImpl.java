@@ -113,20 +113,26 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 				options.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
 				if (workspaceResource != null) {
 					if (getWorkspace().eIsSet(ClassMakerPackage.Literals.WORKSPACE__PROJECTS)) {
-						workspaceResource.getContents().set(0, EcoreUtil.copy(getWorkspace()));
 						try {
-							workspaceResource.save(options);
-						} catch (IOException e) {
-							e.printStackTrace();
+							workspaceResource.getContents().set(0, EcoreUtil.copy(getWorkspace()));
+							try {
+								workspaceResource.save(options);
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						} catch (ClassCastException e) {
 						}
-					}
-				} else {
-					workspaceResource = WorkspaceImpl.RESOURCE_SET_EDEFAULT.createResource(uri);
-					workspaceResource.getContents().add(EcoreUtil.copy(getWorkspace()));
-					try {
-						workspaceResource.save(options);
-					} catch (IOException e) {
-						e.printStackTrace();
+					} else {
+						workspaceResource = WorkspaceImpl.RESOURCE_SET_EDEFAULT.createResource(uri);
+						try {
+							workspaceResource.getContents().add(EcoreUtil.copy(getWorkspace()));
+							try {
+								workspaceResource.save(options);
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						} catch (ClassCastException e) {
+						}
 					}
 				}
 			}
@@ -323,7 +329,8 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 		sourceBlueprint.setDynamicModel(source);
 		Blueprint targetBlueprint = createBlueprint();
 		targetBlueprint.setDynamicModel(target);
-		targetBlueprint.getDependencies().addAll(getWorkspace().getContribution(source).getDependencies());
+		if (getWorkspace().getContribution(source, true) != null)
+			targetBlueprint.getDependencies().addAll(getWorkspace().getContribution(source, true).getDependencies());
 		return replace(sourceBlueprint, targetBlueprint, version, monitor);
 	}
 
@@ -350,8 +357,9 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 						revision = contribution.createRevision(monitor);
 					revision.getDomainModel().setDynamic(EcoreUtil.copy(target.getDynamicModel()));
 				}
-			} else
+			} else {
 				return null;
+			}
 		} else {
 			EPackage existingModel = contribution.getDomainModel().getDynamic();
 			if (ModelUtil.ePackagesAreEqual(existingModel, source.getDynamicModel(), true)) {
@@ -370,6 +378,8 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 					contribution.checkout(revision.getVersion());
 				}
 				revision.getDomainModel().setDynamic(EcoreUtil.copy(target.getDynamicModel()));
+			} else {
+				return null;
 			}
 		}
 		contribution.getDependencies().addAll(target.getDependencies());
@@ -564,7 +574,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 				ResourcesPlugin.getWorkspace().getRoot().getRawLocation().append(transformationPath).toOSString());
 		TransformationExecutor executor = new TransformationExecutor(localTransformationURI);
 
-		EList<EObject> inObjects = ECollections.newBasicEList(source);
+		EList<EObject> inObjects = ECollections.asEList(source);
 
 		ModelExtent input = new BasicModelExtent(inObjects);
 		ModelExtent output = new BasicModelExtent();
@@ -580,7 +590,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 		ExecutionDiagnostic result = executor.execute(context, input, output);
 
 		// check the result for success
-		if (result.getSeverity() == Diagnostic.OK) {
+		if (result.getSeverity() == Diagnostic.OK && !output.getContents().isEmpty()) {
 			return output.getContents().get(0);
 		} else {
 			// turn the result diagnostic into status and send it to error log

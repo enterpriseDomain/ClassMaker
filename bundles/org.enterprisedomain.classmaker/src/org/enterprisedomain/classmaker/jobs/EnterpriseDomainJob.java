@@ -71,7 +71,8 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 		public void done(IJobChangeEvent event) {
 			if (!getName().equals(event.getJob().getName()))
 				return;
-			getContributionState().setPhase(getResultStage());
+			if (event.getResult().isOK())
+				getContributionState().setPhase(getResultStage());
 
 			Status result = new Status(event.getResult().getSeverity(), ClassMakerPlugin.PLUGIN_ID,
 					event.getJob().getName() + ": " + event.getResult().getMessage()); //$NON-NLS-1$
@@ -79,6 +80,19 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 				return;
 			ClassMakerPlugin.getInstance().getLog().log(result);
 
+			if (hasErrors(event.getResult()) && getDepth() < 5) {
+				EnterpriseDomainJob job = getJob(getContributionState().getReturnWorker());
+				if (job != null) {
+					EnterpriseDomainJob nextJob = job.getNextJob();
+					EnterpriseDomainJob prevJob = job;
+					while (nextJob != null && !nextJob.terminate()) {
+						prevJob = nextJob;
+						nextJob = nextJob.getNextJob();
+					}
+					prevJob.setNextJob(getNextJob());
+				}
+				setNextJob(job);
+			}
 			if (getNextJob() == null) {
 				if (ClassMakerPlugin.getPreviousProgressProvider() != null)
 					Job.getJobManager().setProgressProvider(ClassMakerPlugin.getPreviousProgressProvider());
@@ -88,11 +102,6 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 			}
 			getNextJob().setProject(getProject());
 			getNextJob().schedule();
-			try {
-				getNextJob().join();
-			} catch (InterruptedException e) {
-				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createWarningStatus(e));
-			}
 		}
 
 	};
@@ -103,14 +112,17 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 
 	private boolean commitState = false;
 
+	private int depth = -1;
+
 	private int buildKind;
 
 	private boolean changeRule;
 
 	private Properties properties;
 
-	public EnterpriseDomainJob(String name, long stateTimestamp) {
+	public EnterpriseDomainJob(String name, int depth, long stateTimestamp) {
 		super(name);
+		setDepth(depth);
 		setStateTimestamp(stateTimestamp);
 		setUser(true);
 		setPriority(Job.BUILD);
@@ -130,7 +142,7 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 		for (Job job : jobs)
 			if (job.getName().equals(name))
 				try {
-					job.join();
+					job.join(10000, ClassMakerPlugin.getProgressMonitor());
 					joined = true;
 				} catch (InterruptedException e) {
 				}
@@ -146,11 +158,7 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 			return result;
 		if (progressProvider == null)
 			setProgressProvider(DEFAULT_PROGRESS_PROVIDER);
-		result = work(monitor);
-		if (hasErrors(result)) {
-			setNextJob(getJob(getContributionState().getReturnWorker()));
-		}
-		return result;
+		return work(monitor);
 	}
 
 	public boolean hasErrors(IStatus status) {
@@ -158,6 +166,8 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 	}
 
 	public static EnterpriseDomainJob getJob(Worker worker) {
+		if (worker == null)
+			return null;
 		return (EnterpriseDomainJob) worker.getAdapter(EnterpriseDomainJob.class);
 	}
 
@@ -209,6 +219,18 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 	 */
 	public int getBuildKind() {
 		return buildKind;
+	}
+
+	protected int getDepth() {
+		return depth;
+	}
+
+	protected void setDepth(int depth) {
+		this.depth = depth;
+	}
+
+	protected boolean terminate() {
+		return false;
 	}
 
 	public IProject getProject() {
@@ -266,7 +288,7 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 	}
 
 	public State getContributionState() {
-		if (contributionState == null || contributionState.getTimestamp() != getStateTimestamp()) {
+		if (contributionState == null) {
 			Contribution contribution = ClassMakerPlugin.getClassMaker().getWorkspace()
 					.getContribution(getProject().getName());
 			if (contribution == null)

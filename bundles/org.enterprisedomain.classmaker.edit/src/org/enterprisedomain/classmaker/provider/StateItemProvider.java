@@ -58,10 +58,10 @@ public class StateItemProvider extends ItemItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addGeneratorPropertyDescriptor(object);
-			addExporterPropertyDescriptor(object);
-			addInstallerPropertyDescriptor(object);
-			addLoaderPropertyDescriptor(object);
+			addGeneratorsPropertyDescriptor(object);
+			addExportersPropertyDescriptor(object);
+			addInstallersPropertyDescriptor(object);
+			addLoadersPropertyDescriptor(object);
 			addPackageClassNamePropertyDescriptor(object);
 			addEditPluginClassNamePropertyDescriptor(object);
 			addEditorPluginClassNamePropertyDescriptor(object);
@@ -84,61 +84,62 @@ public class StateItemProvider extends ItemItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Generator feature. <!--
+	 * This adds a property descriptor for the Generators feature. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	protected void addGeneratorPropertyDescriptor(Object object) {
+	protected void addGeneratorsPropertyDescriptor(Object object) {
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_State_generator_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_State_generator_feature",
+						getResourceLocator(), getString("_UI_State_generators_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_State_generators_feature",
 								"_UI_State_type"),
-						ClassMakerPackage.Literals.STATE__GENERATOR, true, false, true, null, null, null));
+						ClassMakerPackage.Literals.STATE__GENERATORS, true, false, true, null, null, null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Exporter feature. <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	protected void addExporterPropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_State_exporter_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_State_exporter_feature", "_UI_State_type"),
-						ClassMakerPackage.Literals.STATE__EXPORTER, true, false, true, null, null, null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Installer feature. <!--
+	 * This adds a property descriptor for the Exporters feature. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	protected void addInstallerPropertyDescriptor(Object object) {
+	protected void addExportersPropertyDescriptor(Object object) {
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_State_installer_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_State_installer_feature",
+						getResourceLocator(), getString("_UI_State_exporters_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_State_exporters_feature",
 								"_UI_State_type"),
-						ClassMakerPackage.Literals.STATE__INSTALLER, true, false, true, null, null, null));
+						ClassMakerPackage.Literals.STATE__EXPORTERS, true, false, true, null, null, null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Loader feature. <!-- begin-user-doc
+	 * This adds a property descriptor for the Installers feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected void addInstallersPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_State_installers_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_State_installers_feature",
+								"_UI_State_type"),
+						ClassMakerPackage.Literals.STATE__INSTALLERS, true, false, true, null, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Loaders feature. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	protected void addLoaderPropertyDescriptor(Object object) {
+	protected void addLoadersPropertyDescriptor(Object object) {
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_State_loader_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_State_loader_feature", "_UI_State_type"),
-						ClassMakerPackage.Literals.STATE__LOADER, true, false, true, null, null, null));
+						getResourceLocator(), getString("_UI_State_loaders_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_State_loaders_feature", "_UI_State_type"),
+						ClassMakerPackage.Literals.STATE__LOADERS, true, false, true, null, null, null));
 	}
 
 	/**

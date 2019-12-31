@@ -56,88 +56,98 @@ public class PDEPluginExporter extends AbstractExporter {
 
 	private PluginExportOperation op = null;
 
-	public PDEPluginExporter(long stateTimestamp) {
-		super(stateTimestamp);
+	private Object lock = new Object();
+
+	public PDEPluginExporter(int depth, long stateTimestamp) {
+		super(depth, stateTimestamp);
 	}
 
 	@Override
 	public IStatus work(final IProgressMonitor monitor) throws CoreException {
-		cleanup(monitor);
-
-		State state = getContributionState();
-		Version version = state.getProject().getVersion();
-		final FeatureExportInfo info = new FeatureExportInfo();
-		info.destinationDirectory = getProperties().getProperty(EXPORT_DESTINATION_PROP);
-		info.toDirectory = true;
-		info.useJarFormat = true;
-		info.exportMetadata = true;
-		info.useWorkspaceCompiledClasses = false;
-		info.targets = new String[][] { { "os", TargetPlatform.getOS() }, { "ws", TargetPlatform.getWS() }, //$NON-NLS-1$ //$NON-NLS-2$
-				{ "arch", TargetPlatform.getOSArch() }, { "nl", TargetPlatform.getNL() } }; //$NON-NLS-1$ //$NON-NLS-2$
-		if (!version.equals(Version.emptyVersion))
-			info.qualifier = (String) version.getQualifier();
-		PluginModelManager modelManager = PDECore.getDefault().getModelManager();
-		modelManager.bundleRootChanged(getProject());
-		List<IPluginModelBase> models = new ArrayList<IPluginModelBase>();
-		IPluginModelBase model = modelManager.findModel(getProject());
-		if (model != null) {
-			models.add(model);
-			updateBuildProperties(model, true);
-		}
-		if (getContributionState().isEdit()) {
-			IPluginModelBase edit = modelManager.findModel(getProject().getName() + ".edit");
-			if (edit != null) {
-				models.add(edit);
-				updateBuildProperties(edit, false);
-				IPluginModelBase emfEdit = modelManager.findModel("org.eclipse.emf.edit");
-				if (emfEdit != null)
-					models.add(emfEdit);
+		synchronized (lock) {
+			State state = getContributionState();
+			Version version = state.getProject().getVersion();
+			final FeatureExportInfo info = new FeatureExportInfo();
+			info.destinationDirectory = getProperties().getProperty(EXPORT_DESTINATION_PROP);
+			info.toDirectory = true;
+			info.useJarFormat = true;
+			info.exportMetadata = true;
+			info.useWorkspaceCompiledClasses = false;
+			info.targets = new String[][] { { "os", TargetPlatform.getOS() }, { "ws", TargetPlatform.getWS() }, //$NON-NLS-1$ //$NON-NLS-2$
+					{ "arch", TargetPlatform.getOSArch() }, { "nl", TargetPlatform.getNL() } }; //$NON-NLS-1$ //$NON-NLS-2$
+			if (!version.equals(Version.emptyVersion))
+				info.qualifier = (String) version.getQualifier();
+			PluginModelManager modelManager = PDECore.getDefault().getModelManager();
+			modelManager.bundleRootChanged(getProject());
+			List<IPluginModelBase> models = new ArrayList<IPluginModelBase>();
+			IPluginModelBase model = modelManager.findModel(getProject());
+			if (model != null) {
+				models.add(model);
+				updateBuildProperties(model, true);
+				if (op != null)
+					op.deleteBuildFiles(model);
+				if (new Version(model.getPluginBase().getVersion()).compareTo(state.getRevision().getVersion()) == 0)
+					cleanup(monitor);
 			}
-		}
-		if (getContributionState().isEditor()) {
-			IPluginModelBase editor = modelManager.findModel(getProject().getName() + ".editor");
-			if (editor != null) {
-				models.add(editor);
-				updateBuildProperties(editor, false);
-				IPluginModelBase emfEditor = modelManager.findModel("org.eclipse.emf.edit.ui");
-				if (emfEditor != null)
-					models.add(emfEditor);
-			}
-		}
-		if (!models.isEmpty())
-			info.items = models.toArray();
-		joinJob(Messages.JobNamePDEExport);
-		final SubMonitor pm = SubMonitor.convert(monitor);
-		pm.setTaskName(Messages.TaskNamePluginExport);
-		pm.subTask(Messages.SubTaskNamePluginExport);
-		final SubMonitor m = pm.newChild(9, SubMonitor.SUPPRESS_ISCANCELED);
-		op = new PluginExportOperation(info, Messages.JobNamePDEExport);
-		DelegatingJob delegate = new DelegatingJob(op, getStateTimestamp());
-		delegate.setProgressProvider(new ProgressProvider() {
-
-			@Override
-			public IProgressMonitor createMonitor(Job job) {
-				return m;
-			}
-		});
-		delegate.setContributionState(getContributionState());
-		delegate.setNextJob(getNextJob());
-		delegate.setResultStage(getResultStage());
-		delegate.setDirtyStage(getDirtyStage());
-		setNextJob(delegate);
-		delegate.addJobChangeListener(new JobChangeAdapter() {
-
-			@Override
-			public void done(IJobChangeEvent event) {
-				if (event.getJob().getName().equals(Messages.JobNamePDEExport)) {
-					m.done();
-					pm.done();
+			if (getContributionState().isEdit()) {
+				IPluginModelBase edit = modelManager.findModel(getProject().getName() + ".edit"); //$NON-NLS-1$
+				if (edit != null) {
+					models.add(edit);
+					updateBuildProperties(edit, false);
+					IPluginModelBase emfEdit = modelManager.findModel("org.eclipse.emf.edit"); //$NON-NLS-1$
+					if (emfEdit != null)
+						models.add(emfEdit);
 				}
+				if (op != null)
+					op.deleteBuildFiles(edit);
 			}
+			if (getContributionState().isEditor()) {
+				IPluginModelBase editor = modelManager.findModel(getProject().getName() + ".editor"); //$NON-NLS-1$
+				if (editor != null) {
+					models.add(editor);
+					updateBuildProperties(editor, false);
+					IPluginModelBase emfEditor = modelManager.findModel("org.eclipse.emf.edit.ui"); //$NON-NLS-1$
+					if (emfEditor != null)
+						models.add(emfEditor);
+				}
+				if (op != null)
+					op.deleteBuildFiles(editor);
+			}
+			if (!models.isEmpty())
+				info.items = models.toArray();
+//			joinJob(Messages.JobNamePDEExport);
+			final SubMonitor pm = SubMonitor.convert(monitor);
+			pm.setTaskName(Messages.TaskNamePluginExport);
+			pm.subTask(Messages.SubTaskNamePluginExport);
+			final SubMonitor m = pm.newChild(9, SubMonitor.SUPPRESS_ISCANCELED);
 
-		});
-		state.setPhase(getResultStage());
-		return Status.OK_STATUS;
+			op = new PluginExportOperation(info, Messages.JobNamePDEExport);
+			DelegatingJob delegate = new DelegatingJob(op, getDepth(), getStateTimestamp());
+			delegate.setProgressProvider(new ProgressProvider() {
+
+				@Override
+				public IProgressMonitor createMonitor(Job job) {
+					return m;
+				}
+			});
+			delegate.setContributionState(getContributionState());
+			delegate.setNextJob(getNextJob());
+			delegate.setResultStage(getResultStage());
+			delegate.setDirtyStage(getDirtyStage());
+			setNextJob(delegate);
+			delegate.addJobChangeListener(new JobChangeAdapter() {
+
+				@Override
+				public void done(IJobChangeEvent event) {
+					if (event.getJob().getName().equals(Messages.JobNamePDEExport)) {
+						m.done();
+						pm.done();
+					}
+				}
+
+			});
+			return new Status(IStatus.INFO, ClassMakerPlugin.PLUGIN_ID, Messages.PDEExportScheduled);
+		}
 	}
 
 	@Override

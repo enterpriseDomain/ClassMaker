@@ -24,8 +24,8 @@ import org.eclipse.emf.ecore.EPackage;
 
 public class CDOGenerator extends EcoreGenerator {
 
-	public CDOGenerator(int stateTimestamp) {
-		super(stateTimestamp);
+	public CDOGenerator(int depth, long stateTimestamp) {
+		super(depth, stateTimestamp);
 	}
 
 	protected void setupGenModel(IPath projectPath, GenModel ecoreGenModel, Collection<EPackage> ePackages) {

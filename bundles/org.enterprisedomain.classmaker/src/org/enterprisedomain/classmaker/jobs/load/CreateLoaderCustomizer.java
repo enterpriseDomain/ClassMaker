@@ -7,7 +7,7 @@ public class CreateLoaderCustomizer extends CustomizerImpl {
 
 	@Override
 	public Object customize(EList<Object> args) {
-		return new OSGiEPackageLoader((Long) args.get(0));
+		return new OSGiEPackageLoader((Integer) args.get(0), (Long) args.get(1));
 	}
 
 }

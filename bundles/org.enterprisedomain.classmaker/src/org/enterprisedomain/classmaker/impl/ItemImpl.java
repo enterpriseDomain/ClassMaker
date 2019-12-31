@@ -445,7 +445,7 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 		EPackage ePackage = null;
 		if (from.getDomainModel() != null)
 			ePackage = from.getDomainModel().getDynamic();
-		if (ePackage != null && !getDomainModel().eIsSet(ClassMakerPackage.Literals.MODEL_PAIR__DYNAMIC))
+		if (ePackage != null)
 			getDomainModel().setDynamic(EcoreUtil.copy(ePackage));
 	}
 
