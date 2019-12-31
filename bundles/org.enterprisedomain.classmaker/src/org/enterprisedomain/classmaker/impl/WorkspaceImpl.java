@@ -326,20 +326,23 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 					if (workspaceResource == null) {
 						workspaceResource = getResourceSet().createResource(uri);
 					}
-					if (workspaceResource.getContents().isEmpty())
-						workspaceResource.getContents().add(EcoreUtil.copy((EObject) msg.getOldValue()));
-					else
-						workspaceResource.getContents().set(0, EcoreUtil.copy((EObject) msg.getOldValue()));
 					try {
-						Map<String, String> options = new HashMap<String, String>();
-						options.put(XMLResource.OPTION_PROCESS_DANGLING_HREF,
-								XMLResource.OPTION_PROCESS_DANGLING_HREF_RECORD);
-						options.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED,
-								Resource.OPTION_SAVE_ONLY_IF_CHANGED_FILE_BUFFER);
-						workspaceResource.save(options);
-					} catch (IOException e) {
-						ClassMakerPlugin.getInstance().getLog()
-								.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+						if (workspaceResource.getContents().isEmpty())
+							workspaceResource.getContents().add(EcoreUtil.copy((EObject) msg.getOldValue()));
+						else
+							workspaceResource.getContents().set(0, EcoreUtil.copy((EObject) msg.getOldValue()));
+						try {
+							Map<String, String> options = new HashMap<String, String>();
+							options.put(XMLResource.OPTION_PROCESS_DANGLING_HREF,
+									XMLResource.OPTION_PROCESS_DANGLING_HREF_RECORD);
+							options.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED,
+									Resource.OPTION_SAVE_ONLY_IF_CHANGED_FILE_BUFFER);
+							workspaceResource.save(options);
+						} catch (IOException e) {
+							ClassMakerPlugin.getInstance().getLog().log(
+									new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+						}
+					} catch (ClassCastException e) {
 					}
 				}
 			}
@@ -402,7 +405,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			}
 
 		});
-		customizers.get(0).customize((EList<Object>) (EList<?>) ECollections.newBasicEList(this));
+		customizers.get(0).customize((EList<Object>) (EList<?>) ECollections.asEList(this));
 	}
 
 	private static boolean targetPlatformAlreadySet = false;

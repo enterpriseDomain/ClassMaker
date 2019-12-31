@@ -79,10 +79,10 @@
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="ClassMaker.ecore#//State" labelFeature="#//classmaker/State/timestamp">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//State/generator"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//State/exporter"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//State/installer"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//State/loader"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//State/generators"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//State/exporters"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//State/installers"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//State/loaders"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/packageClassName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/editPluginClassName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/editorPluginClassName"/>
@@ -126,6 +126,10 @@
       <genOperations ecoreOperation="ClassMaker.ecore#//State/createInstaller"/>
       <genOperations ecoreOperation="ClassMaker.ecore#//State/createModelLoader"/>
       <genOperations ecoreOperation="ClassMaker.ecore#//State/getReturnWorker"/>
+      <genOperations documentation="@return current depth" ecoreOperation="ClassMaker.ecore#//State/configureJobs">
+        <genParameters ecoreParameter="ClassMaker.ecore#//State/configureJobs/create"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//State/configureJobs/monitor"/>
+      </genOperations>
     </genClasses>
     <genClasses image="false" ecoreClass="ClassMaker.ecore#//Item">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Item/modelName"/>

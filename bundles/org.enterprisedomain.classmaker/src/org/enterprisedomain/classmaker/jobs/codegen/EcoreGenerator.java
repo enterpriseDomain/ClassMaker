@@ -63,19 +63,19 @@ import org.enterprisedomain.classmaker.util.ResourceUtils;
 
 public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 
-	public EcoreGenerator(long stateTimestamp) {
-		super(Messages.JobNameCodeGenerator, stateTimestamp);
+	public EcoreGenerator(int depth, long stateTimestamp) {
+		super(Messages.JobNameCodeGenerator, depth, stateTimestamp);
 	}
 
 	protected static final String SOURCE_FOLDER_NAME = "src"; /// main/java"; //$NON-NLS-1$
 
 	public static final String GENMODEL_EXT = "genmodel"; //$NON-NLS-1$
 
-	private GeneratorJob genModelGeneration = new GenModelGenerationJob(getStateTimestamp());
+	private GeneratorJob genModelGeneration = new GenModelGenerationJob(getDepth(), getStateTimestamp());
 
-	private GeneratorJob genModelSetup = new GenModelSetupJob(this, getStateTimestamp());
+	private GeneratorJob genModelSetup = new GenModelSetupJob(this, getDepth(), getStateTimestamp());
 
-	private CodeGenerationJob codeGeneration = new CodeGenerationJob(getStateTimestamp());
+	private CodeGenerationJob codeGeneration = new CodeGenerationJob(getDepth(), getStateTimestamp());
 
 	private String modelName;
 
@@ -85,8 +85,8 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 		private IPath modelPath;
 		private IPath genModelPath;
 
-		public GeneratorJob(String jobName, long stateTimestamp) {
-			super(jobName, stateTimestamp);
+		public GeneratorJob(String jobName, int depth, long stateTimestamp) {
+			super(jobName, depth, stateTimestamp);
 		}
 
 		public org.eclipse.emf.codegen.ecore.Generator getGenerator() {
@@ -131,8 +131,8 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 
 	protected class GenModelGenerationJob extends GeneratorJob {
 
-		public GenModelGenerationJob(long stateTimestamp) {
-			super(Messages.JobNameGenModelGeneration, stateTimestamp);
+		public GenModelGenerationJob(int depth, long stateTimestamp) {
+			super(Messages.JobNameGenModelGeneration, depth, stateTimestamp);
 			setChangeRule(false);
 		}
 
@@ -158,8 +158,8 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 
 	protected class CodeGenerationJob extends GeneratorJob {
 
-		public CodeGenerationJob(long stateTimestamp) {
-			super(NLS.bind(Messages.JobNameCodeGeneration, "Code"), stateTimestamp);
+		public CodeGenerationJob(int depth, long stateTimestamp) {
+			super(NLS.bind(Messages.JobNameCodeGeneration, "Code"), depth, stateTimestamp);
 			setChangeRule(false);
 		}
 
@@ -325,7 +325,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 		genModel.reconcile();
 		genModel.initialize(ePackages);
 		genModel.setCanGenerate(true);
-		genModel.setComplianceLevel(GenJDKLevel.JDK70_LITERAL);
+		genModel.setComplianceLevel(GenJDKLevel.JDK90_LITERAL);
 		genModel.setUpdateClasspath(true);
 		genModel.setModelDirectory(projectPath.append(SOURCE_FOLDER_NAME).toString());
 		genModel.setSuppressInterfaces(true);

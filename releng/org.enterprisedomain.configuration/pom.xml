@@ -6,7 +6,7 @@
 	<version>0.8.1-SNAPSHOT</version>
 	<properties>
 		<product.version>0.8.1-SNAPSHOT</product.version>
-		<tycho.version>1.4.0</tycho.version>
+		<tycho.version>1.5.1</tycho.version>
 		<tycho.extras.version>${tycho.version}</tycho.extras.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<org.osgi.framework.system.capabilities>
@@ -18,18 +18,18 @@
 			<id>edapt-p2-repo</id>
 			<url>http://download.eclipse.org/edapt/releases/12x</url>
 			<layout>p2</layout>
-		</repository>		
-		<repository>
-		    <id>2019-09</id>
-		    <layout>p2</layout>
-		    <url>http://download.eclipse.org/releases/2019-09</url>
 		</repository>
 		<repository>
-		    <id>ecp</id>
-		    <layout>p2</layout>
-		    <url>http://download.eclipse.org/ecp/releases/releases_target_122</url>
+			<id>2019-12</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/releases/2019-12</url>
 		</repository>
-  	</repositories>
+		<repository>
+			<id>ecp</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/ecp/releases/releases_target_123</url>
+		</repository>
+	</repositories>
 	<build>
 		<plugins>
 			<plugin>
@@ -104,6 +104,26 @@
 		<pluginManagement>
 			<plugins>
 				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-enforcer-plugin</artifactId>
+					<version>1.4.1</version>
+					<executions>
+						<execution>
+							<id>enforce-maven</id>
+							<goals>
+								<goal>enforce</goal>
+							</goals>
+							<configuration>
+								<rules>
+									<requireMavenVersion>
+										<version>3.6.3</version>
+									</requireMavenVersion>
+								</rules>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
 					<version>1.0.0</version>
@@ -126,7 +146,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<execute/>
+										<execute />
 									</action>
 								</pluginExecution>
 							</pluginExecutions>

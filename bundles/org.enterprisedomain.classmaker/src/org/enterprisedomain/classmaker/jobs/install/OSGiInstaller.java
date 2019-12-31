@@ -63,9 +63,8 @@ public class OSGiInstaller extends ContainerJob {
 							Version.parseVersion(event.getBundle().getHeaders().get(Constants.BUNDLE_VERSION)),
 							getContributionState().getProject().getVersion(), true)))
 				switch (event.getType()) {
+				case BundleEvent.RESOLVED:
 				case BundleEvent.INSTALLED:
-					installed.release();
-					break;
 				case BundleEvent.UPDATED:
 					installed.release();
 					break;
@@ -79,8 +78,8 @@ public class OSGiInstaller extends ContainerJob {
 	private Semaphore uninstalled;
 	private FrameworkWiring frameworkWiring;
 
-	public OSGiInstaller(long stateTimestamp) {
-		super(Messages.JobNameInstaller, stateTimestamp);
+	public OSGiInstaller(int depth, long stateTimestamp) {
+		super(Messages.JobNameInstaller, depth, stateTimestamp);
 		installed = new Semaphore(0);
 		uninstalled = new Semaphore(0);
 	}
@@ -200,13 +199,12 @@ public class OSGiInstaller extends ContainerJob {
 							&& revision.eIsSet(ClassMakerPackage.Literals.REVISION__STATE_HISTORY)
 							&& !revision.getStateHistory().isEmpty())
 						for (State state : revision.getStateHistory().values())
-							if (state.getDomainModel().getGenerated() != null && EPackage.Registry.INSTANCE.getEPackage(
-									getContributionState().getDomainModel().getGenerated().getNsURI()) != null)
-								EPackage.Registry.INSTANCE
-										.remove(getContributionState().getDomainModel().getGenerated().getNsURI());
+							if (state.getDomainModel().getGenerated() != null && EPackage.Registry.INSTANCE
+									.getEPackage(state.getDomainModel().getGenerated().getNsURI()) != null)
+								EPackage.Registry.INSTANCE.remove(state.getDomainModel().getGenerated().getNsURI());
 				existingBundle.uninstall();
-				uninstalled.acquire();
 				refreshBundle(null, context);
+				uninstalled.acquire();
 			}
 			switch (kind) {
 			case -1:

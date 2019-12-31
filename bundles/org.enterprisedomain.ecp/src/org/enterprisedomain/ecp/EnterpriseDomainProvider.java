@@ -739,7 +739,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 						Activator.log(e);
 					}
 				else
-					domainProject.delete(ECollections.newBasicEList(objects));
+					domainProject.delete(ECollections.asEList(objects));
 			}
 		};
 		if (changeCommand.canExecute()) {

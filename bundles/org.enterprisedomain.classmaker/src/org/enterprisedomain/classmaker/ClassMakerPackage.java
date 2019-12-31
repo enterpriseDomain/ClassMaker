@@ -827,40 +827,40 @@ public interface ClassMakerPackage extends EPackage {
 	int STATE__PROJECT = ITEM__PROJECT;
 
 	/**
-	 * The feature id for the '<em><b>Generator</b></em>' reference. <!--
+	 * The feature id for the '<em><b>Generators</b></em>' reference list. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__GENERATOR = ITEM_FEATURE_COUNT + 0;
+	int STATE__GENERATORS = ITEM_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Exporter</b></em>' reference. <!--
+	 * The feature id for the '<em><b>Exporters</b></em>' reference list. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__EXPORTER = ITEM_FEATURE_COUNT + 1;
+	int STATE__EXPORTERS = ITEM_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Installer</b></em>' reference. <!--
+	 * The feature id for the '<em><b>Installers</b></em>' reference list. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__INSTALLER = ITEM_FEATURE_COUNT + 2;
+	int STATE__INSTALLERS = ITEM_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Loader</b></em>' reference. <!--
+	 * The feature id for the '<em><b>Loaders</b></em>' reference list. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__LOADER = ITEM_FEATURE_COUNT + 3;
+	int STATE__LOADERS = ITEM_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Package Class Name</b></em>' attribute. <!--
@@ -1997,52 +1997,52 @@ public interface ClassMakerPackage extends EPackage {
 	EClass getState();
 
 	/**
-	 * Returns the meta object for the reference
-	 * '{@link org.enterprisedomain.classmaker.State#getGenerator
-	 * <em>Generator</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the meta object for the reference list
+	 * '{@link org.enterprisedomain.classmaker.State#getGenerators
+	 * <em>Generators</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the reference '<em>Generator</em>'.
-	 * @see org.enterprisedomain.classmaker.State#getGenerator()
+	 * @return the meta object for the reference list '<em>Generators</em>'.
+	 * @see org.enterprisedomain.classmaker.State#getGenerators()
 	 * @see #getState()
 	 * @generated
 	 */
-	EReference getState_Generator();
+	EReference getState_Generators();
 
 	/**
-	 * Returns the meta object for the reference
-	 * '{@link org.enterprisedomain.classmaker.State#getExporter
-	 * <em>Exporter</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the meta object for the reference list
+	 * '{@link org.enterprisedomain.classmaker.State#getExporters
+	 * <em>Exporters</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the reference '<em>Exporter</em>'.
-	 * @see org.enterprisedomain.classmaker.State#getExporter()
+	 * @return the meta object for the reference list '<em>Exporters</em>'.
+	 * @see org.enterprisedomain.classmaker.State#getExporters()
 	 * @see #getState()
 	 * @generated
 	 */
-	EReference getState_Exporter();
+	EReference getState_Exporters();
 
 	/**
-	 * Returns the meta object for the reference
-	 * '{@link org.enterprisedomain.classmaker.State#getInstaller
-	 * <em>Installer</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the meta object for the reference list
+	 * '{@link org.enterprisedomain.classmaker.State#getInstallers
+	 * <em>Installers</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the reference '<em>Installer</em>'.
-	 * @see org.enterprisedomain.classmaker.State#getInstaller()
+	 * @return the meta object for the reference list '<em>Installers</em>'.
+	 * @see org.enterprisedomain.classmaker.State#getInstallers()
 	 * @see #getState()
 	 * @generated
 	 */
-	EReference getState_Installer();
+	EReference getState_Installers();
 
 	/**
-	 * Returns the meta object for the reference
-	 * '{@link org.enterprisedomain.classmaker.State#getLoader <em>Loader</em>}'.
+	 * Returns the meta object for the reference list
+	 * '{@link org.enterprisedomain.classmaker.State#getLoaders <em>Loaders</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the reference '<em>Loader</em>'.
-	 * @see org.enterprisedomain.classmaker.State#getLoader()
+	 * @return the meta object for the reference list '<em>Loaders</em>'.
+	 * @see org.enterprisedomain.classmaker.State#getLoaders()
 	 * @see #getState()
 	 * @generated
 	 */
-	EReference getState_Loader();
+	EReference getState_Loaders();
 
 	/**
 	 * Returns the meta object for the attribute
@@ -3475,36 +3475,36 @@ public interface ClassMakerPackage extends EPackage {
 		EClass STATE = eINSTANCE.getState();
 
 		/**
-		 * The meta object literal for the '<em><b>Generator</b></em>' reference
+		 * The meta object literal for the '<em><b>Generators</b></em>' reference list
 		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
-		EReference STATE__GENERATOR = eINSTANCE.getState_Generator();
+		EReference STATE__GENERATORS = eINSTANCE.getState_Generators();
 
 		/**
-		 * The meta object literal for the '<em><b>Exporter</b></em>' reference feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
-		 * @generated
-		 */
-		EReference STATE__EXPORTER = eINSTANCE.getState_Exporter();
-
-		/**
-		 * The meta object literal for the '<em><b>Installer</b></em>' reference
+		 * The meta object literal for the '<em><b>Exporters</b></em>' reference list
 		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
-		EReference STATE__INSTALLER = eINSTANCE.getState_Installer();
+		EReference STATE__EXPORTERS = eINSTANCE.getState_Exporters();
 
 		/**
-		 * The meta object literal for the '<em><b>Loader</b></em>' reference feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Installers</b></em>' reference list
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
-		EReference STATE__LOADER = eINSTANCE.getState_Loader();
+		EReference STATE__INSTALLERS = eINSTANCE.getState_Installers();
+
+		/**
+		 * The meta object literal for the '<em><b>Loaders</b></em>' reference list
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference STATE__LOADERS = eINSTANCE.getState_Loaders();
 
 		/**
 		 * The meta object literal for the '<em><b>Package Class Name</b></em>'

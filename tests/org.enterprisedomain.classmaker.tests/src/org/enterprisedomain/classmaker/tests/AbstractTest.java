@@ -261,6 +261,7 @@ public abstract class AbstractTest {
 		EObject o = null;
 		try {
 			o = eFactory.create(s);
+		} catch (IllegalStateException e) {
 		} catch (NoClassDefFoundError e) {
 			fail(e.getLocalizedMessage());
 		}

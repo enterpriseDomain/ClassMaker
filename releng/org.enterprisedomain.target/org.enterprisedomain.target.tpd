@@ -1,4 +1,4 @@
 target "org.enterprisedomain.target" with allEnvironments configurePhase
 
-include "photon.tpd"
+include "2019-12.tpd"
 include "etc.tpd"

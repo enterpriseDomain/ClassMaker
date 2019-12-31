@@ -83,8 +83,8 @@ public class OSGiEPackageLoader extends ContainerJob {
 		}
 	};
 
-	public OSGiEPackageLoader(long stateTimestamp) {
-		super(Messages.JobNameLoader, stateTimestamp);
+	public OSGiEPackageLoader(int depth, long stateTimestamp) {
+		super(Messages.JobNameLoader, depth, stateTimestamp);
 	}
 
 	public IStatus work(IProgressMonitor monitor) throws CoreException {
@@ -142,6 +142,11 @@ public class OSGiEPackageLoader extends ContainerJob {
 				setException(e);
 			}
 		}
+	}
+
+	@Override
+	protected boolean terminate() {
+		return true;
 	}
 
 	private IStatus getStatus(Bundle osgiBundle) {
