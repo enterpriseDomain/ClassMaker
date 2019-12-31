@@ -12,7 +12,10 @@ cache:
   - "$HOME/.m2"
 before_install:
 - cp toolchains.xml ~/.m2/toolchains.xml
-script: mvn clean verify
+- "mvn -N io.takari:maven:0.7.7:wrapper -Dmaven=${MAVEN_VERSION}"
+script: 
+ - ./mvnw -Dfcrepo.streaming.parallel=true install -B -V
+ - mvn clean verify
 before_deploy:
   - mvn package -Dmaven.test.skip=true
 deploy:
