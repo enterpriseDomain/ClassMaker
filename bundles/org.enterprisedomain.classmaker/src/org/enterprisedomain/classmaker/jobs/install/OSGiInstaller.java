@@ -199,9 +199,12 @@ public class OSGiInstaller extends ContainerJob {
 							&& revision.eIsSet(ClassMakerPackage.Literals.REVISION__STATE_HISTORY)
 							&& !revision.getStateHistory().isEmpty())
 						for (State state : revision.getStateHistory().values())
-							if (state.getDomainModel().getGenerated() != null && EPackage.Registry.INSTANCE
-									.getEPackage(state.getDomainModel().getGenerated().getNsURI()) != null)
-								EPackage.Registry.INSTANCE.remove(state.getDomainModel().getGenerated().getNsURI());
+							if (state.getDomainModel().getGenerated() != null
+									&& state.getDomainModel().getGenerated() instanceof EPackage
+									&& EPackage.Registry.INSTANCE.getEPackage(
+											((EPackage) state.getDomainModel().getGenerated()).getNsURI()) != null)
+								EPackage.Registry.INSTANCE
+										.remove(((EPackage) state.getDomainModel().getGenerated()).getNsURI());
 				existingBundle.uninstall();
 				refreshBundle(null, context);
 				uninstalled.acquire();

@@ -61,6 +61,15 @@ public interface ClassMakerFactory extends EFactory {
 	State createState();
 
 	/**
+	 * Returns a new object of class '<em>Strategy</em>'. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return a new object of class '<em>Strategy</em>'.
+	 * @generated
+	 */
+	Strategy createStrategy();
+
+	/**
 	 * Returns a new object of class '<em>Workspace</em>'. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 

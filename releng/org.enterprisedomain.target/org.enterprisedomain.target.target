@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="org.enterprisedomain.target" sequenceNumber="1576919048">
+<target name="org.enterprisedomain.target" sequenceNumber="1579752325">
   <locations>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.eclipse.rcp.feature.group" version="4.14.0.v20191210-0610"/>
@@ -84,6 +84,7 @@
       <unit id="org.eclipse.emf.ecp.common.ui" version="1.23.0.20191216-1644"/>
       <unit id="org.eclipse.emf.ecp.emfforms.runtime.feature.feature.group" version="1.23.0.20191216-1644"/>
       <unit id="org.eclipse.emfforms.setup.base" version="1.23.0.20191216-1644"/>
+      <unit id="org.eclipse.emf.ecp.validation" version="1.23.0.20191216-1644"/>
       <unit id="org.eclipse.emf.ecp.feature.feature.group" version="1.23.0.20191216-1644"/>
       <unit id="org.eclipse.emf.ecp.validation.view.feature.feature.group" version="1.23.0.20191216-1644"/>
       <unit id="org.eclipse.emf.ecp.view.treemasterdetail.validation" version="1.23.0.20191216-1644"/>

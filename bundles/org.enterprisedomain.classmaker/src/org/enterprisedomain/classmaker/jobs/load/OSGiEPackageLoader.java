@@ -22,6 +22,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.osgi.util.NLS;
@@ -156,7 +157,12 @@ public class OSGiEPackageLoader extends ContainerJob {
 			ePackagesMsg = Messages.EPackageNo;
 			warning = true;
 		} else {
-			EPackage ePackage = getContributionState().getDomainModel().getGenerated();
+			EPackage ePackage = null;
+			if (getContributionState().getDomainModel().getGenerated() instanceof EPackage)
+				ePackage = (EPackage) getContributionState().getDomainModel().getGenerated();
+			else
+				return ClassMakerPlugin.createInfoStatus(NLS.bind("EObject {0} is not a EPackage",
+						getContributionState().getDomainModel().getGenerated()));
 			if (ePackage != null)
 				ePackagesMsg = ePackagesMsg + ePackage.getNsURI() + ", "; //$NON-NLS-1$
 			if (ePackagesMsg.length() > 2)
@@ -184,9 +190,11 @@ public class OSGiEPackageLoader extends ContainerJob {
 		switch (kind) {
 		case 0:
 			try {
-				EPackage model = state.getDomainModel().getDynamic();
-				String packageClassName = CodeGenUtil.safeName(model.getName()) + "." //$NON-NLS-1$
-						+ state.getPackageClassName();
+				EObject model = state.getDomainModel().getDynamic();
+				String packageClassName = null;
+				if (model instanceof EPackage)
+					packageClassName = CodeGenUtil.safeName(((EPackage) model).getName()) + "." //$NON-NLS-1$
+							+ state.getPackageClassName();
 				Class<?> packageClass = null;
 				try {
 					packageClass = osgiBundle.loadClass(packageClassName);
@@ -226,9 +234,11 @@ public class OSGiEPackageLoader extends ContainerJob {
 			}
 			break;
 		case 1:
-			EPackage model = state.getDomainModel().getDynamic();
-			String pluginClassName = CodeGenUtil.safeName(model.getName()) + "." //$NON-NLS-1$
-					+ state.getEditPluginClassName();
+			EObject model = state.getDomainModel().getDynamic();
+			String pluginClassName = null;
+			if (model instanceof EPackage)
+				pluginClassName = CodeGenUtil.safeName(((EPackage) model).getName()) + "." //$NON-NLS-1$
+						+ state.getEditPluginClassName();
 			Class<?> pluginClass = null;
 			try {
 				pluginClass = osgiBundle.loadClass(pluginClassName);
@@ -245,9 +255,11 @@ public class OSGiEPackageLoader extends ContainerJob {
 			}
 			break;
 		case 2:
-			EPackage model1 = state.getDomainModel().getDynamic();
-			String pluginClassName1 = CodeGenUtil.safeName(model1.getName()) + "." //$NON-NLS-1$
-					+ state.getEditorPluginClassName();
+			EObject model1 = state.getDomainModel().getDynamic();
+			String pluginClassName1 = null;
+			if (model1 instanceof EPackage)
+				pluginClassName1 = CodeGenUtil.safeName(((EPackage) model1).getName()) + "." //$NON-NLS-1$
+						+ state.getEditorPluginClassName();
 			Class<?> pluginClass1 = null;
 			try {
 				pluginClass1 = osgiBundle.loadClass(pluginClassName1);

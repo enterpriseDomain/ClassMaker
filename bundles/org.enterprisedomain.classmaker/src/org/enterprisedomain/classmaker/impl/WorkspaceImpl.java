@@ -48,9 +48,11 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
@@ -326,23 +328,28 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 					if (workspaceResource == null) {
 						workspaceResource = getResourceSet().createResource(uri);
 					}
+					Map<String, String> options = new HashMap<String, String>();
+					options.put(XMLResource.OPTION_PROCESS_DANGLING_HREF,
+							XMLResource.OPTION_PROCESS_DANGLING_HREF_RECORD);
+					options.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_FILE_BUFFER);
 					try {
 						if (workspaceResource.getContents().isEmpty())
 							workspaceResource.getContents().add(EcoreUtil.copy((EObject) msg.getOldValue()));
 						else
 							workspaceResource.getContents().set(0, EcoreUtil.copy((EObject) msg.getOldValue()));
 						try {
-							Map<String, String> options = new HashMap<String, String>();
-							options.put(XMLResource.OPTION_PROCESS_DANGLING_HREF,
-									XMLResource.OPTION_PROCESS_DANGLING_HREF_RECORD);
-							options.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED,
-									Resource.OPTION_SAVE_ONLY_IF_CHANGED_FILE_BUFFER);
 							workspaceResource.save(options);
 						} catch (IOException e) {
 							ClassMakerPlugin.getInstance().getLog().log(
 									new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 						}
 					} catch (ClassCastException e) {
+						try {
+							workspaceResource.save(options);
+						} catch (IOException e1) {
+							ClassMakerPlugin.getInstance().getLog().log(
+									new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e1));
+						}
 					}
 				}
 			}
@@ -384,6 +391,12 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			for (Project project : getProjects()) {
 				if (!(project instanceof Contribution))
 					project.initialize(false);
+				else
+					try {
+						((Contribution) project).load(false);
+					} catch (CoreException e) {
+						ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
+					}
 			}
 		EList<Customizer> customizers = ECollections.newBasicEList();
 		ListIterator<Map.Entry<StageQualifier, Customizer>> it = getCustomizers().listIterator();
@@ -474,7 +487,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * 
 	 * @generated NOT
 	 */
-	public Contribution createContribution(EPackage blueprint, IProgressMonitor monitor) throws CoreException {
+	public Contribution createContribution(EObject blueprint, IProgressMonitor monitor) throws CoreException {
 		try {
 			Contribution result = getContribution(blueprint, true);
 			if (result != null) {
@@ -491,13 +504,16 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			// Contribution not exists. Create
 			result = ClassMakerFactory.eINSTANCE.createContribution();
 			registerProject(result);
-			result.setName(blueprint.getName());
+			if (blueprint instanceof ENamedElement)
+				result.setName(((ENamedElement) blueprint).getName());
+			else
+				result.setName(blueprint.eClass().getName());
 			result.create(monitor);
 			Version version = result.nextVersion();
 			Revision revision = result.newRevision(version);
 			result.checkout(revision.getVersion());
 			result.load(true);
-			EPackage model = EcoreUtil.copy(blueprint);
+			EObject model = EcoreUtil.copy(blueprint);
 			result.getDomainModel().setDynamic(model);
 			result.getState().saveResource();
 			return result;
@@ -513,6 +529,21 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 */
 	public Contribution getContribution(EObject eObject) {
 		ClassMakerSwitch<Contribution> getSwitch = new ClassMakerSwitch<Contribution>() {
+
+			@Override
+			protected boolean isSwitchFor(EPackage ePackage) {
+				return super.isSwitchFor(ePackage) || ePackage.equals(EcorePackage.eINSTANCE);
+			}
+
+			@Override
+			protected Contribution doSwitch(int classifierID, EObject theEObject) {
+				switch (classifierID) {
+				case EcorePackage.EPACKAGE:
+					return getContribution(theEObject, true);
+				default:
+					return super.doSwitch(classifierID, theEObject);
+				}
+			}
 
 			@Override
 			public Contribution caseContribution(Contribution object) {
@@ -560,8 +591,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * 
 	 * @generated NOT
 	 */
-	public Contribution getContribution(EPackage ePackage) {
-		return getContribution(ePackage, true);
+	public Contribution getContribution(EObject eObject, boolean searchOptimistic) {
+		return getContribution(eObject, Stage.MODELED, searchOptimistic);
 	}
 
 	/**
@@ -569,8 +600,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * 
 	 * @generated NOT
 	 */
-	public Contribution getContribution(EPackage ePackage, boolean searchOptimistic) {
-		return getContribution(ePackage, Stage.MODELED, searchOptimistic);
+	public Contribution getContribution(EObject eObject, Stage filter) {
+		return getContribution(eObject, filter, true);
 	}
 
 	/**
@@ -578,16 +609,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * 
 	 * @generated NOT
 	 */
-	public Contribution getContribution(EPackage ePackage, Stage filter) {
-		return getContribution(ePackage, filter, true);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public Contribution getContribution(EPackage ePackage, Stage filter, boolean searchOptimistic) {
+	public Contribution getContribution(EObject eObject, Stage filter, boolean searchOptimistic) {
 		switch (filter.getValue()) {
 		case Stage.DEFINED_VALUE:
 		case Stage.MODELED_VALUE:
@@ -595,15 +617,15 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		case Stage.EXPORTED_VALUE:
 		case Stage.INSTALLED_VALUE:
 			for (Contribution c : getContributions())
-				if (ModelUtil.ePackagesAreEqual(ePackage, c.getDomainModel().getDynamic(), !searchOptimistic))
+				if (ModelUtil.eObjectsAreEqual(eObject, c.getDomainModel().getDynamic(), !searchOptimistic))
 					return c;
 			break;
 		case Stage.LOADED_VALUE:
 			for (Contribution c : getContributions()) {
-				if (ModelUtil.ePackagesAreEqual(ePackage, c.getDomainModel().getDynamic(), false))
+				if (ModelUtil.eObjectsAreEqual(eObject, c.getDomainModel().getDynamic(), false))
 					while (c.getState().isMaking() && !c.getPhase().equals(Stage.LOADED))
 						Thread.yield();
-				if (ModelUtil.ePackagesAreEqual(ePackage, c.getDomainModel().getGenerated(), !searchOptimistic))
+				if (ModelUtil.eObjectsAreEqual(eObject, c.getDomainModel().getGenerated(), !searchOptimistic))
 					return c;
 			}
 		}
@@ -657,14 +679,16 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		case Stage.INSTALLED_VALUE:
 			for (Contribution contribution : getContributions()) {
 				if (contribution.getDomainModel().getDynamic() != null
-						&& contribution.getDomainModel().getDynamic().getNsURI().equals(nsURI))
+						&& contribution.getDomainModel().getDynamic() instanceof EPackage
+						&& ((EPackage) contribution.getDomainModel().getDynamic()).getNsURI().equals(nsURI))
 					return contribution;
 			}
 			break;
 		case Stage.LOADED_VALUE:
 			for (Contribution contribution : getContributions()) {
 				if (contribution.getDomainModel().getGenerated() != null
-						&& contribution.getDomainModel().getGenerated().getNsURI().equals(nsURI))
+						&& contribution.getDomainModel().getGenerated() instanceof EPackage
+						&& ((EPackage) contribution.getDomainModel().getGenerated()).getNsURI().equals(nsURI))
 					return contribution;
 			}
 			break;
@@ -778,27 +802,18 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * 
 	 * @generated NOT
 	 */
-	public Stage contains(EPackage blueprint) {
+	public Stage contains(EObject blueprint) {
 		for (Contribution c : getContributions()) {
 			if (c.getPhase().getValue() < Stage.LOADED_VALUE) {
-				if (ModelUtil.ePackagesAreEqual(blueprint, c.getDomainModel().getDynamic(), false))
+				if (ModelUtil.eObjectsAreEqual(blueprint, c.getDomainModel().getDynamic(), false))
 					return c.getPhase();
 			} else {
-				if (ModelUtil.ePackagesAreEqual(blueprint, c.getDomainModel().getGenerated(), false))
+				if (ModelUtil.eObjectsAreEqual(blueprint, c.getDomainModel().getGenerated(), false))
 					return c.getPhase();
 			}
 		}
 		return Stage.DEFINED;
 
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public boolean contains(EObject eObject) {
-		return getContribution((EObject) eObject) != null;
 	}
 
 	/**

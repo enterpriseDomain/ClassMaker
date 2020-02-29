@@ -20,6 +20,7 @@ import org.eclipse.emf.common.ui.action.WorkbenchWindowActionDelegate;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.edit.ui.action.LoadResourceAction;
 import org.eclipse.emf.edit.ui.util.EditUIUtil;
+import org.enterprisedomain.classmaker.presentation.ClassMakerEditorPlugin;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 import org.eclipse.jface.action.GroupMarker;
@@ -78,8 +79,8 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 	}
 
 	/**
-	 * RCP's application <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * RCP's application
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static class Application implements IApplication {
@@ -105,7 +106,8 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 		}
 
 		/**
-		 * @see org.eclipse.equinox.app.IApplication#stop() <!-- begin-user-doc --> <!--
+		 * @see org.eclipse.equinox.app.IApplication#stop()
+		 * <!-- begin-user-doc --> <!--
 		 *      end-user-doc -->
 		 * @generated
 		 */
@@ -116,14 +118,14 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 	}
 
 	/**
-	 * RCP's perspective <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * RCP's perspective
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static class Perspective implements IPerspectiveFactory {
 		/**
-		 * Perspective ID <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * Perspective ID
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final String ID_PERSPECTIVE = "org.enterprisedomain.classmaker.presentation.ClassMakerEditorAdvisorPerspective";
@@ -147,8 +149,8 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 	}
 
 	/**
-	 * RCP's window advisor <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * RCP's window advisor
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static class WindowAdvisor extends WorkbenchWindowAdvisor {
@@ -187,8 +189,8 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 	}
 
 	/**
-	 * RCP's action bar advisor <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * RCP's action bar advisor
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static class WindowActionBarAdvisor extends ActionBarAdvisor {
@@ -217,8 +219,8 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 		}
 
 		/**
-		 * Creates the 'File' menu. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * Creates the 'File' menu.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		protected IMenuManager createFileMenu(IWorkbenchWindow window) {
@@ -245,8 +247,8 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 		}
 
 		/**
-		 * Creates the 'Edit' menu. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * Creates the 'Edit' menu.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		protected IMenuManager createEditMenu(IWorkbenchWindow window) {
@@ -276,8 +278,8 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 		}
 
 		/**
-		 * Creates the 'Window' menu. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * Creates the 'Window' menu.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		protected IMenuManager createWindowMenu(IWorkbenchWindow window) {
@@ -290,8 +292,8 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 		}
 
 		/**
-		 * Creates the 'Help' menu. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * Creates the 'Help' menu.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		protected IMenuManager createHelpMenu(IWorkbenchWindow window) {
@@ -319,9 +321,9 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 	}
 
 	/**
-	 * About action for the RCP application. <!-- begin-user-doc --> <!--
+	 * About action for the RCP application.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public static class AboutAction extends WorkbenchWindowActionDelegate {
@@ -364,7 +366,6 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public static boolean openEditor(IWorkbench workbench, URI uri) {

@@ -25,6 +25,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Project;
+import org.enterprisedomain.classmaker.impl.ClassMakerServiceImpl;
 import org.osgi.framework.ServiceException;
 
 public class ClassMakerBuilder extends IncrementalProjectBuilder implements IBuildConfiguration {
@@ -46,6 +47,8 @@ public class ClassMakerBuilder extends IncrementalProjectBuilder implements IBui
 	@Override
 	protected IProject[] build(int kind, Map<String, String> options, IProgressMonitor monitor) throws CoreException {
 		ClassMakerService service = null;
+		if (ClassMakerServiceImpl.initializing)
+			return null;
 		try {
 			service = ClassMakerPlugin.getClassMaker();
 		} catch (ServiceException e) {

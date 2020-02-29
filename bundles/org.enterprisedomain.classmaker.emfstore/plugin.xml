@@ -10,16 +10,16 @@
       </customizer>
    </extension>
    <extension
-         point="org.eclipse.emf.emfstore.client.resourceSetProvider">
+         point="org.eclipse.emf.emfstore.server.resourceSetProvider">
       <resourceSetProvider
-            class="org.enterprisedomain.classmaker.emfstore.EDClientResourceSetProvider"
+            class="org.enterprisedomain.classmaker.emfstore.EDServerResourceSetProvider"
             priority="4">
       </resourceSetProvider>
    </extension>
    <extension
-         point="org.eclipse.emf.emfstore.server.resourceSetProvider">
+         point="org.eclipse.emf.emfstore.client.resourceSetProvider">
       <resourceSetProvider
-            class="org.enterprisedomain.classmaker.emfstore.EDServerResourceSetProvider"
+            class="org.enterprisedomain.classmaker.emfstore.EDClientResourceSetProvider"
             priority="4">
       </resourceSetProvider>
    </extension>

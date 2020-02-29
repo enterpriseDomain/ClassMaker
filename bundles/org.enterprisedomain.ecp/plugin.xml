@@ -41,5 +41,15 @@
             provider="org.enterprisedomain.ecp.provider">
       </repository>
    </extension>
+   <extension
+         point="org.eclipse.core.expressions.propertyTesters">
+      <propertyTester
+            class="org.enterprisedomain.ecp.ECPPropertyTester"
+            id="org.enterprisedomain.ecp.propertyTester"
+            namespace="org.enterprisedomain.ecp"
+            properties="isContribution"
+            type="org.eclipse.emf.ecp.core.ECPProject">
+      </propertyTester>
+   </extension>
 
 </plugin>

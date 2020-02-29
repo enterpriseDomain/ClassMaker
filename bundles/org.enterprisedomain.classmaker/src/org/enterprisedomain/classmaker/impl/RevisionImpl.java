@@ -413,7 +413,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 		setTimestamp(stateTime);
 		getProject().initAdapters(this);
 		if (isStateSet())
-			getState().checkout(commitId, true);
+			getState().checkout(commitId, false);
 	}
 
 	/**

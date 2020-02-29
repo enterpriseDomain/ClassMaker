@@ -76,7 +76,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getISchedulingRule()
 	 * @generated
 	 */
-	int ISCHEDULING_RULE = 8;
+	int ISCHEDULING_RULE = 9;
 
 	/**
 	 * The number of structural features of the '<em>IScheduling Rule</em>' class.
@@ -96,7 +96,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getProject()
 	 * @generated
 	 */
-	int PROJECT = 18;
+	int PROJECT = 19;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute. <!-- begin-user-doc
@@ -523,7 +523,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getItem()
 	 * @generated
 	 */
-	int ITEM = 3;
+	int ITEM = 4;
 
 	/**
 	 * The feature id for the '<em><b>Model Name</b></em>' attribute. <!--
@@ -827,49 +827,13 @@ public interface ClassMakerPackage extends EPackage {
 	int STATE__PROJECT = ITEM__PROJECT;
 
 	/**
-	 * The feature id for the '<em><b>Generators</b></em>' reference list. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int STATE__GENERATORS = ITEM_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Exporters</b></em>' reference list. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int STATE__EXPORTERS = ITEM_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Installers</b></em>' reference list. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int STATE__INSTALLERS = ITEM_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Loaders</b></em>' reference list. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int STATE__LOADERS = ITEM_FEATURE_COUNT + 3;
-
-	/**
 	 * The feature id for the '<em><b>Package Class Name</b></em>' attribute. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__PACKAGE_CLASS_NAME = ITEM_FEATURE_COUNT + 4;
+	int STATE__PACKAGE_CLASS_NAME = ITEM_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Edit Plugin Class Name</b></em>' attribute.
@@ -878,7 +842,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__EDIT_PLUGIN_CLASS_NAME = ITEM_FEATURE_COUNT + 5;
+	int STATE__EDIT_PLUGIN_CLASS_NAME = ITEM_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Editor Plugin Class Name</b></em>' attribute.
@@ -887,7 +851,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__EDITOR_PLUGIN_CLASS_NAME = ITEM_FEATURE_COUNT + 6;
+	int STATE__EDITOR_PLUGIN_CLASS_NAME = ITEM_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Required Plugins</b></em>' attribute list.
@@ -896,7 +860,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__REQUIRED_PLUGINS = ITEM_FEATURE_COUNT + 7;
+	int STATE__REQUIRED_PLUGINS = ITEM_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Revision</b></em>' reference. <!--
@@ -905,7 +869,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__REVISION = ITEM_FEATURE_COUNT + 8;
+	int STATE__REVISION = ITEM_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Timestamp</b></em>' attribute. <!--
@@ -914,7 +878,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__TIMESTAMP = ITEM_FEATURE_COUNT + 9;
+	int STATE__TIMESTAMP = ITEM_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Deployable Unit Name</b></em>' attribute. <!--
@@ -923,7 +887,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__DEPLOYABLE_UNIT_NAME = ITEM_FEATURE_COUNT + 10;
+	int STATE__DEPLOYABLE_UNIT_NAME = ITEM_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Edit Deployable Unit Name</b></em>' attribute.
@@ -932,7 +896,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__EDIT_DEPLOYABLE_UNIT_NAME = ITEM_FEATURE_COUNT + 11;
+	int STATE__EDIT_DEPLOYABLE_UNIT_NAME = ITEM_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Editor Deployable Unit Name</b></em>'
@@ -941,7 +905,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__EDITOR_DEPLOYABLE_UNIT_NAME = ITEM_FEATURE_COUNT + 12;
+	int STATE__EDITOR_DEPLOYABLE_UNIT_NAME = ITEM_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Job Family</b></em>' attribute. <!--
@@ -950,7 +914,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__JOB_FAMILY = ITEM_FEATURE_COUNT + 13;
+	int STATE__JOB_FAMILY = ITEM_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Resource</b></em>' reference. <!--
@@ -959,7 +923,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__RESOURCE = ITEM_FEATURE_COUNT + 14;
+	int STATE__RESOURCE = ITEM_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Commit Ids</b></em>' attribute list. <!--
@@ -968,7 +932,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__COMMIT_IDS = ITEM_FEATURE_COUNT + 15;
+	int STATE__COMMIT_IDS = ITEM_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Commit Id</b></em>' attribute. <!--
@@ -977,7 +941,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__COMMIT_ID = ITEM_FEATURE_COUNT + 16;
+	int STATE__COMMIT_ID = ITEM_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>State Customizers</b></em>' map. <!--
@@ -986,7 +950,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__STATE_CUSTOMIZERS = ITEM_FEATURE_COUNT + 17;
+	int STATE__STATE_CUSTOMIZERS = ITEM_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Project Name</b></em>' attribute. <!--
@@ -995,7 +959,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__PROJECT_NAME = ITEM_FEATURE_COUNT + 18;
+	int STATE__PROJECT_NAME = ITEM_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Making</b></em>' attribute. <!--
@@ -1004,7 +968,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__MAKING = ITEM_FEATURE_COUNT + 19;
+	int STATE__MAKING = ITEM_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Edit</b></em>' attribute. <!-- begin-user-doc
@@ -1013,7 +977,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__EDIT = ITEM_FEATURE_COUNT + 20;
+	int STATE__EDIT = ITEM_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Editor</b></em>' attribute. <!--
@@ -1022,7 +986,16 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__EDITOR = ITEM_FEATURE_COUNT + 21;
+	int STATE__EDITOR = ITEM_FEATURE_COUNT + 17;
+
+	/**
+	 * The feature id for the '<em><b>Strategy</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__STRATEGY = ITEM_FEATURE_COUNT + 18;
 
 	/**
 	 * The number of structural features of the '<em>State</em>' class. <!--
@@ -1031,7 +1004,72 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE_FEATURE_COUNT = ITEM_FEATURE_COUNT + 22;
+	int STATE_FEATURE_COUNT = ITEM_FEATURE_COUNT + 19;
+
+	/**
+	 * The meta object id for the
+	 * '{@link org.enterprisedomain.classmaker.impl.StrategyImpl <em>Strategy</em>}'
+	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see org.enterprisedomain.classmaker.impl.StrategyImpl
+	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getStrategy()
+	 * @generated
+	 */
+	int STRATEGY = 3;
+
+	/**
+	 * The feature id for the '<em><b>Generators</b></em>' reference list. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int STRATEGY__GENERATORS = 0;
+
+	/**
+	 * The feature id for the '<em><b>Exporters</b></em>' reference list. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int STRATEGY__EXPORTERS = 1;
+
+	/**
+	 * The feature id for the '<em><b>Installers</b></em>' reference list. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int STRATEGY__INSTALLERS = 2;
+
+	/**
+	 * The feature id for the '<em><b>Loaders</b></em>' reference list. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int STRATEGY__LOADERS = 3;
+
+	/**
+	 * The feature id for the '<em><b>State</b></em>' reference. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int STRATEGY__STATE = 4;
+
+	/**
+	 * The number of structural features of the '<em>Strategy</em>' class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int STRATEGY_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.emf.common.notify.Adapter
@@ -1041,7 +1079,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getAdapter()
 	 * @generated
 	 */
-	int ADAPTER = 4;
+	int ADAPTER = 5;
 
 	/**
 	 * The number of structural features of the '<em>Adapter</em>' class. <!--
@@ -1061,7 +1099,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getWorkspace()
 	 * @generated
 	 */
-	int WORKSPACE = 5;
+	int WORKSPACE = 6;
 
 	/**
 	 * The feature id for the '<em><b>Projects</b></em>' containment reference list.
@@ -1127,7 +1165,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getLongToStateMapEntry()
 	 * @generated
 	 */
-	int LONG_TO_STATE_MAP_ENTRY = 6;
+	int LONG_TO_STATE_MAP_ENTRY = 7;
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' attribute. <!-- begin-user-doc
@@ -1166,7 +1204,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getVersionToRevisionMapEntry()
 	 * @generated
 	 */
-	int VERSION_TO_REVISION_MAP_ENTRY = 7;
+	int VERSION_TO_REVISION_MAP_ENTRY = 8;
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' attribute. <!-- begin-user-doc
@@ -1203,7 +1241,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getExecutor()
 	 * @generated
 	 */
-	int EXECUTOR = 9;
+	int EXECUTOR = 10;
 
 	/**
 	 * The number of structural features of the '<em>Executor</em>' class. <!--
@@ -1222,7 +1260,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getFuture()
 	 * @generated
 	 */
-	int FUTURE = 10;
+	int FUTURE = 11;
 
 	/**
 	 * The number of structural features of the '<em>Future</em>' class. <!--
@@ -1242,7 +1280,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getIAdapterFactory()
 	 * @generated
 	 */
-	int IADAPTER_FACTORY = 11;
+	int IADAPTER_FACTORY = 12;
 
 	/**
 	 * The number of structural features of the '<em>IAdapter Factory</em>' class.
@@ -1262,7 +1300,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getCustomizer()
 	 * @generated
 	 */
-	int CUSTOMIZER = 12;
+	int CUSTOMIZER = 13;
 
 	/**
 	 * The feature id for the '<em><b>Rank</b></em>' attribute. <!-- begin-user-doc
@@ -1291,7 +1329,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getStageQualifier()
 	 * @generated
 	 */
-	int STAGE_QUALIFIER = 13;
+	int STAGE_QUALIFIER = 14;
 
 	/**
 	 * The feature id for the '<em><b>Stage</b></em>' attribute. <!-- begin-user-doc
@@ -1330,7 +1368,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getStageQualifierToCustomizerMapEntry()
 	 * @generated
 	 */
-	int STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY = 14;
+	int STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY = 15;
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' reference. <!-- begin-user-doc
@@ -1368,7 +1406,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getModelPair()
 	 * @generated
 	 */
-	int MODEL_PAIR = 15;
+	int MODEL_PAIR = 16;
 
 	/**
 	 * The feature id for the '<em><b>Dynamic</b></em>' reference. <!--
@@ -1415,7 +1453,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getSCMOperator()
 	 * @generated
 	 */
-	int SCM_OPERATOR = 16;
+	int SCM_OPERATOR = 17;
 
 	/**
 	 * The feature id for the '<em><b>Project Name</b></em>' attribute. <!--
@@ -1453,7 +1491,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getSCMRegistry()
 	 * @generated
 	 */
-	int SCM_REGISTRY = 17;
+	int SCM_REGISTRY = 18;
 
 	/**
 	 * The number of structural features of the '<em>SCM Registry</em>' class. <!--
@@ -1472,7 +1510,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getResource()
 	 * @generated
 	 */
-	int RESOURCE = 19;
+	int RESOURCE = 20;
 
 	/**
 	 * The number of structural features of the '<em>Resource</em>' class. <!--
@@ -1493,7 +1531,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getResourceChangeListener()
 	 * @generated
 	 */
-	int RESOURCE_CHANGE_LISTENER = 20;
+	int RESOURCE_CHANGE_LISTENER = 21;
 
 	/**
 	 * The number of structural features of the '<em>Resource Change Listener</em>'
@@ -1512,7 +1550,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getNotification()
 	 * @generated
 	 */
-	int NOTIFICATION = 21;
+	int NOTIFICATION = 22;
 
 	/**
 	 * The number of structural features of the '<em>Notification</em>' class. <!--
@@ -1533,7 +1571,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getCompletionListener()
 	 * @generated
 	 */
-	int COMPLETION_LISTENER = 22;
+	int COMPLETION_LISTENER = 23;
 
 	/**
 	 * The number of structural features of the '<em>Completion Listener</em>'
@@ -1553,7 +1591,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getWorker()
 	 * @generated
 	 */
-	int WORKER = 27;
+	int WORKER = 28;
 
 	/**
 	 * The meta object id for the
@@ -1564,7 +1602,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getResourceAdapter()
 	 * @generated
 	 */
-	int RESOURCE_ADAPTER = 23;
+	int RESOURCE_ADAPTER = 24;
 
 	/**
 	 * The feature id for the '<em><b>Resource</b></em>' reference. <!--
@@ -1611,7 +1649,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getClassMakerService()
 	 * @generated
 	 */
-	int CLASS_MAKER_SERVICE = 24;
+	int CLASS_MAKER_SERVICE = 25;
 
 	/**
 	 * The feature id for the '<em><b>Workspace</b></em>' reference. <!--
@@ -1640,7 +1678,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getBlueprint()
 	 * @generated
 	 */
-	int BLUEPRINT = 25;
+	int BLUEPRINT = 26;
 
 	/**
 	 * The feature id for the '<em><b>Dynamic Model</b></em>' reference. <!--
@@ -1706,7 +1744,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getCompletionNotificationAdapter()
 	 * @generated
 	 */
-	int COMPLETION_NOTIFICATION_ADAPTER = 26;
+	int COMPLETION_NOTIFICATION_ADAPTER = 27;
 
 	/**
 	 * The feature id for the '<em><b>Error</b></em>' attribute. <!-- begin-user-doc
@@ -1745,7 +1783,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getSelectRevealHandler()
 	 * @generated
 	 */
-	int SELECT_REVEAL_HANDLER = 28;
+	int SELECT_REVEAL_HANDLER = 29;
 
 	/**
 	 * The number of structural features of the '<em>Select Reveal Handler</em>'
@@ -1764,7 +1802,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getLocale()
 	 * @generated
 	 */
-	int LOCALE = 39;
+	int LOCALE = 41;
 
 	/**
 	 * The meta object id for the '{@link org.enterprisedomain.classmaker.Stage
@@ -1774,7 +1812,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getStage()
 	 * @generated
 	 */
-	int STAGE = 29;
+	int STAGE = 30;
 
 	/**
 	 * The meta object id for the '<em>Properties</em>' data type. <!--
@@ -1784,7 +1822,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getProperties()
 	 * @generated
 	 */
-	int PROPERTIES = 30;
+	int PROPERTIES = 31;
 
 	/**
 	 * The meta object id for the '<em>IProgress Monitor</em>' data type. <!--
@@ -1794,7 +1832,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getIProgressMonitor()
 	 * @generated
 	 */
-	int IPROGRESS_MONITOR = 31;
+	int IPROGRESS_MONITOR = 32;
 
 	/**
 	 * The meta object id for the '<em>OS Gi Version</em>' data type. <!--
@@ -1804,7 +1842,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getOSGiVersion()
 	 * @generated
 	 */
-	int OS_GI_VERSION = 32;
+	int OS_GI_VERSION = 33;
 
 	/**
 	 * The meta object id for the '<em>Semaphore</em>' data type. <!--
@@ -1814,7 +1852,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getSemaphore()
 	 * @generated
 	 */
-	int SEMAPHORE = 33;
+	int SEMAPHORE = 34;
 
 	/**
 	 * The meta object id for the '<em>Core Exception</em>' data type. <!--
@@ -1824,7 +1862,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getCoreException()
 	 * @generated
 	 */
-	int CORE_EXCEPTION = 34;
+	int CORE_EXCEPTION = 35;
 
 	/**
 	 * The meta object id for the '<em>Invocation Target Exception</em>' data type.
@@ -1834,7 +1872,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getInvocationTargetException()
 	 * @generated
 	 */
-	int INVOCATION_TARGET_EXCEPTION = 35;
+	int INVOCATION_TARGET_EXCEPTION = 36;
 
 	/**
 	 * The meta object id for the '<em>IStatus</em>' data type. <!-- begin-user-doc
@@ -1844,7 +1882,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getIStatus()
 	 * @generated
 	 */
-	int ISTATUS = 36;
+	int ISTATUS = 37;
 
 	/**
 	 * The meta object id for the '<em>URI</em>' data type. <!-- begin-user-doc -->
@@ -1854,7 +1892,17 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getURI()
 	 * @generated
 	 */
-	int URI = 37;
+	int URI = 38;
+
+	/**
+	 * The meta object id for the '<em>Name</em>' data type. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @see java.lang.String
+	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getName_()
+	 * @generated
+	 */
+	int NAME = 39;
 
 	/**
 	 * The meta object id for the '<em>Exception</em>' data type. <!--
@@ -1864,7 +1912,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getException()
 	 * @generated
 	 */
-	int EXCEPTION = 38;
+	int EXCEPTION = 40;
 
 	/**
 	 * Returns the meta object for class
@@ -1995,54 +2043,6 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getState();
-
-	/**
-	 * Returns the meta object for the reference list
-	 * '{@link org.enterprisedomain.classmaker.State#getGenerators
-	 * <em>Generators</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for the reference list '<em>Generators</em>'.
-	 * @see org.enterprisedomain.classmaker.State#getGenerators()
-	 * @see #getState()
-	 * @generated
-	 */
-	EReference getState_Generators();
-
-	/**
-	 * Returns the meta object for the reference list
-	 * '{@link org.enterprisedomain.classmaker.State#getExporters
-	 * <em>Exporters</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for the reference list '<em>Exporters</em>'.
-	 * @see org.enterprisedomain.classmaker.State#getExporters()
-	 * @see #getState()
-	 * @generated
-	 */
-	EReference getState_Exporters();
-
-	/**
-	 * Returns the meta object for the reference list
-	 * '{@link org.enterprisedomain.classmaker.State#getInstallers
-	 * <em>Installers</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for the reference list '<em>Installers</em>'.
-	 * @see org.enterprisedomain.classmaker.State#getInstallers()
-	 * @see #getState()
-	 * @generated
-	 */
-	EReference getState_Installers();
-
-	/**
-	 * Returns the meta object for the reference list
-	 * '{@link org.enterprisedomain.classmaker.State#getLoaders <em>Loaders</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for the reference list '<em>Loaders</em>'.
-	 * @see org.enterprisedomain.classmaker.State#getLoaders()
-	 * @see #getState()
-	 * @generated
-	 */
-	EReference getState_Loaders();
 
 	/**
 	 * Returns the meta object for the attribute
@@ -2266,6 +2266,89 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getState_Editor();
+
+	/**
+	 * Returns the meta object for the reference
+	 * '{@link org.enterprisedomain.classmaker.State#getStrategy
+	 * <em>Strategy</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the reference '<em>Strategy</em>'.
+	 * @see org.enterprisedomain.classmaker.State#getStrategy()
+	 * @see #getState()
+	 * @generated
+	 */
+	EReference getState_Strategy();
+
+	/**
+	 * Returns the meta object for class
+	 * '{@link org.enterprisedomain.classmaker.Strategy <em>Strategy</em>}'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for class '<em>Strategy</em>'.
+	 * @see org.enterprisedomain.classmaker.Strategy
+	 * @generated
+	 */
+	EClass getStrategy();
+
+	/**
+	 * Returns the meta object for the reference list
+	 * '{@link org.enterprisedomain.classmaker.Strategy#getGenerators
+	 * <em>Generators</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the reference list '<em>Generators</em>'.
+	 * @see org.enterprisedomain.classmaker.Strategy#getGenerators()
+	 * @see #getStrategy()
+	 * @generated
+	 */
+	EReference getStrategy_Generators();
+
+	/**
+	 * Returns the meta object for the reference list
+	 * '{@link org.enterprisedomain.classmaker.Strategy#getExporters
+	 * <em>Exporters</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the reference list '<em>Exporters</em>'.
+	 * @see org.enterprisedomain.classmaker.Strategy#getExporters()
+	 * @see #getStrategy()
+	 * @generated
+	 */
+	EReference getStrategy_Exporters();
+
+	/**
+	 * Returns the meta object for the reference list
+	 * '{@link org.enterprisedomain.classmaker.Strategy#getInstallers
+	 * <em>Installers</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the reference list '<em>Installers</em>'.
+	 * @see org.enterprisedomain.classmaker.Strategy#getInstallers()
+	 * @see #getStrategy()
+	 * @generated
+	 */
+	EReference getStrategy_Installers();
+
+	/**
+	 * Returns the meta object for the reference list
+	 * '{@link org.enterprisedomain.classmaker.Strategy#getLoaders
+	 * <em>Loaders</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the reference list '<em>Loaders</em>'.
+	 * @see org.enterprisedomain.classmaker.Strategy#getLoaders()
+	 * @see #getStrategy()
+	 * @generated
+	 */
+	EReference getStrategy_Loaders();
+
+	/**
+	 * Returns the meta object for the reference
+	 * '{@link org.enterprisedomain.classmaker.Strategy#getState <em>State</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the reference '<em>State</em>'.
+	 * @see org.enterprisedomain.classmaker.Strategy#getState()
+	 * @see #getStrategy()
+	 * @generated
+	 */
+	EReference getStrategy_State();
 
 	/**
 	 * Returns the meta object for class
@@ -3343,6 +3426,18 @@ public interface ClassMakerPackage extends EPackage {
 	EDataType getURI();
 
 	/**
+	 * Returns the meta object for data type '{@link java.lang.String
+	 * <em>Name</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for data type '<em>Name</em>'.
+	 * @see java.lang.String
+	 * @model instanceClass="java.lang.String"
+	 *        extendedMetaData="pattern='[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*'"
+	 * @generated
+	 */
+	EDataType getName_();
+
+	/**
 	 * Returns the meta object for data type '{@link java.lang.Exception
 	 * <em>Exception</em>}'. <!-- begin-user-doc --> <!-- end-user-doc --> <!--
 	 * begin-model-doc --> {@link java.lang.Exception} datatype import. <!--
@@ -3473,38 +3568,6 @@ public interface ClassMakerPackage extends EPackage {
 		 * @generated
 		 */
 		EClass STATE = eINSTANCE.getState();
-
-		/**
-		 * The meta object literal for the '<em><b>Generators</b></em>' reference list
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
-		 * @generated
-		 */
-		EReference STATE__GENERATORS = eINSTANCE.getState_Generators();
-
-		/**
-		 * The meta object literal for the '<em><b>Exporters</b></em>' reference list
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
-		 * @generated
-		 */
-		EReference STATE__EXPORTERS = eINSTANCE.getState_Exporters();
-
-		/**
-		 * The meta object literal for the '<em><b>Installers</b></em>' reference list
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
-		 * @generated
-		 */
-		EReference STATE__INSTALLERS = eINSTANCE.getState_Installers();
-
-		/**
-		 * The meta object literal for the '<em><b>Loaders</b></em>' reference list
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
-		 * @generated
-		 */
-		EReference STATE__LOADERS = eINSTANCE.getState_Loaders();
 
 		/**
 		 * The meta object literal for the '<em><b>Package Class Name</b></em>'
@@ -3649,6 +3712,65 @@ public interface ClassMakerPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute STATE__EDITOR = eINSTANCE.getState_Editor();
+
+		/**
+		 * The meta object literal for the '<em><b>Strategy</b></em>' reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference STATE__STRATEGY = eINSTANCE.getState_Strategy();
+
+		/**
+		 * The meta object literal for the
+		 * '{@link org.enterprisedomain.classmaker.impl.StrategyImpl <em>Strategy</em>}'
+		 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @see org.enterprisedomain.classmaker.impl.StrategyImpl
+		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getStrategy()
+		 * @generated
+		 */
+		EClass STRATEGY = eINSTANCE.getStrategy();
+
+		/**
+		 * The meta object literal for the '<em><b>Generators</b></em>' reference list
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference STRATEGY__GENERATORS = eINSTANCE.getStrategy_Generators();
+
+		/**
+		 * The meta object literal for the '<em><b>Exporters</b></em>' reference list
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference STRATEGY__EXPORTERS = eINSTANCE.getStrategy_Exporters();
+
+		/**
+		 * The meta object literal for the '<em><b>Installers</b></em>' reference list
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference STRATEGY__INSTALLERS = eINSTANCE.getStrategy_Installers();
+
+		/**
+		 * The meta object literal for the '<em><b>Loaders</b></em>' reference list
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference STRATEGY__LOADERS = eINSTANCE.getStrategy_Loaders();
+
+		/**
+		 * The meta object literal for the '<em><b>State</b></em>' reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference STRATEGY__STATE = eINSTANCE.getStrategy_State();
 
 		/**
 		 * The meta object literal for the
@@ -4466,6 +4588,16 @@ public interface ClassMakerPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType URI = eINSTANCE.getURI();
+
+		/**
+		 * The meta object literal for the '<em>Name</em>' data type. <!--
+		 * begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @see java.lang.String
+		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getName_()
+		 * @generated
+		 */
+		EDataType NAME = eINSTANCE.getName_();
 
 		/**
 		 * The meta object literal for the '<em>Exception</em>' data type. <!--

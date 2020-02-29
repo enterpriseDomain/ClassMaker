@@ -45,7 +45,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
@@ -97,6 +96,16 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 	 */
 	protected Workspace workspace;
 
+	/**
+	 * The cached value of the '{@link #isInitializing() <em>Initializing</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #isInitializing()
+	 * @generated NOT
+	 * @ordered
+	 */
+	public static boolean initializing = INITIALIZING_EDEFAULT;
+
 	private WorkspaceResourceAdapter workspaceResourceAdapter = new WorkspaceResourceAdapter();
 
 	private class WorkspaceResourceAdapter extends EContentAdapter {
@@ -121,17 +130,27 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 								e.printStackTrace();
 							}
 						} catch (ClassCastException e) {
-						}
-					} else {
-						workspaceResource = WorkspaceImpl.RESOURCE_SET_EDEFAULT.createResource(uri);
-						try {
-							workspaceResource.getContents().add(EcoreUtil.copy(getWorkspace()));
 							try {
 								workspaceResource.save(options);
-							} catch (IOException e) {
-								e.printStackTrace();
+							} catch (IOException e1) {
+								e1.printStackTrace();
 							}
-						} catch (ClassCastException e) {
+						}
+					}
+				} else {
+					workspaceResource = WorkspaceImpl.RESOURCE_SET_EDEFAULT.createResource(uri);
+					try {
+						workspaceResource.getContents().add(EcoreUtil.copy(getWorkspace()));
+						try {
+							workspaceResource.save(options);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					} catch (ClassCastException e) {
+						try {
+							workspaceResource.save(options);
+						} catch (IOException e1) {
+							e1.printStackTrace();
 						}
 					}
 				}
@@ -217,7 +236,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 	 * 
 	 * @generated NOT
 	 */
-	public EPackage make(EPackage input, IProgressMonitor monitor) throws CoreException {
+	public EObject make(EObject input, IProgressMonitor monitor) throws CoreException {
 		Blueprint blueprint = createBlueprint();
 		blueprint.setDynamicModel(input);
 		return make(blueprint, monitor);
@@ -228,7 +247,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 	 * 
 	 * @generated NOT
 	 */
-	public EPackage make(Blueprint input, IProgressMonitor monitor) throws CoreException {
+	public EObject make(Blueprint input, IProgressMonitor monitor) throws CoreException {
 		try {
 			Contribution contrib = getWorkspace().createContribution(input.getDynamicModel(), monitor);
 			contrib.getDependencies().addAll(input.getDependencies());
@@ -262,7 +281,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 	 * 
 	 * @generated NOT
 	 */
-	public EPackage replace(EPackage source, EPackage target, IProgressMonitor monitor) throws CoreException {
+	public EObject replace(EObject source, EObject target, IProgressMonitor monitor) throws CoreException {
 		return replace(source, target, true, monitor);
 	}
 
@@ -271,7 +290,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 	 * 
 	 * @generated NOT
 	 */
-	public EPackage replace(Blueprint source, Blueprint target, IProgressMonitor monitor) throws CoreException {
+	public EObject replace(Blueprint source, Blueprint target, IProgressMonitor monitor) throws CoreException {
 		return replace(source, target, true, monitor);
 	}
 
@@ -280,7 +299,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 	 * 
 	 * @generated NOT
 	 */
-	public EPackage replace(EPackage source, EPackage target, boolean changeVersion, IProgressMonitor monitor)
+	public EObject replace(EObject source, EObject target, boolean changeVersion, IProgressMonitor monitor)
 			throws CoreException {
 		Blueprint sourceBlueprint = createBlueprint();
 		sourceBlueprint.setDynamicModel(source);
@@ -294,7 +313,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 	 * 
 	 * @generated NOT
 	 */
-	public EPackage replace(Blueprint source, Blueprint target, boolean changeVersion, IProgressMonitor monitor)
+	public EObject replace(Blueprint source, Blueprint target, boolean changeVersion, IProgressMonitor monitor)
 			throws CoreException {
 		try {
 			Version version = null;
@@ -323,7 +342,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 	 * 
 	 * @generated NOT
 	 */
-	public EPackage replace(EPackage source, EPackage target, Version version, IProgressMonitor monitor)
+	public EObject replace(EObject source, EObject target, Version version, IProgressMonitor monitor)
 			throws CoreException {
 		Blueprint sourceBlueprint = createBlueprint();
 		sourceBlueprint.setDynamicModel(source);
@@ -339,14 +358,14 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 	 * 
 	 * @generated NOT
 	 */
-	public EPackage replace(Blueprint source, Blueprint target, Version version, IProgressMonitor monitor)
+	public EObject replace(Blueprint source, Blueprint target, Version version, IProgressMonitor monitor)
 			throws CoreException {
 		Contribution contribution = getWorkspace().getContribution(source.getDynamicModel(), false);
 		if (contribution == null) {
 			contribution = getWorkspace().getContribution(source.getDynamicModel(), true);
 			if (contribution != null) {
-				EPackage existingModel = contribution.getDomainModel().getDynamic();
-				if (ModelUtil.ePackagesAreEqual(existingModel, source.getDynamicModel(), false)) {
+				EObject existingModel = contribution.getDomainModel().getDynamic();
+				if (ModelUtil.eObjectsAreEqual(existingModel, source.getDynamicModel(), false)) {
 					Revision revision = null;
 					if (version.compareTo(contribution.getVersion()) < 0) {
 						if (!contribution.getRevisions().containsKey(version))
@@ -361,8 +380,8 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 				return null;
 			}
 		} else {
-			EPackage existingModel = contribution.getDomainModel().getDynamic();
-			if (ModelUtil.ePackagesAreEqual(existingModel, source.getDynamicModel(), true)) {
+			EObject existingModel = contribution.getDomainModel().getDynamic();
+			if (ModelUtil.eObjectsAreEqual(existingModel, source.getDynamicModel(), true)) {
 				Revision revision = contribution.getRevision();
 				if (version.compareTo(contribution.getVersion()) > 0) {
 					revision = contribution.newRevision(version);
@@ -408,12 +427,12 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 	 * 
 	 * @generated NOT
 	 */
-	public Future<? extends EPackage> make(final Blueprint input, Executor executor, final IProgressMonitor monitor)
+	public Future<? extends EObject> make(final Blueprint input, Executor executor, final IProgressMonitor monitor)
 			throws CoreException {
-		return asyncExecute(new Callable<EPackage>() {
+		return asyncExecute(new Callable<EObject>() {
 
 			@Override
-			public EPackage call() throws Exception {
+			public EObject call() throws Exception {
 				return make(input, monitor);
 			}
 		}, executor);
@@ -424,16 +443,16 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 	 * 
 	 * @generated NOT
 	 */
-	public Future<? extends EPackage> replace(EPackage source, EPackage target, Executor executor,
+	public Future<? extends EObject> replace(EObject source, EObject target, Executor executor,
 			final IProgressMonitor monitor) throws CoreException {
 		final Blueprint sourceBlueprint = createBlueprint();
 		sourceBlueprint.setDynamicModel(source);
 		final Blueprint targetBlueprint = createBlueprint();
 		targetBlueprint.setDynamicModel(target);
-		return asyncExecute(new Callable<EPackage>() {
+		return asyncExecute(new Callable<EObject>() {
 
 			@Override
-			public EPackage call() throws Exception {
+			public EObject call() throws Exception {
 				return replace(sourceBlueprint, targetBlueprint, monitor);
 			}
 		}, executor);
@@ -444,7 +463,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 	 * 
 	 * @generated NOT
 	 */
-	public Future<? extends EPackage> make(EPackage input, Executor executor, IProgressMonitor monitor)
+	public Future<? extends EObject> make(EObject input, Executor executor, IProgressMonitor monitor)
 			throws CoreException {
 		Blueprint blueprint = createBlueprint();
 		blueprint.setDynamicModel(input);
@@ -456,12 +475,12 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 	 * 
 	 * @generated NOT
 	 */
-	public Future<? extends EPackage> replace(final Blueprint source, final Blueprint target, Executor executor,
+	public Future<? extends EObject> replace(final Blueprint source, final Blueprint target, Executor executor,
 			final IProgressMonitor monitor) throws CoreException {
-		return asyncExecute(new Callable<EPackage>() {
+		return asyncExecute(new Callable<EObject>() {
 
 			@Override
-			public EPackage call() throws Exception {
+			public EObject call() throws Exception {
 				return replace(source, target, monitor);
 			}
 		}, executor);
@@ -472,16 +491,16 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 	 * 
 	 * @generated NOT
 	 */
-	public Future<? extends EPackage> replace(EPackage source, EPackage target, final boolean changeVersion,
+	public Future<? extends EObject> replace(EObject source, EObject target, final boolean changeVersion,
 			Executor executor, final IProgressMonitor monitor) throws CoreException {
 		final Blueprint sourceBlueprint = createBlueprint();
 		sourceBlueprint.setDynamicModel(source);
 		final Blueprint targetBlueprint = createBlueprint();
 		targetBlueprint.setDynamicModel(target);
-		return asyncExecute(new Callable<EPackage>() {
+		return asyncExecute(new Callable<EObject>() {
 
 			@Override
-			public EPackage call() throws Exception {
+			public EObject call() throws Exception {
 				return replace(sourceBlueprint, targetBlueprint, changeVersion, monitor);
 			}
 		}, executor);
@@ -492,12 +511,12 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 	 * 
 	 * @generated NOT
 	 */
-	public Future<? extends EPackage> replace(final Blueprint source, final Blueprint target,
+	public Future<? extends EObject> replace(final Blueprint source, final Blueprint target,
 			final boolean changeVersion, Executor executor, final IProgressMonitor monitor) throws CoreException {
-		return asyncExecute(new Callable<EPackage>() {
+		return asyncExecute(new Callable<EObject>() {
 
 			@Override
-			public EPackage call() throws Exception {
+			public EObject call() throws Exception {
 				return replace(source, target, changeVersion, monitor);
 			}
 		}, executor);
@@ -508,16 +527,16 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 	 * 
 	 * @generated NOT
 	 */
-	public Future<? extends EPackage> replace(EPackage source, EPackage target, final Version version,
-			Executor executor, final IProgressMonitor monitor) throws CoreException {
+	public Future<? extends EObject> replace(EObject source, EObject target, final Version version, Executor executor,
+			final IProgressMonitor monitor) throws CoreException {
 		final Blueprint sourceBlueprint = createBlueprint();
 		sourceBlueprint.setDynamicModel(source);
 		final Blueprint targetBlueprint = createBlueprint();
 		targetBlueprint.setDynamicModel(target);
-		return asyncExecute(new Callable<EPackage>() {
+		return asyncExecute(new Callable<EObject>() {
 
 			@Override
-			public EPackage call() throws Exception {
+			public EObject call() throws Exception {
 				return replace(sourceBlueprint, targetBlueprint, version, monitor);
 			}
 		}, executor);
@@ -528,12 +547,12 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 	 * 
 	 * @generated NOT
 	 */
-	public Future<? extends EPackage> replace(final Blueprint source, final Blueprint target, final Version version,
+	public Future<? extends EObject> replace(final Blueprint source, final Blueprint target, final Version version,
 			Executor executor, final IProgressMonitor monitor) throws CoreException {
-		return asyncExecute(new Callable<EPackage>() {
+		return asyncExecute(new Callable<EObject>() {
 
 			@Override
-			public EPackage call() throws Exception {
+			public EObject call() throws Exception {
 				return replace(source, target, version, monitor);
 			}
 		}, executor);
@@ -549,9 +568,8 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 		return transform(source, transformationURI, monitor);
 	}
 
-	private Future<? extends EPackage> asyncExecute(Callable<EPackage> callable, Executor executor)
-			throws CoreException {
-		FutureTask<? extends EPackage> future = new FutureTask<EPackage>(callable);
+	private Future<? extends EObject> asyncExecute(Callable<EObject> callable, Executor executor) throws CoreException {
+		FutureTask<? extends EObject> future = new FutureTask<EObject>(callable);
 		try {
 			executor.execute(future);
 		} catch (Exception e) {
@@ -631,7 +649,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 	 * 
 	 * @generated NOT
 	 */
-	public boolean checkEquals(EPackage model1, EPackage model2) {
+	public boolean checkEquals(EObject model1, EObject model2) {
 		return EcoreUtil.equals(model1, model2);
 	}
 
@@ -668,6 +686,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 	 * @generated NOT
 	 */
 	public void initialize() {
+		initializing = true;
 		getWorkspace().setService(this);
 		ClassMakerService.Stages.contributeStages();
 		final URI uri = URI.createFileURI(ResourceUtils.WORKSPACE_RESOURCE_PATH.toString());
@@ -676,11 +695,14 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 				Resource workspaceResource = WorkspaceImpl.RESOURCE_SET_EDEFAULT.getResource(uri, true);
 				try {
 					workspaceResource.load(Collections.emptyMap());
-					setWorkspace(EcoreUtil.copy((Workspace) workspaceResource.getContents().get(0)));
-					for (Project project : getWorkspace().getProjects()) {
-						if (project.eIsSet(ClassMakerPackage.Literals.PROJECT__STATE))
-							project.getState().load(false);
-					}
+					if (!workspaceResource.getContents().isEmpty()) {
+						setWorkspace(EcoreUtil.copy((Workspace) workspaceResource.getContents().get(0)));
+						for (Project project : getWorkspace().getProjects()) {
+							if (project.eIsSet(ClassMakerPackage.Literals.PROJECT__STATE))
+								project.getState().load(false);
+						}
+					} else
+						getWorkspace().initialize();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -689,6 +711,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 			}
 		} else
 			getWorkspace().initialize();
+		initializing = INITIALIZING_EDEFAULT;
 	}
 
 	/**

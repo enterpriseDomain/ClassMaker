@@ -20,12 +20,16 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.Semaphore;
 
 import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceChangeEvent;
+import org.eclipse.core.resources.IResourceChangeListener;
+import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -45,7 +49,10 @@ import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.jdt.core.ElementChangedEvent;
 import org.eclipse.jdt.core.IClasspathEntry;
+import org.eclipse.jdt.core.IElementChangedListener;
+import org.eclipse.jdt.core.IJavaElementDelta;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
@@ -189,6 +196,20 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 
 				ICommand command = ResourceUtils.getBuildSpec(getProject().getDescription(), JavaCore.BUILDER_ID);
 				try {
+					getProject().getWorkspace().addResourceChangeListener(new IResourceChangeListener() {
+
+						@Override
+						public void resourceChanged(IResourceChangeEvent event) {
+							if (event.getDelta() != null)
+								for (IResourceDelta delta : event.getDelta()
+										.getAffectedChildren(IResourceDelta.CHANGED))
+									if (delta.getResource().equals(getProject()))
+										try {
+											getProject().notifyAll();
+										} catch (IllegalMonitorStateException e) {
+										}
+						}
+					}, IResourceChangeEvent.POST_BUILD);
 					getProject().build(IncrementalProjectBuilder.FULL_BUILD, JavaCore.BUILDER_ID,
 							command.getArguments(), monitor);
 				} catch (OperationCanceledException e) {
@@ -250,11 +271,26 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 						false));
 				entries.add(JavaCore.newContainerEntry(new Path("org.eclipse.pde.core.requiredPlugins"), null, null,
 						false));
+				Semaphore built = new Semaphore(0);
+				JavaCore.addElementChangedListener(new IElementChangedListener() {
+
+					@Override
+					public void elementChanged(ElementChangedEvent event) {
+						IJavaElementDelta[] delta = event.getDelta().getChangedChildren();
+						if (delta != null && delta.length > 0)
+							if (delta[0].getElement().getJavaProject().getProject().equals(getProject())
+									&& event.getType() == ElementChangedEvent.POST_CHANGE)
+								built.release();
+					}
+				}, ElementChangedEvent.POST_CHANGE);
 				javaProject.setRawClasspath((IClasspathEntry[]) entries.toArray(new IClasspathEntry[entries.size()]),
 						m);
 				javaProject.getResolvedClasspath(false);
+				built.acquire();
 			} catch (JavaModelException e) {
 				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
+			} catch (InterruptedException e) {
+				monitor.setCanceled(true);
 			} finally {
 				m.done();
 				pm.done();

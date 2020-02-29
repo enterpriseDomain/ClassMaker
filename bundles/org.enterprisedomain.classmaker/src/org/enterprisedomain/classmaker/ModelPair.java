@@ -57,7 +57,7 @@ public interface ModelPair extends EObject {
 	 * @model
 	 * @generated
 	 */
-	EPackage getDynamic();
+	EObject getDynamic();
 
 	/**
 	 * Sets the value of the
@@ -69,7 +69,7 @@ public interface ModelPair extends EObject {
 	 * @see #getDynamic()
 	 * @generated
 	 */
-	void setDynamic(EPackage value);
+	void setDynamic(EObject value);
 
 	/**
 	 * Returns the value of the '<em><b>Generated</b></em>' reference. <!--
@@ -86,7 +86,7 @@ public interface ModelPair extends EObject {
 	 * @model
 	 * @generated
 	 */
-	EPackage getGenerated();
+	EObject getGenerated();
 
 	/**
 	 * Sets the value of the
@@ -97,7 +97,7 @@ public interface ModelPair extends EObject {
 	 * @see #getGenerated()
 	 * @generated
 	 */
-	void setGenerated(EPackage value);
+	void setGenerated(EObject value);
 
 	/**
 	 * Returns the value of the '<em><b>Parent</b></em>' container reference. It is

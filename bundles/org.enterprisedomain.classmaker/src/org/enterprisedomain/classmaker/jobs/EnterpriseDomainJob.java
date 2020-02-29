@@ -42,6 +42,7 @@ import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
+import org.enterprisedomain.classmaker.impl.ClassMakerServiceImpl;
 import org.enterprisedomain.classmaker.util.ReflectiveFactory;
 
 public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker {
@@ -81,7 +82,7 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 			ClassMakerPlugin.getInstance().getLog().log(result);
 
 			if (hasErrors(event.getResult()) && getDepth() < 5) {
-				EnterpriseDomainJob job = getJob(getContributionState().getReturnWorker());
+				EnterpriseDomainJob job = getJob(getContributionState().getStrategy().getReturnWorker());
 				if (job != null) {
 					EnterpriseDomainJob nextJob = job.getNextJob();
 					EnterpriseDomainJob prevJob = job;
@@ -127,8 +128,10 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 		setUser(true);
 		setPriority(Job.BUILD);
 		try {
-			if (ClassMakerPlugin.getClassMaker() != null)
+			if (!ClassMakerServiceImpl.initializing && ClassMakerPlugin.getClassMaker() != null)
 				setRule(ClassMakerPlugin.getClassMaker().getWorkspace());
+			else
+				setRule(project);
 		} catch (Exception e) {
 			setRule(project);
 		}
@@ -239,11 +242,13 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 
 	public void setProject(IProject project) {
 		this.project = project;
-		if (isChangeRule())
+		if (isChangeRule() && project != null)
 			setRule(calcSchedulingRule(project));
 	}
 
 	protected ISchedulingRule calcSchedulingRule(IProject project) {
+		if (ClassMakerServiceImpl.initializing)
+			return project;
 		ClassMakerService service = ClassMakerPlugin.getClassMaker();
 		if (service == null)
 			return project;

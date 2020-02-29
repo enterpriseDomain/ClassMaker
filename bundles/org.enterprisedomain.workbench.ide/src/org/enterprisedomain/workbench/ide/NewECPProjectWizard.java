@@ -11,24 +11,17 @@ import org.eclipse.emf.ecp.core.exceptions.ECPProjectWithNameExistsException;
 import org.eclipse.emf.ecp.core.util.ECPProperties;
 import org.eclipse.emf.ecp.core.util.ECPUtil;
 import org.eclipse.emf.ecp.internal.wizards.CreateProjectWizard;
-import org.eclipse.emf.ecp.spi.common.ui.CompositeProvider;
 import org.eclipse.emf.ecp.spi.core.InternalProvider;
 import org.eclipse.emf.ecp.spi.core.InternalProvider.LifecycleEvent;
-import org.eclipse.emf.ecp.spi.ui.UIProvider;
 import org.eclipse.emf.ecp.ui.common.CreateProjectComposite;
 import org.eclipse.emf.ecp.ui.common.ECPCompositeFactory;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.Wizard;
-import org.eclipse.jface.wizard.WizardDialog;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
-import org.enterprisedomain.ecp.EnterpriseDomainProvider;
-import org.enterprisedomain.ecp.ui.EnterpriseDomainUIProvider;
 
 @SuppressWarnings("restriction")
 public class NewECPProjectWizard extends Wizard implements INewWizard {
