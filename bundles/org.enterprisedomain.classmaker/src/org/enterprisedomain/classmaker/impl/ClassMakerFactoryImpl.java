@@ -50,6 +50,7 @@ import org.enterprisedomain.classmaker.SelectRevealHandler;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
+import org.enterprisedomain.classmaker.Strategy;
 import org.enterprisedomain.classmaker.Workspace;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.osgi.framework.Version;
@@ -104,6 +105,8 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 			return createRevision();
 		case ClassMakerPackage.STATE:
 			return createState();
+		case ClassMakerPackage.STRATEGY:
+			return createStrategy();
 		case ClassMakerPackage.WORKSPACE:
 			return createWorkspace();
 		case ClassMakerPackage.LONG_TO_STATE_MAP_ENTRY:
@@ -165,6 +168,8 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 			return createIStatusFromString(eDataType, initialValue);
 		case ClassMakerPackage.URI:
 			return createURIFromString(eDataType, initialValue);
+		case ClassMakerPackage.NAME:
+			return createNameFromString(eDataType, initialValue);
 		case ClassMakerPackage.EXCEPTION:
 			return createExceptionFromString(eDataType, initialValue);
 		case ClassMakerPackage.LOCALE:
@@ -200,6 +205,8 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 			return convertIStatusToString(eDataType, instanceValue);
 		case ClassMakerPackage.URI:
 			return convertURIToString(eDataType, instanceValue);
+		case ClassMakerPackage.NAME:
+			return convertNameToString(eDataType, instanceValue);
 		case ClassMakerPackage.EXCEPTION:
 			return convertExceptionToString(eDataType, instanceValue);
 		case ClassMakerPackage.LOCALE:
@@ -240,6 +247,17 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 	public State createState() {
 		StateImpl state = new StateImpl();
 		return state;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public Strategy createStrategy() {
+		StrategyImpl strategy = new StrategyImpl();
+		return strategy;
 	}
 
 	/**
@@ -575,6 +593,24 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 	 * @generated
 	 */
 	public String convertURIToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public String createNameFromString(EDataType eDataType, String initialValue) {
+		return (String) super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public String convertNameToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

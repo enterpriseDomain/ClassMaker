@@ -56,6 +56,7 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecp.core.ECPProject;
@@ -80,6 +81,7 @@ import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.ResourceAdapter;
 import org.enterprisedomain.classmaker.SelectRevealHandler;
+import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.impl.CompletionListenerImpl;
 import org.enterprisedomain.classmaker.impl.ResourceChangeListenerImpl;
@@ -231,7 +233,9 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 				} catch (CoreException e) {
 					Activator.log(e);
 				}
-				addVisiblePackage(project, domainProject.getRevision().getState().getDomainModel().getGenerated());
+				if (domainProject.getRevision().getState().getDomainModel().getGenerated() instanceof EPackage)
+					addVisiblePackage(project,
+							(EPackage) domainProject.getRevision().getState().getDomainModel().getGenerated());
 				domainProject.initialize(false);
 			} else {
 				boolean contribution = false;
@@ -420,7 +424,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 	@Override
 	public boolean contains(InternalProject project, Object object) {
 		if (object instanceof EObject)
-			return Activator.getClassMaker().getWorkspace().contains((EObject) object);
+			return Activator.getClassMaker().getWorkspace().contains((EObject) object).getValue() == Stage.LOADED_VALUE;
 		return super.contains(project, object);
 	}
 
@@ -482,7 +486,8 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 				}
 
 			});
-			addVisiblePackage(project, ((Contribution) result).getDomainModel().getGenerated());
+			if (((Contribution) result).getDomainModel().getGenerated() instanceof EPackage)
+				addVisiblePackage(project, (EPackage) ((Contribution) result).getDomainModel().getGenerated());
 			project.notifyObjectsChanged((Collection<Object>) (Collection<?>) Arrays.asList(project), true);
 			Collection<ECPRepository> repositories = (Collection<ECPRepository>) (Collection<?>) Arrays
 					.asList(project.getRepository());
@@ -493,7 +498,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 
 	@Override
 	public Notifier getRoot(InternalProject project) {
-		return Activator.getClassMaker().getWorkspace();
+		return Activator.getClassMaker().getWorkspace().getProject(project.getName());
 	}
 
 	public void addVisiblePackage(InternalProject project, EPackage ePackage) {
@@ -653,6 +658,8 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 				project.notifyObjectsChanged(
 						(Collection<Object>) (Collection<?>) Collections.singleton(notification.getNotifier()), true);
 			}
+//			Diagnostician.INSTANCE
+//					.validate(ClassMakerPlugin.getClassMaker().getWorkspace().getProject(project.getName()));
 			// if (notification.getNotifier() instanceof Notifier) {
 			// provider.notifyProviderChangeListeners(notification);
 			//

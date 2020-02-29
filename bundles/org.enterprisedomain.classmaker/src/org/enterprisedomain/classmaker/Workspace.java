@@ -21,7 +21,6 @@ import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 
@@ -189,7 +188,7 @@ public interface Workspace extends EObject, ISchedulingRule {
 	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
-	Contribution createContribution(EPackage blueprint, IProgressMonitor monitor) throws CoreException;
+	Contribution createContribution(EObject blueprint, IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc --> Lookup
@@ -203,12 +202,38 @@ public interface Workspace extends EObject, ISchedulingRule {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc --> Lookup
-	 * workspace Contribution by model EPackage. <!-- end-model-doc -->
+	 * workspace Contribution by model EPackage.
 	 * 
+	 * @param searchOptimistic true if use OR while EPackage comparison, overwise
+	 *                         use AND. <!-- end-model-doc -->
 	 * @model
 	 * @generated
 	 */
-	Contribution getContribution(EPackage ePackage);
+	Contribution getContribution(EObject eObject, boolean searchOptimistic);
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc --> Lookup
+	 * workspace Contribution by model EPackage.
+	 * 
+	 * @param filter returns blueprint EPackage if Stage is less or equal MODELED,
+	 *               generated if it equals LOADED. <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	Contribution getContribution(EObject eObject, Stage filter);
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc --> Lookup
+	 * workspace Contribution by model EPackage.
+	 * 
+	 * @param filter           returns blueprint EPackage if Stage is less or equal
+	 *                         MODELED, generated if it equals LOADED.
+	 * @param searchOptimistic true if use OR while EPackage comparison, overwise
+	 *                         use AND. <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	Contribution getContribution(EObject eObject, Stage filter, boolean searchOptimistic);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc --> Lookup
@@ -256,41 +281,6 @@ public interface Workspace extends EObject, ISchedulingRule {
 	Project getProject(Resource resource);
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc --> Lookup
-	 * workspace Contribution by model EPackage.
-	 * 
-	 * @param searchOptimistic true if use OR while EPackage comparison, overwise
-	 *                         use AND. <!-- end-model-doc -->
-	 * @model
-	 * @generated
-	 */
-	Contribution getContribution(EPackage ePackage, boolean searchOptimistic);
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc --> Lookup
-	 * workspace Contribution by model EPackage.
-	 * 
-	 * @param filter returns blueprint EPackage if Stage is less or equal MODELED,
-	 *               generated if it equals LOADED. <!-- end-model-doc -->
-	 * @model
-	 * @generated
-	 */
-	Contribution getContribution(EPackage ePackage, Stage filter);
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc --> Lookup
-	 * workspace Contribution by model EPackage.
-	 * 
-	 * @param filter           returns blueprint EPackage if Stage is less or equal
-	 *                         MODELED, generated if it equals LOADED.
-	 * @param searchOptimistic true if use OR while EPackage comparison, overwise
-	 *                         use AND. <!-- end-model-doc -->
-	 * @model
-	 * @generated
-	 */
-	Contribution getContribution(EPackage ePackage, Stage filter, boolean searchOptimistic);
-
-	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @model
@@ -312,15 +302,7 @@ public interface Workspace extends EObject, ISchedulingRule {
 	 * @model
 	 * @generated
 	 */
-	Stage contains(EPackage blueprint);
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model
-	 * @generated
-	 */
-	boolean contains(EObject eObject);
+	Stage contains(EObject blueprint);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

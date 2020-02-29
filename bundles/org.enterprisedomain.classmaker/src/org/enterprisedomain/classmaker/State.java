@@ -22,9 +22,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
-import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.enterprisedomain.classmaker.jobs.Worker;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '
@@ -38,14 +37,6 @@ import org.enterprisedomain.classmaker.jobs.Worker;
  * The following features are supported:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.State#getGenerators
- * <em>Generators</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.State#getExporters
- * <em>Exporters</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.State#getInstallers
- * <em>Installers</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.State#getLoaders
- * <em>Loaders</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.State#getPackageClassName
  * <em>Package Class Name</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.State#getEditPluginClassName
@@ -81,6 +72,8 @@ import org.enterprisedomain.classmaker.jobs.Worker;
  * <li>{@link org.enterprisedomain.classmaker.State#isEdit <em>Edit</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.State#isEditor
  * <em>Editor</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.State#getStrategy
+ * <em>Strategy</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getState()
@@ -89,60 +82,6 @@ import org.enterprisedomain.classmaker.jobs.Worker;
  * @generated
  */
 public interface State extends Item, ISchedulingRule {
-	/**
-	 * Returns the value of the '<em><b>Generators</b></em>' reference list. The
-	 * list contents are of type
-	 * {@link org.enterprisedomain.classmaker.jobs.Worker}. <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Generators</em>' reference list.
-	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getState_Generators()
-	 * @model type="org.enterprisedomain.classmaker.Worker" resolveProxies="false"
-	 *        transient="true"
-	 * @generated
-	 */
-	EList<Worker> getGenerators();
-
-	/**
-	 * Returns the value of the '<em><b>Exporters</b></em>' reference list. The list
-	 * contents are of type {@link org.enterprisedomain.classmaker.jobs.Worker}.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Exporters</em>' reference list.
-	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getState_Exporters()
-	 * @model type="org.enterprisedomain.classmaker.Worker" resolveProxies="false"
-	 *        transient="true"
-	 * @generated
-	 */
-	EList<Worker> getExporters();
-
-	/**
-	 * Returns the value of the '<em><b>Installers</b></em>' reference list. The
-	 * list contents are of type
-	 * {@link org.enterprisedomain.classmaker.jobs.Worker}. <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Installers</em>' reference list.
-	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getState_Installers()
-	 * @model type="org.enterprisedomain.classmaker.Worker" resolveProxies="false"
-	 *        transient="true"
-	 * @generated
-	 */
-	EList<Worker> getInstallers();
-
-	/**
-	 * Returns the value of the '<em><b>Loaders</b></em>' reference list. The list
-	 * contents are of type {@link org.enterprisedomain.classmaker.jobs.Worker}.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Loaders</em>' reference list.
-	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getState_Loaders()
-	 * @model type="org.enterprisedomain.classmaker.Worker" resolveProxies="false"
-	 *        transient="true"
-	 * @generated
-	 */
-	EList<Worker> getLoaders();
-
 	/**
 	 * Returns the value of the '<em><b>Package Class Name</b></em>' attribute. <!--
 	 * begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc --> Generated
@@ -606,6 +545,32 @@ public interface State extends Item, ISchedulingRule {
 	void setEditor(boolean value);
 
 	/**
+	 * Returns the value of the '<em><b>Strategy</b></em>' reference. It is
+	 * bidirectional and its opposite is
+	 * '{@link org.enterprisedomain.classmaker.Strategy#getState <em>State</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Strategy</em>' reference.
+	 * @see #setStrategy(Strategy)
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getState_Strategy()
+	 * @see org.enterprisedomain.classmaker.Strategy#getState
+	 * @model opposite="state"
+	 * @generated
+	 */
+	Strategy getStrategy();
+
+	/**
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.State#getStrategy <em>Strategy</em>}'
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value the new value of the '<em>Strategy</em>' reference.
+	 * @see #getStrategy()
+	 * @generated
+	 */
+	void setStrategy(Strategy value);
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
@@ -629,7 +594,7 @@ public interface State extends Item, ISchedulingRule {
 	 * @model
 	 * @generated
 	 */
-	EPackage find(EPackage ePackage, Stage stage);
+	EObject find(EObject eObject, Stage stage);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -672,54 +637,5 @@ public interface State extends Item, ISchedulingRule {
 	 * @generated
 	 */
 	void saveResource();
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model type="org.enterprisedomain.classmaker.Worker"
-	 * @generated
-	 */
-	Worker createGenerator();
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model type="org.enterprisedomain.classmaker.Worker"
-	 * @generated
-	 */
-	Worker createExporter();
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model type="org.enterprisedomain.classmaker.Worker"
-	 * @generated
-	 */
-	Worker createInstaller();
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model type="org.enterprisedomain.classmaker.Worker"
-	 * @generated
-	 */
-	Worker createModelLoader();
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model kind="operation" type="org.enterprisedomain.classmaker.Worker"
-	 * @generated
-	 */
-	Worker getReturnWorker();
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
-	 * 
-	 * @return current depth <!-- end-model-doc -->
-	 * @model monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
-	 * @generated
-	 */
-	int configureJobs(boolean create, IProgressMonitor monitor);
 
 } // State

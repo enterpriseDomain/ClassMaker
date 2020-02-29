@@ -59,7 +59,7 @@ public interface Blueprint extends EObject {
 	 * @model
 	 * @generated
 	 */
-	EPackage getDynamicModel();
+	EObject getDynamicModel();
 
 	/**
 	 * Sets the value of the
@@ -70,7 +70,7 @@ public interface Blueprint extends EObject {
 	 * @see #getDynamicModel()
 	 * @generated
 	 */
-	void setDynamicModel(EPackage value);
+	void setDynamicModel(EObject value);
 
 	/**
 	 * Returns the value of the '<em><b>Dependencies</b></em>' attribute list. The

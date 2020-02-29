@@ -32,10 +32,8 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.enterprisedomain.classmaker.CompletionNotificationAdapter;
 
 /**
- * This is the item provider adapter for a
- * {@link org.enterprisedomain.classmaker.CompletionNotificationAdapter} object.
+ * This is the item provider adapter for a {@link org.enterprisedomain.classmaker.CompletionNotificationAdapter} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
- * 
  * @generated
  */
 public class CompletionNotificationAdapterItemProvider extends ItemProviderAdapter
@@ -67,9 +65,9 @@ public class CompletionNotificationAdapterItemProvider extends ItemProviderAdapt
 	}
 
 	/**
-	 * This returns CompletionNotificationAdapter.gif. <!-- begin-user-doc --> <!--
+	 * This returns CompletionNotificationAdapter.gif.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -78,9 +76,9 @@ public class CompletionNotificationAdapterItemProvider extends ItemProviderAdapt
 	}
 
 	/**
-	 * This returns the label text for the adapted class. <!-- begin-user-doc -->
+	 * This returns the label text for the adapted class.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -92,10 +90,9 @@ public class CompletionNotificationAdapterItemProvider extends ItemProviderAdapt
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update
-	 * any cached children and by creating a viewer notification, which it passes to
-	 * {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -105,10 +102,10 @@ public class CompletionNotificationAdapterItemProvider extends ItemProviderAdapt
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing
-	 * the children that can be created under this object. <!-- begin-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+	 * that can be created under this object.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

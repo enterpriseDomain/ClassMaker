@@ -30,6 +30,8 @@ public class Activator extends Plugin implements BundleActivator {
 
 	private static Activator instance;
 
+	public static final String PLUGIN_ID = "org.enterprisedomain.ecp";
+
 	private static ServiceTracker<ClassMakerService, ClassMakerServiceImpl> classMaker;
 
 	public static ClassMakerService getClassMaker() {

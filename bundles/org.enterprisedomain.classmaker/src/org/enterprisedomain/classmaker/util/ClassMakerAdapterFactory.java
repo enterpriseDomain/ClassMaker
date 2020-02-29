@@ -45,6 +45,7 @@ import org.enterprisedomain.classmaker.SCMRegistry;
 import org.enterprisedomain.classmaker.SelectRevealHandler;
 import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
+import org.enterprisedomain.classmaker.Strategy;
 import org.enterprisedomain.classmaker.Workspace;
 import org.enterprisedomain.classmaker.jobs.Worker;
 import org.osgi.framework.Version;
@@ -117,6 +118,11 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseState(State object) {
 			return createStateAdapter();
+		}
+
+		@Override
+		public Adapter caseStrategy(Strategy object) {
+			return createStrategyAdapter();
 		}
 
 		@Override
@@ -310,6 +316,21 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createStateAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class
+	 * '{@link org.enterprisedomain.classmaker.Strategy <em>Strategy</em>}'. <!--
+	 * begin-user-doc --> This default implementation returns null so that we can
+	 * easily ignore cases; it's useful to ignore a case when inheritance will catch
+	 * all the cases anyway. <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see org.enterprisedomain.classmaker.Strategy
+	 * @generated
+	 */
+	public Adapter createStrategyAdapter() {
 		return null;
 	}
 

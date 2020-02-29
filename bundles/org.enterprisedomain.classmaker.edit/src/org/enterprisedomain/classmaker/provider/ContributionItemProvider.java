@@ -87,9 +87,9 @@ public class ContributionItemProvider extends ProjectItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Phase feature. <!-- begin-user-doc
+	 * This adds a property descriptor for the Phase feature.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addPhasePropertyDescriptor(Object object) {
@@ -102,9 +102,9 @@ public class ContributionItemProvider extends ProjectItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Language feature. <!-- begin-user-doc
+	 * This adds a property descriptor for the Language feature.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addLanguagePropertyDescriptor(Object object) {
@@ -117,9 +117,9 @@ public class ContributionItemProvider extends ProjectItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Parent feature. <!-- begin-user-doc
+	 * This adds a property descriptor for the Parent feature.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addParentPropertyDescriptor(Object object) {
@@ -131,9 +131,9 @@ public class ContributionItemProvider extends ProjectItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Locale feature. <!-- begin-user-doc
+	 * This adds a property descriptor for the Locale feature.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addLocalePropertyDescriptor(Object object) {
@@ -146,9 +146,9 @@ public class ContributionItemProvider extends ProjectItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Project feature. <!-- begin-user-doc
+	 * This adds a property descriptor for the Project feature.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addProjectPropertyDescriptor(Object object) {
@@ -208,12 +208,10 @@ public class ContributionItemProvider extends ProjectItemProvider {
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an
-	 * appropriate feature for an {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -227,21 +225,19 @@ public class ContributionItemProvider extends ProjectItemProvider {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to
-		// use for
+		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
 		return super.getChildFeature(object, child);
 	}
 
 	/**
-	 * This returns Contribution.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This returns Contribution.gif.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -250,9 +246,9 @@ public class ContributionItemProvider extends ProjectItemProvider {
 	}
 
 	/**
-	 * This returns the label text for the adapted class. <!-- begin-user-doc -->
+	 * This returns the label text for the adapted class.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -263,10 +259,9 @@ public class ContributionItemProvider extends ProjectItemProvider {
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update
-	 * any cached children and by creating a viewer notification, which it passes to
-	 * {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -291,10 +286,10 @@ public class ContributionItemProvider extends ProjectItemProvider {
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing
-	 * the children that can be created under this object. <!-- begin-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+	 * that can be created under this object.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

@@ -94,7 +94,7 @@
 				<configuration>
 					<toolchains>
 						<jdk>
-							<version>1.11</version>
+							<version>11</version>
 							<vendor>openjdk</vendor>
 						</jdk>
 					</toolchains>
@@ -127,6 +127,33 @@
 									</pluginExecutionFilter>
 									<action>
 										<execute />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-dependency-plugin</artifactId>
+										<goals>
+											<goal>list</goal>
+										</goals>
+										<versionRange>[0.0,)</versionRange>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-dependency-plugin</artifactId>
+										<goals>
+											<goal>copy-dependencies</goal>
+											<goal>unpack</goal>
+										</goals>
+										<versionRange>[0.0,)</versionRange>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
 									</action>
 								</pluginExecution>
 							</pluginExecutions>

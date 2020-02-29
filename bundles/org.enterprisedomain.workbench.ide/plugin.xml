@@ -59,15 +59,6 @@
       </modelElementOpener>
    </extension>
    <extension
-         point="org.eclipse.ui.editors">
-      <editor
-            class="org.enterprisedomain.workbench.ide.ModelEditor"
-            default="false"
-            id="org.enterprisedomain.workbench.ide.modelEditor"
-            name="Model Editor">
-      </editor>
-   </extension>
-   <extension
          point="org.eclipse.ui.perspectiveExtensions">
       <perspectiveExtension
             targetID="org.eclipse.emf.ecp.application3x.perspective">
@@ -138,13 +129,22 @@
                      variable="activeMenuSelection">
                   <iterate
                         ifEmpty="false">
-                     <adapt
-                           type="org.eclipse.core.resources.IProject">
-                        <test
-                              property="org.eclipse.core.resources.projectNature"
-                              value="org.enterprisedomain.classmaker.projectNature">
-                        </test>
-                     </adapt>
+                     <or>
+                        <adapt
+                              type="org.eclipse.core.resources.IProject">
+                           <test
+                                 property="org.eclipse.core.resources.projectNature"
+                                 value="org.enterprisedomain.classmaker.projectNature">
+                           </test>
+                        </adapt>
+                        <adapt
+                              type="org.eclipse.emf.ecp.core.ECPProject">
+                           <test
+                                 property="org.enterprisedomain.ecp.isContribution"
+                                 value="true">
+                           </test>
+                        </adapt>
+                     </or>
                   </iterate>
                </with>
          </activeWhen>
@@ -163,13 +163,23 @@
                      variable="activeMenuSelection">
                   <iterate
                         ifEmpty="false">
-                     <adapt
-                           type="org.eclipse.core.resources.IProject">
-                        <test
-                              property="org.eclipse.core.resources.projectNature"
-                              value="org.enterprisedomain.classmaker.projectNature">
-                        </test>
-                     </adapt>
+                     <or>
+                        <adapt
+                              type="org.eclipse.core.resources.IProject">
+                           <test
+                                 property="org.eclipse.core.resources.projectNature"
+                                 value="org.enterprisedomain.classmaker.projectNature">
+                           </test>
+                        </adapt>
+                        <adapt
+                              type="org.eclipse.emf.ecp.core.ECPProject">
+                           <test
+                                 forcePluginActivation="true"
+                                 property="org.enterprisedomain.ecp.isContribution"
+                                 value="true">
+                           </test>
+                        </adapt>
+                     </or>
                   </iterate>
                </with>
             </visibleWhen>

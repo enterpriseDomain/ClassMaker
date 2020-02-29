@@ -44,7 +44,6 @@ import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -409,9 +408,9 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	public void copyModel(Item from) {
 		setModelName(from.getModelName());
 		setLanguage(from.getLanguage());
-		EPackage ePackage = from.getDomainModel().getDynamic();
-		if (ePackage != null)
-			getDomainModel().setDynamic(EcoreUtil.copy(ePackage));
+		EObject eObject = from.getDomainModel().getDynamic();
+		if (eObject != null)
+			getDomainModel().setDynamic(EcoreUtil.copy(eObject));
 	}
 
 	/**

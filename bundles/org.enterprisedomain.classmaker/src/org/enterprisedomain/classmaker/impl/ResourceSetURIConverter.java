@@ -5,10 +5,12 @@ import java.util.Map;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.Revision;
+import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 
 public class ResourceSetURIConverter extends ExtensibleURIConverterImpl implements URIConverter {
@@ -27,8 +29,10 @@ public class ResourceSetURIConverter extends ExtensibleURIConverterImpl implemen
 			return results;
 		for (Project project : ClassMakerPlugin.getClassMaker().getWorkspace().getProjects()) {
 			Revision revision = project.getRevision();
-			if (revision.getDomainModel().getDynamic() != null && revision.getState().getResource() != null)
-				results.put(URI.createURI(revision.getDomainModel().getDynamic().getNsURI()),
+			if (revision.getPhase().getValue() < Stage.LOADED_VALUE && revision.getDomainModel().getDynamic() != null
+					&& revision.getDomainModel().getDynamic() instanceof EPackage
+					&& revision.getState().getResource() != null)
+				results.put(URI.createURI(((EPackage) revision.getDomainModel().getDynamic()).getNsURI()),
 						revision.getState().getResource().getURI());
 		}
 		return results;

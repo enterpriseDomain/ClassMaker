@@ -160,6 +160,7 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider implements IRe
 		isContributionButton.setText("Software Contribution");
 		isContributionButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false));
 		isContribution = Boolean.valueOf(projectProperties.getValue(EnterpriseDomainProvider.PROP_CONTRIBUTION));
+		isContributionButton.setSelection(isContribution);
 		isContributionButton.addSelectionListener(new SelectionAdapter() {
 
 			@Override

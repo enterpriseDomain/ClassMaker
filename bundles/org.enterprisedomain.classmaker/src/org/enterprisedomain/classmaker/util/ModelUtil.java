@@ -24,59 +24,76 @@ import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreSwitch;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.enterprisedomain.classmaker.Item;
 
 public class ModelUtil {
 
 	/***
 	 * 
-	 * @param first       the first EPackage
-	 * @param second      the second EPackage
+	 * @param first       the first EObject
+	 * @param second      the second EObject
 	 * @param conjunction true if exact matching is required, false if at least one
 	 *                    of features are equal
 	 * @return whether the first and second are the same EPackages
 	 */
-	public static boolean ePackagesAreEqual(EPackage first, EPackage second, boolean conjunction) {
+	public static boolean eObjectsAreEqual(EObject first, EObject second, boolean conjunction) {
 		if (first == null || second == null)
 			return false;
-		else
-			return conjunction ? (first.eIsSet(EcorePackage.Literals.EPACKAGE__NS_URI)
-					&& second.eIsSet(EcorePackage.Literals.EPACKAGE__NS_URI)
-							? first.getNsURI().equals(second.getNsURI()) ? EcoreUtil.equals(first, second) : false
-							: false)
-					&& (first.eIsSet(EcorePackage.Literals.ENAMED_ELEMENT__NAME)
-							&& second.eIsSet(EcorePackage.Literals.ENAMED_ELEMENT__NAME)
-									? first.getName().equals(second.getName()) ? EcoreUtil.equals(first, second) : false
+		else if (first instanceof EPackage && second instanceof EPackage) {
+			EPackage firstEPackage = (EPackage) first;
+			EPackage secondEPackage = (EPackage) second;
+			return conjunction
+					? (firstEPackage.eIsSet(EcorePackage.Literals.EPACKAGE__NS_URI)
+							&& secondEPackage.eIsSet(EcorePackage.Literals.EPACKAGE__NS_URI)
+									? firstEPackage.getNsURI().equals(secondEPackage.getNsURI())
+											? EcoreUtil.equals(firstEPackage, secondEPackage)
+											: false
 									: false)
-					: (first.eIsSet(EcorePackage.Literals.EPACKAGE__NS_URI)
-							&& second.eIsSet(EcorePackage.Literals.EPACKAGE__NS_URI)
-									? first.getNsURI().equals(second.getNsURI()) ? true
-											: EcoreUtil.equals(first, second)
+							&& (firstEPackage.eIsSet(EcorePackage.Literals.ENAMED_ELEMENT__NAME)
+									&& secondEPackage.eIsSet(EcorePackage.Literals.ENAMED_ELEMENT__NAME)
+											? firstEPackage.getName().equals(secondEPackage.getName())
+													? EcoreUtil.equals(firstEPackage, secondEPackage)
+													: false
+											: false)
+					: (firstEPackage.eIsSet(EcorePackage.Literals.EPACKAGE__NS_URI)
+							&& secondEPackage.eIsSet(EcorePackage.Literals.EPACKAGE__NS_URI)
+									? firstEPackage.getNsURI().equals(secondEPackage.getNsURI()) ? true
+											: EcoreUtil.equals(firstEPackage, secondEPackage)
 									: false)
-							|| (first.eIsSet(EcorePackage.Literals.ENAMED_ELEMENT__NAME)
-									&& second.eIsSet(EcorePackage.Literals.ENAMED_ELEMENT__NAME)
-											? first.getName().equals(second.getName()) ? true
-													: EcoreUtil.equals(first, second)
+							|| (firstEPackage.eIsSet(EcorePackage.Literals.ENAMED_ELEMENT__NAME)
+									&& secondEPackage.eIsSet(EcorePackage.Literals.ENAMED_ELEMENT__NAME)
+											? firstEPackage.getName().equals(secondEPackage.getName()) ? true
+													: EcoreUtil.equals(firstEPackage, secondEPackage)
 											: false);
+		} else if (first.getClass().isAssignableFrom(Item.class) || second.getClass().isAssignableFrom(Item.class))
+			return conjunction
+					? first.getClass().isAssignableFrom(Item.class)
+							&& second.getClass().isAssignableFrom(first.getClass())
+					: (first.getClass().isAssignableFrom(Item.class)
+							|| second.getClass().isAssignableFrom(first.getClass()))
+							|| (second.getClass().isAssignableFrom(Item.class)
+									|| first.getClass().isAssignableFrom(second.getClass()));
+		return EcoreUtil.equals(first, second);
 
 	}
 
-	public static boolean ePackagesAreEqual(EPackage first, EList<EPackage> second, boolean conjunction) {
+	public static boolean eObjectsAreEqual(EObject first, EList<EObject> second, boolean conjunction) {
 		boolean result = second.contains(first);
 		if (result)
 			return result;
-		for (EPackage secondEPackage : second)
-			result |= ePackagesAreEqual(first, secondEPackage, conjunction);
+		for (EObject secondEObject : second)
+			result |= eObjectsAreEqual(first, secondEObject, conjunction);
 		return result;
 	}
 
-	public static boolean ePackagesAreEqual(EList<EPackage> first, EList<EPackage> second, boolean conjunction) {
+	public static boolean eObjectsAreEqual(EList<EObject> first, EList<EObject> second, boolean conjunction) {
 		if (first.size() != second.size())
 			return false;
 		boolean result = first.equals(second);
 		if (result)
 			return result;
-		for (EPackage firstEPackage : first)
-			result |= ePackagesAreEqual(firstEPackage, second, conjunction);
+		for (EObject firstEObject : first)
+			result |= eObjectsAreEqual(firstEObject, second, conjunction);
 		return result;
 	}
 

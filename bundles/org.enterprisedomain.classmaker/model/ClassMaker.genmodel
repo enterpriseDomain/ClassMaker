@@ -28,6 +28,7 @@
     <genDataTypes ecoreDataType="ClassMaker.ecore#//InvocationTargetException"/>
     <genDataTypes ecoreDataType="ClassMaker.ecore#//IStatus"/>
     <genDataTypes ecoreDataType="ClassMaker.ecore#//URI"/>
+    <genDataTypes ecoreDataType="ClassMaker.ecore#//Name"/>
     <genDataTypes ecoreDataType="ClassMaker.ecore#//Exception"/>
     <genDataTypes ecoreDataType="ClassMaker.ecore#//Locale"/>
     <genClasses ecoreClass="ClassMaker.ecore#//Contribution">
@@ -79,10 +80,6 @@
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="ClassMaker.ecore#//State" labelFeature="#//classmaker/State/timestamp">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//State/generators"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//State/exporters"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//State/installers"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//State/loaders"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/packageClassName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/editPluginClassName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/editorPluginClassName"/>
@@ -101,6 +98,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/making"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/edit"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/editor"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//State/strategy"/>
       <genOperations ecoreOperation="ClassMaker.ecore#//State/setProjectVersion">
         <genParameters ecoreParameter="ClassMaker.ecore#//State/setProjectVersion/monitor"/>
       </genOperations>
@@ -108,7 +106,7 @@
         <genParameters ecoreParameter="ClassMaker.ecore#//State/delete/monitor"/>
       </genOperations>
       <genOperations ecoreOperation="ClassMaker.ecore#//State/find">
-        <genParameters ecoreParameter="ClassMaker.ecore#//State/find/ePackage"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//State/find/eObject"/>
         <genParameters ecoreParameter="ClassMaker.ecore#//State/find/stage"/>
       </genOperations>
       <genOperations ecoreOperation="ClassMaker.ecore#//State/checkout"/>
@@ -121,14 +119,24 @@
       </genOperations>
       <genOperations ecoreOperation="ClassMaker.ecore#//State/commit"/>
       <genOperations ecoreOperation="ClassMaker.ecore#//State/saveResource"/>
-      <genOperations ecoreOperation="ClassMaker.ecore#//State/createGenerator"/>
-      <genOperations ecoreOperation="ClassMaker.ecore#//State/createExporter"/>
-      <genOperations ecoreOperation="ClassMaker.ecore#//State/createInstaller"/>
-      <genOperations ecoreOperation="ClassMaker.ecore#//State/createModelLoader"/>
-      <genOperations ecoreOperation="ClassMaker.ecore#//State/getReturnWorker"/>
-      <genOperations documentation="@return current depth" ecoreOperation="ClassMaker.ecore#//State/configureJobs">
-        <genParameters ecoreParameter="ClassMaker.ecore#//State/configureJobs/create"/>
-        <genParameters ecoreParameter="ClassMaker.ecore#//State/configureJobs/monitor"/>
+    </genClasses>
+    <genClasses ecoreClass="ClassMaker.ecore#//Strategy">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//Strategy/generators"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//Strategy/exporters"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//Strategy/installers"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//Strategy/loaders"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//Strategy/state"/>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Strategy/createGenerator"/>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Strategy/createExporter"/>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Strategy/createInstaller"/>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Strategy/createModelLoader"/>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Strategy/getReturnWorker"/>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Strategy/configureJobs">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Strategy/configureJobs/create"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//Strategy/configureJobs/monitor"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Strategy/configuteBuildJobs">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Strategy/configuteBuildJobs/monitor"/>
       </genOperations>
     </genClasses>
     <genClasses image="false" ecoreClass="ClassMaker.ecore#//Item">
@@ -179,27 +187,24 @@
         <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/getContribution/eObject"/>
       </genOperations>
       <genOperations ecoreOperation="ClassMaker.ecore#//Workspace/getContribution.1">
-        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/getContribution.1/ePackage"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/getContribution.1/eObject"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/getContribution.1/searchOptimistic"/>
       </genOperations>
       <genOperations ecoreOperation="ClassMaker.ecore#//Workspace/getContribution.2">
-        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/getContribution.2/ePackage"/>
-        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/getContribution.2/searchOptimistic"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/getContribution.2/eObject"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/getContribution.2/filter"/>
       </genOperations>
       <genOperations ecoreOperation="ClassMaker.ecore#//Workspace/getContribution.3">
-        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/getContribution.3/ePackage"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/getContribution.3/eObject"/>
         <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/getContribution.3/filter"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/getContribution.3/searchOptimistic"/>
       </genOperations>
       <genOperations ecoreOperation="ClassMaker.ecore#//Workspace/getContribution.4">
-        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/getContribution.4/ePackage"/>
-        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/getContribution.4/filter"/>
-        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/getContribution.4/searchOptimistic"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/getContribution.4/projectName"/>
       </genOperations>
       <genOperations ecoreOperation="ClassMaker.ecore#//Workspace/getContribution.5">
-        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/getContribution.5/projectName"/>
-      </genOperations>
-      <genOperations ecoreOperation="ClassMaker.ecore#//Workspace/getContribution.6">
-        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/getContribution.6/nsURI"/>
-        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/getContribution.6/filter"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/getContribution.5/nsURI"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/getContribution.5/filter"/>
       </genOperations>
       <genOperations ecoreOperation="ClassMaker.ecore#//Workspace/getProject">
         <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/getProject/name"/>
@@ -218,9 +223,6 @@
       </genOperations>
       <genOperations ecoreOperation="ClassMaker.ecore#//Workspace/contains">
         <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/contains/blueprint"/>
-      </genOperations>
-      <genOperations ecoreOperation="ClassMaker.ecore#//Workspace/contains.1">
-        <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/contains.1/eObject"/>
       </genOperations>
       <genOperations ecoreOperation="ClassMaker.ecore#//Workspace/delete">
         <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/delete/object"/>

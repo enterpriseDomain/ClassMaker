@@ -118,7 +118,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 
 		assertNotNull(service);
 
-		EPackage ePackage = service.make(readerEPackage, getProgressMonitor());
+		EPackage ePackage = (EPackage) service.make(readerEPackage, getProgressMonitor());
 		assertNotNull(ePackage);
 		EClass theClass = (EClass) ePackage.getEClassifier(eClass.getName());
 		EObject theObject = ePackage.getEFactoryInstance().create(theClass);
@@ -172,17 +172,17 @@ public class TestEnterpriseDomain extends AbstractTest {
 		checkedExistance.setResolveProxies(false);
 		version.getEStructuralFeatures().add(checkedExistance);
 		dynamicEPackage.getEClassifiers().add(version);
-		EPackage first = service.make(dynamicEPackage, getProgressMonitor());
+		EPackage first = (EPackage) service.make(dynamicEPackage, getProgressMonitor());
 		EPackage newDynamicEPackage = service.copy(dynamicEPackage);
 		EClass newVersion = (EClass) newDynamicEPackage.getEClassifier(version.getName());
 		newVersion.getEStructuralFeature(checkedType.getName())
 				.setEType(newDynamicEPackage.getEClassifier(specific.getName()));
-		EPackage second = service.replace(dynamicEPackage, newDynamicEPackage, getProgressMonitor());
+		EPackage second = (EPackage) service.replace(dynamicEPackage, newDynamicEPackage, getProgressMonitor());
 		assertFalse(service.checkEquals(first, second));
 		EPackage newerDynamicEPackage = service.copy(newDynamicEPackage);
 		EClass newerVersion = (EClass) newerDynamicEPackage.getEClassifier(version.getName());
 		newerVersion.getEStructuralFeatures().remove(newerVersion.getEStructuralFeature(checkedExistance.getName()));
-		EPackage third = service.replace(newDynamicEPackage, newerDynamicEPackage, getProgressMonitor());
+		EPackage third = (EPackage) service.replace(newDynamicEPackage, newerDynamicEPackage, getProgressMonitor());
 		assertFalse(service.checkEquals(second, third));
 		assertFalse(service.checkEquals(first, third));
 		EPackage newestDynamicEPackage = service.copy(newerDynamicEPackage);
@@ -190,7 +190,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		newestVersion.getEStructuralFeatures().add(service.copy(checkedExistance));
 		newestVersion.getEStructuralFeature(checkedType.getName())
 				.setEType(newestDynamicEPackage.getEClassifier(base.getName()));
-		EPackage fourth = service.replace(newerDynamicEPackage, newestDynamicEPackage, getProgressMonitor());
+		EPackage fourth = (EPackage) service.replace(newerDynamicEPackage, newestDynamicEPackage, getProgressMonitor());
 		assertFalse(service.checkEquals(second, fourth));
 		assertFalse(service.checkEquals(third, fourth));
 		assertTrue(service.checkEquals(first, fourth));
@@ -222,7 +222,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		eClass.setName(className1);
 		ePackage.getEClassifiers().add(eClass);
 
-		ePackage = tested.make(ePackage, getProgressMonitor());
+		ePackage = (EPackage) tested.make(ePackage, getProgressMonitor());
 		assertNotNull(ePackage);
 		assertObjectClass(className0, ePackage);
 		assertObjectClass(className1, ePackage);
@@ -276,7 +276,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		metaPackage.getEClassifiers().add(modelClass);
 
 		ClassMakerPlugin.getInstance().setTurnOffAutoBuilding(true);
-		EPackage ePackage = service.make(metaPackage, getProgressMonitor());
+		EPackage ePackage = (EPackage) service.make(metaPackage, getProgressMonitor());
 		assertNotNull(ePackage);
 		EClass resultClass = (EClass) ePackage.getEClassifier(metaClass.getName());
 		EObject metaClassObject = ePackage.getEFactoryInstance().create(resultClass);
@@ -327,7 +327,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 				+ "\teType := type;\n}\n");
 		EPackage metaModel = (EPackage) service.transform(nativeModel, URI.createFileURI(qvt.toString()));
 		assertNotNull(metaModel);
-		EPackage resultMetaModel = service.make(metaModel, getProgressMonitor());
+		EPackage resultMetaModel = (EPackage) service.make(metaModel, getProgressMonitor());
 		assertNotNull(resultMetaModel);
 		EObject o = resultMetaModel.getEFactoryInstance()
 				.create((EClass) resultMetaModel.getEClassifier(domainClassName));
@@ -393,9 +393,10 @@ public class TestEnterpriseDomain extends AbstractTest {
 		opBuild.setEType(EcorePackage.Literals.EPACKAGE);
 		a = f.createEAnnotation();
 		a.setSource("http://www.eclipse.org/emf/2002/GenModel");
-		a.getDetails().put("body", "return <%org.enterprisedomain.classmaker.core.ClassMakerPlugin%>"
-				+ ".getClassMaker().make(getProduct(), <%org.enterprisedomain.classmaker.core.ClassMakerPlugin%>"
-				+ ".getProgressMonitor());");
+		a.getDetails().put("body",
+				"return (<%org.eclipse.emf.ecore.EPackage%>) <%org.enterprisedomain.classmaker.core.ClassMakerPlugin%>"
+						+ ".getClassMaker().make(getProduct(), <%org.enterprisedomain.classmaker.core.ClassMakerPlugin%>"
+						+ ".getProgressMonitor());");
 		opBuild.getEAnnotations().add(a);
 		a = f.createEAnnotation();
 		a.setSource(ClassMakerService.INVOCATION_DELEGATE_URI);
@@ -418,7 +419,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		b.setDynamicModel(p);
 		b.getDependencies().addAll(dependencies);
 		ClassMakerPlugin.getInstance().setTurnOffAutoBuilding(true);
-		EPackage creator = service.make(b, getProgressMonitor());
+		EPackage creator = (EPackage) service.make(b, getProgressMonitor());
 		assertNotNull(creator);
 		EObject builder = (EObject) creator.getEFactoryInstance().create((EClass) creator.getEClassifier(c.getName()));
 		EList<Object> args = ECollections.newBasicEList();
@@ -452,7 +453,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		b.setEditor(true);
 		b.setDynamicModel(e);
 		try {
-			EPackage p = service.make(b, getProgressMonitor());
+			EPackage p = (EPackage) service.make(b, getProgressMonitor());
 			test(p, attributeName, "test");
 		} catch (CoreException ex) {
 			fail(ex.getLocalizedMessage());
@@ -474,7 +475,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		cl.getEStructuralFeatures().add(a);
 		p.getEClassifiers().add(cl);
 		ClassMakerPlugin.getInstance().setTurnOffAutoBuilding(true);
-		EPackage e0 = service.make(p, getProgressMonitor());
+		EPackage e0 = (EPackage) service.make(p, getProgressMonitor());
 		assertEquals("http://" + e0.getName() + "/0.1", e0.getNsURI());
 		EClass c0 = (EClass) e0.getEClassifier(cl.getName());
 		o = e0.getEFactoryInstance().create(c0);
@@ -491,7 +492,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		b.setName(getAttributeName());
 		b.setEType(EcorePackage.Literals.EINT);
 		((EClass) p2.getEClassifier(cl.getName())).getEStructuralFeatures().add(b);
-		EPackage e1 = service.replace(p, p2, getProgressMonitor());
+		EPackage e1 = (EPackage) service.replace(p, p2, getProgressMonitor());
 		assertEquals("http://" + e1.getName() + "/0.2", e1.getNsURI());
 		EClass cla = (EClass) e1.getEClassifier(cl.getName());
 		o = e1.getEFactoryInstance().create(cla);
@@ -511,7 +512,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 
 		service.getWorkspace().getContribution(service.computeProjectName(p.getName())).checkout(v1);
 		EPackage p3 = updateEPackage(p2, "0.3");
-		EPackage e2 = service.replace(p2, p3, true, getProgressMonitor());
+		EPackage e2 = (EPackage) service.replace(p2, p3, true, getProgressMonitor());
 		assertEquals("http://" + e2.getName() + "/0.3", e2.getNsURI());
 		cleanup();
 		ClassMakerPlugin.getInstance().setTurnOffAutoBuilding(false);
@@ -526,13 +527,13 @@ public class TestEnterpriseDomain extends AbstractTest {
 		ClassMakerPlugin.getInstance().setTurnOffAutoBuilding(true);
 		EPackage p = createAndTestEPackage(getProgressMonitor());
 		Contribution c = service.getWorkspace().getContribution(p, Stage.LOADED);
-		p = c.getDomainModel().getDynamic();
+		p = (EPackage) c.getDomainModel().getDynamic();
 		Version v = c.getVersion();
 
 		EPackage p2 = updateEPackage(p, "1");
 		EClass clazz = (EClass) p2.getEClassifier(getClassName());
 		clazz.getEStructuralFeatures().remove(clazz.getEStructuralFeature(getAttributeName()));
-		EPackage g = service.replace(p, p2, getProgressMonitor());
+		EPackage g = (EPackage) service.replace(p, p2, getProgressMonitor());
 		EClass gClazz = (EClass) g.getEClassifier(getClassName());
 		EObject o = g.getEFactoryInstance().create(gClazz);
 		assertNull(gClazz.getEStructuralFeature(getAttributeName()));
@@ -541,7 +542,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		EPackage p1 = service.copy(p);
 		EClass clazz1 = (EClass) p1.getEClassifier(getClassName());
 		clazz1.getEStructuralFeatures().remove(clazz1.getEStructuralFeature(DEFAULT_ATTR_NAME));
-		g = service.replace(p, p1, v, getProgressMonitor());
+		g = (EPackage) service.replace(p, p1, v, getProgressMonitor());
 		gClazz = (EClass) g.getEClassifier(getClassName());
 		o = g.getEFactoryInstance().create(gClazz);
 		EAttribute x = (EAttribute) gClazz.getEStructuralFeature(getAttributeName());
@@ -570,7 +571,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		Resource resource0 = resourceSet.createResource(resourceURI);
 		resource0.getContents().add(p0);
 		resource0.save(Collections.emptyMap());
-		EPackage r = service.make(p0, getProgressMonitor());
+		EPackage r = (EPackage) service.make(p0, getProgressMonitor());
 		assertNotNull(r);
 
 		String modelName = "MetaModel";
@@ -579,7 +580,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 				false), true);
 		resource1.load(new HashMap<String, String>());
 		EPackage p1 = (EPackage) resource1.getContents().get(0);
-		EPackage ePackage = service.make(p1, getProgressMonitor());
+		EPackage ePackage = (EPackage) service.make(p1, getProgressMonitor());
 		assertNotNull(ePackage);
 		assertEquals(modelName, ePackage.getNsPrefix());
 	}
@@ -607,9 +608,9 @@ public class TestEnterpriseDomain extends AbstractTest {
 		Contribution c = service.getWorkspace().getContribution(p, Stage.LOADED);
 		Version oldVersion = c.getRevision().getVersion();
 		Version newVersion = c.nextVersion();
-		EPackage g = service.replace(p, p, newVersion, getProgressMonitor());
+		EPackage g = (EPackage) service.replace(p, p, newVersion, getProgressMonitor());
 		test(g, "c", new Object());
-		g = service.replace(p, p, oldVersion, getProgressMonitor());
+		g = (EPackage) service.replace(p, p, oldVersion, getProgressMonitor());
 		assertNotNull(g);
 		test(g, "c", new Object());
 		cleanup();
@@ -671,7 +672,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 				try {
 					EPackage e = null;
 					Class<?> cl = null;
-					e = ((Contribution) result).getDomainModel().getGenerated();
+					e = (EPackage) ((Contribution) result).getDomainModel().getGenerated();
 					cl = e.getClass().getClassLoader().loadClass(getPackageName() + "." + getClassName());
 					Method getMethod0 = cl.getMethod("get" + at.getName(), new Class<?>[] {});
 					EClass ec = (EClass) e.getEClassifier(getClassName());

@@ -57,16 +57,16 @@ import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.provider.ClassMakerEditPlugin;
 
 /**
- * This is a simple wizard for creating a new model file. <!-- begin-user-doc
+ * This is a simple wizard for creating a new model file.
+ * <!-- begin-user-doc
  * --> <!-- end-user-doc -->
- * 
  * @generated
  */
 public class ClassMakerModelWizard extends Wizard implements INewWizard {
 	/**
-	 * The supported extensions for created files. <!-- begin-user-doc --> <!--
+	 * The supported extensions for created files.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public static final List<String> FILE_EXTENSIONS = Collections.unmodifiableList(Arrays.asList(
@@ -82,41 +82,40 @@ public class ClassMakerModelWizard extends Wizard implements INewWizard {
 			.getString("_UI_ClassMakerEditorFilenameExtensions").replaceAll("\\s*,\\s*", ", ");
 
 	/**
-	 * This caches an instance of the model package. <!-- begin-user-doc --> <!--
+	 * This caches an instance of the model package.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected ClassMakerPackage classMakerPackage = ClassMakerPackage.eINSTANCE;
 
 	/**
-	 * This caches an instance of the model factory. <!-- begin-user-doc --> <!--
+	 * This caches an instance of the model factory.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected ClassMakerFactory classMakerFactory = classMakerPackage.getClassMakerFactory();
 
 	/**
-	 * This is the initial object creation page. <!-- begin-user-doc --> <!--
+	 * This is the initial object creation page.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected ClassMakerModelWizardInitialObjectCreationPage initialObjectCreationPage;
 
 	/**
-	 * Remember the selection during initialization for populating the default
-	 * container. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Remember the selection during initialization for populating the default container.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected IStructuredSelection selection;
 
 	/**
-	 * Remember the workbench during initialization. <!-- begin-user-doc --> <!--
+	 * Remember the workbench during initialization.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected IWorkbench workbench;
@@ -167,8 +166,8 @@ public class ClassMakerModelWizard extends Wizard implements INewWizard {
 	}
 
 	/**
-	 * Create a new model. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Create a new model.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected EObject createInitialModel() {
@@ -178,9 +177,9 @@ public class ClassMakerModelWizard extends Wizard implements INewWizard {
 	}
 
 	/**
-	 * Do the work after everything is specified. <!-- begin-user-doc --> <!--
+	 * Do the work after everything is specified.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -250,14 +249,12 @@ public class ClassMakerModelWizard extends Wizard implements INewWizard {
 	public class ClassMakerModelWizardInitialObjectCreationPage extends WizardPage {
 		/**
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		protected Text fileField;
 
 		/**
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		protected Combo initialObjectField;
@@ -269,14 +266,13 @@ public class ClassMakerModelWizard extends Wizard implements INewWizard {
 
 		/**
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		protected Combo encodingField;
 
 		/**
-		 * Pass in the selection. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * Pass in the selection.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		public ClassMakerModelWizardInitialObjectCreationPage(String pageId) {
@@ -285,7 +281,6 @@ public class ClassMakerModelWizard extends Wizard implements INewWizard {
 
 		/**
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		@Override
@@ -393,7 +388,6 @@ public class ClassMakerModelWizard extends Wizard implements INewWizard {
 
 		/**
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		protected ModifyListener validator = new ModifyListener() {
@@ -405,7 +399,6 @@ public class ClassMakerModelWizard extends Wizard implements INewWizard {
 
 		/**
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		protected boolean validatePage() {
@@ -429,7 +422,6 @@ public class ClassMakerModelWizard extends Wizard implements INewWizard {
 
 		/**
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		@Override
@@ -444,7 +436,6 @@ public class ClassMakerModelWizard extends Wizard implements INewWizard {
 
 		/**
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		public String getInitialObjectName() {
@@ -460,7 +451,6 @@ public class ClassMakerModelWizard extends Wizard implements INewWizard {
 
 		/**
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		public String getEncoding() {
@@ -469,7 +459,6 @@ public class ClassMakerModelWizard extends Wizard implements INewWizard {
 
 		/**
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		public URI getFileURI() {
@@ -483,7 +472,6 @@ public class ClassMakerModelWizard extends Wizard implements INewWizard {
 
 		/**
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		public void selectFileField() {
@@ -494,9 +482,9 @@ public class ClassMakerModelWizard extends Wizard implements INewWizard {
 		}
 
 		/**
-		 * Returns the label for the specified type name. <!-- begin-user-doc --> <!--
+		 * Returns the label for the specified type name.
+		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		protected String getLabel(String typeName) {
@@ -510,7 +498,6 @@ public class ClassMakerModelWizard extends Wizard implements INewWizard {
 
 		/**
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		protected Collection<String> getEncodings() {
@@ -543,8 +530,8 @@ public class ClassMakerModelWizard extends Wizard implements INewWizard {
 	}
 
 	/**
-	 * Get the URI from the page. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Get the URI from the page.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public URI getModelURI() {

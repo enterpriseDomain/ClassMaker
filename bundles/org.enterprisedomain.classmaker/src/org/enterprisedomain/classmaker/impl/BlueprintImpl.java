@@ -20,7 +20,7 @@ import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
@@ -60,7 +60,7 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 	 * @generated
 	 * @ordered
 	 */
-	protected EPackage dynamicModel;
+	protected EObject dynamicModel;
 
 	/**
 	 * The cached value of the '{@link #getDependencies() <em>Dependencies</em>}'
@@ -148,10 +148,10 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 	 * @generated
 	 */
 	@Override
-	public EPackage getDynamicModel() {
+	public EObject getDynamicModel() {
 		if (dynamicModel != null && dynamicModel.eIsProxy()) {
 			InternalEObject oldDynamicModel = (InternalEObject) dynamicModel;
-			dynamicModel = (EPackage) eResolveProxy(oldDynamicModel);
+			dynamicModel = eResolveProxy(oldDynamicModel);
 			if (dynamicModel != oldDynamicModel) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
@@ -166,7 +166,7 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 	 * 
 	 * @generated
 	 */
-	public EPackage basicGetDynamicModel() {
+	public EObject basicGetDynamicModel() {
 		return dynamicModel;
 	}
 
@@ -176,8 +176,8 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 	 * @generated
 	 */
 	@Override
-	public void setDynamicModel(EPackage newDynamicModel) {
-		EPackage oldDynamicModel = dynamicModel;
+	public void setDynamicModel(EObject newDynamicModel) {
+		EObject oldDynamicModel = dynamicModel;
 		dynamicModel = newDynamicModel;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.BLUEPRINT__DYNAMIC_MODEL,
@@ -293,7 +293,7 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 		case ClassMakerPackage.BLUEPRINT__DYNAMIC_MODEL:
-			setDynamicModel((EPackage) newValue);
+			setDynamicModel((EObject) newValue);
 			return;
 		case ClassMakerPackage.BLUEPRINT__DEPENDENCIES:
 			getDependencies().clear();
@@ -322,7 +322,7 @@ public class BlueprintImpl extends EObjectImpl implements Blueprint {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 		case ClassMakerPackage.BLUEPRINT__DYNAMIC_MODEL:
-			setDynamicModel((EPackage) null);
+			setDynamicModel((EObject) null);
 			return;
 		case ClassMakerPackage.BLUEPRINT__DEPENDENCIES:
 			getDependencies().clear();

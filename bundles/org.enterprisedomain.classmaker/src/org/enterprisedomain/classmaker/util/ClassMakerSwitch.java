@@ -45,6 +45,7 @@ import org.enterprisedomain.classmaker.SCMRegistry;
 import org.enterprisedomain.classmaker.SelectRevealHandler;
 import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
+import org.enterprisedomain.classmaker.Strategy;
 import org.enterprisedomain.classmaker.Workspace;
 import org.enterprisedomain.classmaker.jobs.Worker;
 import org.osgi.framework.Version;
@@ -133,6 +134,13 @@ public class ClassMakerSwitch<T1> extends Switch<T1> {
 				result = caseItem(state);
 			if (result == null)
 				result = caseISchedulingRule(state);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ClassMakerPackage.STRATEGY: {
+			Strategy strategy = (Strategy) theEObject;
+			T1 result = caseStrategy(strategy);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -379,6 +387,22 @@ public class ClassMakerSwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public T1 caseState(State object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of
+	 * '<em>Strategy</em>'. <!-- begin-user-doc --> This implementation returns
+	 * null; returning a non-null result will terminate the switch. <!--
+	 * end-user-doc -->
+	 * 
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of
+	 *         '<em>Strategy</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseStrategy(Strategy object) {
 		return null;
 	}
 

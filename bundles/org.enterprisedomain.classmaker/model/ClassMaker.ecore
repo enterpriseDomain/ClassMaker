@@ -107,8 +107,8 @@
     <eOperations name="delete" eExceptions="#//CoreException">
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
-    <eOperations name="find" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage">
-      <eParameters name="ePackage" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+    <eOperations name="find" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject">
+      <eParameters name="eObject" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
       <eParameters name="stage" eType="#//Stage"/>
     </eOperations>
     <eOperations name="checkout"/>
@@ -126,23 +126,6 @@
       </eAnnotations>
     </eOperations>
     <eOperations name="saveResource"/>
-    <eOperations name="createGenerator" eType="#//Worker"/>
-    <eOperations name="createExporter" eType="#//Worker"/>
-    <eOperations name="createInstaller" eType="#//Worker"/>
-    <eOperations name="createModelLoader" eType="#//Worker"/>
-    <eOperations name="getReturnWorker" eType="#//Worker"/>
-    <eOperations name="configureJobs" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
-      <eParameters name="create" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-      <eParameters name="monitor" eType="#//IProgressMonitor"/>
-    </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="generators" upperBound="-1"
-        eType="#//Worker" transient="true" resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="exporters" upperBound="-1"
-        eType="#//Worker" transient="true" resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="installers" upperBound="-1"
-        eType="#//Worker" transient="true" resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="loaders" upperBound="-1"
-        eType="#//Worker" transient="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="packageClassName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Generated {@link org.eclipse.emf.ecore.EPackage EPackage} class name set in a {@link org.eclipse.emf.codegen.ecore.genmodel.GenModel GenModel}."/>
@@ -239,6 +222,32 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="edit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="editor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="strategy" eType="#//Strategy"
+        eOpposite="#//Strategy/state"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Strategy">
+    <eOperations name="createGenerator" eType="#//Worker"/>
+    <eOperations name="createExporter" eType="#//Worker"/>
+    <eOperations name="createInstaller" eType="#//Worker"/>
+    <eOperations name="createModelLoader" eType="#//Worker"/>
+    <eOperations name="getReturnWorker" eType="#//Worker"/>
+    <eOperations name="configureJobs" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eParameters name="create" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
+    <eOperations name="configuteBuildJobs">
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="generators" upperBound="-1"
+        eType="#//Worker" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exporters" upperBound="-1"
+        eType="#//Worker" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="installers" upperBound="-1"
+        eType="#//Worker" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="loaders" upperBound="-1"
+        eType="#//Worker" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//State"
+        eOpposite="#//State/strategy"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Item" abstract="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -341,40 +350,34 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Create new Contribution."/>
       </eAnnotations>
-      <eParameters name="blueprint" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="blueprint" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
     <eOperations name="getContribution" eType="#//Contribution">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Lookup workspace Contribution by any type of EObject contained."/>
+        <details key="documentation" value="Lookup workspace Contribution by any type of http://www.eclipse.org/emf/2002/Ecore#//EObjectct contained."/>
       </eAnnotations>
       <eParameters name="eObject" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
     </eOperations>
     <eOperations name="getContribution" eType="#//Contribution">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Lookup workspace Contribution by model EPackage."/>
-      </eAnnotations>
-      <eParameters name="ePackage" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-    </eOperations>
-    <eOperations name="getContribution" eType="#//Contribution">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Lookup workspace Contribution by model EPackage.&#xA;&#xA;@param searchOptimistic true if use OR while EPackage comparison, overwise use AND."/>
       </eAnnotations>
-      <eParameters name="ePackage" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="eObject" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
       <eParameters name="searchOptimistic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eOperations>
     <eOperations name="getContribution" eType="#//Contribution">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Lookup workspace Contribution by model EPackage.&#xA;&#xA;@param filter returns blueprint EPackage if Stage is less or equal MODELED, generated if it equals LOADED."/>
       </eAnnotations>
-      <eParameters name="ePackage" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="eObject" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
       <eParameters name="filter" eType="#//Stage"/>
     </eOperations>
     <eOperations name="getContribution" eType="#//Contribution">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Lookup workspace Contribution by model EPackage.&#xA;&#xA;@param filter returns blueprint EPackage if Stage is less or equal MODELED, generated if it equals LOADED.&#xA;@param searchOptimistic true if use OR while EPackage comparison, overwise use AND."/>
       </eAnnotations>
-      <eParameters name="ePackage" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="eObject" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
       <eParameters name="filter" eType="#//Stage"/>
       <eParameters name="searchOptimistic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eOperations>
@@ -416,10 +419,7 @@
       <eParameters name="project" eType="#//Project"/>
     </eOperations>
     <eOperations name="contains" eType="#//Stage">
-      <eParameters name="blueprint" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-    </eOperations>
-    <eOperations name="contains" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
-      <eParameters name="eObject" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      <eParameters name="blueprint" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
     </eOperations>
     <eOperations name="delete" eExceptions="#//CoreException">
       <eParameters name="object" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
@@ -638,13 +638,13 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A holder of pair of references. To blueprint dynamic model instance, and to a resulting generated one."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dynamic" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dynamic" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Dynamic model {@link org.eclipse.emf.ecore.EPackage EPackage} instance, which serves as a blueprint for {@link ClassMakerPlant#make() making}."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="generated" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="generated" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Generated model {@link org.eclipse.emf.ecore.EPackage EPackage} instance, which appears as a result of {@link ClassMakerPlant#make() making}."/>
       </eAnnotations>
@@ -840,8 +840,7 @@
     <eOperations name="initAdapters">
       <eParameters name="revision" eType="#//Revision"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        defaultValueLiteral="">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//Name">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A name of the &lt;em>&lt;b>Project&lt;/b>&lt;/em>."/>
       </eAnnotations>
@@ -916,6 +915,11 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Name" instanceClassName="java.lang.String">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="pattern" value="[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*"/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Resource" instanceClassName="org.eclipse.emf.ecore.resource.Resource"
       abstract="true" interface="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -967,15 +971,15 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="ClassMaker API facade service."/>
     </eAnnotations>
-    <eOperations name="make" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
+    <eOperations name="make" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
         eExceptions="#//CoreException">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Performs {@link org.eclipse.emf.ecore.EPackage EPackage} instance generation, build and export, then installs the result into OSGi container, and then loads a generated {@link org.eclipse.emf.ecore.EPackage EPackage} class."/>
       </eAnnotations>
-      <eParameters name="input" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="input" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
-    <eOperations name="make" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
+    <eOperations name="make" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
         eExceptions="#//CoreException">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Performs {@link org.eclipse.emf.ecore.EPackage EPackage} instance generation, build and export, then installs the result into OSGi container, and then loads a generated {@link org.eclipse.emf.ecore.EPackage EPackage} class."/>
@@ -983,40 +987,40 @@
       <eParameters name="input" eType="#//Blueprint"/>
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
-    <eOperations name="replace" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
+    <eOperations name="replace" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
         eExceptions="#//CoreException">
-      <eParameters name="source" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="target" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="source" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      <eParameters name="target" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
-    <eOperations name="replace" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
+    <eOperations name="replace" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
         eExceptions="#//CoreException">
       <eParameters name="source" eType="#//Blueprint"/>
       <eParameters name="target" eType="#//Blueprint"/>
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
-    <eOperations name="replace" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
+    <eOperations name="replace" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
         eExceptions="#//CoreException">
-      <eParameters name="source" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="target" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="source" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      <eParameters name="target" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
       <eParameters name="changeVersion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
-    <eOperations name="replace" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
+    <eOperations name="replace" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
         eExceptions="#//CoreException">
       <eParameters name="source" eType="#//Blueprint"/>
       <eParameters name="target" eType="#//Blueprint"/>
       <eParameters name="changeVersion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
-    <eOperations name="replace" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
+    <eOperations name="replace" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
         eExceptions="#//CoreException">
-      <eParameters name="source" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="target" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="source" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      <eParameters name="target" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
       <eParameters name="version" eType="#//OSGiVersion"/>
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
-    <eOperations name="replace" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"
+    <eOperations name="replace" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
         eExceptions="#//CoreException">
       <eParameters name="source" eType="#//Blueprint"/>
       <eParameters name="target" eType="#//Blueprint"/>
@@ -1029,10 +1033,10 @@
       </eAnnotations>
       <eGenericType eClassifier="#//Future">
         <eTypeArguments>
-          <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+          <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
         </eTypeArguments>
       </eGenericType>
-      <eParameters name="input" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="input" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
       <eParameters name="executor" eType="#//Executor"/>
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
@@ -1042,7 +1046,7 @@
       </eAnnotations>
       <eGenericType eClassifier="#//Future">
         <eTypeArguments>
-          <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+          <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
         </eTypeArguments>
       </eGenericType>
       <eParameters name="input" eType="#//Blueprint"/>
@@ -1052,18 +1056,18 @@
     <eOperations name="replace" eExceptions="#//CoreException">
       <eGenericType eClassifier="#//Future">
         <eTypeArguments>
-          <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+          <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
         </eTypeArguments>
       </eGenericType>
-      <eParameters name="source" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="target" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="source" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      <eParameters name="target" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
       <eParameters name="executor" eType="#//Executor"/>
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
     <eOperations name="replace" eExceptions="#//CoreException">
       <eGenericType eClassifier="#//Future">
         <eTypeArguments>
-          <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+          <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
         </eTypeArguments>
       </eGenericType>
       <eParameters name="source" eType="#//Blueprint"/>
@@ -1074,11 +1078,11 @@
     <eOperations name="replace" eExceptions="#//CoreException">
       <eGenericType eClassifier="#//Future">
         <eTypeArguments>
-          <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+          <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
         </eTypeArguments>
       </eGenericType>
-      <eParameters name="source" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="target" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="source" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      <eParameters name="target" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
       <eParameters name="changeVersion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
       <eParameters name="executor" eType="#//Executor"/>
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
@@ -1086,7 +1090,7 @@
     <eOperations name="replace" eExceptions="#//CoreException">
       <eGenericType eClassifier="#//Future">
         <eTypeArguments>
-          <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+          <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
         </eTypeArguments>
       </eGenericType>
       <eParameters name="source" eType="#//Blueprint"/>
@@ -1098,11 +1102,11 @@
     <eOperations name="replace" eExceptions="#//CoreException">
       <eGenericType eClassifier="#//Future">
         <eTypeArguments>
-          <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+          <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
         </eTypeArguments>
       </eGenericType>
-      <eParameters name="source" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="target" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="source" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      <eParameters name="target" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
       <eParameters name="version" eType="#//OSGiVersion"/>
       <eParameters name="executor" eType="#//Executor"/>
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
@@ -1110,7 +1114,7 @@
     <eOperations name="replace" eExceptions="#//CoreException">
       <eGenericType eClassifier="#//Future">
         <eTypeArguments>
-          <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+          <eUpperBound eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
         </eTypeArguments>
       </eGenericType>
       <eParameters name="source" eType="#//Blueprint"/>
@@ -1141,8 +1145,8 @@
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
     <eOperations name="checkEquals" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
-      <eParameters name="model1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-      <eParameters name="model2" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eParameters name="model1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      <eParameters name="model2" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
     </eOperations>
     <eOperations name="createBlueprint" eType="#//Blueprint"/>
     <eOperations name="computeProjectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
@@ -1170,7 +1174,7 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Model object wrapper and input specification for {@link #make() making}."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dynamicModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Model {@link org.eclipse.emf.ecore.EPackage EPackage} object."/>
       </eAnnotations>

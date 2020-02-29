@@ -31,7 +31,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
-import org.eclipse.emf.ecore.EPackage;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.osgi.framework.Version;
 
@@ -122,6 +121,14 @@ public interface ClassMakerService extends EObject {
 	}
 
 	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 * @ordered
+	 */
+	public static final boolean INITIALIZING_EDEFAULT = false;
+
+	/**
 	 * Returns the value of the '<em><b>Workspace</b></em>' reference. <!--
 	 * begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc --> The
 	 * {@link Workspace <em><b>Workspace</b></em>} containing the {@link Project
@@ -158,7 +165,7 @@ public interface ClassMakerService extends EObject {
 	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
-	EPackage make(EPackage input, IProgressMonitor monitor) throws CoreException;
+	EObject make(EObject input, IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
@@ -171,7 +178,7 @@ public interface ClassMakerService extends EObject {
 	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
-	EPackage make(Blueprint input, IProgressMonitor monitor) throws CoreException;
+	EObject make(Blueprint input, IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -180,7 +187,7 @@ public interface ClassMakerService extends EObject {
 	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
-	EPackage replace(EPackage source, EPackage target, IProgressMonitor monitor) throws CoreException;
+	EObject replace(EObject source, EObject target, IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -189,7 +196,7 @@ public interface ClassMakerService extends EObject {
 	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
-	EPackage replace(Blueprint source, Blueprint target, IProgressMonitor monitor) throws CoreException;
+	EObject replace(Blueprint source, Blueprint target, IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -198,7 +205,7 @@ public interface ClassMakerService extends EObject {
 	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
-	EPackage replace(EPackage source, EPackage target, boolean changeVersion, IProgressMonitor monitor)
+	EObject replace(EObject source, EObject target, boolean changeVersion, IProgressMonitor monitor)
 			throws CoreException;
 
 	/**
@@ -208,7 +215,7 @@ public interface ClassMakerService extends EObject {
 	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
-	EPackage replace(Blueprint source, Blueprint target, boolean changeVersion, IProgressMonitor monitor)
+	EObject replace(Blueprint source, Blueprint target, boolean changeVersion, IProgressMonitor monitor)
 			throws CoreException;
 
 	/**
@@ -219,7 +226,7 @@ public interface ClassMakerService extends EObject {
 	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
-	EPackage replace(EPackage source, EPackage target, Version version, IProgressMonitor monitor) throws CoreException;
+	EObject replace(EObject source, EObject target, Version version, IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -229,8 +236,23 @@ public interface ClassMakerService extends EObject {
 	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
-	EPackage replace(Blueprint source, Blueprint target, Version version, IProgressMonitor monitor)
-			throws CoreException;
+	EObject replace(Blueprint source, Blueprint target, Version version, IProgressMonitor monitor) throws CoreException;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
+	 * Performs {@link org.eclipse.emf.ecore.EPackage EPackage} instance generation,
+	 * build and export, then installs the result into OSGi container, and then
+	 * loads a generated {@link org.eclipse.emf.ecore.EPackage EPackage} class. <!--
+	 * end-model-doc -->
+	 * 
+	 * @model type="org.enterprisedomain.classmaker.Future&lt;? extends
+	 *        org.eclipse.emf.ecore.EObject&gt;"
+	 *        exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        executorType="org.enterprisedomain.classmaker.Executor"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * @generated
+	 */
+	Future<? extends EObject> make(EObject input, Executor executor, IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
@@ -246,102 +268,86 @@ public interface ClassMakerService extends EObject {
 	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
-	Future<? extends EPackage> make(EPackage input, Executor executor, IProgressMonitor monitor) throws CoreException;
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
-	 * Performs {@link org.eclipse.emf.ecore.EPackage EPackage} instance generation,
-	 * build and export, then installs the result into OSGi container, and then
-	 * loads a generated {@link org.eclipse.emf.ecore.EPackage EPackage} class. <!--
-	 * end-model-doc -->
-	 * 
-	 * @model type="org.enterprisedomain.classmaker.Future&lt;? extends
-	 *        org.eclipse.emf.ecore.EPackage&gt;"
-	 *        exceptions="org.enterprisedomain.classmaker.CoreException"
-	 *        executorType="org.enterprisedomain.classmaker.Executor"
-	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
-	 * @generated
-	 */
-	Future<? extends EPackage> make(Blueprint input, Executor executor, IProgressMonitor monitor) throws CoreException;
+	Future<? extends EObject> make(Blueprint input, Executor executor, IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @model type="org.enterprisedomain.classmaker.Future&lt;? extends
-	 *        org.eclipse.emf.ecore.EPackage&gt;"
+	 *        org.eclipse.emf.ecore.EObject&gt;"
 	 *        exceptions="org.enterprisedomain.classmaker.CoreException"
 	 *        executorType="org.enterprisedomain.classmaker.Executor"
 	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
-	Future<? extends EPackage> replace(EPackage source, EPackage target, Executor executor, IProgressMonitor monitor)
+	Future<? extends EObject> replace(EObject source, EObject target, Executor executor, IProgressMonitor monitor)
 			throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @model type="org.enterprisedomain.classmaker.Future&lt;? extends
-	 *        org.eclipse.emf.ecore.EPackage&gt;"
+	 *        org.eclipse.emf.ecore.EObject&gt;"
 	 *        exceptions="org.enterprisedomain.classmaker.CoreException"
 	 *        executorType="org.enterprisedomain.classmaker.Executor"
 	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
-	Future<? extends EPackage> replace(Blueprint source, Blueprint target, Executor executor, IProgressMonitor monitor)
+	Future<? extends EObject> replace(Blueprint source, Blueprint target, Executor executor, IProgressMonitor monitor)
 			throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @model type="org.enterprisedomain.classmaker.Future&lt;? extends
-	 *        org.eclipse.emf.ecore.EPackage&gt;"
+	 *        org.eclipse.emf.ecore.EObject&gt;"
 	 *        exceptions="org.enterprisedomain.classmaker.CoreException"
 	 *        executorType="org.enterprisedomain.classmaker.Executor"
 	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
-	Future<? extends EPackage> replace(EPackage source, EPackage target, boolean changeVersion, Executor executor,
+	Future<? extends EObject> replace(EObject source, EObject target, boolean changeVersion, Executor executor,
 			IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @model type="org.enterprisedomain.classmaker.Future&lt;? extends
-	 *        org.eclipse.emf.ecore.EPackage&gt;"
+	 *        org.eclipse.emf.ecore.EObject&gt;"
 	 *        exceptions="org.enterprisedomain.classmaker.CoreException"
 	 *        executorType="org.enterprisedomain.classmaker.Executor"
 	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
-	Future<? extends EPackage> replace(Blueprint source, Blueprint target, boolean changeVersion, Executor executor,
+	Future<? extends EObject> replace(Blueprint source, Blueprint target, boolean changeVersion, Executor executor,
 			IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @model type="org.enterprisedomain.classmaker.Future&lt;? extends
-	 *        org.eclipse.emf.ecore.EPackage&gt;"
+	 *        org.eclipse.emf.ecore.EObject&gt;"
 	 *        exceptions="org.enterprisedomain.classmaker.CoreException"
 	 *        versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
 	 *        executorType="org.enterprisedomain.classmaker.Executor"
 	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
-	Future<? extends EPackage> replace(EPackage source, EPackage target, Version version, Executor executor,
+	Future<? extends EObject> replace(EObject source, EObject target, Version version, Executor executor,
 			IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @model type="org.enterprisedomain.classmaker.Future&lt;? extends
-	 *        org.eclipse.emf.ecore.EPackage&gt;"
+	 *        org.eclipse.emf.ecore.EObject&gt;"
 	 *        exceptions="org.enterprisedomain.classmaker.CoreException"
 	 *        versionDataType="org.enterprisedomain.classmaker.OSGiVersion"
 	 *        executorType="org.enterprisedomain.classmaker.Executor"
 	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
-	Future<? extends EPackage> replace(Blueprint source, Blueprint target, Version version, Executor executor,
+	Future<? extends EObject> replace(Blueprint source, Blueprint target, Version version, Executor executor,
 			IProgressMonitor monitor) throws CoreException;
 
 	/**
@@ -387,7 +393,7 @@ public interface ClassMakerService extends EObject {
 	 * @model
 	 * @generated
 	 */
-	boolean checkEquals(EPackage model1, EPackage model2);
+	boolean checkEquals(EObject model1, EObject model2);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

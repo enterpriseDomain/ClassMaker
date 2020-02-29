@@ -20,6 +20,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -82,18 +83,18 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 		@Override
 		public void notifyChanged(Notification msg) {
 			if (msg.getNotifier() instanceof ModelPair && msg.getEventType() == Notification.SET) {
-				EPackage ePackage = null;
+				EObject eObject = null;
 				switch (msg.getFeatureID(ModelPair.class)) {
 				case ClassMakerPackage.MODEL_PAIR__DYNAMIC:
-					ePackage = (EPackage) msg.getNewValue();
-					if (ePackage != null && !getParent().getPhase().equals(Stage.LOADED)) {
+					eObject = (EObject) msg.getNewValue();
+					if (eObject != null && !getParent().getPhase().equals(Stage.LOADED)) {
 						getParent().setPhase(Stage.MODELED);
 					}
-					onDynamicEPackage((EPackage) msg.getOldValue(), ePackage);
+					onDynamicEObject((EObject) msg.getOldValue(), eObject);
 					break;
 				case ClassMakerPackage.MODEL_PAIR__GENERATED:
-					ePackage = (EPackage) msg.getNewValue();
-					if (ePackage != null) {
+					eObject = (EPackage) msg.getNewValue();
+					if (eObject != null) {
 						getParent().setPhase(Stage.LOADED);
 					}
 					break;
@@ -101,7 +102,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 			}
 		}
 
-		private void onDynamicEPackage(EPackage oldValue, EPackage newValue) {
+		private void onDynamicEObject(EObject oldValue, EObject newValue) {
 			if (oldValue != null)
 				oldValue.eAdapters().remove(adapter);
 			if (newValue != null)
@@ -117,7 +118,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 	 * @generated
 	 * @ordered
 	 */
-	protected EPackage dynamic;
+	protected EObject dynamic;
 
 	/**
 	 * The cached value of the '{@link #getGenerated() <em>Generated</em>}'
@@ -127,7 +128,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 	 * @generated
 	 * @ordered
 	 */
-	protected EPackage generated;
+	protected EObject generated;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -155,7 +156,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 	 * @generated
 	 */
 	@Override
-	public EPackage getDynamic() {
+	public EObject getDynamic() {
 		return dynamic;
 	}
 
@@ -164,8 +165,8 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 	 * 
 	 * @generated
 	 */
-	public NotificationChain basicSetDynamic(EPackage newDynamic, NotificationChain msgs) {
-		EPackage oldDynamic = dynamic;
+	public NotificationChain basicSetDynamic(EObject newDynamic, NotificationChain msgs) {
+		EObject oldDynamic = dynamic;
 		dynamic = newDynamic;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
@@ -184,7 +185,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 	 * @generated
 	 */
 	@Override
-	public void setDynamic(EPackage newDynamic) {
+	public void setDynamic(EObject newDynamic) {
 		if (newDynamic != dynamic) {
 			NotificationChain msgs = null;
 			if (dynamic != null)
@@ -207,10 +208,10 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 	 * @generated
 	 */
 	@Override
-	public EPackage getGenerated() {
+	public EObject getGenerated() {
 		if (generated != null && generated.eIsProxy()) {
 			InternalEObject oldGenerated = (InternalEObject) generated;
-			generated = (EPackage) eResolveProxy(oldGenerated);
+			generated = eResolveProxy(oldGenerated);
 			if (generated != oldGenerated) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassMakerPackage.MODEL_PAIR__GENERATED,
@@ -225,7 +226,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 	 * 
 	 * @generated
 	 */
-	public EPackage basicGetGenerated() {
+	public EObject basicGetGenerated() {
 		return generated;
 	}
 
@@ -235,8 +236,8 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 	 * @generated
 	 */
 	@Override
-	public void setGenerated(EPackage newGenerated) {
-		EPackage oldGenerated = generated;
+	public void setGenerated(EObject newGenerated) {
+		EObject oldGenerated = generated;
 		generated = newGenerated;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.MODEL_PAIR__GENERATED, oldGenerated,
@@ -365,10 +366,10 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 		case ClassMakerPackage.MODEL_PAIR__DYNAMIC:
-			setDynamic((EPackage) newValue);
+			setDynamic((EObject) newValue);
 			return;
 		case ClassMakerPackage.MODEL_PAIR__GENERATED:
-			setGenerated((EPackage) newValue);
+			setGenerated((EObject) newValue);
 			return;
 		case ClassMakerPackage.MODEL_PAIR__PARENT:
 			setParent((Item) newValue);
@@ -386,10 +387,10 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 		case ClassMakerPackage.MODEL_PAIR__DYNAMIC:
-			setDynamic((EPackage) null);
+			setDynamic((EObject) null);
 			return;
 		case ClassMakerPackage.MODEL_PAIR__GENERATED:
-			setGenerated((EPackage) null);
+			setGenerated((EObject) null);
 			return;
 		case ClassMakerPackage.MODEL_PAIR__PARENT:
 			setParent((Item) null);

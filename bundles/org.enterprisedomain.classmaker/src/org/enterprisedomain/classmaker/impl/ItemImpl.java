@@ -1,5 +1,4 @@
 /**
- * Copyright 2012-2017 Kyrill Zotkin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +22,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -442,11 +441,11 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	public void copyModel(Item from) {
 		setModelName(from.getModelName());
 		setLanguage(from.getLanguage());
-		EPackage ePackage = null;
+		EObject eObject = null;
 		if (from.getDomainModel() != null)
-			ePackage = from.getDomainModel().getDynamic();
-		if (ePackage != null)
-			getDomainModel().setDynamic(EcoreUtil.copy(ePackage));
+			eObject = from.getDomainModel().getDynamic();
+		if (eObject != null)
+			getDomainModel().setDynamic(EcoreUtil.copy(eObject));
 	}
 
 	/**

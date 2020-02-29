@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 Kyrill Zotkin
+ * Copyright 2020 Kyrill Zotkin
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,16 +17,19 @@ package org.enterprisedomain.classmaker.emfstore;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.emfstore.internal.server.storage.ServerXMIResourceSetProvider;
+import org.eclipse.emf.emfstore.internal.server.storage.XMIServerURIConverter;
+import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 
 public class EDServerResourceSetProvider extends ServerXMIResourceSetProvider {
 
 	public EDServerResourceSetProvider() {
 	}
 
+	@SuppressWarnings("restriction")
 	@Override
 	public ResourceSet getResourceSet() {
 		ResourceSet result = super.getResourceSet();
-		result.setURIConverter(new EMFStoreURIConverter(result.getURIConverter()));
+		result.setURIConverter(new XMIServerURIConverter());
 		return result;
 	}
 

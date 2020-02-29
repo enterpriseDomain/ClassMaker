@@ -194,7 +194,7 @@ public abstract class AbstractTest {
 	protected EPackage testAPICreate(EPackage ePackage, String attributeName, EDataType attributeType,
 			Object attributeValue, IProgressMonitor monitor) throws CoreException, InterruptedException {
 		try {
-			EPackage result = service.make(ePackage, monitor);
+			EPackage result = (EPackage) service.make(ePackage, monitor);
 			return testResult(result, attributeName, attributeType, attributeValue);
 		} catch (CoreException e) {
 			fail(e.getLocalizedMessage());
@@ -207,7 +207,7 @@ public abstract class AbstractTest {
 			EDataType attributeType, Object attributeValue, IProgressMonitor monitor)
 			throws CoreException, InterruptedException {
 		try {
-			EPackage result = service.replace(originalEPackage, ePackage, monitor);
+			EPackage result = (EPackage) service.replace(originalEPackage, ePackage, monitor);
 			return testResult(result, attributeName, attributeType, attributeValue);
 		} catch (CoreException e) {
 			fail(e.getLocalizedMessage());
@@ -233,7 +233,7 @@ public abstract class AbstractTest {
 
 	protected EPackage saveAndTest(EPackage ePackage, String attributeName, Object attributeValue,
 			IProgressMonitor monitor, String[] dependencies) throws CoreException, InterruptedException {
-		EPackage e = service.make(ePackage, monitor);
+		EPackage e = (EPackage) service.make(ePackage, monitor);
 		Contribution c = service.getWorkspace().getContribution(ePackage);
 		for (String dependency : dependencies)
 			c.getDependencies().add(dependency);
@@ -243,12 +243,12 @@ public abstract class AbstractTest {
 
 	private Future<? extends EPackage> save(final EPackage ePackage, Executor executor, IProgressMonitor monitor)
 			throws CoreException, InterruptedException {
-		return service.make(ePackage, executor, monitor);
+		return (Future<? extends EPackage>) service.make(ePackage, executor, monitor);
 	}
 
 	private Future<? extends EPackage> updateAndSave(EPackage ePackage, EPackage updated, Executor executor,
 			IProgressMonitor monitor) throws CoreException {
-		return service.replace(ePackage, updated, executor, monitor);
+		return (Future<? extends EPackage>) service.replace(ePackage, updated, executor, monitor);
 	}
 
 	protected EPackage test(EPackage ePackage, String className, String attributeName, Object attributeValue) {

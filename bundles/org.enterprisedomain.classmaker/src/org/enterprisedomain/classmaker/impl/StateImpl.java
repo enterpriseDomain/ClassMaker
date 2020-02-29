@@ -19,8 +19,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -55,7 +53,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
-import org.eclipse.emf.ecore.util.EObjectEList;
 import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -68,8 +65,8 @@ import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.m2m.internal.qvt.oml.cst.parser.NLS;
 import org.eclipse.pde.core.project.IBundleProjectDescription;
 import org.eclipse.pde.core.project.IBundleProjectService;
+import org.enterprisedomain.classmaker.ClassMakerFactory;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
-import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Customizer;
@@ -82,11 +79,10 @@ import org.enterprisedomain.classmaker.SCMOperator;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
+import org.enterprisedomain.classmaker.Strategy;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.core.WrappingProgressMonitor;
 import org.enterprisedomain.classmaker.jobs.EnterpriseDomainJob;
-import org.enterprisedomain.classmaker.jobs.Worker;
-import org.enterprisedomain.classmaker.jobs.export.AbstractExporter;
 import org.enterprisedomain.classmaker.util.ListUtil;
 import org.enterprisedomain.classmaker.util.ModelUtil;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
@@ -99,14 +95,6 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getGenerators
- * <em>Generators</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getExporters
- * <em>Exporters</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getInstallers
- * <em>Installers</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getLoaders
- * <em>Loaders</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getPackageClassName
  * <em>Package Class Name</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getEditPluginClassName
@@ -143,51 +131,13 @@ import org.osgi.framework.Version;
  * <em>Edit</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#isEditor
  * <em>Editor</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getStrategy
+ * <em>Strategy</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class StateImpl extends ItemImpl implements State {
-
-	/**
-	 * The cached value of the '{@link #getGenerators() <em>Generators</em>}'
-	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #getGenerators()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Worker> generators;
-
-	/**
-	 * The cached value of the '{@link #getExporters() <em>Exporters</em>}'
-	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #getExporters()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Worker> exporters;
-
-	/**
-	 * The cached value of the '{@link #getInstallers() <em>Installers</em>}'
-	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #getInstallers()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Worker> installers;
-
-	/**
-	 * The cached value of the '{@link #getLoaders() <em>Loaders</em>}' reference
-	 * list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #getLoaders()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Worker> loaders;
 
 	/**
 	 * The default value of the '{@link #getPackageClassName() <em>Package Class
@@ -496,6 +446,16 @@ public class StateImpl extends ItemImpl implements State {
 	 */
 	protected boolean editor = EDITOR_EDEFAULT;
 
+	/**
+	 * The cached value of the '{@link #getStrategy() <em>Strategy</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getStrategy()
+	 * @generated
+	 * @ordered
+	 */
+	protected Strategy strategy;
+
 	protected String language = LANGUAGE_EDEFAULT;
 
 	private boolean loading = false;
@@ -510,6 +470,7 @@ public class StateImpl extends ItemImpl implements State {
 	protected StateImpl() {
 		super();
 		eAdapters().add(new StateAdapter());
+		setStrategy(ClassMakerFactory.eINSTANCE.createStrategy());
 	}
 
 	/**
@@ -520,58 +481,6 @@ public class StateImpl extends ItemImpl implements State {
 	@Override
 	protected EClass eStaticClass() {
 		return ClassMakerPackage.Literals.STATE;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public EList<Worker> getGenerators() {
-		if (generators == null) {
-			generators = new EObjectEList<Worker>(Worker.class, this, ClassMakerPackage.STATE__GENERATORS);
-		}
-		return generators;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public EList<Worker> getExporters() {
-		if (exporters == null) {
-			exporters = new EObjectEList<Worker>(Worker.class, this, ClassMakerPackage.STATE__EXPORTERS);
-		}
-		return exporters;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public EList<Worker> getInstallers() {
-		if (installers == null) {
-			installers = new EObjectEList<Worker>(Worker.class, this, ClassMakerPackage.STATE__INSTALLERS);
-		}
-		return installers;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public EList<Worker> getLoaders() {
-		if (loaders == null) {
-			loaders = new EObjectEList<Worker>(Worker.class, this, ClassMakerPackage.STATE__LOADERS);
-		}
-		return loaders;
 	}
 
 	/**
@@ -876,8 +785,9 @@ public class StateImpl extends ItemImpl implements State {
 					} catch (CoreException e1) {
 						ClassMakerPlugin.getInstance().getLog().log(e1.getStatus());
 					}
-					EPackage ePackage = contribution.getDomainModel().getGenerated();
-					resourceSet.getPackageRegistry().put(ePackage.getNsURI(), ePackage);
+					EObject eObject = contribution.getDomainModel().getGenerated();
+					if (eObject instanceof EPackage)
+						resourceSet.getPackageRegistry().put(((EPackage) eObject).getNsURI(), (EPackage) eObject);
 					setResource(resourceSet.getResource(modelURI, loadOnDemand));
 				}
 			}
@@ -899,7 +809,7 @@ public class StateImpl extends ItemImpl implements State {
 			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createWarningStatus(e));
 		}
 		if (!getResource().getContents().isEmpty()) {
-			getDomainModel().setDynamic(EcoreUtil.copy((EPackage) getResource().getContents().get(0)));
+			getDomainModel().setDynamic(EcoreUtil.copy((EObject) getResource().getContents().get(0)));
 		}
 		loading = false;
 	}
@@ -929,7 +839,7 @@ public class StateImpl extends ItemImpl implements State {
 			ClassMakerPlugin.getInstance().getLog()
 					.log(ClassMakerPlugin.createInfoStatus(NLS.bind(Messages.ResourceImported, importSource.getURI())));
 		} else if (getPhase().getValue() >= Stage.MODELED_VALUE && getDomainModel().getDynamic() != null
-				&& packagesDiffer(getDomainModel().getDynamic(), resource.getContents())) {
+				&& objectsDiffer(getDomainModel().getDynamic(), resource.getContents())) {
 			boolean deliver = resource.eDeliver();
 			resource.eSetDeliver(false);
 			resource.getContents().clear();
@@ -952,197 +862,35 @@ public class StateImpl extends ItemImpl implements State {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @generated NOT
-	 */
-	public Worker createGenerator() {
-		getGenerators().add(
-				create(ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "project.create.generator"), //$NON-NLS-1$
-						getGenerators().size(), getEclipseProject(), getTimestamp()));
-		return getGenerators().get(getGenerators().size() - 1);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public Worker createExporter() {
-		getExporters().add(
-				create(ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "project.create.exporter"), //$NON-NLS-1$
-						getExporters().size(), Long.valueOf(getTimestamp())));
-		return getExporters().get(getExporters().size() - 1);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public Worker createInstaller() {
-		getInstallers().add(
-				create(ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "project.create.installer"), //$NON-NLS-1$
-						getInstallers().size(), Long.valueOf(getTimestamp())));
-		return getInstallers().get(getInstallers().size() - 1);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public Worker createModelLoader() {
-		getLoaders().add(
-				create(ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "project.create.loader"), //$NON-NLS-1$
-						getLoaders().size(), Long.valueOf(getTimestamp())));
-		return getLoaders().get(getLoaders().size() - 1);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
+	 * @generated
 	 */
 	@Override
-	public Worker getReturnWorker() {
-		int depth = configureJobs(getGenerators().size() < 5, ClassMakerPlugin.getProgressMonitor());
-		EnterpriseDomainJob generatorJob = EnterpriseDomainJob.getJob(getGenerators().get(depth));
-		EnterpriseDomainJob exporterJob = EnterpriseDomainJob.getJob(getExporters().get(depth));
-		EnterpriseDomainJob installerJob = EnterpriseDomainJob.getJob(getInstallers().get(depth));
-		EnterpriseDomainJob loaderJob = EnterpriseDomainJob.getJob(getLoaders().get(depth));
-		switch (depth % 5) {
-		case 1:
-			switch (getPhase().getValue()) {
-			case Stage.DEFINED_VALUE:
-				saveResource();
-			case Stage.MODELED_VALUE:
-				return generatorJob;
-			case Stage.GENERATED_VALUE:
-				return exporterJob;
-			case Stage.EXPORTED_VALUE:
-				return installerJob;
-			case Stage.INSTALLED_VALUE:
-			case Stage.LOADED_VALUE:
-				return loaderJob;
-			}
-		case 2:
-			switch (getPhase().getValue()) {
-			case Stage.DEFINED_VALUE:
-				saveResource();
-			case Stage.MODELED_VALUE:
-			case Stage.INSTALLED_VALUE:
-				return generatorJob;
-			case Stage.GENERATED_VALUE:
-				return exporterJob;
-			case Stage.EXPORTED_VALUE:
-				return installerJob;
-			case Stage.LOADED_VALUE:
-				return loaderJob;
-			}
-		case 3:
-			switch (getPhase().getValue()) {
-			case Stage.DEFINED_VALUE:
-				saveResource();
-			case Stage.MODELED_VALUE:
-				return generatorJob;
-			case Stage.GENERATED_VALUE:
-				return exporterJob;
-			case Stage.EXPORTED_VALUE:
-			case Stage.INSTALLED_VALUE:
-				return installerJob;
-			case Stage.LOADED_VALUE:
-				return loaderJob;
-			}
-		case 4:
-			return null;
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+		case ClassMakerPackage.STATE__STRATEGY:
+			if (strategy != null)
+				msgs = ((InternalEObject) strategy).eInverseRemove(this, ClassMakerPackage.STRATEGY__STATE,
+						Strategy.class, msgs);
+			return basicSetStrategy((Strategy) otherEnd, msgs);
 		}
-		return null;
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	@Override
-	public int configureJobs(boolean create, IProgressMonitor monitor) {
-		Worker exporter = null;
-		if (create)
-			exporter = createExporter();
-		else
-			exporter = getExporters().get(getExporters().size() - 1);
-
-		EnterpriseDomainJob exporterJob = EnterpriseDomainJob.getJob(exporter);
-		exporterJob.setContributionState(this);
-		boolean changeRule = exporterJob.isChangeRule();
-		if (exporterJob.getState() != Job.NONE)
-			exporterJob.setChangeRule(false);
-		exporterJob.setProject(getEclipseProject());
-		exporterJob.setChangeRule(changeRule);
-		exporter.getProperties().put(AbstractExporter.EXPORT_DESTINATION_PROP,
-				ResourceUtils.getExportDestination(getEclipseProject()).toString());
-
-		Worker generator = null;
-		if (create)
-			generator = createGenerator();
-		else
-			generator = getGenerators().get(getGenerators().size() - 1);
-		EnterpriseDomainJob generatorJob = EnterpriseDomainJob.getJob(generator);
-		generatorJob.setResourceSet(getProject().getWorkspace().getResourceSet());
-		generatorJob.setContributionState(this);
-		generatorJob.setProject(getEclipseProject());
-		generatorJob.setProgressGroup(monitor, 1);
-		generatorJob.setNextJob(exporterJob);
-
-		Worker installer = null;
-		if (create)
-			installer = createInstaller();
-		else
-			installer = getInstallers().get(getInstallers().size() - 1);
-		EnterpriseDomainJob installJob = EnterpriseDomainJob.getJob(installer);
-		installJob.setContributionState(this);
-		exporterJob.setNextJob(installJob);
-
-		Worker modelLoader = null;
-		if (create)
-			modelLoader = createModelLoader();
-		else
-			modelLoader = getLoaders().get(getLoaders().size() - 1);
-		EnterpriseDomainJob loadJob = EnterpriseDomainJob.getJob(modelLoader);
-		loadJob.setContributionState(this);
-		loadJob.addListener();
-
-		installJob.setNextJob(loadJob);
-		return getGenerators().size() - 1;
-	}
-
-	private Worker create(StageQualifier stage, Object... customizerArgs) {
-		SortedSet<Customizer> customizer = new TreeSet<Customizer>(new Customizer.CustomizerComparator());
-		for (StageQualifier filter : getStateCustomizers().keySet())
-			if (stage.equals(filter))
-				customizer.add(getStateCustomizers().get(filter));
-		for (StageQualifier filter : getProject().getWorkspace().getCustomizers().keySet())
-			if (filter.equals(stage))
-				customizer.add(getProject().getWorkspace().getCustomizers().get(filter));
-		if (customizer.isEmpty())
-			return null;
-		return (Worker) (customizer.last().customize(ECollections.asEList(customizerArgs)));
-	}
-
-	private boolean packagesDiffer(EPackage source, EList<EObject> target) {
+	private boolean objectsDiffer(EObject source, EList<EObject> target) {
 		if (source == null && target == null)
 			return false;
-		EList<EPackage> existingEPackages = ECollections.newBasicEList();
+		EList<EObject> existingEObjects = ECollections.newBasicEList();
 		boolean whether = false;
 		if (source == null)
 			whether = true;
 		if (target == null)
 			whether = true;
 		for (EObject eObject : target)
-			if (eObject instanceof EPackage)
-				existingEPackages.add((EPackage) eObject);
+			if (eObject instanceof EObject)
+				existingEObjects.add((EObject) eObject);
 			else
 				whether = true;
-		return whether || !ModelUtil.ePackagesAreEqual(source, existingEPackages, true);
+		return whether || !ModelUtil.eObjectsAreEqual(source, existingEObjects, true);
 	}
 
 	/**
@@ -1190,33 +938,39 @@ public class StateImpl extends ItemImpl implements State {
 					ResourceUtils.createProject(project, ClassMakerPlugin.NATURE_ID, wrappingMonitor);
 				}
 
-				configureJobs(getGenerators().isEmpty(), wrappingMonitor);
+				getStrategy().configureJobs(getStrategy().getGenerators().isEmpty(), wrappingMonitor);
 
 				monitor.beginTask(Messages.Save, 4);
-				if (getPhase().getValue() == Stage.LOADED_VALUE)
-					setPhase(Stage.MODELED);
 
 				EnterpriseDomainJob job = null;
 				switch (getPhase().getValue()) {
+				case Stage.LOADED_VALUE:
+					saveResource();
+					setPhase(Stage.MODELED);
 				case Stage.MODELED_VALUE:
-					job = EnterpriseDomainJob.getJob(getGenerators().get(getGenerators().size() - 1));
+					job = EnterpriseDomainJob
+							.getJob(getStrategy().getGenerators().get(getStrategy().getGenerators().size() - 1));
 					job.schedule();
 					break;
 				case Stage.GENERATED_VALUE:
-					job = EnterpriseDomainJob.getJob(getExporters().get(getExporters().size() - 1));
+					job = EnterpriseDomainJob
+							.getJob(getStrategy().getExporters().get(getStrategy().getExporters().size() - 1));
 					job.schedule();
 					break;
 				case Stage.EXPORTED_VALUE:
-					job = EnterpriseDomainJob.getJob(getInstallers().get(getInstallers().size() - 1));
+					job = EnterpriseDomainJob
+							.getJob(getStrategy().getInstallers().get(getStrategy().getInstallers().size() - 1));
 					job.schedule();
 					break;
 				case Stage.INSTALLED_VALUE:
-					job = EnterpriseDomainJob.getJob(getLoaders().get(getLoaders().size() - 1));
+					job = EnterpriseDomainJob
+							.getJob(getStrategy().getLoaders().get(getStrategy().getLoaders().size() - 1));
 					job.schedule();
 					break;
 				}
 				try {
-					job.join();
+					if (job != null)
+						job.join();
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 					monitor.setCanceled(true);
@@ -1256,16 +1010,22 @@ public class StateImpl extends ItemImpl implements State {
 		}
 	}
 
-	private IProject getEclipseProject() {
-		return ResourceUtils.getProject(getProjectName());
-	}
-
 	/**
 	 * Initialize and load resource. Parent revision should be set.
 	 */
 	@Override
 	public void load(boolean create) throws CoreException {
 		loadResource(getModelURI(), create, true);
+		if (ClassMakerServiceImpl.initializing && getPhase().getValue() == Stage.LOADED_VALUE) {
+			getStrategy().configureJobs(getStrategy().getLoaders().isEmpty(), ClassMakerPlugin.getProgressMonitor());
+			Job job = EnterpriseDomainJob
+					.getJob(getStrategy().getInstallers().get(getStrategy().getInstallers().size() - 1));
+			job.schedule();
+			try {
+				job.join();
+			} catch (InterruptedException e) {
+			}
+		}
 	}
 
 	/**
@@ -1345,6 +1105,8 @@ public class StateImpl extends ItemImpl implements State {
 		switch (featureID) {
 		case ClassMakerPackage.STATE__STATE_CUSTOMIZERS:
 			return ((InternalEList<?>) getStateCustomizers()).basicRemove(otherEnd, msgs);
+		case ClassMakerPackage.STATE__STRATEGY:
+			return basicSetStrategy(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -1363,30 +1125,32 @@ public class StateImpl extends ItemImpl implements State {
 			if (msg.getFeatureID(Resource.class) == Resource.RESOURCE__CONTENTS)
 				switch (msg.getEventType()) {
 				case Notification.ADD:
-					if (msg.getNewValue() != null && msg.getNewValue() instanceof EPackage) {
-						if (findExistingEPackage((EPackage) msg.getNewValue()) == null) {
-							getDomainModel().setDynamic(copyEPackage((EPackage) msg.getNewValue()));
+					if (msg.getNewValue() != null && msg.getNewValue() instanceof EObject) {
+						if (findExistingEObject((EObject) msg.getNewValue()) == null) {
+							getDomainModel().setDynamic(copyEObject((EObject) msg.getNewValue()));
 						}
 					}
 					break;
 				case Notification.SET:
-					if (msg.getOldValue() != null && msg.getOldValue() instanceof EPackage)
+					if (msg.getOldValue() != null && msg.getOldValue() instanceof EObject)
 						getDomainModel().setDynamic(null);
-					if (msg.getNewValue() != null && msg.getNewValue() instanceof EPackage)
-						if (findExistingEPackage((EPackage) msg.getNewValue()) == null) {
-							getDomainModel().setDynamic(copyEPackage((EPackage) msg.getNewValue()));
+					if (msg.getNewValue() != null && msg.getNewValue() instanceof EObject
+							&& !(msg.getNewValue() instanceof Item))
+						if (findExistingEObject((EObject) msg.getNewValue()) == null) {
+							getDomainModel().setDynamic(copyEObject((EObject) msg.getNewValue()));
 						}
+
 					break;
 				case Notification.REMOVE_MANY:
 					if (msg.getOldValue() != null) {
 						for (Object object : (Iterable<?>) msg.getOldValue())
-							if (object instanceof EPackage) {
+							if (object instanceof EObject) {
 								getDomainModel().setDynamic(null);
 							}
 					}
 					break;
 				case Notification.REMOVE:
-					if (msg.getOldValue() != null && msg.getOldValue() instanceof EPackage) {
+					if (msg.getOldValue() != null && msg.getOldValue() instanceof EObject) {
 						getDomainModel().setDynamic(null);
 					}
 					break;
@@ -1395,15 +1159,17 @@ public class StateImpl extends ItemImpl implements State {
 			resourceModelsSynchronizing = false;
 		}
 
-		private EPackage copyEPackage(EPackage ePackage) {
-			EPackage copy = EcoreUtil.copy(ePackage);
+		private EObject copyEObject(EObject eObject) {
+			EObject copy = EcoreUtil.copy(eObject);
 			return copy;
 		}
 
-		private EPackage findExistingEPackage(EPackage query) {
-			EPackage ePackage = getDomainModel().getDynamic();
-			if (ModelUtil.ePackagesAreEqual(ePackage, query, true))
-				return ePackage;
+		private EObject findExistingEObject(EObject query) {
+			if (!(getDomainModel().getDynamic() instanceof EObject))
+				return null;
+			EObject eObject = getDomainModel().getDynamic();
+			if (ModelUtil.eObjectsAreEqual(eObject, query, true))
+				return eObject;
 			return null;
 		}
 
@@ -1423,20 +1189,20 @@ public class StateImpl extends ItemImpl implements State {
 				getResource().eSetDeliver(false);
 				if (notification.getEventType() == Notification.SET) {
 					if (notification.getOldValue() != null) {
-						EPackage dynamicEPackage = (EPackage) notification.getOldValue();
+						EObject dynamicEObject = (EObject) notification.getOldValue();
 						EList<EObject> toRemove = ECollections.newBasicEList();
 						for (EObject eObject : getResource().getContents())
-							if (eObject instanceof EPackage
-									&& ModelUtil.ePackagesAreEqual((EPackage) eObject, dynamicEPackage, false))
+							if (eObject instanceof EObject
+									&& ModelUtil.eObjectsAreEqual((EObject) eObject, dynamicEObject, false))
 								toRemove.add(eObject);
 						getResource().getContents().removeAll(toRemove);
 					}
 					if (notification.getNewValue() != null && notification.getPosition() >= Notification.NO_INDEX) {
-						EPackage dynamicEPackage = (EPackage) notification.getNewValue();
+						EObject dynamicEObject = (EObject) notification.getNewValue();
 						if (getResource().getContents().isEmpty()) {
-							getResource().getContents().add(EcoreUtil.copy(dynamicEPackage));
+							getResource().getContents().add(EcoreUtil.copy(dynamicEObject));
 						} else
-							getResource().getContents().set(0, EcoreUtil.copy(dynamicEPackage));
+							getResource().getContents().set(0, EcoreUtil.copy(dynamicEObject));
 					}
 				}
 				getResource().eSetDeliver(deliver);
@@ -1707,6 +1473,76 @@ public class StateImpl extends ItemImpl implements State {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
+	 * @generated
+	 */
+	@Override
+	public Strategy getStrategy() {
+		if (strategy != null && strategy.eIsProxy()) {
+			InternalEObject oldStrategy = (InternalEObject) strategy;
+			strategy = (Strategy) eResolveProxy(oldStrategy);
+			if (strategy != oldStrategy) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassMakerPackage.STATE__STRATEGY,
+							oldStrategy, strategy));
+			}
+		}
+		return strategy;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public Strategy basicGetStrategy() {
+		return strategy;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public NotificationChain basicSetStrategy(Strategy newStrategy, NotificationChain msgs) {
+		Strategy oldStrategy = strategy;
+		strategy = newStrategy;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					ClassMakerPackage.STATE__STRATEGY, oldStrategy, newStrategy);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public void setStrategy(Strategy newStrategy) {
+		if (newStrategy != strategy) {
+			NotificationChain msgs = null;
+			if (strategy != null)
+				msgs = ((InternalEObject) strategy).eInverseRemove(this, ClassMakerPackage.STRATEGY__STATE,
+						Strategy.class, msgs);
+			if (newStrategy != null)
+				msgs = ((InternalEObject) newStrategy).eInverseAdd(this, ClassMakerPackage.STRATEGY__STATE,
+						Strategy.class, msgs);
+			msgs = basicSetStrategy(newStrategy, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.STATE__STRATEGY, newStrategy,
+					newStrategy));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	public void setProjectVersion(IProgressMonitor monitor) throws CoreException {
@@ -1756,16 +1592,16 @@ public class StateImpl extends ItemImpl implements State {
 	 * 
 	 * @generated NOT
 	 */
-	public EPackage find(EPackage ePackage, Stage stage) {
+	public EObject find(EObject eObject, Stage stage) {
 		if (stage.equals(Stage.MODELED)) {
-			EPackage dynamicEPackage = getDomainModel().getDynamic();
-			if (ModelUtil.ePackagesAreEqual(ePackage, dynamicEPackage, false))
-				return dynamicEPackage;
+			EObject dynamicEObject = getDomainModel().getDynamic();
+			if (ModelUtil.eObjectsAreEqual(eObject, dynamicEObject, false))
+				return dynamicEObject;
 		}
 		if (stage.equals(Stage.GENERATED)) {
-			EPackage generatedEPackage = getDomainModel().getGenerated();
-			if (ModelUtil.ePackagesAreEqual(ePackage, generatedEPackage, false))
-				return generatedEPackage;
+			EObject generatedEObject = getDomainModel().getGenerated();
+			if (ModelUtil.eObjectsAreEqual(eObject, generatedEObject, false))
+				return generatedEObject;
 		}
 		return null;
 	}
@@ -1780,14 +1616,6 @@ public class StateImpl extends ItemImpl implements State {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case ClassMakerPackage.STATE__GENERATORS:
-			return getGenerators();
-		case ClassMakerPackage.STATE__EXPORTERS:
-			return getExporters();
-		case ClassMakerPackage.STATE__INSTALLERS:
-			return getInstallers();
-		case ClassMakerPackage.STATE__LOADERS:
-			return getLoaders();
 		case ClassMakerPackage.STATE__PACKAGE_CLASS_NAME:
 			return getPackageClassName();
 		case ClassMakerPackage.STATE__EDIT_PLUGIN_CLASS_NAME:
@@ -1829,6 +1657,10 @@ public class StateImpl extends ItemImpl implements State {
 			return isEdit();
 		case ClassMakerPackage.STATE__EDITOR:
 			return isEditor();
+		case ClassMakerPackage.STATE__STRATEGY:
+			if (resolve)
+				return getStrategy();
+			return basicGetStrategy();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1842,22 +1674,6 @@ public class StateImpl extends ItemImpl implements State {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case ClassMakerPackage.STATE__GENERATORS:
-			getGenerators().clear();
-			getGenerators().addAll((Collection<? extends Worker>) newValue);
-			return;
-		case ClassMakerPackage.STATE__EXPORTERS:
-			getExporters().clear();
-			getExporters().addAll((Collection<? extends Worker>) newValue);
-			return;
-		case ClassMakerPackage.STATE__INSTALLERS:
-			getInstallers().clear();
-			getInstallers().addAll((Collection<? extends Worker>) newValue);
-			return;
-		case ClassMakerPackage.STATE__LOADERS:
-			getLoaders().clear();
-			getLoaders().addAll((Collection<? extends Worker>) newValue);
-			return;
 		case ClassMakerPackage.STATE__PACKAGE_CLASS_NAME:
 			setPackageClassName((String) newValue);
 			return;
@@ -1914,6 +1730,9 @@ public class StateImpl extends ItemImpl implements State {
 		case ClassMakerPackage.STATE__EDITOR:
 			setEditor((Boolean) newValue);
 			return;
+		case ClassMakerPackage.STATE__STRATEGY:
+			setStrategy((Strategy) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -1926,18 +1745,6 @@ public class StateImpl extends ItemImpl implements State {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case ClassMakerPackage.STATE__GENERATORS:
-			getGenerators().clear();
-			return;
-		case ClassMakerPackage.STATE__EXPORTERS:
-			getExporters().clear();
-			return;
-		case ClassMakerPackage.STATE__INSTALLERS:
-			getInstallers().clear();
-			return;
-		case ClassMakerPackage.STATE__LOADERS:
-			getLoaders().clear();
-			return;
 		case ClassMakerPackage.STATE__PACKAGE_CLASS_NAME:
 			setPackageClassName(PACKAGE_CLASS_NAME_EDEFAULT);
 			return;
@@ -1992,6 +1799,9 @@ public class StateImpl extends ItemImpl implements State {
 		case ClassMakerPackage.STATE__EDITOR:
 			setEditor(EDITOR_EDEFAULT);
 			return;
+		case ClassMakerPackage.STATE__STRATEGY:
+			setStrategy((Strategy) null);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -2004,14 +1814,6 @@ public class StateImpl extends ItemImpl implements State {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case ClassMakerPackage.STATE__GENERATORS:
-			return generators != null && !generators.isEmpty();
-		case ClassMakerPackage.STATE__EXPORTERS:
-			return exporters != null && !exporters.isEmpty();
-		case ClassMakerPackage.STATE__INSTALLERS:
-			return installers != null && !installers.isEmpty();
-		case ClassMakerPackage.STATE__LOADERS:
-			return loaders != null && !loaders.isEmpty();
 		case ClassMakerPackage.STATE__PACKAGE_CLASS_NAME:
 			return PACKAGE_CLASS_NAME_EDEFAULT == null ? packageClassName != null
 					: !PACKAGE_CLASS_NAME_EDEFAULT.equals(packageClassName);
@@ -2055,6 +1857,8 @@ public class StateImpl extends ItemImpl implements State {
 			return edit != EDIT_EDEFAULT;
 		case ClassMakerPackage.STATE__EDITOR:
 			return editor != EDITOR_EDEFAULT;
+		case ClassMakerPackage.STATE__STRATEGY:
+			return strategy != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -2132,52 +1936,44 @@ public class StateImpl extends ItemImpl implements State {
 
 	@Override
 	public void build(IProgressMonitor monitor) throws CoreException {
-		Worker exporter = createExporter();
-		EnterpriseDomainJob exportJob = EnterpriseDomainJob.getJob(exporter);
-		exportJob.setContributionState(this);
-		exportJob.setProject(getEclipseProject());
-		exporter.getProperties().put(AbstractExporter.EXPORT_DESTINATION_PROP,
-				ResourceUtils.getExportDestination(getEclipseProject()).toString());
+		getStrategy().configuteBuildJobs(monitor);
 
-		Worker generator = createGenerator();
-		EnterpriseDomainJob generatorJob = EnterpriseDomainJob.getJob(generator);
-		generatorJob.setResourceSet(getProject().getWorkspace().getResourceSet());
-		generatorJob.setContributionState(this);
-		generatorJob.setProject(getEclipseProject());
-		generatorJob.setProgressGroup(monitor, 1);
-		generatorJob.setNextJob(exportJob);
-
-		EnterpriseDomainJob installJob = EnterpriseDomainJob.getJob(createInstaller());
-		installJob.setContributionState(this);
-
-		EnterpriseDomainJob loadJob = EnterpriseDomainJob.getJob(createModelLoader());
-		loadJob.setContributionState(this);
-		loadJob.addListener();
-
-		exportJob.setNextJob(installJob);
-		installJob.setNextJob(loadJob);
-
+		EnterpriseDomainJob generatorJob = null;
+		EnterpriseDomainJob exportJob = null;
+		EnterpriseDomainJob installJob = null;
+		EnterpriseDomainJob loadJob = null;
 		switch (getPhase().getValue()) {
 		case Stage.DEFINED_VALUE:
 			saveResource();
 		case Stage.MODELED_VALUE:
+			generatorJob = EnterpriseDomainJob
+					.getJob(getStrategy().getGenerators().get(getStrategy().getGenerators().size() - 1));
 			generatorJob.schedule();
 			break;
 		case Stage.GENERATED_VALUE:
+			exportJob = EnterpriseDomainJob
+					.getJob(getStrategy().getExporters().get(getStrategy().getExporters().size() - 1));
 			exportJob.schedule();
 			break;
 		case Stage.EXPORTED_VALUE:
+			installJob = EnterpriseDomainJob
+					.getJob(getStrategy().getInstallers().get(getStrategy().getInstallers().size() - 1));
 			installJob.schedule();
 			break;
 		case Stage.INSTALLED_VALUE:
+			loadJob = EnterpriseDomainJob.getJob(getStrategy().getLoaders().get(getStrategy().getLoaders().size() - 1));
 			loadJob.schedule();
 			break;
 		}
 		try {
-			generatorJob.join();
-			exportJob.join();
-			installJob.join();
-			loadJob.join();
+			if (generatorJob != null)
+				generatorJob.join();
+			if (exportJob != null)
+				exportJob.join();
+			if (installJob != null)
+				installJob.join();
+			if (loadJob != null)
+				loadJob.join();
 			add("."); //$NON-NLS-1$
 			Thread.yield();
 		} catch (InterruptedException e) {

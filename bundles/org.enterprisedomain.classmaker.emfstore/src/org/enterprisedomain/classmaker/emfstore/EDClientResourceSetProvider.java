@@ -17,16 +17,19 @@ package org.enterprisedomain.classmaker.emfstore;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.emfstore.internal.client.provider.ClientXMIResourceSetProvider;
+import org.eclipse.emf.emfstore.internal.client.provider.XMIClientURIConverter;
+import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 
 public class EDClientResourceSetProvider extends ClientXMIResourceSetProvider {
 
 	public EDClientResourceSetProvider() {
 	}
 
+	@SuppressWarnings("restriction")
 	@Override
 	public ResourceSet getResourceSet() {
 		ResourceSet result = super.getResourceSet();
-		result.setURIConverter(new EMFStoreURIConverter(result.getURIConverter()));
+		result.setURIConverter(new XMIClientURIConverter());
 		return result;
 	}
 

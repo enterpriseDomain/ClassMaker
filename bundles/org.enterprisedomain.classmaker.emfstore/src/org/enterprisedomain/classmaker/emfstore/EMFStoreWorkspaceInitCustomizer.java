@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 Kyrill Zotkin
+ * Copyright 2020 Kyrill Zotkin
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.emfstore.internal.client.provider.XMIClientURIConverter;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.server.storage.XMIServerURIConverter;
 import org.enterprisedomain.classmaker.Customizer;
 import org.enterprisedomain.classmaker.Workspace;
 import org.enterprisedomain.classmaker.impl.WorkspaceInitCustomizer;
@@ -32,7 +33,6 @@ public class EMFStoreWorkspaceInitCustomizer extends WorkspaceInitCustomizer imp
 	public Object customize(EList<Object> args) {
 		Workspace workspace = (Workspace) args.get(0);
 		ResourceSet resourceSet = workspace.getResourceSet();
-		resourceSet.setURIConverter(new EMFStoreURIConverter(new XMIClientURIConverter()));
 		resourceSet.getLoadOptions().putAll(ModelUtil.getResourceLoadOptions());
 		return super.customize(args);
 	}
