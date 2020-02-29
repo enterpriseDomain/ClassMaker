@@ -187,6 +187,8 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 					args.add("-edit");
 				if (getContributionState().isEditor())
 					args.add("-editor");
+				args.add("-autoBuild");
+				args.add("false");
 				args.add("-reconcile");
 				args.add(EcorePlugin.getWorkspaceRoot().getRawLocation().append(getGenModelLocation()).toString());
 				int result = (Integer) getGenerator().run((String[]) args.toArray(new String[args.size()]));
