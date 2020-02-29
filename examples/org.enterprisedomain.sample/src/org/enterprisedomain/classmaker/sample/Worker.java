@@ -46,7 +46,7 @@ public class Worker implements Runnable {
 		c.getEStructuralFeatures().add(a);
 		p.getEClassifiers().add(c);
 		try {
-			ePackage = m.make(p, ClassMakerPlugin.getProgressMonitor());
+			ePackage = (EPackage) m.make(p, ClassMakerPlugin.getProgressMonitor());
 			EClass e = (EClass) ePackage.getEClassifier(c.getName());
 			System.out.println(e.getName());
 			EObject o = ePackage.getEFactoryInstance().create(e);
