@@ -37,6 +37,7 @@ import org.eclipse.emf.ecp.core.ECPRepository;
 import org.eclipse.emf.ecp.core.util.ECPContainer;
 import org.eclipse.emf.ecp.core.util.ECPProperties;
 import org.eclipse.emf.ecp.core.util.ECPUtil;
+import org.eclipse.emf.ecp.core.util.observer.ECPProjectContentChangedObserver;
 import org.eclipse.emf.ecp.spi.core.InternalProject;
 import org.eclipse.emf.ecp.spi.core.InternalProvider;
 import org.eclipse.emf.ecp.spi.ui.CompositeStateObserver;
@@ -98,6 +99,27 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider implements IRe
 	public EnterpriseDomainUIProvider() {
 		super(EnterpriseDomainProvider.NAME);
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(resourceChangeListener);
+		ECPUtil.getECPObserverBus().register(new ECPProjectContentChangedObserver() {
+
+			@Override
+			public Collection<Object> objectsChanged(ECPProject project, Collection<Object> objectsChanged) {
+				IViewPart modelExplorerView = null;
+				try {
+					modelExplorerView = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
+							.showView("org.eclipse.emf.ecp.ui.ModelExplorerView");
+					if (modelExplorerView instanceof ModelExplorerView) {
+						final ModelExplorerView modelExplorer = (ModelExplorerView) modelExplorerView;
+						Object object = objectsChanged.iterator().next();
+						if (object instanceof EObject)
+							modelExplorer.getViewer().refresh(((EObject) object).eContainer(), true);
+					}
+				} catch (Exception e) {
+					Activator.log(e);
+				}
+				return objectsChanged;
+			}
+
+		});
 		setClientRunWrapper(new IRunWrapper() {
 
 			@Override
@@ -211,7 +233,6 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider implements IRe
 						}
 					} catch (Exception e) {
 						Activator.log(e);
-
 					}
 					project.getEditingDomain().getCommandStack().flush();
 				}

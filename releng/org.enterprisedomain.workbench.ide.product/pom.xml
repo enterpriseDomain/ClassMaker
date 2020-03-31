@@ -2,6 +2,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.enterprisedomain</groupId>
 	<artifactId>org.enterprisedomain.workbench.ide.product</artifactId>
 	<packaging>eclipse-repository</packaging>
 	<version>0.8.1-SNAPSHOT</version>
@@ -26,18 +27,20 @@
 				<version>${tycho.version}</version>
 				<executions>
 					<execution>
-						<id>materialize-products</id>
+						<id>create-product-distributions</id>
 						<goals>
 							<goal>materialize-products</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>archive-products</id>
-						<goals>
 							<goal>archive-products</goal>
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<products>
+						<product>
+							<id>ide.product</id>
+						</product>
+					</products>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

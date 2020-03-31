@@ -18,7 +18,10 @@ package org.enterprisedomain.workbench.ide;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EContentAdapter;
@@ -48,32 +51,43 @@ public class ModelElementOpener implements ECPModelElementOpener {
 	@Override
 	public void openModelElement(Object modelElement, final ECPProject ecpProject) {
 		resource = null;
+		String fragment = null;
 		if (modelElement instanceof Resource)
 			resource = (Resource) modelElement;
 		if (modelElement instanceof EObject) {
-			if (((EObject) modelElement).eResource() != null)
+			if (((EObject) modelElement).eResource() != null) {
 				resource = ((EObject) modelElement).eResource();
-			else {
+				fragment = resource.getURIFragment((EObject) modelElement);
+			} else {
 				Project project = Activator.getClassMaker().getWorkspace().getProject(ecpProject.getName());
 				resource = (Resource) project.getChildren().get(0);
 			}
 		}
 		if (resource != null)
-			open(resource.getURI(), resource.getResourceSet(), ecpProject);
+			open(resource.getURI(), fragment, resource.getResourceSet(), ecpProject);
 	}
 
-	private IEditorPart open(URI uri, ResourceSet resourceSet, ECPProject project) {
-		if (uri.toString().endsWith("project"))
-			return openEditor(uri, MODEL_EDITOR_ID, resourceSet, project);
-		return openEditor(uri, EDITOR_ID, resourceSet, project);
+	private IEditorPart open(URI uri, String fragment, ResourceSet resourceSet, ECPProject project) {
+		if (uri.toString().endsWith("project") || uri.toString().endsWith("xmi"))
+			return openEditor(uri, fragment, MODEL_EDITOR_ID, resourceSet, project);
+		return openEditor(uri, fragment, EDITOR_ID, resourceSet, project);
 	}
 
-	private IEditorPart openEditor(URI uri, String editorId, ResourceSet resourceSet, ECPProject project) {
+	private IEditorPart openEditor(URI uri, String fragment, String editorId, ResourceSet resourceSet,
+			ECPProject project) {
 		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 		IEditorPart result = null;
 		try {
-			EObject modelElement = ((ESLocalProject) resourceSet.getResource(uri, true).getContents().get(0))
-					.getAllModelElements().iterator().next();
+			EObject eObject = null;
+			if (!resourceSet.getResource(uri, true).getContents().isEmpty())
+				eObject = resourceSet.getResource(uri, true).getContents().get(0);
+			if (fragment != null)
+				eObject = resourceSet.getResource(uri, true).getEObject(fragment);
+			EObject modelElement = null;
+			if (eObject instanceof ESLocalProject)
+				modelElement = ((ESLocalProject) eObject).getAllModelElements().iterator().next();
+			else if (eObject instanceof EObject)
+				modelElement = (EObject) eObject;
 			final ECPEditorContext eec = new EditorContext(modelElement, project);
 			result = IDE.openEditor(page, new MEEditorInput((EditorContext) eec), editorId);
 		} catch (PartInitException e) {

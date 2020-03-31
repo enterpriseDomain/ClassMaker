@@ -6,7 +6,7 @@
 	<version>0.8.1-SNAPSHOT</version>
 	<properties>
 		<product.version>0.8.1-SNAPSHOT</product.version>
-		<tycho.version>1.5.1</tycho.version>
+		<tycho.version>1.6.0</tycho.version>
 		<tycho.extras.version>${tycho.version}</tycho.extras.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<org.osgi.framework.system.capabilities>
@@ -20,14 +20,14 @@
 			<layout>p2</layout>
 		</repository>
 		<repository>
-			<id>2019-12</id>
+			<id>2020-03</id>
 			<layout>p2</layout>
-			<url>http://download.eclipse.org/releases/2019-12</url>
+			<url>http://download.eclipse.org/releases/2020-03</url>
 		</repository>
 		<repository>
 			<id>ecp</id>
 			<layout>p2</layout>
-			<url>http://download.eclipse.org/ecp/releases/releases_target_123</url>
+			<url>http://download.eclipse.org/ecp/releases/releases_target_124</url>
 		</repository>
 	</repositories>
 	<build>
@@ -37,6 +37,20 @@
 				<artifactId>tycho-maven-plugin</artifactId>
 				<version>${tycho.version}</version>
 				<extensions>true</extensions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-packaging-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<id>package-feature</id>
+						<configuration>
+							<finalName>${project.artifactId}_${unqualifiedVersion}.${buildQualifier}</finalName>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
@@ -54,8 +68,8 @@
 					<dependency-resolution>
 						<extraRequirements>
 							<requirement>
-								<type>eclipse-plugin</type>
-								<id>org.eclipse.osgi.compatibility.state</id>
+								<type>eclipse-feature</type>
+								<id>org.eclipse.e4.rcp</id>
 								<versionRange>0.0.0</versionRange>
 							</requirement>
 						</extraRequirements>

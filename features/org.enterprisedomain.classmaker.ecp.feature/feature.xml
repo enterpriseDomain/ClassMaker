@@ -108,21 +108,21 @@ limitations under the License.
 
    <requires>
       <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.emf.ecp.view.model" version="1.23.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecp.view.model" version="1.24.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.edit.ui" version="2.14.0" match="compatible"/>
       <import plugin="org.eclipse.jface" version="3.11.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui" version="3.109.100" match="compatible"/>
       <import plugin="org.enterprisedomain.classmaker" version="0.8.0" match="equivalent"/>
       <import plugin="org.enterprisedomain.classmaker.edit" version="0.8.0" match="greaterOrEqual"/>
-      <import plugin="org.enterprisedomain.ecp" version="0.8.0" match="equivalent"/>
+      <import plugin="org.enterprisedomain.ecp" version="0.8.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.runtime" version="3.15.200" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.ecp.ui" version="1.23.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecp.ui" version="1.24.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.swt" version="3.110.0" match="greaterOrEqual"/>
       <import plugin="org.enterprisedomain.classmaker.edit" version="0.8.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.common.ui"/>
       <import plugin="org.eclipse.ui.navigator" version="3.7.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.ecp.common.ui" version="1.23.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.ecp.ui.e3" version="1.23.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecp.common.ui" version="1.24.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecp.ui.e3" version="1.24.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.runtime" version="3.12.0" match="compatible"/>
       <import plugin="org.eclipse.emf.ecore" version="2.12.0" match="compatible"/>
       <import plugin="org.eclipse.emf.ecore.xmi" version="2.12.0" match="compatible"/>
@@ -170,7 +170,7 @@ limitations under the License.
       <import plugin="org.eclipse.emf.edit" version="2.15.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.edit.ui" version="2.16.0" match="greaterOrEqual"/>
       <import feature="org.eclipse.emf.ecp.feature" version="1.8.0.20160216-1319" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.ecp.core" version="1.23.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecp.core" version="1.24.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
