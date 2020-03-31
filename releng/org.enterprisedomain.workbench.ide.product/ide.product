@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="enterpriseDomain Workbench" uid="workbench" id="org.enterprisedomain.workbench.ide.product" application="org.eclipse.ui.ide.workbench" version="0.8.1.qualifier" useFeatures="true" includeLaunchers="true">
+<product name="enterpriseDomain Workbench" uid="ide.product" id="org.enterprisedomain.workbench.ide.product" application="org.eclipse.ui.ide.workbench" version="0.8.1.qualifier" useFeatures="true" includeLaunchers="true">
 
    <configIni use="default">
    </configIni>
@@ -275,33 +275,39 @@
 
    <features>
       <feature id="org.enterprisedomain.ui.workbench.rcp.feature" installMode="root"/>
-      <feature id="org.eclipse.emf.ecp.view.treemasterdetail.feature" installMode="root"/>
-      <feature id="org.enterprisedomain.classmaker.ecp.feature" installMode="root"/>
-      <feature id="org.eclipse.emf.ecp.view.template.feature" installMode="root"/>
-      <feature id="org.eclipse.emf.ecp.e3.feature" installMode="root"/>
-      <feature id="org.enterprisedomain.classmaker.osgi.resolverhooks.feature" installMode="root"/>
-      <feature id="org.enterprisedomain.classmaker.feature" installMode="root"/>
-      <feature id="org.eclipse.emf.common" installMode="root"/>
-      <feature id="org.eclipse.emf.ecp.view.label.feature" installMode="root"/>
-      <feature id="org.eclipse.emf.ecp.feature" installMode="root"/>
-      <feature id="org.eclipse.emfforms.core.bazaar.feature" installMode="root"/>
-      <feature id="org.eclipse.emfforms.view.annotation.feature" installMode="root"/>
-      <feature id="org.eclipse.emf.ecp.view.table.feature" installMode="root"/>
-      <feature id="org.enterprisedomain.classmaker.edit.feature" installMode="root"/>
-      <feature id="org.eclipse.emf.ecp.view.categorization.feature" installMode="root"/>
-      <feature id="org.eclipse.emf.ecp.view.group.feature" installMode="root"/>
-      <feature id="org.eclipse.emf.ecore" installMode="root"/>
-      <feature id="org.eclipse.emf.ecp.emfforms.runtime.feature" installMode="root"/>
-      <feature id="org.eclipse.emf.ecp.view.vertical.feature" installMode="root"/>
-      <feature id="org.eclipse.emf.ecp.view.custom.feature" installMode="root"/>
-      <feature id="org.eclipse.emf.ecp.view.stack.feature" installMode="root"/>
-      <feature id="org.eclipse.emf.ecp.view.compoundcontrol.feature" installMode="root"/>
-      <feature id="org.eclipse.emf.ecp.view.validation.feature" installMode="root"/>
-      <feature id="org.eclipse.emf.ecp.view.rule.feature" installMode="root"/>
-      <feature id="org.eclipse.emf.ecp.view.unset.feature" installMode="root"/>
-      <feature id="org.eclipse.emf.ecp.view.horizontal.feature" installMode="root"/>
-      <feature id="org.eclipse.emf.ecp.viewmodel.feature" installMode="root"/>
-      <feature id="org.eclipse.e4.rcp" installMode="root"/>
+      <feature id="org.eclipse.emf.ecp.view.treemasterdetail.feature"/>
+      <feature id="org.eclipse.emf.ecp.view.template.feature"/>
+      <feature id="org.eclipse.emf.ecp.e3.feature"/>
+      <feature id="org.enterprisedomain.classmaker.osgi.resolverhooks.feature"/>
+      <feature id="org.enterprisedomain.classmaker.feature"/>
+      <feature id="org.eclipse.emf.common"/>
+      <feature id="org.eclipse.emf.ecp.view.label.feature"/>
+      <feature id="org.eclipse.emf.ecp.feature"/>
+      <feature id="org.eclipse.emfforms.core.bazaar.feature"/>
+      <feature id="org.eclipse.emfforms.view.annotation.feature"/>
+      <feature id="org.eclipse.emf.ecp.view.table.feature"/>
+      <feature id="org.enterprisedomain.classmaker.edit.feature"/>
+      <feature id="org.eclipse.emf.ecp.view.categorization.feature"/>
+      <feature id="org.eclipse.emf.ecp.view.group.feature"/>
+      <feature id="org.eclipse.emf.ecore"/>
+      <feature id="org.eclipse.emf.ecp.emfforms.runtime.feature"/>
+      <feature id="org.eclipse.emf.ecp.view.vertical.feature"/>
+      <feature id="org.eclipse.emf.ecp.view.custom.feature"/>
+      <feature id="org.eclipse.emf.ecp.view.stack.feature"/>
+      <feature id="org.eclipse.emf.ecp.view.compoundcontrol.feature"/>
+      <feature id="org.eclipse.emf.ecp.view.validation.feature"/>
+      <feature id="org.eclipse.emf.ecp.view.rule.feature"/>
+      <feature id="org.eclipse.emf.ecp.view.unset.feature"/>
+      <feature id="org.eclipse.emf.ecp.view.horizontal.feature"/>
+      <feature id="org.eclipse.emf.ecp.viewmodel.feature"/>
+      <feature id="org.eclipse.e4.rcp"/>
+      <feature id="org.eclipse.equinox.p2.core.feature"/>
+      <feature id="org.eclipse.ecf.core.feature"/>
+      <feature id="org.eclipse.ecf.filetransfer.feature"/>
+      <feature id="org.eclipse.ecf.core.ssl.feature"/>
+      <feature id="org.eclipse.ecf.filetransfer.ssl.feature"/>
+      <feature id="org.eclipse.ecf.filetransfer.httpclient45.feature"/>
+      <feature id="org.enterprisedomain.classmaker.ecp.feature"/>
    </features>
 
    <configurations>
