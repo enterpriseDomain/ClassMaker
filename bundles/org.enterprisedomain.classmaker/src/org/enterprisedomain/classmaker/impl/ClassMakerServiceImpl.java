@@ -640,7 +640,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 	 */
 	public void delete(String packageName, IProgressMonitor monitor) throws CoreException {
 		Contribution contribution = getWorkspace().getContribution(computeProjectName(packageName));
-		if (contribution != null)
+		if (contribution != null && !contribution.getState().isMaking())
 			contribution.delete(monitor);
 	}
 
