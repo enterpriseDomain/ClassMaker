@@ -8,7 +8,7 @@
         "issue_tracker_url": "https://github.com/enterpriseDomain/ClassMaker/issues",
         "vcs_url": "https://github.com/enterpriseDomain/ClassMaker.git",
         "licenses": ["Apache-2.0"],
-        "labels": ["2019-09"],
+        "labels": ["2020-03"],
         "public_download_numbers": false,
         "public_stats": false
     },
@@ -16,7 +16,7 @@
     "version": {
         "name": "0.8.1",
         "desc": "This is a release version",      
-        "released": "2020-03-22",
+        "released": "2020-04-06",
         "vcs_tag": "0.8.1",
         "gpgSign": false
     },
