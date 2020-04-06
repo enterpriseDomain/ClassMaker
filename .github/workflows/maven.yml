@@ -21,6 +21,6 @@ jobs:
       with:
         java-version: 11
     - name: Copy toolchain
-        cp toolchains.xml ~/.m2/toolchains.xml
+        run: cp toolchains.xml ~/.m2/toolchains.xml
     - name: Build with Maven      
-      run: mvn -B package --file pom.xml      
+        run: mvn -B package --file pom.xml      
