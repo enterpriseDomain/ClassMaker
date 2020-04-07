@@ -5,7 +5,6 @@
 		<groupId>org.enterprisedomain</groupId>
 		<artifactId>org.enterprisedomain</artifactId>
 		<version>0.8.1-SNAPSHOT</version>
-		<relativePath></relativePath>
 	</parent>
 
 	<artifactId>org.enterprisedomain.classmaker.emfstore</artifactId>
