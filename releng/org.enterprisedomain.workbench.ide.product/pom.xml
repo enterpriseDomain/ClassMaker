@@ -8,8 +8,9 @@
 	<version>0.8.1-SNAPSHOT</version>
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
-		<artifactId>org.enterprisedomain.releng</artifactId>
+		<artifactId>org.enterprisedomain</artifactId>
 		<version>0.8.1-SNAPSHOT</version>
+		<relativePath></relativePath>
 	</parent>
 	<build>
 		<plugins>
@@ -37,7 +38,7 @@
 				<configuration>
 					<products>
 						<product>
-							<id>ide.product</id>
+							<id>workbench.ide.product</id>
 						</product>
 					</products>
 				</configuration>

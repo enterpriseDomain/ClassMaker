@@ -8,3 +8,4 @@ Fragment-Host: org.eclipse.osgi;bundle-version="[3.11.2,4.0.0)"
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: org.enterprisedomain.classmaker.osgi.systemextension
 ExtensionBundle-Activator: org.enterprisedomain.classmaker.osgi.systemextension.Activator
+Automatic-Module-Name: org.enterprisedomain.classmaker.osgi.systemextension

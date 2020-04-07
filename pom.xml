@@ -1,22 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.enterprisedomain</groupId>
-	<artifactId>org.enterprisedomain.root</artifactId>
+	<artifactId>org.enterprisedomain</artifactId>
 	<packaging>pom</packaging>
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
-		<artifactId>org.enterprisedomain.configuration</artifactId>
+		<artifactId>configuration</artifactId>
 		<version>0.8.1-SNAPSHOT</version>
 		<relativePath>./releng/org.enterprisedomain.configuration</relativePath>
 	</parent>
 
 	<modules>
-		<module>bundles</module>
-		<module>features</module>
-		<module>tests</module>
-		<module>releng</module>
+		<module>bundles/org.enterprisedomain.classmaker</module>
+		<module>bundles/org.enterprisedomain.classmaker.osgi.systemextension</module>
+		<module>bundles/org.enterprisedomain.classmaker.edit</module>
+		<module>bundles/org.enterprisedomain.classmaker.emfstore</module>
+		<module>bundles/org.enterprisedomain.ecp</module>
+		<module>bundles/org.enterprisedomain.ecp.filter</module>
+		<module>bundles/org.enterprisedomain.ecp.ui</module>
+		<module>bundles/org.enterprisedomain.workbench.ide</module>
+		<module>features/org.enterprisedomain.classmaker.feature</module>
+		<module>features/org.enterprisedomain.classmaker.osgi.resolverhooks.feature</module>
+		<module>features/org.enterprisedomain.classmaker.edit.feature</module>
+		<module>features/org.enterprisedomain.classmaker.ecp.feature</module>
+		<module>features/org.enterprisedomain.ui.workbench.rcp.feature</module>
+		<module>tests/org.enterprisedomain.classmaker.tests</module>
+		<module>releng/org.enterprisedomain.configuration</module>
+		<module>releng/org.enterprisedomain.update</module>
+		<module>releng/org.enterprisedomain.workbench.ide.product</module>
+		<module>releng/org.enterprisedomain.target</module>
 	</modules>
 	<properties>
 		<surefire.moduleProperties></surefire.moduleProperties>
@@ -31,6 +45,5 @@
 				<surefire.moduleProperties>--add-modules=ALL-SYSTEM</surefire.moduleProperties>
 			</properties>
 		</profile>
-	</profiles>
-	<version>0.8.1-SNAPSHOT</version>	
+	</profiles>		
 </project>

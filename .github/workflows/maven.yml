@@ -23,7 +23,7 @@ jobs:
     - name: Copy toolchain
       run: cp toolchains.xml ~/.m2/toolchains.xml
     - name: Build with Maven      
-      run: mvn -B package --file pom.xml      
+      run: mvn -B verify --file pom.xml      
     - name: maven-settings-xml-action
       uses: whelk-io/maven-settings-xml-action@v5
       with:

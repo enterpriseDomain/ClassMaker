@@ -10,4 +10,5 @@ Require-Bundle: org.enterprisedomain.classmaker,
  org.eclipse.e4.core.di,
  org.eclipse.equinox.concurrent
 Bundle-ActivationPolicy: lazy
+Automatic-Module-Name: org.enterprisedomain.classmaker.sample
 
