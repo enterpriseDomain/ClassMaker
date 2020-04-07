@@ -20,3 +20,4 @@ Export-Package: org.enterprisedomain.ecp.ui,
  org.enterprisedomain.ecp.ui.actions
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.enterprisedomain.ecp.ui.Activator
+Automatic-Module-Name: org.enterprisedomain.ecp.ui

@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
-		<artifactId>org.enterprisedomain.bundles</artifactId>
+		<artifactId>org.enterprisedomain</artifactId>
 		<version>0.8.1-SNAPSHOT</version>
+		<relativePath></relativePath>
 	</parent>
 
 	<artifactId>org.enterprisedomain.classmaker.emfstore</artifactId>
 	<packaging>eclipse-plugin</packaging>
-	<version>0.8.1-SNAPSHOT</version>
 </project>
