@@ -25,12 +25,4 @@ jobs:
     - name: Build with Maven      
       run: mvn -B package --file pom.xml      
     - name: Maven Deploy
-      run: mvn deploy -Dregistry=https://maven.pkg.github.com/enterpriseDomain -Dtoken=GH_TOKEN
-    - name: action-bintray-maven-central-sync
-      uses: simontunnat/action-bintray-maven-central-sync@v1
-      with:
-        username: kyrillzotkin
-        password: ${{ secrets.BINTRAY_API_KEY }} 
-        repo: ClassMaker
-        package: ClassMaker
-        version: '0.8.1'        
+      run: mvn deploy -Dregistry=https://maven.pkg.github.com/enterpriseDomain -Dtoken={{secrets.GITHUB_TOKEN}}  
