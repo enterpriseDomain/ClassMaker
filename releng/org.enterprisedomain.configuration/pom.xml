@@ -190,4 +190,11 @@
 		</dependency>
 	</dependencies>
 	<packaging>pom</packaging>
+	<distributionManagement>
+	     <repository>
+     	  	<id>github</id>
+	   	<name>GitHub enterpriseDomain Apache Maven Packages</name>
+     	      	<url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url>
+           </repository>
+	</distributionManagement>
 </project>
