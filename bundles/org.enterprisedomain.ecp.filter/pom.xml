@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
 		<artifactId>org.enterprisedomain</artifactId>
-		<version>0.8.1-SNAPSHOT</version>
+		<version>0.8.1-SNAPSHOT</version><relativePath>./pom.xml</relativePath>
 	</parent>
 
 	<artifactId>org.enterprisedomain.ecp.filter</artifactId>
