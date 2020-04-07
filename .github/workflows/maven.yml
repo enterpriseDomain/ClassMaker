@@ -24,15 +24,13 @@ jobs:
       run: cp toolchains.xml ~/.m2/toolchains.xml
     - name: Build with Maven      
       run: mvn -B package --file pom.xml      
-    - name: action-upload-bintray
-      uses: bpicode/github-action-upload-bintray@v0.9.0
+    - name: Maven Deploy
+      run: mvn deploy -Dregistry=https://maven.pkg.github.com/enterpriseDomain -Dtoken=GH_TOKEN
+    - name: action-bintray-maven-central-sync
+      uses: simontunnat/action-bintray-maven-central-sync@v1
       with:
-        api_user: kyrillzotkin
-        api_key: ${{ secrets.BINTRAY_API_KEY }} 
-        repository_user: kyrillzotkin
-        repository: ClassMaker
+        username: kyrillzotkin
+        password: ${{ secrets.BINTRAY_API_KEY }} 
+        repo: ClassMaker
         package: ClassMaker
-        version: '0.8.1'
-        upload_path: releng/org.enterprisedomain.update/target/org.enterprisedomain.update-0.8.1-SNAPSHOT.zip 
-        publish: 1
-        calculate_metadata: true
+        version: '0.8.1'        
