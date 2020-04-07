@@ -27,7 +27,7 @@ jobs:
     - name: maven-settings-xml-action
       uses: whelk-io/maven-settings-xml-action@v5
       with:
-        repositories: '[{"id": "bintray-classmaker-maven", "url": "https://api.bintray.com/maven/enterprisedomain/maven/classmaker/;publish=1"}, { "id": "central", "url": "https://repo1.maven.org/maven2", "releases": { "enabled": "true" }, "snapshots": { "enabled": "true" }}, { "id": "github", "url": "https://maven.pkg.github.com/enterpriseDomain/ClassMaker/" }]'
+        repositories: '[{"id": "bintray-classmaker-maven", "url": "https://api.bintray.com/maven/enterprisedomain/maven/classmaker/;publish=1"}, { "id": "maven-central", "url": "https://repo1.maven.org/maven2", "releases": { "enabled": "true" }, "snapshots": { "enabled": "true" }}, { "id": "github", "url": "https://maven.pkg.github.com/enterpriseDomain/ClassMaker/" }]'
         servers: '[{"id": "bintray-classmaker-maven", "username": "kyrillzotkin", "password": "${{ secrets.BINTRAY_API_KEY }}" } ,{ "id": "github", "username": "kyrillzotkin", "password": "${{ secrets.GITHUB_TOKEN }}" }]'
     - name: Maven Deploy
       run: mvn deploy -Dregistry=https://maven.pkg.github.com/enterpriseDomain -Dtoken=${{ secrets.GITHUB_TOKEN }}  
