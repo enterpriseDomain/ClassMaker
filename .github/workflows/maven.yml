@@ -66,6 +66,4 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     </server>
   </servers>
 </settings>" > ~/.m2/settings.xml
-        mvn -B deploy -Dregistry=https://maven.pkg.github.com/enterpriseDomain -Dtoken=${{ secrets.GITHUB_TOKEN }}
-      env: 
-        PAT: ${{ secrets.GITHUB_TOKEN }}  
+        mvn -B deploy -Dregistry=https://maven.pkg.github.com/enterpriseDomain -Dtoken=${{ secrets.GITHUB_TOKEN }}      
