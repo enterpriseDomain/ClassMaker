@@ -31,7 +31,12 @@
 			<layout>p2</layout>
 			<url>http://download.eclipse.org/ecp/releases/releases_target_124</url>
 		</repository>
-	</repositories>
+	    <repository>
+            <id>github</id>
+            <name>GitHub</name>
+            <url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker/</url>
+        </repository>
+    </repositories>
 	<build>
 		<plugins>
 			<plugin>
@@ -193,10 +198,17 @@
 	</dependencies>
 	<packaging>pom</packaging>
 	<distributionManagement>
-	    <repository>
-     	  	<id>github</id>
-	       	<name>GitHub enterpriseDomain Apache Maven Packages</name>
-     	   	<url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker/</url>
+        <snapshotRepository>
+            <id>github-snapshot</id>
+            <name>GitHub snapshot</name>
+            <url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker/</url>
+            <uniqueVersion>true</uniqueVersion>
+        </snapshotRepository>
+        <repository>
+            <id>github-release</id>
+            <name>GitHub release</name>
+            <url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker/</url>
+            <uniqueVersion>false</uniqueVersion>
         </repository>
 	</distributionManagement>
 </project>
