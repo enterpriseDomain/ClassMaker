@@ -3,12 +3,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>org.enterprisedomain.classmaker.tests</artifactId>
 	<version>0.0.4-SNAPSHOT</version>
-	<packaging>pom</packaging>
+	<packaging>eclipse-test-plugin</packaging>
 
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
-		<artifactId>org.enterprisedomain</artifactId>
-		<version>0.8.1-SNAPSHOT</version><relativePath>./pom.xml</relativePath>
+		<artifactId>bundles</artifactId>
+		<version>0.8.1-SNAPSHOT</version>
+		<relativePath>../../</relativePath>
 	</parent>
 
 	<build>
