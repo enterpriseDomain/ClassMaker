@@ -25,6 +25,6 @@ jobs:
     - name: Build with Maven      
       run: mvn -B package --file pom.xml      
     - name: Deploy with Maven
-      run: mvn -B deploy --settings settings.xml -Dregistry=https://maven.pkg.github.com/enterpriseDomain -Dtoken=${{ secrets.GITHUB_TOKEN }}
+      run: mvn -B deploy --settings settings.xml -Dmaven.wagon.http.pool=false  -Dregistry=https://maven.pkg.github.com/enterpriseDomain -Dtoken=${{ secrets.GITHUB_TOKEN }}
       env: 
         PAT: ${{ secrets.GITHUB_TOKEN }}  
