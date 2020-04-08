@@ -1,4 +1,4 @@
-ClassMaker ![Java CI with Maven](https://github.com/enterpriseDomain/ClassMaker/workflows/Java%20CI%20with%20Maven/badge.svg) [![Code Triagers Badge](https://www.codetriage.com/kyrillzotkin/classmaker/badges/users.svg)](https://www.codetriage.com/kyrillzotkin/classmaker)
+ClassMaker ![Java CI & CD with Maven](https://github.com/enterpriseDomain/ClassMaker/workflows/Java%20CI%20&%20CD%20with%20Maven/badge.svg) [![Code Triagers Badge](https://www.codetriage.com/kyrillzotkin/classmaker/badges/users.svg)](https://www.codetriage.com/kyrillzotkin/classmaker)
 ===========
 
 ClassMaker is an Eclipse plug-in that allows to create classes programmatically, providing them to client bundle.  
