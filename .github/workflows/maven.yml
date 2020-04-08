@@ -24,20 +24,7 @@ jobs:
       run: cp toolchains.xml ~/.m2/toolchains.xml
     - name: Build with Maven      
       run: mvn -B package --file pom.xml      
-    - name: Create Maven settings.xml
-      uses: whelk-io/maven-settings-xml-action@v5
-      with:
-        repositories: '[{ "id": "maven-central", "url": "https://repo1.maven.org/maven2", "releases": { "enabled": "true" }, "snapshots": { "enabled": "true" } }, { "id": "github", "url": "https://maven.pkg.github.com/enterpriseDomain/ClassMaker/" }]'
-        servers: '[{ "id": "github", "username": "kyrillzotkin", "password": "${{ secrets.GITHUB_TOKEN }}" }]'
-    - run: cat /home/runner/.m2/settings.xml > text.txt
-
-    - uses: pCYSl5EDgo/cat@master
-      id: hello
-      with:
-        path: text.txt
-
-    - run: echo $TEXT
-      env:
-        TEXT: ${{ steps.hello.outputs.text }}    
     - name: Maven Deploy
-      run: mvn deploy -Dregistry=https://maven.pkg.github.com/enterpriseDomain -Dtoken=${{ secrets.GITHUB_TOKEN }}  
+      run: mvn deploy --settings settings.xml -Dregistry=https://maven.pkg.github.com/enterpriseDomain -Dtoken=${{ secrets.GITHUB_TOKEN }}
+      env: 
+        PAT: ${{ secrets.GITHUB_TOKEN }}  
