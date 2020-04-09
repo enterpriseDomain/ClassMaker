@@ -57,15 +57,7 @@
 							<appendAssemblyId>false</appendAssemblyId>	
 							<finalName>${project.artifactId}_${unqualifiedVersion}.${buildQualifier}</finalName>
 						</configuration>
-					</execution>
-					<execution>
-						<phase>package</phase>
-						<id>package-plugin</id>
-						<configuration>
-							<appendAssemblyId>false</appendAssemblyId>	
-							<finalName>@{artifactId}@-@{version}@@{dashClassifier?}@.@{extension}</finalName>
-						</configuration>
-					</execution>
+					</execution>					
 				</executions>
 			</plugin>
 			<plugin>
