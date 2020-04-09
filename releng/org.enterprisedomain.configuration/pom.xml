@@ -54,6 +54,7 @@
 						<phase>package</phase>
 						<id>package-feature</id>
 						<configuration>
+							<appendAssemblyId>false</appendAssemblyId>	
 							<finalName>${project.artifactId}_${unqualifiedVersion}.${buildQualifier}</finalName>
 						</configuration>
 					</execution>
