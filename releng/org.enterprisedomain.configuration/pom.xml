@@ -34,7 +34,7 @@
 	    <repository>
             <id>github</id>
             <name>GitHub</name>
-            <url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker/</url>
+            <url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url>
         </repository>
     </repositories>
 	<build>
@@ -211,13 +211,13 @@
         <snapshotRepository>
             <id>github-snapshot</id>
             <name>GitHub snapshot</name>
-            <url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker/</url>
+            <url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url>
             <uniqueVersion>true</uniqueVersion>
         </snapshotRepository>
         <repository>
             <id>github-release</id>
             <name>GitHub release</name>
-            <url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker/</url>
+            <url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url>
             <uniqueVersion>false</uniqueVersion>
         </repository>
 	</distributionManagement>
