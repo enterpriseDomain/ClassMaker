@@ -63,7 +63,7 @@
 						<id>package-plugin</id>
 						<configuration>
 							<appendAssemblyId>false</appendAssemblyId>	
-							<finalName>${artifactId}@-${version}@@{dashClassifier?}$.${extension}</finalName>
+							<finalName>@{artifactId}@-@{version}@@{dashClassifier?}@.@{extension}</finalName>
 						</configuration>
 					</execution>
 				</executions>
