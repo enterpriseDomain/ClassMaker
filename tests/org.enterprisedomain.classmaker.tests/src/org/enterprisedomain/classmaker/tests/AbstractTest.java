@@ -237,7 +237,6 @@ public abstract class AbstractTest {
 		Contribution c = service.getWorkspace().getContribution(ePackage);
 		for (String dependency : dependencies)
 			c.getDependencies().add(dependency);
-		c.make(monitor);
 		return test(e, attributeName, attributeValue);
 	}
 
