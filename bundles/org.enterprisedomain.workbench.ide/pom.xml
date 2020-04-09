@@ -9,7 +9,6 @@
 		<version>0.8.1-SNAPSHOT</version>
 		<relativePath>../../</relativePath>
 	</parent>
-
 	<artifactId>org.enterprisedomain.workbench.ide</artifactId>
-	<packaging>eclipse-plugin</packaging>	
+	<packaging>eclipse-plugin</packaging>
 </project>
