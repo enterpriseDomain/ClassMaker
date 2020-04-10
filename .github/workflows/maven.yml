@@ -29,6 +29,5 @@ jobs:
         PAT: ${{ secrets.PAT }}
       run: |
         mkdir -p ~/.m2
-        export p=${env.PAT}
-        echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?><settings xmlns=\"http://maven.apache.org/SETTINGS/1.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd\"><servers><server><id>github</id><username>x-access-token</username><password>$p</password></server><server><id>github-snapshot</id><username>x-access-token</username><password>$p</password></server><server><id>github-release</id><username>x-access-token</username><password>$p</password></server></servers></settings>" > ~/.m2/settings.xml
+        echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?><settings xmlns=\"http://maven.apache.org/SETTINGS/1.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd\"><servers><server><id>github</id><username>x-access-token</username><password>$env.PAT</password></server><server><id>github-snapshot</id><username>x-access-token</username><password>$env.PAT</password></server><server><id>github-release</id><username>x-access-token</username><password>$env.PAT</password></server></servers></settings>" > ~/.m2/settings.xml
         mvn -B clean deploy      
