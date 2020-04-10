@@ -26,6 +26,4 @@ jobs:
       run: mvn -B clean package --file pom.xml      
     - name: Deploy with Maven
       run: |
-        mkdir -p ~/.m2
-        echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?><settings xmlns=\"http://maven.apache.org/SETTINGS/1.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd\"><servers><server><id>github</id><username>${github.user}</username><password>${github.password}</password></server><server><id>github-snapshot</id><username>${github.user}</username><password>${github.password}</password></server><server><id>github-release</id><username>${github.user}</username><password>${github.password}</password></server></servers></settings>" > ~/.m2/settings.xml
-        mvn -B -Dgithub.user=${{ secrets.github_user }} -Dgithub.password=${{ secrets.github_token }} clean deploy      
+        mvn -B -Dgithub.user=${{ secrets.github_user }} -Dgithub.password=${{ secrets.github_token }} -s settings.xml clean deploy      
