@@ -13,7 +13,7 @@
 				<include>org.enterprisedomain</include>
 			</includes>
 			<binaries>
-				<outputFileNameMapping>@{artifactId}@-@{version}@@{dashClassifier?}@.@{extension}@</outputFileNameMapping>
+				<outputFileNameMapping>@{groupId}@.@{artifactId}@-@{version}@@{dashClassifier?}@.@{extension}@</outputFileNameMapping>
 			</binaries>
 		</moduleSet>
 	</moduleSets>
