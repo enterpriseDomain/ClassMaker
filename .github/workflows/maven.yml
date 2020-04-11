@@ -20,10 +20,12 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 11
+    - name: Copy toolchain      
+      run:
+       cp toolchains.xml ~/.m2/toolchains.xml
     - name: Build with Maven      
-      run: |
-      cp toolchains.xml ~/.m2/toolchains.xml
-      mvn -B clean package --file pom.xml      
+      run:
+       mvn -B clean package --file pom.xml
     - name: Deploy with Maven
       env:
            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
