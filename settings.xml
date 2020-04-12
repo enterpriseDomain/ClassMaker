@@ -19,7 +19,7 @@
 					</releases>
 					<snapshots>
 						<enabled>true</enabled>
-						<updatePolicy>never</updatePolicy>
+						<updatePolicy>always</updatePolicy>
 						<checksumPolicy>fail</checksumPolicy>
 					</snapshots>
 					<url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url>
