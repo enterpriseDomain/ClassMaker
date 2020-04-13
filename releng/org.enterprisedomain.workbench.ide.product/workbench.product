@@ -300,7 +300,7 @@
       <feature id="org.eclipse.emf.ecp.view.unset.feature"/>
       <feature id="org.eclipse.emf.ecp.view.horizontal.feature"/>
       <feature id="org.eclipse.emf.ecp.viewmodel.feature"/>
-      <feature id="org.eclipse.e4.rcp"/>
+      <feature id="org.eclipse.e4.rcp" installMode="root"/>
       <feature id="org.eclipse.equinox.p2.core.feature"/>
       <feature id="org.eclipse.ecf.core.feature"/>
       <feature id="org.eclipse.ecf.filetransfer.feature"/>
