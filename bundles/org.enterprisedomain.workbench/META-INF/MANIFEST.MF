@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: enterpriseDomain Workbench Application
-Bundle-SymbolicName: org.enterprisedomain.workbench.ide;singleton:=true
+Bundle-SymbolicName: org.enterprisedomain.workbench;singleton:=true
 Bundle-Version: 0.8.1.qualifier
-Bundle-Activator: org.enterprisedomain.workbench.ide.Activator
+Bundle-Activator: org.enterprisedomain.workbench.Activator
 Bundle-Vendor: Kyrill Zotkin
 Require-Bundle: javax.inject,
  org.eclipse.osgi,
@@ -43,8 +43,8 @@ Require-Bundle: javax.inject,
  org.eclipse.emf.emfstore.client,
  org.eclipse.emfforms.editor.ecore;bundle-version="1.24.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Automatic-Module-Name: org.enterprisedomain.workbench.ide
+Automatic-Module-Name: org.enterprisedomain.workbench
 Import-Package: javax.annotation;version="1.2.0"
 Bundle-ActivationPolicy: lazy
-Export-Package: org.enterprisedomain.workbench.ide,
- org.enterprisedomain.workbench.ide.handler
+Export-Package: org.enterprisedomain.workbench,
+ org.enterprisedomain.workbench.handler

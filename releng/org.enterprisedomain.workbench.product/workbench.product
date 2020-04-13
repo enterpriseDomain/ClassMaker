@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="enterpriseDomain Workbench" uid="workbench.product" id="org.enterprisedomain.workbench.ide.product" application="org.eclipse.ui.ide.workbench" version="0.8.1.qualifier" useFeatures="true" includeLaunchers="true">
+<product name="enterpriseDomain Workbench" uid="workbench.product" id="org.enterprisedomain.workbench.product" application="org.eclipse.ui.ide.workbench" version="0.8.1.qualifier" useFeatures="true" includeLaunchers="true">
 
    <configIni use="default">
    </configIni>

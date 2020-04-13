@@ -108,14 +108,15 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider implements IRe
 			public Collection<Object> objectsChanged(ECPProject project, Collection<Object> objectsChanged) {
 				IViewPart modelExplorerView = null;
 				try {
-					IWorkbenchWindow workbenchWindow = ((IWorkbench) PlatformUI.getWorkbench())
-							.getActiveWorkbenchWindow();
+					IWorkbench workbench = (IWorkbench) PlatformUI.getWorkbench();
+					if (workbench != null) {
+						IWorkbenchWindow workbenchWindow = workbench.getActiveWorkbenchWindow();
 
-					if (workbenchWindow != null) {
-						IWorkbenchPage page = workbenchWindow.getActivePage();
-						modelExplorerView = page.showView("org.eclipse.emf.ecp.ui.ModelExplorerView");
+						if (workbenchWindow != null) {
+							IWorkbenchPage page = workbenchWindow.getActivePage();
+							modelExplorerView = page.showView("org.eclipse.emf.ecp.ui.ModelExplorerView");
+						}
 					}
-
 					if (modelExplorerView instanceof ModelExplorerView) {
 						final ModelExplorerView modelExplorer = (ModelExplorerView) modelExplorerView;
 						Object object = objectsChanged.iterator().next();
