@@ -8,6 +8,11 @@
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
+			<properties>
+				<altDeploymentRepository>github::default::https://maven.pkg.github.com/enterpriseDomain/ClassMaker/</altDeploymentRepository>
+				<altReleaseDeploymentRepository>github-release::default::https://maven.pkg.github.com/enterpriseDomain/ClassMaker/</altReleaseDeploymentRepository>
+				<altSnapshotDeploymentRepository>github-snapshot::default::https://maven.pkg.github.com/enterpriseDomain/ClassMaker/</altSnapshotDeploymentRepository>
+			</properties>
 			<repositories>
 				<repository>
 					<id>github-snapshot</id>
