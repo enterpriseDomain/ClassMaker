@@ -21,7 +21,7 @@
 		<module>bundles/org.enterprisedomain.ecp</module>
 		<module>bundles/org.enterprisedomain.ecp.filter</module>
 		<module>bundles/org.enterprisedomain.ecp.ui</module>
-		<module>bundles/org.enterprisedomain.workbench.ide</module>
+		<module>bundles/org.enterprisedomain.workbench</module>
 		<module>features/org.enterprisedomain.classmaker.feature</module>
 		<module>features/org.enterprisedomain.classmaker.osgi.resolverhooks.feature</module>
 		<module>features/org.enterprisedomain.classmaker.edit.feature</module>

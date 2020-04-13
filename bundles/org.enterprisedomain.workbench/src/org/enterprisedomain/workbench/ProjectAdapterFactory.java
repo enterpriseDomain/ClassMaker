@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.enterprisedomain.workbench.ide;
+package org.enterprisedomain.workbench;
 
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.emf.ecp.core.ECPProject;

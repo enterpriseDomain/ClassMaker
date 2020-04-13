@@ -4,7 +4,7 @@
       label="Domain Workplace RCP UI Feature"
       version="0.8.1.qualifier"
       provider-name="Kyrill Zotkin"
-      plugin="org.enterprisedomain.workbench.ide">
+      plugin="org.enterprisedomain.workbench">
 
    <description url="https://www.enterprisedomain.org/">
       enterpriseDomain Workbench is a ClassMaker RCP Application.
@@ -172,7 +172,7 @@ limitations under the License.
          unpack="false"/>
 
    <plugin
-         id="org.enterprisedomain.workbench.ide"
+         id="org.enterprisedomain.workbench"
          download-size="0"
          install-size="0"
          version="0.0.0"

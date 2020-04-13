@@ -1,4 +1,4 @@
-package org.enterprisedomain.workbench.ide.handler;
+package org.enterprisedomain.workbench.handler;
 
 import java.lang.reflect.InvocationTargetException;
 

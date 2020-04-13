@@ -124,6 +124,8 @@
           version="JavaSE-11"
           location="${jre.location-11}"/>
     </version>
+    <version
+        name="2020-03"/>
     <description>enterpriseDomain Workbench provides model and meta-model management.</description>
   </product>
   <description>enterpriseDomain provides cool products.</description>

@@ -5,15 +5,15 @@
    <extension
          point="org.eclipse.ui.newWizards">
       <wizard
-            category="org.enterprisedomain.workbench.ide.ecp"
-            class="org.enterprisedomain.workbench.ide.NewECPProjectWizard"
+            category="org.enterprisedomain.workbench.ecp"
+            class="org.enterprisedomain.workbench.NewECPProjectWizard"
             icon="platform:/plugin/org.eclipse.emf.ecp.ui/icons/checkout_project_old.gif"
-            id="org.enterprisedomain.workbench.ide.newProjectWizard"
+            id="org.enterprisedomain.workbench.newProjectWizard"
             name="ECP Project"
             project="true">
       </wizard>
       <category
-            id="org.enterprisedomain.workbench.ide.ecp"
+            id="org.enterprisedomain.workbench.ecp"
             name="ECP">
       </category>
    </extension>
@@ -46,15 +46,15 @@
    <extension
          point="org.eclipse.ui.startup">
       <startup
-            class="org.enterprisedomain.workbench.ide.Startup">
+            class="org.enterprisedomain.workbench.Startup">
       </startup>
    </extension>
    <extension
          point="org.eclipse.emf.ecp.ui.modelElementOpener">
       <modelElementOpener
-            class="org.enterprisedomain.workbench.ide.ModelElementOpener">
+            class="org.enterprisedomain.workbench.ModelElementOpener">
          <dynamicTester
-               tester="org.enterprisedomain.workbench.ide.ModelElementOpenTester">
+               tester="org.enterprisedomain.workbench.ModelElementOpenTester">
          </dynamicTester>
       </modelElementOpener>
    </extension>
@@ -73,8 +73,8 @@
    <extension
          point="org.eclipse.ui.ide.editorAssociationOverride">
          <editorAssociationOverride
-            id="org.enterprisedomain.workbench.ide.modelEditorAssociation"
-            class="org.enterprisedomain.workbench.ide.ModelEditorAssociationOverride">
+            id="org.enterprisedomain.workbench.modelEditorAssociation"
+            class="org.enterprisedomain.workbench.ModelEditorAssociationOverride">
          </editorAssociationOverride>
    </extension>
    <extension
@@ -106,7 +106,7 @@
          point="org.eclipse.core.runtime.adapters">
       <factory
             adaptableType="org.eclipse.emf.ecp.core.ECPProject"
-            class="org.enterprisedomain.workbench.ide.ProjectAdapterFactory">
+            class="org.enterprisedomain.workbench.ProjectAdapterFactory">
          <adapter
                type="org.enterprisedomain.classmaker.Contribution">
          </adapter>
@@ -115,15 +115,15 @@
    <extension
          point="org.eclipse.ui.commands">
       <command
-            id="org.enterprisedomain.workbench.ide.command.make"
+            id="org.enterprisedomain.workbench.command.make"
             name="Make">
       </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="org.enterprisedomain.workbench.ide.handler.MakeHandler"
-            commandId="org.enterprisedomain.workbench.ide.command.make">
+            class="org.enterprisedomain.workbench.handler.MakeHandler"
+            commandId="org.enterprisedomain.workbench.command.make">
          <activeWhen>
             <with
                      variable="activeMenuSelection">
@@ -156,7 +156,7 @@
             allPopups="true"
             locationURI="popup:org.eclipse.ui.popup.any?after=additions">
          <command
-               commandId="org.enterprisedomain.workbench.ide.command.make"
+               commandId="org.enterprisedomain.workbench.command.make"
                style="push">
            <visibleWhen>
                <with

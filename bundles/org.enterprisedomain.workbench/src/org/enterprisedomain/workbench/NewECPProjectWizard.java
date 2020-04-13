@@ -1,4 +1,4 @@
-package org.enterprisedomain.workbench.ide;
+package org.enterprisedomain.workbench;
 
 import java.util.ArrayList;
 import java.util.List;
