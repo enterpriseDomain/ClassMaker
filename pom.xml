@@ -30,7 +30,7 @@
 		<module>tests/org.enterprisedomain.classmaker.tests</module>
 		<module>releng/org.enterprisedomain.configuration</module>
 		<module>releng/org.enterprisedomain.update</module>
-		<module>releng/org.enterprisedomain.workbench.ide.product</module>
+		<module>releng/org.enterprisedomain.workbench.product</module>
 		<module>releng/org.enterprisedomain.target</module>
 	</modules>
 	<properties>
