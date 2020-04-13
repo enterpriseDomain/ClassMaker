@@ -63,6 +63,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IViewPart;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.internal.progress.ProgressManager;
 import org.enterprisedomain.classmaker.ClassMakerService;
@@ -105,8 +108,14 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider implements IRe
 			public Collection<Object> objectsChanged(ECPProject project, Collection<Object> objectsChanged) {
 				IViewPart modelExplorerView = null;
 				try {
-					modelExplorerView = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
-							.showView("org.eclipse.emf.ecp.ui.ModelExplorerView");
+					IWorkbenchWindow workbenchWindow = ((IWorkbench) PlatformUI.getWorkbench())
+							.getActiveWorkbenchWindow();
+
+					if (workbenchWindow != null) {
+						IWorkbenchPage page = workbenchWindow.getActivePage();
+						modelExplorerView = page.showView("org.eclipse.emf.ecp.ui.ModelExplorerView");
+					}
+
 					if (modelExplorerView instanceof ModelExplorerView) {
 						final ModelExplorerView modelExplorer = (ModelExplorerView) modelExplorerView;
 						Object object = objectsChanged.iterator().next();
@@ -141,7 +150,12 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider implements IRe
 					@Override
 					public void run() {
 						try {
-							PlatformUI.getWorkbench().getActiveWorkbenchWindow().run(true, true, runnable);
+							IWorkbenchWindow workbenchWindow = ((IWorkbench) PlatformUI.getWorkbench())
+									.getActiveWorkbenchWindow();
+
+							if (workbenchWindow != null) {
+								workbenchWindow.run(true, true, runnable);
+							}
 						} catch (InvocationTargetException e) {
 							Activator.log(e.getTargetException());
 						} catch (InterruptedException e) {
