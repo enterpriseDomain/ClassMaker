@@ -21,7 +21,8 @@ jobs:
       with:
         java-version: 11
     - name: Copy toolchain      
-      run:
+      run: |
+       echo $JAVA_HOME
        cp toolchains.xml ~/.m2/toolchains.xml
     - name: Build with Maven      
       run:
