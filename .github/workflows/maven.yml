@@ -31,4 +31,5 @@ jobs:
       env:
            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run:
-        mvn -B -Dgithub.user=x-access-token -Dgithub.password=${{ env.GH_TOKEN }} -s settings.xml -Dmaven.wagon.http.pool=false clean deploy      
+        mvn -B -Dgithub.user=x-access-token -Dgithub.password=${{ env.GH_TOKEN }} -s settings.xml -Dmaven.wagon.http.pool=false clean deploy --file pom.xml
+    
