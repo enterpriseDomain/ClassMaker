@@ -22,19 +22,7 @@ jobs:
         java-version: 11
     - name: Copy toolchain      
       run: |
-       echo "<toolchains xmlns=\"http://maven.apache.org/TOOLCHAINS/1.1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"
-  xsi:schemaLocation=\"http://maven.apache.org/TOOLCHAINS/1.1.0 http://maven.apache.org/xsd/toolchains-1.1.0.xsd\">
-	  <toolchain>
-	    <type>jdk</type>
-	    <provides>
-	      <version>11</version>
-	      <vendor>openjdk</vendor>     
-	    </provides>
-	    <configuration>
-	        <jdkHome>/"+$JAVA_HOME+"</jdkHome>
-	    </configuration>
-	  </toolchain>
-  </toolchains>" > toolchains.xml
+       echo "<toolchains xmlns=\"http://maven.apache.org/TOOLCHAINS/1.1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://maven.apache.org/TOOLCHAINS/1.1.0 http://maven.apache.org/xsd/toolchains-1.1.0.xsd\"><toolchain><type>jdk</type><provides><version>11</version><vendor>openjdk</vendor></provides><configuration><jdkHome>/"+$JAVA_HOME+"</jdkHome></configuration></toolchain></toolchains>" > toolchains.xml
        cp toolchains.xml ~/.m2/toolchains.xml
     - name: Build with Maven      
       run:
