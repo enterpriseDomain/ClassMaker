@@ -37,6 +37,19 @@
 			<url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url>
 		</repository>
 	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<releases>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<id>central</id>
+			<name>Central Repository</name>
+			<url>https://repo.maven.apache.org/maven2</url>
+		</pluginRepository>
+	</pluginRepositories>
 	<build>
 		<finalName>${project.artifactId}-${project.version}</finalName>
 		<plugins>
