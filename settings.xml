@@ -31,6 +31,22 @@
 					<layout>default</layout>
 				</repository>
 				<repository>
+					<id>github-release</id>
+					<name>GitHub snapshot</name>
+					<releases>
+						<enabled>true</enabled>
+						<updatePolicy>always</updatePolicy>
+						<checksumPolicy>warn</checksumPolicy>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+						<updatePolicy>always</updatePolicy>
+						<checksumPolicy>fail</checksumPolicy>
+					</snapshots>
+					<url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url>
+					<layout>default</layout>
+				</repository>
+				<repository>
 					<id>central</id>
 					<url>https://repo1.maven.org/maven2</url>
 					<releases>
