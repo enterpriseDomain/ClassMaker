@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.enterprisedomain.classmaker.edit;singleton:=true
 Automatic-Module-Name: org.enterprisedomain.classmaker.edit
-Bundle-Version: 0.8.1.qualifier
+Bundle-Version: 0.8.10.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.enterprisedomain.classmaker.provider.ClassMakerEditPlugin$Implementation
 Bundle-Vendor: %providerName
