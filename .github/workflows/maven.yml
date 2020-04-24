@@ -30,6 +30,6 @@ jobs:
     - name: Deploy with Maven
       env:
            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run:
-        mvn -B -Dgithub.user=x-access-token -Dgithub.password=${{ env.GH_TOKEN }} -s settings.xml -Dmaven.wagon.http.pool=false clean deploy --file pom.xml
-    
+      run: |
+       mvn -B -Dtag=v0.8.01 release:prepare -DreleaseVersion=0.8.01 -DdevelopmentVersion=0.8.01-SNAPSHOT
+       mvn release:perform -B -Dgithub.user=x-access-token -Dgithub.password=${{ env.GH_TOKEN }} -s settings.xml    
