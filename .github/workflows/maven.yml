@@ -31,5 +31,6 @@ jobs:
       env:
            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-       mvn -B release:prepare -DreleaseVersion=0.8.10 -DdevelopmentVersion=0.8.10-SNAPSHOT
-       mvn release:perform -B -Dgithub.user=x-access-token -Dgithub.password=${{ env.GH_TOKEN }} -s settings.xml    
+       mvn release:rollback
+#       mvn -B release:prepare -DreleaseVersion=0.8.10 -DdevelopmentVersion=0.8.10-SNAPSHOT
+#       mvn release:perform -B -Dgithub.user=x-access-token -Dgithub.password=${{ env.GH_TOKEN }} -s settings.xml    
