@@ -49,7 +49,7 @@
 		</pluginRepository>
 	</pluginRepositories>
 	<build>
-		<finalName>${project.artifactId}-${project.version}</finalName>
+		<finalName>${project.artifactId}-${product.version}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
