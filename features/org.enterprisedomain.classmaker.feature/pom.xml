@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
 		<artifactId>bundles</artifactId>
-		<version>0.8.01-SNAPSHOT</version>
+		<version>0.8.10-SNAPSHOT</version>
 		<relativePath>../../</relativePath>
 	</parent>
 
