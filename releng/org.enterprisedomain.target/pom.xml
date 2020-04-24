@@ -15,6 +15,28 @@
 		<plugins>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-packaging-plugin</artifactId>
+				<version>1.6.0</version>
+				<executions>
+					<execution>
+						<id>default-package-target-definition</id>
+						<phase>package</phase>
+						<goals>
+							<goal>package-target-definition</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>package-feature</id>
+						<phase>package</phase>
+						<configuration>
+							<appendAssemblyId>false</appendAssemblyId>
+							<finalName>${project.artifactId}_${unqualifiedVersion}.${buildQualifier}</finalName>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>target-platform-configuration</artifactId>
 				<version>${tycho.version}</version>
 				<configuration>
