@@ -17,7 +17,7 @@
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-packaging-plugin</artifactId>
-				<version>1.6.0</version>
+				<version>${tycho.version}</version>
 				<executions>
 					<execution>
 						<id>default-package-target-definition</id>
