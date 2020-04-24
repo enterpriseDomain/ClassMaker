@@ -5,7 +5,7 @@
 	<artifactId>configuration</artifactId>
 	<version>0.8.01-SNAPSHOT</version>
 	<properties>
-		<product.version>0.8.1-SNAPSHOT</product.version>
+		<product.version>0.8.01-SNAPSHOT</product.version>
 		<tycho.version>1.6.0</tycho.version>
 		<tycho.extras.version>${tycho.version}</tycho.extras.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -82,7 +82,7 @@
 						<artifact>
 							<groupId>org.enterprisedomain</groupId>
 							<artifactId>org.enterprisedomain.target</artifactId>
-							<version>0.8.1-SNAPSHOT</version>
+							<version>0.8.01-SNAPSHOT</version>
 						</artifact>
 					</target>
 					<dependency-resolution>
