@@ -1,0 +1,18 @@
+
+      {
+        repository(owner: "enterpriseDomain", name: "ClassMaker") {
+          packages(first: 3) {
+            edges {
+              node {
+                id
+                name
+                latestVersion {
+                  id
+                  platform
+                  summary
+                }
+              }
+            }
+          }
+        }
+      }
