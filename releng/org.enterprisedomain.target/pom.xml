@@ -30,7 +30,7 @@
 						<phase>package</phase>
 						<configuration>
 							<appendAssemblyId>false</appendAssemblyId>
-							<finalName>${project.artifactId}_${unqualifiedVersion}.${buildQualifier}</finalName>
+							<finalName>${project.artifactId}-${unqualifiedVersion}.${buildQualifier}</finalName>
 						</configuration>
 					</execution>
 				</executions>
@@ -44,7 +44,7 @@
 						<artifact>
 							<groupId>org.enterprisedomain</groupId>
 							<artifactId>org.enterprisedomain.target</artifactId>
-							<version>0.8.10-SNAPSHOT</version>
+							<version>${product.version}</version>
 						</artifact>
 					</target>
 					<executionEnvironment>JavaSE-11</executionEnvironment>

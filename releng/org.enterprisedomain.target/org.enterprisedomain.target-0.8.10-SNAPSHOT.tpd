@@ -1,4 +1,0 @@
-target "org.enterprisedomain.target-0.8.10-SNAPSHOT" with allEnvironments configurePhase
-
-include "2020-03.tpd"
-include "etc.tpd"
