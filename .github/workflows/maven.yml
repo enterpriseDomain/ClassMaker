@@ -31,5 +31,5 @@ jobs:
       env:
            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        mvn -B release:prepare -Dtag=v0.8.10 -DreleaseVersion=0.8.10 -DdevelopmentVersion=0.8.10-SNAPSHOT -Dgithub.user=x-access-token -Dgithub.password=${{ env.GH_TOKEN }} -s settings.xml
-        mvn -B release:perform -Dgithub.user=x-access-token -Dgithub.password=${{ env.GH_TOKEN }} -s settings.xml    
+        mvn -B release:prepare-with-poms -Dtag=v0.8.10 -DreleaseVersion=0.8.10 -DdevelopmentVersion=0.8.10-SNAPSHOT -Dgithub.user=x-access-token -Dgithub.password=${{ env.GH_TOKEN }} -s settings.xml
+        mvn -B release:perform -Dgithub.user=x-access-token -Dgithub.password=${{ env.GH_TOKEN }} -s settings.xml -f release-pom.xml    
