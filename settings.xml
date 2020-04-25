@@ -71,7 +71,8 @@
 			<password>${github.password}</password>
 		</server>
 		<server>
-			<id>github-release</id>
+			<id>artifact-repository</id>
+			<!-- <id>github-release</id> -->
 			<username>${github.user}</username>
 			<password>${github.password}</password>
 		</server>
