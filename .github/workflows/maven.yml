@@ -31,4 +31,4 @@ jobs:
       env:
            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run:
-        mvn -B  clean deploy scm:tag -DVERSION_NUMBER=0.8.10 -Dgithub.user=x-access-token -Dgithub.password=${{ env.GH_TOKEN }} -s settings.xml
+        mvn deploy scm:tag -Drevision=$buildQualifier -Dgithub.user=x-access-token -Dgithub.password=${{ env.GH_TOKEN }} -s settings.xml
