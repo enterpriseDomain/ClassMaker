@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.enterprisedomain</groupId>
 	<artifactId>org.enterprisedomain.configuration</artifactId>
-	<version>${VERSION_NUMBER}</version>
+	<version>0.8.10-SNAPSHOT</version>
 	<properties>
 		<product.version>0.8.10-SNAPSHOT</product.version>
 		<VERSION_NUMBER>0.8.10-SNAPSHOT</VERSION_NUMBER>
