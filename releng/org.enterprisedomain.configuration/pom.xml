@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.enterprisedomain</groupId>
 	<artifactId>org.enterprisedomain.configuration</artifactId>
-	<version>0.8.10-SNAPSHOT</version>
+	<version>${VERSION_NUMBER}</version>
 	<properties>
 		<product.version>0.8.10-SNAPSHOT</product.version>
+		<VERSION_NUMBER>0.8.10-SNAPSHOT</VERSION_NUMBER>
 		<tycho.version>1.7.0</tycho.version>
 		<tycho.extras.version>${tycho.version}</tycho.extras.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -13,6 +16,20 @@
 			osgi.ee;osgi.ee="JavaSE";version:List="1.0,1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,9,10,11"
 		</org.osgi.framework.system.capabilities>
 	</properties>
+	<profiles>
+		<profile>
+			<id>snapshot-deploy-url-override</id>
+			<activation>
+				<property>
+					<name>!VERSION_NUMBER</name>
+				</property>
+			</activation>
+			<properties>
+				<deployRepoUrl>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</deployRepoUrl>
+				<isRelease>false</isRelease>
+			</properties>
+		</profile>
+	</profiles>
 	<repositories>
 		<repository>
 			<id>edapt-p2-repo</id>
@@ -51,6 +68,72 @@
 	<build>
 		<finalName>${project.artifactId}-${product.version}</finalName>
 		<plugins>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.4.3</version>
+				<executions>
+					<execution>
+						<id>replace-pom-placeholder</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<resources>
+								<resource>
+									<directory>${basedir}</directory>
+									<includes>
+										<include>pom.xml</include>
+									</includes>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+							<outputDirectory>${project.build.directory}/pom-install-deploy-fix</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-install-plugin</artifactId>
+				<version>2.3.1</version>
+				<executions>
+					<execution>
+						<id>overwrite-pom</id>
+						<phase>install</phase>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+						<configuration>
+							<packaging>pom</packaging>
+							<file>target/pom-install-deploy-fix/pom.xml</file>
+							<pomFile>target/pom-install-deploy-fix/pom.xml</pomFile>
+							<version>${project.version}</version>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>2.5</version>
+				<executions>
+					<execution>
+						<id>overwrite-pom</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>deploy-file</goal>
+						</goals>
+						<configuration>
+							<packaging>pom</packaging>
+							<file>target/pom-install-deploy-fix/pom.xml</file>
+							<pomFile>target/pom-install-deploy-fix/pom.xml</pomFile>
+							<url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url>
+							<version>${project.version}</version>
+							<updateReleaseInfo>${isRelease}</updateReleaseInfo>
+							<uniqueVersion>false</uniqueVersion>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-maven-plugin</artifactId>
@@ -137,6 +220,13 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<artifactId>maven-scm-plugin</artifactId>
+					<version>1.4</version>
+					<configuration>
+						<tag>${project.artifactId}-${VERSION_NUMBER}</tag>
+					</configuration>
+				</plugin>
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
