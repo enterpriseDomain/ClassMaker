@@ -8,7 +8,6 @@
 	<version>0.8.10-SNAPSHOT</version>
 	<properties>
 		<product.version>0.8.10-SNAPSHOT</product.version>
-		<VERSION_NUMBER>0.8.10-SNAPSHOT</VERSION_NUMBER>
 		<tycho.version>1.7.0</tycho.version>
 		<tycho.extras.version>${tycho.version}</tycho.extras.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -64,6 +63,16 @@
 				<version>1.11.2</version>
 				<configuration>
 					<tag>${project.artifactId}-${project.version}</tag>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.2.0</version>
+				<configuration>
+					<archive>
+						<manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+					</archive>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -236,11 +245,11 @@
 			<url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url>
 			<uniqueVersion>true</uniqueVersion>
 		</snapshotRepository>
-<!-- 		<repository> -->
-<!-- 			<id>github-release</id> -->
-<!-- 			<name>GitHub release</name> -->
-<!-- 			<url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url> -->
-<!-- 			<uniqueVersion>false</uniqueVersion> -->
-<!-- 		</repository> -->
+		<!-- <repository> -->
+		<!-- <id>github-release</id> -->
+		<!-- <name>GitHub release</name> -->
+		<!-- <url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url> -->
+		<!-- <uniqueVersion>false</uniqueVersion> -->
+		<!-- </repository> -->
 	</distributionManagement>
 </project>
