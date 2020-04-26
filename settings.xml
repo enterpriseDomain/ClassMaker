@@ -24,7 +24,7 @@
 					</releases>
 					<snapshots>
 						<enabled>true</enabled>
-						<updatePolicy>never</updatePolicy>
+						<updatePolicy>daily</updatePolicy>
 						<checksumPolicy>fail</checksumPolicy>
 					</snapshots>
 					<url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url>
@@ -40,7 +40,7 @@
 					</releases>
 					<snapshots>
 						<enabled>false</enabled>
-						<updatePolicy>never</updatePolicy>
+						<updatePolicy>daily</updatePolicy>
 						<checksumPolicy>fail</checksumPolicy>
 					</snapshots>
 					<url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url>
