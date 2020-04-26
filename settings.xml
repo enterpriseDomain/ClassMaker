@@ -19,12 +19,12 @@
 					<name>GitHub snapshot</name>
 					<releases>
 						<enabled>false</enabled>
-						<updatePolicy>always</updatePolicy>
+						<updatePolicy>never</updatePolicy>
 						<checksumPolicy>warn</checksumPolicy>
 					</releases>
 					<snapshots>
 						<enabled>true</enabled>
-						<updatePolicy>always</updatePolicy>
+						<updatePolicy>never</updatePolicy>
 						<checksumPolicy>fail</checksumPolicy>
 					</snapshots>
 					<url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url>
@@ -35,12 +35,12 @@
 					<name>GitHub snapshot</name>
 					<releases>
 						<enabled>true</enabled>
-						<updatePolicy>always</updatePolicy>
+						<updatePolicy>never</updatePolicy>
 						<checksumPolicy>warn</checksumPolicy>
 					</releases>
 					<snapshots>
 						<enabled>false</enabled>
-						<updatePolicy>always</updatePolicy>
+						<updatePolicy>never</updatePolicy>
 						<checksumPolicy>fail</checksumPolicy>
 					</snapshots>
 					<url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url>
