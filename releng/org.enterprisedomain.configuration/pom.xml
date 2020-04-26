@@ -238,6 +238,7 @@
 		<repository>
 			<id>artifact-repository</id>
 			<url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url>
+			<uniqueVersion>false</uniqueVersion>
 		</repository>
 		<snapshotRepository>
 			<id>github-snapshot</id>
