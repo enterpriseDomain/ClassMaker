@@ -19,28 +19,29 @@
 					<name>GitHub snapshot</name>
 					<releases>
 						<enabled>false</enabled>
-						<updatePolicy>never</updatePolicy>
+						<updatePolicy>always</updatePolicy>
 						<checksumPolicy>warn</checksumPolicy>
 					</releases>
 					<snapshots>
 						<enabled>true</enabled>
-						<updatePolicy>daily</updatePolicy>
+						<updatePolicy>always</updatePolicy>
 						<checksumPolicy>fail</checksumPolicy>
 					</snapshots>
 					<url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url>
 					<layout>default</layout>
 				</repository>
 				<repository>
-					<id>github-release</id>
-					<name>GitHub snapshot</name>
+					<id>artifact-repository</id>
+					<!-- <id>github-release</id> -->
+					<name>GitHub release</name>
 					<releases>
 						<enabled>true</enabled>
-						<updatePolicy>never</updatePolicy>
+						<updatePolicy>always</updatePolicy>
 						<checksumPolicy>warn</checksumPolicy>
 					</releases>
 					<snapshots>
 						<enabled>false</enabled>
-						<updatePolicy>daily</updatePolicy>
+						<updatePolicy>always</updatePolicy>
 						<checksumPolicy>fail</checksumPolicy>
 					</snapshots>
 					<url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url>
