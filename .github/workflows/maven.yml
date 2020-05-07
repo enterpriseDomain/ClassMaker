@@ -28,7 +28,5 @@ jobs:
       run:
        mvn -B clean package --file pom.xml
     - name: Deploy with Maven
-      env:
-           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run:
-        mvn deploy scm:tag -Drevision=$buildQualifier -Dgithub.user=x-access-token -Dgithub.password=${{ env.GH_TOKEN }} -s settings.xml
+        mvn deploy -s settings.xml
