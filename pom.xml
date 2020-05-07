@@ -12,8 +12,7 @@
 		<relativePath>./releng/org.enterprisedomain.configuration</relativePath>
 	</parent>
 	<scm>
-		<connection>scm:git:https://github.com/enterpriseDomain/ClassMaker</connection>
-		<url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url>
+		<connection>scm:git:https://github.com/enterpriseDomain/ClassMaker</connection>		
 	</scm>
 
 	<modules>

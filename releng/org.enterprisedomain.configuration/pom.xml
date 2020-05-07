@@ -236,21 +236,9 @@
 	<packaging>pom</packaging>
 	<distributionManagement>
 		<repository>
-			<id>artifact-repository</id>
-			<url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url>
-			<uniqueVersion>false</uniqueVersion>
+			<id>bintray-enterprisedomain-enterpriseDomain</id>
+			<name>enterprisedomain-enterpriseDomain</name>
+			<url>https://api.bintray.com/maven/enterprisedomain/enterpriseDomain/ClassMaker/;publish=1</url>
 		</repository>
-		<snapshotRepository>
-			<id>github-snapshot</id>
-			<name>GitHub snapshot</name>
-			<url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url>
-			<uniqueVersion>true</uniqueVersion>
-		</snapshotRepository>
-		<!-- <repository> -->
-		<!-- <id>github-release</id> -->
-		<!-- <name>GitHub release</name> -->
-		<!-- <url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url> -->
-		<!-- <uniqueVersion>false</uniqueVersion> -->
-		<!-- </repository> -->
 	</distributionManagement>
 </project>
