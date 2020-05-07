@@ -5,4 +5,4 @@ Changes proposed in this pull request:
 -
 -
 
-@enterpriseDomain/core
+@enterpriseDomain/all
