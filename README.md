@@ -47,11 +47,7 @@ There is more [code](/tests/org.enterprisedomain.classmaker.tests/src/org/enterp
 Download
 ---------
  
-### enterpriseDomain Workbench
-Please, download [the latest release](https://github.com/enterpriseDomain/ClassMaker/releases) for your platform, then extract it and launch the workbench executable.
- 
-### ClassMaker
-Please, use the [update site](https://dl.bintray.com/enterprisedomain/ClassMaker/) to install ClassMaker. [See](https://github.com/enterpriseDomain/ClassMaker/wiki/HowToRun#usage) how to use it.
+[ ![Download](https://api.bintray.com/packages/enterprisedomain/enterpriseDomain/ClassMaker/images/download.svg?version=0.8.10-SNAPSHOT) ](https://bintray.com/enterprisedomain/enterpriseDomain/ClassMaker/0.8.10-SNAPSHOT/link)
 
 Feedback
 ---------
