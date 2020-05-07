@@ -28,5 +28,7 @@ jobs:
       run:
        mvn -B clean package --file pom.xml
     - name: Deploy with Maven
-      run:
+      run: |
+       git config --global user.name "Kyrill Zotkin"
+       git config --global user.email "143617+kyrillzotkin@users.noreply.github.com"
        mvn deploy scm:tag -Drevision=$buildQualifier -s settings.xml
