@@ -14,6 +14,29 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.3</version>
+				<executions>
+					<execution>
+						<id>attach-artifacts</id>
+						<phase>package</phase>
+						<goals>
+							<goal>attach-artifact</goal>
+						</goals>
+						<configuration>
+							<artifacts>
+								<artifact>
+									<file>org.enterprisedomain.target.target</file>
+									<type>target</type>
+									<classifier>org.enterprisedomain.target.target</classifier>
+								</artifact>
+							</artifacts>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-packaging-plugin</artifactId>
 				<version>${tycho.version}</version>
@@ -46,6 +69,7 @@
 							<groupId>org.enterprisedomain</groupId>
 							<artifactId>org.enterprisedomain.target</artifactId>
 							<version>0.8.10-SNAPSHOT</version>
+							<classifier>org.enterprisedomain.target.target</classifier>
 						</artifact>
 					</target>
 					<executionEnvironment>JavaSE-11</executionEnvironment>
