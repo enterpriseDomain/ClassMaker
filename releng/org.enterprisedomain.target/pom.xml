@@ -10,7 +10,6 @@
 		<relativePath>../../</relativePath>
 	</parent>
 	<artifactId>org.enterprisedomain.target</artifactId>
-	<version>0.8.10-SNAPSHOT</version>
 	<packaging>eclipse-target-definition</packaging>
 	<build>
 		<plugins>
@@ -46,7 +45,7 @@
 						<artifact>
 							<groupId>org.enterprisedomain</groupId>
 							<artifactId>org.enterprisedomain.target</artifactId>
-							<version>${product.version}</version>
+							<version>0.8.10-SNAPSHOT</version>
 						</artifact>
 					</target>
 					<executionEnvironment>JavaSE-11</executionEnvironment>
