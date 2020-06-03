@@ -7,11 +7,6 @@
 	<artifactId>sample</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<repositories>
-		<repository>
-			<id>github</id>
-			<name>GitHub</name>
-			<url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url>
-		</repository>
 	</repositories>
 	<build>
 	</build>
@@ -22,19 +17,5 @@
 			<version>0.8.10-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
-	<packaging>pom</packaging>
-	<distributionManagement>
-		<snapshotRepository>
-			<id>github-snapshot</id>
-			<name>GitHub snapshot</name>
-			<url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url>
-			<uniqueVersion>true</uniqueVersion>
-		</snapshotRepository>
-		<repository>
-			<id>github-release</id>
-			<name>GitHub release</name>
-			<url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url>
-			<uniqueVersion>false</uniqueVersion>
-		</repository>
-	</distributionManagement>
+	<packaging>pom</packaging>	
 </project>

@@ -29,12 +29,7 @@
 			<id>ecp</id>
 			<layout>p2</layout>
 			<url>http://download.eclipse.org/ecp/releases/releases_target_124</url>
-		</repository>
-		<repository>
-			<id>github</id>
-			<name>GitHub</name>
-			<url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url>
-		</repository>
+		</repository>		
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
