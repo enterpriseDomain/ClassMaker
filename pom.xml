@@ -12,9 +12,35 @@
 		<relativePath>./releng/org.enterprisedomain.configuration</relativePath>
 	</parent>
 	<scm>
-		<connection>scm:git:https://github.com/enterpriseDomain/ClassMaker</connection>		
+		<connection>scm:git:https://github.com/enterpriseDomain/ClassMaker</connection>
 	</scm>
-
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<id>attach-artifacts</id>
+						<phase>package</phase>
+						<goals>
+							<goal>attach-artifact</goal>
+						</goals>
+						<configuration>
+							<artifacts>
+								<artifact>
+									<file>org.enterprisedomain.target.target</file>
+									<type>target</type>
+									<classifier>org.enterprisedomain.target.target</classifier>
+								</artifact>
+							</artifacts>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 	<modules>
 		<module>bundles/org.enterprisedomain.classmaker</module>
 		<module>bundles/org.enterprisedomain.classmaker.osgi.systemextension</module>
