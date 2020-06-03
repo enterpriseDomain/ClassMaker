@@ -31,4 +31,5 @@ jobs:
       run: |
        git config --global user.name "Kyrill Zotkin"
        git config --global user.email "143617+kyrillzotkin@users.noreply.github.com"
-       mvn deploy -s settings.xml
+       mvn release:prepare -s settings.xml
+       mvn release:perform -s settings.xml
