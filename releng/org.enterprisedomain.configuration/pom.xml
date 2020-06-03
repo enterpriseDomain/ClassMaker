@@ -45,7 +45,7 @@
 		</pluginRepository>
 	</pluginRepositories>
 	<build>
-		<finalName>${project.artifactId}-${project.version}</finalName>
+		<finalName>${project.artifactId}-${baseversion}.{buildQualifier}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -56,7 +56,7 @@
 				<artifactId>maven-scm-plugin</artifactId>
 				<version>1.11.2</version>
 				<configuration>
-					<tag>${project.artifactId}-${project.version}</tag>
+					<tag>${project.artifactId}-${baseversion}.{buildQualifier}</tag>
 				</configuration>
 			</plugin>
 			<plugin>
