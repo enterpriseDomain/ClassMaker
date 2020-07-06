@@ -51,7 +51,6 @@
 						</artifact>
 					</target>
 					<executionEnvironment>JavaSE-11</executionEnvironment>
-					<resolver>p2</resolver>
 					<dependency-resolution>
 						<profileProperties>
 							<org.eclipse.swt.buildtime>true</org.eclipse.swt.buildtime>
