@@ -33,7 +33,7 @@
 		<repository>
 			<id>tycho-p2</id>
 			<layout>p2</layout>
-			<url>https://mvnrepository.com/artifact/org.eclipse.tycho/tycho-p2-facade</url>
+			<url>https://mvnrepository.com/artifact/org.eclipse.tycho</url>
 		</repository>
 	</repositories>
 	<pluginRepositories>
