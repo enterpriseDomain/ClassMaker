@@ -1,5 +1,5 @@
 /**
- * Copyright 2012-2018 Kyrill Zotkin
+ * Copyright 2012-2020 Kyrill Zotkin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,7 +41,7 @@ import org.osgi.framework.startlevel.BundleStartLevel;
 
 public class OSGiEPackageLoader extends ContainerJob {
 
-	private Semaphore loaded = new Semaphore(0);
+	private Semaphore loaded;
 
 	private Throwable exception;
 
@@ -95,18 +95,25 @@ public class OSGiEPackageLoader extends ContainerJob {
 		Bundle osgiBundle = null;
 		Bundle editBundle = null;
 		Bundle editorBundle = null;
+		int loadedCount = 0;
 		try {
 			for (Bundle bundle : getBundles())
 				if (versionsAreEqual(Version.parseVersion(bundle.getHeaders().get(Constants.BUNDLE_VERSION)),
 						getContributionState().getProject().getVersion(), false)) {
 					osgiBundle = bundle;
 					if (getContributionState().isEdit()
-							&& bundle.getSymbolicName().equals(getProject().getName() + ".edit"))
+							&& bundle.getSymbolicName().equals(getProject().getName() + ".edit")) {
 						editBundle = bundle;
+						loadedCount++;
+					}
 					if (getContributionState().isEditor()
-							&& bundle.getSymbolicName().equals(getProject().getName() + ".editor"))
+							&& bundle.getSymbolicName().equals(getProject().getName() + ".editor")) {
 						editorBundle = bundle;
+						loadedCount++;
+					}
 				}
+			loaded = new Semaphore(loadedCount);
+			getContext().addBundleListener(listener);
 			if (osgiBundle != null) {
 				start(osgiBundle);
 				if (editBundle != null)
@@ -237,7 +244,7 @@ public class OSGiEPackageLoader extends ContainerJob {
 			EObject model = state.getDomainModel().getDynamic();
 			String pluginClassName = null;
 			if (model instanceof EPackage)
-				pluginClassName = CodeGenUtil.safeName(((EPackage) model).getName()) + "." //$NON-NLS-1$
+				pluginClassName = CodeGenUtil.safeName(((EPackage) model).getName()) + ".provider." //$NON-NLS-1$
 						+ state.getEditPluginClassName();
 			Class<?> pluginClass = null;
 			try {
@@ -252,13 +259,17 @@ public class OSGiEPackageLoader extends ContainerJob {
 			} catch (Exception e) {
 				e.printStackTrace();
 				setException(e);
+			} finally {
+				loaded.release();
+				if (loaded.availablePermits() >= 1)
+					getContributionState().getProject().setNeedCompletionNotification(true);
 			}
 			break;
 		case 2:
 			EObject model1 = state.getDomainModel().getDynamic();
 			String pluginClassName1 = null;
 			if (model1 instanceof EPackage)
-				pluginClassName1 = CodeGenUtil.safeName(((EPackage) model1).getName()) + "." //$NON-NLS-1$
+				pluginClassName1 = CodeGenUtil.safeName(((EPackage) model1).getName()) + ".presentation." //$NON-NLS-1$
 						+ state.getEditorPluginClassName();
 			Class<?> pluginClass1 = null;
 			try {
@@ -273,6 +284,10 @@ public class OSGiEPackageLoader extends ContainerJob {
 			} catch (Exception e) {
 				e.printStackTrace();
 				setException(e);
+			} finally {
+				loaded.release();
+				if (loaded.availablePermits() >= 1)
+					getContributionState().getProject().setNeedCompletionNotification(true);
 			}
 			break;
 		}

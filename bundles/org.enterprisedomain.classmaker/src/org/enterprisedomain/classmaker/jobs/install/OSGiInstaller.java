@@ -1,5 +1,5 @@
 /**
- * Copyright 2012-2018 Kyrill Zotkin
+ * Copyright 2012-2020 Kyrill Zotkin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,12 +56,17 @@ public class OSGiInstaller extends ContainerJob {
 		public void bundleChanged(BundleEvent event) {
 			if (event.getBundle() == null)
 				return;
-			if (event.getBundle().getSymbolicName().equals(getProject().getName()) && (versionsAreEqual(
-					Version.parseVersion(event.getBundle().getHeaders().get(Constants.BUNDLE_VERSION)),
-					getContributionState().getProject().getVersion(), false)
-					|| versionAreLess(
+			if ((event.getBundle().getSymbolicName().equals(getProject().getName())
+					|| getContributionState().isEdit()
+							&& event.getBundle().getSymbolicName().equals(getProject().getName() + ".edit")
+					|| getContributionState().isEditor()
+							&& event.getBundle().getSymbolicName().equals(getProject().getName() + ".editor"))
+					&& (versionsAreEqual(
 							Version.parseVersion(event.getBundle().getHeaders().get(Constants.BUNDLE_VERSION)),
-							getContributionState().getProject().getVersion(), true)))
+							getContributionState().getProject().getVersion(), false)
+							|| versionAreLess(
+									Version.parseVersion(event.getBundle().getHeaders().get(Constants.BUNDLE_VERSION)),
+									getContributionState().getProject().getVersion(), true)))
 				switch (event.getType()) {
 				case BundleEvent.RESOLVED:
 				case BundleEvent.INSTALLED:
@@ -123,6 +128,10 @@ public class OSGiInstaller extends ContainerJob {
 				}
 			}
 			result = addStatus(installBundle(existingBundle, kind, bundleContext), result);
+			if (getContributionState().isEdit())
+				result = addStatus(installBundle(existingBundle, 1, bundleContext), result);
+			if (getContributionState().isEditor())
+				result = addStatus(installBundle(existingBundle, 2, bundleContext), result);
 		} catch (IllegalArgumentException e) {
 			throw new CoreException(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 		} catch (SecurityException e) {
@@ -171,9 +180,7 @@ public class OSGiInstaller extends ContainerJob {
 			installed.acquire();
 			getContributionState().setPhase(getResultStage());
 			return getOKStatus(existingBundle);
-		} catch (
-
-		BundleException e) {
+		} catch (BundleException e) {
 			if (e.getType() == BundleException.RESOLVE_ERROR)
 				return getWarningStatus(existingBundle, e);
 			else if (e.getType() == BundleException.DUPLICATE_BUNDLE_ERROR)
