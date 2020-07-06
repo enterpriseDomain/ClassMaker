@@ -47,7 +47,7 @@
 							<groupId>org.enterprisedomain</groupId>
 							<artifactId>org.enterprisedomain.target</artifactId>
 							<version>0.8.10-SNAPSHOT</version>
-							<classifier>org.enterprisedomain.target.target</classifier>
+							<classifier>org.enterprisedomain.target</classifier>
 						</artifact>
 					</target>
 					<executionEnvironment>JavaSE-11</executionEnvironment>

@@ -10,8 +10,6 @@ target "org.enterprisedomain.target.etc" with allEnvironments configurePhase //l
  //}
  location "https://download.eclipse.org/tools/orbit/downloads/drops/I20200501210244/repository/" { javax.validation org.apache.poi.source org.apache.poi org.apache.log4j.source org.objenesis org.objenesis.source org.h2 javax.validation.source org.apache.log4j org.apache.commons.codec org.apache.commons.logging org.h2.source com.google.gson.source com.google.gson com.google.guava com.google.guava.source org.hamcrest.core org.hamcrest.library org.hamcrest.library.source }
  
- location "http://dist.springsource.org/release/GRECLIPSE/e4.16/" { org.codehaus.groovy.m2eclipse }
- 
  location "http://download.eclipse.org/edapt/releases/13x" { org.eclipse.emf.edapt.runtime.feature.feature.group org.eclipse.emf.edapt.runtime.feature.source.feature.group } //location "http://download.eclipse.org/nebula/releases/1.0.0" {
  //	org.eclipse.nebula.widgets.grid.feature.feature.group
  //}
