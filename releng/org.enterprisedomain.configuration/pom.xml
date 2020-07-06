@@ -32,6 +32,7 @@
 		</repository>
 		<repository>
 			<id>tycho-p2</id>
+			<layout>p2</layout>
 			<url>https://mvnrepository.com/artifact/org.eclipse.tycho/tycho-p2-facade</url>
 		</repository>
 	</repositories>
@@ -105,6 +106,7 @@
 							<groupId>org.enterprisedomain</groupId>
 							<artifactId>org.enterprisedomain.target</artifactId>
 							<version>0.8.10-SNAPSHOT</version>
+							<classifier>org.enterprisedomain.target</classifier>
 						</artifact>
 					</target>
 					<dependency-resolution>
