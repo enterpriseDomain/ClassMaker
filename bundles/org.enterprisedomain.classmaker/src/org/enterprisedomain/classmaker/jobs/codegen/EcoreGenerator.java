@@ -254,27 +254,97 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 			final SubMonitor m = pm.newChild(1, SubMonitor.SUPPRESS_ISCANCELED);
 			try {
 				IJavaProject javaProject = null;
+				IJavaProject editJavaProject = null;
+				IJavaProject editorJavaProject = null;
 				try {
 					javaProject = JavaCore
 							.create(ResourcesPlugin.getWorkspace().getRoot().getProject(getProject().getName()));
+					if (getContributionState().isEdit())
+						editJavaProject = JavaCore.create(
+								ResourcesPlugin.getWorkspace().getRoot().getProject(getProject().getName() + ".edit"));
+					if (getContributionState().isEditor())
+						editorJavaProject = JavaCore.create(ResourcesPlugin.getWorkspace().getRoot()
+								.getProject(getProject().getName() + ".editor"));
+
 				} catch (IllegalStateException e) {
 					throw new CoreException(
 							new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 				}
 				Set<IClasspathEntry> entries = new HashSet<IClasspathEntry>();
+				Set<IClasspathEntry> editEntries = new HashSet<IClasspathEntry>();
+				Set<IClasspathEntry> editorEntries = new HashSet<IClasspathEntry>();
 				for (IClasspathEntry e : javaProject.getRawClasspath())
 					if (!e.getPath().equals(new Path(IPath.SEPARATOR + getProject().getName())))
 						entries.add(e);
+				if (editJavaProject != null)
+					for (IClasspathEntry e : editJavaProject.getRawClasspath())
+						if (!e.getPath().equals(new Path(IPath.SEPARATOR + getProject().getName() + ".edit")))
+							editEntries.add(e);
+				if (editorJavaProject != null)
+					for (IClasspathEntry e : editorJavaProject.getRawClasspath())
+						if (!e.getPath().equals(new Path(IPath.SEPARATOR + getProject().getName() + ".editor")))
+							editorEntries.add(e);
 				entries.add(JavaCore.newSourceEntry(
 						new Path(IPath.SEPARATOR + getProject().getName() + IPath.SEPARATOR + "src" + IPath.SEPARATOR),
 						null, new Path(
 								IPath.SEPARATOR + getProject().getName() + IPath.SEPARATOR + "bin" + IPath.SEPARATOR)));
+				if (editJavaProject != null) {
+					IClasspathEntry e = JavaCore.newSourceEntry(
+							new Path(IPath.SEPARATOR + getProject().getName() + ".edit" + IPath.SEPARATOR + "src"
+									+ IPath.SEPARATOR),
+							null, new Path(IPath.SEPARATOR + getProject().getName() + ".edit" + IPath.SEPARATOR + "bin"
+									+ IPath.SEPARATOR));
+					if (!editEntries.contains(e))
+						editEntries.add(e);
+				}
+				if (editorJavaProject != null) {
+					IClasspathEntry e = JavaCore.newSourceEntry(
+							new Path(IPath.SEPARATOR + getProject().getName() + ".editor" + IPath.SEPARATOR + "src"
+									+ IPath.SEPARATOR),
+							null, new Path(IPath.SEPARATOR + getProject().getName() + ".editor" + IPath.SEPARATOR
+									+ "bin" + IPath.SEPARATOR));
+					if (!editorEntries.contains(e))
+						editorEntries.add(e);
+				}
 				entries.add(JavaCore.newContainerEntry(new Path("org.eclipse.jdt.launching.JRE_CONTAINER"), null, null,
 						false));
+				if (editJavaProject != null) {
+					IClasspathEntry e = JavaCore.newContainerEntry(new Path("org.eclipse.jdt.launching.JRE_CONTAINER"),
+							null, null, false);
+					if (!editEntries.contains(e))
+						editEntries.add(e);
+				}
+				if (editorJavaProject != null) {
+					IClasspathEntry e = JavaCore.newContainerEntry(new Path("org.eclipse.jdt.launching.JRE_CONTAINER"),
+							null, null, false);
+					if (!editorEntries.contains(e))
+						editorEntries.add(e);
+				}
 				entries.add(JavaCore.newContainerEntry(new Path("org.eclipse.pde.core.requiredPlugins"), null, null,
 						false));
+				if (editJavaProject != null) {
+					IClasspathEntry e = JavaCore.newContainerEntry(new Path("org.eclipse.pde.core.requiredPlugins"),
+							null, null, false);
+					if (!editEntries.contains(e))
+						editEntries.add(e);
+				}
+				if (editorJavaProject != null) {
+					IClasspathEntry e = JavaCore.newSourceEntry(
+							new Path(IPath.SEPARATOR + getProject().getName() + ".editor" + IPath.SEPARATOR + "src"
+									+ IPath.SEPARATOR),
+							null, new Path(IPath.SEPARATOR + getProject().getName() + ".editor" + IPath.SEPARATOR
+									+ "bin" + IPath.SEPARATOR));
+					if (!editorEntries.contains(e))
+						editorEntries.add(e);
+				}
 				Semaphore built = new Semaphore(0);
 				JavaCore.addElementChangedListener(new IElementChangedListener() {
+
+					private boolean isBuilt = false;
+
+					private boolean isEditBuilt = false;
+
+					private boolean isEditorBuilt = false;
 
 					@Override
 					public void elementChanged(ElementChangedEvent event) {
@@ -282,16 +352,40 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 						if (delta != null && delta.length > 0)
 							if (delta[0].getElement().getJavaProject().getProject().equals(getProject())
 									&& event.getType() == ElementChangedEvent.POST_CHANGE)
-								built.release();
+								isBuilt = true;
+							if ((getContributionState().isEdit()
+									&& delta[0].getElement().getJavaProject().getProject().getName()
+											.equals(getProject().getName() + ".edit")
+									&& event.getType() == ElementChangedEvent.POST_CHANGE)
+									|| !getContributionState().isEdit())
+								isEditBuilt = true;
+							if ((getContributionState().isEditor()
+									&& delta[0].getElement().getJavaProject().getProject().getName()
+											.equals(getProject().getName() + ".editor")
+									&& event.getType() == ElementChangedEvent.POST_CHANGE)
+									|| !getContributionState().isEditor())
+								isEditorBuilt = true;
+						if (isBuilt && isEditBuilt && isEditorBuilt)
+							built.release();
 					}
 				}, ElementChangedEvent.POST_CHANGE);
 				javaProject.setRawClasspath((IClasspathEntry[]) entries.toArray(new IClasspathEntry[entries.size()]),
 						m);
 				javaProject.getResolvedClasspath(false);
+				if (editJavaProject != null) {
+					editJavaProject.setRawClasspath(
+							(IClasspathEntry[]) editEntries.toArray(new IClasspathEntry[editEntries.size()]), m);
+					editJavaProject.getResolvedClasspath(false);
+				}
+				if (editorJavaProject != null) {
+					editorJavaProject.setRawClasspath(
+							(IClasspathEntry[]) editorEntries.toArray(new IClasspathEntry[editorEntries.size()]), m);
+					editorJavaProject.getResolvedClasspath(false);
+				}
 				built.acquire();
-			} catch (JavaModelException e) {
-				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
-			} catch (InterruptedException e) {
+			} catch (JavaModelException mex) {
+				throw new CoreException(ClassMakerPlugin.createErrorStatus(mex));
+			} catch (InterruptedException iex) {
 				monitor.setCanceled(true);
 			} finally {
 				m.done();
