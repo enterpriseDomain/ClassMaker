@@ -10,6 +10,7 @@
 		<relativePath>../../</relativePath>
 	</parent>
 	<artifactId>org.enterprisedomain.target</artifactId>
+	<version>0.8.10-SNAPSHOT</version>
 	<packaging>eclipse-target-definition</packaging>
 	<build>
 		<plugins>
