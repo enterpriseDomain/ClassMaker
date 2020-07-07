@@ -67,12 +67,12 @@
 								<type>eclipse-feature</type>
 								<groupId>org.enterprisedomain</groupId>
 								<artifactId>org.enterprisedomain.ui.workbench.rcp.feature</artifactId>
-								<version>0.8.10-SNAPSHOT</version>
+								<version>0.8.19</version>
 							</requirement>
 							<requirement>
 								<type>eclipse-plugin</type>
 								<artifactId>org.enterprisedomain.classmaker.osgi.systemextension</artifactId>
-								<version>0.8.10-SNAPSHOT</version>
+								<version>0.8.19</version>
 							</requirement>
 						</extraRequirements>
 					</dependency-resolution>
