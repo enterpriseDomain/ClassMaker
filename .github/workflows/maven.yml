@@ -29,7 +29,6 @@ jobs:
        mvn -B clean package --file pom.xml
     - name: Deploy with Maven
       run: |
-       git config --global user.name "Kyrill Zotkin"
-       git config --global user.email "143617+kyrillzotkin@users.noreply.github.com"
        mvn release:prepare -s settings.xml
+       mvn clean install
        mvn release:perform -s settings.xml
