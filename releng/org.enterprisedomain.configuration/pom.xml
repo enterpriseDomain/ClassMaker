@@ -23,17 +23,12 @@
 		<repository>
 			<id>2020-03</id>
 			<layout>p2</layout>
-			<url>http://download.eclipse.org/releases/2020-03</url>
+			<url>http://download.eclipse.org/releases/2020-06</url>
 		</repository>
 		<repository>
 			<id>ecp</id>
 			<layout>p2</layout>
 			<url>http://download.eclipse.org/ecp/releases/releases_target_124</url>
-		</repository>
-		<repository>
-			<id>tycho-p2</id>
-			<layout>p2</layout>
-			<url>https://mvnrepository.com/artifact/org.eclipse.tycho</url>
 		</repository>
 	</repositories>
 	<pluginRepositories>
