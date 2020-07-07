@@ -29,4 +29,4 @@ jobs:
        mvn -B clean package --file pom.xml
     - name: Deploy with Maven
       run: |
-       mvn deploy -s settings.xml
+       mvn deploy -e -X -s settings.xml
