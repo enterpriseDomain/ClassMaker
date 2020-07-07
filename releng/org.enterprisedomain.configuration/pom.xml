@@ -105,7 +105,7 @@
 						<artifact>
 							<groupId>org.enterprisedomain</groupId>
 							<artifactId>org.enterprisedomain.target</artifactId>
-							<version>0.8.10-SNAPSHOT</version>
+							<version>0.8.19</version>
 							<classifier>org.enterprisedomain.target</classifier>
 						</artifact>
 					</target>
