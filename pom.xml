@@ -31,7 +31,7 @@
 							<artifacts>
 								<artifact>
 									<file>org.enterprisedomain.target.target</file>
-									<classifier>org.enterprisedomain.target.target</classifier>
+									<classifier>org.enterprisedomain.target</classifier>
 								</artifact>
 							</artifacts>
 						</configuration>
