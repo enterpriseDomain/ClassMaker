@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: enterpriseDomain ECP Provider
 Bundle-SymbolicName: org.enterprisedomain.ecp;singleton:=true
-Bundle-Version: 0.8.10.qualifier
+Bundle-Version: 0.8.19
 Bundle-Activator: org.enterprisedomain.ecp.Activator
 Bundle-Vendor: Kyrill Zotkin
 Require-Bundle: org.eclipse.core.runtime,
