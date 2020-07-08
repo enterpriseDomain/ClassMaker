@@ -90,7 +90,7 @@
 						<id>package-feature</id>
 						<configuration>
 							<appendAssemblyId>false</appendAssemblyId>
-							<finalName>${project.groupId}.${project.artifactId}_${unqualifiedVersion}.${buildQualifier}</finalName>
+							<finalName>${project.artifactId}-${baseversion}.{buildQualifier}</finalName>
 						</configuration>
 					</execution>
 				</executions>
