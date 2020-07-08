@@ -14,12 +14,14 @@
 					<url>https://dl.bintray.com/enterprisedomain/enterpriseDomain</url>
 				</repository>
 				<repository>
-					<snapshots />
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
 					<releases>
 						<enabled>false</enabled>
 					</releases>
 					<id>bintray-enterprisedomain-enterpriseDomain-snapshots</id>
-					<name>bintray</name>
+					<name>bintray-snapshots</name>
 					<url>https://dl.bintray.com/enterprisedomain/enterpriseDomain</url>
 				</repository>
 			</repositories>
@@ -33,12 +35,14 @@
 					<url>https://dl.bintray.com/enterprisedomain/enterpriseDomain</url>
 				</pluginRepository>
 				<pluginRepository>
-					<snapshots />
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
 					<releases>
 						<enabled>false</enabled>
 					</releases>
 					<id>bintray-enterprisedomain-enterpriseDomain-snapshots</id>
-					<name>bintray-plugins</name>
+					<name>bintray-plugins-snapshots</name>
 					<url>https://dl.bintray.com/enterprisedomain/enterpriseDomain</url>
 				</pluginRepository>
 			</pluginRepositories>
