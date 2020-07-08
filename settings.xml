@@ -9,6 +9,9 @@
 					<snapshots>
 						<enabled>false</enabled>
 					</snapshots>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
 					<id>bintray-enterprisedomain-enterpriseDomain</id>
 					<name>bintray</name>
 					<url>https://dl.bintray.com/enterprisedomain/enterpriseDomain</url>
@@ -30,6 +33,9 @@
 					<snapshots>
 						<enabled>false</enabled>
 					</snapshots>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
 					<id>bintray-enterprisedomain-enterpriseDomain</id>
 					<name>bintray-plugins</name>
 					<url>https://dl.bintray.com/enterprisedomain/enterpriseDomain</url>
