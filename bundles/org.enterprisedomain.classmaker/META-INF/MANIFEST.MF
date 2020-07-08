@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.enterprisedomain.classmaker;singleton:=true
 Automatic-Module-Name: org.enterprisedomain.classmaker
-Bundle-Version: 0.8.19
+Bundle-Version: 0.8.28
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
