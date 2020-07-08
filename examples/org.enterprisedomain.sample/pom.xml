@@ -14,7 +14,7 @@
 		<dependency>
 			<groupId>org.enterprisedomain.org.enterprisedomain</groupId>
 			<artifactId>update</artifactId>
-			<version>0.8.19</version>
+			<version>0.8.28</version>
 		</dependency>
 	</dependencies>
 	<packaging>pom</packaging>	
