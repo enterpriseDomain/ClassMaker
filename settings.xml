@@ -11,6 +11,12 @@
                     <name>bintray</name>
                     <url>https://dl.bintray.com/enterprisedomain/enterpriseDomain</url>
                 </repository>
+                <repository>
+                    <snapshots/>
+                    <id>bintray-enterprisedomain-enterpriseDomain-snapshots</id>
+                    <name>bintray</name>
+                    <url>https://dl.bintray.com/enterprisedomain/enterpriseDomain</url>
+                </repository>
             </repositories>
             <pluginRepositories>
                 <pluginRepository>
@@ -18,6 +24,12 @@
                         <enabled>false</enabled>
                     </snapshots>
                     <id>bintray-enterprisedomain-enterpriseDomain</id>
+                    <name>bintray-plugins</name>
+                    <url>https://dl.bintray.com/enterprisedomain/enterpriseDomain</url>
+                </pluginRepository>                
+                <pluginRepository>
+                    <snapshots/>
+                    <id>bintray-enterprisedomain-enterpriseDomain-snapshots</id>
                     <name>bintray-plugins</name>
                     <url>https://dl.bintray.com/enterprisedomain/enterpriseDomain</url>
                 </pluginRepository>
@@ -31,6 +43,11 @@
     <servers>
         <server>
             <id>bintray-enterprisedomain-enterpriseDomain</id>
+            <username>kyrillzotkin</username>
+            <password>cf452b628f49c67921da3b5cd2eade962d93097b</password>
+        </server>
+        <server>
+            <id>bintray-enterprisedomain-enterpriseDomain-snapshots</id>
             <username>kyrillzotkin</username>
             <password>cf452b628f49c67921da3b5cd2eade962d93097b</password>
         </server>
