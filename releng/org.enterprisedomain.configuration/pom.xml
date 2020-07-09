@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.enterprisedomain</groupId>
 	<artifactId>org.enterprisedomain.configuration</artifactId>
-	<version>0.8.28</version>
+	<version>0.8.28-SNAPSHOT</version>
 	<properties>
 		<tycho.version>1.7.0</tycho.version>
 		<tycho.extras.version>${tycho.version}</tycho.extras.version>
@@ -34,6 +34,11 @@
 			<id>eclipse</id>
 			<layout>p2</layout>
 			<url>https://download.eclipse.org/eclipse/updates/4.16</url>
+		</repository>
+		<repository>
+			<id>github</id>
+			<name>GitHub</name>
+			<url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url>
 		</repository>
 	</repositories>
 	<pluginRepositories>
@@ -105,8 +110,7 @@
 						<artifact>
 							<groupId>org.enterprisedomain</groupId>
 							<artifactId>org.enterprisedomain.target</artifactId>
-							<version>0.8.28</version>
-							<classifier>org.enterprisedomain.target</classifier>
+							<version>0.8.28-SNAPSHOT</version>
 						</artifact>
 					</target>
 					<dependency-resolution>
