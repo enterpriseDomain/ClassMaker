@@ -36,9 +36,9 @@
 			<url>https://download.eclipse.org/eclipse/updates/4.16</url>
 		</repository>
 		<repository>
-			<id>github</id>
-			<name>GitHub</name>
-			<url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url>
+			<id>bintray</id>
+			<name>BinTray</name>
+			<url>https://api.bintray.com/maven/enterprisedomain/enterpriseDomain/ClassMaker/;publish=1</url>
 		</repository>
 	</repositories>
 	<pluginRepositories>
