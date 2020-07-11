@@ -26,11 +26,11 @@
     </profile>
   </profiles>
 
-<!--   <servers> -->
-<!--     <server> -->
-<!--       <id>github</id> -->
-<!--       <username>kyrillzotkin</username> -->
-<!--       <password>${{secrets.PAT}}</password> -->
-<!--     </server> -->
-<!--   </servers> -->
+  <servers>
+    <server>
+      <id>github</id>
+      <username>kyrillzotkin</username>
+      <password>${{secrets.PAT}}</password>
+    </server>
+  </servers>
 </settings>
