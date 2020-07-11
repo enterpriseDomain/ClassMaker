@@ -29,5 +29,6 @@ jobs:
        mvn -B clean package --file pom.xml
     - name: Deploy with Maven
       run: |
-       mvn clean deploy -s settings.xml -u Bearer -p ${{secrets.GITHUB_TOKEN}}
+       mvn clean deploy -s settings.xml
+
 
