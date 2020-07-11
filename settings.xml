@@ -30,7 +30,7 @@
     <server>
       <id>github</id>
       <username>kyrillzotkin</username>
-      <password>${{secrets.PAT}}</password>
+      <password>$PAT</password>
     </server>
   </servers>
 </settings>

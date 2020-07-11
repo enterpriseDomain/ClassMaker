@@ -28,6 +28,8 @@ jobs:
       run:
        mvn -B clean package --file pom.xml
     - name: Deploy with Maven
+      env:
+       PAT: ${{ secrets.GITHUB_TOKEN }}
       run: |
        mvn clean deploy -s settings.xml
 
