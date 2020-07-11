@@ -240,9 +240,9 @@
 	<packaging>pom</packaging>
 	<distributionManagement>
 		<repository>
-			<id>bintray-enterprisedomain-enterpriseDomain</id>
-			<name>enterprisedomain-enterpriseDomain</name>
-			<url>https://api.bintray.com/maven/enterprisedomain/enterpriseDomain/ClassMaker/;publish=1</url>
+			<id>github</id>
+			<name>GitHub enterpriseDomain Apache Maven Packages</name>
+			<url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url>
 		</repository>
 	</distributionManagement>
 </project>
