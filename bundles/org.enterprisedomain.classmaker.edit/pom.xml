@@ -5,8 +5,7 @@
 	<artifactId>org.enterprisedomain.classmaker.edit</artifactId>
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
-		<artifactId>org.enterprisedomain.root</artifactId>
-		<version>0.8.28</version>
+		<artifactId>org.enterprisedomain.root</artifactId>		<version>0.8.28</version>
 		<relativePath>../../</relativePath>
 	</parent>	
 </project>
