@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.enterprisedomain</groupId>
 	<artifactId>org.enterprisedomain.configuration</artifactId>
-	<version>0.8.28-SNAPSHOT</version>
+	<version>0.8.28</version>
 	<properties>
 		<tycho.version>1.7.0</tycho.version>
 		<tycho.extras.version>${tycho.version}</tycho.extras.version>
@@ -87,6 +87,11 @@
 			</plugin>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-source-plugin</artifactId>
+				<version>${tycho.version}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-packaging-plugin</artifactId>
 				<version>${tycho.version}</version>
 				<executions>
@@ -110,7 +115,7 @@
 						<artifact>
 							<groupId>org.enterprisedomain</groupId>
 							<artifactId>org.enterprisedomain.target</artifactId>
-							<version>0.8.28-SNAPSHOT</version>
+							<version>0.8.28</version>
 						</artifact>
 					</target>
 					<dependency-resolution>
@@ -222,6 +227,11 @@
 						</lifecycleMappingMetadata>
 					</configuration>
 				</plugin>
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-source-plugin</artifactId>
+					<version>${tycho.version}</version>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
@@ -239,10 +249,15 @@
 	</dependencies>
 	<packaging>pom</packaging>
 	<distributionManagement>
-			<repository>
-				<id>github</id>
-				<name>GitHub enterpriseDomain Apache Maven Packages</name>
-				<url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url>
-			</repository>		
+		<snapshotRepository>
+			<id>github</id>
+			<name>GitHub enterpriseDomain Apache Maven Packages</name>
+			<url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url>
+		</snapshotRepository>
+		<repository>
+			<id>bintray-enterprisedomain-enterpriseDomain</id>
+			<name>enterprisedomain-enterpriseDomain</name>
+			<url>https://api.bintray.com/maven/enterprisedomain/enterpriseDomain/ClassMaker/;publish=1</url>
+		</repository>
 	</distributionManagement>
 </project>

@@ -2,7 +2,7 @@
 <feature
       id="org.enterprisedomain.classmaker.osgi.resolverhooks.feature"
       label="%featureName"
-      version="0.8.28.qualifier"
+      version="0.8.28"
       provider-name="%providerName">
 
    <requires>
