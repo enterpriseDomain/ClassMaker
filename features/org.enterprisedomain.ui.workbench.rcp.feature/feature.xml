@@ -2,7 +2,7 @@
 <feature
       id="org.enterprisedomain.ui.workbench.rcp.feature"
       label="Domain Workplace RCP UI Feature"
-      version="0.8.10.qualifier"
+      version="0.8.28.qualifier"
       provider-name="Kyrill Zotkin"
       plugin="org.enterprisedomain.workbench">
 

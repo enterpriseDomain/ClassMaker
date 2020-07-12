@@ -5,9 +5,9 @@ name: Java CI & CD with Maven
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, develop ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, develop ]
 
 jobs:
   build:
@@ -28,7 +28,9 @@ jobs:
       run:
        mvn -B clean package --file pom.xml
     - name: Deploy with Maven
+      env:
+       PAT: ${{ secrets.GITHUB_TOKEN }}
       run: |
-       git config --global user.name "Kyrill Zotkin"
-       git config --global user.email "143617+kyrillzotkin@users.noreply.github.com"
-       mvn deploy -s settings.xml
+       echo "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><settings xmlns='http://maven.apache.org/SETTINGS/1.0.0' xsi:schemaLocation='http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><activeProfiles><activeProfile>github</activeProfile></activeProfiles><profiles><profile><id>github</id><repositories><repository><id>central</id><url>https://repo1.maven.org/maven2</url><releases><enabled>true</enabled></releases><snapshots><enabled>true</enabled></snapshots></repository><repository><id>github</id><name>GitHub enterpriseDomain Apache Maven Packages</name><url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url><snapshots><enabled>true</enabled></snapshots></repository></repositories></profile></profiles><servers><server><id>github</id><username>kyrillzotkin</username><password>$PAT</password></server></servers></settings>" > ~/.m2/settings.xml
+       mvn clean deploy -s ~/.m2/settings.xml
+

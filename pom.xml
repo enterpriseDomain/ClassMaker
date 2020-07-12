@@ -8,13 +8,12 @@
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
 		<artifactId>org.enterprisedomain.configuration</artifactId>
-		<version>0.8.10-SNAPSHOT</version>
+		<version>0.8.28-SNAPSHOT</version>
 		<relativePath>./releng/org.enterprisedomain.configuration</relativePath>
 	</parent>
 	<scm>
-		<connection>scm:git:https://github.com/enterpriseDomain/ClassMaker</connection>		
+		<connection>scm:git:https://github.com/enterpriseDomain/ClassMaker</connection>
 	</scm>
-
 	<modules>
 		<module>bundles/org.enterprisedomain.classmaker</module>
 		<module>bundles/org.enterprisedomain.classmaker.osgi.systemextension</module>
@@ -49,4 +48,5 @@
 			</properties>
 		</profile>
 	</profiles>
+	<version>0.8.28-SNAPSHOT</version>
 </project>

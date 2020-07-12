@@ -5,9 +5,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.enterprisedomain</groupId>
 	<artifactId>org.enterprisedomain.configuration</artifactId>
-	<version>0.8.10-SNAPSHOT</version>
+	<version>0.8.28-SNAPSHOT</version>
 	<properties>
-		<product.version>0.8.10-SNAPSHOT</product.version>
 		<tycho.version>1.7.0</tycho.version>
 		<tycho.extras.version>${tycho.version}</tycho.extras.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -22,9 +21,9 @@
 			<layout>p2</layout>
 		</repository>
 		<repository>
-			<id>2020-03</id>
+			<id>2020-06</id>
 			<layout>p2</layout>
-			<url>http://download.eclipse.org/releases/2020-03</url>
+			<url>http://download.eclipse.org/releases/2020-06</url>
 		</repository>
 		<repository>
 			<id>ecp</id>
@@ -32,9 +31,14 @@
 			<url>http://download.eclipse.org/ecp/releases/releases_target_124</url>
 		</repository>
 		<repository>
-			<id>github</id>
-			<name>GitHub</name>
-			<url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url>
+			<id>eclipse</id>
+			<layout>p2</layout>
+			<url>https://download.eclipse.org/eclipse/updates/4.16</url>
+		</repository>
+		<repository>
+			<id>bintray</id>
+			<name>BinTray</name>
+			<url>https://api.bintray.com/maven/enterprisedomain/enterpriseDomain/ClassMaker/;publish=1</url>
 		</repository>
 	</repositories>
 	<pluginRepositories>
@@ -51,7 +55,7 @@
 		</pluginRepository>
 	</pluginRepositories>
 	<build>
-		<finalName>${project.artifactId}-${product.version}</finalName>
+		<finalName>${project.artifactId}-${baseversion}.{buildQualifier}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -62,7 +66,7 @@
 				<artifactId>maven-scm-plugin</artifactId>
 				<version>1.11.2</version>
 				<configuration>
-					<tag>${project.artifactId}-${project.version}</tag>
+					<tag>${project.artifactId}-${baseversion}.{buildQualifier}</tag>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -91,7 +95,7 @@
 						<id>package-feature</id>
 						<configuration>
 							<appendAssemblyId>false</appendAssemblyId>
-							<finalName>${project.groupId}.${project.artifactId}_${unqualifiedVersion}.${buildQualifier}</finalName>
+							<finalName>${project.artifactId}-${baseversion}.{buildQualifier}</finalName>
 						</configuration>
 					</execution>
 				</executions>
@@ -106,7 +110,7 @@
 						<artifact>
 							<groupId>org.enterprisedomain</groupId>
 							<artifactId>org.enterprisedomain.target</artifactId>
-							<version>0.8.10-SNAPSHOT</version>
+							<version>0.8.28-SNAPSHOT</version>
 						</artifact>
 					</target>
 					<dependency-resolution>
@@ -140,7 +144,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-toolchains-plugin</artifactId>
-				<version>1.1</version>
+				<version>3.0.0</version>
 				<executions>
 					<execution>
 						<phase>validate</phase>
@@ -235,10 +239,10 @@
 	</dependencies>
 	<packaging>pom</packaging>
 	<distributionManagement>
-		<repository>
-			<id>bintray-enterprisedomain-enterpriseDomain</id>
-			<name>enterprisedomain-enterpriseDomain</name>
-			<url>https://api.bintray.com/maven/enterprisedomain/enterpriseDomain/ClassMaker/;publish=1</url>
-		</repository>
+			<repository>
+				<id>github</id>
+				<name>GitHub enterpriseDomain Apache Maven Packages</name>
+				<url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url>
+			</repository>		
 	</distributionManagement>
 </project>

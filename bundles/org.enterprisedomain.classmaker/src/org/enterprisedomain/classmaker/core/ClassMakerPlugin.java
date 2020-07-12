@@ -28,6 +28,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.ProgressProvider;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.impl.ClassMakerServiceImpl;
@@ -128,8 +129,11 @@ public class ClassMakerPlugin extends Plugin {
 	 */
 	public void start(BundleContext context) throws Exception {
 		instance = this;
-		tracker = new ServiceTracker<ClassMakerService, ClassMakerServiceImpl>(context, ClassMakerService.class, null);
-		ResourceUtils.saveAutoBuilding(ResourcesPlugin.getWorkspace());
+		if (EMFPlugin.IS_RESOURCES_BUNDLE_AVAILABLE) {
+			tracker = new ServiceTracker<ClassMakerService, ClassMakerServiceImpl>(context, ClassMakerService.class,
+					null);
+			ResourceUtils.saveAutoBuilding(ResourcesPlugin.getWorkspace());
+		}
 	}
 
 	/*
