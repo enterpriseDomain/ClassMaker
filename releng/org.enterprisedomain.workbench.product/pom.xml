@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>org.enterprisedomain.workbench.product</artifactId>
 	<packaging>eclipse-repository</packaging>
-	<version>0.8.28-SNAPSHOT</version>
+	<version>0.8.28</version>
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
 		<artifactId>org.enterprisedomain.bundles</artifactId>
-		<version>0.8.28-SNAPSHOT</version>
+		<version>0.8.28</version>
 		<relativePath>../../</relativePath>
 	</parent>
 	<build>
