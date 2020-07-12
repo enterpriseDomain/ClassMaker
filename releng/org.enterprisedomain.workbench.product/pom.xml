@@ -6,7 +6,7 @@
 	<version>0.8.28</version>
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
-		<artifactId>org.enterprisedomain.bundles</artifactId>
+		<artifactId>org.enterprisedomain.root</artifactId>
 		<version>0.8.28</version>
 		<relativePath>../../</relativePath>
 	</parent>
