@@ -227,14 +227,11 @@
 						</lifecycleMappingMetadata>
 					</configuration>
 				</plugin>
-
 				<plugin>
 					<groupId>org.eclipse.tycho</groupId>
 					<artifactId>tycho-source-plugin</artifactId>
 					<version>${tycho.version}</version>
 				</plugin>
-=======
->>>>>>> 76cbdd5c56bd32215e94eaf6487636af4a61ffa5
 			</plugins>
 		</pluginManagement>
 	</build>
