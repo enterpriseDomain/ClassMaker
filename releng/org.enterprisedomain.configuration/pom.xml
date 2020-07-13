@@ -301,12 +301,12 @@
 		<snapshotRepository>
 			<id>snapshots</id>
 			<name>OJO Snapshots</name>
-			<url>https://oss.jfrog.org/artifactory/libs-snapshot</url>
+			<url>http://oss.jfrog.org/artifactory/oss-snapshot-local</url>
 		</snapshotRepository>
 		<repository>
-			<id>central</id>
-			<name>OJO</name>
-			<url>https://oss.jfrog.org/artifactory/libs-release</url>
+			<id>bintray-enterprisedomain-enterpriseDomain</id>
+			<name>enterprisedomain-enterpriseDomain</name>
+			<url>https://api.bintray.com/maven/enterprisedomain/enterpriseDomain/ClassMaker/;publish=1</url>
 		</repository>
 	</distributionManagement>
 </project>
