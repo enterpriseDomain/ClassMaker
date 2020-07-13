@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: enterpriseDomain ECP UI
 Bundle-SymbolicName: org.enterprisedomain.ecp.ui;singleton:=true
-Bundle-Version: 0.8.28.qualifier
+Bundle-Version: 0.8.37.qualifier
 Bundle-Vendor: Kyrill Zotkin
 Require-Bundle: org.enterprisedomain.ecp;bundle-version="[0.8.0,0.9.0)";visibility:=reexport,
  org.eclipse.core.runtime;bundle-version="3.15.200",
