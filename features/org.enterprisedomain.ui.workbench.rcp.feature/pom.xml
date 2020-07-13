@@ -5,7 +5,7 @@
 	<artifactId>org.enterprisedomain.ui.workbench.rcp.feature</artifactId>
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
-		<artifactId>org.enterprisedomain.root</artifactId>		<version>0.8.28</version>
+		<artifactId>org.enterprisedomain.root</artifactId>		<version>0.8.28-SNAPSHOT</version>
 		<relativePath>../../</relativePath>
 	</parent>
 </project>

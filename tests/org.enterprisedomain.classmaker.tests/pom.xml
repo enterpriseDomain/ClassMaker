@@ -7,7 +7,7 @@
 
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
-		<artifactId>org.enterprisedomain.root</artifactId>		<version>0.8.28</version>
+		<artifactId>org.enterprisedomain.root</artifactId>		<version>0.8.28-SNAPSHOT</version>
 		<relativePath>../../</relativePath>
 	</parent>
 
@@ -32,7 +32,7 @@
 						<frameworkExtension>
 							<groupId>org.enterprisedomain</groupId>
 							<artifactId>org.enterprisedomain.classmaker.osgi.systemextension</artifactId>
-							<version>0.8.28</version>
+							<version>0.8.28-SNAPSHOT</version>
 						</frameworkExtension>
 					</frameworkExtensions>
 					<argLine>${surefire.moduleProperties}</argLine>
