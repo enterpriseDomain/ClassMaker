@@ -69,5 +69,5 @@
 			</build>
 		</profile>
 	</profiles>
-	<version>0.8.28-SNAPSHOT-SNAPSHOT</version>
+	<version>0.8.28-SNAPSHOT</version>
 </project>
