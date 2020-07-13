@@ -58,24 +58,6 @@
 		<finalName>${project.artifactId}-${baseversion}.{buildQualifier}</finalName>
 		<plugins>
 			<plugin>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.3</version>
-				<executions>
-					<execution>
-						<id>generate-sources-flag</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>run</goal>
-						</goals>
-						<configuration>
-							<tasks>
-								<echo>GENERATE SOURCES IS EXECUTING</echo>
-							</tasks>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>versions-maven-plugin</artifactId>
 				<version>2.1</version>
@@ -225,15 +207,16 @@
 		<pluginManagement>
 			<plugins>
 				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-source-plugin</artifactId>
 					<version>2.1.1</version>
 					<executions>
 						<execution>
-							<id>attach-sources-no-fork</id>
-							<inherited>true</inherited>
-							<phase>generate-sources</phase>
+							<!-- This id must match the -Prelease-profile id value or else sources 
+								will be "uploaded" twice, which causes Nexus to fail -->
+							<id>attach-sources</id>
 							<goals>
-								<goal>jar-no-fork</goal>
+								<goal>jar</goal>
 							</goals>
 						</execution>
 					</executions>

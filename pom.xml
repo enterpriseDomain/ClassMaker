@@ -46,29 +46,11 @@
 			<properties>
 				<surefire.moduleProperties>--add-modules=ALL-SYSTEM</surefire.moduleProperties>
 			</properties>
-		</profile>
-		<profile>
-			<id>release-profile</id>
-			<activation>
-				<property>
-					<name>performRelease</name>
-					<value>true</value>
-				</property>
-			</activation>
 			<build>
 				<plugins>
 					<plugin>
-						<inherited>true</inherited>
+						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-source-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>attach-sources-no-fork</id>
-								<inherited>true</inherited>
-								<goals>
-									<goal>jar-no-fork</goal>
-								</goals>
-							</execution>
-						</executions>
 					</plugin>
 				</plugins>
 			</build>
