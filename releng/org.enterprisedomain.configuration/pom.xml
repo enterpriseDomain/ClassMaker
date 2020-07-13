@@ -299,14 +299,14 @@
 	<packaging>pom</packaging>
 	<distributionManagement>
 		<snapshotRepository>
-			<id>github</id>
-			<name>GitHub enterpriseDomain Apache Maven Packages</name>
-			<url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url>
+			<id>snapshots</id>
+			<name>OJO Snapshots</name>
+			<url>https://oss.jfrog.org/artifactory/libs-snapshot</url>
 		</snapshotRepository>
 		<repository>
-			<id>bintray-enterprisedomain-enterpriseDomain</id>
-			<name>enterprisedomain-enterpriseDomain</name>
-			<url>https://api.bintray.com/maven/enterprisedomain/enterpriseDomain/ClassMaker/;publish=1</url>
+			<id>central</id>
+			<name>OJO</name>
+			<url>https://oss.jfrog.org/artifactory/libs-release</url>
 		</repository>
 	</distributionManagement>
 </project>
