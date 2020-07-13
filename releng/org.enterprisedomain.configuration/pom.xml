@@ -301,12 +301,12 @@
 		<snapshotRepository>
 			<id>snapshots</id>
 			<name>OJO Snapshots</name>
-			<url>https://oss.jfrog.org/artifactory/libs-snapshot</url>
+			<url>http://oss.jfrog.org/artifactory/oss-snapshot-local</url>
 		</snapshotRepository>
 		<repository>
 			<id>central</id>
 			<name>OJO</name>
-			<url>https://oss.jfrog.org/artifactory/libs-release</url>
+			<url>http://oss.jfrog.org/artifactory/oss-release-local</url>
 		</repository>
 	</distributionManagement>
 </project>
