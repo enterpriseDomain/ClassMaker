@@ -48,23 +48,17 @@
 			</properties>
 		</profile>
 		<profile>
-			<id>release-profile</id>
-			<activation>
-				<property>
-					<name>performRelease</name>
-					<value>true</value>
-				</property>
-			</activation>
+			<id>release</id>
 			<build>
 				<plugins>
 					<plugin>
 						<inherited>true</inherited>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-source-plugin</artifactId>
+						<version>3.2.0</version>
 						<executions>
 							<execution>
-								<id>attach-sources-no-fork</id>
-								<inherited>true</inherited>
+								<id>attach-sources</id>
 								<goals>
 									<goal>jar-no-fork</goal>
 								</goals>
