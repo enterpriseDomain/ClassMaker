@@ -47,7 +47,7 @@ There is more [code](/tests/org.enterprisedomain.classmaker.tests/src/org/enterp
 Download
 ---------
  
-[ ![Download](https://github.com/enterpriseDomain/ClassMaker/releases/tag/0.8.28-SNASHOT)
+[ ![Download](https://api.bintray.com/packages/enterprisedomain/enterpriseDomain/ClassMaker/images/download.svg?version=0.8.28) ](https://bintray.com/enterprisedomain/enterpriseDomain/ClassMaker/0.8.28/link)
 
 Feedback
 ---------
