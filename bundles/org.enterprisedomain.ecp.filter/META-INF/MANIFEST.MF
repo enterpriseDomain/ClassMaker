@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: enterpriseDomain ECP EPackage Filter
 Bundle-SymbolicName: org.enterprisedomain.ecp.filter;singleton:=true
-Bundle-Version: 0.8.28
+Bundle-Version: 0.8.37.qualifier
 Bundle-Activator: org.enterprisedomain.ecp.filter.Activator
 Bundle-Vendor: Kyrill Zotkin
 Require-Bundle: org.eclipse.ui;bundle-version="[3.109.100,4.0.0)",

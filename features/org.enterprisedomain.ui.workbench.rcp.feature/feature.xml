@@ -2,7 +2,7 @@
 <feature
       id="org.enterprisedomain.ui.workbench.rcp.feature"
       label="Domain Workplace RCP UI Feature"
-      version="0.8.28"
+      version="0.8.37.qualifier"
       provider-name="Kyrill Zotkin"
       plugin="org.enterprisedomain.workbench">
 
@@ -108,6 +108,10 @@ limitations under the License.
 
    <includes
          id="org.enterprisedomain.classmaker.ecp.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.equinox.p2.extras.feature"
          version="0.0.0"/>
 
    <requires>

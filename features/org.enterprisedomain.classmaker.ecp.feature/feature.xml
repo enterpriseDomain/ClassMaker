@@ -2,7 +2,7 @@
 <feature
       id="org.enterprisedomain.classmaker.ecp.feature"
       label="Enterprise Domain ECP Provider Feature"
-      version="0.8.28"
+      version="0.8.37.qualifier"
       provider-name="Kyrill Zotkin">
 
    <description url="http://www.example.com/description">

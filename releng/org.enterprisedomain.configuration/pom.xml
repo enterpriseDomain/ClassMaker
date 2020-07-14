@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.enterprisedomain</groupId>
 	<artifactId>org.enterprisedomain.configuration</artifactId>
-	<version>0.8.28</version>
+	<version>0.8.37-SNAPSHOT</version>
 	<properties>
 		<tycho.version>1.7.0</tycho.version>
 		<tycho.extras.version>${tycho.version}</tycho.extras.version>
@@ -89,6 +89,14 @@
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-source-plugin</artifactId>
 				<version>${tycho.version}</version>
+				<executions>
+					<execution>
+						<id>plugin-source</id>
+						<goals>
+							<goal>plugin-source</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
@@ -106,6 +114,34 @@
 				</executions>
 			</plugin>
 			<plugin>
+				<groupId>org.eclipse.tycho.extras</groupId>
+				<artifactId>tycho-source-feature-plugin</artifactId>
+				<version>${tycho.extras.version}</version>
+				<executions>
+					<execution>
+						<id>source-feature</id>
+						<phase>package</phase>
+						<goals>
+							<goal>source-feature</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<executions>
+					<execution>
+						<id>attach-p2-metadata</id>
+						<phase>package</phase>
+						<goals>
+							<goal>p2-metadata</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>target-platform-configuration</artifactId>
 				<version>${tycho.version}</version>
@@ -115,7 +151,7 @@
 						<artifact>
 							<groupId>org.enterprisedomain</groupId>
 							<artifactId>org.enterprisedomain.target</artifactId>
-							<version>0.8.28</version>
+							<version>0.8.37-SNAPSHOT</version>
 						</artifact>
 					</target>
 					<dependency-resolution>
@@ -170,6 +206,19 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>2.1.1</version>
+					<executions>
+						<execution>
+							<id>attach-sources</id>
+							<goals>
+								<goal>jar</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
@@ -250,9 +299,9 @@
 	<packaging>pom</packaging>
 	<distributionManagement>
 		<snapshotRepository>
-			<id>github</id>
-			<name>GitHub enterpriseDomain Apache Maven Packages</name>
-			<url>https://maven.pkg.github.com/enterpriseDomain/ClassMaker</url>
+			<id>snapshots</id>
+			<name>oss-jfrog-artifactory-snapshots</name>
+			<url>https://oss.jfrog.org/artifactory/oss-snapshot-local</url>
 		</snapshotRepository>
 		<repository>
 			<id>bintray-enterprisedomain-enterpriseDomain</id>

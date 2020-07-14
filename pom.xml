@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
 		<artifactId>org.enterprisedomain.configuration</artifactId>
-		<version>0.8.28</version>
+		<version>0.8.37-SNAPSHOT</version>
 		<relativePath>./releng/org.enterprisedomain.configuration</relativePath>
 	</parent>
 	<scm>
@@ -47,6 +47,27 @@
 				<surefire.moduleProperties>--add-modules=ALL-SYSTEM</surefire.moduleProperties>
 			</properties>
 		</profile>
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<inherited>true</inherited>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>3.2.0</version>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 	</profiles>
-	<version>0.8.28</version>
+	<version>0.8.37-SNAPSHOT</version>
 </project>
