@@ -6,7 +6,8 @@
 	<version>0.8.37-SNAPSHOT</version>
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
-		<artifactId>org.enterprisedomain.root</artifactId>		<version>0.8.37-SNAPSHOT</version>
+		<artifactId>org.enterprisedomain.root</artifactId>
+		<version>0.8.37-SNAPSHOT</version>
 		<relativePath>../../</relativePath>
 	</parent>
 	<build>
