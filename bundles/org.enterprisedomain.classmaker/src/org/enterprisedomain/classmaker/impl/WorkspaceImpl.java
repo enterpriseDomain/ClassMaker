@@ -135,6 +135,10 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 */
 	protected static final ResourceSet RESOURCE_SET_EDEFAULT = new ResourceSetImpl();
 
+	static {
+		RESOURCE_SET_EDEFAULT.setURIConverter(new ResourceSetURIConverter());
+	}
+
 	/**
 	 * The cached value of the '{@link #getResourceSet() <em>Resource Set</em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -501,12 +505,13 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 				registerProject(result);
 				return result;
 			}
-			// Contribution not exists. Create
 			result = ClassMakerFactory.eINSTANCE.createContribution();
 			registerProject(result);
-			if (blueprint instanceof ENamedElement)
+			if (blueprint instanceof ENamedElement) {
 				result.setName(((ENamedElement) blueprint).getName());
-			else
+				if (blueprint instanceof EPackage)
+					result.setModelName(((EPackage) blueprint).getNsPrefix());
+			} else
 				result.setName(blueprint.eClass().getName());
 			result.create(monitor);
 			Version version = result.nextVersion();

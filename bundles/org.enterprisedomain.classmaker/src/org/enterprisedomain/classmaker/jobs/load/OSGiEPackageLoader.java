@@ -241,10 +241,10 @@ public class OSGiEPackageLoader extends ContainerJob {
 			}
 			break;
 		case 1:
-			EObject model = state.getDomainModel().getDynamic();
+			EObject model0 = state.getDomainModel().getDynamic();
 			String pluginClassName = null;
-			if (model instanceof EPackage)
-				pluginClassName = CodeGenUtil.safeName(((EPackage) model).getName()) + ".provider." //$NON-NLS-1$
+			if (model0 instanceof EPackage)
+				pluginClassName = CodeGenUtil.safeName(((EPackage) model0).getName()) + ".provider." //$NON-NLS-1$
 						+ state.getEditPluginClassName();
 			Class<?> pluginClass = null;
 			try {

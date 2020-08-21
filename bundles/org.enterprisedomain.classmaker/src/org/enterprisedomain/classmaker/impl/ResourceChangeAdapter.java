@@ -37,8 +37,7 @@ class ResourceChangeAdapter extends EContentAdapter {
 				&& notification.getEventType() == Notification.SET && notification.getNotifier() instanceof Resource
 				&& project != null && project instanceof Contribution && !project.getChildren().isEmpty()
 				&& project.getChildren().get(0) instanceof Resource && ((Resource) project.getChildren().get(0))
-						.getURI().equals(((Resource) notification.getNotifier()).getURI())
-				&& !notification.getNewBooleanValue())
+						.getURI().equals(((Resource) notification.getNotifier()).getURI()))
 			try {
 				project.notifyResourceChanged(notification);
 			} catch (Exception e) {

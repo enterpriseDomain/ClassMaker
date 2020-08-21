@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="org.enterprisedomain.target" sequenceNumber="1594806799">
+<target name="org.enterprisedomain.target" sequenceNumber="1595666313">
   <locations>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.eclipse.e4.rcp.feature.group" version="4.16.0.v20200604-0951"/>
@@ -38,7 +38,7 @@
       <unit id="org.eclipse.m2m.qvt.oml.sdk.feature.group" version="3.10.2.v20200609-1812"/>
       <unit id="org.eclipse.xtend.sdk.feature.group" version="2.22.0.v20200602-1533"/>
       <unit id="org.eclipse.emf.ecp.sdk.e4.feature.feature.group" version="1.24.0.20200303-1319"/>
-      <repository id="photon" location="https://download.eclipse.org/releases/2020-06/"/>
+      <repository id="simrel2020-06" location="https://download.eclipse.org/releases/2020-06/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.eclipse.jgit.feature.group" version="5.8.1.202007141445-r"/>

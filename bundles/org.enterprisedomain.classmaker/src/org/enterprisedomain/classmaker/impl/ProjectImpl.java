@@ -71,6 +71,7 @@ import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.CompletionNotificationAdapter;
 import org.enterprisedomain.classmaker.Contribution;
+import org.enterprisedomain.classmaker.Item;
 import org.enterprisedomain.classmaker.Messages;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.ResourceChangeListener;
@@ -336,7 +337,11 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 		@Override
 		public void notifyChanged(Notification msg) {
-			if (msg.getFeatureID(State.class) == ClassMakerPackage.PROJECT__NAME
+			if (msg.getFeatureID(Project.class) == ClassMakerPackage.PROJECT__NAME
+					&& msg.getEventType() == Notification.SET && msg.getNewStringValue() != null
+					&& eIsSet(ClassMakerPackage.PROJECT__WORKSPACE))
+				setProjectName(getWorkspace().getService().computeProjectName(msg.getNewStringValue()));
+			if (msg.getFeatureID(Item.class) == ClassMakerPackage.ITEM__MODEL_NAME
 					&& msg.getEventType() == Notification.SET && msg.getNewStringValue() != null
 					&& eIsSet(ClassMakerPackage.PROJECT__WORKSPACE))
 				setProjectName(getWorkspace().getService().computeProjectName(msg.getNewStringValue()));
@@ -606,11 +611,12 @@ public class ProjectImpl extends EObjectImpl implements Project {
 					Resource theResource = (Resource) getChildren().get(0);
 					Resource resource = (Resource) notification.getNotifier();
 					if (!loading && !isSavingResource() && resource.getURI().equals(theResource.getURI())
-							&& !theResource.isModified() && theResource.isLoaded()) {
+							&& theResource.isLoaded()) {
 						loading = true;
 						if (ProjectImpl.this.eIsSet(ClassMakerPackage.PROJECT__SELECT_REVEAL_HANDLER))
 							getSelectRevealHandler().prepare();
-						setResource(resource);
+						if (!theResource.isModified())
+							setResource(resource);
 						theResource = ((Resource) getChildren().get(0));
 						// theResource.setURI(getResourceURI());
 						// theResource.unload();
@@ -1108,7 +1114,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 */
 	@Override
 	public void initAdapters(Revision revision) {
-		eAdapters().add(new AdapterImpl() {
+//		if(!getState().eIsSet(ClassMakerPackage.Literals.STATE__RESOURCE))
+//			return;
+		getState().getResource().eAdapters().add(new AdapterImpl() {
 
 			@Override
 			public void notifyChanged(Notification msg) {

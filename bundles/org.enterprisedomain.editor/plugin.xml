@@ -44,6 +44,23 @@
             description="%_UI_Menu_OpenURI_description"
             categoryId="org.eclipse.ui.category.file"
             id="org.enterprisedomain.classmaker.presentation.ClassMakerEditorAdvisorOpenURICommand"/>
+      <command
+            name="%_UI_Menu_Open_label"
+            description="%_UI_Menu_Open_description"
+            categoryId="org.eclipse.ui.category.file"
+            id="org.enterprisedomain.classmaker.presentation.ClassMakerEditorAdvisorOpenCommand"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.bindings">
+      <!-- @generated ClassMaker -->
+      <key
+            commandId="org.enterprisedomain.classmaker.presentation.ClassMakerEditorAdvisorOpenURICommand"
+            sequence="M1+U"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+      <key
+            commandId="org.enterprisedomain.classmaker.presentation.ClassMakerEditorAdvisorOpenCommand"
+            sequence="M1+O"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
    </extension>
 
    <extension point="org.eclipse.ui.actionSets">
@@ -63,6 +80,12 @@
                class="org.enterprisedomain.classmaker.presentation.ClassMakerEditorAdvisor$OpenURIAction"
                menubarPath="file/additions"
                id="org.enterprisedomain.classmaker.presentation.ClassMakerEditorAdvisorOpenURIAction"/>
+         <action
+               label="%_UI_Menu_Open_label"
+               definitionId="org.enterprisedomain.classmaker.presentation.ClassMakerEditorAdvisorOpenCommand"
+               class="org.enterprisedomain.classmaker.presentation.ClassMakerEditorAdvisor$OpenAction"
+               menubarPath="file/additions"
+               id="org.enterprisedomain.classmaker.presentation.ClassMakerEditorAdvisorOpenAction"/>
       </actionSet>
    </extension>
 

@@ -353,18 +353,18 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 							if (delta[0].getElement().getJavaProject().getProject().equals(getProject())
 									&& event.getType() == ElementChangedEvent.POST_CHANGE)
 								isBuilt = true;
-							if ((getContributionState().isEdit()
-									&& delta[0].getElement().getJavaProject().getProject().getName()
-											.equals(getProject().getName() + ".edit")
-									&& event.getType() == ElementChangedEvent.POST_CHANGE)
-									|| !getContributionState().isEdit())
-								isEditBuilt = true;
-							if ((getContributionState().isEditor()
-									&& delta[0].getElement().getJavaProject().getProject().getName()
-											.equals(getProject().getName() + ".editor")
-									&& event.getType() == ElementChangedEvent.POST_CHANGE)
-									|| !getContributionState().isEditor())
-								isEditorBuilt = true;
+						if ((getContributionState().isEdit() && delta.length > 0
+								&& delta[0].getElement().getJavaProject().getProject().getName()
+										.equals(getProject().getName() + ".edit")
+								&& event.getType() == ElementChangedEvent.POST_CHANGE)
+								|| !getContributionState().isEdit())
+							isEditBuilt = true;
+						if ((getContributionState().isEditor() && delta.length > 0
+								&& delta[0].getElement().getJavaProject().getProject().getName()
+										.equals(getProject().getName() + ".editor")
+								&& event.getType() == ElementChangedEvent.POST_CHANGE)
+								|| !getContributionState().isEditor())
+							isEditorBuilt = true;
 						if (isBuilt && isEditBuilt && isEditorBuilt)
 							built.release();
 					}

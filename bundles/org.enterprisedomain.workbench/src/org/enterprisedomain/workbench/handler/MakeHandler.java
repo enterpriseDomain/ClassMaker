@@ -44,15 +44,11 @@ public class MakeHandler extends AbstractHandler implements IHandler {
 							try {
 								Project project = classMaker.getWorkspace()
 										.getProject((String) ((ECPProject) eProject).getName());
-								EPackage ePackage = null;
 								if (project.getRevision().getState().getDomainModel()
 										.getDynamic() instanceof EPackage) {
-									ePackage = (EPackage) project.getRevision().getState().getDomainModel()
-											.getDynamic();
 									Revision newRevision = project.newRevision(project.nextVersion());
 									newRevision.create(monitor);
-									project.checkout(newRevision.getVersion());
-									newRevision.getState().getDomainModel().setDynamic(EcoreUtil.copy(ePackage));
+									project.checkout(newRevision.getVersion());									
 								}
 								project.make(monitor);
 							} catch (CoreException e) {

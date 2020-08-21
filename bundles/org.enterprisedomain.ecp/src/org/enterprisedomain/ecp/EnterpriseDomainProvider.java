@@ -56,7 +56,6 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecp.core.ECPProject;
@@ -276,9 +275,9 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 					} catch (CoreException e) {
 						Activator.log(e);
 					}
-				classMaker.getWorkspace().getResourceSet().eAdapters()
-						.add(new AdapterFactoryEditingDomain.EditingDomainProvider(project.getEditingDomain()));
 			}
+			classMaker.getWorkspace().getResourceSet().eAdapters()
+					.add(new AdapterFactoryEditingDomain.EditingDomainProvider(project.getEditingDomain()));
 
 		}
 		registerChangeListener(new ProviderChangeListener() {
@@ -320,7 +319,11 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 	protected void createProject(final InternalProject project) {
 		project.open();
 		final EditingDomain editingDomain = project.getEditingDomain();
-		editingDomain.getResourceSet().eAdapters().add(new EnterpriseDomainProjectObserver(project, this));
+		Adapter observer = new EnterpriseDomainProjectObserver(project, this);
+		editingDomain.getResourceSet().eAdapters().add(observer);
+		ClassMakerService classMaker = Activator.getClassMaker();
+		if (classMaker != null)
+			classMaker.getWorkspace().getResourceSet().eAdapters().add(observer);
 	}
 
 	@Override
@@ -383,6 +386,9 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 						monitor = ClassMakerPlugin.getProgressMonitor();
 					else
 						monitor = getUIProvider().getAdapter(project, IProgressMonitor.class);
+					Object object = domainProject.getChildren().get(0);
+					if (object instanceof Resource)
+						((Resource) object).setTrackingModification(false);
 					domainProject.close(monitor);
 				} catch (CoreException e) {
 					Activator.log(e);
