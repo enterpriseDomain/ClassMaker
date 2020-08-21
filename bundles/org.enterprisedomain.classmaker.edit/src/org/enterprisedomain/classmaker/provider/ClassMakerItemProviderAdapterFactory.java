@@ -152,9 +152,10 @@ public class ClassMakerItemProviderAdapterFactory extends ClassMakerAdapterFacto
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.enterprisedomain.classmaker.Strategy} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This keeps track of the one adapter used for all
+	 * {@link org.enterprisedomain.classmaker.Strategy} instances. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected StrategyItemProvider strategyItemProvider;

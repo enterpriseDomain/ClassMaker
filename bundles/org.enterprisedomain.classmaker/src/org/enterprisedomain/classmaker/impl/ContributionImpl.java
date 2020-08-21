@@ -571,7 +571,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	public String initialize(boolean commit) {
 		@SuppressWarnings("unchecked")
 		SCMOperator<Git> operator = (SCMOperator<Git>) getWorkspace().getSCMRegistry().get(getProjectName());
-		setName(getProjectName());
+		setName(getModelName() != null ? getModelName() : getProjectName());
 		try {
 			Git git = operator.getRepositorySCM();
 			// if (git == null)
@@ -698,7 +698,8 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
-		setModelName(newName);
+		if (!eIsSet(ClassMakerPackage.ITEM__MODEL_NAME))
+			setModelName(newName);
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.CONTRIBUTION__NAME, oldName, name));
 	}

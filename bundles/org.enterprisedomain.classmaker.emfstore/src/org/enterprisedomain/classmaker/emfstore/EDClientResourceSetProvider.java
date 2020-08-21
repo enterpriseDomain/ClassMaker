@@ -18,7 +18,6 @@ package org.enterprisedomain.classmaker.emfstore;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.emfstore.internal.client.provider.ClientXMIResourceSetProvider;
 import org.eclipse.emf.emfstore.internal.client.provider.XMIClientURIConverter;
-import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 
 public class EDClientResourceSetProvider extends ClientXMIResourceSetProvider {
 

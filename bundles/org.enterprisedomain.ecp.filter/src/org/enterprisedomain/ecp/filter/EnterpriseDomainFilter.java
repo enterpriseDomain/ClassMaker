@@ -23,7 +23,7 @@ import org.enterprisedomain.classmaker.ClassMakerPackage;
 
 public class EnterpriseDomainFilter implements ECPFilterProvider {
 
-	public EnterpriseDomainFilter() {		
+	public EnterpriseDomainFilter() {
 	}
 
 	@Override

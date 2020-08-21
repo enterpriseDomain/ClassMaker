@@ -14,7 +14,7 @@ public class Startup implements IStartup {
 		MessageConsole out = new MessageConsole("Output", null);
 		System.setOut(new PrintStream(out.newOutputStream()));
 		ConsolePlugin.getDefault().getConsoleManager().addConsoles(new IConsole[] { out });
-		ConsolePlugin.getDefault().getConsoleManager().refresh(out);	
+		ConsolePlugin.getDefault().getConsoleManager().refresh(out);
 	}
 
 }

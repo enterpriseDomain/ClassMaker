@@ -342,8 +342,8 @@ public class StateItemProvider extends ItemItemProvider {
 
 	/**
 	 * This adds a property descriptor for the Strategy feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected void addStrategyPropertyDescriptor(Object object) {

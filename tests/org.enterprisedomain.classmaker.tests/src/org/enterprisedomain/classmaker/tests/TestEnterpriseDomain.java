@@ -37,6 +37,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
+import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -145,7 +146,6 @@ public class TestEnterpriseDomain extends AbstractTest {
 				getProgressMonitor());
 		((Resource) project.getChildren().get(0)).getContents().add(theObject);
 		assertEquals(theObject, ((Resource) project.getChildren().get(0)).getContents().get(0));
-		;
 		cleanup();
 	}
 
@@ -566,7 +566,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		c.getEStructuralFeatures().add(a);
 		p0.getEClassifiers().add(c);
 		URI resourceURI = URI.createFileURI(ClassMakerTestsPlugin.getInstance().getStateLocation().append(p0.getName())
-				.append(p0.getNsPrefix()).addFileExtension("xmi").toString());
+				.append(p0.getName()).addFileExtension("xmi").toString());
 		ResourceSet resourceSet = service.getWorkspace().getResourceSet();
 		Resource resource0 = resourceSet.createResource(resourceURI);
 		resource0.getContents().add(p0);
@@ -575,9 +575,9 @@ public class TestEnterpriseDomain extends AbstractTest {
 		assertNotNull(r);
 
 		String modelName = "MetaModel";
-		Resource resource1 = resourceSet.getResource(URI.createPlatformPluginURI(
-				ClassMakerTestsPlugin.PLUGIN_ID + IPath.SEPARATOR + "model" + IPath.SEPARATOR + modelName + ".ecore",
-				false), true);
+		Resource resource1 = resourceSet.getResource(URI.createPlatformPluginURI(ClassMakerTestsPlugin.PLUGIN_ID
+				+ IPath.SEPARATOR + "model" + IPath.SEPARATOR + CodeGenUtil.safeName(modelName) + ".ecore", false),
+				true);
 		resource1.load(new HashMap<String, String>());
 		EPackage p1 = (EPackage) resource1.getContents().get(0);
 		EPackage ePackage = (EPackage) service.make(p1, getProgressMonitor());

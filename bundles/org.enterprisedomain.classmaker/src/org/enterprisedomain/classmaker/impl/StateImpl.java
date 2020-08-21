@@ -717,7 +717,6 @@ public class StateImpl extends ItemImpl implements State {
 								.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 					}
 				}
-				getProject().checkout(getRevision().getVersion(), getTimestamp(), getCommitId());
 			}
 		}
 		return getCommitId(); // $NON-NLS-1$
@@ -795,19 +794,20 @@ public class StateImpl extends ItemImpl implements State {
 			setResource(resourceSet.createResource(modelURI));
 			created = true;
 		}
-		getResource().eAdapters().remove(resourceToModelsAdapter);
-		getResource().eAdapters().add(resourceToModelsAdapter);
 		getDomainModel().eAdapters().remove(modelsToResourceAdapter);
 		getDomainModel().eAdapters().add(modelsToResourceAdapter);
+		getResource().eAdapters().remove(resourceToModelsAdapter);
+		getResource().eAdapters().add(resourceToModelsAdapter);
 		if (created) {
 			loading = false;
 			return;
 		}
-		try {
-			getResource().load(Collections.emptyMap());
-		} catch (IOException e) {
-			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createWarningStatus(e));
-		}
+		if (!loadOnDemand)
+			try {
+				getResource().load(Collections.emptyMap());
+			} catch (IOException e) {
+				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createWarningStatus(e));
+			}
 		if (!getResource().getContents().isEmpty()) {
 			getDomainModel().setDynamic(EcoreUtil.copy((EObject) getResource().getContents().get(0)));
 		}
@@ -839,7 +839,8 @@ public class StateImpl extends ItemImpl implements State {
 			ClassMakerPlugin.getInstance().getLog()
 					.log(ClassMakerPlugin.createInfoStatus(NLS.bind(Messages.ResourceImported, importSource.getURI())));
 		} else if (getPhase().getValue() >= Stage.MODELED_VALUE && getDomainModel().getDynamic() != null
-				&& objectsDiffer(getDomainModel().getDynamic(), resource.getContents())) {
+				&& objectsDiffer(getDomainModel().getDynamic(), resource.getContents())
+				&& resource.getContents().isEmpty()) {
 			boolean deliver = resource.eDeliver();
 			resource.eSetDeliver(false);
 			resource.getContents().clear();

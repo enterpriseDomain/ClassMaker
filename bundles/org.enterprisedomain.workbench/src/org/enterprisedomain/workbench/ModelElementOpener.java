@@ -15,22 +15,18 @@
  */
 package org.enterprisedomain.workbench;
 
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecp.core.ECPProject;
 import org.eclipse.emf.ecp.editor.e3.ECPEditorContext;
 import org.eclipse.emf.ecp.editor.e3.MEEditorInput;
-import org.eclipse.emf.ecp.editor.internal.e3.MEEditor;
 import org.eclipse.emf.ecp.explorereditorbridge.internal.EditorContext;
+import org.eclipse.emf.ecp.explorereditorbridge.internal.EditorModelElementOpener;
 import org.eclipse.emf.ecp.ui.util.ECPModelElementOpener;
+import org.eclipse.emf.ecp.view.spi.context.ViewModelContext;
+import org.eclipse.emf.ecp.view.spi.context.ViewModelContextDisposeListener;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
@@ -39,7 +35,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 import org.enterprisedomain.classmaker.Project;
 
-public class ModelElementOpener implements ECPModelElementOpener {
+public class ModelElementOpener extends EditorModelElementOpener {
 
 	public static final String EDITOR_ID = "org.eclipse.emf.ecore.presentation.EcoreEditorID"; //$NON-NLS-1$
 	public static final String MODEL_EDITOR_ID = "org.eclipse.emf.ecp.editor"; //$NON-NLS-1$
@@ -63,8 +59,14 @@ public class ModelElementOpener implements ECPModelElementOpener {
 				resource = (Resource) project.getChildren().get(0);
 			}
 		}
-		if (resource != null)
+		if (resource != null) {
+			ResourceSet classMakerResourceSet = Activator.getClassMaker().getWorkspace().getResourceSet();
+			if (!resource.getResourceSet().equals(classMakerResourceSet)) {
+				open(resource.getURI(), fragment, classMakerResourceSet, ecpProject);
+				return;
+			}
 			open(resource.getURI(), fragment, resource.getResourceSet(), ecpProject);
+		}
 	}
 
 	private IEditorPart open(URI uri, String fragment, ResourceSet resourceSet, ECPProject project) {
@@ -89,7 +91,7 @@ public class ModelElementOpener implements ECPModelElementOpener {
 			else if (eObject instanceof EObject)
 				modelElement = (EObject) eObject;
 			final ECPEditorContext eec = new EditorContext(modelElement, project);
-			result = IDE.openEditor(page, new MEEditorInput((EditorContext) eec), editorId);
+			result = page.openEditor(new MEEditorInput((EditorContext) eec), editorId, true);
 		} catch (PartInitException e) {
 			e.printStackTrace();
 		}

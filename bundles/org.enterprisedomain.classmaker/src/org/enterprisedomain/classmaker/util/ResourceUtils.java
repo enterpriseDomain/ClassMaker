@@ -41,6 +41,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.preferences.IPreferencesService;
+import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.pde.internal.core.ICoreConstants;
@@ -122,7 +123,7 @@ public class ResourceUtils {
 	}
 
 	public static String getFileName(String name) {
-		return name + '.' + getModelFileExt();
+		return CodeGenUtil.safeName(name) + '.' + getModelFileExt();
 	}
 
 	public static String parseProjectName(URI modelURI) {

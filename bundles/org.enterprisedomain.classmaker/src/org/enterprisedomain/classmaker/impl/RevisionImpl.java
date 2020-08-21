@@ -37,6 +37,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.LogCommand;
 import org.eclipse.jgit.api.errors.NoHeadException;
+import org.eclipse.jgit.api.errors.RefNotFoundException;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.enterprisedomain.classmaker.ClassMakerFactory;
@@ -357,7 +358,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 				}
 				if (getStateHistory().isEmpty())
 					return null;
-				checkout(ListUtil.getLast(getStateHistory()).getKey());
 			}
 		} catch (NoHeadException e) {
 			return null;
@@ -386,9 +386,19 @@ public class RevisionImpl extends ItemImpl implements Revision {
 			@SuppressWarnings("unchecked")
 			SCMOperator<Git> operator = (SCMOperator<Git>) getProject().getWorkspace().getSCMRegistry()
 					.get(getProject().getProjectName());
+			Git git = null;
 			try {
-				Git git = operator.getRepositorySCM();
-				git.branchCreate().setForce(true).setName(getVersion().toString()).call();
+				git = operator.getRepositorySCM();
+				if (git != null)
+					git.branchCreate().setForce(true).setName(getVersion().toString()).call();
+			} catch (RefNotFoundException e) {
+				try {
+					getState().commit();
+					git.branchCreate().setForce(true).setName(getVersion().toString()).call();
+				} catch (Exception e1) {
+					throw new CoreException(
+							new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+				}
 			} catch (Exception e) {
 				throw new CoreException(
 						new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
@@ -411,7 +421,11 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	 */
 	public void checkout(long stateTime, String commitId) {
 		setTimestamp(stateTime);
-		getProject().initAdapters(this);
+		try {
+			load(true);
+		} catch (CoreException e) {
+			ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
+		}
 		if (isStateSet())
 			getState().checkout(commitId, false);
 	}
@@ -423,7 +437,11 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	 */
 	public void checkout(long stateTime) {
 		setTimestamp(stateTime);
-		getProject().initAdapters(this);
+		try {
+			load(true);
+		} catch (CoreException e) {
+			ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
+		}
 		if (isStateSet())
 			getState().checkout();
 	}
@@ -468,7 +486,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	@Override
 	public void load(boolean create) throws CoreException {
 		initialize(false);
-		getProject().initAdapters(this);
 		if (create && isStateSet()) {
 			@SuppressWarnings("unchecked")
 			SCMOperator<Git> operator = (SCMOperator<Git>) getProject().getWorkspace().getSCMRegistry()
@@ -495,8 +512,10 @@ public class RevisionImpl extends ItemImpl implements Revision {
 				}
 			}
 		}
-		if (isStateSet())
+		if (isStateSet()) {
 			getState().load(create);
+			getProject().initAdapters(this);
+		}
 	}
 
 	/**

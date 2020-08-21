@@ -2440,7 +2440,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 				"needCompletionNotification", null, 0, 1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getProject_CompletionNotificationAdapter(), this.getCompletionNotificationAdapter(), null,
-				"completionNotificationAdapter", null, 0, 1, Project.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				"completionNotificationAdapter", null, 0, 1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getProject_ResourceReloadListener(), this.getResourceChangeListener(), null,
 				"resourceReloadListener", null, 0, 1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE,
