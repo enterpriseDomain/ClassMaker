@@ -487,16 +487,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
-	public EReference getContribution_ModelResourceAdapter() {
-		return (EReference) contributionEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
 	public EClass getRevision() {
 		return revisionEClass;
 	}
@@ -1327,6 +1317,16 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
+	public EReference getProject_ModelResourceAdapter() {
+		return (EReference) projectEClass.getEStructuralFeatures().get(16);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
 	public EClass getModelPair() {
 		return modelPairEClass;
 	}
@@ -1754,7 +1754,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		contributionEClass = createEClass(CONTRIBUTION);
 		createEAttribute(contributionEClass, CONTRIBUTION__DEPENDENCIES);
 		createEAttribute(contributionEClass, CONTRIBUTION__LATEST_VERSION);
-		createEReference(contributionEClass, CONTRIBUTION__MODEL_RESOURCE_ADAPTER);
 
 		revisionEClass = createEClass(REVISION);
 		createEReference(revisionEClass, REVISION__STATE);
@@ -1865,6 +1864,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		createEReference(projectEClass, PROJECT__SELECT_REVEAL_HANDLER);
 		createEAttribute(projectEClass, PROJECT__VERSION);
 		createEReference(projectEClass, PROJECT__STATE);
+		createEReference(projectEClass, PROJECT__MODEL_RESOURCE_ADAPTER);
 
 		resourceEClass = createEClass(RESOURCE);
 
@@ -1946,12 +1946,12 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 		// Add supertypes to classes
 		contributionEClass.getESuperTypes().add(this.getProject());
-		contributionEClass.getESuperTypes().add(this.getItem());
 		revisionEClass.getESuperTypes().add(this.getItem());
 		stateEClass.getESuperTypes().add(this.getItem());
 		stateEClass.getESuperTypes().add(this.getISchedulingRule());
 		workspaceEClass.getESuperTypes().add(this.getISchedulingRule());
 		projectEClass.getESuperTypes().add(this.getISchedulingRule());
+		projectEClass.getESuperTypes().add(this.getItem());
 		resourceAdapterEClass.getESuperTypes().add(this.getAdapter());
 		completionNotificationAdapterEClass.getESuperTypes().add(this.getAdapter());
 
@@ -1964,10 +1964,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEAttribute(getContribution_LatestVersion(), this.getOSGiVersion(), "latestVersion", null, 0, 1,
 				Contribution.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				IS_DERIVED, IS_ORDERED);
-		initEReference(getContribution_ModelResourceAdapter(), this.getResourceAdapter(),
-				this.getResourceAdapter_Project(), "modelResourceAdapter", null, 0, 1, Contribution.class,
-				!IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(contributionEClass, this.getRevision(), "createRevision", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
@@ -2464,6 +2460,9 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEReference(getProject_State(), this.getState(), null, "state", null, 0, 1, Project.class, IS_TRANSIENT,
 				IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED,
 				IS_ORDERED);
+		initEReference(getProject_ModelResourceAdapter(), this.getResourceAdapter(), this.getResourceAdapter_Project(),
+				"modelResourceAdapter", null, 0, 1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE,
+				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(projectEClass, null, "create", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -2587,10 +2586,9 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEAttribute(getResourceAdapter_Filename(), ecorePackage.getEString(), "filename", null, 0, 1,
 				ResourceAdapter.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				IS_DERIVED, IS_ORDERED);
-		initEReference(getResourceAdapter_Project(), this.getContribution(),
-				this.getContribution_ModelResourceAdapter(), "project", null, 0, 1, ResourceAdapter.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getResourceAdapter_Project(), this.getProject(), this.getProject_ModelResourceAdapter(),
+				"project", null, 0, 1, ResourceAdapter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(classMakerServiceEClass, ClassMakerService.class, "ClassMakerService", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);

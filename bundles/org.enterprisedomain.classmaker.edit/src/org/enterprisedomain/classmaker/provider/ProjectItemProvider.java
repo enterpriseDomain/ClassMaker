@@ -39,9 +39,10 @@ import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.Project;
 
 /**
- * This is the item provider adapter for a {@link org.enterprisedomain.classmaker.Project} object.
- * <!-- begin-user-doc
+ * This is the item provider adapter for a
+ * {@link org.enterprisedomain.classmaker.Project} object. <!-- begin-user-doc
  * --> <!-- end-user-doc -->
+ * 
  * @generated
  */
 public class ProjectItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
@@ -67,6 +68,12 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addModelNamePropertyDescriptor(object);
+			addPhasePropertyDescriptor(object);
+			addLanguagePropertyDescriptor(object);
+			addParentPropertyDescriptor(object);
+			addLocalePropertyDescriptor(object);
+			addProjectPropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
 			addProjectNamePropertyDescriptor(object);
 			addChildrenPropertyDescriptor(object);
@@ -85,9 +92,97 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 	}
 
 	/**
-	 * This adds a property descriptor for the Name feature.
-	 * <!-- begin-user-doc -->
+	 * This adds a property descriptor for the Model Name feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected void addModelNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Item_modelName_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Item_modelName_feature", "_UI_Item_type"),
+						ClassMakerPackage.Literals.ITEM__MODEL_NAME, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Phase feature. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected void addPhasePropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Item_phase_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Item_phase_feature", "_UI_Item_type"),
+						ClassMakerPackage.Literals.ITEM__PHASE, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Language feature. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected void addLanguagePropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Item_language_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Item_language_feature", "_UI_Item_type"),
+						ClassMakerPackage.Literals.ITEM__LANGUAGE, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Parent feature. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected void addParentPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Item_parent_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Item_parent_feature", "_UI_Item_type"),
+						ClassMakerPackage.Literals.ITEM__PARENT, true, false, true, null, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Locale feature. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected void addLocalePropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Item_locale_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Item_locale_feature", "_UI_Item_type"),
+						ClassMakerPackage.Literals.ITEM__LOCALE, false, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Project feature. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected void addProjectPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Item_project_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Item_project_feature", "_UI_Item_type"),
+						ClassMakerPackage.Literals.ITEM__PROJECT, true, false, true, null, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Name feature. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addNamePropertyDescriptor(Object object) {
@@ -116,9 +211,9 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 	}
 
 	/**
-	 * This adds a property descriptor for the Children feature.
-	 * <!-- begin-user-doc
+	 * This adds a property descriptor for the Children feature. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addChildrenPropertyDescriptor(Object object) {
@@ -132,9 +227,9 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 	}
 
 	/**
-	 * This adds a property descriptor for the Dirty feature.
-	 * <!-- begin-user-doc
+	 * This adds a property descriptor for the Dirty feature. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addDirtyPropertyDescriptor(Object object) {
@@ -166,6 +261,7 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 	/**
 	 * This adds a property descriptor for the Need Completion Notification feature.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addNeedCompletionNotificationPropertyDescriptor(Object object) {
@@ -181,6 +277,7 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 	/**
 	 * This adds a property descriptor for the Resource Reload Listener feature.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addResourceReloadListenerPropertyDescriptor(Object object) {
@@ -210,9 +307,9 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 	}
 
 	/**
-	 * This adds a property descriptor for the Revision feature.
-	 * <!-- begin-user-doc
+	 * This adds a property descriptor for the Revision feature. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addRevisionPropertyDescriptor(Object object) {
@@ -257,9 +354,9 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 	}
 
 	/**
-	 * This adds a property descriptor for the Version feature.
-	 * <!-- begin-user-doc
+	 * This adds a property descriptor for the Version feature. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addVersionPropertyDescriptor(Object object) {
@@ -273,9 +370,9 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 	}
 
 	/**
-	 * This adds a property descriptor for the State feature.
-	 * <!-- begin-user-doc
+	 * This adds a property descriptor for the State feature. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addStatePropertyDescriptor(Object object) {
@@ -288,37 +385,43 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an
+	 * appropriate feature for an {@link org.eclipse.emf.edit.command.AddCommand},
+	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(ClassMakerPackage.Literals.ITEM__DOMAIN_MODEL);
 			childrenFeatures.add(ClassMakerPackage.Literals.PROJECT__CHILDREN);
 			childrenFeatures.add(ClassMakerPackage.Literals.PROJECT__REVISIONS);
+			childrenFeatures.add(ClassMakerPackage.Literals.PROJECT__MODEL_RESOURCE_ADAPTER);
 		}
 		return childrenFeatures;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
+		// Check the type of the specified child object and return the proper feature to
+		// use for
 		// adding (see {@link AddCommand}) it as a child.
 
 		return super.getChildFeature(object, child);
 	}
 
 	/**
-	 * This returns Project.gif.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This returns Project.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -327,9 +430,9 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 	}
 
 	/**
-	 * This returns the label text for the adapted class.
-	 * <!-- begin-user-doc -->
+	 * This returns the label text for the adapted class. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -340,9 +443,10 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This handles model notifications by calling {@link #updateChildren} to update
+	 * any cached children and by creating a viewer notification, which it passes to
+	 * {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -350,6 +454,11 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Project.class)) {
+		case ClassMakerPackage.PROJECT__MODEL_NAME:
+		case ClassMakerPackage.PROJECT__PHASE:
+		case ClassMakerPackage.PROJECT__LANGUAGE:
+		case ClassMakerPackage.PROJECT__CUSTOMIZERS:
+		case ClassMakerPackage.PROJECT__LOCALE:
 		case ClassMakerPackage.PROJECT__NAME:
 		case ClassMakerPackage.PROJECT__PROJECT_NAME:
 		case ClassMakerPackage.PROJECT__DIRTY:
@@ -360,8 +469,10 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 		case ClassMakerPackage.PROJECT__VERSION:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
+		case ClassMakerPackage.PROJECT__DOMAIN_MODEL:
 		case ClassMakerPackage.PROJECT__CHILDREN:
 		case ClassMakerPackage.PROJECT__REVISIONS:
+		case ClassMakerPackage.PROJECT__MODEL_RESOURCE_ADAPTER:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
@@ -369,18 +480,25 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-	 * that can be created under this object.
-	 * <!-- begin-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing
+	 * the children that can be created under this object. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
+		newChildDescriptors
+				.add(createChildParameter(ClassMakerPackage.Literals.ITEM__CUSTOMIZERS, ClassMakerFactory.eINSTANCE
+						.create(ClassMakerPackage.Literals.STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY)));
+
 		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				EcoreFactory.eINSTANCE.createFromString(EcorePackage.Literals.EJAVA_OBJECT, null))); // TODO: ensure this is a valid literal value
+				EcoreFactory.eINSTANCE.createFromString(EcorePackage.Literals.EJAVA_OBJECT, null))); // TODO: ensure
+																										// this is a
+																										// valid literal
+																										// value
 
 		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__REVISIONS,
 				ClassMakerFactory.eINSTANCE.create(ClassMakerPackage.Literals.VERSION_TO_REVISION_MAP_ENTRY)));

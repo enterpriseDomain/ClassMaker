@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 Kyrill Zotkin
+ * Copyright 2019-2021 Kyrill Zotkin
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,15 +24,11 @@ import org.eclipse.emf.ecp.editor.e3.ECPEditorContext;
 import org.eclipse.emf.ecp.editor.e3.MEEditorInput;
 import org.eclipse.emf.ecp.explorereditorbridge.internal.EditorContext;
 import org.eclipse.emf.ecp.explorereditorbridge.internal.EditorModelElementOpener;
-import org.eclipse.emf.ecp.ui.util.ECPModelElementOpener;
-import org.eclipse.emf.ecp.view.spi.context.ViewModelContext;
-import org.eclipse.emf.ecp.view.spi.context.ViewModelContextDisposeListener;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.ide.IDE;
 import org.enterprisedomain.classmaker.Project;
 
 public class ModelElementOpener extends EditorModelElementOpener {

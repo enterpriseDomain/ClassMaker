@@ -15,6 +15,7 @@
  */
 package org.enterprisedomain.classmaker.core;
 
+import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -80,6 +81,8 @@ public class ClassMakerPlugin extends Plugin {
 	private static ServiceTracker<ClassMakerService, ClassMakerServiceImpl> tracker;
 
 	private static ClassMakerService service;
+
+	private static PrintStream defaultOutputStream = System.out;
 
 	private boolean turnOffAutoBuilding = Platform.getPreferencesService().getBoolean(PLUGIN_ID,
 			TURN_OFF_AUTO_BUILDING_PREF_KEY, false, null);
@@ -155,6 +158,14 @@ public class ClassMakerPlugin extends Plugin {
 		instance = null;
 	}
 
+	public static PrintStream getDefaultOutputStream() {
+		return defaultOutputStream;
+	}
+
+	public static void setDefaultOutputStream(PrintStream defaultOutputStream) {
+		ClassMakerPlugin.defaultOutputStream = defaultOutputStream;
+	}
+
 	public static void setRunnerWithProgress(IRunnerWithProgress runner) {
 		ClassMakerPlugin.runner = runner;
 	}
@@ -212,7 +223,7 @@ public class ClassMakerPlugin extends Plugin {
 
 	private static IProgressMonitor createProgressMonitor() {
 		if (monitorClass == null || monitorParameters == null)
-			setMonitorParameters(CodeGenUtil.EclipseUtil.StreamProgressMonitor.class, System.out);
+			setMonitorParameters(CodeGenUtil.EclipseUtil.StreamProgressMonitor.class, defaultOutputStream);
 		return new WrappingProgressMonitor(ReflectiveFactory.create(monitorClass, monitorParameters));
 	}
 

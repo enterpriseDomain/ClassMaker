@@ -1,5 +1,5 @@
 /**
- * Copyright 2012-2018 Kyrill Zotkin
+ * Copyright 2012-2021 Kyrill Zotkin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -208,7 +208,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 
 	@Test
 	public void osgiService() throws Exception {
-		BundleContext bundleContext = FrameworkUtil.getBundle(this.getClass()).getBundleContext();
+		BundleContext bundleContext = FrameworkUtil.getBundle(ClassMakerService.class).getBundleContext();
 		ServiceReference<?> serviceReference = bundleContext.getServiceReference(ClassMakerService.class);
 		ClassMakerService tested = (ClassMakerService) bundleContext.getService(serviceReference);
 		assertNotNull(tested);
@@ -640,11 +640,13 @@ public class TestEnterpriseDomain extends AbstractTest {
 	public void immutable() throws Exception {
 		setPackageName("immutable");
 		EPackage eP = createEPackage("0.0.1");
+		setClassName("C");
 		EClass eC = createEClass();
 		setAttributeName("C");
 		setAttributeType(EcorePackage.Literals.EJAVA_OBJECT);
 		final EAttribute at = createEAttribute();
 		EcoreUtil.setSuppressedVisibility(at, EcoreUtil.SET, true);
+		at.setChangeable(false);
 		eC.getEStructuralFeatures().add(at);
 		eP.getEClassifiers().add(eC);
 		final Contribution c = service.getWorkspace().createContribution(eP, getProgressMonitor());
@@ -653,11 +655,8 @@ public class TestEnterpriseDomain extends AbstractTest {
 			@Override
 			public Object customize(EList<Object> args) {
 				GenModel genModel = ((GenModel) args.get(1));
-				genModel.setDynamicTemplates(true);
-				genModel.setTemplateDirectory("platform:/plugin/org.enterprisedomain.tests/templates");
-				genModel.getGenPackages().get(0).setPrefix("Wonder");
 				genModel.setSuppressInterfaces(false);
-				return super.customize(args);
+				return null;
 			}
 
 		};
@@ -672,8 +671,8 @@ public class TestEnterpriseDomain extends AbstractTest {
 				try {
 					EPackage e = null;
 					Class<?> cl = null;
-					e = (EPackage) ((Contribution) result).getDomainModel().getGenerated();
-					cl = e.getClass().getClassLoader().loadClass(getPackageName() + "." + getClassName());
+					e = (EPackage) result.getDomainModel().getGenerated();
+					cl = TestEnterpriseDomain.class.getClassLoader().loadClass(getPackageName() + "." + getClassName());
 					Method getMethod0 = cl.getMethod("get" + at.getName(), new Class<?>[] {});
 					EClass ec = (EClass) e.getEClassifier(getClassName());
 					EObject eo = e.getEFactoryInstance().create(ec);

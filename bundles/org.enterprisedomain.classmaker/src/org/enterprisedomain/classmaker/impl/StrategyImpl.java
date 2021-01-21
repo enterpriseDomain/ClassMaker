@@ -263,9 +263,9 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 	 * @generated NOT
 	 */
 	public Worker createGenerator() {
-		getGenerators().add(
-				create(ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "project.create.generator"), //$NON-NLS-1$
-						getGenerators().size(), getEclipseProject(), getState().getTimestamp()));
+		getGenerators().add(createWithCustomizer(
+				ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "project.create.generator"), //$NON-NLS-1$
+				getGenerators().size(), getEclipseProject(), getState().getTimestamp()));
 		return getGenerators().get(getGenerators().size() - 1);
 	}
 
@@ -275,9 +275,9 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 	 * @generated NOT
 	 */
 	public Worker createExporter() {
-		getExporters().add(
-				create(ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "project.create.exporter"), //$NON-NLS-1$
-						getExporters().size(), Long.valueOf(getState().getTimestamp())));
+		getExporters().add(createWithCustomizer(
+				ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "project.create.exporter"), //$NON-NLS-1$
+				getExporters().size(), Long.valueOf(getState().getTimestamp())));
 		return getExporters().get(getExporters().size() - 1);
 	}
 
@@ -287,9 +287,9 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 	 * @generated NOT
 	 */
 	public Worker createInstaller() {
-		getInstallers().add(
-				create(ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "project.create.installer"), //$NON-NLS-1$
-						getInstallers().size(), Long.valueOf(getState().getTimestamp())));
+		getInstallers().add(createWithCustomizer(
+				ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "project.create.installer"), //$NON-NLS-1$
+				getInstallers().size(), Long.valueOf(getState().getTimestamp())));
 		return getInstallers().get(getInstallers().size() - 1);
 	}
 
@@ -299,9 +299,9 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 	 * @generated NOT
 	 */
 	public Worker createModelLoader() {
-		getLoaders().add(
-				create(ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "project.create.loader"), //$NON-NLS-1$
-						getLoaders().size(), Long.valueOf(getState().getTimestamp())));
+		getLoaders().add(createWithCustomizer(
+				ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "project.create.loader"), //$NON-NLS-1$
+				getLoaders().size(), Long.valueOf(getState().getTimestamp())));
 		return getLoaders().get(getLoaders().size() - 1);
 	}
 
@@ -493,17 +493,26 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
-	private Worker create(StageQualifier stage, Object... customizerArgs) {
-		SortedSet<Customizer> customizer = new TreeSet<Customizer>(new Customizer.CustomizerComparator());
+	private Worker createWithCustomizer(StageQualifier stage, Object... customizerArgs) {
+		SortedSet<Customizer> customizers = createCustomizers(stage);
+		if (customizers == null)
+			return null;
+		Customizer customizer = customizers.last();
+		return (Worker) (customizer.customize(ECollections.asEList(customizerArgs)));
+	}
+
+	private SortedSet<Customizer> createCustomizers(StageQualifier stage) {
+		SortedSet<Customizer> customizers = new TreeSet<Customizer>(new Customizer.CustomizerComparator());
+
 		for (StageQualifier filter : getState().getStateCustomizers().keySet())
 			if (stage.equals(filter))
-				customizer.add(getState().getStateCustomizers().get(filter));
+				customizers.add(getState().getStateCustomizers().get(filter));
 		for (StageQualifier filter : getState().getProject().getWorkspace().getCustomizers().keySet())
 			if (filter.equals(stage))
-				customizer.add(getState().getProject().getWorkspace().getCustomizers().get(filter));
-		if (customizer.isEmpty())
+				customizers.add(getState().getProject().getWorkspace().getCustomizers().get(filter));
+		if (customizers.isEmpty())
 			return null;
-		return (Worker) (customizer.last().customize(ECollections.asEList(customizerArgs)));
+		return customizers;
 	}
 
 	/**

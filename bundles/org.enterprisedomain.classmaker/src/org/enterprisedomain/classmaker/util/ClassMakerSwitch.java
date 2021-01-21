@@ -111,9 +111,9 @@ public class ClassMakerSwitch<T1> extends Switch<T1> {
 			if (result == null)
 				result = caseProject(contribution);
 			if (result == null)
-				result = caseItem(contribution);
-			if (result == null)
 				result = caseISchedulingRule(contribution);
+			if (result == null)
+				result = caseItem(contribution);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -260,6 +260,8 @@ public class ClassMakerSwitch<T1> extends Switch<T1> {
 			T1 result = caseProject(project);
 			if (result == null)
 				result = caseISchedulingRule(project);
+			if (result == null)
+				result = caseItem(project);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;

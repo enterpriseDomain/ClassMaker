@@ -1,5 +1,5 @@
 /**
- * Copyright 2012-2018 Kyrill Zotkin
+ * Copyright 2012-2021 Kyrill Zotkin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -115,7 +115,7 @@ public class PDEPluginExporter extends AbstractExporter {
 			}
 			if (!models.isEmpty())
 				info.items = models.toArray();
-//			joinJob(Messages.JobNamePDEExport);
+			joinJob(Messages.JobNamePDEExport);
 			final SubMonitor pm = SubMonitor.convert(monitor);
 			pm.setTaskName(Messages.TaskNamePluginExport);
 			pm.subTask(Messages.SubTaskNamePluginExport);

@@ -129,6 +129,7 @@ public class SCMRegistryImpl<T> extends EObjectImpl implements SCMRegistry<T> {
 	 * @generated NOT
 	 */
 	public SCMOperator<T> createSCMOperator(String projectName) {
+		@SuppressWarnings("unchecked")
 		SCMOperator<T> operator = (SCMOperator<T>) (new GitSCMOperator());
 		operator.setProjectName(projectName);
 		operator.setRegistry(this);

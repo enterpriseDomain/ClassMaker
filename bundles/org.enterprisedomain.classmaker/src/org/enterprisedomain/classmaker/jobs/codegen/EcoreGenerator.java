@@ -285,13 +285,14 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 						if (!e.getPath().equals(new Path(IPath.SEPARATOR + getProject().getName() + ".editor")))
 							editorEntries.add(e);
 				entries.add(JavaCore.newSourceEntry(
-						new Path(IPath.SEPARATOR + getProject().getName() + IPath.SEPARATOR + "src" + IPath.SEPARATOR),
+						new Path(IPath.SEPARATOR + getProject().getName() + IPath.SEPARATOR + SOURCE_FOLDER_NAME
+								+ IPath.SEPARATOR),
 						null, new Path(
 								IPath.SEPARATOR + getProject().getName() + IPath.SEPARATOR + "bin" + IPath.SEPARATOR)));
 				if (editJavaProject != null) {
 					IClasspathEntry e = JavaCore.newSourceEntry(
-							new Path(IPath.SEPARATOR + getProject().getName() + ".edit" + IPath.SEPARATOR + "src"
-									+ IPath.SEPARATOR),
+							new Path(IPath.SEPARATOR + getProject().getName() + ".edit" + IPath.SEPARATOR
+									+ SOURCE_FOLDER_NAME + IPath.SEPARATOR),
 							null, new Path(IPath.SEPARATOR + getProject().getName() + ".edit" + IPath.SEPARATOR + "bin"
 									+ IPath.SEPARATOR));
 					if (!editEntries.contains(e))
@@ -299,8 +300,8 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 				}
 				if (editorJavaProject != null) {
 					IClasspathEntry e = JavaCore.newSourceEntry(
-							new Path(IPath.SEPARATOR + getProject().getName() + ".editor" + IPath.SEPARATOR + "src"
-									+ IPath.SEPARATOR),
+							new Path(IPath.SEPARATOR + getProject().getName() + ".editor" + IPath.SEPARATOR
+									+ SOURCE_FOLDER_NAME + IPath.SEPARATOR),
 							null, new Path(IPath.SEPARATOR + getProject().getName() + ".editor" + IPath.SEPARATOR
 									+ "bin" + IPath.SEPARATOR));
 					if (!editorEntries.contains(e))
@@ -330,8 +331,8 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 				}
 				if (editorJavaProject != null) {
 					IClasspathEntry e = JavaCore.newSourceEntry(
-							new Path(IPath.SEPARATOR + getProject().getName() + ".editor" + IPath.SEPARATOR + "src"
-									+ IPath.SEPARATOR),
+							new Path(IPath.SEPARATOR + getProject().getName() + ".editor" + IPath.SEPARATOR
+									+ SOURCE_FOLDER_NAME + IPath.SEPARATOR),
 							null, new Path(IPath.SEPARATOR + getProject().getName() + ".editor" + IPath.SEPARATOR
 									+ "bin" + IPath.SEPARATOR));
 					if (!editorEntries.contains(e))
@@ -385,6 +386,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 				built.acquire();
 			} catch (JavaModelException mex) {
 				throw new CoreException(ClassMakerPlugin.createErrorStatus(mex));
+			} catch (OperationCanceledException ocex) {
 			} catch (InterruptedException iex) {
 				monitor.setCanceled(true);
 			} finally {

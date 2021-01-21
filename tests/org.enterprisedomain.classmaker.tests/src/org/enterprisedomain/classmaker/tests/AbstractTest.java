@@ -240,11 +240,13 @@ public abstract class AbstractTest {
 		return test(e, attributeName, attributeValue);
 	}
 
+	@SuppressWarnings("unchecked")
 	private Future<? extends EPackage> save(final EPackage ePackage, Executor executor, IProgressMonitor monitor)
 			throws CoreException, InterruptedException {
 		return (Future<? extends EPackage>) service.make(ePackage, executor, monitor);
 	}
 
+	@SuppressWarnings("unchecked")
 	private Future<? extends EPackage> updateAndSave(EPackage ePackage, EPackage updated, Executor executor,
 			IProgressMonitor monitor) throws CoreException {
 		return (Future<? extends EPackage>) service.replace(ePackage, updated, executor, monitor);

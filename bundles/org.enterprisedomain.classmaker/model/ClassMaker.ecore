@@ -2,7 +2,7 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="classmaker" nsURI="http://org/enterprisedomain/ClassMaker/0.8.28"
     nsPrefix="ClassMaker">
-  <eClassifiers xsi:type="ecore:EClass" name="Contribution" eSuperTypes="#//Project #//Item">
+  <eClassifiers xsi:type="ecore:EClass" name="Contribution" eSuperTypes="#//Project">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Software contribution project item. Basically, it contibutes the software piece to the body of main program."/>
     </eAnnotations>
@@ -31,12 +31,6 @@
         changeable="false" volatile="true" transient="true" derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Max {@link Revision#getVersion() &lt;em>Version&lt;/em>} number of all {@link #getRevisions() &lt;em>Revisions&lt;/em>}."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="modelResourceAdapter" eType="#//ResourceAdapter"
-        changeable="false" containment="true" eOpposite="#//ResourceAdapter/project">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A {@link ResourceAdapter &lt;em>&lt;b>ResourceAdapter&lt;/b>&lt;/em>} for  &lt;em>Contibution&lt;/em>."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -748,7 +742,7 @@
       <eParameters name="projectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Project" eSuperTypes="#//ISchedulingRule">
+  <eClassifiers xsi:type="ecore:EClass" name="Project" eSuperTypes="#//ISchedulingRule #//Item">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Default project class."/>
     </eAnnotations>
@@ -914,6 +908,12 @@
         <details key="documentation" value="Currently checked out &lt;em>State&lt;/em>."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modelResourceAdapter" eType="#//ResourceAdapter"
+        changeable="false" containment="true" eOpposite="#//ResourceAdapter/project">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A {@link ResourceAdapter &lt;em>&lt;b>ResourceAdapter&lt;/b>&lt;/em>} for  &lt;em>Project&lt;/em>."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Name" instanceClassName="java.lang.String">
     <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
@@ -964,8 +964,8 @@
         <details key="documentation" value="{@link org.eclipse.emf.ecore.resource.Resource Resource} file's path."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="project" eType="#//Contribution"
-        eOpposite="#//Contribution/modelResourceAdapter"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="project" eType="#//Project"
+        eOpposite="#//Project/modelResourceAdapter"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClassMakerService">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

@@ -21,7 +21,6 @@ import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
-import org.eclipse.emf.ecore.EObject;
 import org.osgi.framework.Version;
 
 /**
@@ -66,13 +65,16 @@ import org.osgi.framework.Version;
  * <em>Version</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.Project#getState
  * <em>State</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Project#getModelResourceAdapter
+ * <em>Model Resource Adapter</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject()
- * @model superTypes="org.enterprisedomain.classmaker.ISchedulingRule"
+ * @model superTypes="org.enterprisedomain.classmaker.ISchedulingRule
+ *        org.enterprisedomain.classmaker.Item"
  * @generated
  */
-public interface Project extends EObject, ISchedulingRule {
+public interface Project extends ISchedulingRule, Item {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute. The default value
 	 * is <code>""</code>. <!-- begin-user-doc -->
@@ -458,6 +460,23 @@ public interface Project extends EObject, ISchedulingRule {
 	 * @generated
 	 */
 	State getState();
+
+	/**
+	 * Returns the value of the '<em><b>Model Resource Adapter</b></em>' containment
+	 * reference. It is bidirectional and its opposite is
+	 * '{@link org.enterprisedomain.classmaker.ResourceAdapter#getProject
+	 * <em>Project</em>}'. <!-- begin-user-doc --> <!-- end-user-doc --> <!--
+	 * begin-model-doc --> A {@link ResourceAdapter <em><b>ResourceAdapter</b></em>}
+	 * for <em>Project</em>. <!-- end-model-doc -->
+	 * 
+	 * @return the value of the '<em>Model Resource Adapter</em>' containment
+	 *         reference.
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject_ModelResourceAdapter()
+	 * @see org.enterprisedomain.classmaker.ResourceAdapter#getProject
+	 * @model opposite="project" containment="true" changeable="false"
+	 * @generated
+	 */
+	ResourceAdapter getModelResourceAdapter();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

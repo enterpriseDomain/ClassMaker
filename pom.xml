@@ -21,6 +21,7 @@
 		<module>bundles/org.enterprisedomain.classmaker.emfstore</module>
 		<module>bundles/org.enterprisedomain.ecp</module>
 		<module>bundles/org.enterprisedomain.ecp.filter</module>
+		<module>bundles/org.enterprisedomain.ecp.edit</module>
 		<module>bundles/org.enterprisedomain.ecp.ui</module>
 		<module>bundles/org.enterprisedomain.workbench</module>
 		<module>features/org.enterprisedomain.classmaker.feature</module>
@@ -52,6 +53,40 @@
 			<build>
 				<plugins>
 					<plugin>
+						<groupId>org.eclipse.tycho.extras</groupId>
+						<artifactId>tycho-source-feature-plugin</artifactId>
+						<version>${tycho.version}</version>
+						<executions>
+							<execution>
+								<id>source-feature</id>
+								<phase>package</phase>
+								<goals>
+									<goal>source-feature</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<excludes>
+ 								<plugin id="org.enterprisedomain.workbench.product" />
+ 								<plugin id="org.enterprisedomain.target" />
+ 								<plugin id="org.enterprisedomain.update" />
+ 							</excludes>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-source-plugin</artifactId>
+						<version>${tycho.version}</version>
+						<executions>
+							<execution>
+								<id>plugin-source</id>
+								<goals>
+									<goal>plugin-source</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
 						<inherited>true</inherited>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-source-plugin</artifactId>
@@ -61,6 +96,20 @@
 								<id>attach-sources</id>
 								<goals>
 									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-p2-plugin</artifactId>
+						<version>${tycho.version}</version>
+						<executions>
+							<execution>
+								<id>attach-p2-metadata</id>
+								<phase>package</phase>
+								<goals>
+									<goal>p2-metadata</goal>
 								</goals>
 							</execution>
 						</executions>
