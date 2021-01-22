@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ecp" nsURI="http://org/enterprisedomain/ClassMaker/ECP/0.8.37"
+    nsPrefix="ECP">
+  <eClassifiers xsi:type="ecore:EClass" name="EOperationInvocation">
+    <eOperations name="execute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eOperation" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EOperation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
+        eType="#//EParameterToObjectMapEntry" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="result" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EParameterToObjectMapEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="key" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EParameter"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+  </eClassifiers>
+</ecore:EPackage>

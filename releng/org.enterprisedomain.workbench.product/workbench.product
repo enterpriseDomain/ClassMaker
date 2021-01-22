@@ -301,13 +301,15 @@
       <feature id="org.eclipse.emf.ecp.view.horizontal.feature"/>
       <feature id="org.eclipse.emf.ecp.viewmodel.feature"/>
       <feature id="org.eclipse.e4.rcp" installMode="root"/>
-      <feature id="org.eclipse.equinox.p2.core.feature"/>
+      <feature id="org.eclipse.equinox.p2.core.feature" installMode="root"/>
       <feature id="org.eclipse.ecf.core.feature"/>
       <feature id="org.eclipse.ecf.filetransfer.feature"/>
       <feature id="org.eclipse.ecf.core.ssl.feature"/>
       <feature id="org.eclipse.ecf.filetransfer.ssl.feature"/>
       <feature id="org.eclipse.ecf.filetransfer.httpclient45.feature"/>
       <feature id="org.enterprisedomain.classmaker.ecp.feature"/>
+      <feature id="org.eclipse.equinox.p2.extras.feature" installMode="root"/>
+      <feature id="org.eclipse.rcp" installMode="root"/>
    </features>
 
    <configurations>

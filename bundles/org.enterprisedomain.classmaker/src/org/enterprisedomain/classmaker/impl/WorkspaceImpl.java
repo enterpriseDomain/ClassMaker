@@ -26,6 +26,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.SortedSet;
 
@@ -236,6 +237,16 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 					for (Customizer customizer : customizers)
 						this.customizers.put(ClassMakerService.Stages.lookup(id), customizer);
 			}
+			this.customizers.sort(new Comparator<Map.Entry<StageQualifier, Customizer>>() {
+
+				@Override
+				public int compare(Entry<StageQualifier, Customizer> o1, Entry<StageQualifier, Customizer> o2) {
+					if (o1.getKey().equals(o2.getKey())) {
+						return o1.getValue().getRank() - o2.getValue().getRank();
+					}
+					return 0;
+				}
+			});
 		}
 		return customizers;
 	}
@@ -393,14 +404,11 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			}
 		} else
 			for (Project project : getProjects()) {
-				if (!(project instanceof Contribution))
-					project.initialize(false);
-				else
-					try {
-						((Contribution) project).load(false);
-					} catch (CoreException e) {
-						ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
-					}
+				try {
+					project.load(false);
+				} catch (CoreException e) {
+					ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
+				}
 			}
 		EList<Customizer> customizers = ECollections.newBasicEList();
 		ListIterator<Map.Entry<StageQualifier, Customizer>> it = getCustomizers().listIterator();
@@ -414,15 +422,9 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			if (filter.equals(ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "workspace.init")))
 				customizers.add(next.getValue());
 		}
-		ECollections.sort(customizers, new Comparator<Customizer>() {
-
-			@Override
-			public int compare(Customizer arg0, Customizer arg1) {
-				return arg0.getRank() - arg1.getRank();
-			}
-
-		});
-		customizers.get(0).customize((EList<Object>) (EList<?>) ECollections.asEList(this));
+		ECollections.sort(customizers, new Customizer.CustomizerComparator());
+		for (Customizer customizer : customizers)
+			customizer.customize((EList<Object>) (EList<?>) ECollections.asEList(this));
 	}
 
 	private static boolean targetPlatformAlreadySet = false;

@@ -7,7 +7,7 @@
 	<artifactId>org.enterprisedomain.configuration</artifactId>
 	<version>0.8.37-SNAPSHOT</version>
 	<properties>
-		<tycho.version>1.7.0</tycho.version>
+		<tycho.version>2.1.0</tycho.version>
 		<tycho.extras.version>${tycho.version}</tycho.extras.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<org.osgi.framework.system.capabilities>
@@ -21,19 +21,19 @@
 			<layout>p2</layout>
 		</repository>
 		<repository>
-			<id>2020-06</id>
+			<id>2020-12</id>
 			<layout>p2</layout>
-			<url>http://download.eclipse.org/releases/2020-06</url>
+			<url>http://download.eclipse.org/releases/2020-12</url>
 		</repository>
 		<repository>
 			<id>ecp</id>
 			<layout>p2</layout>
-			<url>http://download.eclipse.org/ecp/releases/releases_target_124</url>
+			<url>http://download.eclipse.org/ecp/releases/releases_target_125</url>
 		</repository>
 		<repository>
 			<id>eclipse</id>
 			<layout>p2</layout>
-			<url>https://download.eclipse.org/eclipse/updates/4.16</url>
+			<url>https://download.eclipse.org/eclipse/updates/4.18</url>
 		</repository>
 		<repository>
 			<id>bintray</id>

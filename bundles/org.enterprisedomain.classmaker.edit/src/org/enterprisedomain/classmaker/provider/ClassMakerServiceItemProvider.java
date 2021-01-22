@@ -93,9 +93,9 @@ public class ClassMakerServiceItemProvider extends ItemProviderAdapter implement
 	}
 
 	/**
-	 * This returns the label text for the adapted class.
-	 * <!-- begin-user-doc -->
+	 * This returns the label text for the adapted class. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -104,9 +104,10 @@ public class ClassMakerServiceItemProvider extends ItemProviderAdapter implement
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This handles model notifications by calling {@link #updateChildren} to update
+	 * any cached children and by creating a viewer notification, which it passes to
+	 * {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -116,10 +117,10 @@ public class ClassMakerServiceItemProvider extends ItemProviderAdapter implement
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-	 * that can be created under this object.
-	 * <!-- begin-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing
+	 * the children that can be created under this object. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

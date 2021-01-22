@@ -31,7 +31,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
-import org.enterprisedomain.classmaker.Contribution;
+import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.ResourceAdapter;
 
 /**
@@ -152,10 +152,10 @@ public class ResourceAdapterImpl extends EObjectImpl implements ResourceAdapter 
 	 * @generated
 	 */
 	@Override
-	public Contribution getProject() {
+	public Project getProject() {
 		if (eContainerFeatureID() != ClassMakerPackage.RESOURCE_ADAPTER__PROJECT)
 			return null;
-		return (Contribution) eInternalContainer();
+		return (Project) eInternalContainer();
 	}
 
 	/**
@@ -163,7 +163,7 @@ public class ResourceAdapterImpl extends EObjectImpl implements ResourceAdapter 
 	 * 
 	 * @generated
 	 */
-	public NotificationChain basicSetProject(Contribution newProject, NotificationChain msgs) {
+	public NotificationChain basicSetProject(Project newProject, NotificationChain msgs) {
 		msgs = eBasicSetContainer((InternalEObject) newProject, ClassMakerPackage.RESOURCE_ADAPTER__PROJECT, msgs);
 		return msgs;
 	}
@@ -174,7 +174,7 @@ public class ResourceAdapterImpl extends EObjectImpl implements ResourceAdapter 
 	 * @generated
 	 */
 	@Override
-	public void setProject(Contribution newProject) {
+	public void setProject(Project newProject) {
 		if (newProject != eInternalContainer()
 				|| (eContainerFeatureID() != ClassMakerPackage.RESOURCE_ADAPTER__PROJECT && newProject != null)) {
 			if (EcoreUtil.isAncestor(this, newProject))
@@ -184,7 +184,7 @@ public class ResourceAdapterImpl extends EObjectImpl implements ResourceAdapter 
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newProject != null)
 				msgs = ((InternalEObject) newProject).eInverseAdd(this,
-						ClassMakerPackage.CONTRIBUTION__MODEL_RESOURCE_ADAPTER, Contribution.class, msgs);
+						ClassMakerPackage.PROJECT__MODEL_RESOURCE_ADAPTER, Project.class, msgs);
 			msgs = basicSetProject(newProject, msgs);
 			if (msgs != null)
 				msgs.dispatch();
@@ -204,7 +204,7 @@ public class ResourceAdapterImpl extends EObjectImpl implements ResourceAdapter 
 		case ClassMakerPackage.RESOURCE_ADAPTER__PROJECT:
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			return basicSetProject((Contribution) otherEnd, msgs);
+			return basicSetProject((Project) otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -232,8 +232,8 @@ public class ResourceAdapterImpl extends EObjectImpl implements ResourceAdapter 
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 		case ClassMakerPackage.RESOURCE_ADAPTER__PROJECT:
-			return eInternalContainer().eInverseRemove(this, ClassMakerPackage.CONTRIBUTION__MODEL_RESOURCE_ADAPTER,
-					Contribution.class, msgs);
+			return eInternalContainer().eInverseRemove(this, ClassMakerPackage.PROJECT__MODEL_RESOURCE_ADAPTER,
+					Project.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -270,7 +270,7 @@ public class ResourceAdapterImpl extends EObjectImpl implements ResourceAdapter 
 			setResource((Resource) newValue);
 			return;
 		case ClassMakerPackage.RESOURCE_ADAPTER__PROJECT:
-			setProject((Contribution) newValue);
+			setProject((Project) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -288,7 +288,7 @@ public class ResourceAdapterImpl extends EObjectImpl implements ResourceAdapter 
 			setResource((Resource) null);
 			return;
 		case ClassMakerPackage.RESOURCE_ADAPTER__PROJECT:
-			setProject((Contribution) null);
+			setProject((Project) null);
 			return;
 		}
 		super.eUnset(featureID);

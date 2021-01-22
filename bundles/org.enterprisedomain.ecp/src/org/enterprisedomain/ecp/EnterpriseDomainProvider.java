@@ -45,6 +45,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -138,7 +139,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 			}
 			InternalProject project = (InternalProject) getModelContext(resource);
 			if (project != null) {
-				propagatePackagesVisibility(project);
+				propagatePackagesVisibility();
 				project.notifyObjectsChanged((Collection<Object>) (Collection<?>) Arrays.asList(project), true);
 			}
 		}
@@ -257,7 +258,23 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 					dummyEAttribute.setName("value");
 					dummyEAttribute.setEType(EcorePackage.Literals.ESTRING);
 					dummyEClass.getEStructuralFeatures().add(dummyEAttribute);
+					EOperation op = ecoreFactory.createEOperation();
+					op.setName("perform");
+					op.setEType(EcorePackage.Literals.EINT);
+					EAnnotation an = ecoreFactory.createEAnnotation();
+					an.setSource("http://www.eclipse.org/emf/2002/GenModel");
+					an.getDetails().put("body", "return 7;");
+					op.getEAnnotations().add(an);
+					EAnnotation invocation = ecoreFactory.createEAnnotation();
+					invocation.setSource(ClassMakerService.INVOCATION_DELEGATE_URI);
+					op.getEAnnotations().add(invocation);
+					dummyEClass.getEOperations().add(op);
 					model.getEClassifiers().add(dummyEClass);
+					EAnnotation invocationDelegate = ecoreFactory.createEAnnotation();
+					invocationDelegate.setSource(EcorePackage.eNS_URI);
+					invocationDelegate.getDetails().put("invocationDelegates",
+							ClassMakerService.INVOCATION_DELEGATE_URI);
+					model.getEAnnotations().add(invocationDelegate);
 					try {
 						domainProject = classMaker.getWorkspace().createContribution(model, monitor);
 						domainProject.getState().setEdit(true);
@@ -271,7 +288,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 					try {
 						domainProject = classMaker.getWorkspace().createProject(project.getName(), monitor);
 						domainProject.initialize(true);
-						propagatePackagesVisibility(project);
+						propagatePackagesVisibility();
 					} catch (CoreException e) {
 						Activator.log(e);
 					}
@@ -368,6 +385,9 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 		}
 
 		if (element instanceof EObject) {
+			if (((EObject) element).eContainer() instanceof ECPContainer) {
+				return getModelContext(((EObject) element).eContainer().eResource());
+			}
 			return getModelContext(((EObject) element).eResource());
 		}
 
@@ -485,7 +505,6 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 			result.setSelectRevealHandler(getUIProvider().getAdapter(project, SelectRevealHandler.class));
 			result.addResourceChangeListener(new ResourceChangeListenerImpl() {
 
-				@SuppressWarnings("unchecked")
 				@Override
 				public void changed(Notification notification) throws Exception {
 					project.notifyObjectsChanged(((Collection<Object>) (Collection<?>) Arrays.asList(project)), true);
@@ -520,25 +539,27 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 					eClasses.add(eClass.getName());
 			visiblePackagesToClasses.put(ePackage.getNsURI(), eClasses);
 		}
-		propagatePackagesVisibility(project);
+		propagatePackagesVisibility();
 	}
 
-	private void propagatePackagesVisibility(InternalProject project) {
-		for (String ePackageNsURI : visiblePackagesToClasses.keySet()) {
-			EPackage eP = project.getEditingDomain().getResourceSet().getPackageRegistry().getEPackage(ePackageNsURI);
-			Set<EPackage> ePs = new HashSet<EPackage>();
-			ePs.addAll(project.getVisiblePackages());
-			ePs.add(eP);
-			project.setVisiblePackages(ePs);
-			for (Map.Entry<String, HashSet<String>> eClassNames : visiblePackagesToClasses.entrySet())
-				if (eClassNames.getKey().equals(ePackageNsURI))
-					for (String eClassName : eClassNames.getValue()) {
-						Set<EClass> eCls = new HashSet<EClass>();
-						eCls.addAll(project.getVisibleEClasses());
-						eCls.add((EClass) eP.getEClassifier(eClassName));
-						project.setVisibleEClasses(eCls);
-					}
-		}
+	private void propagatePackagesVisibility() {
+		for (InternalProject project : getOpenProjects())
+			for (String ePackageNsURI : visiblePackagesToClasses.keySet()) {
+				EPackage eP = project.getEditingDomain().getResourceSet().getPackageRegistry()
+						.getEPackage(ePackageNsURI);
+				Set<EPackage> ePs = new HashSet<EPackage>();
+				ePs.addAll(project.getVisiblePackages());
+				ePs.add(eP);
+				project.setVisiblePackages(ePs);
+				for (Map.Entry<String, HashSet<String>> eClassNames : visiblePackagesToClasses.entrySet())
+					if (eClassNames.getKey().equals(ePackageNsURI))
+						for (String eClassName : eClassNames.getValue()) {
+							Set<EClass> eCls = new HashSet<EClass>();
+							eCls.addAll(project.getVisibleEClasses());
+							eCls.add((EClass) eP.getEClassifier(eClassName));
+							project.setVisibleEClasses(eCls);
+						}
+			}
 	}
 
 	private class EnterpriseDomainResourceListener implements IResourceChangeListener {

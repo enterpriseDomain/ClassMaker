@@ -82,7 +82,7 @@
          point="org.eclipse.core.runtime.products">
       <product
             application="org.eclipse.ui.ide.workbench"
-            description="enterpriseDomain Workbench Application"
+            description="enterpriseDomain Workbench Object Management Application."
             name="enterpriseDomain Workbench">
          <property
                name="windowImages"

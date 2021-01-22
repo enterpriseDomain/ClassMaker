@@ -1,4 +1,4 @@
 target "org.enterprisedomain.target" with allEnvironments configurePhase
 
-include "2020-06.tpd"
+include "2020-12.tpd"
 include "etc.tpd"

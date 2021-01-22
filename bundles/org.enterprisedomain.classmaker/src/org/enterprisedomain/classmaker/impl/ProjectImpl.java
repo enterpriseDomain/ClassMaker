@@ -22,6 +22,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.Locale;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
@@ -39,14 +41,17 @@ import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.notify.impl.NotificationImpl;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -55,6 +60,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.util.NotifyingInternalEListImpl;
 import org.eclipse.emf.ecore.xmi.PackageNotFoundException;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.ListBranchCommand;
@@ -71,14 +77,18 @@ import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.CompletionNotificationAdapter;
 import org.enterprisedomain.classmaker.Contribution;
+import org.enterprisedomain.classmaker.Customizer;
 import org.enterprisedomain.classmaker.Item;
 import org.enterprisedomain.classmaker.Messages;
+import org.enterprisedomain.classmaker.ModelPair;
 import org.enterprisedomain.classmaker.Project;
+import org.enterprisedomain.classmaker.ResourceAdapter;
 import org.enterprisedomain.classmaker.ResourceChangeListener;
 import org.enterprisedomain.classmaker.Revision;
 import org.enterprisedomain.classmaker.SCMOperator;
 import org.enterprisedomain.classmaker.SelectRevealHandler;
 import org.enterprisedomain.classmaker.Stage;
+import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
@@ -93,6 +103,22 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getModelName
+ * <em>Model Name</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getPhase
+ * <em>Phase</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getLanguage
+ * <em>Language</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getDomainModel
+ * <em>Domain Model</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getCustomizers
+ * <em>Customizers</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getParent
+ * <em>Parent</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getLocale
+ * <em>Locale</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getProject
+ * <em>Project</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getName
  * <em>Name</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getProjectName
@@ -125,11 +151,104 @@ import org.osgi.framework.Version;
  * <em>Version</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getState
  * <em>State</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getModelResourceAdapter
+ * <em>Model Resource Adapter</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ProjectImpl extends EObjectImpl implements Project {
+
+	/**
+	 * The default value of the '{@link #getModelName() <em>Model Name</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getModelName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String MODEL_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getModelName() <em>Model Name</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getModelName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String modelName = MODEL_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getPhase() <em>Phase</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getPhase()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Stage PHASE_EDEFAULT = Stage.DEFINED;
+
+	/**
+	 * The cached value of the '{@link #getPhase() <em>Phase</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getPhase()
+	 * @generated
+	 * @ordered
+	 */
+	protected Stage phase = PHASE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getLanguage() <em>Language</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getLanguage()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String LANGUAGE_EDEFAULT = "";
+
+	/**
+	 * The cached value of the '{@link #getLanguage() <em>Language</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getLanguage()
+	 * @generated
+	 * @ordered
+	 */
+	protected String language = LANGUAGE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getDomainModel() <em>Domain Model</em>}'
+	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getDomainModel()
+	 * @generated
+	 * @ordered
+	 */
+	protected ModelPair domainModel;
+
+	/**
+	 * The default value of the '{@link #getLocale() <em>Locale</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getLocale()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Locale LOCALE_EDEFAULT = (Locale) ClassMakerFactory.eINSTANCE
+			.createFromString(ClassMakerPackage.eINSTANCE.getLocale(), "");
+
+	/**
+	 * The cached value of the '{@link #getLocale() <em>Locale</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getLocale()
+	 * @generated
+	 * @ordered
+	 */
+	protected Locale locale = LOCALE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute. <!--
@@ -325,11 +444,22 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 */
 	protected Version version = VERSION_EDEFAULT;
 
+	/**
+	 * The cached value of the '{@link #getModelResourceAdapter() <em>Model Resource
+	 * Adapter</em>}' containment reference. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @see #getModelResourceAdapter()
+	 * @generated
+	 * @ordered
+	 */
+	protected ResourceAdapter modelResourceAdapter;
+
 	protected ListenerList<CompletionListener> completionListeners = new ListenerList<CompletionListener>();
 
 	protected ListenerList<ResourceChangeListener> resourceChangeListeners = new ListenerList<ResourceChangeListener>();
 
-	protected EList<Object> children = ECollections.newBasicEList();
+	protected LoadingEList children;
 
 	protected ResourceChangeAdapter resourceAdapter = new ResourceChangeAdapter(this);
 
@@ -348,6 +478,25 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		}
 
 	}
+
+	protected Adapter stateModelAdapter = new AdapterImpl() {
+		@Override
+		public void notifyChanged(Notification msg) {
+			if (msg.getFeatureID(State.class) == ClassMakerPackage.STATE__RESOURCE
+					&& msg.getEventType() == Notification.SET) {
+				if (isStateSet() && getState().eIsSet(ClassMakerPackage.Literals.STATE__RESOURCE)) {
+					ResourceAdapter modelResourceAdapter = null;
+					if (eIsSet(ClassMakerPackage.PROJECT__MODEL_RESOURCE_ADAPTER)) {
+						modelResourceAdapter = getModelResourceAdapter();
+					} else {
+						modelResourceAdapter = ClassMakerFactory.eINSTANCE.createResourceAdapter();
+					}
+					modelResourceAdapter.setResource(getState().getResource());
+					modelResourceAdapter.setProject(ProjectImpl.this);
+				}
+			}
+		}
+	};
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -369,6 +518,224 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	@Override
 	protected EClass eStaticClass() {
 		return ClassMakerPackage.Literals.PROJECT;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public String getModelName() {
+		return modelName;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public void setModelName(String newModelName) {
+		String oldModelName = modelName;
+		modelName = newModelName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.PROJECT__MODEL_NAME, oldModelName,
+					modelName));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public Stage getPhase() {
+		return phase;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public void setPhase(Stage newPhase) {
+		Stage oldPhase = phase;
+		phase = newPhase == null ? PHASE_EDEFAULT : newPhase;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.PROJECT__PHASE, oldPhase, phase));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public String getLanguage() {
+		return language;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public void setLanguage(String newLanguage) {
+		String oldLanguage = language;
+		language = newLanguage;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.PROJECT__LANGUAGE, oldLanguage,
+					language));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public ModelPair getDomainModel() {
+		return domainModel;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public NotificationChain basicSetDomainModel(ModelPair newDomainModel, NotificationChain msgs) {
+		ModelPair oldDomainModel = domainModel;
+		domainModel = newDomainModel;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					ClassMakerPackage.PROJECT__DOMAIN_MODEL, oldDomainModel, newDomainModel);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public void setDomainModel(ModelPair newDomainModel) {
+		if (newDomainModel != domainModel) {
+			NotificationChain msgs = null;
+			if (domainModel != null)
+				msgs = ((InternalEObject) domainModel).eInverseRemove(this, ClassMakerPackage.MODEL_PAIR__PARENT,
+						ModelPair.class, msgs);
+			if (newDomainModel != null)
+				msgs = ((InternalEObject) newDomainModel).eInverseAdd(this, ClassMakerPackage.MODEL_PAIR__PARENT,
+						ModelPair.class, msgs);
+			msgs = basicSetDomainModel(newDomainModel, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.PROJECT__DOMAIN_MODEL,
+					newDomainModel, newDomainModel));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public EMap<StageQualifier, Customizer> getCustomizers() {
+		if (isStateSet())
+			return getState().getCustomizers();
+
+		return ECollections.emptyEMap();
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public Item getParent() {
+		Item parent = basicGetParent();
+		return parent != null && parent.eIsProxy() ? (Item) eResolveProxy((InternalEObject) parent) : parent;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Item basicGetParent() {
+		return this;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public void setParent(Item newParent) {
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public Locale getLocale() {
+		return locale;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public void setLocale(Locale newLocale) {
+		Locale oldLocale = locale;
+		locale = newLocale;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.PROJECT__LOCALE, oldLocale,
+					locale));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public Project getProject() {
+		Project project = basicGetProject();
+		return project != null && project.eIsProxy() ? (Project) eResolveProxy((InternalEObject) project) : project;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Project basicGetProject() {
+		return this;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public void setProject(Project newProject) {
 	}
 
 	/**
@@ -424,15 +791,29 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 */
 	@SuppressWarnings("unchecked")
 	public EList<Object> getChildren() {
-		if (eIsSet(ClassMakerPackage.Literals.PROJECT__REVISION)
-				&& getRevision().eIsSet(ClassMakerPackage.Literals.REVISION__STATE)) {
-			if (children.isEmpty())
-				children.add(getRevision().getState().getResource());
+		if (children == null || children.isEmpty()) {
+			if (getModelResourceAdapter() != null)
+				children = new LoadingEList(getModelResourceAdapter().getResource());
 			else
-				children.set(0, getRevision().getState().getResource());
+				children = new LoadingEList(null);
+			eAdapters().remove(modelAdapter);
+			eAdapters().add(modelAdapter);
 		}
-		return children;
+		return (EList<Object>) (EList<?>) children;
 	}
+
+	private Adapter modelAdapter = new AdapterImpl() {
+
+		@Override
+		public void notifyChanged(Notification msg) {
+			super.notifyChanged(msg);
+			if (msg.getFeatureID(Contribution.class) == ClassMakerPackage.PROJECT__MODEL_RESOURCE_ADAPTER
+					&& msg.getEventType() == Notification.SET && msg.getNewValue() != null) {
+				children.setContents(getModelResourceAdapter().getResource());
+			}
+		}
+
+	};
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -511,6 +892,14 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 */
 	public String getResourcePath() {
 		return IPath.SEPARATOR + getProjectName() + IPath.SEPARATOR + ResourceUtils.getFileName(getName());
+	}
+
+	protected boolean isRevisionSet() {
+		return eIsSet(ClassMakerPackage.PROJECT__REVISION);
+	}
+
+	protected boolean isStateSet() {
+		return isRevisionSet() && eIsSet(ClassMakerPackage.PROJECT__STATE);
 	}
 
 	/**
@@ -821,6 +1210,37 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
+	 * @generated
+	 */
+	@Override
+	public ResourceAdapter getModelResourceAdapter() {
+		return modelResourceAdapter;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public NotificationChain basicSetModelResourceAdapter(ResourceAdapter newModelResourceAdapter,
+			NotificationChain msgs) {
+		ResourceAdapter oldModelResourceAdapter = modelResourceAdapter;
+		modelResourceAdapter = newModelResourceAdapter;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					ClassMakerPackage.PROJECT__MODEL_RESOURCE_ADAPTER, oldModelResourceAdapter,
+					newModelResourceAdapter);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	public void create(IProgressMonitor monitor) throws CoreException {
@@ -862,7 +1282,16 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * @generated NOT
 	 */
 	public void delete(EList<Object> objects) {
-		((Resource) getChildren().get(0)).getContents().removeAll(objects);
+		TreeIterator<EObject> it = ((Resource) getChildren().get(0)).getAllContents();
+		while (it.hasNext()) {
+			EObject o = it.next();
+			ListIterator<Object> li = objects.listIterator();
+			while (li.hasNext()) {
+				Object obj = li.next();
+				if (obj.equals(o) || (obj instanceof Collection<?> ? ((Collection<?>) obj).contains(o) : false))
+					it.remove();
+			}
+		}
 		try {
 			((Resource) getChildren().get(0)).save(Collections.emptyMap());
 		} catch (IOException e) {
@@ -1114,19 +1543,66 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 */
 	@Override
 	public void initAdapters(Revision revision) {
-//		if(!getState().eIsSet(ClassMakerPackage.Literals.STATE__RESOURCE))
-//			return;
-		getState().getResource().eAdapters().add(new AdapterImpl() {
+		revision.addAdapters(ECollections.singletonEList(stateModelAdapter));
+		if (isStateSet())
+			getState().getResource().eAdapters().add(new AdapterImpl() {
 
-			@Override
-			public void notifyChanged(Notification msg) {
-				if (msg.getFeatureID(Resource.class) == Resource.RESOURCE__IS_MODIFIED && msg.getNewBooleanValue()) {
-					setDirty(true);
+				@Override
+				public void notifyChanged(Notification msg) {
+					if (msg.getFeatureID(Resource.class) == Resource.RESOURCE__IS_MODIFIED
+							&& msg.getNewBooleanValue()) {
+						setDirty(true);
+					}
+				}
+
+			});
+
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public void load(boolean create) throws CoreException {
+		initialize(false);
+		if (isRevisionSet()) {
+			if (create) {
+				try {
+					@SuppressWarnings("unchecked")
+					SCMOperator<Git> operator = (SCMOperator<Git>) getWorkspace().getSCMRegistry()
+							.get(getProjectName());
+					operator.add(".");
+					operator.commit(getProjectName());
+				} catch (Exception e) {
+					throw new CoreException(
+							new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 				}
 			}
+			getRevision().load(create);
+		}
+	}
 
-		});
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public void build(IProgressMonitor monitor) throws CoreException {
+		if (isRevisionSet())
+			getRevision().build(monitor);
+	}
 
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public void copyModel(Item from) {
+		if (isRevisionSet())
+			getRevision().copyModel(from);
 	}
 
 	/**
@@ -1322,6 +1798,114 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		return URI.createFileURI(workspacePath.append(getResourcePath()).toString());
 	}
 
+	protected class LoadingEList extends NotifyingInternalEListImpl<Notifier> {
+
+		private static final long serialVersionUID = 164926149524632079L;
+		private Notifier object;
+		private Adapter initAdapter = new AdapterImpl() {
+
+			@Override
+			public void notifyChanged(Notification msg) {
+				super.notifyChanged(msg);
+				if (msg.getFeatureID(ResourceAdapter.class) == ClassMakerPackage.RESOURCE_ADAPTER__RESOURCE
+						&& msg.getEventType() == Notification.SET && msg.getNewValue() != null) {
+					LoadingEList.this.object = (Notifier) msg.getNewValue();
+					fill((Notifier) msg.getNewValue());
+				}
+			}
+
+		};
+
+		public LoadingEList(Notifier object) {
+			setContents(object);
+		}
+
+		private class ResourceNotificationImpl extends NotificationImpl {
+
+			public ResourceNotificationImpl(int eventType, Object oldValue, Object newValue) {
+				super(eventType, oldValue, newValue);
+			}
+
+			public ResourceNotificationImpl(int eventType, Object oldValue, Object newValue, int position) {
+				super(eventType, oldValue, newValue, position);
+			}
+
+			@Override
+			public int getFeatureID(Class<?> expectedClass) {
+				if (expectedClass.isAssignableFrom(Resource.class))
+					return Resource.RESOURCE__CONTENTS;
+				return super.getFeatureID(expectedClass);
+			}
+
+		}
+
+		private void fill(Notifier object) {
+			clear();
+			add(object);
+		}
+
+		@Override
+		protected void didSet(int index, Notifier newObject, Notifier oldObject) {
+			detachInitAdapter();
+			setObject(newObject);
+			super.didSet(index, newObject, oldObject);
+			attachInitAdapter();
+			if (eNotificationRequired())
+				eNotify(new ResourceNotificationImpl(Notification.SET, oldObject, newObject, index));
+		}
+
+		@Override
+		protected void didAdd(int index, Notifier newObject) {
+			super.didAdd(index, newObject);
+			attachInitAdapter();
+			setObject(newObject);
+			if (eNotificationRequired())
+				eNotify(new ResourceNotificationImpl(Notification.ADD, null, newObject, index));
+		}
+
+		@Override
+		protected void didRemove(int index, Notifier oldObject) {
+			detachInitAdapter();
+			setObject(null);
+			super.didRemove(index, oldObject);
+			if (eNotificationRequired())
+				eNotify(new ResourceNotificationImpl(Notification.REMOVE, oldObject, null, index));
+		}
+
+		@Override
+		protected void didClear(int size, Object[] oldObjects) {
+			detachInitAdapter();
+			setObject(null);
+			super.didClear(size, oldObjects);
+			if (eNotificationRequired())
+				eNotify(new ResourceNotificationImpl(Notification.REMOVE_MANY, oldObjects, null));
+		}
+
+		private void attachInitAdapter() {
+			if (object == null)
+				return;
+			object.eAdapters().add(initAdapter);
+		}
+
+		private void detachInitAdapter() {
+			if (object == null)
+				return;
+			object.eAdapters().remove(initAdapter);
+		}
+
+		public void setContents(Notifier object) {
+			detachInitAdapter();
+			setObject(object);
+			attachInitAdapter();
+			fill(object);
+		}
+
+		private void setObject(Notifier object) {
+			this.object = object;
+		}
+
+	}
+
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -1363,10 +1947,20 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+		case ClassMakerPackage.PROJECT__DOMAIN_MODEL:
+			if (domainModel != null)
+				msgs = ((InternalEObject) domainModel).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - ClassMakerPackage.PROJECT__DOMAIN_MODEL, null, msgs);
+			return basicSetDomainModel((ModelPair) otherEnd, msgs);
 		case ClassMakerPackage.PROJECT__WORKSPACE:
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			return basicSetWorkspace((Workspace) otherEnd, msgs);
+		case ClassMakerPackage.PROJECT__MODEL_RESOURCE_ADAPTER:
+			if (modelResourceAdapter != null)
+				msgs = ((InternalEObject) modelResourceAdapter).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - ClassMakerPackage.PROJECT__MODEL_RESOURCE_ADAPTER, null, msgs);
+			return basicSetModelResourceAdapter((ResourceAdapter) otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -1379,12 +1973,18 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+		case ClassMakerPackage.PROJECT__DOMAIN_MODEL:
+			return basicSetDomainModel(null, msgs);
+		case ClassMakerPackage.PROJECT__CUSTOMIZERS:
+			return ((InternalEList<?>) getCustomizers()).basicRemove(otherEnd, msgs);
 		case ClassMakerPackage.PROJECT__WORKSPACE:
 			return basicSetWorkspace(null, msgs);
 		case ClassMakerPackage.PROJECT__COMPLETION_NOTIFICATION_ADAPTER:
 			return basicSetCompletionNotificationAdapter(null, msgs);
 		case ClassMakerPackage.PROJECT__REVISIONS:
 			return ((InternalEList<?>) getRevisions()).basicRemove(otherEnd, msgs);
+		case ClassMakerPackage.PROJECT__MODEL_RESOURCE_ADAPTER:
+			return basicSetModelResourceAdapter(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -1444,6 +2044,29 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+		case ClassMakerPackage.PROJECT__MODEL_NAME:
+			return getModelName();
+		case ClassMakerPackage.PROJECT__PHASE:
+			return getPhase();
+		case ClassMakerPackage.PROJECT__LANGUAGE:
+			return getLanguage();
+		case ClassMakerPackage.PROJECT__DOMAIN_MODEL:
+			return getDomainModel();
+		case ClassMakerPackage.PROJECT__CUSTOMIZERS:
+			if (coreType)
+				return getCustomizers();
+			else
+				return getCustomizers().map();
+		case ClassMakerPackage.PROJECT__PARENT:
+			if (resolve)
+				return getParent();
+			return basicGetParent();
+		case ClassMakerPackage.PROJECT__LOCALE:
+			return getLocale();
+		case ClassMakerPackage.PROJECT__PROJECT:
+			if (resolve)
+				return getProject();
+			return basicGetProject();
 		case ClassMakerPackage.PROJECT__NAME:
 			return getName();
 		case ClassMakerPackage.PROJECT__PROJECT_NAME:
@@ -1485,6 +2108,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			if (resolve)
 				return getState();
 			return basicGetState();
+		case ClassMakerPackage.PROJECT__MODEL_RESOURCE_ADAPTER:
+			return getModelResourceAdapter();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1497,6 +2122,30 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+		case ClassMakerPackage.PROJECT__MODEL_NAME:
+			setModelName((String) newValue);
+			return;
+		case ClassMakerPackage.PROJECT__PHASE:
+			setPhase((Stage) newValue);
+			return;
+		case ClassMakerPackage.PROJECT__LANGUAGE:
+			setLanguage((String) newValue);
+			return;
+		case ClassMakerPackage.PROJECT__DOMAIN_MODEL:
+			setDomainModel((ModelPair) newValue);
+			return;
+		case ClassMakerPackage.PROJECT__CUSTOMIZERS:
+			((EStructuralFeature.Setting) getCustomizers()).set(newValue);
+			return;
+		case ClassMakerPackage.PROJECT__PARENT:
+			setParent((Item) newValue);
+			return;
+		case ClassMakerPackage.PROJECT__LOCALE:
+			setLocale((Locale) newValue);
+			return;
+		case ClassMakerPackage.PROJECT__PROJECT:
+			setProject((Project) newValue);
+			return;
 		case ClassMakerPackage.PROJECT__NAME:
 			setName((String) newValue);
 			return;
@@ -1545,6 +2194,30 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+		case ClassMakerPackage.PROJECT__MODEL_NAME:
+			setModelName(MODEL_NAME_EDEFAULT);
+			return;
+		case ClassMakerPackage.PROJECT__PHASE:
+			setPhase(PHASE_EDEFAULT);
+			return;
+		case ClassMakerPackage.PROJECT__LANGUAGE:
+			setLanguage(LANGUAGE_EDEFAULT);
+			return;
+		case ClassMakerPackage.PROJECT__DOMAIN_MODEL:
+			setDomainModel((ModelPair) null);
+			return;
+		case ClassMakerPackage.PROJECT__CUSTOMIZERS:
+			getCustomizers().clear();
+			return;
+		case ClassMakerPackage.PROJECT__PARENT:
+			setParent((Item) null);
+			return;
+		case ClassMakerPackage.PROJECT__LOCALE:
+			setLocale(LOCALE_EDEFAULT);
+			return;
+		case ClassMakerPackage.PROJECT__PROJECT:
+			setProject((Project) null);
+			return;
 		case ClassMakerPackage.PROJECT__NAME:
 			setName(NAME_EDEFAULT);
 			return;
@@ -1593,6 +2266,22 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+		case ClassMakerPackage.PROJECT__MODEL_NAME:
+			return MODEL_NAME_EDEFAULT == null ? modelName != null : !MODEL_NAME_EDEFAULT.equals(modelName);
+		case ClassMakerPackage.PROJECT__PHASE:
+			return phase != PHASE_EDEFAULT;
+		case ClassMakerPackage.PROJECT__LANGUAGE:
+			return LANGUAGE_EDEFAULT == null ? language != null : !LANGUAGE_EDEFAULT.equals(language);
+		case ClassMakerPackage.PROJECT__DOMAIN_MODEL:
+			return domainModel != null;
+		case ClassMakerPackage.PROJECT__CUSTOMIZERS:
+			return !getCustomizers().isEmpty();
+		case ClassMakerPackage.PROJECT__PARENT:
+			return basicGetParent() != null;
+		case ClassMakerPackage.PROJECT__LOCALE:
+			return LOCALE_EDEFAULT == null ? locale != null : !LOCALE_EDEFAULT.equals(locale);
+		case ClassMakerPackage.PROJECT__PROJECT:
+			return basicGetProject() != null;
 		case ClassMakerPackage.PROJECT__NAME:
 			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		case ClassMakerPackage.PROJECT__PROJECT_NAME:
@@ -1627,8 +2316,74 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
 		case ClassMakerPackage.PROJECT__STATE:
 			return basicGetState() != null;
+		case ClassMakerPackage.PROJECT__MODEL_RESOURCE_ADAPTER:
+			return modelResourceAdapter != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == Item.class) {
+			switch (derivedFeatureID) {
+			case ClassMakerPackage.PROJECT__MODEL_NAME:
+				return ClassMakerPackage.ITEM__MODEL_NAME;
+			case ClassMakerPackage.PROJECT__PHASE:
+				return ClassMakerPackage.ITEM__PHASE;
+			case ClassMakerPackage.PROJECT__LANGUAGE:
+				return ClassMakerPackage.ITEM__LANGUAGE;
+			case ClassMakerPackage.PROJECT__DOMAIN_MODEL:
+				return ClassMakerPackage.ITEM__DOMAIN_MODEL;
+			case ClassMakerPackage.PROJECT__CUSTOMIZERS:
+				return ClassMakerPackage.ITEM__CUSTOMIZERS;
+			case ClassMakerPackage.PROJECT__PARENT:
+				return ClassMakerPackage.ITEM__PARENT;
+			case ClassMakerPackage.PROJECT__LOCALE:
+				return ClassMakerPackage.ITEM__LOCALE;
+			case ClassMakerPackage.PROJECT__PROJECT:
+				return ClassMakerPackage.ITEM__PROJECT;
+			default:
+				return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == Item.class) {
+			switch (baseFeatureID) {
+			case ClassMakerPackage.ITEM__MODEL_NAME:
+				return ClassMakerPackage.PROJECT__MODEL_NAME;
+			case ClassMakerPackage.ITEM__PHASE:
+				return ClassMakerPackage.PROJECT__PHASE;
+			case ClassMakerPackage.ITEM__LANGUAGE:
+				return ClassMakerPackage.PROJECT__LANGUAGE;
+			case ClassMakerPackage.ITEM__DOMAIN_MODEL:
+				return ClassMakerPackage.PROJECT__DOMAIN_MODEL;
+			case ClassMakerPackage.ITEM__CUSTOMIZERS:
+				return ClassMakerPackage.PROJECT__CUSTOMIZERS;
+			case ClassMakerPackage.ITEM__PARENT:
+				return ClassMakerPackage.PROJECT__PARENT;
+			case ClassMakerPackage.ITEM__LOCALE:
+				return ClassMakerPackage.PROJECT__LOCALE;
+			case ClassMakerPackage.ITEM__PROJECT:
+				return ClassMakerPackage.PROJECT__PROJECT;
+			default:
+				return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	@Override
@@ -1667,7 +2422,15 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (name: ");
+		result.append(" (modelName: ");
+		result.append(modelName);
+		result.append(", phase: ");
+		result.append(phase);
+		result.append(", language: ");
+		result.append(language);
+		result.append(", locale: ");
+		result.append(locale);
+		result.append(", name: ");
 		result.append(name);
 		result.append(", projectName: ");
 		result.append(projectName);

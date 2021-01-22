@@ -34,6 +34,8 @@ import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.core.runtime.jobs.JobGroup;
 import org.eclipse.core.runtime.jobs.MultiRule;
 import org.eclipse.core.runtime.jobs.ProgressProvider;
+import org.eclipse.emf.common.util.ECollections;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.ClassMakerService;
@@ -145,7 +147,7 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 		for (Job job : jobs)
 			if (job.getName().equals(name))
 				try {
-					job.join(10000, ClassMakerPlugin.getProgressMonitor());
+					job.join(9000, ClassMakerPlugin.getProgressMonitor());
 					joined = true;
 				} catch (InterruptedException e) {
 				}
@@ -172,6 +174,15 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 		if (worker == null)
 			return null;
 		return (EnterpriseDomainJob) worker.getAdapter(EnterpriseDomainJob.class);
+	}
+
+	public static EList<EnterpriseDomainJob> getJobs(EList<Worker> workers) {
+		if (workers == null)
+			return null;
+		EList<EnterpriseDomainJob> results = ECollections.newBasicEList();
+		for (Worker worker : workers)
+			results.add((EnterpriseDomainJob) worker.getAdapter(EnterpriseDomainJob.class));
+		return results;
 	}
 
 	public abstract IStatus work(IProgressMonitor monitor) throws CoreException;

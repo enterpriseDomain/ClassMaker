@@ -19,9 +19,9 @@
       <genTypeParameters ecoreTypeParameter="MetaModel.ecore#//Production/T"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MetaModel.ecore#//Production/value"/>
     </genClasses>
-    <genClasses ecoreClass="MetaModel.ecore#//Consummation">
-      <genOperations ecoreOperation="MetaModel.ecore#//Consummation/perform">
-        <genParameters ecoreParameter="MetaModel.ecore#//Consummation/perform/args"/>
+    <genClasses ecoreClass="MetaModel.ecore#//Consumption">
+      <genOperations ecoreOperation="MetaModel.ecore#//Consumption/perform">
+        <genParameters ecoreParameter="MetaModel.ecore#//Consumption/perform/args"/>
       </genOperations>
     </genClasses>
   </genPackages>

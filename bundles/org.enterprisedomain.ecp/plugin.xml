@@ -49,6 +49,21 @@
             properties="isContribution"
             type="org.eclipse.emf.ecp.core.ECPProject">
       </propertyTester>
+      <propertyTester
+            class="org.enterprisedomain.ecp.ObjectPropertyTester"
+            id="org.enterprisedomain.ecp.containerPropertyTester"
+            namespace="org.eclipse.emf.ecp.core.container"
+            properties="canDelete"
+            type="java.lang.Object">
+      </propertyTester>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated ECP -->
+      <package
+            uri="http://org/enterprisedomain/ClassMaker/ECP/0.8.37"
+            class="org.enterprisedomain.ecp.ECPPackage"
+            genModel="model/ECP.genmodel"/>
    </extension>
 
 </plugin>

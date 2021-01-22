@@ -93,7 +93,7 @@ public interface ResourceAdapter extends EObject, Adapter {
 	/**
 	 * Returns the value of the '<em><b>Project</b></em>' container reference. It is
 	 * bidirectional and its opposite is
-	 * '{@link org.enterprisedomain.classmaker.Contribution#getModelResourceAdapter
+	 * '{@link org.enterprisedomain.classmaker.Project#getModelResourceAdapter
 	 * <em>Model Resource Adapter</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Project</em>' container reference isn't clear,
@@ -102,13 +102,13 @@ public interface ResourceAdapter extends EObject, Adapter {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Project</em>' container reference.
-	 * @see #setProject(Contribution)
+	 * @see #setProject(Project)
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getResourceAdapter_Project()
-	 * @see org.enterprisedomain.classmaker.Contribution#getModelResourceAdapter
+	 * @see org.enterprisedomain.classmaker.Project#getModelResourceAdapter
 	 * @model opposite="modelResourceAdapter" transient="false"
 	 * @generated
 	 */
-	Contribution getProject();
+	Project getProject();
 
 	/**
 	 * Sets the value of the
@@ -120,5 +120,5 @@ public interface ResourceAdapter extends EObject, Adapter {
 	 * @see #getProject()
 	 * @generated
 	 */
-	void setProject(Contribution value);
+	void setProject(Project value);
 } // ResourceAdapter

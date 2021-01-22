@@ -99,13 +99,85 @@ public interface ClassMakerPackage extends EPackage {
 	int PROJECT = 19;
 
 	/**
+	 * The feature id for the '<em><b>Model Name</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECT__MODEL_NAME = ISCHEDULING_RULE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Phase</b></em>' attribute. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECT__PHASE = ISCHEDULING_RULE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Language</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECT__LANGUAGE = ISCHEDULING_RULE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Domain Model</b></em>' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECT__DOMAIN_MODEL = ISCHEDULING_RULE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Customizers</b></em>' map. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECT__CUSTOMIZERS = ISCHEDULING_RULE_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECT__PARENT = ISCHEDULING_RULE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Locale</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECT__LOCALE = ISCHEDULING_RULE_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Project</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECT__PROJECT = ISCHEDULING_RULE_FEATURE_COUNT + 7;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int PROJECT__NAME = ISCHEDULING_RULE_FEATURE_COUNT + 0;
+	int PROJECT__NAME = ISCHEDULING_RULE_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Project Name</b></em>' attribute. <!--
@@ -114,7 +186,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROJECT__PROJECT_NAME = ISCHEDULING_RULE_FEATURE_COUNT + 1;
+	int PROJECT__PROJECT_NAME = ISCHEDULING_RULE_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' reference list. <!--
@@ -123,7 +195,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROJECT__CHILDREN = ISCHEDULING_RULE_FEATURE_COUNT + 2;
+	int PROJECT__CHILDREN = ISCHEDULING_RULE_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Dirty</b></em>' attribute. <!-- begin-user-doc
@@ -132,7 +204,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROJECT__DIRTY = ISCHEDULING_RULE_FEATURE_COUNT + 3;
+	int PROJECT__DIRTY = ISCHEDULING_RULE_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Workspace</b></em>' container reference. <!--
@@ -141,7 +213,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROJECT__WORKSPACE = ISCHEDULING_RULE_FEATURE_COUNT + 4;
+	int PROJECT__WORKSPACE = ISCHEDULING_RULE_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Resource Path</b></em>' attribute. <!--
@@ -150,7 +222,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROJECT__RESOURCE_PATH = ISCHEDULING_RULE_FEATURE_COUNT + 5;
+	int PROJECT__RESOURCE_PATH = ISCHEDULING_RULE_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Need Completion Notification</b></em>'
@@ -159,7 +231,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROJECT__NEED_COMPLETION_NOTIFICATION = ISCHEDULING_RULE_FEATURE_COUNT + 6;
+	int PROJECT__NEED_COMPLETION_NOTIFICATION = ISCHEDULING_RULE_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Completion Notification Adapter</b></em>'
@@ -168,7 +240,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROJECT__COMPLETION_NOTIFICATION_ADAPTER = ISCHEDULING_RULE_FEATURE_COUNT + 7;
+	int PROJECT__COMPLETION_NOTIFICATION_ADAPTER = ISCHEDULING_RULE_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Resource Reload Listener</b></em>' reference.
@@ -177,7 +249,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROJECT__RESOURCE_RELOAD_LISTENER = ISCHEDULING_RULE_FEATURE_COUNT + 8;
+	int PROJECT__RESOURCE_RELOAD_LISTENER = ISCHEDULING_RULE_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Saving Resource</b></em>' attribute. <!--
@@ -186,7 +258,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROJECT__SAVING_RESOURCE = ISCHEDULING_RULE_FEATURE_COUNT + 9;
+	int PROJECT__SAVING_RESOURCE = ISCHEDULING_RULE_FEATURE_COUNT + 17;
 
 	/**
 	 * The feature id for the '<em><b>Revision</b></em>' reference. <!--
@@ -195,7 +267,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROJECT__REVISION = ISCHEDULING_RULE_FEATURE_COUNT + 10;
+	int PROJECT__REVISION = ISCHEDULING_RULE_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' map. <!-- begin-user-doc
@@ -204,7 +276,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROJECT__REVISIONS = ISCHEDULING_RULE_FEATURE_COUNT + 11;
+	int PROJECT__REVISIONS = ISCHEDULING_RULE_FEATURE_COUNT + 19;
 
 	/**
 	 * The feature id for the '<em><b>Project Version</b></em>' attribute. <!--
@@ -213,7 +285,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROJECT__PROJECT_VERSION = ISCHEDULING_RULE_FEATURE_COUNT + 12;
+	int PROJECT__PROJECT_VERSION = ISCHEDULING_RULE_FEATURE_COUNT + 20;
 
 	/**
 	 * The feature id for the '<em><b>Select Reveal Handler</b></em>' reference.
@@ -222,7 +294,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROJECT__SELECT_REVEAL_HANDLER = ISCHEDULING_RULE_FEATURE_COUNT + 13;
+	int PROJECT__SELECT_REVEAL_HANDLER = ISCHEDULING_RULE_FEATURE_COUNT + 21;
 
 	/**
 	 * The feature id for the '<em><b>Version</b></em>' attribute. <!--
@@ -231,7 +303,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROJECT__VERSION = ISCHEDULING_RULE_FEATURE_COUNT + 14;
+	int PROJECT__VERSION = ISCHEDULING_RULE_FEATURE_COUNT + 22;
 
 	/**
 	 * The feature id for the '<em><b>State</b></em>' reference. <!-- begin-user-doc
@@ -240,7 +312,16 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROJECT__STATE = ISCHEDULING_RULE_FEATURE_COUNT + 15;
+	int PROJECT__STATE = ISCHEDULING_RULE_FEATURE_COUNT + 23;
+
+	/**
+	 * The feature id for the '<em><b>Model Resource Adapter</b></em>' containment
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECT__MODEL_RESOURCE_ADAPTER = ISCHEDULING_RULE_FEATURE_COUNT + 24;
 
 	/**
 	 * The number of structural features of the '<em>Project</em>' class. <!--
@@ -249,7 +330,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROJECT_FEATURE_COUNT = ISCHEDULING_RULE_FEATURE_COUNT + 16;
+	int PROJECT_FEATURE_COUNT = ISCHEDULING_RULE_FEATURE_COUNT + 25;
 
 	/**
 	 * The meta object id for the
@@ -261,6 +342,78 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 */
 	int CONTRIBUTION = 0;
+
+	/**
+	 * The feature id for the '<em><b>Model Name</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CONTRIBUTION__MODEL_NAME = PROJECT__MODEL_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Phase</b></em>' attribute. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CONTRIBUTION__PHASE = PROJECT__PHASE;
+
+	/**
+	 * The feature id for the '<em><b>Language</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CONTRIBUTION__LANGUAGE = PROJECT__LANGUAGE;
+
+	/**
+	 * The feature id for the '<em><b>Domain Model</b></em>' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CONTRIBUTION__DOMAIN_MODEL = PROJECT__DOMAIN_MODEL;
+
+	/**
+	 * The feature id for the '<em><b>Customizers</b></em>' map. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CONTRIBUTION__CUSTOMIZERS = PROJECT__CUSTOMIZERS;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CONTRIBUTION__PARENT = PROJECT__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Locale</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CONTRIBUTION__LOCALE = PROJECT__LOCALE;
+
+	/**
+	 * The feature id for the '<em><b>Project</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CONTRIBUTION__PROJECT = PROJECT__PROJECT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute. <!-- begin-user-doc
@@ -407,76 +560,13 @@ public interface ClassMakerPackage extends EPackage {
 	int CONTRIBUTION__STATE = PROJECT__STATE;
 
 	/**
-	 * The feature id for the '<em><b>Model Name</b></em>' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * The feature id for the '<em><b>Model Resource Adapter</b></em>' containment
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__MODEL_NAME = PROJECT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Phase</b></em>' attribute. <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int CONTRIBUTION__PHASE = PROJECT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Language</b></em>' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int CONTRIBUTION__LANGUAGE = PROJECT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Domain Model</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int CONTRIBUTION__DOMAIN_MODEL = PROJECT_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Customizers</b></em>' map. <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int CONTRIBUTION__CUSTOMIZERS = PROJECT_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int CONTRIBUTION__PARENT = PROJECT_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Locale</b></em>' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int CONTRIBUTION__LOCALE = PROJECT_FEATURE_COUNT + 6;
-
-	/**
-	 * The feature id for the '<em><b>Project</b></em>' reference. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int CONTRIBUTION__PROJECT = PROJECT_FEATURE_COUNT + 7;
+	int CONTRIBUTION__MODEL_RESOURCE_ADAPTER = PROJECT__MODEL_RESOURCE_ADAPTER;
 
 	/**
 	 * The feature id for the '<em><b>Dependencies</b></em>' attribute list. <!--
@@ -485,7 +575,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__DEPENDENCIES = PROJECT_FEATURE_COUNT + 8;
+	int CONTRIBUTION__DEPENDENCIES = PROJECT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Latest Version</b></em>' attribute. <!--
@@ -494,16 +584,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION__LATEST_VERSION = PROJECT_FEATURE_COUNT + 9;
-
-	/**
-	 * The feature id for the '<em><b>Model Resource Adapter</b></em>' containment
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int CONTRIBUTION__MODEL_RESOURCE_ADAPTER = PROJECT_FEATURE_COUNT + 10;
+	int CONTRIBUTION__LATEST_VERSION = PROJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Contribution</em>' class. <!--
@@ -512,7 +593,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRIBUTION_FEATURE_COUNT = PROJECT_FEATURE_COUNT + 11;
+	int CONTRIBUTION_FEATURE_COUNT = PROJECT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the
@@ -1950,19 +2031,6 @@ public interface ClassMakerPackage extends EPackage {
 	EAttribute getContribution_LatestVersion();
 
 	/**
-	 * Returns the meta object for the reference
-	 * '{@link org.enterprisedomain.classmaker.Contribution#getModelResourceAdapter
-	 * <em>Model Resource Adapter</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
-	 * 
-	 * @return the meta object for the reference '<em>Model Resource Adapter</em>'.
-	 * @see org.enterprisedomain.classmaker.Contribution#getModelResourceAdapter()
-	 * @see #getContribution()
-	 * @generated
-	 */
-	EReference getContribution_ModelResourceAdapter();
-
-	/**
 	 * Returns the meta object for class
 	 * '{@link org.enterprisedomain.classmaker.Revision <em>Revision</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -2967,6 +3035,20 @@ public interface ClassMakerPackage extends EPackage {
 	EReference getProject_State();
 
 	/**
+	 * Returns the meta object for the containment reference
+	 * '{@link org.enterprisedomain.classmaker.Project#getModelResourceAdapter
+	 * <em>Model Resource Adapter</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
+	 * @return the meta object for the containment reference '<em>Model Resource
+	 *         Adapter</em>'.
+	 * @see org.enterprisedomain.classmaker.Project#getModelResourceAdapter()
+	 * @see #getProject()
+	 * @generated
+	 */
+	EReference getProject_ModelResourceAdapter();
+
+	/**
 	 * Returns the meta object for class
 	 * '{@link org.enterprisedomain.classmaker.ModelPair <em>Model Pair</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -3498,14 +3580,6 @@ public interface ClassMakerPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CONTRIBUTION__LATEST_VERSION = eINSTANCE.getContribution_LatestVersion();
-
-		/**
-		 * The meta object literal for the '<em><b>Model Resource Adapter</b></em>'
-		 * containment reference feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
-		 * @generated
-		 */
-		EReference CONTRIBUTION__MODEL_RESOURCE_ADAPTER = eINSTANCE.getContribution_ModelResourceAdapter();
 
 		/**
 		 * The meta object literal for the
@@ -4221,6 +4295,14 @@ public interface ClassMakerPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PROJECT__STATE = eINSTANCE.getProject_State();
+
+		/**
+		 * The meta object literal for the '<em><b>Model Resource Adapter</b></em>'
+		 * containment reference feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference PROJECT__MODEL_RESOURCE_ADAPTER = eINSTANCE.getProject_ModelResourceAdapter();
 
 		/**
 		 * The meta object literal for the

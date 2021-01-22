@@ -36,15 +36,13 @@ import org.osgi.framework.Version;
  * <em>Dependencies</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.Contribution#getLatestVersion
  * <em>Latest Version</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Contribution#getModelResourceAdapter
- * <em>Model Resource Adapter</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getContribution()
  * @model
  * @generated
  */
-public interface Contribution extends Project, Item {
+public interface Contribution extends Project {
 
 	/**
 	 * Returns the value of the '<em><b>Dependencies</b></em>' attribute list. The
@@ -79,24 +77,6 @@ public interface Contribution extends Project, Item {
 	 * @generated
 	 */
 	Version getLatestVersion();
-
-	/**
-	 * Returns the value of the '<em><b>Model Resource Adapter</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Model Resource Adapter</em>' reference isn't
-	 * clear, there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc --> <!-- begin-model-doc --> A
-	 * <em><b>ResourceAdapter</b></em> for <em>Contibution</em>.
-	 * 
-	 * @see org.enterprisedomain.classmaker.ResourceAdapter <!-- end-model-doc -->
-	 * @return the value of the '<em>Model Resource Adapter</em>' reference.
-	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getContribution_ModelResourceAdapter()
-	 * @model changeable="false" derived="true"
-	 * @generated
-	 */
-	ResourceAdapter getModelResourceAdapter();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
