@@ -42,7 +42,7 @@ Here is how you can use it:
     assertEquals(pages, jObject.eGet(jAttr));
     assertEquals(eClass.getName(), jObject.getClass().getSimpleName());  
         
-There is more [code](/tests/org.enterprisedomain.classmaker.tests/src/org/enterprisedomain/classmaker/tests/TestEnterpriseDomain.java), where you can specify a method body and call a method, customize the generation templates, or create a meta-model of any meta-level.
+There is more [code](/tests/org.enterprisedomain.classmaker.tests/src/org/enterprisedomain/classmaker/tests/TestEnterpriseDomain.java), where you can specify a method body and call a method or create a meta-model of any meta-level.
 
 Download
 ---------
