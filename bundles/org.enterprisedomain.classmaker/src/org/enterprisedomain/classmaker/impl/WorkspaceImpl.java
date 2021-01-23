@@ -738,39 +738,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			if (theProject.getProjectName() != null && theProject.getProjectName().equals(projectName))
 				project = theProject;
 		}
-		// IProgressMonitor monitor = ClassMakerPlugin.getProgressMonitor();
-		// IProject eProject =
-		// ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
-		// try {
-		// if (!eProject.exists())
-		// return project;
-		// if (!eProject.isOpen()) {
-		// SubMonitor pm = SubMonitor.convert(monitor);
-		// SubMonitor m = pm.newChild(1, SubMonitor.SUPPRESS_ISCANCELED);
-		// try {
-		// eProject.open(m);
-		// } finally {
-		// m.done();
-		// pm.done();
-		// }
-		// }
-		// if (eProject.hasNature(ClassMakerPlugin.NATURE_ID)) {
-		// if (contribution == null) {
-		// contribution = (ContributionImpl)
-		// ClassMakerFactory.eINSTANCE.createContribution();
-		// contribution.setProjectName(eProject.getName());
-		// }
-		// registerProject(contribution);
-		// } else {
-		// project = ClassMakerFactory.eINSTANCE.createProject();
-		// project.setName(eProject.getName());
-		// registerProject(project);
-		// }
-		// } catch (CoreException e) {
-		// ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
-		// } finally {
-		// monitor.done();
-		// }
 		return project;
 	}
 

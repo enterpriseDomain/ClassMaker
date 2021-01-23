@@ -791,7 +791,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 */
 	@SuppressWarnings("unchecked")
 	public EList<Object> getChildren() {
-		if (children == null || children.isEmpty()) {
+		if (children == null || children.isEmpty() || children.get(0) == null) {
 			if (getModelResourceAdapter() != null)
 				children = new LoadingEList(getModelResourceAdapter().getResource());
 			else
@@ -1749,8 +1749,10 @@ public class ProjectImpl extends EObjectImpl implements Project {
 					if (currentBranch.equals(SCMOperator.MASTER_BRANCH))
 						checkout(getVersion(), timestamp);
 					if (eIsSet(ClassMakerPackage.PROJECT__REVISION)
-							&& getRevision().eIsSet(ClassMakerPackage.Literals.REVISION__STATE))
+							&& getRevision().eIsSet(ClassMakerPackage.Literals.REVISION__STATE)) {
 						getRevision().getState().setResource(resource);
+						getProject().initAdapters(getRevision());
+					}
 					onModelResourceCreate(resource);
 					getWorkspace().getResourceSet().eAdapters().add(resourceAdapter);
 					addResourceChangeListener(getResourceReloadListener());

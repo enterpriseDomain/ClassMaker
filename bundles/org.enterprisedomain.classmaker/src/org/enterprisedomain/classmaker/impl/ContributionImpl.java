@@ -244,7 +244,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	 */
 	public EList<String> getDependencies() {
 		if (!isStateSet())
-			return ECollections.emptyEList();
+			return ECollections.newBasicEList(State.defaultRequiredPlugins);
 		return getState().getRequiredPlugins();
 	}
 
@@ -510,31 +510,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 		addCompletionListener(completionListener);
 		super.initAdapters(revision);
 	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public void load(boolean create) throws CoreException {
-		initialize(false);
-		if (isRevisionSet()) {
-			if (create) {
-				try {
-					@SuppressWarnings("unchecked")
-					SCMOperator<Git> operator = (SCMOperator<Git>) getWorkspace().getSCMRegistry()
-							.get(getProjectName());
-					operator.add(".");
-					operator.commit(getProjectName());
-				} catch (Exception e) {
-					throw new CoreException(
-							new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
-				}
-			}
-			getRevision().load(create);
-		}
-	}
-
+	
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 

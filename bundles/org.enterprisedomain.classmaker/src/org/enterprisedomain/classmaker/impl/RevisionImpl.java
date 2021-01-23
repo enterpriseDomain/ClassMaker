@@ -537,7 +537,8 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	 */
 	public void addAdapters(EList<Adapter> adapters) {
 		for (State state : getStateHistory().values())
-			state.eAdapters().addAll(adapters);
+			if (!state.eAdapters().containsAll(adapters))
+				state.eAdapters().addAll(adapters);
 	}
 
 	/**

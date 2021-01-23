@@ -379,7 +379,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 			}
 			for (InternalProject project : projects) {
 				Project domainProject = Activator.getClassMaker().getWorkspace().getProject((Resource) element);
-				if (domainProject != null && domainProject.getName().equals(project.getName()))
+				if (domainProject != null && domainProject.getProjectName().equals(project.getName()))
 					return project;
 			}
 		}

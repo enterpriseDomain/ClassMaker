@@ -82,6 +82,9 @@ import org.eclipse.emf.ecore.resource.Resource;
  * @generated
  */
 public interface State extends Item, ISchedulingRule {
+
+	public String[] defaultRequiredPlugins = new String[] { "org.eclipse.emf.common", "org.eclipse.emf.ecore" };
+
 	/**
 	 * Returns the value of the '<em><b>Package Class Name</b></em>' attribute. <!--
 	 * begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc --> Generated

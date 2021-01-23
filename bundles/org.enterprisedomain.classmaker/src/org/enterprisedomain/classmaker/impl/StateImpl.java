@@ -565,8 +565,8 @@ public class StateImpl extends ItemImpl implements State {
 		if (requiredPlugins == null) {
 			requiredPlugins = new EDataTypeUniqueEList<String>(String.class, this,
 					ClassMakerPackage.STATE__REQUIRED_PLUGINS);
-			requiredPlugins.add("org.eclipse.emf.common");
-			requiredPlugins.add("org.eclipse.emf.ecore");
+			for (String req : defaultRequiredPlugins)
+				requiredPlugins.add(req);
 		}
 		return requiredPlugins;
 	}
