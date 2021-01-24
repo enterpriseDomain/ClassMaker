@@ -802,12 +802,11 @@ public class StateImpl extends ItemImpl implements State {
 			loading = false;
 			return;
 		}
-		if (!loadOnDemand)
-			try {
-				getResource().load(Collections.emptyMap());
-			} catch (IOException e) {
-				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createWarningStatus(e));
-			}
+		try {
+			getResource().load(Collections.emptyMap());
+		} catch (IOException e) {
+			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createWarningStatus(e));
+		}
 		if (!getResource().getContents().isEmpty()) {
 			getDomainModel().setDynamic(EcoreUtil.copy((EObject) getResource().getContents().get(0)));
 		}
