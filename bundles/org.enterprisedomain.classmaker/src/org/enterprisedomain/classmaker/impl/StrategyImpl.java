@@ -51,25 +51,19 @@ import org.enterprisedomain.classmaker.util.ResourceUtils;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.impl.StrategyImpl#getGenerators
- * <em>Generators</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.StrategyImpl#getExporters
- * <em>Exporters</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.StrategyImpl#getInstallers
- * <em>Installers</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.StrategyImpl#getLoaders
- * <em>Loaders</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.StrategyImpl#getState
- * <em>State</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.StrategyImpl#getGenerators <em>Generators</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.StrategyImpl#getExporters <em>Exporters</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.StrategyImpl#getInstallers <em>Installers</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.StrategyImpl#getLoaders <em>Loaders</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.StrategyImpl#getState <em>State</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class StrategyImpl extends EObjectImpl implements Strategy {
 	/**
-	 * The cached value of the '{@link #getGenerators() <em>Generators</em>}'
-	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getGenerators() <em>Generators</em>}' reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getGenerators()
 	 * @generated
 	 * @ordered
@@ -77,9 +71,8 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 	protected EList<Worker> generators;
 
 	/**
-	 * The cached value of the '{@link #getExporters() <em>Exporters</em>}'
-	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getExporters() <em>Exporters</em>}' reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getExporters()
 	 * @generated
 	 * @ordered
@@ -87,9 +80,8 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 	protected EList<Worker> exporters;
 
 	/**
-	 * The cached value of the '{@link #getInstallers() <em>Installers</em>}'
-	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getInstallers() <em>Installers</em>}' reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getInstallers()
 	 * @generated
 	 * @ordered
@@ -97,9 +89,8 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 	protected EList<Worker> installers;
 
 	/**
-	 * The cached value of the '{@link #getLoaders() <em>Loaders</em>}' reference
-	 * list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getLoaders() <em>Loaders</em>}' reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getLoaders()
 	 * @generated
 	 * @ordered
@@ -118,7 +109,6 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected StrategyImpl() {
@@ -127,7 +117,6 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -137,7 +126,6 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -150,7 +138,6 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -163,7 +150,6 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -176,7 +162,6 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -189,7 +174,6 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -208,7 +192,6 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public State basicGetState() {
@@ -217,7 +200,6 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetState(State newState, NotificationChain msgs) {
@@ -236,7 +218,6 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -464,7 +445,6 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -481,7 +461,6 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -517,7 +496,6 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -541,7 +519,6 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -573,7 +550,6 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -600,7 +576,6 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

@@ -869,7 +869,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="completionNotificationAdapter"
-        eType="#//CompletionNotificationAdapter" containment="true">
+        eType="#//CompletionNotificationAdapter" eOpposite="#//CompletionNotificationAdapter/project">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;em>CompletionNotificationAdapter&lt;/em> for &lt;em>&lt;b>Project&lt;/b>&lt;/em>'s operations."/>
         <details key="notify" value="false"/>
@@ -1205,6 +1205,8 @@
         <details key="documentation" value="Contains error {@link org.eclipse.core.runtime.IStatus Status} in case it happened during the process, {@code null} otherwise."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="project" eType="#//Project"
+        eOpposite="#//Project/completionNotificationAdapter"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Worker" instanceClassName="org.enterprisedomain.classmaker.jobs.Worker"
       abstract="true" interface="true">

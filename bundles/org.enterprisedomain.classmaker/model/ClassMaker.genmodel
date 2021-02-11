@@ -577,8 +577,9 @@
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Blueprint/edit"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Blueprint/editor"/>
     </genClasses>
-    <genClasses ecoreClass="ClassMaker.ecore#//CompletionNotificationAdapter">
+    <genClasses image="false" ecoreClass="ClassMaker.ecore#//CompletionNotificationAdapter">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//CompletionNotificationAdapter/error"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//CompletionNotificationAdapter/project"/>
     </genClasses>
     <genClasses image="false" ecoreClass="ClassMaker.ecore#//Worker"/>
     <genClasses ecoreClass="ClassMaker.ecore#//SelectRevealHandler">

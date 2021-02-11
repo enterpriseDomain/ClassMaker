@@ -46,31 +46,22 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getModelName
- * <em>Model Name</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getPhase
- * <em>Phase</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getLanguage
- * <em>Language</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getDomainModel
- * <em>Domain Model</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getCustomizers
- * <em>Customizers</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getParent
- * <em>Parent</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getLocale
- * <em>Locale</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getProject
- * <em>Project</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getModelName <em>Model Name</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getPhase <em>Phase</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getLanguage <em>Language</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getDomainModel <em>Domain Model</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getCustomizers <em>Customizers</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getParent <em>Parent</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getLocale <em>Locale</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getProject <em>Project</em>}</li>
  * </ul>
  *
  * @generated
  */
 public abstract class ItemImpl extends EObjectImpl implements Item {
 	/**
-	 * The default value of the '{@link #getModelName() <em>Model Name</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getModelName() <em>Model Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getModelName()
 	 * @generated
 	 * @ordered
@@ -78,9 +69,8 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	protected static final String MODEL_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getModelName() <em>Model Name</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getModelName() <em>Model Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getModelName()
 	 * @generated
 	 * @ordered
@@ -118,9 +108,8 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	protected static final Version VERSION_EDEFAULT = Version.emptyVersion;
 
 	/**
-	 * The default value of the '{@link #getLanguage() <em>Language</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getLanguage() <em>Language</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getLanguage()
 	 * @generated
 	 * @ordered
@@ -130,7 +119,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	/**
 	 * The cached value of the '{@link #getLanguage() <em>Language</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getLanguage()
 	 * @generated
 	 * @ordered
@@ -138,9 +126,8 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	protected String language = LANGUAGE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getDomainModel() <em>Domain Model</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getDomainModel() <em>Domain Model</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getDomainModel()
 	 * @generated
 	 * @ordered
@@ -150,7 +137,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	/**
 	 * The default value of the '{@link #getLocale() <em>Locale</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getLocale()
 	 * @generated
 	 * @ordered
@@ -172,7 +158,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -182,7 +167,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -192,7 +176,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -206,7 +189,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -216,7 +198,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -241,7 +222,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -254,7 +234,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -283,7 +262,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -293,7 +271,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -307,7 +284,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -317,7 +293,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetDomainModel(ModelPair newDomainModel, NotificationChain msgs) {
@@ -336,7 +311,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -368,7 +342,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -450,7 +423,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -467,7 +439,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -483,7 +454,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -518,7 +488,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -554,7 +523,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -590,7 +558,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -618,7 +585,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
