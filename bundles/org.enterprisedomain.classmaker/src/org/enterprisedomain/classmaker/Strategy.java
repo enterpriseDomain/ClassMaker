@@ -28,16 +28,11 @@ import org.enterprisedomain.classmaker.jobs.Worker;
  * The following features are supported:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.Strategy#getGenerators
- * <em>Generators</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Strategy#getExporters
- * <em>Exporters</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Strategy#getInstallers
- * <em>Installers</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Strategy#getLoaders
- * <em>Loaders</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Strategy#getState
- * <em>State</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Strategy#getGenerators <em>Generators</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Strategy#getExporters <em>Exporters</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Strategy#getInstallers <em>Installers</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Strategy#getLoaders <em>Loaders</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Strategy#getState <em>State</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getStrategy()
@@ -46,11 +41,10 @@ import org.enterprisedomain.classmaker.jobs.Worker;
  */
 public interface Strategy extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Generators</b></em>' reference list. The
-	 * list contents are of type
-	 * {@link org.enterprisedomain.classmaker.jobs.Worker}. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Generators</b></em>' reference list.
+	 * The list contents are of type {@link org.enterprisedomain.classmaker.jobs.Worker}.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Generators</em>' reference list.
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getStrategy_Generators()
 	 * @model type="org.enterprisedomain.classmaker.Worker" resolveProxies="false"
@@ -59,10 +53,9 @@ public interface Strategy extends EObject {
 	EList<Worker> getGenerators();
 
 	/**
-	 * Returns the value of the '<em><b>Exporters</b></em>' reference list. The list
-	 * contents are of type {@link org.enterprisedomain.classmaker.jobs.Worker}.
+	 * Returns the value of the '<em><b>Exporters</b></em>' reference list.
+	 * The list contents are of type {@link org.enterprisedomain.classmaker.jobs.Worker}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Exporters</em>' reference list.
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getStrategy_Exporters()
 	 * @model type="org.enterprisedomain.classmaker.Worker" resolveProxies="false"
@@ -71,11 +64,10 @@ public interface Strategy extends EObject {
 	EList<Worker> getExporters();
 
 	/**
-	 * Returns the value of the '<em><b>Installers</b></em>' reference list. The
-	 * list contents are of type
-	 * {@link org.enterprisedomain.classmaker.jobs.Worker}. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Installers</b></em>' reference list.
+	 * The list contents are of type {@link org.enterprisedomain.classmaker.jobs.Worker}.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Installers</em>' reference list.
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getStrategy_Installers()
 	 * @model type="org.enterprisedomain.classmaker.Worker" resolveProxies="false"
@@ -84,10 +76,9 @@ public interface Strategy extends EObject {
 	EList<Worker> getInstallers();
 
 	/**
-	 * Returns the value of the '<em><b>Loaders</b></em>' reference list. The list
-	 * contents are of type {@link org.enterprisedomain.classmaker.jobs.Worker}.
+	 * Returns the value of the '<em><b>Loaders</b></em>' reference list.
+	 * The list contents are of type {@link org.enterprisedomain.classmaker.jobs.Worker}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Loaders</em>' reference list.
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getStrategy_Loaders()
 	 * @model type="org.enterprisedomain.classmaker.Worker" resolveProxies="false"
@@ -96,11 +87,9 @@ public interface Strategy extends EObject {
 	EList<Worker> getLoaders();
 
 	/**
-	 * Returns the value of the '<em><b>State</b></em>' reference. It is
-	 * bidirectional and its opposite is
-	 * '{@link org.enterprisedomain.classmaker.State#getStrategy
-	 * <em>Strategy</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the value of the '<em><b>State</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link org.enterprisedomain.classmaker.State#getStrategy <em>Strategy</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the value of the '<em>State</em>' reference.
 	 * @see #setState(State)
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getStrategy_State()
@@ -111,10 +100,8 @@ public interface Strategy extends EObject {
 	State getState();
 
 	/**
-	 * Sets the value of the
-	 * '{@link org.enterprisedomain.classmaker.Strategy#getState <em>State</em>}'
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Strategy#getState <em>State</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>State</em>' reference.
 	 * @see #getState()
 	 * @generated
@@ -123,7 +110,6 @@ public interface Strategy extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model type="org.enterprisedomain.classmaker.Worker"
 	 * @generated
 	 */
@@ -131,7 +117,6 @@ public interface Strategy extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model type="org.enterprisedomain.classmaker.Worker"
 	 * @generated
 	 */
@@ -139,7 +124,6 @@ public interface Strategy extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model type="org.enterprisedomain.classmaker.Worker"
 	 * @generated
 	 */
@@ -147,7 +131,6 @@ public interface Strategy extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model type="org.enterprisedomain.classmaker.Worker"
 	 * @generated
 	 */
@@ -155,7 +138,6 @@ public interface Strategy extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model kind="operation" type="org.enterprisedomain.classmaker.Worker"
 	 * @generated
 	 */
@@ -163,7 +145,6 @@ public interface Strategy extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
@@ -171,7 +152,6 @@ public interface Strategy extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */

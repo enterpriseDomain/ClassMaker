@@ -34,9 +34,6 @@
     <genClasses ecoreClass="ClassMaker.ecore#//Contribution">
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Contribution/dependencies"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Contribution/latestVersion"/>
-      <genOperations ecoreOperation="ClassMaker.ecore#//Contribution/createRevision">
-        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/createRevision/monitor"/>
-      </genOperations>
       <genOperations ecoreOperation="ClassMaker.ecore#//Contribution/delete">
         <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/delete/monitor"/>
       </genOperations>
@@ -344,6 +341,9 @@
       <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference ClassMaker.ecore#//Project/modelResourceAdapter"/>
       <genOperations ecoreOperation="ClassMaker.ecore#//Project/create">
         <genParameters ecoreParameter="ClassMaker.ecore#//Project/create/monitor"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Project/createRevision">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Project/createRevision/monitor"/>
       </genOperations>
       <genOperations ecoreOperation="ClassMaker.ecore#//Project/delete">
         <genParameters ecoreParameter="ClassMaker.ecore#//Project/delete/monitor"/>

@@ -6,9 +6,6 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Software contribution project item. Basically, it contibutes the software piece to the body of main program."/>
     </eAnnotations>
-    <eOperations name="createRevision" eType="#//Revision" eExceptions="#//CoreException">
-      <eParameters name="monitor" eType="#//IProgressMonitor"/>
-    </eOperations>
     <eOperations name="delete" eExceptions="#//CoreException">
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
@@ -747,6 +744,9 @@
       <details key="documentation" value="Default project class."/>
     </eAnnotations>
     <eOperations name="create" eExceptions="#//CoreException">
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
+    <eOperations name="createRevision" eType="#//Revision" eExceptions="#//CoreException">
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
     <eOperations name="delete" eExceptions="#//CoreException">

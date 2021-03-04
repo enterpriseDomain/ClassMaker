@@ -14,9 +14,9 @@
  */
 package org.enterprisedomain.classmaker.tests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,8 +42,8 @@ import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 
 public abstract class AbstractTest {
 
@@ -70,12 +70,12 @@ public abstract class AbstractTest {
 		latch.countDown();
 	}
 
-	@BeforeClass
+	@BeforeAll
 	public static void init() {
 		currentDynamics = new HashMap<Future<? extends EPackage>, EPackage>();
 	}
 
-	@Before
+	@BeforeEach
 	public void dependencyCheck() {
 		try {
 			latch.await(1, TimeUnit.SECONDS);
@@ -84,7 +84,7 @@ public abstract class AbstractTest {
 		}
 	}
 
-	@Before
+	@BeforeEach
 	public void prepare() {
 		setPackageName(null);
 		setClassName("C");

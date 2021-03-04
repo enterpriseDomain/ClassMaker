@@ -1190,6 +1190,22 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * 
 	 * @generated NOT
 	 */
+	public Revision createRevision(IProgressMonitor monitor) throws CoreException {
+		Revision revision = null;
+		if (!isRevisionSet()) {
+			Version version = nextVersion();
+			revision = newRevision(version);
+		} else
+			revision = getRevision();
+		revision.create(monitor);
+		return revision;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
 	public void delete(IProgressMonitor monitor) throws CoreException {
 		if (eIsSet(ClassMakerPackage.PROJECT__WORKSPACE)) {
 			getWorkspace().getResourceSet().eAdapters().remove(resourceAdapter);

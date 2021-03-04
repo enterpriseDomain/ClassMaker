@@ -248,22 +248,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	 * 
 	 * @generated NOT
 	 */
-	public Revision createRevision(IProgressMonitor monitor) throws CoreException {
-		Revision revision = null;
-		if (!isRevisionSet()) {
-			Version version = nextVersion();
-			revision = newRevision(version);
-		} else
-			revision = getRevision();
-		revision.create(monitor);
-		return revision;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
 	public EMap<StageQualifier, Customizer> getCustomizers() {
 		if (isStateSet())
 			return getState().getCustomizers();
