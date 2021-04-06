@@ -2,16 +2,13 @@
  */
 package org.enterprisedomain.ecp.provider;
 
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -22,27 +19,20 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
 import org.enterprisedomain.ecp.ECPPackage;
 
 /**
  * This is the item provider adapter for a {@link java.util.Map.Entry} object.
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  */
-public class EParameterToObjectMapEntryItemProvider 
-	extends ItemProviderAdapter
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource {
+public class EParameterToObjectMapEntryItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
+		IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
-	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EParameterToObjectMapEntryItemProvider(AdapterFactory adapterFactory) {
@@ -50,9 +40,9 @@ public class EParameterToObjectMapEntryItemProvider
 	}
 
 	/**
-	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This returns the property descriptors for the adapted class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -67,53 +57,40 @@ public class EParameterToObjectMapEntryItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Key feature.
-	 * <!-- begin-user-doc -->
+	 * This adds a property descriptor for the Key feature. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addKeyPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_EParameterToObjectMapEntry_key_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_EParameterToObjectMapEntry_key_feature", "_UI_EParameterToObjectMapEntry_type"),
-				 ECPPackage.Literals.EPARAMETER_TO_OBJECT_MAP_ENTRY__KEY,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_EParameterToObjectMapEntry_key_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_EParameterToObjectMapEntry_key_feature",
+								"_UI_EParameterToObjectMapEntry_type"),
+						ECPPackage.Literals.EPARAMETER_TO_OBJECT_MAP_ENTRY__KEY, true, false, true, null, null, null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Value feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This adds a property descriptor for the Value feature. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addValuePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_EParameterToObjectMapEntry_value_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_EParameterToObjectMapEntry_value_feature", "_UI_EParameterToObjectMapEntry_type"),
-				 ECPPackage.Literals.EPARAMETER_TO_OBJECT_MAP_ENTRY__VALUE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_EParameterToObjectMapEntry_value_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_EParameterToObjectMapEntry_value_feature",
+								"_UI_EParameterToObjectMapEntry_type"),
+						ECPPackage.Literals.EPARAMETER_TO_OBJECT_MAP_ENTRY__VALUE, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
-	 * This returns EParameterToObjectMapEntry.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This returns EParameterToObjectMapEntry.gif. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -122,23 +99,22 @@ public class EParameterToObjectMapEntryItemProvider
 	}
 
 	/**
-	 * This returns the label text for the adapted class.
-	 * <!-- begin-user-doc -->
+	 * This returns the label text for the adapted class. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public String getText(Object object) {
-		Map.Entry<?, ?> eParameterToObjectMapEntry = (Map.Entry<?, ?>)object;
+		Map.Entry<?, ?> eParameterToObjectMapEntry = (Map.Entry<?, ?>) object;
 		return "" + eParameterToObjectMapEntry.getKey() + " -> " + eParameterToObjectMapEntry.getValue();
 	}
 
-
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This handles model notifications by calling {@link #updateChildren} to update
+	 * any cached children and by creating a viewer notification, which it passes to
+	 * {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -146,18 +122,18 @@ public class EParameterToObjectMapEntryItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Map.Entry.class)) {
-			case ECPPackage.EPARAMETER_TO_OBJECT_MAP_ENTRY__VALUE:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
+		case ECPPackage.EPARAMETER_TO_OBJECT_MAP_ENTRY__VALUE:
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+			return;
 		}
 		super.notifyChanged(notification);
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-	 * that can be created under this object.
-	 * <!-- begin-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing
+	 * the children that can be created under this object. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -166,9 +142,9 @@ public class EParameterToObjectMapEntryItemProvider
 	}
 
 	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Return the resource locator for this item provider's resources. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

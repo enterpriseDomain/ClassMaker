@@ -4,9 +4,10 @@
     modelDirectory="/org.enterprisedomain.classmaker/src" creationSubmenus="true"
     editDirectory="/org.enterprisedomain.classmaker.edit/src" editorDirectory="/org.enterprisedomain.editor/src"
     modelPluginID="org.enterprisedomain.classmaker" templateDirectory="" redirection=""
-    modelName="ClassMaker" modelPluginClass="" codeFormatting="true" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="6.0" copyrightFields="false" editPluginID="org.enterprisedomain.classmaker.edit"
-    editorPluginID="org.enterprisedomain.editor" language="" usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore"
+    modelName="ClassMaker" modelPluginClass="" codeFormatting="true" testsDirectory=""
+    testSuiteClass="" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    copyrightFields="false" editPluginID="org.enterprisedomain.classmaker.edit" editorPluginID="org.enterprisedomain.editor"
+    testsPluginID="org.enterprisedomain.classmaker.tests" language="" usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore"
     interfaceNamePattern="" runtimePlatform="RCP" pluginKey="ClassMaker">
   <foreignModel>ClassMaker.ecore</foreignModel>
   <genPackages prefix="ClassMaker" basePackage="org.enterprisedomain" resource="XMI"
@@ -146,6 +147,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//Item/project"/>
       <genOperations ecoreOperation="ClassMaker.ecore#//Item/load">
         <genParameters ecoreParameter="ClassMaker.ecore#//Item/load/create"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//Item/load/loadOnDemand"/>
       </genOperations>
       <genOperations ecoreOperation="ClassMaker.ecore#//Item/make">
         <genParameters ecoreParameter="ClassMaker.ecore#//Item/make/monitor"/>
@@ -433,6 +435,7 @@
       </genOperations>
     </genClasses>
     <genClasses image="false" ecoreClass="ClassMaker.ecore#//Notification"/>
+    <genClasses image="false" ecoreClass="ClassMaker.ecore#//Notifier"/>
     <genClasses image="false" ecoreClass="ClassMaker.ecore#//CompletionListener">
       <genOperations ecoreOperation="ClassMaker.ecore#//CompletionListener/completed">
         <genParameters ecoreParameter="ClassMaker.ecore#//CompletionListener/completed/result"/>

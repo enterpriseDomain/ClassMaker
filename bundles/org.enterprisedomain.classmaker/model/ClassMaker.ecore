@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="classmaker" nsURI="http://org/enterprisedomain/ClassMaker/0.8.28"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="classmaker" nsURI="http://org/enterprisedomain/ClassMaker/0.8.37"
     nsPrefix="ClassMaker">
   <eClassifiers xsi:type="ecore:EClass" name="Contribution" eSuperTypes="#//Project">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -246,6 +246,7 @@
     </eAnnotations>
     <eOperations name="load" eExceptions="#//CoreException">
       <eParameters name="create" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eParameters name="loadOnDemand" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eOperations>
     <eOperations name="make" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         eExceptions="#//Exception">
@@ -932,6 +933,8 @@
     </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Notification" instanceClassName="org.eclipse.emf.common.notify.Notification"
+      abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Notifier" instanceClassName="org.eclipse.emf.common.notify.Notifier"
       abstract="true" interface="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="CompletionListener" abstract="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

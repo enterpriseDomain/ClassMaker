@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ClassMaker CDO UI Support
+Bundle-SymbolicName: org.enterprisedomain.classmaker.cdo.ui
+Bundle-Version: 0.8.37.qualifier
+Bundle-Vendor: Kyrill Zotkin
+Require-Bundle: org.enterprisedomain.classmaker.cdo;bundle-version="0.0.1",
+ org.eclipse.emf.cdo.ui;bundle-version="4.9.1",
+ org.eclipse.emf.cdo.explorer.ui;bundle-version="4.7.1",
+ org.eclipse.net4j.tcp;bundle-version="4.2.1",
+ org.eclipse.emf.ecp.view.context;bundle-version="1.26.0",
+ org.eclipse.emf.ecp.ui.view;bundle-version="1.26.0",
+ org.eclipse.emf.ecp.ui.view.swt;bundle-version="1.26.0"
+Automatic-Module-Name: org.enterprisedomain.classmaker.cdo.ui
+Bundle-RequiredExecutionEnvironment: JavaSE-11

@@ -405,7 +405,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		} else
 			for (Project project : getProjects()) {
 				try {
-					project.load(false);
+					project.load(false, true);
 				} catch (CoreException e) {
 					ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
 				}
@@ -502,7 +502,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 					result.checkout(newRevision.getVersion());
 				} else {
 					result.createRevision(monitor);
-					result.load(true);
+					result.load(true, true);
 				}
 				registerProject(result);
 				return result;
@@ -519,7 +519,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			Version version = result.nextVersion();
 			Revision revision = result.newRevision(version);
 			result.checkout(revision.getVersion());
-			result.load(true);
+			result.load(true, true);
 			EObject model = EcoreUtil.copy(blueprint);
 			result.getDomainModel().setDynamic(model);
 			result.getState().saveResource();
@@ -717,6 +717,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			Revision revision = project.createRevision(monitor);
 			project.checkout(revision.getVersion());
 			project.initialize(true);
+			project.load(true, true);
 			return project;
 		} finally {
 			monitor.done();

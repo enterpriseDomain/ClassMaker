@@ -42,8 +42,8 @@ import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 
 public abstract class AbstractTest {
 

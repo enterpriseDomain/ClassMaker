@@ -16,6 +16,7 @@
 package org.enterprisedomain.classmaker.impl;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
@@ -95,25 +96,44 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getPackageClassName <em>Package Class Name</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getEditPluginClassName <em>Edit Plugin Class Name</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getEditorPluginClassName <em>Editor Plugin Class Name</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getRequiredPlugins <em>Required Plugins</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getRevision <em>Revision</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getTimestamp <em>Timestamp</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getDeployableUnitName <em>Deployable Unit Name</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getEditDeployableUnitName <em>Edit Deployable Unit Name</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getEditorDeployableUnitName <em>Editor Deployable Unit Name</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getJobFamily <em>Job Family</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getResource <em>Resource</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getCommitIds <em>Commit Ids</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getCommitId <em>Commit Id</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getStateCustomizers <em>State Customizers</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getProjectName <em>Project Name</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#isMaking <em>Making</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#isEdit <em>Edit</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#isEditor <em>Editor</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getStrategy <em>Strategy</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getPackageClassName
+ * <em>Package Class Name</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getEditPluginClassName
+ * <em>Edit Plugin Class Name</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getEditorPluginClassName
+ * <em>Editor Plugin Class Name</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getRequiredPlugins
+ * <em>Required Plugins</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getRevision
+ * <em>Revision</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getTimestamp
+ * <em>Timestamp</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getDeployableUnitName
+ * <em>Deployable Unit Name</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getEditDeployableUnitName
+ * <em>Edit Deployable Unit Name</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getEditorDeployableUnitName
+ * <em>Editor Deployable Unit Name</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getJobFamily
+ * <em>Job Family</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getResource
+ * <em>Resource</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getCommitIds
+ * <em>Commit Ids</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getCommitId
+ * <em>Commit Id</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getStateCustomizers
+ * <em>State Customizers</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getProjectName
+ * <em>Project Name</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#isMaking
+ * <em>Making</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#isEdit
+ * <em>Edit</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#isEditor
+ * <em>Editor</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getStrategy
+ * <em>Strategy</em>}</li>
  * </ul>
  *
  * @generated
@@ -121,8 +141,9 @@ import org.osgi.framework.Version;
 public class StateImpl extends ItemImpl implements State {
 
 	/**
-	 * The default value of the '{@link #getPackageClassName() <em>Package Class Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getPackageClassName() <em>Package Class
+	 * Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getPackageClassName()
 	 * @generated
 	 * @ordered
@@ -130,8 +151,9 @@ public class StateImpl extends ItemImpl implements State {
 	protected static final String PACKAGE_CLASS_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getPackageClassName() <em>Package Class Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getPackageClassName() <em>Package Class
+	 * Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getPackageClassName()
 	 * @generated
 	 * @ordered
@@ -139,8 +161,9 @@ public class StateImpl extends ItemImpl implements State {
 	protected String packageClassName = PACKAGE_CLASS_NAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getEditPluginClassName() <em>Edit Plugin Class Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getEditPluginClassName() <em>Edit Plugin
+	 * Class Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getEditPluginClassName()
 	 * @generated
 	 * @ordered
@@ -148,8 +171,9 @@ public class StateImpl extends ItemImpl implements State {
 	protected static final String EDIT_PLUGIN_CLASS_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getEditPluginClassName() <em>Edit Plugin Class Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getEditPluginClassName() <em>Edit Plugin
+	 * Class Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getEditPluginClassName()
 	 * @generated
 	 * @ordered
@@ -168,8 +192,9 @@ public class StateImpl extends ItemImpl implements State {
 	protected static final String EDITOR_PLUGIN_CLASS_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getEditorPluginClassName() <em>Editor Plugin Class Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getEditorPluginClassName() <em>Editor Plugin
+	 * Class Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getEditorPluginClassName()
 	 * @generated
 	 * @ordered
@@ -177,8 +202,9 @@ public class StateImpl extends ItemImpl implements State {
 	protected String editorPluginClassName = EDITOR_PLUGIN_CLASS_NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getRequiredPlugins() <em>Required Plugins</em>}' attribute list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getRequiredPlugins() <em>Required
+	 * Plugins</em>}' attribute list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getRequiredPlugins()
 	 * @generated
 	 * @ordered
@@ -220,8 +246,9 @@ public class StateImpl extends ItemImpl implements State {
 	}
 
 	/**
-	 * The default value of the '{@link #getTimestamp() <em>Timestamp</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getTimestamp() <em>Timestamp</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getTimestamp()
 	 * @generated
 	 * @ordered
@@ -229,8 +256,9 @@ public class StateImpl extends ItemImpl implements State {
 	protected static final long TIMESTAMP_EDEFAULT = 0L;
 
 	/**
-	 * The cached value of the '{@link #getTimestamp() <em>Timestamp</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getTimestamp() <em>Timestamp</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getTimestamp()
 	 * @generated
 	 * @ordered
@@ -248,8 +276,9 @@ public class StateImpl extends ItemImpl implements State {
 	protected static final Version VERSION_EDEFAULT = Version.emptyVersion;
 
 	/**
-	 * The default value of the '{@link #getDeployableUnitName() <em>Deployable Unit Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getDeployableUnitName() <em>Deployable Unit
+	 * Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getDeployableUnitName()
 	 * @generated
 	 * @ordered
@@ -257,9 +286,10 @@ public class StateImpl extends ItemImpl implements State {
 	protected static final String DEPLOYABLE_UNIT_NAME_EDEFAULT = ""; //$NON-NLS-1$
 
 	/**
-	 * The default value of the '{@link #getEditDeployableUnitName() <em>Edit Deployable Unit Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
+	 * The default value of the '{@link #getEditDeployableUnitName() <em>Edit
+	 * Deployable Unit Name</em>}' attribute. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @see #getEditDeployableUnitName()
 	 * @generated
 	 * @ordered
@@ -267,9 +297,10 @@ public class StateImpl extends ItemImpl implements State {
 	protected static final String EDIT_DEPLOYABLE_UNIT_NAME_EDEFAULT = "";
 
 	/**
-	 * The default value of the '{@link #getEditorDeployableUnitName() <em>Editor Deployable Unit Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
+	 * The default value of the '{@link #getEditorDeployableUnitName() <em>Editor
+	 * Deployable Unit Name</em>}' attribute. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @see #getEditorDeployableUnitName()
 	 * @generated
 	 * @ordered
@@ -277,8 +308,9 @@ public class StateImpl extends ItemImpl implements State {
 	protected static final String EDITOR_DEPLOYABLE_UNIT_NAME_EDEFAULT = "";
 
 	/**
-	 * The default value of the '{@link #getJobFamily() <em>Job Family</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getJobFamily() <em>Job Family</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getJobFamily()
 	 * @generated
 	 * @ordered
@@ -286,8 +318,9 @@ public class StateImpl extends ItemImpl implements State {
 	protected static final String JOB_FAMILY_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getJobFamily() <em>Job Family</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getJobFamily() <em>Job Family</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getJobFamily()
 	 * @generated
 	 * @ordered
@@ -297,6 +330,7 @@ public class StateImpl extends ItemImpl implements State {
 	/**
 	 * The cached value of the '{@link #getResource() <em>Resource</em>}' reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getResource()
 	 * @generated
 	 * @ordered
@@ -304,8 +338,9 @@ public class StateImpl extends ItemImpl implements State {
 	protected Resource resource;
 
 	/**
-	 * The cached value of the '{@link #getCommitIds() <em>Commit Ids</em>}' attribute list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getCommitIds() <em>Commit Ids</em>}'
+	 * attribute list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getCommitIds()
 	 * @generated
 	 * @ordered
@@ -313,8 +348,9 @@ public class StateImpl extends ItemImpl implements State {
 	protected EList<String> commitIds;
 
 	/**
-	 * The default value of the '{@link #getCommitId() <em>Commit Id</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getCommitId() <em>Commit Id</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getCommitId()
 	 * @generated
 	 * @ordered
@@ -322,8 +358,9 @@ public class StateImpl extends ItemImpl implements State {
 	protected static final String COMMIT_ID_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getCommitId() <em>Commit Id</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getCommitId() <em>Commit Id</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getCommitId()
 	 * @generated
 	 * @ordered
@@ -331,8 +368,9 @@ public class StateImpl extends ItemImpl implements State {
 	protected String commitId = COMMIT_ID_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getStateCustomizers() <em>State Customizers</em>}' map.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getStateCustomizers() <em>State
+	 * Customizers</em>}' map. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getStateCustomizers()
 	 * @generated
 	 * @ordered
@@ -340,8 +378,9 @@ public class StateImpl extends ItemImpl implements State {
 	protected EMap<StageQualifier, Customizer> stateCustomizers;
 
 	/**
-	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getProjectName()
 	 * @generated
 	 * @ordered
@@ -351,6 +390,7 @@ public class StateImpl extends ItemImpl implements State {
 	/**
 	 * The default value of the '{@link #isMaking() <em>Making</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #isMaking()
 	 * @generated
 	 * @ordered
@@ -390,6 +430,7 @@ public class StateImpl extends ItemImpl implements State {
 	/**
 	 * The default value of the '{@link #isEditor() <em>Editor</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #isEditor()
 	 * @generated
 	 * @ordered
@@ -409,6 +450,7 @@ public class StateImpl extends ItemImpl implements State {
 	/**
 	 * The cached value of the '{@link #getStrategy() <em>Strategy</em>}' reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getStrategy()
 	 * @generated
 	 * @ordered
@@ -434,6 +476,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -443,6 +486,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -452,6 +496,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -465,6 +510,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -474,6 +520,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -487,6 +534,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -496,6 +544,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -525,6 +574,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -534,6 +584,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -682,7 +733,7 @@ public class StateImpl extends ItemImpl implements State {
 			IProgressMonitor monitor = ClassMakerPlugin.getProgressMonitor();
 			IFolder folder = project.getFolder(ResourceUtils.getModelFolderName());
 
-			if (!folder.exists()) {
+			if (!folder.exists() && getParent().getParent() instanceof Contribution) {
 				SubMonitor pm = null;
 				SubMonitor m = null;
 				try {
@@ -743,6 +794,17 @@ public class StateImpl extends ItemImpl implements State {
 		} else if (create && !eIsSet(ClassMakerPackage.STATE__RESOURCE)) {
 			setResource(resourceSet.createResource(modelURI));
 			created = true;
+		}
+		if (loadOnDemand && (!eIsSet(ClassMakerPackage.STATE__RESOURCE)
+				|| (eIsSet(ClassMakerPackage.STATE__RESOURCE) && getResource().getContents().isEmpty()))) {
+			try {
+				setResource(resourceSet.getResource(modelURI, loadOnDemand));
+				created = false;
+			} catch (WrappedException e) {
+				if (e.getCause() instanceof FileNotFoundException) {
+					setResource(resourceSet.createResource(modelURI));
+				}
+			}
 		}
 		getDomainModel().eAdapters().remove(modelsToResourceAdapter);
 		getDomainModel().eAdapters().add(modelsToResourceAdapter);
@@ -811,6 +873,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -963,8 +1026,8 @@ public class StateImpl extends ItemImpl implements State {
 	 * Initialize and load resource. Parent revision should be set.
 	 */
 	@Override
-	public void load(boolean create) throws CoreException {
-		loadResource(getModelURI(), create, true);
+	public void load(boolean create, boolean loadOnDemand) throws CoreException {
+		loadResource(getModelURI(), create, loadOnDemand);
 		if (ClassMakerServiceImpl.initializing && getPhase().getValue() == Stage.LOADED_VALUE) {
 			getStrategy().configureJobs(getStrategy().getLoaders().isEmpty(), ClassMakerPlugin.getProgressMonitor());
 			Job job = EnterpriseDomainJob
@@ -1004,7 +1067,7 @@ public class StateImpl extends ItemImpl implements State {
 			setCommitId(commitId);
 			operator.checkout(getProject().getVersion().toString(), getCommitId(), forced);
 			copyModel(getParent());
-			load(false);
+			load(false, false);
 		} catch (CheckoutConflictException e) {
 			e.getConflictingPaths().clear();
 		} catch (CoreException e) {
@@ -1046,6 +1109,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1190,6 +1254,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1234,6 +1299,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1247,6 +1313,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1256,6 +1323,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1269,6 +1337,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1281,6 +1350,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1290,6 +1360,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1308,6 +1379,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1343,6 +1415,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1352,6 +1425,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1364,6 +1438,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1373,6 +1448,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1385,6 +1461,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1394,6 +1471,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1406,6 +1484,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1424,6 +1503,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Strategy basicGetStrategy() {
@@ -1432,6 +1512,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetStrategy(Strategy newStrategy, NotificationChain msgs) {
@@ -1450,6 +1531,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1540,6 +1622,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1596,6 +1679,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -1667,6 +1751,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1735,6 +1820,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1791,6 +1877,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

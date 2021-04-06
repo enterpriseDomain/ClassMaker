@@ -1,0 +1,60 @@
+target "org.enterprisedomain.target.2020-12" with allEnvironments configurePhase
+
+location updates4_19 "http://download.eclipse.org/eclipse/updates/4.19/" {
+	org.eclipse.e4.rcp.feature.group
+	org.eclipse.rcp.configuration.feature.group
+	org.eclipse.rcp.source.feature.group
+	org.eclipse.e4.rcp.source.feature.group
+	org.eclipse.equinox.sdk.feature.group
+	org.eclipse.equinox.executable.feature.group [3.8.1000,3.9.0)
+	org.eclipse.platform.ide
+	org.eclipse.jdt.core
+	org.eclipse.pde.core
+}
+
+location simrel2021-03 "https://download.eclipse.org/releases/2021-03/" {
+	org.eclipse.jdt.feature.group
+	org.eclipse.emf.sdk.feature.group [2.25.0,2.26.0)
+	org.eclipse.gef.sdk.feature.group
+	org.eclipse.graphiti.feature.feature.group
+	org.eclipse.graphiti.export.feature.feature.group
+	org.eclipse.emf.validation.sdk.feature.group
+	org.eclipse.emf.transaction.sdk.feature.group
+	org.eclipse.net4j.sdk.feature.group
+	org.eclipse.emf.cdo.sdk.feature.group
+	org.eclipse.platform.feature.group
+	org.eclipse.swt
+	org.eclipse.pde.feature.group
+	org.eclipse.equinox.ds [1.6.100,2.0.0)
+	org.eclipse.equinox.p2.extras.feature.feature.group
+	org.eclipse.equinox.p2.extras.feature.source.feature.group
+	org.eclipse.equinox.weaving.caching
+	org.eclipse.equinox.weaving.caching.j9
+	org.eclipse.equinox.weaving.hook
+	org.eclipse.ocl.all.sdk.feature.group
+	org.eclipse.m2m.qvt.oml.sdk.feature.group [3.10.3,4.0.0)
+	org.eclipse.xtend.sdk.feature.group
+	org.eclipse.emf.ecp.emfforms.sdk.feature.feature.group [1.26.0,1.27.0)
+	org.eclipse.ecf.core.ssl.feature.feature.group
+	org.eclipse.ecf.filetransfer.ssl.feature.feature.group
+	org.eclipse.ecf.filetransfer.httpclient45.feature.feature.group
+}
+
+location "http://download.eclipse.org/egit/updates/" {
+	org.eclipse.jgit.feature.group [5.11.0,5.11.1)
+	org.eclipse.jgit.lfs.feature.group [5.11.0,5.11.1)
+	org.eclipse.jgit.pgm.feature.group [5.11.0,5.11.1)
+	org.eclipse.jgit.http.apache.feature.group [5.11.0,5.11.1)
+	org.eclipse.jgit.ssh.apache.feature.group [5.11.0,5.11.1)
+}
+
+location "http://download.eclipse.org/sirius/updates/releases/6.4.2/2020-09/" {
+	org.eclipse.sirius
+	org.eclipse.sirius.aql.feature.group
+	org.eclipse.sirius.common
+	org.eclipse.sirius.common.acceleo.aql
+	org.eclipse.sirius.diagram
+	org.eclipse.sirius.diagram.ui
+	org.eclipse.sirius.runtime.feature.group
+	org.eclipse.sirius.properties.feature.feature.group
+}

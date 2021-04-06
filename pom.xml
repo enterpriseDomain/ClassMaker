@@ -18,7 +18,8 @@
 		<module>bundles/org.enterprisedomain.classmaker</module>
 		<module>bundles/org.enterprisedomain.classmaker.osgi.systemextension</module>
 		<module>bundles/org.enterprisedomain.classmaker.edit</module>
-		<module>bundles/org.enterprisedomain.classmaker.emfstore</module>
+		<module>bundles/org.enterprisedomain.classmaker.cdo</module>
+		<module>bundles/org.enterprisedomain.classmaker.cdo.ui</module>
 		<module>bundles/org.enterprisedomain.ecp</module>
 		<module>bundles/org.enterprisedomain.ecp.filter</module>
 		<module>bundles/org.enterprisedomain.ecp.edit</module>
@@ -28,6 +29,7 @@
 		<module>features/org.enterprisedomain.classmaker.osgi.resolverhooks.feature</module>
 		<module>features/org.enterprisedomain.classmaker.edit.feature</module>
 		<module>features/org.enterprisedomain.classmaker.ecp.feature</module>
+		<module>features/org.enterprisedomain.classmaker.cdo.feature</module>
 		<module>features/org.enterprisedomain.ui.workbench.rcp.feature</module>
 		<module>tests/org.enterprisedomain.classmaker.tests</module>
 		<module>releng/org.enterprisedomain.configuration</module>

@@ -79,15 +79,17 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ClassMakerServiceImpl#getWorkspace <em>Workspace</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ClassMakerServiceImpl#getWorkspace
+ * <em>Workspace</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerService {
 	/**
-	 * The cached value of the '{@link #getWorkspace() <em>Workspace</em>}' containment reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getWorkspace() <em>Workspace</em>}'
+	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getWorkspace()
 	 * @generated
 	 * @ordered
@@ -169,6 +171,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -178,6 +181,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -187,6 +191,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetWorkspace(Workspace newWorkspace, NotificationChain msgs) {
@@ -205,6 +210,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -693,7 +699,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 						setWorkspace(EcoreUtil.copy((Workspace) workspaceResource.getContents().get(0)));
 						for (Project project : getWorkspace().getProjects()) {
 							if (project.eIsSet(ClassMakerPackage.Literals.PROJECT__STATE))
-								project.getState().load(false);
+								project.getState().load(false, true);
 						}
 					} else
 						getWorkspace().initialize();
@@ -719,6 +725,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -735,6 +742,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -748,6 +756,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -761,6 +770,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -775,6 +785,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -789,6 +800,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

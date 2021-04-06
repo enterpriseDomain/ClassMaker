@@ -1,5 +1,5 @@
 /**
- * Copyright 2012-2018 Kyrill Zotkin
+ * Copyright 2012-2021 Kyrill Zotkin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -185,7 +185,6 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider implements IRe
 		return (T) getProvider().getAdapter(adaptable, adapterType);
 	}
 
-	@SuppressWarnings("restriction")
 	@Override
 	public Control createNewProjectUI(Composite parent, final CompositeStateObserver observer,
 			final ECPProperties projectProperties) {
@@ -277,8 +276,8 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider implements IRe
 					if (eA != null && eA.equals(ClassMakerService.INVOCATION_DELEGATE_URI)) {
 						for (EOperation eOperation : ((EObject) element).eClass().getEOperations())
 							if (eOperation.getEAnnotation(ClassMakerService.INVOCATION_DELEGATE_URI) != null
-									&& !EcoreUtil.getAnnotation(eOperation, "http://www.eclipse.org/emf/2002/GenModel",
-											"body").isEmpty()) {
+									&& EcoreUtil.getAnnotation(eOperation, "http://www.eclipse.org/emf/2002/GenModel",
+											"body") != null) {
 								manager.add(new ExecuteOperationAction(project.getEditingDomain(),
 										new StructuredSelection(
 												new Object[] { element, eOperation/* , control.getShell() */ }),

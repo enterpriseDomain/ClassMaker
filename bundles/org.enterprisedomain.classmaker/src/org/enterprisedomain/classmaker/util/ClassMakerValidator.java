@@ -30,6 +30,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.common.util.URI;
@@ -38,7 +39,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.xml.type.util.XMLTypeUtil;
-import org.enterprisedomain.classmaker.*;
 import org.enterprisedomain.classmaker.Blueprint;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.ClassMakerService;
@@ -72,15 +72,17 @@ import org.osgi.framework.Version;
  */
 public class ClassMakerValidator extends EObjectValidator {
 	/**
-	 * The cached model package
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached model package <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static final ClassMakerValidator INSTANCE = new ClassMakerValidator();
 
 	/**
-	 * A constant for the {@link org.eclipse.emf.common.util.Diagnostic#getSource() source} of diagnostic {@link org.eclipse.emf.common.util.Diagnostic#getCode() codes} from this package.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * A constant for the {@link org.eclipse.emf.common.util.Diagnostic#getSource()
+	 * source} of diagnostic {@link org.eclipse.emf.common.util.Diagnostic#getCode()
+	 * codes} from this package. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see org.eclipse.emf.common.util.Diagnostic#getSource()
 	 * @see org.eclipse.emf.common.util.Diagnostic#getCode()
 	 * @generated
@@ -97,9 +99,10 @@ public class ClassMakerValidator extends EObjectValidator {
 	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 0;
 
 	/**
-	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
-	 * <!-- begin-user-doc -->
+	 * A constant with a fixed name that can be used as the base value for
+	 * additional hand written constants in a derived class. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected static final int DIAGNOSTIC_CODE_COUNT = GENERATED_DIAGNOSTIC_CODE_COUNT;
@@ -115,9 +118,9 @@ public class ClassMakerValidator extends EObjectValidator {
 	}
 
 	/**
-	 * Returns the package of this validator switch.
-	 * <!-- begin-user-doc --> <!--
+	 * Returns the package of this validator switch. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -128,6 +131,7 @@ public class ClassMakerValidator extends EObjectValidator {
 	/**
 	 * Calls <code>validateXXX</code> for the corresponding classifier of the model.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -180,6 +184,8 @@ public class ClassMakerValidator extends EObjectValidator {
 			return validateResourceChangeListener((ResourceChangeListener) value, diagnostics, context);
 		case ClassMakerPackage.NOTIFICATION:
 			return validateNotification((Notification) value, diagnostics, context);
+		case ClassMakerPackage.NOTIFIER:
+			return validateNotifier((Notifier) value, diagnostics, context);
 		case ClassMakerPackage.COMPLETION_LISTENER:
 			return validateCompletionListener((CompletionListener) value, diagnostics, context);
 		case ClassMakerPackage.RESOURCE_ADAPTER:
@@ -225,6 +231,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateContribution(Contribution contribution, DiagnosticChain diagnostics,
@@ -234,6 +241,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateRevision(Revision revision, DiagnosticChain diagnostics, Map<Object, Object> context) {
@@ -242,6 +250,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateState(State state, DiagnosticChain diagnostics, Map<Object, Object> context) {
@@ -250,6 +259,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateStrategy(Strategy strategy, DiagnosticChain diagnostics, Map<Object, Object> context) {
@@ -258,6 +268,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateItem(Item item, DiagnosticChain diagnostics, Map<Object, Object> context) {
@@ -266,6 +277,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateAdapter(Adapter adapter, DiagnosticChain diagnostics, Map<Object, Object> context) {
@@ -274,6 +286,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateWorkspace(Workspace workspace, DiagnosticChain diagnostics, Map<Object, Object> context) {
@@ -282,6 +295,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateLongToStateMapEntry(Map.Entry<?, ?> longToStateMapEntry, DiagnosticChain diagnostics,
@@ -291,6 +305,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateVersionToRevisionMapEntry(Map.Entry<?, ?> versionToRevisionMapEntry,
@@ -300,6 +315,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateISchedulingRule(ISchedulingRule iSchedulingRule, DiagnosticChain diagnostics,
@@ -309,6 +325,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateExecutor(Executor executor, DiagnosticChain diagnostics, Map<Object, Object> context) {
@@ -317,6 +334,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateFuture(Future<?> future, DiagnosticChain diagnostics, Map<Object, Object> context) {
@@ -325,6 +343,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateIAdapterFactory(IAdapterFactory iAdapterFactory, DiagnosticChain diagnostics,
@@ -334,6 +353,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateCustomizer(Customizer customizer, DiagnosticChain diagnostics, Map<Object, Object> context) {
@@ -342,6 +362,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateStageQualifier(StageQualifier stageQualifier, DiagnosticChain diagnostics,
@@ -351,6 +372,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateStageQualifierToCustomizerMapEntry(Map.Entry<?, ?> stageQualifierToCustomizerMapEntry,
@@ -360,6 +382,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateModelPair(ModelPair modelPair, DiagnosticChain diagnostics, Map<Object, Object> context) {
@@ -368,6 +391,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateSCMOperator(SCMOperator<?> scmOperator, DiagnosticChain diagnostics,
@@ -377,6 +401,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateSCMRegistry(SCMRegistry<?> scmRegistry, DiagnosticChain diagnostics,
@@ -386,6 +411,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateProject(Project project, DiagnosticChain diagnostics, Map<Object, Object> context) {
@@ -403,6 +429,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateResourceChangeListener(ResourceChangeListener resourceChangeListener,
@@ -412,6 +439,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateNotification(Notification notification, DiagnosticChain diagnostics,
@@ -421,6 +449,16 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public boolean validateNotifier(Notifier notifier, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint((EObject) notifier, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateCompletionListener(CompletionListener completionListener, DiagnosticChain diagnostics,
@@ -430,6 +468,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateResourceAdapter(ResourceAdapter resourceAdapter, DiagnosticChain diagnostics,
@@ -439,6 +478,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateClassMakerService(ClassMakerService classMakerService, DiagnosticChain diagnostics,
@@ -448,6 +488,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateBlueprint(Blueprint blueprint, DiagnosticChain diagnostics, Map<Object, Object> context) {
@@ -456,6 +497,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateCompletionNotificationAdapter(CompletionNotificationAdapter completionNotificationAdapter,
@@ -465,6 +507,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateWorker(Worker worker, DiagnosticChain diagnostics, Map<Object, Object> context) {
@@ -473,6 +516,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateSelectRevealHandler(SelectRevealHandler selectRevealHandler, DiagnosticChain diagnostics,
@@ -482,6 +526,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateStage(Stage stage, DiagnosticChain diagnostics, Map<Object, Object> context) {
@@ -490,6 +535,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateProperties(Properties properties, DiagnosticChain diagnostics, Map<Object, Object> context) {
@@ -498,6 +544,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateIProgressMonitor(IProgressMonitor iProgressMonitor, DiagnosticChain diagnostics,
@@ -507,6 +554,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateOSGiVersion(Version osGiVersion, DiagnosticChain diagnostics, Map<Object, Object> context) {
@@ -515,6 +563,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateSemaphore(Semaphore semaphore, DiagnosticChain diagnostics, Map<Object, Object> context) {
@@ -523,6 +572,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateCoreException(CoreException coreException, DiagnosticChain diagnostics,
@@ -532,6 +582,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateInvocationTargetException(InvocationTargetException invocationTargetException,
@@ -541,6 +592,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateIStatus(IStatus iStatus, DiagnosticChain diagnostics, Map<Object, Object> context) {
@@ -549,6 +601,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateURI(URI uri, DiagnosticChain diagnostics, Map<Object, Object> context) {
@@ -557,6 +610,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateName(String name, DiagnosticChain diagnostics, Map<Object, Object> context) {
@@ -566,6 +620,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @see #validateName_Pattern
 	 */
@@ -573,9 +628,9 @@ public class ClassMakerValidator extends EObjectValidator {
 			new PatternMatcher[] { XMLTypeUtil.createPatternMatcher("[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*") } };
 
 	/**
-	 * Validates the Pattern constraint of '<em>Name</em>'.
-	 * <!-- begin-user-doc -->
+	 * Validates the Pattern constraint of '<em>Name</em>'. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateName_Pattern(String name, DiagnosticChain diagnostics, Map<Object, Object> context) {
@@ -584,6 +639,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateException(Exception exception, DiagnosticChain diagnostics, Map<Object, Object> context) {
@@ -592,6 +648,7 @@ public class ClassMakerValidator extends EObjectValidator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean validateLocale(Locale locale, DiagnosticChain diagnostics, Map<Object, Object> context) {
@@ -599,14 +656,16 @@ public class ClassMakerValidator extends EObjectValidator {
 	}
 
 	/**
-	 * Returns the resource locator that will be used to fetch messages for this validator's diagnostics.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the resource locator that will be used to fetch messages for this
+	 * validator's diagnostics. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
 		// TODO
-		// Specialize this to return a resource locator for messages specific to this validator.
+		// Specialize this to return a resource locator for messages specific to this
+		// validator.
 		// Ensure that you remove @generated or mark it @generated NOT
 		return super.getResourceLocator();
 	}

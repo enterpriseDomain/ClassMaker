@@ -24,16 +24,18 @@ import org.osgi.framework.Version;
  * <!-- begin-user-doc --> A representation of the model object
  * '<em><b>Contribution</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc -->
- * Software contribution project item. Basically, it contibutes the software piece to the body of main program.
- * <!-- end-model-doc -->
+ * <!-- begin-model-doc --> Software contribution project item. Basically, it
+ * contibutes the software piece to the body of main program. <!-- end-model-doc
+ * -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.Contribution#getDependencies <em>Dependencies</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Contribution#getLatestVersion <em>Latest Version</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Contribution#getDependencies
+ * <em>Dependencies</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Contribution#getLatestVersion
+ * <em>Latest Version</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getContribution()
@@ -78,20 +80,25 @@ public interface Contribution extends Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	void delete(IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	String make(Revision revision, IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */

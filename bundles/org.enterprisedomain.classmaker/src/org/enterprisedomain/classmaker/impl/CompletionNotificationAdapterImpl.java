@@ -36,8 +36,10 @@ import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.impl.CompletionNotificationAdapterImpl#getError <em>Error</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.CompletionNotificationAdapterImpl#getProject <em>Project</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.CompletionNotificationAdapterImpl#getError
+ * <em>Error</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.CompletionNotificationAdapterImpl#getProject
+ * <em>Project</em>}</li>
  * </ul>
  *
  * @generated
@@ -65,8 +67,8 @@ public class CompletionNotificationAdapterImpl extends EObjectImpl implements Co
 
 	/**
 	 * The cached value of the '{@link #getProject() <em>Project</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getProject()
 	 * @generated
 	 * @ordered
@@ -75,6 +77,7 @@ public class CompletionNotificationAdapterImpl extends EObjectImpl implements Co
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected CompletionNotificationAdapterImpl() {
@@ -83,6 +86,7 @@ public class CompletionNotificationAdapterImpl extends EObjectImpl implements Co
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -92,6 +96,7 @@ public class CompletionNotificationAdapterImpl extends EObjectImpl implements Co
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -100,8 +105,8 @@ public class CompletionNotificationAdapterImpl extends EObjectImpl implements Co
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -119,8 +124,8 @@ public class CompletionNotificationAdapterImpl extends EObjectImpl implements Co
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Project basicGetProject() {
@@ -128,8 +133,8 @@ public class CompletionNotificationAdapterImpl extends EObjectImpl implements Co
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetProject(Project newProject, NotificationChain msgs) {
@@ -147,8 +152,8 @@ public class CompletionNotificationAdapterImpl extends EObjectImpl implements Co
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -170,8 +175,8 @@ public class CompletionNotificationAdapterImpl extends EObjectImpl implements Co
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -187,8 +192,8 @@ public class CompletionNotificationAdapterImpl extends EObjectImpl implements Co
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -242,6 +247,7 @@ public class CompletionNotificationAdapterImpl extends EObjectImpl implements Co
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -258,8 +264,8 @@ public class CompletionNotificationAdapterImpl extends EObjectImpl implements Co
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -273,8 +279,8 @@ public class CompletionNotificationAdapterImpl extends EObjectImpl implements Co
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -289,6 +295,7 @@ public class CompletionNotificationAdapterImpl extends EObjectImpl implements Co
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -304,6 +311,7 @@ public class CompletionNotificationAdapterImpl extends EObjectImpl implements Co
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
