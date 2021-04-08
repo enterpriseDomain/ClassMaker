@@ -30,71 +30,44 @@ public class MakeHandler extends AbstractHandler implements IHandler {
 		ISelection selection = HandlerUtil.getCurrentSelectionChecked(event);
 		if (selection instanceof IStructuredSelection) {
 			final Object eProject = ((IStructuredSelection) selection).getFirstElement();
-			final ClassMakerService classMaker = ClassMakerPlugin.getClassMaker();
-			if (eProject instanceof IProject) {
-				try {
-					ClassMakerPlugin.runWithProgress(new IRunnableWithProgress() {
 
-						@Override
-						public void run(final IProgressMonitor monitor)
-								throws InvocationTargetException, InterruptedException {
-							try {
-								Project project = classMaker.getWorkspace()
-										.getProject((String) ((IProject) eProject).getName());
-								Revision newRevision = project.newRevision(project.nextVersion());
-								newRevision.create(monitor);
-								project.checkout(newRevision.getVersion());
-								project.make(monitor);
-							} catch (CoreException e) {
-								ClassMakerPlugin.wrapRun(new Runnable() {
-									public void run() {
-										monitor.setCanceled(true);
-									}
-								});
-								throw new InvocationTargetException(e);
-							}
-						}
-
-					});
-				} catch (InvocationTargetException e) {
-					Throwable exception = e.getTargetException();
-					ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(exception));
-					throw new ExecutionException(e.getLocalizedMessage(), e.getTargetException());
-				} catch (InterruptedException e) {
-				}
-			} else if (eProject instanceof ECPProject) {
-				try {
-					ClassMakerPlugin.runWithProgress(new IRunnableWithProgress() {
-
-						@Override
-						public void run(final IProgressMonitor monitor)
-								throws InvocationTargetException, InterruptedException {
-							try {
-								Project project = classMaker.getWorkspace()
-										.getProject((String) ((ECPProject) eProject).getName());
-								Revision newRevision = project.newRevision(project.nextVersion());
-								newRevision.create(monitor);
-								project.checkout(newRevision.getVersion());
-								project.make(monitor);
-							} catch (CoreException e) {
-								ClassMakerPlugin.wrapRun(new Runnable() {
-									public void run() {
-										monitor.setCanceled(true);
-									}
-								});
-								throw new InvocationTargetException(e);
-							}
-						}
-
-					});
-				} catch (InvocationTargetException e) {
-					Throwable exception = e.getTargetException();
-					ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(exception));
-					throw new ExecutionException(e.getLocalizedMessage(), e.getTargetException());
-				} catch (InterruptedException e) {
-				}
-			}
+			if (eProject instanceof IProject)
+				doMake((String) ((IProject) eProject).getName());
+			else if (eProject instanceof ECPProject)
+				doMake((String) ((ECPProject) eProject).getName());
 		}
 		return null;
+	}
+
+	private void doMake(final String projectName) throws ExecutionException {
+		final ClassMakerService classMaker = ClassMakerPlugin.getClassMaker();
+		try {
+			ClassMakerPlugin.runWithProgress(new IRunnableWithProgress() {
+
+				@Override
+				public void run(final IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
+					try {
+						Project project = classMaker.getWorkspace().getProject(projectName);
+						Revision newRevision = project.newRevision(project.nextVersion());
+						newRevision.create(monitor);
+						project.checkout(newRevision.getVersion());
+						project.make(monitor);
+					} catch (CoreException e) {
+						ClassMakerPlugin.wrapRun(new Runnable() {
+							public void run() {
+								monitor.setCanceled(true);
+							}
+						});
+						throw new InvocationTargetException(e);
+					}
+				}
+
+			});
+		} catch (InvocationTargetException e) {
+			Throwable exception = e.getTargetException();
+			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(exception));
+			throw new ExecutionException(e.getLocalizedMessage(), e.getTargetException());
+		} catch (InterruptedException e) {
+		}
 	}
 }
