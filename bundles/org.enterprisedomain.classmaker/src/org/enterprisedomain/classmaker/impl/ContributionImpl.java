@@ -525,7 +525,9 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 			return;
 
 		for (Object object : objects)
-			if (object instanceof EObject) {
+			if (object instanceof Collection<?>) {
+				EcoreUtil.removeAll((Collection<EObject>) object);
+			} else if (object instanceof EObject) {
 				for (TreeIterator<EObject> tree = EcoreUtil.getAllProperContents((EObject) object, false); tree
 						.hasNext();) {
 					EcoreUtil.remove(tree.next());

@@ -1,4 +1,4 @@
-target "org.enterprisedomain.target.2020-12" with allEnvironments configurePhase
+target "org.enterprisedomain.target.2021-03" with allEnvironments configurePhase
 
 location updates4_19 "http://download.eclipse.org/eclipse/updates/4.19/" {
 	org.eclipse.e4.rcp.feature.group

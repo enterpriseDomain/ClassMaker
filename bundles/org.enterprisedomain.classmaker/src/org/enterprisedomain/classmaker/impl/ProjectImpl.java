@@ -1331,8 +1331,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		try {
 			((Resource) getChildren().get(0)).save(Collections.emptyMap());
 		} catch (IOException e) {
-			ClassMakerPlugin.getInstance().getLog()
-					.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 		}
 	}
 

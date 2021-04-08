@@ -35,15 +35,6 @@
       </defaultEnablement>
    </extension>
    <extension
-         point="org.eclipse.ui.perspectiveExtensions">
-      <perspectiveExtension
-            targetID="*">
-         <perspectiveShortcut
-               id="org.enterprisedomain.ecp.perspective">
-         </perspectiveShortcut>
-      </perspectiveExtension>
-   </extension>
-   <extension
          point="org.eclipse.ui.startup">
       <startup
             class="org.enterprisedomain.workbench.Startup">
@@ -93,14 +84,6 @@
                value="enterpriseDomain Workbench">
          </property>
       </product>
-   </extension>
-   <extension
-         point="org.eclipse.ui.perspectives">
-      <perspective
-            class="org.eclipse.emf.ecp.ui.perspective.ECPPerspectiveFactory"
-            id="org.enterprisedomain.ecp.perspective"
-            name="ECP">
-      </perspective>
    </extension>
    <extension
          point="org.eclipse.core.runtime.adapters">
@@ -153,7 +136,7 @@
    <extension
          point="org.eclipse.ui.menus">
       <menuContribution
-            allPopups="true"
+            allPopups="false"
             locationURI="popup:org.eclipse.ui.popup.any?after=additions">
          <command
                commandId="org.enterprisedomain.workbench.command.make"

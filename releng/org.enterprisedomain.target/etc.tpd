@@ -57,7 +57,6 @@ location ecp "http://download.eclipse.org/ecp/releases/releases_target_126/" {
 	org.eclipse.emf.ecp.view.model [1.26.0,1.27.0)
 	org.eclipse.emf.ecp.view.mappingdmr.model [1.26.0,1.27.0)
 	org.eclipse.emfforms.swt.control.multiattribute [1.26.0,1.27.0)
-	org.eclipse.emf.ecp.emfstore.feature.feature.group [1.26.0,1.27.0)
 	org.eclipse.emfforms.core.services.segments.mapping [1.26.0,1.27.0)
 	org.eclipse.emfforms.core.services.segments.index [1.26.0,1.27.0)
 	org.eclipse.emfforms.view.mappingsegment.model [1.26.0,1.27.0)
