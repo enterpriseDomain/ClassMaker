@@ -298,15 +298,10 @@
 	</dependencies>
 	<packaging>pom</packaging>
 	<distributionManagement>
-		<snapshotRepository>
-			<id>snapshots</id>
-			<name>oss-jfrog-artifactory-snapshots</name>
-			<url>https://oss.jfrog.org/artifactory/oss-snapshot-local</url>
-		</snapshotRepository>
 		<repository>
-			<id>bintray-enterprisedomain-enterpriseDomain</id>
-			<name>enterprisedomain-enterpriseDomain</name>
-			<url>https://api.bintray.com/maven/enterprisedomain/enterpriseDomain/ClassMaker/;publish=1</url>
+			<id>github</id>
+			<name>GitHub enterpriseDomain Apache Maven Packages</name>
+			<url>https://maven.pkg.github.com/enterprisedDomain/ClassMaker</url>
 		</repository>
 	</distributionManagement>
 </project>
