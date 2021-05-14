@@ -30,6 +30,7 @@
 		<module>features/org.enterprisedomain.classmaker.edit.feature</module>
 		<module>features/org.enterprisedomain.classmaker.ecp.feature</module>
 		<module>features/org.enterprisedomain.classmaker.cdo.feature</module>
+		<module>features/org.enterprisedomain.classmaker.cdo.ui.feature</module>
 		<module>features/org.enterprisedomain.ui.workbench.rcp.feature</module>
 		<module>tests/org.enterprisedomain.classmaker.tests</module>
 		<module>releng/org.enterprisedomain.configuration</module>

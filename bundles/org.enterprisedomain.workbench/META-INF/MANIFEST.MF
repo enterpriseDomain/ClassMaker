@@ -13,7 +13,7 @@ Require-Bundle: javax.inject,
  org.eclipse.e4.ui.services,
  org.eclipse.e4.core.di.annotations,
  org.eclipse.core.runtime,
- org.eclipse.ui.ide;bundle-version="3.15.0",
+ org.eclipse.ui.ide;bundle-version="[3.15.0,4.0.0)",
  org.eclipse.emf.ecp.ui;bundle-version="[1.26.0,1.26.1)",
  org.eclipse.emf.ecp.common.ui;bundle-version="[1.26.0,1.26.1)",
  org.enterprisedomain.ecp,
@@ -39,10 +39,7 @@ Require-Bundle: javax.inject,
  org.eclipse.emf.ecp.explorereditorbridge;bundle-version="1.23.0",
  org.eclipse.ui.forms;bundle-version="3.8.200",
  org.eclipse.emfforms.editor.ecore;bundle-version="1.24.0",
- org.eclipse.emf.ecp.application.e3;bundle-version="1.26.0",
- org.apache.felix.gogo.command;bundle-version="1.1.2",
- org.apache.felix.gogo.runtime;bundle-version="1.1.4",
- org.apache.felix.gogo.shell;bundle-version="1.1.4"
+ org.eclipse.emf.ecp.application.e3;bundle-version="1.26.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: org.enterprisedomain.workbench
 Import-Package: javax.annotation;version="1.2.0"

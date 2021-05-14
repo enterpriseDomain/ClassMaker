@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
@@ -38,10 +39,13 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.ui.actions.WorkspaceModifyDelegatingOperation;
 import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
+import org.enterprisedomain.classmaker.core.IRunnerWithProgress;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -73,6 +77,15 @@ public abstract class AbstractTest {
 	@BeforeAll
 	public static void init() {
 		currentDynamics = new HashMap<Future<? extends EPackage>, EPackage>();
+		ClassMakerPlugin.setRunnerWithProgress(new IRunnerWithProgress() {
+
+			@Override
+			public void run(IRunnableWithProgress runnable) throws InvocationTargetException, InterruptedException {
+				WorkspaceModifyDelegatingOperation op = new WorkspaceModifyDelegatingOperation(runnable,
+						ClassMakerPlugin.getClassMaker().getWorkspace());
+				op.run(ClassMakerPlugin.getProgressMonitor());
+			}
+		});
 	}
 
 	@BeforeEach

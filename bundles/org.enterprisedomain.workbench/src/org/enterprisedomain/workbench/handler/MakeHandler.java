@@ -48,9 +48,13 @@ public class MakeHandler extends AbstractHandler implements IHandler {
 				public void run(final IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 					try {
 						Project project = classMaker.getWorkspace().getProject(projectName);
-						Revision newRevision = project.newRevision(project.nextVersion());
-						newRevision.create(monitor);
-						project.checkout(newRevision.getVersion());
+						if (project == null)
+							project = classMaker.getWorkspace().createProject(projectName, monitor);
+						else {
+							Revision newRevision = project.newRevision(project.nextVersion());
+							newRevision.create(monitor);
+							project.checkout(newRevision.getVersion());
+						}
 						project.make(monitor);
 					} catch (CoreException e) {
 						ClassMakerPlugin.wrapRun(new Runnable() {

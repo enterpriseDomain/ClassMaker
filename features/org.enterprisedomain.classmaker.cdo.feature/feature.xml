@@ -17,15 +17,15 @@
       [Enter License Description here.]
    </license>
 
-   <plugin
-         id="org.enterprisedomain.classmaker.cdo"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+   <requires>
+      <import plugin="org.eclipse.osgi" version="3.16.200" match="compatible"/>
+      <import plugin="org.enterprisedomain.classmaker" version="0.8.37" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.cdo" version="4.13.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.cdo.edit" version="4.5.4" match="greaterOrEqual"/>
+   </requires>
 
    <plugin
-         id="org.enterprisedomain.classmaker.cdo.ui"
+         id="org.enterprisedomain.classmaker.cdo"
          download-size="0"
          install-size="0"
          version="0.0.0"

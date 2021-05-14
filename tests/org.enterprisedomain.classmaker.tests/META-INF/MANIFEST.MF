@@ -15,9 +15,11 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.pde.junit.runtime;bundle-version="[3.5.50,4.0.0)",
  org.junit,
  org.junit.jupiter.api,
- org.eclipse.jdt.junit5.runtime;bundle-version="1.0.1100"
+ org.eclipse.jdt.junit5.runtime;bundle-version="1.0.1100",
+ org.eclipse.ui.ide
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: org.enterprisedomain.classmaker.tests
 Service-Component: OSGI-INF/component.xml
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.enterprisedomain.classmaker.tests.ClassMakerTestsPlugin
+Import-Package: org.eclipse.jface.operation

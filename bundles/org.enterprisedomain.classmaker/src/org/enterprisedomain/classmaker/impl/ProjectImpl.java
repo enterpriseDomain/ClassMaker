@@ -794,8 +794,18 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		if (children == null || children.isEmpty() || children.get(0) == null) {
 			if (getModelResourceAdapter() != null)
 				children = new LoadingEList(getModelResourceAdapter().getResource());
-			else
-				children = new LoadingEList(null);
+			else {
+				try {
+					load(false, false);
+				} catch (CoreException e) {
+					ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
+				}
+				if (getModelResourceAdapter() != null)
+					children = new LoadingEList(getModelResourceAdapter().getResource());
+				else
+					children = new LoadingEList(null);
+			}
+
 			eAdapters().remove(modelAdapter);
 			eAdapters().add(modelAdapter);
 		}
@@ -1488,22 +1498,18 @@ public class ProjectImpl extends EObjectImpl implements Project {
 							reset.setRef(ref.getName());
 						reset.call();
 					} catch (CheckoutConflictException ex) {
-						ClassMakerPlugin.getInstance().getLog().log(
-								new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, ex.getLocalizedMessage(), ex));
+						ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(ex));
 					} catch (GitAPIException ex) {
-						ClassMakerPlugin.getInstance().getLog().log(
-								new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, ex.getLocalizedMessage(), ex));
+						ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(ex));
 					}
 				}
 			} catch (Exception e) {
-				ClassMakerPlugin.getInstance().getLog()
-						.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 			} finally {
 				try {
 					operator.ungetRepositorySCM();
 				} catch (Exception e) {
-					ClassMakerPlugin.getInstance().getLog()
-							.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+					ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 				}
 			}
 			revision = getRevisions().get(version);
