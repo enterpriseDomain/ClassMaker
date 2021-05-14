@@ -17,7 +17,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 11
-    - uses: actions/setup-java@v1
+      uses: actions/setup-java@v1
       with:
         java-version: 11
     - name: Copy toolchain      
@@ -29,7 +29,7 @@ jobs:
        mvn -B clean package --file pom.xml
     - name: Deploy with Maven
       env:
-       BT_PAT: ${{ secrets.BT_TOKEN }}
+       BT_PAT: ${{ secrets.bat }}
       run: |
        echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?><settings xsi:schemaLocation=\"http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd\" xmlns=\"http://maven.apache.org/SETTINGS/1.1.0\"xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><servers><server><username>kyrillzotkin</username><password>$BT_PAT</password><id>github</id></server></servers><profiles><profile><repositories><repository><id>central</id><url>https://repo1.maven.org/maven2</url></repository><repository><id>github</id><url>https://maven.pkg.github.com/enterpriseDomain/*</url><snapshots><enabled>true</enabled></snapshots></repository></repositories><id>github</id></profile></profiles><activeProfiles><activeProfile>github</activeProfile></activeProfiles></settings>" > ~/.m2/settings.xml
        mvn clean deploy -s ~/.m2/settings.xml
