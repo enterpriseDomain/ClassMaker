@@ -20,5 +20,5 @@ jobs:
         uses: actions/delete-package-versions@v1.0.3
         with:
           package-name: 'org.enterprisedomain.org.enterprisedomain.*'
-          token: ${{ secrets.del }}
+          token: ${{ secrets.DEL }}
           num-old-versions-to-delete: 1
