@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="org.enterprisedomain.target" sequenceNumber="1617702659">
+<target name="org.enterprisedomain.target" sequenceNumber="1621054310">
   <locations>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.eclipse.e4.rcp.feature.group" version="4.19.0.v20210302-1107"/>
@@ -44,11 +44,11 @@
       <repository id="simrel2021-03" location="https://download.eclipse.org/releases/2021-03/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
-      <unit id="org.eclipse.jgit.feature.group" version="5.11.0.202103091610-r"/>
-      <unit id="org.eclipse.jgit.lfs.feature.group" version="5.11.0.202103091610-r"/>
-      <unit id="org.eclipse.jgit.pgm.feature.group" version="5.11.0.202103091610-r"/>
-      <unit id="org.eclipse.jgit.http.apache.feature.group" version="5.11.0.202103091610-r"/>
-      <unit id="org.eclipse.jgit.ssh.apache.feature.group" version="5.11.0.202103091610-r"/>
+      <unit id="org.eclipse.jgit.feature.group" version="5.11.1.202105131744-r"/>
+      <unit id="org.eclipse.jgit.lfs.feature.group" version="5.11.1.202105131744-r"/>
+      <unit id="org.eclipse.jgit.pgm.feature.group" version="5.11.1.202105131744-r"/>
+      <unit id="org.eclipse.jgit.http.apache.feature.group" version="5.11.1.202105131744-r"/>
+      <unit id="org.eclipse.jgit.ssh.apache.feature.group" version="5.11.1.202105131744-r"/>
       <repository location="http://download.eclipse.org/egit/updates/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
