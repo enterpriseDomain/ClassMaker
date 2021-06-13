@@ -6,10 +6,9 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecp.core.ECPProject;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ISelection;
@@ -31,41 +30,48 @@ public class MakeHandler extends AbstractHandler implements IHandler {
 		ISelection selection = HandlerUtil.getCurrentSelectionChecked(event);
 		if (selection instanceof IStructuredSelection) {
 			final Object eProject = ((IStructuredSelection) selection).getFirstElement();
-			if (eProject instanceof ECPProject) {
-				final ClassMakerService classMaker = ClassMakerPlugin.getClassMaker();
-				try {
-					ClassMakerPlugin.runWithProgress(new IRunnableWithProgress() {
 
-						@Override
-						public void run(final IProgressMonitor monitor)
-								throws InvocationTargetException, InterruptedException {
-							try {
-								Project project = classMaker.getWorkspace()
-										.getProject((String) ((ECPProject) eProject).getName());
-								Revision newRevision = project.newRevision(project.nextVersion());
-								newRevision.create(monitor);
-								project.checkout(newRevision.getVersion());
-								project.make(monitor);
-							} catch (CoreException e) {
-								ClassMakerPlugin.wrapRun(new Runnable() {
-									public void run() {
-										monitor.setCanceled(true);
-									}
-								});
-								throw new InvocationTargetException(e);
-							}
-						}
-
-					});
-				} catch (InvocationTargetException e) {
-					Throwable exception = e.getTargetException();
-					ClassMakerPlugin.getInstance().getLog().log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID,
-							exception.getLocalizedMessage(), exception));
-					throw new ExecutionException(e.getLocalizedMessage(), e.getTargetException());
-				} catch (InterruptedException e) {
-				}
-			}
+			if (eProject instanceof IProject)
+				doMake((String) ((IProject) eProject).getName());
+			else if (eProject instanceof ECPProject)
+				doMake((String) ((ECPProject) eProject).getName());
 		}
 		return null;
+	}
+
+	private void doMake(final String projectName) throws ExecutionException {
+		final ClassMakerService classMaker = ClassMakerPlugin.getClassMaker();
+		try {
+			ClassMakerPlugin.runWithProgress(new IRunnableWithProgress() {
+
+				@Override
+				public void run(final IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
+					try {
+						Project project = classMaker.getWorkspace().getProject(projectName);
+						if (project == null)
+							project = classMaker.getWorkspace().createProject(projectName, monitor);
+						else {
+							Revision newRevision = project.newRevision(project.nextVersion());
+							newRevision.create(monitor);
+							project.checkout(newRevision.getVersion());
+						}
+						project.make(monitor);
+					} catch (CoreException e) {
+						ClassMakerPlugin.wrapRun(new Runnable() {
+							public void run() {
+								monitor.setCanceled(true);
+							}
+						});
+						throw new InvocationTargetException(e);
+					}
+				}
+
+			});
+		} catch (InvocationTargetException e) {
+			Throwable exception = e.getTargetException();
+			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(exception));
+			throw new ExecutionException(e.getLocalizedMessage(), e.getTargetException());
+		} catch (InterruptedException e) {
+		}
 	}
 }

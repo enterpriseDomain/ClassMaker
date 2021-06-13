@@ -17,7 +17,7 @@ package org.enterprisedomain.workbench;
 
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.emf.ecp.core.ECPProject;
-import org.enterprisedomain.classmaker.Contribution;
+import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 
 public class ProjectAdapterFactory implements IAdapterFactory {
@@ -25,17 +25,17 @@ public class ProjectAdapterFactory implements IAdapterFactory {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T getAdapter(Object adaptableObject, Class<T> adapterType) {
-		if (Contribution.class.isAssignableFrom(adapterType)) {
+		if (Project.class.isAssignableFrom(adapterType)) {
 			if (adaptableObject instanceof ECPProject)
 				return (T) ClassMakerPlugin.getClassMaker().getWorkspace()
-						.getContribution(((ECPProject) adaptableObject).getName());
+						.getProject(((ECPProject) adaptableObject).getName());
 		}
 		return null;
 	}
 
 	@Override
 	public Class<?>[] getAdapterList() {
-		return new Class<?>[] { Contribution.class };
+		return new Class<?>[] { Project.class };
 	}
 
 }

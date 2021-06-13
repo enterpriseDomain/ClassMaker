@@ -237,6 +237,11 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 					addVisiblePackage(project,
 							(EPackage) domainProject.getRevision().getState().getDomainModel().getGenerated());
 				domainProject.initialize(false);
+				try {
+					domainProject.load(false, true);
+				} catch (CoreException e) {
+					ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
+				}
 			} else {
 				boolean contribution = false;
 				if (project.getProperties().getKeys().contains(PROP_CONTRIBUTION))
@@ -331,6 +336,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 
 		});
 		initing.put(project, false);
+
 	}
 
 	protected void createProject(final InternalProject project) {
@@ -379,7 +385,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 			}
 			for (InternalProject project : projects) {
 				Project domainProject = Activator.getClassMaker().getWorkspace().getProject((Resource) element);
-				if (domainProject != null && domainProject.getName().equals(project.getName()))
+				if (domainProject != null && domainProject.getProjectName().equals(project.getName()))
 					return project;
 			}
 		}
@@ -736,12 +742,10 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 		Project domainProject = classMaker.getWorkspace().getProject(project.getName());
 		// Blueprint blueprint = classMaker.createBlueprint();
 		// blueprint.getCompletionListeners().add(saveListener);
-		if (domainProject instanceof Contribution) {
-			((Contribution) domainProject).getState().saveResource();
-			// blueprint.setDynamicModel(
-			// ((Contribution)
-			// domainProject).getContribution().getDomainModel().getDynamic());
-		}
+		domainProject.getState().saveResource();
+		// blueprint.setDynamicModel(
+		// ((Contribution)
+		// domainProject).getContribution().getDomainModel().getDynamic());
 		// classMaker.make(blueprint, monitor);
 		// try {
 		// saved.acquire();

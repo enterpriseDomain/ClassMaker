@@ -9,19 +9,15 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.enterprisedomain.ecp.ECPPackage;
 import org.enterprisedomain.ecp.EOperationInvocation;
 
@@ -32,9 +28,12 @@ import org.enterprisedomain.ecp.EOperationInvocation;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.ecp.impl.EOperationInvocationImpl#getEOperation <em>EOperation</em>}</li>
- *   <li>{@link org.enterprisedomain.ecp.impl.EOperationInvocationImpl#getArguments <em>Arguments</em>}</li>
- *   <li>{@link org.enterprisedomain.ecp.impl.EOperationInvocationImpl#getResult <em>Result</em>}</li>
+ * <li>{@link org.enterprisedomain.ecp.impl.EOperationInvocationImpl#getEOperation
+ * <em>EOperation</em>}</li>
+ * <li>{@link org.enterprisedomain.ecp.impl.EOperationInvocationImpl#getArguments
+ * <em>Arguments</em>}</li>
+ * <li>{@link org.enterprisedomain.ecp.impl.EOperationInvocationImpl#getResult
+ * <em>Result</em>}</li>
  * </ul>
  *
  * @generated
@@ -55,8 +54,9 @@ public class EOperationInvocationImpl extends MinimalEObjectImpl.Container imple
 	}
 
 	/**
-	 * The cached value of the '{@link #getEOperation() <em>EOperation</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getEOperation() <em>EOperation</em>}'
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getEOperation()
 	 * @generated
 	 * @ordered
@@ -66,6 +66,7 @@ public class EOperationInvocationImpl extends MinimalEObjectImpl.Container imple
 	/**
 	 * The cached value of the '{@link #getArguments() <em>Arguments</em>}' map.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getArguments()
 	 * @generated
 	 * @ordered
@@ -75,6 +76,7 @@ public class EOperationInvocationImpl extends MinimalEObjectImpl.Container imple
 	/**
 	 * The default value of the '{@link #getResult() <em>Result</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getResult()
 	 * @generated
 	 * @ordered
@@ -84,6 +86,7 @@ public class EOperationInvocationImpl extends MinimalEObjectImpl.Container imple
 	/**
 	 * The cached value of the '{@link #getResult() <em>Result</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getResult()
 	 * @generated
 	 * @ordered
@@ -102,6 +105,7 @@ public class EOperationInvocationImpl extends MinimalEObjectImpl.Container imple
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -111,15 +115,17 @@ public class EOperationInvocationImpl extends MinimalEObjectImpl.Container imple
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EOperation getEOperation() {
 		if (eOperation != null && eOperation.eIsProxy()) {
-			InternalEObject oldEOperation = (InternalEObject)eOperation;
-			eOperation = (EOperation)eResolveProxy(oldEOperation);
+			InternalEObject oldEOperation = (InternalEObject) eOperation;
+			eOperation = (EOperation) eResolveProxy(oldEOperation);
 			if (eOperation != oldEOperation) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ECPPackage.EOPERATION_INVOCATION__EOPERATION, oldEOperation, eOperation));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							ECPPackage.EOPERATION_INVOCATION__EOPERATION, oldEOperation, eOperation));
 			}
 		}
 		return eOperation;
@@ -127,6 +133,7 @@ public class EOperationInvocationImpl extends MinimalEObjectImpl.Container imple
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EOperation basicGetEOperation() {
@@ -135,28 +142,33 @@ public class EOperationInvocationImpl extends MinimalEObjectImpl.Container imple
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setEOperation(EOperation newEOperation) {
 		EOperation oldEOperation = eOperation;
 		eOperation = newEOperation;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ECPPackage.EOPERATION_INVOCATION__EOPERATION, oldEOperation, eOperation));
+			eNotify(new ENotificationImpl(this, Notification.SET, ECPPackage.EOPERATION_INVOCATION__EOPERATION,
+					oldEOperation, eOperation));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EMap<EParameter, Object> getArguments() {
 		if (arguments == null) {
-			arguments = new EcoreEMap<EParameter,Object>(ECPPackage.Literals.EPARAMETER_TO_OBJECT_MAP_ENTRY, EParameterToObjectMapEntryImpl.class, this, ECPPackage.EOPERATION_INVOCATION__ARGUMENTS);
+			arguments = new EcoreEMap<EParameter, Object>(ECPPackage.Literals.EPARAMETER_TO_OBJECT_MAP_ENTRY,
+					EParameterToObjectMapEntryImpl.class, this, ECPPackage.EOPERATION_INVOCATION__ARGUMENTS);
 		}
 		return arguments;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Object getResult() {
@@ -165,17 +177,20 @@ public class EOperationInvocationImpl extends MinimalEObjectImpl.Container imple
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setResult(Object newResult) {
 		Object oldResult = result;
 		result = newResult;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ECPPackage.EOPERATION_INVOCATION__RESULT, oldResult, result));
+			eNotify(new ENotificationImpl(this, Notification.SET, ECPPackage.EOPERATION_INVOCATION__RESULT, oldResult,
+					result));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void execute() {
@@ -186,114 +201,125 @@ public class EOperationInvocationImpl extends MinimalEObjectImpl.Container imple
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ECPPackage.EOPERATION_INVOCATION__ARGUMENTS:
-				return ((InternalEList<?>)getArguments()).basicRemove(otherEnd, msgs);
+		case ECPPackage.EOPERATION_INVOCATION__ARGUMENTS:
+			return ((InternalEList<?>) getArguments()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ECPPackage.EOPERATION_INVOCATION__EOPERATION:
-				if (resolve) return getEOperation();
-				return basicGetEOperation();
-			case ECPPackage.EOPERATION_INVOCATION__ARGUMENTS:
-				if (coreType) return getArguments();
-				else return getArguments().map();
-			case ECPPackage.EOPERATION_INVOCATION__RESULT:
-				return getResult();
+		case ECPPackage.EOPERATION_INVOCATION__EOPERATION:
+			if (resolve)
+				return getEOperation();
+			return basicGetEOperation();
+		case ECPPackage.EOPERATION_INVOCATION__ARGUMENTS:
+			if (coreType)
+				return getArguments();
+			else
+				return getArguments().map();
+		case ECPPackage.EOPERATION_INVOCATION__RESULT:
+			return getResult();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ECPPackage.EOPERATION_INVOCATION__EOPERATION:
-				setEOperation((EOperation)newValue);
-				return;
-			case ECPPackage.EOPERATION_INVOCATION__ARGUMENTS:
-				((EStructuralFeature.Setting)getArguments()).set(newValue);
-				return;
-			case ECPPackage.EOPERATION_INVOCATION__RESULT:
-				setResult(newValue);
-				return;
+		case ECPPackage.EOPERATION_INVOCATION__EOPERATION:
+			setEOperation((EOperation) newValue);
+			return;
+		case ECPPackage.EOPERATION_INVOCATION__ARGUMENTS:
+			((EStructuralFeature.Setting) getArguments()).set(newValue);
+			return;
+		case ECPPackage.EOPERATION_INVOCATION__RESULT:
+			setResult(newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ECPPackage.EOPERATION_INVOCATION__EOPERATION:
-				setEOperation((EOperation)null);
-				return;
-			case ECPPackage.EOPERATION_INVOCATION__ARGUMENTS:
-				getArguments().clear();
-				return;
-			case ECPPackage.EOPERATION_INVOCATION__RESULT:
-				setResult(RESULT_EDEFAULT);
-				return;
+		case ECPPackage.EOPERATION_INVOCATION__EOPERATION:
+			setEOperation((EOperation) null);
+			return;
+		case ECPPackage.EOPERATION_INVOCATION__ARGUMENTS:
+			getArguments().clear();
+			return;
+		case ECPPackage.EOPERATION_INVOCATION__RESULT:
+			setResult(RESULT_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ECPPackage.EOPERATION_INVOCATION__EOPERATION:
-				return eOperation != null;
-			case ECPPackage.EOPERATION_INVOCATION__ARGUMENTS:
-				return arguments != null && !arguments.isEmpty();
-			case ECPPackage.EOPERATION_INVOCATION__RESULT:
-				return RESULT_EDEFAULT == null ? result != null : !RESULT_EDEFAULT.equals(result);
+		case ECPPackage.EOPERATION_INVOCATION__EOPERATION:
+			return eOperation != null;
+		case ECPPackage.EOPERATION_INVOCATION__ARGUMENTS:
+			return arguments != null && !arguments.isEmpty();
+		case ECPPackage.EOPERATION_INVOCATION__RESULT:
+			return RESULT_EDEFAULT == null ? result != null : !RESULT_EDEFAULT.equals(result);
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case ECPPackage.EOPERATION_INVOCATION___EXECUTE:
-				execute();
-				return null;
+		case ECPPackage.EOPERATION_INVOCATION___EXECUTE:
+			execute();
+			return null;
 		}
 		return super.eInvoke(operationID, arguments);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy())
+			return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (result: ");

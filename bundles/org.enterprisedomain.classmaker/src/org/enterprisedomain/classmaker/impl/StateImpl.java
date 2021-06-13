@@ -16,6 +16,7 @@
 package org.enterprisedomain.classmaker.impl;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
@@ -565,8 +566,8 @@ public class StateImpl extends ItemImpl implements State {
 		if (requiredPlugins == null) {
 			requiredPlugins = new EDataTypeUniqueEList<String>(String.class, this,
 					ClassMakerPackage.STATE__REQUIRED_PLUGINS);
-			requiredPlugins.add("org.eclipse.emf.common");
-			requiredPlugins.add("org.eclipse.emf.ecore");
+			for (String req : defaultRequiredPlugins)
+				requiredPlugins.add(req);
 		}
 		return requiredPlugins;
 	}
@@ -732,7 +733,7 @@ public class StateImpl extends ItemImpl implements State {
 			IProgressMonitor monitor = ClassMakerPlugin.getProgressMonitor();
 			IFolder folder = project.getFolder(ResourceUtils.getModelFolderName());
 
-			if (!folder.exists()) {
+			if (!folder.exists() && getParent().getParent() instanceof Contribution) {
 				SubMonitor pm = null;
 				SubMonitor m = null;
 				try {
@@ -794,6 +795,17 @@ public class StateImpl extends ItemImpl implements State {
 			setResource(resourceSet.createResource(modelURI));
 			created = true;
 		}
+		if (loadOnDemand && (!eIsSet(ClassMakerPackage.STATE__RESOURCE)
+				|| (eIsSet(ClassMakerPackage.STATE__RESOURCE) && getResource().getContents().isEmpty()))) {
+			try {
+				setResource(resourceSet.getResource(modelURI, loadOnDemand));
+				created = false;
+			} catch (WrappedException e) {
+				if (e.getCause() instanceof FileNotFoundException) {
+					setResource(resourceSet.createResource(modelURI));
+				}
+			}
+		}
 		getDomainModel().eAdapters().remove(modelsToResourceAdapter);
 		getDomainModel().eAdapters().add(modelsToResourceAdapter);
 		getResource().eAdapters().remove(resourceToModelsAdapter);
@@ -802,12 +814,11 @@ public class StateImpl extends ItemImpl implements State {
 			loading = false;
 			return;
 		}
-		if (!loadOnDemand)
-			try {
-				getResource().load(Collections.emptyMap());
-			} catch (IOException e) {
-				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createWarningStatus(e));
-			}
+		try {
+			getResource().load(Collections.emptyMap());
+		} catch (IOException e) {
+			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createWarningStatus(e));
+		}
 		if (!getResource().getContents().isEmpty()) {
 			getDomainModel().setDynamic(EcoreUtil.copy((EObject) getResource().getContents().get(0)));
 		}
@@ -1015,8 +1026,8 @@ public class StateImpl extends ItemImpl implements State {
 	 * Initialize and load resource. Parent revision should be set.
 	 */
 	@Override
-	public void load(boolean create) throws CoreException {
-		loadResource(getModelURI(), create, true);
+	public void load(boolean create, boolean loadOnDemand) throws CoreException {
+		loadResource(getModelURI(), create, loadOnDemand);
 		if (ClassMakerServiceImpl.initializing && getPhase().getValue() == Stage.LOADED_VALUE) {
 			getStrategy().configureJobs(getStrategy().getLoaders().isEmpty(), ClassMakerPlugin.getProgressMonitor());
 			Job job = EnterpriseDomainJob
@@ -1056,7 +1067,7 @@ public class StateImpl extends ItemImpl implements State {
 			setCommitId(commitId);
 			operator.checkout(getProject().getVersion().toString(), getCommitId(), forced);
 			copyModel(getParent());
-			load(false);
+			load(false, false);
 		} catch (CheckoutConflictException e) {
 			e.getConflictingPaths().clear();
 		} catch (CoreException e) {

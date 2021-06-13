@@ -284,6 +284,15 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public void load(boolean create, boolean loadOnDemand) throws CoreException {
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -393,14 +402,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	 */
 	public void setParent(Item newParent) {
 		copyModel(newParent);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public void load(boolean create) throws CoreException {
 	}
 
 	/**

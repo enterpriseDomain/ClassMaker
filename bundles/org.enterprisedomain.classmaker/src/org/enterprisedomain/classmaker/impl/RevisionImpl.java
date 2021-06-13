@@ -362,15 +362,13 @@ public class RevisionImpl extends ItemImpl implements Revision {
 		} catch (NoHeadException e) {
 			return null;
 		} catch (Exception e) {
-			ClassMakerPlugin.getInstance().getLog()
-					.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 			return null;
 		} finally {
 			try {
 				operator.ungetRepositorySCM();
 			} catch (Exception e) {
-				ClassMakerPlugin.getInstance().getLog()
-						.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 			}
 		}
 		return getState().getCommitId();
@@ -422,7 +420,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	public void checkout(long stateTime, String commitId) {
 		setTimestamp(stateTime);
 		try {
-			load(true);
+			load(true, true);
 		} catch (CoreException e) {
 			ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
 		}
@@ -438,7 +436,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	public void checkout(long stateTime) {
 		setTimestamp(stateTime);
 		try {
-			load(true);
+			load(true, true);
 		} catch (CoreException e) {
 			ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
 		}
@@ -484,7 +482,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	}
 
 	@Override
-	public void load(boolean create) throws CoreException {
+	public void load(boolean create, boolean loadOnDemand) throws CoreException {
 		initialize(false);
 		if (create && isStateSet()) {
 			@SuppressWarnings("unchecked")
@@ -501,19 +499,17 @@ public class RevisionImpl extends ItemImpl implements Revision {
 					getState().initialize(false);
 				}
 			} catch (Exception e) {
-				throw new CoreException(
-						new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 			} finally {
 				try {
 					operator.ungetRepositorySCM();
 				} catch (Exception e) {
-					throw new CoreException(
-							new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+					throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 				}
 			}
 		}
 		if (isStateSet()) {
-			getState().load(create);
+			getState().load(create, loadOnDemand);
 			getProject().initAdapters(this);
 		}
 	}
@@ -537,7 +533,8 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	 */
 	public void addAdapters(EList<Adapter> adapters) {
 		for (State state : getStateHistory().values())
-			state.eAdapters().addAll(adapters);
+			if (!state.eAdapters().containsAll(adapters))
+				state.eAdapters().addAll(adapters);
 	}
 
 	/**

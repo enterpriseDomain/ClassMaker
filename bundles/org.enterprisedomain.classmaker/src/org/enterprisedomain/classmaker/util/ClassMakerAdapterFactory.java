@@ -221,6 +221,11 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public Adapter caseNotifier(Notifier object) {
+			return createNotifierAdapter();
+		}
+
+		@Override
 		public Adapter caseCompletionListener(CompletionListener object) {
 			return createCompletionListenerAdapter();
 		}
@@ -616,6 +621,21 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNotificationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class
+	 * '{@link org.eclipse.emf.common.notify.Notifier <em>Notifier</em>}'. <!--
+	 * begin-user-doc --> This default implementation returns null so that we can
+	 * easily ignore cases; it's useful to ignore a case when inheritance will catch
+	 * all the cases anyway. <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see org.eclipse.emf.common.notify.Notifier
+	 * @generated
+	 */
+	public Adapter createNotifierAdapter() {
 		return null;
 	}
 

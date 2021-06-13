@@ -405,7 +405,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		} else
 			for (Project project : getProjects()) {
 				try {
-					project.load(false);
+					project.load(false, true);
 				} catch (CoreException e) {
 					ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
 				}
@@ -502,7 +502,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 					result.checkout(newRevision.getVersion());
 				} else {
 					result.createRevision(monitor);
-					result.load(true);
+					result.load(true, true);
 				}
 				registerProject(result);
 				return result;
@@ -519,7 +519,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			Version version = result.nextVersion();
 			Revision revision = result.newRevision(version);
 			result.checkout(revision.getVersion());
-			result.load(true);
+			result.load(true, true);
 			EObject model = EcoreUtil.copy(blueprint);
 			result.getDomainModel().setDynamic(model);
 			result.getState().saveResource();
@@ -714,9 +714,10 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			registerProject(project);
 			project.setName(name);
 			project.create(monitor);
-			Revision revision = project.newRevision(project.nextVersion());
+			Revision revision = project.createRevision(monitor);
 			project.checkout(revision.getVersion());
 			project.initialize(true);
+			project.load(true, true);
 			return project;
 		} finally {
 			monitor.done();
@@ -738,39 +739,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			if (theProject.getProjectName() != null && theProject.getProjectName().equals(projectName))
 				project = theProject;
 		}
-		// IProgressMonitor monitor = ClassMakerPlugin.getProgressMonitor();
-		// IProject eProject =
-		// ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
-		// try {
-		// if (!eProject.exists())
-		// return project;
-		// if (!eProject.isOpen()) {
-		// SubMonitor pm = SubMonitor.convert(monitor);
-		// SubMonitor m = pm.newChild(1, SubMonitor.SUPPRESS_ISCANCELED);
-		// try {
-		// eProject.open(m);
-		// } finally {
-		// m.done();
-		// pm.done();
-		// }
-		// }
-		// if (eProject.hasNature(ClassMakerPlugin.NATURE_ID)) {
-		// if (contribution == null) {
-		// contribution = (ContributionImpl)
-		// ClassMakerFactory.eINSTANCE.createContribution();
-		// contribution.setProjectName(eProject.getName());
-		// }
-		// registerProject(contribution);
-		// } else {
-		// project = ClassMakerFactory.eINSTANCE.createProject();
-		// project.setName(eProject.getName());
-		// registerProject(project);
-		// }
-		// } catch (CoreException e) {
-		// ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
-		// } finally {
-		// monitor.done();
-		// }
 		return project;
 	}
 

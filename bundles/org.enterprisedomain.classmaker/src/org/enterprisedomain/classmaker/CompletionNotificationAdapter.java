@@ -32,6 +32,8 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  * <li>{@link org.enterprisedomain.classmaker.CompletionNotificationAdapter#getError
  * <em>Error</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.CompletionNotificationAdapter#getProject
+ * <em>Project</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getCompletionNotificationAdapter()
@@ -54,5 +56,32 @@ public interface CompletionNotificationAdapter extends EObject, Adapter {
 	 * @generated
 	 */
 	IStatus getError();
+
+	/**
+	 * Returns the value of the '<em><b>Project</b></em>' reference. It is
+	 * bidirectional and its opposite is
+	 * '{@link org.enterprisedomain.classmaker.Project#getCompletionNotificationAdapter
+	 * <em>Completion Notification Adapter</em>}'. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Project</em>' reference.
+	 * @see #setProject(Project)
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getCompletionNotificationAdapter_Project()
+	 * @see org.enterprisedomain.classmaker.Project#getCompletionNotificationAdapter
+	 * @model opposite="completionNotificationAdapter"
+	 * @generated
+	 */
+	Project getProject();
+
+	/**
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.CompletionNotificationAdapter#getProject
+	 * <em>Project</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value the new value of the '<em>Project</em>' reference.
+	 * @see #getProject()
+	 * @generated
+	 */
+	void setProject(Project value);
 
 } // CompletionNotificationAdapter

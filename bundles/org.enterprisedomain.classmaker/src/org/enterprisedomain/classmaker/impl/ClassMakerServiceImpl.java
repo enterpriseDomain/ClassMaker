@@ -699,7 +699,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 						setWorkspace(EcoreUtil.copy((Workspace) workspaceResource.getContents().get(0)));
 						for (Project project : getWorkspace().getProjects()) {
 							if (project.eIsSet(ClassMakerPackage.Literals.PROJECT__STATE))
-								project.getState().load(false);
+								project.getState().load(false, true);
 						}
 					} else
 						getWorkspace().initialize();

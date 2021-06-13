@@ -228,14 +228,6 @@ public interface Item extends EObject {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
-	 * @generated
-	 */
-	void load(boolean create) throws CoreException;
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model exceptions="org.enterprisedomain.classmaker.Exception"
 	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
@@ -313,5 +305,13 @@ public interface Item extends EObject {
 	 * @generated
 	 */
 	void setProject(Project value);
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 * @generated
+	 */
+	void load(boolean create, boolean loadOnDemand) throws CoreException;
 
 } // Item

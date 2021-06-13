@@ -244,24 +244,8 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	 */
 	public EList<String> getDependencies() {
 		if (!isStateSet())
-			return ECollections.emptyEList();
+			return ECollections.newBasicEList(State.defaultRequiredPlugins);
 		return getState().getRequiredPlugins();
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public Revision createRevision(IProgressMonitor monitor) throws CoreException {
-		Revision revision = null;
-		if (!isRevisionSet()) {
-			Version version = nextVersion();
-			revision = newRevision(version);
-		} else
-			revision = getRevision();
-		revision.create(monitor);
-		return revision;
 	}
 
 	/**
@@ -516,30 +500,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	 * 
 	 * @generated NOT
 	 */
-	public void load(boolean create) throws CoreException {
-		initialize(false);
-		if (isRevisionSet()) {
-			if (create) {
-				try {
-					@SuppressWarnings("unchecked")
-					SCMOperator<Git> operator = (SCMOperator<Git>) getWorkspace().getSCMRegistry()
-							.get(getProjectName());
-					operator.add(".");
-					operator.commit(getProjectName());
-				} catch (Exception e) {
-					throw new CoreException(
-							new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
-				}
-			}
-			getRevision().load(create);
-		}
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
 	@Override
 	public void build(IProgressMonitor monitor) throws CoreException {
 		if (isRevisionSet())
@@ -565,7 +525,9 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 			return;
 
 		for (Object object : objects)
-			if (object instanceof EObject) {
+			if (object instanceof Collection<?>) {
+				EcoreUtil.removeAll((Collection<EObject>) object);
+			} else if (object instanceof EObject) {
 				for (TreeIterator<EObject> tree = EcoreUtil.getAllProperContents((EObject) object, false); tree
 						.hasNext();) {
 					EcoreUtil.remove(tree.next());

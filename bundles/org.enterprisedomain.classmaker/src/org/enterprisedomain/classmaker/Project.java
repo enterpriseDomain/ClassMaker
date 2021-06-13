@@ -494,6 +494,15 @@ public interface Project extends ISchedulingRule, Item {
 	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
+	Revision createRevision(IProgressMonitor monitor) throws CoreException;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
+	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * @generated
+	 */
 	void delete(IProgressMonitor monitor) throws CoreException;
 
 	/**

@@ -14,10 +14,11 @@
  */
 package org.enterprisedomain.classmaker.tests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
@@ -38,12 +39,15 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.ui.actions.WorkspaceModifyDelegatingOperation;
 import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import org.enterprisedomain.classmaker.core.IRunnerWithProgress;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 
 public abstract class AbstractTest {
 
@@ -70,12 +74,21 @@ public abstract class AbstractTest {
 		latch.countDown();
 	}
 
-	@BeforeClass
+	@BeforeAll
 	public static void init() {
 		currentDynamics = new HashMap<Future<? extends EPackage>, EPackage>();
+		ClassMakerPlugin.setRunnerWithProgress(new IRunnerWithProgress() {
+
+			@Override
+			public void run(IRunnableWithProgress runnable) throws InvocationTargetException, InterruptedException {
+				WorkspaceModifyDelegatingOperation op = new WorkspaceModifyDelegatingOperation(runnable,
+						ClassMakerPlugin.getClassMaker().getWorkspace());
+				op.run(ClassMakerPlugin.getProgressMonitor());
+			}
+		});
 	}
 
-	@Before
+	@BeforeEach
 	public void dependencyCheck() {
 		try {
 			latch.await(1, TimeUnit.SECONDS);
@@ -84,7 +97,7 @@ public abstract class AbstractTest {
 		}
 	}
 
-	@Before
+	@BeforeEach
 	public void prepare() {
 		setPackageName(null);
 		setClassName("C");

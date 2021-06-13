@@ -24,7 +24,6 @@ import org.eclipse.emf.ecp.editor.e3.ECPEditorContext;
 import org.eclipse.emf.ecp.editor.e3.MEEditorInput;
 import org.eclipse.emf.ecp.explorereditorbridge.internal.EditorContext;
 import org.eclipse.emf.ecp.explorereditorbridge.internal.EditorModelElementOpener;
-import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
@@ -82,12 +81,10 @@ public class ModelElementOpener extends EditorModelElementOpener {
 			if (fragment != null)
 				eObject = resourceSet.getResource(uri, true).getEObject(fragment);
 			EObject modelElement = null;
-			if (eObject instanceof ESLocalProject)
-				modelElement = ((ESLocalProject) eObject).getAllModelElements().iterator().next();
-			else if (eObject instanceof EObject)
+			if (eObject instanceof EObject)
 				modelElement = (EObject) eObject;
 			final ECPEditorContext eec = new EditorContext(modelElement, project);
-			result = page.openEditor(new MEEditorInput((EditorContext) eec), editorId, true);
+			result = page.openEditor(new MEEditorInput((EditorContext) eec), editorId, false);
 		} catch (PartInitException e) {
 			e.printStackTrace();
 		}

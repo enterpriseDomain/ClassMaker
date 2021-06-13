@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.enterprisedomain.classmaker.cdo.ui.feature"
+      label="CDO UI Feature"
+      version="0.8.37.qualifier"
+      provider-name="Kyrill Zotkin">
+
+   <description url="http://www.example.com/description">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <includes
+         id="org.enterprisedomain.classmaker.cdo.feature"
+         version="0.0.0"/>
+
+   <requires>
+      <import plugin="org.enterprisedomain.classmaker.cdo" version="0.0.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.cdo.ui.shared" version="4.5.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.cdo.ui" version="4.9.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.cdo.explorer.ui" version="4.7.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.net4j.tcp" version="4.2.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecp.view.context" version="1.26.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecp.ui.view" version="1.26.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecp.ui.view.swt" version="1.26.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.equinox.concurrent" version="1.2.0" match="greaterOrEqual"/>
+   </requires>
+
+   <plugin
+         id="org.enterprisedomain.classmaker.cdo.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

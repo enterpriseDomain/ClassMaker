@@ -15,6 +15,7 @@
  */
 package org.enterprisedomain.classmaker.jobs.load;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.Semaphore;
 
 import org.eclipse.core.runtime.CoreException;
@@ -25,6 +26,7 @@ import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
+import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.osgi.util.NLS;
 import org.enterprisedomain.classmaker.Messages;
 import org.enterprisedomain.classmaker.Stage;
@@ -49,9 +51,9 @@ public class OSGiEPackageLoader extends ContainerJob {
 
 		@Override
 		public void bundleChanged(BundleEvent event) {
-			if (event.getBundle() == null)
+			if (event != null && event.getBundle() == null)
 				return;
-			if (event.getBundle().getSymbolicName().equals(getProject().getName())) {
+			if (getProject() != null && event.getBundle().getSymbolicName().equals(getProject().getName())) {
 				if ((event.getType() == BundleEvent.STARTED || event.getType() == BundleEvent.RESOLVED
 						|| event.getType() == BundleEvent.LAZY_ACTIVATION)
 						&& event.getBundle().getState() == Bundle.ACTIVE)
@@ -80,7 +82,8 @@ public class OSGiEPackageLoader extends ContainerJob {
 					} catch (Exception e) {
 						setException(e);
 					}
-			}
+			} else
+				loaded.release();
 		}
 	};
 
@@ -196,99 +199,119 @@ public class OSGiEPackageLoader extends ContainerJob {
 	private synchronized void doLoad(State state, Bundle osgiBundle, int kind) throws Exception {
 		switch (kind) {
 		case 0:
-			try {
-				EObject model = state.getDomainModel().getDynamic();
-				String packageClassName = null;
-				if (model instanceof EPackage)
-					packageClassName = CodeGenUtil.safeName(((EPackage) model).getName()) + "." //$NON-NLS-1$
-							+ state.getPackageClassName();
-				Class<?> packageClass = null;
-				try {
-					packageClass = osgiBundle.loadClass(packageClassName);
-				} catch (Exception e) {
-					e.printStackTrace();
-					setException(e);
-					throw e;
-				}
-				EPackage ePackage = null;
-				try {
-					ePackage = (EPackage) packageClass.getField("eINSTANCE").get(null); // $NON-NLS-1$ //$NON-NLS-1$
-					if (ePackage != null) {
-						getContributionState().getDomainModel().setGenerated(ePackage);
-						registerEPackage(Registry.INSTANCE, ePackage);
-						if (getContributionState().getRevision().getProject().getWorkspace().getResourceSet() != null)
-							registerEPackage(getContributionState().getRevision().getProject().getWorkspace()
-									.getResourceSet().getPackageRegistry(), ePackage);
+			ClassMakerPlugin.runWithProgress(new IRunnableWithProgress() {
+
+				@Override
+				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
+					try {
+						EObject model = state.getDomainModel().getDynamic();
+						String packageClassName = null;
+						if (model instanceof EPackage)
+							packageClassName = CodeGenUtil.safeName(((EPackage) model).getName()) + "." //$NON-NLS-1$
+									+ state.getPackageClassName();
+						Class<?> packageClass = null;
+						try {
+							packageClass = osgiBundle.loadClass(packageClassName);
+						} catch (Exception e) {
+							e.printStackTrace();
+							setException(e);
+						}
+
+						EPackage ePackage = null;
+						try {
+							ePackage = (EPackage) packageClass.getField("eINSTANCE").get(null); // $NON-NLS-1$
+							if (ePackage != null) {
+								getContributionState().getDomainModel().setGenerated(ePackage);
+								registerEPackage(Registry.INSTANCE, ePackage);
+								if (getContributionState().getRevision().getProject().getWorkspace()
+										.getResourceSet() != null)
+									registerEPackage(getContributionState().getRevision().getProject().getWorkspace()
+											.getResourceSet().getPackageRegistry(), ePackage);
+							}
+						} catch (ClassCastException e) {
+							if (ePackage != null) {
+								getContributionState().getDomainModel().setGenerated(ePackage);
+								registerEPackage(Registry.INSTANCE, ePackage);
+								if (getContributionState().getRevision().getProject().getWorkspace()
+										.getResourceSet() != null)
+									registerEPackage(getContributionState().getRevision().getProject().getWorkspace()
+											.getResourceSet().getPackageRegistry(), ePackage);
+							}
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+						setException(e);
+						throw new InvocationTargetException(e);
+					} finally {
+						loaded.release();
+						getContributionState().getProject().setNeedCompletionNotification(true);
 					}
-				} catch (ClassCastException e) {
-					if (ePackage != null) {
-						getContributionState().getDomainModel().setGenerated(ePackage);
-						registerEPackage(Registry.INSTANCE, ePackage);
-						if (getContributionState().getRevision().getProject().getWorkspace().getResourceSet() != null)
-							registerEPackage(getContributionState().getRevision().getProject().getWorkspace()
-									.getResourceSet().getPackageRegistry(), ePackage);
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-					setException(e);
 				}
-			} catch (NullPointerException e) {
-				e.printStackTrace();
-				setException(e);
-			} finally {
-				loaded.release();
-				getContributionState().getProject().setNeedCompletionNotification(true);
-			}
+			});
 			break;
 		case 1:
-			EObject model0 = state.getDomainModel().getDynamic();
-			String pluginClassName = null;
-			if (model0 instanceof EPackage)
-				pluginClassName = CodeGenUtil.safeName(((EPackage) model0).getName()) + ".provider." //$NON-NLS-1$
-						+ state.getEditPluginClassName();
-			Class<?> pluginClass = null;
-			try {
-				pluginClass = osgiBundle.loadClass(pluginClassName);
-			} catch (Exception e) {
-				e.printStackTrace();
-				setException(e);
-				throw e;
-			}
-			try {
-				pluginClass.getField("INSTANCE").get(null);
-			} catch (Exception e) {
-				e.printStackTrace();
-				setException(e);
-			} finally {
-				loaded.release();
-				if (loaded.availablePermits() >= 1)
-					getContributionState().getProject().setNeedCompletionNotification(true);
-			}
+			ClassMakerPlugin.runWithProgress(new IRunnableWithProgress() {
+
+				@Override
+				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
+
+					EObject model0 = state.getDomainModel().getDynamic();
+					String pluginClassName = null;
+					if (model0 instanceof EPackage)
+						pluginClassName = CodeGenUtil.safeName(((EPackage) model0).getName()) + ".provider." //$NON-NLS-1$
+								+ state.getEditPluginClassName();
+					Class<?> pluginClass = null;
+					try {
+						pluginClass = osgiBundle.loadClass(pluginClassName);
+					} catch (Exception e) {
+						e.printStackTrace();
+						setException(e);
+					}
+					try {
+						pluginClass.getField("INSTANCE").get(null);
+					} catch (Exception e) {
+						e.printStackTrace();
+						setException(e);
+						throw new InvocationTargetException(e);
+					} finally {
+						loaded.release();
+						if (loaded.availablePermits() >= 1)
+							getContributionState().getProject().setNeedCompletionNotification(true);
+					}
+				}
+			});
 			break;
 		case 2:
-			EObject model1 = state.getDomainModel().getDynamic();
-			String pluginClassName1 = null;
-			if (model1 instanceof EPackage)
-				pluginClassName1 = CodeGenUtil.safeName(((EPackage) model1).getName()) + ".presentation." //$NON-NLS-1$
-						+ state.getEditorPluginClassName();
-			Class<?> pluginClass1 = null;
-			try {
-				pluginClass1 = osgiBundle.loadClass(pluginClassName1);
-			} catch (Exception e) {
-				e.printStackTrace();
-				setException(e);
-				throw e;
-			}
-			try {
-				pluginClass1.getField("INSTANCE").get(null);
-			} catch (Exception e) {
-				e.printStackTrace();
-				setException(e);
-			} finally {
-				loaded.release();
-				if (loaded.availablePermits() >= 1)
-					getContributionState().getProject().setNeedCompletionNotification(true);
-			}
+			ClassMakerPlugin.runWithProgress(new IRunnableWithProgress() {
+
+				@Override
+				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
+
+					final EObject model1 = state.getDomainModel().getDynamic();
+					String pluginClassName1 = null;
+					if (model1 instanceof EPackage)
+						pluginClassName1 = CodeGenUtil.safeName(((EPackage) model1).getName()) + ".presentation." //$NON-NLS-1$
+								+ state.getEditorPluginClassName();
+					Class<?> pluginClass1 = null;
+					try {
+						pluginClass1 = osgiBundle.loadClass(pluginClassName1);
+					} catch (Exception e) {
+						e.printStackTrace();
+						setException(e);
+					}
+					try {
+						pluginClass1.getField("INSTANCE").get(null);
+					} catch (Exception e) {
+						e.printStackTrace();
+						setException(e);
+						throw new InvocationTargetException(e);
+					} finally {
+						loaded.release();
+						if (loaded.availablePermits() >= 1)
+							getContributionState().getProject().setNeedCompletionNotification(true);
+					}
+				}
+			});
 			break;
 		}
 	}

@@ -23,6 +23,7 @@ public class ContributionAdapterFactory implements IAdapterFactory {
 
 	protected Class<?>[] ADAPTED_CLASSES = { Resource.class };
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T getAdapter(Object adaptableObject, Class<T> adapterType) {
 		if (ADAPTED_CLASSES[0].isAssignableFrom(adapterType))

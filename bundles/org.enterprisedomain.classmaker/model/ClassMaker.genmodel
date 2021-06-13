@@ -4,9 +4,10 @@
     modelDirectory="/org.enterprisedomain.classmaker/src" creationSubmenus="true"
     editDirectory="/org.enterprisedomain.classmaker.edit/src" editorDirectory="/org.enterprisedomain.editor/src"
     modelPluginID="org.enterprisedomain.classmaker" templateDirectory="" redirection=""
-    modelName="ClassMaker" modelPluginClass="" codeFormatting="true" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="6.0" copyrightFields="false" editPluginID="org.enterprisedomain.classmaker.edit"
-    editorPluginID="org.enterprisedomain.editor" language="" usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore"
+    modelName="ClassMaker" modelPluginClass="" codeFormatting="true" testsDirectory=""
+    testSuiteClass="" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    copyrightFields="false" editPluginID="org.enterprisedomain.classmaker.edit" editorPluginID="org.enterprisedomain.editor"
+    testsPluginID="org.enterprisedomain.classmaker.tests" language="" usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore"
     interfaceNamePattern="" runtimePlatform="RCP" pluginKey="ClassMaker">
   <foreignModel>ClassMaker.ecore</foreignModel>
   <genPackages prefix="ClassMaker" basePackage="org.enterprisedomain" resource="XMI"
@@ -34,9 +35,6 @@
     <genClasses ecoreClass="ClassMaker.ecore#//Contribution">
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Contribution/dependencies"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Contribution/latestVersion"/>
-      <genOperations ecoreOperation="ClassMaker.ecore#//Contribution/createRevision">
-        <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/createRevision/monitor"/>
-      </genOperations>
       <genOperations ecoreOperation="ClassMaker.ecore#//Contribution/delete">
         <genParameters ecoreParameter="ClassMaker.ecore#//Contribution/delete/monitor"/>
       </genOperations>
@@ -149,6 +147,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//Item/project"/>
       <genOperations ecoreOperation="ClassMaker.ecore#//Item/load">
         <genParameters ecoreParameter="ClassMaker.ecore#//Item/load/create"/>
+        <genParameters ecoreParameter="ClassMaker.ecore#//Item/load/loadOnDemand"/>
       </genOperations>
       <genOperations ecoreOperation="ClassMaker.ecore#//Item/make">
         <genParameters ecoreParameter="ClassMaker.ecore#//Item/make/monitor"/>
@@ -345,6 +344,9 @@
       <genOperations ecoreOperation="ClassMaker.ecore#//Project/create">
         <genParameters ecoreParameter="ClassMaker.ecore#//Project/create/monitor"/>
       </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Project/createRevision">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Project/createRevision/monitor"/>
+      </genOperations>
       <genOperations ecoreOperation="ClassMaker.ecore#//Project/delete">
         <genParameters ecoreParameter="ClassMaker.ecore#//Project/delete/monitor"/>
       </genOperations>
@@ -433,6 +435,7 @@
       </genOperations>
     </genClasses>
     <genClasses image="false" ecoreClass="ClassMaker.ecore#//Notification"/>
+    <genClasses image="false" ecoreClass="ClassMaker.ecore#//Notifier"/>
     <genClasses image="false" ecoreClass="ClassMaker.ecore#//CompletionListener">
       <genOperations ecoreOperation="ClassMaker.ecore#//CompletionListener/completed">
         <genParameters ecoreParameter="ClassMaker.ecore#//CompletionListener/completed/result"/>
@@ -577,8 +580,9 @@
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Blueprint/edit"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Blueprint/editor"/>
     </genClasses>
-    <genClasses ecoreClass="ClassMaker.ecore#//CompletionNotificationAdapter">
+    <genClasses image="false" ecoreClass="ClassMaker.ecore#//CompletionNotificationAdapter">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//CompletionNotificationAdapter/error"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//CompletionNotificationAdapter/project"/>
     </genClasses>
     <genClasses image="false" ecoreClass="ClassMaker.ecore#//Worker"/>
     <genClasses ecoreClass="ClassMaker.ecore#//SelectRevealHandler">

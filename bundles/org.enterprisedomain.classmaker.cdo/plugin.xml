@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.enterprisedomain.classmaker.customizers">
+      <customizer
+            class="org.enterprisedomain.classmaker.cdo.CreateCDOGeneratorCustomizer"
+            rank="4"
+            stage="org.enterprisedomain.classmaker.customization.stages.project.create.generator">
+      </customizer>
+   </extension>
+
+</plugin>

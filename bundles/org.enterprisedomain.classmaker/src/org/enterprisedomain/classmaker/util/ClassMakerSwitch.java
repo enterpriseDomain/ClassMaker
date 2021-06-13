@@ -23,6 +23,7 @@ import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -283,6 +284,13 @@ public class ClassMakerSwitch<T1> extends Switch<T1> {
 		case ClassMakerPackage.NOTIFICATION: {
 			Notification notification = (Notification) theEObject;
 			T1 result = caseNotification(notification);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ClassMakerPackage.NOTIFIER: {
+			Notifier notifier = (Notifier) theEObject;
+			T1 result = caseNotifier(notifier);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -700,6 +708,22 @@ public class ClassMakerSwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public T1 caseNotification(Notification object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of
+	 * '<em>Notifier</em>'. <!-- begin-user-doc --> This implementation returns
+	 * null; returning a non-null result will terminate the switch. <!--
+	 * end-user-doc -->
+	 * 
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of
+	 *         '<em>Notifier</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseNotifier(Notifier object) {
 		return null;
 	}
 

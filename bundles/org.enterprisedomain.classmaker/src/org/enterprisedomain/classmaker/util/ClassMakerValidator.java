@@ -30,6 +30,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.common.util.URI;
@@ -183,6 +184,8 @@ public class ClassMakerValidator extends EObjectValidator {
 			return validateResourceChangeListener((ResourceChangeListener) value, diagnostics, context);
 		case ClassMakerPackage.NOTIFICATION:
 			return validateNotification((Notification) value, diagnostics, context);
+		case ClassMakerPackage.NOTIFIER:
+			return validateNotifier((Notifier) value, diagnostics, context);
 		case ClassMakerPackage.COMPLETION_LISTENER:
 			return validateCompletionListener((CompletionListener) value, diagnostics, context);
 		case ClassMakerPackage.RESOURCE_ADAPTER:
@@ -442,6 +445,15 @@ public class ClassMakerValidator extends EObjectValidator {
 	public boolean validateNotification(Notification notification, DiagnosticChain diagnostics,
 			Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint((EObject) notification, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public boolean validateNotifier(Notifier notifier, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint((EObject) notifier, diagnostics, context);
 	}
 
 	/**

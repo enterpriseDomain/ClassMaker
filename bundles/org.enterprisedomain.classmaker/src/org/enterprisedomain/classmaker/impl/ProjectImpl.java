@@ -791,11 +791,21 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 */
 	@SuppressWarnings("unchecked")
 	public EList<Object> getChildren() {
-		if (children == null || children.isEmpty()) {
+		if (children == null || children.isEmpty() || children.get(0) == null) {
 			if (getModelResourceAdapter() != null)
 				children = new LoadingEList(getModelResourceAdapter().getResource());
-			else
-				children = new LoadingEList(null);
+			else {
+				try {
+					load(false, false);
+				} catch (CoreException e) {
+					ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
+				}
+				if (getModelResourceAdapter() != null)
+					children = new LoadingEList(getModelResourceAdapter().getResource());
+				else
+					children = new LoadingEList(null);
+			}
+
 			eAdapters().remove(modelAdapter);
 			eAdapters().add(modelAdapter);
 		}
@@ -807,7 +817,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		@Override
 		public void notifyChanged(Notification msg) {
 			super.notifyChanged(msg);
-			if (msg.getFeatureID(Contribution.class) == ClassMakerPackage.PROJECT__MODEL_RESOURCE_ADAPTER
+			if (msg.getFeatureID(Project.class) == ClassMakerPackage.PROJECT__MODEL_RESOURCE_ADAPTER
 					&& msg.getEventType() == Notification.SET && msg.getNewValue() != null) {
 				children.setContents(getModelResourceAdapter().getResource());
 			}
@@ -934,6 +944,26 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 */
 	@Override
 	public CompletionNotificationAdapter getCompletionNotificationAdapter() {
+		if (completionNotificationAdapter != null && completionNotificationAdapter.eIsProxy()) {
+			InternalEObject oldCompletionNotificationAdapter = (InternalEObject) completionNotificationAdapter;
+			completionNotificationAdapter = (CompletionNotificationAdapter) eResolveProxy(
+					oldCompletionNotificationAdapter);
+			if (completionNotificationAdapter != oldCompletionNotificationAdapter) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							ClassMakerPackage.PROJECT__COMPLETION_NOTIFICATION_ADAPTER,
+							oldCompletionNotificationAdapter, completionNotificationAdapter));
+			}
+		}
+		return completionNotificationAdapter;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public CompletionNotificationAdapter basicGetCompletionNotificationAdapter() {
 		return completionNotificationAdapter;
 	}
 
@@ -969,11 +999,11 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			NotificationChain msgs = null;
 			if (completionNotificationAdapter != null)
 				msgs = ((InternalEObject) completionNotificationAdapter).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE - ClassMakerPackage.PROJECT__COMPLETION_NOTIFICATION_ADAPTER, null,
+						ClassMakerPackage.COMPLETION_NOTIFICATION_ADAPTER__PROJECT, CompletionNotificationAdapter.class,
 						msgs);
 			if (newCompletionNotificationAdapter != null)
 				msgs = ((InternalEObject) newCompletionNotificationAdapter).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE - ClassMakerPackage.PROJECT__COMPLETION_NOTIFICATION_ADAPTER, null,
+						ClassMakerPackage.COMPLETION_NOTIFICATION_ADAPTER__PROJECT, CompletionNotificationAdapter.class,
 						msgs);
 			msgs = basicSetCompletionNotificationAdapter(newCompletionNotificationAdapter, msgs);
 			if (msgs != null)
@@ -1255,6 +1285,22 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * 
 	 * @generated NOT
 	 */
+	public Revision createRevision(IProgressMonitor monitor) throws CoreException {
+		Revision revision = null;
+		if (!isRevisionSet()) {
+			Version version = nextVersion();
+			revision = newRevision(version);
+		} else
+			revision = getRevision();
+		revision.create(monitor);
+		return revision;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
 	public void delete(IProgressMonitor monitor) throws CoreException {
 		if (eIsSet(ClassMakerPackage.PROJECT__WORKSPACE)) {
 			getWorkspace().getResourceSet().eAdapters().remove(resourceAdapter);
@@ -1295,8 +1341,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		try {
 			((Resource) getChildren().get(0)).save(Collections.emptyMap());
 		} catch (IOException e) {
-			ClassMakerPlugin.getInstance().getLog()
-					.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 		}
 	}
 
@@ -1453,22 +1498,18 @@ public class ProjectImpl extends EObjectImpl implements Project {
 							reset.setRef(ref.getName());
 						reset.call();
 					} catch (CheckoutConflictException ex) {
-						ClassMakerPlugin.getInstance().getLog().log(
-								new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, ex.getLocalizedMessage(), ex));
+						ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(ex));
 					} catch (GitAPIException ex) {
-						ClassMakerPlugin.getInstance().getLog().log(
-								new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, ex.getLocalizedMessage(), ex));
+						ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(ex));
 					}
 				}
 			} catch (Exception e) {
-				ClassMakerPlugin.getInstance().getLog()
-						.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 			} finally {
 				try {
 					operator.ungetRepositorySCM();
 				} catch (Exception e) {
-					ClassMakerPlugin.getInstance().getLog()
-							.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+					ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 				}
 			}
 			revision = getRevisions().get(version);
@@ -1564,7 +1605,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * 
 	 * @generated NOT
 	 */
-	public void load(boolean create) throws CoreException {
+	public void load(boolean create, boolean loadOnDemand) throws CoreException {
 		initialize(false);
 		if (isRevisionSet()) {
 			if (create) {
@@ -1575,11 +1616,10 @@ public class ProjectImpl extends EObjectImpl implements Project {
 					operator.add(".");
 					operator.commit(getProjectName());
 				} catch (Exception e) {
-					throw new CoreException(
-							new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+					throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 				}
 			}
-			getRevision().load(create);
+			getRevision().load(create, loadOnDemand);
 		}
 	}
 
@@ -1749,22 +1789,22 @@ public class ProjectImpl extends EObjectImpl implements Project {
 					if (currentBranch.equals(SCMOperator.MASTER_BRANCH))
 						checkout(getVersion(), timestamp);
 					if (eIsSet(ClassMakerPackage.PROJECT__REVISION)
-							&& getRevision().eIsSet(ClassMakerPackage.Literals.REVISION__STATE))
+							&& getRevision().eIsSet(ClassMakerPackage.Literals.REVISION__STATE)) {
 						getRevision().getState().setResource(resource);
+						initAdapters(getRevision());
+					}
 					onModelResourceCreate(resource);
 					getWorkspace().getResourceSet().eAdapters().add(resourceAdapter);
 					addResourceChangeListener(getResourceReloadListener());
 					return commitId;
 				} catch (Exception e) {
-					ClassMakerPlugin.getInstance().getLog()
-							.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+					ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 					return null;
 				} finally {
 					try {
 						operator.ungetRepositorySCM();
 					} catch (Exception e) {
-						ClassMakerPlugin.getInstance().getLog()
-								.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+						ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 					}
 				}
 			} else {
@@ -1808,10 +1848,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			public void notifyChanged(Notification msg) {
 				super.notifyChanged(msg);
 				if (msg.getFeatureID(ResourceAdapter.class) == ClassMakerPackage.RESOURCE_ADAPTER__RESOURCE
-						&& msg.getEventType() == Notification.SET && msg.getNewValue() != null) {
-					LoadingEList.this.object = (Notifier) msg.getNewValue();
-					fill((Notifier) msg.getNewValue());
-				}
+						&& msg.getEventType() == Notification.SET && msg.getNewValue() != null)
+					setContents((Notifier) msg.getNewValue());
 			}
 
 		};
@@ -1840,8 +1878,13 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		}
 
 		private void fill(Notifier object) {
-			clear();
-			add(object);
+			if (object instanceof Resource) {
+				clear();
+				add(object);
+			} else if (object instanceof EObject) {
+				((Resource) this.object).getContents().clear();
+				((Resource) this.object).getContents().add((EObject) object);
+			}
 		}
 
 		@Override
@@ -1901,7 +1944,10 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		}
 
 		private void setObject(Notifier object) {
-			this.object = object;
+			if (object instanceof Resource)
+				this.object = object;
+			else if (object instanceof EObject)
+				((Resource) this.object).getContents().add((EObject) object);
 		}
 
 	}
@@ -1956,6 +2002,12 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			return basicSetWorkspace((Workspace) otherEnd, msgs);
+		case ClassMakerPackage.PROJECT__COMPLETION_NOTIFICATION_ADAPTER:
+			if (completionNotificationAdapter != null)
+				msgs = ((InternalEObject) completionNotificationAdapter).eInverseRemove(this,
+						ClassMakerPackage.COMPLETION_NOTIFICATION_ADAPTER__PROJECT, CompletionNotificationAdapter.class,
+						msgs);
+			return basicSetCompletionNotificationAdapter((CompletionNotificationAdapter) otherEnd, msgs);
 		case ClassMakerPackage.PROJECT__MODEL_RESOURCE_ADAPTER:
 			if (modelResourceAdapter != null)
 				msgs = ((InternalEObject) modelResourceAdapter).eInverseRemove(this,
@@ -2082,7 +2134,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		case ClassMakerPackage.PROJECT__NEED_COMPLETION_NOTIFICATION:
 			return isNeedCompletionNotification();
 		case ClassMakerPackage.PROJECT__COMPLETION_NOTIFICATION_ADAPTER:
-			return getCompletionNotificationAdapter();
+			if (resolve)
+				return getCompletionNotificationAdapter();
+			return basicGetCompletionNotificationAdapter();
 		case ClassMakerPackage.PROJECT__RESOURCE_RELOAD_LISTENER:
 			return getResourceReloadListener();
 		case ClassMakerPackage.PROJECT__SAVING_RESOURCE:

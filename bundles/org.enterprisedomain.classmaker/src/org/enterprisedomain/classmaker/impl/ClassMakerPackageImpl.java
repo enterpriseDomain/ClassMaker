@@ -33,6 +33,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -239,6 +240,13 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	private EClass notificationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private EClass notifierEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -1437,6 +1445,16 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
+	public EClass getNotifier() {
+		return notifierEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
 	public EClass getCompletionListener() {
 		return completionListenerEClass;
 	}
@@ -1599,6 +1617,16 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	@Override
 	public EAttribute getCompletionNotificationAdapter_Error() {
 		return (EAttribute) completionNotificationAdapterEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public EReference getCompletionNotificationAdapter_Project() {
+		return (EReference) completionNotificationAdapterEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1872,6 +1900,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 		notificationEClass = createEClass(NOTIFICATION);
 
+		notifierEClass = createEClass(NOTIFIER);
+
 		completionListenerEClass = createEClass(COMPLETION_LISTENER);
 
 		resourceAdapterEClass = createEClass(RESOURCE_ADAPTER);
@@ -1891,6 +1921,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 		completionNotificationAdapterEClass = createEClass(COMPLETION_NOTIFICATION_ADAPTER);
 		createEAttribute(completionNotificationAdapterEClass, COMPLETION_NOTIFICATION_ADAPTER__ERROR);
+		createEReference(completionNotificationAdapterEClass, COMPLETION_NOTIFICATION_ADAPTER__PROJECT);
 
 		workerEClass = createEClass(WORKER);
 
@@ -1965,12 +1996,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 				Contribution.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				IS_DERIVED, IS_ORDERED);
 
-		EOperation op = addEOperation(contributionEClass, this.getRevision(), "createRevision", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEException(op, this.getCoreException());
-
-		op = addEOperation(contributionEClass, null, "delete", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EOperation op = addEOperation(contributionEClass, null, "delete", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEException(op, this.getCoreException());
 
@@ -2161,6 +2187,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 		op = addEOperation(itemEClass, null, "load", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEBoolean(), "create", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEBoolean(), "loadOnDemand", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEException(op, this.getCoreException());
 
 		op = addEOperation(itemEClass, ecorePackage.getEString(), "make", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -2435,9 +2462,10 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEAttribute(getProject_NeedCompletionNotification(), ecorePackage.getEBoolean(),
 				"needCompletionNotification", null, 0, 1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getProject_CompletionNotificationAdapter(), this.getCompletionNotificationAdapter(), null,
-				"completionNotificationAdapter", null, 0, 1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProject_CompletionNotificationAdapter(), this.getCompletionNotificationAdapter(),
+				this.getCompletionNotificationAdapter_Project(), "completionNotificationAdapter", null, 0, 1,
+				Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getProject_ResourceReloadListener(), this.getResourceChangeListener(), null,
 				"resourceReloadListener", null, 0, 1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE,
 				!IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2465,6 +2493,10 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(projectEClass, null, "create", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEException(op, this.getCoreException());
+
+		op = addEOperation(projectEClass, this.getRevision(), "createRevision", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEException(op, this.getCoreException());
 
@@ -2570,6 +2602,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 		initEClass(notificationEClass, Notification.class, "Notification", IS_ABSTRACT, IS_INTERFACE,
 				!IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(notifierEClass, Notifier.class, "Notifier", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(completionListenerEClass, CompletionListener.class, "CompletionListener", IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
@@ -2822,6 +2856,10 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEAttribute(getCompletionNotificationAdapter_Error(), this.getIStatus(), "error", null, 0, 1,
 				CompletionNotificationAdapter.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE,
 				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCompletionNotificationAdapter_Project(), this.getProject(),
+				this.getProject_CompletionNotificationAdapter(), "project", null, 0, 1,
+				CompletionNotificationAdapter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(workerEClass, Worker.class, "Worker", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 
