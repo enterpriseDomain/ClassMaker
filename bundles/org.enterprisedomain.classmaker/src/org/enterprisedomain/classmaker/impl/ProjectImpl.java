@@ -1875,6 +1875,10 @@ public class ProjectImpl extends EObjectImpl implements Project {
 				return super.getFeatureID(expectedClass);
 			}
 
+			public Object getNotifier() {
+				return ProjectImpl.this;
+			}
+
 		}
 
 		private void fill(Notifier object) {

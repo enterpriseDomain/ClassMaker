@@ -41,11 +41,11 @@ location simrel2021-03 "https://download.eclipse.org/releases/2021-03/" {
 }
 
 location "http://download.eclipse.org/egit/updates/" {
-	org.eclipse.jgit.feature.group [5.11.1,5.11.2)
-	org.eclipse.jgit.lfs.feature.group [5.11.1,5.11.2)
-	org.eclipse.jgit.pgm.feature.group [5.11.1,5.11.2)
-	org.eclipse.jgit.http.apache.feature.group [5.11.1,5.11.2)
-	org.eclipse.jgit.ssh.apache.feature.group [5.11.1,5.11.2)
+	org.eclipse.jgit.feature.group [5.12.0,5.12.1)
+	org.eclipse.jgit.lfs.feature.group [5.12.0,5.12.1)
+	org.eclipse.jgit.pgm.feature.group [5.12.0,5.12.1)
+	org.eclipse.jgit.http.apache.feature.group [5.12.0,5.12.1)
+	org.eclipse.jgit.ssh.apache.feature.group [5.12.0,5.12.1)
 }
 
 location "http://download.eclipse.org/sirius/updates/releases/6.4.2/2020-09/" {
