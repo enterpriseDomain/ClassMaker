@@ -15,4 +15,12 @@
 <extension  point="org.eclipse.emf.ecp.view.model.provider.xmi.file">
 <file filePath="viewmodel/EOperationInvocation.view"/>
 </extension>
+<extension
+      point="org.eclipse.ui.decorators">
+   <decorator
+         class="org.enterprisedomain.ecp.ui.StageDecorator"
+         id="org.enterprisedomain.ecp.ui.stagedecorator"
+         label="Stage Decorator">
+   </decorator>
+</extension>
 </plugin>

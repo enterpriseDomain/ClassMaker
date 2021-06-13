@@ -45,12 +45,16 @@ import org.eclipse.emf.ecp.spi.ui.DefaultUIProvider;
 import org.eclipse.emf.ecp.ui.tester.ECPSavePropertySource;
 import org.eclipse.emf.ecp.ui.tester.SaveButtonEnablementObserver;
 import org.eclipse.emf.ecp.ui.views.ModelExplorerView;
+import org.eclipse.emf.ecp.ui.views.ModelRepositoriesView;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.jface.viewers.DecoratingLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.jface.viewers.ILabelProviderListener;
+import org.eclipse.jface.viewers.LabelProviderChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -70,6 +74,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.internal.progress.ProgressManager;
 import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.Contribution;
+import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.SelectRevealHandler;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.core.IRunWrapper;
@@ -87,8 +92,43 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider implements IRe
 			new AdapterFactory[] { new ClassMakerItemProviderAdapterFactory(), new ClassMakerAdapterFactory(),
 					InternalProvider.EMF_ADAPTER_FACTORY });
 
-	private static final ILabelProvider ENTERPRISE_DOMAIN_LABEL_PROVIDER = new AdapterFactoryLabelProvider(
-			ENTERPRISE_DOMAIN_ITEM_PROVIDER_ADAPTER_FACTORY);
+	private static final ILabelProvider ENTERPRISE_DOMAIN_LABEL_PROVIDER = new DecoratingLabelProvider(
+			new AdapterFactoryLabelProvider(ENTERPRISE_DOMAIN_ITEM_PROVIDER_ADAPTER_FACTORY), new StageDecorator());
+
+	public class LabelProviderListener implements ILabelProviderListener {
+
+		@Override
+		public void labelProviderChanged(LabelProviderChangedEvent event) {
+			IViewPart reposView = null;
+			try {
+				IWorkbench workbench = (IWorkbench) PlatformUI.getWorkbench();
+				if (workbench != null) {
+					IWorkbenchWindow workbenchWindow = workbench.getWorkbenchWindows()[0];
+
+					if (workbenchWindow != null) {
+						IWorkbenchPage page = workbenchWindow.getActivePage();
+						reposView = page.findView("org.eclipse.emf.ecp.ui.ModelRepositoriesView");
+					}
+				}
+				if (reposView instanceof ModelRepositoriesView) {
+					final ModelRepositoriesView modelRepos = (ModelRepositoriesView) reposView;
+					Object element = event.getElement();
+					if (element instanceof EObject)
+						ClassMakerPlugin.runWithProgress(new IRunnableWithProgress() {
+
+							@Override
+							public void run(IProgressMonitor monitor)
+									throws InvocationTargetException, InterruptedException {
+								modelRepos.getViewer().refresh((EObject) element, true);
+							}
+						});
+				}
+			} catch (Exception e) {
+				Activator.log(e);
+			}
+		}
+
+	}
 
 	private Button isContributionButton;
 	private boolean isContribution;
@@ -130,15 +170,6 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider implements IRe
 			}
 
 		});
-		setClientRunWrapper(new IRunWrapper() {
-
-			@Override
-			public void wrapRun(Runnable runnable) {
-				Display display = Display.getCurrent() != null ? Display.getCurrent() : Display.getDefault();
-				display.asyncExec(runnable);
-			}
-
-		});
 
 		setRunnerWithProgress(new IRunnerWithProgress() {
 
@@ -152,10 +183,10 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider implements IRe
 					public void run() {
 						try {
 							IWorkbenchWindow workbenchWindow = ((IWorkbench) PlatformUI.getWorkbench())
-									.getActiveWorkbenchWindow();
+									.getWorkbenchWindows()[0];
 
 							if (workbenchWindow != null) {
-								workbenchWindow.run(true, true, runnable);
+								workbenchWindow.run(false, true, runnable);
 							}
 						} catch (InvocationTargetException e) {
 							Activator.log(e.getTargetException());
@@ -167,6 +198,16 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider implements IRe
 
 			}
 		});
+		setClientRunWrapper(new IRunWrapper() {
+
+			@Override
+			public void wrapRun(Runnable runnable) {
+				Display display = Display.getCurrent() != null ? Display.getCurrent() : Display.getDefault();
+				display.asyncExec(runnable);
+			}
+
+		});
+		ENTERPRISE_DOMAIN_LABEL_PROVIDER.addListener(new LabelProviderListener());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -311,12 +352,12 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider implements IRe
 	@Override
 	public String getText(Object element) {
 		if (element instanceof ECPProject) {
-			Contribution domainProject = Activator.getClassMaker().getWorkspace()
-					.getContribution(((ECPProject) element).getName());
+			Project domainProject = Activator.getClassMaker().getWorkspace()
+					.getProject(((ECPProject) element).getName().toLowerCase());
 			if (domainProject != null)
-				return super.getText(element) + " [" + domainProject.getPhase().toString().toLowerCase() + "]";
+				return super.getText(element) + " [" + domainProject.getPhase().getName().toLowerCase() + "]";
 		}
-		return super.getText(element);
+		return ENTERPRISE_DOMAIN_LABEL_PROVIDER.getText(element);
 	}
 
 	public class EnterpriseDomainUIResourceListener implements IResourceChangeListener {
