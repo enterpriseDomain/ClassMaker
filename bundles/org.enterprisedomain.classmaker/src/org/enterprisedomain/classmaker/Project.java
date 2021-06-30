@@ -135,7 +135,7 @@ public interface Project extends ISchedulingRule, Item {
 
 	/**
 	 * Returns the value of the '<em><b>Children</b></em>' reference list. The list
-	 * contents are of type {@link org.eclipse.emf.ecore.EObject}. <!--
+	 * contents are of type {@link java.lang.Object}. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Children</em>' attribute list isn't clear, there

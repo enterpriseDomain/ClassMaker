@@ -12,10 +12,10 @@
    <feature url="features/org.enterprisedomain.classmaker.feature_0.8.1.qualifier.jar" id="org.enterprisedomain.classmaker.feature" version="0.8.37.qualifier">
       <category name="enterprisedomain"/>
    </feature>
-   <feature id="org.enterprisedomain.classmaker.cdo.ui.feature">
+   <feature id="org.enterprisedomain.classmaker.cdo.feature">
       <category name="enterprisedomain.cdo"/>
    </feature>
-   <feature id="org.enterprisedomain.classmaker.cdo.feature">
+   <feature id="org.enterprisedomain.classmaker.cdo.ui.feature">
       <category name="enterprisedomain.cdo"/>
    </feature>
    <category-def name="enterprisedomain" label="enterpriseDomain">
