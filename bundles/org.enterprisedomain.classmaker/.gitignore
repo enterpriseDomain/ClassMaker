@@ -2,3 +2,4 @@
 /.settings
 /target/
 /.polyglot.build.properties
+/doc/

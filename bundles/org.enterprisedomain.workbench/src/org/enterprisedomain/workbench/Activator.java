@@ -74,7 +74,7 @@ public class Activator extends AbstractUIPlugin {
 	}
 
 	public static void log(Throwable e) {
-		plugin.getLog().log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+		plugin.getLog().log(ClassMakerPlugin.createErrorStatus(e));
 	}
 
 }

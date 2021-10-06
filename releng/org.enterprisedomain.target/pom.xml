@@ -6,12 +6,12 @@
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
 		<artifactId>org.enterprisedomain.root</artifactId>
-		<version>0.8.37-SNAPSHOT</version>
+		<version>0.8.46-SNAPSHOT</version>
 		<relativePath>../../</relativePath>
 	</parent>
 	<groupId>org.enterprisedomain</groupId>
 	<artifactId>org.enterprisedomain.target</artifactId>
-	<version>0.8.37-SNAPSHOT</version>
+	<version>0.8.46-SNAPSHOT</version>
 	<packaging>eclipse-target-definition</packaging>
 	<build>
 		<plugins>
@@ -48,7 +48,7 @@
 							<groupId>org.enterprisedomain</groupId>
 							<artifactId>org.enterprisedomain.target</artifactId>
 					
-		<version>0.8.37-SNAPSHOT</version>
+		<version>0.8.46-SNAPSHOT</version>
 							<file>../releng/org.enterprisedomain.target/org.enterprisedomain.target.target</file>
 							<type>target</type>
 						</artifact>
@@ -71,13 +71,13 @@
 								<groupId>org.enterprisedomain</groupId>
 								<artifactId>org.enterprisedomain.ui.workbench.rcp.feature</artifactId>
 						
-		<version>0.8.37-SNAPSHOT</version>
+		<version>0.8.46-SNAPSHOT</version>
 							</requirement>
 							<requirement>
 								<type>eclipse-plugin</type>
 								<artifactId>org.enterprisedomain.classmaker.osgi.systemextension</artifactId>
 						
-		<version>0.8.37-SNAPSHOT</version>
+		<version>0.8.46-SNAPSHOT</version>
 							</requirement>
 						</extraRequirements>
 					</dependency-resolution>

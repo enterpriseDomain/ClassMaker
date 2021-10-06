@@ -15,6 +15,8 @@
  */
 package org.enterprisedomain.classmaker.impl;
 
+import java.util.Objects;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -144,6 +146,23 @@ public class StageQualifierImpl extends EObjectImpl implements StageQualifier {
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.STAGE_QUALIFIER__STEP, oldStep,
 					step));
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(stage, step);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		StageQualifierImpl other = (StageQualifierImpl) obj;
+		return stage == other.stage && Objects.equals(step, other.step);
 	}
 
 	/**

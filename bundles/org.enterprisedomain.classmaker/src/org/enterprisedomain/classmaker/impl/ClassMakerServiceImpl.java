@@ -113,7 +113,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 		@Override
 		public void notifyChanged(Notification msg) {
 			super.notifyChanged(msg);
-			if (msg.getFeatureID(State.class) == ClassMakerPackage.STATE__PHASE
+			if (msg.getFeature() != null && msg.getFeature().equals(ClassMakerPackage.Literals.ITEM__PHASE)
 					&& msg.getEventType() == Notification.SET) {
 				final URI uri = URI.createFileURI(ResourceUtils.WORKSPACE_RESOURCE_PATH.toString());
 				Resource workspaceResource = WorkspaceImpl.RESOURCE_SET_EDEFAULT.getResource(uri, false);
@@ -573,7 +573,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 		try {
 			executor.execute(future);
 		} catch (Exception e) {
-			throw new CoreException(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 		}
 		return future;
 	}

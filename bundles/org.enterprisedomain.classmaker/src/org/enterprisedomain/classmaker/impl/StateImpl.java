@@ -688,8 +688,7 @@ public class StateImpl extends ItemImpl implements State {
 					String result = commit();
 					return result;
 				} catch (Exception e) {
-					ClassMakerPlugin.getInstance().getLog()
-							.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+					ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 					return null;
 				}
 			else {
@@ -1073,8 +1072,7 @@ public class StateImpl extends ItemImpl implements State {
 		} catch (CoreException e) {
 			ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
 		} catch (Exception e) {
-			ClassMakerPlugin.getInstance().getLog()
-					.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 		}
 
 	}
@@ -1590,8 +1588,7 @@ public class StateImpl extends ItemImpl implements State {
 			try {
 				operator.checkoutOrphan(getProject().getVersion().toString(), getTimestamp());
 			} catch (Exception e) {
-				throw new CoreException(
-						new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 			}
 		} finally {
 			monitor.done();
@@ -1957,7 +1954,9 @@ public class StateImpl extends ItemImpl implements State {
 		switch (getPhase().getValue()) {
 		case Stage.DEFINED_VALUE:
 			saveResource();
+			break;
 		case Stage.MODELED_VALUE:
+			saveResource();
 			generatorJob = EnterpriseDomainJob
 					.getJob(getStrategy().getGenerators().get(getStrategy().getGenerators().size() - 1));
 			generatorJob.schedule();
@@ -1992,7 +1991,7 @@ public class StateImpl extends ItemImpl implements State {
 			e.printStackTrace();
 			monitor.setCanceled(true);
 		} catch (Exception e) {
-			throw new CoreException(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 		}
 
 	}

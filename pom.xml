@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
 		<artifactId>org.enterprisedomain.configuration</artifactId>
-		<version>0.8.37-SNAPSHOT</version>
+		<version>0.8.46-SNAPSHOT</version>
 		<relativePath>./releng/org.enterprisedomain.configuration</relativePath>
 	</parent>
 	<scm>
@@ -121,5 +121,5 @@
 			</build>
 		</profile>
 	</profiles>
-	<version>0.8.37-SNAPSHOT</version>
+	<version>0.8.46-SNAPSHOT</version>
 </project>

@@ -224,7 +224,7 @@ public class CompletionNotificationAdapterImpl extends EObjectImpl implements Co
 				getProject().notifyCompletion();
 			} catch (NullPointerException e) {
 			} catch (Exception e) {
-				error = new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e);
+				error = ClassMakerPlugin.createErrorStatus(e);
 				ClassMakerPlugin.getInstance().getLog().log(getError());
 			}
 		}

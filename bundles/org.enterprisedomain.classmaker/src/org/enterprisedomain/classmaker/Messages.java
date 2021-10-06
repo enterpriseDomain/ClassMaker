@@ -48,7 +48,7 @@ public class Messages extends NLS {
 	public static String SubTaskNameSetProjectVersion;
 	public static String TaskNamePluginExport;
 	public static String TaskNameSetProjectVersion;
-	public static String VersionNotExists;
+	public static String VersionDoesNotExists;
 	public static String WarningEPackageNoClassifiers;
 
 	static {

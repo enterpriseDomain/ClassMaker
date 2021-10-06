@@ -146,7 +146,7 @@ public class PDEPluginExporter extends AbstractExporter {
 				}
 
 			});
-			return new Status(IStatus.INFO, ClassMakerPlugin.PLUGIN_ID, Messages.PDEExportScheduled);
+			return ClassMakerPlugin.createErrorStatus(Messages.PDEExportScheduled);
 		}
 	}
 
@@ -165,7 +165,7 @@ public class PDEPluginExporter extends AbstractExporter {
 					.getSCMRegistry().get(getProject().getName());
 			operator.add("."); //$NON-NLS-1$
 		} catch (Exception e) {
-			throw new CoreException(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 		}
 		refreshLocal(getProject(), IResource.DEPTH_ONE, monitor);
 	}

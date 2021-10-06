@@ -265,7 +265,7 @@ public class ResourceUtils {
 					ResourcesPlugin.getWorkspace().getRoot().getRawLocation().append(targetPath).toFile().toPath(),
 					StandardCopyOption.REPLACE_EXISTING);
 		} catch (IOException e) {
-			throw new CoreException(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 		}
 	}
 
@@ -336,7 +336,7 @@ public class ResourceUtils {
 					writer.close();
 			}
 		} catch (IOException e) {
-			throw new CoreException(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 		}
 	}
 

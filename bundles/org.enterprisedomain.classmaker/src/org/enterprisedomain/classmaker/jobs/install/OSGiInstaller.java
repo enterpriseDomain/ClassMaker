@@ -133,9 +133,9 @@ public class OSGiInstaller extends ContainerJob {
 			if (getContributionState().isEditor())
 				result = addStatus(installBundle(existingBundle, 2, bundleContext), result);
 		} catch (IllegalArgumentException e) {
-			throw new CoreException(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 		} catch (SecurityException e) {
-			throw new CoreException(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 		} catch (InterruptedException e) {
 			monitor.setCanceled(true);
 			return Status.CANCEL_STATUS;

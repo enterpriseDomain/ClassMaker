@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" activate="initialize" deactivate="dispose" enabled="true" immediate="true" name="org.enterprisedomain.classmaker.service">
+<scr:component
+	xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" activate="initialize"
+	deactivate="dispose" enabled="true" immediate="true"
+	name="org.enterprisedomain.classmaker.service">
 	<implementation
 		class="org.enterprisedomain.classmaker.impl.ClassMakerServiceImpl" />
 	<service>
-		<provide interface="org.enterprisedomain.classmaker.ClassMakerService" />
+		<provide
+			interface="org.enterprisedomain.classmaker.ClassMakerService" />
 	</service>
 </scr:component>

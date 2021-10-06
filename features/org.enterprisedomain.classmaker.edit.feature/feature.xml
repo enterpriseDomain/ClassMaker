@@ -2,7 +2,7 @@
 <feature
       id="org.enterprisedomain.classmaker.edit.feature"
       label="enterpriseDomain ClassMaker Edit Feature"
-      version="0.8.37.qualifier">
+      version="0.8.46.qualifier">
 
    <description url="https://www.enterprisedomain.org/">
       enterpriseDomain ClassMaker Edit Feature

@@ -394,18 +394,15 @@ public class RevisionImpl extends ItemImpl implements Revision {
 					getState().commit();
 					git.branchCreate().setForce(true).setName(getVersion().toString()).call();
 				} catch (Exception e1) {
-					throw new CoreException(
-							new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+					throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 				}
 			} catch (Exception e) {
-				throw new CoreException(
-						new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 			} finally {
 				try {
 					operator.ungetRepositorySCM();
 				} catch (Exception e) {
-					throw new CoreException(
-							new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+					throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 				}
 			}
 		}

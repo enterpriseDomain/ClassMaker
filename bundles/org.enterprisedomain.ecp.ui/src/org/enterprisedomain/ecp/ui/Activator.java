@@ -41,7 +41,7 @@ public class Activator extends Plugin implements BundleActivator {
 	}
 
 	public static void log(Throwable e) {
-		instance.getLog().log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+		instance.getLog().log(ClassMakerPlugin.createErrorStatus(e));
 	}
 
 }
