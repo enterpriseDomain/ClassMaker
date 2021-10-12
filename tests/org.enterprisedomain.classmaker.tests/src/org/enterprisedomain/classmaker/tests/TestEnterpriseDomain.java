@@ -161,7 +161,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		createAndTestAPI(getProgressMonitor());
 		Bundle bundle = FrameworkUtil.getBundle(ClassMakerService.class);
 		bundle.stop();
-		bundle.start();
+		bundle.start(Bundle.START_TRANSIENT);
 		Contribution contribution = ClassMakerPlugin.getClassMaker().getWorkspace().getContribution(packageName);
 		contribution.build(getProgressMonitor());
 		assertEquals(packageName,
@@ -691,16 +691,8 @@ public class TestEnterpriseDomain extends AbstractTest {
 		eC.getEStructuralFeatures().add(at);
 		eP.getEClassifiers().add(eC);
 		final Contribution c = service.getWorkspace().createContribution(eP, getProgressMonitor());
-		Customizer customizer = new CustomizerImpl() {
+		Customizer customizer = new GenModelCustomizer();
 
-			@Override
-			public Object customize(EList<Object> args) {
-				GenModel genModel = ((GenModel) args.get(1));
-				genModel.setSuppressInterfaces(false);
-				return null;
-			}
-
-		};
 		c.getCustomizers().put(ClassMakerService.Stages
 				.lookup(ClassMakerService.Stages.ID_PREFIX + "project.generation.genmodel.setup"), customizer);
 
@@ -740,6 +732,20 @@ public class TestEnterpriseDomain extends AbstractTest {
 		c.removeCompletionListener(l);
 		cleanup();
 	}
+
+	private class GenModelCustomizer extends CustomizerImpl {
+
+		public GenModelCustomizer() {
+		}
+
+		@Override
+		public Object customize(EList<Object> args) {
+			GenModel genModel = ((GenModel) args.get(1));
+			genModel.setSuppressInterfaces(false);
+			return null;
+		}
+
+	};
 
 	@Test
 	public void package_() throws OperationCanceledException, InterruptedException, ExecutionException, CoreException {
