@@ -1014,10 +1014,15 @@ public class StateImpl extends ItemImpl implements State {
 				Thread.yield();
 			}
 			getProject().removeCompletionListener(completionListener);
-			add("."); //$NON-NLS-1$
-			String result = commit(); // $NON-NLS-1$
-			monitor.done();
-			return result;
+			String result = null;
+			try {
+				add("."); //$NON-NLS-1$
+				result = commit(); // $NON-NLS-1$
+			} catch (FileNotFoundException e) {
+			} finally {
+				monitor.done();
+				return result;
+			}
 		}
 	}
 
