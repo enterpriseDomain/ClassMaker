@@ -47,7 +47,7 @@ There is more [code](/tests/org.enterprisedomain.classmaker.tests/src/org/enterp
 Download
 ---------
  
-[ ![Download](https://github.com/enterpriseDomain/ClassMaker/releases/tag/0.8.28-SNASHOT)
+[Download latest release](https://github.com/enterpriseDomain/ClassMaker/releases/latest).
 
 Feedback
 ---------
