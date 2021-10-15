@@ -109,8 +109,21 @@ public abstract class AbstractTest {
 		try {
 			service.delete(getPackageName(), getProgressMonitor());
 			Project project = service.getWorkspace().getProject(service.computeProjectName(getPackageName()));
-			if (project != null)
-				project.make(getProgressMonitor());
+			if (project != null) {
+				if (project.getState().isEdit()) {
+					Project editProject = service.getWorkspace()
+							.getProject(service.computeProjectName(getPackageName()) + ".edit");
+					if (editProject != null)
+						editProject.delete(getProgressMonitor());
+				}
+				if (project.getState().isEditor()) {
+					Project editorProject = service.getWorkspace()
+							.getProject(service.computeProjectName(getPackageName()) + ".editor");
+					if (editorProject != null)
+						editorProject.delete(getProgressMonitor());
+				}
+				project.delete(getProgressMonitor());
+			}
 		} catch (CoreException e) {
 			e.printStackTrace();
 			fail(e.getLocalizedMessage());

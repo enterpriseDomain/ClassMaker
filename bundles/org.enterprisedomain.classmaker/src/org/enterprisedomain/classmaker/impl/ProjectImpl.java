@@ -1527,7 +1527,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 					revision.checkout(time);
 			}
 		} else
-			throw new IllegalStateException(NLS.bind(Messages.VersionNotExists, version));
+			throw new IllegalStateException(NLS.bind(Messages.VersionDoesNotExists, version));
 	}
 
 	/**
@@ -1585,7 +1585,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	@Override
 	public void initAdapters(Revision revision) {
 		revision.addAdapters(ECollections.singletonEList(stateModelAdapter));
-		if (isStateSet())
+		if (isStateSet() && getState().getResource() != null)
 			getState().getResource().eAdapters().add(new AdapterImpl() {
 
 				@Override
@@ -1739,8 +1739,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 				try {
 					resource.load(Collections.emptyMap());
 				} catch (IOException e) {
-					ClassMakerPlugin.getInstance().getLog()
-							.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+					ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 				}
 				@SuppressWarnings("unchecked")
 				SCMOperator<Git> operator = (SCMOperator<Git>) getWorkspace().getSCMRegistry().get(getProjectName());
@@ -1827,8 +1826,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			try {
 				resource.save(Collections.emptyMap());
 			} catch (IOException e) {
-				ClassMakerPlugin.getInstance().getLog()
-						.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 			}
 		onModelResourceCreate(resource);
 	}

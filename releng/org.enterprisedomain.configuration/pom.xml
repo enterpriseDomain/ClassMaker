@@ -5,9 +5,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.enterprisedomain</groupId>
 	<artifactId>org.enterprisedomain.configuration</artifactId>
-	<version>0.8.37-SNAPSHOT</version>
+	<version>0.8.46-SNAPSHOT</version>
 	<properties>
-		<tycho.version>2.1.0</tycho.version>
+		<tycho.version>2.5.0</tycho.version>
 		<tycho.extras.version>${tycho.version}</tycho.extras.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<org.osgi.framework.system.capabilities>
@@ -17,23 +17,23 @@
 	<repositories>
 		<repository>
 			<id>edapt-p2-repo</id>
-			<url>http://download.eclipse.org/edapt/releases/12x</url>
+			<url>http://download.eclipse.org/edapt/releases/13x</url>
 			<layout>p2</layout>
 		</repository>
 		<repository>
-			<id>2020-12</id>
+			<id>eclipse-latest</id>
 			<layout>p2</layout>
-			<url>http://download.eclipse.org/releases/2020-12</url>
+			<url>http://download.eclipse.org/releases/latest</url>
 		</repository>
 		<repository>
 			<id>ecp</id>
 			<layout>p2</layout>
-			<url>http://download.eclipse.org/ecp/releases/releases_target_125</url>
+			<url>http://download.eclipse.org/ecp/releases/releases_target_126</url>
 		</repository>
 		<repository>
 			<id>eclipse</id>
 			<layout>p2</layout>
-			<url>https://download.eclipse.org/eclipse/updates/4.18</url>
+			<url>https://download.eclipse.org/eclipse/updates/latest</url>
 		</repository>		
 	</repositories>
 	<pluginRepositories>
@@ -146,7 +146,7 @@
 						<artifact>
 							<groupId>org.enterprisedomain</groupId>
 							<artifactId>org.enterprisedomain.target</artifactId>
-							<version>0.8.37-SNAPSHOT</version>
+							<version>0.8.46-SNAPSHOT</version>
 						</artifact>
 					</target>
 					<dependency-resolution>

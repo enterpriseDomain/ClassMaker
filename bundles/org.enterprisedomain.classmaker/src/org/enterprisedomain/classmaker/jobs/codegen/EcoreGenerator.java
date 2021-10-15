@@ -267,8 +267,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 								.getProject(getProject().getName() + ".editor"));
 
 				} catch (IllegalStateException e) {
-					throw new CoreException(
-							new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+					throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 				}
 				Set<IClasspathEntry> entries = new HashSet<IClasspathEntry>();
 				Set<IClasspathEntry> editEntries = new HashSet<IClasspathEntry>();

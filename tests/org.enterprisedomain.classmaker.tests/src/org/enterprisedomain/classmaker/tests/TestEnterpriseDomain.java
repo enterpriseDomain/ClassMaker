@@ -71,7 +71,9 @@ import org.enterprisedomain.classmaker.impl.CompletionListenerImpl;
 import org.enterprisedomain.classmaker.impl.CustomizerImpl;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
 import org.junit.jupiter.api.Test;
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.BundleException;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceReference;
 import org.osgi.framework.Version;
@@ -150,6 +152,23 @@ public class TestEnterpriseDomain extends AbstractTest {
 	}
 
 	@Test
+	public void restart() throws BundleException, CoreException, InterruptedException {
+		String packageName = "start";
+		setPackageName(packageName);
+		setClassName("Type");
+		setAttributeName("test");
+		setAttributeType(EcorePackage.Literals.EBOOLEAN);
+		createAndTestAPI(getProgressMonitor());
+		Bundle bundle = FrameworkUtil.getBundle(ClassMakerService.class);
+		bundle.stop();
+		bundle.start(Bundle.START_TRANSIENT);
+		Contribution contribution = ClassMakerPlugin.getClassMaker().getWorkspace().getContribution(packageName);
+		contribution.build(getProgressMonitor());
+		assertEquals(packageName,
+				((EPackage) ((Resource) contribution.getChildren().get(0)).getContents().get(0)).getName());
+	}
+
+	@Test
 	public void checks() throws CoreException {
 		EcoreFactory ecoreFactory = EcoreFactory.eINSTANCE;
 		final EPackage dynamicEPackage = createEPackage("fieldland", "1.0");
@@ -194,6 +213,9 @@ public class TestEnterpriseDomain extends AbstractTest {
 		assertFalse(service.checkEquals(second, fourth));
 		assertFalse(service.checkEquals(third, fourth));
 		assertTrue(service.checkEquals(first, fourth));
+		Project project = service.getWorkspace().getProject(service.computeProjectName(getPackageName()));
+		if (project != null)
+			project.delete(getProgressMonitor());
 	}
 
 	@Test
@@ -204,6 +226,9 @@ public class TestEnterpriseDomain extends AbstractTest {
 		test(ePackage.get(), DEFAULT_ATTR_NAME, true);
 		ePackage = updateAndSaveEPackage(ePackage, executor, getProgressMonitor());
 		testAnother(ePackage.get(), "b", true);
+		Project project = service.getWorkspace().getProject(service.computeProjectName(getPackageName()));
+		if (project != null)
+			project.delete(getProgressMonitor());
 	}
 
 	@Test
@@ -440,7 +465,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 	}
 
 	@Test
-	public void editor() {
+	public void editor() throws CoreException {
 		setPackageName("test");
 		setClassName("Edited");
 		setAttributeName("t");
@@ -457,6 +482,22 @@ public class TestEnterpriseDomain extends AbstractTest {
 			test(p, attributeName, "test");
 		} catch (CoreException ex) {
 			fail(ex.getLocalizedMessage());
+		}
+		Project project = service.getWorkspace().getProject(service.computeProjectName(getPackageName()));
+		if (project != null) {
+			if (project.getState().isEdit()) {
+				Project editProject = service.getWorkspace()
+						.getProject(service.computeProjectName(getPackageName()) + ".edit");
+				if (editProject != null)
+					editProject.delete(getProgressMonitor());
+			}
+			if (project.getState().isEditor()) {
+				Project editorProject = service.getWorkspace()
+						.getProject(service.computeProjectName(getPackageName()) + ".editor");
+				if (editorProject != null)
+					editorProject.delete(getProgressMonitor());
+			}
+			project.delete(getProgressMonitor());
 		}
 	}
 
@@ -650,16 +691,8 @@ public class TestEnterpriseDomain extends AbstractTest {
 		eC.getEStructuralFeatures().add(at);
 		eP.getEClassifiers().add(eC);
 		final Contribution c = service.getWorkspace().createContribution(eP, getProgressMonitor());
-		Customizer customizer = new CustomizerImpl() {
+		Customizer customizer = new GenModelCustomizer();
 
-			@Override
-			public Object customize(EList<Object> args) {
-				GenModel genModel = ((GenModel) args.get(1));
-				genModel.setSuppressInterfaces(false);
-				return null;
-			}
-
-		};
 		c.getCustomizers().put(ClassMakerService.Stages
 				.lookup(ClassMakerService.Stages.ID_PREFIX + "project.generation.genmodel.setup"), customizer);
 
@@ -699,6 +732,20 @@ public class TestEnterpriseDomain extends AbstractTest {
 		c.removeCompletionListener(l);
 		cleanup();
 	}
+
+	private class GenModelCustomizer extends CustomizerImpl {
+
+		public GenModelCustomizer() {
+		}
+
+		@Override
+		public Object customize(EList<Object> args) {
+			GenModel genModel = ((GenModel) args.get(1));
+			genModel.setSuppressInterfaces(false);
+			return null;
+		}
+
+	};
 
 	@Test
 	public void package_() throws OperationCanceledException, InterruptedException, ExecutionException, CoreException {

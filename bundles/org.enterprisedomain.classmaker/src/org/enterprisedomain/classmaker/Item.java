@@ -153,7 +153,7 @@ public interface Item extends EObject {
 	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc --> <!-- begin-model-doc --> Subject <em>ModelPair</em> for
-	 * <em><b>Item</b></em> {@link ClassMakerPlant#make() making}. <!--
+	 * <em><b>Item</b></em> {@link ClassMakerService#make() making}. <!--
 	 * end-model-doc -->
 	 * 
 	 * @return the value of the '<em>Domain Model</em>' containment reference.

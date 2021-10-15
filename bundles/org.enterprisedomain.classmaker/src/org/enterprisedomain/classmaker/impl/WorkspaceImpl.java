@@ -348,6 +348,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 							XMLResource.OPTION_PROCESS_DANGLING_HREF_RECORD);
 					options.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_FILE_BUFFER);
 					try {
+						if (msg.getNewValue() == null)
+							return;
 						if (workspaceResource.getContents().isEmpty())
 							workspaceResource.getContents().add(EcoreUtil.copy((EObject) msg.getOldValue()));
 						else
@@ -355,15 +357,13 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 						try {
 							workspaceResource.save(options);
 						} catch (IOException e) {
-							ClassMakerPlugin.getInstance().getLog().log(
-									new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+							ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 						}
 					} catch (ClassCastException e) {
 						try {
 							workspaceResource.save(options);
 						} catch (IOException e1) {
-							ClassMakerPlugin.getInstance().getLog().log(
-									new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e1));
+							ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 						}
 					}
 				}
@@ -624,7 +624,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		case Stage.EXPORTED_VALUE:
 		case Stage.INSTALLED_VALUE:
 			for (Contribution c : getContributions())
-				if (ModelUtil.eObjectsAreEqual(eObject, c.getDomainModel().getDynamic(), !searchOptimistic))
+				if (c.getDomainModel() != null
+						&& ModelUtil.eObjectsAreEqual(eObject, c.getDomainModel().getDynamic(), !searchOptimistic))
 					return c;
 			break;
 		case Stage.LOADED_VALUE:
@@ -757,15 +758,32 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * @generated NOT
 	 */
 	public Project getProject(Resource resource) {
-		URIConverter uriConverter = resource.getResourceSet().getURIConverter();
+		ResourceSet resourceSet = resource.getResourceSet();
+		URIConverter uriConverter = null;
+		if (resourceSet != null)
+			uriConverter = resourceSet.getURIConverter();
+		else {
+			resourceSet = getResourceSet();
+			uriConverter = resourceSet.getURIConverter();
+		}
 		for (Project project : getProjects()) {
-			if (!project.getChildren().isEmpty() && project.getChildren().get(0) instanceof Resource) {
+			if (uriConverter != null && !project.getChildren().isEmpty()
+					&& project.getChildren().get(0) instanceof Resource) {
 				if (uriConverter.normalize(resource.getURI())
 						.equals(uriConverter.normalize(((Resource) project.getChildren().get(0)).getURI())))
 					return project;
-			} else if (!project.getChildren().isEmpty() && project.getChildren().get(0) instanceof EObject) {
+			} else if (uriConverter != null && !project.getChildren().isEmpty()
+					&& project.getChildren().get(0) instanceof EObject) {
 				if (uriConverter.normalize(resource.getURI())
 						.equals(uriConverter.normalize(((EObject) project.getChildren().get(0)).eResource().getURI())))
+					return project;
+			} else if (uriConverter == null && !project.getChildren().isEmpty()
+					&& project.getChildren().get(0) instanceof Resource) {
+				if (resource.getURI().equals(((Resource) project.getChildren().get(0)).getURI()))
+					return project;
+			} else if (uriConverter == null && !project.getChildren().isEmpty()
+					&& project.getChildren().get(0) instanceof EObject) {
+				if (resource.getURI().equals(((EObject) project.getChildren().get(0)).eResource().getURI()))
 					return project;
 			}
 		}

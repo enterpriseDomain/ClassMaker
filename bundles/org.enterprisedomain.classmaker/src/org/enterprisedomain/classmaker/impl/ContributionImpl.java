@@ -32,6 +32,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.ECollections;
@@ -285,7 +286,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	public String initialize(boolean commit) {
 		@SuppressWarnings("unchecked")
 		SCMOperator<Git> operator = (SCMOperator<Git>) getWorkspace().getSCMRegistry().get(getProjectName());
-		setName(getModelName() != null ? getModelName() : getProjectName());
+		setName(getModelName() != null ? getModelName() : CodeGenUtil.capName(getProjectName()));
 		try {
 			Git git = operator.getRepositorySCM();
 			// if (git == null)
@@ -336,15 +337,13 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 			addResourceChangeListener(getResourceReloadListener());
 			return commitId;
 		} catch (Exception e) {
-			ClassMakerPlugin.getInstance().getLog()
-					.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 			return null;
 		} finally {
 			try {
 				operator.ungetRepositorySCM();
 			} catch (Exception e) {
-				ClassMakerPlugin.getInstance().getLog()
-						.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 			}
 		}
 	}

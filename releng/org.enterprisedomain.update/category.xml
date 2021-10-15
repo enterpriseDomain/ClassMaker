@@ -3,13 +3,13 @@
    <description name="enterpriseDomain" url="https://dl.bintray.com/enterprisedomain/ClassMaker">
       enterpriseDomain ClassMaker
    </description>
-   <feature url="features/org.enterprisedomain.classmaker.osgi.resolverhooks.feature_0.8.1.qualifier.jar" id="org.enterprisedomain.classmaker.osgi.resolverhooks.feature" version="0.8.37.qualifier">
+   <feature url="features/org.enterprisedomain.classmaker.osgi.resolverhooks.feature_0.8.46.qualifier.jar" id="org.enterprisedomain.classmaker.osgi.resolverhooks.feature" version="0.8.46.qualifier">
       <category name="enterprisedomain"/>
    </feature>
-   <feature url="features/org.enterprisedomain.ui.workbench.rcp.feature_0.8.1.qualifier.jar" id="org.enterprisedomain.ui.workbench.rcp.feature" version="0.8.37.qualifier">
+   <feature url="features/org.enterprisedomain.ui.workbench.rcp.feature_0.8.46.qualifier.jar" id="org.enterprisedomain.ui.workbench.rcp.feature" version="0.8.46.qualifier">
       <category name="enterprisedomain.rcp"/>
    </feature>
-   <feature url="features/org.enterprisedomain.classmaker.feature_0.8.1.qualifier.jar" id="org.enterprisedomain.classmaker.feature" version="0.8.37.qualifier">
+   <feature url="features/org.enterprisedomain.classmaker.feature_0.8.46.qualifier.jar" id="org.enterprisedomain.classmaker.feature" version="0.8.46.qualifier">
       <category name="enterprisedomain"/>
    </feature>
    <feature id="org.enterprisedomain.classmaker.cdo.feature">
@@ -26,7 +26,7 @@
    <category-def name="enterprisedomain.rcp" label="enterpriseDomain RCP"/>
    <category-def name="enterprisedomain.cdo" label="enterpriseDomain CDO Support"/>
    <repository-reference location="http://download.eclipse.org/releases/oxygen" enabled="true" />
-   <repository-reference location="http://download.eclipse.org/eclipse/updates/4.7" enabled="true" />
+   <repository-reference location="http://download.eclipse.org/eclipse/updates/latest" enabled="true" />
    <repository-reference location="http://download.eclipse.org/ecp/releases/releases_target_117/" enabled="true" />
    <repository-reference location="http://download.eclipse.org/egit/updates/" enabled="true" />
    <repository-reference location="http://download.eclipse.org/rt/ecf/3.14.0/site.p2" enabled="true" />

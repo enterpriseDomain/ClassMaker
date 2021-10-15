@@ -483,7 +483,7 @@ public interface State extends Item, ISchedulingRule {
 	 * should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc --> <!-- begin-model-doc --> Whether
-	 * {@link ClassMakerPlant#make() making}is happening. <!-- end-model-doc -->
+	 * {@link ClassMakerService#make() making}is happening. <!-- end-model-doc -->
 	 * 
 	 * @return the value of the '<em>Making</em>' attribute.
 	 * @see #setMaking(boolean)

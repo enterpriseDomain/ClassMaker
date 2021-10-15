@@ -2,7 +2,7 @@
 <feature
       id="org.enterprisedomain.classmaker.feature"
       label="Enterprise Domain ClassMaker Feature"
-      version="0.8.37.qualifier"
+      version="0.8.46.qualifier"
       provider-name="Kyrill Zotkin">
 
    <copyright>
@@ -147,7 +147,7 @@ limitations under the License.
       <import plugin="org.apache.ant" version="1.10.9" match="compatible"/>
       <import plugin="javax.annotation" version="1.3.5" match="compatible"/>
       <import plugin="org.eclipse.osgi" version="3.16.200" match="compatible"/>
-      <import plugin="org.enterprisedomain.classmaker" version="0.8.37" match="greaterOrEqual"/>
+      <import plugin="org.enterprisedomain.classmaker" version="0.8.46" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.cdo" version="4.13.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.cdo.edit" version="4.5.4" match="greaterOrEqual"/>
    </requires>
