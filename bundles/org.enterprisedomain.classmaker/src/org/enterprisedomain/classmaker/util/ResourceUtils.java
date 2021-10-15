@@ -163,7 +163,22 @@ public class ResourceUtils {
 	public static void addProjectNature(IProject project, String natureId) throws CoreException {
 		IProjectDescription description = project.getDescription();
 		description.setNatureIds(addElement(description.getNatureIds(), natureId));
-		project.setDescription(description, ClassMakerPlugin.getProgressMonitor());
+		IProgressMonitor monitor = ClassMakerPlugin.getProgressMonitor();
+		SubMonitor pm = null;
+		SubMonitor m = null;
+		try {
+			pm = SubMonitor.convert(monitor);
+			pm.setTaskName("Add nature");
+			pm.subTask("Adding project nature...");
+			m = pm.newChild(1, SubMonitor.SUPPRESS_ISCANCELED);
+			project.setDescription(description, m);
+		} finally {
+			if (m != null)
+				m.done();
+			if (pm != null)
+				pm.done();
+			monitor.done();
+		}
 	}
 
 	public static void removeProjectNature(IProject project, String natureId) throws CoreException {
