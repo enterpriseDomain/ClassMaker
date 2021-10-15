@@ -1995,6 +1995,7 @@ public class StateImpl extends ItemImpl implements State {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 			monitor.setCanceled(true);
+		} catch (FileNotFoundException e) {
 		} catch (Exception e) {
 			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 		}
