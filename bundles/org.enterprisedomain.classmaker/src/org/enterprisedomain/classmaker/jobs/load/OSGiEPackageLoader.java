@@ -213,7 +213,6 @@ public class OSGiEPackageLoader extends ContainerJob {
 						try {
 							packageClass = osgiBundle.loadClass(packageClassName);
 						} catch (Exception e) {
-							e.printStackTrace();
 							setException(e);
 						}
 
@@ -239,7 +238,6 @@ public class OSGiEPackageLoader extends ContainerJob {
 							}
 						}
 					} catch (Exception e) {
-						e.printStackTrace();
 						setException(e);
 						throw new InvocationTargetException(e);
 					} finally {
@@ -264,13 +262,11 @@ public class OSGiEPackageLoader extends ContainerJob {
 					try {
 						pluginClass = osgiBundle.loadClass(pluginClassName);
 					} catch (Exception e) {
-						e.printStackTrace();
 						setException(e);
 					}
 					try {
 						pluginClass.getField("INSTANCE").get(null);
 					} catch (Exception e) {
-						e.printStackTrace();
 						setException(e);
 						throw new InvocationTargetException(e);
 					} finally {
@@ -296,13 +292,11 @@ public class OSGiEPackageLoader extends ContainerJob {
 					try {
 						pluginClass1 = osgiBundle.loadClass(pluginClassName1);
 					} catch (Exception e) {
-						e.printStackTrace();
 						setException(e);
 					}
 					try {
 						pluginClass1.getField("INSTANCE").get(null);
 					} catch (Exception e) {
-						e.printStackTrace();
 						setException(e);
 						throw new InvocationTargetException(e);
 					} finally {
