@@ -86,7 +86,7 @@ public interface Workspace extends EObject, ISchedulingRule {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Resource Set</em>' attribute.
-	 * @see org.genericdomain.EnterpriseDomainPackage#getWorkspace_ResourceSet()
+	 * @see org.enterprisedomain.EnterpriseDomainPackage#getWorkspace_ResourceSet()
 	 * @model transient="true" changeable="false"
 	 * @generated
 	 */

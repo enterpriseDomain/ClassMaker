@@ -104,7 +104,7 @@ location "https://download.eclipse.org/tools/orbit/downloads/drops/R202102232326
 	net.i2p.crypto.eddsa.source
 }
 
-location "http://download.eclipse.org/edapt/releases/13x" {
+location "http://download.eclipse.org/edapt/releases/14x" {
 	org.eclipse.emf.edapt.runtime.feature.feature.group
 	org.eclipse.emf.edapt.runtime.feature.source.feature.group
 } //location "http://download.eclipse.org/nebula/releases/1.0.0" {

@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.EObject;
  * <em>Language</em>}</li>
  * </ul>
  *
- * @see org.genericdomain.EnterpriseDomainPackage#getLocalizable()
+ * @see org.enterprisedomain.EnterpriseDomainPackage#getLocalizable()
  * @model interface="true" abstract="true"
  * @generated
  */
@@ -45,7 +45,7 @@ public interface Localizable extends EObject {
 	 * 
 	 * @return the value of the '<em>Language</em>' attribute.
 	 * @see #setLanguage(String)
-	 * @see org.genericdomain.EnterpriseDomainPackage#getLocalizable_Language()
+	 * @see org.enterprisedomain.EnterpriseDomainPackage#getLocalizable_Language()
 	 * @model volatile="true"
 	 * @generated
 	 */

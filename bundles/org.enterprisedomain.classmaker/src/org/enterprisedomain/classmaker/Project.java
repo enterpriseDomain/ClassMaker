@@ -143,7 +143,7 @@ public interface Project extends ISchedulingRule, Item {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Children</em>' reference list.
-	 * @see org.genericdomain.EnterpriseDomainPackage#getProject_Children()
+	 * @see org.enterprisedomain.EnterpriseDomainPackage#getProject_Children()
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
@@ -159,7 +159,7 @@ public interface Project extends ISchedulingRule, Item {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Dirty</em>' attribute.
-	 * @see org.genericdomain.EnterpriseDomainPackage#getProject_Dirty()
+	 * @see org.enterprisedomain.EnterpriseDomainPackage#getProject_Dirty()
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */

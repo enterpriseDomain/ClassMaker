@@ -34,7 +34,7 @@
 			<id>eclipse</id>
 			<layout>p2</layout>
 			<url>https://download.eclipse.org/eclipse/updates/latest</url>
-		</repository>		
+		</repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
@@ -141,6 +141,26 @@
 				<artifactId>target-platform-configuration</artifactId>
 				<version>${tycho.version}</version>
 				<configuration>
+					<lifecycleMappingMetadata>
+						<pluginExecutions>
+							<pluginExecution>
+								<pluginExecutionFilter>
+									<groupId>org.enterprisedomain</groupId>
+									<artifactId>org.enterprisedomain.target</artifactId>
+									<versionRange>[0.8.0,)</versionRange>
+									<phase>initialize</phase>
+									<goals>
+										<goal>default-target-platform</goal>
+									</goals>
+								</pluginExecutionFilter>
+								<action>
+									<execute>
+										<runOnIncremental>false</runOnIncremental>
+									</execute>
+								</action>
+							</pluginExecution>
+						</pluginExecutions>
+					</lifecycleMappingMetadata>
 					<pomDependencies>consider</pomDependencies>
 					<target>
 						<artifact>

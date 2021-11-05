@@ -196,7 +196,7 @@ public interface State extends Item, ISchedulingRule {
 	 * 
 	 * @return the value of the '<em>Timestamp</em>' attribute.
 	 * @see #setTimestamp(Date)
-	 * @see org.genericdomain.EnterpriseDomainPackage#getState_Timestamp()
+	 * @see org.enterprisedomain.EnterpriseDomainPackage#getState_Timestamp()
 	 * @model id="true"
 	 * @generated
 	 */
