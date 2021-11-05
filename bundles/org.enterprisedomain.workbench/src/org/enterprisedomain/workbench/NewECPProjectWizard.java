@@ -22,6 +22,7 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
+import org.enterprisedomain.ecp.ui.EnterpriseDomainUIProvider;
 
 @SuppressWarnings("restriction")
 public class NewECPProjectWizard extends Wizard implements INewWizard {
@@ -46,6 +47,8 @@ public class NewECPProjectWizard extends Wizard implements INewWizard {
 				if (provider.hasCreateProjectWithoutRepositorySupport())
 					providers.add(provider);
 			createProjectComposite = ECPCompositeFactory.getCreateProjectComposite(providers);
+			System.getProperties().setProperty(EnterpriseDomainUIProvider.PROP_DISABLE_CONTRIBUTION,
+					Boolean.toString(false));
 			backingWizard.setCompositeProvider(createProjectComposite);
 			backingWizard.setContainer(getContainer());
 		}

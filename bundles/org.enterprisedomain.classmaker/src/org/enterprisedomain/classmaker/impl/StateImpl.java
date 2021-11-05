@@ -61,6 +61,7 @@ import org.eclipse.emf.ecore.xmi.PackageNotFoundException;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.LogCommand;
 import org.eclipse.jgit.api.errors.CheckoutConflictException;
+import org.eclipse.jgit.api.errors.JGitInternalException;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.m2m.internal.qvt.oml.cst.parser.NLS;
@@ -1996,6 +1997,7 @@ public class StateImpl extends ItemImpl implements State {
 			e.printStackTrace();
 			monitor.setCanceled(true);
 		} catch (FileNotFoundException e) {
+		} catch (JGitInternalException e) {
 		} catch (Exception e) {
 			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 		}

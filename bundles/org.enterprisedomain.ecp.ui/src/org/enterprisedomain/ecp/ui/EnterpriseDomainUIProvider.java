@@ -95,6 +95,8 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider implements IRe
 	private static final ILabelProvider ENTERPRISE_DOMAIN_LABEL_PROVIDER = new DecoratingLabelProvider(
 			new AdapterFactoryLabelProvider(ENTERPRISE_DOMAIN_ITEM_PROVIDER_ADAPTER_FACTORY), new StageDecorator());
 
+	public static final String PROP_DISABLE_CONTRIBUTION = "disableContribution";
+
 	public class LabelProviderListener implements ILabelProviderListener {
 
 		@Override
@@ -250,6 +252,8 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider implements IRe
 			}
 
 		});
+		if (Boolean.getBoolean(PROP_DISABLE_CONTRIBUTION))
+			isContributionButton.setEnabled(false);
 
 		ClassMakerPlugin.setPreviousProgressProvider(ProgressManager.getInstance());
 		observer.compositeChangedState(control, true, projectProperties);

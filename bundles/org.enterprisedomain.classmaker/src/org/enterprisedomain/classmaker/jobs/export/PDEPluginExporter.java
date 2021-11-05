@@ -146,7 +146,7 @@ public class PDEPluginExporter extends AbstractExporter {
 				}
 
 			});
-			return ClassMakerPlugin.createErrorStatus(Messages.PDEExportScheduled);
+			return ClassMakerPlugin.createInfoStatus(Messages.PDEExportScheduled);
 		}
 	}
 
