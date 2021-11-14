@@ -244,7 +244,8 @@ public class StateImpl extends ItemImpl implements State {
 					makingLock.notifyAll();
 				}
 				EPackage ePackage = (EPackage) getDomainModel().getGenerated();
-				Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);
+				if (ePackage != null)
+					Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);
 			}
 		}
 
