@@ -9,7 +9,7 @@ public class ObjectPropertyTester extends PropertyTester {
 
 	@Override
 	public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
-		if (property == "canDelete")
+		if (property.equals("canDelete"))
 			return true;
 		return false;
 	}

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <units size='2'>
-  <unit id='org.enterprisedomain.classmaker.cdo' version='0.8.46.202111050801' generation='2'>
-    <update id='org.enterprisedomain.classmaker.cdo' range='[0.0.0,0.8.46.202111050801)' severity='0'/>
+  <unit id='org.enterprisedomain.classmaker.cdo' version='0.8.46.202111140725' generation='2'>
+    <update id='org.enterprisedomain.classmaker.cdo' range='[0.0.0,0.8.46.202111140725)' severity='0'/>
     <properties size='5'>
       <property name='org.eclipse.equinox.p2.name' value='ClassMaker CDO Support'/>
       <property name='org.eclipse.equinox.p2.provider' value='Kyrill Zotkin'/>
@@ -10,9 +10,9 @@
       <property name='maven-version' value='0.8.46-SNAPSHOT'/>
     </properties>
     <provides size='4'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='org.enterprisedomain.classmaker.cdo' version='0.8.46.202111050801'/>
-      <provided namespace='osgi.bundle' name='org.enterprisedomain.classmaker.cdo' version='0.8.46.202111050801'/>
-      <provided namespace='osgi.identity' name='org.enterprisedomain.classmaker.cdo' version='0.8.46.202111050801'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='org.enterprisedomain.classmaker.cdo' version='0.8.46.202111140725'/>
+      <provided namespace='osgi.bundle' name='org.enterprisedomain.classmaker.cdo' version='0.8.46.202111140725'/>
+      <provided namespace='osgi.identity' name='org.enterprisedomain.classmaker.cdo' version='0.8.46.202111140725'>
         <properties size='1'>
           <property name='type' value='osgi.bundle'/>
         </properties>
@@ -31,19 +31,19 @@
       </requiredProperties>
     </requires>
     <artifacts size='1'>
-      <artifact classifier='osgi.bundle' id='org.enterprisedomain.classmaker.cdo' version='0.8.46.202111050801'/>
+      <artifact classifier='osgi.bundle' id='org.enterprisedomain.classmaker.cdo' version='0.8.46.202111140725'/>
     </artifacts>
     <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
     <touchpointData size='1'>
       <instructions size='1'>
         <instruction key='manifest'>
-          Bundle-SymbolicName: org.enterprisedomain.classmaker.cdo;singleton:=true&#xA;Bundle-Version: 0.8.46.202111050801&#xA;
+          Bundle-SymbolicName: org.enterprisedomain.classmaker.cdo;singleton:=true&#xA;Bundle-Version: 0.8.46.202111140725&#xA;
         </instruction>
       </instructions>
     </touchpointData>
   </unit>
-  <unit id='org.enterprisedomain.classmaker.cdo.source' version='0.8.46.202111050801' singleton='false'>
-    <update id='org.enterprisedomain.classmaker.cdo.source' range='[0.0.0,0.8.46.202111050801)' severity='0'/>
+  <unit id='org.enterprisedomain.classmaker.cdo.source' version='0.8.46.202111140725' singleton='false'>
+    <update id='org.enterprisedomain.classmaker.cdo.source' range='[0.0.0,0.8.46.202111140725)' severity='0'/>
     <properties size='9'>
       <property name='df_LT.bundleVendor' value='Kyrill Zotkin'/>
       <property name='df_LT.bundleName' value='ClassMaker CDO Support Source'/>
@@ -56,9 +56,9 @@
       <property name='maven-classifier' value='sources'/>
     </properties>
     <provides size='5'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='org.enterprisedomain.classmaker.cdo.source' version='0.8.46.202111050801'/>
-      <provided namespace='osgi.bundle' name='org.enterprisedomain.classmaker.cdo.source' version='0.8.46.202111050801'/>
-      <provided namespace='osgi.identity' name='org.enterprisedomain.classmaker.cdo.source' version='0.8.46.202111050801'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='org.enterprisedomain.classmaker.cdo.source' version='0.8.46.202111140725'/>
+      <provided namespace='osgi.bundle' name='org.enterprisedomain.classmaker.cdo.source' version='0.8.46.202111140725'/>
+      <provided namespace='osgi.identity' name='org.enterprisedomain.classmaker.cdo.source' version='0.8.46.202111140725'>
         <properties size='1'>
           <property name='type' value='osgi.bundle'/>
         </properties>
@@ -67,13 +67,13 @@
       <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
     </provides>
     <artifacts size='1'>
-      <artifact classifier='osgi.bundle' id='org.enterprisedomain.classmaker.cdo.source' version='0.8.46.202111050801'/>
+      <artifact classifier='osgi.bundle' id='org.enterprisedomain.classmaker.cdo.source' version='0.8.46.202111140725'/>
     </artifacts>
     <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
     <touchpointData size='1'>
       <instructions size='1'>
         <instruction key='manifest'>
-          Bundle-SymbolicName: org.enterprisedomain.classmaker.cdo.source&#xA;Bundle-Version: 0.8.46.202111050801&#xA;
+          Bundle-SymbolicName: org.enterprisedomain.classmaker.cdo.source&#xA;Bundle-Version: 0.8.46.202111140725&#xA;
         </instruction>
       </instructions>
     </touchpointData>

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: ClassMaker CDO UI Support
 Bundle-SymbolicName: org.enterprisedomain.classmaker.cdo.ui
-Bundle-Version: 0.8.46.202111050801
+Bundle-Version: 0.8.46.202111140725
 Bundle-Vendor: Kyrill Zotkin
 Require-Bundle: org.enterprisedomain.classmaker.cdo;bundle-version="0.0.
  1",org.eclipse.emf.cdo.ui.shared;bundle-version="4.5.0",org.eclipse.emf

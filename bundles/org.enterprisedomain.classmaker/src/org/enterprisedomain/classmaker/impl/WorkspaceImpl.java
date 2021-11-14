@@ -31,14 +31,18 @@ import java.util.Set;
 import java.util.SortedSet;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceChangeEvent;
+import org.eclipse.core.resources.IResourceChangeListener;
+import org.eclipse.core.resources.IResourceDelta;
+import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.core.runtime.jobs.MultiRule;
 import org.eclipse.emf.common.notify.Notification;
@@ -55,8 +59,10 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -137,7 +143,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	protected static final ResourceSet RESOURCE_SET_EDEFAULT = new ResourceSetImpl();
 
 	static {
-		RESOURCE_SET_EDEFAULT.setURIConverter(new ResourceSetURIConverter());
+		RESOURCE_SET_EDEFAULT.setURIConverter(new ResourceSetURIConverter());		
 	}
 
 	/**
@@ -169,6 +175,28 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * @ordered
 	 */
 	protected SCMRegistry<?> scmRegistry;
+
+	protected IResourceChangeListener resourcesListener = new IResourceChangeListener() {
+
+		@Override
+		public void resourceChanged(IResourceChangeEvent event) {
+			if (event.getResource() != null && event.getResource().getType() == IResource.PROJECT
+					&& event.getType() == IResourceChangeEvent.PRE_DELETE)
+				try {
+					Project project = getProject(event.getResource().getName());
+					SubMonitor pm = SubMonitor.convert(ClassMakerPlugin.getProgressMonitor());
+					SubMonitor m = pm.newChild(1, SubMonitor.SUPPRESS_ISCANCELED);
+					try {
+						project.delete(m);
+					} finally {
+						m.done();
+						pm.done();
+					}
+				} catch (CoreException e) {
+					ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
+				}
+		}
+	};
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -395,7 +423,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			for (Contribution contribution : getContributions()) {
 				contribution.initialize(false);
 			}
-		if (getProjects().isEmpty() && !edProjects.isEmpty()) {
+		if (getProjects().size() <= getContributions().size() && !edProjects.isEmpty()) {
 			for (IProject p : edProjects.keySet()) {
 				Project project = edProjects.get(p);
 				project.setProjectName(p.getName());
@@ -410,6 +438,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 					ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
 				}
 			}
+		ResourcesPlugin.getWorkspace().addResourceChangeListener(resourcesListener,
+				IResourceChangeEvent.POST_CHANGE | IResourceChangeEvent.PRE_DELETE);
 		EList<Customizer> customizers = ECollections.newBasicEList();
 		ListIterator<Map.Entry<StageQualifier, Customizer>> it = getCustomizers().listIterator();
 		while (it.hasNext()) {

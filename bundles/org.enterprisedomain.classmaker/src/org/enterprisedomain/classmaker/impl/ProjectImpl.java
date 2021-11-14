@@ -26,6 +26,9 @@ import java.util.ListIterator;
 import java.util.Locale;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceChangeEvent;
+import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -461,7 +464,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	protected LoadingEList children;
 
-	protected ResourceChangeAdapter resourceAdapter = new ResourceChangeAdapter(this);
+	protected ResourceChangeAdapter resourceChangeAdapter = new ResourceChangeAdapter(this);
 
 	public class ProjectNameAdapter extends AdapterImpl {
 
@@ -1303,23 +1306,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 */
 	public void delete(IProgressMonitor monitor) throws CoreException {
 		if (eIsSet(ClassMakerPackage.PROJECT__WORKSPACE)) {
-			getWorkspace().getResourceSet().eAdapters().remove(resourceAdapter);
+			getWorkspace().getResourceSet().eAdapters().remove(resourceChangeAdapter);
 			getWorkspace().unregisterProject(this);
 		}
-		String projectName = getProjectName();
-		if (projectName.isEmpty())
-			return;
-		IWorkspace workspace = ResourcesPlugin.getWorkspace();
-		IProject project = workspace.getRoot().getProject(projectName);
-		SubMonitor pm = SubMonitor.convert(monitor);
-		SubMonitor m = pm.newChild(1, SubMonitor.SUPPRESS_ISCANCELED);
-		try {
-			project.delete(true, true, m);
-		} finally {
-			m.done();
-			pm.done();
-		}
-
 	}
 
 	/**
@@ -1585,8 +1574,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	@Override
 	public void initAdapters(Revision revision) {
 		revision.addAdapters(ECollections.singletonEList(stateModelAdapter));
-		if (isStateSet() && getState().getResource() != null)
-			getState().getResource().eAdapters().add(new AdapterImpl() {
+		if (isStateSet() && getState().getResource() != null) {
+			Adapter a = new AdapterImpl() {
 
 				@Override
 				public void notifyChanged(Notification msg) {
@@ -1596,8 +1585,10 @@ public class ProjectImpl extends EObjectImpl implements Project {
 					}
 				}
 
-			});
-
+			};
+			if (!getState().getResource().eAdapters().contains(a))
+				getState().getResource().eAdapters().add(a);
+		}
 	}
 
 	/**
@@ -1663,7 +1654,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 */
 	public String make(IProgressMonitor monitor) throws CoreException {
 		removeResourceChangeListener(getResourceReloadListener());
-		String result = "You made it!"; //$NON-NLS-1$
+		String result = ""; //$NON-NLS-1$
 		addResourceChangeListener(getResourceReloadListener());
 		setNeedCompletionNotification(true);
 		setDirty(false);
@@ -1793,7 +1784,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 						initAdapters(getRevision());
 					}
 					onModelResourceCreate(resource);
-					getWorkspace().getResourceSet().eAdapters().add(resourceAdapter);
+					if (!getWorkspace().getResourceSet().eAdapters().contains(resourceChangeAdapter))
+						getWorkspace().getResourceSet().eAdapters().add(resourceChangeAdapter);
 					addResourceChangeListener(getResourceReloadListener());
 					return commitId;
 				} catch (Exception e) {
@@ -1812,7 +1804,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		} else {
 			createResource(uri, commit);
 		}
-		getWorkspace().getResourceSet().eAdapters().add(resourceAdapter);
+		if (!getWorkspace().getResourceSet().eAdapters().contains(resourceChangeAdapter))
+			getWorkspace().getResourceSet().eAdapters().add(resourceChangeAdapter);
 		addResourceChangeListener(getResourceReloadListener());
 		return ""; //$NON-NLS-1$
 	}

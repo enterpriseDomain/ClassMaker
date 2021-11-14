@@ -28,7 +28,9 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -162,7 +164,7 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider implements IRe
 					if (modelExplorerView instanceof ModelExplorerView) {
 						final ModelExplorerView modelExplorer = (ModelExplorerView) modelExplorerView;
 						Object object = objectsChanged.iterator().next();
-						if (object instanceof EObject)
+						if (object instanceof EObject && modelExplorer.getViewer() != null)
 							modelExplorer.getViewer().refresh(((EObject) object).eContainer(), true);
 					}
 				} catch (Exception e) {
