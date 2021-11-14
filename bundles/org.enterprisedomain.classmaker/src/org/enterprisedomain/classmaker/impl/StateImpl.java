@@ -49,7 +49,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EContentAdapter;
@@ -241,6 +243,8 @@ public class StateImpl extends ItemImpl implements State {
 				synchronized (makingLock) {
 					makingLock.notifyAll();
 				}
+				EPackage ePackage = (EPackage) getDomainModel().getGenerated();
+				Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);
 			}
 		}
 
@@ -806,10 +810,10 @@ public class StateImpl extends ItemImpl implements State {
 				}
 			}
 		}
-		getDomainModel().eAdapters().remove(modelsToResourceAdapter);
-		getDomainModel().eAdapters().add(modelsToResourceAdapter);
-		getResource().eAdapters().remove(resourceToModelsAdapter);
-		getResource().eAdapters().add(resourceToModelsAdapter);
+		if (!getDomainModel().eAdapters().contains(modelsToResourceAdapter))
+			getDomainModel().eAdapters().add(modelsToResourceAdapter);
+		if (!getResource().eAdapters().contains(resourceToModelsAdapter))
+			getResource().eAdapters().add(resourceToModelsAdapter);
 		if (created) {
 			loading = false;
 			return;
@@ -1129,7 +1133,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	private boolean resourceModelsSynchronizing = false;
 
-	protected Adapter resourceToModelsAdapter = new AdapterImpl() {
+	protected class ResourceToModelsAdapter extends AdapterImpl {
 
 		@Override
 		public void notifyChanged(Notification msg) {
@@ -1189,7 +1193,9 @@ public class StateImpl extends ItemImpl implements State {
 			return null;
 		}
 
-	};
+	}
+
+	protected ResourceToModelsAdapter resourceToModelsAdapter = new ResourceToModelsAdapter();
 
 	protected Adapter modelsToResourceAdapter = new EContentAdapter() {
 
@@ -1591,15 +1597,10 @@ public class StateImpl extends ItemImpl implements State {
 				.get(getProjectName());
 		try {
 			operator.deleteProject();
-			try {
-				operator.checkoutOrphan(getProject().getVersion().toString(), getTimestamp());
-			} catch (Exception e) {
-				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
-			}
+			ResourcesPlugin.getWorkspace().getRoot().getProject(getProjectName()).delete(true, true, monitor);
 		} finally {
 			monitor.done();
 		}
-
 	}
 
 	/**

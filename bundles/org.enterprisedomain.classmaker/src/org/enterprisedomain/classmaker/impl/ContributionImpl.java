@@ -41,7 +41,9 @@ import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -99,6 +101,11 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 		@Override
 		public void completed(Project result) throws Exception {
 			addResourceChangeListener(getResourceReloadListener());
+			if (result.getPhase().equals(Stage.LOADED)) {
+				EPackage ePackage = (EPackage) result.getDomainModel().getGenerated();
+				if (ePackage != null)
+					Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);
+			}
 		}
 
 	};
@@ -333,8 +340,18 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 				checkout(getVersion(), timestamp);
 			if (currentBranch.equals(SCMOperator.MASTER_BRANCH))
 				checkout(getVersion(), timestamp);
-			getWorkspace().getResourceSet().eAdapters().add(resourceAdapter);
+			if (!getWorkspace().getResourceSet().eAdapters().contains(resourceChangeAdapter))
+				getWorkspace().getResourceSet().eAdapters().add(resourceChangeAdapter);
 			addResourceChangeListener(getResourceReloadListener());
+			if (getPhase().equals(Stage.MODELED)) {
+				EPackage ePackage = (EPackage) getDomainModel().getDynamic();
+				if (ePackage != null)
+					Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);
+			} else if (getPhase().equals(Stage.LOADED)) {
+				EPackage ePackage = (EPackage) getDomainModel().getGenerated();
+				if (ePackage != null)
+					Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);
+			}
 			return commitId;
 		} catch (Exception e) {
 			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));

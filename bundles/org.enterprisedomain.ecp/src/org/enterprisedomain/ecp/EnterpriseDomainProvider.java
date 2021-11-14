@@ -35,6 +35,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.command.BasicCommandStack;
 import org.eclipse.emf.common.command.Command;
@@ -55,6 +56,8 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.EPackage.Registry;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EContentAdapter;
@@ -427,7 +430,8 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 		initing.remove(project);
 		Project domainProject = (Project) Activator.getClassMaker().getWorkspace().getProject(project.getName());
 		try {
-			domainProject.delete(getUIProvider().getAdapter(project, IProgressMonitor.class));
+			if (domainProject != null)
+				domainProject.delete(getUIProvider().getAdapter(project, IProgressMonitor.class));
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
@@ -493,7 +497,9 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 		commandStack = (BasicCommandStack) createCommandStack(project);
 		final EditingDomain editingDomain = new AdapterFactoryEditingDomain(ENTERPRISE_DOMAIN_ADAPTER_FACTORY,
 				commandStack, Activator.getClassMaker().getWorkspace().getResourceSet());
-		editingDomain.getResourceSet().eAdapters().add(new ECPModelContextAdapter(project));
+		ECPModelContextAdapter a = new ECPModelContextAdapter(project);
+		if (!editingDomain.getResourceSet().eAdapters().contains(a))
+			editingDomain.getResourceSet().eAdapters().add(a);
 		return editingDomain;
 	}
 
@@ -636,6 +642,15 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 					}
 				}
 				return false;
+			} else if (delta.getResource() != null && delta.getResource().getType() == IResource.PROJECT
+					&& delta.getKind() == IResourceDelta.REMOVED) {
+				try {
+					ECPProject project = ECPUtil.getECPProjectManager().getProject(delta.getResource().getName());
+					project.delete();
+				} catch (Exception e) {
+					ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
+				}
+				return false;
 			}
 			return true;
 		}
@@ -714,6 +729,7 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 			// }
 			// }
 		}
+
 	}
 
 	@Override
@@ -765,19 +781,21 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 	}
 
 	@Override
-	public void doDelete(final InternalProject project, final Collection<Object> objects) {
+	public void doDelete(InternalProject project, Collection<Object> objects) {
+		final InternalProject p = project;
+		final Collection<Object> o = objects;
 		final Command changeCommand = new ChangeCommand(project.getEditingDomain().getResourceSet()) {
 			@Override
 			protected void doExecute() {
-				Project domainProject = Activator.getClassMaker().getWorkspace().getProject(project.getName());
-				if (objects.isEmpty())
+				Project domainProject = Activator.getClassMaker().getWorkspace().getProject(p.getName());
+				if (o.isEmpty())
 					try {
-						domainProject.delete(getUIProvider().getAdapter(project, IProgressMonitor.class));
+						domainProject.delete(getUIProvider().getAdapter(p, IProgressMonitor.class));
 					} catch (CoreException e) {
 						Activator.log(e);
 					}
 				else
-					domainProject.delete(ECollections.asEList(objects));
+					domainProject.delete(ECollections.asEList(o));
 			}
 		};
 		if (changeCommand.canExecute()) {

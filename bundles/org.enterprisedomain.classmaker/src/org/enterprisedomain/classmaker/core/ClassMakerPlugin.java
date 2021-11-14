@@ -30,6 +30,7 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.ProgressProvider;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.EMFPlugin;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.impl.ClassMakerServiceImpl;
