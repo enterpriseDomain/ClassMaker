@@ -1,5 +1,7 @@
 package org.enterprisedomain.classmaker.sample;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -8,6 +10,10 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
+import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.ui.actions.WorkspaceModifyDelegatingOperation;
+import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
+import org.enterprisedomain.classmaker.core.IRunnerWithProgress;
 
 public class App implements IApplication {
 
@@ -28,6 +34,16 @@ public class App implements IApplication {
 				return Status.OK_STATUS;
 			}
 		};
+		ClassMakerPlugin.setRunnerWithProgress(new IRunnerWithProgress() {
+
+			@Override
+			public void run(IRunnableWithProgress runnable) throws InvocationTargetException, InterruptedException {
+				WorkspaceModifyDelegatingOperation op = new WorkspaceModifyDelegatingOperation(runnable,
+						ClassMakerPlugin.getClassMaker().getWorkspace());
+				op.run(ClassMakerPlugin.getProgressMonitor());
+			}
+
+		});
 		run.schedule();
 		Job.getJobManager().addJobChangeListener(new JobChangeAdapter() {
 

@@ -101,8 +101,8 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 		@Override
 		public void completed(Project result) throws Exception {
 			addResourceChangeListener(getResourceReloadListener());
-			if (result.getPhase().equals(Stage.LOADED)) {
-				EPackage ePackage = (EPackage) result.getDomainModel().getGenerated();
+			if (getState().getPhase().equals(Stage.LOADED)) {
+				EPackage ePackage = (EPackage) getState().getDomainModel().getGenerated();
 				if (ePackage != null)
 					Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);
 			}

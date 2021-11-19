@@ -11,4 +11,6 @@ Require-Bundle: org.enterprisedomain.classmaker,
  org.eclipse.equinox.concurrent
 Bundle-ActivationPolicy: lazy
 Automatic-Module-Name: org.enterprisedomain.classmaker.sample
+Import-Package: org.eclipse.jface.operation,
+ org.eclipse.ui.actions
 

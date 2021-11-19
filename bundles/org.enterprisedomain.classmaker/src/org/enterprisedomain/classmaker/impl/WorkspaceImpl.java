@@ -34,8 +34,6 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
-import org.eclipse.core.resources.IResourceDelta;
-import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -59,10 +57,8 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -143,7 +139,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	protected static final ResourceSet RESOURCE_SET_EDEFAULT = new ResourceSetImpl();
 
 	static {
-		RESOURCE_SET_EDEFAULT.setURIConverter(new ResourceSetURIConverter());		
+		RESOURCE_SET_EDEFAULT.setURIConverter(new ResourceSetURIConverter());
 	}
 
 	/**
@@ -187,7 +183,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 					SubMonitor pm = SubMonitor.convert(ClassMakerPlugin.getProgressMonitor());
 					SubMonitor m = pm.newChild(1, SubMonitor.SUPPRESS_ISCANCELED);
 					try {
-						project.delete(m);
+						if (project != null)
+							project.delete(m);
 					} finally {
 						m.done();
 						pm.done();

@@ -15,12 +15,19 @@
  */
 package org.enterprisedomain.workbench;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
+import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
+import org.enterprisedomain.classmaker.core.IRunWrapper;
+import org.enterprisedomain.classmaker.core.IRunnerWithProgress;
 import org.enterprisedomain.classmaker.impl.ClassMakerServiceImpl;
 import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
@@ -55,6 +62,42 @@ public class Activator extends AbstractUIPlugin {
 		plugin = this;
 		tracker = new ServiceTracker<ClassMakerService, ClassMakerServiceImpl>(context, ClassMakerService.class, null);
 		tracker.open();
+		ClassMakerPlugin.setRunnerWithProgress(new IRunnerWithProgress() {
+		
+			@Override
+			public void run(final IRunnableWithProgress runnable)
+					throws InvocationTargetException, InterruptedException {
+				Display display = Display.getCurrent() != null ? Display.getCurrent() : Display.getDefault();
+				display.asyncExec(new Runnable() {
+		
+					@Override
+					public void run() {
+						try {
+							IWorkbenchWindow workbenchWindow = ((IWorkbench) PlatformUI.getWorkbench())
+									.getWorkbenchWindows()[0];
+		
+							if (workbenchWindow != null) {
+								workbenchWindow.run(false, true, runnable);
+							}
+						} catch (InvocationTargetException e) {
+							Activator.log(e.getTargetException());
+						} catch (InterruptedException e) {
+							return;
+						}
+					}
+				});
+		
+			}
+		});
+		ClassMakerPlugin.setClientRunWrapper(new IRunWrapper() {
+		
+			@Override
+			public void wrapRun(Runnable runnable) {
+				Display display = Display.getCurrent() != null ? Display.getCurrent() : Display.getDefault();
+				display.asyncExec(runnable);
+			}
+		
+		});
 	}
 
 	/*
