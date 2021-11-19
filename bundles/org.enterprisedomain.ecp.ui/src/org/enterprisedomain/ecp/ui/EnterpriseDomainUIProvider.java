@@ -175,42 +175,6 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider implements IRe
 
 		});
 
-		setRunnerWithProgress(new IRunnerWithProgress() {
-
-			@Override
-			public void run(final IRunnableWithProgress runnable)
-					throws InvocationTargetException, InterruptedException {
-				Display display = Display.getCurrent() != null ? Display.getCurrent() : Display.getDefault();
-				display.asyncExec(new Runnable() {
-
-					@Override
-					public void run() {
-						try {
-							IWorkbenchWindow workbenchWindow = ((IWorkbench) PlatformUI.getWorkbench())
-									.getWorkbenchWindows()[0];
-
-							if (workbenchWindow != null) {
-								workbenchWindow.run(false, true, runnable);
-							}
-						} catch (InvocationTargetException e) {
-							Activator.log(e.getTargetException());
-						} catch (InterruptedException e) {
-							return;
-						}
-					}
-				});
-
-			}
-		});
-		setClientRunWrapper(new IRunWrapper() {
-
-			@Override
-			public void wrapRun(Runnable runnable) {
-				Display display = Display.getCurrent() != null ? Display.getCurrent() : Display.getDefault();
-				display.asyncExec(runnable);
-			}
-
-		});
 		ENTERPRISE_DOMAIN_LABEL_PROVIDER.addListener(new LabelProviderListener());
 	}
 
@@ -338,14 +302,6 @@ public class EnterpriseDomainUIProvider extends DefaultUIProvider implements IRe
 
 	public void setProgressMonitor(IProgressMonitor progressMonitor) {
 		ClassMakerPlugin.setProgressMonitor(progressMonitor);
-	}
-
-	public void setClientRunWrapper(IRunWrapper wrapper) {
-		ClassMakerPlugin.setClientRunWrapper(wrapper);
-	}
-
-	public void setRunnerWithProgress(IRunnerWithProgress runner) {
-		ClassMakerPlugin.setRunnerWithProgress(runner);
 	}
 
 	@Override
