@@ -218,6 +218,8 @@ public class OSGiEPackageLoader extends ContainerJob {
 
 						EPackage ePackage = null;
 						try {
+							if (packageClass == null)
+								throw new Exception("packageClass is null");
 							ePackage = (EPackage) packageClass.getField("eINSTANCE").get(null); // $NON-NLS-1$
 							if (ePackage != null) {
 								getContributionState().getDomainModel().setGenerated(ePackage);
