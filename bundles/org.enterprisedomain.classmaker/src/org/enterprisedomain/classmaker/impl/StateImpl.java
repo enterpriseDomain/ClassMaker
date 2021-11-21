@@ -47,11 +47,10 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EContentAdapter;
@@ -1598,7 +1597,14 @@ public class StateImpl extends ItemImpl implements State {
 				.get(getProjectName());
 		try {
 			operator.deleteProject();
-			ResourcesPlugin.getWorkspace().getRoot().getProject(getProjectName()).delete(true, true, monitor);
+			SubMonitor pm = SubMonitor.convert(ClassMakerPlugin.getProgressMonitor());
+			SubMonitor m = pm.newChild(1, SubMonitor.SUPPRESS_ISCANCELED);
+			try {
+				ResourcesPlugin.getWorkspace().getRoot().getProject(getProjectName()).delete(true, true, m);
+			} finally {
+				m.done();
+				pm.done();
+			}
 		} finally {
 			monitor.done();
 		}

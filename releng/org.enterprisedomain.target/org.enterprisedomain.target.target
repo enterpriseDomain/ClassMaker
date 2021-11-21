@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="org.enterprisedomain.target" sequenceNumber="1632032225">
+<target name="org.enterprisedomain.target" sequenceNumber="1637486286">
   <locations>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.eclipse.e4.rcp.feature.group" version="4.21.0.v20210906-0842"/>
@@ -13,7 +13,7 @@
       <unit id="org.eclipse.platform.ide" version="4.21.0.I20210906-0500"/>
       <unit id="org.eclipse.jdt.core" version="3.27.0.v20210823-1758"/>
       <unit id="org.eclipse.pde.core" version="3.14.400.v20210812-0807"/>
-      <repository id="updates4_21" location="http://download.eclipse.org/eclipse/updates/latest/"/>
+      <repository id="updates" location="http://download.eclipse.org/eclipse/updates/latest/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.eclipse.jdt.feature.group" version="3.18.900.v20210906-0500"/>
@@ -41,14 +41,10 @@
       <unit id="org.eclipse.ecf.core.ssl.feature.feature.group" version="1.1.501.v20210409-2301"/>
       <unit id="org.eclipse.ecf.filetransfer.ssl.feature.feature.group" version="1.1.401.v20210409-2301"/>
       <unit id="org.eclipse.ecf.filetransfer.httpclient45.feature.feature.group" version="1.0.703.v20210512-0614"/>
-      <repository id="simrel2021-03" location="https://download.eclipse.org/releases/latest/"/>
+      <repository id="simrel_latest" location="https://download.eclipse.org/releases/latest/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.eclipse.jgit.feature.group" version="5.13.0.202109080827-r"/>
-      <unit id="org.eclipse.jgit.lfs.feature.group" version="5.13.0.202109080827-r"/>
-      <unit id="org.eclipse.jgit.pgm.feature.group" version="5.13.0.202109080827-r"/>
-      <unit id="org.eclipse.jgit.http.apache.feature.group" version="5.13.0.202109080827-r"/>
-      <unit id="org.eclipse.jgit.ssh.apache.feature.group" version="5.13.0.202109080827-r"/>
       <repository location="http://download.eclipse.org/egit/updates/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
@@ -159,9 +155,9 @@
       <repository location="https://download.eclipse.org/tools/orbit/downloads/drops/R20210223232630/repository"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
-      <unit id="org.eclipse.emf.edapt.runtime.feature.feature.group" version="1.3.1.201812130816"/>
-      <unit id="org.eclipse.emf.edapt.runtime.feature.source.feature.group" version="1.3.1.201812130816"/>
-      <repository location="http://download.eclipse.org/edapt/releases/13x"/>
+      <unit id="org.eclipse.emf.edapt.runtime.feature.feature.group" version="1.4.1.202002140949"/>
+      <unit id="org.eclipse.emf.edapt.runtime.feature.source.feature.group" version="1.4.1.202002140949"/>
+      <repository location="http://download.eclipse.org/edapt/releases/14x"/>
     </location>
   </locations>
 </target>

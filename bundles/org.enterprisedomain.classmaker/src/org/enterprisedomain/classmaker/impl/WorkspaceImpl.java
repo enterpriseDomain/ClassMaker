@@ -180,6 +180,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 					&& event.getType() == IResourceChangeEvent.PRE_DELETE)
 				try {
 					Project project = getProject(event.getResource().getName());
+					if (project == null)
+						return;
 					SubMonitor pm = SubMonitor.convert(ClassMakerPlugin.getProgressMonitor());
 					SubMonitor m = pm.newChild(1, SubMonitor.SUPPRESS_ISCANCELED);
 					try {
