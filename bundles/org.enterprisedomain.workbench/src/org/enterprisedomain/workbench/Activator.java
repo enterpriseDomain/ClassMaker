@@ -18,6 +18,8 @@ package org.enterprisedomain.workbench;
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.ISafeRunnable;
+import org.eclipse.core.runtime.SafeRunner;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IWorkbench;
@@ -63,40 +65,48 @@ public class Activator extends AbstractUIPlugin {
 		tracker = new ServiceTracker<ClassMakerService, ClassMakerServiceImpl>(context, ClassMakerService.class, null);
 		tracker.open();
 		ClassMakerPlugin.setRunnerWithProgress(new IRunnerWithProgress() {
-		
+
 			@Override
 			public void run(final IRunnableWithProgress runnable)
 					throws InvocationTargetException, InterruptedException {
-				Display display = Display.getCurrent() != null ? Display.getCurrent() : Display.getDefault();
-				display.asyncExec(new Runnable() {
-		
+				SafeRunner.run(new ISafeRunnable() {
+
 					@Override
-					public void run() {
-						try {
-							IWorkbenchWindow workbenchWindow = ((IWorkbench) PlatformUI.getWorkbench())
-									.getWorkbenchWindows()[0];
-		
-							if (workbenchWindow != null) {
-								workbenchWindow.run(false, true, runnable);
-							}
-						} catch (InvocationTargetException e) {
-							Activator.log(e.getTargetException());
-						} catch (InterruptedException e) {
-							return;
-						}
+					public void run() throws Exception {
+						runnable.run(ClassMakerPlugin.getProgressMonitor());
 					}
 				});
-		
+				// Display display = Display.getCurrent() != null ? Display.getCurrent() :
+				// Display.getDefault();
+//				display.asyncExec(new Runnable() {
+//		
+//					@Override
+//					public void run() {
+//						try {
+//							IWorkbenchWindow workbenchWindow = ((IWorkbench) PlatformUI.getWorkbench())
+//									.getWorkbenchWindows()[0];
+//		
+//							if (workbenchWindow != null) {
+//								workbenchWindow.run(false, true, runnable);
+//							}
+//						} catch (InvocationTargetException e) {
+//							Activator.log(e.getTargetException());
+//						} catch (InterruptedException e) {
+//							return;
+//						}
+//					}
+//				});
+
 			}
 		});
 		ClassMakerPlugin.setClientRunWrapper(new IRunWrapper() {
-		
+
 			@Override
 			public void wrapRun(Runnable runnable) {
 				Display display = Display.getCurrent() != null ? Display.getCurrent() : Display.getDefault();
 				display.asyncExec(runnable);
 			}
-		
+
 		});
 	}
 

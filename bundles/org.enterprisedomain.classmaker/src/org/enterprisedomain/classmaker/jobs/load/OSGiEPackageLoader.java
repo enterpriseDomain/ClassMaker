@@ -23,6 +23,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
@@ -219,7 +220,7 @@ public class OSGiEPackageLoader extends ContainerJob {
 						EPackage ePackage = null;
 						try {
 							if (packageClass == null)
-								throw new Exception("packageClass is null");
+								start(osgiBundle);
 							ePackage = (EPackage) packageClass.getField("eINSTANCE").get(null); // $NON-NLS-1$
 							if (ePackage != null) {
 								getContributionState().getDomainModel().setGenerated(ePackage);
@@ -266,15 +267,19 @@ public class OSGiEPackageLoader extends ContainerJob {
 					} catch (Exception e) {
 						setException(e);
 					}
+					EMFPlugin editPlugin = null;
 					try {
-						pluginClass.getField("INSTANCE").get(null);
+						editPlugin = (EMFPlugin) pluginClass.getField("INSTANCE").get(null);
+						if (editPlugin != null)
+							getContributionState().getDomainModel().setGeneratedEdit(editPlugin);
 					} catch (Exception e) {
 						setException(e);
 						throw new InvocationTargetException(e);
 					} finally {
 						loaded.release();
-						if (loaded.availablePermits() >= 1)
+						if (loaded.availablePermits() >= 1) {
 							getContributionState().getProject().setNeedCompletionNotification(true);
+						}
 					}
 				}
 			});
@@ -296,17 +301,22 @@ public class OSGiEPackageLoader extends ContainerJob {
 					} catch (Exception e) {
 						setException(e);
 					}
+					EMFPlugin editorPlugin = null;
 					try {
-						pluginClass1.getField("INSTANCE").get(null);
+						editorPlugin = (EMFPlugin) pluginClass1.getField("INSTANCE").get(null);
+						if (editorPlugin != null)
+							getContributionState().getDomainModel().setGeneratedEditor(editorPlugin);
 					} catch (Exception e) {
 						setException(e);
 						throw new InvocationTargetException(e);
 					} finally {
 						loaded.release();
-						if (loaded.availablePermits() >= 1)
+						if (loaded.availablePermits() >= 1) {
 							getContributionState().getProject().setNeedCompletionNotification(true);
+						}
 					}
 				}
+
 			});
 			break;
 		}

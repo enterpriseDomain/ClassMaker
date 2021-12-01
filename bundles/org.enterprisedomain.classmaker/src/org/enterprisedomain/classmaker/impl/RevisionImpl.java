@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.LogCommand;
+import org.eclipse.jgit.api.errors.JGitInternalException;
 import org.eclipse.jgit.api.errors.NoHeadException;
 import org.eclipse.jgit.api.errors.RefNotFoundException;
 import org.eclipse.jgit.lib.Ref;
@@ -43,7 +44,7 @@ import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Customizer;
 import org.enterprisedomain.classmaker.Item;
-import org.enterprisedomain.classmaker.ModelPair;
+import org.enterprisedomain.classmaker.Models;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.Revision;
 import org.enterprisedomain.classmaker.SCMOperator;
@@ -287,7 +288,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	}
 
 	@Override
-	public ModelPair getDomainModel() {
+	public Models getDomainModel() {
 		if (isStateSet())
 			return getState().getDomainModel();
 		return null;
@@ -387,6 +388,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 				git = operator.getRepositorySCM();
 				if (git != null)
 					git.branchCreate().setForce(true).setName(getVersion().toString()).call();
+			} catch (JGitInternalException e) {
 			} catch (RefNotFoundException e) {
 				try {
 					getState().commit();

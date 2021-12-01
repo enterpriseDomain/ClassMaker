@@ -75,7 +75,7 @@ import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Customizer;
 import org.enterprisedomain.classmaker.Item;
 import org.enterprisedomain.classmaker.Messages;
-import org.enterprisedomain.classmaker.ModelPair;
+import org.enterprisedomain.classmaker.Models;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.Revision;
 import org.enterprisedomain.classmaker.SCMOperator;
@@ -219,7 +219,9 @@ public class StateImpl extends ItemImpl implements State {
 		public void notifyChanged(Notification msg) {
 			if (msg.getFeatureID(State.class) == ClassMakerPackage.STATE__MODEL_NAME
 					&& msg.getEventType() == Notification.SET && msg.getNewStringValue() != null
-					&& eIsSet(ClassMakerPackage.STATE__PROJECT)) {
+					&& eIsSet(ClassMakerPackage.STATE__PROJECT)
+					&& getProject().eIsSet(ClassMakerPackage.Literals.PROJECT__WORKSPACE)
+					&& getProject().getWorkspace().eIsSet(ClassMakerPackage.Literals.WORKSPACE__SERVICE)) {
 				setProjectName(getProject().getWorkspace().getService().computeProjectName(msg.getNewStringValue()));
 			} else if (msg.getFeatureID(State.class) == ClassMakerPackage.STATE__EDIT
 					&& msg.getEventType() == Notification.SET && msg.getNewBooleanValue()) {
@@ -1014,7 +1016,7 @@ public class StateImpl extends ItemImpl implements State {
 				wrappingMonitor.done();
 			}
 			if (!monitor.isCanceled() || (!getPhase().equals(Stage.LOADED)
-					&& !getDomainModel().eIsSet(ClassMakerPackage.Literals.MODEL_PAIR__GENERATED))) {
+					&& !getDomainModel().eIsSet(ClassMakerPackage.Literals.MODELS__GENERATED))) {
 				makingLock.wait(7000);
 				Thread.yield();
 			}
@@ -1079,6 +1081,7 @@ public class StateImpl extends ItemImpl implements State {
 			load(false, false);
 		} catch (CheckoutConflictException e) {
 			e.getConflictingPaths().clear();
+		} catch (JGitInternalException e) {
 		} catch (CoreException e) {
 			ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
 		} catch (Exception e) {
@@ -1204,8 +1207,8 @@ public class StateImpl extends ItemImpl implements State {
 			super.notifyChanged(notification);
 			if (resourceModelsSynchronizing)
 				return;
-			if (notification.getNotifier() instanceof ModelPair
-					&& notification.getFeatureID(ModelPair.class) == ClassMakerPackage.MODEL_PAIR__DYNAMIC) {
+			if (notification.getNotifier() instanceof Models
+					&& notification.getFeatureID(Models.class) == ClassMakerPackage.MODELS__DYNAMIC) {
 				resourceModelsSynchronizing = true;
 				boolean deliver = getResource().eDeliver();
 				getResource().eSetDeliver(false);

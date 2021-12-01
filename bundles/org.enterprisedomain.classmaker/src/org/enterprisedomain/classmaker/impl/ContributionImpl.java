@@ -58,7 +58,7 @@ import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Customizer;
 import org.enterprisedomain.classmaker.Item;
-import org.enterprisedomain.classmaker.ModelPair;
+import org.enterprisedomain.classmaker.Models;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.Revision;
 import org.enterprisedomain.classmaker.SCMOperator;
@@ -101,11 +101,11 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 		@Override
 		public void completed(Project result) throws Exception {
 			addResourceChangeListener(getResourceReloadListener());
-			if (getState().getPhase().equals(Stage.LOADED)) {
-				EPackage ePackage = (EPackage) getState().getDomainModel().getGenerated();
-				if (ePackage != null)
-					Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);
-			}
+			// if (getState().getPhase().equals(Stage.LOADED)) {
+			// EPackage ePackage = (EPackage) getState().getDomainModel().getGenerated();
+			// if (ePackage != null)
+			// Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);
+			// }
 		}
 
 	};
@@ -468,7 +468,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	 * 
 	 * @generated NOT
 	 */
-	public ModelPair getDomainModel() {
+	public Models getDomainModel() {
 		if (isStateSet())
 			return getState().getDomainModel();
 		return null;

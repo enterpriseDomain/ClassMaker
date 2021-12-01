@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Kyrill Zotkin
+ * Copyright 2021 Kyrill Zotkin
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 package org.enterprisedomain.classmaker.impl;
 
 import org.eclipse.emf.codegen.util.CodeGenUtil;
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
@@ -29,28 +30,32 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.Item;
-import org.enterprisedomain.classmaker.ModelPair;
+import org.enterprisedomain.classmaker.Models;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.State;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Model
- * Pair</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object
+ * '<em><b>Models</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.impl.ModelPairImpl#getDynamic
+ * <li>{@link org.enterprisedomain.classmaker.impl.ModelsImpl#getDynamic
  * <em>Dynamic</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ModelPairImpl#getGenerated
+ * <li>{@link org.enterprisedomain.classmaker.impl.ModelsImpl#getGenerated
  * <em>Generated</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ModelPairImpl#getParent
+ * <li>{@link org.enterprisedomain.classmaker.impl.ModelsImpl#getGeneratedEdit
+ * <em>Generated Edit</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ModelsImpl#getGeneratedEditor
+ * <em>Generated Editor</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ModelsImpl#getParent
  * <em>Parent</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ModelPairImpl extends EObjectImpl implements ModelPair {
+public class ModelsImpl extends EObjectImpl implements Models {
 
 	public class EPackageAdapter extends AdapterImpl {
 		@Override
@@ -82,17 +87,17 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 
 		@Override
 		public void notifyChanged(Notification msg) {
-			if (msg.getNotifier() instanceof ModelPair && msg.getEventType() == Notification.SET) {
+			if (msg.getNotifier() instanceof Models && msg.getEventType() == Notification.SET) {
 				EObject eObject = null;
-				switch (msg.getFeatureID(ModelPair.class)) {
-				case ClassMakerPackage.MODEL_PAIR__DYNAMIC:
+				switch (msg.getFeatureID(Models.class)) {
+				case ClassMakerPackage.MODELS__DYNAMIC:
 					eObject = (EObject) msg.getNewValue();
 					if (eObject != null && !getParent().getPhase().equals(Stage.LOADED)) {
 						getParent().setPhase(Stage.MODELED);
 					}
 					onDynamicEObject((EObject) msg.getOldValue(), eObject);
 					break;
-				case ClassMakerPackage.MODEL_PAIR__GENERATED:
+				case ClassMakerPackage.MODELS__GENERATED:
 					eObject = (EPackage) msg.getNewValue();
 					if (eObject != null) {
 						getParent().setPhase(Stage.LOADED);
@@ -131,11 +136,31 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 	protected EObject generated;
 
 	/**
+	 * The cached value of the '{@link #getGeneratedEdit() <em>Generated Edit</em>}'
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getGeneratedEdit()
+	 * @generated
+	 * @ordered
+	 */
+	protected EMFPlugin generatedEdit;
+
+	/**
+	 * The cached value of the '{@link #getGeneratedEditor() <em>Generated
+	 * Editor</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getGeneratedEditor()
+	 * @generated
+	 * @ordered
+	 */
+	protected EMFPlugin generatedEditor;
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
 	 */
-	protected ModelPairImpl() {
+	protected ModelsImpl() {
 		super();
 		eAdapters().add(new StageAdapter());
 	}
@@ -147,7 +172,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ClassMakerPackage.Literals.MODEL_PAIR;
+		return ClassMakerPackage.Literals.MODELS;
 	}
 
 	/**
@@ -170,7 +195,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 		dynamic = newDynamic;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-					ClassMakerPackage.MODEL_PAIR__DYNAMIC, oldDynamic, newDynamic);
+					ClassMakerPackage.MODELS__DYNAMIC, oldDynamic, newDynamic);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -190,15 +215,15 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 			NotificationChain msgs = null;
 			if (dynamic != null)
 				msgs = ((InternalEObject) dynamic).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE - ClassMakerPackage.MODEL_PAIR__DYNAMIC, null, msgs);
+						EOPPOSITE_FEATURE_BASE - ClassMakerPackage.MODELS__DYNAMIC, null, msgs);
 			if (newDynamic != null)
 				msgs = ((InternalEObject) newDynamic).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE - ClassMakerPackage.MODEL_PAIR__DYNAMIC, null, msgs);
+						EOPPOSITE_FEATURE_BASE - ClassMakerPackage.MODELS__DYNAMIC, null, msgs);
 			msgs = basicSetDynamic(newDynamic, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.MODEL_PAIR__DYNAMIC, newDynamic,
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.MODELS__DYNAMIC, newDynamic,
 					newDynamic));
 	}
 
@@ -214,7 +239,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 			generated = eResolveProxy(oldGenerated);
 			if (generated != oldGenerated) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassMakerPackage.MODEL_PAIR__GENERATED,
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassMakerPackage.MODELS__GENERATED,
 							oldGenerated, generated));
 			}
 		}
@@ -240,7 +265,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 		EObject oldGenerated = generated;
 		generated = newGenerated;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.MODEL_PAIR__GENERATED, oldGenerated,
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.MODELS__GENERATED, oldGenerated,
 					generated));
 	}
 
@@ -250,8 +275,92 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 	 * @generated
 	 */
 	@Override
+	public EMFPlugin getGeneratedEdit() {
+		if (generatedEdit != null && ((EObject) generatedEdit).eIsProxy()) {
+			InternalEObject oldGeneratedEdit = (InternalEObject) generatedEdit;
+			generatedEdit = (EMFPlugin) eResolveProxy(oldGeneratedEdit);
+			if (generatedEdit != oldGeneratedEdit) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassMakerPackage.MODELS__GENERATED_EDIT,
+							oldGeneratedEdit, generatedEdit));
+			}
+		}
+		return generatedEdit;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EMFPlugin basicGetGeneratedEdit() {
+		return generatedEdit;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public void setGeneratedEdit(EMFPlugin newGeneratedEdit) {
+		EMFPlugin oldGeneratedEdit = generatedEdit;
+		generatedEdit = newGeneratedEdit;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.MODELS__GENERATED_EDIT,
+					oldGeneratedEdit, generatedEdit));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public EMFPlugin getGeneratedEditor() {
+		if (generatedEditor != null && ((EObject) generatedEditor).eIsProxy()) {
+			InternalEObject oldGeneratedEditor = (InternalEObject) generatedEditor;
+			generatedEditor = (EMFPlugin) eResolveProxy(oldGeneratedEditor);
+			if (generatedEditor != oldGeneratedEditor) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							ClassMakerPackage.MODELS__GENERATED_EDITOR, oldGeneratedEditor, generatedEditor));
+			}
+		}
+		return generatedEditor;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EMFPlugin basicGetGeneratedEditor() {
+		return generatedEditor;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public void setGeneratedEditor(EMFPlugin newGeneratedEditor) {
+		EMFPlugin oldGeneratedEditor = generatedEditor;
+		generatedEditor = newGeneratedEditor;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.MODELS__GENERATED_EDITOR,
+					oldGeneratedEditor, generatedEditor));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
 	public Item getParent() {
-		if (eContainerFeatureID() != ClassMakerPackage.MODEL_PAIR__PARENT)
+		if (eContainerFeatureID() != ClassMakerPackage.MODELS__PARENT)
 			return null;
 		return (Item) eInternalContainer();
 	}
@@ -262,7 +371,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 	 * @generated
 	 */
 	public NotificationChain basicSetParent(Item newParent, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject) newParent, ClassMakerPackage.MODEL_PAIR__PARENT, msgs);
+		msgs = eBasicSetContainer((InternalEObject) newParent, ClassMakerPackage.MODELS__PARENT, msgs);
 		return msgs;
 	}
 
@@ -274,7 +383,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 	@Override
 	public void setParent(Item newParent) {
 		if (newParent != eInternalContainer()
-				|| (eContainerFeatureID() != ClassMakerPackage.MODEL_PAIR__PARENT && newParent != null)) {
+				|| (eContainerFeatureID() != ClassMakerPackage.MODELS__PARENT && newParent != null)) {
 			if (EcoreUtil.isAncestor(this, newParent))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -287,7 +396,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.MODEL_PAIR__PARENT, newParent,
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.MODELS__PARENT, newParent,
 					newParent));
 	}
 
@@ -299,7 +408,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case ClassMakerPackage.MODEL_PAIR__PARENT:
+		case ClassMakerPackage.MODELS__PARENT:
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			return basicSetParent((Item) otherEnd, msgs);
@@ -315,9 +424,9 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case ClassMakerPackage.MODEL_PAIR__DYNAMIC:
+		case ClassMakerPackage.MODELS__DYNAMIC:
 			return basicSetDynamic(null, msgs);
-		case ClassMakerPackage.MODEL_PAIR__PARENT:
+		case ClassMakerPackage.MODELS__PARENT:
 			return basicSetParent(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -331,7 +440,7 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-		case ClassMakerPackage.MODEL_PAIR__PARENT:
+		case ClassMakerPackage.MODELS__PARENT:
 			return eInternalContainer().eInverseRemove(this, ClassMakerPackage.ITEM__DOMAIN_MODEL, Item.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
@@ -345,13 +454,21 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case ClassMakerPackage.MODEL_PAIR__DYNAMIC:
+		case ClassMakerPackage.MODELS__DYNAMIC:
 			return getDynamic();
-		case ClassMakerPackage.MODEL_PAIR__GENERATED:
+		case ClassMakerPackage.MODELS__GENERATED:
 			if (resolve)
 				return getGenerated();
 			return basicGetGenerated();
-		case ClassMakerPackage.MODEL_PAIR__PARENT:
+		case ClassMakerPackage.MODELS__GENERATED_EDIT:
+			if (resolve)
+				return getGeneratedEdit();
+			return basicGetGeneratedEdit();
+		case ClassMakerPackage.MODELS__GENERATED_EDITOR:
+			if (resolve)
+				return getGeneratedEditor();
+			return basicGetGeneratedEditor();
+		case ClassMakerPackage.MODELS__PARENT:
 			return getParent();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -365,13 +482,19 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case ClassMakerPackage.MODEL_PAIR__DYNAMIC:
+		case ClassMakerPackage.MODELS__DYNAMIC:
 			setDynamic((EObject) newValue);
 			return;
-		case ClassMakerPackage.MODEL_PAIR__GENERATED:
+		case ClassMakerPackage.MODELS__GENERATED:
 			setGenerated((EObject) newValue);
 			return;
-		case ClassMakerPackage.MODEL_PAIR__PARENT:
+		case ClassMakerPackage.MODELS__GENERATED_EDIT:
+			setGeneratedEdit((EMFPlugin) newValue);
+			return;
+		case ClassMakerPackage.MODELS__GENERATED_EDITOR:
+			setGeneratedEditor((EMFPlugin) newValue);
+			return;
+		case ClassMakerPackage.MODELS__PARENT:
 			setParent((Item) newValue);
 			return;
 		}
@@ -386,13 +509,19 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case ClassMakerPackage.MODEL_PAIR__DYNAMIC:
+		case ClassMakerPackage.MODELS__DYNAMIC:
 			setDynamic((EObject) null);
 			return;
-		case ClassMakerPackage.MODEL_PAIR__GENERATED:
+		case ClassMakerPackage.MODELS__GENERATED:
 			setGenerated((EObject) null);
 			return;
-		case ClassMakerPackage.MODEL_PAIR__PARENT:
+		case ClassMakerPackage.MODELS__GENERATED_EDIT:
+			setGeneratedEdit((EMFPlugin) null);
+			return;
+		case ClassMakerPackage.MODELS__GENERATED_EDITOR:
+			setGeneratedEditor((EMFPlugin) null);
+			return;
+		case ClassMakerPackage.MODELS__PARENT:
 			setParent((Item) null);
 			return;
 		}
@@ -407,14 +536,18 @@ public class ModelPairImpl extends EObjectImpl implements ModelPair {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case ClassMakerPackage.MODEL_PAIR__DYNAMIC:
+		case ClassMakerPackage.MODELS__DYNAMIC:
 			return dynamic != null;
-		case ClassMakerPackage.MODEL_PAIR__GENERATED:
+		case ClassMakerPackage.MODELS__GENERATED:
 			return generated != null;
-		case ClassMakerPackage.MODEL_PAIR__PARENT:
+		case ClassMakerPackage.MODELS__GENERATED_EDIT:
+			return generatedEdit != null;
+		case ClassMakerPackage.MODELS__GENERATED_EDITOR:
+			return generatedEditor != null;
+		case ClassMakerPackage.MODELS__PARENT:
 			return getParent() != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} // ModelPairImpl
+} // ModelsImpl

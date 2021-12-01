@@ -40,7 +40,7 @@ import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.CompletionNotificationAdapter;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Customizer;
-import org.enterprisedomain.classmaker.ModelPair;
+import org.enterprisedomain.classmaker.Models;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.ResourceAdapter;
 import org.enterprisedomain.classmaker.ResourceChangeListener;
@@ -119,8 +119,8 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 			return createStageQualifier();
 		case ClassMakerPackage.STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY:
 			return (EObject) createStageQualifierToCustomizerMapEntry();
-		case ClassMakerPackage.MODEL_PAIR:
-			return createModelPair();
+		case ClassMakerPackage.MODELS:
+			return createModels();
 		case ClassMakerPackage.SCM_REGISTRY:
 			return createSCMRegistry();
 		case ClassMakerPackage.PROJECT:
@@ -329,9 +329,9 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 	 * @generated
 	 */
 	@Override
-	public Project createProject() {
-		ProjectImpl project = new ProjectImpl();
-		return project;
+	public Models createModels() {
+		ModelsImpl models = new ModelsImpl();
+		return models;
 	}
 
 	/**
@@ -340,9 +340,9 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 	 * @generated
 	 */
 	@Override
-	public ModelPair createModelPair() {
-		ModelPairImpl modelPair = new ModelPairImpl();
-		return modelPair;
+	public Project createProject() {
+		ProjectImpl project = new ProjectImpl();
+		return project;
 	}
 
 	/**

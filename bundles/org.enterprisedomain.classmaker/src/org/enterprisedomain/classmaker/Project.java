@@ -134,7 +134,7 @@ public interface Project extends ISchedulingRule, Item {
 	void setProjectName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Children</b></em>' reference list. The list
+	 * Returns the value of the '<em><b>Children</b></em>' attribute list. The list
 	 * contents are of type {@link java.lang.Object}. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Children</em>' attribute list isn't clear, there
@@ -142,8 +142,8 @@ public interface Project extends ISchedulingRule, Item {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
-	 * @return the value of the '<em>Children</em>' reference list.
-	 * @see org.enterprisedomain.EnterpriseDomainPackage#getProject_Children()
+	 * @return the value of the '<em>Children</em>' attribute list.
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject_Children()
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */

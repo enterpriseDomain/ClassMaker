@@ -97,6 +97,15 @@ public interface ClassMakerFactory extends EFactory {
 	StageQualifier createStageQualifier();
 
 	/**
+	 * Returns a new object of class '<em>Models</em>'. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @return a new object of class '<em>Models</em>'.
+	 * @generated
+	 */
+	Models createModels();
+
+	/**
 	 * Returns a new object of class '<em>Project</em>'. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -104,15 +113,6 @@ public interface ClassMakerFactory extends EFactory {
 	 * @generated
 	 */
 	Project createProject();
-
-	/**
-	 * Returns a new object of class '<em>Model Pair</em>'. <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return a new object of class '<em>Model Pair</em>'.
-	 * @generated
-	 */
-	ModelPair createModelPair();
 
 	/**
 	 * Returns a new object of class '<em>SCM Registry</em>'. <!-- begin-user-doc

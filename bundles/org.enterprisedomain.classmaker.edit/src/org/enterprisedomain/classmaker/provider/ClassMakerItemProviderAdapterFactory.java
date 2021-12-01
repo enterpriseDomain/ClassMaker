@@ -330,6 +330,30 @@ public class ClassMakerItemProviderAdapterFactory extends ClassMakerAdapterFacto
 
 	/**
 	 * This keeps track of the one adapter used for all
+	 * {@link org.enterprisedomain.classmaker.Models} instances. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected ModelsItemProvider modelsItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.enterprisedomain.classmaker.Models}.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public Adapter createModelsAdapter() {
+		if (modelsItemProvider == null) {
+			modelsItemProvider = new ModelsItemProvider(this);
+		}
+
+		return modelsItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all
 	 * {@link org.enterprisedomain.classmaker.Project} instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -351,31 +375,6 @@ public class ClassMakerItemProviderAdapterFactory extends ClassMakerAdapterFacto
 		}
 
 		return projectItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all
-	 * {@link org.enterprisedomain.classmaker.ModelPair} instances. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	protected ModelPairItemProvider modelPairItemProvider;
-
-	/**
-	 * This creates an adapter for a
-	 * {@link org.enterprisedomain.classmaker.ModelPair}. <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public Adapter createModelPairAdapter() {
-		if (modelPairItemProvider == null) {
-			modelPairItemProvider = new ModelPairItemProvider(this);
-		}
-
-		return modelPairItemProvider;
 	}
 
 	/**
@@ -676,8 +675,8 @@ public class ClassMakerItemProviderAdapterFactory extends ClassMakerAdapterFacto
 			stageQualifierItemProvider.dispose();
 		if (stageQualifierToCustomizerMapEntryItemProvider != null)
 			stageQualifierToCustomizerMapEntryItemProvider.dispose();
-		if (modelPairItemProvider != null)
-			modelPairItemProvider.dispose();
+		if (modelsItemProvider != null)
+			modelsItemProvider.dispose();
 		if (scmRegistryItemProvider != null)
 			scmRegistryItemProvider.dispose();
 		if (projectItemProvider != null)
