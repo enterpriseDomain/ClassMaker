@@ -28,6 +28,7 @@ import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
@@ -47,7 +48,7 @@ import org.enterprisedomain.classmaker.CompletionNotificationAdapter;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Customizer;
 import org.enterprisedomain.classmaker.Item;
-import org.enterprisedomain.classmaker.ModelPair;
+import org.enterprisedomain.classmaker.Models;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.ResourceAdapter;
 import org.enterprisedomain.classmaker.ResourceChangeListener;
@@ -170,8 +171,10 @@ public class ClassMakerValidator extends EObjectValidator {
 			return validateStageQualifier((StageQualifier) value, diagnostics, context);
 		case ClassMakerPackage.STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY:
 			return validateStageQualifierToCustomizerMapEntry((Map.Entry<?, ?>) value, diagnostics, context);
-		case ClassMakerPackage.MODEL_PAIR:
-			return validateModelPair((ModelPair) value, diagnostics, context);
+		case ClassMakerPackage.MODELS:
+			return validateModels((Models) value, diagnostics, context);
+		case ClassMakerPackage.EMF_PLUGIN:
+			return validateEMFPlugin((EMFPlugin) value, diagnostics, context);
 		case ClassMakerPackage.SCM_OPERATOR:
 			return validateSCMOperator((SCMOperator<?>) value, diagnostics, context);
 		case ClassMakerPackage.SCM_REGISTRY:
@@ -385,8 +388,17 @@ public class ClassMakerValidator extends EObjectValidator {
 	 * 
 	 * @generated
 	 */
-	public boolean validateModelPair(ModelPair modelPair, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(modelPair, diagnostics, context);
+	public boolean validateModels(Models models, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(models, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public boolean validateEMFPlugin(EMFPlugin emfPlugin, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint((EObject) emfPlugin, diagnostics, context);
 	}
 
 	/**

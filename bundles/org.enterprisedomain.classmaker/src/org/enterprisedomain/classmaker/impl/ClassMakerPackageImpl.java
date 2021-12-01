@@ -31,6 +31,7 @@ import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
@@ -56,7 +57,7 @@ import org.enterprisedomain.classmaker.CompletionNotificationAdapter;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Customizer;
 import org.enterprisedomain.classmaker.Item;
-import org.enterprisedomain.classmaker.ModelPair;
+import org.enterprisedomain.classmaker.Models;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.ResourceAdapter;
 import org.enterprisedomain.classmaker.ResourceChangeListener;
@@ -197,14 +198,21 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * 
 	 * @generated
 	 */
-	private EClass projectEClass = null;
+	private EClass modelsEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	private EClass modelPairEClass = null;
+	private EClass emfPluginEClass = null;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private EClass projectEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -1155,6 +1163,76 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
+	public EClass getModels() {
+		return modelsEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public EReference getModels_Dynamic() {
+		return (EReference) modelsEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public EReference getModels_Generated() {
+		return (EReference) modelsEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public EReference getModels_GeneratedEdit() {
+		return (EReference) modelsEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public EReference getModels_GeneratedEditor() {
+		return (EReference) modelsEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public EReference getModels_Parent() {
+		return (EReference) modelsEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public EClass getEMFPlugin() {
+		return emfPluginEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
 	public EClass getProject() {
 		return projectEClass;
 	}
@@ -1327,46 +1405,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	@Override
 	public EReference getProject_ModelResourceAdapter() {
 		return (EReference) projectEClass.getEStructuralFeatures().get(16);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public EClass getModelPair() {
-		return modelPairEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public EReference getModelPair_Dynamic() {
-		return (EReference) modelPairEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public EReference getModelPair_Generated() {
-		return (EReference) modelPairEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public EReference getModelPair_Parent() {
-		return (EReference) modelPairEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1864,10 +1902,14 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		createEReference(stageQualifierToCustomizerMapEntryEClass, STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY__KEY);
 		createEReference(stageQualifierToCustomizerMapEntryEClass, STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY__VALUE);
 
-		modelPairEClass = createEClass(MODEL_PAIR);
-		createEReference(modelPairEClass, MODEL_PAIR__DYNAMIC);
-		createEReference(modelPairEClass, MODEL_PAIR__GENERATED);
-		createEReference(modelPairEClass, MODEL_PAIR__PARENT);
+		modelsEClass = createEClass(MODELS);
+		createEReference(modelsEClass, MODELS__DYNAMIC);
+		createEReference(modelsEClass, MODELS__GENERATED);
+		createEReference(modelsEClass, MODELS__GENERATED_EDIT);
+		createEReference(modelsEClass, MODELS__GENERATED_EDITOR);
+		createEReference(modelsEClass, MODELS__PARENT);
+
+		emfPluginEClass = createEClass(EMF_PLUGIN);
 
 		scmOperatorEClass = createEClass(SCM_OPERATOR);
 		createEAttribute(scmOperatorEClass, SCM_OPERATOR__PROJECT_NAME);
@@ -2170,8 +2212,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getItem_Language(), ecorePackage.getEString(), "language", "", 0, 1, Item.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getItem_DomainModel(), this.getModelPair(), this.getModelPair_Parent(), "domainModel", null, 0,
-				1, Item.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+		initEReference(getItem_DomainModel(), this.getModels(), this.getModels_Parent(), "domainModel", null, 0, 1,
+				Item.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getItem_Customizers(), this.getStageQualifierToCustomizerMapEntry(), null, "customizers", null,
 				0, -1, Item.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
@@ -2339,17 +2381,25 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 				Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(modelPairEClass, ModelPair.class, "ModelPair", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getModelPair_Dynamic(), ecorePackage.getEObject(), null, "dynamic", null, 0, 1, ModelPair.class,
+		initEClass(modelsEClass, Models.class, "Models", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getModels_Dynamic(), ecorePackage.getEObject(), null, "dynamic", null, 0, 1, Models.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getModelPair_Generated(), ecorePackage.getEObject(), null, "generated", null, 0, 1,
-				ModelPair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+		initEReference(getModels_Generated(), ecorePackage.getEObject(), null, "generated", null, 0, 1, Models.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModels_GeneratedEdit(), this.getEMFPlugin(), null, "generatedEdit", null, 0, 1, Models.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModels_GeneratedEditor(), this.getEMFPlugin(), null, "generatedEditor", null, 0, 1,
+				Models.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getModelPair_Parent(), this.getItem(), this.getItem_DomainModel(), "parent", null, 0, 1,
-				ModelPair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+		initEReference(getModels_Parent(), this.getItem(), this.getItem_DomainModel(), "parent", null, 0, 1,
+				Models.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(emfPluginEClass, EMFPlugin.class, "EMFPlugin", IS_ABSTRACT, IS_INTERFACE,
+				!IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(scmOperatorEClass, SCMOperator.class, "SCMOperator", IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);

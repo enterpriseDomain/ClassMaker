@@ -162,7 +162,7 @@ public interface Item extends EObject {
 	 * @model opposite="parent" containment="true" changeable="false" derived="true"
 	 * @generated
 	 */
-	ModelPair getDomainModel();
+	Models getDomainModel();
 
 	/**
 	 * Sets the value of the
@@ -175,7 +175,7 @@ public interface Item extends EObject {
 	 * @see #getDomainModel()
 	 * @generated
 	 */
-	void setDomainModel(ModelPair value);
+	void setDomainModel(Models value);
 
 	/**
 	 * Returns the value of the '<em><b>Customizers</b></em>' map. The key is of

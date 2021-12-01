@@ -66,6 +66,7 @@ import org.eclipse.jgit.api.ResetCommand;
 import org.eclipse.jgit.api.ResetCommand.ResetType;
 import org.eclipse.jgit.api.errors.CheckoutConflictException;
 import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.api.errors.JGitInternalException;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.ReflogEntry;
 import org.eclipse.osgi.util.NLS;
@@ -77,7 +78,7 @@ import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Customizer;
 import org.enterprisedomain.classmaker.Item;
 import org.enterprisedomain.classmaker.Messages;
-import org.enterprisedomain.classmaker.ModelPair;
+import org.enterprisedomain.classmaker.Models;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.ResourceAdapter;
 import org.enterprisedomain.classmaker.ResourceChangeListener;
@@ -224,7 +225,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * @generated
 	 * @ordered
 	 */
-	protected ModelPair domainModel;
+	protected Models domainModel;
 
 	/**
 	 * The default value of the '{@link #getLocale() <em>Locale</em>}' attribute.
@@ -594,7 +595,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * @generated
 	 */
 	@Override
-	public ModelPair getDomainModel() {
+	public Models getDomainModel() {
 		return domainModel;
 	}
 
@@ -603,8 +604,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * 
 	 * @generated
 	 */
-	public NotificationChain basicSetDomainModel(ModelPair newDomainModel, NotificationChain msgs) {
-		ModelPair oldDomainModel = domainModel;
+	public NotificationChain basicSetDomainModel(Models newDomainModel, NotificationChain msgs) {
+		Models oldDomainModel = domainModel;
 		domainModel = newDomainModel;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
@@ -623,15 +624,15 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * @generated
 	 */
 	@Override
-	public void setDomainModel(ModelPair newDomainModel) {
+	public void setDomainModel(Models newDomainModel) {
 		if (newDomainModel != domainModel) {
 			NotificationChain msgs = null;
 			if (domainModel != null)
-				msgs = ((InternalEObject) domainModel).eInverseRemove(this, ClassMakerPackage.MODEL_PAIR__PARENT,
-						ModelPair.class, msgs);
+				msgs = ((InternalEObject) domainModel).eInverseRemove(this, ClassMakerPackage.MODELS__PARENT,
+						Models.class, msgs);
 			if (newDomainModel != null)
-				msgs = ((InternalEObject) newDomainModel).eInverseAdd(this, ClassMakerPackage.MODEL_PAIR__PARENT,
-						ModelPair.class, msgs);
+				msgs = ((InternalEObject) newDomainModel).eInverseAdd(this, ClassMakerPackage.MODELS__PARENT,
+						Models.class, msgs);
 			msgs = basicSetDomainModel(newDomainModel, msgs);
 			if (msgs != null)
 				msgs.dispatch();
@@ -1486,6 +1487,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 						ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(ex));
 					}
 				}
+			} catch (JGitInternalException e) {
 			} catch (Exception e) {
 				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 			} finally {
@@ -1986,7 +1988,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			if (domainModel != null)
 				msgs = ((InternalEObject) domainModel).eInverseRemove(this,
 						EOPPOSITE_FEATURE_BASE - ClassMakerPackage.PROJECT__DOMAIN_MODEL, null, msgs);
-			return basicSetDomainModel((ModelPair) otherEnd, msgs);
+			return basicSetDomainModel((Models) otherEnd, msgs);
 		case ClassMakerPackage.PROJECT__WORKSPACE:
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
@@ -2175,7 +2177,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			setLanguage((String) newValue);
 			return;
 		case ClassMakerPackage.PROJECT__DOMAIN_MODEL:
-			setDomainModel((ModelPair) newValue);
+			setDomainModel((Models) newValue);
 			return;
 		case ClassMakerPackage.PROJECT__CUSTOMIZERS:
 			((EStructuralFeature.Setting) getCustomizers()).set(newValue);
@@ -2247,7 +2249,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			setLanguage(LANGUAGE_EDEFAULT);
 			return;
 		case ClassMakerPackage.PROJECT__DOMAIN_MODEL:
-			setDomainModel((ModelPair) null);
+			setDomainModel((Models) null);
 			return;
 		case ClassMakerPackage.PROJECT__CUSTOMIZERS:
 			getCustomizers().clear();

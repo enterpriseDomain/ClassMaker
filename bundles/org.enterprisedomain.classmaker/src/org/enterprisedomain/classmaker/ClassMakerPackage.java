@@ -96,7 +96,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getProject()
 	 * @generated
 	 */
-	int PROJECT = 19;
+	int PROJECT = 20;
 
 	/**
 	 * The feature id for the '<em><b>Model Name</b></em>' attribute. <!--
@@ -1480,23 +1480,23 @@ public interface ClassMakerPackage extends EPackage {
 
 	/**
 	 * The meta object id for the
-	 * '{@link org.enterprisedomain.classmaker.impl.ModelPairImpl <em>Model
-	 * Pair</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * '{@link org.enterprisedomain.classmaker.impl.ModelsImpl <em>Models</em>}'
+	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.enterprisedomain.classmaker.impl.ModelPairImpl
-	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getModelPair()
+	 * @see org.enterprisedomain.classmaker.impl.ModelsImpl
+	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getModels()
 	 * @generated
 	 */
-	int MODEL_PAIR = 16;
+	int MODELS = 16;
 
 	/**
-	 * The feature id for the '<em><b>Dynamic</b></em>' reference. <!--
+	 * The feature id for the '<em><b>Dynamic</b></em>' containment reference. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_PAIR__DYNAMIC = 0;
+	int MODELS__DYNAMIC = 0;
 
 	/**
 	 * The feature id for the '<em><b>Generated</b></em>' reference. <!--
@@ -1505,7 +1505,25 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_PAIR__GENERATED = 1;
+	int MODELS__GENERATED = 1;
+
+	/**
+	 * The feature id for the '<em><b>Generated Edit</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int MODELS__GENERATED_EDIT = 2;
+
+	/**
+	 * The feature id for the '<em><b>Generated Editor</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int MODELS__GENERATED_EDITOR = 3;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference. <!--
@@ -1514,16 +1532,35 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_PAIR__PARENT = 2;
+	int MODELS__PARENT = 4;
 
 	/**
-	 * The number of structural features of the '<em>Model Pair</em>' class. <!--
+	 * The number of structural features of the '<em>Models</em>' class. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_PAIR_FEATURE_COUNT = 3;
+	int MODELS_FEATURE_COUNT = 5;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.emf.common.EMFPlugin <em>EMF
+	 * Plugin</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see org.eclipse.emf.common.EMFPlugin
+	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getEMFPlugin()
+	 * @generated
+	 */
+	int EMF_PLUGIN = 17;
+
+	/**
+	 * The number of structural features of the '<em>EMF Plugin</em>' class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_PLUGIN_FEATURE_COUNT = 0;
 
 	/**
 	 * The meta object id for the
@@ -1534,7 +1571,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getSCMOperator()
 	 * @generated
 	 */
-	int SCM_OPERATOR = 17;
+	int SCM_OPERATOR = 18;
 
 	/**
 	 * The feature id for the '<em><b>Project Name</b></em>' attribute. <!--
@@ -1572,7 +1609,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getSCMRegistry()
 	 * @generated
 	 */
-	int SCM_REGISTRY = 18;
+	int SCM_REGISTRY = 19;
 
 	/**
 	 * The number of structural features of the '<em>SCM Registry</em>' class. <!--
@@ -1591,7 +1628,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getResource()
 	 * @generated
 	 */
-	int RESOURCE = 20;
+	int RESOURCE = 21;
 
 	/**
 	 * The number of structural features of the '<em>Resource</em>' class. <!--
@@ -1612,7 +1649,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getResourceChangeListener()
 	 * @generated
 	 */
-	int RESOURCE_CHANGE_LISTENER = 21;
+	int RESOURCE_CHANGE_LISTENER = 22;
 
 	/**
 	 * The number of structural features of the '<em>Resource Change Listener</em>'
@@ -1631,7 +1668,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getNotification()
 	 * @generated
 	 */
-	int NOTIFICATION = 22;
+	int NOTIFICATION = 23;
 
 	/**
 	 * The number of structural features of the '<em>Notification</em>' class. <!--
@@ -1650,7 +1687,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getNotifier()
 	 * @generated
 	 */
-	int NOTIFIER = 23;
+	int NOTIFIER = 24;
 
 	/**
 	 * The number of structural features of the '<em>Notifier</em>' class. <!--
@@ -1671,7 +1708,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getCompletionListener()
 	 * @generated
 	 */
-	int COMPLETION_LISTENER = 24;
+	int COMPLETION_LISTENER = 25;
 
 	/**
 	 * The number of structural features of the '<em>Completion Listener</em>'
@@ -1691,7 +1728,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getWorker()
 	 * @generated
 	 */
-	int WORKER = 29;
+	int WORKER = 30;
 
 	/**
 	 * The meta object id for the
@@ -1702,7 +1739,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getResourceAdapter()
 	 * @generated
 	 */
-	int RESOURCE_ADAPTER = 25;
+	int RESOURCE_ADAPTER = 26;
 
 	/**
 	 * The feature id for the '<em><b>Resource</b></em>' reference. <!--
@@ -1749,7 +1786,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getClassMakerService()
 	 * @generated
 	 */
-	int CLASS_MAKER_SERVICE = 26;
+	int CLASS_MAKER_SERVICE = 27;
 
 	/**
 	 * The feature id for the '<em><b>Workspace</b></em>' reference. <!--
@@ -1778,7 +1815,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getBlueprint()
 	 * @generated
 	 */
-	int BLUEPRINT = 27;
+	int BLUEPRINT = 28;
 
 	/**
 	 * The feature id for the '<em><b>Dynamic Model</b></em>' reference. <!--
@@ -1844,7 +1881,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getCompletionNotificationAdapter()
 	 * @generated
 	 */
-	int COMPLETION_NOTIFICATION_ADAPTER = 28;
+	int COMPLETION_NOTIFICATION_ADAPTER = 29;
 
 	/**
 	 * The feature id for the '<em><b>Error</b></em>' attribute. <!-- begin-user-doc
@@ -1892,7 +1929,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getSelectRevealHandler()
 	 * @generated
 	 */
-	int SELECT_REVEAL_HANDLER = 30;
+	int SELECT_REVEAL_HANDLER = 31;
 
 	/**
 	 * The number of structural features of the '<em>Select Reveal Handler</em>'
@@ -1911,7 +1948,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getLocale()
 	 * @generated
 	 */
-	int LOCALE = 42;
+	int LOCALE = 43;
 
 	/**
 	 * The meta object id for the '{@link org.enterprisedomain.classmaker.Stage
@@ -1921,7 +1958,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getStage()
 	 * @generated
 	 */
-	int STAGE = 31;
+	int STAGE = 32;
 
 	/**
 	 * The meta object id for the '<em>Properties</em>' data type. <!--
@@ -1931,7 +1968,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getProperties()
 	 * @generated
 	 */
-	int PROPERTIES = 32;
+	int PROPERTIES = 33;
 
 	/**
 	 * The meta object id for the '<em>IProgress Monitor</em>' data type. <!--
@@ -1941,7 +1978,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getIProgressMonitor()
 	 * @generated
 	 */
-	int IPROGRESS_MONITOR = 33;
+	int IPROGRESS_MONITOR = 34;
 
 	/**
 	 * The meta object id for the '<em>OS Gi Version</em>' data type. <!--
@@ -1951,7 +1988,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getOSGiVersion()
 	 * @generated
 	 */
-	int OS_GI_VERSION = 34;
+	int OS_GI_VERSION = 35;
 
 	/**
 	 * The meta object id for the '<em>Semaphore</em>' data type. <!--
@@ -1961,7 +1998,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getSemaphore()
 	 * @generated
 	 */
-	int SEMAPHORE = 35;
+	int SEMAPHORE = 36;
 
 	/**
 	 * The meta object id for the '<em>Core Exception</em>' data type. <!--
@@ -1971,7 +2008,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getCoreException()
 	 * @generated
 	 */
-	int CORE_EXCEPTION = 36;
+	int CORE_EXCEPTION = 37;
 
 	/**
 	 * The meta object id for the '<em>Invocation Target Exception</em>' data type.
@@ -1981,7 +2018,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getInvocationTargetException()
 	 * @generated
 	 */
-	int INVOCATION_TARGET_EXCEPTION = 37;
+	int INVOCATION_TARGET_EXCEPTION = 38;
 
 	/**
 	 * The meta object id for the '<em>IStatus</em>' data type. <!-- begin-user-doc
@@ -1991,7 +2028,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getIStatus()
 	 * @generated
 	 */
-	int ISTATUS = 38;
+	int ISTATUS = 39;
 
 	/**
 	 * The meta object id for the '<em>URI</em>' data type. <!-- begin-user-doc -->
@@ -2001,7 +2038,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getURI()
 	 * @generated
 	 */
-	int URI = 39;
+	int URI = 40;
 
 	/**
 	 * The meta object id for the '<em>Name</em>' data type. <!-- begin-user-doc -->
@@ -2011,7 +2048,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getName_()
 	 * @generated
 	 */
-	int NAME = 40;
+	int NAME = 41;
 
 	/**
 	 * The meta object id for the '<em>Exception</em>' data type. <!--
@@ -2021,7 +2058,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getException()
 	 * @generated
 	 */
-	int EXCEPTION = 41;
+	int EXCEPTION = 42;
 
 	/**
 	 * Returns the meta object for class
@@ -2854,6 +2891,88 @@ public interface ClassMakerPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for class
+	 * '{@link org.enterprisedomain.classmaker.Models <em>Models</em>}'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for class '<em>Models</em>'.
+	 * @see org.enterprisedomain.classmaker.Models
+	 * @generated
+	 */
+	EClass getModels();
+
+	/**
+	 * Returns the meta object for the containment reference
+	 * '{@link org.enterprisedomain.classmaker.Models#getDynamic <em>Dynamic</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the containment reference '<em>Dynamic</em>'.
+	 * @see org.enterprisedomain.classmaker.Models#getDynamic()
+	 * @see #getModels()
+	 * @generated
+	 */
+	EReference getModels_Dynamic();
+
+	/**
+	 * Returns the meta object for the reference
+	 * '{@link org.enterprisedomain.classmaker.Models#getGenerated
+	 * <em>Generated</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the reference '<em>Generated</em>'.
+	 * @see org.enterprisedomain.classmaker.Models#getGenerated()
+	 * @see #getModels()
+	 * @generated
+	 */
+	EReference getModels_Generated();
+
+	/**
+	 * Returns the meta object for the reference
+	 * '{@link org.enterprisedomain.classmaker.Models#getGeneratedEdit <em>Generated
+	 * Edit</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the reference '<em>Generated Edit</em>'.
+	 * @see org.enterprisedomain.classmaker.Models#getGeneratedEdit()
+	 * @see #getModels()
+	 * @generated
+	 */
+	EReference getModels_GeneratedEdit();
+
+	/**
+	 * Returns the meta object for the reference
+	 * '{@link org.enterprisedomain.classmaker.Models#getGeneratedEditor
+	 * <em>Generated Editor</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the reference '<em>Generated Editor</em>'.
+	 * @see org.enterprisedomain.classmaker.Models#getGeneratedEditor()
+	 * @see #getModels()
+	 * @generated
+	 */
+	EReference getModels_GeneratedEditor();
+
+	/**
+	 * Returns the meta object for the container reference
+	 * '{@link org.enterprisedomain.classmaker.Models#getParent <em>Parent</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the container reference '<em>Parent</em>'.
+	 * @see org.enterprisedomain.classmaker.Models#getParent()
+	 * @see #getModels()
+	 * @generated
+	 */
+	EReference getModels_Parent();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.emf.common.EMFPlugin
+	 * <em>EMF Plugin</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for class '<em>EMF Plugin</em>'.
+	 * @see org.eclipse.emf.common.EMFPlugin
+	 * @model instanceClass="org.eclipse.emf.common.EMFPlugin"
+	 * @generated
+	 */
+	EClass getEMFPlugin();
+
+	/**
+	 * Returns the meta object for class
 	 * '{@link org.enterprisedomain.classmaker.Project <em>Project</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -3075,53 +3194,6 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getProject_ModelResourceAdapter();
-
-	/**
-	 * Returns the meta object for class
-	 * '{@link org.enterprisedomain.classmaker.ModelPair <em>Model Pair</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for class '<em>Model Pair</em>'.
-	 * @see org.enterprisedomain.classmaker.ModelPair
-	 * @generated
-	 */
-	EClass getModelPair();
-
-	/**
-	 * Returns the meta object for the containment reference
-	 * '{@link org.enterprisedomain.classmaker.ModelPair#getDynamic
-	 * <em>Dynamic</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for the containment reference '<em>Dynamic</em>'.
-	 * @see org.enterprisedomain.classmaker.ModelPair#getDynamic()
-	 * @see #getModelPair()
-	 * @generated
-	 */
-	EReference getModelPair_Dynamic();
-
-	/**
-	 * Returns the meta object for the reference
-	 * '{@link org.enterprisedomain.classmaker.ModelPair#getGenerated
-	 * <em>Generated</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for the reference '<em>Generated</em>'.
-	 * @see org.enterprisedomain.classmaker.ModelPair#getGenerated()
-	 * @see #getModelPair()
-	 * @generated
-	 */
-	EReference getModelPair_Generated();
-
-	/**
-	 * Returns the meta object for the container reference
-	 * '{@link org.enterprisedomain.classmaker.ModelPair#getParent
-	 * <em>Parent</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for the container reference '<em>Parent</em>'.
-	 * @see org.enterprisedomain.classmaker.ModelPair#getParent()
-	 * @see #getModelPair()
-	 * @generated
-	 */
-	EReference getModelPair_Parent();
 
 	/**
 	 * Returns the meta object for class
@@ -4209,6 +4281,67 @@ public interface ClassMakerPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the
+		 * '{@link org.enterprisedomain.classmaker.impl.ModelsImpl <em>Models</em>}'
+		 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @see org.enterprisedomain.classmaker.impl.ModelsImpl
+		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getModels()
+		 * @generated
+		 */
+		EClass MODELS = eINSTANCE.getModels();
+
+		/**
+		 * The meta object literal for the '<em><b>Dynamic</b></em>' containment
+		 * reference feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference MODELS__DYNAMIC = eINSTANCE.getModels_Dynamic();
+
+		/**
+		 * The meta object literal for the '<em><b>Generated</b></em>' reference
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference MODELS__GENERATED = eINSTANCE.getModels_Generated();
+
+		/**
+		 * The meta object literal for the '<em><b>Generated Edit</b></em>' reference
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference MODELS__GENERATED_EDIT = eINSTANCE.getModels_GeneratedEdit();
+
+		/**
+		 * The meta object literal for the '<em><b>Generated Editor</b></em>' reference
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference MODELS__GENERATED_EDITOR = eINSTANCE.getModels_GeneratedEditor();
+
+		/**
+		 * The meta object literal for the '<em><b>Parent</b></em>' container reference
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference MODELS__PARENT = eINSTANCE.getModels_Parent();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.emf.common.EMFPlugin
+		 * <em>EMF Plugin</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @see org.eclipse.emf.common.EMFPlugin
+		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getEMFPlugin()
+		 * @generated
+		 */
+		EClass EMF_PLUGIN = eINSTANCE.getEMFPlugin();
+
+		/**
+		 * The meta object literal for the
 		 * '{@link org.enterprisedomain.classmaker.impl.ProjectImpl <em>Project</em>}'
 		 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
@@ -4355,41 +4488,6 @@ public interface ClassMakerPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PROJECT__MODEL_RESOURCE_ADAPTER = eINSTANCE.getProject_ModelResourceAdapter();
-
-		/**
-		 * The meta object literal for the
-		 * '{@link org.enterprisedomain.classmaker.impl.ModelPairImpl <em>Model
-		 * Pair</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
-		 * @see org.enterprisedomain.classmaker.impl.ModelPairImpl
-		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getModelPair()
-		 * @generated
-		 */
-		EClass MODEL_PAIR = eINSTANCE.getModelPair();
-
-		/**
-		 * The meta object literal for the '<em><b>Dynamic</b></em>' containment
-		 * reference feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
-		 * @generated
-		 */
-		EReference MODEL_PAIR__DYNAMIC = eINSTANCE.getModelPair_Dynamic();
-
-		/**
-		 * The meta object literal for the '<em><b>Generated</b></em>' reference
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
-		 * @generated
-		 */
-		EReference MODEL_PAIR__GENERATED = eINSTANCE.getModelPair_Generated();
-
-		/**
-		 * The meta object literal for the '<em><b>Parent</b></em>' container reference
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
-		 * @generated
-		 */
-		EReference MODEL_PAIR__PARENT = eINSTANCE.getModelPair_Parent();
 
 		/**
 		 * The meta object literal for the

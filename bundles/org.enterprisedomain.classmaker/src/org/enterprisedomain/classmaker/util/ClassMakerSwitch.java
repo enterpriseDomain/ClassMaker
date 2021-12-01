@@ -21,6 +21,7 @@ import java.util.concurrent.Future;
 
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
@@ -36,7 +37,7 @@ import org.enterprisedomain.classmaker.CompletionNotificationAdapter;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Customizer;
 import org.enterprisedomain.classmaker.Item;
-import org.enterprisedomain.classmaker.ModelPair;
+import org.enterprisedomain.classmaker.Models;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.ResourceAdapter;
 import org.enterprisedomain.classmaker.ResourceChangeListener;
@@ -235,9 +236,16 @@ public class ClassMakerSwitch<T1> extends Switch<T1> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case ClassMakerPackage.MODEL_PAIR: {
-			ModelPair modelPair = (ModelPair) theEObject;
-			T1 result = caseModelPair(modelPair);
+		case ClassMakerPackage.MODELS: {
+			Models models = (Models) theEObject;
+			T1 result = caseModels(models);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ClassMakerPackage.EMF_PLUGIN: {
+			EMFPlugin emfPlugin = (EMFPlugin) theEObject;
+			T1 result = caseEMFPlugin(emfPlugin);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -605,6 +613,36 @@ public class ClassMakerSwitch<T1> extends Switch<T1> {
 
 	/**
 	 * Returns the result of interpreting the object as an instance of
+	 * '<em>Models</em>'. <!-- begin-user-doc --> This implementation returns null;
+	 * returning a non-null result will terminate the switch. <!-- end-user-doc -->
+	 * 
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of
+	 *         '<em>Models</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseModels(Models object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>EMF
+	 * Plugin</em>'. <!-- begin-user-doc --> This implementation returns null;
+	 * returning a non-null result will terminate the switch. <!-- end-user-doc -->
+	 * 
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>EMF
+	 *         Plugin</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseEMFPlugin(EMFPlugin object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of
 	 * '<em>Project</em>'. <!-- begin-user-doc --> This implementation returns null;
 	 * returning a non-null result will terminate the switch. <!-- end-user-doc -->
 	 * 
@@ -615,21 +653,6 @@ public class ClassMakerSwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public T1 caseProject(Project object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Model
-	 * Pair</em>'. <!-- begin-user-doc --> This implementation returns null;
-	 * returning a non-null result will terminate the switch. <!-- end-user-doc -->
-	 * 
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Model
-	 *         Pair</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T1 caseModelPair(ModelPair object) {
 		return null;
 	}
 

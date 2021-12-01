@@ -18,6 +18,7 @@ import java.util.Locale;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EMap;
@@ -33,7 +34,7 @@ import org.enterprisedomain.classmaker.ClassMakerFactory;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.Customizer;
 import org.enterprisedomain.classmaker.Item;
-import org.enterprisedomain.classmaker.ModelPair;
+import org.enterprisedomain.classmaker.Models;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.StageQualifier;
@@ -145,7 +146,7 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	 * @generated
 	 * @ordered
 	 */
-	protected ModelPair domainModel;
+	protected Models domainModel;
 
 	/**
 	 * The default value of the '{@link #getLocale() <em>Locale</em>}' attribute.
@@ -167,7 +168,7 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	 */
 	protected ItemImpl() {
 		super();
-		ClassMakerFactory.eINSTANCE.createModelPair().setParent(this);
+		ClassMakerFactory.eINSTANCE.createModels().setParent(this);
 	}
 
 	/**
@@ -320,7 +321,7 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	 * @generated
 	 */
 	@Override
-	public ModelPair getDomainModel() {
+	public Models getDomainModel() {
 		return domainModel;
 	}
 
@@ -329,8 +330,8 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	 * 
 	 * @generated
 	 */
-	public NotificationChain basicSetDomainModel(ModelPair newDomainModel, NotificationChain msgs) {
-		ModelPair oldDomainModel = domainModel;
+	public NotificationChain basicSetDomainModel(Models newDomainModel, NotificationChain msgs) {
+		Models oldDomainModel = domainModel;
 		domainModel = newDomainModel;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
@@ -349,15 +350,15 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	 * @generated
 	 */
 	@Override
-	public void setDomainModel(ModelPair newDomainModel) {
+	public void setDomainModel(Models newDomainModel) {
 		if (newDomainModel != domainModel) {
 			NotificationChain msgs = null;
 			if (domainModel != null)
-				msgs = ((InternalEObject) domainModel).eInverseRemove(this, ClassMakerPackage.MODEL_PAIR__PARENT,
-						ModelPair.class, msgs);
+				msgs = ((InternalEObject) domainModel).eInverseRemove(this, ClassMakerPackage.MODELS__PARENT,
+						Models.class, msgs);
 			if (newDomainModel != null)
-				msgs = ((InternalEObject) newDomainModel).eInverseAdd(this, ClassMakerPackage.MODEL_PAIR__PARENT,
-						ModelPair.class, msgs);
+				msgs = ((InternalEObject) newDomainModel).eInverseAdd(this, ClassMakerPackage.MODELS__PARENT,
+						Models.class, msgs);
 			msgs = basicSetDomainModel(newDomainModel, msgs);
 			if (msgs != null)
 				msgs.dispatch();
@@ -443,10 +444,23 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 		setModelName(from.getModelName());
 		setLanguage(from.getLanguage());
 		EObject eObject = null;
-		if (from.getDomainModel() != null)
+		EObject eGenObject = null;
+		EMFPlugin eEditObject = null;
+		EMFPlugin eEditorObject = null;
+		if (from.getDomainModel() != null) {
 			eObject = from.getDomainModel().getDynamic();
+			eGenObject = from.getDomainModel().getGenerated();
+			eEditObject = from.getDomainModel().getGeneratedEdit();
+			eEditorObject = from.getDomainModel().getGeneratedEditor();
+		}
 		if (eObject != null)
 			getDomainModel().setDynamic(EcoreUtil.copy(eObject));
+		if (eGenObject != null)
+			getDomainModel().setGenerated(EcoreUtil.copy(eGenObject));
+		if (eEditObject != null)
+			getDomainModel().setGeneratedEdit(eEditObject);
+		if (eEditorObject != null)
+			getDomainModel().setGeneratedEditor(eEditorObject);
 	}
 
 	/**
@@ -461,7 +475,7 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 			if (domainModel != null)
 				msgs = ((InternalEObject) domainModel).eInverseRemove(this,
 						EOPPOSITE_FEATURE_BASE - ClassMakerPackage.ITEM__DOMAIN_MODEL, null, msgs);
-			return basicSetDomainModel((ModelPair) otherEnd, msgs);
+			return basicSetDomainModel((Models) otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -535,7 +549,7 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 			setLanguage((String) newValue);
 			return;
 		case ClassMakerPackage.ITEM__DOMAIN_MODEL:
-			setDomainModel((ModelPair) newValue);
+			setDomainModel((Models) newValue);
 			return;
 		case ClassMakerPackage.ITEM__CUSTOMIZERS:
 			((EStructuralFeature.Setting) getCustomizers()).set(newValue);
@@ -571,7 +585,7 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 			setLanguage(LANGUAGE_EDEFAULT);
 			return;
 		case ClassMakerPackage.ITEM__DOMAIN_MODEL:
-			setDomainModel((ModelPair) null);
+			setDomainModel((Models) null);
 			return;
 		case ClassMakerPackage.ITEM__CUSTOMIZERS:
 			getCustomizers().clear();

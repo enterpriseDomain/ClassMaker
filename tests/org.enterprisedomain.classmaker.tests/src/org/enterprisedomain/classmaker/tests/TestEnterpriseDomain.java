@@ -575,6 +575,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		EClass clazz = (EClass) p2.getEClassifier(getClassName());
 		clazz.getEStructuralFeatures().remove(clazz.getEStructuralFeature(getAttributeName()));
 		EPackage g = (EPackage) service.replace(p, p2, getProgressMonitor());
+		assertNotNull(g);
 		EClass gClazz = (EClass) g.getEClassifier(getClassName());
 		EObject o = g.getEFactoryInstance().create(gClazz);
 		assertNull(gClazz.getEStructuralFeature(getAttributeName()));
