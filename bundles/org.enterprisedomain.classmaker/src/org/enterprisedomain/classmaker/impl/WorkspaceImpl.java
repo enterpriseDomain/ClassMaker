@@ -374,6 +374,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 					options.put(XMLResource.OPTION_PROCESS_DANGLING_HREF,
 							XMLResource.OPTION_PROCESS_DANGLING_HREF_RECORD);
 					options.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_FILE_BUFFER);
+					options.put(XMLResource.OPTION_ENCODING, "UTF-8");
 					try {
 						if (msg.getNewValue() == null)
 							return;
@@ -403,11 +404,13 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 				Project project = null;
 				try {
 					eProject.open(ClassMakerPlugin.getProgressMonitor());
-					if (eProject.hasNature(ClassMakerPlugin.NATURE_ID)) {
+					if (eProject.hasNature(ClassMakerPlugin.CONTRIBUTION_NATURE_ID)) {
 						project = ClassMakerFactory.eINSTANCE.createContribution();
-					} else {
+					} else if (eProject.hasNature(ClassMakerPlugin.NATURE_ID)) {
 						project = ClassMakerFactory.eINSTANCE.createProject();
 						edProjects.put(eProject, project);
+						continue;
+					} else {
 						continue;
 					}
 					project.setProjectName(eProject.getName());

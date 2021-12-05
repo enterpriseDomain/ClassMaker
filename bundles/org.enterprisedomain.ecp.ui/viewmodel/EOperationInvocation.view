@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <org.eclipse.emf.ecp.view.model:View xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:org.eclipse.emf.ecp.view.model="http://org/eclipse/emf/ecp/view/model/1180" xmi:id="_S5cIoPWwEeqPneSuEVrPXA" name="EOperationInvocation">
-  <rootEClass href="http://org/enterprisedomain/ClassMaker/ECP/0.8.37#//EOperationInvocation"/>
+  <rootEClass href="http://org/enterprisedomain/ClassMaker/ECP/0.8.46#//EOperationInvocation"/>
   <children xsi:type="org.eclipse.emf.ecp.view.model:Control" xmi:id="_S52_YPWwEeqPneSuEVrPXA" name="eOperation" readonly="true">
     <domainModelReference xsi:type="org.eclipse.emf.ecp.view.model:FeaturePathDomainModelReference" xmi:id="_S52_YfWwEeqPneSuEVrPXA">
-      <domainModelEFeature xsi:type="ecore:EReference" href="http://org/enterprisedomain/ClassMaker/ECP/0.8.37#//EOperationInvocation/eOperation"/>
+      <domainModelEFeature xsi:type="ecore:EReference" href="http://org/enterprisedomain/ClassMaker/ECP/0.8.46#//EOperationInvocation/eOperation"/>
     </domainModelReference>
   </children>
   <children xsi:type="org.eclipse.emf.ecp.view.model:Control" xmi:id="_S52_YvWwEeqPneSuEVrPXA" name="arguments">
     <domainModelReference xsi:type="org.eclipse.emf.ecp.view.model:FeaturePathDomainModelReference" xmi:id="_kDXmcArXEeuaZtscqoCi9Q">
-      <domainModelEFeature xsi:type="ecore:EReference" href="http://org/enterprisedomain/ClassMaker/ECP/0.8.37#//EOperationInvocation/arguments"/>
+      <domainModelEFeature xsi:type="ecore:EReference" href="http://org/enterprisedomain/ClassMaker/ECP/0.8.46#//EOperationInvocation/arguments"/>
     </domainModelReference>
   </children>
   <children xsi:type="org.eclipse.emf.ecp.view.model:Control" xmi:id="_8-L3sAiGEeuHQ8d4PiVRiQ" name="result">
     <domainModelReference xsi:type="org.eclipse.emf.ecp.view.model:FeaturePathDomainModelReference" xmi:id="_CPlf4AiHEeuHQ8d4PiVRiQ">
-      <domainModelEFeature xsi:type="ecore:EAttribute" href="http://org/enterprisedomain/ClassMaker/ECP/0.8.37#//EOperationInvocation/result"/>
+      <domainModelEFeature xsi:type="ecore:EAttribute" href="http://org/enterprisedomain/ClassMaker/ECP/0.8.46#//EOperationInvocation/result"/>
     </domainModelReference>
   </children>
   <ecorePaths>/bundles/org.enterprisedomain.ecp/model/ECP.ecore</ecorePaths>

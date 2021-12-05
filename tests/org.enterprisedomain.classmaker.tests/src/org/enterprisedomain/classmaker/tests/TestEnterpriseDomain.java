@@ -27,6 +27,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -58,6 +59,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.enterprisedomain.classmaker.Blueprint;
 import org.enterprisedomain.classmaker.ClassMakerFactory;
 import org.enterprisedomain.classmaker.ClassMakerService;
@@ -612,7 +614,9 @@ public class TestEnterpriseDomain extends AbstractTest {
 		ResourceSet resourceSet = service.getWorkspace().getResourceSet();
 		Resource resource0 = resourceSet.createResource(resourceURI);
 		resource0.getContents().add(p0);
-		resource0.save(Collections.emptyMap());
+		Map<String, String> options = new HashMap<String, String>();
+		options.put(XMLResource.OPTION_ENCODING, "UTF-8");
+		resource0.save(options);
 		EPackage r = (EPackage) service.make(p0, getProgressMonitor());
 		assertNotNull(r);
 

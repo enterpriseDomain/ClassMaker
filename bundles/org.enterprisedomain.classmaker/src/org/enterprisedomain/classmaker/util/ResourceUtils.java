@@ -153,7 +153,10 @@ public class ResourceUtils {
 		if (oldElements.length == 0)
 			return oldElements;
 		String[] newNatures = new String[oldElements.length - 1];
-		int index = Arrays.binarySearch(oldElements, element);
+		int index = 0;
+		for (int i = 0; i < oldElements.length; i++)
+			if (oldElements[i].equals(element))
+				index = i;
 		System.arraycopy(oldElements, index + 1, newNatures, index, oldElements.length - 1 - index);
 		return newNatures;
 	}

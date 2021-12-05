@@ -371,7 +371,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		String projectName = getProjectName();
 		IProject project = workspace.getRoot().getProject(projectName);
-		ResourceUtils.addProjectNature(project, ClassMakerPlugin.NATURE_ID);
+		ResourceUtils.addProjectNature(project, ClassMakerPlugin.CONTRIBUTION_NATURE_ID);
 	}
 
 	/**

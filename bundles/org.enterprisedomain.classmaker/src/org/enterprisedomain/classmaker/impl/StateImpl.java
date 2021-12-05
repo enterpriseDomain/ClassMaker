@@ -20,6 +20,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -59,6 +61,7 @@ import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.xmi.PackageNotFoundException;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.LogCommand;
 import org.eclipse.jgit.api.errors.CheckoutConflictException;
@@ -866,7 +869,11 @@ public class StateImpl extends ItemImpl implements State {
 			setPhase(Stage.MODELED);
 		}
 		try {
-			resource.save(Collections.emptyMap());
+			if (!resource.getContents().isEmpty()) {
+				Map<String, String> options = new HashMap<String, String>();
+				options.put(XMLResource.OPTION_ENCODING, "UTF-8");
+				resource.save(options);
+			}
 		} catch (IOException e) {
 			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createWarningStatus(e));
 		} finally {
@@ -953,7 +960,7 @@ public class StateImpl extends ItemImpl implements State {
 					if (!project.isOpen())
 						project.open(m);
 				} else {
-					ResourceUtils.createProject(project, ClassMakerPlugin.NATURE_ID, wrappingMonitor);
+					ResourceUtils.createProject(project, ClassMakerPlugin.CONTRIBUTION_NATURE_ID, wrappingMonitor);
 				}
 
 				getStrategy().configureJobs(getStrategy().getGenerators().isEmpty(), wrappingMonitor);

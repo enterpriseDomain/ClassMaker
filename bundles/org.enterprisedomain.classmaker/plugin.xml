@@ -12,18 +12,18 @@
    <extension-point id="stages" name="Work Customization Stages" schema="schema/stages.exsd"/>
    <extension-point id="customizers" name="Work Stage Customizers" schema="schema/customizers.exsd"/>
    <extension
-         id="projectNature"
-         name="enterpriseDomain Project Nature"
+         id="contributionProjectNature"
+         name="enterpriseDomain Contribution Project Nature"
          point="org.eclipse.core.resources.natures">
       <runtime>
          <run
-               class="org.enterprisedomain.classmaker.core.ProjectNature">
+               class="org.enterprisedomain.classmaker.core.ContributionProjectNature">
          </run>
       </runtime>
    </extension>
    <extension
-         id="projectBuilder"
-         name="enterpriseDomain Project Builder"
+         id="contributionProjectBuilder"
+         name="enterpriseDomain Contribution Project Builder"
          point="org.eclipse.core.resources.builders">
          <builder>
             <run 
@@ -58,6 +58,13 @@
       <factory
             adaptableType="org.enterprisedomain.classmaker.Contribution"
             class="org.enterprisedomain.classmaker.util.ContributionAdapterFactory">
+         <adapter
+               type="org.eclipse.emf.ecore.resource.Resource">
+         </adapter>
+      </factory>
+      <factory
+            adaptableType="org.enterprisedomain.classmaker.Project"
+            class="org.enterprisedomain.classmaker.util.ProjectAdapterFactory">
          <adapter
                type="org.eclipse.emf.ecore.resource.Resource">
          </adapter>
@@ -123,5 +130,15 @@
             rank="2"
             stage="org.enterprisedomain.classmaker.customization.stages.workspace.init">
       </customizer>
+   </extension>
+   <extension
+         id="projectNature"
+         name="enterpriseDomain Project Nature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="org.enterprisedomain.classmaker.core.ProjectNature">
+         </run>
+      </runtime>
    </extension>
 </plugin>

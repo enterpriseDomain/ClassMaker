@@ -20,10 +20,12 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Locale;
+import java.util.Map;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
@@ -59,6 +61,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.util.NotifyingInternalEListImpl;
 import org.eclipse.emf.ecore.xmi.PackageNotFoundException;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.ListBranchCommand;
 import org.eclipse.jgit.api.ReflogCommand;
@@ -1275,7 +1278,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		String projectName = getProjectName();
 		IProject project = workspace.getRoot().getProject(projectName);
-		ResourceUtils.createProject(project, null, monitor);
+		ResourceUtils.createProject(project, ClassMakerPlugin.NATURE_ID, monitor);
 	}
 
 	/**
@@ -1323,7 +1326,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			}
 		}
 		try {
-			((Resource) getChildren().get(0)).save(Collections.emptyMap());
+			Map<String, String> options = new HashMap<String, String>();
+			options.put(XMLResource.OPTION_ENCODING, "UTF-8");
+			((Resource) getChildren().get(0)).save(options);
 		} catch (IOException e) {
 			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 		}
@@ -1813,7 +1818,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			getRevision().getState().setResource(resource);
 		if (commit)
 			try {
-				resource.save(Collections.emptyMap());
+				Map<String, String> options = new HashMap<String, String>();
+				options.put(XMLResource.OPTION_ENCODING, "UTF-8");
+				resource.save(options);
 			} catch (IOException e) {
 				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 			}

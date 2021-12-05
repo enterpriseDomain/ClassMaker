@@ -93,6 +93,9 @@
          <adapter
                type="org.enterprisedomain.classmaker.Contribution">
          </adapter>
+         <adapter
+               type="org.enterprisedomain.classmaker.Project">
+         </adapter>
       </factory>
    </extension>
    <extension
