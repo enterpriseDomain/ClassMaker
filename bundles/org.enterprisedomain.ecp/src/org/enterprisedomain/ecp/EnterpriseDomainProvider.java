@@ -62,6 +62,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecp.core.ECPProject;
 import org.eclipse.emf.ecp.core.ECPRepository;
 import org.eclipse.emf.ecp.core.util.ECPContainer;
@@ -135,7 +136,9 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 			Project domainProject = Activator.getClassMaker().getWorkspace().getProject(resource);
 			if (domainProject != null && !(domainProject instanceof Contribution)) {
 				try {
-					resource.save(Collections.emptyMap());
+					Map<String, String> options = new HashMap<String, String>();
+					options.put(XMLResource.OPTION_ENCODING, "UTF-8");
+					resource.save(options);
 				} catch (final IOException ex) {
 					Activator.log(ex);
 				}
@@ -523,8 +526,8 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 				}
 
 			});
-			if (((Contribution) result).getDomainModel().getGenerated() instanceof EPackage)
-				addVisiblePackage(project, (EPackage) ((Contribution) result).getDomainModel().getGenerated());
+			if (result.getDomainModel().getGenerated() instanceof EPackage)
+				addVisiblePackage(project, (EPackage) result.getDomainModel().getGenerated());
 			project.notifyObjectsChanged((Collection<Object>) (Collection<?>) Arrays.asList(project), true);
 			Collection<ECPRepository> repositories = (Collection<ECPRepository>) (Collection<?>) Arrays
 					.asList(project.getRepository());

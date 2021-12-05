@@ -37,7 +37,7 @@ public interface ECPPackage extends EPackage {
 	 * 
 	 * @generated
 	 */
-	String eNS_URI = "http://org/enterprisedomain/ClassMaker/ECP/0.8.37";
+	String eNS_URI = "http://org/enterprisedomain/ClassMaker/ECP/0.8.46";
 
 	/**
 	 * The package namespace name. <!-- begin-user-doc --> <!-- end-user-doc -->

@@ -119,6 +119,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 				Map<String, String> options = new HashMap<String, String>();
 				options.put(XMLResource.OPTION_PROCESS_DANGLING_HREF, XMLResource.OPTION_PROCESS_DANGLING_HREF_RECORD);
 				options.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
+				options.put(XMLResource.OPTION_ENCODING, "UTF-8");
 				if (workspaceResource != null) {
 					if (getWorkspace().eIsSet(ClassMakerPackage.Literals.WORKSPACE__PROJECTS)) {
 						try {
