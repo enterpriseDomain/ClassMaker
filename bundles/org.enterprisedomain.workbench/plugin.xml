@@ -120,7 +120,7 @@
                               type="org.eclipse.core.resources.IProject">
                            <test
                                  property="org.eclipse.core.resources.projectNature"
-                                 value="org.enterprisedomain.classmaker.projectNature">
+                                 value="org.enterprisedomain.classmaker.contributionProjectNature">
                            </test>
                         </adapt>
                         <adapt
@@ -154,7 +154,7 @@
                               type="org.eclipse.core.resources.IProject">
                            <test
                                  property="org.eclipse.core.resources.projectNature"
-                                 value="org.enterprisedomain.classmaker.projectNature">
+                                 value="org.enterprisedomain.classmaker.contributionProjectNature">
                            </test>
                         </adapt>
                         <adapt
