@@ -4,7 +4,7 @@
 <target name="org.enterprisedomain.target" sequenceNumber="1637486286">
   <locations>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
-      <unit id="org.eclipse.e4.rcp.feature.group" version="4.21.0.v20210906-0842"/>
+      <unit id="org.eclipse.e4.rcp.feature.group" version="4.22.0.v20211123-0851"/>
       <unit id="org.eclipse.rcp.configuration.feature.group" version="1.1.1400.v20210906-0500"/>
       <unit id="org.eclipse.rcp.source.feature.group" version="4.21.0.v20210906-0842"/>
       <unit id="org.eclipse.e4.rcp.source.feature.group" version="4.21.0.v20210906-0842"/>
