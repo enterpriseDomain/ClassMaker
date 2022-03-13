@@ -44,7 +44,7 @@
       <repository id="simrel_latest" location="https://download.eclipse.org/releases/latest/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
-      <unit id="org.eclipse.jgit.feature.group" version="5.13.0.202109080827-r"/>
+      <unit id="org.eclipse.jgit.feature.group" version="6.0.0.202111291000-r"/>
       <repository location="http://download.eclipse.org/egit/updates/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
