@@ -28,7 +28,7 @@ Here is how you can use it:
     ClassMakerService classMaker = (ClassMakerService) bundleContext
                                 .getService(serviceReference);
 
-    // Produce result by combining them
+    // Produce the result by combining them
     EPackage jPackage = (EPackage) classMaker.make(ePackage, progressMonitor);
     
     ...
