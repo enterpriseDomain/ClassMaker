@@ -176,6 +176,7 @@ limitations under the License.
       <import plugin="org.apache.felix.gogo.runtime" version="1.1.4" match="greaterOrEqual"/>
       <import plugin="org.apache.felix.gogo.shell" version="1.1.4" match="greaterOrEqual"/>
       <import feature="org.eclipse.emf.ecp.feature" version="1.8.0.20160216-1319" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.query" version="1.7.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
