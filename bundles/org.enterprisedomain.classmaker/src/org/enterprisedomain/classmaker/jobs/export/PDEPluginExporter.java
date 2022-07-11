@@ -31,12 +31,15 @@ import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.core.runtime.jobs.ProgressProvider;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.pde.core.IEditableModel;
+import org.eclipse.pde.core.IModel;
+import org.eclipse.pde.core.IModelProviderEvent;
 import org.eclipse.pde.core.build.IBuild;
 import org.eclipse.pde.core.build.IBuildEntry;
 import org.eclipse.pde.core.build.IBuildModel;
 import org.eclipse.pde.core.plugin.IPluginModelBase;
 import org.eclipse.pde.core.plugin.PluginRegistry;
 import org.eclipse.pde.core.plugin.TargetPlatform;
+import org.eclipse.pde.internal.core.ModelProviderEvent;
 import org.eclipse.pde.internal.core.PDECore;
 import org.eclipse.pde.internal.core.PluginModelManager;
 import org.eclipse.pde.internal.core.exports.FeatureExportInfo;
@@ -77,7 +80,6 @@ public class PDEPluginExporter extends AbstractExporter {
 			if (!version.equals(Version.emptyVersion))
 				info.qualifier = (String) version.getQualifier();
 			PluginModelManager modelManager = PDECore.getDefault().getModelManager();
-			modelManager.bundleRootChanged(getProject());
 			List<IPluginModelBase> models = new ArrayList<IPluginModelBase>();
 			IPluginModelBase model = modelManager.findModel(getProject());
 			if (model != null) {
@@ -112,8 +114,15 @@ public class PDEPluginExporter extends AbstractExporter {
 				if (op != null)
 					op.deleteBuildFiles(editor);
 			}
-			if (!models.isEmpty())
+			if (!models.isEmpty()) {
 				info.items = models.toArray();
+				List<IModel> ms = new ArrayList<IModel>();
+				for (IPluginModelBase m : models)
+					ms.add(m);
+				IModel[] ma = ms.toArray(new IModel[ms.size()]);
+				modelManager.modelsChanged(
+						new ModelProviderEvent(getProject(), IModelProviderEvent.MODELS_ADDED, ma, null, null));
+			}
 			joinJob(Messages.JobNamePDEExport);
 			final SubMonitor pm = SubMonitor.convert(monitor);
 			pm.setTaskName(Messages.TaskNamePluginExport);
