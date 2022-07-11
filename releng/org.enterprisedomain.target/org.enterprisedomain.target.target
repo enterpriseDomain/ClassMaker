@@ -184,8 +184,15 @@
       <unit id="org.apache.poi.ooxml" version="4.1.1.v20200820-1148"/>
       <unit id="org.apache.poi.ooxml.source" version="4.1.1.v20200820-1148"/>
       <unit id="org.apache.poi.ooxml.schemas" version="4.1.1.v20200922-2105"/>
-      <unit id="org.apache.poi.ooxml.schemas.source" version="3.9.0.v201405241750"/>
+      <unit id="org.apache.poi.ooxml.schemas.source" version="4.1.1.v20200922-2105"/>
+      <unit id="org.apache.xmlbeans" version="3.1.0.v20200922-1359"/>
+      <unit id="org.apache.xmlbeans.source" version="3.1.0.v20200922-1359"/>
+      <unit id="org.apache.commons.collections4" version="4.4.0.v20200420-1700"/>
+      <unit id="org.apache.commons.collections4.source" version="4.4.0.v20200420-1700"/>
+      <unit id="org.apache.commons.math3" version="3.6.1.v20200817-1830"/>
+      <unit id="org.apache.commons.math3.source" version="3.6.1.v20200817-1830"/>
       <repository location="https://download.eclipse.org/tools/orbit/downloads/drops/R20220531185310/repository/"/>
+
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.eclipse.emf.edapt.runtime.feature.feature.group" version="1.5.0.202201311430"/>
