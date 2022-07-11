@@ -9,5 +9,6 @@ Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-Activator: org.enterprisedomain.classmaker.cdo.Activator
 Require-Bundle: org.eclipse.osgi;bundle-version="[3.16.200,4.0.0)",
  org.enterprisedomain.classmaker;bundle-version="0.8.46",
- org.eclipse.emf.cdo;bundle-version="4.13.0";visibility:=reexport,
- org.eclipse.emf.cdo.edit;bundle-version="4.5.4"
+ org.eclipse.emf.cdo;bundle-version="4.15.0";visibility:=reexport,
+ org.eclipse.emf.cdo.edit;bundle-version="4.5.6";visibility:=reexport
+Export-Package: org.enterprisedomain.classmaker.cdo

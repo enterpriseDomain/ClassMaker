@@ -43,8 +43,7 @@
       <!-- @generated ClassMaker -->
       <package
             uri="http://org/enterprisedomain/ClassMaker/0.8.46"
-            class="org.enterprisedomain.classmaker.ClassMakerPackage"
-            genModel="model/ClassMaker.genmodel"/>
+            class="org.enterprisedomain.classmaker.ClassMakerPackage"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">

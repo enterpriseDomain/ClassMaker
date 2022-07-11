@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <description name="enterpriseDomain" url="https://dl.bintray.com/enterprisedomain/ClassMaker">
+   <description name="enterpriseDomain">
       enterpriseDomain ClassMaker
    </description>
    <feature url="features/org.enterprisedomain.classmaker.osgi.resolverhooks.feature_0.8.46.qualifier.jar" id="org.enterprisedomain.classmaker.osgi.resolverhooks.feature" version="0.8.46.qualifier">

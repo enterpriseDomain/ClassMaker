@@ -1,8 +1,8 @@
 target "org.enterprisedomain.target.latest" with allEnvironments configurePhase
 
-location updates "http://download.eclipse.org/eclipse/updates/latest/" {
-	org.eclipse.e4.rcp.feature.group
-	org.eclipse.rcp.configuration.feature.group
+location updates "https://download.eclipse.org/eclipse/updates/4.24/" {
+	org.eclipse.e4.rcp.feature.group [4.23.0,5.0.0)
+	org.eclipse.rcp.configuration.feature.group [1.1.1500,1.2.0)
 	org.eclipse.rcp.source.feature.group
 	org.eclipse.e4.rcp.source.feature.group
 	org.eclipse.equinox.sdk.feature.group
@@ -13,8 +13,8 @@ location updates "http://download.eclipse.org/eclipse/updates/latest/" {
 }
 
 location simrel_latest "https://download.eclipse.org/releases/latest/" {
-	org.eclipse.jdt.feature.group
-	org.eclipse.emf.sdk.feature.group [2.27.0,2.28.0)
+	org.eclipse.jdt.feature.group [3.18.1000,3.19.0)
+	org.eclipse.emf.sdk.feature.group [2.30.0,3.0.0)
 	org.eclipse.gef.sdk.feature.group
 	org.eclipse.graphiti.feature.feature.group
 	org.eclipse.graphiti.export.feature.feature.group
@@ -25,26 +25,30 @@ location simrel_latest "https://download.eclipse.org/releases/latest/" {
 	org.eclipse.platform.feature.group
 	org.eclipse.swt
 	org.eclipse.pde.feature.group
+	org.eclipse.core.contenttype [3.8.100,4.0.0)
 	org.eclipse.equinox.ds [1.6.100,2.0.0)
 	org.eclipse.equinox.p2.extras.feature.feature.group
 	org.eclipse.equinox.p2.extras.feature.source.feature.group
+	org.eclipse.equinox.preferences
 	org.eclipse.equinox.weaving.caching
 	org.eclipse.equinox.weaving.caching.j9
 	org.eclipse.equinox.weaving.hook
 	org.eclipse.ocl.all.sdk.feature.group
 	org.eclipse.m2m.qvt.oml.sdk.feature.group [3.10.3,4.0.0)
 	org.eclipse.xtend.sdk.feature.group
-	org.eclipse.emf.ecp.emfforms.sdk.feature.feature.group [1.26.1,1.27.0)
+	org.eclipse.emf.ecp.emfforms.sdk.feature.feature.group [1.26.2,2.0.0)
 	org.eclipse.ecf.core.ssl.feature.feature.group
 	org.eclipse.ecf.filetransfer.ssl.feature.feature.group
-	org.eclipse.ecf.filetransfer.httpclient45.feature.feature.group
+	org.eclipse.ecf.filetransfer.httpclient5.feature.feature.group
+	org.sat4j.core
+	org.sat4j.pb
 }
 
 location "http://download.eclipse.org/egit/updates/" {
-	org.eclipse.jgit.feature.group [5.13.0,5.14.0)	
+	org.eclipse.jgit.feature.group [6.0.0,7.0.0)
 }
 
-location "http://download.eclipse.org/sirius/updates/releases/6.5.1/2020-09/" {
+location "http://download.eclipse.org/sirius/updates/releases/7.0.1/2021-06" {
 	org.eclipse.sirius
 	org.eclipse.sirius.aql.feature.group
 	org.eclipse.sirius.common
@@ -53,4 +57,12 @@ location "http://download.eclipse.org/sirius/updates/releases/6.5.1/2020-09/" {
 	org.eclipse.sirius.diagram.ui
 	org.eclipse.sirius.runtime.feature.group
 	org.eclipse.sirius.properties.feature.feature.group
+}
+
+location "https://download.eclipse.org/modeling/emf/query/updates/releases/" {
+	org.eclipse.emf.query
+}
+
+location "https://download.eclipse.org/justj/jres/17/updates/release/latest" {
+	org.eclipse.justj.openjdk.hotspot.jre.full.feature.group [17.0.3,18.0.0)
 }

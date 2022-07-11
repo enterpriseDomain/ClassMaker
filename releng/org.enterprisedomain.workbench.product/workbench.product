@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="enterpriseDomain Workbench" uid="workbench.product" id="org.enterprisedomain.workbench.product" application="org.eclipse.ui.ide.workbench" version="0.8.46.qualifier" useFeatures="true" includeLaunchers="true">
+<product name="enterpriseDomain Workbench" uid="workbench.product" id="org.enterprisedomain.workbench.product" application="org.eclipse.ui.ide.workbench" version="0.8.46.qualifier" useFeatures="true" includeLaunchers="true" autoIncludeRequirements="true">
 
    <configIni use="default">
    </configIni>
@@ -24,6 +24,7 @@
    </launcher>
 
    <vm>
+      <linux include="false">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17</linux>
    </vm>
 
    <plugins>
@@ -306,10 +307,48 @@
       <feature id="org.eclipse.ecf.filetransfer.feature"/>
       <feature id="org.eclipse.ecf.core.ssl.feature"/>
       <feature id="org.eclipse.ecf.filetransfer.ssl.feature"/>
-      <feature id="org.eclipse.ecf.filetransfer.httpclient45.feature"/>
       <feature id="org.enterprisedomain.classmaker.ecp.feature"/>
       <feature id="org.eclipse.equinox.p2.extras.feature" installMode="root"/>
       <feature id="org.eclipse.rcp" installMode="root"/>
+      <feature id="org.eclipse.emf.sdk" installMode="root"/>
+      <feature id="org.eclipse.emf.mapping.ecore" installMode="root"/>
+      <feature id="org.eclipse.emf.databinding.edit.source" installMode="root"/>
+      <feature id="org.eclipse.emf.codegen.ui.source" installMode="root"/>
+      <feature id="org.eclipse.emf.databinding.source" installMode="root"/>
+      <feature id="org.eclipse.emf.codegen" installMode="root"/>
+      <feature id="org.eclipse.emf" installMode="root"/>
+      <feature id="org.eclipse.emf.mapping.ecore.editor.source" installMode="root"/>
+      <feature id="org.eclipse.emf.edit" installMode="root"/>
+      <feature id="org.eclipse.emf.codegen.ui" installMode="root"/>
+      <feature id="org.eclipse.emf.ecore.editor.source" installMode="root"/>
+      <feature id="org.eclipse.emf.databinding.edit" installMode="root"/>
+      <feature id="org.eclipse.emf.common.source" installMode="root"/>
+      <feature id="org.eclipse.emf.edit.source" installMode="root"/>
+      <feature id="org.eclipse.emf.codegen.ecore" installMode="root"/>
+      <feature id="org.eclipse.emf.converter" installMode="root"/>
+      <feature id="org.eclipse.emf.mapping.ecore.source" installMode="root"/>
+      <feature id="org.eclipse.emf.edit.ui" installMode="root"/>
+      <feature id="org.eclipse.emf.codegen.source" installMode="root"/>
+      <feature id="org.eclipse.emf.mapping.source" installMode="root"/>
+      <feature id="org.eclipse.emf.codegen.ecore.ui.source" installMode="root"/>
+      <feature id="org.eclipse.emf.doc" installMode="root"/>
+      <feature id="org.eclipse.emf.ecore.source" installMode="root"/>
+      <feature id="org.eclipse.emf.edit.ui.source" installMode="root"/>
+      <feature id="org.eclipse.emf.common.ui" installMode="root"/>
+      <feature id="org.eclipse.emf.converter.source" installMode="root"/>
+      <feature id="org.eclipse.emf.mapping.ui" installMode="root"/>
+      <feature id="org.eclipse.emf.codegen.ecore.source" installMode="root"/>
+      <feature id="org.eclipse.emf.mapping" installMode="root"/>
+      <feature id="org.eclipse.emf.mapping.ui.source" installMode="root"/>
+      <feature id="org.eclipse.emf.ecore.edit.source" installMode="root"/>
+      <feature id="org.eclipse.emf.codegen.ecore.ui" installMode="root"/>
+      <feature id="org.eclipse.emf.ecore.editor" installMode="root"/>
+      <feature id="org.eclipse.emf.source" installMode="root"/>
+      <feature id="org.eclipse.emf.mapping.ecore.editor" installMode="root"/>
+      <feature id="org.eclipse.emf.databinding" installMode="root"/>
+      <feature id="org.eclipse.emf.ecore.edit" installMode="root"/>
+      <feature id="org.eclipse.emf.common.ui.source" installMode="root"/>
+      <feature id="org.eclipse.ecf.filetransfer.httpclient5.feature" installMode="root"/>
    </features>
 
    <configurations>
