@@ -21,7 +21,6 @@ import java.util.concurrent.Future;
 
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
-import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
@@ -239,13 +238,6 @@ public class ClassMakerSwitch<T1> extends Switch<T1> {
 		case ClassMakerPackage.MODELS: {
 			Models models = (Models) theEObject;
 			T1 result = caseModels(models);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case ClassMakerPackage.EMF_PLUGIN: {
-			EMFPlugin emfPlugin = (EMFPlugin) theEObject;
-			T1 result = caseEMFPlugin(emfPlugin);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -623,21 +615,6 @@ public class ClassMakerSwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public T1 caseModels(Models object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>EMF
-	 * Plugin</em>'. <!-- begin-user-doc --> This implementation returns null;
-	 * returning a non-null result will terminate the switch. <!-- end-user-doc -->
-	 * 
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>EMF
-	 *         Plugin</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T1 caseEMFPlugin(EMFPlugin object) {
 		return null;
 	}
 

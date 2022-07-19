@@ -1,5 +1,5 @@
 /**
- * Copyright 2012-2017 Kyrill Zotkin
+ * Copyright 2012-2022 Kyrill Zotkin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -487,7 +487,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	@Override
 	public String getResourcePath() {
 		return IPath.SEPARATOR + getProjectName() + IPath.SEPARATOR + ResourceUtils.getModelFolderName()
-				+ IPath.SEPARATOR + ResourceUtils.getFileName(getModelName());
+				+ IPath.SEPARATOR + ResourceUtils.getEcoreFileName(getModelName());
 	}
 
 	/**

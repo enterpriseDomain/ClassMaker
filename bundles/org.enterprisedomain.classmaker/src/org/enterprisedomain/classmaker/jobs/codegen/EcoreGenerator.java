@@ -442,6 +442,8 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 		if (!folder.exists())
 			folder.create(true, true, monitor);
 		IFile file = folder.getFile(ResourceUtils.getFileName(name));
+		if (!file.exists())
+			file = folder.getFile(ResourceUtils.getEcoreFileName(name));
 		return file.getFullPath();
 	}
 
@@ -458,7 +460,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 		genModel.reconcile();
 		genModel.initialize(ePackages);
 		genModel.setCanGenerate(true);
-		genModel.setComplianceLevel(GenJDKLevel.JDK90_LITERAL);
+		genModel.setComplianceLevel(GenJDKLevel.JDK110_LITERAL);
 		genModel.setUpdateClasspath(true);
 		genModel.setModelDirectory(projectPath.append(SOURCE_FOLDER_NAME).toString());
 		genModel.setSuppressInterfaces(true);

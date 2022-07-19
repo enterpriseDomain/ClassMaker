@@ -1,5 +1,5 @@
 /**
- * Copyright 2012-2018 Kyrill Zotkin
+ * Copyright 2012-2022 Kyrill Zotkin
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ import java.util.concurrent.Future;
 
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
-import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
@@ -189,11 +188,6 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseModels(Models object) {
 			return createModelsAdapter();
-		}
-
-		@Override
-		public Adapter caseEMFPlugin(EMFPlugin object) {
-			return createEMFPluginAdapter();
 		}
 
 		@Override
@@ -537,21 +531,6 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createModelsAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class
-	 * '{@link org.eclipse.emf.common.EMFPlugin <em>EMF Plugin</em>}'. <!--
-	 * begin-user-doc --> This default implementation returns null so that we can
-	 * easily ignore cases; it's useful to ignore a case when inheritance will catch
-	 * all the cases anyway. <!-- end-user-doc -->
-	 * 
-	 * @return the new adapter.
-	 * @see org.eclipse.emf.common.EMFPlugin
-	 * @generated
-	 */
-	public Adapter createEMFPluginAdapter() {
 		return null;
 	}
 

@@ -45,7 +45,7 @@ public class ClassMakerPlugin extends Plugin {
 	public static final String PLUGIN_ID = "org.enterprisedomain.classmaker"; //$NON-NLS-1$
 
 	public static final String CONTRIBUTION_NATURE_ID = PLUGIN_ID + ".contributionProjectNature"; //$NON-NLS-1$
-	
+
 	public static final String NATURE_ID = PLUGIN_ID + ".projectNature"; //$NON-NLS-1$
 
 	public static final String BUILDER_ID = PLUGIN_ID + ".contributionProjectBuilder"; //$NON-NLS-1$

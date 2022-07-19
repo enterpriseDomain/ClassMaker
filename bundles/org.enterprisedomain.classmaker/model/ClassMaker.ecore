@@ -641,8 +641,8 @@
         <details key="documentation" value="Generated model {@link org.eclipse.emf.ecore.EPackage EPackage} instance, which appears as a result of {@link ClassMakerService#make() making}."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="generatedEdit" eType="#//EMFPlugin"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="generatedEditor" eType="#//EMFPlugin"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="generatedEdit" eType="#//EMFPlugin"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="generatedEditor" eType="#//EMFPlugin"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//Item"
         eOpposite="#//Item/domainModel">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -650,8 +650,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EMFPlugin" instanceClassName="org.eclipse.emf.common.EMFPlugin"
-      abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EMFPlugin" instanceClassName="org.eclipse.emf.common.EMFPlugin"/>
   <eClassifiers xsi:type="ecore:EClass" name="SCMOperator" abstract="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Operator of Source Code Management system."/>

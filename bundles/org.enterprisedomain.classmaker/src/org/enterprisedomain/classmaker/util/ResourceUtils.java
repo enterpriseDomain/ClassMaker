@@ -120,8 +120,16 @@ public class ResourceUtils {
 		return fileExt;
 	}
 
+	public static String getEcoreModelFileExt() {
+		return "ecore";
+	}
+
 	public static String getFileName(String name) {
 		return CodeGenUtil.safeName(name) + '.' + getModelFileExt();
+	}
+
+	public static String getEcoreFileName(String name) {
+		return CodeGenUtil.safeName(name) + '.' + getEcoreModelFileExt();
 	}
 
 	public static String parseProjectName(URI modelURI) {

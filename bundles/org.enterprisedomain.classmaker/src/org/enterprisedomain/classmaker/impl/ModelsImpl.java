@@ -136,24 +136,44 @@ public class ModelsImpl extends EObjectImpl implements Models {
 	protected EObject generated;
 
 	/**
-	 * The cached value of the '{@link #getGeneratedEdit() <em>Generated Edit</em>}'
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getGeneratedEdit() <em>Generated
+	 * Edit</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getGeneratedEdit()
 	 * @generated
 	 * @ordered
 	 */
-	protected EMFPlugin generatedEdit;
+	protected static final EMFPlugin GENERATED_EDIT_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getGeneratedEditor() <em>Generated
-	 * Editor</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getGeneratedEdit() <em>Generated Edit</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getGeneratedEdit()
+	 * @generated
+	 * @ordered
+	 */
+	protected EMFPlugin generatedEdit = GENERATED_EDIT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getGeneratedEditor() <em>Generated
+	 * Editor</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getGeneratedEditor()
 	 * @generated
 	 * @ordered
 	 */
-	protected EMFPlugin generatedEditor;
+	protected static final EMFPlugin GENERATED_EDITOR_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getGeneratedEditor() <em>Generated
+	 * Editor</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getGeneratedEditor()
+	 * @generated
+	 * @ordered
+	 */
+	protected EMFPlugin generatedEditor = GENERATED_EDITOR_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -276,24 +296,6 @@ public class ModelsImpl extends EObjectImpl implements Models {
 	 */
 	@Override
 	public EMFPlugin getGeneratedEdit() {
-		if (generatedEdit != null && ((EObject) generatedEdit).eIsProxy()) {
-			InternalEObject oldGeneratedEdit = (InternalEObject) generatedEdit;
-			generatedEdit = (EMFPlugin) eResolveProxy(oldGeneratedEdit);
-			if (generatedEdit != oldGeneratedEdit) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassMakerPackage.MODELS__GENERATED_EDIT,
-							oldGeneratedEdit, generatedEdit));
-			}
-		}
-		return generatedEdit;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public EMFPlugin basicGetGeneratedEdit() {
 		return generatedEdit;
 	}
 
@@ -318,24 +320,6 @@ public class ModelsImpl extends EObjectImpl implements Models {
 	 */
 	@Override
 	public EMFPlugin getGeneratedEditor() {
-		if (generatedEditor != null && ((EObject) generatedEditor).eIsProxy()) {
-			InternalEObject oldGeneratedEditor = (InternalEObject) generatedEditor;
-			generatedEditor = (EMFPlugin) eResolveProxy(oldGeneratedEditor);
-			if (generatedEditor != oldGeneratedEditor) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							ClassMakerPackage.MODELS__GENERATED_EDITOR, oldGeneratedEditor, generatedEditor));
-			}
-		}
-		return generatedEditor;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public EMFPlugin basicGetGeneratedEditor() {
 		return generatedEditor;
 	}
 
@@ -461,13 +445,9 @@ public class ModelsImpl extends EObjectImpl implements Models {
 				return getGenerated();
 			return basicGetGenerated();
 		case ClassMakerPackage.MODELS__GENERATED_EDIT:
-			if (resolve)
-				return getGeneratedEdit();
-			return basicGetGeneratedEdit();
+			return getGeneratedEdit();
 		case ClassMakerPackage.MODELS__GENERATED_EDITOR:
-			if (resolve)
-				return getGeneratedEditor();
-			return basicGetGeneratedEditor();
+			return getGeneratedEditor();
 		case ClassMakerPackage.MODELS__PARENT:
 			return getParent();
 		}
@@ -516,10 +496,10 @@ public class ModelsImpl extends EObjectImpl implements Models {
 			setGenerated((EObject) null);
 			return;
 		case ClassMakerPackage.MODELS__GENERATED_EDIT:
-			setGeneratedEdit((EMFPlugin) null);
+			setGeneratedEdit(GENERATED_EDIT_EDEFAULT);
 			return;
 		case ClassMakerPackage.MODELS__GENERATED_EDITOR:
-			setGeneratedEditor((EMFPlugin) null);
+			setGeneratedEditor(GENERATED_EDITOR_EDEFAULT);
 			return;
 		case ClassMakerPackage.MODELS__PARENT:
 			setParent((Item) null);
@@ -541,13 +521,34 @@ public class ModelsImpl extends EObjectImpl implements Models {
 		case ClassMakerPackage.MODELS__GENERATED:
 			return generated != null;
 		case ClassMakerPackage.MODELS__GENERATED_EDIT:
-			return generatedEdit != null;
+			return GENERATED_EDIT_EDEFAULT == null ? generatedEdit != null
+					: !GENERATED_EDIT_EDEFAULT.equals(generatedEdit);
 		case ClassMakerPackage.MODELS__GENERATED_EDITOR:
-			return generatedEditor != null;
+			return GENERATED_EDITOR_EDEFAULT == null ? generatedEditor != null
+					: !GENERATED_EDITOR_EDEFAULT.equals(generatedEditor);
 		case ClassMakerPackage.MODELS__PARENT:
 			return getParent() != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy())
+			return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (generatedEdit: ");
+		result.append(generatedEdit);
+		result.append(", generatedEditor: ");
+		result.append(generatedEditor);
+		result.append(')');
+		return result.toString();
 	}
 
 } // ModelsImpl

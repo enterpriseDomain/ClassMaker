@@ -205,13 +205,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * 
 	 * @generated
 	 */
-	private EClass emfPluginEClass = null;
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
 	private EClass projectEClass = null;
 
 	/**
@@ -367,6 +360,13 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	private EDataType uriEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private EDataType emfPluginEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -1193,8 +1193,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
-	public EReference getModels_GeneratedEdit() {
-		return (EReference) modelsEClass.getEStructuralFeatures().get(2);
+	public EAttribute getModels_GeneratedEdit() {
+		return (EAttribute) modelsEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1203,8 +1203,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
-	public EReference getModels_GeneratedEditor() {
-		return (EReference) modelsEClass.getEStructuralFeatures().get(3);
+	public EAttribute getModels_GeneratedEditor() {
+		return (EAttribute) modelsEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1223,8 +1223,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
-	public EClass getEMFPlugin() {
-		return emfPluginEClass;
+	public EDataType getEMFPlugin() {
+		return emfPluginEDataType;
 	}
 
 	/**
@@ -1905,11 +1905,9 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		modelsEClass = createEClass(MODELS);
 		createEReference(modelsEClass, MODELS__DYNAMIC);
 		createEReference(modelsEClass, MODELS__GENERATED);
-		createEReference(modelsEClass, MODELS__GENERATED_EDIT);
-		createEReference(modelsEClass, MODELS__GENERATED_EDITOR);
+		createEAttribute(modelsEClass, MODELS__GENERATED_EDIT);
+		createEAttribute(modelsEClass, MODELS__GENERATED_EDITOR);
 		createEReference(modelsEClass, MODELS__PARENT);
-
-		emfPluginEClass = createEClass(EMF_PLUGIN);
 
 		scmOperatorEClass = createEClass(SCM_OPERATOR);
 		createEAttribute(scmOperatorEClass, SCM_OPERATOR__PROJECT_NAME);
@@ -1981,6 +1979,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		invocationTargetExceptionEDataType = createEDataType(INVOCATION_TARGET_EXCEPTION);
 		iStatusEDataType = createEDataType(ISTATUS);
 		uriEDataType = createEDataType(URI);
+		emfPluginEDataType = createEDataType(EMF_PLUGIN);
 		nameEDataType = createEDataType(NAME);
 		exceptionEDataType = createEDataType(EXCEPTION);
 		localeEDataType = createEDataType(LOCALE);
@@ -2388,18 +2387,13 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEReference(getModels_Generated(), ecorePackage.getEObject(), null, "generated", null, 0, 1, Models.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getModels_GeneratedEdit(), this.getEMFPlugin(), null, "generatedEdit", null, 0, 1, Models.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getModels_GeneratedEditor(), this.getEMFPlugin(), null, "generatedEditor", null, 0, 1,
-				Models.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getModels_GeneratedEdit(), this.getEMFPlugin(), "generatedEdit", null, 0, 1, Models.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getModels_GeneratedEditor(), this.getEMFPlugin(), "generatedEditor", null, 0, 1, Models.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModels_Parent(), this.getItem(), this.getItem_DomainModel(), "parent", null, 0, 1,
 				Models.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(emfPluginEClass, EMFPlugin.class, "EMFPlugin", IS_ABSTRACT, IS_INTERFACE,
-				!IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(scmOperatorEClass, SCMOperator.class, "SCMOperator", IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
@@ -2945,6 +2939,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEDataType(iStatusEDataType, IStatus.class, "IStatus", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(uriEDataType, org.eclipse.emf.common.util.URI.class, "URI", IS_SERIALIZABLE,
 				!IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(emfPluginEDataType, EMFPlugin.class, "EMFPlugin", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(nameEDataType, String.class, "Name", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(exceptionEDataType, Exception.class, "Exception", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(localeEDataType, Locale.class, "Locale", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

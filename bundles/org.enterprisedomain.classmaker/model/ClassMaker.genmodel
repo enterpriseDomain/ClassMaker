@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright 2021 Kyrill Zotkin&#xA;&#xA;Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);&#xA;you may not use this file except in compliance with the License.&#xA;You may obtain a copy of the License at&#xA;&#xA;    http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;Unless required by applicable law or agreed to in writing, software&#xA;distributed under the License is distributed on an &quot;AS IS&quot; BASIS,&#xA;WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;See the License for the specific language governing permissions and&#xA;limitations under the License."
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright 2022 Kyrill Zotkin&#xA;&#xA;Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);&#xA;you may not use this file except in compliance with the License.&#xA;You may obtain a copy of the License at&#xA;&#xA;    http://www.apache.org/licenses/LICENSE-2.0&#xA;&#xA;Unless required by applicable law or agreed to in writing, software&#xA;distributed under the License is distributed on an &quot;AS IS&quot; BASIS,&#xA;WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;See the License for the specific language governing permissions and&#xA;limitations under the License."
     modelDirectory="/org.enterprisedomain.classmaker/src" creationSubmenus="true"
     editDirectory="/org.enterprisedomain.classmaker.edit/src" editorDirectory="/org.enterprisedomain.editor/src"
     modelPluginID="org.enterprisedomain.classmaker" templateDirectory="" redirection=""
     modelName="ClassMaker" modelPluginClass="" codeFormatting="true" testsDirectory=""
-    testSuiteClass="" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    testSuiteClass="" importerID="org.eclipse.emf.importer.ecore" complianceLevel="11.0"
     copyrightFields="false" editPluginID="org.enterprisedomain.classmaker.edit" editorPluginID="org.enterprisedomain.editor"
     testsPluginID="org.enterprisedomain.classmaker.tests" language="" usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore"
     interfaceNamePattern="" runtimePlatform="RCP" pluginKey="ClassMaker">
@@ -29,6 +29,7 @@
     <genDataTypes ecoreDataType="ClassMaker.ecore#//InvocationTargetException"/>
     <genDataTypes ecoreDataType="ClassMaker.ecore#//IStatus"/>
     <genDataTypes ecoreDataType="ClassMaker.ecore#//URI"/>
+    <genDataTypes ecoreDataType="ClassMaker.ecore#//EMFPlugin"/>
     <genDataTypes ecoreDataType="ClassMaker.ecore#//Name"/>
     <genDataTypes ecoreDataType="ClassMaker.ecore#//Exception"/>
     <genDataTypes ecoreDataType="ClassMaker.ecore#//Locale"/>
@@ -258,11 +259,10 @@
     <genClasses ecoreClass="ClassMaker.ecore#//Models">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//Models/dynamic"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//Models/generated"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//Models/generatedEdit"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//Models/generatedEditor"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Models/generatedEdit"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Models/generatedEditor"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ClassMaker.ecore#//Models/parent"/>
     </genClasses>
-    <genClasses ecoreClass="ClassMaker.ecore#//EMFPlugin"/>
     <genClasses image="false" ecoreClass="ClassMaker.ecore#//SCMOperator">
       <genTypeParameters ecoreTypeParameter="ClassMaker.ecore#//SCMOperator/T"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//SCMOperator/projectName"/>
