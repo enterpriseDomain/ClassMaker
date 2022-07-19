@@ -126,7 +126,6 @@ limitations under the License.
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.eclipse.emf.ecore.edit"/>
       <import plugin="org.eclipse.emf.ecp.view.util.swt" version="1.19.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.ecp.ui.view.swt" version="1.19.0" match="compatible"/>
       <import plugin="org.eclipse.e4.ui.services"/>
       <import plugin="org.eclipse.ui" version="3.112.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.jface"/>
