@@ -173,8 +173,6 @@ public class ClassMakerValidator extends EObjectValidator {
 			return validateStageQualifierToCustomizerMapEntry((Map.Entry<?, ?>) value, diagnostics, context);
 		case ClassMakerPackage.MODELS:
 			return validateModels((Models) value, diagnostics, context);
-		case ClassMakerPackage.EMF_PLUGIN:
-			return validateEMFPlugin((EMFPlugin) value, diagnostics, context);
 		case ClassMakerPackage.SCM_OPERATOR:
 			return validateSCMOperator((SCMOperator<?>) value, diagnostics, context);
 		case ClassMakerPackage.SCM_REGISTRY:
@@ -221,6 +219,8 @@ public class ClassMakerValidator extends EObjectValidator {
 			return validateIStatus((IStatus) value, diagnostics, context);
 		case ClassMakerPackage.URI:
 			return validateURI((URI) value, diagnostics, context);
+		case ClassMakerPackage.EMF_PLUGIN:
+			return validateEMFPlugin((EMFPlugin) value, diagnostics, context);
 		case ClassMakerPackage.NAME:
 			return validateName((String) value, diagnostics, context);
 		case ClassMakerPackage.EXCEPTION:
@@ -398,7 +398,7 @@ public class ClassMakerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateEMFPlugin(EMFPlugin emfPlugin, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint((EObject) emfPlugin, diagnostics, context);
+		return true;
 	}
 
 	/**

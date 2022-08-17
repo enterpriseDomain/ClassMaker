@@ -88,7 +88,7 @@ public class ModelElementOpener extends EditorModelElementOpener {
 			if (eObject instanceof EObject)
 				modelElement = (EObject) eObject;
 			final ECPEditorContext eec = new EditorContext(modelElement, project);
-			result = page.openEditor(new MEEditorInput((EditorContext) eec), editorId, false);
+			result = page.openEditor(new URIMEEditorInput(uri, (EditorContext) eec), editorId, false);
 		} catch (PartInitException e) {
 			e.printStackTrace();
 		}

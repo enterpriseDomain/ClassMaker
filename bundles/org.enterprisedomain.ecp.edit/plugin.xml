@@ -9,7 +9,7 @@
    <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
       <!-- @generated ECP -->
       <factory
-            uri="http://org/enterprisedomain/ClassMaker/ECP/0.8.46"
+            uri="http://org/enterprisedomain/ClassMaker/ECP/0.8.55"
             class="org.enterprisedomain.ecp.provider.ECPItemProviderAdapterFactory"
             supportedTypes=
               "org.eclipse.emf.edit.provider.IEditingDomainItemProvider

@@ -83,7 +83,8 @@ import org.eclipse.emf.ecore.resource.Resource;
  */
 public interface State extends Item, ISchedulingRule {
 
-	public String[] defaultRequiredPlugins = new String[] { "org.eclipse.emf.common", "org.eclipse.emf.ecore" };
+	public String[] defaultRequiredPlugins = new String[] { "org.eclipse.emf.common", "org.eclipse.emf.ecore",
+			"org.eclipse.emf.query" };
 
 	/**
 	 * Returns the value of the '<em><b>Package Class Name</b></em>' attribute. <!--

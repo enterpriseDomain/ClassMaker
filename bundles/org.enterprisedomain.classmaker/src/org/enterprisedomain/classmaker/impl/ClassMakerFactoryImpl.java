@@ -26,6 +26,7 @@ import java.util.concurrent.Semaphore;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -168,6 +169,8 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 			return createIStatusFromString(eDataType, initialValue);
 		case ClassMakerPackage.URI:
 			return createURIFromString(eDataType, initialValue);
+		case ClassMakerPackage.EMF_PLUGIN:
+			return createEMFPluginFromString(eDataType, initialValue);
 		case ClassMakerPackage.NAME:
 			return createNameFromString(eDataType, initialValue);
 		case ClassMakerPackage.EXCEPTION:
@@ -205,6 +208,8 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 			return convertIStatusToString(eDataType, instanceValue);
 		case ClassMakerPackage.URI:
 			return convertURIToString(eDataType, instanceValue);
+		case ClassMakerPackage.EMF_PLUGIN:
+			return convertEMFPluginToString(eDataType, instanceValue);
 		case ClassMakerPackage.NAME:
 			return convertNameToString(eDataType, instanceValue);
 		case ClassMakerPackage.EXCEPTION:
@@ -593,6 +598,24 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 	 * @generated
 	 */
 	public String convertURIToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EMFPlugin createEMFPluginFromString(EDataType eDataType, String initialValue) {
+		return (EMFPlugin) super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public String convertEMFPluginToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

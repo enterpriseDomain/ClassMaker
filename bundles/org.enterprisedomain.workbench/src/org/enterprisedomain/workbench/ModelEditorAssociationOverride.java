@@ -22,6 +22,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.content.IContentType;
 import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorRegistry;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IEditorAssociationOverride;
 
@@ -43,6 +44,8 @@ public class ModelEditorAssociationOverride implements IEditorAssociationOverrid
 			return PlatformUI.getWorkbench().getEditorRegistry().findEditor(ModelElementOpener.EDITOR_ID);
 		else if (fileName.endsWith("project"))
 			return PlatformUI.getWorkbench().getEditorRegistry().findEditor(ModelElementOpener.MODEL_EDITOR_ID);
+		else if (fileName.equals("*.class without source") || fileName.endsWith("class"))
+			return PlatformUI.getWorkbench().getEditorRegistry().findEditor("org.eclipse.jdt.ui.ClassFileEditor");
 		return null;
 	}
 

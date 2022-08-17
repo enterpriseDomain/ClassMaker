@@ -2,7 +2,7 @@
 <feature
       id="org.enterprisedomain.classmaker.ecp.feature"
       label="Enterprise Domain ECP Provider Feature"
-      version="0.8.46.qualifier"
+      version="0.8.55.qualifier"
       provider-name="Kyrill Zotkin">
 
    <description url="http://www.example.com/description">
@@ -107,28 +107,20 @@ limitations under the License.
          version="0.0.0"/>
 
    <requires>
-      <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.emf.ecore" version="2.12.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.ecp.core" version="1.25.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.ecp.view.model" version="1.25.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.edit.ui" version="2.14.0" match="compatible"/>
-      <import plugin="org.eclipse.jface" version="3.11.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.expressions" version="3.6.600" match="compatible"/>
       <import plugin="org.eclipse.ui" version="3.109.100" match="compatible"/>
       <import plugin="org.eclipse.emf.ecp.core" version="1.26.0" match="compatible"/>
       <import plugin="org.enterprisedomain.classmaker" version="0.8.0" match="equivalent"/>
-      <import plugin="org.enterprisedomain.classmaker.edit" version="0.8.0" match="greaterOrEqual"/>
       <import plugin="org.enterprisedomain.ecp" version="0.8.0" match="equivalent"/>
-      <import plugin="org.eclipse.core.runtime" version="3.15.200" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.swt" version="3.110.0" match="greaterOrEqual"/>
-      <import plugin="org.enterprisedomain.classmaker.edit" version="0.8.46" match="greaterOrEqual"/>
+      <import plugin="org.enterprisedomain.classmaker.edit" version="0.8.55" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.common.ui"/>
       <import plugin="org.eclipse.ui.navigator" version="3.7.0" match="compatible"/>
       <import plugin="org.eclipse.emf.ecp.common.ui" version="1.26.0" match="compatible"/>
       <import plugin="org.eclipse.emf.ecp.ui.e3" version="1.26.0" match="compatible"/>
       <import plugin="org.eclipse.ui.workbench"/>
       <import plugin="org.eclipse.emf.ecp.ui" version="1.26.0" match="compatible"/>
-      <import plugin="org.eclipse.core.runtime" version="3.12.0" match="compatible"/>
       <import plugin="org.eclipse.emf.ecore.xmi" version="2.12.0" match="compatible"/>
       <import plugin="org.eclipse.emf.codegen.ecore" version="2.12.0" match="compatible"/>
       <import plugin="org.eclipse.osgi" version="3.11.1" match="compatible"/>
@@ -175,8 +167,10 @@ limitations under the License.
       <import plugin="org.apache.felix.gogo.command" version="1.1.2" match="greaterOrEqual"/>
       <import plugin="org.apache.felix.gogo.runtime" version="1.1.4" match="greaterOrEqual"/>
       <import plugin="org.apache.felix.gogo.shell" version="1.1.4" match="greaterOrEqual"/>
-      <import feature="org.eclipse.emf.ecp.feature" version="1.8.0.20160216-1319" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.equinox.common"/>
       <import plugin="org.eclipse.emf.query" version="1.7.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.emf.ecp.feature" version="1.8.0.20160216-1319" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.runtime" version="3.25.0" match="compatible"/>
    </requires>
 
    <plugin

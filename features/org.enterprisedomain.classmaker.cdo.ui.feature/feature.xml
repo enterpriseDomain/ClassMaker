@@ -2,7 +2,7 @@
 <feature
       id="org.enterprisedomain.classmaker.cdo.ui.feature"
       label="CDO UI Feature"
-      version="0.8.46.qualifier"
+      version="0.8.55.qualifier"
       provider-name="Kyrill Zotkin">
 
    <description url="http://www.example.com/description">

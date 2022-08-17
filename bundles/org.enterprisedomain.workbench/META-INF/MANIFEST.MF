@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: enterpriseDomain Workbench Application
 Bundle-SymbolicName: org.enterprisedomain.workbench;singleton:=true
-Bundle-Version: 0.8.46.qualifier
+Bundle-Version: 0.8.55.qualifier
 Bundle-Activator: org.enterprisedomain.workbench.Activator
 Bundle-Vendor: Kyrill Zotkin
 Require-Bundle: javax.inject,
@@ -14,28 +14,28 @@ Require-Bundle: javax.inject,
  org.eclipse.e4.core.di.annotations,
  org.eclipse.core.runtime,
  org.eclipse.ui.ide;bundle-version="[3.15.0,4.0.0)",
- org.eclipse.emf.ecp.ui;bundle-version="[1.26.1,1.27.0)",
+ org.eclipse.emf.ecp.ui;bundle-version="[1.27.0,2.0.0)",
  org.eclipse.emf.ecp.common.ui;bundle-version="[1.26.1,1.27.0)",
  org.enterprisedomain.ecp,
  org.enterprisedomain.ecp.ui,
  org.eclipse.ui.console,
- org.eclipse.emf.ecp.view.swt.layout;bundle-version="[1.26.1,1.27.0)",
- org.eclipse.emf.ecp.view.model.provider.generator;bundle-version="[1.26.1,1.27.0)",
- org.eclipse.emf.ecp.view.model.provider.xmi;bundle-version="[1.26.1,1.27.0)",
+ org.eclipse.emf.ecp.view.swt.layout;bundle-version="[1.27.0,2.0.0)",
+ org.eclipse.emf.ecp.view.model.provider.generator;bundle-version="[1.27.0,2.0.0)",
+ org.eclipse.emf.ecp.view.model.provider.xmi;bundle-version="[1.27.0,2.0.0)",
  org.eclipse.emf.edit.ui;bundle-version="2.16.0",
- org.eclipse.emf.ecp.ui.view.swt;bundle-version="[1.26.1,1.27.0)",
- org.eclipse.emf.ecp.edit;bundle-version="[1.26.1,1.27.0)",
- org.eclipse.emf.ecp.ui.rcp;bundle-version="[1.26.1,1.27.0)",
- org.eclipse.emfforms.setup.base;bundle-version="[1.26.1,1.27.0)",
+ org.eclipse.emf.ecp.ui.view.swt;bundle-version="[1.27.0,2.0.0)",
+ org.eclipse.emf.ecp.edit;bundle-version="[1.27.0,2.0.0)",
+ org.eclipse.emf.ecp.ui.rcp;bundle-version="[1.27.0,2.0.0)",
+ org.eclipse.emfforms.setup.base;bundle-version="[1.27.0,2.0.0)",
  org.apache.batik.css;bundle-version="1.10.0",
  org.apache.commons.logging;bundle-version="1.2.0",
- org.eclipse.emf.ecp.ui.e3;bundle-version="[1.26.1,1.27.0)",
+ org.eclipse.emf.ecp.ui.e3;bundle-version="[1.27.0,2.0.0)",
  org.eclipse.ui.ide.application;bundle-version="[1.4.0,2.0.0)",
- org.eclipse.emf.ecp.core.emffilter;bundle-version="[1.26.1,1.27.0)",
+ org.eclipse.emf.ecp.core.emffilter;bundle-version="[1.27.0,2.0.0)",
  org.eclipse.emf.ecp.ide.view.service;bundle-version="1.26.1",
  org.eclipse.emf.ecore.editor;bundle-version="2.17.0",
  org.eclipse.e4.ui.workbench;bundle-version="1.11.0",
- org.eclipse.emf.ecp.editor.e3;bundle-version="[1.23.0,2.0.0)",
+ org.eclipse.emf.ecp.editor.e3;bundle-version="[1.27.0,2.0.0)",
  org.eclipse.emf.ecp.explorereditorbridge;bundle-version="1.23.0",
  org.eclipse.ui.forms;bundle-version="3.8.200",
  org.eclipse.emfforms.editor.ecore;bundle-version="1.24.0",
@@ -44,7 +44,10 @@ Require-Bundle: javax.inject,
  org.apache.felix.scr;bundle-version="2.1.24",
  org.eclipse.equinox.event;bundle-version="1.6.0",
  org.eclipse.ui.workbench,
- org.eclipse.ui.navigator.resources;bundle-version="3.8.200"
+ org.eclipse.ui.navigator.resources;bundle-version="3.8.200",
+ org.eclipse.emf.importer;bundle-version="2.12.0",
+ org.eclipse.emf.importer.ecore;bundle-version="2.10.0",
+ org.eclipse.jdt.ui;bundle-version="3.25.0";visibility:=reexport
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: org.enterprisedomain.workbench
 Import-Package: javax.annotation;version="1.2.0"

@@ -113,9 +113,9 @@ public interface Models extends EObject {
 	/**
 	 * Sets the value of the
 	 * '{@link org.enterprisedomain.classmaker.Models#getGeneratedEdit <em>Generated
-	 * Edit</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Edit</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @param value the new value of the '<em>Generated Edit</em>' reference.
+	 * @param value the new value of the '<em>Generated Edit</em>' attribute.
 	 * @see #getGeneratedEdit()
 	 * @generated
 	 */
@@ -136,10 +136,10 @@ public interface Models extends EObject {
 	/**
 	 * Sets the value of the
 	 * '{@link org.enterprisedomain.classmaker.Models#getGeneratedEditor
-	 * <em>Generated Editor</em>}' reference. <!-- begin-user-doc --> <!--
+	 * <em>Generated Editor</em>}' attribute. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @param value the new value of the '<em>Generated Editor</em>' reference.
+	 * @param value the new value of the '<em>Generated Editor</em>' attribute.
 	 * @see #getGeneratedEditor()
 	 * @generated
 	 */

@@ -1,16 +1,17 @@
-target "org.enterprisedomain.target.etc" with allEnvironments configurePhase // location "http://download.eclipse.org/technology/swtbot/releases/latest/" {
+target "org.enterprisedomain.target.etc" with allEnvironments configurePhase
+
+// location "http://download.eclipse.org/technology/swtbot/releases/latest/" {
 // org.eclipse.swtbot.forms.feature.group
 // org.eclipse.swtbot.eclipse.feature.group
 // org.eclipse.swtbot.eclipse.gef.feature.group
 // org.eclipse.swtbot.feature.group
 // org.eclipse.swtbot.eclipse.test.junit.feature.group
 // }
-
 location "https://download.eclipse.org/modeling/emf/cdo/drops/R20210308-1312/" {
 	org.eclipse.emf.cdo.all.feature.group [4.13.0,5.0.0)
 }
 
-location "http://download.eclipse.org/modeling/emf/compare/updates/releases/3.3" {
+location "https://download.eclipse.org/modeling/emf/compare/updates/releases/latest/" {
 	org.eclipse.emf.compare.feature.group
 	org.eclipse.emf.compare.edit
 	org.eclipse.emf.compare.ide
@@ -19,50 +20,50 @@ location "http://download.eclipse.org/modeling/emf/compare/updates/releases/3.3"
 	org.eclipse.emf.compare.rcp.ui
 }
 
-location ecp "http://download.eclipse.org/ecp/releases/releases_target_126/" {
-	org.eclipse.emf.ecp.application.e3 [1.26.0,1.27.0)
-	org.eclipse.emf.ecp.e3.feature.feature.group [1.26.0,1.27.0)
-	org.eclipse.emf.ecp.e3.feature.source.feature.group [1.26.0,1.27.0)
-	org.eclipse.emf.ecp.core [1.26.0,1.27.0)
-	org.eclipse.emf.ecp.view.model.provider.generator [1.26.0,1.27.0)
-	org.eclipse.emf.ecp.view.model.provider.xmi [1.26.0,1.27.0)
-	org.eclipse.emf.ecp.view.swt.layout [1.26.0,1.27.0)
-	org.eclipse.emf.ecp.edit [1.26.0,1.27.0)
-	org.eclipse.emf.ecp.ui [1.26.0,2.0.0)
-	org.eclipse.emf.ecp.ui.source [1.26.0,1.27.0)
-	org.eclipse.emf.ecp.ui.view.swt [1.26.0,1.27.0)
-	org.eclipse.emf.ecp.ui.e3 [1.26.0,1.27.0)
-	org.eclipse.emf.ecp.ecore.feature.feature.group [1.26.0,1.27.0)
-	org.eclipse.emf.ecp.ide.util [1.26.0,1.27.0)
-	org.eclipse.emf.ecp.ide.view.service [1.26.0,1.27.0)
-	org.eclipse.emf.ecp.common.ui [1.26.0,1.27.0)
-	org.eclipse.emf.ecp.emfforms.runtime.feature.feature.group [1.26.0,1.27.0)
-	org.eclipse.emf.ecp.emfforms.runtime.feature.source.feature.group [1.26.0,1.27.0)
-	org.eclipse.emfforms.ide.view.segments [1.26.0,1.27.0)
-	org.eclipse.emfforms.ide.preferences [1.26.0,1.27.0)
-	org.eclipse.emfforms.editor [1.26.0,1.27.0)
-	org.eclipse.emfforms.editor.ecore [1.26.0,1.27.0)
-	org.eclipse.emfforms.setup.base [1.26.0,1.27.0)
-	org.eclipse.emf.ecp.validation [1.26.0,1.27.0)
-	org.eclipse.emf.ecp.feature.feature.group [1.26.0,1.27.0)
-	org.eclipse.emf.ecp.validation.view.feature.feature.group [1.26.0,1.27.0)
-	org.eclipse.emf.ecp.view.treemasterdetail.validation [1.26.0,1.27.0)
-	org.eclipse.emfforms.core.services.databinding.index [1.26.0,1.27.0)
-	org.eclipse.emfforms.core.services.databinding.mapping [1.26.0,1.27.0)
-	org.eclipse.emfforms.core.services.domainexpander.index [1.26.0,1.27.0)
-	org.eclipse.emfforms.core.services.domainexpander.mapping [1.26.0,1.27.0)
-	org.eclipse.emfforms.core.services.structuralchange.index [1.26.0,1.27.0)
-	org.eclipse.emfforms.core.services.structuralchange.mapping [1.26.0,1.27.0)
-	org.eclipse.emf.ecp.view.indexdmr.model [1.26.0,1.27.0)
-	org.eclipse.emf.ecp.view.model [1.26.0,1.27.0)
-	org.eclipse.emf.ecp.view.mappingdmr.model [1.26.0,1.27.0)
-	org.eclipse.emfforms.swt.control.multiattribute [1.26.0,1.27.0)
-	org.eclipse.emfforms.core.services.segments.mapping [1.26.0,1.27.0)
-	org.eclipse.emfforms.core.services.segments.index [1.26.0,1.27.0)
-	org.eclipse.emfforms.view.mappingsegment.model [1.26.0,1.27.0)
-	org.eclipse.emfforms.view.indexsegment.model [1.26.0,1.27.0)
-	org.eclipse.emf.ecp.ui.rcp [1.26.0,1.27.0)
-	org.eclipse.emf.ecp.ui.rcp.source [1.26.0,1.27.0)
+location ecp "http://download.eclipse.org/ecp/releases/releases_target_127/" {
+	org.eclipse.emf.ecp.application.e3 [1.27.0,1.28.0)
+	org.eclipse.emf.ecp.e3.feature.feature.group [1.27.0,1.28.0)
+	org.eclipse.emf.ecp.e3.feature.source.feature.group [1.27.0,1.28.0)
+	org.eclipse.emf.ecp.core [1.27.0,1.28.0)
+	org.eclipse.emf.ecp.view.model.provider.generator [1.27.0,1.28.0)
+	org.eclipse.emf.ecp.view.model.provider.xmi [1.27.0,1.28.0)
+	org.eclipse.emf.ecp.view.swt.layout [1.27.0,1.28.0)
+	org.eclipse.emf.ecp.edit [1.27.0,1.28.0)
+	org.eclipse.emf.ecp.ui [1.27.0,2.0.0)
+	org.eclipse.emf.ecp.ui.source [1.27.0,1.28.0)
+	org.eclipse.emf.ecp.ui.view.swt [1.27.0,1.28.0)
+	org.eclipse.emf.ecp.ui.e3 [1.27.0,1.28.0)
+	org.eclipse.emf.ecp.ecore.feature.feature.group [1.27.0,1.28.0)
+	org.eclipse.emf.ecp.ide.util [1.27.0,1.28.0)
+	org.eclipse.emf.ecp.ide.view.service [1.27.0,1.28.0)
+	org.eclipse.emf.ecp.common.ui [1.27.0,1.28.0)
+	org.eclipse.emf.ecp.emfforms.runtime.feature.feature.group [1.27.0,1.28.0)
+	org.eclipse.emf.ecp.emfforms.runtime.feature.source.feature.group [1.27.0,1.28.0)
+	org.eclipse.emfforms.ide.view.segments [1.27.0,1.28.0)
+	org.eclipse.emfforms.ide.preferences [1.27.0,1.28.0)
+	org.eclipse.emfforms.editor [1.27.0,1.28.0)
+	org.eclipse.emfforms.editor.ecore [1.27.0,1.28.0)
+	org.eclipse.emfforms.setup.base [1.27.0,1.28.0)
+	org.eclipse.emf.ecp.validation [1.27.0,1.28.0)
+	org.eclipse.emf.ecp.feature.feature.group [1.27.0,1.28.0)
+	org.eclipse.emf.ecp.validation.view.feature.feature.group [1.27.0,1.28.0)
+	org.eclipse.emf.ecp.view.treemasterdetail.validation [1.27.0,1.28.0)
+	org.eclipse.emfforms.core.services.databinding.index [1.27.0,1.28.0)
+	org.eclipse.emfforms.core.services.databinding.mapping [1.27.0,1.28.0)
+	org.eclipse.emfforms.core.services.domainexpander.index [1.27.0,1.28.0)
+	org.eclipse.emfforms.core.services.domainexpander.mapping [1.27.0,1.28.0)
+	org.eclipse.emfforms.core.services.structuralchange.index [1.27.0,1.28.0)
+	org.eclipse.emfforms.core.services.structuralchange.mapping [1.27.0,1.28.0)
+	org.eclipse.emf.ecp.view.indexdmr.model [1.27.0,1.28.0)
+	org.eclipse.emf.ecp.view.model [1.27.0,1.28.0)
+	org.eclipse.emf.ecp.view.mappingdmr.model [1.27.0,1.28.0)
+	org.eclipse.emfforms.swt.control.multiattribute [1.27.0,1.28.0)
+	org.eclipse.emfforms.core.services.segments.mapping [1.27.0,1.28.0)
+	org.eclipse.emfforms.core.services.segments.index [1.27.0,1.28.0)
+	org.eclipse.emfforms.view.mappingsegment.model [1.27.0,1.28.0)
+	org.eclipse.emfforms.view.indexsegment.model [1.27.0,1.28.0)
+	org.eclipse.emf.ecp.ui.rcp [1.27.0,1.28.0)
+	org.eclipse.emf.ecp.ui.rcp.source [1.27.0,1.28.0)
 }
 
 location "http://download.eclipse.org/rt/ecf/3.14.0/site.p2" {
@@ -72,22 +73,18 @@ location "http://download.eclipse.org/rt/ecf/3.14.0/site.p2" {
 // org.mockito.mockito-core-hamcrest-modified
 // }
 
-location "https://download.eclipse.org/tools/orbit/downloads/drops/R20210223232630/repository" {
+location "https://download.eclipse.org/tools/orbit/downloads/drops/R20220531185310/repository/" {
 	javaewah
 	javaewah.source
-	javax.validation
-	javax.validation.source
 	javax.annotation [1.3.5,2.0.0)
 	javax.annotation.source
+	org.objectweb.asm [9.3.0,9.4.0)
+	org.objectweb.asm.tree [9.3.0,9.4.0)
 	org.apache.commons.compress
 	org.apache.commons.compress.source
 	org.apache.sshd.sftp
 	org.apache.sshd.sftp.source
-	org.apache.poi.source
-	org.apache.poi
 	org.apache.log4j.source
-	org.objenesis
-	org.objenesis.source
 	org.apache.log4j
 	org.apache.commons.codec
 	org.apache.commons.logging
@@ -102,12 +99,47 @@ location "https://download.eclipse.org/tools/orbit/downloads/drops/R202102232326
 	org.kohsuke.args4j.source
 	net.i2p.crypto.eddsa
 	net.i2p.crypto.eddsa.source
+	org.mockito [2.23.0.v20200310-1642,2.23.0.v20200310-1642]
+	org.mockito.source [2.23.0.v20200310-1642,2.23.0.v20200310-1642]
+	org.objenesis [2.6.0.v20180420-1519,2.6.0.v20180420-1519]
+	org.objenesis.source [2.6.0.v20180420-1519,2.6.0.v20180420-1519]
+	org.slf4j.api [1.7.30.v20200204-2150,1.7.30.v20200204-2150]
+	org.slf4j.api.source [1.7.30.v20200204-2150,1.7.30.v20200204-2150]
+	org.slf4j.binding.log4j12 [1.7.30.v20201108-2042,1.7.30.v20201108-2042]
+	org.slf4j.binding.log4j12.source [1.7.30.v20201108-2042,1.7.30.v20201108-2042]
+	org.tukaani.xz [1.9.0.v20210624-1259,1.9.0.v20210624-1259]
+	org.tukaani.xz.source [1.9.0.v20210624-1259,1.9.0.v20210624-1259]
+	com.sun.jna
+	com.sun.jna.source
+	com.sun.jna.platform
+	com.sun.jna.platform.source
+	javax.validation
+	javax.validation.source
+	jakarta.servlet [5.0.0,6.0.0)
+	jakarta.servlet.source [5.0.0,6.0.0)
+	org.apache.batik.bridge
+	org.apache.poi.source
+	org.apache.poi
+	org.apache.poi.ooxml
+	org.apache.poi.ooxml.source
+	org.apache.poi.ooxml.schemas
+	org.apache.xmlbeans
+	org.apache.xmlbeans.source
+	org.apache.commons.collections4
+	org.apache.commons.collections4.source
+	org.apache.commons.math3
+	org.apache.commons.math3.source
 }
 
-location "http://download.eclipse.org/edapt/releases/14x" {
+location "http://download.eclipse.org/edapt/releases/15x" {
 	org.eclipse.emf.edapt.runtime.feature.feature.group
 	org.eclipse.emf.edapt.runtime.feature.source.feature.group
-} //location "http://download.eclipse.org/nebula/releases/1.0.0" {
+}
+
+location "https://download.eclipse.org/jetty/updates/jetty-bundles-9.x/9.4.48.v20220622/" {
+	org.eclipse.jetty.server [9.0.0,10.0.0)
+}
+ //location "http://download.eclipse.org/nebula/releases/1.0.0" {
  //	org.eclipse.nebula.widgets.grid.feature.feature.group
  //}
 

@@ -18,6 +18,7 @@ package org.enterprisedomain.classmaker.provider;
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
@@ -31,6 +32,7 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.enterprisedomain.classmaker.ClassMakerFactory;
@@ -101,7 +103,8 @@ public class ModelsItemProvider extends ItemProviderAdapter implements IEditingD
 						getResourceLocator(), getString("_UI_Models_generatedEdit_feature"),
 						getString("_UI_PropertyDescriptor_description", "_UI_Models_generatedEdit_feature",
 								"_UI_Models_type"),
-						ClassMakerPackage.Literals.MODELS__GENERATED_EDIT, true, false, true, null, null, null));
+						ClassMakerPackage.Literals.MODELS__GENERATED_EDIT, true, false, true,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -116,7 +119,8 @@ public class ModelsItemProvider extends ItemProviderAdapter implements IEditingD
 						getResourceLocator(), getString("_UI_Models_generatedEditor_feature"),
 						getString("_UI_PropertyDescriptor_description", "_UI_Models_generatedEditor_feature",
 								"_UI_Models_type"),
-						ClassMakerPackage.Literals.MODELS__GENERATED_EDITOR, true, false, true, null, null, null));
+						ClassMakerPackage.Literals.MODELS__GENERATED_EDITOR, true, false, true,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -169,7 +173,10 @@ public class ModelsItemProvider extends ItemProviderAdapter implements IEditingD
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Models_type");
+		EMFPlugin labelValue = ((Models) object).getGeneratedEdit();
+		String label = labelValue == null ? null : labelValue.toString();
+		return label == null || label.length() == 0 ? getString("_UI_Models_type")
+				: getString("_UI_Models_type") + " " + label;
 	}
 
 	/**

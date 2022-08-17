@@ -3,11 +3,11 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.enterprisedomain.classmaker;singleton:=true
 Automatic-Module-Name: org.enterprisedomain.classmaker
-Bundle-Version: 0.8.46.qualifier
+Bundle-Version: 0.8.55.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: org.enterprisedomain.classmaker,
  org.enterprisedomain.classmaker.core,
  org.enterprisedomain.classmaker.impl,
@@ -18,7 +18,7 @@ Export-Package: org.enterprisedomain.classmaker,
  org.enterprisedomain.classmaker.jobs.load,
  org.enterprisedomain.classmaker.scm,
  org.enterprisedomain.classmaker.util
-Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.12.0,4.0.0)";visibility:=reexport,
+Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.25.0,4.0.0)";visibility:=reexport,
  org.eclipse.emf.ecore;bundle-version="[2.12.0,3.0.0)";visibility:=reexport,
  org.eclipse.emf.ecore.xmi;bundle-version="[2.12.0,3.0.0)";visibility:=reexport,
  org.eclipse.emf.codegen.ecore;bundle-version="[2.12.0,3.0.0)";visibility:=reexport,
@@ -61,11 +61,14 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.12.0,4.0.0)";visibil
  javax.annotation;bundle-version="[1.3.5,2.0.0)",
  org.eclipse.pde.ds.core;bundle-version="1.1.500",
  org.eclipse.pde.ds.lib;bundle-version="1.1.300",
- org.eclipse.emf.edit;bundle-version="2.15.0",
+ org.eclipse.emf.edit;bundle-version="2.16.0",
  org.eclipse.emf.edit.ui;bundle-version="2.16.0",
  org.apache.felix.gogo.command;bundle-version="1.1.2",
  org.apache.felix.gogo.runtime;bundle-version="1.1.4",
- org.apache.felix.gogo.shell;bundle-version="1.1.4"
+ org.apache.felix.gogo.shell;bundle-version="1.1.4",
+ org.eclipse.equinox.common,
+ org.eclipse.emf.query;bundle-version="1.7.0";visibility:=reexport
 Service-Component: OSGI-INF/component.xml
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.enterprisedomain.classmaker.core.ClassMakerPlugin
+Import-Package: org.enterprisedomain.classmaker.jobs.export
