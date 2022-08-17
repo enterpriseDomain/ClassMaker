@@ -3,13 +3,13 @@
    <description name="enterpriseDomain">
       enterpriseDomain ClassMaker
    </description>
-   <feature url="features/org.enterprisedomain.classmaker.osgi.resolverhooks.feature_0.8.46.qualifier.jar" id="org.enterprisedomain.classmaker.osgi.resolverhooks.feature" version="0.8.46.qualifier">
+   <feature url="features/org.enterprisedomain.classmaker.osgi.resolverhooks.feature_0.8.55.qualifier.jar" id="org.enterprisedomain.classmaker.osgi.resolverhooks.feature" version="0.8.55.qualifier">
       <category name="enterprisedomain"/>
    </feature>
-   <feature url="features/org.enterprisedomain.ui.workbench.rcp.feature_0.8.46.qualifier.jar" id="org.enterprisedomain.ui.workbench.rcp.feature" version="0.8.46.qualifier">
+   <feature url="features/org.enterprisedomain.ui.workbench.rcp.feature_0.8.55.qualifier.jar" id="org.enterprisedomain.ui.workbench.rcp.feature" version="0.8.55.qualifier">
       <category name="enterprisedomain.rcp"/>
    </feature>
-   <feature url="features/org.enterprisedomain.classmaker.feature_0.8.46.qualifier.jar" id="org.enterprisedomain.classmaker.feature" version="0.8.46.qualifier">
+   <feature url="features/org.enterprisedomain.classmaker.feature_0.8.55.qualifier.jar" id="org.enterprisedomain.classmaker.feature" version="0.8.55.qualifier">
       <category name="enterprisedomain"/>
    </feature>
    <feature id="org.enterprisedomain.classmaker.cdo.feature">

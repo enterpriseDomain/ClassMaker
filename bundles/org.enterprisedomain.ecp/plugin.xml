@@ -61,7 +61,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated ECP -->
       <package
-            uri="http://org/enterprisedomain/ClassMaker/ECP/0.8.46"
+            uri="http://org/enterprisedomain/ClassMaker/ECP/0.8.55"
             class="org.enterprisedomain.ecp.ECPPackage"
             genModel="model/ECP.genmodel"/>
    </extension>

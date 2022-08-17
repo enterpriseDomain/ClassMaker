@@ -1,5 +1,5 @@
 /**
- * Copyright 2012-2017 Kyrill Zotkin
+ * Copyright 2012-2022 Kyrill Zotkin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,16 @@
 package org.enterprisedomain.classmaker.impl;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardWatchEventKinds;
+import java.nio.file.WatchEvent;
+import java.nio.file.WatchKey;
+import java.nio.file.WatchService;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -25,6 +33,11 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceChangeEvent;
+import org.eclipse.core.resources.IResourceChangeListener;
+import org.eclipse.core.resources.IResourceDelta;
+import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -68,7 +81,7 @@ import org.eclipse.jgit.api.errors.CheckoutConflictException;
 import org.eclipse.jgit.api.errors.JGitInternalException;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.revwalk.RevCommit;
-import org.eclipse.m2m.internal.qvt.oml.cst.parser.NLS;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.pde.core.project.IBundleProjectDescription;
 import org.eclipse.pde.core.project.IBundleProjectService;
 import org.enterprisedomain.classmaker.ClassMakerFactory;
@@ -473,6 +486,8 @@ public class StateImpl extends ItemImpl implements State {
 
 	private Object makingLock = new Object();
 
+	private WatchService watch = null;
+
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -482,6 +497,45 @@ public class StateImpl extends ItemImpl implements State {
 		super();
 		eAdapters().add(new StateAdapter());
 		setStrategy(ClassMakerFactory.eINSTANCE.createStrategy());
+		ResourcesPlugin.getWorkspace().addResourceChangeListener(new ResourceChangeListener(),
+				IResourceChangeEvent.POST_CHANGE);
+	}
+
+	private class ResourceChangeListener implements IResourceChangeListener {
+
+		@Override
+		public void resourceChanged(IResourceChangeEvent event) {
+			if (eIsSet(ClassMakerPackage.STATE__RESOURCE)) {
+				try {
+					event.getDelta().accept(new IResourceDeltaVisitor() {
+
+						@Override
+						public boolean visit(IResourceDelta delta) throws CoreException {
+							if (delta.getResource().getType() == IResource.FILE && delta.getResource().getLocation()
+									.toFile().getPath().equals(getResource().getURI().toFileString())) {
+								if ((delta.getFlags() & IResourceDelta.CONTENT) != 0) {
+									try {
+										Resource resource = getProject().getWorkspace().getResourceSet().getResource(
+												URI.createFileURI(delta.getResource().getLocation().toString()), false);
+										resource.unload();
+										resource.load(new FileInputStream(delta.getResource().getLocation().toFile()),
+												Collections.emptyMap());
+									} catch (FileNotFoundException e) {
+										e.printStackTrace();
+									} catch (IOException e) {
+										e.printStackTrace();
+									}
+								}
+								return false;
+							}
+							return true;
+						}
+					});
+				} catch (CoreException e) {
+					ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
+				}
+			}
+		}
 	}
 
 	/**
@@ -839,39 +893,41 @@ public class StateImpl extends ItemImpl implements State {
 			return;
 		getProject().setSavingResource(true);
 		setMaking(true);
-		if (!eIsSet(ClassMakerPackage.STATE__RESOURCE))
-			return;
-		if (getPhase().getValue() >= Stage.MODELED_VALUE && getDomainModel().getDynamic() != null
-				&& getDomainModel().getDynamic().eResource() != null) {
-			Resource importSource = getDomainModel().getDynamic().eResource();
-			try {
-				importSource.load(Collections.emptyMap());
-				setPhase(Stage.MODELED);
-			} catch (IOException e) {
-				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createWarningStatus(e));
-			}
-			boolean deliver = resource.eDeliver();
-			resource.eSetDeliver(false);
-			resource.getContents().clear();
-			resource.getContents().addAll(EcoreUtil.copyAll(importSource.getContents()));
-			importSource.unload();
-			resource.eSetDeliver(deliver);
-			ClassMakerPlugin.getInstance().getLog()
-					.log(ClassMakerPlugin.createInfoStatus(NLS.bind(Messages.ResourceImported, importSource.getURI())));
-		} else if (getPhase().getValue() >= Stage.MODELED_VALUE && getDomainModel().getDynamic() != null
-				&& objectsDiffer(getDomainModel().getDynamic(), resource.getContents())
-				&& resource.getContents().isEmpty()) {
-			boolean deliver = resource.eDeliver();
-			resource.eSetDeliver(false);
-			resource.getContents().clear();
-			resource.getContents().add(EcoreUtil.copy(getDomainModel().getDynamic()));
-			resource.eSetDeliver(deliver);
-			setPhase(Stage.MODELED);
-		}
 		try {
+			if (!eIsSet(ClassMakerPackage.STATE__RESOURCE))
+				return;
+			if (getPhase().getValue() >= Stage.MODELED_VALUE && getDomainModel().getDynamic() != null
+					&& getDomainModel().getDynamic().eResource() != null) {
+				Resource importSource = getDomainModel().getDynamic().eResource();
+				try {
+					importSource.load(Collections.emptyMap());
+					setPhase(Stage.MODELED);
+				} catch (IOException e) {
+					ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createWarningStatus(e));
+				}
+				boolean deliver = resource.eDeliver();
+				resource.eSetDeliver(false);
+				resource.getContents().clear();
+				resource.getContents().addAll(EcoreUtil.copyAll(importSource.getContents()));
+				importSource.unload();
+				resource.eSetDeliver(deliver);
+				ClassMakerPlugin.getInstance().getLog().log(
+						ClassMakerPlugin.createInfoStatus(NLS.bind(Messages.ResourceImported, importSource.getURI())));
+			} else if (getPhase().getValue() >= Stage.MODELED_VALUE && getDomainModel().getDynamic() != null
+					&& objectsDiffer(getDomainModel().getDynamic(), resource.getContents())
+					&& resource.getContents().isEmpty()) {
+				boolean deliver = resource.eDeliver();
+				resource.eSetDeliver(false);
+				resource.getContents().clear();
+				resource.getContents().add(EcoreUtil.copy(getDomainModel().getDynamic()));
+				resource.eSetDeliver(deliver);
+				setPhase(Stage.MODELED);
+			}
 			if (!resource.getContents().isEmpty()) {
 				Map<String, String> options = new HashMap<String, String>();
 				options.put(XMLResource.OPTION_ENCODING, "UTF-8");
+				options.put(XMLResource.OPTION_SAVE_ONLY_IF_CHANGED,
+						XMLResource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
 				resource.save(options);
 			}
 		} catch (IOException e) {
@@ -926,6 +982,7 @@ public class StateImpl extends ItemImpl implements State {
 	public String make(IProgressMonitor monitor) throws Exception {
 		if (isMaking())
 			return "";
+		String result = null;
 		synchronized (makingLock) {
 			IProgressMonitor wrappingMonitor = new WrappingProgressMonitor(monitor);
 			CompletionListener completionListener = new MakingCompletionListener();
@@ -939,6 +996,11 @@ public class StateImpl extends ItemImpl implements State {
 						return ListUtil.getLast(getCommitIds());
 					else
 						return ""; //$NON-NLS-1$
+				saveResource();
+				try {
+					loadResource(getModelURI(), !eIsSet(ClassMakerPackage.STATE__RESOURCE), true);
+				} catch (Exception e) {
+				}
 				saveResource();
 				try {
 					getProject().getWorkspace().provision(wrappingMonitor);
@@ -1028,16 +1090,15 @@ public class StateImpl extends ItemImpl implements State {
 				Thread.yield();
 			}
 			getProject().removeCompletionListener(completionListener);
-			String result = null;
 			try {
 				add("."); //$NON-NLS-1$
-				result = commit(); // $NON-NLS-1$
+				result = commit();
 			} catch (FileNotFoundException e) {
 			} finally {
 				monitor.done();
-				return result;
 			}
 		}
+		return result;
 	}
 
 	/**
@@ -1116,7 +1177,7 @@ public class StateImpl extends ItemImpl implements State {
 	 */
 	public String commit() throws Exception {
 		@SuppressWarnings("unchecked")
-		SCMOperator<Git> operator = (SCMOperator<Git>) ClassMakerPlugin.getClassMaker().getWorkspace().getSCMRegistry()
+		SCMOperator<Git> operator = (SCMOperator<Git>) getProject().getWorkspace().getSCMRegistry()
 				.get(getProjectName());
 		String commitId = null;
 		commitId = operator.commit(operator.encodeCommitMessage(this));
@@ -1590,7 +1651,21 @@ public class StateImpl extends ItemImpl implements State {
 			IBundleProjectDescription bundleProjectDescription = service.getDescription(project);
 			bundleProjectDescription.setBundleVersion(getProject().getVersion());
 			bundleProjectDescription.apply(m);
-		} finally {
+			if (isEdit()) {
+				project = workspace.getRoot().getProject(getProjectName() + ".edit");
+				bundleProjectDescription = service.getDescription(project);
+				bundleProjectDescription.setBundleVersion(getProject().getVersion());
+				bundleProjectDescription.apply(m);
+			}
+			if (isEditor()) {
+				project = workspace.getRoot().getProject(getProjectName() + ".editor");
+				bundleProjectDescription = service.getDescription(project);
+				bundleProjectDescription.setBundleVersion(getProject().getVersion());
+				bundleProjectDescription.apply(m);
+			}
+		} finally
+
+		{
 			m.done();
 			pm.done();
 		}
@@ -2022,4 +2097,5 @@ public class StateImpl extends ItemImpl implements State {
 
 	}
 
-} // StateImpl
+}
+// StateImpl

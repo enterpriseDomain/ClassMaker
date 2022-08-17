@@ -14,6 +14,7 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
+import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.Revision;
@@ -53,7 +54,7 @@ public class MakeHandler extends AbstractHandler implements IHandler {
 						else {
 							Revision newRevision = project.newRevision(project.nextVersion());
 							newRevision.create(monitor);
-							project.checkout(newRevision.getVersion());
+							project.setProjectVersion(newRevision.getVersion());
 						}
 						project.make(monitor);
 					} catch (CoreException e) {

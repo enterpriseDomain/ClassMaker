@@ -35,7 +35,6 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.command.BasicCommandStack;
 import org.eclipse.emf.common.command.Command;
@@ -53,11 +52,10 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.ecore.EPackage.Registry;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EContentAdapter;
@@ -286,6 +284,38 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 					invocationDelegate.getDetails().put("invocationDelegates",
 							ClassMakerService.INVOCATION_DELEGATE_URI);
 					model.getEAnnotations().add(invocationDelegate);
+					EClass queriesEClass = ecoreFactory.createEClass();
+					queriesEClass.setName("Queries");
+					EOperation query = ecoreFactory.createEOperation();
+					query.setName("selectAllTheObjects");
+					EClass eObjectEClass = EcorePackage.Literals.EOBJECT;
+					query.setEType(eObjectEClass);
+					query.setUpperBound(-1);
+					EParameter param = ecoreFactory.createEParameter();
+					param.setName("selectedEObjects");
+					param.setEType(eObjectEClass);
+					param.setUpperBound(-1);
+					query.getEParameters().add(param);
+					EAnnotation ann = ecoreFactory.createEAnnotation();
+					ann.setSource("http://www.eclipse.org/emf/2002/GenModel");
+					ann.getDetails().put("body", "if (null == selectedEObjects) {\n"
+							+ "	throw new <%java.lang.NullPointerException%>(\"Argument is null\"); //$NON-NLS-1$\n"
+							+ "}\n" + "\n"
+							+ "<%org.eclipse.emf.query.conditions.eobjects.EObjectCondition%> condition = "
+							+ "new <%org.eclipse.emf.query.conditions.eobjects.EObjectTypeRelationCondition%>("
+							+ "(<%org.eclipse.emf.ecore.EClass%>) <%org.eclipse.emf.ecore.EPackage%>.Registry.INSTANCE.getEPackage(\"http://"
+							+ project.getName().replaceAll(" ", "") + "/1.0\")" + ".getEClassifier(\""
+							+ dummyEClass.getName() + "\"));\n"
+							+ "<%org.eclipse.emf.query.statements.SELECT%> statement = new <%org.eclipse.emf.query.statements.SELECT%>(\n"
+							+ " new <%org.eclipse.emf.query.statements.FROM%>(selectedEObjects), \n"
+							+ "	new <%org.eclipse.emf.query.statements.WHERE%>(condition)\n" + ");\n" + "\n"
+							+ "return <%org.eclipse.emf.common.util.ECollections%>.toEList(statement.execute().getEObjects());");
+					query.getEAnnotations().add(ann);
+					EAnnotation in = ecoreFactory.createEAnnotation();
+					in.setSource(ClassMakerService.INVOCATION_DELEGATE_URI);
+					query.getEAnnotations().add(in);
+					queriesEClass.getEOperations().add(query);
+					model.getEClassifiers().add(queriesEClass);
 					try {
 						domainProject = classMaker.getWorkspace().createContribution(model, monitor);
 						domainProject.getState().setEdit(true);
@@ -342,7 +372,6 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 
 		});
 		initing.put(project, false);
-
 	}
 
 	protected void createProject(final InternalProject project) {
@@ -400,7 +429,22 @@ public class EnterpriseDomainProvider extends DefaultProvider {
 			if (((EObject) element).eContainer() instanceof ECPContainer) {
 				return getModelContext(((EObject) element).eContainer().eResource());
 			}
-			return getModelContext(((EObject) element).eResource());
+			if (element instanceof Resource) {
+				Collection<InternalProject> projects = null;
+				try {
+					projects = getOpenProjects();
+				} catch (RuntimeException e) {
+					return null;
+				}
+				for (InternalProject project : projects) {
+					Project domainProject = Activator.getClassMaker().getWorkspace()
+							.getProject(((Resource) element).getContents().get(0).eClass().getEPackage());
+					if (domainProject != null && domainProject.getProjectName().equals(project.getName()))
+						return project;
+				}
+			}
+			if (((EObject) element).eResource() != null)
+				return getModelContext(((EObject) element).eResource());
 		}
 
 		return null;

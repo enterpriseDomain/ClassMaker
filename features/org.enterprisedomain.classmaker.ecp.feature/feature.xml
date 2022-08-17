@@ -2,7 +2,7 @@
 <feature
       id="org.enterprisedomain.classmaker.ecp.feature"
       label="Enterprise Domain ECP Provider Feature"
-      version="0.8.46.qualifier"
+      version="0.8.55.qualifier"
       provider-name="Kyrill Zotkin">
 
    <description url="http://www.example.com/description">
@@ -114,7 +114,7 @@ limitations under the License.
       <import plugin="org.eclipse.emf.ecp.core" version="1.26.0" match="compatible"/>
       <import plugin="org.enterprisedomain.classmaker" version="0.8.0" match="equivalent"/>
       <import plugin="org.enterprisedomain.ecp" version="0.8.0" match="equivalent"/>
-      <import plugin="org.enterprisedomain.classmaker.edit" version="0.8.46" match="greaterOrEqual"/>
+      <import plugin="org.enterprisedomain.classmaker.edit" version="0.8.55" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.common.ui"/>
       <import plugin="org.eclipse.ui.navigator" version="3.7.0" match="compatible"/>
       <import plugin="org.eclipse.emf.ecp.common.ui" version="1.26.0" match="compatible"/>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="org.enterprisedomain.target" sequenceNumber="1657537699">
+<target name="org.enterprisedomain.target" sequenceNumber="1660724144">
   <locations>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.eclipse.e4.rcp.feature.group" version="4.24.0.v20220530-1036"/>
@@ -63,11 +63,11 @@
       <repository location="http://download.eclipse.org/sirius/updates/releases/7.0.1/2021-06"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
-      <unit id="org.eclipse.emf.query" version="1.7.0.201706061326"/>
+      <unit id="org.eclipse.emf.query" version="1.7.0.202208101410"/>
       <repository location="https://download.eclipse.org/modeling/emf/query/updates/releases/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
-      <unit id="org.eclipse.justj.openjdk.hotspot.jre.full.feature.group" version="17.0.3.v20220515-1416"/>
+      <unit id="org.eclipse.justj.openjdk.hotspot.jre.full.feature.group" version="17.0.4.v20220805-1047"/>
       <repository location="https://download.eclipse.org/justj/jres/17/updates/release/latest"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
