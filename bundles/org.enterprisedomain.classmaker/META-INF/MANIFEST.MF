@@ -66,7 +66,7 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.25.0,4.0.0)";visibil
  org.apache.felix.gogo.runtime;bundle-version="1.1.4",
  org.apache.felix.gogo.shell;bundle-version="1.1.4",
  org.eclipse.equinox.common,
- org.eclipse.emf.query;bundle-version="1.7.0";visibility:=reexport
+ org.eclipse.emf.query;bundle-version="1.7.0";visibility:=reexport 
 Service-Component: OSGI-INF/component.xml
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.enterprisedomain.classmaker.core.ClassMakerPlugin
