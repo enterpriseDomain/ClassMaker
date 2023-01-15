@@ -99,18 +99,6 @@ limitations under the License.
    </license>
 
    <includes
-         id="org.eclipse.emf.ecp.emfforms.runtime.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.emf.ecp.e3.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="org.enterprisedomain.classmaker.ecp.feature"
-         version="0.0.0"/>
-
-   <includes
          id="org.eclipse.equinox.p2.extras.feature"
          version="0.0.0"/>
 
@@ -119,24 +107,17 @@ limitations under the License.
          version="0.0.0"/>
 
    <requires>
-      <import plugin="org.eclipse.swt" version="3.7.0" match="compatible"/>
       <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.enterprisedomain.classmaker" version="0.8.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.edit"/>
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.eclipse.emf.ecore.edit"/>
-      <import plugin="org.eclipse.emf.ecp.view.util.swt" version="1.19.0" match="compatible"/>
       <import plugin="org.eclipse.e4.ui.services"/>
       <import plugin="org.eclipse.ui" version="3.112.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.jface"/>
-      <import plugin="javax.inject"/>
       <import plugin="org.eclipse.osgi"/>
+      <import plugin="org.eclipse.jface"/>
       <import plugin="org.eclipse.e4.ui.model.workbench"/>
       <import plugin="org.eclipse.e4.ui.di"/>
       <import plugin="org.eclipse.e4.core.di.annotations"/>
-      <import plugin="org.eclipse.ui.ide" version="3.15.0" match="greaterOrEqual"/>
-      <import plugin="org.enterprisedomain.ecp"/>
-      <import plugin="org.enterprisedomain.ecp.ui"/>
       <import plugin="org.eclipse.ui.console"/>
       <import plugin="org.eclipse.emf.edit.ui" version="2.16.0" match="greaterOrEqual"/>
       <import plugin="org.apache.batik.css" version="1.10.0" match="greaterOrEqual"/>
@@ -144,32 +125,19 @@ limitations under the License.
       <import plugin="org.eclipse.ui.ide.application" version="1.4.0" match="compatible"/>
       <import plugin="org.eclipse.emf.ecore.editor" version="2.17.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.e4.ui.workbench" version="1.11.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.ecp.editor.e3" version="1.23.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.ecp.explorereditorbridge" version="1.23.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.forms" version="3.8.200" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emfforms.editor.ecore" version="1.24.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.ecp.application.e3" version="1.26.0" match="greaterOrEqual"/>
-      <import plugin="javax.annotation"/>
-      <import plugin="org.eclipse.emf.ecp.ui" version="1.26.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.ecp.common.ui" version="1.26.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.ecp.view.swt.layout" version="1.26.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.ecp.view.model.provider.generator" version="1.26.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.ecp.view.model.provider.xmi" version="1.26.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.ecp.ui.view.swt" version="1.26.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.ecp.edit" version="1.26.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.ecp.ui.rcp" version="1.26.0" match="compatible"/>
-      <import plugin="org.eclipse.emfforms.setup.base" version="1.26.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.ecp.ui.e3" version="1.26.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.ecp.core.emffilter" version="1.26.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.ecp.ide.view.service" version="1.26.0" match="compatible"/>
+      <import plugin="org.eclipse.ui.ide" version="3.15.0" match="compatible"/>
+      <import plugin="org.eclipse.pde.ds.annotations" version="1.2.200" match="greaterOrEqual"/>
+      <import plugin="org.apache.felix.scr" version="2.1.24" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.equinox.event" version="1.6.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.workbench"/>
+      <import plugin="org.eclipse.ui.navigator.resources" version="3.8.200" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.importer" version="2.12.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.importer.ecore" version="2.10.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.jdt.ui" version="3.25.0" match="greaterOrEqual"/>
+      <import plugin="org.enterprisedomain.classmaker" version="0.8.55" match="greaterOrEqual"/>
+      <import plugin="org.enterprisedomain.classmaker.parsley" version="0.8.55" match="greaterOrEqual"/>
    </requires>
-
-   <plugin
-         id="org.eclipse.emf.ecp.ui.rcp"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
 
    <plugin
          id="org.enterprisedomain.classmaker.edit"

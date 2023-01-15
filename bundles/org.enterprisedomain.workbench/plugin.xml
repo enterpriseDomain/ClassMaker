@@ -3,21 +3,6 @@
 <plugin>
 
    <extension
-         point="org.eclipse.ui.newWizards">
-      <wizard
-            category="org.enterprisedomain.workbench.ecp"
-            class="org.enterprisedomain.workbench.NewECPProjectWizard"
-            icon="platform:/plugin/org.eclipse.emf.ecp.ui/icons/checkout_project_old.gif"
-            id="org.enterprisedomain.workbench.newProjectWizard"
-            name="ECP Project"
-            project="true">
-      </wizard>
-      <category
-            id="org.enterprisedomain.workbench.ecp"
-            name="ECP">
-      </category>
-   </extension>
-   <extension
          point="org.eclipse.core.contenttype.contentTypes">
       <file-association
             content-type="org.eclipse.emf.ecore.xmi"
@@ -29,25 +14,10 @@
       </file-association>
    </extension>
    <extension
-         point="org.eclipse.ui.activities">
-      <defaultEnablement
-            id="org.eclipse.emf.ecp.application.e3.enablement">
-      </defaultEnablement>
-   </extension>
-   <extension
          point="org.eclipse.ui.startup">
       <startup
             class="org.enterprisedomain.workbench.Startup">
       </startup>
-   </extension>
-   <extension
-         point="org.eclipse.emf.ecp.ui.modelElementOpener">
-      <modelElementOpener
-            class="org.enterprisedomain.workbench.ModelElementOpener">
-         <dynamicTester
-               tester="org.enterprisedomain.workbench.ModelElementOpenTester">
-         </dynamicTester>
-      </modelElementOpener>
    </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
@@ -60,13 +30,6 @@
                relative="org.eclipse.emf.ecp.ui.ModelRepositoriesView">
          </view>
       </perspectiveExtension>
-   </extension>
-   <extension
-         point="org.eclipse.ui.ide.editorAssociationOverride">
-         <editorAssociationOverride
-            id="org.enterprisedomain.workbench.modelEditorAssociation"
-            class="org.enterprisedomain.workbench.ModelEditorAssociationOverride">
-         </editorAssociationOverride>
    </extension>
    <extension
          id="product"
@@ -88,7 +51,7 @@
    <extension
          point="org.eclipse.core.runtime.adapters">
       <factory
-            adaptableType="org.eclipse.emf.ecp.core.ECPProject"
+            adaptableType="org.eclipse.core.resources.IProject"
             class="org.enterprisedomain.workbench.ProjectAdapterFactory">
          <adapter
                type="org.enterprisedomain.classmaker.Contribution">
@@ -172,6 +135,32 @@
          </command>
       </menuContribution>
    </extension>
-     
+     <extension
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            category="org.enterprisedomain.classmaker.parsley.category"
+            class="org.enterprisedomain.workbench.NewProjectWizard"
+            id="org.enterprisedomain.classmaker.parsley.wizards.new.project"
+            name="Model Project"
+            project="true">
+         <selection
+               class="org.eclipse.core.resources.IResource">
+         </selection>
+      </wizard>
+      <category
+            id="org.enterprisedomain.classmaker.parsley.category"
+            name="Domain Creativity">
+      </category>
+      <wizard
+            category="org.enterprisedomain.classmaker.parsley.category"
+            class="org.enterprisedomain.workbench.NewContributionWizard"
+            id="org.enterprisedomain.classmaker.parsley.wizard1"
+            name="Meta-Model Contribution"
+            project="true">
+         <selection
+               class="org.eclipse.core.resources.IResource">
+         </selection>
+      </wizard>
+   </extension>
 
 </plugin>

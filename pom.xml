@@ -18,17 +18,13 @@
 		<module>bundles/org.enterprisedomain.classmaker</module>
 		<module>bundles/org.enterprisedomain.classmaker.osgi.systemextension</module>
 		<module>bundles/org.enterprisedomain.classmaker.edit</module>
+		<module>bundles/org.enterprisedomain.classmaker.parsley</module>
 		<module>bundles/org.enterprisedomain.classmaker.cdo</module>
 		<module>bundles/org.enterprisedomain.classmaker.cdo.ui</module>
-		<module>bundles/org.enterprisedomain.ecp</module>
-		<module>bundles/org.enterprisedomain.ecp.filter</module>
-		<module>bundles/org.enterprisedomain.ecp.edit</module>
-		<module>bundles/org.enterprisedomain.ecp.ui</module>
 		<module>bundles/org.enterprisedomain.workbench</module>
 		<module>features/org.enterprisedomain.classmaker.feature</module>
 		<module>features/org.enterprisedomain.classmaker.osgi.resolverhooks.feature</module>
 		<module>features/org.enterprisedomain.classmaker.edit.feature</module>
-		<module>features/org.enterprisedomain.classmaker.ecp.feature</module>
 		<module>features/org.enterprisedomain.classmaker.cdo.feature</module>
 		<module>features/org.enterprisedomain.classmaker.cdo.ui.feature</module>
 		<module>features/org.enterprisedomain.ui.workbench.rcp.feature</module>
@@ -56,15 +52,15 @@
 			<build>
 				<plugins>
 					<plugin>
-						<groupId>org.eclipse.tycho.extras</groupId>
-						<artifactId>tycho-source-feature-plugin</artifactId>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-source-plugin</artifactId>
 						<version>${tycho.version}</version>
 						<executions>
 							<execution>
-								<id>source-feature</id>
+								<id>feature-source</id>
 								<phase>package</phase>
 								<goals>
-									<goal>source-feature</goal>
+									<goal>feature-source</goal>
 								</goals>
 							</execution>
 						</executions>
@@ -75,20 +71,7 @@
  								<plugin id="org.enterprisedomain.update" />
  							</excludes>
 						</configuration>
-					</plugin>
-					<plugin>
-						<groupId>org.eclipse.tycho</groupId>
-						<artifactId>tycho-source-plugin</artifactId>
-						<version>${tycho.version}</version>
-						<executions>
-							<execution>
-								<id>plugin-source</id>
-								<goals>
-									<goal>plugin-source</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
+					</plugin>					
 					<plugin>
 						<inherited>true</inherited>
 						<groupId>org.apache.maven.plugins</groupId>

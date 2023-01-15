@@ -35,6 +35,8 @@ import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
 
 public class Activator extends AbstractUIPlugin {
+	
+	public static final String PLUGIN_ID = "org.enterprisedomain.workbench"; //$NON-NLS-1$
 
 	private static BundleContext context;
 	private static Activator plugin;
