@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: ClassMaker CDO UI Support
-Bundle-SymbolicName: org.enterprisedomain.classmaker.cdo.ui
+Bundle-SymbolicName: org.enterprisedomain.classmaker.cdo.ui;singleton:=true
 Bundle-Version: 0.8.55.qualifier
 Bundle-Vendor: Kyrill Zotkin
 Require-Bundle: org.enterprisedomain.classmaker.cdo;bundle-version="0.0.1",
@@ -9,9 +9,22 @@ Require-Bundle: org.enterprisedomain.classmaker.cdo;bundle-version="0.0.1",
  org.eclipse.emf.cdo.ui;bundle-version="4.9.1",
  org.eclipse.emf.cdo.explorer.ui;bundle-version="4.7.1",
  org.eclipse.net4j.tcp;bundle-version="4.2.1",
- org.eclipse.emf.ecp.view.context;bundle-version="1.26.0",
- org.eclipse.emf.ecp.ui.view;bundle-version="1.26.0",
- org.eclipse.emf.ecp.ui.view.swt;bundle-version="1.26.0",
- org.eclipse.equinox.concurrent;bundle-version="1.2.0"
+ org.eclipse.equinox.concurrent;bundle-version="1.2.0",
+ org.eclipse.emf.ecp.ui;bundle-version="[1.27.0,2.0.0)",
+ org.eclipse.emf.ecp.common.ui;bundle-version="[1.27.0,2.0.0)",
+ org.eclipse.emf.ecp.view.swt.layout;bundle-version="[1.27.0,2.0.0)",
+ org.eclipse.emf.ecp.view.model.provider.generator;bundle-version="[1.27.0,2.0.0)",
+ org.eclipse.emf.ecp.view.model.provider.xmi;bundle-version="[1.27.0,2.0.0)",
+ org.eclipse.emf.ecp.ui.view.swt;bundle-version="[1.27.0,2.0.0)",
+ org.eclipse.emf.ecp.edit;bundle-version="[1.27.0,2.0.0)",
+ org.eclipse.emf.ecp.ui.rcp;bundle-version="[1.27.0,2.0.0)",
+ org.eclipse.emfforms.setup.base;bundle-version="[1.27.0,2.0.0)",
+ org.eclipse.emf.ecp.ui.e3;bundle-version="[1.27.0,2.0.0)",
+ org.eclipse.emf.ecp.core.emffilter;bundle-version="[1.27.0,2.0.0)",
+ org.eclipse.emf.ecp.ide.view.service;bundle-version="1.26.1",
+ org.eclipse.emf.ecp.editor.e3;bundle-version="[1.27.0,2.0.0)",
+ org.eclipse.emf.ecp.explorereditorbridge;bundle-version="1.23.0",
+ org.eclipse.emfforms.editor.ecore;bundle-version="1.24.0",
+ org.eclipse.emf.ecp.application.e3;bundle-version="1.26.0" 
 Automatic-Module-Name: org.enterprisedomain.classmaker.cdo.ui
 Bundle-RequiredExecutionEnvironment: JavaSE-11

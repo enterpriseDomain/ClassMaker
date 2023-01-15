@@ -5,7 +5,7 @@
 	<artifactId>org.enterprisedomain.configuration</artifactId>
 	<version>0.8.55-SNAPSHOT</version>
 	<properties>
-		<tycho.version>2.7.4</tycho.version>
+		<tycho.version>2.7.5</tycho.version>
 		<tycho.extras.version>${tycho.version}</tycho.extras.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -16,24 +16,19 @@
 			<layout>p2</layout>
 		</repository>
 		<repository>
+			<id>justj</id>
+			<url>https://download.eclipse.org/justj/jres/17/updates/release/17.0.4</url>
+			<layout>p2</layout>
+		</repository>
+		<repository>
 			<id>eclipse-latest</id>
 			<layout>p2</layout>
 			<url>http://download.eclipse.org/releases/latest</url>
 		</repository>
 		<repository>
-			<id>ecp</id>
-			<layout>p2</layout>
-			<url>http://download.eclipse.org/ecp/releases/releases_target_127</url>
-		</repository>
-		<repository>
 			<id>eclipse</id>
 			<layout>p2</layout>
 			<url>https://download.eclipse.org/eclipse/updates/latest</url>
-		</repository>
-		<repository>
-			<id>justj</id>
-			<url>https://download.eclipse.org/justj/jres/17/updates/release/latest</url>
-			<layout>p2</layout>
 		</repository>
 	</repositories>
 	<pluginRepositories>
@@ -79,20 +74,7 @@
 				<artifactId>tycho-maven-plugin</artifactId>
 				<version>${tycho.version}</version>
 				<extensions>true</extensions>
-			</plugin>
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-source-plugin</artifactId>
-				<version>${tycho.version}</version>
-				<executions>
-					<execution>
-						<id>plugin-source</id>
-						<goals>
-							<goal>plugin-source</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+			</plugin>			
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-packaging-plugin</artifactId>
@@ -107,21 +89,7 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.eclipse.tycho.extras</groupId>
-				<artifactId>tycho-source-feature-plugin</artifactId>
-				<version>${tycho.extras.version}</version>
-				<executions>
-					<execution>
-						<id>source-feature</id>
-						<phase>package</phase>
-						<goals>
-							<goal>source-feature</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+			</plugin>			
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-p2-plugin</artifactId>
@@ -331,9 +299,9 @@
 			<version>1.2</version>
 		</dependency>
 		<dependency>
-			<groupId>com.oracle.database.jdbc</groupId>
-			<artifactId>ojdbc8</artifactId>
-			<version>21.6.0.0.1</version>
+		<groupId>org.eclipse.pde</groupId>
+			<artifactId>org.eclipse.pde.ds.lib</artifactId>
+			<version>1.1.300</version>
 		</dependency>
 	</dependencies>
 	<packaging>pom</packaging>
