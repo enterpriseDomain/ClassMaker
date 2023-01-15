@@ -1034,13 +1034,22 @@ public interface ClassMakerPackage extends EPackage {
 	int STATE__STATE_CUSTOMIZERS = ITEM_FEATURE_COUNT + 13;
 
 	/**
+	 * The feature id for the '<em><b>Non Exclusive State Customizers</b></em>' map.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__NON_EXCLUSIVE_STATE_CUSTOMIZERS = ITEM_FEATURE_COUNT + 14;
+
+	/**
 	 * The feature id for the '<em><b>Project Name</b></em>' attribute. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__PROJECT_NAME = ITEM_FEATURE_COUNT + 14;
+	int STATE__PROJECT_NAME = ITEM_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Making</b></em>' attribute. <!--
@@ -1049,7 +1058,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__MAKING = ITEM_FEATURE_COUNT + 15;
+	int STATE__MAKING = ITEM_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Edit</b></em>' attribute. <!-- begin-user-doc
@@ -1058,7 +1067,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__EDIT = ITEM_FEATURE_COUNT + 16;
+	int STATE__EDIT = ITEM_FEATURE_COUNT + 17;
 
 	/**
 	 * The feature id for the '<em><b>Editor</b></em>' attribute. <!--
@@ -1067,7 +1076,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__EDITOR = ITEM_FEATURE_COUNT + 17;
+	int STATE__EDITOR = ITEM_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>Strategy</b></em>' reference. <!--
@@ -1076,7 +1085,16 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__STRATEGY = ITEM_FEATURE_COUNT + 18;
+	int STATE__STRATEGY = ITEM_FEATURE_COUNT + 19;
+
+	/**
+	 * The feature id for the '<em><b>Base Package</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__BASE_PACKAGE = ITEM_FEATURE_COUNT + 20;
 
 	/**
 	 * The number of structural features of the '<em>State</em>' class. <!--
@@ -1085,7 +1103,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE_FEATURE_COUNT = ITEM_FEATURE_COUNT + 19;
+	int STATE_FEATURE_COUNT = ITEM_FEATURE_COUNT + 21;
 
 	/**
 	 * The meta object id for the
@@ -1210,13 +1228,22 @@ public interface ClassMakerPackage extends EPackage {
 	int WORKSPACE__CUSTOMIZERS = ISCHEDULING_RULE_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Non Exclusive Customizers</b></em>' map. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int WORKSPACE__NON_EXCLUSIVE_CUSTOMIZERS = ISCHEDULING_RULE_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Service</b></em>' container reference. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int WORKSPACE__SERVICE = ISCHEDULING_RULE_FEATURE_COUNT + 3;
+	int WORKSPACE__SERVICE = ISCHEDULING_RULE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>SCM Registry</b></em>' reference. <!--
@@ -1225,7 +1252,16 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WORKSPACE__SCM_REGISTRY = ISCHEDULING_RULE_FEATURE_COUNT + 4;
+	int WORKSPACE__SCM_REGISTRY = ISCHEDULING_RULE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Excluded EPackages</b></em>' reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int WORKSPACE__EXCLUDED_EPACKAGES = ISCHEDULING_RULE_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Workspace</em>' class. <!--
@@ -1234,7 +1270,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WORKSPACE_FEATURE_COUNT = ISCHEDULING_RULE_FEATURE_COUNT + 5;
+	int WORKSPACE_FEATURE_COUNT = ISCHEDULING_RULE_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the
@@ -1393,13 +1429,31 @@ public interface ClassMakerPackage extends EPackage {
 	int CUSTOMIZER__RANK = 0;
 
 	/**
+	 * The feature id for the '<em><b>Exclusive</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOMIZER__EXCLUSIVE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Stage</b></em>' reference. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOMIZER__STAGE = 2;
+
+	/**
 	 * The number of structural features of the '<em>Customizer</em>' class. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int CUSTOMIZER_FEATURE_COUNT = 1;
+	int CUSTOMIZER_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the
@@ -2344,6 +2398,20 @@ public interface ClassMakerPackage extends EPackage {
 	EReference getState_StateCustomizers();
 
 	/**
+	 * Returns the meta object for the map
+	 * '{@link org.enterprisedomain.classmaker.State#getNonExclusiveStateCustomizers
+	 * <em>Non Exclusive State Customizers</em>}'. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @return the meta object for the map '<em>Non Exclusive State
+	 *         Customizers</em>'.
+	 * @see org.enterprisedomain.classmaker.State#getNonExclusiveStateCustomizers()
+	 * @see #getState()
+	 * @generated
+	 */
+	EReference getState_NonExclusiveStateCustomizers();
+
+	/**
 	 * Returns the meta object for the attribute
 	 * '{@link org.enterprisedomain.classmaker.State#getProjectName <em>Project
 	 * Name</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -2402,6 +2470,18 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getState_Strategy();
+
+	/**
+	 * Returns the meta object for the attribute
+	 * '{@link org.enterprisedomain.classmaker.State#getBasePackage <em>Base
+	 * Package</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the attribute '<em>Base Package</em>'.
+	 * @see org.enterprisedomain.classmaker.State#getBasePackage()
+	 * @see #getState()
+	 * @generated
+	 */
+	EAttribute getState_BasePackage();
 
 	/**
 	 * Returns the meta object for class
@@ -2643,6 +2723,19 @@ public interface ClassMakerPackage extends EPackage {
 	EReference getWorkspace_Customizers();
 
 	/**
+	 * Returns the meta object for the map
+	 * '{@link org.enterprisedomain.classmaker.Workspace#getNonExclusiveCustomizers
+	 * <em>Non Exclusive Customizers</em>}'. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @return the meta object for the map '<em>Non Exclusive Customizers</em>'.
+	 * @see org.enterprisedomain.classmaker.Workspace#getNonExclusiveCustomizers()
+	 * @see #getWorkspace()
+	 * @generated
+	 */
+	EReference getWorkspace_NonExclusiveCustomizers();
+
+	/**
 	 * Returns the meta object for the container reference
 	 * '{@link org.enterprisedomain.classmaker.Workspace#getService
 	 * <em>Service</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -2665,6 +2758,18 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getWorkspace_SCMRegistry();
+
+	/**
+	 * Returns the meta object for the reference list
+	 * '{@link org.enterprisedomain.classmaker.Workspace#getExcludedEPackages
+	 * <em>Excluded EPackages</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the reference list '<em>Excluded EPackages</em>'.
+	 * @see org.enterprisedomain.classmaker.Workspace#getExcludedEPackages()
+	 * @see #getWorkspace()
+	 * @generated
+	 */
+	EReference getWorkspace_ExcludedEPackages();
 
 	/**
 	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Long To
@@ -2806,6 +2911,30 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getCustomizer_Rank();
+
+	/**
+	 * Returns the meta object for the attribute
+	 * '{@link org.enterprisedomain.classmaker.Customizer#isExclusive
+	 * <em>Exclusive</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the attribute '<em>Exclusive</em>'.
+	 * @see org.enterprisedomain.classmaker.Customizer#isExclusive()
+	 * @see #getCustomizer()
+	 * @generated
+	 */
+	EAttribute getCustomizer_Exclusive();
+
+	/**
+	 * Returns the meta object for the reference
+	 * '{@link org.enterprisedomain.classmaker.Customizer#getStage <em>Stage</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the reference '<em>Stage</em>'.
+	 * @see org.enterprisedomain.classmaker.Customizer#getStage()
+	 * @see #getCustomizer()
+	 * @generated
+	 */
+	EReference getCustomizer_Stage();
 
 	/**
 	 * Returns the meta object for class
@@ -3872,6 +4001,15 @@ public interface ClassMakerPackage extends EPackage {
 		EReference STATE__STATE_CUSTOMIZERS = eINSTANCE.getState_StateCustomizers();
 
 		/**
+		 * The meta object literal for the '<em><b>Non Exclusive State
+		 * Customizers</b></em>' map feature. <!-- begin-user-doc --> <!-- end-user-doc
+		 * -->
+		 * 
+		 * @generated
+		 */
+		EReference STATE__NON_EXCLUSIVE_STATE_CUSTOMIZERS = eINSTANCE.getState_NonExclusiveStateCustomizers();
+
+		/**
 		 * The meta object literal for the '<em><b>Project Name</b></em>' attribute
 		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
@@ -3910,6 +4048,14 @@ public interface ClassMakerPackage extends EPackage {
 		 * @generated
 		 */
 		EReference STATE__STRATEGY = eINSTANCE.getState_Strategy();
+
+		/**
+		 * The meta object literal for the '<em><b>Base Package</b></em>' attribute
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EAttribute STATE__BASE_PACKAGE = eINSTANCE.getState_BasePackage();
 
 		/**
 		 * The meta object literal for the
@@ -4083,6 +4229,14 @@ public interface ClassMakerPackage extends EPackage {
 		EReference WORKSPACE__CUSTOMIZERS = eINSTANCE.getWorkspace_Customizers();
 
 		/**
+		 * The meta object literal for the '<em><b>Non Exclusive Customizers</b></em>'
+		 * map feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference WORKSPACE__NON_EXCLUSIVE_CUSTOMIZERS = eINSTANCE.getWorkspace_NonExclusiveCustomizers();
+
+		/**
 		 * The meta object literal for the '<em><b>Service</b></em>' container reference
 		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
@@ -4097,6 +4251,14 @@ public interface ClassMakerPackage extends EPackage {
 		 * @generated
 		 */
 		EReference WORKSPACE__SCM_REGISTRY = eINSTANCE.getWorkspace_SCMRegistry();
+
+		/**
+		 * The meta object literal for the '<em><b>Excluded EPackages</b></em>'
+		 * reference list feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference WORKSPACE__EXCLUDED_EPACKAGES = eINSTANCE.getWorkspace_ExcludedEPackages();
 
 		/**
 		 * The meta object literal for the
@@ -4214,6 +4376,22 @@ public interface ClassMakerPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CUSTOMIZER__RANK = eINSTANCE.getCustomizer_Rank();
+
+		/**
+		 * The meta object literal for the '<em><b>Exclusive</b></em>' attribute
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EAttribute CUSTOMIZER__EXCLUSIVE = eINSTANCE.getCustomizer_Exclusive();
+
+		/**
+		 * The meta object literal for the '<em><b>Stage</b></em>' reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference CUSTOMIZER__STAGE = eINSTANCE.getCustomizer_Stage();
 
 		/**
 		 * The meta object literal for the

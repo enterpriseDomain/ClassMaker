@@ -92,11 +92,13 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/commitIds"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/commitId"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//State/stateCustomizers"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//State/nonExclusiveStateCustomizers"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/projectName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/making"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/edit"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/editor"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//State/strategy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//State/basePackage"/>
       <genOperations ecoreOperation="ClassMaker.ecore#//State/setProjectVersion">
         <genParameters ecoreParameter="ClassMaker.ecore#//State/setProjectVersion/monitor"/>
       </genOperations>
@@ -168,8 +170,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//Workspace/projects"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Workspace/resourceSet"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//Workspace/customizers"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//Workspace/nonExclusiveCustomizers"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ClassMaker.ecore#//Workspace/service"/>
       <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference ClassMaker.ecore#//Workspace/SCMRegistry"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ClassMaker.ecore#//Workspace/excludedEPackages"/>
       <genOperations ecoreOperation="ClassMaker.ecore#//Workspace/initialize"/>
       <genOperations ecoreOperation="ClassMaker.ecore#//Workspace/provision">
         <genParameters ecoreParameter="ClassMaker.ecore#//Workspace/provision/monitor"/>
@@ -244,8 +248,13 @@
     <genClasses image="false" ecoreClass="ClassMaker.ecore#//IAdapterFactory"/>
     <genClasses ecoreClass="ClassMaker.ecore#//Customizer">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Customizer/rank"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Customizer/exclusive"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference ClassMaker.ecore#//Customizer/stage"/>
       <genOperations ecoreOperation="ClassMaker.ecore#//Customizer/customize">
         <genParameters ecoreParameter="ClassMaker.ecore#//Customizer/customize/args"/>
+      </genOperations>
+      <genOperations ecoreOperation="ClassMaker.ecore#//Customizer/isNextAfter">
+        <genParameters ecoreParameter="ClassMaker.ecore#//Customizer/isNextAfter/customizerClass"/>
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="ClassMaker.ecore#//StageQualifier">

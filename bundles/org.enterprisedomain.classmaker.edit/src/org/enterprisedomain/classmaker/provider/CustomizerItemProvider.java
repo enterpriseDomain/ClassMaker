@@ -65,14 +65,16 @@ public class CustomizerItemProvider extends ItemProviderAdapter implements IEdit
 			super.getPropertyDescriptors(object);
 
 			addRankPropertyDescriptor(object);
+			addExclusivePropertyDescriptor(object);
+			addStagePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Rank feature. <!-- begin-user-doc -->
+	 * This adds a property descriptor for the Rank feature.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addRankPropertyDescriptor(Object object) {
@@ -86,8 +88,39 @@ public class CustomizerItemProvider extends ItemProviderAdapter implements IEdit
 	}
 
 	/**
-	 * This returns Customizer.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This adds a property descriptor for the Exclusive feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
+	 * @generated
+	 */
+	protected void addExclusivePropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Customizer_exclusive_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Customizer_exclusive_feature",
+								"_UI_Customizer_type"),
+						ClassMakerPackage.Literals.CUSTOMIZER__EXCLUSIVE, true, false, false,
+						ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Stage feature.
+	 * <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addStagePropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Customizer_stage_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Customizer_stage_feature",
+								"_UI_Customizer_type"),
+						ClassMakerPackage.Literals.CUSTOMIZER__STAGE, true, false, false, null, null, null));
+	}
+
+	/**
+	 * This returns Customizer.gif.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -96,9 +129,9 @@ public class CustomizerItemProvider extends ItemProviderAdapter implements IEdit
 	}
 
 	/**
-	 * This returns the label text for the adapted class. <!-- begin-user-doc -->
+	 * This returns the label text for the adapted class.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -108,10 +141,9 @@ public class CustomizerItemProvider extends ItemProviderAdapter implements IEdit
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update
-	 * any cached children and by creating a viewer notification, which it passes to
-	 * {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -120,6 +152,8 @@ public class CustomizerItemProvider extends ItemProviderAdapter implements IEdit
 
 		switch (notification.getFeatureID(Customizer.class)) {
 		case ClassMakerPackage.CUSTOMIZER__RANK:
+		case ClassMakerPackage.CUSTOMIZER__EXCLUSIVE:
+		case ClassMakerPackage.CUSTOMIZER__STAGE:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		}
@@ -127,10 +161,10 @@ public class CustomizerItemProvider extends ItemProviderAdapter implements IEdit
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing
-	 * the children that can be created under this object. <!-- begin-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+	 * that can be created under this object.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

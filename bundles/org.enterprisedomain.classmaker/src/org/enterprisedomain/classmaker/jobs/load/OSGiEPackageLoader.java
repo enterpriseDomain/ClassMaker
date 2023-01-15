@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.osgi.util.NLS;
+import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.Messages;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.State;
@@ -208,13 +209,19 @@ public class OSGiEPackageLoader extends ContainerJob {
 						EObject model = state.getDomainModel().getDynamic();
 						String packageClassName = null;
 						if (model instanceof EPackage)
-							packageClassName = CodeGenUtil.safeName(((EPackage) model).getName()) + "." //$NON-NLS-1$
+							packageClassName = (getContributionState()
+									.eIsSet(ClassMakerPackage.Literals.STATE__BASE_PACKAGE)
+											? getContributionState().getBasePackage() + "."
+											: "") //$NON-NLS-1$
+									+ CodeGenUtil.safeName(((EPackage) model).getName()) + "."
 									+ state.getPackageClassName();
 						Class<?> packageClass = null;
 						try {
 							packageClass = osgiBundle.loadClass(packageClassName);
 						} catch (Exception e) {
 							setException(e);
+							ClassMakerPlugin.getInstance().getLog()
+									.log(ClassMakerPlugin.createErrorStatus(e.getLocalizedMessage()));
 						}
 
 						EPackage ePackage = null;
@@ -257,13 +264,16 @@ public class OSGiEPackageLoader extends ContainerJob {
 					EObject model0 = state.getDomainModel().getDynamic();
 					String pluginClassName = null;
 					if (model0 instanceof EPackage)
-						pluginClassName = CodeGenUtil.safeName(((EPackage) model0).getName()) + ".provider." //$NON-NLS-1$
+						pluginClassName = (getContributionState().eIsSet(ClassMakerPackage.Literals.STATE__BASE_PACKAGE)
+								? getContributionState().getBasePackage() + "."
+								: "") + CodeGenUtil.safeName(((EPackage) model0).getName()) + ".provider." //$NON-NLS-1$
 								+ state.getEditPluginClassName();
 					Class<?> pluginClass = null;
 					try {
 						pluginClass = osgiBundle.loadClass(pluginClassName);
 					} catch (Exception e) {
 						setException(e);
+						throw new InvocationTargetException(e);
 					}
 					EMFPlugin editPlugin = null;
 					try {
@@ -291,7 +301,11 @@ public class OSGiEPackageLoader extends ContainerJob {
 					final EObject model1 = state.getDomainModel().getDynamic();
 					String pluginClassName1 = null;
 					if (model1 instanceof EPackage)
-						pluginClassName1 = CodeGenUtil.safeName(((EPackage) model1).getName()) + ".presentation." //$NON-NLS-1$
+						pluginClassName1 = (getContributionState()
+								.eIsSet(ClassMakerPackage.Literals.STATE__BASE_PACKAGE)
+										? getContributionState().getBasePackage() + "."
+										: "") //$NON-NLS-1$
+								+ CodeGenUtil.safeName(((EPackage) model1).getName()) + ".presentation."
 								+ state.getEditorPluginClassName();
 					Class<?> pluginClass1 = null;
 					try {

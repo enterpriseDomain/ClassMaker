@@ -47,6 +47,7 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.ECollections;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jdt.core.ElementChangedEvent;
@@ -136,7 +137,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 
 	}
 
-	protected class GenModelGenerationJob extends GeneratorJob {
+	public class GenModelGenerationJob extends GeneratorJob {
 
 		public GenModelGenerationJob(int depth, long stateTimestamp) {
 			super(Messages.JobNameGenModelGeneration, depth, stateTimestamp);
@@ -163,7 +164,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 
 	}
 
-	protected class CodeGenerationJob extends GeneratorJob {
+	public class CodeGenerationJob extends GeneratorJob {
 
 		public CodeGenerationJob(int depth, long stateTimestamp) {
 			super(NLS.bind(Messages.JobNameCodeGeneration, "Code"), depth, stateTimestamp);
@@ -386,6 +387,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 			} catch (JavaModelException mex) {
 				throw new CoreException(ClassMakerPlugin.createErrorStatus(mex));
 			} catch (OperationCanceledException ocex) {
+				monitor.setCanceled(true);
 			} catch (InterruptedException iex) {
 				monitor.setCanceled(true);
 			} finally {
@@ -454,11 +456,18 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 	protected void setupGenModel(IPath projectPath, GenModel genModel, Collection<EPackage> ePackages) {
 		for (EPackage ePackage : ePackages) {
 			GenPackage genPackage = genModel.findGenPackage(ePackage);
-			if (genPackage != null)
-				genPackage.setEcorePackage(ePackage);
+			if (genPackage != null) {
+				genPackage.setEcorePackage(ePackage);				
+			}
 		}
 		genModel.reconcile();
 		genModel.initialize(ePackages);
+		for (EPackage ePackage : ePackages) {
+			GenPackage genPackage = genModel.findGenPackage(ePackage);
+			if (genPackage != null) {
+				getContributionState().setBasePackage(genPackage.getBasePackage());				
+			}
+		}		
 		genModel.setCanGenerate(true);
 		genModel.setComplianceLevel(GenJDKLevel.JDK110_LITERAL);
 		genModel.setUpdateClasspath(true);

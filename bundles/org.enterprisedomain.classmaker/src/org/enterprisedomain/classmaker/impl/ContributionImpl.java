@@ -51,7 +51,6 @@ import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.ListBranchCommand;
 import org.eclipse.jgit.api.ReflogCommand;
 import org.eclipse.jgit.api.errors.JGitInternalException;
-import org.eclipse.jgit.errors.LockFailedException;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.ReflogEntry;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
@@ -342,7 +341,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 					try {
 						getState().add(".");
 						getState().commit();
-					} catch (JGitInternalException e) {						
+					} catch (JGitInternalException e) {
 					}
 				}
 				checkout(getVersion(), timestamp);
@@ -404,19 +403,20 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	public String make(IProgressMonitor monitor) throws CoreException {
 		removeResourceChangeListener(getResourceReloadListener());
 		String result = // "";
-//		try {
-//		result = 
+				// try {
+				// result =
 				make(getRevision(), monitor);
-//		} catch (CoreException e) {
-//			if (e.getCause() instanceof InvocationTargetException) {
-//				InvocationTargetException ex = (InvocationTargetException) e.getCause();
-//				if (ex.getCause() instanceof Error) {
-//					ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.CLEAN_BUILD, monitor);
-//					result = make(getRevision(), monitor);
-//				}
-//			} else
-//				throw e;
-//		}
+		// } catch (CoreException e) {
+		// if (e.getCause() instanceof InvocationTargetException) {
+		// InvocationTargetException ex = (InvocationTargetException) e.getCause();
+		// if (ex.getCause() instanceof Error) {
+		// ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.CLEAN_BUILD,
+		// monitor);
+		// result = make(getRevision(), monitor);
+		// }
+		// } else
+		// throw e;
+		// }
 		setDirty(false);
 		return result;
 	}
