@@ -16,7 +16,7 @@
       <repository id="updates" location="https://download.eclipse.org/eclipse/updates/4.24/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
-      <unit id="org.eclipse.jdt.feature.group" version="3.18.1200.v20220607-0700"/>
+      <unit id="org.eclipse.jdt.feature.group" version="3.18.1400.v20221123-1800"/>
       <unit id="org.eclipse.emf.sdk.feature.group" version="2.30.0.v20220516-1117"/>
       <unit id="org.eclipse.gef.sdk.feature.group" version="3.11.0.201606061308"/>
       <unit id="org.eclipse.graphiti.feature.feature.group" version="0.18.0.202106091000"/>
