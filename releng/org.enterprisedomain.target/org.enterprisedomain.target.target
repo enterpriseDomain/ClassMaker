@@ -115,13 +115,13 @@
       <repository location="https://download.eclipse.org/modeling/emf/cdo/drops/R20210308-1312/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
-    	<unit id="org.eclipse.emf.compare.feature.group" version="3.3.20.202211161457"/>
-			<unit id="org.eclipse.emf.compare.edit" version="4.3.1.202211161457"/>
-			<unit id="org.eclipse.emf.compare.ide" version="3.4.3.202211161457"/>
-			<unit id="org.eclipse.emf.compare.ide.ui" version="4.4.3.202211161457"/>
-			<unit id="org.eclipse.emf.compare.rcp" version="2.5.2.202211161457"/>
-			<unit id="org.eclipse.emf.compare.rcp.ui" version="4.4.2.202211161457"/>
-		  <repository location="https://download.eclipse.org/modeling/emf/compare/updates/releases/latest/"/>
+      <unit id="org.eclipse.emf.compare.feature.group" version="3.3.20.202211161457"/>
+      <unit id="org.eclipse.emf.compare.edit" version="4.3.1.202211161457"/>
+      <unit id="org.eclipse.emf.compare.ide" version="3.4.3.202211161457"/>
+      <unit id="org.eclipse.emf.compare.ide.ui" version="4.4.3.202211161457"/>
+      <unit id="org.eclipse.emf.compare.rcp" version="2.5.2.202211161457"/>
+      <unit id="org.eclipse.emf.compare.rcp.ui" version="4.4.2.202211161457"/>
+      <repository location="https://download.eclipse.org/modeling/emf/compare/updates/releases/latest/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.eclipse.emf.ecp.application.e3" version="1.27.0.20221202-1633"/>
@@ -233,8 +233,8 @@
       <repository location="https://download.eclipse.org/tools/orbit/downloads/drops/R20220531185310/repository/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
-      <unit id="org.eclipse.emf.edapt.runtime.feature.feature.group" version="1.5.0.202201311430"/>
-      <unit id="org.eclipse.emf.edapt.runtime.feature.source.feature.group" version="1.5.0.202201311430"/>
+      <unit id="org.eclipse.emf.edapt.runtime.feature.feature.group" version="1.5.0.202211141318"/>
+      <unit id="org.eclipse.emf.edapt.runtime.feature.source.feature.group" version="1.5.0.202211141318"/>
       <repository location="http://download.eclipse.org/edapt/releases/15x"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
