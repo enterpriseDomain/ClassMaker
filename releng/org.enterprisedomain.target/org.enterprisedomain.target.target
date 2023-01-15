@@ -18,7 +18,7 @@
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.eclipse.jdt.feature.group" version="3.18.1400.v20221123-1800"/>
       <unit id="org.eclipse.emf.sdk.feature.group" version="2.32.0.v20221121-1400"/>
-      <unit id="org.eclipse.gef.sdk.feature.group" version="3.11.0.201606061308"/>
+      <unit id="org.eclipse.gef.sdk.feature.group" version="3.15.0.202211301913"/>
       <unit id="org.eclipse.graphiti.feature.feature.group" version="0.18.0.202106091000"/>
       <unit id="org.eclipse.graphiti.export.feature.feature.group" version="0.18.0.202106091000"/>
       <unit id="org.eclipse.emf.validation.sdk.feature.group" version="1.12.2.202008210805"/>
