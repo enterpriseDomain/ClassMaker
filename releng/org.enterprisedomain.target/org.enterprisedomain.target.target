@@ -107,7 +107,7 @@
       <repository location="https://download.eclipse.org/modeling/emf/query/updates/releases/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
-      <unit id="org.eclipse.justj.openjdk.hotspot.jre.full.feature.group" version="17.0.4.v20220805-1047"/>
+      <unit id="org.eclipse.justj.openjdk.hotspot.jre.full.feature.group" version="17.0.5.v20221102-0933"/>
       <repository location="https://download.eclipse.org/justj/jres/17/updates/release/latest"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
