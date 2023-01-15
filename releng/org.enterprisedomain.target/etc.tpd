@@ -1,14 +1,7 @@
 target "org.enterprisedomain.target.etc" with allEnvironments configurePhase
 
-// location "http://download.eclipse.org/technology/swtbot/releases/latest/" {
-// org.eclipse.swtbot.forms.feature.group
-// org.eclipse.swtbot.eclipse.feature.group
-// org.eclipse.swtbot.eclipse.gef.feature.group
-// org.eclipse.swtbot.feature.group
-// org.eclipse.swtbot.eclipse.test.junit.feature.group
-// }
-location "https://download.eclipse.org/modeling/emf/cdo/drops/R20210308-1312/" {
-	org.eclipse.emf.cdo.all.feature.group [4.13.0,5.0.0)
+location "https://download.eclipse.org/modeling/emf/cdo/updates/releases/4.x/latest/" {
+	org.eclipse.emf.cdo.all.feature.group
 }
 
 location "https://download.eclipse.org/modeling/emf/compare/updates/releases/latest/" {
@@ -69,28 +62,31 @@ location ecp "http://download.eclipse.org/ecp/releases/releases_target_127/" {
 location "http://download.eclipse.org/rt/ecf/3.14.0/site.p2" {
 	org.eclipse.ecf.core.feature.feature.group
 	org.eclipse.ecf.filetransfer.feature.feature.group
-} // location "http://build.eclipse.org/rt/rap/base-platforms/3.1/extra-dependencies/" {
-// org.mockito.mockito-core-hamcrest-modified
-// }
+}
 
-location "https://download.eclipse.org/tools/orbit/downloads/drops/R20220531185310/repository/" {
+location "https://download.eclipse.org/tools/orbit/downloads/drops/R20221123021534/repository" {
 	javaewah
 	javaewah.source
 	javax.annotation [1.3.5,2.0.0)
 	javax.annotation.source
-	org.objectweb.asm [9.3.0,9.4.0)
-	org.objectweb.asm.tree [9.3.0,9.4.0)
+	org.objectweb.asm [9.4.0,10.0.0)
+	org.objectweb.asm.tree [9.4.0,10.0.0)
+	org.objectweb.asm.commons [9.4.0,10.0.0)
+	org.objectweb.asm.util [9.4.0,10.0.0)
 	org.apache.commons.compress
 	org.apache.commons.compress.source
 	org.apache.sshd.sftp
 	org.apache.sshd.sftp.source
 	org.apache.log4j.source
 	org.apache.log4j
+	org.apache.commons.io
 	org.apache.commons.codec
 	org.apache.commons.logging
+	com.google.inject [5.0.1,6.0.0)
+	com.google.inject.source
 	com.google.gson.source
 	com.google.gson
-	com.google.guava [27.1.0,28.0.0)
+	com.google.guava [30.1.0,31.0.0)
 	com.google.guava.source
 	org.hamcrest.core
 	org.hamcrest.library
@@ -99,14 +95,16 @@ location "https://download.eclipse.org/tools/orbit/downloads/drops/R202205311853
 	org.kohsuke.args4j.source
 	net.i2p.crypto.eddsa
 	net.i2p.crypto.eddsa.source
-	org.mockito [2.23.0.v20200310-1642,2.23.0.v20200310-1642]
-	org.mockito.source [2.23.0.v20200310-1642,2.23.0.v20200310-1642]
-	org.objenesis [2.6.0.v20180420-1519,2.6.0.v20180420-1519]
-	org.objenesis.source [2.6.0.v20180420-1519,2.6.0.v20180420-1519]
-	org.slf4j.api [1.7.30.v20200204-2150,1.7.30.v20200204-2150]
-	org.slf4j.api.source [1.7.30.v20200204-2150,1.7.30.v20200204-2150]
-	org.slf4j.binding.log4j12 [1.7.30.v20201108-2042,1.7.30.v20201108-2042]
-	org.slf4j.binding.log4j12.source [1.7.30.v20201108-2042,1.7.30.v20201108-2042]
+	org.mockito.junit-jupiter
+	org.mockito.junit-jupiter.source
+	org.mockito.mockito-core
+	org.mockito.mockito-core.source
+	org.objenesis [3.3.0,3.3.1)
+	org.objenesis.source [3.3.0,3.3.1)
+	org.slf4j.api [1.7.30,1.7.31)
+	org.slf4j.api.source [1.7.30,1.7.31)
+	org.slf4j.binding.log4j12 [1.7.30,1.7.31)
+	org.slf4j.binding.log4j12.source [1.7.30,1.7.31)
 	org.tukaani.xz [1.9.0.v20210624-1259,1.9.0.v20210624-1259]
 	org.tukaani.xz.source [1.9.0.v20210624-1259,1.9.0.v20210624-1259]
 	com.sun.jna
@@ -118,6 +116,9 @@ location "https://download.eclipse.org/tools/orbit/downloads/drops/R202205311853
 	jakarta.servlet [5.0.0,6.0.0)
 	jakarta.servlet.source [5.0.0,6.0.0)
 	org.apache.batik.bridge
+	org.apache.batik.dom
+	org.apache.batik.anim
+	org.apache.xalan
 	org.apache.poi.source
 	org.apache.poi
 	org.apache.poi.ooxml
@@ -131,15 +132,10 @@ location "https://download.eclipse.org/tools/orbit/downloads/drops/R202205311853
 	org.apache.commons.math3.source
 }
 
-location "http://download.eclipse.org/edapt/releases/15x" {
+location edapt-p2-repo "http://download.eclipse.org/edapt/releases/15x" {
 	org.eclipse.emf.edapt.runtime.feature.feature.group
 	org.eclipse.emf.edapt.runtime.feature.source.feature.group
 }
 
-location "https://download.eclipse.org/jetty/updates/jetty-bundles-9.x/9.4.48.v20220622/" {
-	org.eclipse.jetty.server [9.0.0,10.0.0)
-}
- //location "http://download.eclipse.org/nebula/releases/1.0.0" {
- //	org.eclipse.nebula.widgets.grid.feature.feature.group
- //}
+
 

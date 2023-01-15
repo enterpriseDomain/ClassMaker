@@ -19,13 +19,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardWatchEventKinds;
-import java.nio.file.WatchEvent;
-import java.nio.file.WatchKey;
-import java.nio.file.WatchService;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -142,6 +135,8 @@ import org.osgi.framework.Version;
  * <em>Commit Id</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getStateCustomizers
  * <em>State Customizers</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getNonExclusiveStateCustomizers
+ * <em>Non Exclusive State Customizers</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getProjectName
  * <em>Project Name</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#isMaking
@@ -152,6 +147,8 @@ import org.osgi.framework.Version;
  * <em>Editor</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getStrategy
  * <em>Strategy</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getBasePackage
+ * <em>Base Package</em>}</li>
  * </ul>
  *
  * @generated
@@ -401,6 +398,17 @@ public class StateImpl extends ItemImpl implements State {
 	protected EMap<StageQualifier, Customizer> stateCustomizers;
 
 	/**
+	 * The cached value of the '{@link #getNonExclusiveStateCustomizers() <em>Non
+	 * Exclusive State Customizers</em>}' map. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @see #getNonExclusiveStateCustomizers()
+	 * @generated
+	 * @ordered
+	 */
+	protected EMap<StageQualifier, Customizer> nonExclusiveStateCustomizers;
+
+	/**
 	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -480,13 +488,31 @@ public class StateImpl extends ItemImpl implements State {
 	 */
 	protected Strategy strategy;
 
+	/**
+	 * The default value of the '{@link #getBasePackage() <em>Base Package</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getBasePackage()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String BASE_PACKAGE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getBasePackage() <em>Base Package</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getBasePackage()
+	 * @generated
+	 * @ordered
+	 */
+	protected String basePackage = BASE_PACKAGE_EDEFAULT;
+
 	protected String language = LANGUAGE_EDEFAULT;
 
 	private boolean loading = false;
 
 	private Object makingLock = new Object();
-
-	private WatchService watch = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -511,8 +537,9 @@ public class StateImpl extends ItemImpl implements State {
 
 						@Override
 						public boolean visit(IResourceDelta delta) throws CoreException {
-							if (delta.getResource().getType() == IResource.FILE && delta.getResource().getLocation()
-									.toFile().getPath().equals(getResource().getURI().toFileString())) {
+							if (delta.getResource().getType() == IResource.FILE
+									&& delta.getResource().getLocation() != null && delta.getResource().getLocation()
+											.toFile().getPath().equals(getResource().getURI().toFileString())) {
 								if ((delta.getFlags() & IResourceDelta.CONTENT) != 0) {
 									try {
 										Resource resource = getProject().getWorkspace().getResourceSet().getResource(
@@ -783,7 +810,7 @@ public class StateImpl extends ItemImpl implements State {
 				}
 			}
 		}
-		return getCommitId(); // $NON-NLS-1$
+		return getCommitId();
 	}
 
 	private URI modelURI;
@@ -924,10 +951,12 @@ public class StateImpl extends ItemImpl implements State {
 				setPhase(Stage.MODELED);
 			}
 			if (!resource.getContents().isEmpty()) {
-				Map<String, String> options = new HashMap<String, String>();
+				Map<Object, Object> options = new HashMap<Object, Object>();
 				options.put(XMLResource.OPTION_ENCODING, "UTF-8");
 				options.put(XMLResource.OPTION_SAVE_ONLY_IF_CHANGED,
 						XMLResource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
+				((XMLResource) resource).getDefaultSaveOptions().put(XMLResource.OPTION_PROCESS_DANGLING_HREF,
+						XMLResource.OPTION_PROCESS_DANGLING_HREF_RECORD);
 				resource.save(options);
 			}
 		} catch (IOException e) {
@@ -1196,6 +1225,8 @@ public class StateImpl extends ItemImpl implements State {
 		switch (featureID) {
 		case ClassMakerPackage.STATE__STATE_CUSTOMIZERS:
 			return ((InternalEList<?>) getStateCustomizers()).basicRemove(otherEnd, msgs);
+		case ClassMakerPackage.STATE__NON_EXCLUSIVE_STATE_CUSTOMIZERS:
+			return ((InternalEList<?>) getNonExclusiveStateCustomizers()).basicRemove(otherEnd, msgs);
 		case ClassMakerPackage.STATE__STRATEGY:
 			return basicSetStrategy(null, msgs);
 		}
@@ -1476,6 +1507,23 @@ public class StateImpl extends ItemImpl implements State {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public EMap<StageQualifier, Customizer> getNonExclusiveStateCustomizers() {
+		if (nonExclusiveStateCustomizers == null) {
+			nonExclusiveStateCustomizers = new EcoreEMap<StageQualifier, Customizer>(
+					ClassMakerPackage.Literals.STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY,
+					StageQualifierToCustomizerMapEntryImpl.class, this,
+					ClassMakerPackage.STATE__NON_EXCLUSIVE_STATE_CUSTOMIZERS);
+		}
+		return nonExclusiveStateCustomizers;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	public String getProjectName() {
@@ -1636,6 +1684,30 @@ public class StateImpl extends ItemImpl implements State {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
+	 * @generated
+	 */
+	@Override
+	public String getBasePackage() {
+		return basePackage;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public void setBasePackage(String newBasePackage) {
+		String oldBasePackage = basePackage;
+		basePackage = newBasePackage;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.STATE__BASE_PACKAGE, oldBasePackage,
+					basePackage));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	public void setProjectVersion(IProgressMonitor monitor) throws CoreException {
@@ -1757,6 +1829,11 @@ public class StateImpl extends ItemImpl implements State {
 				return getStateCustomizers();
 			else
 				return getStateCustomizers().map();
+		case ClassMakerPackage.STATE__NON_EXCLUSIVE_STATE_CUSTOMIZERS:
+			if (coreType)
+				return getNonExclusiveStateCustomizers();
+			else
+				return getNonExclusiveStateCustomizers().map();
 		case ClassMakerPackage.STATE__PROJECT_NAME:
 			return getProjectName();
 		case ClassMakerPackage.STATE__MAKING:
@@ -1769,6 +1846,8 @@ public class StateImpl extends ItemImpl implements State {
 			if (resolve)
 				return getStrategy();
 			return basicGetStrategy();
+		case ClassMakerPackage.STATE__BASE_PACKAGE:
+			return getBasePackage();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1826,6 +1905,9 @@ public class StateImpl extends ItemImpl implements State {
 		case ClassMakerPackage.STATE__STATE_CUSTOMIZERS:
 			((EStructuralFeature.Setting) getStateCustomizers()).set(newValue);
 			return;
+		case ClassMakerPackage.STATE__NON_EXCLUSIVE_STATE_CUSTOMIZERS:
+			((EStructuralFeature.Setting) getNonExclusiveStateCustomizers()).set(newValue);
+			return;
 		case ClassMakerPackage.STATE__PROJECT_NAME:
 			setProjectName((String) newValue);
 			return;
@@ -1840,6 +1922,9 @@ public class StateImpl extends ItemImpl implements State {
 			return;
 		case ClassMakerPackage.STATE__STRATEGY:
 			setStrategy((Strategy) newValue);
+			return;
+		case ClassMakerPackage.STATE__BASE_PACKAGE:
+			setBasePackage((String) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -1895,6 +1980,9 @@ public class StateImpl extends ItemImpl implements State {
 		case ClassMakerPackage.STATE__STATE_CUSTOMIZERS:
 			getStateCustomizers().clear();
 			return;
+		case ClassMakerPackage.STATE__NON_EXCLUSIVE_STATE_CUSTOMIZERS:
+			getNonExclusiveStateCustomizers().clear();
+			return;
 		case ClassMakerPackage.STATE__PROJECT_NAME:
 			setProjectName(PROJECT_NAME_EDEFAULT);
 			return;
@@ -1909,6 +1997,9 @@ public class StateImpl extends ItemImpl implements State {
 			return;
 		case ClassMakerPackage.STATE__STRATEGY:
 			setStrategy((Strategy) null);
+			return;
+		case ClassMakerPackage.STATE__BASE_PACKAGE:
+			setBasePackage(BASE_PACKAGE_EDEFAULT);
 			return;
 		}
 		super.eUnset(featureID);
@@ -1956,6 +2047,8 @@ public class StateImpl extends ItemImpl implements State {
 			return COMMIT_ID_EDEFAULT == null ? commitId != null : !COMMIT_ID_EDEFAULT.equals(commitId);
 		case ClassMakerPackage.STATE__STATE_CUSTOMIZERS:
 			return stateCustomizers != null && !stateCustomizers.isEmpty();
+		case ClassMakerPackage.STATE__NON_EXCLUSIVE_STATE_CUSTOMIZERS:
+			return nonExclusiveStateCustomizers != null && !nonExclusiveStateCustomizers.isEmpty();
 		case ClassMakerPackage.STATE__PROJECT_NAME:
 			return PROJECT_NAME_EDEFAULT == null ? getProjectName() != null
 					: !PROJECT_NAME_EDEFAULT.equals(getProjectName());
@@ -1967,6 +2060,8 @@ public class StateImpl extends ItemImpl implements State {
 			return editor != EDITOR_EDEFAULT;
 		case ClassMakerPackage.STATE__STRATEGY:
 			return strategy != null;
+		case ClassMakerPackage.STATE__BASE_PACKAGE:
+			return BASE_PACKAGE_EDEFAULT == null ? basePackage != null : !BASE_PACKAGE_EDEFAULT.equals(basePackage);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -2004,6 +2099,8 @@ public class StateImpl extends ItemImpl implements State {
 		result.append(edit);
 		result.append(", editor: ");
 		result.append(editor);
+		result.append(", basePackage: ");
+		result.append(basePackage);
 		result.append(')');
 		return result.toString();
 	}

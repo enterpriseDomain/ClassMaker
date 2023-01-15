@@ -70,6 +70,9 @@ public class PDEPluginExporter extends AbstractExporter {
 			State state = getContributionState();
 			Version version = state.getProject().getVersion();
 			final FeatureExportInfo info = new FeatureExportInfo();
+			if (getProperties().isEmpty())
+				getProperties().put(AbstractExporter.EXPORT_DESTINATION_PROP,
+						ResourceUtils.getExportDestination(getProject()).toString());
 			info.destinationDirectory = getProperties().getProperty(EXPORT_DESTINATION_PROP);
 			info.toDirectory = true;
 			info.useJarFormat = true;

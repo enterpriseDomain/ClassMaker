@@ -38,10 +38,9 @@ import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.Workspace;
 
 /**
- * This is the item provider adapter for a
- * {@link org.enterprisedomain.classmaker.Workspace} object. <!-- begin-user-doc
+ * This is the item provider adapter for a {@link org.enterprisedomain.classmaker.Workspace} object.
+ * <!-- begin-user-doc
  * --> <!-- end-user-doc -->
- * 
  * @generated
  */
 public class WorkspaceItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
@@ -68,7 +67,9 @@ public class WorkspaceItemProvider extends ItemProviderAdapter implements IEditi
 			super.getPropertyDescriptors(object);
 
 			addResourceSetPropertyDescriptor(object);
+			addNonExclusiveCustomizersPropertyDescriptor(object);
 			addSCMRegistryPropertyDescriptor(object);
+			addExcludedEPackagesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -90,6 +91,21 @@ public class WorkspaceItemProvider extends ItemProviderAdapter implements IEditi
 	}
 
 	/**
+	 * This adds a property descriptor for the Non Exclusive Customizers feature.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNonExclusiveCustomizersPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Workspace_nonExclusiveCustomizers_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Workspace_nonExclusiveCustomizers_feature",
+								"_UI_Workspace_type"),
+						ClassMakerPackage.Literals.WORKSPACE__NON_EXCLUSIVE_CUSTOMIZERS, true, false, true, null, null,
+						null));
+	}
+
+	/**
 	 * This adds a property descriptor for the SCM Registry feature. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -105,12 +121,25 @@ public class WorkspaceItemProvider extends ItemProviderAdapter implements IEditi
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an
-	 * appropriate feature for an {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * This adds a property descriptor for the Excluded EPackages feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected void addExcludedEPackagesPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Workspace_excludedEPackages_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Workspace_excludedEPackages_feature",
+								"_UI_Workspace_type"),
+						ClassMakerPackage.Literals.WORKSPACE__EXCLUDED_EPACKAGES, true, false, true, null, null, null));
+	}
+
+	/**
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -125,21 +154,19 @@ public class WorkspaceItemProvider extends ItemProviderAdapter implements IEditi
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to
-		// use for
+		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
 		return super.getChildFeature(object, child);
 	}
 
 	/**
-	 * This returns Workspace.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This returns Workspace.gif.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -148,9 +175,9 @@ public class WorkspaceItemProvider extends ItemProviderAdapter implements IEditi
 	}
 
 	/**
-	 * This returns the label text for the adapted class. <!-- begin-user-doc -->
+	 * This returns the label text for the adapted class.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -162,10 +189,9 @@ public class WorkspaceItemProvider extends ItemProviderAdapter implements IEditi
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update
-	 * any cached children and by creating a viewer notification, which it passes to
-	 * {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -185,10 +211,10 @@ public class WorkspaceItemProvider extends ItemProviderAdapter implements IEditi
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing
-	 * the children that can be created under this object. <!-- begin-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+	 * that can be created under this object.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

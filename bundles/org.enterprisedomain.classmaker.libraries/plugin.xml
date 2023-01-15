@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+   <extension-point id="libraries" name="ClassMaker Libraries" schema="schema/libraries.exsd"/>
+   <extension
+         point="org.enterprisedomain.classmaker.customizers">
+      <customizer
+            class="org.enterprisedomain.classmaker.libraries.LoadLibrariesCustomizer"
+            exclusive="false"
+            rank="4"
+            stage="org.enterprisedomain.classmaker.customization.stages.workspace.init">
+      </customizer>
+   </extension>
+</plugin>

@@ -16,6 +16,7 @@
 package org.enterprisedomain.classmaker.impl;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -265,7 +266,7 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 	public Worker createGenerator() {
 		getGenerators().add(createWithCustomizer(
 				ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "project.create.generator"), //$NON-NLS-1$
-				getGenerators().size(), getEclipseProject(), getState().getTimestamp()));
+				getGenerators().size(), getState().getTimestamp(), getEclipseProject()));
 		return getGenerators().get(getGenerators().size() - 1);
 	}
 
@@ -497,8 +498,32 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 		SortedSet<Customizer> customizers = createCustomizers(stage);
 		if (customizers == null)
 			return null;
-		Customizer customizer = customizers.last();
-		return (Worker) (customizer.customize(ECollections.asEList(customizerArgs)));
+		Customizer c = customizers.last();
+		SortedSet<Customizer> neCustomizers = createNonExclusiveCustomizers(stage);
+		Worker w = (Worker) c.customize(ECollections.asEList(customizerArgs));
+		EnterpriseDomainJob e = w.getAdapter(EnterpriseDomainJob.class);
+		if (neCustomizers == null)
+			return w;
+		EnterpriseDomainJob job = null;
+		Iterator<Customizer> it = neCustomizers.iterator();
+		Customizer n = null;
+		if (it.hasNext()) {
+			n = it.next();
+			job = ((Worker) n.customize(ECollections.asEList(customizerArgs))).getAdapter(EnterpriseDomainJob.class);
+			job.setExclusive(false);
+			e.setNextJob(job);
+		}
+		while (it.hasNext()) {
+			job = ((Worker) n.customize(ECollections.asEList(customizerArgs))).getAdapter(EnterpriseDomainJob.class);
+			if (job != null) {
+				job.setExclusive(false);
+				n = it.next();
+				job.setNextJob(((Worker) n.customize(ECollections.asEList(customizerArgs)))
+						.getAdapter(EnterpriseDomainJob.class));
+				job.getNextJob().setExclusive(false);
+			}
+		}
+		return w;
 	}
 
 	private SortedSet<Customizer> createCustomizers(StageQualifier stage) {
@@ -510,6 +535,20 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 		for (StageQualifier filter : getState().getProject().getWorkspace().getCustomizers().keySet())
 			if (filter.equals(stage))
 				customizers.add(getState().getProject().getWorkspace().getCustomizers().get(filter));
+		if (customizers.isEmpty())
+			return null;
+		return customizers;
+	}
+
+	private SortedSet<Customizer> createNonExclusiveCustomizers(StageQualifier stage) {
+		SortedSet<Customizer> customizers = new TreeSet<Customizer>(new Customizer.CustomizerComparator());
+
+		for (StageQualifier filter : getState().getNonExclusiveStateCustomizers().keySet())
+			if (stage.equals(filter))
+				customizers.add(getState().getNonExclusiveStateCustomizers().get(filter));
+		for (StageQualifier filter : getState().getProject().getWorkspace().getNonExclusiveCustomizers().keySet())
+			if (filter.equals(stage))
+				customizers.add(getState().getProject().getWorkspace().getNonExclusiveCustomizers().get(filter));
 		if (customizers.isEmpty())
 			return null;
 		return customizers;

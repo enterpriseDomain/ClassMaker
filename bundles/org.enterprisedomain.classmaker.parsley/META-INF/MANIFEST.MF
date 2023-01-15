@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: org.enterprisedomain.classmaker.parsley
+Bundle-ManifestVersion: 2
+Bundle-Name: org.enterprisedomain.classmaker.parsley
+Bundle-Vendor: Kyrill Zotkin
+Bundle-Version: 0.8.55.qualifier
+Bundle-SymbolicName: org.enterprisedomain.classmaker.parsley; singleton:=true
+Bundle-Activator: org.enterprisedomain.parsley.classmaker.ClassMakerActivator
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.ui,
+ org.eclipse.emf.parsley.views,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.ui.ide,
+ org.enterprisedomain.classmaker;bundle-version="0.8.55"
+Import-Package: org.apache.commons.logging,
+ org.apache.log4j
+Bundle-RequiredExecutionEnvironment: JavaSE-17
+Export-Package: org.enterprisedomain.parsley.classmaker

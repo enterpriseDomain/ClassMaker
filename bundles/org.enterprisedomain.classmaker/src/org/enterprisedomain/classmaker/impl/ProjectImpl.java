@@ -1718,7 +1718,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 				if (e.exception() instanceof PackageNotFoundException) {
 					Contribution contribution = getWorkspace()
 							.getContribution(((PackageNotFoundException) e.exception()).uri(), Stage.MODELED);
-					if (contribution.getPhase().getValue() >= Stage.INSTALLED_VALUE)
+					if (contribution != null && contribution.getPhase().getValue() >= Stage.INSTALLED_VALUE)
 						try {
 							contribution.build(ClassMakerPlugin.getProgressMonitor());
 							resource = getWorkspace().getResourceSet().getResource(uri, true);
