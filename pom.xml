@@ -9,7 +9,7 @@
 		<groupId>org.enterprisedomain</groupId>
 		<artifactId>org.enterprisedomain.configuration</artifactId>
 		<version>0.8.55-SNAPSHOT</version>
-		<relativePath>./releng/org.enterprisedomain.configuration</relativePath>
+		<relativePath>../releng/org.enterprisedomain.configuration/pom.xml</relativePath>
 	</parent>
 	<scm>
 		<connection>scm:git:https://github.com/enterpriseDomain/ClassMaker</connection>
