@@ -10,12 +10,5 @@
 		<version>0.8.55-SNAPSHOT</version>
 		<relativePath>../../</relativePath>
 	</parent>
-	<packaging>eclipse-plugin</packaging>
-	<dependencies>
-		<dependency>
-			<groupId>org.enterprisedomain</groupId>
-			<artifactId>org.enterprisedomain.root</artifactId>
-			<version>0.8.55-SNAPSHOT</version>
-		</dependency>
-	</dependencies>
+	<packaging>eclipse-plugin</packaging>	
 </project>
