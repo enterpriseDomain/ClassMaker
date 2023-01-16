@@ -30,7 +30,7 @@ Require-Bundle: org.eclipse.osgi,
  org.eclipse.emf.importer.ecore;bundle-version="2.10.0",
  org.eclipse.jdt.ui;bundle-version="3.25.0";visibility:=reexport,
  org.enterprisedomain.classmaker;bundle-version="0.8.55"
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Automatic-Module-Name: org.enterprisedomain.workbench
 Import-Package: javax.annotation;version="1.2.0"
 Bundle-ActivationPolicy: lazy
