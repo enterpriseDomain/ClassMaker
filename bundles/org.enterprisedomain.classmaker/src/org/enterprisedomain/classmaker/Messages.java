@@ -26,8 +26,8 @@ public class Messages extends NLS {
 	public static String JobNameCodeGeneration;
 	public static String JobNameCodeGenerator;
 	public static String BundleDuplicate;
-	public static String EPackageClassLoadComplete;
-	public static String EPackageNo;
+	public static String ObjectClassLoadComplete;
+	public static String ObjectNo;
 	public static String JobNameGenModelConfiguration;
 	public static String JobNameGenModelGeneration;
 	public static String JobNameInstaller;
@@ -37,7 +37,6 @@ public class Messages extends NLS {
 	public static String JobNameModelResource;
 	public static String BundleNo;
 	public static String JobNamePDEExport;
-	public static String PDEExportScheduled;
 	public static String ProjectNotExist;
 	public static String DefaultResourceExt;
 	public static String None;

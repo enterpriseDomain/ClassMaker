@@ -46,7 +46,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.22.1</version>
+				<version>2.19.1</version>
 				<configuration>
 					<includes>
 						<include>**/TestEnterpriseDomain.java</include>
@@ -73,6 +73,7 @@
 					<systemProperties>
 						<buildingWithTycho>true</buildingWithTycho>
 					</systemProperties>
+					<useJDK>BREE</useJDK>
 					<useSystemClassLoader>true</useSystemClassLoader>
 					<useManifestOnlyJar>false</useManifestOnlyJar>
 					<dependency>

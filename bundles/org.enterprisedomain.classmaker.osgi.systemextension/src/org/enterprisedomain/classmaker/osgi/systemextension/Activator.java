@@ -7,6 +7,8 @@ import org.osgi.framework.hooks.resolver.ResolverHookFactory;
 
 public class Activator implements BundleActivator {
 
+	private static BundleContext bundleContext;
+
 	private ServiceRegistration<ResolverHookFactory> reg;
 
 	public Activator() {
@@ -14,6 +16,7 @@ public class Activator implements BundleActivator {
 
 	@Override
 	public void start(BundleContext context) throws Exception {
+		bundleContext = context;
 		reg = context.registerService(ResolverHookFactory.class, new ResolverHook(), null);
 	}
 
@@ -23,6 +26,11 @@ public class Activator implements BundleActivator {
 			reg.unregister();
 			reg = null;
 		}
+		bundleContext = null;
+	}
+
+	public static BundleContext getContext() {
+		return bundleContext;
 	}
 
 }

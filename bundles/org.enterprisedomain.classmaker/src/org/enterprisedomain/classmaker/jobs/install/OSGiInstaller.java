@@ -19,9 +19,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.Semaphore;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -29,7 +32,14 @@ import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.osgi.service.resolver.BundleDescription;
+import org.eclipse.osgi.service.resolver.BundleSpecification;
 import org.eclipse.osgi.util.NLS;
+import org.eclipse.pde.core.plugin.IPluginModelBase;
+import org.eclipse.pde.internal.core.PDECore;
+import org.eclipse.pde.internal.core.PluginModelManager;
+import org.eclipse.pde.internal.core.bundle.BundlePluginModel;
+import org.eclipse.pde.internal.core.bundle.WorkspaceBundleModel;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.Messages;
 import org.enterprisedomain.classmaker.Revision;
@@ -64,9 +74,9 @@ public class OSGiInstaller extends ContainerJob {
 					&& (versionsAreEqual(
 							Version.parseVersion(event.getBundle().getHeaders().get(Constants.BUNDLE_VERSION)),
 							getContributionState().getProject().getVersion(), false)
-							|| versionAreLess(
+							|| versionAreLess(getContributionState().getProject().getVersion(),
 									Version.parseVersion(event.getBundle().getHeaders().get(Constants.BUNDLE_VERSION)),
-									getContributionState().getProject().getVersion(), true)))
+									true)))
 				switch (event.getType()) {
 				case BundleEvent.RESOLVED:
 				case BundleEvent.INSTALLED:
@@ -98,36 +108,23 @@ public class OSGiInstaller extends ContainerJob {
 		IStatus result = new MultiStatus(ClassMakerPlugin.PLUGIN_ID, IStatus.OK, "", null);
 		try {
 			Bundle existingBundle = null;
-			int kind = -1;
 			for (Bundle bundle : getBundles()) {
 				if (versionsAreEqual(Version.parseVersion(bundle.getHeaders().get(Constants.BUNDLE_VERSION)),
 						getContributionState().getProject().getVersion(), false)) {
 					existingBundle = bundle;
-					kind = 0;
-					if (getContributionState().isEdit()
-							&& bundle.getSymbolicName().equals(bundle.getSymbolicName() + ".edit")) {
-						kind = 1;
-					}
-					if (getContributionState().isEditor()
-							&& bundle.getSymbolicName().equals(bundle.getSymbolicName() + ".editor")) {
-						kind = 2;
-					}
 				} else if (versionAreLess(Version.parseVersion(bundle.getHeaders().get(Constants.BUNDLE_VERSION)),
 						getContributionState().getProject().getVersion(), false)) {
 					existingBundle = bundle;
-					kind = 0;
-					if (getContributionState().isEdit()
-							&& bundle.getSymbolicName().equals(bundle.getSymbolicName() + ".edit"))
-						kind = 1;
-					if (getContributionState().isEditor()
-							&& bundle.getSymbolicName().equals(bundle.getSymbolicName() + ".editor"))
-						kind = 2;
-					result = addStatus(updateBundle(existingBundle, kind, bundleContext), result);
+					if (getContributionState().isEdit())
+						result = addStatus(updateBundle(existingBundle, 1, bundleContext), result);
+					if (getContributionState().isEditor())
+						result = addStatus(updateBundle(existingBundle, 2, bundleContext), result);
 					if (result.isOK())
 						return result;
 				}
 			}
-			result = addStatus(installBundle(existingBundle, kind, bundleContext), result);
+			((ContainerJob) getNextJob()).getBundleIds().clear();
+			result = addStatus(installBundle(existingBundle, 0, bundleContext), result);
 			if (getContributionState().isEdit())
 				result = addStatus(installBundle(existingBundle, 1, bundleContext), result);
 			if (getContributionState().isEditor())
@@ -156,38 +153,40 @@ public class OSGiInstaller extends ContainerJob {
 	}
 
 	private IStatus updateBundle(Bundle existingBundle, int kind, BundleContext context) {
+		List<Bundle> bundles = new ArrayList<Bundle>();
 		if (existingBundle == null)
-			return getWarningStatus(existingBundle, null);
+			return getWarningStatus(bundles, null);
 		try {
 			context.addBundleListener(listener);
 			switch (kind) {
 			case 0:
-				existingBundle.update(new FileInputStream(
-						ResourceUtils.getTargetResourcePath(getProject(), getContributionState()).toFile()));
+				existingBundle.update(
+						new FileInputStream(ResourceUtils.getTargetResourcePath(getContributionState()).toFile()));
+				bundles.add(existingBundle);
 				break;
 			case 1:
 				if (getContributionState().isEdit())
 					existingBundle.update(new FileInputStream(
-							ResourceUtils.getEditTargetResourcePath(getProject(), getContributionState()).toFile()));
+							ResourceUtils.getEditTargetResourcePath(getContributionState()).toFile()));
 				break;
 			case 2:
 				if (getContributionState().isEditor())
 					existingBundle.update(new FileInputStream(
-							ResourceUtils.getEditorTargetResourcePath(getProject(), getContributionState()).toFile()));
+							ResourceUtils.getEditorTargetResourcePath(getContributionState()).toFile()));
 				break;
 			}
-			refreshBundle(existingBundle, context);
+			refreshBundle(bundles, context);
 			installed.acquire();
 			getContributionState().setPhase(getResultStage());
-			return getOKStatus(existingBundle);
+			return getOKStatus(bundles);
 		} catch (BundleException e) {
 			if (e.getType() == BundleException.RESOLVE_ERROR)
-				return getWarningStatus(existingBundle, e);
+				return getWarningStatus(bundles, e);
 			else if (e.getType() == BundleException.DUPLICATE_BUNDLE_ERROR)
-				return getOKStatus(existingBundle);
-			return getWarningStatus(existingBundle, e);
+				return getOKStatus(bundles);
+			return getWarningStatus(bundles, e);
 		} catch (FileNotFoundException e) {
-			return getWarningStatus(existingBundle, e);
+			return getWarningStatus(bundles, e);
 		} catch (InterruptedException e) {
 			return Status.CANCEL_STATUS;
 		} finally {
@@ -197,7 +196,9 @@ public class OSGiInstaller extends ContainerJob {
 
 	private IStatus installBundle(Bundle existingBundle, int kind, BundleContext context)
 			throws InterruptedException, CoreException {
-		Bundle bundle = null;
+		List<Bundle> bundles = new ArrayList<Bundle>();
+		String uri = null;
+		Set<String> requiredUris = new HashSet<String>();
 		try {
 			context.addBundleListener(listener);
 			if (existingBundle != null) {
@@ -219,49 +220,96 @@ public class OSGiInstaller extends ContainerJob {
 			switch (kind) {
 			case -1:
 			case 0:
-				bundle = context.installBundle(URI
-						.createFileURI(
-								ResourceUtils.getTargetResourcePath(getProject(), getContributionState()).toString())
-						.toString());
+				uri = URI.createFileURI(ResourceUtils.getTargetResourcePath(getContributionState()).toString())
+						.toString();
+				extractRequiredURIs(requiredUris, getProject());
 				break;
 			case 1:
-				if (getContributionState().isEdit())
-					bundle = context
-							.installBundle(URI
-									.createFileURI(ResourceUtils
-											.getEditTargetResourcePath(getProject(), getContributionState()).toString())
-									.toString());
+				if (getContributionState().isEdit()) {
+					uri = URI.createFileURI(ResourceUtils.getEditTargetResourcePath(getContributionState()).toString())
+							.toString();
+					extractRequiredURIs(requiredUris, getEditProject());
+				}
 				break;
 			case 2:
-				if (getContributionState().isEditor())
-					bundle = context.installBundle(URI
-							.createFileURI(ResourceUtils
-									.getEditorTargetResourcePath(getProject(), getContributionState()).toString())
-							.toString());
+				if (getContributionState().isEditor()) {
+					uri = URI
+							.createFileURI(ResourceUtils.getEditorTargetResourcePath(getContributionState()).toString())
+							.toString();
+					extractRequiredURIs(requiredUris, getEditorProject());
+				}
 				break;
 			}
-			if (bundle == null)
+			for (String requiredUri : requiredUris)
+				bundles.add(context.installBundle(requiredUri));
+			bundles.add(context.installBundle(uri));
+			if (bundles.isEmpty())
 				return ClassMakerPlugin
 						.createErrorStatus(NLS.bind(Messages.BundleNotInstalled, getProject().getName()));
-			refreshBundle(bundle, context);
-			installed.acquire();
+			for (Bundle bundle : bundles)
+				((ContainerJob) getNextJob()).getBundleIds().add(bundle.getBundleId());
+			refreshBundle(bundles, context);
+//			installed.acquire();
 			getContributionState().setPhase(getResultStage());
-			return getOKStatus(bundle);
-		} catch (BundleException e) {
+			return getOKStatus(bundles);
+		} catch (
+
+		BundleException e) {
 			if (e.getType() == BundleException.DUPLICATE_BUNDLE_ERROR)
-				return getOKStatus(existingBundle, bundle);
-			return getWarningStatus(bundle, e);
+				return getOKStatus(existingBundle, bundles);
+			if (e.getCause() instanceof FileNotFoundException) {
+				Thread.sleep(3000);
+				try {
+					for (String requiredUri : requiredUris)
+						bundles.add(context.installBundle(requiredUri));
+					bundles.add(context.installBundle(uri));
+					if (bundles.isEmpty())
+						return ClassMakerPlugin
+								.createErrorStatus(NLS.bind(Messages.BundleNotInstalled, getProject().getName()));
+					refreshBundle(bundles, context);
+//					installed.acquire();
+					getContributionState().setPhase(getResultStage());
+					return getOKStatus(bundles);
+				} catch (BundleException ex) {
+					if (ex.getType() == BundleException.DUPLICATE_BUNDLE_ERROR)
+						return getOKStatus(existingBundle, bundles);
+				}
+			}
+			return getWarningStatus(bundles, e);
 		} finally {
 			getContext().removeBundleListener(listener);
 		}
 	}
 
-	protected Collection<Bundle> refreshBundle(Bundle bundle, BundleContext context) {
-		Collection<Bundle> bundles = new ArrayList<Bundle>();
-		if (bundle != null)
-			bundles.add(bundle);
+	private void extractRequiredURIs(Set<String> requiredUris, IProject project) {
+		PluginModelManager modelManager = PDECore.getDefault().getModelManager();
+		IPluginModelBase model = modelManager.findModel(project);
+		if (model != null) {
+			for (BundleSpecification requiredBundle : ((IPluginModelBase) model).getBundleDescription()
+					.getRequiredBundles()) {
+				IPluginModelBase requiredModel = modelManager.findModel(requiredBundle.getName());
+				if (requiredModel instanceof BundlePluginModel)
+					if (((BundlePluginModel) requiredModel).getBundleModel() instanceof WorkspaceBundleModel) {
+						BundleDescription bd = requiredModel.getBundleDescription();
+						requiredUris.add(URI.createFileURI(ResourceUtils.getExportDestination(getContributionState()).append("plugins") //$NON-NLS-1$
+								.addTrailingSeparator().append(bd.getSymbolicName() + "_" + bd.getVersion().toString())
+								.addFileExtension("jar").toString()) // $NON-NLS-1
+								.toString());
+					}
+
+			}
+		}
+	}
+
+	protected Collection<Bundle> refreshBundle(Collection<Bundle> bundles, BundleContext context) {
 		frameworkWiring = context.getBundle(0).adapt(FrameworkWiring.class);
-		frameworkWiring.refreshBundles(bundles, new FrameworkListener[0]);
+		if (bundles != null)
+			frameworkWiring.refreshBundles(bundles, new FrameworkListener[] { (e) -> {
+				if (bundles.contains(context.getBundle())) {
+					uninstalled.release();
+					installed.release();
+				}
+			} });
 		try {
 			notifyAll();
 		} catch (IllegalMonitorStateException e) {
@@ -269,34 +317,41 @@ public class OSGiInstaller extends ContainerJob {
 		return bundles;
 	}
 
-	private IStatus getWarningStatus(Bundle bundle, Exception e) {
-		if (bundle == null)
+	private IStatus getWarningStatus(Collection<Bundle> bundles, Exception e) {
+		if (bundles.isEmpty())
 			return ClassMakerPlugin.createWarningStatus(NLS.bind(Messages.BundleNo, getProject().getName()), e);
 		else
-			return ClassMakerPlugin.createWarningStatus(getStateStatusMessage(bundle), e);
+			return ClassMakerPlugin.createWarningStatus(getStateStatusMessage(bundles), e);
 	}
 
-	private IStatus getOKStatus(Bundle existingBundle, Bundle bundle) {
-		return ClassMakerPlugin.createOKStatus(Messages.OK + " " + getDuplicateStatusMessage(existingBundle, bundle));
+	private IStatus getOKStatus(Bundle existingBundle, Collection<Bundle> bundles) {
+		return ClassMakerPlugin.createOKStatus(Messages.OK + " " + getDuplicateStatusMessage(existingBundle, bundles));
 	}
 
-	private IStatus getOKStatus(Bundle bundle) {
-		return ClassMakerPlugin.createOKStatus(Messages.OK + " " + getStateStatusMessage(bundle));
+	private IStatus getOKStatus(Collection<Bundle> bundles) {
+		return ClassMakerPlugin.createOKStatus(Messages.OK + " " + getStateStatusMessage(bundles));
 	}
 
-	protected String getStateStatusMessage(Bundle bundle) {
-		return NLS.bind(Messages.BundleState,
-				new Object[] { bundle.getSymbolicName(), bundle.getHeaders().get(Constants.BUNDLE_VERSION),
-						ClassMakerPlugin.bundleStateAsString(bundle.getState()) });
+	protected String getStateStatusMessage(Collection<Bundle> bundles) {
+		StringBuffer states = new StringBuffer();
+		for (Bundle bundle : bundles)
+			states.append(NLS.bind(Messages.BundleState,
+					new Object[] { bundle.getSymbolicName(), bundle.getHeaders().get(Constants.BUNDLE_VERSION),
+							ClassMakerPlugin.bundleStateAsString(bundle.getState()) })
+					+ " ");
+		return states.toString().trim();
 	}
 
-	private String getDuplicateStatusMessage(Bundle existingBundle, Bundle bundle) {
-		return NLS.bind(Messages.BundleDuplicate,
-				new Object[] { existingBundle.getSymbolicName(),
-						existingBundle.getHeaders().get(Constants.BUNDLE_VERSION),
-						ClassMakerPlugin.bundleStateAsString(existingBundle.getState()), bundle.getSymbolicName(),
-						bundle.getHeaders().get(Constants.BUNDLE_VERSION),
-						ClassMakerPlugin.bundleStateAsString(bundle.getState()) });
+	private String getDuplicateStatusMessage(Bundle existingBundle, Collection<Bundle> bundles) {
+		StringBuffer states = new StringBuffer();
+		for (Bundle bundle : bundles)
+			states.append(NLS.bind(Messages.BundleDuplicate,
+					new Object[] { existingBundle.getSymbolicName(),
+							existingBundle.getHeaders().get(Constants.BUNDLE_VERSION),
+							ClassMakerPlugin.bundleStateAsString(existingBundle.getState()), bundle.getSymbolicName(),
+							bundle.getHeaders().get(Constants.BUNDLE_VERSION),
+							ClassMakerPlugin.bundleStateAsString(bundle.getState()) }));
+		return states.toString();
 	}
 
 	@Override

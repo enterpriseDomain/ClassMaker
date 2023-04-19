@@ -47,7 +47,6 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.ECollections;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jdt.core.ElementChangedEvent;
@@ -457,7 +456,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 		for (EPackage ePackage : ePackages) {
 			GenPackage genPackage = genModel.findGenPackage(ePackage);
 			if (genPackage != null) {
-				genPackage.setEcorePackage(ePackage);				
+				genPackage.setEcorePackage(ePackage);
 			}
 		}
 		genModel.reconcile();
@@ -465,11 +464,11 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 		for (EPackage ePackage : ePackages) {
 			GenPackage genPackage = genModel.findGenPackage(ePackage);
 			if (genPackage != null) {
-				getContributionState().setBasePackage(genPackage.getBasePackage());				
+				getContributionState().setBasePackage(genPackage.getBasePackage());
 			}
-		}		
+		}
 		genModel.setCanGenerate(true);
-		genModel.setComplianceLevel(GenJDKLevel.JDK110_LITERAL);
+		genModel.setComplianceLevel(GenJDKLevel.JDK170_LITERAL);
 		genModel.setUpdateClasspath(true);
 		genModel.setModelDirectory(projectPath.append(SOURCE_FOLDER_NAME).toString());
 		genModel.setSuppressInterfaces(true);

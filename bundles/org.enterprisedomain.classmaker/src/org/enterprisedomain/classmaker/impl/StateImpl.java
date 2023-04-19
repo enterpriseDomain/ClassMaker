@@ -544,9 +544,14 @@ public class StateImpl extends ItemImpl implements State {
 									try {
 										Resource resource = getProject().getWorkspace().getResourceSet().getResource(
 												URI.createFileURI(delta.getResource().getLocation().toString()), false);
+										EObject eObject = null;
+										if (!resource.getContents().isEmpty())
+											eObject = resource.getContents().get(0);
 										resource.unload();
 										resource.load(new FileInputStream(delta.getResource().getLocation().toFile()),
 												Collections.emptyMap());
+										if (resource.getContents().isEmpty())
+											resource.getContents().add(eObject);
 									} catch (FileNotFoundException e) {
 										e.printStackTrace();
 									} catch (IOException e) {
@@ -1184,7 +1189,6 @@ public class StateImpl extends ItemImpl implements State {
 		} catch (Exception e) {
 			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 		}
-
 	}
 
 	/**

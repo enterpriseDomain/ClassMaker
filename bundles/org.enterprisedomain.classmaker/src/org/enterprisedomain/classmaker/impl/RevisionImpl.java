@@ -462,6 +462,10 @@ public class RevisionImpl extends ItemImpl implements Revision {
 		newState.setTimestamp(
 				(long) (Calendar.getInstance(Revision.VERSION_QUALIFIER_FORMAT.getTimeZone()).getTimeInMillis()
 						/ 1000));
+		if (isStateSet()) {
+			newState.setEdit(getState().isEdit());
+			newState.setEditor(getState().isEditor());
+		}
 		getStateHistory().put(newState.getTimestamp(), newState);
 		newState.getProject().setVersion(getVersion());
 		return newState;

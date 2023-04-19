@@ -5,7 +5,7 @@
 	<artifactId>org.enterprisedomain.configuration</artifactId>
 	<version>0.8.55-SNAPSHOT</version>
 	<properties>
-		<tycho.version>3.0.1</tycho.version>
+		<tycho.version>3.0.3</tycho.version>
 		<tycho.extras.version>${tycho.version}</tycho.extras.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -13,11 +13,6 @@
 		<repository>
 			<id>edapt-p2-repo</id>
 			<url>http://download.eclipse.org/edapt/releases/15x</url>
-			<layout>p2</layout>
-		</repository>
-		<repository>
-			<id>justj</id>
-			<url>https://download.eclipse.org/justj/jres/17/updates/release/17.0.4</url>
 			<layout>p2</layout>
 		</repository>
 		<repository>

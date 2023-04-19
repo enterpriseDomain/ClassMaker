@@ -668,6 +668,14 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 	 * @generated NOT
 	 */
 	public String computeProjectName(String packageName) {
+		if (packageName.endsWith(".edit"))
+			packageName = packageName.substring(0, packageName.lastIndexOf(".edit"));
+		if (packageName.isEmpty())
+			packageName = ".edit";
+		if (packageName.endsWith(".editor"))
+			packageName = packageName.substring(0, packageName.lastIndexOf(".editor"));
+		if (packageName.isEmpty())
+			packageName = ".editor";
 		return CodeGenUtil.safeName(packageName.toLowerCase());
 	}
 

@@ -24,7 +24,7 @@ jobs:
     - name: Copy toolchain      
       run: |
        mkdir -p ~/.m2/
-       echo "<toolchains xmlns=\"http://maven.apache.org/TOOLCHAINS/1.1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://maven.apache.org/TOOLCHAINS/1.1.0 http://maven.apache.org/xsd/toolchains-1.1.0.xsd\"><toolchain><type>jdk</type><provides><version>17</version><vendor>eclipse</vendor></provides><configuration><jdkHome>/$JAVA_HOME</jdkHome></configuration></toolchain></toolchains>" > ~/.m2/toolchains.xml
+       echo "<toolchains xmlns=\"http://maven.apache.org/TOOLCHAINS/1.1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://maven.apache.org/TOOLCHAINS/1.1.0 http://maven.apache.org/xsd/toolchains-1.1.0.xsd\"><toolchain><type>jdk</type><provides><id>JavaSE-17</id><version>17</version><vendor>eclipse</vendor></provides><configuration><jdkHome>/$JAVA_HOME</jdkHome></configuration></toolchain></toolchains>" > ~/.m2/toolchains.xml
     - name: Build with Maven      
       run:
        mvn -B clean package --file pom.xml

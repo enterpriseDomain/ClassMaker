@@ -34,6 +34,8 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.ListenerList;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.core.runtime.jobs.MultiRule;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
@@ -1307,6 +1309,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			getWorkspace().getResourceSet().eAdapters().remove(resourceChangeAdapter);
 			getWorkspace().unregisterProject(this);
 		}
+		ResourceUtils.delete(Platform.getStateLocation(Platform.getBundle(ClassMakerPlugin.PLUGIN_ID))
+				.append(getProjectName()).toFile(), null);
 	}
 
 	/**

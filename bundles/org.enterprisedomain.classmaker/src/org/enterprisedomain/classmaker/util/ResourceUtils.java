@@ -36,12 +36,12 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.preferences.IPreferencesService;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jgit.lib.Constants;
 import org.eclipse.pde.internal.core.ICoreConstants;
 import org.enterprisedomain.classmaker.Messages;
 import org.enterprisedomain.classmaker.State;
@@ -69,7 +69,6 @@ public class ResourceUtils {
 
 	static {
 		PROJECT_DELETE_MASK = new ArrayList<String>();
-		PROJECT_DELETE_MASK.add(Constants.DOT_GIT);
 		PROJECT_DELETE_MASK.add(ICoreConstants.PLUGIN_FILENAME_DESCRIPTOR);
 		PROJECT_DELETE_MASK.add(ICoreConstants.MANIFEST_FOLDER_NAME);
 		PROJECT_DELETE_MASK.add(ICoreConstants.MANIFEST_FILENAME);
@@ -83,22 +82,23 @@ public class ResourceUtils {
 		return project.getFullPath().append(getModelFolderName()).append(transformationURI.lastSegment());
 	}
 
-	public static IPath getExportDestination(IProject project) {
-		return project.getLocation().append(getTargetFolderName());
+	public static IPath getExportDestination(State state) {
+		return ResourcesPlugin.getWorkspace().getRoot().getProject(state.getProjectName()).getLocation()
+				.append(getTargetFolderName());
 	}
 
-	public static IPath getTargetResourcePath(IProject project, State state) {
-		return getExportDestination(project).append("plugins").addTrailingSeparator() //$NON-NLS-1$
+	public static IPath getTargetResourcePath(State state) {
+		return getExportDestination(state).append("plugins").addTrailingSeparator() //$NON-NLS-1$
 				.append(state.getDeployableUnitName()).addFileExtension("jar"); //$NON-NLS-1$
 	}
 
-	public static IPath getEditTargetResourcePath(IProject project, State state) {
-		return getExportDestination(project).append("plugins").addTrailingSeparator() //$NON-NLS-1$
+	public static IPath getEditTargetResourcePath(State state) {
+		return getExportDestination(state).append("plugins").addTrailingSeparator() //$NON-NLS-1$
 				.append(state.getEditDeployableUnitName()).addFileExtension("jar"); //$NON-NLS-1$
 	}
 
-	public static IPath getEditorTargetResourcePath(IProject project, State state) {
-		return getExportDestination(project).append("plugins").addTrailingSeparator() //$NON-NLS-1$
+	public static IPath getEditorTargetResourcePath(State state) {
+		return getExportDestination(state).append("plugins").addTrailingSeparator() //$NON-NLS-1$
 				.append(state.getEditorDeployableUnitName()).addFileExtension("jar"); //$NON-NLS-1$
 	}
 
@@ -309,6 +309,14 @@ public class ResourceUtils {
 		setAutoBuilding(workspace, oldAutoBuilding);
 	}
 
+	public static void cleanupDir() throws CoreException {
+		cleanupDir("");
+	}
+
+	public static void cleanupDir(String folderPath) throws CoreException {
+		cleanupDir(folderPath, new String[] {});
+	}
+
 	public static void cleanupDir(IProject project) throws CoreException {
 		cleanupDir(project, "");
 	}
@@ -325,6 +333,19 @@ public class ResourceUtils {
 			path = project.getFolder(folderPath).getFullPath();
 		}
 		path = project.getWorkspace().getRoot().getLocation().append(path);
+		File folder = path.toFile();
+		if (!folder.exists())
+			return;
+		for (String fileName : folder.list())
+			delete(new File(folder.toString() + File.separator + fileName), excluding);
+	}
+
+	public static void cleanupDir(String folderPath, String[] excluding) throws CoreException {
+		IPath path;
+		if (folderPath.isEmpty())
+			path = ResourcesPlugin.getWorkspace().getRoot().getLocation();
+		else
+			path = new Path(folderPath);
 		File folder = path.toFile();
 		if (!folder.exists())
 			return;

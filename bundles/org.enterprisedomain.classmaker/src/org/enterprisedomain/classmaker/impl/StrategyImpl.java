@@ -392,7 +392,7 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 		exporterJob.setProject(getEclipseProject());
 		exporterJob.setChangeRule(changeRule);
 		exporter.getProperties().put(AbstractExporter.EXPORT_DESTINATION_PROP,
-				ResourceUtils.getExportDestination(getEclipseProject()).toString());
+				ResourceUtils.getExportDestination(getState()).toString());
 
 		Worker generator = null;
 		if (create)
@@ -441,7 +441,7 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 		exportJob.setContributionState(getState());
 		exportJob.setProject(getEclipseProject());
 		exporter.getProperties().put(AbstractExporter.EXPORT_DESTINATION_PROP,
-				ResourceUtils.getExportDestination(getEclipseProject()).toString());
+				ResourceUtils.getExportDestination(getState()).toString());
 
 		Worker generator = createGenerator();
 		EnterpriseDomainJob generatorJob = EnterpriseDomainJob.getJob(generator);

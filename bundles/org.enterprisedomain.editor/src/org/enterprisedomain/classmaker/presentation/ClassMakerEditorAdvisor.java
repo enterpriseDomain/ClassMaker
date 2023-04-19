@@ -23,7 +23,6 @@ import org.eclipse.emf.common.ui.action.WorkbenchWindowActionDelegate;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.edit.ui.action.LoadResourceAction;
 import org.eclipse.emf.edit.ui.util.EditUIUtil;
-import org.enterprisedomain.classmaker.presentation.ClassMakerEditorPlugin;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 import org.eclipse.jface.action.GroupMarker;
@@ -65,9 +64,9 @@ import org.eclipse.ui.application.WorkbenchWindowAdvisor;
  */
 public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 	/**
-	 * The default file extension filters for use in dialogs.
-	 * <!-- begin-user-doc
+	 * The default file extension filters for use in dialogs. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private static final String[] FILE_EXTENSION_FILTERS = ClassMakerEditor.FILE_EXTENSION_FILTERS
@@ -95,8 +94,8 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 	}
 
 	/**
-	 * RCP's application
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * RCP's application <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static class Application implements IApplication {
@@ -122,8 +121,7 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 		}
 
 		/**
-		 * @see org.eclipse.equinox.app.IApplication#stop()
-		 * <!-- begin-user-doc --> <!--
+		 * @see org.eclipse.equinox.app.IApplication#stop() <!-- begin-user-doc --> <!--
 		 *      end-user-doc -->
 		 * @generated
 		 */
@@ -134,14 +132,14 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 	}
 
 	/**
-	 * RCP's perspective
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * RCP's perspective <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static class Perspective implements IPerspectiveFactory {
 		/**
-		 * Perspective ID
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * Perspective ID <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		public static final String ID_PERSPECTIVE = "org.enterprisedomain.classmaker.presentation.ClassMakerEditorAdvisorPerspective";
@@ -165,8 +163,8 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 	}
 
 	/**
-	 * RCP's window advisor
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * RCP's window advisor <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static class WindowAdvisor extends WorkbenchWindowAdvisor {
@@ -205,8 +203,8 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 	}
 
 	/**
-	 * RCP's action bar advisor
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * RCP's action bar advisor <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static class WindowActionBarAdvisor extends ActionBarAdvisor {
@@ -235,8 +233,8 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 		}
 
 		/**
-		 * Creates the 'File' menu.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * Creates the 'File' menu. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		protected IMenuManager createFileMenu(IWorkbenchWindow window) {
@@ -263,8 +261,8 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 		}
 
 		/**
-		 * Creates the 'Edit' menu.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * Creates the 'Edit' menu. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		protected IMenuManager createEditMenu(IWorkbenchWindow window) {
@@ -294,8 +292,8 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 		}
 
 		/**
-		 * Creates the 'Window' menu.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * Creates the 'Window' menu. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		protected IMenuManager createWindowMenu(IWorkbenchWindow window) {
@@ -309,8 +307,8 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 		}
 
 		/**
-		 * Creates the 'Help' menu.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * Creates the 'Help' menu. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		protected IMenuManager createHelpMenu(IWorkbenchWindow window) {
@@ -338,9 +336,9 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 	}
 
 	/**
-	 * About action for the RCP application.
-	 * <!-- begin-user-doc --> <!--
+	 * About action for the RCP application. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static class AboutAction extends WorkbenchWindowActionDelegate {
@@ -357,9 +355,9 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 	}
 
 	/**
-	 * Open action for the objects from the ClassMaker model.
-	 * <!-- begin-user-doc
+	 * Open action for the objects from the ClassMaker model. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static class OpenAction extends WorkbenchWindowActionDelegate {
@@ -405,6 +403,7 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static String[] openFilePathDialog(Shell shell, int style, String[] fileExtensionFilters) {
@@ -414,6 +413,7 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static String[] openFilePathDialog(Shell shell, int style, String[] fileExtensionFilters,
@@ -423,7 +423,8 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 			fileExtensionFilters = FILE_EXTENSION_FILTERS;
 		}
 
-		// If requested, augment the file extension filters by adding a group of all the other filters (*.ext1;*.ext2;...)
+		// If requested, augment the file extension filters by adding a group of all the
+		// other filters (*.ext1;*.ext2;...)
 		// at the beginning and/or an all files wildcard (*.*) at the end.
 		//
 		includeGroupFilter &= fileExtensionFilters.length > 1;
@@ -462,7 +463,8 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 		String path = fileDialog.getFilterPath() + File.separator;
 		String extension = null;
 
-		// If extension adding requested, get the dotted extension corresponding to the selected filter.
+		// If extension adding requested, get the dotted extension corresponding to the
+		// selected filter.
 		//
 		if (addExtension) {
 			int i = fileDialog.getFilterIndex();
@@ -476,7 +478,8 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 			}
 		}
 
-		// Build the result by adding the selected path and, if needed, auto-appending the extension.
+		// Build the result by adding the selected path and, if needed, auto-appending
+		// the extension.
 		//
 		for (int i = 0; i < filenames.length; i++) {
 			String filename = path + filenames[i];
@@ -493,6 +496,7 @@ public final class ClassMakerEditorAdvisor extends WorkbenchAdvisor {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static boolean openEditor(IWorkbench workbench, URI uri) {

@@ -283,6 +283,14 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 			setRule(calcSchedulingRule(project));
 	}
 
+	public IProject getEditProject() {
+		return ResourcesPlugin.getWorkspace().getRoot().getProject(getProject().getName() + ".edit");
+	}
+
+	public IProject getEditorProject() {
+		return ResourcesPlugin.getWorkspace().getRoot().getProject(getProject().getName() + ".editor");
+	}
+
 	protected ISchedulingRule calcSchedulingRule(IProject project) {
 		if (ClassMakerServiceImpl.initializing)
 			return project;

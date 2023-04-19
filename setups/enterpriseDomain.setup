@@ -40,7 +40,7 @@
           label="${scope.product.label} (${scope.product.version.label})">
         <requirement
             name="org.enterprisedomain.workbench.ide"
-            versionRange="0.8.46"/>
+            versionRange="0.8.55"/>
         <requirement
             name="org.eclipse.platform.ide"/>
         <requirement
