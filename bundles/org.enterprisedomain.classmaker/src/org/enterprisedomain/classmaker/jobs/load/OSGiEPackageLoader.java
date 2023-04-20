@@ -118,7 +118,8 @@ public class OSGiEPackageLoader extends ContainerJob implements BundleTrackerCus
 		Bundle editorBundle = null;
 		int loadedCount = 0;
 		try {
-			bundleTracker = new BundleTracker<EPackage>(getContext(), Bundle.ACTIVE | Bundle.RESOLVED, this);
+			bundleTracker = new BundleTracker<EPackage>(getContext(), Bundle.STARTING | Bundle.ACTIVE | Bundle.RESOLVED,
+					this);
 			bundleTracker.open();
 			for (Bundle bundle : getBundles())
 				if (versionsAreEqual(Version.parseVersion(bundle.getHeaders().get(Constants.BUNDLE_VERSION)),
@@ -449,10 +450,6 @@ public class OSGiEPackageLoader extends ContainerJob implements BundleTrackerCus
 				}
 			}
 		} catch (Exception e) {
-			BundleWiring wiring = bundle.adapt(BundleWiring.class);
-			for (BundleRequirement br : wiring.getRequirements("osgi.wiring.package"))
-				for (BundleRequirement r : br.getRevision().getDeclaredRequirements("osgi.wiring.package"))
-					System.out.println(r.toString());
 			setException(e);
 			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 		} finally {
@@ -469,7 +466,7 @@ public class OSGiEPackageLoader extends ContainerJob implements BundleTrackerCus
 			if (!bundle.getSymbolicName().equalsIgnoreCase(((EPackage) model).getName())) {
 				loaded = new Semaphore(0);
 				return;
-			}
+			}			
 		}
 	}
 

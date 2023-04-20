@@ -44,6 +44,7 @@ import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.codegen.ecore.Generator;
 import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
+import org.eclipse.emf.codegen.ecore.genmodel.GenOSGiStyle;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.ECollections;
@@ -492,6 +493,13 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 			getContributionState().setEditPluginClassName(genModel.getGenPackages().get(0).getEditPluginClassName());
 			getContributionState()
 					.setEditorPluginClassName(genModel.getGenPackages().get(0).getEditorPluginClassName());
+			genModel.setOSGiCompatible(true);
+			genModel.getOSGiStyle().add(GenOSGiStyle.PROVIDE_CAPABILITY_GENERATED_PACKAGE);
+			genModel.setForceOverwrite(true);
+			genModel.setPublicConstructors(true);
+			genModel.setRuntimeCompatibility(false);
+			genModel.setRuntimeJar(true);
+			genModel.setUpdateClasspath(true);			
 		}
 
 		genModel.setValidateModel(true);

@@ -250,18 +250,17 @@ public class ImageViewer extends EditorPart {
 			if (measurements != null)
 				for (Measurement m : measurements) {
 					gc.setForeground(canvas.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-					gc.drawLine((int) Math.floor(doubleX((m.getFrom().x) * this.rate, srcX, destRect.width, gc)),
-							(int) Math.floor(doubleY((m.getFrom().y) * this.rate, destRect.y, destRect.height, gc)),
-							(int) Math.floor(doubleX((m.getTo().x) * this.rate, srcX, destRect.width, gc)),
-							(int) Math.floor(doubleY((m.getTo().y) * this.rate, destRect.y, destRect.height, gc)));
+					gc.drawLine((int) Math.floor(doubleX((m.getFrom().x) * this.rate, srcX, destRect.width)),
+							(int) Math.floor(doubleY((m.getFrom().y) * this.rate, destRect.y, destRect.height)),
+							(int) Math.floor(doubleX((m.getTo().x) * this.rate, srcX, destRect.width)),
+							(int) Math.floor(doubleY((m.getTo().y) * this.rate, destRect.y, destRect.height)));
 				}
 			if (measurementPoints != null)
 				for (Point m : measurementPoints) {
 					gc.setBackground(canvas.getDisplay().getSystemColor(SWT.COLOR_GREEN));
-					gc.fillOval((int) Math.floor(doubleX((m.x) * this.rate, srcX, destRect.width, gc)) - 8,
-							(int) Math.floor(doubleY((m.y) * this.rate, destRect.y, destRect.height, gc)) - 8, 16, 16);
+					gc.fillOval((int) Math.floor(doubleX((m.x) * this.rate, srcX, destRect.width)) - 8,
+							(int) Math.floor(doubleY((m.y) * this.rate, destRect.y, destRect.height)) - 8, 16, 16);
 				}
-			gc.drawRectangle(pointRect);
 		} else {
 			gc.setClipping(clientRect);
 			gc.fillRectangle(clientRect);
@@ -269,26 +268,20 @@ public class ImageViewer extends EditorPart {
 		}
 	}
 
-	private double doubleX(double srcX, double destX, double destWidth, GC gc) {
+	private double doubleX(double srcX, double destX, double destWidth) {
 		double center = destX + destWidth / 2;
-		this.srcX = srcX;
-		this.destWidth = destWidth;
-		gc.drawRectangle(new Rectangle((int) srcX, (int) srcY, (int) destWidth, (int) destHeight));
 		if (srcX <= center)
 			return srcX;
 		else
-			return doubleX(srcX, center, destWidth * this.rate, gc);
+			return doubleX(srcX, center, destWidth * this.rate);
 	}
 
-	private double doubleY(double srcY, double destY, double destHeight, GC gc) {
+	private double doubleY(double srcY, double destY, double destHeight) {
 		double center = destY + destHeight / 2;
-		this.srcY = srcY;
-		this.destHeight = destHeight;
-		gc.drawRectangle(new Rectangle((int) srcX, (int) srcY, (int) destWidth, (int) destHeight));
 		if (srcY <= center)
 			return srcY;
 		else
-			return doubleY(srcY, center, destHeight * this.rate, gc);
+			return doubleY(srcY, center, destHeight * this.rate);
 	}
 
 	public void redraw() {
