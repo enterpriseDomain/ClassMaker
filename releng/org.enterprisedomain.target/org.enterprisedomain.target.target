@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="org.enterprisedomain.target" sequenceNumber="1679384108">
+<target name="org.enterprisedomain.target" sequenceNumber="1683017840">
 	<locations>
 		<location includeMode="slicer" includeAllPlatforms="true"
 			includeSource="false" includeConfigurePhase="true"
@@ -169,7 +169,7 @@
 			includeSource="false" includeConfigurePhase="true"
 			type="InstallableUnit">
 			<unit id="org.eclipse.justj.openjdk.hotspot.jre.full.feature.group"
-				version="17.0.6.v20230204-1729" />
+				version="17.0.7.v20230425-1502" />
 			<repository
 				location="https://download.eclipse.org/justj/jres/17/updates/release/latest" />
 		</location>
