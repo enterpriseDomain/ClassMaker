@@ -285,19 +285,23 @@ public class OSGiInstaller extends ContainerJob {
 		PluginModelManager modelManager = PDECore.getDefault().getModelManager();
 		IPluginModelBase model = modelManager.findModel(project);
 		if (model != null) {
-			for (BundleSpecification requiredBundle : ((IPluginModelBase) model).getBundleDescription()
-					.getRequiredBundles()) {
-				IPluginModelBase requiredModel = modelManager.findModel(requiredBundle.getName());
-				if (requiredModel instanceof BundlePluginModel)
-					if (((BundlePluginModel) requiredModel).getBundleModel() instanceof WorkspaceBundleModel) {
-						BundleDescription bd = requiredModel.getBundleDescription();
-						requiredUris.add(URI.createFileURI(ResourceUtils.getExportDestination(getContributionState()).append("plugins") //$NON-NLS-1$
-								.addTrailingSeparator().append(bd.getSymbolicName() + "_" + bd.getVersion().toString())
-								.addFileExtension("jar").toString()) // $NON-NLS-1
-								.toString());
-					}
+			BundleDescription bundleDescription = ((IPluginModelBase) model).getBundleDescription();
+			if (bundleDescription != null)
+				for (BundleSpecification requiredBundle : bundleDescription.getRequiredBundles()) {
+					IPluginModelBase requiredModel = modelManager.findModel(requiredBundle.getName());
+					if (requiredModel instanceof BundlePluginModel)
+						if (((BundlePluginModel) requiredModel).getBundleModel() instanceof WorkspaceBundleModel) {
+							BundleDescription bd = requiredModel.getBundleDescription();
+							requiredUris.add(URI
+									.createFileURI(
+											ResourceUtils.getExportDestination(getContributionState()).append("plugins") //$NON-NLS-1$
+													.addTrailingSeparator()
+													.append(bd.getSymbolicName() + "_" + bd.getVersion().toString())
+													.addFileExtension("jar").toString()) // $NON-NLS-1
+									.toString());
+						}
 
-			}
+				}
 		}
 	}
 

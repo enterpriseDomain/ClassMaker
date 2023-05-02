@@ -51,6 +51,7 @@ import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jdt.core.ElementChangedEvent;
+import org.eclipse.jdt.core.IClasspathAttribute;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IElementChangedListener;
 import org.eclipse.jdt.core.IJavaElementDelta;
@@ -284,13 +285,15 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 					for (IClasspathEntry e : editorJavaProject.getRawClasspath())
 						if (!e.getPath().equals(new Path(IPath.SEPARATOR + getProject().getName() + ".editor")))
 							editorEntries.add(e);
-				entries.add(JavaCore.newSourceEntry(
+				IClasspathEntry e = JavaCore.newSourceEntry(
 						new Path(IPath.SEPARATOR + getProject().getName() + IPath.SEPARATOR + SOURCE_FOLDER_NAME
 								+ IPath.SEPARATOR),
-						null, new Path(
-								IPath.SEPARATOR + getProject().getName() + IPath.SEPARATOR + "bin" + IPath.SEPARATOR)));
+						null,
+						new Path(IPath.SEPARATOR + getProject().getName() + IPath.SEPARATOR + "bin" + IPath.SEPARATOR));
+				if (!entries.contains(e))
+					entries.add(e);
 				if (editJavaProject != null) {
-					IClasspathEntry e = JavaCore.newSourceEntry(
+					e = JavaCore.newSourceEntry(
 							new Path(IPath.SEPARATOR + getProject().getName() + ".edit" + IPath.SEPARATOR
 									+ SOURCE_FOLDER_NAME + IPath.SEPARATOR),
 							null, new Path(IPath.SEPARATOR + getProject().getName() + ".edit" + IPath.SEPARATOR + "bin"
@@ -299,7 +302,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 						editEntries.add(e);
 				}
 				if (editorJavaProject != null) {
-					IClasspathEntry e = JavaCore.newSourceEntry(
+					e = JavaCore.newSourceEntry(
 							new Path(IPath.SEPARATOR + getProject().getName() + ".editor" + IPath.SEPARATOR
 									+ SOURCE_FOLDER_NAME + IPath.SEPARATOR),
 							null, new Path(IPath.SEPARATOR + getProject().getName() + ".editor" + IPath.SEPARATOR
@@ -307,34 +310,37 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 					if (!editorEntries.contains(e))
 						editorEntries.add(e);
 				}
-				entries.add(JavaCore.newContainerEntry(new Path("org.eclipse.jdt.launching.JRE_CONTAINER"), null, null,
-						false));
+				e = JavaCore.newContainerEntry(new Path(
+						"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17"),
+						null, new IClasspathAttribute[] { JavaCore.newClasspathAttribute("module", "true") }, false);
+				if (!entries.contains(e))
+					entries.add(e);
 				if (editJavaProject != null) {
-					IClasspathEntry e = JavaCore.newContainerEntry(new Path("org.eclipse.jdt.launching.JRE_CONTAINER"),
-							null, null, false);
+					e = JavaCore.newContainerEntry(new Path(
+							"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17"),
+							null, new IClasspathAttribute[] { JavaCore.newClasspathAttribute("module", "true") },
+							false);
 					if (!editEntries.contains(e))
 						editEntries.add(e);
 				}
 				if (editorJavaProject != null) {
-					IClasspathEntry e = JavaCore.newContainerEntry(new Path("org.eclipse.jdt.launching.JRE_CONTAINER"),
-							null, null, false);
+					e = JavaCore.newContainerEntry(new Path(
+							"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17"),
+							null, new IClasspathAttribute[] { JavaCore.newClasspathAttribute("module", "true") },
+							false);
 					if (!editorEntries.contains(e))
 						editorEntries.add(e);
 				}
-				entries.add(JavaCore.newContainerEntry(new Path("org.eclipse.pde.core.requiredPlugins"), null, null,
-						false));
+				e = JavaCore.newContainerEntry(new Path("org.eclipse.pde.core.requiredPlugins"), null, null, false);
+				if (!entries.contains(e))
+					entries.add(e);
 				if (editJavaProject != null) {
-					IClasspathEntry e = JavaCore.newContainerEntry(new Path("org.eclipse.pde.core.requiredPlugins"),
-							null, null, false);
+					e = JavaCore.newContainerEntry(new Path("org.eclipse.pde.core.requiredPlugins"), null, null, false);
 					if (!editEntries.contains(e))
 						editEntries.add(e);
 				}
 				if (editorJavaProject != null) {
-					IClasspathEntry e = JavaCore.newSourceEntry(
-							new Path(IPath.SEPARATOR + getProject().getName() + ".editor" + IPath.SEPARATOR
-									+ SOURCE_FOLDER_NAME + IPath.SEPARATOR),
-							null, new Path(IPath.SEPARATOR + getProject().getName() + ".editor" + IPath.SEPARATOR
-									+ "bin" + IPath.SEPARATOR));
+					e = JavaCore.newContainerEntry(new Path("org.eclipse.pde.core.requiredPlugins"), null, null, false);
 					if (!editorEntries.contains(e))
 						editorEntries.add(e);
 				}
@@ -499,7 +505,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 			genModel.setPublicConstructors(true);
 			genModel.setRuntimeCompatibility(false);
 			genModel.setRuntimeJar(true);
-			genModel.setUpdateClasspath(true);			
+			genModel.setUpdateClasspath(true);
 		}
 
 		genModel.setValidateModel(true);

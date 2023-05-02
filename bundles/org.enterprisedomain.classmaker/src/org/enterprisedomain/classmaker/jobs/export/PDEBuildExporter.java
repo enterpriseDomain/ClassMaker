@@ -43,6 +43,7 @@ import org.eclipse.equinox.p2.publisher.eclipse.BundlesAction;
 import org.eclipse.equinox.p2.repository.artifact.IArtifactRepository;
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepository;
 import org.eclipse.jgit.api.Git;
+import org.eclipse.osgi.service.resolver.BundleDescription;
 import org.eclipse.osgi.service.resolver.BundleSpecification;
 import org.eclipse.pde.core.IEditableModel;
 import org.eclipse.pde.core.IModel;
@@ -175,31 +176,36 @@ public class PDEBuildExporter extends AbstractExporter {
 		bundleLocations.add(getProject().getLocation().toFile());
 		PluginModelManager modelManager = PDECore.getDefault().getModelManager();
 		for (IModel model : models)
-			if (model instanceof IPluginModelBase)
-				for (BundleSpecification requiredBundle : ((IPluginModelBase) model).getBundleDescription()
-						.getRequiredBundles()) {
-					IPluginModelBase requiredModel = modelManager.findModel(requiredBundle.getName());
-					if (requiredModel instanceof BundlePluginModel)
-						if (((BundlePluginModel) requiredModel).getBundleModel() instanceof WorkspaceBundleModel) {
-							bundleLocations.add(new File(requiredModel.getInstallLocation()));
-							writeVersion(model, requiredModel);
-						}
-				}
+			if (model instanceof IPluginModelBase) {
+				BundleDescription bundleDescription = ((IPluginModelBase) model).getBundleDescription();
+				if (bundleDescription != null)
+					for (BundleSpecification requiredBundle : bundleDescription.getRequiredBundles()) {
+						IPluginModelBase requiredModel = modelManager.findModel(requiredBundle.getName());
+						if (requiredModel instanceof BundlePluginModel)
+							if (((BundlePluginModel) requiredModel).getBundleModel() instanceof WorkspaceBundleModel) {
+								bundleLocations.add(new File(requiredModel.getInstallLocation()));
+								writeVersion(model, requiredModel);
+							}
+					}
+			}
 		if (getContributionState().isEdit()) {
 			bundleLocations.add(new File(getProject().getLocation().toString() + ".edit"));
 			for (IModel model : models) {
 				if (model instanceof AbstractPluginModelBase && ((AbstractPluginModelBase) model).getBundleDescription()
 						.getName().equals("org.eclipse.emf.edit"))
 					bundleLocations.add(new File(((AbstractPluginModelBase) model).getInstallLocation()));
-				if (model instanceof IPluginModelBase)
-					for (BundleSpecification requiredBundle : ((IPluginModelBase) model).getBundleDescription()
-							.getRequiredBundles()) {
-						IPluginModelBase requiredModel = modelManager.findModel(requiredBundle.getName() + ".edit");
-						if (requiredModel instanceof BundlePluginModel)
-							if (((BundlePluginModel) requiredModel).getBundleModel() instanceof WorkspaceBundleModel) {
-								writeVersion(model, requiredModel);
-							}
-					}
+				if (model instanceof IPluginModelBase) {
+					BundleDescription bundleDescription = ((IPluginModelBase) model).getBundleDescription();
+					if (bundleDescription != null)
+						for (BundleSpecification requiredBundle : bundleDescription.getRequiredBundles()) {
+							IPluginModelBase requiredModel = modelManager.findModel(requiredBundle.getName() + ".edit");
+							if (requiredModel instanceof BundlePluginModel)
+								if (((BundlePluginModel) requiredModel)
+										.getBundleModel() instanceof WorkspaceBundleModel) {
+									writeVersion(model, requiredModel);
+								}
+						}
+				}
 			}
 		}
 		if (getContributionState().isEditor()) {
@@ -208,15 +214,19 @@ public class PDEBuildExporter extends AbstractExporter {
 				if (model instanceof AbstractPluginModelBase && ((AbstractPluginModelBase) model).getBundleDescription()
 						.getName().equals("org.eclipse.emf.edit.ui"))
 					bundleLocations.add(new File(((AbstractPluginModelBase) model).getInstallLocation()));
-				if (model instanceof IPluginModelBase)
-					for (BundleSpecification requiredBundle : ((IPluginModelBase) model).getBundleDescription()
-							.getRequiredBundles()) {
-						IPluginModelBase requiredModel = modelManager.findModel(requiredBundle.getName() + ".editor");
-						if (requiredModel instanceof BundlePluginModel)
-							if (((BundlePluginModel) requiredModel).getBundleModel() instanceof WorkspaceBundleModel) {
-								writeVersion(model, requiredModel);
-							}
-					}
+				if (model instanceof IPluginModelBase) {
+					BundleDescription bundleDescription = ((IPluginModelBase) model).getBundleDescription();
+					if (bundleDescription != null)
+						for (BundleSpecification requiredBundle : bundleDescription.getRequiredBundles()) {
+							IPluginModelBase requiredModel = modelManager
+									.findModel(requiredBundle.getName() + ".editor");
+							if (requiredModel instanceof BundlePluginModel)
+								if (((BundlePluginModel) requiredModel)
+										.getBundleModel() instanceof WorkspaceBundleModel) {
+									writeVersion(model, requiredModel);
+								}
+						}
+				}
 			}
 		}
 		BundlesAction bundlesAction = new BundlesAction(bundleLocations.toArray(new File[bundleLocations.size()]));
@@ -225,15 +235,18 @@ public class PDEBuildExporter extends AbstractExporter {
 	}
 
 	private void writeVersion(IModel model, IPluginModelBase requiredModel) {
-		for (IPluginImport i : ((IPluginModelBase) model).getPluginBase().getImports())
-			if (i.getPluginModel().getBundleDescription().getSymbolicName()
-					.equals(requiredModel.getBundleDescription().getSymbolicName()))
-				try {
-					if (i.getPluginModel().isEditable())
-						i.setVersion(getContributionState().getRevision().getVersion().toString());
-				} catch (CoreException e) {
-					ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
-				}
+		for (IPluginImport i : ((IPluginModelBase) model).getPluginBase().getImports()) {
+			BundleDescription desc = i.getPluginModel().getBundleDescription();
+			BundleDescription rDesc = requiredModel.getBundleDescription();
+			if (desc != null && rDesc != null)
+				if (desc.getSymbolicName().equals(rDesc.getSymbolicName()))
+					try {
+						if (i.getPluginModel().isEditable())
+							i.setVersion(getContributionState().getRevision().getVersion().toString());
+					} catch (CoreException e) {
+						ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
+					}
+		}
 	}
 
 	private void cleanup(IProgressMonitor monitor) throws CoreException {
