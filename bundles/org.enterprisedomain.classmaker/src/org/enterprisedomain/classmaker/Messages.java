@@ -39,6 +39,7 @@ public class Messages extends NLS {
 	public static String JobNamePDEExport;
 	public static String ProjectNotExist;
 	public static String DefaultResourceExt;
+	public static String EObjectIsNotAEPackage;
 	public static String None;
 	public static String OK;
 	public static String ResourceImported;

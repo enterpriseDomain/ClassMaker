@@ -1344,6 +1344,8 @@ public class StateImpl extends ItemImpl implements State {
 	public void copyModel(Item from) {
 		if (from instanceof Contribution && !((ContributionImpl) from).isStateSet())
 			return;
+		if (getResource() != null)
+			EcoreUtil.resolveAll(getResource());
 		super.copyModel(from);
 	}
 

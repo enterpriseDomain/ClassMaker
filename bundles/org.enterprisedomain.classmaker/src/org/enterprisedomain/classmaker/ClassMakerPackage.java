@@ -324,13 +324,22 @@ public interface ClassMakerPackage extends EPackage {
 	int PROJECT__MODEL_RESOURCE_ADAPTER = ISCHEDULING_RULE_FEATURE_COUNT + 24;
 
 	/**
+	 * The feature id for the '<em><b>Class Loader</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECT__CLASS_LOADER = ISCHEDULING_RULE_FEATURE_COUNT + 25;
+
+	/**
 	 * The number of structural features of the '<em>Project</em>' class. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int PROJECT_FEATURE_COUNT = ISCHEDULING_RULE_FEATURE_COUNT + 25;
+	int PROJECT_FEATURE_COUNT = ISCHEDULING_RULE_FEATURE_COUNT + 26;
 
 	/**
 	 * The meta object id for the
@@ -567,6 +576,15 @@ public interface ClassMakerPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONTRIBUTION__MODEL_RESOURCE_ADAPTER = PROJECT__MODEL_RESOURCE_ADAPTER;
+
+	/**
+	 * The feature id for the '<em><b>Class Loader</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CONTRIBUTION__CLASS_LOADER = PROJECT__CLASS_LOADER;
 
 	/**
 	 * The feature id for the '<em><b>Dependencies</b></em>' attribute list. <!--
@@ -1605,7 +1623,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getEMFPlugin()
 	 * @generated
 	 */
-	int EMF_PLUGIN = 40;
+	int EMF_PLUGIN = 41;
 
 	/**
 	 * The meta object id for the
@@ -1993,7 +2011,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getLocale()
 	 * @generated
 	 */
-	int LOCALE = 43;
+	int LOCALE = 44;
 
 	/**
 	 * The meta object id for the '{@link org.enterprisedomain.classmaker.Stage
@@ -2006,6 +2024,16 @@ public interface ClassMakerPackage extends EPackage {
 	int STAGE = 31;
 
 	/**
+	 * The meta object id for the '<em>Class Loader</em>' data type. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see java.lang.ClassLoader
+	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getClassLoader()
+	 * @generated
+	 */
+	int CLASS_LOADER = 32;
+
+	/**
 	 * The meta object id for the '<em>Properties</em>' data type. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -2013,7 +2041,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getProperties()
 	 * @generated
 	 */
-	int PROPERTIES = 32;
+	int PROPERTIES = 33;
 
 	/**
 	 * The meta object id for the '<em>IProgress Monitor</em>' data type. <!--
@@ -2023,7 +2051,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getIProgressMonitor()
 	 * @generated
 	 */
-	int IPROGRESS_MONITOR = 33;
+	int IPROGRESS_MONITOR = 34;
 
 	/**
 	 * The meta object id for the '<em>OS Gi Version</em>' data type. <!--
@@ -2033,7 +2061,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getOSGiVersion()
 	 * @generated
 	 */
-	int OS_GI_VERSION = 34;
+	int OS_GI_VERSION = 35;
 
 	/**
 	 * The meta object id for the '<em>Semaphore</em>' data type. <!--
@@ -2043,7 +2071,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getSemaphore()
 	 * @generated
 	 */
-	int SEMAPHORE = 35;
+	int SEMAPHORE = 36;
 
 	/**
 	 * The meta object id for the '<em>Core Exception</em>' data type. <!--
@@ -2053,7 +2081,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getCoreException()
 	 * @generated
 	 */
-	int CORE_EXCEPTION = 36;
+	int CORE_EXCEPTION = 37;
 
 	/**
 	 * The meta object id for the '<em>Invocation Target Exception</em>' data type.
@@ -2063,7 +2091,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getInvocationTargetException()
 	 * @generated
 	 */
-	int INVOCATION_TARGET_EXCEPTION = 37;
+	int INVOCATION_TARGET_EXCEPTION = 38;
 
 	/**
 	 * The meta object id for the '<em>IStatus</em>' data type. <!-- begin-user-doc
@@ -2073,7 +2101,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getIStatus()
 	 * @generated
 	 */
-	int ISTATUS = 38;
+	int ISTATUS = 39;
 
 	/**
 	 * The meta object id for the '<em>URI</em>' data type. <!-- begin-user-doc -->
@@ -2083,7 +2111,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getURI()
 	 * @generated
 	 */
-	int URI = 39;
+	int URI = 40;
 
 	/**
 	 * The meta object id for the '<em>Name</em>' data type. <!-- begin-user-doc -->
@@ -2093,7 +2121,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getName_()
 	 * @generated
 	 */
-	int NAME = 41;
+	int NAME = 42;
 
 	/**
 	 * The meta object id for the '<em>Exception</em>' data type. <!--
@@ -2103,7 +2131,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getException()
 	 * @generated
 	 */
-	int EXCEPTION = 42;
+	int EXCEPTION = 43;
 
 	/**
 	 * Returns the meta object for class
@@ -3317,6 +3345,18 @@ public interface ClassMakerPackage extends EPackage {
 	EReference getProject_ModelResourceAdapter();
 
 	/**
+	 * Returns the meta object for the attribute
+	 * '{@link org.enterprisedomain.classmaker.Project#getClassLoader <em>Class
+	 * Loader</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the attribute '<em>Class Loader</em>'.
+	 * @see org.enterprisedomain.classmaker.Project#getClassLoader()
+	 * @see #getProject()
+	 * @generated
+	 */
+	EAttribute getProject_ClassLoader();
+
+	/**
 	 * Returns the meta object for class
 	 * '{@link org.enterprisedomain.classmaker.SCMOperator <em>SCM Operator</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -3645,6 +3685,17 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getStage();
+
+	/**
+	 * Returns the meta object for data type '{@link java.lang.ClassLoader <em>Class
+	 * Loader</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for data type '<em>Class Loader</em>'.
+	 * @see java.lang.ClassLoader
+	 * @model instanceClass="java.lang.ClassLoader"
+	 * @generated
+	 */
+	EDataType getClassLoader();
 
 	/**
 	 * Returns the meta object for data type '{@link java.util.Properties
@@ -4660,6 +4711,14 @@ public interface ClassMakerPackage extends EPackage {
 		EReference PROJECT__MODEL_RESOURCE_ADAPTER = eINSTANCE.getProject_ModelResourceAdapter();
 
 		/**
+		 * The meta object literal for the '<em><b>Class Loader</b></em>' attribute
+		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EAttribute PROJECT__CLASS_LOADER = eINSTANCE.getProject_ClassLoader();
+
+		/**
 		 * The meta object literal for the
 		 * '{@link org.enterprisedomain.classmaker.impl.SCMOperatorImpl <em>SCM
 		 * Operator</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -4929,6 +4988,16 @@ public interface ClassMakerPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum STAGE = eINSTANCE.getStage();
+
+		/**
+		 * The meta object literal for the '<em>Class Loader</em>' data type. <!--
+		 * begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @see java.lang.ClassLoader
+		 * @see org.enterprisedomain.classmaker.impl.ClassMakerPackageImpl#getClassLoader()
+		 * @generated
+		 */
+		EDataType CLASS_LOADER = eINSTANCE.getClassLoader();
 
 		/**
 		 * The meta object literal for the '<em>Properties</em>' data type. <!--

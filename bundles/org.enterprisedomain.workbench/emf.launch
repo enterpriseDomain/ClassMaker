@@ -300,7 +300,9 @@
         <setEntry value="wrapped.aopalliance.aopalliance@default:default"/>
     </setAttribute>
     <setAttribute key="selected_workspace_bundles">
+        <setEntry value="bundle@default:default"/>
         <setEntry value="org.enterprisedomain.classmaker.edit@default:default"/>
+        <setEntry value="org.enterprisedomain.classmaker.invoke.ui@default:default"/>
         <setEntry value="org.enterprisedomain.classmaker.libraries@default:default"/>
         <setEntry value="org.enterprisedomain.classmaker.osgi.systemextension@default:false"/>
         <setEntry value="org.enterprisedomain.classmaker.parsley@default:default"/>

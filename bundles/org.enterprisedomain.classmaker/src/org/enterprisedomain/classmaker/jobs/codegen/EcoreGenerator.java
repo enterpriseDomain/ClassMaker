@@ -20,7 +20,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.Semaphore;
 
 import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IFile;
@@ -50,11 +49,8 @@ import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.jdt.core.ElementChangedEvent;
 import org.eclipse.jdt.core.IClasspathAttribute;
 import org.eclipse.jdt.core.IClasspathEntry;
-import org.eclipse.jdt.core.IElementChangedListener;
-import org.eclipse.jdt.core.IJavaElementDelta;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
@@ -167,6 +163,8 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 
 	public class CodeGenerationJob extends GeneratorJob {
 
+		private IClasspathEntry e;
+
 		public CodeGenerationJob(int depth, long stateTimestamp) {
 			super(NLS.bind(Messages.JobNameCodeGeneration, "Code"), depth, stateTimestamp);
 			setChangeRule(false);
@@ -198,36 +196,8 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 
 				updateClassPath(monitor);
 
-				ICommand command = ResourceUtils.getBuildSpec(getProject().getDescription(), JavaCore.BUILDER_ID);
-				try {
-					getProject().getWorkspace().addResourceChangeListener(new IResourceChangeListener() {
+				compile(monitor);
 
-						@Override
-						public void resourceChanged(IResourceChangeEvent event) {
-							if (event.getDelta() != null)
-								for (IResourceDelta delta : event.getDelta()
-										.getAffectedChildren(IResourceDelta.CHANGED))
-									if (delta.getResource().equals(getProject()))
-										try {
-											getProject().notifyAll();
-										} catch (IllegalMonitorStateException e) {
-										}
-						}
-					}, IResourceChangeEvent.POST_BUILD);
-					getProject().build(IncrementalProjectBuilder.FULL_BUILD, JavaCore.BUILDER_ID,
-							command.getArguments(), monitor);
-				} catch (OperationCanceledException e) {
-					monitor.setCanceled(true);
-				} catch (CoreException e) {
-					ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
-					throw e;
-				} catch (Exception e) {
-					throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
-				}
-				try {
-					notifyAll();
-				} catch (IllegalMonitorStateException e) {
-				}
 				try {
 					@SuppressWarnings("unchecked")
 					SCMOperator<Git> operator = (SCMOperator<Git>) getContributionState().getProject().getWorkspace()
@@ -246,6 +216,47 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 				}
 			} finally {
 				monitor.done();
+			}
+		}
+
+		private void compile(final IProgressMonitor monitor) throws CoreException {
+			ICommand command = ResourceUtils.getBuildSpec(getProject().getDescription(), JavaCore.BUILDER_ID);
+			final SubMonitor pm = SubMonitor.convert(monitor);
+			pm.setTaskName("Compile Java");
+			pm.subTask("Compiling Java");
+			final SubMonitor m = pm.newChild(5, SubMonitor.SUPPRESS_ISCANCELED);
+			try {
+				getProject().getWorkspace().addResourceChangeListener(new IResourceChangeListener() {
+
+					@Override
+					public void resourceChanged(IResourceChangeEvent event) {
+						if (event.getDelta() != null)
+							for (IResourceDelta delta : event.getDelta().getAffectedChildren(IResourceDelta.CHANGED))
+								if (delta.getResource().equals(getProject()))
+									try {
+										getProject().notifyAll();
+									} catch (IllegalMonitorStateException e) {
+									}
+					}
+				}, IResourceChangeEvent.POST_BUILD);
+				getProject().build(IncrementalProjectBuilder.FULL_BUILD, JavaCore.BUILDER_ID, command.getArguments(),
+						m);
+			} catch (OperationCanceledException e) {
+				monitor.setCanceled(true);
+			} catch (CoreException e) {
+				ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
+				throw e;
+			} catch (Exception e) {
+				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
+			} finally {
+				if (m != null)
+					m.done();
+				if (pm != null)
+					pm.done();
+			}
+			try {
+				notifyAll();
+			} catch (IllegalMonitorStateException e) {
 			}
 		}
 
@@ -274,64 +285,77 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 				Set<IClasspathEntry> entries = new HashSet<IClasspathEntry>();
 				Set<IClasspathEntry> editEntries = new HashSet<IClasspathEntry>();
 				Set<IClasspathEntry> editorEntries = new HashSet<IClasspathEntry>();
-				for (IClasspathEntry e : javaProject.getRawClasspath())
-					if (!e.getPath().equals(new Path(IPath.SEPARATOR + getProject().getName())))
-						entries.add(e);
+				for (IClasspathEntry en : javaProject.getRawClasspath())
+					if (!en.getPath().equals(new Path(IPath.SEPARATOR + getProject().getName())))
+						entries.add(en);
 				if (editJavaProject != null)
-					for (IClasspathEntry e : editJavaProject.getRawClasspath())
-						if (!e.getPath().equals(new Path(IPath.SEPARATOR + getProject().getName() + ".edit")))
-							editEntries.add(e);
+					for (IClasspathEntry en : editJavaProject.getRawClasspath())
+						if (!en.getPath().equals(new Path(IPath.SEPARATOR + getProject().getName() + ".edit")))
+							editEntries.add(en);
 				if (editorJavaProject != null)
-					for (IClasspathEntry e : editorJavaProject.getRawClasspath())
-						if (!e.getPath().equals(new Path(IPath.SEPARATOR + getProject().getName() + ".editor")))
-							editorEntries.add(e);
-				IClasspathEntry e = JavaCore.newSourceEntry(
-						new Path(IPath.SEPARATOR + getProject().getName() + IPath.SEPARATOR + SOURCE_FOLDER_NAME
-								+ IPath.SEPARATOR),
-						null,
+					for (IClasspathEntry en : editorJavaProject.getRawClasspath())
+						if (!en.getPath().equals(new Path(IPath.SEPARATOR + getProject().getName() + ".editor")))
+							editorEntries.add(en);
+				e = JavaCore.newSourceEntry(
+						new Path(IPath.SEPARATOR + getProject().getName() + IPath.SEPARATOR + SOURCE_FOLDER_NAME), null,
 						new Path(IPath.SEPARATOR + getProject().getName() + IPath.SEPARATOR + "bin" + IPath.SEPARATOR));
-				if (!entries.contains(e))
-					entries.add(e);
+				entries.removeIf(en -> {
+					return en.getPath().isPrefixOf(e.getPath()) && en.getOutputLocation() == null;
+				});
+				entries.add(e);
 				if (editJavaProject != null) {
 					e = JavaCore.newSourceEntry(
 							new Path(IPath.SEPARATOR + getProject().getName() + ".edit" + IPath.SEPARATOR
-									+ SOURCE_FOLDER_NAME + IPath.SEPARATOR),
+									+ SOURCE_FOLDER_NAME),
 							null, new Path(IPath.SEPARATOR + getProject().getName() + ".edit" + IPath.SEPARATOR + "bin"
 									+ IPath.SEPARATOR));
+					editEntries.removeIf(en -> {
+						return en.getPath().isPrefixOf(e.getPath()) && en.getOutputLocation() == null;
+					});
 					if (!editEntries.contains(e))
 						editEntries.add(e);
 				}
 				if (editorJavaProject != null) {
 					e = JavaCore.newSourceEntry(
 							new Path(IPath.SEPARATOR + getProject().getName() + ".editor" + IPath.SEPARATOR
-									+ SOURCE_FOLDER_NAME + IPath.SEPARATOR),
+									+ SOURCE_FOLDER_NAME),
 							null, new Path(IPath.SEPARATOR + getProject().getName() + ".editor" + IPath.SEPARATOR
 									+ "bin" + IPath.SEPARATOR));
+					editorEntries.removeIf(en -> {
+						return en.getPath().isPrefixOf(e.getPath()) && en.getOutputLocation() == null;
+					});
 					if (!editorEntries.contains(e))
 						editorEntries.add(e);
 				}
 				e = JavaCore.newContainerEntry(new Path(
 						"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17"),
-						null, new IClasspathAttribute[] { JavaCore.newClasspathAttribute("module", "true") }, false);
+						null, new IClasspathAttribute[] { JavaCore.newClasspathAttribute("module", "true") }, true);
+				entries.removeIf(en -> {
+					return en.getPath().isPrefixOf(e.getPath());
+				});
 				if (!entries.contains(e))
 					entries.add(e);
 				if (editJavaProject != null) {
 					e = JavaCore.newContainerEntry(new Path(
 							"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17"),
-							null, new IClasspathAttribute[] { JavaCore.newClasspathAttribute("module", "true") },
-							false);
+							null, new IClasspathAttribute[] { JavaCore.newClasspathAttribute("module", "true") }, true);
+					editEntries.removeIf(en -> {
+						return en.getPath().isPrefixOf(e.getPath());
+					});
 					if (!editEntries.contains(e))
 						editEntries.add(e);
 				}
 				if (editorJavaProject != null) {
 					e = JavaCore.newContainerEntry(new Path(
 							"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17"),
-							null, new IClasspathAttribute[] { JavaCore.newClasspathAttribute("module", "true") },
-							false);
+							null, new IClasspathAttribute[] { JavaCore.newClasspathAttribute("module", "true") }, true);
 					if (!editorEntries.contains(e))
 						editorEntries.add(e);
 				}
 				e = JavaCore.newContainerEntry(new Path("org.eclipse.pde.core.requiredPlugins"), null, null, false);
+				editorEntries.removeIf(en -> {
+					return en.getPath().isPrefixOf(e.getPath());
+				});
 				if (!entries.contains(e))
 					entries.add(e);
 				if (editJavaProject != null) {
@@ -344,38 +368,6 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 					if (!editorEntries.contains(e))
 						editorEntries.add(e);
 				}
-				Semaphore built = new Semaphore(0);
-				JavaCore.addElementChangedListener(new IElementChangedListener() {
-
-					private boolean isBuilt = false;
-
-					private boolean isEditBuilt = false;
-
-					private boolean isEditorBuilt = false;
-
-					@Override
-					public void elementChanged(ElementChangedEvent event) {
-						IJavaElementDelta[] delta = event.getDelta().getChangedChildren();
-						if (delta != null && delta.length > 0)
-							if (delta[0].getElement().getJavaProject().getProject().equals(getProject())
-									&& event.getType() == ElementChangedEvent.POST_CHANGE)
-								isBuilt = true;
-						if ((getContributionState().isEdit() && delta.length > 0
-								&& delta[0].getElement().getJavaProject().getProject().getName()
-										.equals(getProject().getName() + ".edit")
-								&& event.getType() == ElementChangedEvent.POST_CHANGE)
-								|| !getContributionState().isEdit())
-							isEditBuilt = true;
-						if ((getContributionState().isEditor() && delta.length > 0
-								&& delta[0].getElement().getJavaProject().getProject().getName()
-										.equals(getProject().getName() + ".editor")
-								&& event.getType() == ElementChangedEvent.POST_CHANGE)
-								|| !getContributionState().isEditor())
-							isEditorBuilt = true;
-						if (isBuilt && isEditBuilt && isEditorBuilt)
-							built.release();
-					}
-				}, ElementChangedEvent.POST_CHANGE);
 				javaProject.setRawClasspath((IClasspathEntry[]) entries.toArray(new IClasspathEntry[entries.size()]),
 						m);
 				javaProject.getResolvedClasspath(false);
@@ -389,12 +381,9 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 							(IClasspathEntry[]) editorEntries.toArray(new IClasspathEntry[editorEntries.size()]), m);
 					editorJavaProject.getResolvedClasspath(false);
 				}
-				built.acquire();
 			} catch (JavaModelException mex) {
 				throw new CoreException(ClassMakerPlugin.createErrorStatus(mex));
 			} catch (OperationCanceledException ocex) {
-				monitor.setCanceled(true);
-			} catch (InterruptedException iex) {
 				monitor.setCanceled(true);
 			} finally {
 				m.done();
@@ -504,7 +493,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 			genModel.setForceOverwrite(true);
 			genModel.setPublicConstructors(true);
 			genModel.setRuntimeCompatibility(false);
-			genModel.setRuntimeJar(true);
+			genModel.setRuntimeJar(false);
 			genModel.setUpdateClasspath(true);
 		}
 

@@ -453,6 +453,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="excludedEPackages" upperBound="-1"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="ClassLoader" instanceClassName="java.lang.ClassLoader"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Properties" instanceClassName="java.util.Properties">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="{@link java.util.Properties} datatype import."/>
@@ -934,6 +935,8 @@
         <details key="documentation" value="A {@link ResourceAdapter &lt;em>&lt;b>ResourceAdapter&lt;/b>&lt;/em>} for  &lt;em>Project&lt;/em>."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="classLoader" eType="#//ClassLoader"
+        unsettable="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Name" instanceClassName="java.lang.String">
     <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">

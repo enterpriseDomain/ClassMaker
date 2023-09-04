@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>org.enterprisedomain.classmaker.tests</artifactId>
 	<version>0.0.5-SNAPSHOT</version>
@@ -26,6 +28,18 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-nop</artifactId>
 			<version>2.0.6</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.test.junit5</artifactId>
+			<version>1.2.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.test.common</artifactId>
+			<version>1.2.1</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -78,13 +92,15 @@
 					<useManifestOnlyJar>false</useManifestOnlyJar>
 					<dependency>
 						<type>eclipse-plugin</type>
-						<artifactId>org.eclipse.core.runtime.compatibility.registry</artifactId>
+						<artifactId>
+							org.eclipse.core.runtime.compatibility.registry</artifactId>
 						<version>0.0.0</version>
 					</dependency>
 					<frameworkExtensions>
 						<frameworkExtension>
 							<groupId>org.enterprisedomain</groupId>
-							<artifactId>org.enterprisedomain.classmaker.osgi.systemextension</artifactId>
+							<artifactId>
+								org.enterprisedomain.classmaker.osgi.systemextension</artifactId>
 							<version>0.8.55-SNAPSHOT</version>
 						</frameworkExtension>
 					</frameworkExtensions>

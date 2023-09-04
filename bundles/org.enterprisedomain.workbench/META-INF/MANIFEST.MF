@@ -32,7 +32,7 @@ Require-Bundle: org.eclipse.osgi,
  org.enterprisedomain.classmaker;bundle-version="0.8.55"
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Automatic-Module-Name: org.enterprisedomain.workbench
-Import-Package: javax.annotation;version="1.2.0"
+Import-Package: javax.annotation;version="[1.2.0,2.0.0)"
 Bundle-ActivationPolicy: lazy
 Export-Package: org.enterprisedomain.workbench,
  org.enterprisedomain.workbench.handler

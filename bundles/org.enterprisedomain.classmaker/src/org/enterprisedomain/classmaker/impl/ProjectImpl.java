@@ -34,7 +34,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.ListenerList;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.core.runtime.jobs.MultiRule;
@@ -156,6 +155,8 @@ import org.osgi.framework.Version;
  * <em>State</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getModelResourceAdapter
  * <em>Model Resource Adapter</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getClassLoader
+ * <em>Class Loader</em>}</li>
  * </ul>
  *
  * @generated
@@ -457,6 +458,35 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * @ordered
 	 */
 	protected ResourceAdapter modelResourceAdapter;
+
+	/**
+	 * The default value of the '{@link #getClassLoader() <em>Class Loader</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getClassLoader()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final ClassLoader CLASS_LOADER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getClassLoader() <em>Class Loader</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getClassLoader()
+	 * @generated
+	 * @ordered
+	 */
+	protected ClassLoader classLoader = CLASS_LOADER_EDEFAULT;
+
+	/**
+	 * This is true if the Class Loader attribute has been set. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean classLoaderESet;
 
 	protected ListenerList<CompletionListener> completionListeners = new ListenerList<CompletionListener>();
 
@@ -1269,6 +1299,58 @@ public class ProjectImpl extends EObjectImpl implements Project {
 				msgs.add(notification);
 		}
 		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public ClassLoader getClassLoader() {
+		return classLoader;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public void setClassLoader(ClassLoader newClassLoader) {
+		ClassLoader oldClassLoader = classLoader;
+		classLoader = newClassLoader;
+		boolean oldClassLoaderESet = classLoaderESet;
+		classLoaderESet = true;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.PROJECT__CLASS_LOADER,
+					oldClassLoader, classLoader, !oldClassLoaderESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public void unsetClassLoader() {
+		ClassLoader oldClassLoader = classLoader;
+		boolean oldClassLoaderESet = classLoaderESet;
+		classLoader = CLASS_LOADER_EDEFAULT;
+		classLoaderESet = false;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.UNSET, ClassMakerPackage.PROJECT__CLASS_LOADER,
+					oldClassLoader, CLASS_LOADER_EDEFAULT, oldClassLoaderESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public boolean isSetClassLoader() {
+		return classLoaderESet;
 	}
 
 	/**
@@ -2166,6 +2248,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			return basicGetState();
 		case ClassMakerPackage.PROJECT__MODEL_RESOURCE_ADAPTER:
 			return getModelResourceAdapter();
+		case ClassMakerPackage.PROJECT__CLASS_LOADER:
+			return getClassLoader();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -2237,6 +2321,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			return;
 		case ClassMakerPackage.PROJECT__VERSION:
 			setVersion((Version) newValue);
+			return;
+		case ClassMakerPackage.PROJECT__CLASS_LOADER:
+			setClassLoader((ClassLoader) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -2310,6 +2397,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		case ClassMakerPackage.PROJECT__VERSION:
 			setVersion(VERSION_EDEFAULT);
 			return;
+		case ClassMakerPackage.PROJECT__CLASS_LOADER:
+			unsetClassLoader();
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -2374,6 +2464,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			return basicGetState() != null;
 		case ClassMakerPackage.PROJECT__MODEL_RESOURCE_ADAPTER:
 			return modelResourceAdapter != null;
+		case ClassMakerPackage.PROJECT__CLASS_LOADER:
+			return isSetClassLoader();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -2500,6 +2592,11 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		result.append(projectVersion);
 		result.append(", version: ");
 		result.append(version);
+		result.append(", classLoader: ");
+		if (classLoaderESet)
+			result.append(classLoader);
+		else
+			result.append("<unset>");
 		result.append(')');
 		return result.toString();
 	}

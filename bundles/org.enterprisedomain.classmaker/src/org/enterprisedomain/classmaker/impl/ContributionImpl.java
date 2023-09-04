@@ -296,8 +296,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 		setName(getModelName() != null ? getModelName() : CodeGenUtil.capName(getProjectName()));
 		try {
 			Git git = operator.getRepositorySCM();
-			// if (git == null)
-			// return "";
 			String currentBranch = git.getRepository().getBranch();
 
 			ListBranchCommand listBranches = git.branchList();

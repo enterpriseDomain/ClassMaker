@@ -259,7 +259,7 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 
 	/**
 	 * 
-	 * @return job class after which to execute this job
+	 * @return job class after which instances should execute this job
 	 */
 	public Class<? extends EnterpriseDomainJob> getAfterJob() {
 		return after;

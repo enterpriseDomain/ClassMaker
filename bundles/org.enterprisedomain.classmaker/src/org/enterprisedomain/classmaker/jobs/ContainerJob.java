@@ -28,7 +28,7 @@ import org.osgi.framework.Version;
 
 public abstract class ContainerJob extends EnterpriseDomainJob {
 
-	private Set<Long> bundleIds = new HashSet<Long>();
+	private Set<Bundle> installedBundles = new HashSet<Bundle>();
 
 	public ContainerJob(String name, int depth, long stateTimestamp) {
 		super(name, depth, stateTimestamp);
@@ -43,7 +43,7 @@ public abstract class ContainerJob extends EnterpriseDomainJob {
 					|| (getContributionState().isEdit() && bundle.getSymbolicName().equals(symbolicName + ".edit"))
 					|| (getContributionState().isEditor() && bundle.getSymbolicName().equals(symbolicName + ".editor")))
 					&& (versionsAreEqual(version, bundle.getVersion(), true)
-							|| versionAreLess(version, bundle.getVersion(), true)))
+							|| versionAreLess(bundle.getVersion(), version, true)))
 				results.add(bundle);
 		return results;
 	}
@@ -57,8 +57,8 @@ public abstract class ContainerJob extends EnterpriseDomainJob {
 
 	}
 
-	public Set<Long> getBundleIds() {
-		return bundleIds;
+	public Set<Bundle> getInstalledBundles() {
+		return installedBundles;
 	}
 
 	protected BundleContext getContext() {

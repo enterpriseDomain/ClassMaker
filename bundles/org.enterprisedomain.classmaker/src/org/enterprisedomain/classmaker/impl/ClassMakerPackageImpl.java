@@ -310,6 +310,13 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * 
 	 * @generated
 	 */
+	private EDataType classLoaderEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	private EDataType propertiesEDataType = null;
 
 	/**
@@ -1473,6 +1480,16 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
+	public EAttribute getProject_ClassLoader() {
+		return (EAttribute) projectEClass.getEStructuralFeatures().get(17);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
 	public EClass getSCMOperator() {
 		return scmOperatorEClass;
 	}
@@ -1753,6 +1770,16 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
+	public EDataType getClassLoader() {
+		return classLoaderEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
 	public EDataType getProperties() {
 		return propertiesEDataType;
 	}
@@ -1999,6 +2026,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		createEAttribute(projectEClass, PROJECT__VERSION);
 		createEReference(projectEClass, PROJECT__STATE);
 		createEReference(projectEClass, PROJECT__MODEL_RESOURCE_ADAPTER);
+		createEAttribute(projectEClass, PROJECT__CLASS_LOADER);
 
 		resourceEClass = createEClass(RESOURCE);
 
@@ -2037,6 +2065,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		stageEEnum = createEEnum(STAGE);
 
 		// Create data types
+		classLoaderEDataType = createEDataType(CLASS_LOADER);
 		propertiesEDataType = createEDataType(PROPERTIES);
 		iProgressMonitorEDataType = createEDataType(IPROGRESS_MONITOR);
 		osGiVersionEDataType = createEDataType(OS_GI_VERSION);
@@ -2626,6 +2655,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEReference(getProject_ModelResourceAdapter(), this.getResourceAdapter(), this.getResourceAdapter_Project(),
 				"modelResourceAdapter", null, 0, 1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE,
 				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProject_ClassLoader(), this.getClassLoader(), "classLoader", null, 0, 1, Project.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(projectEClass, null, "create", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -3016,6 +3047,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		addEEnumLiteral(stageEEnum, Stage.LOADED);
 
 		// Initialize data types
+		initEDataType(classLoaderEDataType, ClassLoader.class, "ClassLoader", IS_SERIALIZABLE,
+				!IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(propertiesEDataType, Properties.class, "Properties", IS_SERIALIZABLE,
 				!IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(iProgressMonitorEDataType, IProgressMonitor.class, "IProgressMonitor", IS_SERIALIZABLE,

@@ -21,6 +21,7 @@
       <genEnumLiterals ecoreEnumLiteral="ClassMaker.ecore#//Stage/INSTALLED"/>
       <genEnumLiterals ecoreEnumLiteral="ClassMaker.ecore#//Stage/LOADED"/>
     </genEnums>
+    <genDataTypes ecoreDataType="ClassMaker.ecore#//ClassLoader"/>
     <genDataTypes ecoreDataType="ClassMaker.ecore#//Properties"/>
     <genDataTypes ecoreDataType="ClassMaker.ecore#//IProgressMonitor"/>
     <genDataTypes ecoreDataType="ClassMaker.ecore#//OSGiVersion"/>
@@ -351,6 +352,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Project/version"/>
       <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference ClassMaker.ecore#//Project/state"/>
       <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference ClassMaker.ecore#//Project/modelResourceAdapter"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Project/classLoader"/>
       <genOperations ecoreOperation="ClassMaker.ecore#//Project/create">
         <genParameters ecoreParameter="ClassMaker.ecore#//Project/create/monitor"/>
       </genOperations>

@@ -123,7 +123,7 @@ public class OSGiInstaller extends ContainerJob {
 						return result;
 				}
 			}
-			((ContainerJob) getNextJob()).getBundleIds().clear();
+			((ContainerJob) getNextJob()).getInstalledBundles().clear();
 			result = addStatus(installBundle(existingBundle, 0, bundleContext), result);
 			if (getContributionState().isEdit())
 				result = addStatus(installBundle(existingBundle, 1, bundleContext), result);
@@ -240,21 +240,25 @@ public class OSGiInstaller extends ContainerJob {
 				}
 				break;
 			}
-			for (String requiredUri : requiredUris)
-				bundles.add(context.installBundle(requiredUri));
+			for (String requiredUri : requiredUris) {
+				try {
+					bundles.add(context.installBundle(requiredUri));
+				} catch (BundleException e) {
+					if (e.getType() == BundleException.DUPLICATE_BUNDLE_ERROR) {
+						((ContainerJob) getNextJob()).getInstalledBundles().addAll(bundles);
+					}
+				}
+			}
 			bundles.add(context.installBundle(uri));
 			if (bundles.isEmpty())
 				return ClassMakerPlugin
 						.createErrorStatus(NLS.bind(Messages.BundleNotInstalled, getProject().getName()));
-			for (Bundle bundle : bundles)
-				((ContainerJob) getNextJob()).getBundleIds().add(bundle.getBundleId());
+			((ContainerJob) getNextJob()).getInstalledBundles().addAll(bundles);
 			refreshBundle(bundles, context);
 //			installed.acquire();
 			getContributionState().setPhase(getResultStage());
 			return getOKStatus(bundles);
-		} catch (
-
-		BundleException e) {
+		} catch (BundleException e) {
 			if (e.getType() == BundleException.DUPLICATE_BUNDLE_ERROR)
 				return getOKStatus(existingBundle, bundles);
 			if (e.getCause() instanceof FileNotFoundException) {
@@ -292,17 +296,30 @@ public class OSGiInstaller extends ContainerJob {
 					if (requiredModel instanceof BundlePluginModel)
 						if (((BundlePluginModel) requiredModel).getBundleModel() instanceof WorkspaceBundleModel) {
 							BundleDescription bd = requiredModel.getBundleDescription();
-							requiredUris.add(URI
-									.createFileURI(
-											ResourceUtils.getExportDestination(getContributionState()).append("plugins") //$NON-NLS-1$
-													.addTrailingSeparator()
-													.append(bd.getSymbolicName() + "_" + bd.getVersion().toString())
-													.addFileExtension("jar").toString()) // $NON-NLS-1
-									.toString());
+							if (!isInstalled(bd))
+								requiredUris.add(URI
+										.createFileURI(ResourceUtils.getExportDestination(getContributionState())
+												.append("plugins") //$NON-NLS-1$
+												.addTrailingSeparator()
+												.append(bd.getSymbolicName() + "_" + bd.getVersion().toString())
+												.addFileExtension("jar").toString()) // $NON-NLS-1
+										.toString());
 						}
 
 				}
 		}
+	}
+
+	/**
+	 * @return whether the specified bundle is installed.
+	 */
+	private boolean isInstalled(BundleDescription bd) {
+		for (Bundle b : getContext().getBundles()) {
+			if (b.getSymbolicName().equals(bd.getSymbolicName()) && b.getVersion().equals(bd.getVersion())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	protected Collection<Bundle> refreshBundle(Collection<Bundle> bundles, BundleContext context) {

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <units size='1'>
-  <unit id='org.enterprisedomain.classmaker.cdo.ui' version='0.8.55.202212210851' singleton='false' generation='2'>
-    <update id='org.enterprisedomain.classmaker.cdo.ui' range='[0.0.0,0.8.55.202212210851)' severity='0'/>
+  <unit id='org.enterprisedomain.classmaker.cdo.ui' version='0.8.55.202306180705' generation='2'>
+    <update id='org.enterprisedomain.classmaker.cdo.ui' range='[0.0.0,0.8.55.202306180705)' severity='0'/>
     <properties size='6'>
       <property name='org.eclipse.equinox.p2.name' value='ClassMaker CDO UI Support'/>
       <property name='org.eclipse.equinox.p2.provider' value='Kyrill Zotkin'/>
@@ -11,9 +11,9 @@
       <property name='maven-type' value='eclipse-plugin'/>
     </properties>
     <provides size='4'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='org.enterprisedomain.classmaker.cdo.ui' version='0.8.55.202212210851'/>
-      <provided namespace='osgi.bundle' name='org.enterprisedomain.classmaker.cdo.ui' version='0.8.55.202212210851'/>
-      <provided namespace='osgi.identity' name='org.enterprisedomain.classmaker.cdo.ui' version='0.8.55.202212210851'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='org.enterprisedomain.classmaker.cdo.ui' version='0.8.55.202306180705'/>
+      <provided namespace='osgi.bundle' name='org.enterprisedomain.classmaker.cdo.ui' version='0.8.55.202306180705'/>
+      <provided namespace='osgi.identity' name='org.enterprisedomain.classmaker.cdo.ui' version='0.8.55.202306180705'>
         <properties size='1'>
           <property name='type' value='osgi.bundle'/>
         </properties>
@@ -43,20 +43,20 @@
       <required namespace='osgi.bundle' name='org.eclipse.emf.ecp.explorereditorbridge' range='1.23.0'/>
       <required namespace='osgi.bundle' name='org.eclipse.emfforms.editor.ecore' range='1.24.0'/>
       <required namespace='osgi.bundle' name='org.eclipse.emf.ecp.application.e3' range='1.26.0'/>
-      <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=11))'>
+      <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=17))'>
         <description>
           org.enterprisedomain.classmaker.cdo.ui
         </description>
       </requiredProperties>
     </requires>
     <artifacts size='1'>
-      <artifact classifier='osgi.bundle' id='org.enterprisedomain.classmaker.cdo.ui' version='0.8.55.202212210851'/>
+      <artifact classifier='osgi.bundle' id='org.enterprisedomain.classmaker.cdo.ui' version='0.8.55.202306180705'/>
     </artifacts>
     <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
     <touchpointData size='1'>
       <instructions size='1'>
         <instruction key='manifest'>
-          Bundle-SymbolicName: org.enterprisedomain.classmaker.cdo.ui&#xA;Bundle-Version: 0.8.55.202212210851&#xA;
+          Bundle-SymbolicName: org.enterprisedomain.classmaker.cdo.ui;singleton:=true&#xA;Bundle-Version: 0.8.55.202306180705&#xA;
         </instruction>
       </instructions>
     </touchpointData>

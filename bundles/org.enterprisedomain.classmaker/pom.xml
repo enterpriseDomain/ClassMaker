@@ -10,5 +10,5 @@
 		<version>0.8.55-SNAPSHOT</version>
 		<relativePath>../../</relativePath>
 	</parent>
-	<packaging>eclipse-plugin</packaging>	
+	<packaging>eclipse-plugin</packaging>
 </project>

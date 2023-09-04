@@ -1,5 +1,5 @@
 /**
- * Copyright 2012-2021 Kyrill Zotkin
+ * Copyright 2012-2023 Kyrill Zotkin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -144,7 +144,14 @@ public class PDEBuildExporter extends AbstractExporter {
 			final SubMonitor m = pm.newChild(9, SubMonitor.SUPPRESS_ISCANCELED);
 
 			Publisher publisher = new Publisher(info);
-			return publisher.publish(actions, m);
+			try {
+				return publisher.publish(actions, m);
+			} finally {
+				if (m != null)
+					m.done();
+				if (pm != null)
+					pm.done();
+			}
 		}
 	}
 
@@ -235,18 +242,19 @@ public class PDEBuildExporter extends AbstractExporter {
 	}
 
 	private void writeVersion(IModel model, IPluginModelBase requiredModel) {
-		for (IPluginImport i : ((IPluginModelBase) model).getPluginBase().getImports()) {
-			BundleDescription desc = i.getPluginModel().getBundleDescription();
-			BundleDescription rDesc = requiredModel.getBundleDescription();
-			if (desc != null && rDesc != null)
-				if (desc.getSymbolicName().equals(rDesc.getSymbolicName()))
-					try {
-						if (i.getPluginModel().isEditable())
-							i.setVersion(getContributionState().getRevision().getVersion().toString());
-					} catch (CoreException e) {
-						ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
-					}
-		}
+		BundleDescription rDesc = requiredModel.getBundleDescription();
+		if (rDesc != null)
+			for (IPluginImport i : ((IPluginModelBase) model).getPluginBase().getImports()) {
+				BundleDescription desc = i.getPluginModel().getBundleDescription();
+				if (desc != null)
+					if (desc.getSymbolicName().equals(rDesc.getSymbolicName()))
+						try {
+							if (i.getPluginModel().isEditable())
+								i.setVersion(getContributionState().getRevision().getVersion().toString());
+						} catch (CoreException e) {
+							ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
+						}
+			}
 	}
 
 	private void cleanup(IProgressMonitor monitor) throws CoreException {
@@ -276,7 +284,16 @@ public class PDEBuildExporter extends AbstractExporter {
 		IBuildEntry srcEntry = build.getEntry("source.."); //$NON-NLS-1$
 		if (srcEntry == null) {
 			srcEntry = buildModel.getFactory().createEntry("source.."); //$NON-NLS-1$
+			if (!srcEntry.contains("src/"))
+				srcEntry.addToken("src/");
 			build.add(srcEntry);
+		}
+		IBuildEntry outputEntry = build.getEntry("output.."); //$NON-NLS-1$
+		if (outputEntry == null) {
+			outputEntry = buildModel.getFactory().createEntry("output.."); //$NON-NLS-1$
+			if (!outputEntry.contains("bin"))
+				outputEntry.addToken("bin");
+			build.add(outputEntry);
 		}
 		if (!srcEntry.contains("src" + IPath.SEPARATOR)) //$NON-NLS-1$
 			srcEntry.addToken("src" + IPath.SEPARATOR); //$NON-NLS-1$

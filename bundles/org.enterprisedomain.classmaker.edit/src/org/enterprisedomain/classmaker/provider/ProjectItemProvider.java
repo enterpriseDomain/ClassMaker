@@ -87,6 +87,7 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 			addSelectRevealHandlerPropertyDescriptor(object);
 			addVersionPropertyDescriptor(object);
 			addStatePropertyDescriptor(object);
+			addClassLoaderPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -385,6 +386,22 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 	}
 
 	/**
+	 * This adds a property descriptor for the Class Loader feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected void addClassLoaderPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Project_classLoader_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Project_classLoader_feature",
+								"_UI_Project_type"),
+						ClassMakerPackage.Literals.PROJECT__CLASS_LOADER, false, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an
 	 * appropriate feature for an {@link org.eclipse.emf.edit.command.AddCommand},
 	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
@@ -467,6 +484,7 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 		case ClassMakerPackage.PROJECT__SAVING_RESOURCE:
 		case ClassMakerPackage.PROJECT__PROJECT_VERSION:
 		case ClassMakerPackage.PROJECT__VERSION:
+		case ClassMakerPackage.PROJECT__CLASS_LOADER:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case ClassMakerPackage.PROJECT__DOMAIN_MODEL:

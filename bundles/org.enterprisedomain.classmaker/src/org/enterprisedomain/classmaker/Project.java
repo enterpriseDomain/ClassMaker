@@ -67,6 +67,8 @@ import org.osgi.framework.Version;
  * <em>State</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.Project#getModelResourceAdapter
  * <em>Model Resource Adapter</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Project#getClassLoader <em>Class
+ * Loader</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject()
@@ -476,6 +478,56 @@ public interface Project extends ISchedulingRule, Item {
 	 * @generated
 	 */
 	ResourceAdapter getModelResourceAdapter();
+
+	/**
+	 * Returns the value of the '<em><b>Class Loader</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Class Loader</em>' attribute.
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject_ClassLoader()
+	 * @model dataType="org.enterprisedomain.classmaker.ClassLoader"
+	 *        changeable="false"
+	 * @generated
+	 */
+	ClassLoader getClassLoader();
+
+	/**
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Project#getClassLoader <em>Class
+	 * Loader</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value the new value of the '<em>Class Loader</em>' attribute.
+	 * @see #isSetClassLoader()
+	 * @see #unsetClassLoader()
+	 * @see #getClassLoader()
+	 * @generated
+	 */
+	void setClassLoader(ClassLoader value);
+
+	/**
+	 * Unsets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Project#getClassLoader <em>Class
+	 * Loader</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #isSetClassLoader()
+	 * @see #getClassLoader()
+	 * @see #setClassLoader(ClassLoader)
+	 * @generated
+	 */
+	void unsetClassLoader();
+
+	/**
+	 * Returns whether the value of the
+	 * '{@link org.enterprisedomain.classmaker.Project#getClassLoader <em>Class
+	 * Loader</em>}' attribute is set. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return whether the value of the '<em>Class Loader</em>' attribute is set.
+	 * @see #unsetClassLoader()
+	 * @see #getClassLoader()
+	 * @see #setClassLoader(ClassLoader)
+	 * @generated
+	 */
+	boolean isSetClassLoader();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
