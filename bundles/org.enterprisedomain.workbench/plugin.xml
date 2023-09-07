@@ -39,10 +39,6 @@
             description="enterpriseDomain Workbench Object Management Application."
             name="enterpriseDomain Workbench">
          <property
-               name="windowImages"
-               value="platform:/plugin/org.eclipse.emf.ecp.ui.e3/icons/bricks.png">
-         </property>
-         <property
                name="appName"
                value="enterpriseDomain Workbench">
          </property>

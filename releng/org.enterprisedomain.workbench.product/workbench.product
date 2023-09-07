@@ -3,6 +3,7 @@
 
 <product name="enterpriseDomain Workbench" uid="workbench.product" id="org.enterprisedomain.workbench.product" application="org.eclipse.ui.ide.workbench" version="0.8.55.qualifier" useFeatures="true" includeLaunchers="true" autoIncludeRequirements="true">
 
+
    <configIni use="default">
    </configIni>
 
@@ -13,7 +14,7 @@
       </vmArgsMac>
    </launcherArgs>
 
-   <windowImages i16="platform:/plugin/org.eclipse.emf.ecp.ui.e3/icons/bricks.png"/>
+   <windowImages/>
 
    <splash
       location="org.enterprisedomain.workbench.ide" />
@@ -22,6 +23,7 @@
          <bmp/>
       </win>
    </launcher>
+
 
    <vm>
       <linux include="false">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17</linux>
