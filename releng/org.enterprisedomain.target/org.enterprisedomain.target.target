@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="org.enterprisedomain.target" sequenceNumber="1701429476">
+<target name="org.enterprisedomain.target" sequenceNumber="1702122693">
 	<locations>
 		<location includeMode="slicer" includeAllPlatforms="true"
 			includeSource="false" includeConfigurePhase="true"
@@ -32,124 +32,124 @@
 			includeSource="false" includeConfigurePhase="true"
 			type="InstallableUnit">
 			<unit id="org.eclipse.emf.ecore.feature.group"
-				version="2.35.0.v20230829-0934" />
-			<unit id="org.eclipse.emf.ecore.xmi" version="2.35.0.v20230801-1141" />
+				version="2.36.0.v20231002-1156" />
+			<unit id="org.eclipse.emf.ecore.xmi" version="2.36.0.v20231002-1156" />
 			<unit id="org.eclipse.xtext.xbase.lib.feature.group"
-				version="2.32.0.v20230827-1315" />
-			<unit id="org.eclipse.emf.parsley" version="1.14.0.v20221201-1038" />
+				version="2.33.0.v20231121-0955" />
+			<unit id="org.eclipse.emf.parsley" version="1.15.0.v20231125-1306" />
 			<unit id="org.eclipse.emf.parsley.cdo"
-				version="1.14.0.v20221201-1038" />
+				version="1.15.0.v20231125-1306" />
 			<unit id="org.eclipse.emf.parsley.common"
-				version="1.14.0.v20221201-1038" />
+				version="1.15.0.v20231125-1306" />
 			<unit id="org.eclipse.emf.parsley.cdo.common"
-				version="1.14.0.v20221201-1038" />
+				version="1.15.0.v20231125-1306" />
 			<unit id="org.eclipse.emf.parsley.runtime"
-				version="1.14.0.v20221201-1038" />
+				version="1.15.0.v20231125-1306" />
 			<unit id="org.eclipse.emf.parsley.runtime.common"
-				version="1.14.0.v20221201-1038" />
+				version="1.15.0.v20231125-1306" />
 			<unit id="org.eclipse.emf.parsley.views"
-				version="1.14.0.v20221201-1038" />
+				version="1.15.0.v20231125-1306" />
 			<unit id="org.eclipse.emf.parsley.views.common"
-				version="1.14.0.v20221201-1038" />
+				version="1.15.0.v20231125-1306" />
 			<unit id="org.eclipse.equinox.core.feature.feature.group"
-				version="1.14.100.v20230801-1826" />
+				version="1.14.200.v20231110-1900" />
 			<unit id="org.eclipse.equinox.registry"
-				version="3.11.300.v20230801-1826" />
+				version="3.11.400.v20231102-2218" />
 			<unit id="org.eclipse.core.runtime.feature.feature.group"
-				version="1.4.100.v20230808-1403" />
+				version="1.4.200.v20231110-1900" />
 			<unit id="org.eclipse.core.expressions"
-				version="3.9.100.v20230726-0617" />
-			<unit id="org.eclipse.ui.ide" version="3.21.100.v20230825-1346" />
+				version="3.9.200.v20230921-0857" />
+			<unit id="org.eclipse.ui.ide" version="3.22.0.v20231102-1012" />
 			<unit id="org.eclipse.ui.views" version="3.12.100.v20230821-1342" />
 			<unit id="org.eclipse.e4.ui.workbench"
-				version="1.15.100.v20230819-0347" />
-			<unit id="org.eclipse.ui.workbench" version="3.130.0.v20230822-0911" />
-			<unit id="org.eclipse.ui" version="3.204.0.v20230821-1342" />
+				version="1.15.200.v20231030-2045" />
+			<unit id="org.eclipse.ui.workbench" version="3.131.0.v20231201-0512" />
+			<unit id="org.eclipse.ui" version="3.205.0.v20230922-1312" />
 			<unit id="org.eclipse.ui.navigator"
-				version="3.12.100.v20230821-1342" />
+				version="3.12.200.v20231019-2116" />
 			<unit id="org.eclipse.equinox.common"
-				version="3.18.100.v20230730-1117" />
+				version="3.18.200.v20231106-1826" />
 			<unit id="org.eclipse.equinox.servletbridge"
-				version="1.6.300.v20230622-2056" />
+				version="1.6.400.v20231104-1108" />
 			<unit id="org.eclipse.equinox.servletbridge.source"
-				version="1.6.300.v20230622-2056" />
+				version="1.6.400.v20231104-1108" />
 			<unit id="org.eclipse.equinox.http.servlet"
-				version="1.7.400.v20221006-1531" />
+				version="1.8.0.v20231018-1316" />
 			<unit id="org.eclipse.equinox.http.servlet.source"
-				version="1.7.400.v20221006-1531" />
+				version="1.8.0.v20231018-1316" />
 			<unit id="org.eclipse.equinox.http.servletbridge"
-				version="1.2.200.v20220710-1223" />
+				version="1.2.300.v20231018-1317" />
 			<unit id="org.eclipse.equinox.http.servletbridge.source"
-				version="1.2.200.v20220710-1223" />
-			<unit id="org.eclipse.swt" version="3.124.100.v20230825-1346" />
+				version="1.2.300.v20231018-1317" />
+			<unit id="org.eclipse.swt" version="3.124.200.v20231113-1355" />
 			<unit id="org.eclipse.equinox.p2.extras.feature.feature.group"
-				version="1.4.2100.v20230814-2013" />
+				version="1.4.2200.v20231112-1314" />
 			<unit
 				id="org.eclipse.equinox.p2.extras.feature.source.feature.group"
-				version="1.4.2100.v20230814-2013" />
+				version="1.4.2200.v20231112-1314" />
 			<unit id="org.eclipse.equinox.weaving.caching"
-				version="1.2.300.v20230425-1618" />
+				version="1.2.400.v20231012-1253" />
 			<unit id="org.eclipse.equinox.weaving.caching.j9"
-				version="1.2.200.v20220720-1916" />
+				version="1.2.300.v20231106-1826" />
 			<unit id="org.eclipse.equinox.weaving.hook"
-				version="1.3.200.v20220720-1916" />
-			<unit id="org.eclipse.osgi.util" version="3.7.200.v20230103-1101" />
+				version="1.3.300.v20231106-1826" />
+			<unit id="org.eclipse.osgi.util" version="3.7.300.v20231104-1118" />
 			<unit id="org.apache.felix.scr" version="2.2.6" />
 			<unit id="org.apache.commons.jxpath" version="1.3.0.v200911051830" />
 			<unit id="org.eclipse.swtbot.eclipse.feature.group"
 				version="4.1.0.202306071420" />
 			<unit id="org.eclipse.swtbot.junit4_x" version="4.1.0.202306071420" />
-			<unit id="org.eclipse.core.runtime" version="3.29.0.v20230726-0617" />
+			<unit id="org.eclipse.core.runtime" version="3.30.0.v20231102-0719" />
 			<unit id="org.eclipse.core.resources"
-				version="3.19.100.v20230814-1312" />
+				version="3.20.0.v20231102-0934" />
 			<unit id="org.eclipse.jdt.feature.group"
-				version="3.19.200.v20230903-1000" />
+				version="3.19.300.v20231201-0110" />
 			<unit id="org.eclipse.jdt.core.compiler.batch"
-				version="3.35.0.v20230814-2020" />
-			<unit id="org.eclipse.jdt.ui" version="3.30.0.v20230822-0733" />
+				version="3.36.0.v20231114-0937" />
+			<unit id="org.eclipse.jdt.ui" version="3.31.0.v20231115-2128" />
 			<unit id="org.eclipse.equinox.server.core.feature.group"
-				version="1.15.100.v20230808-1403" />
+				version="1.15.200.v20231110-1900" />
 			<unit id="org.eclipse.equinox.server.p2.feature.group"
-				version="1.12.1000.v20230814-2013" />
+				version="1.12.1100.v20231112-1314" />
 			<unit id="org.eclipse.equinox.http.registry"
-				version="1.3.300.v20230630-1303" />
+				version="1.3.400.v20231012-1210" />
 			<unit id="org.eclipse.emf.sdk.feature.group"
-				version="2.35.0.v20230829-0934" />
+				version="2.36.0.v20231107-0612" />
 			<unit id="org.eclipse.gef.sdk.feature.group"
-				version="3.17.0.202308311129" />
+				version="5.5.0.202311221639" />
 			<unit id="org.eclipse.graphiti.feature.feature.group"
-				version="0.19.1.202211181144" />
+				version="0.19.2.202311281543" />
 			<unit id="org.eclipse.graphiti.export.feature.feature.group"
-				version="0.19.1.202211181144" />
+				version="0.19.2.202311281543" />
 			<unit id="org.eclipse.emf.validation.sdk.feature.group"
 				version="1.13.3.202305230712" />
 			<unit id="org.eclipse.emf.transaction.sdk.feature.group"
 				version="1.13.0.202208110935" />
 			<unit id="org.eclipse.net4j.sdk.feature.group"
-				version="4.23.0.v20230904-1612" />
+				version="4.24.0.v20231129-1238" />
 			<unit id="org.eclipse.emf.cdo.sdk.feature.group"
-				version="5.14.1.v20230905-0631" />
+				version="5.14.1.v20231129-1238" />
 			<unit id="org.eclipse.platform.feature.group"
-				version="4.29.0.v20230903-1000" />
+				version="4.30.0.v20231201-0512" />
 			<unit id="org.eclipse.pde.feature.group"
-				version="3.15.100.v20230903-1000" />
+				version="3.15.200.v20231201-0110" />
 			<unit id="org.eclipse.core.contenttype"
-				version="3.9.100.v20230630-1232" />
+				version="3.9.200.v20230914-0751" />
 			<unit id="org.eclipse.equinox.preferences"
-				version="3.10.300.v20230630-1303" />
+				version="3.10.400.v20231102-2218" />
 			<unit id="org.eclipse.ocl.all.sdk.feature.group"
-				version="5.18.0.v20221201-0557" />
+				version="5.19.0.v20231129-1236" />
 			<unit id="org.eclipse.m2m.qvt.oml.sdk.feature.group"
-				version="3.10.7.v20220605-1149" />
+				version="3.10.8.v20231126-0839" />
 			<unit id="org.eclipse.xtend.sdk.feature.group"
-				version="2.32.0.v20230827-1315" />
+				version="2.33.0.v20231121-0955" />
 			<unit id="org.eclipse.ecf.core.ssl.feature.feature.group"
 				version="1.1.501.v20230507-1921" />
 			<unit id="org.eclipse.ecf.filetransfer.ssl.feature.feature.group"
-				version="1.1.401.v20230422-0242" />
+				version="1.1.402.v20231021-2127" />
 			<unit
 				id="org.eclipse.ecf.filetransfer.httpclient5.feature.feature.group"
-				version="1.1.701.v20230423-0417" />
+				version="1.1.702.v20231114-1017" />
 			<unit id="org.sat4j.core" version="2.3.6.v20201214" />
 			<unit id="org.sat4j.pb" version="2.3.6.v20201214" />
 			<repository id="simrel_latest"
@@ -159,7 +159,7 @@
 			includeSource="false" includeConfigurePhase="true"
 			type="InstallableUnit">
 			<unit id="org.eclipse.jgit.feature.group"
-				version="6.7.0.202309050840-r" />
+				version="6.8.0.202311291450-r" />
 			<repository location="http://download.eclipse.org/egit/updates/" />
 		</location>
 		<location includeMode="slicer" includeAllPlatforms="true"
@@ -181,7 +181,7 @@
 			includeSource="false" includeConfigurePhase="true"
 			type="InstallableUnit">
 			<unit id="org.eclipse.emf.cdo.all.feature.group"
-				version="4.23.0.v20230905-0631" />
+				version="4.24.0.v20231129-1238" />
 			<repository
 				location="https://download.eclipse.org/modeling/emf/cdo/updates/releases/4.x/latest/" />
 		</location>
@@ -304,6 +304,17 @@
 				version="3.6.1.v20221112-0806" />
 			<repository
 				location="https://download.eclipse.org/tools/orbit/downloads/drops/R20230531010532/repository" />
+		</location>
+		<location includeMode="slicer" includeAllPlatforms="true"
+			includeSource="false" includeConfigurePhase="true"
+			type="InstallableUnit">
+			<unit id="org.eclipse.emf.edapt.runtime.feature.feature.group"
+				version="1.5.0.202211141318" />
+			<unit
+				id="org.eclipse.emf.edapt.runtime.feature.source.feature.group"
+				version="1.5.0.202211141318" />
+			<repository id="edapt-p2-repo"
+				location="http://download.eclipse.org/edapt/releases/15x" />
 		</location>
 		<location includeMode="slicer" includeAllPlatforms="true"
 			includeSource="false" includeConfigurePhase="true"
