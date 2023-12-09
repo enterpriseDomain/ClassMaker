@@ -13,6 +13,7 @@ package org.enterprisedomain.classmaker.impl;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +23,7 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.osgi.framework.Bundle;
+import org.osgi.framework.Version;
 
 public class CustomClassLoader extends ClassLoader {
 
@@ -92,7 +94,10 @@ public class CustomClassLoader extends ClassLoader {
 	private @Nullable Class<?> loadExplicitClass(@NonNull String qualifiedClassName, boolean resolve)
 			throws ClassNotFoundException, IOException {
 		String filePath = qualifiedClassName.replaceAll("\\.", "/") + ".class";
-		InputStream inputStream = FileLocator.toFileURL(bundle.getEntry("/bin/" + filePath)).openStream();
+		URL url = bundle.getEntry("/bin/" + filePath);
+		if (url == null)
+			url = bundle.getResource("/bin/" + filePath);
+		InputStream inputStream = FileLocator.toFileURL(url).openStream();
 		ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
 		try {
 			int bytes;
@@ -120,6 +125,10 @@ public class CustomClassLoader extends ClassLoader {
 			resolveClass(theClass);
 		}
 		return theClass;
+	}
+
+	public Version getBundleVersion() {
+		return bundle.getVersion();
 	}
 
 }

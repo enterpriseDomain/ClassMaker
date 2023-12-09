@@ -56,6 +56,7 @@ import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
 import org.eclipse.m2m.qvt.oml.ExecutionDiagnostic;
 import org.eclipse.m2m.qvt.oml.ModelExtent;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
+import org.eclipse.osgi.util.NLS;
 import org.enterprisedomain.classmaker.Blueprint;
 import org.enterprisedomain.classmaker.ClassMakerFactory;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
@@ -694,6 +695,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 	 * @generated NOT
 	 */
 	public void initialize() {
+		ClassMakerPlugin.print("Initializing service");
 		initializing = true;
 		getWorkspace().setService(this);
 		ClassMakerService.Stages.contributeStages();
@@ -702,12 +704,16 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 			try {
 				Resource workspaceResource = WorkspaceImpl.RESOURCE_SET_EDEFAULT.getResource(uri, true);
 				try {
+					ClassMakerPlugin.print("Loading workspace resource");
 					workspaceResource.load(Collections.emptyMap());
 					if (!workspaceResource.getContents().isEmpty()) {
 						setWorkspace(EcoreUtil.copy((Workspace) workspaceResource.getContents().get(0)));
 						for (Project project : getWorkspace().getProjects()) {
-							if (project.eIsSet(ClassMakerPackage.Literals.PROJECT__STATE))
+							if (project.eIsSet(ClassMakerPackage.Literals.PROJECT__STATE)) {
+								ClassMakerPlugin.print(NLS.bind("Project {0} state {1} load", project.getName(),
+										project.getState().getTimestamp()));
 								project.getState().load(false, true);
+							}
 						}
 					} else
 						getWorkspace().initialize();

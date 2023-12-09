@@ -82,7 +82,10 @@ public class ModelUtil {
 		if (result)
 			return result;
 		for (EObject secondEObject : second)
-			result |= eObjectsAreEqual(first, secondEObject, conjunction);
+			if (conjunction)
+				result &= eObjectsAreEqual(first, secondEObject, conjunction);
+			else
+				result |= eObjectsAreEqual(first, secondEObject, conjunction);
 		return result;
 	}
 

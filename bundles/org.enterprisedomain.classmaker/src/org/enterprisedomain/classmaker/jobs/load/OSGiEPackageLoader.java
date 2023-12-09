@@ -72,7 +72,6 @@ public class OSGiEPackageLoader extends ContainerJob implements BundleTrackerCus
 		try {
 			bundleTracker = new BundleTracker<EPackage>(getContext(),
 					Bundle.STARTING | Bundle.ACTIVE | Bundle.RESOLVED | Bundle.INSTALLED, this);
-			bundleTracker.open();
 			for (Bundle bundle : getInstalledBundles())
 				if (versionsAreEqual(Version.parseVersion(bundle.getHeaders().get(Constants.BUNDLE_VERSION)),
 						getContributionState().getProject().getVersion(), false)) {
@@ -122,11 +121,16 @@ public class OSGiEPackageLoader extends ContainerJob implements BundleTrackerCus
 					return ClassMakerPlugin
 							.createErrorStatus(NLS.bind(Messages.BundleNotFound, getProject().getName()));
 			}
-			while (bundleTracker.getTrackingCount() == 0)
+			bundleTracker.open();
+			while (bundleTracker.isEmpty()) {
+				ePackage = bundleTracker.getObject(osgiBundle);
+				if (ePackage == null)
+					break;
 				try {
 					Thread.sleep(200);
 				} catch (InterruptedException e) {
 				}
+			}
 			ePackage = bundleTracker.getObject(osgiBundle);
 			if (exception == null) {
 				try {
@@ -253,6 +257,8 @@ public class OSGiEPackageLoader extends ContainerJob implements BundleTrackerCus
 						registerEPackage(getContributionState().getRevision().getProject().getWorkspace()
 								.getResourceSet().getPackageRegistry(), ePackage);
 				}
+			} catch (NoClassDefFoundError e) {
+				e.printStackTrace();
 			} catch (ClassCastException e) {
 				if (ePackage != null) {
 					getContributionState().getDomainModel().setGenerated(ePackage);
@@ -265,7 +271,6 @@ public class OSGiEPackageLoader extends ContainerJob implements BundleTrackerCus
 				Thread.currentThread().setContextClassLoader(cl);
 			}
 		} catch (ClassNotFoundException e) {
-
 		} catch (Exception e) {
 			setException(e);
 			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
@@ -285,7 +290,9 @@ public class OSGiEPackageLoader extends ContainerJob implements BundleTrackerCus
 	}
 
 	public ClassLoader getCustomClassLoader(Bundle bundle, EPackage m, ClassLoader cl) {
-		if (!getContributionState().getProject().eIsSet(ClassMakerPackage.Literals.PROJECT__CLASS_LOADER)) {
+		if (!getContributionState().getProject().eIsSet(ClassMakerPackage.Literals.PROJECT__CLASS_LOADER)
+				|| ((CustomClassLoader) getContributionState().getProject().getClassLoader()).getBundleVersion()
+						.compareTo(bundle.getVersion()) < 0) {
 			List<String> pkgs = new ArrayList<String>(5);
 			String pkg = (getContributionState().eIsSet(ClassMakerPackage.Literals.STATE__BASE_PACKAGE)
 					? getContributionState().getBasePackage() + "." //$NON-NLS-1$
@@ -321,7 +328,7 @@ public class OSGiEPackageLoader extends ContainerJob implements BundleTrackerCus
 					&& getContributionState().getDomainModel().getGeneratedEditor() instanceof EMFPlugin)
 				editorPlugin = getContributionState().getDomainModel().getGeneratedEditor();
 			else
-				return ClassMakerPlugin.createInfoStatus(NLS.bind(Messages.EObjectIsNotAEPackage,
+				return ClassMakerPlugin.createInfoStatus(NLS.bind(Messages.EObjectIsNotEPackage,
 						getContributionState().getDomainModel().getGenerated()));
 			if (ePackage != null)
 				ePackagesMsg = ePackagesMsg + ePackage.getNsURI() + ", "; //$NON-NLS-1$

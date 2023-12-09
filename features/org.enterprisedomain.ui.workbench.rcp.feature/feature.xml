@@ -6,7 +6,7 @@
       provider-name="Kyrill Zotkin"
       plugin="org.enterprisedomain.workbench">
 
-   <description url="https://www.enterprisedomain.org/">
+   <description url="https://www.enterprisedomain.ru/">
       enterpriseDomain Workbench is a ClassMaker RCP Application.
    </description>
 

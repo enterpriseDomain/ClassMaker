@@ -39,6 +39,7 @@ import org.eclipse.jgit.api.errors.NoHeadException;
 import org.eclipse.jgit.api.errors.RefNotFoundException;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.revwalk.RevCommit;
+import org.eclipse.osgi.util.NLS;
 import org.enterprisedomain.classmaker.ClassMakerFactory;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.Contribution;
@@ -322,6 +323,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	@Override
 	public String initialize(boolean commit) {
 		super.initialize(commit);
+		ClassMakerPlugin.print(NLS.bind("Revision {0} initialize", getVersion()));
 		@SuppressWarnings("unchecked")
 		SCMOperator<Git> operator = (SCMOperator<Git>) getProject().getWorkspace().getSCMRegistry()
 				.get(getProject().getProjectName());
@@ -336,7 +338,8 @@ public class RevisionImpl extends ItemImpl implements Revision {
 				for (RevCommit c : commits) {
 					long timestamp = operator.decodeTimestamp(c.getShortMessage());
 					if (timestamp == -1) {
-						timestamp = operator.decodeTimestamp(getVersion().getQualifier());
+						timestamp = operator
+								.decodeTimestamp(String.valueOf(Long.valueOf(getVersion().getQualifier()) / 1000));
 						if (timestamp == -1)
 							continue;
 					}
@@ -350,7 +353,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 						state.getProject().setVersion(getVersion());
 					}
 					String commitId = c.getId().toString();
-					state.getCommitIds().add(commitId);
 					state.setCommitId(commitId);
 					setTimestamp(timestamp);
 					state.initialize(commit);
@@ -448,7 +450,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	 */
 	public void checkout(String commitId) {
 		for (State state : getStateHistory().values())
-			if (state.getCommitIds().contains(commitId))
+			if (state.getCommitId().equals(commitId))
 				checkout(state.getTimestamp(), commitId);
 	}
 

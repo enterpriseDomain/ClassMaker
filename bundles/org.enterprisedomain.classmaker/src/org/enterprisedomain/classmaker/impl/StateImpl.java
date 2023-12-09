@@ -95,7 +95,6 @@ import org.enterprisedomain.classmaker.Strategy;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.core.WrappingProgressMonitor;
 import org.enterprisedomain.classmaker.jobs.EnterpriseDomainJob;
-import org.enterprisedomain.classmaker.util.ListUtil;
 import org.enterprisedomain.classmaker.util.ModelUtil;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
 import org.osgi.framework.Version;
@@ -129,8 +128,6 @@ import org.osgi.framework.Version;
  * <em>Job Family</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getResource
  * <em>Resource</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getCommitIds
- * <em>Commit Ids</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getCommitId
  * <em>Commit Id</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getStateCustomizers
@@ -356,16 +353,6 @@ public class StateImpl extends ItemImpl implements State {
 	 * @ordered
 	 */
 	protected Resource resource;
-
-	/**
-	 * The cached value of the '{@link #getCommitIds() <em>Commit Ids</em>}'
-	 * attribute list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #getCommitIds()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<String> commitIds;
 
 	/**
 	 * The default value of the '{@link #getCommitId() <em>Commit Id</em>}'
@@ -768,6 +755,8 @@ public class StateImpl extends ItemImpl implements State {
 		if (eIsSet(ClassMakerPackage.STATE__PROJECT)
 				&& getProject().eIsSet(ClassMakerPackage.Literals.PROJECT__PROJECT_NAME)
 				&& ResourceUtils.isProjectExists(getProjectName())) {
+			ClassMakerPlugin.print(NLS.bind("State {0} of {1} {2} initialize",
+					new Object[] { getTimestamp(), getProject().getName(), getRevision().getVersion() }));
 			URI modelURI = getModelURI();
 			loadResource(modelURI, !eIsSet(ClassMakerPackage.STATE__RESOURCE), true);
 			saveResource();
@@ -800,7 +789,6 @@ public class StateImpl extends ItemImpl implements State {
 					for (RevCommit c : commits) {
 						if (operator.decodeTimestamp(c.getShortMessage()) == getTimestamp()) {
 							String id = c.getId().toString();
-							getCommitIds().add(id);
 							setCommitId(id);
 						}
 					}
@@ -1026,8 +1014,8 @@ public class StateImpl extends ItemImpl implements State {
 			SubMonitor m = null;
 			try {
 				if (isMaking())
-					if (!getCommitIds().isEmpty())
-						return ListUtil.getLast(getCommitIds());
+					if (!eIsSet(ClassMakerPackage.STATE__COMMIT_ID))
+						return getCommitId();
 					else
 						return ""; //$NON-NLS-1$
 				saveResource();
@@ -1159,11 +1147,8 @@ public class StateImpl extends ItemImpl implements State {
 	 * @generated NOT
 	 */
 	public void checkout() {
-		if (getCommitIds().isEmpty()) {
-			return;
-		}
 		if (!eIsSet(ClassMakerPackage.STATE__COMMIT_ID))
-			setCommitId(ListUtil.getLast(getCommitIds()));
+			setCommitId(getCommitId());
 		checkout(getCommitId(), true);
 	}
 
@@ -1214,7 +1199,6 @@ public class StateImpl extends ItemImpl implements State {
 				.get(getProjectName());
 		String commitId = null;
 		commitId = operator.commit(operator.encodeCommitMessage(this));
-		getCommitIds().add(commitId);
 		setCommitId(commitId);
 		return commitId;
 	}
@@ -1451,19 +1435,6 @@ public class StateImpl extends ItemImpl implements State {
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.STATE__RESOURCE, oldResource,
 					resource));
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public EList<String> getCommitIds() {
-		if (commitIds == null) {
-			commitIds = new EDataTypeUniqueEList<String>(String.class, this, ClassMakerPackage.STATE__COMMIT_IDS);
-		}
-		return commitIds;
 	}
 
 	/**
@@ -1826,8 +1797,6 @@ public class StateImpl extends ItemImpl implements State {
 			return getJobFamily();
 		case ClassMakerPackage.STATE__RESOURCE:
 			return getResource();
-		case ClassMakerPackage.STATE__COMMIT_IDS:
-			return getCommitIds();
 		case ClassMakerPackage.STATE__COMMIT_ID:
 			return getCommitId();
 		case ClassMakerPackage.STATE__STATE_CUSTOMIZERS:
@@ -1901,10 +1870,6 @@ public class StateImpl extends ItemImpl implements State {
 		case ClassMakerPackage.STATE__RESOURCE:
 			setResource((Resource) newValue);
 			return;
-		case ClassMakerPackage.STATE__COMMIT_IDS:
-			getCommitIds().clear();
-			getCommitIds().addAll((Collection<? extends String>) newValue);
-			return;
 		case ClassMakerPackage.STATE__COMMIT_ID:
 			setCommitId((String) newValue);
 			return;
@@ -1977,9 +1942,6 @@ public class StateImpl extends ItemImpl implements State {
 		case ClassMakerPackage.STATE__RESOURCE:
 			setResource((Resource) null);
 			return;
-		case ClassMakerPackage.STATE__COMMIT_IDS:
-			getCommitIds().clear();
-			return;
 		case ClassMakerPackage.STATE__COMMIT_ID:
 			setCommitId(COMMIT_ID_EDEFAULT);
 			return;
@@ -2047,8 +2009,6 @@ public class StateImpl extends ItemImpl implements State {
 			return JOB_FAMILY_EDEFAULT == null ? jobFamily != null : !JOB_FAMILY_EDEFAULT.equals(jobFamily);
 		case ClassMakerPackage.STATE__RESOURCE:
 			return resource != null;
-		case ClassMakerPackage.STATE__COMMIT_IDS:
-			return commitIds != null && !commitIds.isEmpty();
 		case ClassMakerPackage.STATE__COMMIT_ID:
 			return COMMIT_ID_EDEFAULT == null ? commitId != null : !COMMIT_ID_EDEFAULT.equals(commitId);
 		case ClassMakerPackage.STATE__STATE_CUSTOMIZERS:
@@ -2095,8 +2055,6 @@ public class StateImpl extends ItemImpl implements State {
 		result.append(timestamp);
 		result.append(", jobFamily: ");
 		result.append(jobFamily);
-		result.append(", commitIds: ");
-		result.append(commitIds);
 		result.append(", commitId: ");
 		result.append(commitId);
 		result.append(", making: ");

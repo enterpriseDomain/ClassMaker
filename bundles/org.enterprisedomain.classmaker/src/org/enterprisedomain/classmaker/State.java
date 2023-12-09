@@ -59,8 +59,6 @@ import org.eclipse.emf.ecore.resource.Resource;
  * Family</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.State#getResource
  * <em>Resource</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.State#getCommitIds <em>Commit
- * Ids</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.State#getCommitId <em>Commit
  * Id</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.State#getStateCustomizers
@@ -384,23 +382,6 @@ public interface State extends Item, ISchedulingRule {
 	 * @generated
 	 */
 	void setResource(Resource value);
-
-	/**
-	 * Returns the value of the '<em><b>Commit Ids</b></em>' attribute list. The
-	 * list contents are of type {@link java.lang.String}. <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Commit Ids</em>' attribute list isn't clear, there
-	 * really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc --> <!-- begin-model-doc --> An SCM commit's associated
-	 * with the state identifiers. <!-- end-model-doc -->
-	 * 
-	 * @return the value of the '<em>Commit Ids</em>' attribute list.
-	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getState_CommitIds()
-	 * @model
-	 * @generated
-	 */
-	EList<String> getCommitIds();
 
 	/**
 	 * Returns the value of the '<em><b>Commit Id</b></em>' attribute. <!--

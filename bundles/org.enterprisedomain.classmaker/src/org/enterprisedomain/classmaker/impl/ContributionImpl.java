@@ -318,7 +318,8 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 							if (ref.getNewId().equals(branch.getObjectId())) {
 								timestamp = operator.decodeTimestamp(ref.getComment());
 								if (timestamp == -1)
-									timestamp = operator.decodeTimestamp(version.getQualifier());
+									timestamp = operator.decodeTimestamp(
+											String.valueOf(Long.valueOf(version.getQualifier()) / 1000));
 							}
 					} catch (IllegalArgumentException e) {
 						continue;

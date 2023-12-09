@@ -46,8 +46,6 @@ public interface StateValidator {
 
 	boolean validateResource(Resource value);
 
-	boolean validateCommitIds(EList<String> value);
-
 	boolean validateCommitId(String value);
 
 	boolean validateStateCustomizers(EMap<StageQualifier, Customizer> value);

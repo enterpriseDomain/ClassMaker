@@ -145,7 +145,7 @@
       </wizard>
       <category
             id="org.enterprisedomain.classmaker.parsley.category"
-            name="Domain Creativity">
+            name="enterpriseDomain Tooling">
       </category>
       <wizard
             category="org.enterprisedomain.classmaker.parsley.category"

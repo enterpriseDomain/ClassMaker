@@ -69,7 +69,6 @@ public class StateItemProvider extends ItemItemProvider {
 			addEditorDeployableUnitNamePropertyDescriptor(object);
 			addJobFamilyPropertyDescriptor(object);
 			addResourcePropertyDescriptor(object);
-			addCommitIdsPropertyDescriptor(object);
 			addCommitIdPropertyDescriptor(object);
 			addNonExclusiveStateCustomizersPropertyDescriptor(object);
 			addProjectNamePropertyDescriptor(object);
@@ -252,22 +251,6 @@ public class StateItemProvider extends ItemItemProvider {
 						getResourceLocator(), getString("_UI_State_resource_feature"),
 						getString("_UI_PropertyDescriptor_description", "_UI_State_resource_feature", "_UI_State_type"),
 						ClassMakerPackage.Literals.STATE__RESOURCE, true, false, true, null, null, null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Commit Ids feature. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	protected void addCommitIdsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_State_commitIds_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_State_commitIds_feature",
-								"_UI_State_type"),
-						ClassMakerPackage.Literals.STATE__COMMIT_IDS, true, false, false,
-						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -467,7 +450,6 @@ public class StateItemProvider extends ItemItemProvider {
 		case ClassMakerPackage.STATE__EDIT_DEPLOYABLE_UNIT_NAME:
 		case ClassMakerPackage.STATE__EDITOR_DEPLOYABLE_UNIT_NAME:
 		case ClassMakerPackage.STATE__JOB_FAMILY:
-		case ClassMakerPackage.STATE__COMMIT_IDS:
 		case ClassMakerPackage.STATE__COMMIT_ID:
 		case ClassMakerPackage.STATE__PROJECT_NAME:
 		case ClassMakerPackage.STATE__MAKING:

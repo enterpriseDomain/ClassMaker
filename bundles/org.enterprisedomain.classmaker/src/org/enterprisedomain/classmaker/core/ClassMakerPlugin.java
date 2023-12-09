@@ -42,6 +42,8 @@ import org.osgi.util.tracker.ServiceTracker;
 
 public class ClassMakerPlugin extends Plugin {
 
+	public static final boolean DEBUG = false;
+
 	public static final String PLUGIN_ID = "org.enterprisedomain.classmaker"; //$NON-NLS-1$
 
 	public static final String CONTRIBUTION_NATURE_ID = PLUGIN_ID + ".contributionProjectNature"; //$NON-NLS-1$
@@ -166,6 +168,11 @@ public class ClassMakerPlugin extends Plugin {
 
 	public static void setDefaultOutputStream(PrintStream defaultOutputStream) {
 		ClassMakerPlugin.defaultOutputStream = defaultOutputStream;
+	}
+
+	public static void print(String string) {
+		if (DEBUG)
+			getDefaultOutputStream().println("*** " + string);
 	}
 
 	public static void setRunnerWithProgress(IRunnerWithProgress runner) {

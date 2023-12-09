@@ -65,12 +65,16 @@
 							</requirement>
 							<requirement>
 								<type>eclipse-feature</type>
+								<id>org.enterprisedomain.ui.workbench.rcp.feature</id>
+								<versionRange>0.8.55-SNAPSHOT</versionRange>
 								<groupId>org.enterprisedomain</groupId>
 								<artifactId>org.enterprisedomain.ui.workbench.rcp.feature</artifactId>
 								<version>0.8.55-SNAPSHOT</version>
 							</requirement>
 							<requirement>
 								<type>eclipse-plugin</type>
+								<id>org.enterprisedomain.classmaker.osgi.systemextension</id>
+								<versionRange>0.8.55-SNAPSHOT</versionRange>
 								<artifactId>org.enterprisedomain.classmaker.osgi.systemextension</artifactId>
 								<version>0.8.55-SNAPSHOT</version>
 							</requirement>

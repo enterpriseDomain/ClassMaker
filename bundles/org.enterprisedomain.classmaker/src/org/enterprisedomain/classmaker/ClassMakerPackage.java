@@ -1025,22 +1025,13 @@ public interface ClassMakerPackage extends EPackage {
 	int STATE__RESOURCE = ITEM_FEATURE_COUNT + 10;
 
 	/**
-	 * The feature id for the '<em><b>Commit Ids</b></em>' attribute list. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int STATE__COMMIT_IDS = ITEM_FEATURE_COUNT + 11;
-
-	/**
 	 * The feature id for the '<em><b>Commit Id</b></em>' attribute. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__COMMIT_ID = ITEM_FEATURE_COUNT + 12;
+	int STATE__COMMIT_ID = ITEM_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>State Customizers</b></em>' map. <!--
@@ -1049,7 +1040,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__STATE_CUSTOMIZERS = ITEM_FEATURE_COUNT + 13;
+	int STATE__STATE_CUSTOMIZERS = ITEM_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Non Exclusive State Customizers</b></em>' map.
@@ -1058,7 +1049,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__NON_EXCLUSIVE_STATE_CUSTOMIZERS = ITEM_FEATURE_COUNT + 14;
+	int STATE__NON_EXCLUSIVE_STATE_CUSTOMIZERS = ITEM_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Project Name</b></em>' attribute. <!--
@@ -1067,7 +1058,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__PROJECT_NAME = ITEM_FEATURE_COUNT + 15;
+	int STATE__PROJECT_NAME = ITEM_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Making</b></em>' attribute. <!--
@@ -1076,7 +1067,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__MAKING = ITEM_FEATURE_COUNT + 16;
+	int STATE__MAKING = ITEM_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Edit</b></em>' attribute. <!-- begin-user-doc
@@ -1085,7 +1076,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__EDIT = ITEM_FEATURE_COUNT + 17;
+	int STATE__EDIT = ITEM_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Editor</b></em>' attribute. <!--
@@ -1094,7 +1085,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__EDITOR = ITEM_FEATURE_COUNT + 18;
+	int STATE__EDITOR = ITEM_FEATURE_COUNT + 17;
 
 	/**
 	 * The feature id for the '<em><b>Strategy</b></em>' reference. <!--
@@ -1103,7 +1094,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__STRATEGY = ITEM_FEATURE_COUNT + 19;
+	int STATE__STRATEGY = ITEM_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>Base Package</b></em>' attribute. <!--
@@ -1112,7 +1103,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__BASE_PACKAGE = ITEM_FEATURE_COUNT + 20;
+	int STATE__BASE_PACKAGE = ITEM_FEATURE_COUNT + 19;
 
 	/**
 	 * The number of structural features of the '<em>State</em>' class. <!--
@@ -1121,7 +1112,7 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE_FEATURE_COUNT = ITEM_FEATURE_COUNT + 21;
+	int STATE_FEATURE_COUNT = ITEM_FEATURE_COUNT + 20;
 
 	/**
 	 * The meta object id for the
@@ -2388,18 +2379,6 @@ public interface ClassMakerPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getState_Resource();
-
-	/**
-	 * Returns the meta object for the attribute list
-	 * '{@link org.enterprisedomain.classmaker.State#getCommitIds <em>Commit
-	 * Ids</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for the attribute list '<em>Commit Ids</em>'.
-	 * @see org.enterprisedomain.classmaker.State#getCommitIds()
-	 * @see #getState()
-	 * @generated
-	 */
-	EAttribute getState_CommitIds();
 
 	/**
 	 * Returns the meta object for the attribute
@@ -4026,14 +4005,6 @@ public interface ClassMakerPackage extends EPackage {
 		 * @generated
 		 */
 		EReference STATE__RESOURCE = eINSTANCE.getState_Resource();
-
-		/**
-		 * The meta object literal for the '<em><b>Commit Ids</b></em>' attribute list
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
-		 * @generated
-		 */
-		EAttribute STATE__COMMIT_IDS = eINSTANCE.getState_CommitIds();
 
 		/**
 		 * The meta object literal for the '<em><b>Commit Id</b></em>' attribute

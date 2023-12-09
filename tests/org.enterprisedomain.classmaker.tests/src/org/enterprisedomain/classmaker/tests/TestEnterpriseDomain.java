@@ -199,7 +199,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		EClass newVersion = (EClass) newDynamicEPackage.getEClassifier(version.getName());
 		newVersion.getEStructuralFeature(checkedType.getName())
 				.setEType(newDynamicEPackage.getEClassifier(specific.getName()));
-		EPackage second = (EPackage) service.replace(dynamicEPackage, newDynamicEPackage, getProgressMonitor());
+		EPackage second = (EPackage) service.replace(dynamicEPackage, newDynamicEPackage, false, getProgressMonitor());
 		assertFalse(service.checkEquals(first, second));
 		EPackage newerDynamicEPackage = service.copy(newDynamicEPackage);
 		EClass newerVersion = (EClass) newerDynamicEPackage.getEClassifier(version.getName());

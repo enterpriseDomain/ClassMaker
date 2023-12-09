@@ -1596,8 +1596,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 				revision.checkout(time);
 			} else if (revision.getStateHistory().containsKey(time)) {
 				State state = revision.getStateHistory().get((Object) time);
-				EList<String> commits = state.getCommitIds();
-				if (!commits.isEmpty()) {
+				if (!state.eIsSet(ClassMakerPackage.Literals.STATE__COMMIT_ID)) {
 					revision.checkout(time, state.getCommitId());
 				} else
 					revision.checkout(time);
@@ -1638,7 +1637,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	public void checkout(long time, String commitId) {
 		if (getRevision().getStateHistory().containsKey(time)) {
 			State state = getRevision().getStateHistory().get((Object) time);
-			if (state.getCommitIds().contains(commitId))
+			if (state.getCommitId().equals(commitId))
 				getRevision().checkout(time, commitId);
 		}
 	}
@@ -1649,7 +1648,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * @generated NOT
 	 */
 	public void checkout(String commitId) {
-		if (getState().getCommitIds().contains(commitId))
+		if (getState().getCommitId().equals(commitId))
 			getState().checkout(commitId, true);
 	}
 
@@ -1794,6 +1793,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * @generated NOT
 	 */
 	public String initialize(boolean commit) {
+		ClassMakerPlugin.print(NLS.bind("Project {0} initialize", getName()));
 		setName(getProjectName());
 		URI uri = getResourceURI();
 		Resource resource = null;
@@ -1845,7 +1845,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 									if (ref.getNewId().equals(branch.getObjectId())) {
 										timestamp = operator.decodeTimestamp(ref.getComment());
 										if (timestamp == -1)
-											timestamp = operator.decodeTimestamp(version.getQualifier());
+											timestamp = operator.decodeTimestamp(
+													String.valueOf(Long.valueOf(version.getQualifier()) / 1000));
 									}
 							} catch (IllegalArgumentException e) {
 								continue;

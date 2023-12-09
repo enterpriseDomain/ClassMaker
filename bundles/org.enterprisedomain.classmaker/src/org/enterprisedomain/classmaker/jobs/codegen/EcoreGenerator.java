@@ -220,27 +220,18 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 		}
 
 		private void compile(final IProgressMonitor monitor) throws CoreException {
-			ICommand command = ResourceUtils.getBuildSpec(getProject().getDescription(), JavaCore.BUILDER_ID);
 			final SubMonitor pm = SubMonitor.convert(monitor);
 			pm.setTaskName("Compile Java");
 			pm.subTask("Compiling Java");
 			final SubMonitor m = pm.newChild(5, SubMonitor.SUPPRESS_ISCANCELED);
 			try {
-				getProject().getWorkspace().addResourceChangeListener(new IResourceChangeListener() {
-
-					@Override
-					public void resourceChanged(IResourceChangeEvent event) {
-						if (event.getDelta() != null)
-							for (IResourceDelta delta : event.getDelta().getAffectedChildren(IResourceDelta.CHANGED))
-								if (delta.getResource().equals(getProject()))
-									try {
-										getProject().notifyAll();
-									} catch (IllegalMonitorStateException e) {
-									}
-					}
-				}, IResourceChangeEvent.POST_BUILD);
-				getProject().build(IncrementalProjectBuilder.FULL_BUILD, JavaCore.BUILDER_ID, command.getArguments(),
-						m);
+				build(getProject(), m);
+				if (getContributionState().isEdit()) {
+					build(getProject().getWorkspace().getRoot().getProject(getProject().getName() + ".edit"), m);
+				}
+				if (getContributionState().isEditor()) {
+					build(getProject().getWorkspace().getRoot().getProject(getProject().getName() + ".editor"), m);
+				}
 			} catch (OperationCanceledException e) {
 				monitor.setCanceled(true);
 			} catch (CoreException e) {
@@ -258,6 +249,24 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 				notifyAll();
 			} catch (IllegalMonitorStateException e) {
 			}
+		}
+
+		private void build(final IProject project, final IProgressMonitor monitor) throws CoreException {
+			ICommand command = ResourceUtils.getBuildSpec(project.getDescription(), JavaCore.BUILDER_ID);
+			project.getWorkspace().addResourceChangeListener(new IResourceChangeListener() {
+
+				@Override
+				public void resourceChanged(IResourceChangeEvent event) {
+					if (event.getDelta() != null)
+						for (IResourceDelta delta : event.getDelta().getAffectedChildren(IResourceDelta.CHANGED))
+							if (delta.getResource().equals(getProject()))
+								try {
+									project.notifyAll();
+								} catch (IllegalMonitorStateException e) {
+								}
+				}
+			}, IResourceChangeEvent.POST_BUILD);
+			project.build(IncrementalProjectBuilder.FULL_BUILD, JavaCore.BUILDER_ID, command.getArguments(), monitor);
 		}
 
 		private void updateClassPath(IProgressMonitor monitor) throws CoreException {

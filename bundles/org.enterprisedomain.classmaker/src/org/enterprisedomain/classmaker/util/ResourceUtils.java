@@ -65,7 +65,7 @@ public class ResourceUtils {
 	private static String fileExt = preferencesService.getString(ClassMakerPlugin.PLUGIN_ID,
 			ClassMakerPlugin.MODEL_RESOURCE_EXT_PREF_KEY, Messages.DefaultResourceExt, null);
 
-	private static final String targetFolderName = "repos"; //$NON-NLS-1$
+	private static final String targetFolderName = "target"; //$NON-NLS-1$
 
 	static {
 		PROJECT_DELETE_MASK = new ArrayList<String>();
@@ -83,7 +83,7 @@ public class ResourceUtils {
 	}
 
 	public static IPath getExportDestination(State state) {
-		return ResourcesPlugin.getWorkspace().getRoot().getProject(state.getProjectName()).getLocation()
+		return Platform.getStateLocation(Platform.getBundle(ClassMakerPlugin.PLUGIN_ID)).append(state.getProjectName())
 				.append(getTargetFolderName());
 	}
 

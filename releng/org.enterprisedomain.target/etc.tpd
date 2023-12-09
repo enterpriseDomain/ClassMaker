@@ -13,58 +13,12 @@ location "https://download.eclipse.org/modeling/emf/compare/updates/releases/lat
 	org.eclipse.emf.compare.rcp.ui
 }
 
-location ecp "http://download.eclipse.org/ecp/releases/releases_target_127/" {
-	org.eclipse.emf.ecp.application.e3 [1.27.0,1.28.0)
-	org.eclipse.emf.ecp.e3.feature.feature.group [1.27.0,1.28.0)
-	org.eclipse.emf.ecp.e3.feature.source.feature.group [1.27.0,1.28.0)
-	org.eclipse.emf.ecp.core [1.27.0,1.28.0)
-	org.eclipse.emf.ecp.view.model.provider.generator [1.27.0,1.28.0)
-	org.eclipse.emf.ecp.view.model.provider.xmi [1.27.0,1.28.0)
-	org.eclipse.emf.ecp.view.swt.layout [1.27.0,1.28.0)
-	org.eclipse.emf.ecp.edit [1.27.0,1.28.0)
-	org.eclipse.emf.ecp.ui [1.27.0,2.0.0)
-	org.eclipse.emf.ecp.ui.source [1.27.0,1.28.0)
-	org.eclipse.emf.ecp.ui.view.swt [1.27.0,1.28.0)
-	org.eclipse.emf.ecp.ui.e3 [1.27.0,1.28.0)
-	org.eclipse.emf.ecp.ecore.feature.feature.group [1.27.0,1.28.0)
-	org.eclipse.emf.ecp.ide.util [1.27.0,1.28.0)
-	org.eclipse.emf.ecp.ide.view.service [1.27.0,1.28.0)
-	org.eclipse.emf.ecp.common.ui [1.27.0,1.28.0)
-	org.eclipse.emf.ecp.emfforms.runtime.feature.feature.group [1.27.0,1.28.0)
-	org.eclipse.emf.ecp.emfforms.runtime.feature.source.feature.group [1.27.0,1.28.0)
-	org.eclipse.emfforms.ide.view.segments [1.27.0,1.28.0)
-	org.eclipse.emfforms.ide.preferences [1.27.0,1.28.0)
-	org.eclipse.emfforms.editor [1.27.0,1.28.0)
-	org.eclipse.emfforms.editor.ecore [1.27.0,1.28.0)
-	org.eclipse.emfforms.setup.base [1.27.0,1.28.0)
-	org.eclipse.emf.ecp.validation [1.27.0,1.28.0)
-	org.eclipse.emf.ecp.feature.feature.group [1.27.0,1.28.0)
-	org.eclipse.emf.ecp.validation.view.feature.feature.group [1.27.0,1.28.0)
-	org.eclipse.emf.ecp.view.treemasterdetail.validation [1.27.0,1.28.0)
-	org.eclipse.emfforms.core.services.databinding.index [1.27.0,1.28.0)
-	org.eclipse.emfforms.core.services.databinding.mapping [1.27.0,1.28.0)
-	org.eclipse.emfforms.core.services.domainexpander.index [1.27.0,1.28.0)
-	org.eclipse.emfforms.core.services.domainexpander.mapping [1.27.0,1.28.0)
-	org.eclipse.emfforms.core.services.structuralchange.index [1.27.0,1.28.0)
-	org.eclipse.emfforms.core.services.structuralchange.mapping [1.27.0,1.28.0)
-	org.eclipse.emf.ecp.view.indexdmr.model [1.27.0,1.28.0)
-	org.eclipse.emf.ecp.view.model [1.27.0,1.28.0)
-	org.eclipse.emf.ecp.view.mappingdmr.model [1.27.0,1.28.0)
-	org.eclipse.emfforms.swt.control.multiattribute [1.27.0,1.28.0)
-	org.eclipse.emfforms.core.services.segments.mapping [1.27.0,1.28.0)
-	org.eclipse.emfforms.core.services.segments.index [1.27.0,1.28.0)
-	org.eclipse.emfforms.view.mappingsegment.model [1.27.0,1.28.0)
-	org.eclipse.emfforms.view.indexsegment.model [1.27.0,1.28.0)
-	org.eclipse.emf.ecp.ui.rcp [1.27.0,1.28.0)
-	org.eclipse.emf.ecp.ui.rcp.source [1.27.0,1.28.0)
-}
-
 location "http://download.eclipse.org/rt/ecf/3.14.0/site.p2" {
 	org.eclipse.ecf.core.feature.feature.group
 	org.eclipse.ecf.filetransfer.feature.feature.group
 }
 
-location "https://download.eclipse.org/tools/orbit/downloads/drops/R20221123021534/repository" {
+location "https://download.eclipse.org/tools/orbit/downloads/drops/R20230531010532/repository" {
 	javaewah
 	javaewah.source
 	javax.annotation [1.3.5,2.0.0)
@@ -80,14 +34,22 @@ location "https://download.eclipse.org/tools/orbit/downloads/drops/R202211230215
 	org.apache.log4j.source
 	org.apache.log4j
 	org.apache.commons.io
-	org.apache.commons.codec
+	org.apache.commons.codec 
 	org.apache.commons.logging
+	org.apache.lucene.core
+	org.apache.lucene.analysis-common
+	org.apache.lucene.analysis-smartcn
 	com.google.inject [5.0.1,6.0.0)
 	com.google.inject.source
 	com.google.gson.source
 	com.google.gson
-	com.google.guava [30.1.0,31.0.0)
+	com.google.guava
 	com.google.guava.source
+	org.bouncycastle.bcpg
+	org.bouncycastle.bcprov
+	org.bouncycastle.bcpkix
+	org.bouncycastle.bcutil
+	org.hamcrest
 	org.hamcrest.core
 	org.hamcrest.library
 	org.hamcrest.library.source

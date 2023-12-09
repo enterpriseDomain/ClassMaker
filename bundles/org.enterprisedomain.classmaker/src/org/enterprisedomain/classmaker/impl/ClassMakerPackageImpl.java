@@ -690,7 +690,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
-	public EAttribute getState_CommitIds() {
+	public EAttribute getState_CommitId() {
 		return (EAttribute) stateEClass.getEStructuralFeatures().get(11);
 	}
 
@@ -700,18 +700,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
-	public EAttribute getState_CommitId() {
-		return (EAttribute) stateEClass.getEStructuralFeatures().get(12);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
 	public EReference getState_StateCustomizers() {
-		return (EReference) stateEClass.getEStructuralFeatures().get(13);
+		return (EReference) stateEClass.getEStructuralFeatures().get(12);
 	}
 
 	/**
@@ -721,7 +711,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EReference getState_NonExclusiveStateCustomizers() {
-		return (EReference) stateEClass.getEStructuralFeatures().get(14);
+		return (EReference) stateEClass.getEStructuralFeatures().get(13);
 	}
 
 	/**
@@ -731,7 +721,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EAttribute getState_ProjectName() {
-		return (EAttribute) stateEClass.getEStructuralFeatures().get(15);
+		return (EAttribute) stateEClass.getEStructuralFeatures().get(14);
 	}
 
 	/**
@@ -741,7 +731,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EAttribute getState_Making() {
-		return (EAttribute) stateEClass.getEStructuralFeatures().get(16);
+		return (EAttribute) stateEClass.getEStructuralFeatures().get(15);
 	}
 
 	/**
@@ -751,7 +741,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EAttribute getState_Edit() {
-		return (EAttribute) stateEClass.getEStructuralFeatures().get(17);
+		return (EAttribute) stateEClass.getEStructuralFeatures().get(16);
 	}
 
 	/**
@@ -761,7 +751,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EAttribute getState_Editor() {
-		return (EAttribute) stateEClass.getEStructuralFeatures().get(18);
+		return (EAttribute) stateEClass.getEStructuralFeatures().get(17);
 	}
 
 	/**
@@ -771,7 +761,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EReference getState_Strategy() {
-		return (EReference) stateEClass.getEStructuralFeatures().get(19);
+		return (EReference) stateEClass.getEStructuralFeatures().get(18);
 	}
 
 	/**
@@ -781,7 +771,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EAttribute getState_BasePackage() {
-		return (EAttribute) stateEClass.getEStructuralFeatures().get(20);
+		return (EAttribute) stateEClass.getEStructuralFeatures().get(19);
 	}
 
 	/**
@@ -1927,7 +1917,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		createEAttribute(stateEClass, STATE__EDITOR_DEPLOYABLE_UNIT_NAME);
 		createEAttribute(stateEClass, STATE__JOB_FAMILY);
 		createEReference(stateEClass, STATE__RESOURCE);
-		createEAttribute(stateEClass, STATE__COMMIT_IDS);
 		createEAttribute(stateEClass, STATE__COMMIT_ID);
 		createEReference(stateEClass, STATE__STATE_CUSTOMIZERS);
 		createEReference(stateEClass, STATE__NON_EXCLUSIVE_STATE_CUSTOMIZERS);
@@ -2218,8 +2207,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEReference(getState_Resource(), this.getResource(), null, "resource", null, 0, 1, State.class, IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
-		initEAttribute(getState_CommitIds(), ecorePackage.getEString(), "commitIds", null, 0, -1, State.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getState_CommitId(), ecorePackage.getEString(), "commitId", null, 0, 1, State.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getState_StateCustomizers(), this.getStageQualifierToCustomizerMapEntry(), null,

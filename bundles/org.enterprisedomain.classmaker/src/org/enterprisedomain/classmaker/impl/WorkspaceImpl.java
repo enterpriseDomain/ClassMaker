@@ -495,6 +495,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * @generated NOT
 	 */
 	public void initialize() {
+		ClassMakerPlugin.print("Workspace initialize");
 		final URI uri = URI.createFileURI(ResourceUtils.WORKSPACE_RESOURCE_PATH.toString());
 		getService().eAdapters().add(new AdapterImpl() {
 
@@ -672,8 +673,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			Contribution result = getContribution(blueprint, true);
 			if (result != null) {
 				if (!result.getRevisions().isEmpty()) {
-					Revision newRevision = result.newRevision(result.nextVersion());
-					result.checkout(newRevision.getVersion());
+					result.checkout(result.getVersion());
 				} else {
 					result.createRevision(monitor);
 					result.load(true, true);
