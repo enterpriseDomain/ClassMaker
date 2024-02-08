@@ -1320,7 +1320,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
-	public EAttribute getProject_Children() {
+	public EAttribute getProject_Dirty() {
 		return (EAttribute) projectEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -1330,18 +1330,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
-	public EAttribute getProject_Dirty() {
-		return (EAttribute) projectEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
 	public EReference getProject_Workspace() {
-		return (EReference) projectEClass.getEStructuralFeatures().get(4);
+		return (EReference) projectEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1351,7 +1341,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EAttribute getProject_ResourcePath() {
-		return (EAttribute) projectEClass.getEStructuralFeatures().get(5);
+		return (EAttribute) projectEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1361,7 +1351,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EAttribute getProject_NeedCompletionNotification() {
-		return (EAttribute) projectEClass.getEStructuralFeatures().get(6);
+		return (EAttribute) projectEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -1371,7 +1361,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EReference getProject_CompletionNotificationAdapter() {
-		return (EReference) projectEClass.getEStructuralFeatures().get(7);
+		return (EReference) projectEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -1381,7 +1371,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EReference getProject_ResourceReloadListener() {
-		return (EReference) projectEClass.getEStructuralFeatures().get(8);
+		return (EReference) projectEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -1391,7 +1381,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EAttribute getProject_SavingResource() {
-		return (EAttribute) projectEClass.getEStructuralFeatures().get(9);
+		return (EAttribute) projectEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -1401,7 +1391,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EReference getProject_Revision() {
-		return (EReference) projectEClass.getEStructuralFeatures().get(10);
+		return (EReference) projectEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -1411,7 +1401,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EReference getProject_Revisions() {
-		return (EReference) projectEClass.getEStructuralFeatures().get(11);
+		return (EReference) projectEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -1421,7 +1411,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EAttribute getProject_ProjectVersion() {
-		return (EAttribute) projectEClass.getEStructuralFeatures().get(12);
+		return (EAttribute) projectEClass.getEStructuralFeatures().get(11);
 	}
 
 	/**
@@ -1431,7 +1421,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EReference getProject_SelectRevealHandler() {
-		return (EReference) projectEClass.getEStructuralFeatures().get(13);
+		return (EReference) projectEClass.getEStructuralFeatures().get(12);
 	}
 
 	/**
@@ -1441,7 +1431,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EAttribute getProject_Version() {
-		return (EAttribute) projectEClass.getEStructuralFeatures().get(14);
+		return (EAttribute) projectEClass.getEStructuralFeatures().get(13);
 	}
 
 	/**
@@ -1451,7 +1441,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EReference getProject_State() {
-		return (EReference) projectEClass.getEStructuralFeatures().get(15);
+		return (EReference) projectEClass.getEStructuralFeatures().get(14);
 	}
 
 	/**
@@ -1461,7 +1451,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EReference getProject_ModelResourceAdapter() {
-		return (EReference) projectEClass.getEStructuralFeatures().get(16);
+		return (EReference) projectEClass.getEStructuralFeatures().get(15);
 	}
 
 	/**
@@ -1471,7 +1461,17 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EAttribute getProject_ClassLoader() {
-		return (EAttribute) projectEClass.getEStructuralFeatures().get(17);
+		return (EAttribute) projectEClass.getEStructuralFeatures().get(16);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public EReference getProject_Resource() {
+		return (EReference) projectEClass.getEStructuralFeatures().get(17);
 	}
 
 	/**
@@ -2000,7 +2000,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		projectEClass = createEClass(PROJECT);
 		createEAttribute(projectEClass, PROJECT__NAME);
 		createEAttribute(projectEClass, PROJECT__PROJECT_NAME);
-		createEAttribute(projectEClass, PROJECT__CHILDREN);
 		createEAttribute(projectEClass, PROJECT__DIRTY);
 		createEReference(projectEClass, PROJECT__WORKSPACE);
 		createEAttribute(projectEClass, PROJECT__RESOURCE_PATH);
@@ -2016,6 +2015,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		createEReference(projectEClass, PROJECT__STATE);
 		createEReference(projectEClass, PROJECT__MODEL_RESOURCE_ADAPTER);
 		createEAttribute(projectEClass, PROJECT__CLASS_LOADER);
+		createEReference(projectEClass, PROJECT__RESOURCE);
 
 		resourceEClass = createEClass(RESOURCE);
 
@@ -2601,8 +2601,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getProject_ProjectName(), ecorePackage.getEString(), "projectName", "", 0, 1, Project.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getProject_Children(), ecorePackage.getEJavaObject(), "children", null, 0, -1, Project.class,
-				IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getProject_Dirty(), ecorePackage.getEBoolean(), "dirty", null, 0, 1, Project.class, IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getProject_Workspace(), this.getWorkspace(), this.getWorkspace_Projects(), "workspace", null, 0,
@@ -2644,6 +2642,9 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getProject_ClassLoader(), this.getClassLoader(), "classLoader", null, 0, 1, Project.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProject_Resource(), this.getResource(), null, "resource", null, 0, 1, Project.class,
+				!IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(projectEClass, null, "create", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);

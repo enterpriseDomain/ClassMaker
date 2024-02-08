@@ -3,11 +3,11 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.enterprisedomain.classmaker.tests;singleton:=true
 Automatic-Module-Name: org.enterprisedomain.classmaker.tests
-Bundle-Version: 0.0.5.qualifier
+Bundle-Version: 0.0.6.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Require-Bundle: org.eclipse.core.runtime,
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.30.0",
  org.enterprisedomain.classmaker;bundle-version="[0.8.0,0.9.0)";visibility:=reexport,
  org.eclipse.equinox.concurrent,
  org.eclipse.emf.ecore;visibility:=reexport,

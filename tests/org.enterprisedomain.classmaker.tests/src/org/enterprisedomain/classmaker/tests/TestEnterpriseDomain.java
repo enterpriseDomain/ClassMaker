@@ -149,8 +149,8 @@ public class TestEnterpriseDomain extends AbstractTest {
 
 		Project project = service.getWorkspace().createProject(readerEPackage.getName() + "Instance",
 				getProgressMonitor());
-		((Resource) project.getChildren().get(0)).getContents().add(theObject);
-		assertEquals(theObject, ((Resource) project.getChildren().get(0)).getContents().get(0));
+		project.getResource().getContents().add(theObject);
+		assertEquals(theObject, project.getResource().getContents().get(0));
 		cleanup();
 	}
 
@@ -167,8 +167,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		bundle.start(Bundle.START_TRANSIENT);
 		Contribution contribution = ClassMakerPlugin.getClassMaker().getWorkspace().getContribution(packageName);
 		contribution.build(getProgressMonitor());
-		assertEquals(packageName,
-				((EPackage) ((Resource) contribution.getChildren().get(0)).getContents().get(0)).getName());
+		assertEquals(packageName, ((EPackage) contribution.getResource().getContents().get(0)).getName());
 	}
 
 	@Test

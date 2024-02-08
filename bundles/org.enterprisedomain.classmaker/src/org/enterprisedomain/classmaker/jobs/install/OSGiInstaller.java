@@ -262,7 +262,6 @@ public class OSGiInstaller extends ContainerJob {
 			if (e.getType() == BundleException.DUPLICATE_BUNDLE_ERROR)
 				return getOKStatus(existingBundle, bundles);
 			if (e.getCause() instanceof FileNotFoundException) {
-				Thread.sleep(3000);
 				try {
 					for (String requiredUri : requiredUris)
 						bundles.add(context.installBundle(requiredUri));

@@ -41,7 +41,6 @@ import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.notify.impl.NotificationImpl;
 import org.eclipse.emf.common.util.ECollections;
@@ -60,7 +59,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.emf.ecore.util.NotifyingInternalEListImpl;
 import org.eclipse.emf.ecore.xmi.PackageNotFoundException;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jgit.api.Git;
@@ -125,8 +123,6 @@ import org.osgi.framework.Version;
  * <em>Name</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getProjectName
  * <em>Project Name</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getChildren
- * <em>Children</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#isDirty
  * <em>Dirty</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getWorkspace
@@ -157,6 +153,8 @@ import org.osgi.framework.Version;
  * <em>Model Resource Adapter</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getClassLoader
  * <em>Class Loader</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getResource
+ * <em>Resource</em>}</li>
  * </ul>
  *
  * @generated
@@ -492,8 +490,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	protected ListenerList<ResourceChangeListener> resourceChangeListeners = new ListenerList<ResourceChangeListener>();
 
-	protected LoadingEList children;
-
 	protected ResourceChangeAdapter resourceChangeAdapter = new ResourceChangeAdapter(this);
 
 	public class ProjectNameAdapter extends AdapterImpl {
@@ -515,16 +511,16 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	protected Adapter stateModelAdapter = new AdapterImpl() {
 		@Override
 		public void notifyChanged(Notification msg) {
-			if (msg.getFeatureID(State.class) == ClassMakerPackage.STATE__RESOURCE
+			if (msg.getFeatureID(Project.class) == ClassMakerPackage.PROJECT__RESOURCE
 					&& msg.getEventType() == Notification.SET) {
-				if (isStateSet() && getState().eIsSet(ClassMakerPackage.Literals.STATE__RESOURCE)) {
+				if (isStateSet() && eIsSet(ClassMakerPackage.Literals.PROJECT__RESOURCE)) {
 					ResourceAdapter modelResourceAdapter = null;
 					if (eIsSet(ClassMakerPackage.PROJECT__MODEL_RESOURCE_ADAPTER)) {
 						modelResourceAdapter = getModelResourceAdapter();
 					} else {
 						modelResourceAdapter = ClassMakerFactory.eINSTANCE.createResourceAdapter();
 					}
-					modelResourceAdapter.setResource(getState().getResource());
+					modelResourceAdapter.setResource(getResource());
 					modelResourceAdapter.setProject(ProjectImpl.this);
 				}
 			}
@@ -820,47 +816,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @generated NOT
-	 */
-	@SuppressWarnings("unchecked")
-	public EList<Object> getChildren() {
-		if (children == null || children.isEmpty() || children.get(0) == null) {
-			if (getModelResourceAdapter() != null)
-				children = new LoadingEList(getModelResourceAdapter().getResource());
-			else {
-				try {
-					load(false, false);
-				} catch (CoreException e) {
-					ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
-				}
-				if (getModelResourceAdapter() != null)
-					children = new LoadingEList(getModelResourceAdapter().getResource());
-				else
-					children = new LoadingEList(null);
-			}
-
-			eAdapters().remove(modelAdapter);
-			eAdapters().add(modelAdapter);
-		}
-		return (EList<Object>) (EList<?>) children;
-	}
-
-	private Adapter modelAdapter = new AdapterImpl() {
-
-		@Override
-		public void notifyChanged(Notification msg) {
-			super.notifyChanged(msg);
-			if (msg.getFeatureID(Project.class) == ClassMakerPackage.PROJECT__MODEL_RESOURCE_ADAPTER
-					&& msg.getEventType() == Notification.SET && msg.getNewValue() != null) {
-				children.setContents(getModelResourceAdapter().getResource());
-			}
-		}
-
-	};
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1060,7 +1015,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 				@Override
 				public void changed(Notification notification) throws Exception {
-					Resource theResource = (Resource) getChildren().get(0);
+					Resource theResource = getResource();
 					Resource resource = (Resource) notification.getNotifier();
 					if (!loading && !isSavingResource() && resource.getURI().equals(theResource.getURI())
 							&& theResource.isLoaded()) {
@@ -1069,7 +1024,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 							getSelectRevealHandler().prepare();
 						if (!theResource.isModified())
 							setResource(resource);
-						theResource = ((Resource) getChildren().get(0));
+						theResource = getResource();
 						// theResource.setURI(getResourceURI());
 						// theResource.unload();
 						// theResource.load(Collections.emptyMap());
@@ -1086,7 +1041,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	protected void setResource(Resource resource) {
 		getRevision().getState().setResource(resource);
-		getChildren().set(0, resource);
 	}
 
 	/**
@@ -1358,6 +1312,16 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
+	public Resource getResource() {
+		return getState().getResource();
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
 	public void create(IProgressMonitor monitor) throws CoreException {
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		String projectName = getProjectName();
@@ -1401,7 +1365,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * @generated NOT
 	 */
 	public void delete(EList<Object> objects) {
-		TreeIterator<EObject> it = ((Resource) getChildren().get(0)).getAllContents();
+		TreeIterator<EObject> it = getResource().getAllContents();
 		while (it.hasNext()) {
 			EObject o = it.next();
 			ListIterator<Object> li = objects.listIterator();
@@ -1414,7 +1378,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		try {
 			Map<String, String> options = new HashMap<String, String>();
 			options.put(XMLResource.OPTION_ENCODING, "UTF-8");
-			((Resource) getChildren().get(0)).save(options);
+			getResource().save(options);
 		} catch (IOException e) {
 			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 		}
@@ -1919,124 +1883,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		return URI.createFileURI(workspacePath.append(getResourcePath()).toString());
 	}
 
-	protected class LoadingEList extends NotifyingInternalEListImpl<Notifier> {
-
-		private static final long serialVersionUID = 164926149524632079L;
-		private Notifier object;
-		private Adapter initAdapter = new AdapterImpl() {
-
-			@Override
-			public void notifyChanged(Notification msg) {
-				super.notifyChanged(msg);
-				if (msg.getFeatureID(ResourceAdapter.class) == ClassMakerPackage.RESOURCE_ADAPTER__RESOURCE
-						&& msg.getEventType() == Notification.SET && msg.getNewValue() != null)
-					setContents((Notifier) msg.getNewValue());
-			}
-
-		};
-
-		public LoadingEList(Notifier object) {
-			setContents(object);
-		}
-
-		private class ResourceNotificationImpl extends NotificationImpl {
-
-			public ResourceNotificationImpl(int eventType, Object oldValue, Object newValue) {
-				super(eventType, oldValue, newValue);
-			}
-
-			public ResourceNotificationImpl(int eventType, Object oldValue, Object newValue, int position) {
-				super(eventType, oldValue, newValue, position);
-			}
-
-			@Override
-			public int getFeatureID(Class<?> expectedClass) {
-				if (expectedClass.isAssignableFrom(Resource.class))
-					return Resource.RESOURCE__CONTENTS;
-				return super.getFeatureID(expectedClass);
-			}
-
-			public Object getNotifier() {
-				return ProjectImpl.this;
-			}
-
-		}
-
-		private void fill(Notifier object) {
-			if (object instanceof Resource) {
-				clear();
-				add(object);
-			} else if (object instanceof EObject) {
-				((Resource) this.object).getContents().clear();
-				((Resource) this.object).getContents().add((EObject) object);
-			}
-		}
-
-		@Override
-		protected void didSet(int index, Notifier newObject, Notifier oldObject) {
-			detachInitAdapter();
-			setObject(newObject);
-			super.didSet(index, newObject, oldObject);
-			attachInitAdapter();
-			if (eNotificationRequired())
-				eNotify(new ResourceNotificationImpl(Notification.SET, oldObject, newObject, index));
-		}
-
-		@Override
-		protected void didAdd(int index, Notifier newObject) {
-			super.didAdd(index, newObject);
-			attachInitAdapter();
-			setObject(newObject);
-			if (eNotificationRequired())
-				eNotify(new ResourceNotificationImpl(Notification.ADD, null, newObject, index));
-		}
-
-		@Override
-		protected void didRemove(int index, Notifier oldObject) {
-			detachInitAdapter();
-			setObject(null);
-			super.didRemove(index, oldObject);
-			if (eNotificationRequired())
-				eNotify(new ResourceNotificationImpl(Notification.REMOVE, oldObject, null, index));
-		}
-
-		@Override
-		protected void didClear(int size, Object[] oldObjects) {
-			detachInitAdapter();
-			setObject(null);
-			super.didClear(size, oldObjects);
-			if (eNotificationRequired())
-				eNotify(new ResourceNotificationImpl(Notification.REMOVE_MANY, oldObjects, null));
-		}
-
-		private void attachInitAdapter() {
-			if (object == null)
-				return;
-			object.eAdapters().add(initAdapter);
-		}
-
-		private void detachInitAdapter() {
-			if (object == null)
-				return;
-			object.eAdapters().remove(initAdapter);
-		}
-
-		public void setContents(Notifier object) {
-			detachInitAdapter();
-			setObject(object);
-			attachInitAdapter();
-			fill(object);
-		}
-
-		private void setObject(Notifier object) {
-			if (object instanceof Resource)
-				this.object = object;
-			else if (object instanceof EObject)
-				((Resource) this.object).getContents().add((EObject) object);
-		}
-
-	}
-
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -2208,8 +2054,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			return getName();
 		case ClassMakerPackage.PROJECT__PROJECT_NAME:
 			return getProjectName();
-		case ClassMakerPackage.PROJECT__CHILDREN:
-			return getChildren();
 		case ClassMakerPackage.PROJECT__DIRTY:
 			return isDirty();
 		case ClassMakerPackage.PROJECT__WORKSPACE:
@@ -2251,6 +2095,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			return getModelResourceAdapter();
 		case ClassMakerPackage.PROJECT__CLASS_LOADER:
 			return getClassLoader();
+		case ClassMakerPackage.PROJECT__RESOURCE:
+			return getResource();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -2433,8 +2279,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		case ClassMakerPackage.PROJECT__PROJECT_NAME:
 			return PROJECT_NAME_EDEFAULT == null ? projectName != null : !PROJECT_NAME_EDEFAULT.equals(projectName);
-		case ClassMakerPackage.PROJECT__CHILDREN:
-			return !getChildren().isEmpty();
 		case ClassMakerPackage.PROJECT__DIRTY:
 			return dirty != DIRTY_EDEFAULT;
 		case ClassMakerPackage.PROJECT__WORKSPACE:
@@ -2467,6 +2311,8 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			return modelResourceAdapter != null;
 		case ClassMakerPackage.PROJECT__CLASS_LOADER:
 			return isSetClassLoader();
+		case ClassMakerPackage.PROJECT__RESOURCE:
+			return getResource() != null;
 		}
 		return super.eIsSet(featureID);
 	}

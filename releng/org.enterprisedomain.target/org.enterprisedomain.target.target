@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="org.enterprisedomain.target" sequenceNumber="1702122693">
+<target name="org.enterprisedomain.target" sequenceNumber="1707138798">
 	<locations>
 		<location includeMode="slicer" includeAllPlatforms="true"
 			includeSource="false" includeConfigurePhase="true"
@@ -59,6 +59,8 @@
 				version="1.4.200.v20231110-1900" />
 			<unit id="org.eclipse.core.expressions"
 				version="3.9.200.v20230921-0857" />
+			<unit id="org.eclipse.search" version="3.16.0.v20230921-2245" />
+			<unit id="org.eclipse.search.core" version="3.16.0.v20230921-0933" />
 			<unit id="org.eclipse.ui.ide" version="3.22.0.v20231102-1012" />
 			<unit id="org.eclipse.ui.views" version="3.12.100.v20230821-1342" />
 			<unit id="org.eclipse.e4.ui.workbench"
@@ -173,7 +175,7 @@
 			includeSource="false" includeConfigurePhase="true"
 			type="InstallableUnit">
 			<unit id="org.eclipse.justj.openjdk.hotspot.jre.full.feature.group"
-				version="17.0.9.v20231028-0858" />
+				version="17.0.10.v20240120-1143" />
 			<repository
 				location="https://download.eclipse.org/justj/jres/17/updates/release/latest" />
 		</location>
@@ -271,6 +273,9 @@
 			<unit id="org.slf4j.binding.log4j12" version="1.7.30.v20221112-0806" />
 			<unit id="org.slf4j.binding.log4j12.source"
 				version="1.7.30.v20221112-0806" />
+			<unit id="org.slf4j.binding.nop" version="1.7.30.v20221112-0806" />
+			<unit id="org.slf4j.binding.nop.source"
+				version="1.7.30.v20221112-0806" />
 			<unit id="org.tukaani.xz" version="1.9.0.v20210624-1259" />
 			<unit id="org.tukaani.xz.source" version="1.9.0.v20210624-1259" />
 			<unit id="com.sun.jna" version="5.12.1.v20221103-2317" />
@@ -285,6 +290,17 @@
 			<unit id="org.apache.batik.bridge" version="1.16.0.v20230210-1249" />
 			<unit id="org.apache.batik.dom" version="1.16.0.v20230210-1249" />
 			<unit id="org.apache.batik.anim" version="1.16.0.v20221027-0840" />
+			<unit id="org.apache.batik.css" version="1.16.0.v20221027-0840" />
+			<unit id="org.apache.batik.constants"
+				version="1.16.0.v20221027-0840" />
+			<unit id="org.apache.batik.util" version="1.16.0.v20221027-0840" />
+			<unit id="org.apache.batik.i18n" version="1.16.0.v20221027-0840" />
+			<unit id="org.apache.batik.xml" version="1.16.0.v20221027-0840" />
+			<unit id="org.apache.batik.script" version="1.16.0.v20221027-0840" />
+			<unit id="org.apache.batik.parser" version="1.16.0.v20221027-0840" />
+			<unit id="org.apache.batik.gvt" version="1.16.0.v20221027-0840" />
+			<unit id="org.apache.batik.ext" version="1.16.0.v20221027-0840" />
+			<unit id="org.apache.batik.dom.svg" version="1.16.0.v20221027-0840" />
 			<unit id="org.apache.xalan" version="2.7.2.v20221112-0806" />
 			<unit id="org.apache.poi.source" version="4.1.1.v20221112-0806" />
 			<unit id="org.apache.poi" version="4.1.1.v20221112-0806" />
@@ -304,17 +320,6 @@
 				version="3.6.1.v20221112-0806" />
 			<repository
 				location="https://download.eclipse.org/tools/orbit/downloads/drops/R20230531010532/repository" />
-		</location>
-		<location includeMode="slicer" includeAllPlatforms="true"
-			includeSource="false" includeConfigurePhase="true"
-			type="InstallableUnit">
-			<unit id="org.eclipse.emf.edapt.runtime.feature.feature.group"
-				version="1.5.0.202211141318" />
-			<unit
-				id="org.eclipse.emf.edapt.runtime.feature.source.feature.group"
-				version="1.5.0.202211141318" />
-			<repository id="edapt-p2-repo"
-				location="http://download.eclipse.org/edapt/releases/15x" />
 		</location>
 		<location includeMode="slicer" includeAllPlatforms="true"
 			includeSource="false" includeConfigurePhase="true"
@@ -361,6 +366,12 @@
 					<version>9.4</version>
 					<type>jar</type>
 				</dependency>
+				<dependency>
+					<groupId>org.ow2.asm</groupId>
+					<artifactId>asm-analysis</artifactId>
+					<version>9.6</version>
+					<type>jar</type>
+				</dependency>
 			</dependencies>
 		</location>
 		<location includeDependencyDepth="none"
@@ -404,18 +415,6 @@
 			missingManifest="generate" type="Maven">
 			<dependencies>
 				<dependency>
-					<groupId>org.apache.xmlgraphics</groupId>
-					<artifactId>batik-dom</artifactId>
-					<version>1.16</version>
-					<type>jar</type>
-				</dependency>
-			</dependencies>
-		</location>
-		<location includeDependencyDepth="none"
-			includeDependencyScopes="compile" includeSource="true"
-			missingManifest="generate" type="Maven">
-			<dependencies>
-				<dependency>
 					<groupId>org.osgi</groupId>
 					<artifactId>org.osgi.test.common</artifactId>
 					<version>1.2.1</version>
@@ -448,13 +447,13 @@
 				<dependency>
 					<groupId>biz.aQute.bnd</groupId>
 					<artifactId>biz.aQute.bnd.util</artifactId>
-					<version>6.4.1</version>
+					<version>7.0.0</version>
 					<type>jar</type>
 				</dependency>
 				<dependency>
 					<groupId>biz.aQute.bnd</groupId>
 					<artifactId>biz.aQute.bndlib</artifactId>
-					<version>6.4.1</version>
+					<version>7.0.0</version>
 					<type>jar</type>
 				</dependency>
 			</dependencies>
@@ -485,6 +484,114 @@
 					<groupId>commons-codec</groupId>
 					<artifactId>commons-codec</artifactId>
 					<version>1.16.0</version>
+					<type>jar</type>
+				</dependency>
+			</dependencies>
+		</location>
+		<location includeDependencyDepth="none"
+			includeDependencyScopes="compile" includeSource="true"
+			missingManifest="generate" type="Maven">
+			<dependencies>
+				<dependency>
+					<groupId>commons-io</groupId>
+					<artifactId>commons-io</artifactId>
+					<version>2.15.1</version>
+					<type>jar</type>
+				</dependency>
+			</dependencies>
+		</location>
+		<location includeDependencyDepth="none"
+			includeDependencyScopes="compile" includeSource="true"
+			missingManifest="generate" type="Maven">
+			<dependencies>
+				<dependency>
+					<groupId>jakarta.inject</groupId>
+					<artifactId>jakarta.inject-api</artifactId>
+					<version>2.0.1</version>
+					<type>jar</type>
+				</dependency>
+			</dependencies>
+		</location>
+		<location includeDependencyDepth="none"
+			includeDependencyScopes="compile" includeSource="true"
+			missingManifest="generate" type="Maven">
+			<dependencies>
+				<dependency>
+					<groupId>jakarta.annotation</groupId>
+					<artifactId>jakarta.annotation-api</artifactId>
+					<version>2.1.1</version>
+					<type>jar</type>
+				</dependency>
+			</dependencies>
+		</location>
+		<location includeDependencyDepth="none"
+			includeDependencyScopes="compile" includeSource="true"
+			missingManifest="generate" type="Maven">
+			<dependencies>
+				<dependency>
+					<groupId>org.ow2.asm</groupId>
+					<artifactId>asm-tree</artifactId>
+					<version>9.6</version>
+					<type>jar</type>
+				</dependency>
+			</dependencies>
+		</location>
+		<location includeDependencyDepth="none"
+			includeDependencyScopes="compile" includeSource="true"
+			missingManifest="generate" type="Maven">
+			<dependencies>
+				<dependency>
+					<groupId>org.ow2.asm</groupId>
+					<artifactId>asm-analysis</artifactId>
+					<version>9.6</version>
+					<type>jar</type>
+				</dependency>
+			</dependencies>
+		</location>
+		<location includeDependencyDepth="none"
+			includeDependencyScopes="compile" includeSource="true"
+			missingManifest="generate" type="Maven">
+			<dependencies>
+				<dependency>
+					<groupId>org.ow2.asm</groupId>
+					<artifactId>asm</artifactId>
+					<version>9.6</version>
+					<type>jar</type>
+				</dependency>
+			</dependencies>
+		</location>
+		<location includeDependencyDepth="none"
+			includeDependencyScopes="compile" includeSource="true"
+			missingManifest="generate" type="Maven">
+			<dependencies>
+				<dependency>
+					<groupId>org.ow2.asm</groupId>
+					<artifactId>asm-tree</artifactId>
+					<version>9.5</version>
+					<type>jar</type>
+				</dependency>
+			</dependencies>
+		</location>
+		<location includeDependencyDepth="none"
+			includeDependencyScopes="compile" includeSource="true"
+			missingManifest="generate" type="Maven">
+			<dependencies>
+				<dependency>
+					<groupId>org.ow2.asm</groupId>
+					<artifactId>asm-util</artifactId>
+					<version>9.5</version>
+					<type>jar</type>
+				</dependency>
+			</dependencies>
+		</location>
+		<location includeDependencyDepth="none"
+			includeDependencyScopes="compile" includeSource="true"
+			missingManifest="generate" type="Maven">
+			<dependencies>
+				<dependency>
+					<groupId>org.apache.xmlgraphics</groupId>
+					<artifactId>batik-all</artifactId>
+					<version>1.17</version>
 					<type>jar</type>
 				</dependency>
 			</dependencies>

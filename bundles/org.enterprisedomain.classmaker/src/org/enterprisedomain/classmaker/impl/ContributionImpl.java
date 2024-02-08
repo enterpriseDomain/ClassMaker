@@ -45,7 +45,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.ListBranchCommand;
@@ -557,7 +556,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	public void delete(EList<Object> objects) {
 		if (!isStateSet())
 			return;
-		boolean removed = ((Resource) getChildren().get(0)).getContents().removeAll(objects);
+		boolean removed = getState().getResource().getContents().removeAll(objects);
 		if (removed)
 			return;
 

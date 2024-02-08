@@ -336,7 +336,6 @@
     <genClasses ecoreClass="ClassMaker.ecore#//Project">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Project/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Project/projectName"/>
-      <genFeatures property="Readonly" children="true" createChild="true" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Project/children"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Project/dirty"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ClassMaker.ecore#//Project/workspace"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Project/resourcePath"/>
@@ -352,6 +351,7 @@
       <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference ClassMaker.ecore#//Project/state"/>
       <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference ClassMaker.ecore#//Project/modelResourceAdapter"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ClassMaker.ecore#//Project/classLoader"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference ClassMaker.ecore#//Project/resource"/>
       <genOperations ecoreOperation="ClassMaker.ecore#//Project/create">
         <genParameters ecoreParameter="ClassMaker.ecore#//Project/create/monitor"/>
       </genOperations>

@@ -62,8 +62,7 @@ public class NewProjectWizard extends Wizard implements INewWizard {
 				IProgressMonitor monitor = ClassMakerPlugin.getProgressMonitor();
 				try {
 					domainProject = classMaker.getWorkspace().createProject(getProjectName(), monitor);
-					((Resource) domainProject.getChildren().get(0)).getContents()
-							.add(EcoreFactory.eINSTANCE.createEObject());
+					domainProject.getResource().getContents().add(EcoreFactory.eINSTANCE.createEObject());
 					domainProject.initialize(true);
 				} catch (CoreException e) {
 					ClassMakerPlugin.getInstance().getLog().log(e.getStatus());

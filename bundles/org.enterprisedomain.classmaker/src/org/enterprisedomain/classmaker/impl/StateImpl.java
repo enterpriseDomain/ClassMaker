@@ -757,7 +757,7 @@ public class StateImpl extends ItemImpl implements State {
 				&& ResourceUtils.isProjectExists(getProjectName())) {
 			ClassMakerPlugin.print(NLS.bind("State {0} of {1} {2} initialize",
 					new Object[] { getTimestamp(), getProject().getName(), getRevision().getVersion() }));
-			URI modelURI = getModelURI();
+			URI modelURI = obtainModelURI();
 			loadResource(modelURI, !eIsSet(ClassMakerPackage.STATE__RESOURCE), true);
 			saveResource();
 			if (!getPhase().equals(Stage.LOADED))
@@ -808,7 +808,7 @@ public class StateImpl extends ItemImpl implements State {
 
 	private URI modelURI;
 
-	private URI getModelURI() {
+	private URI obtainModelURI() {
 		if (modelURI == null) {
 			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 			IProject project = root.getProject(
@@ -1020,7 +1020,7 @@ public class StateImpl extends ItemImpl implements State {
 						return ""; //$NON-NLS-1$
 				saveResource();
 				try {
-					loadResource(getModelURI(), !eIsSet(ClassMakerPackage.STATE__RESOURCE), true);
+					loadResource(obtainModelURI(), !eIsSet(ClassMakerPackage.STATE__RESOURCE), true);
 				} catch (Exception e) {
 				}
 				saveResource();
@@ -1128,7 +1128,7 @@ public class StateImpl extends ItemImpl implements State {
 	 */
 	@Override
 	public void load(boolean create, boolean loadOnDemand) throws CoreException {
-		loadResource(getModelURI(), create, loadOnDemand);
+		loadResource(obtainModelURI(), create, loadOnDemand);
 		if (ClassMakerServiceImpl.initializing && getPhase().getValue() == Stage.LOADED_VALUE) {
 			getStrategy().configureJobs(getStrategy().getLoaders().isEmpty(), ClassMakerPlugin.getProgressMonitor());
 			Job job = EnterpriseDomainJob
@@ -1486,7 +1486,6 @@ public class StateImpl extends ItemImpl implements State {
 	 * 
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public EMap<StageQualifier, Customizer> getNonExclusiveStateCustomizers() {
 		if (nonExclusiveStateCustomizers == null) {

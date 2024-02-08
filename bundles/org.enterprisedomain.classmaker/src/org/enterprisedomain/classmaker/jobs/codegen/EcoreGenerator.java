@@ -163,7 +163,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 
 	public class CodeGenerationJob extends GeneratorJob {
 
-		private IClasspathEntry e;
+		private IClasspathEntry entry;
 
 		public CodeGenerationJob(int depth, long stateTimestamp) {
 			super(NLS.bind(Messages.JobNameCodeGeneration, "Code"), depth, stateTimestamp);
@@ -176,7 +176,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 				ResourceUtils.cleanupDir(getProject(), SOURCE_FOLDER_NAME);
 				try {
 					getProject().refreshLocal(IResource.DEPTH_INFINITE, monitor);
-				} catch (OperationCanceledException e) {
+				} catch (OperationCanceledException ex) {
 				}
 				List<String> args = new ArrayList<String>();
 				args.add("-forceOverwrite");
@@ -196,15 +196,19 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 
 				updateClassPath(monitor);
 
-				compile(monitor);
+				try {
+					compile(monitor);
+				} catch (CoreException ex) {
+					return ex.getStatus();
+				}
 
 				try {
 					@SuppressWarnings("unchecked")
 					SCMOperator<Git> operator = (SCMOperator<Git>) getContributionState().getProject().getWorkspace()
 							.getSCMRegistry().get(getProject().getName());
 					operator.add(".");
-				} catch (Exception e) {
-					throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
+				} catch (Exception ex) {
+					throw new CoreException(ClassMakerPlugin.createErrorStatus(ex));
 				}
 				if (result == 1)
 					throw new CoreException(ClassMakerPlugin.createErrorStatus("Code generation failed."));
@@ -232,13 +236,13 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 				if (getContributionState().isEditor()) {
 					build(getProject().getWorkspace().getRoot().getProject(getProject().getName() + ".editor"), m);
 				}
-			} catch (OperationCanceledException e) {
+			} catch (OperationCanceledException ex) {
 				monitor.setCanceled(true);
-			} catch (CoreException e) {
-				ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
-				throw e;
-			} catch (Exception e) {
-				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
+			} catch (CoreException ex) {
+				ClassMakerPlugin.getInstance().getLog().log(ex.getStatus());
+				throw ex;
+			} catch (Exception ex) {
+				throw new CoreException(ClassMakerPlugin.createErrorStatus(ex));
 			} finally {
 				if (m != null)
 					m.done();
@@ -247,7 +251,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 			}
 			try {
 				notifyAll();
-			} catch (IllegalMonitorStateException e) {
+			} catch (IllegalMonitorStateException ex) {
 			}
 		}
 
@@ -262,7 +266,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 							if (delta.getResource().equals(getProject()))
 								try {
 									project.notifyAll();
-								} catch (IllegalMonitorStateException e) {
+								} catch (IllegalMonitorStateException ex) {
 								}
 				}
 			}, IResourceChangeEvent.POST_BUILD);
@@ -288,8 +292,8 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 						editorJavaProject = JavaCore.create(ResourcesPlugin.getWorkspace().getRoot()
 								.getProject(getProject().getName() + ".editor"));
 
-				} catch (IllegalStateException e) {
-					throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
+				} catch (IllegalStateException ex) {
+					throw new CoreException(ClassMakerPlugin.createErrorStatus(ex));
 				}
 				Set<IClasspathEntry> entries = new HashSet<IClasspathEntry>();
 				Set<IClasspathEntry> editEntries = new HashSet<IClasspathEntry>();
@@ -305,77 +309,79 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 					for (IClasspathEntry en : editorJavaProject.getRawClasspath())
 						if (!en.getPath().equals(new Path(IPath.SEPARATOR + getProject().getName() + ".editor")))
 							editorEntries.add(en);
-				e = JavaCore.newSourceEntry(
+				entry = JavaCore.newSourceEntry(
 						new Path(IPath.SEPARATOR + getProject().getName() + IPath.SEPARATOR + SOURCE_FOLDER_NAME), null,
 						new Path(IPath.SEPARATOR + getProject().getName() + IPath.SEPARATOR + "bin" + IPath.SEPARATOR));
 				entries.removeIf(en -> {
-					return en.getPath().isPrefixOf(e.getPath()) && en.getOutputLocation() == null;
+					return en.getPath().isPrefixOf(entry.getPath()) && en.getOutputLocation() == null;
 				});
-				entries.add(e);
+				entries.add(entry);
 				if (editJavaProject != null) {
-					e = JavaCore.newSourceEntry(
+					entry = JavaCore.newSourceEntry(
 							new Path(IPath.SEPARATOR + getProject().getName() + ".edit" + IPath.SEPARATOR
 									+ SOURCE_FOLDER_NAME),
 							null, new Path(IPath.SEPARATOR + getProject().getName() + ".edit" + IPath.SEPARATOR + "bin"
 									+ IPath.SEPARATOR));
 					editEntries.removeIf(en -> {
-						return en.getPath().isPrefixOf(e.getPath()) && en.getOutputLocation() == null;
+						return en.getPath().isPrefixOf(entry.getPath()) && en.getOutputLocation() == null;
 					});
-					if (!editEntries.contains(e))
-						editEntries.add(e);
+					if (!editEntries.contains(entry))
+						editEntries.add(entry);
 				}
 				if (editorJavaProject != null) {
-					e = JavaCore.newSourceEntry(
+					entry = JavaCore.newSourceEntry(
 							new Path(IPath.SEPARATOR + getProject().getName() + ".editor" + IPath.SEPARATOR
 									+ SOURCE_FOLDER_NAME),
 							null, new Path(IPath.SEPARATOR + getProject().getName() + ".editor" + IPath.SEPARATOR
 									+ "bin" + IPath.SEPARATOR));
 					editorEntries.removeIf(en -> {
-						return en.getPath().isPrefixOf(e.getPath()) && en.getOutputLocation() == null;
+						return en.getPath().isPrefixOf(entry.getPath()) && en.getOutputLocation() == null;
 					});
-					if (!editorEntries.contains(e))
-						editorEntries.add(e);
+					if (!editorEntries.contains(entry))
+						editorEntries.add(entry);
 				}
-				e = JavaCore.newContainerEntry(new Path(
+				entry = JavaCore.newContainerEntry(new Path(
 						"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17"),
 						null, new IClasspathAttribute[] { JavaCore.newClasspathAttribute("module", "true") }, true);
 				entries.removeIf(en -> {
-					return en.getPath().isPrefixOf(e.getPath());
+					return en.getPath().isPrefixOf(entry.getPath());
 				});
-				if (!entries.contains(e))
-					entries.add(e);
+				if (!entries.contains(entry))
+					entries.add(entry);
 				if (editJavaProject != null) {
-					e = JavaCore.newContainerEntry(new Path(
+					entry = JavaCore.newContainerEntry(new Path(
 							"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17"),
 							null, new IClasspathAttribute[] { JavaCore.newClasspathAttribute("module", "true") }, true);
 					editEntries.removeIf(en -> {
-						return en.getPath().isPrefixOf(e.getPath());
+						return en.getPath().isPrefixOf(entry.getPath());
 					});
-					if (!editEntries.contains(e))
-						editEntries.add(e);
+					if (!editEntries.contains(entry))
+						editEntries.add(entry);
 				}
 				if (editorJavaProject != null) {
-					e = JavaCore.newContainerEntry(new Path(
+					entry = JavaCore.newContainerEntry(new Path(
 							"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17"),
 							null, new IClasspathAttribute[] { JavaCore.newClasspathAttribute("module", "true") }, true);
-					if (!editorEntries.contains(e))
-						editorEntries.add(e);
+					if (!editorEntries.contains(entry))
+						editorEntries.add(entry);
 				}
-				e = JavaCore.newContainerEntry(new Path("org.eclipse.pde.core.requiredPlugins"), null, null, false);
+				entry = JavaCore.newContainerEntry(new Path("org.eclipse.pde.core.requiredPlugins"), null, null, false);
 				editorEntries.removeIf(en -> {
-					return en.getPath().isPrefixOf(e.getPath());
+					return en.getPath().isPrefixOf(entry.getPath());
 				});
-				if (!entries.contains(e))
-					entries.add(e);
+				if (!entries.contains(entry))
+					entries.add(entry);
 				if (editJavaProject != null) {
-					e = JavaCore.newContainerEntry(new Path("org.eclipse.pde.core.requiredPlugins"), null, null, false);
-					if (!editEntries.contains(e))
-						editEntries.add(e);
+					entry = JavaCore.newContainerEntry(new Path("org.eclipse.pde.core.requiredPlugins"), null, null,
+							false);
+					if (!editEntries.contains(entry))
+						editEntries.add(entry);
 				}
 				if (editorJavaProject != null) {
-					e = JavaCore.newContainerEntry(new Path("org.eclipse.pde.core.requiredPlugins"), null, null, false);
-					if (!editorEntries.contains(e))
-						editorEntries.add(e);
+					entry = JavaCore.newContainerEntry(new Path("org.eclipse.pde.core.requiredPlugins"), null, null,
+							false);
+					if (!editorEntries.contains(entry))
+						editorEntries.add(entry);
 				}
 				javaProject.setRawClasspath((IClasspathEntry[]) entries.toArray(new IClasspathEntry[entries.size()]),
 						m);

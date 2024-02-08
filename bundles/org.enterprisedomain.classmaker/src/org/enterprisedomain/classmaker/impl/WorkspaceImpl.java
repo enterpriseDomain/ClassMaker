@@ -941,23 +941,20 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			uriConverter = resourceSet.getURIConverter();
 		}
 		for (Project project : getProjects()) {
-			if (uriConverter != null && !project.getChildren().isEmpty()
-					&& project.getChildren().get(0) instanceof Resource) {
+			if (uriConverter != null && project.getResource() != null) {
 				if (uriConverter.normalize(resource.getURI())
-						.equals(uriConverter.normalize(((Resource) project.getChildren().get(0)).getURI())))
+						.equals(uriConverter.normalize(project.getResource().getURI())))
 					return project;
-			} else if (uriConverter != null && !project.getChildren().isEmpty()
-					&& project.getChildren().get(0) instanceof EObject) {
-				if (uriConverter.normalize(resource.getURI())
-						.equals(uriConverter.normalize(((EObject) project.getChildren().get(0)).eResource().getURI())))
+			} else if (uriConverter != null && project.getResource() != null) {
+				if (uriConverter.normalize(resource.getURI()).equals(uriConverter
+						.normalize(((EObject) project.getResource().getContents().get(0)).eResource().getURI())))
 					return project;
-			} else if (uriConverter == null && !project.getChildren().isEmpty()
-					&& project.getChildren().get(0) instanceof Resource) {
-				if (resource.getURI().equals(((Resource) project.getChildren().get(0)).getURI()))
+			} else if (uriConverter == null && project.getResource() != null) {
+				if (resource.getURI().equals(project.getResource().getURI()))
 					return project;
-			} else if (uriConverter == null && !project.getChildren().isEmpty()
-					&& project.getChildren().get(0) instanceof EObject) {
-				if (resource.getURI().equals(((EObject) project.getChildren().get(0)).eResource().getURI()))
+			} else if (uriConverter == null && project.getResource() != null) {
+				if (resource.getURI()
+						.equals(((EObject) project.getResource().getContents().get(0)).eResource().getURI()))
 					return project;
 			}
 		}

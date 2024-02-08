@@ -22,8 +22,6 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.EcoreFactory;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -76,7 +74,6 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 			addProjectPropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
 			addProjectNamePropertyDescriptor(object);
-			addChildrenPropertyDescriptor(object);
 			addDirtyPropertyDescriptor(object);
 			addResourcePathPropertyDescriptor(object);
 			addNeedCompletionNotificationPropertyDescriptor(object);
@@ -88,6 +85,7 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 			addVersionPropertyDescriptor(object);
 			addStatePropertyDescriptor(object);
 			addClassLoaderPropertyDescriptor(object);
+			addResourcePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -208,22 +206,6 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 						getString("_UI_PropertyDescriptor_description", "_UI_Project_projectName_feature",
 								"_UI_Project_type"),
 						ClassMakerPackage.Literals.PROJECT__PROJECT_NAME, true, false, false,
-						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Children feature. <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	protected void addChildrenPropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_Project_children_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_Project_children_feature",
-								"_UI_Project_type"),
-						ClassMakerPackage.Literals.PROJECT__CHILDREN, false, false, false,
 						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
@@ -402,6 +384,21 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 	}
 
 	/**
+	 * This adds a property descriptor for the Resource feature. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected void addResourcePropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Project_resource_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Project_resource_feature",
+								"_UI_Project_type"),
+						ClassMakerPackage.Literals.PROJECT__RESOURCE, false, false, false, null, null, null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an
 	 * appropriate feature for an {@link org.eclipse.emf.edit.command.AddCommand},
 	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
@@ -415,7 +412,6 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ClassMakerPackage.Literals.ITEM__DOMAIN_MODEL);
-			childrenFeatures.add(ClassMakerPackage.Literals.PROJECT__CHILDREN);
 			childrenFeatures.add(ClassMakerPackage.Literals.PROJECT__REVISIONS);
 			childrenFeatures.add(ClassMakerPackage.Literals.PROJECT__MODEL_RESOURCE_ADAPTER);
 		}
@@ -488,7 +484,6 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case ClassMakerPackage.PROJECT__DOMAIN_MODEL:
-		case ClassMakerPackage.PROJECT__CHILDREN:
 		case ClassMakerPackage.PROJECT__REVISIONS:
 		case ClassMakerPackage.PROJECT__MODEL_RESOURCE_ADAPTER:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
@@ -511,12 +506,6 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 		newChildDescriptors
 				.add(createChildParameter(ClassMakerPackage.Literals.ITEM__CUSTOMIZERS, ClassMakerFactory.eINSTANCE
 						.create(ClassMakerPackage.Literals.STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY)));
-
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__CHILDREN,
-				EcoreFactory.eINSTANCE.createFromString(EcorePackage.Literals.EJAVA_OBJECT, null))); // TODO: ensure
-																										// this is a
-																										// valid literal
-																										// value
 
 		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.PROJECT__REVISIONS,
 				ClassMakerFactory.eINSTANCE.create(ClassMakerPackage.Literals.VERSION_TO_REVISION_MAP_ENTRY)));

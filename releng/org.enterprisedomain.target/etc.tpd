@@ -34,7 +34,7 @@ location "https://download.eclipse.org/tools/orbit/downloads/drops/R202305310105
 	org.apache.log4j.source
 	org.apache.log4j
 	org.apache.commons.io
-	org.apache.commons.codec 
+	org.apache.commons.codec
 	org.apache.commons.logging
 	org.apache.lucene.core
 	org.apache.lucene.analysis-common
@@ -67,6 +67,8 @@ location "https://download.eclipse.org/tools/orbit/downloads/drops/R202305310105
 	org.slf4j.api.source [1.7.30,1.7.31)
 	org.slf4j.binding.log4j12 [1.7.30,1.7.31)
 	org.slf4j.binding.log4j12.source [1.7.30,1.7.31)
+	org.slf4j.binding.nop [1.7.30,1.7.31)
+	org.slf4j.binding.nop.source [1.7.30,1.7.31)
 	org.tukaani.xz [1.9.0.v20210624-1259,1.9.0.v20210624-1259]
 	org.tukaani.xz.source [1.9.0.v20210624-1259,1.9.0.v20210624-1259]
 	com.sun.jna
@@ -80,6 +82,16 @@ location "https://download.eclipse.org/tools/orbit/downloads/drops/R202305310105
 	org.apache.batik.bridge
 	org.apache.batik.dom
 	org.apache.batik.anim
+	org.apache.batik.css
+	org.apache.batik.constants
+	org.apache.batik.util
+	org.apache.batik.i18n
+	org.apache.batik.xml
+	org.apache.batik.script
+	org.apache.batik.parser
+	org.apache.batik.gvt
+	org.apache.batik.ext
+	org.apache.batik.dom.svg
 	org.apache.xalan
 	org.apache.poi.source
 	org.apache.poi

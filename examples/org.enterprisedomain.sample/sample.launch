@@ -30,7 +30,7 @@
     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_ATTR_USE_ARGFILE" value="false"/>
     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_SHOW_CODEDETAILS_IN_EXCEPTION_MESSAGES" value="true"/>
     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
-    <stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11"/>
+    <stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17"/>
     <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl} -consoleLog"/>
     <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.pde.ui.workbenchClasspathProvider"/>
     <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dorg.eclipse.swt.graphics.Resource.reportNonDisposed=true"/>
@@ -38,7 +38,6 @@
     <stringAttribute key="product" value="org.eclipse.platform.ide"/>
     <setAttribute key="selected_target_bundles">
         <setEntry value="com.google.gson@default:default"/>
-        <setEntry value="com.jcraft.jsch*0.1.55.v20221112-0806@default:default"/>
         <setEntry value="com.sun.jna*5.12.1.v20221103-2317@default:default"/>
         <setEntry value="com.sun.jna.platform*5.12.1.v20221103-2317@default:default"/>
         <setEntry value="jakarta.servlet-api@default:default"/>
@@ -46,7 +45,7 @@
         <setEntry value="javax.inject@default:default"/>
         <setEntry value="lpg.runtime.java@default:default"/>
         <setEntry value="net.i2p.crypto.eddsa@default:default"/>
-        <setEntry value="org.apache.ant@default:default"/>
+        <setEntry value="org.apache.ant*1.10.14.v20230922-1200@default:default"/>
         <setEntry value="org.apache.batik.constants*1.16.0.v20221027-0840@default:default"/>
         <setEntry value="org.apache.batik.css*1.16.0.v20221027-0840@default:default"/>
         <setEntry value="org.apache.batik.i18n*1.16.0.v20221027-0840@default:default"/>
@@ -63,11 +62,7 @@
         <setEntry value="org.apache.log4j@default:default"/>
         <setEntry value="org.apache.sshd.osgi@default:default"/>
         <setEntry value="org.apache.sshd.sftp@default:default"/>
-        <setEntry value="org.apache.xmlgraphics*2.7.0.v20221018-0736@default:default"/>
         <setEntry value="org.eclipse.core.filesystem.linux.x86_64@default:false"/>
-        <setEntry value="org.eclipse.core.net.linux*1.0.300.v20230630-1232@default:false"/>
-        <setEntry value="org.eclipse.e4.core.di.extensions*0.18.0.v20230429-1914@default:default"/>
-        <setEntry value="org.eclipse.e4.ui.swt.gtk*1.2.0.v20230501-1823@default:false"/>
         <setEntry value="org.eclipse.e4.ui.widgets*1.4.0.v20230317-0802@default:default"/>
         <setEntry value="org.eclipse.ecf.filetransfer@default:default"/>
         <setEntry value="org.eclipse.ecf.identity@default:default"/>
@@ -84,30 +79,22 @@
         <setEntry value="org.eclipse.emf.ecore@default:default"/>
         <setEntry value="org.eclipse.emf.edit.ui@default:default"/>
         <setEntry value="org.eclipse.emf.edit@default:default"/>
-        <setEntry value="org.eclipse.equinox.app*1.6.300.v20230630-1303@default:default"/>
-        <setEntry value="org.eclipse.equinox.bidi*1.4.300.v20230630-1303@default:default"/>
-        <setEntry value="org.eclipse.equinox.concurrent@default:default"/>
+        <setEntry value="org.eclipse.equinox.concurrent*1.2.200.v20231103-0833@default:default"/>
         <setEntry value="org.eclipse.equinox.console.jaas.fragment@default:false"/>
-        <setEntry value="org.eclipse.equinox.event*1.6.200.v20230120-0604@default:default"/>
-        <setEntry value="org.eclipse.equinox.frameworkadmin*2.2.200.v20230630-1506@default:default"/>
-        <setEntry value="org.eclipse.equinox.launcher*1.6.500.v20230717-2134@default:default"/>
-        <setEntry value="org.eclipse.equinox.launcher.gtk.linux.x86_64*1.2.700.v20221108-1024@default:false"/>
         <setEntry value="org.eclipse.equinox.region@default:false"/>
-        <setEntry value="org.eclipse.equinox.registry*3.11.300.v20230801-1826@default:default"/>
-        <setEntry value="org.eclipse.equinox.security*1.4.0.v20230630-1303@default:default"/>
         <setEntry value="org.eclipse.equinox.transforms.hook@default:false"/>
-        <setEntry value="org.eclipse.equinox.weaving.hook@default:false"/>
+        <setEntry value="org.eclipse.equinox.weaving.hook*1.3.300.v20231106-1826@default:false"/>
         <setEntry value="org.eclipse.jdt.debug@default:default"/>
         <setEntry value="org.eclipse.jdt.junit.core@default:default"/>
         <setEntry value="org.eclipse.jdt.junit.runtime@default:default"/>
         <setEntry value="org.eclipse.jdt.launching@default:default"/>
-        <setEntry value="org.eclipse.jetty.http*10.0.15@default:default"/>
-        <setEntry value="org.eclipse.jetty.io*10.0.15@default:default"/>
-        <setEntry value="org.eclipse.jetty.security*10.0.15@default:default"/>
-        <setEntry value="org.eclipse.jetty.server*10.0.15@default:default"/>
-        <setEntry value="org.eclipse.jetty.servlet*10.0.15@default:default"/>
-        <setEntry value="org.eclipse.jetty.util*10.0.15@default:default"/>
-        <setEntry value="org.eclipse.jetty.util.ajax*10.0.15@default:default"/>
+        <setEntry value="org.eclipse.jetty.http@default:default"/>
+        <setEntry value="org.eclipse.jetty.io@default:default"/>
+        <setEntry value="org.eclipse.jetty.security@default:default"/>
+        <setEntry value="org.eclipse.jetty.server@default:default"/>
+        <setEntry value="org.eclipse.jetty.servlet@default:default"/>
+        <setEntry value="org.eclipse.jetty.util.ajax@default:default"/>
+        <setEntry value="org.eclipse.jetty.util@default:default"/>
         <setEntry value="org.eclipse.jgit.archive@default:default"/>
         <setEntry value="org.eclipse.jgit@default:default"/>
         <setEntry value="org.eclipse.m2m.qvt.oml.common@default:default"/>
@@ -121,9 +108,6 @@
         <setEntry value="org.eclipse.ocl.common@default:default"/>
         <setEntry value="org.eclipse.ocl.ecore@default:default"/>
         <setEntry value="org.eclipse.ocl@default:default"/>
-        <setEntry value="org.eclipse.osgi.compatibility.state*1.2.800.v20221116-1440@default:false"/>
-        <setEntry value="org.eclipse.osgi.services*3.11.100.v20221006-1531@default:default"/>
-        <setEntry value="org.eclipse.osgi.util*3.7.200.v20230103-1101@default:default"/>
         <setEntry value="org.eclipse.pde.api.tools@default:default"/>
         <setEntry value="org.eclipse.pde.build@default:default"/>
         <setEntry value="org.eclipse.pde.ds.core@default:default"/>
@@ -131,10 +115,10 @@
         <setEntry value="org.hamcrest.core*2.2.0.v20230809-1000@default:default"/>
         <setEntry value="org.junit@default:default"/>
         <setEntry value="org.kohsuke.args4j@default:default"/>
+        <setEntry value="org.objectweb.asm*9.6.0@default:default"/>
         <setEntry value="org.objectweb.asm.commons@default:default"/>
-        <setEntry value="org.objectweb.asm.tree@default:default"/>
-        <setEntry value="org.objectweb.asm.util@default:default"/>
-        <setEntry value="org.objectweb.asm@default:default"/>
+        <setEntry value="org.objectweb.asm.tree*9.6.0@default:default"/>
+        <setEntry value="org.objectweb.asm.util*9.5.0@default:default"/>
         <setEntry value="org.opentest4j@default:default"/>
         <setEntry value="org.sat4j.core@default:default"/>
         <setEntry value="org.sat4j.pb@default:default"/>

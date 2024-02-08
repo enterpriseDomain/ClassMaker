@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>org.enterprisedomain.classmaker.tests</artifactId>
-	<version>0.0.5-SNAPSHOT</version>
+	<version>0.0.6-SNAPSHOT</version>
 	<packaging>eclipse-test-plugin</packaging>
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
@@ -89,20 +89,13 @@
 					</systemProperties>
 					<useJDK>BREE</useJDK>
 					<useSystemClassLoader>true</useSystemClassLoader>
-					<useManifestOnlyJar>false</useManifestOnlyJar>
-					<dependency>
-						<type>eclipse-plugin</type>
-						<artifactId>
-							org.eclipse.core.runtime.compatibility.registry</artifactId>
-						<version>0.0.0</version>
-					</dependency>
+					<useManifestOnlyJar>false</useManifestOnlyJar>					
 					<frameworkExtensions>
 						<frameworkExtension>
 							<groupId>org.enterprisedomain</groupId>
 							<artifactId>
 								org.enterprisedomain.classmaker.osgi.systemextension</artifactId>
-							<version>0.8.55-SNAPSHOT</version>
-						</frameworkExtension>
+											</frameworkExtension>
 					</frameworkExtensions>
 					<argLine>${surefire.moduleProperties}</argLine>
 				</configuration>
