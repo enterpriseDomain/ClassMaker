@@ -45,13 +45,11 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.ListBranchCommand;
 import org.eclipse.jgit.api.ReflogCommand;
 import org.eclipse.jgit.api.errors.JGitInternalException;
-import org.eclipse.jgit.errors.LockFailedException;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.ReflogEntry;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
@@ -297,8 +295,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 		setName(getModelName() != null ? getModelName() : CodeGenUtil.capName(getProjectName()));
 		try {
 			Git git = operator.getRepositorySCM();
-			// if (git == null)
-			// return "";
 			String currentBranch = git.getRepository().getBranch();
 
 			ListBranchCommand listBranches = git.branchList();
@@ -321,7 +317,8 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 							if (ref.getNewId().equals(branch.getObjectId())) {
 								timestamp = operator.decodeTimestamp(ref.getComment());
 								if (timestamp == -1)
-									timestamp = operator.decodeTimestamp(version.getQualifier());
+									timestamp = operator.decodeTimestamp(
+											String.valueOf(Long.valueOf(version.getQualifier()) / 1000));
 							}
 					} catch (IllegalArgumentException e) {
 						continue;
@@ -342,7 +339,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 					try {
 						getState().add(".");
 						getState().commit();
-					} catch (JGitInternalException e) {						
+					} catch (JGitInternalException e) {
 					}
 				}
 				checkout(getVersion(), timestamp);
@@ -404,19 +401,20 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	public String make(IProgressMonitor monitor) throws CoreException {
 		removeResourceChangeListener(getResourceReloadListener());
 		String result = // "";
-//		try {
-//		result = 
+				// try {
+				// result =
 				make(getRevision(), monitor);
-//		} catch (CoreException e) {
-//			if (e.getCause() instanceof InvocationTargetException) {
-//				InvocationTargetException ex = (InvocationTargetException) e.getCause();
-//				if (ex.getCause() instanceof Error) {
-//					ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.CLEAN_BUILD, monitor);
-//					result = make(getRevision(), monitor);
-//				}
-//			} else
-//				throw e;
-//		}
+		// } catch (CoreException e) {
+		// if (e.getCause() instanceof InvocationTargetException) {
+		// InvocationTargetException ex = (InvocationTargetException) e.getCause();
+		// if (ex.getCause() instanceof Error) {
+		// ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.CLEAN_BUILD,
+		// monitor);
+		// result = make(getRevision(), monitor);
+		// }
+		// } else
+		// throw e;
+		// }
 		setDirty(false);
 		return result;
 	}
@@ -558,7 +556,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	public void delete(EList<Object> objects) {
 		if (!isStateSet())
 			return;
-		boolean removed = ((Resource) getChildren().get(0)).getContents().removeAll(objects);
+		boolean removed = getState().getResource().getContents().removeAll(objects);
 		if (removed)
 			return;
 

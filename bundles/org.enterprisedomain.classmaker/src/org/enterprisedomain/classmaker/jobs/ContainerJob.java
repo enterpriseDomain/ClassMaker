@@ -17,7 +17,9 @@ package org.enterprisedomain.classmaker.jobs;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
@@ -25,6 +27,8 @@ import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.Version;
 
 public abstract class ContainerJob extends EnterpriseDomainJob {
+
+	private Set<Bundle> installedBundles = new HashSet<Bundle>();
 
 	public ContainerJob(String name, int depth, long stateTimestamp) {
 		super(name, depth, stateTimestamp);
@@ -39,7 +43,7 @@ public abstract class ContainerJob extends EnterpriseDomainJob {
 					|| (getContributionState().isEdit() && bundle.getSymbolicName().equals(symbolicName + ".edit"))
 					|| (getContributionState().isEditor() && bundle.getSymbolicName().equals(symbolicName + ".editor")))
 					&& (versionsAreEqual(version, bundle.getVersion(), true)
-							|| versionAreLess(version, bundle.getVersion(), true)))
+							|| versionAreLess(bundle.getVersion(), version, true)))
 				results.add(bundle);
 		return results;
 	}
@@ -51,6 +55,10 @@ public abstract class ContainerJob extends EnterpriseDomainJob {
 	public Collection<Bundle> getBundles() {
 		return getBundles(getContributionState().getProjectName(), getContributionState().getProject().getVersion());
 
+	}
+
+	public Set<Bundle> getInstalledBundles() {
+		return installedBundles;
 	}
 
 	protected BundleContext getContext() {

@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 
@@ -43,10 +44,14 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
  * <em>Resource Set</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.Workspace#getCustomizers
  * <em>Customizers</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Workspace#getNonExclusiveCustomizers
+ * <em>Non Exclusive Customizers</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.Workspace#getService
  * <em>Service</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.Workspace#getSCMRegistry <em>SCM
  * Registry</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Workspace#getExcludedEPackages
+ * <em>Excluded EPackages</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getWorkspace()
@@ -108,6 +113,20 @@ public interface Workspace extends EObject, ISchedulingRule {
 	EMap<StageQualifier, Customizer> getCustomizers();
 
 	/**
+	 * Returns the value of the '<em><b>Non Exclusive Customizers</b></em>' map. The
+	 * key is of type {@link org.enterprisedomain.classmaker.StageQualifier}, and
+	 * the value is of type {@link org.enterprisedomain.classmaker.Customizer}, <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Non Exclusive Customizers</em>' map.
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getWorkspace_NonExclusiveCustomizers()
+	 * @model mapType="org.enterprisedomain.classmaker.StageQualifierToCustomizerMapEntry&lt;org.enterprisedomain.classmaker.StageQualifier,
+	 *        org.enterprisedomain.classmaker.Customizer&gt;"
+	 * @generated
+	 */
+	EMap<StageQualifier, Customizer> getNonExclusiveCustomizers();
+
+	/**
 	 * Returns the value of the '<em><b>Service</b></em>' container reference. It is
 	 * bidirectional and its opposite is
 	 * '{@link org.enterprisedomain.classmaker.ClassMakerService#getWorkspace
@@ -150,6 +169,18 @@ public interface Workspace extends EObject, ISchedulingRule {
 	 * @generated
 	 */
 	SCMRegistry<?> getSCMRegistry();
+
+	/**
+	 * Returns the value of the '<em><b>Excluded EPackages</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.emf.ecore.EPackage}. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Excluded EPackages</em>' reference list.
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getWorkspace_ExcludedEPackages()
+	 * @model
+	 * @generated
+	 */
+	EList<EPackage> getExcludedEPackages();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->

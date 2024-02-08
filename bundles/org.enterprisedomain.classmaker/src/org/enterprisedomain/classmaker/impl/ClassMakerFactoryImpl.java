@@ -153,6 +153,8 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 		switch (eDataType.getClassifierID()) {
 		case ClassMakerPackage.STAGE:
 			return createStageFromString(eDataType, initialValue);
+		case ClassMakerPackage.CLASS_LOADER:
+			return createClassLoaderFromString(eDataType, initialValue);
 		case ClassMakerPackage.PROPERTIES:
 			return createPropertiesFromString(eDataType, initialValue);
 		case ClassMakerPackage.IPROGRESS_MONITOR:
@@ -192,6 +194,8 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 		switch (eDataType.getClassifierID()) {
 		case ClassMakerPackage.STAGE:
 			return convertStageToString(eDataType, instanceValue);
+		case ClassMakerPackage.CLASS_LOADER:
+			return convertClassLoaderToString(eDataType, instanceValue);
 		case ClassMakerPackage.PROPERTIES:
 			return convertPropertiesToString(eDataType, instanceValue);
 		case ClassMakerPackage.IPROGRESS_MONITOR:
@@ -447,6 +451,24 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 	 */
 	public String convertStageToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public ClassLoader createClassLoaderFromString(EDataType eDataType, String initialValue) {
+		return (ClassLoader) super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public String convertClassLoaderToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**

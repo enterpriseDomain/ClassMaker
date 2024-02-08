@@ -12,7 +12,7 @@ public class ProjectAdapterFactory implements IAdapterFactory {
 	@Override
 	public <T> T getAdapter(Object adaptableObject, Class<T> adapterType) {
 		if (ADAPTED_CLASSES[0].isAssignableFrom(adapterType))
-			return (T) ((Project) adaptableObject).getChildren().get(0);
+			return (T) ((Project) adaptableObject).getResource();
 		return null;
 	}
 

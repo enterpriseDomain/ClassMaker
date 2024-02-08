@@ -69,13 +69,14 @@ public class StateItemProvider extends ItemItemProvider {
 			addEditorDeployableUnitNamePropertyDescriptor(object);
 			addJobFamilyPropertyDescriptor(object);
 			addResourcePropertyDescriptor(object);
-			addCommitIdsPropertyDescriptor(object);
 			addCommitIdPropertyDescriptor(object);
+			addNonExclusiveStateCustomizersPropertyDescriptor(object);
 			addProjectNamePropertyDescriptor(object);
 			addMakingPropertyDescriptor(object);
 			addEditPropertyDescriptor(object);
 			addEditorPropertyDescriptor(object);
 			addStrategyPropertyDescriptor(object);
+			addBasePackagePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -253,22 +254,6 @@ public class StateItemProvider extends ItemItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Commit Ids feature. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	protected void addCommitIdsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_State_commitIds_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_State_commitIds_feature",
-								"_UI_State_type"),
-						ClassMakerPackage.Literals.STATE__COMMIT_IDS, true, false, false,
-						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
-	}
-
-	/**
 	 * This adds a property descriptor for the Commit Id feature. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -281,6 +266,22 @@ public class StateItemProvider extends ItemItemProvider {
 						getString("_UI_PropertyDescriptor_description", "_UI_State_commitId_feature", "_UI_State_type"),
 						ClassMakerPackage.Literals.STATE__COMMIT_ID, true, false, false,
 						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Non Exclusive State Customizers
+	 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected void addNonExclusiveStateCustomizersPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
+				getString("_UI_State_nonExclusiveStateCustomizers_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_State_nonExclusiveStateCustomizers_feature",
+						"_UI_State_type"),
+				ClassMakerPackage.Literals.STATE__NON_EXCLUSIVE_STATE_CUSTOMIZERS, true, false, true, null, null,
+				null));
 	}
 
 	/**
@@ -359,6 +360,22 @@ public class StateItemProvider extends ItemItemProvider {
 	}
 
 	/**
+	 * This adds a property descriptor for the Base Package feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected void addBasePackagePropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_State_basePackage_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_State_basePackage_feature",
+								"_UI_State_type"),
+						ClassMakerPackage.Literals.STATE__BASE_PACKAGE, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an
 	 * appropriate feature for an {@link org.eclipse.emf.edit.command.AddCommand},
 	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
@@ -433,12 +450,12 @@ public class StateItemProvider extends ItemItemProvider {
 		case ClassMakerPackage.STATE__EDIT_DEPLOYABLE_UNIT_NAME:
 		case ClassMakerPackage.STATE__EDITOR_DEPLOYABLE_UNIT_NAME:
 		case ClassMakerPackage.STATE__JOB_FAMILY:
-		case ClassMakerPackage.STATE__COMMIT_IDS:
 		case ClassMakerPackage.STATE__COMMIT_ID:
 		case ClassMakerPackage.STATE__PROJECT_NAME:
 		case ClassMakerPackage.STATE__MAKING:
 		case ClassMakerPackage.STATE__EDIT:
 		case ClassMakerPackage.STATE__EDITOR:
+		case ClassMakerPackage.STATE__BASE_PACKAGE:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case ClassMakerPackage.STATE__STATE_CUSTOMIZERS:

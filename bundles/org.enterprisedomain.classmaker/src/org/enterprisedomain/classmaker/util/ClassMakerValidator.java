@@ -203,6 +203,8 @@ public class ClassMakerValidator extends EObjectValidator {
 			return validateSelectRevealHandler((SelectRevealHandler) value, diagnostics, context);
 		case ClassMakerPackage.STAGE:
 			return validateStage((Stage) value, diagnostics, context);
+		case ClassMakerPackage.CLASS_LOADER:
+			return validateClassLoader((ClassLoader) value, diagnostics, context);
 		case ClassMakerPackage.PROPERTIES:
 			return validateProperties((Properties) value, diagnostics, context);
 		case ClassMakerPackage.IPROGRESS_MONITOR:
@@ -542,6 +544,16 @@ public class ClassMakerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateStage(Stage stage, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public boolean validateClassLoader(ClassLoader classLoader, DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
 		return true;
 	}
 

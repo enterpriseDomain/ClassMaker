@@ -1,0 +1,925 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.pde.ui.RuntimeWorkbench">
+    <booleanAttribute key="append.args" value="true"/>
+    <booleanAttribute key="askclear" value="true"/>
+    <booleanAttribute key="automaticAdd" value="true"/>
+    <booleanAttribute key="automaticValidate" value="true"/>
+    <stringAttribute key="bootstrap" value=""/>
+    <stringAttribute key="checked" value="[NONE]"/>
+    <booleanAttribute key="clearConfig" value="true"/>
+    <booleanAttribute key="clearws" value="true"/>
+    <booleanAttribute key="clearwslog" value="false"/>
+    <stringAttribute key="configLocation" value="${workspace_loc}/.metadata/.plugins/org.eclipse.pde.core/RCP"/>
+    <booleanAttribute key="default" value="false"/>
+    <setAttribute key="deselected_workspace_bundles"/>
+    <booleanAttribute key="generateProfile" value="true"/>
+    <booleanAttribute key="includeOptional" value="true"/>
+    <stringAttribute key="location" value="${workspace_loc}/../runtime-rcp"/>
+    <booleanAttribute key="org.eclipse.debug.core.ATTR_FORCE_SYSTEM_CONSOLE_ENCODING" value="false"/>
+    <stringAttribute key="org.eclipse.debug.core.source_locator_id" value="org.eclipse.pde.ui.launcher.PDESourceLookupDirector"/>
+    <stringAttribute key="org.eclipse.debug.core.source_locator_memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#10;&lt;sourceLookupDirector&gt;&#10;    &lt;sourceContainers duplicates=&quot;false&quot;&gt;&#10;        &lt;container memento=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; standalone=&amp;quot;no&amp;quot;?&amp;gt;&amp;#10;&amp;lt;javaProject name=&amp;quot;ClassMaker&amp;quot;/&amp;gt;&amp;#10;&quot; typeId=&quot;org.eclipse.jdt.launching.sourceContainer.javaProject&quot;/&gt;&#10;        &lt;container memento=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; standalone=&amp;quot;no&amp;quot;?&amp;gt;&amp;#10;&amp;lt;default/&amp;gt;&amp;#10;&quot; typeId=&quot;org.eclipse.debug.core.containerType.default&quot;/&gt;&#10;    &lt;/sourceContainers&gt;&#10;&lt;/sourceLookupDirector&gt;&#10;"/>
+    <booleanAttribute key="org.eclipse.jdt.launching.ATTR_ATTR_USE_ARGFILE" value="false"/>
+    <booleanAttribute key="org.eclipse.jdt.launching.ATTR_SHOW_CODEDETAILS_IN_EXCEPTION_MESSAGES" value="true"/>
+    <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
+    <stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17"/>
+    <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl} -consoleLog"/>
+    <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.pde.ui.workbenchClasspathProvider"/>
+    <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dorg.eclipse.swt.graphics.Resource.reportNonDisposed=true -Dosgi.compatibility.trigger.lazyActivation.onFailedClassLoad=true"/>
+    <stringAttribute key="pde.version" value="3.3"/>
+    <stringAttribute key="product" value="org.enterprisedomain.workbench.product"/>
+    <setAttribute key="selected_target_bundles">
+        <setEntry value="biz.aQute.bnd.util@default:default"/>
+        <setEntry value="biz.aQute.bndlib@default:default"/>
+        <setEntry value="com.google.guava*30.1.0.v20221112-0806@default:default"/>
+        <setEntry value="com.google.guava*32.1.2.jre@default:default"/>
+        <setEntry value="com.google.guava.failureaccess@default:default"/>
+        <setEntry value="com.google.inject@default:default"/>
+        <setEntry value="com.ibm.icu@default:default"/>
+        <setEntry value="com.jcraft.jsch*0.1.55.v20230916-1400@default:default"/>
+        <setEntry value="com.sun.activation.javax.activation@default:default"/>
+        <setEntry value="com.sun.jna*5.12.1.v20221103-2317@default:default"/>
+        <setEntry value="com.sun.jna.platform*5.12.1.v20221103-2317@default:default"/>
+        <setEntry value="jakarta.annotation-api@default:default"/>
+        <setEntry value="jakarta.inject.jakarta.inject-api@default:default"/>
+        <setEntry value="jakarta.servlet-api@default:default"/>
+        <setEntry value="javaewah@default:default"/>
+        <setEntry value="javax.annotation*1.3.5.v20230504-0748@default:default"/>
+        <setEntry value="javax.inject@default:default"/>
+        <setEntry value="jaxb-api@default:default"/>
+        <setEntry value="junit-jupiter-api@default:default"/>
+        <setEntry value="junit-jupiter-engine@default:default"/>
+        <setEntry value="junit-jupiter-migrationsupport@default:default"/>
+        <setEntry value="junit-jupiter-params@default:default"/>
+        <setEntry value="junit-platform-commons@default:default"/>
+        <setEntry value="junit-platform-engine@default:default"/>
+        <setEntry value="junit-platform-launcher@default:default"/>
+        <setEntry value="junit-platform-runner@default:default"/>
+        <setEntry value="junit-platform-suite-api@default:default"/>
+        <setEntry value="junit-platform-suite-commons@default:default"/>
+        <setEntry value="junit-platform-suite-engine@default:default"/>
+        <setEntry value="junit-vintage-engine@default:default"/>
+        <setEntry value="lpg.runtime.java@default:default"/>
+        <setEntry value="org.apache.ant*1.10.14.v20230922-1200@default:default"/>
+        <setEntry value="org.apache.aries.spifly.dynamic.bundle@default:default"/>
+        <setEntry value="org.apache.batik.constants*1.16.0.v20221027-0840@default:default"/>
+        <setEntry value="org.apache.batik.css*1.16.0.v20221027-0840@default:default"/>
+        <setEntry value="org.apache.batik.util*1.16.0.v20221027-0840@default:default"/>
+        <setEntry value="org.apache.commons.collections4@default:default"/>
+        <setEntry value="org.apache.commons.commons-codec@default:default"/>
+        <setEntry value="org.apache.commons.commons-io@default:default"/>
+        <setEntry value="org.apache.commons.compress@default:default"/>
+        <setEntry value="org.apache.commons.jxpath@default:default"/>
+        <setEntry value="org.apache.commons.logging@default:default"/>
+        <setEntry value="org.apache.commons.math3@default:default"/>
+        <setEntry value="org.apache.felix.gogo.command@default:default"/>
+        <setEntry value="org.apache.felix.gogo.runtime@default:default"/>
+        <setEntry value="org.apache.felix.gogo.shell@default:default"/>
+        <setEntry value="org.apache.felix.scr*2.2.6@1:true"/>
+        <setEntry value="org.apache.log4j@default:default"/>
+        <setEntry value="org.apache.lucene.analysis-common@default:default"/>
+        <setEntry value="org.apache.lucene.analysis-smartcn@default:default"/>
+        <setEntry value="org.apache.lucene.core*9.4.2.v20221211-0752@default:default"/>
+        <setEntry value="org.apache.poi.ooxml.schemas@default:default"/>
+        <setEntry value="org.apache.poi.ooxml@default:default"/>
+        <setEntry value="org.apache.poi@default:default"/>
+        <setEntry value="org.apache.xalan@default:default"/>
+        <setEntry value="org.apache.xmlbeans@default:default"/>
+        <setEntry value="org.apache.xmlgraphics*2.9.0.v20230916-1600@default:default"/>
+        <setEntry value="org.apiguardian.api@default:default"/>
+        <setEntry value="org.bouncycastle.bcpg*1.72.0.v20221013-1810@default:default"/>
+        <setEntry value="org.bouncycastle.bcpkix@default:default"/>
+        <setEntry value="org.bouncycastle.bcprov*1.72.0.v20221013-1810@default:default"/>
+        <setEntry value="org.bouncycastle.bcutil@default:default"/>
+        <setEntry value="org.eclipse.ant.core*3.7.200.v20231102-0934@default:default"/>
+        <setEntry value="org.eclipse.ant.launching@default:default"/>
+        <setEntry value="org.eclipse.ant.ui@default:default"/>
+        <setEntry value="org.eclipse.compare*3.9.300.v20231123-2204@default:default"/>
+        <setEntry value="org.eclipse.compare.core*3.8.300.v20231106-1240@default:default"/>
+        <setEntry value="org.eclipse.core.commands*3.11.200.v20231108-1058@default:default"/>
+        <setEntry value="org.eclipse.core.contenttype*3.9.200.v20230914-0751@default:default"/>
+        <setEntry value="org.eclipse.core.databinding*1.13.100.v20230708-0916@default:default"/>
+        <setEntry value="org.eclipse.core.databinding.beans*1.10.100.v20230708-0916@default:default"/>
+        <setEntry value="org.eclipse.core.databinding.observable*1.13.100.v20230708-0916@default:default"/>
+        <setEntry value="org.eclipse.core.databinding.property*1.10.100.v20230708-0916@default:default"/>
+        <setEntry value="org.eclipse.core.expressions*3.9.200.v20230921-0857@default:default"/>
+        <setEntry value="org.eclipse.core.externaltools*1.3.200.v20230914-0751@default:default"/>
+        <setEntry value="org.eclipse.core.filebuffers*3.8.200.v20230921-0933@default:default"/>
+        <setEntry value="org.eclipse.core.filesystem*1.10.200.v20231102-0934@default:default"/>
+        <setEntry value="org.eclipse.core.filesystem.linux.x86_64@default:false"/>
+        <setEntry value="org.eclipse.core.jobs*3.15.100.v20230930-1207@default:default"/>
+        <setEntry value="org.eclipse.core.net*1.5.200.v20231106-1240@default:default"/>
+        <setEntry value="org.eclipse.core.net.linux*1.1.0.v20230919-1757@default:false"/>
+        <setEntry value="org.eclipse.core.resources*3.20.0.v20231102-0934@default:default"/>
+        <setEntry value="org.eclipse.core.runtime*3.30.0.v20231102-0719@default:true"/>
+        <setEntry value="org.eclipse.core.variables*3.6.200.v20230914-0751@default:default"/>
+        <setEntry value="org.eclipse.debug.core*3.21.200.v20231021-1513@default:default"/>
+        <setEntry value="org.eclipse.debug.ui*3.18.200.v20231106-1112@default:default"/>
+        <setEntry value="org.eclipse.e4.core.commands*1.1.200.v20231108-1058@default:default"/>
+        <setEntry value="org.eclipse.e4.core.contexts*1.12.400.v20231103-2012@default:default"/>
+        <setEntry value="org.eclipse.e4.core.di*1.9.200.v20231105-0754@default:default"/>
+        <setEntry value="org.eclipse.e4.core.di.annotations*1.8.200.v20231103-2012@default:default"/>
+        <setEntry value="org.eclipse.e4.core.di.extensions*0.18.100.v20231103-2012@default:default"/>
+        <setEntry value="org.eclipse.e4.core.di.extensions.supplier*0.17.300.v20231028-1632@default:default"/>
+        <setEntry value="org.eclipse.e4.core.services*2.4.200.v20231103-2012@default:default"/>
+        <setEntry value="org.eclipse.e4.emf.xpath*0.4.100.v20230801-1255@default:default"/>
+        <setEntry value="org.eclipse.e4.ui.bindings*0.14.200.v20231030-2045@default:default"/>
+        <setEntry value="org.eclipse.e4.ui.css.core*0.14.200.v20231025-0632@default:default"/>
+        <setEntry value="org.eclipse.e4.ui.css.swt*0.15.200.v20231025-0632@default:default"/>
+        <setEntry value="org.eclipse.e4.ui.css.swt.theme*0.14.200.v20230913-1724@default:default"/>
+        <setEntry value="org.eclipse.e4.ui.di*1.5.200.v20231030-2045@default:default"/>
+        <setEntry value="org.eclipse.e4.ui.dialogs*1.4.100.v20230727-0604@default:default"/>
+        <setEntry value="org.eclipse.e4.ui.ide*3.17.100.v20230727-0604@default:default"/>
+        <setEntry value="org.eclipse.e4.ui.model.workbench*2.4.100.v20230801-1255@default:default"/>
+        <setEntry value="org.eclipse.e4.ui.progress*0.4.200.v20231030-2045@default:default"/>
+        <setEntry value="org.eclipse.e4.ui.services*1.6.200.v20231030-2045@default:default"/>
+        <setEntry value="org.eclipse.e4.ui.swt.gtk*1.2.100.v20231030-2045@default:false"/>
+        <setEntry value="org.eclipse.e4.ui.widgets*1.4.0.v20230317-0802@default:default"/>
+        <setEntry value="org.eclipse.e4.ui.workbench*1.15.200.v20231030-2045@default:default"/>
+        <setEntry value="org.eclipse.e4.ui.workbench.addons.swt*1.5.200.v20231106-1600@default:default"/>
+        <setEntry value="org.eclipse.e4.ui.workbench.renderers.swt*0.16.200.v20231030-2045@default:default"/>
+        <setEntry value="org.eclipse.e4.ui.workbench.swt*0.17.200.v20231030-2045@default:default"/>
+        <setEntry value="org.eclipse.e4.ui.workbench3*0.17.200.v20231025-0632@default:default"/>
+        <setEntry value="org.eclipse.ecf.filetransfer@default:default"/>
+        <setEntry value="org.eclipse.ecf.identity@default:default"/>
+        <setEntry value="org.eclipse.ecf.provider.filetransfer.ssl@default:false"/>
+        <setEntry value="org.eclipse.ecf.provider.filetransfer@default:default"/>
+        <setEntry value="org.eclipse.ecf.ssl@default:false"/>
+        <setEntry value="org.eclipse.ecf@default:default"/>
+        <setEntry value="org.eclipse.emf.ant@default:default"/>
+        <setEntry value="org.eclipse.emf.cdo.admin@default:default"/>
+        <setEntry value="org.eclipse.emf.cdo.common@default:default"/>
+        <setEntry value="org.eclipse.emf.cdo.compare@default:default"/>
+        <setEntry value="org.eclipse.emf.cdo.edit@default:default"/>
+        <setEntry value="org.eclipse.emf.cdo.explorer.ui@default:default"/>
+        <setEntry value="org.eclipse.emf.cdo.explorer@default:default"/>
+        <setEntry value="org.eclipse.emf.cdo.expressions@default:default"/>
+        <setEntry value="org.eclipse.emf.cdo.lm.modules@default:default"/>
+        <setEntry value="org.eclipse.emf.cdo.lm.server@default:default"/>
+        <setEntry value="org.eclipse.emf.cdo.lm@default:default"/>
+        <setEntry value="org.eclipse.emf.cdo.net4j@default:default"/>
+        <setEntry value="org.eclipse.emf.cdo.security@default:default"/>
+        <setEntry value="org.eclipse.emf.cdo.server.db@default:default"/>
+        <setEntry value="org.eclipse.emf.cdo.server.embedded@default:default"/>
+        <setEntry value="org.eclipse.emf.cdo.server.net4j@default:default"/>
+        <setEntry value="org.eclipse.emf.cdo.server.security@default:default"/>
+        <setEntry value="org.eclipse.emf.cdo.server@default:default"/>
+        <setEntry value="org.eclipse.emf.cdo.transfer.repository@default:default"/>
+        <setEntry value="org.eclipse.emf.cdo.transfer.ui@default:default"/>
+        <setEntry value="org.eclipse.emf.cdo.transfer.workspace@default:default"/>
+        <setEntry value="org.eclipse.emf.cdo.transfer@default:default"/>
+        <setEntry value="org.eclipse.emf.cdo.ui.compare@default:default"/>
+        <setEntry value="org.eclipse.emf.cdo.ui.shared@default:default"/>
+        <setEntry value="org.eclipse.emf.cdo.ui.team@default:default"/>
+        <setEntry value="org.eclipse.emf.cdo.ui@default:default"/>
+        <setEntry value="org.eclipse.emf.cdo.workspace@default:default"/>
+        <setEntry value="org.eclipse.emf.cdo@default:default"/>
+        <setEntry value="org.eclipse.emf.codegen.ecore.ui@default:default"/>
+        <setEntry value="org.eclipse.emf.codegen.ecore@default:default"/>
+        <setEntry value="org.eclipse.emf.codegen@default:default"/>
+        <setEntry value="org.eclipse.emf.common.ui@default:default"/>
+        <setEntry value="org.eclipse.emf.common@default:default"/>
+        <setEntry value="org.eclipse.emf.compare.edit@default:default"/>
+        <setEntry value="org.eclipse.emf.compare.ide.ui@default:default"/>
+        <setEntry value="org.eclipse.emf.compare.ide@default:default"/>
+        <setEntry value="org.eclipse.emf.compare.rcp.ui@default:default"/>
+        <setEntry value="org.eclipse.emf.compare.rcp@default:default"/>
+        <setEntry value="org.eclipse.emf.compare@default:default"/>
+        <setEntry value="org.eclipse.emf.converter@default:default"/>
+        <setEntry value="org.eclipse.emf.databinding.edit@default:default"/>
+        <setEntry value="org.eclipse.emf.databinding@default:default"/>
+        <setEntry value="org.eclipse.emf.ecore.change@default:default"/>
+        <setEntry value="org.eclipse.emf.ecore.edit@default:default"/>
+        <setEntry value="org.eclipse.emf.ecore.editor@default:default"/>
+        <setEntry value="org.eclipse.emf.ecore.xmi@default:default"/>
+        <setEntry value="org.eclipse.emf.ecore@default:default"/>
+        <setEntry value="org.eclipse.emf.edit.ui@default:default"/>
+        <setEntry value="org.eclipse.emf.edit@default:default"/>
+        <setEntry value="org.eclipse.emf.importer.ecore@default:default"/>
+        <setEntry value="org.eclipse.emf.importer@default:default"/>
+        <setEntry value="org.eclipse.emf.parsley.common@default:default"/>
+        <setEntry value="org.eclipse.emf.parsley.runtime.common@default:default"/>
+        <setEntry value="org.eclipse.emf.parsley.runtime@default:default"/>
+        <setEntry value="org.eclipse.emf.parsley.views.common@default:default"/>
+        <setEntry value="org.eclipse.emf.parsley.views@default:default"/>
+        <setEntry value="org.eclipse.emf.parsley@default:default"/>
+        <setEntry value="org.eclipse.emf.query@default:default"/>
+        <setEntry value="org.eclipse.emf.transaction@default:default"/>
+        <setEntry value="org.eclipse.emf.validation@default:default"/>
+        <setEntry value="org.eclipse.equinox.app*1.6.400.v20231103-0807@default:default"/>
+        <setEntry value="org.eclipse.equinox.bidi*1.4.400.v20231106-0858@default:default"/>
+        <setEntry value="org.eclipse.equinox.common*3.18.200.v20231106-1826@2:true"/>
+        <setEntry value="org.eclipse.equinox.concurrent*1.2.200.v20231103-0833@default:default"/>
+        <setEntry value="org.eclipse.equinox.console*1.4.600.v20231106-0859@default:default"/>
+        <setEntry value="org.eclipse.equinox.event*1.6.300.v20231012-1251@default:default"/>
+        <setEntry value="org.eclipse.equinox.frameworkadmin*2.3.0.v20230919-1457@default:default"/>
+        <setEntry value="org.eclipse.equinox.frameworkadmin.equinox*1.3.0.v20231106-1059@default:default"/>
+        <setEntry value="org.eclipse.equinox.launcher*1.6.600.v20231106-1826@default:default"/>
+        <setEntry value="org.eclipse.equinox.launcher.gtk.linux.x86_64*1.2.800.v20231003-1442@default:false"/>
+        <setEntry value="org.eclipse.equinox.p2.artifact.repository*1.5.200.v20231105-1139@default:default"/>
+        <setEntry value="org.eclipse.equinox.p2.core*2.10.200.v20231102-1258@default:default"/>
+        <setEntry value="org.eclipse.equinox.p2.director*2.6.200.v20231021-1906@default:default"/>
+        <setEntry value="org.eclipse.equinox.p2.director.app*1.3.200.v20231103-0929@default:default"/>
+        <setEntry value="org.eclipse.equinox.p2.directorywatcher*1.4.200.v20230921-2011@default:default"/>
+        <setEntry value="org.eclipse.equinox.p2.engine*2.9.0.v20231105-1139@default:default"/>
+        <setEntry value="org.eclipse.equinox.p2.extensionlocation*1.5.200.v20230914-2056@default:default"/>
+        <setEntry value="org.eclipse.equinox.p2.garbagecollector*1.3.100.v20230630-1506@default:default"/>
+        <setEntry value="org.eclipse.equinox.p2.jarprocessor*1.3.200.v20230630-1506@default:default"/>
+        <setEntry value="org.eclipse.equinox.p2.metadata*2.8.0.v20231102-1258@default:default"/>
+        <setEntry value="org.eclipse.equinox.p2.metadata.repository*1.5.200.v20231021-1438@default:default"/>
+        <setEntry value="org.eclipse.equinox.p2.operations*2.7.200.v20231105-1139@default:default"/>
+        <setEntry value="org.eclipse.equinox.p2.publisher*1.9.0.v20230921-2011@default:default"/>
+        <setEntry value="org.eclipse.equinox.p2.publisher.eclipse*1.5.200.v20231105-1123@default:default"/>
+        <setEntry value="org.eclipse.equinox.p2.repository*2.8.0.v20231111-1058@default:default"/>
+        <setEntry value="org.eclipse.equinox.p2.repository.tools*2.4.200.v20231021-1906@default:default"/>
+        <setEntry value="org.eclipse.equinox.p2.touchpoint.eclipse*2.4.100.v20230630-1506@default:default"/>
+        <setEntry value="org.eclipse.equinox.p2.touchpoint.natives*1.5.100.v20230630-1506@default:default"/>
+        <setEntry value="org.eclipse.equinox.p2.transport.ecf*1.4.100.v20230630-1506@default:default"/>
+        <setEntry value="org.eclipse.equinox.p2.ui*2.8.200.v20231105-1139@default:default"/>
+        <setEntry value="org.eclipse.equinox.p2.updatesite*1.3.200.v20231008-1114@default:default"/>
+        <setEntry value="org.eclipse.equinox.preferences*3.10.400.v20231102-2218@default:default"/>
+        <setEntry value="org.eclipse.equinox.region@default:false"/>
+        <setEntry value="org.eclipse.equinox.registry*3.11.400.v20231102-2218@default:default"/>
+        <setEntry value="org.eclipse.equinox.security*1.4.100.v20231012-1825@default:default"/>
+        <setEntry value="org.eclipse.equinox.security.linux*1.1.100.v20231012-1237@default:false"/>
+        <setEntry value="org.eclipse.equinox.security.ui*1.4.100.v20231103-0809@default:default"/>
+        <setEntry value="org.eclipse.equinox.simpleconfigurator*1.5.0.v20230919-1457@1:true"/>
+        <setEntry value="org.eclipse.equinox.simpleconfigurator.manipulator*2.3.0.v20230919-1457@default:default"/>
+        <setEntry value="org.eclipse.equinox.transforms.hook@default:false"/>
+        <setEntry value="org.eclipse.equinox.weaving.hook*1.3.300.v20231106-1826@default:false"/>
+        <setEntry value="org.eclipse.help*3.10.200.v20231106-1240@default:default"/>
+        <setEntry value="org.eclipse.help.base*4.4.200.v20231201-0110@default:default"/>
+        <setEntry value="org.eclipse.help.ui*4.6.100.v20231106-1240@default:default"/>
+        <setEntry value="org.eclipse.jdt.annotation*2.2.800.v20231029-1039@default:default"/>
+        <setEntry value="org.eclipse.jdt.core*3.36.0.v20231115-1055@default:default"/>
+        <setEntry value="org.eclipse.jdt.core.compiler.batch@default:default"/>
+        <setEntry value="org.eclipse.jdt.core.manipulation@default:default"/>
+        <setEntry value="org.eclipse.jdt.debug.ui@default:default"/>
+        <setEntry value="org.eclipse.jdt.debug@default:default"/>
+        <setEntry value="org.eclipse.jdt.junit.core@default:default"/>
+        <setEntry value="org.eclipse.jdt.junit.runtime@default:default"/>
+        <setEntry value="org.eclipse.jdt.junit5.runtime@default:default"/>
+        <setEntry value="org.eclipse.jdt.junit@default:default"/>
+        <setEntry value="org.eclipse.jdt.launching@default:default"/>
+        <setEntry value="org.eclipse.jdt.ui@default:default"/>
+        <setEntry value="org.eclipse.jface*3.32.0.v20231107-0834@default:default"/>
+        <setEntry value="org.eclipse.jface.databinding*1.15.100.v20230708-0916@default:default"/>
+        <setEntry value="org.eclipse.jface.text*3.24.200.v20231024-0828@default:default"/>
+        <setEntry value="org.eclipse.jgit@default:default"/>
+        <setEntry value="org.eclipse.ltk.core.refactoring*3.14.200.v20231106-1218@default:default"/>
+        <setEntry value="org.eclipse.ltk.ui.refactoring*3.13.200.v20231006-1610@default:default"/>
+        <setEntry value="org.eclipse.m2m.qvt.oml.common@default:default"/>
+        <setEntry value="org.eclipse.m2m.qvt.oml.cst.parser@default:default"/>
+        <setEntry value="org.eclipse.m2m.qvt.oml.ecore.imperativeocl@default:default"/>
+        <setEntry value="org.eclipse.m2m.qvt.oml.emf.util@default:default"/>
+        <setEntry value="org.eclipse.m2m.qvt.oml.ocl@default:default"/>
+        <setEntry value="org.eclipse.m2m.qvt.oml.project@default:default"/>
+        <setEntry value="org.eclipse.m2m.qvt.oml.runtime@default:default"/>
+        <setEntry value="org.eclipse.m2m.qvt.oml@default:default"/>
+        <setEntry value="org.eclipse.net4j.db.h2@default:default"/>
+        <setEntry value="org.eclipse.net4j.db.jdbc@default:default"/>
+        <setEntry value="org.eclipse.net4j.db@default:default"/>
+        <setEntry value="org.eclipse.net4j.jms.api@default:default"/>
+        <setEntry value="org.eclipse.net4j.jvm@default:default"/>
+        <setEntry value="org.eclipse.net4j.tcp@default:default"/>
+        <setEntry value="org.eclipse.net4j.ui.shared@default:default"/>
+        <setEntry value="org.eclipse.net4j.util.ui@default:default"/>
+        <setEntry value="org.eclipse.net4j.util@default:default"/>
+        <setEntry value="org.eclipse.net4j@default:default"/>
+        <setEntry value="org.eclipse.ocl.common@default:default"/>
+        <setEntry value="org.eclipse.ocl.ecore@default:default"/>
+        <setEntry value="org.eclipse.ocl@default:default"/>
+        <setEntry value="org.eclipse.osgi*3.18.600.v20231110-1900@1:true"/>
+        <setEntry value="org.eclipse.osgi.compatibility.state*1.2.900.v20231106-0859@default:false"/>
+        <setEntry value="org.eclipse.osgi.services*3.11.200.v20231106-0901@default:default"/>
+        <setEntry value="org.eclipse.pde.api.tools@default:default"/>
+        <setEntry value="org.eclipse.pde.build@default:default"/>
+        <setEntry value="org.eclipse.pde.core*3.17.200.v20231118-2008@default:default"/>
+        <setEntry value="org.eclipse.pde.ds.annotations@default:default"/>
+        <setEntry value="org.eclipse.pde.ds.core@default:default"/>
+        <setEntry value="org.eclipse.pde.junit.runtime@default:default"/>
+        <setEntry value="org.eclipse.pde.launching@default:default"/>
+        <setEntry value="org.eclipse.pde.ui@default:default"/>
+        <setEntry value="org.eclipse.search*3.16.0.v20230921-2245@default:default"/>
+        <setEntry value="org.eclipse.search.core@default:default"/>
+        <setEntry value="org.eclipse.swt*3.124.200.v20231113-1355@default:default"/>
+        <setEntry value="org.eclipse.swt.gtk.linux.x86_64*3.124.200.v20231113-1355@default:false"/>
+        <setEntry value="org.eclipse.team.core*3.10.200.v20231106-1240@default:default"/>
+        <setEntry value="org.eclipse.team.ui*3.10.200.v20231106-1240@default:default"/>
+        <setEntry value="org.eclipse.text*3.13.100.v20230801-1334@default:default"/>
+        <setEntry value="org.eclipse.ui*3.205.0.v20230922-1312@default:default"/>
+        <setEntry value="org.eclipse.ui.cheatsheets*3.8.200.v20231106-1240@default:default"/>
+        <setEntry value="org.eclipse.ui.console*3.13.100.v20230914-0751@default:default"/>
+        <setEntry value="org.eclipse.ui.editors*3.17.100.v20231106-1600@default:default"/>
+        <setEntry value="org.eclipse.ui.externaltools*3.6.200.v20231102-2015@default:default"/>
+        <setEntry value="org.eclipse.ui.forms*3.13.100.v20231102-1012@default:default"/>
+        <setEntry value="org.eclipse.ui.genericeditor*1.3.200.v20231113-1227@default:default"/>
+        <setEntry value="org.eclipse.ui.ide*3.22.0.v20231102-1012@default:default"/>
+        <setEntry value="org.eclipse.ui.ide.application*1.5.200.v20231030-2045@default:default"/>
+        <setEntry value="org.eclipse.ui.intro*3.7.200.v20231106-1240@default:default"/>
+        <setEntry value="org.eclipse.ui.navigator*3.12.200.v20231019-2116@default:default"/>
+        <setEntry value="org.eclipse.ui.navigator.resources*3.9.100.v20230821-1342@default:default"/>
+        <setEntry value="org.eclipse.ui.views*3.12.100.v20230821-1342@default:default"/>
+        <setEntry value="org.eclipse.ui.views.log*1.4.200.v20231025-1102@default:default"/>
+        <setEntry value="org.eclipse.ui.views.properties.tabbed*3.10.100.v20230727-0604@default:default"/>
+        <setEntry value="org.eclipse.ui.workbench*3.131.0.v20231201-0512@default:default"/>
+        <setEntry value="org.eclipse.ui.workbench.texteditor*3.17.200.v20231106-1600@default:default"/>
+        <setEntry value="org.eclipse.urischeme*1.3.100.v20230727-0604@default:default"/>
+        <setEntry value="org.eclipse.xtext.xbase.lib@default:default"/>
+        <setEntry value="org.h2@default:default"/>
+        <setEntry value="org.hamcrest.core*2.2.0.v20230809-1000@default:default"/>
+        <setEntry value="org.hamcrest@default:default"/>
+        <setEntry value="org.junit@default:default"/>
+        <setEntry value="org.objectweb.asm*9.4.0.v20221107-1714@default:default"/>
+        <setEntry value="org.objectweb.asm*9.6.0@default:default"/>
+        <setEntry value="org.objectweb.asm.commons@default:default"/>
+        <setEntry value="org.objectweb.asm.tree*9.4.0.v20221107-1714@default:default"/>
+        <setEntry value="org.objectweb.asm.tree*9.6.0@default:default"/>
+        <setEntry value="org.objectweb.asm.tree.analysis*9.6.0@default:default"/>
+        <setEntry value="org.objectweb.asm.util*9.5.0@default:default"/>
+        <setEntry value="org.opentest4j@default:default"/>
+        <setEntry value="org.osgi.service.cm@default:default"/>
+        <setEntry value="org.osgi.service.component*1.5.1.202212101352@default:default"/>
+        <setEntry value="org.osgi.service.device@default:default"/>
+        <setEntry value="org.osgi.service.event@default:default"/>
+        <setEntry value="org.osgi.service.metatype@default:default"/>
+        <setEntry value="org.osgi.service.prefs@default:default"/>
+        <setEntry value="org.osgi.service.provisioning@default:default"/>
+        <setEntry value="org.osgi.service.repository@default:default"/>
+        <setEntry value="org.osgi.service.upnp@default:default"/>
+        <setEntry value="org.osgi.service.useradmin@default:default"/>
+        <setEntry value="org.osgi.service.wireadmin@default:default"/>
+        <setEntry value="org.osgi.test.common@default:default"/>
+        <setEntry value="org.osgi.test.junit5@default:default"/>
+        <setEntry value="org.osgi.util.function@default:default"/>
+        <setEntry value="org.osgi.util.promise*1.3.0.202212101352@default:default"/>
+        <setEntry value="org.sat4j.core@default:default"/>
+        <setEntry value="org.sat4j.pb@default:default"/>
+        <setEntry value="org.slf4j.api*1.7.30.v20221112-0806@default:default"/>
+        <setEntry value="org.slf4j.binding.nop@default:false"/>
+        <setEntry value="org.tukaani.xz*1.9.0.v20210624-1259@default:default"/>
+        <setEntry value="org.w3c.css.sac@default:default"/>
+        <setEntry value="org.w3c.dom.events@default:default"/>
+        <setEntry value="org.w3c.dom.smil@default:default"/>
+        <setEntry value="org.w3c.dom.svg@default:default"/>
+        <setEntry value="wrapped.aopalliance.aopalliance@default:default"/>
+        <setEntry value="wrapped.org.apache.xmlgraphics.batik-all@default:default"/>
+    </setAttribute>
+    <setAttribute key="selected_workspace_bundles">
+        <setEntry value="org.enterprisedomain.classmaker.cdo.master@default:default"/>
+        <setEntry value="org.enterprisedomain.classmaker.cdo.ui@default:default"/>
+        <setEntry value="org.enterprisedomain.classmaker.cdo@default:default"/>
+        <setEntry value="org.enterprisedomain.classmaker.edit@default:default"/>
+        <setEntry value="org.enterprisedomain.classmaker.images.ui.edit@default:default"/>
+        <setEntry value="org.enterprisedomain.classmaker.images.ui@default:default"/>
+        <setEntry value="org.enterprisedomain.classmaker.invoke.ui@default:default"/>
+        <setEntry value="org.enterprisedomain.classmaker.libraries@default:default"/>
+        <setEntry value="org.enterprisedomain.classmaker.load.cdo@default:default"/>
+        <setEntry value="org.enterprisedomain.classmaker.load@default:default"/>
+        <setEntry value="org.enterprisedomain.classmaker.osgi.systemextension@default:false"/>
+        <setEntry value="org.enterprisedomain.classmaker.parsley@default:default"/>
+        <setEntry value="org.enterprisedomain.classmaker.sample@default:default"/>
+        <setEntry value="org.enterprisedomain.classmaker.tests@default:default"/>
+        <setEntry value="org.enterprisedomain.classmaker@default:default"/>
+        <setEntry value="org.enterprisedomain.editor@default:default"/>
+        <setEntry value="org.enterprisedomain.workbench@default:default"/>
+    </setAttribute>
+    <booleanAttribute key="show_selected_only" value="false"/>
+    <stringAttribute key="templateConfig" value="${target_home}/configuration/config.ini"/>
+    <booleanAttribute key="tracing" value="false"/>
+    <mapAttribute key="tracingOptions">
+        <mapEntry key="org.aspectj.osgi.service.caching.j9/debug" value="false"/>
+        <mapEntry key="org.eclipse.core.contenttype/debug" value="false"/>
+        <mapEntry key="org.eclipse.core.expressions/debug/TypeExtensionManager" value="false"/>
+        <mapEntry key="org.eclipse.core.expressions/tracePropertyResolving" value="false"/>
+        <mapEntry key="org.eclipse.core.jobs/jobs" value="false"/>
+        <mapEntry key="org.eclipse.core.jobs/jobs/beginend" value="false"/>
+        <mapEntry key="org.eclipse.core.jobs/jobs/errorondeadlock" value="false"/>
+        <mapEntry key="org.eclipse.core.jobs/jobs/locks" value="false"/>
+        <mapEntry key="org.eclipse.core.jobs/jobs/shutdown" value="false"/>
+        <mapEntry key="org.eclipse.core.net/debug" value="false"/>
+        <mapEntry key="org.eclipse.core.net/systemproviders" value="false"/>
+        <mapEntry key="org.eclipse.core.resources/build/cycle" value="false"/>
+        <mapEntry key="org.eclipse.core.resources/build/delta" value="false"/>
+        <mapEntry key="org.eclipse.core.resources/build/failure" value="false"/>
+        <mapEntry key="org.eclipse.core.resources/build/interrupt" value="false"/>
+        <mapEntry key="org.eclipse.core.resources/build/invoking" value="false"/>
+        <mapEntry key="org.eclipse.core.resources/build/needbuild" value="false"/>
+        <mapEntry key="org.eclipse.core.resources/build/needbuilddelta" value="false"/>
+        <mapEntry key="org.eclipse.core.resources/build/needbuildstack" value="false"/>
+        <mapEntry key="org.eclipse.core.resources/build/stacktrace" value="false"/>
+        <mapEntry key="org.eclipse.core.resources/contenttype" value="false"/>
+        <mapEntry key="org.eclipse.core.resources/contenttype/cache" value="false"/>
+        <mapEntry key="org.eclipse.core.resources/debug" value="false"/>
+        <mapEntry key="org.eclipse.core.resources/history" value="false"/>
+        <mapEntry key="org.eclipse.core.resources/natures" value="false"/>
+        <mapEntry key="org.eclipse.core.resources/notifications" value="false"/>
+        <mapEntry key="org.eclipse.core.resources/perf/builders" value="10000"/>
+        <mapEntry key="org.eclipse.core.resources/perf/listeners" value="500"/>
+        <mapEntry key="org.eclipse.core.resources/perf/save.participants" value="500"/>
+        <mapEntry key="org.eclipse.core.resources/perf/snapshot" value="1000"/>
+        <mapEntry key="org.eclipse.core.resources/preferences" value="false"/>
+        <mapEntry key="org.eclipse.core.resources/refresh" value="false"/>
+        <mapEntry key="org.eclipse.core.resources/restore" value="false"/>
+        <mapEntry key="org.eclipse.core.resources/restore/markers" value="false"/>
+        <mapEntry key="org.eclipse.core.resources/restore/mastertable" value="false"/>
+        <mapEntry key="org.eclipse.core.resources/restore/metainfo" value="false"/>
+        <mapEntry key="org.eclipse.core.resources/restore/snapshots" value="false"/>
+        <mapEntry key="org.eclipse.core.resources/restore/syncinfo" value="false"/>
+        <mapEntry key="org.eclipse.core.resources/restore/tree" value="false"/>
+        <mapEntry key="org.eclipse.core.resources/save" value="false"/>
+        <mapEntry key="org.eclipse.core.resources/save/markers" value="false"/>
+        <mapEntry key="org.eclipse.core.resources/save/mastertable" value="false"/>
+        <mapEntry key="org.eclipse.core.resources/save/metainfo" value="false"/>
+        <mapEntry key="org.eclipse.core.resources/save/syncinfo" value="false"/>
+        <mapEntry key="org.eclipse.core.resources/save/tree" value="false"/>
+        <mapEntry key="org.eclipse.core.resources/strings" value="false"/>
+        <mapEntry key="org.eclipse.core.runtime/compatibility/debug" value="false"/>
+        <mapEntry key="org.eclipse.core.runtime/debug" value="false"/>
+        <mapEntry key="org.eclipse.core.runtime/debug/context" value="false"/>
+        <mapEntry key="org.eclipse.core.runtime/perf" value="false"/>
+        <mapEntry key="org.eclipse.core.runtime/perf/success" value="false"/>
+        <mapEntry key="org.eclipse.core.runtime/preferences/plugin" value="false"/>
+        <mapEntry key="org.eclipse.core.runtime/url/debug" value="false"/>
+        <mapEntry key="org.eclipse.core.runtime/url/debug/cachecopy" value="false"/>
+        <mapEntry key="org.eclipse.core.runtime/url/debug/cachelookup" value="false"/>
+        <mapEntry key="org.eclipse.core.runtime/url/debug/connect" value="false"/>
+        <mapEntry key="org.eclipse.debug.core/debug" value="false"/>
+        <mapEntry key="org.eclipse.debug.core/debug/commands" value="false"/>
+        <mapEntry key="org.eclipse.debug.core/debug/events" value="false"/>
+        <mapEntry key="org.eclipse.debug.ui/debug" value="false"/>
+        <mapEntry key="org.eclipse.debug.ui/debug/breadcrumb" value="false"/>
+        <mapEntry key="org.eclipse.debug.ui/debug/commandservice" value="false"/>
+        <mapEntry key="org.eclipse.debug.ui/debug/contextlaunching" value="false"/>
+        <mapEntry key="org.eclipse.debug.ui/debug/launchhistory" value="false"/>
+        <mapEntry key="org.eclipse.debug.ui/debug/memory/dynamicLoading" value="false"/>
+        <mapEntry key="org.eclipse.debug.ui/debug/viewers/breakpointDeltas" value="false"/>
+        <mapEntry key="org.eclipse.debug.ui/debug/viewers/contentProvider" value="false"/>
+        <mapEntry key="org.eclipse.debug.ui/debug/viewers/deltas" value="false"/>
+        <mapEntry key="org.eclipse.debug.ui/debug/viewers/model" value="false"/>
+        <mapEntry key="org.eclipse.debug.ui/debug/viewers/presentationId" value=""/>
+        <mapEntry key="org.eclipse.debug.ui/debug/viewers/stateSaveRestore" value="false"/>
+        <mapEntry key="org.eclipse.debug.ui/debug/viewers/updateSequence" value="false"/>
+        <mapEntry key="org.eclipse.debug.ui/debug/viewers/viewer" value="false"/>
+        <mapEntry key="org.eclipse.e4.core.contexts/debug" value="false"/>
+        <mapEntry key="org.eclipse.e4.core.contexts/debug/listeners" value="false"/>
+        <mapEntry key="org.eclipse.e4.core.contexts/debug/names" value="false"/>
+        <mapEntry key="org.eclipse.e4.core.di/debug" value="false"/>
+        <mapEntry key="org.eclipse.e4.core.services/debug" value="false"/>
+        <mapEntry key="org.eclipse.e4.core.services/debug/injector" value="false"/>
+        <mapEntry key="org.eclipse.e4.ui.workbench.swt/debug" value="false"/>
+        <mapEntry key="org.eclipse.e4.ui.workbench.swt/trace" value="false"/>
+        <mapEntry key="org.eclipse.e4.ui.workbench.swt/trace/commands" value="false"/>
+        <mapEntry key="org.eclipse.e4.ui.workbench.swt/trace/eclipse.context" value="false"/>
+        <mapEntry key="org.eclipse.e4.ui.workbench.swt/trace/eclipse.context.verbose" value="false"/>
+        <mapEntry key="org.eclipse.e4.ui.workbench.swt/trace/focus" value="false"/>
+        <mapEntry key="org.eclipse.e4.ui.workbench.swt/trace/menus" value="false"/>
+        <mapEntry key="org.eclipse.e4.ui.workbench.swt/trace/renderer" value="false"/>
+        <mapEntry key="org.eclipse.e4.ui.workbench.swt/trace/workbench" value="false"/>
+        <mapEntry key="org.eclipse.e4.ui.workbench/debug" value="false"/>
+        <mapEntry key="org.eclipse.e4.ui.workbench/trace" value="false"/>
+        <mapEntry key="org.eclipse.e4.ui.workbench/trace/commands" value="false"/>
+        <mapEntry key="org.eclipse.e4.ui.workbench/trace/eclipse.context" value="false"/>
+        <mapEntry key="org.eclipse.e4.ui.workbench/trace/eclipse.context.verbose" value="false"/>
+        <mapEntry key="org.eclipse.e4.ui.workbench/trace/focus" value="false"/>
+        <mapEntry key="org.eclipse.e4.ui.workbench/trace/menus" value="false"/>
+        <mapEntry key="org.eclipse.e4.ui.workbench/trace/renderer" value="false"/>
+        <mapEntry key="org.eclipse.e4.ui.workbench/trace/workbench" value="false"/>
+        <mapEntry key="org.eclipse.emf.cdo.admin/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.admin/debug.protocol" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.common/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.common/debug.id" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.common/debug.protocol" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.common/debug.revision" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.common/perf" value="false"/>
+        <mapEntry key="org.eclipse.emf.cdo.common/perf.revision" value="false"/>
+        <mapEntry key="org.eclipse.emf.cdo.common/perf.revision.reading" value="false"/>
+        <mapEntry key="org.eclipse.emf.cdo.common/perf.revision.writing" value="false"/>
+        <mapEntry key="org.eclipse.emf.cdo.compare/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.dawn.ui/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.dawn.ui/debug.object" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.dawn.util/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.dawn.util/debug.object" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.dawn/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.examples/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.explorer.ui/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.explorer/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.net4j/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.net4j/perf" value="false"/>
+        <mapEntry key="org.eclipse.emf.cdo.net4j/perf.revision" value="false"/>
+        <mapEntry key="org.eclipse.emf.cdo.net4j/perf.revision.loading" value="false"/>
+        <mapEntry key="org.eclipse.emf.cdo.security/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.server.admin/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.server.admin/debug.protocol" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.server.db/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.server.db/debug.units" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.server.embedded/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.server.lissome/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.server.lissome/debug.index" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.server.lissome/debug.journal" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.server.lissome/debug.vob" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.server.mongodb/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.server.net4j/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.server/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.server/debug.repository" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.server/debug.session" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.server/debug.transaction" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.tests.all/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.tests.db/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.tests.lissome/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.tests.mongodb/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.tests/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.transfer.repository/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.transfer.ui/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.transfer.workspace.ui/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.transfer.workspace/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.transfer/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.ui.admin/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.ui.compare/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.ui.shared/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.ui.team/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.ui/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo.workspace/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo/debug.object" value="false"/>
+        <mapEntry key="org.eclipse.emf.cdo/debug.object.statemachine" value="false"/>
+        <mapEntry key="org.eclipse.emf.cdo/debug.object.store" value="false"/>
+        <mapEntry key="org.eclipse.emf.cdo/debug.session" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo/debug.session.model" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo/debug.session.revision" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo/debug.view" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo/debug.view.audit" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo/debug.view.transaction" value="true"/>
+        <mapEntry key="org.eclipse.emf.cdo/load.resource.before.notification" value="false"/>
+        <mapEntry key="org.eclipse.emf.query/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.query/debug/exceptions/catching" value="false"/>
+        <mapEntry key="org.eclipse.emf.query/debug/exceptions/throwing" value="false"/>
+        <mapEntry key="org.eclipse.emf.query/debug/methods/entering" value="false"/>
+        <mapEntry key="org.eclipse.emf.query/debug/methods/exiting" value="false"/>
+        <mapEntry key="org.eclipse.emf.transaction/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.transaction/debug/exceptions/catching" value="false"/>
+        <mapEntry key="org.eclipse.emf.transaction/debug/exceptions/throwing" value="false"/>
+        <mapEntry key="org.eclipse.emf.transaction/debug/locking" value="false"/>
+        <mapEntry key="org.eclipse.emf.transaction/debug/methods/entering" value="false"/>
+        <mapEntry key="org.eclipse.emf.transaction/debug/methods/exiting" value="false"/>
+        <mapEntry key="org.eclipse.emf.transaction/debug/transactions" value="false"/>
+        <mapEntry key="org.eclipse.emf.validation/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.validation/debug/cache" value="false"/>
+        <mapEntry key="org.eclipse.emf.validation/debug/constraints" value="false"/>
+        <mapEntry key="org.eclipse.emf.validation/debug/constraints/disabled" value="false"/>
+        <mapEntry key="org.eclipse.emf.validation/debug/constraints/evaluation" value="false"/>
+        <mapEntry key="org.eclipse.emf.validation/debug/exceptions/catching" value="false"/>
+        <mapEntry key="org.eclipse.emf.validation/debug/exceptions/throwing" value="false"/>
+        <mapEntry key="org.eclipse.emf.validation/debug/listeners" value="false"/>
+        <mapEntry key="org.eclipse.emf.validation/debug/methods/entering" value="false"/>
+        <mapEntry key="org.eclipse.emf.validation/debug/methods/exiting" value="false"/>
+        <mapEntry key="org.eclipse.emf.validation/debug/parsers" value="false"/>
+        <mapEntry key="org.eclipse.emf.validation/debug/providers" value="false"/>
+        <mapEntry key="org.eclipse.emf.validation/debug/xml" value="false"/>
+        <mapEntry key="org.eclipse.emf.workspace/debug" value="true"/>
+        <mapEntry key="org.eclipse.emf.workspace/debug/exceptions/catching" value="false"/>
+        <mapEntry key="org.eclipse.emf.workspace/debug/exceptions/throwing" value="false"/>
+        <mapEntry key="org.eclipse.emf.workspace/debug/methods/entering" value="false"/>
+        <mapEntry key="org.eclipse.emf.workspace/debug/methods/exiting" value="false"/>
+        <mapEntry key="org.eclipse.equinox.common/debug" value="false"/>
+        <mapEntry key="org.eclipse.equinox.common/progress_monitors" value="false"/>
+        <mapEntry key="org.eclipse.equinox.p2.core/artifacts/mirrors" value="false"/>
+        <mapEntry key="org.eclipse.equinox.p2.core/core/parseproblems" value="false"/>
+        <mapEntry key="org.eclipse.equinox.p2.core/core/removeRepo" value="false"/>
+        <mapEntry key="org.eclipse.equinox.p2.core/debug" value="false"/>
+        <mapEntry key="org.eclipse.equinox.p2.core/engine/installregistry" value="false"/>
+        <mapEntry key="org.eclipse.equinox.p2.core/engine/profilepreferences" value="false"/>
+        <mapEntry key="org.eclipse.equinox.p2.core/events/client" value="false"/>
+        <mapEntry key="org.eclipse.equinox.p2.core/generator/parsing" value="false"/>
+        <mapEntry key="org.eclipse.equinox.p2.core/metadata/parsing" value="false"/>
+        <mapEntry key="org.eclipse.equinox.p2.core/planner/encoding" value="false"/>
+        <mapEntry key="org.eclipse.equinox.p2.core/planner/operands" value="false"/>
+        <mapEntry key="org.eclipse.equinox.p2.core/planner/projector" value="false"/>
+        <mapEntry key="org.eclipse.equinox.p2.core/publisher" value="false"/>
+        <mapEntry key="org.eclipse.equinox.p2.core/reconciler" value="false"/>
+        <mapEntry key="org.eclipse.equinox.p2.core/ui/default" value="false"/>
+        <mapEntry key="org.eclipse.equinox.p2.core/updatechecker" value="false"/>
+        <mapEntry key="org.eclipse.equinox.p2.engine/certificatechecker/unsigned" value="false"/>
+        <mapEntry key="org.eclipse.equinox.p2.engine/certificatechecker/untrusted" value="false"/>
+        <mapEntry key="org.eclipse.equinox.p2.engine/engine/debug" value="false"/>
+        <mapEntry key="org.eclipse.equinox.p2.engine/enginesession/debug" value="false"/>
+        <mapEntry key="org.eclipse.equinox.p2.engine/profileregistry/debug" value="false"/>
+        <mapEntry key="org.eclipse.equinox.p2.repository/credentials/debug" value="false"/>
+        <mapEntry key="org.eclipse.equinox.p2.repository/keyservice/debug" value="false"/>
+        <mapEntry key="org.eclipse.equinox.p2.repository/transport/debug" value="false"/>
+        <mapEntry key="org.eclipse.equinox.preferences/general" value="false"/>
+        <mapEntry key="org.eclipse.equinox.preferences/get" value="false"/>
+        <mapEntry key="org.eclipse.equinox.preferences/set" value="false"/>
+        <mapEntry key="org.eclipse.equinox.registry/debug" value="false"/>
+        <mapEntry key="org.eclipse.equinox.registry/debug/events" value="false"/>
+        <mapEntry key="org.eclipse.equinox.security.ui/debug" value="false"/>
+        <mapEntry key="org.eclipse.equinox.security.ui/debug/storage" value="false"/>
+        <mapEntry key="org.eclipse.equinox.security/debug" value="false"/>
+        <mapEntry key="org.eclipse.equinox.security/debug/loginFramework" value="false"/>
+        <mapEntry key="org.eclipse.equinox.weaving.hook/debug" value="false"/>
+        <mapEntry key="org.eclipse.equinox.weaving.hook/debug/bundle" value="false"/>
+        <mapEntry key="org.eclipse.equinox.weaving.hook/debug/bundleName" value="false"/>
+        <mapEntry key="org.eclipse.equinox.weaving.hook/debug/cache" value="false"/>
+        <mapEntry key="org.eclipse.equinox.weaving.hook/debug/supplements" value="false"/>
+        <mapEntry key="org.eclipse.equinox.weaving.hook/debug/weave" value="true"/>
+        <mapEntry key="org.eclipse.help.ui/debug" value="true"/>
+        <mapEntry key="org.eclipse.help.ui/debug/embeddedBrowser" value="false"/>
+        <mapEntry key="org.eclipse.help.ui/debug/embeddedBrowser/inprocess" value="false"/>
+        <mapEntry key="org.eclipse.help.ui/debug/infopop" value="false"/>
+        <mapEntry key="org.eclipse.help.webapp/debug" value="true"/>
+        <mapEntry key="org.eclipse.help.webapp/debug/workingsets" value="false"/>
+        <mapEntry key="org.eclipse.help/debug" value="true"/>
+        <mapEntry key="org.eclipse.help/debug/context" value="false"/>
+        <mapEntry key="org.eclipse.help/debug/search" value="false"/>
+        <mapEntry key="org.eclipse.help/debug/toc" value="false"/>
+        <mapEntry key="org.eclipse.jdt.apt.core/debug" value="false"/>
+        <mapEntry key="org.eclipse.jdt.apt.core/debug/compilationEnv" value="false"/>
+        <mapEntry key="org.eclipse.jdt.apt.core/debug/generatedFileMaps" value="false"/>
+        <mapEntry key="org.eclipse.jdt.apt.core/debug/generatedFiles" value="false"/>
+        <mapEntry key="org.eclipse.jdt.apt.pluggable.core/debug" value="false"/>
+        <mapEntry key="org.eclipse.jdt.core.manipulation/debug" value="false"/>
+        <mapEntry key="org.eclipse.jdt.core/debug" value="false"/>
+        <mapEntry key="org.eclipse.jdt.core/debug/buffermanager" value="false"/>
+        <mapEntry key="org.eclipse.jdt.core/debug/builder" value="false"/>
+        <mapEntry key="org.eclipse.jdt.core/debug/builder/stats" value="false"/>
+        <mapEntry key="org.eclipse.jdt.core/debug/compiler" value="false"/>
+        <mapEntry key="org.eclipse.jdt.core/debug/completion" value="false"/>
+        <mapEntry key="org.eclipse.jdt.core/debug/cpresolution" value="false"/>
+        <mapEntry key="org.eclipse.jdt.core/debug/cpresolution/advanced" value="false"/>
+        <mapEntry key="org.eclipse.jdt.core/debug/cpresolution/failure" value="false"/>
+        <mapEntry key="org.eclipse.jdt.core/debug/dom/ast" value="false"/>
+        <mapEntry key="org.eclipse.jdt.core/debug/dom/ast/throw" value="false"/>
+        <mapEntry key="org.eclipse.jdt.core/debug/dom/rewrite" value="false"/>
+        <mapEntry key="org.eclipse.jdt.core/debug/formatter" value="false"/>
+        <mapEntry key="org.eclipse.jdt.core/debug/hierarchy" value="false"/>
+        <mapEntry key="org.eclipse.jdt.core/debug/indexmanager" value="false"/>
+        <mapEntry key="org.eclipse.jdt.core/debug/indexmanager/advanced" value="false"/>
+        <mapEntry key="org.eclipse.jdt.core/debug/javadelta" value="false"/>
+        <mapEntry key="org.eclipse.jdt.core/debug/javadelta/verbose" value="false"/>
+        <mapEntry key="org.eclipse.jdt.core/debug/javamodel" value="false"/>
+        <mapEntry key="org.eclipse.jdt.core/debug/javamodel/cache" value="false"/>
+        <mapEntry key="org.eclipse.jdt.core/debug/javamodel/classpath" value="false"/>
+        <mapEntry key="org.eclipse.jdt.core/debug/javamodel/insertions" value="false"/>
+        <mapEntry key="org.eclipse.jdt.core/debug/javamodel/invalid_archives" value="false"/>
+        <mapEntry key="org.eclipse.jdt.core/debug/postaction" value="false"/>
+        <mapEntry key="org.eclipse.jdt.core/debug/resolution" value="false"/>
+        <mapEntry key="org.eclipse.jdt.core/debug/search" value="false"/>
+        <mapEntry key="org.eclipse.jdt.core/debug/selection" value="false"/>
+        <mapEntry key="org.eclipse.jdt.core/debug/sourcemapper" value="false"/>
+        <mapEntry key="org.eclipse.jdt.core/debug/zipaccess" value="false"/>
+        <mapEntry key="org.eclipse.jdt.core/perf/completion" value="300"/>
+        <mapEntry key="org.eclipse.jdt.core/perf/containerinitializer" value="5000"/>
+        <mapEntry key="org.eclipse.jdt.core/perf/javadeltalistener" value="500"/>
+        <mapEntry key="org.eclipse.jdt.core/perf/reconcile" value="1000"/>
+        <mapEntry key="org.eclipse.jdt.core/perf/selection" value="300"/>
+        <mapEntry key="org.eclipse.jdt.core/perf/variableinitializer" value="5000"/>
+        <mapEntry key="org.eclipse.jdt.debug/debug" value="false"/>
+        <mapEntry key="org.eclipse.jdt.debug/debug/astEvaluations" value="false"/>
+        <mapEntry key="org.eclipse.jdt.debug/debug/astEvaluations/callingThreads" value="false"/>
+        <mapEntry key="org.eclipse.jdt.debug/debug/jdi/verbose" value="false"/>
+        <mapEntry key="org.eclipse.jdt.debug/debug/jdi/verbose/file" value=""/>
+        <mapEntry key="org.eclipse.jdt.debug/debug/jdiEvents" value="false"/>
+        <mapEntry key="org.eclipse.jdt.debug/debug/jdiRequestTimes" value="false"/>
+        <mapEntry key="org.eclipse.jdt.launching/debug" value="false"/>
+        <mapEntry key="org.eclipse.jdt.launching/debug/classpath/jreContainer" value="false"/>
+        <mapEntry key="org.eclipse.jdt.ui/debug" value="false"/>
+        <mapEntry key="org.eclipse.jdt.ui/debug/ASTProvider" value="false"/>
+        <mapEntry key="org.eclipse.jdt.ui/debug/BreadcrumbItemDropDown" value="false"/>
+        <mapEntry key="org.eclipse.jdt.ui/debug/ResultCollector" value="false"/>
+        <mapEntry key="org.eclipse.jdt.ui/debug/TypeConstraints" value="false"/>
+        <mapEntry key="org.eclipse.jdt.ui/perf/content_assist/extensions" value="1000"/>
+        <mapEntry key="org.eclipse.jdt.ui/perf/content_assist_sorters/extensions" value=""/>
+        <mapEntry key="org.eclipse.jdt.ui/perf/explorer/RefactorActionGroup" value="150"/>
+        <mapEntry key="org.eclipse.jdt.ui/perf/explorer/createPartControl" value="1300"/>
+        <mapEntry key="org.eclipse.jdt.ui/perf/explorer/makeActions" value="1000"/>
+        <mapEntry key="org.eclipse.jdt.ui/perf/search/participants" value="300"/>
+        <mapEntry key="org.eclipse.jface.text.source/debug/RevisionRulerColumn" value="false"/>
+        <mapEntry key="org.eclipse.jface.text/assert/TextSelection/validConstructorArguments" value="false"/>
+        <mapEntry key="org.eclipse.jface.text/debug/AbstractInformationControlManager" value="false"/>
+        <mapEntry key="org.eclipse.jface.text/debug/AnnotationPainter" value="false"/>
+        <mapEntry key="org.eclipse.jface.text/debug/ContentAssistSubjectAdapters" value="false"/>
+        <mapEntry key="org.eclipse.jface.text/debug/FastPartitioner/PositionCache" value="false"/>
+        <mapEntry key="org.eclipse.jface/debug" value="false"/>
+        <mapEntry key="org.eclipse.jface/debug/bidiUtils" value="false"/>
+        <mapEntry key="org.eclipse.jface/debug/dialog/noparent" value="false"/>
+        <mapEntry key="org.eclipse.jface/debug/loadURLImageDescriptor2x" value="true"/>
+        <mapEntry key="org.eclipse.jface/debug/loadURLImageDescriptor2xPngForGif" value="false"/>
+        <mapEntry key="org.eclipse.jface/debug/loadURLImageDescriptorDirectly" value="false"/>
+        <mapEntry key="org.eclipse.jface/debug/logURLImageDescriptorMissing2x" value="false"/>
+        <mapEntry key="org.eclipse.jface/debug/trace/URLImageDescriptor" value="false"/>
+        <mapEntry key="org.eclipse.jface/debug/viewers/equalElements" value="false"/>
+        <mapEntry key="org.eclipse.jface/debug/viewers/reentrantViewerCalls" value="false"/>
+        <mapEntry key="org.eclipse.jface/newlook/preferences/showNewLook" value="false"/>
+        <mapEntry key="org.eclipse.jface/trace/actions" value="false"/>
+        <mapEntry key="org.eclipse.jface/trace/toolbarDisposal" value="false"/>
+        <mapEntry key="org.eclipse.ltk.core.refactoring/perf/participants/checkConditions" value="300"/>
+        <mapEntry key="org.eclipse.ltk.core.refactoring/perf/participants/createChanges" value="300"/>
+        <mapEntry key="org.eclipse.m2m.qvt.oml.ocl/loglevel" value="Severe"/>
+        <mapEntry key="org.eclipse.net4j.buddies.chat.ui/debug" value="true"/>
+        <mapEntry key="org.eclipse.net4j.buddies.chat/debug" value="true"/>
+        <mapEntry key="org.eclipse.net4j.buddies.common/debug" value="true"/>
+        <mapEntry key="org.eclipse.net4j.buddies.server/debug" value="true"/>
+        <mapEntry key="org.eclipse.net4j.buddies.ui/debug" value="true"/>
+        <mapEntry key="org.eclipse.net4j.buddies/debug" value="true"/>
+        <mapEntry key="org.eclipse.net4j.db.derby/debug" value="true"/>
+        <mapEntry key="org.eclipse.net4j.db.derby/debug.sql" value="true"/>
+        <mapEntry key="org.eclipse.net4j.db.h2/debug" value="true"/>
+        <mapEntry key="org.eclipse.net4j.db.h2/debug.sql" value="true"/>
+        <mapEntry key="org.eclipse.net4j.db.hsqldb/debug" value="true"/>
+        <mapEntry key="org.eclipse.net4j.db.hsqldb/debug.sql" value="true"/>
+        <mapEntry key="org.eclipse.net4j.db.mysql/debug" value="true"/>
+        <mapEntry key="org.eclipse.net4j.db.mysql/debug.sql" value="true"/>
+        <mapEntry key="org.eclipse.net4j.db.oracle/debug" value="true"/>
+        <mapEntry key="org.eclipse.net4j.db.oracle/debug.sql" value="true"/>
+        <mapEntry key="org.eclipse.net4j.db.postgresql/debug" value="true"/>
+        <mapEntry key="org.eclipse.net4j.db.postgresql/debug.sql" value="true"/>
+        <mapEntry key="org.eclipse.net4j.db/debug" value="true"/>
+        <mapEntry key="org.eclipse.net4j.db/debug.sql" value="true"/>
+        <mapEntry key="org.eclipse.net4j.debug/debug" value="true"/>
+        <mapEntry key="org.eclipse.net4j.examples/debug" value="true"/>
+        <mapEntry key="org.eclipse.net4j.jms.admin/debug" value="true"/>
+        <mapEntry key="org.eclipse.net4j.jms.admin/debug.protocol" value="true"/>
+        <mapEntry key="org.eclipse.net4j.jms.server.jdbc/debug" value="true"/>
+        <mapEntry key="org.eclipse.net4j.jms.server/debug" value="true"/>
+        <mapEntry key="org.eclipse.net4j.jms.server/debug.protocol" value="true"/>
+        <mapEntry key="org.eclipse.net4j.jms.server/debug.store" value="true"/>
+        <mapEntry key="org.eclipse.net4j.jms/debug" value="true"/>
+        <mapEntry key="org.eclipse.net4j.jms/debug.protocol" value="true"/>
+        <mapEntry key="org.eclipse.net4j.jvm/debug" value="true"/>
+        <mapEntry key="org.eclipse.net4j.tcp/debug" value="true"/>
+        <mapEntry key="org.eclipse.net4j.tests/debug" value="true"/>
+        <mapEntry key="org.eclipse.net4j.trace.aspectj/debug" value="true"/>
+        <mapEntry key="org.eclipse.net4j.trace/debug" value="true"/>
+        <mapEntry key="org.eclipse.net4j.ui.shared/debug" value="true"/>
+        <mapEntry key="org.eclipse.net4j.ui/debug" value="true"/>
+        <mapEntry key="org.eclipse.net4j.util.ui/debug" value="true"/>
+        <mapEntry key="org.eclipse.net4j.util/debug" value="true"/>
+        <mapEntry key="org.eclipse.net4j.ws/debug" value="true"/>
+        <mapEntry key="org.eclipse.net4j/debug" value="true"/>
+        <mapEntry key="org.eclipse.net4j/debug.acceptor" value="true"/>
+        <mapEntry key="org.eclipse.net4j/debug.buffer" value="true"/>
+        <mapEntry key="org.eclipse.net4j/debug.channel" value="true"/>
+        <mapEntry key="org.eclipse.net4j/debug.connector" value="true"/>
+        <mapEntry key="org.eclipse.net4j/debug.signal" value="true"/>
+        <mapEntry key="org.eclipse.net4j/open.channel.timeout" value="10000"/>
+        <mapEntry key="org.eclipse.net4j/set.signal.thread.name" value="false"/>
+        <mapEntry key="org.eclipse.ocl/debug" value="true"/>
+        <mapEntry key="org.eclipse.ocl/debug/evaluation" value="false"/>
+        <mapEntry key="org.eclipse.ocl/debug/exceptions/catching" value="false"/>
+        <mapEntry key="org.eclipse.ocl/debug/exceptions/throwing" value="false"/>
+        <mapEntry key="org.eclipse.ocl/debug/methods/entering" value="false"/>
+        <mapEntry key="org.eclipse.ocl/debug/methods/exiting" value="false"/>
+        <mapEntry key="org.eclipse.ocl/debug/parsing" value="false"/>
+        <mapEntry key="org.eclipse.osgi/debug" value="false"/>
+        <mapEntry key="org.eclipse.osgi/debug/bundleFile" value="false"/>
+        <mapEntry key="org.eclipse.osgi/debug/bundleFile/close" value="false"/>
+        <mapEntry key="org.eclipse.osgi/debug/bundleFile/open" value="false"/>
+        <mapEntry key="org.eclipse.osgi/debug/bundleStartTime" value="false"/>
+        <mapEntry key="org.eclipse.osgi/debug/bundleTime" value="false"/>
+        <mapEntry key="org.eclipse.osgi/debug/cachedmanifest" value="false"/>
+        <mapEntry key="org.eclipse.osgi/debug/events" value="false"/>
+        <mapEntry key="org.eclipse.osgi/debug/filter" value="false"/>
+        <mapEntry key="org.eclipse.osgi/debug/loader" value="false"/>
+        <mapEntry key="org.eclipse.osgi/debug/location" value="false"/>
+        <mapEntry key="org.eclipse.osgi/debug/manifest" value="false"/>
+        <mapEntry key="org.eclipse.osgi/debug/messageBundles" value="false"/>
+        <mapEntry key="org.eclipse.osgi/debug/objectPool/adds" value="false"/>
+        <mapEntry key="org.eclipse.osgi/debug/objectPool/dups" value="false"/>
+        <mapEntry key="org.eclipse.osgi/debug/packageadmin" value="false"/>
+        <mapEntry key="org.eclipse.osgi/debug/security" value="false"/>
+        <mapEntry key="org.eclipse.osgi/debug/services" value="false"/>
+        <mapEntry key="org.eclipse.osgi/debug/startlevel" value="false"/>
+        <mapEntry key="org.eclipse.osgi/debug/storage" value="false"/>
+        <mapEntry key="org.eclipse.osgi/debug/systemBundle" value="false"/>
+        <mapEntry key="org.eclipse.osgi/eclipseadaptor/converter/debug" value="false"/>
+        <mapEntry key="org.eclipse.osgi/eclipseadaptor/debug" value="false"/>
+        <mapEntry key="org.eclipse.osgi/eclipseadaptor/debug/platformadmin" value="false"/>
+        <mapEntry key="org.eclipse.osgi/eclipseadaptor/debug/platformadmin/resolver" value="false"/>
+        <mapEntry key="org.eclipse.osgi/monitor/activation" value="false"/>
+        <mapEntry key="org.eclipse.osgi/monitor/lazy" value="false"/>
+        <mapEntry key="org.eclipse.osgi/resolver" value="false"/>
+        <mapEntry key="org.eclipse.osgi/resolver/hooks" value="false"/>
+        <mapEntry key="org.eclipse.osgi/resolver/providers" value="false"/>
+        <mapEntry key="org.eclipse.osgi/resolver/report" value="false"/>
+        <mapEntry key="org.eclipse.osgi/resolver/roots" value="false"/>
+        <mapEntry key="org.eclipse.osgi/resolver/uses" value="false"/>
+        <mapEntry key="org.eclipse.osgi/resolver/wiring" value="false"/>
+        <mapEntry key="org.eclipse.pde.api.tools/debug" value="false"/>
+        <mapEntry key="org.eclipse.pde.api.tools/debug/apianalyzer" value="false"/>
+        <mapEntry key="org.eclipse.pde.api.tools/debug/apidescription" value="false"/>
+        <mapEntry key="org.eclipse.pde.api.tools/debug/apifilterstore" value="false"/>
+        <mapEntry key="org.eclipse.pde.api.tools/debug/apiprofile" value="false"/>
+        <mapEntry key="org.eclipse.pde.api.tools/debug/builder" value="false"/>
+        <mapEntry key="org.eclipse.pde.api.tools/debug/classfilevisitor" value="false"/>
+        <mapEntry key="org.eclipse.pde.api.tools/debug/delta" value="false"/>
+        <mapEntry key="org.eclipse.pde.api.tools/debug/descriptor/framework" value="false"/>
+        <mapEntry key="org.eclipse.pde.api.tools/debug/pluginworkspacecomponent" value="false"/>
+        <mapEntry key="org.eclipse.pde.api.tools/debug/profilemanager" value="false"/>
+        <mapEntry key="org.eclipse.pde.api.tools/debug/search" value="false"/>
+        <mapEntry key="org.eclipse.pde.api.tools/debug/tagscanner" value="false"/>
+        <mapEntry key="org.eclipse.pde.api.tools/debug/usereportconverter" value="false"/>
+        <mapEntry key="org.eclipse.pde.api.tools/debug/workspacedeltaprocessor" value="false"/>
+        <mapEntry key="org.eclipse.pde.build/debug" value="false"/>
+        <mapEntry key="org.eclipse.pde.core/classpath" value="false"/>
+        <mapEntry key="org.eclipse.pde.core/debug" value="false"/>
+        <mapEntry key="org.eclipse.pde.core/model" value="false"/>
+        <mapEntry key="org.eclipse.pde.core/target/profile" value="false"/>
+        <mapEntry key="org.eclipse.pde.core/validation" value="false"/>
+        <mapEntry key="org.eclipse.pde.ds.annotations/debug" value="false"/>
+        <mapEntry key="org.eclipse.pde.ds.annotations/ds-annotation-builder" value="false"/>
+        <mapEntry key="org.eclipse.pde.ds.annotations/ds-annotation-builder/processor" value="false"/>
+        <mapEntry key="org.eclipse.search/perf" value="false"/>
+        <mapEntry key="org.eclipse.team.core/backgroundevents" value="false"/>
+        <mapEntry key="org.eclipse.team.core/debug" value="false"/>
+        <mapEntry key="org.eclipse.team.core/refreshjob" value="false"/>
+        <mapEntry key="org.eclipse.team.core/streams" value="false"/>
+        <mapEntry key="org.eclipse.team.core/threading" value="false"/>
+        <mapEntry key="org.eclipse.team.ui/compare_editor_input" value="false"/>
+        <mapEntry key="org.eclipse.team.ui/debug" value="false"/>
+        <mapEntry key="org.eclipse.team.ui/dnd" value="false"/>
+        <mapEntry key="org.eclipse.team.ui/history" value="false"/>
+        <mapEntry key="org.eclipse.team.ui/syncmodels" value="false"/>
+        <mapEntry key="org.eclipse.ui.browser/debug" value="false"/>
+        <mapEntry key="org.eclipse.ui.forms/debug" value="false"/>
+        <mapEntry key="org.eclipse.ui.forms/debug/focus" value="false"/>
+        <mapEntry key="org.eclipse.ui.forms/debug/text" value="false"/>
+        <mapEntry key="org.eclipse.ui.forms/debug/textsize" value="false"/>
+        <mapEntry key="org.eclipse.ui.ide/debug" value="false"/>
+        <mapEntry key="org.eclipse.ui.ide/debug/gc" value="false"/>
+        <mapEntry key="org.eclipse.ui.ide/debug/internalerror/openDialog" value="false"/>
+        <mapEntry key="org.eclipse.ui.ide/debug/markers" value="false"/>
+        <mapEntry key="org.eclipse.ui.ide/debug/undomonitor" value="false"/>
+        <mapEntry key="org.eclipse.ui.intro.universal/debug" value="true"/>
+        <mapEntry key="org.eclipse.ui.intro.universal/trace/logInfo" value="true"/>
+        <mapEntry key="org.eclipse.ui.intro.universal/trace/logPerformance" value="false"/>
+        <mapEntry key="org.eclipse.ui.intro/debug" value="true"/>
+        <mapEntry key="org.eclipse.ui.intro/debug/toolbar" value="false"/>
+        <mapEntry key="org.eclipse.ui.intro/flags/noBrowser" value="false"/>
+        <mapEntry key="org.eclipse.ui.intro/trace/logInfo" value="true"/>
+        <mapEntry key="org.eclipse.ui.intro/trace/logPerformance" value="false"/>
+        <mapEntry key="org.eclipse.ui.intro/trace/printHTML" value="false"/>
+        <mapEntry key="org.eclipse.ui.monitoring/debug/event_monitor" value="false"/>
+        <mapEntry key="org.eclipse.ui.navigator/debug" value="false"/>
+        <mapEntry key="org.eclipse.ui.navigator/debug/dnd" value="false"/>
+        <mapEntry key="org.eclipse.ui.navigator/debug/resolution" value="false"/>
+        <mapEntry key="org.eclipse.ui.navigator/debug/setup" value="false"/>
+        <mapEntry key="org.eclipse.ui.navigator/debug/sort" value="false"/>
+        <mapEntry key="org.eclipse.ui.navigator/debug/viewermap" value="false"/>
+        <mapEntry key="org.eclipse.ui.navigator/perf/explorer/createPartControl" value="1300"/>
+        <mapEntry key="org.eclipse.ui.workbench/debug" value="false"/>
+        <mapEntry key="org.eclipse.ui.workbench/debug/e4" value="false"/>
+        <mapEntry key="org.eclipse.ui/debug" value="false"/>
+        <mapEntry key="org.eclipse.ui/debug/contributions" value="false"/>
+        <mapEntry key="org.eclipse.ui/debug/declaredImages" value="false"/>
+        <mapEntry key="org.eclipse.ui/debug/job.stale" value="false"/>
+        <mapEntry key="org.eclipse.ui/debug/showAllJobs" value="false"/>
+        <mapEntry key="org.eclipse.ui/debug/swtdebug" value="false"/>
+        <mapEntry key="org.eclipse.ui/debug/swtdebugglobal" value="false"/>
+        <mapEntry key="org.eclipse.ui/debug/workingSets" value="false"/>
+        <mapEntry key="org.eclipse.ui/experimental/menus" value="false"/>
+        <mapEntry key="org.eclipse.ui/listeners/IWorkbenchPage.IPartListener" value="false"/>
+        <mapEntry key="org.eclipse.ui/listeners/IWorkbenchPage.IPartListener2" value="false"/>
+        <mapEntry key="org.eclipse.ui/listeners/IWorkbenchPage.IPropertyChangeListener" value="false"/>
+        <mapEntry key="org.eclipse.ui/listeners/IWorkbenchPartReference" value="false"/>
+        <mapEntry key="org.eclipse.ui/listeners/IWorkbenchWindow.IPageListener" value="false"/>
+        <mapEntry key="org.eclipse.ui/listeners/IWorkbenchWindow.IPartListener" value="false"/>
+        <mapEntry key="org.eclipse.ui/listeners/IWorkbenchWindow.IPartListener2" value="false"/>
+        <mapEntry key="org.eclipse.ui/listeners/IWorkbenchWindow.IPerspectiveListener" value="false"/>
+        <mapEntry key="org.eclipse.ui/perf/contentTypes" value="200"/>
+        <mapEntry key="org.eclipse.ui/perf/earlyStartup" value="100"/>
+        <mapEntry key="org.eclipse.ui/perf/page.listeners" value="200"/>
+        <mapEntry key="org.eclipse.ui/perf/part.activate" value="200"/>
+        <mapEntry key="org.eclipse.ui/perf/part.control" value="800"/>
+        <mapEntry key="org.eclipse.ui/perf/part.create" value="800"/>
+        <mapEntry key="org.eclipse.ui/perf/part.init" value="800"/>
+        <mapEntry key="org.eclipse.ui/perf/part.input" value="200"/>
+        <mapEntry key="org.eclipse.ui/perf/part.listeners" value="200"/>
+        <mapEntry key="org.eclipse.ui/perf/perspective.create" value="800"/>
+        <mapEntry key="org.eclipse.ui/perf/perspective.listeners" value="200"/>
+        <mapEntry key="org.eclipse.ui/perf/perspective.switch" value="800"/>
+        <mapEntry key="org.eclipse.ui/perf/showHeapStatus" value="true"/>
+        <mapEntry key="org.eclipse.ui/perf/uijob" value="200"/>
+        <mapEntry key="org.eclipse.ui/perf/workbench.restore" value="30000"/>
+        <mapEntry key="org.eclipse.ui/perf/workbench.start" value="45000"/>
+        <mapEntry key="org.eclipse.ui/trace/commands" value="false"/>
+        <mapEntry key="org.eclipse.ui/trace/contexts" value="false"/>
+        <mapEntry key="org.eclipse.ui/trace/contexts.performance" value="false"/>
+        <mapEntry key="org.eclipse.ui/trace/contexts.verbose" value="false"/>
+        <mapEntry key="org.eclipse.ui/trace/graphics" value="false"/>
+        <mapEntry key="org.eclipse.ui/trace/handlers" value="false"/>
+        <mapEntry key="org.eclipse.ui/trace/handlers.performance" value="false"/>
+        <mapEntry key="org.eclipse.ui/trace/handlers.verbose" value="false"/>
+        <mapEntry key="org.eclipse.ui/trace/handlers.verbose.commandId" value=""/>
+        <mapEntry key="org.eclipse.ui/trace/keyBindings" value="false"/>
+        <mapEntry key="org.eclipse.ui/trace/keyBindings.verbose" value="false"/>
+        <mapEntry key="org.eclipse.ui/trace/multipageeditor" value="false"/>
+        <mapEntry key="org.eclipse.ui/trace/operations" value="false"/>
+        <mapEntry key="org.eclipse.ui/trace/operations.verbose" value="false"/>
+        <mapEntry key="org.eclipse.ui/trace/perspectives" value="false"/>
+        <mapEntry key="org.eclipse.ui/trace/sources" value="false"/>
+        <mapEntry key="org.eclipse.update.configurator/debug" value="false"/>
+    </mapAttribute>
+    <booleanAttribute key="useCustomFeatures" value="false"/>
+    <booleanAttribute key="useDefaultConfig" value="true"/>
+    <booleanAttribute key="useDefaultConfigArea" value="true"/>
+    <booleanAttribute key="useProduct" value="false"/>
+</launchConfiguration>

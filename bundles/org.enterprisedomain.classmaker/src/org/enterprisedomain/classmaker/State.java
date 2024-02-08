@@ -59,12 +59,12 @@ import org.eclipse.emf.ecore.resource.Resource;
  * Family</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.State#getResource
  * <em>Resource</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.State#getCommitIds <em>Commit
- * Ids</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.State#getCommitId <em>Commit
  * Id</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.State#getStateCustomizers
  * <em>State Customizers</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.State#getNonExclusiveStateCustomizers
+ * <em>Non Exclusive State Customizers</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.State#getProjectName <em>Project
  * Name</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.State#isMaking
@@ -74,6 +74,8 @@ import org.eclipse.emf.ecore.resource.Resource;
  * <em>Editor</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.State#getStrategy
  * <em>Strategy</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.State#getBasePackage <em>Base
+ * Package</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getState()
@@ -382,23 +384,6 @@ public interface State extends Item, ISchedulingRule {
 	void setResource(Resource value);
 
 	/**
-	 * Returns the value of the '<em><b>Commit Ids</b></em>' attribute list. The
-	 * list contents are of type {@link java.lang.String}. <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Commit Ids</em>' attribute list isn't clear, there
-	 * really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc --> <!-- begin-model-doc --> An SCM commit's associated
-	 * with the state identifiers. <!-- end-model-doc -->
-	 * 
-	 * @return the value of the '<em>Commit Ids</em>' attribute list.
-	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getState_CommitIds()
-	 * @model
-	 * @generated
-	 */
-	EList<String> getCommitIds();
-
-	/**
 	 * Returns the value of the '<em><b>Commit Id</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
@@ -447,6 +432,21 @@ public interface State extends Item, ISchedulingRule {
 	 * @generated
 	 */
 	EMap<StageQualifier, Customizer> getStateCustomizers();
+
+	/**
+	 * Returns the value of the '<em><b>Non Exclusive State Customizers</b></em>'
+	 * map. The key is of type
+	 * {@link org.enterprisedomain.classmaker.StageQualifier}, and the value is of
+	 * type {@link org.enterprisedomain.classmaker.Customizer}, <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Non Exclusive State Customizers</em>' map.
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getState_NonExclusiveStateCustomizers()
+	 * @model mapType="org.enterprisedomain.classmaker.StageQualifierToCustomizerMapEntry&lt;org.enterprisedomain.classmaker.StageQualifier,
+	 *        org.enterprisedomain.classmaker.Customizer&gt;"
+	 * @generated
+	 */
+	EMap<StageQualifier, Customizer> getNonExclusiveStateCustomizers();
 
 	/**
 	 * Returns the value of the '<em><b>Project Name</b></em>' attribute. <!--
@@ -573,6 +573,29 @@ public interface State extends Item, ISchedulingRule {
 	 * @generated
 	 */
 	void setStrategy(Strategy value);
+
+	/**
+	 * Returns the value of the '<em><b>Base Package</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Base Package</em>' attribute.
+	 * @see #setBasePackage(String)
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getState_BasePackage()
+	 * @model
+	 * @generated
+	 */
+	String getBasePackage();
+
+	/**
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.State#getBasePackage <em>Base
+	 * Package</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value the new value of the '<em>Base Package</em>' attribute.
+	 * @see #getBasePackage()
+	 * @generated
+	 */
+	void setBasePackage(String value);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

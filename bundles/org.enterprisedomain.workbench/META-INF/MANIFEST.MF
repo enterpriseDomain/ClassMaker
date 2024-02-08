@@ -11,8 +11,8 @@ Require-Bundle: org.eclipse.osgi,
  org.eclipse.e4.ui.di,
  org.eclipse.e4.ui.services,
  org.eclipse.e4.core.di.annotations,
- org.eclipse.core.runtime,
- org.eclipse.ui.ide;bundle-version="[3.15.0,4.0.0)",
+ org.eclipse.core.runtime;bundle-version="[3.26.100,4.0.0)",
+ org.eclipse.ui.ide;bundle-version="[3.20.0,4.0.0)",
  org.eclipse.ui.console,
  org.eclipse.emf.edit.ui;bundle-version="2.16.0",
  org.apache.batik.css;bundle-version="1.10.0",
@@ -29,10 +29,12 @@ Require-Bundle: org.eclipse.osgi,
  org.eclipse.emf.importer;bundle-version="2.12.0",
  org.eclipse.emf.importer.ecore;bundle-version="2.10.0",
  org.eclipse.jdt.ui;bundle-version="3.25.0";visibility:=reexport,
- org.enterprisedomain.classmaker;bundle-version="0.8.55"
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+ org.enterprisedomain.classmaker;bundle-version="0.8.55",
+ org.eclipse.equinox.p2.repository;bundle-version="2.7.100"
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Automatic-Module-Name: org.enterprisedomain.workbench
-Import-Package: javax.annotation;version="1.2.0"
+Import-Package: jakarta.annotation;version="2.1.1",
+ jakarta.inject;version="2.0.1"
 Bundle-ActivationPolicy: lazy
 Export-Package: org.enterprisedomain.workbench,
  org.enterprisedomain.workbench.handler

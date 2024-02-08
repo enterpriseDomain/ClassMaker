@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Kyrill Zotkin
+ * Copyright 2017, 2022 Kyrill Zotkin
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -71,6 +71,8 @@ public interface ClassMakerService extends EObject {
 
 		private static final String RANK_ATTR = "rank";
 
+		private static final String EXCLUSIVE_ATTR = "exclusive";
+
 		private static final String CLASS_ATTR = "class";
 
 		private static HashMap<String, StageQualifier> stages = new HashMap<String, StageQualifier>();
@@ -109,6 +111,11 @@ public interface ClassMakerService extends EObject {
 					try {
 						Customizer result = (Customizer) ce.createExecutableExtension(CLASS_ATTR);
 						result.setRank(Integer.valueOf(ce.getAttribute(RANK_ATTR)));
+						boolean e = true;
+						if (ce.getAttribute(EXCLUSIVE_ATTR) != null)
+							e = Boolean.valueOf(ce.getAttribute(EXCLUSIVE_ATTR));
+						result.setExclusive(e);
+						result.setStage(stages.get(ce.getAttribute(STAGE_ATTR)));
 						results.add(result);
 					} catch (CoreException ex) {
 						ClassMakerPlugin.getInstance().getLog().log(ex.getStatus());

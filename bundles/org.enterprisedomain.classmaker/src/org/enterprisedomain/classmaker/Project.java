@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.osgi.framework.Version;
 
 /**
@@ -37,8 +38,6 @@ import org.osgi.framework.Version;
  * <em>Name</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.Project#getProjectName <em>Project
  * Name</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Project#getChildren
- * <em>Children</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.Project#isDirty
  * <em>Dirty</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.Project#getWorkspace
@@ -67,6 +66,10 @@ import org.osgi.framework.Version;
  * <em>State</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.Project#getModelResourceAdapter
  * <em>Model Resource Adapter</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Project#getClassLoader <em>Class
+ * Loader</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Project#getResource
+ * <em>Resource</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject()
@@ -132,22 +135,6 @@ public interface Project extends ISchedulingRule, Item {
 	 * @generated
 	 */
 	void setProjectName(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Children</b></em>' attribute list. The list
-	 * contents are of type {@link java.lang.Object}. <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Children</em>' attribute list isn't clear, there
-	 * really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Children</em>' attribute list.
-	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject_Children()
-	 * @model transient="true" changeable="false" volatile="true" derived="true"
-	 * @generated
-	 */
-	EList<Object> getChildren();
 
 	/**
 	 * Returns the value of the '<em><b>Dirty</b></em>' attribute. <!--
@@ -476,6 +463,68 @@ public interface Project extends ISchedulingRule, Item {
 	 * @generated
 	 */
 	ResourceAdapter getModelResourceAdapter();
+
+	/**
+	 * Returns the value of the '<em><b>Class Loader</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Class Loader</em>' attribute.
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject_ClassLoader()
+	 * @model dataType="org.enterprisedomain.classmaker.ClassLoader"
+	 *        changeable="false"
+	 * @generated
+	 */
+	ClassLoader getClassLoader();
+
+	/**
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Project#getClassLoader <em>Class
+	 * Loader</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value the new value of the '<em>Class Loader</em>' attribute.
+	 * @see #isSetClassLoader()
+	 * @see #unsetClassLoader()
+	 * @see #getClassLoader()
+	 * @generated
+	 */
+	void setClassLoader(ClassLoader value);
+
+	/**
+	 * Unsets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Project#getClassLoader <em>Class
+	 * Loader</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #isSetClassLoader()
+	 * @see #getClassLoader()
+	 * @see #setClassLoader(ClassLoader)
+	 * @generated
+	 */
+	void unsetClassLoader();
+
+	/**
+	 * Returns whether the value of the
+	 * '{@link org.enterprisedomain.classmaker.Project#getClassLoader <em>Class
+	 * Loader</em>}' attribute is set. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return whether the value of the '<em>Class Loader</em>' attribute is set.
+	 * @see #unsetClassLoader()
+	 * @see #getClassLoader()
+	 * @see #setClassLoader(ClassLoader)
+	 * @generated
+	 */
+	boolean isSetClassLoader();
+
+	/**
+	 * Returns the value of the '<em><b>Resource</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Resource</em>' reference.
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getProject_Resource()
+	 * @model type="org.enterprisedomain.classmaker.Resource" changeable="false"
+	 *        volatile="true" derived="true"
+	 * @generated
+	 */
+	Resource getResource();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
