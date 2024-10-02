@@ -96,7 +96,7 @@ public class CustomClassLoader extends ClassLoader {
 		String filePath = qualifiedClassName.replaceAll("\\.", "/") + ".class";
 		URL url = bundle.getEntry("/bin/" + filePath);
 		if (url == null)
-			url = bundle.getResource("/bin/" + filePath);
+			return Class.forName(qualifiedClassName, true, fallBackClassLoader);
 		InputStream inputStream = FileLocator.toFileURL(url).openStream();
 		ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
 		try {

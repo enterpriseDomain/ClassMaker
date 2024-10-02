@@ -14,7 +14,7 @@
 		<dependency>
 			<groupId>org.enterprisedomain.org.enterprisedomain</groupId>
 			<artifactId>update</artifactId>
-			</dependency>
+		</dependency>
 	</dependencies>
-	<packaging>pom</packaging>	
+	<packaging>pom</packaging>
 </project>

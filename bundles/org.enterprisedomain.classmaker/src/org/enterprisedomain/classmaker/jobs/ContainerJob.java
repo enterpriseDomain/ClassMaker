@@ -15,9 +15,9 @@
  */
 package org.enterprisedomain.classmaker.jobs;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -28,7 +28,7 @@ import org.osgi.framework.Version;
 
 public abstract class ContainerJob extends EnterpriseDomainJob {
 
-	private Set<Bundle> installedBundles = new HashSet<Bundle>();
+	private Set<Bundle> installedBundles = new LinkedHashSet<Bundle>();
 
 	public ContainerJob(String name, int depth, long stateTimestamp) {
 		super(name, depth, stateTimestamp);
@@ -37,7 +37,7 @@ public abstract class ContainerJob extends EnterpriseDomainJob {
 	public Collection<Bundle> getBundles(String symbolicName, Version version, BundleContext context) {
 		if (context == null)
 			return null;
-		List<Bundle> results = new ArrayList<Bundle>();
+		List<Bundle> results = new LinkedList<Bundle>();
 		for (Bundle bundle : context.getBundles())
 			if ((bundle.getSymbolicName().equals(symbolicName)
 					|| (getContributionState().isEdit() && bundle.getSymbolicName().equals(symbolicName + ".edit"))

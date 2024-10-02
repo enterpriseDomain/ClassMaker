@@ -72,7 +72,6 @@ import org.enterprisedomain.classmaker.impl.CompletionListenerImpl;
 import org.enterprisedomain.classmaker.impl.CustomizerImpl;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
 import org.junit.jupiter.api.Test;
-import org.junit.platform.commons.annotation.Testable;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
@@ -80,7 +79,6 @@ import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceReference;
 import org.osgi.framework.Version;
 
-@Testable
 public class TestEnterpriseDomain extends AbstractTest {
 
 	private EObject o;
@@ -698,8 +696,8 @@ public class TestEnterpriseDomain extends AbstractTest {
 		final Contribution c = service.getWorkspace().createContribution(eP, getProgressMonitor());
 		Customizer customizer = new GenModelCustomizer();
 
-		c.getCustomizers().put(ClassMakerService.Stages
-				.lookup(ClassMakerService.Stages.ID_PREFIX + "project.generation.genmodel.setup"), customizer);
+		c.getCustomizers().put(ClassMakerService.Stages.lookup(Stage.GENERATED, "project.generation.genmodel.setup"),
+				customizer);
 
 		final Semaphore complete = new Semaphore(0);
 		CompletionListener l = new CompletionListenerImpl() {

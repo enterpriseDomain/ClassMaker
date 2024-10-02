@@ -121,7 +121,8 @@
          <meta.section type="implementation"/>
       </appInfo>
       <documentation>
-         [Enter information about supplied implementation of this extension point.]
+         [Enter information about supplied implementation of this extension
+   point.]
       </documentation>
    </annotation>
 

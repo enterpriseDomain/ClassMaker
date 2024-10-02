@@ -347,8 +347,6 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 												.getAdapter(EnterpriseDomainJob.class);
 										(firstWorker.getAdapter(EnterpriseDomainJob.class)).setNextJob(next);
 									} else if (firstWorker != null) {
-										EnterpriseDomainJob job = EnterpriseDomainJob
-												.getJob(((Worker) firstWorker).getAdapter(EnterpriseDomainJob.class));
 										Iterator<Customizer> ine = nonExclusive.iterator();
 										while (ine.hasNext()) {
 											Customizer neCustomizer = ine.next();
@@ -538,6 +536,9 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		if (getContributions().isEmpty()) {
 			IWorkspace workspace = ResourcesPlugin.getWorkspace();
 			for (IProject eProject : workspace.getRoot().getProjects()) {
+				if (getProjects().stream().anyMatch(p -> p.getProjectName().equals(eProject.getName()))) {
+					continue;
+				}
 				Project project = null;
 				try {
 					eProject.open(ClassMakerPlugin.getProgressMonitor());
@@ -552,7 +553,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 					}
 					project.setProjectName(eProject.getName());
 					registerProject(project);
-					project.initialize(false);
+					project.initialize();
 				} catch (CoreException e) {
 					ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
 				}
@@ -560,14 +561,14 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 		} else
 			for (Contribution contribution : getContributions()) {
-				contribution.initialize(false);
+				contribution.initialize();
 			}
 		if (getProjects().size() <= getContributions().size() && !edProjects.isEmpty()) {
 			for (IProject p : edProjects.keySet()) {
 				Project project = edProjects.get(p);
 				project.setProjectName(p.getName());
 				registerProject(project);
-				project.initialize(false);
+				project.initialize();
 			}
 		} else
 			for (Project project : getProjects()) {
@@ -594,7 +595,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 				it.remove();
 				continue;
 			}
-			if (filter.equals(ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "workspace.init")))
+			if (filter.equals(ClassMakerService.Stages.lookup(Stage.DEFINED, "workspace.init")))
 				customizers.add(next.getValue());
 		}
 		ECollections.sort(customizers, new Customizer.CustomizerComparator());
@@ -891,7 +892,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			project.create(monitor);
 			Revision revision = project.createRevision(monitor);
 			project.checkout(revision.getVersion());
-			project.initialize(true);
+			project.initialize();
 			project.load(true, true);
 			return project;
 		} finally {

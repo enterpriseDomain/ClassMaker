@@ -41,16 +41,11 @@ import org.enterprisedomain.classmaker.State;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.impl.ModelsImpl#getDynamic
- * <em>Dynamic</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ModelsImpl#getGenerated
- * <em>Generated</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ModelsImpl#getGeneratedEdit
- * <em>Generated Edit</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ModelsImpl#getGeneratedEditor
- * <em>Generated Editor</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ModelsImpl#getParent
- * <em>Parent</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ModelsImpl#getDynamic <em>Dynamic</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ModelsImpl#getGenerated <em>Generated</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ModelsImpl#getGeneratedEdit <em>Generated Edit</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ModelsImpl#getGeneratedEditor <em>Generated Editor</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ModelsImpl#getParent <em>Parent</em>}</li>
  * </ul>
  *
  * @generated
@@ -116,9 +111,8 @@ public class ModelsImpl extends EObjectImpl implements Models {
 	}
 
 	/**
-	 * The cached value of the '{@link #getDynamic() <em>Dynamic</em>}' containment
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getDynamic() <em>Dynamic</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getDynamic()
 	 * @generated
 	 * @ordered
@@ -126,9 +120,8 @@ public class ModelsImpl extends EObjectImpl implements Models {
 	protected EObject dynamic;
 
 	/**
-	 * The cached value of the '{@link #getGenerated() <em>Generated</em>}'
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getGenerated() <em>Generated</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getGenerated()
 	 * @generated
 	 * @ordered
@@ -136,9 +129,8 @@ public class ModelsImpl extends EObjectImpl implements Models {
 	protected EObject generated;
 
 	/**
-	 * The default value of the '{@link #getGeneratedEdit() <em>Generated
-	 * Edit</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getGeneratedEdit() <em>Generated Edit</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getGeneratedEdit()
 	 * @generated
 	 * @ordered
@@ -146,9 +138,8 @@ public class ModelsImpl extends EObjectImpl implements Models {
 	protected static final EMFPlugin GENERATED_EDIT_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getGeneratedEdit() <em>Generated Edit</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getGeneratedEdit() <em>Generated Edit</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getGeneratedEdit()
 	 * @generated
 	 * @ordered
@@ -156,9 +147,8 @@ public class ModelsImpl extends EObjectImpl implements Models {
 	protected EMFPlugin generatedEdit = GENERATED_EDIT_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getGeneratedEditor() <em>Generated
-	 * Editor</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getGeneratedEditor() <em>Generated Editor</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getGeneratedEditor()
 	 * @generated
 	 * @ordered
@@ -166,9 +156,8 @@ public class ModelsImpl extends EObjectImpl implements Models {
 	protected static final EMFPlugin GENERATED_EDITOR_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getGeneratedEditor() <em>Generated
-	 * Editor</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getGeneratedEditor() <em>Generated Editor</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getGeneratedEditor()
 	 * @generated
 	 * @ordered
@@ -187,7 +176,6 @@ public class ModelsImpl extends EObjectImpl implements Models {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -197,7 +185,6 @@ public class ModelsImpl extends EObjectImpl implements Models {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -207,7 +194,6 @@ public class ModelsImpl extends EObjectImpl implements Models {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetDynamic(EObject newDynamic, NotificationChain msgs) {
@@ -226,7 +212,6 @@ public class ModelsImpl extends EObjectImpl implements Models {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -249,7 +234,6 @@ public class ModelsImpl extends EObjectImpl implements Models {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -268,7 +252,6 @@ public class ModelsImpl extends EObjectImpl implements Models {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EObject basicGetGenerated() {
@@ -277,7 +260,6 @@ public class ModelsImpl extends EObjectImpl implements Models {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -291,7 +273,6 @@ public class ModelsImpl extends EObjectImpl implements Models {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -301,7 +282,6 @@ public class ModelsImpl extends EObjectImpl implements Models {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -315,7 +295,6 @@ public class ModelsImpl extends EObjectImpl implements Models {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -325,7 +304,6 @@ public class ModelsImpl extends EObjectImpl implements Models {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -339,7 +317,6 @@ public class ModelsImpl extends EObjectImpl implements Models {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -351,7 +328,6 @@ public class ModelsImpl extends EObjectImpl implements Models {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetParent(Item newParent, NotificationChain msgs) {
@@ -361,7 +337,6 @@ public class ModelsImpl extends EObjectImpl implements Models {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -386,7 +361,6 @@ public class ModelsImpl extends EObjectImpl implements Models {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -402,7 +376,6 @@ public class ModelsImpl extends EObjectImpl implements Models {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -418,7 +391,6 @@ public class ModelsImpl extends EObjectImpl implements Models {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -432,7 +404,6 @@ public class ModelsImpl extends EObjectImpl implements Models {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -456,7 +427,6 @@ public class ModelsImpl extends EObjectImpl implements Models {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -483,7 +453,6 @@ public class ModelsImpl extends EObjectImpl implements Models {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -510,7 +479,6 @@ public class ModelsImpl extends EObjectImpl implements Models {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -534,7 +502,6 @@ public class ModelsImpl extends EObjectImpl implements Models {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

@@ -9,7 +9,7 @@
 		<groupId>org.enterprisedomain</groupId>
 		<artifactId>org.enterprisedomain.configuration</artifactId>
 		<relativePath>./releng/org.enterprisedomain.configuration/pom.xml</relativePath>
-		<version>0.8.55-SNAPSHOT</version>
+		<version>0.8.55</version>
 	</parent>
 	<scm>
 		<connection>scm:git:https://github.com/enterpriseDomain/ClassMaker</connection>
@@ -23,7 +23,8 @@
 		<module>bundles/org.enterprisedomain.classmaker.cdo.ui</module>
 		<module>bundles/org.enterprisedomain.workbench</module>
 		<module>features/org.enterprisedomain.classmaker.feature</module>
-		<module>features/org.enterprisedomain.classmaker.osgi.resolverhooks.feature</module>
+		<module>
+			features/org.enterprisedomain.classmaker.osgi.resolverhooks.feature</module>
 		<module>features/org.enterprisedomain.classmaker.edit.feature</module>
 		<module>features/org.enterprisedomain.classmaker.cdo.feature</module>
 		<module>features/org.enterprisedomain.classmaker.cdo.ui.feature</module>
@@ -66,12 +67,13 @@
 						</executions>
 						<configuration>
 							<excludes>
- 								<plugin id="org.enterprisedomain.workbench.product" />
- 								<plugin id="org.enterprisedomain.target" />
- 								<plugin id="org.enterprisedomain.update" />
- 							</excludes>
+								<plugin
+									id="org.enterprisedomain.workbench.product" />
+								<plugin id="org.enterprisedomain.target" />
+								<plugin id="org.enterprisedomain.update" />
+							</excludes>
 						</configuration>
-					</plugin>					
+					</plugin>
 					<plugin>
 						<inherited>true</inherited>
 						<groupId>org.apache.maven.plugins</groupId>
@@ -104,5 +106,42 @@
 			</build>
 		</profile>
 	</profiles>
-	<version>0.8.55-SNAPSHOT</version>
+	<version>0.8.55</version>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.eclipse.tycho
+										</groupId>
+										<artifactId>
+											tycho-bnd-plugin
+										</artifactId>
+										<versionRange>
+											[4.0.6,)
+										</versionRange>
+										<goals>
+											<goal>process</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 </project>

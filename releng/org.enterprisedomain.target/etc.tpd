@@ -13,42 +13,33 @@ location "https://download.eclipse.org/modeling/emf/compare/updates/releases/lat
 	org.eclipse.emf.compare.rcp.ui
 }
 
-location "http://download.eclipse.org/rt/ecf/3.14.0/site.p2" {
+location "https://download.eclipse.org/rt/ecf/3.15.0/site.p2" {
 	org.eclipse.ecf.core.feature.feature.group
 	org.eclipse.ecf.filetransfer.feature.feature.group
 }
 
-location "https://download.eclipse.org/tools/orbit/downloads/drops/R20230531010532/repository" {
-	javaewah
-	javaewah.source
-	javax.annotation [1.3.5,2.0.0)
-	javax.annotation.source
+location "https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/release/4.33.0/" {
+	com.ibm.icu
+	com.googlecode.javaewah.JavaEWAH
+	com.googlecode.javaewah.JavaEWAH.source
 	org.objectweb.asm [9.4.0,10.0.0)
 	org.objectweb.asm.tree [9.4.0,10.0.0)
 	org.objectweb.asm.commons [9.4.0,10.0.0)
 	org.objectweb.asm.util [9.4.0,10.0.0)
-	org.apache.commons.compress
-	org.apache.commons.compress.source
 	org.apache.sshd.sftp
 	org.apache.sshd.sftp.source
 	org.apache.log4j.source
 	org.apache.log4j
-	org.apache.commons.io
-	org.apache.commons.codec
+	org.apache.logging.log4j.api
 	org.apache.commons.logging
 	org.apache.lucene.core
 	org.apache.lucene.analysis-common
 	org.apache.lucene.analysis-smartcn
-	com.google.inject [5.0.1,6.0.0)
-	com.google.inject.source
 	com.google.gson.source
 	com.google.gson
-	com.google.guava
-	com.google.guava.source
-	org.bouncycastle.bcpg
-	org.bouncycastle.bcprov
-	org.bouncycastle.bcpkix
-	org.bouncycastle.bcutil
+	com.google.inject
+	com.google.inject.source
+	com.github.virtuald.curvesapi
 	org.hamcrest
 	org.hamcrest.core
 	org.hamcrest.library
@@ -61,24 +52,16 @@ location "https://download.eclipse.org/tools/orbit/downloads/drops/R202305310105
 	org.mockito.junit-jupiter.source
 	org.mockito.mockito-core
 	org.mockito.mockito-core.source
-	org.objenesis [3.3.0,3.3.1)
-	org.objenesis.source [3.3.0,3.3.1)
-	org.slf4j.api [1.7.30,1.7.31)
-	org.slf4j.api.source [1.7.30,1.7.31)
-	org.slf4j.binding.log4j12 [1.7.30,1.7.31)
-	org.slf4j.binding.log4j12.source [1.7.30,1.7.31)
-	org.slf4j.binding.nop [1.7.30,1.7.31)
-	org.slf4j.binding.nop.source [1.7.30,1.7.31)
-	org.tukaani.xz [1.9.0.v20210624-1259,1.9.0.v20210624-1259]
-	org.tukaani.xz.source [1.9.0.v20210624-1259,1.9.0.v20210624-1259]
+	org.objenesis [3.4.0,4.0.0)
+	org.objenesis.source [3.4.0,4.0.0)
+	org.tukaani.xz [1.10.0,2.0.0]
+	org.tukaani.xz.source [1.10.0,2.0.0]
+	org.jdom
+	org.eclipse.orbit.xml-apis-ext
 	com.sun.jna
 	com.sun.jna.source
 	com.sun.jna.platform
 	com.sun.jna.platform.source
-	javax.validation
-	javax.validation.source
-	jakarta.servlet [5.0.0,6.0.0)
-	jakarta.servlet.source [5.0.0,6.0.0)
 	org.apache.batik.bridge
 	org.apache.batik.dom
 	org.apache.batik.anim
@@ -93,15 +76,17 @@ location "https://download.eclipse.org/tools/orbit/downloads/drops/R202305310105
 	org.apache.batik.ext
 	org.apache.batik.dom.svg
 	org.apache.xalan
-	org.apache.poi.source
-	org.apache.poi
-	org.apache.poi.ooxml
-	org.apache.poi.ooxml.source
-	org.apache.poi.ooxml.schemas
+	org.apache.xerces
+	org.apache.xml.resolver
+	org.apache.xml.serializer
+	org.apache.poi.source [5.3.0,5.3.1)
+	org.apache.poi [5.3.0,5.3.1)
+	org.apache.poi.ooxml [5.3.0,5.3.1)
+	org.apache.poi.ooxml.source [5.3.0,5.3.1)
+	org.apache.poi.ooxml.schemas [5.3.0,5.3.1)
 	org.apache.xmlbeans
 	org.apache.xmlbeans.source
-	org.apache.commons.collections4
-	org.apache.commons.collections4.source
+	org.apache.commons.collections
 	org.apache.commons.math3
 	org.apache.commons.math3.source
 }
@@ -111,5 +96,264 @@ location edapt-p2-repo "http://download.eclipse.org/edapt/releases/15x" {
 	org.eclipse.emf.edapt.runtime.feature.source.feature.group
 }
 
-
-
+maven MavenDependencies scope=compile dependencyDepth=infinite missingManifest=generate includeSources {
+	dependency {
+		groupId="org.apache.aries.spifly"
+		artifactId="org.apache.aries.spifly.dynamic.bundle"
+		version="1.3.7"
+	}
+	/*dependency {
+	 * 	groupId="javax.xml.bind"
+	 * 	artifactId="jaxb-api"
+	 * 	version="2.4.0-b180830.0359"
+	 }*/
+	dependency {
+		groupId="org.bouncycastle"
+		artifactId="bcpg-jdk18on"
+		version="1.78.1"
+	}
+	dependency {
+		groupId="org.bouncycastle"
+		artifactId="bcprov-jdk18on"
+		version="1.78.1"
+	}
+	dependency {
+		groupId="org.bouncycastle"
+		artifactId="bcpkix-jdk18on"
+		version="1.78.1"
+	}
+	dependency {
+		groupId="org.bouncycastle"
+		artifactId="bcutil-jdk18on"
+		version="1.78.1"
+	}
+	dependency {
+		groupId="biz.aQute.bnd"
+		artifactId="biz.aQute.bnd.util"
+		version="7.0.0"
+	}
+	dependency {
+		groupId="biz.aQute.bnd"
+		artifactId="biz.aQute.bndlib"
+		version="7.0.0"
+	}
+	dependency {
+		groupId="biz.aQute.bnd"
+		artifactId="biz.aQute.repository"
+		version="7.0.0"
+	}
+	dependency {
+		groupId="biz.aQute.bnd"
+		artifactId="biz.aQute.resolve"
+		version="7.0.0"
+	}
+	dependency {
+		groupId="com.google.guava"
+		artifactId="failureaccess"
+		version="1.0.1"
+	}
+	dependency {
+		groupId="com.google.guava"
+		artifactId="guava"
+		version="32.1.2-jre"
+	}
+	dependency {
+		groupId="com.google.guava"
+		artifactId="guava"
+		version="33.2.1-jre"
+	}
+	dependency {
+		groupId="com.google.guava"
+		artifactId="guava"
+		version="33.3.0-jre"
+	}
+	dependency {
+		groupId="commons-codec"
+		artifactId="commons-codec"
+		version="1.16.0"
+	}
+	dependency {
+		groupId="commons-io"
+		artifactId="commons-io"
+		version="2.15.1"
+	}
+	dependency {
+		groupId="org.apache.commons"
+		artifactId="commons-compress"
+		version="1.27.1"
+	}
+	dependency {
+		groupId="org.apache.commons"
+		artifactId="commons-collections4"
+		version="4.4"
+	}
+	dependency {
+		groupId="jakarta.inject"
+		artifactId="jakarta.inject-api"
+		version="2.0.1"
+	}
+	dependency {
+		groupId="jakarta.activation"
+		artifactId="jakarta.activation-api"
+		version="2.1.3"
+	}
+	dependency {
+		groupId="com.sun.activation"
+		artifactId="javax.activation"
+		version="1.2.0"
+	}
+	dependency {
+		groupId="jakarta.validation"
+		artifactId="jakarta.validation-api"
+		version="3.1.0"
+	}
+	dependency {
+		groupId="jakarta.xml.bind"
+		artifactId="jakarta.xml.bind-api"
+		version="4.0.2"
+	}
+	dependency {
+		groupId="jakarta.annotation"
+		artifactId="jakarta.annotation-api"
+		version="2.1.1"
+	}
+	dependency {
+		groupId="javax.servlet"
+		artifactId="javax.servlet-api"
+		version="4.0.1"
+	}
+	dependency {
+		groupId="javax.servlet.jsp"
+		artifactId="javax.servlet.jsp-api"
+		version="2.3.3"
+	}
+	dependency {
+		groupId="javax.el"
+		artifactId="javax.el-api"
+		version="3.0.0"
+	}
+	dependency {
+		groupId="org.ow2.asm"
+		artifactId="asm-analysis"
+		version="9.7"
+	}
+	dependency {
+		groupId="org.ow2.asm"
+		artifactId="asm"
+		version="9.7"
+	}
+	dependency {
+		groupId="org.ow2.asm"
+		artifactId="asm-tree"
+		version="9.7"
+	}
+	dependency {
+		groupId="org.ow2.asm"
+		artifactId="asm-util"
+		version="9.7"
+	}
+	dependency {
+		groupId="org.ow2.asm"
+		artifactId="asm-commons"
+		version="9.7"
+	}
+	dependency {
+		groupId="org.apache.xmlgraphics"
+		artifactId="batik-awt-util"
+		version="1.17"
+	}
+	dependency {
+		groupId="org.apache.xmlgraphics"
+		artifactId="batik-svggen"
+		version="1.17"
+	}
+	dependency {
+		groupId="de.rototor.pdfbox"
+		artifactId="graphics2d"
+		version="3.0.2"
+	}
+	dependency {
+		groupId="commons-beanutils"
+		artifactId="commons-beanutils"
+		version="1.9.4"
+	}
+	dependency {
+		groupId="org.bndtools"
+		artifactId="bndtools.api"
+		version="7.0.0"
+	}
+	dependency {
+		groupId="org.bndtools"
+		artifactId="org.bndtools.templating"
+		version="7.0.0"
+	}
+	dependency {
+		groupId="com.h2database"
+		artifactId="h2"
+		version="2.1.214"
+	}
+	dependency {
+		groupId="org.osgi"
+		artifactId="org.osgi.namespace.contract"
+		version="1.0.0"
+	}
+	dependency {
+		groupId="org.osgi"
+		artifactId="org.osgi.namespace.extender"
+		version="1.0.1"
+	}
+	dependency {
+		groupId="org.osgi"
+		artifactId="org.osgi.namespace.service"
+		version="1.0.0"
+	}
+	dependency {
+		groupId="org.osgi"
+		artifactId="org.osgi.service.repository"
+		version="1.1.0"
+	}
+	dependency {
+		groupId="org.osgi"
+		artifactId="org.osgi.test.common"
+		version="1.2.1"
+	}
+	dependency {
+		groupId="org.osgi"
+		artifactId="org.osgi.test.junit5"
+		version="1.2.1"
+	}
+	dependency {
+		groupId="com.zaxxer"
+		artifactId="SparseBitSet"
+		version="1.3"
+	}
+	dependency {
+		groupId="aopalliance"
+		artifactId="aopalliance"
+		version="1.0"
+	}
+}
+maven xmlsec scope=compile dependencyDepth=direct missingManifest=generate includeSources {
+	dependency {
+		groupId="org.apache.santuario"
+		artifactId="xmlsec"
+		version="3.0.4"
+	}
+}
+maven slf4j scope=compile dependencyDepth=direct missingManifest=generate includeSources {
+	dependency {
+		groupId="org.slf4j"
+		artifactId="slf4j-api"
+		version="2.0.16"
+	}
+	dependency {
+		groupId="org.slf4j"
+		artifactId="slf4j-reload4j"
+		version="2.0.16"
+	}
+	dependency {
+		groupId="org.slf4j"
+		artifactId="slf4j-nop"
+		version="2.0.16"
+	}
+}

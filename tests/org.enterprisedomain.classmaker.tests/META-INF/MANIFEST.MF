@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.enterprisedomain.classmaker.tests;singleton:=true
 Automatic-Module-Name: org.enterprisedomain.classmaker.tests
-Bundle-Version: 0.0.6.qualifier
+Bundle-Version: 0.0.6
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
@@ -30,7 +30,7 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.30.0",
  junit-jupiter-engine;bundle-version="5.9.2",
  org.osgi.test.common;bundle-version="1.2.1",
  org.osgi.test.junit5;bundle-version="1.2.1"
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: org.enterprisedomain.classmaker.tests
 Service-Component: OSGI-INF/component.xml
 Bundle-ActivationPolicy: lazy

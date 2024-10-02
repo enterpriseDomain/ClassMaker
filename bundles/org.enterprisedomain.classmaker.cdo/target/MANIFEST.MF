@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: ClassMaker CDO Support
 Bundle-SymbolicName: org.enterprisedomain.classmaker.cdo;singleton:=true
-Bundle-Version: 0.8.55.202402081017
+Bundle-Version: 0.8.55
 Bundle-Vendor: Kyrill Zotkin
 Automatic-Module-Name: org.enterprisedomain.classmaker.cdo
 Bundle-Activator: org.enterprisedomain.classmaker.cdo.Activator
@@ -12,5 +12,5 @@ Require-Bundle: org.eclipse.osgi;bundle-version="[3.18.200,4.0.0)",org.e
  rt,org.eclipse.emf.cdo.edit;bundle-version="[4.5.6,5.0.0)";visibility:=
  reexport
 Export-Package: org.enterprisedomain.classmaker.cdo
-Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=17))"
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=21))"
 

@@ -62,16 +62,11 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.impl.RevisionImpl#getState
- * <em>State</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.RevisionImpl#getTimestamp
- * <em>Timestamp</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.RevisionImpl#getStateHistory
- * <em>State History</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.RevisionImpl#getLatestTimestamp
- * <em>Latest Timestamp</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.RevisionImpl#getVersion
- * <em>Version</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.RevisionImpl#getState <em>State</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.RevisionImpl#getTimestamp <em>Timestamp</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.RevisionImpl#getStateHistory <em>State History</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.RevisionImpl#getLatestTimestamp <em>Latest Timestamp</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.RevisionImpl#getVersion <em>Version</em>}</li>
  * </ul>
  *
  * @generated
@@ -83,9 +78,8 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	}
 
 	/**
-	 * The default value of the '{@link #getTimestamp() <em>Timestamp</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getTimestamp() <em>Timestamp</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getTimestamp()
 	 * @generated
 	 * @ordered
@@ -93,9 +87,8 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	protected static final long TIMESTAMP_EDEFAULT = 0L;
 
 	/**
-	 * The cached value of the '{@link #getTimestamp() <em>Timestamp</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getTimestamp() <em>Timestamp</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getTimestamp()
 	 * @generated
 	 * @ordered
@@ -103,9 +96,8 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	protected long timestamp = TIMESTAMP_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getStateHistory() <em>State History</em>}'
-	 * map. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getStateHistory() <em>State History</em>}' map.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getStateHistory()
 	 * @generated
 	 * @ordered
@@ -113,9 +105,8 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	protected EMap<Long, State> stateHistory;
 
 	/**
-	 * The default value of the '{@link #getLatestTimestamp() <em>Latest
-	 * Timestamp</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getLatestTimestamp() <em>Latest Timestamp</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getLatestTimestamp()
 	 * @generated
 	 * @ordered
@@ -125,7 +116,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	/**
 	 * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getVersion()
 	 * @generated
 	 * @ordered
@@ -135,7 +125,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	/**
 	 * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getVersion()
 	 * @generated
 	 * @ordered
@@ -144,7 +133,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected RevisionImpl() {
@@ -153,7 +141,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -173,7 +160,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -204,7 +190,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -214,7 +199,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -228,7 +212,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -253,7 +236,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -263,7 +245,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -321,9 +302,10 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	}
 
 	@Override
-	public String initialize(boolean commit) {
-		super.initialize(commit);
-		ClassMakerPlugin.print(NLS.bind("Revision {0} initialize", getVersion()));
+	public String initialize() {
+		super.initialize();
+		ClassMakerPlugin.print(NLS.bind("Revision {0} of {1} initialize", getVersion(), getProject().getName()));
+		String commitId = getState().getCommitId();
 		@SuppressWarnings("unchecked")
 		SCMOperator<Git> operator = (SCMOperator<Git>) getProject().getWorkspace().getSCMRegistry()
 				.get(getProject().getProjectName());
@@ -335,31 +317,26 @@ public class RevisionImpl extends ItemImpl implements Revision {
 			if (branch != null) {
 				log.add(branch.getObjectId());
 				Iterable<RevCommit> commits = log.call();
+				long timestamp = -1;
 				for (RevCommit c : commits) {
-					long timestamp = operator.decodeTimestamp(c.getShortMessage());
-					if (timestamp == -1) {
-						timestamp = operator
-								.decodeTimestamp(String.valueOf(Long.valueOf(getVersion().getQualifier()) / 1000));
-						if (timestamp == -1)
-							continue;
+					if (extractTimestamp(operator, c) > timestamp) {
+						timestamp = extractTimestamp(operator, c);
+						commitId = c.getId().toString();
 					}
-					State state = null;
-					if (getStateHistory().containsKey(timestamp))
-						state = (State) getStateHistory().get((Object) timestamp);
-					else {
-						state = ClassMakerFactory.eINSTANCE.createState();
-						state.setTimestamp(timestamp);
-						getStateHistory().put(timestamp, state);
-						state.getProject().setVersion(getVersion());
-					}
-					String commitId = c.getId().toString();
-					state.setCommitId(commitId);
-					setTimestamp(timestamp);
-					state.initialize(commit);
 				}
-				if (getStateHistory().isEmpty())
-					return null;
+				State state = null;
+				if (getStateHistory().containsKey(timestamp))
+					state = (State) getStateHistory().get((Object) timestamp);
+				else {
+					state = ClassMakerFactory.eINSTANCE.createState();
+					state.setTimestamp(timestamp);
+					getStateHistory().put(timestamp, state);
+				}
+				state.setCommitId(commitId);
+				return state.initialize();
 			}
+			if (getStateHistory().isEmpty())
+				return null;
 		} catch (NoHeadException e) {
 			return null;
 		} catch (Exception e) {
@@ -372,7 +349,15 @@ public class RevisionImpl extends ItemImpl implements Revision {
 				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 			}
 		}
-		return getState().getCommitId();
+		return commitId;
+	}
+
+	private long extractTimestamp(SCMOperator<Git> operator, RevCommit c) {
+		long timestamp = operator.decodeTimestamp(c.getShortMessage());
+		if (timestamp == -1) {
+			timestamp = operator.decodeTimestamp(String.valueOf(Long.valueOf(getVersion().getQualifier()) / 1000));
+		}
+		return timestamp;
 	}
 
 	/**
@@ -460,16 +445,25 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	 * @generated NOT
 	 */
 	public State newState() {
+		return newState((long) (Calendar.getInstance(Revision.VERSION_QUALIFIER_FORMAT.getTimeZone()).getTimeInMillis()
+				/ 1000));
+
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public State newState(long timestamp) {
 		State newState = ClassMakerFactory.eINSTANCE.createState();
-		newState.setTimestamp(
-				(long) (Calendar.getInstance(Revision.VERSION_QUALIFIER_FORMAT.getTimeZone()).getTimeInMillis()
-						/ 1000));
+		newState.setTimestamp(timestamp);
 		if (isStateSet()) {
 			newState.setEdit(getState().isEdit());
 			newState.setEditor(getState().isEditor());
 		}
 		getStateHistory().put(newState.getTimestamp(), newState);
-		newState.getProject().setVersion(getVersion());
 		return newState;
 	}
 
@@ -486,7 +480,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	@Override
 	public void load(boolean create, boolean loadOnDemand) throws CoreException {
-		initialize(false);
+		initialize();
 		if (create && isStateSet()) {
 			@SuppressWarnings("unchecked")
 			SCMOperator<Git> operator = (SCMOperator<Git>) getProject().getWorkspace().getSCMRegistry()
@@ -499,7 +493,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 					if (create) {
 						create(ClassMakerPlugin.getProgressMonitor());
 					}
-					getState().initialize(false);
+					getState().initialize();
 				}
 			} catch (Exception e) {
 				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
@@ -552,7 +546,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -566,7 +559,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -593,7 +585,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -617,7 +608,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -641,7 +631,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -663,7 +652,6 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

@@ -15,7 +15,6 @@
  */
 package org.enterprisedomain.classmaker.impl;
 
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -27,11 +26,14 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectEList;
+import org.eclipse.emf.ecore.util.EcoreEMap;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.Customizer;
@@ -52,61 +54,15 @@ import org.enterprisedomain.classmaker.util.ResourceUtils;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.impl.StrategyImpl#getGenerators
- * <em>Generators</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.StrategyImpl#getExporters
- * <em>Exporters</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.StrategyImpl#getInstallers
- * <em>Installers</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.StrategyImpl#getLoaders
- * <em>Loaders</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.StrategyImpl#getState
  * <em>State</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StrategyImpl#getWorkers
+ * <em>Workers</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class StrategyImpl extends EObjectImpl implements Strategy {
-	/**
-	 * The cached value of the '{@link #getGenerators() <em>Generators</em>}'
-	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #getGenerators()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Worker> generators;
-
-	/**
-	 * The cached value of the '{@link #getExporters() <em>Exporters</em>}'
-	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #getExporters()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Worker> exporters;
-
-	/**
-	 * The cached value of the '{@link #getInstallers() <em>Installers</em>}'
-	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #getInstallers()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Worker> installers;
-
-	/**
-	 * The cached value of the '{@link #getLoaders() <em>Loaders</em>}' reference
-	 * list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #getLoaders()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Worker> loaders;
-
 	/**
 	 * The cached value of the '{@link #getState() <em>State</em>}' reference. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -116,6 +72,16 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 	 * @ordered
 	 */
 	protected State state;
+
+	/**
+	 * The cached value of the '{@link #getWorkers() <em>Workers</em>}' map. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getWorkers()
+	 * @generated
+	 * @ordered
+	 */
+	protected EMap<StageQualifier, EList<Worker>> workers;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -134,58 +100,6 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 	@Override
 	protected EClass eStaticClass() {
 		return ClassMakerPackage.Literals.STRATEGY;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public EList<Worker> getGenerators() {
-		if (generators == null) {
-			generators = new EObjectEList<Worker>(Worker.class, this, ClassMakerPackage.STRATEGY__GENERATORS);
-		}
-		return generators;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public EList<Worker> getExporters() {
-		if (exporters == null) {
-			exporters = new EObjectEList<Worker>(Worker.class, this, ClassMakerPackage.STRATEGY__EXPORTERS);
-		}
-		return exporters;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public EList<Worker> getInstallers() {
-		if (installers == null) {
-			installers = new EObjectEList<Worker>(Worker.class, this, ClassMakerPackage.STRATEGY__INSTALLERS);
-		}
-		return installers;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public EList<Worker> getLoaders() {
-		if (loaders == null) {
-			loaders = new EObjectEList<Worker>(Worker.class, this, ClassMakerPackage.STRATEGY__LOADERS);
-		}
-		return loaders;
 	}
 
 	/**
@@ -261,13 +175,16 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @generated NOT
+	 * @generated
 	 */
-	public Worker createGenerator() {
-		getGenerators().add(createWithCustomizer(
-				ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "project.create.generator"), //$NON-NLS-1$
-				getGenerators().size(), getState().getTimestamp(), getEclipseProject()));
-		return getGenerators().get(getGenerators().size() - 1);
+	@Override
+	public EMap<StageQualifier, EList<Worker>> getWorkers() {
+		if (workers == null) {
+			workers = new EcoreEMap<StageQualifier, EList<Worker>>(
+					ClassMakerPackage.Literals.STAGE_QUALIFIER_TO_WORKERS_MAP_ENTRY,
+					StageQualifierToWorkersMapEntryImpl.class, this, ClassMakerPackage.STRATEGY__WORKERS);
+		}
+		return workers;
 	}
 
 	/**
@@ -275,35 +192,30 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 	 * 
 	 * @generated NOT
 	 */
-	public Worker createExporter() {
-		getExporters().add(createWithCustomizer(
-				ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "project.create.exporter"), //$NON-NLS-1$
-				getExporters().size(), Long.valueOf(getState().getTimestamp())));
-		return getExporters().get(getExporters().size() - 1);
+	private Worker create(Stage stage, String step) {
+		StageQualifier stageQualifier = stageLookup(stage, step);
+		Worker worker = createWithCustomizer(stageQualifier,
+				getWorkers().get(stageQualifier) != null ? getWorkers().get(stageQualifier).size() : 0,
+				getState().getTimestamp(), getEclipseProject());
+		if (getWorkers().containsKey(stageQualifier)) {
+			EList<Worker> workers = getWorkers().get(stageQualifier);
+			workers.add(worker);
+			getWorkers().put(stageQualifier, workers);
+		} else {
+			getWorkers().put(stageQualifier, ECollections.newBasicEList(worker));
+		}
+		return worker;
 	}
 
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public Worker createInstaller() {
-		getInstallers().add(createWithCustomizer(
-				ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "project.create.installer"), //$NON-NLS-1$
-				getInstallers().size(), Long.valueOf(getState().getTimestamp())));
-		return getInstallers().get(getInstallers().size() - 1);
+	private StageQualifier stageLookup(Stage stage, String step) {
+		return ClassMakerService.Stages.lookup(stage, step);
 	}
 
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public Worker createModelLoader() {
-		getLoaders().add(createWithCustomizer(
-				ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "project.create.loader"), //$NON-NLS-1$
-				getLoaders().size(), Long.valueOf(getState().getTimestamp())));
-		return getLoaders().get(getLoaders().size() - 1);
+	private Worker getOrCreate(boolean create, Stage stage, String step) {
+		if (create)
+			return create(stage, step);
+		else
+			return get(stage, step).get(get(stage, step).size() - 1);
 	}
 
 	/**
@@ -313,11 +225,16 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 	 */
 	@Override
 	public Worker getReturnWorker() {
-		int depth = configureJobs(getGenerators().size() < 5, ClassMakerPlugin.getProgressMonitor());
-		EnterpriseDomainJob generatorJob = EnterpriseDomainJob.getJob(getGenerators().get(depth));
-		EnterpriseDomainJob exporterJob = EnterpriseDomainJob.getJob(getExporters().get(depth));
-		EnterpriseDomainJob installerJob = EnterpriseDomainJob.getJob(getInstallers().get(depth));
-		EnterpriseDomainJob loaderJob = EnterpriseDomainJob.getJob(getLoaders().get(depth));
+		int depth = configureJobs(get(Stage.GENERATED, "project.create.generator").size() < 5,
+				ClassMakerPlugin.getProgressMonitor());
+		EnterpriseDomainJob generatorJob = EnterpriseDomainJob
+				.getJob(get(Stage.GENERATED, "project.create.generator").get(depth));
+		EnterpriseDomainJob exporterJob = EnterpriseDomainJob
+				.getJob(get(Stage.EXPORTED, "project.create.exporter").get(depth));
+		EnterpriseDomainJob installerJob = EnterpriseDomainJob
+				.getJob(get(Stage.INSTALLED, "project.create.installer").get(depth));
+		EnterpriseDomainJob loaderJob = EnterpriseDomainJob
+				.getJob(get(Stage.LOADED, "project.create.loader").get(depth));
 		switch (depth % 5) {
 		case 1:
 			switch (getState().getPhase().getValue()) {
@@ -378,11 +295,7 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 	 */
 	@Override
 	public int configureJobs(boolean create, IProgressMonitor monitor) {
-		Worker exporter = null;
-		if (create)
-			exporter = createExporter();
-		else
-			exporter = getExporters().get(getExporters().size() - 1);
+		Worker exporter = getOrCreate(create, Stage.EXPORTED, "project.create.exporter");
 
 		EnterpriseDomainJob exporterJob = EnterpriseDomainJob.getJob(exporter);
 		exporterJob.setContributionState(getState());
@@ -394,11 +307,7 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 		exporter.getProperties().put(AbstractExporter.EXPORT_DESTINATION_PROP,
 				ResourceUtils.getExportDestination(getState()).toString());
 
-		Worker generator = null;
-		if (create)
-			generator = createGenerator();
-		else
-			generator = getGenerators().get(getGenerators().size() - 1);
+		Worker generator = getOrCreate(create, Stage.GENERATED, "project.create.generator");
 		EnterpriseDomainJob generatorJob = EnterpriseDomainJob.getJob(generator);
 		generatorJob.setResourceSet(getState().getProject().getWorkspace().getResourceSet());
 		generatorJob.setContributionState(getState());
@@ -406,27 +315,19 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 		generatorJob.setProgressGroup(monitor, 1);
 		generatorJob.setNextJob(exporterJob);
 
-		Worker installer = null;
-		if (create)
-			installer = createInstaller();
-		else
-			installer = getInstallers().get(getInstallers().size() - 1);
+		Worker installer = getOrCreate(create, Stage.INSTALLED, "project.create.installer");
 		EnterpriseDomainJob installJob = EnterpriseDomainJob.getJob(installer);
 		installJob.setContributionState(getState());
 		installJob.setProject(getEclipseProject());
 		exporterJob.setNextJob(installJob);
 
-		Worker modelLoader = null;
-		if (create)
-			modelLoader = createModelLoader();
-		else
-			modelLoader = getLoaders().get(getLoaders().size() - 1);
+		Worker modelLoader = getOrCreate(create, Stage.LOADED, "project.create.loader");
 		EnterpriseDomainJob loadJob = EnterpriseDomainJob.getJob(modelLoader);
 		loadJob.setContributionState(getState());
 		loadJob.addListener();
 
 		installJob.setNextJob(loadJob);
-		return getGenerators().size() - 1;
+		return get(Stage.GENERATED, "project.create.generator").size() - 1;
 	}
 
 	/**
@@ -436,14 +337,14 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 	 */
 	@Override
 	public void configuteBuildJobs(IProgressMonitor monitor) {
-		Worker exporter = createExporter();
+		Worker exporter = create(Stage.EXPORTED, "project.create.exporter");
 		EnterpriseDomainJob exportJob = EnterpriseDomainJob.getJob(exporter);
 		exportJob.setContributionState(getState());
 		exportJob.setProject(getEclipseProject());
 		exporter.getProperties().put(AbstractExporter.EXPORT_DESTINATION_PROP,
 				ResourceUtils.getExportDestination(getState()).toString());
 
-		Worker generator = createGenerator();
+		Worker generator = create(Stage.GENERATED, "project.create.generator");
 		EnterpriseDomainJob generatorJob = EnterpriseDomainJob.getJob(generator);
 		generatorJob.setResourceSet(getState().getProject().getWorkspace().getResourceSet());
 		generatorJob.setContributionState(getState());
@@ -451,16 +352,31 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 		generatorJob.setProgressGroup(monitor, 1);
 		generatorJob.setNextJob(exportJob);
 
-		EnterpriseDomainJob installJob = EnterpriseDomainJob.getJob(createInstaller());
+		EnterpriseDomainJob installJob = EnterpriseDomainJob
+				.getJob(create(Stage.INSTALLED, "project.create.installer"));
 		installJob.setContributionState(getState());
 		installJob.setProject(getEclipseProject());
 
-		EnterpriseDomainJob loadJob = EnterpriseDomainJob.getJob(createModelLoader());
+		EnterpriseDomainJob loadJob = EnterpriseDomainJob.getJob(create(Stage.LOADED, "project.create.loader"));
 		loadJob.setContributionState(getState());
 		loadJob.addListener();
 
 		exportJob.setNextJob(installJob);
 		installJob.setNextJob(loadJob);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public EList<Worker> get(Stage stage, String step) {
+		StageQualifier stageQualifier = stageLookup(stage, step);
+		if (getWorkers().containsKey(stageQualifier))
+			return getWorkers().get(stageQualifier);
+		else
+			return ECollections.emptyEList();
 	}
 
 	/**
@@ -490,6 +406,8 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 		switch (featureID) {
 		case ClassMakerPackage.STRATEGY__STATE:
 			return basicSetState(null, msgs);
+		case ClassMakerPackage.STRATEGY__WORKERS:
+			return ((InternalEList<?>) getWorkers()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -562,18 +480,15 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case ClassMakerPackage.STRATEGY__GENERATORS:
-			return getGenerators();
-		case ClassMakerPackage.STRATEGY__EXPORTERS:
-			return getExporters();
-		case ClassMakerPackage.STRATEGY__INSTALLERS:
-			return getInstallers();
-		case ClassMakerPackage.STRATEGY__LOADERS:
-			return getLoaders();
 		case ClassMakerPackage.STRATEGY__STATE:
 			if (resolve)
 				return getState();
 			return basicGetState();
+		case ClassMakerPackage.STRATEGY__WORKERS:
+			if (coreType)
+				return getWorkers();
+			else
+				return getWorkers().map();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -583,28 +498,14 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 	 * 
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case ClassMakerPackage.STRATEGY__GENERATORS:
-			getGenerators().clear();
-			getGenerators().addAll((Collection<? extends Worker>) newValue);
-			return;
-		case ClassMakerPackage.STRATEGY__EXPORTERS:
-			getExporters().clear();
-			getExporters().addAll((Collection<? extends Worker>) newValue);
-			return;
-		case ClassMakerPackage.STRATEGY__INSTALLERS:
-			getInstallers().clear();
-			getInstallers().addAll((Collection<? extends Worker>) newValue);
-			return;
-		case ClassMakerPackage.STRATEGY__LOADERS:
-			getLoaders().clear();
-			getLoaders().addAll((Collection<? extends Worker>) newValue);
-			return;
 		case ClassMakerPackage.STRATEGY__STATE:
 			setState((State) newValue);
+			return;
+		case ClassMakerPackage.STRATEGY__WORKERS:
+			((EStructuralFeature.Setting) getWorkers()).set(newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -618,20 +519,11 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case ClassMakerPackage.STRATEGY__GENERATORS:
-			getGenerators().clear();
-			return;
-		case ClassMakerPackage.STRATEGY__EXPORTERS:
-			getExporters().clear();
-			return;
-		case ClassMakerPackage.STRATEGY__INSTALLERS:
-			getInstallers().clear();
-			return;
-		case ClassMakerPackage.STRATEGY__LOADERS:
-			getLoaders().clear();
-			return;
 		case ClassMakerPackage.STRATEGY__STATE:
 			setState((State) null);
+			return;
+		case ClassMakerPackage.STRATEGY__WORKERS:
+			getWorkers().clear();
 			return;
 		}
 		super.eUnset(featureID);
@@ -645,16 +537,10 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case ClassMakerPackage.STRATEGY__GENERATORS:
-			return generators != null && !generators.isEmpty();
-		case ClassMakerPackage.STRATEGY__EXPORTERS:
-			return exporters != null && !exporters.isEmpty();
-		case ClassMakerPackage.STRATEGY__INSTALLERS:
-			return installers != null && !installers.isEmpty();
-		case ClassMakerPackage.STRATEGY__LOADERS:
-			return loaders != null && !loaders.isEmpty();
 		case ClassMakerPackage.STRATEGY__STATE:
 			return state != null;
+		case ClassMakerPackage.STRATEGY__WORKERS:
+			return workers != null && !workers.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

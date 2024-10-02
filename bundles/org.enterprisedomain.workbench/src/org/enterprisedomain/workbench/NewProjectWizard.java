@@ -52,7 +52,7 @@ public class NewProjectWizard extends Wizard implements INewWizard {
 				} catch (CoreException e) {
 					ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
 				}
-				domainProject.initialize(false);
+				domainProject.initialize();
 				try {
 					domainProject.load(false, true);
 				} catch (CoreException e) {
@@ -63,7 +63,7 @@ public class NewProjectWizard extends Wizard implements INewWizard {
 				try {
 					domainProject = classMaker.getWorkspace().createProject(getProjectName(), monitor);
 					domainProject.getResource().getContents().add(EcoreFactory.eINSTANCE.createEObject());
-					domainProject.initialize(true);
+					domainProject.initialize();
 				} catch (CoreException e) {
 					ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
 				}

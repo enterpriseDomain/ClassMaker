@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: ClassMaker CDO UI Support
 Bundle-SymbolicName: org.enterprisedomain.classmaker.cdo.ui;singleton:=t
  rue
-Bundle-Version: 0.8.55.202402081017
+Bundle-Version: 0.8.55
 Bundle-Vendor: Kyrill Zotkin
 Require-Bundle: org.enterprisedomain.classmaker.cdo;bundle-version="0.0.
  1",org.eclipse.emf.cdo.ui.shared;bundle-version="[4.5.0,5.0.0)",org.ecl
@@ -12,5 +12,5 @@ Require-Bundle: org.enterprisedomain.classmaker.cdo;bundle-version="0.0.
  sion="[4.2.1,5.0.0)",org.eclipse.equinox.concurrent;bundle-version="1.2
  .0"
 Automatic-Module-Name: org.enterprisedomain.classmaker.cdo.ui
-Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=17))"
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=21))"
 

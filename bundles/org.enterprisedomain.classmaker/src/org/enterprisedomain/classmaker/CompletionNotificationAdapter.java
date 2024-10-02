@@ -23,17 +23,16 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- begin-user-doc --> A representation of the model object
  * '<em><b>Completion Notification Adapter</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc --> {@link org.eclipse.emf.common.notify.Adapter
- * Adapter} for notification about process completion. <!-- end-model-doc -->
+ * <!-- begin-model-doc -->
+ * {@link org.eclipse.emf.common.notify.Adapter Adapter} for notification about process completion.
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.CompletionNotificationAdapter#getError
- * <em>Error</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.CompletionNotificationAdapter#getProject
- * <em>Project</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.CompletionNotificationAdapter#getError <em>Error</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.CompletionNotificationAdapter#getProject <em>Project</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getCompletionNotificationAdapter()
@@ -58,12 +57,10 @@ public interface CompletionNotificationAdapter extends EObject, Adapter {
 	IStatus getError();
 
 	/**
-	 * Returns the value of the '<em><b>Project</b></em>' reference. It is
-	 * bidirectional and its opposite is
-	 * '{@link org.enterprisedomain.classmaker.Project#getCompletionNotificationAdapter
-	 * <em>Completion Notification Adapter</em>}'. <!-- begin-user-doc --> <!--
+	 * Returns the value of the '<em><b>Project</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link org.enterprisedomain.classmaker.Project#getCompletionNotificationAdapter <em>Completion Notification Adapter</em>}'.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Project</em>' reference.
 	 * @see #setProject(Project)
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getCompletionNotificationAdapter_Project()
@@ -74,10 +71,8 @@ public interface CompletionNotificationAdapter extends EObject, Adapter {
 	Project getProject();
 
 	/**
-	 * Sets the value of the
-	 * '{@link org.enterprisedomain.classmaker.CompletionNotificationAdapter#getProject
-	 * <em>Project</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.CompletionNotificationAdapter#getProject <em>Project</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Project</em>' reference.
 	 * @see #getProject()
 	 * @generated

@@ -15,9 +15,9 @@
  */
 package org.enterprisedomain.classmaker.jobs.codegen;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -178,7 +178,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 					getProject().refreshLocal(IResource.DEPTH_INFINITE, monitor);
 				} catch (OperationCanceledException ex) {
 				}
-				List<String> args = new ArrayList<String>();
+				List<String> args = new LinkedList<String>();
 				args.add("-forceOverwrite");
 				args.add("-codeFormatting");
 				args.add("default");
@@ -341,7 +341,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 						editorEntries.add(entry);
 				}
 				entry = JavaCore.newContainerEntry(new Path(
-						"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17"),
+						"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-21"),
 						null, new IClasspathAttribute[] { JavaCore.newClasspathAttribute("module", "true") }, true);
 				entries.removeIf(en -> {
 					return en.getPath().isPrefixOf(entry.getPath());
@@ -350,7 +350,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 					entries.add(entry);
 				if (editJavaProject != null) {
 					entry = JavaCore.newContainerEntry(new Path(
-							"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17"),
+							"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-21"),
 							null, new IClasspathAttribute[] { JavaCore.newClasspathAttribute("module", "true") }, true);
 					editEntries.removeIf(en -> {
 						return en.getPath().isPrefixOf(entry.getPath());
@@ -360,7 +360,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 				}
 				if (editorJavaProject != null) {
 					entry = JavaCore.newContainerEntry(new Path(
-							"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17"),
+							"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-21"),
 							null, new IClasspathAttribute[] { JavaCore.newClasspathAttribute("module", "true") }, true);
 					if (!editorEntries.contains(entry))
 						editorEntries.add(entry);
@@ -494,8 +494,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 			genModel.setLanguage(getContributionState().getLanguage());
 			genModel.setModelPluginID(EcoreGenerator.this.getProject().getName());
 			for (StageQualifier filter : getContributionState().getCustomizers().keySet())
-				if (ClassMakerService.Stages
-						.lookup(ClassMakerService.Stages.ID_PREFIX + "project.generation.genmodel.setup")
+				if (ClassMakerService.Stages.lookup(Stage.GENERATED, "project.generation.genmodel.setup")
 						.equals(filter))
 					getContributionState().getCustomizers().get(filter)
 							.customize(ECollections.asEList(projectPath, genModel, ePackages));

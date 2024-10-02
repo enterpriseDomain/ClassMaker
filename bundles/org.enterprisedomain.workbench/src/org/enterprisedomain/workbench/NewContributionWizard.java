@@ -1,7 +1,5 @@
 package org.enterprisedomain.workbench;
 
-import java.util.regex.Pattern;
-
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -54,7 +52,7 @@ public class NewContributionWizard extends Wizard implements INewWizard {
 				} catch (CoreException e) {
 					ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
 				}
-				domainProject.initialize(false);
+				domainProject.initialize();
 				try {
 					domainProject.load(false, true);
 				} catch (CoreException e) {

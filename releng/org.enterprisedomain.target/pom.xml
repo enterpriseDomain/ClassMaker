@@ -6,12 +6,12 @@
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
 		<artifactId>org.enterprisedomain.root</artifactId>
-		<version>0.8.55-SNAPSHOT</version>
+		<version>0.8.55</version>
 		<relativePath>../../</relativePath>
 	</parent>
 	<groupId>org.enterprisedomain</groupId>
 	<artifactId>org.enterprisedomain.target</artifactId>
-	<version>0.8.55-SNAPSHOT</version>
+	<version>0.8.55</version>
 	<packaging>eclipse-target-definition</packaging>
 	<build>
 		<plugins>
@@ -33,7 +33,7 @@
 						<configuration>
 							<appendAssemblyId>false</appendAssemblyId>
 							<finalName>
-								${project.artifactId}-${project.version}</finalName>
+								${project.artifactId}_${project.version}</finalName>
 							<strictVersions>false</strictVersions>
 						</configuration>
 					</execution>
@@ -54,7 +54,7 @@
 						</artifact>
 					</target>
 					<executionEnvironment>
-						org.eclipse.justj.openjdk.hotspot.jre.full-17</executionEnvironment>
+						org.eclipse.justj.openjdk.hotspot.jre.full-21</executionEnvironment>
 					<dependency-resolution>
 						<profileProperties>
 							<org.eclipse.justj.buildtime>true</org.eclipse.justj.buildtime>
@@ -70,7 +70,7 @@
 								<type>eclipse-feature</type>
 								<id>
 									org.enterprisedomain.ui.workbench.rcp.feature</id>
-								<versionRange>0.8.55-SNAPSHOT</versionRange>
+								<versionRange>0.8.55</versionRange>
 								<groupId>org.enterprisedomain</groupId>
 								<artifactId>
 									org.enterprisedomain.ui.workbench.rcp.feature</artifactId>
@@ -79,7 +79,7 @@
 								<type>eclipse-plugin</type>
 								<id>
 									org.enterprisedomain.classmaker.osgi.systemextension</id>
-								<versionRange>0.8.55-SNAPSHOT</versionRange>
+								<versionRange>0.8.55</versionRange>
 								<artifactId>
 									org.enterprisedomain.classmaker.osgi.systemextension</artifactId>
 							</requirement>

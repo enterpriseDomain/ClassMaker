@@ -15,11 +15,10 @@
  */
 package org.enterprisedomain.classmaker.impl;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
@@ -32,7 +31,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.ECollections;
@@ -41,17 +39,10 @@ import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.jgit.api.Git;
-import org.eclipse.jgit.api.ListBranchCommand;
-import org.eclipse.jgit.api.ReflogCommand;
 import org.eclipse.jgit.api.errors.JGitInternalException;
-import org.eclipse.jgit.lib.Ref;
-import org.eclipse.jgit.lib.ReflogEntry;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.Contribution;
@@ -60,7 +51,6 @@ import org.enterprisedomain.classmaker.Item;
 import org.enterprisedomain.classmaker.Models;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.Revision;
-import org.enterprisedomain.classmaker.SCMOperator;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
@@ -76,10 +66,8 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getDependencies
- * <em>Dependencies</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getLatestVersion
- * <em>Latest Version</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getDependencies <em>Dependencies</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getLatestVersion <em>Latest Version</em>}</li>
  * </ul>
  *
  * @generated
@@ -87,9 +75,8 @@ import org.osgi.framework.Version;
 public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
-	 * The default value of the '{@link #getLatestVersion() <em>Latest
-	 * Version</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getLatestVersion() <em>Latest Version</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getLatestVersion()
 	 * @generated
 	 * @ordered
@@ -100,18 +87,12 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 		@Override
 		public void completed(Project result) throws Exception {
 			addResourceChangeListener(getResourceReloadListener());
-			// if (getState().getPhase().equals(Stage.LOADED)) {
-			// EPackage ePackage = (EPackage) getState().getDomainModel().getGenerated();
-			// if (ePackage != null)
-			// Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);
-			// }
 		}
 
 	};
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected ContributionImpl() {
@@ -120,7 +101,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -183,29 +163,16 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	public Version getLatestVersion() {
 		if (!isRevisionSet() || getRevisions().isEmpty())
 			return Version.emptyVersion;
-		List<org.osgi.framework.Version> sorted = new ArrayList<org.osgi.framework.Version>();
+		List<org.osgi.framework.Version> sorted = new LinkedList<org.osgi.framework.Version>();
 		sorted.addAll((Collection<? extends org.osgi.framework.Version>) getRevisions().keySet());
 		Collections.sort(sorted, new Comparator<org.osgi.framework.Version>() {
 
 			@Override
 			public int compare(org.osgi.framework.Version o1, org.osgi.framework.Version o2) {
-				return o1.getMajor() - o2.getMajor() + o1.getMinor() - o2.getMinor() + o1.getMicro() - o2.getMicro();
+				return o1.compareTo(o2);
 			}
 		});
 		return ListUtil.getLast(sorted);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public void copyModel(Item from) {
-		setModelName(from.getModelName());
-		setLanguage(from.getLanguage());
-		EObject eObject = from.getDomainModel().getDynamic();
-		if (eObject != null)
-			getDomainModel().setDynamic(EcoreUtil.copy(eObject));
 	}
 
 	/**
@@ -284,93 +251,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	public void setParent(Item newParent) {
 	}
 
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public String initialize(boolean commit) {
-		@SuppressWarnings("unchecked")
-		SCMOperator<Git> operator = (SCMOperator<Git>) getWorkspace().getSCMRegistry().get(getProjectName());
-		setName(getModelName() != null ? getModelName() : CodeGenUtil.capName(getProjectName()));
-		try {
-			Git git = operator.getRepositorySCM();
-			String currentBranch = git.getRepository().getBranch();
-
-			ListBranchCommand listBranches = git.branchList();
-			List<Ref> branches = listBranches.call();
-			Iterator<Ref> it = branches.iterator();
-			Ref branch = null;
-			long timestamp = -1;
-			String commitId = "";
-			do {
-				Version version = null;
-				if (it.hasNext()) {
-					branch = it.next();
-					String[] name = branch.getName().split("/"); //$NON-NLS-1$
-					try {
-						version = operator.decodeVersion(name[name.length - 1]);
-						ReflogCommand reflog = git.reflog();
-						reflog.setRef(branch.getName().toString());
-						Collection<ReflogEntry> refs = reflog.call();
-						for (ReflogEntry ref : refs)
-							if (ref.getNewId().equals(branch.getObjectId())) {
-								timestamp = operator.decodeTimestamp(ref.getComment());
-								if (timestamp == -1)
-									timestamp = operator.decodeTimestamp(
-											String.valueOf(Long.valueOf(version.getQualifier()) / 1000));
-							}
-					} catch (IllegalArgumentException e) {
-						continue;
-					}
-				}
-				if (version != null && !getRevisions().containsKey(version)) {
-					Revision newRevision = newBareRevision(version);
-					newRevision.setTimestamp(timestamp);
-					newRevision.setProject(this);
-					doNewRevision(newRevision);
-					commitId = newRevision.initialize(commit);
-				}
-			} while (it.hasNext());
-			if (!getRevisions().isEmpty() && getVersion().equals(Version.emptyVersion))
-				setVersion(ListUtil.getLast(getRevisions()).getKey());
-			else if (!getVersion().equals(Version.emptyVersion)) {
-				if (isStateSet()) {
-					try {
-						getState().add(".");
-						getState().commit();
-					} catch (JGitInternalException e) {
-					}
-				}
-				checkout(getVersion(), timestamp);
-			}
-			if (currentBranch.equals(SCMOperator.MASTER_BRANCH))
-				checkout(getVersion(), timestamp);
-			if (!getWorkspace().getResourceSet().eAdapters().contains(resourceChangeAdapter))
-				getWorkspace().getResourceSet().eAdapters().add(resourceChangeAdapter);
-			addResourceChangeListener(getResourceReloadListener());
-			if (getPhase().equals(Stage.MODELED)) {
-				EPackage ePackage = (EPackage) getDomainModel().getDynamic();
-				if (ePackage != null)
-					Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);
-			} else if (getPhase().equals(Stage.LOADED)) {
-				EPackage ePackage = (EPackage) getDomainModel().getGenerated();
-				if (ePackage != null)
-					Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);
-			}
-			return commitId;
-		} catch (Exception e) {
-			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
-			return null;
-		} finally {
-			try {
-				operator.ungetRepositorySCM();
-			} catch (Exception e) {
-				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
-			}
-		}
-	}
-
 	@Override
 	public void create(IProgressMonitor monitor) throws CoreException {
 		super.create(monitor);
@@ -400,28 +280,18 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 	@Override
 	public String make(IProgressMonitor monitor) throws CoreException {
 		removeResourceChangeListener(getResourceReloadListener());
-		String result = // "";
-				// try {
-				// result =
-				make(getRevision(), monitor);
-		// } catch (CoreException e) {
-		// if (e.getCause() instanceof InvocationTargetException) {
-		// InvocationTargetException ex = (InvocationTargetException) e.getCause();
-		// if (ex.getCause() instanceof Error) {
-		// ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.CLEAN_BUILD,
-		// monitor);
-		// result = make(getRevision(), monitor);
-		// }
-		// } else
-		// throw e;
-		// }
+		String result = make(getRevision(), monitor);
 		setDirty(false);
 		return result;
 	}
 
 	@Override
 	public void doNewRevision(Revision newRevision) {
-		State newState = newRevision.newState();
+		State newState = null;
+		if (newRevision.eIsSet(ClassMakerPackage.Literals.REVISION__TIMESTAMP))
+			newState = newRevision.newState(newRevision.getTimestamp());
+		else
+			newState = newRevision.newState();
 		if (isStateSet())
 			newState.copyModel(getState());
 		initAdapters(newRevision);
@@ -574,7 +444,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -590,7 +459,6 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
