@@ -30,7 +30,6 @@ import org.enterprisedomain.classmaker.SelectRevealHandler;
 public class SelectRevealHandlerImpl extends EObjectImpl implements SelectRevealHandler {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected SelectRevealHandlerImpl() {
@@ -39,7 +38,6 @@ public class SelectRevealHandlerImpl extends EObjectImpl implements SelectReveal
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -49,7 +47,6 @@ public class SelectRevealHandlerImpl extends EObjectImpl implements SelectReveal
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -61,7 +58,6 @@ public class SelectRevealHandlerImpl extends EObjectImpl implements SelectReveal
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

@@ -49,6 +49,9 @@
       <eParameters name="commitId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eOperations name="newState" eType="#//State"/>
+    <eOperations name="newState" eType="#//State">
+      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+    </eOperations>
     <eOperations name="delete" eExceptions="#//CoreException">
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
@@ -176,18 +179,6 @@
         <details key="documentation" value="An associated with the &lt;em>&lt;b>State&lt;/b>&lt;/em> Jobs Family"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="resource" eType="#//Resource"
-        transient="true" resolveProxies="false">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A model {@link org.eclipse.emf.ecore.resource.Resource Resource}."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commitIds" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="An SCM commit's associated with the state identifiers."/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="commitId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="An SCM commit identifier attribute."/>
@@ -199,6 +190,8 @@
         <details key="documentation" value="A particular state's {@link Customizer}s. Provides actual implementation to which {@link customizers} feature is delegating."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nonExclusiveStateCustomizers"
+        upperBound="-1" eType="#//StageQualifierToCustomizerMapEntry" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="projectName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         volatile="true" transient="true" derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -215,12 +208,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="editor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="strategy" eType="#//Strategy"
         eOpposite="#//Strategy/state"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="basePackage" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Strategy">
-    <eOperations name="createGenerator" eType="#//Worker"/>
-    <eOperations name="createExporter" eType="#//Worker"/>
-    <eOperations name="createInstaller" eType="#//Worker"/>
-    <eOperations name="createModelLoader" eType="#//Worker"/>
     <eOperations name="getReturnWorker" eType="#//Worker"/>
     <eOperations name="configureJobs" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
       <eParameters name="create" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -229,16 +219,14 @@
     <eOperations name="configuteBuildJobs">
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="generators" upperBound="-1"
-        eType="#//Worker" resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="exporters" upperBound="-1"
-        eType="#//Worker" resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="installers" upperBound="-1"
-        eType="#//Worker" resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="loaders" upperBound="-1"
-        eType="#//Worker" resolveProxies="false"/>
+    <eOperations name="get" upperBound="-1" eType="#//Worker">
+      <eParameters name="stage" eType="#//Stage"/>
+      <eParameters name="step" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//State"
         eOpposite="#//State/strategy"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="workers" upperBound="-1"
+        eType="#//StageQualifierToWorkersMapEntry" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Item" abstract="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -255,9 +243,7 @@
     <eOperations name="build" eExceptions="#//CoreException">
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
-    <eOperations name="initialize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eParameters name="commit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    </eOperations>
+    <eOperations name="initialize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eOperations name="copyModel">
       <eParameters name="from" eType="#//Item"/>
     </eOperations>
@@ -309,6 +295,8 @@
         <details key="documentation" value="&lt;em>Contribution&lt;/em> associated with the &lt;em>&lt;b>Item&lt;/b>&lt;/em>."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resource" eType="#//Resource"
+        transient="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Adapter" instanceClassName="org.eclipse.emf.common.notify.Adapter"
       abstract="true" interface="true">
@@ -435,6 +423,8 @@
         <details key="documentation" value="{@link Customizer Customizers} collection."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nonExclusiveCustomizers"
+        upperBound="-1" eType="#//StageQualifierToCustomizerMapEntry" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="service" eType="#//ClassMakerService"
         eOpposite="#//ClassMakerService/workspace"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="SCMRegistry" changeable="false">
@@ -445,7 +435,10 @@
         <eTypeArguments/>
       </eGenericType>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="excludedEPackages" upperBound="-1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="ClassLoader" instanceClassName="java.lang.ClassLoader"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Properties" instanceClassName="java.util.Properties">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="{@link java.util.Properties} datatype import."/>
@@ -573,16 +566,25 @@
       <details key="documentation" value="Allows to customize the process."/>
     </eAnnotations>
     <eOperations name="customize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Provides customization in the process."/>
-      </eAnnotations>
       <eParameters name="args" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    </eOperations>
+    <eOperations name="isNextAfter" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="customizerClass">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
+          <eTypeArguments>
+            <eUpperBound eClassifier="#//Customizer"/>
+          </eTypeArguments>
+        </eGenericType>
+      </eParameters>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="rank" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Priority in choice of &lt;em>&lt;b>Customizer&lt;/b>&lt;/em>. Maximum value wins."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="exclusive" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stage" eType="#//StageQualifier"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="IStatus" instanceClassName="org.eclipse.core.runtime.IStatus">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -618,6 +620,19 @@
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A {@link Customizer Customizer} value."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StageQualifierToWorkersMapEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="key" eType="#//StageQualifier">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A {@link StageQualifier StageQualifier} key."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" upperBound="-1"
+        eType="#//Worker" resolveProxies="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A {@link Worker Worker} value."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -774,7 +789,6 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Initializes &lt;em>Project&lt;/em>. Calls {@link #initialize() &lt;em>initialize&lt;/em>} on contained &lt;em>Item&lt;/em>s.&#xA;&#xA;@param commit whether to perform commit&#xA;@return commit Id"/>
       </eAnnotations>
-      <eParameters name="commit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eOperations>
     <eOperations name="addCompletionListener">
       <eParameters name="resultListener" eType="#//CompletionListener"/>
@@ -849,9 +863,6 @@
         <details key="documentation" value="A name of the {@link org.eclipse.core.resources.IProject IProject} to which the &lt;em>&lt;b>Project&lt;/b>&lt;/em> is mapped to."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="children" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"
-        changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="dirty" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         transient="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -918,6 +929,8 @@
         <details key="documentation" value="A {@link ResourceAdapter &lt;em>&lt;b>ResourceAdapter&lt;/b>&lt;/em>} for  &lt;em>Project&lt;/em>."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="classLoader" eType="#//ClassLoader"
+        unsettable="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Name" instanceClassName="java.lang.String">
     <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">

@@ -8,8 +8,8 @@ public class CreateCDOGeneratorCustomizer extends CustomizerImpl {
 
 	@Override
 	public Object customize(EList<Object> args) {
-		CDOGenerator generator = new CDOGenerator((Integer) args.get(0), (Long) args.get(2));
-		generator.setProject((IProject) args.get(1));
+		CDOGenerator generator = new CDOGenerator((Integer) args.get(0), (Long) args.get(1));
+		generator.setProject((IProject) args.get(2));
 		return generator;
 	}
 

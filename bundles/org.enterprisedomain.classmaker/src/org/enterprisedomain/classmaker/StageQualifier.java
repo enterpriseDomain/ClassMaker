@@ -21,17 +21,16 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Stage
  * Qualifier</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc --> Qualifier of stage in the process. <!--
- * end-model-doc -->
+ * <!-- begin-model-doc -->
+ * Qualifier of stage in the process.
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.StageQualifier#getStage
- * <em>Stage</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.StageQualifier#getStep
- * <em>Step</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.StageQualifier#getStage <em>Stage</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.StageQualifier#getStep <em>Step</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getStageQualifier()
@@ -60,10 +59,8 @@ public interface StageQualifier extends EObject {
 	Stage getStage();
 
 	/**
-	 * Sets the value of the
-	 * '{@link org.enterprisedomain.classmaker.StageQualifier#getStage
-	 * <em>Stage</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.StageQualifier#getStage <em>Stage</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Stage</em>' attribute.
 	 * @see org.enterprisedomain.classmaker.Stage
 	 * @see #getStage()
@@ -90,10 +87,8 @@ public interface StageQualifier extends EObject {
 	String getStep();
 
 	/**
-	 * Sets the value of the
-	 * '{@link org.enterprisedomain.classmaker.StageQualifier#getStep
-	 * <em>Step</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.StageQualifier#getStep <em>Step</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Step</em>' attribute.
 	 * @see #getStep()
 	 * @generated

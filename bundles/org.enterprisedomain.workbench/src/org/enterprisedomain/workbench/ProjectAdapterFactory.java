@@ -15,8 +15,8 @@
  */
 package org.enterprisedomain.workbench;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IAdapterFactory;
-import org.eclipse.emf.ecp.core.ECPProject;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 
@@ -26,9 +26,9 @@ public class ProjectAdapterFactory implements IAdapterFactory {
 	@Override
 	public <T> T getAdapter(Object adaptableObject, Class<T> adapterType) {
 		if (Project.class.isAssignableFrom(adapterType)) {
-			if (adaptableObject instanceof ECPProject)
+			if (adaptableObject instanceof IProject)
 				return (T) ClassMakerPlugin.getClassMaker().getWorkspace()
-						.getProject(((ECPProject) adaptableObject).getName());
+						.getProject(((IProject) adaptableObject).getName());
 		}
 		return null;
 	}

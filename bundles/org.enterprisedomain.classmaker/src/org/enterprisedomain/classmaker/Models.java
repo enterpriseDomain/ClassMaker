@@ -22,23 +22,19 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- begin-user-doc --> A representation of the model object
  * '<em><b>Models</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc --> A holder of pair of references. To blueprint dynamic
- * model instance, and to a resulting generated one. <!-- end-model-doc -->
+ * <!-- begin-model-doc -->
+ * A holder of pair of references. To blueprint dynamic model instance, and to a resulting generated one.
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.Models#getDynamic
- * <em>Dynamic</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Models#getGenerated
- * <em>Generated</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Models#getGeneratedEdit
- * <em>Generated Edit</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Models#getGeneratedEditor
- * <em>Generated Editor</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Models#getParent
- * <em>Parent</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Models#getDynamic <em>Dynamic</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Models#getGenerated <em>Generated</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Models#getGeneratedEdit <em>Generated Edit</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Models#getGeneratedEditor <em>Generated Editor</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Models#getParent <em>Parent</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getModels()
@@ -62,10 +58,8 @@ public interface Models extends EObject {
 	EObject getDynamic();
 
 	/**
-	 * Sets the value of the
-	 * '{@link org.enterprisedomain.classmaker.Models#getDynamic <em>Dynamic</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Models#getDynamic <em>Dynamic</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Dynamic</em>' containment reference.
 	 * @see #getDynamic()
 	 * @generated
@@ -88,10 +82,8 @@ public interface Models extends EObject {
 	EObject getGenerated();
 
 	/**
-	 * Sets the value of the
-	 * '{@link org.enterprisedomain.classmaker.Models#getGenerated
-	 * <em>Generated</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Models#getGenerated <em>Generated</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Generated</em>' reference.
 	 * @see #getGenerated()
 	 * @generated
@@ -111,10 +103,8 @@ public interface Models extends EObject {
 	EMFPlugin getGeneratedEdit();
 
 	/**
-	 * Sets the value of the
-	 * '{@link org.enterprisedomain.classmaker.Models#getGeneratedEdit <em>Generated
-	 * Edit</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Models#getGeneratedEdit <em>Generated Edit</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Generated Edit</em>' attribute.
 	 * @see #getGeneratedEdit()
 	 * @generated
@@ -134,11 +124,9 @@ public interface Models extends EObject {
 	EMFPlugin getGeneratedEditor();
 
 	/**
-	 * Sets the value of the
-	 * '{@link org.enterprisedomain.classmaker.Models#getGeneratedEditor
-	 * <em>Generated Editor</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Models#getGeneratedEditor <em>Generated Editor</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @param value the new value of the '<em>Generated Editor</em>' attribute.
 	 * @see #getGeneratedEditor()
 	 * @generated
@@ -163,10 +151,8 @@ public interface Models extends EObject {
 	Item getParent();
 
 	/**
-	 * Sets the value of the
-	 * '{@link org.enterprisedomain.classmaker.Models#getParent <em>Parent</em>}'
-	 * container reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Models#getParent <em>Parent</em>}' container reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Parent</em>' container reference.
 	 * @see #getParent()
 	 * @generated

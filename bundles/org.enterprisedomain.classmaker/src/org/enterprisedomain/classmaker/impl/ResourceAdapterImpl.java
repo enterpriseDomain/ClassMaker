@@ -24,6 +24,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
@@ -41,12 +42,9 @@ import org.enterprisedomain.classmaker.ResourceAdapter;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.impl.ResourceAdapterImpl#getResource
- * <em>Resource</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ResourceAdapterImpl#getFilename
- * <em>Filename</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ResourceAdapterImpl#getProject
- * <em>Project</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ResourceAdapterImpl#getResource <em>Resource</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ResourceAdapterImpl#getFilename <em>Filename</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ResourceAdapterImpl#getProject <em>Project</em>}</li>
  * </ul>
  *
  * @generated
@@ -55,7 +53,6 @@ public class ResourceAdapterImpl extends EObjectImpl implements ResourceAdapter 
 	/**
 	 * The cached value of the '{@link #getResource() <em>Resource</em>}' reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getResource()
 	 * @generated
 	 * @ordered
@@ -63,9 +60,8 @@ public class ResourceAdapterImpl extends EObjectImpl implements ResourceAdapter 
 	protected Resource resource;
 
 	/**
-	 * The default value of the '{@link #getFilename() <em>Filename</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getFilename() <em>Filename</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getFilename()
 	 * @generated
 	 * @ordered
@@ -74,7 +70,6 @@ public class ResourceAdapterImpl extends EObjectImpl implements ResourceAdapter 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected ResourceAdapterImpl() {
@@ -83,7 +78,6 @@ public class ResourceAdapterImpl extends EObjectImpl implements ResourceAdapter 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -102,7 +96,6 @@ public class ResourceAdapterImpl extends EObjectImpl implements ResourceAdapter 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Resource basicGetResource() {
@@ -148,7 +141,6 @@ public class ResourceAdapterImpl extends EObjectImpl implements ResourceAdapter 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -160,7 +152,6 @@ public class ResourceAdapterImpl extends EObjectImpl implements ResourceAdapter 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetProject(Project newProject, NotificationChain msgs) {
@@ -170,7 +161,6 @@ public class ResourceAdapterImpl extends EObjectImpl implements ResourceAdapter 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -195,7 +185,6 @@ public class ResourceAdapterImpl extends EObjectImpl implements ResourceAdapter 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -211,7 +200,6 @@ public class ResourceAdapterImpl extends EObjectImpl implements ResourceAdapter 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -225,7 +213,6 @@ public class ResourceAdapterImpl extends EObjectImpl implements ResourceAdapter 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -240,7 +227,6 @@ public class ResourceAdapterImpl extends EObjectImpl implements ResourceAdapter 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -260,7 +246,6 @@ public class ResourceAdapterImpl extends EObjectImpl implements ResourceAdapter 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -278,7 +263,6 @@ public class ResourceAdapterImpl extends EObjectImpl implements ResourceAdapter 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -296,7 +280,6 @@ public class ResourceAdapterImpl extends EObjectImpl implements ResourceAdapter 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

@@ -77,328 +77,295 @@ import org.osgi.framework.Version;
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Package</b>. <!--
  * end-user-doc -->
- * 
  * @generated
  */
 public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPackage {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass contributionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass revisionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass stateEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass strategyEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass itemEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass adapterEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass workspaceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass longToStateMapEntryEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass versionToRevisionMapEntryEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass iSchedulingRuleEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass executorEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass futureEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass iAdapterFactoryEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass customizerEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass stageQualifierEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass stageQualifierToCustomizerMapEntryEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * @generated
+	 */
+	private EClass stageQualifierToWorkersMapEntryEClass = null;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass modelsEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass projectEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass scmOperatorEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass scmRegistryEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass resourceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass resourceChangeListenerEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass notificationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass notifierEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass completionListenerEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass workerEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass selectRevealHandlerEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass resourceAdapterEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass classMakerServiceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass blueprintEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass completionNotificationAdapterEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EEnum stageEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * @generated
+	 */
+	private EDataType classLoaderEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EDataType propertiesEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EDataType iProgressMonitorEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EDataType osGiVersionEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EDataType semaphoreEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EDataType coreExceptionEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EDataType invocationTargetExceptionEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EDataType iStatusEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EDataType uriEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EDataType emfPluginEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EDataType nameEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EDataType exceptionEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EDataType localeEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
-	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the
-	 * package package URI value.
-	 * <p>
-	 * Note: the correct way to create the package is via the static factory method
-	 * {@link #init init()}, which also performs initialization of the package, or
-	 * returns the registered package, if one already exists. <!-- begin-user-doc
+	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
+	 * package URI value.
+	 * <p>Note: the correct way to create the package is via the static
+	 * factory method {@link #init init()}, which also performs
+	 * initialization of the package, or returns the registered package,
+	 * if one already exists.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#eNS_URI
 	 * @see #init()
@@ -410,21 +377,17 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private static boolean isInited = false;
 
 	/**
-	 * Creates, registers, and initializes the <b>Package</b> for this model, and
-	 * for any others upon which it depends.
+	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
 	 *
-	 * <p>
-	 * This method is used to initialize {@link ClassMakerPackage#eINSTANCE} when
-	 * that field is accessed. Clients should not invoke it directly. Instead, they
-	 * should simply access that field to obtain the package. <!-- begin-user-doc
+	 * <p>This method is used to initialize {@link ClassMakerPackage#eINSTANCE} when that field is accessed.
+	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @see #eNS_URI
 	 * @see #createPackageContents()
 	 * @see #initializePackageContents()
@@ -469,7 +432,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -479,7 +441,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -489,7 +450,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -499,7 +459,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -509,7 +468,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -519,7 +477,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -529,7 +486,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -539,7 +495,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -549,7 +504,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -559,7 +513,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -569,7 +522,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -579,7 +531,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -589,7 +540,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -599,7 +549,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -609,7 +558,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -619,7 +567,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -629,7 +576,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -639,7 +585,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -649,7 +594,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -659,7 +603,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -669,97 +612,87 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public EReference getState_Resource() {
-		return (EReference) stateEClass.getEStructuralFeatures().get(10);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public EAttribute getState_CommitIds() {
-		return (EAttribute) stateEClass.getEStructuralFeatures().get(11);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getState_CommitId() {
-		return (EAttribute) stateEClass.getEStructuralFeatures().get(12);
+		return (EAttribute) stateEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EReference getState_StateCustomizers() {
-		return (EReference) stateEClass.getEStructuralFeatures().get(13);
+		return (EReference) stateEClass.getEStructuralFeatures().get(11);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * @generated
+	 */
+	@Override
+	public EReference getState_NonExclusiveStateCustomizers() {
+		return (EReference) stateEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public EAttribute getState_ProjectName() {
+		return (EAttribute) stateEClass.getEStructuralFeatures().get(13);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getState_Making() {
 		return (EAttribute) stateEClass.getEStructuralFeatures().get(14);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
-	public EAttribute getState_Making() {
+	public EAttribute getState_Edit() {
 		return (EAttribute) stateEClass.getEStructuralFeatures().get(15);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
-	public EAttribute getState_Edit() {
+	public EAttribute getState_Editor() {
 		return (EAttribute) stateEClass.getEStructuralFeatures().get(16);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public EAttribute getState_Editor() {
-		return (EAttribute) stateEClass.getEStructuralFeatures().get(17);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EReference getState_Strategy() {
-		return (EReference) stateEClass.getEStructuralFeatures().get(18);
+		return (EReference) stateEClass.getEStructuralFeatures().get(17);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * @generated
+	 */
+	@Override
+	public EAttribute getState_BasePackage() {
+		return (EAttribute) stateEClass.getEStructuralFeatures().get(18);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -769,57 +702,24 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
-	public EReference getStrategy_Generators() {
+	public EReference getStrategy_State() {
 		return (EReference) strategyEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
-	public EReference getStrategy_Exporters() {
+	public EReference getStrategy_Workers() {
 		return (EReference) strategyEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public EReference getStrategy_Installers() {
-		return (EReference) strategyEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public EReference getStrategy_Loaders() {
-		return (EReference) strategyEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public EReference getStrategy_State() {
-		return (EReference) strategyEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -829,7 +729,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -839,7 +738,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -849,7 +747,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -859,7 +756,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -869,7 +765,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -879,7 +774,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -889,7 +783,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -899,7 +792,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -909,7 +801,15 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * @generated
+	 */
+	@Override
+	public EReference getItem_Resource() {
+		return (EReference) itemEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -919,7 +819,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -929,7 +828,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -939,7 +837,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -949,7 +846,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -959,27 +855,42 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
-	public EReference getWorkspace_Service() {
+	public EReference getWorkspace_NonExclusiveCustomizers() {
 		return (EReference) workspaceEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
-	public EReference getWorkspace_SCMRegistry() {
+	public EReference getWorkspace_Service() {
 		return (EReference) workspaceEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * @generated
+	 */
+	@Override
+	public EReference getWorkspace_SCMRegistry() {
+		return (EReference) workspaceEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getWorkspace_ExcludedEPackages() {
+		return (EReference) workspaceEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -989,7 +900,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -999,7 +909,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1009,7 +918,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1019,7 +927,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1029,7 +936,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1039,7 +945,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1049,7 +954,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1059,7 +963,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1069,7 +972,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1079,7 +981,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1089,7 +990,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1099,7 +999,24 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * @generated
+	 */
+	@Override
+	public EAttribute getCustomizer_Exclusive() {
+		return (EAttribute) customizerEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getCustomizer_Stage() {
+		return (EReference) customizerEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -1109,7 +1026,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1119,7 +1035,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1129,7 +1044,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1139,7 +1053,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1149,7 +1062,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1159,7 +1071,33 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * @generated
+	 */
+	@Override
+	public EClass getStageQualifierToWorkersMapEntry() {
+		return stageQualifierToWorkersMapEntryEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getStageQualifierToWorkersMapEntry_Key() {
+		return (EReference) stageQualifierToWorkersMapEntryEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getStageQualifierToWorkersMapEntry_Value() {
+		return (EReference) stageQualifierToWorkersMapEntryEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -1169,7 +1107,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1179,7 +1116,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1189,7 +1125,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1199,7 +1134,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1209,7 +1143,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1219,7 +1152,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1229,7 +1161,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1239,7 +1170,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1249,7 +1179,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1259,157 +1188,141 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
-	public EAttribute getProject_Children() {
+	public EAttribute getProject_Dirty() {
 		return (EAttribute) projectEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public EAttribute getProject_Dirty() {
-		return (EAttribute) projectEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EReference getProject_Workspace() {
-		return (EReference) projectEClass.getEStructuralFeatures().get(4);
+		return (EReference) projectEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getProject_ResourcePath() {
+		return (EAttribute) projectEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getProject_NeedCompletionNotification() {
 		return (EAttribute) projectEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public EAttribute getProject_NeedCompletionNotification() {
-		return (EAttribute) projectEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EReference getProject_CompletionNotificationAdapter() {
+		return (EReference) projectEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getProject_ResourceReloadListener() {
 		return (EReference) projectEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public EReference getProject_ResourceReloadListener() {
-		return (EReference) projectEClass.getEStructuralFeatures().get(8);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getProject_SavingResource() {
-		return (EAttribute) projectEClass.getEStructuralFeatures().get(9);
+		return (EAttribute) projectEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EReference getProject_Revision() {
+		return (EReference) projectEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getProject_Revisions() {
 		return (EReference) projectEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public EReference getProject_Revisions() {
-		return (EReference) projectEClass.getEStructuralFeatures().get(11);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getProject_ProjectVersion() {
-		return (EAttribute) projectEClass.getEStructuralFeatures().get(12);
+		return (EAttribute) projectEClass.getEStructuralFeatures().get(11);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EReference getProject_SelectRevealHandler() {
-		return (EReference) projectEClass.getEStructuralFeatures().get(13);
+		return (EReference) projectEClass.getEStructuralFeatures().get(12);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EAttribute getProject_Version() {
-		return (EAttribute) projectEClass.getEStructuralFeatures().get(14);
+		return (EAttribute) projectEClass.getEStructuralFeatures().get(13);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public EReference getProject_State() {
+		return (EReference) projectEClass.getEStructuralFeatures().get(14);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getProject_ModelResourceAdapter() {
 		return (EReference) projectEClass.getEStructuralFeatures().get(15);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
-	public EReference getProject_ModelResourceAdapter() {
-		return (EReference) projectEClass.getEStructuralFeatures().get(16);
+	public EAttribute getProject_ClassLoader() {
+		return (EAttribute) projectEClass.getEStructuralFeatures().get(16);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1419,7 +1332,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1429,7 +1341,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1439,7 +1350,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1449,7 +1359,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1459,7 +1368,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1469,7 +1377,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1479,7 +1386,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1489,7 +1395,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1499,7 +1404,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1509,7 +1413,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1519,7 +1422,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1529,7 +1431,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1539,7 +1440,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1549,7 +1449,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1559,7 +1458,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1569,7 +1467,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1579,7 +1476,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1589,7 +1485,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1599,7 +1494,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1609,7 +1503,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1619,7 +1512,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1629,7 +1521,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1639,7 +1530,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1649,7 +1539,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1659,7 +1548,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1669,7 +1557,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1679,7 +1566,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1689,7 +1575,15 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * @generated
+	 */
+	@Override
+	public EDataType getClassLoader() {
+		return classLoaderEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -1699,7 +1593,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1709,7 +1602,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1719,7 +1611,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1729,7 +1620,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1739,7 +1629,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1749,7 +1638,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1759,7 +1647,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1769,7 +1656,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1779,7 +1665,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1789,7 +1674,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1799,16 +1683,15 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private boolean isCreated = false;
 
 	/**
-	 * Creates the meta-model objects for the package. This method is guarded to
-	 * have no affect on any invocation but its first. <!-- begin-user-doc --> <!--
+	 * Creates the meta-model objects for the package.  This method is
+	 * guarded to have no affect on any invocation but its first.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void createPackageContents() {
@@ -1839,22 +1722,19 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		createEAttribute(stateEClass, STATE__EDIT_DEPLOYABLE_UNIT_NAME);
 		createEAttribute(stateEClass, STATE__EDITOR_DEPLOYABLE_UNIT_NAME);
 		createEAttribute(stateEClass, STATE__JOB_FAMILY);
-		createEReference(stateEClass, STATE__RESOURCE);
-		createEAttribute(stateEClass, STATE__COMMIT_IDS);
 		createEAttribute(stateEClass, STATE__COMMIT_ID);
 		createEReference(stateEClass, STATE__STATE_CUSTOMIZERS);
+		createEReference(stateEClass, STATE__NON_EXCLUSIVE_STATE_CUSTOMIZERS);
 		createEAttribute(stateEClass, STATE__PROJECT_NAME);
 		createEAttribute(stateEClass, STATE__MAKING);
 		createEAttribute(stateEClass, STATE__EDIT);
 		createEAttribute(stateEClass, STATE__EDITOR);
 		createEReference(stateEClass, STATE__STRATEGY);
+		createEAttribute(stateEClass, STATE__BASE_PACKAGE);
 
 		strategyEClass = createEClass(STRATEGY);
-		createEReference(strategyEClass, STRATEGY__GENERATORS);
-		createEReference(strategyEClass, STRATEGY__EXPORTERS);
-		createEReference(strategyEClass, STRATEGY__INSTALLERS);
-		createEReference(strategyEClass, STRATEGY__LOADERS);
 		createEReference(strategyEClass, STRATEGY__STATE);
+		createEReference(strategyEClass, STRATEGY__WORKERS);
 
 		itemEClass = createEClass(ITEM);
 		createEAttribute(itemEClass, ITEM__MODEL_NAME);
@@ -1865,6 +1745,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		createEReference(itemEClass, ITEM__PARENT);
 		createEAttribute(itemEClass, ITEM__LOCALE);
 		createEReference(itemEClass, ITEM__PROJECT);
+		createEReference(itemEClass, ITEM__RESOURCE);
 
 		adapterEClass = createEClass(ADAPTER);
 
@@ -1872,8 +1753,10 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		createEReference(workspaceEClass, WORKSPACE__PROJECTS);
 		createEAttribute(workspaceEClass, WORKSPACE__RESOURCE_SET);
 		createEReference(workspaceEClass, WORKSPACE__CUSTOMIZERS);
+		createEReference(workspaceEClass, WORKSPACE__NON_EXCLUSIVE_CUSTOMIZERS);
 		createEReference(workspaceEClass, WORKSPACE__SERVICE);
 		createEReference(workspaceEClass, WORKSPACE__SCM_REGISTRY);
+		createEReference(workspaceEClass, WORKSPACE__EXCLUDED_EPACKAGES);
 
 		longToStateMapEntryEClass = createEClass(LONG_TO_STATE_MAP_ENTRY);
 		createEAttribute(longToStateMapEntryEClass, LONG_TO_STATE_MAP_ENTRY__KEY);
@@ -1893,6 +1776,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 		customizerEClass = createEClass(CUSTOMIZER);
 		createEAttribute(customizerEClass, CUSTOMIZER__RANK);
+		createEAttribute(customizerEClass, CUSTOMIZER__EXCLUSIVE);
+		createEReference(customizerEClass, CUSTOMIZER__STAGE);
 
 		stageQualifierEClass = createEClass(STAGE_QUALIFIER);
 		createEAttribute(stageQualifierEClass, STAGE_QUALIFIER__STAGE);
@@ -1901,6 +1786,10 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		stageQualifierToCustomizerMapEntryEClass = createEClass(STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY);
 		createEReference(stageQualifierToCustomizerMapEntryEClass, STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY__KEY);
 		createEReference(stageQualifierToCustomizerMapEntryEClass, STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY__VALUE);
+
+		stageQualifierToWorkersMapEntryEClass = createEClass(STAGE_QUALIFIER_TO_WORKERS_MAP_ENTRY);
+		createEReference(stageQualifierToWorkersMapEntryEClass, STAGE_QUALIFIER_TO_WORKERS_MAP_ENTRY__KEY);
+		createEReference(stageQualifierToWorkersMapEntryEClass, STAGE_QUALIFIER_TO_WORKERS_MAP_ENTRY__VALUE);
 
 		modelsEClass = createEClass(MODELS);
 		createEReference(modelsEClass, MODELS__DYNAMIC);
@@ -1918,7 +1807,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		projectEClass = createEClass(PROJECT);
 		createEAttribute(projectEClass, PROJECT__NAME);
 		createEAttribute(projectEClass, PROJECT__PROJECT_NAME);
-		createEAttribute(projectEClass, PROJECT__CHILDREN);
 		createEAttribute(projectEClass, PROJECT__DIRTY);
 		createEReference(projectEClass, PROJECT__WORKSPACE);
 		createEAttribute(projectEClass, PROJECT__RESOURCE_PATH);
@@ -1933,6 +1821,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		createEAttribute(projectEClass, PROJECT__VERSION);
 		createEReference(projectEClass, PROJECT__STATE);
 		createEReference(projectEClass, PROJECT__MODEL_RESOURCE_ADAPTER);
+		createEAttribute(projectEClass, PROJECT__CLASS_LOADER);
 
 		resourceEClass = createEClass(RESOURCE);
 
@@ -1971,6 +1860,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		stageEEnum = createEEnum(STAGE);
 
 		// Create data types
+		classLoaderEDataType = createEDataType(CLASS_LOADER);
 		propertiesEDataType = createEDataType(PROPERTIES);
 		iProgressMonitorEDataType = createEDataType(IPROGRESS_MONITOR);
 		osGiVersionEDataType = createEDataType(OS_GI_VERSION);
@@ -1987,7 +1877,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private boolean isInitialized = false;
@@ -2081,6 +1970,9 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 		addEOperation(revisionEClass, this.getState(), "newState", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(revisionEClass, this.getState(), "newState", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getELong(), "timestamp", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		op = addEOperation(revisionEClass, null, "delete", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEException(op, this.getCoreException());
@@ -2120,16 +2012,14 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 				IS_DERIVED, IS_ORDERED);
 		initEAttribute(getState_JobFamily(), ecorePackage.getEString(), "jobFamily", null, 0, 1, State.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getState_Resource(), this.getResource(), null, "resource", null, 0, 1, State.class, IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEAttribute(getState_CommitIds(), ecorePackage.getEString(), "commitIds", null, 0, -1, State.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getState_CommitId(), ecorePackage.getEString(), "commitId", null, 0, 1, State.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getState_StateCustomizers(), this.getStageQualifierToCustomizerMapEntry(), null,
 				"stateCustomizers", null, 0, -1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getState_NonExclusiveStateCustomizers(), this.getStageQualifierToCustomizerMapEntry(), null,
+				"nonExclusiveStateCustomizers", null, 0, -1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getState_ProjectName(), ecorePackage.getEString(), "projectName", null, 0, 1, State.class,
 				IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getState_Making(), ecorePackage.getEBoolean(), "making", "false", 0, 1, State.class,
@@ -2141,6 +2031,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEReference(getState_Strategy(), this.getStrategy(), this.getStrategy_State(), "strategy", null, 0, 1,
 				State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getState_BasePackage(), ecorePackage.getEString(), "basePackage", null, 0, 1, State.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(stateEClass, null, "setProjectVersion", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -2171,29 +2063,12 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 		initEClass(strategyEClass, Strategy.class, "Strategy", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getStrategy_Generators(), this.getWorker(), null, "generators", null, 0, -1, Strategy.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getStrategy_Exporters(), this.getWorker(), null, "exporters", null, 0, -1, Strategy.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getStrategy_Installers(), this.getWorker(), null, "installers", null, 0, -1, Strategy.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getStrategy_Loaders(), this.getWorker(), null, "loaders", null, 0, -1, Strategy.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStrategy_State(), this.getState(), this.getState_Strategy(), "state", null, 0, 1,
 				Strategy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		addEOperation(strategyEClass, this.getWorker(), "createGenerator", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(strategyEClass, this.getWorker(), "createExporter", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(strategyEClass, this.getWorker(), "createInstaller", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(strategyEClass, this.getWorker(), "createModelLoader", 0, 1, IS_UNIQUE, IS_ORDERED);
+		initEReference(getStrategy_Workers(), this.getStageQualifierToWorkersMapEntry(), null, "workers", null, 0, -1,
+				Strategy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(strategyEClass, this.getWorker(), "getReturnWorker", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -2203,6 +2078,10 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 		op = addEOperation(strategyEClass, null, "configuteBuildJobs", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(strategyEClass, this.getWorker(), "get", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getStage(), "stage", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "step", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(itemEClass, Item.class, "Item", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getItem_ModelName(), ecorePackage.getEString(), "modelName", null, 0, 1, Item.class,
@@ -2225,6 +2104,9 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEReference(getItem_Project(), this.getProject(), null, "project", null, 0, 1, Item.class, IS_TRANSIENT,
 				IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED,
 				IS_ORDERED);
+		initEReference(getItem_Resource(), this.getResource(), null, "resource", null, 0, 1, Item.class, IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
 
 		op = addEOperation(itemEClass, null, "load", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEBoolean(), "create", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -2239,8 +2121,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEException(op, this.getCoreException());
 
-		op = addEOperation(itemEClass, ecorePackage.getEString(), "initialize", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEBoolean(), "commit", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(itemEClass, ecorePackage.getEString(), "initialize", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(itemEClass, null, "copyModel", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getItem(), "from", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -2258,6 +2139,9 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEReference(getWorkspace_Customizers(), this.getStageQualifierToCustomizerMapEntry(), null, "customizers",
 				null, 0, -1, Workspace.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getWorkspace_NonExclusiveCustomizers(), this.getStageQualifierToCustomizerMapEntry(), null,
+				"nonExclusiveCustomizers", null, 0, -1, Workspace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getWorkspace_Service(), this.getClassMakerService(), this.getClassMakerService_Workspace(),
 				"service", null, 0, 1, Workspace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
 				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2267,6 +2151,9 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEReference(getWorkspace_SCMRegistry(), g1, null, "SCMRegistry", null, 0, 1, Workspace.class, !IS_TRANSIENT,
 				!IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
+		initEReference(getWorkspace_ExcludedEPackages(), ecorePackage.getEPackage(), null, "excludedEPackages", null, 0,
+				-1, Workspace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(workspaceEClass, null, "initialize", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -2360,9 +2247,23 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 				IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCustomizer_Rank(), ecorePackage.getEInt(), "rank", null, 0, 1, Customizer.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCustomizer_Exclusive(), ecorePackage.getEBoolean(), "exclusive", "true", 0, 1,
+				Customizer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEReference(getCustomizer_Stage(), this.getStageQualifier(), null, "stage", null, 0, 1, Customizer.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(customizerEClass, ecorePackage.getEJavaObject(), "customize", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEJavaObject(), "args", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(customizerEClass, ecorePackage.getEBoolean(), "isNextAfter", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEJavaClass());
+		g2 = createEGenericType();
+		g1.getETypeArguments().add(g2);
+		EGenericType g3 = createEGenericType(this.getCustomizer());
+		g2.setEUpperBound(g3);
+		addEParameter(op, g1, "customizerClass", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(stageQualifierEClass, StageQualifier.class, "StageQualifier", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
@@ -2378,6 +2279,15 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStageQualifierToCustomizerMapEntry_Value(), this.getCustomizer(), null, "value", null, 0, 1,
 				Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(stageQualifierToWorkersMapEntryEClass, Map.Entry.class, "StageQualifierToWorkersMapEntry",
+				!IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getStageQualifierToWorkersMapEntry_Key(), this.getStageQualifier(), null, "key", null, 0, 1,
+				Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStageQualifierToWorkersMapEntry_Value(), this.getWorker(), null, "value", null, 0, -1,
+				Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(modelsEClass, Models.class, "Models", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2494,8 +2404,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getProject_ProjectName(), ecorePackage.getEString(), "projectName", "", 0, 1, Project.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getProject_Children(), ecorePackage.getEJavaObject(), "children", null, 0, -1, Project.class,
-				IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getProject_Dirty(), ecorePackage.getEBoolean(), "dirty", null, 0, 1, Project.class, IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getProject_Workspace(), this.getWorkspace(), this.getWorkspace_Projects(), "workspace", null, 0,
@@ -2535,6 +2443,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEReference(getProject_ModelResourceAdapter(), this.getResourceAdapter(), this.getResourceAdapter_Project(),
 				"modelResourceAdapter", null, 0, 1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE,
 				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProject_ClassLoader(), this.getClassLoader(), "classLoader", null, 0, 1, Project.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(projectEClass, null, "create", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -2563,8 +2473,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEException(op, this.getCoreException());
 
-		op = addEOperation(projectEClass, ecorePackage.getEString(), "initialize", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEBoolean(), "commit", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(projectEClass, ecorePackage.getEString(), "initialize", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(projectEClass, null, "addCompletionListener", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getCompletionListener(), "resultListener", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -2732,7 +2641,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		g1 = createEGenericType(this.getFuture());
 		g2 = createEGenericType();
 		g1.getETypeArguments().add(g2);
-		EGenericType g3 = createEGenericType(ecorePackage.getEObject());
+		g3 = createEGenericType(ecorePackage.getEObject());
 		g2.setEUpperBound(g3);
 		initEOperation(op, g1);
 
@@ -2925,6 +2834,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		addEEnumLiteral(stageEEnum, Stage.LOADED);
 
 		// Initialize data types
+		initEDataType(classLoaderEDataType, ClassLoader.class, "ClassLoader", IS_SERIALIZABLE,
+				!IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(propertiesEDataType, Properties.class, "Properties", IS_SERIALIZABLE,
 				!IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(iProgressMonitorEDataType, IProgressMonitor.class, "IProgressMonitor", IS_SERIALIZABLE,

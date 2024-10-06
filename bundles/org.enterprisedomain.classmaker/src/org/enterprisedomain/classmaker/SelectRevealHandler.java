@@ -30,7 +30,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 public interface SelectRevealHandler extends EObject {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model
 	 * @generated
 	 */
@@ -38,7 +37,6 @@ public interface SelectRevealHandler extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model newResourceType="org.enterprisedomain.classmaker.Resource"
 	 * @generated
 	 */
