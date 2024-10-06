@@ -14,6 +14,7 @@
     <booleanAttribute key="default" value="false"/>
     <setAttribute key="deselected_workspace_bundles">
         <setEntry value="org.enterprisedomain.classmaker.invoke.ui"/>
+        <setEntry value="org.enterprisedomain.classmaker.parsley"/>
         <setEntry value="org.enterprisedomain.classmaker.sample"/>
         <setEntry value="org.enterprisedomain.classmaker.tests"/>
         <setEntry value="org.enterprisedomain.editor"/>
@@ -90,7 +91,7 @@
         <setEntry value="org.apache.commons.commons-beanutils@default:default"/>
         <setEntry value="org.apache.commons.commons-codec*1.17.1@default:default"/>
         <setEntry value="org.apache.commons.commons-collections4@default:default"/>
-        <setEntry value="org.apache.commons.commons-compress@default:default"/>
+        <setEntry value="org.apache.commons.commons-compress*1.27.1@default:default"/>
         <setEntry value="org.apache.commons.commons-io*2.16.1@default:default"/>
         <setEntry value="org.apache.commons.commons-logging*1.3.4@default:default"/>
         <setEntry value="org.apache.commons.jxpath@default:default"/>
@@ -102,7 +103,7 @@
         <setEntry value="org.apache.felix.gogo.shell@default:default"/>
         <setEntry value="org.apache.felix.scr@1:true"/>
         <setEntry value="org.apache.log4j*1.2.25@default:default"/>
-        <setEntry value="org.apache.logging.log4j.api@default:default"/>
+        <setEntry value="org.apache.logging.log4j.api*2.23.1@default:default"/>
         <setEntry value="org.apache.lucene.analysis-common@default:default"/>
         <setEntry value="org.apache.lucene.analysis-smartcn@default:default"/>
         <setEntry value="org.apache.lucene.core@default:default"/>
@@ -414,7 +415,6 @@
         <setEntry value="org.enterprisedomain.classmaker.load.cdo@default:default"/>
         <setEntry value="org.enterprisedomain.classmaker.load@default:default"/>
         <setEntry value="org.enterprisedomain.classmaker.osgi.systemextension@default:false"/>
-        <setEntry value="org.enterprisedomain.classmaker.parsley@default:default"/>
         <setEntry value="org.enterprisedomain.classmaker@default:default"/>
         <setEntry value="org.enterprisedomain.workbench@default:default"/>
     </setAttribute>

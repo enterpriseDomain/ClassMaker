@@ -136,21 +136,14 @@ limitations under the License.
       <import plugin="org.eclipse.emf.importer.ecore" version="2.10.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.jdt.ui" version="3.25.0" match="greaterOrEqual"/>
       <import plugin="org.enterprisedomain.classmaker" version="0.8.55" match="greaterOrEqual"/>
-      <import plugin="org.enterprisedomain.classmaker.parsley" version="0.8.55" match="greaterOrEqual"/>
    </requires>
 
    <plugin
          id="org.enterprisedomain.classmaker.edit"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
    <plugin
          id="org.enterprisedomain.workbench"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
 </feature>
