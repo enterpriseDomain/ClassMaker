@@ -56,6 +56,7 @@ import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
 import org.eclipse.m2m.qvt.oml.ExecutionDiagnostic;
 import org.eclipse.m2m.qvt.oml.ModelExtent;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
+import org.eclipse.osgi.util.NLS;
 import org.enterprisedomain.classmaker.Blueprint;
 import org.enterprisedomain.classmaker.ClassMakerFactory;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
@@ -78,17 +79,15 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.impl.ClassMakerServiceImpl#getWorkspace
- * <em>Workspace</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ClassMakerServiceImpl#getWorkspace <em>Workspace</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerService {
 	/**
-	 * The cached value of the '{@link #getWorkspace() <em>Workspace</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getWorkspace() <em>Workspace</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getWorkspace()
 	 * @generated
 	 * @ordered
@@ -171,7 +170,6 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -181,7 +179,6 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -191,7 +188,6 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetWorkspace(Workspace newWorkspace, NotificationChain msgs) {
@@ -210,7 +206,6 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -388,7 +383,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 					State state = revision.getState();
 					state.copyModel(contribution.getState());
 					revision.create(monitor);
-					String commitId = state.initialize(true);
+					String commitId = state.initialize();
 					contribution.checkout(revision.getVersion(), state.getTimestamp(), commitId);
 				} else if (version.compareTo(contribution.getVersion()) < 0) {
 					if (!contribution.getRevisions().containsKey(version))
@@ -668,6 +663,14 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 	 * @generated NOT
 	 */
 	public String computeProjectName(String packageName) {
+		if (packageName.endsWith(".edit"))
+			packageName = packageName.substring(0, packageName.lastIndexOf(".edit"));
+		if (packageName.isEmpty())
+			packageName = ".edit";
+		if (packageName.endsWith(".editor"))
+			packageName = packageName.substring(0, packageName.lastIndexOf(".editor"));
+		if (packageName.isEmpty())
+			packageName = ".editor";
 		return CodeGenUtil.safeName(packageName.toLowerCase());
 	}
 
@@ -686,6 +689,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 	 * @generated NOT
 	 */
 	public void initialize() {
+		ClassMakerPlugin.print("Initializing service");
 		initializing = true;
 		getWorkspace().setService(this);
 		ClassMakerService.Stages.contributeStages();
@@ -694,12 +698,16 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 			try {
 				Resource workspaceResource = WorkspaceImpl.RESOURCE_SET_EDEFAULT.getResource(uri, true);
 				try {
+					ClassMakerPlugin.print("Loading workspace resource");
 					workspaceResource.load(Collections.emptyMap());
 					if (!workspaceResource.getContents().isEmpty()) {
 						setWorkspace(EcoreUtil.copy((Workspace) workspaceResource.getContents().get(0)));
 						for (Project project : getWorkspace().getProjects()) {
-							if (project.eIsSet(ClassMakerPackage.Literals.PROJECT__STATE))
+							if (project.eIsSet(ClassMakerPackage.Literals.PROJECT__STATE)) {
+								ClassMakerPlugin.print(NLS.bind("Project {0} state {1} load", project.getName(),
+										project.getState().getTimestamp()));
 								project.getState().load(false, true);
+							}
 						}
 					} else
 						getWorkspace().initialize();
@@ -725,7 +733,6 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -742,7 +749,6 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -756,7 +762,6 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -770,7 +775,6 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -785,7 +789,6 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -800,7 +803,6 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

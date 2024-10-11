@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	<extension
+		point="org.eclipse.emf.cdo.ui.editorOpeners">
+		<editorOpener
+			class="org.enterprisedomain.classmaker.cdo.ui.CDOEditorOpener"
+			icon="platform:/plugin/org.eclipse.emf.cdo.ui.shared/icons/full/obj16/cdo_editor.gif"
+			id="org.enterprisedomain.classmaker.cdo.ui.editorOpener"
+			name="CDO Editor"
+			priority="700"
+			regex="cdo.*">
+		</editorOpener>
+	</extension>
+
+</plugin>

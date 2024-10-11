@@ -16,6 +16,7 @@
 package org.enterprisedomain.classmaker.jobs.codegen;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +33,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.enterprisedomain.classmaker.Messages;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
@@ -62,11 +64,20 @@ public class GenModelSetupJob extends EcoreGenerator.GeneratorJob {
 
 		URI genModelURI = URI.createFileURI(root.getRawLocation().append(getGenModelLocation()).toString());
 		resource = getResourceSet().getResource(genModelURI, true);
-		GenModel genModel = (GenModel) resource.getContents().get(0);
-		this.ecoreGenerator.setupGenModel(computeProjectPath(), genModel, ePackages);
 		try {
-			Map<String, String> options = new HashMap<String, String>();
+			resource.load(Collections.EMPTY_MAP);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		if (!resource.getContents().isEmpty()) {
+			GenModel genModel = (GenModel) resource.getContents().get(0);
+			this.ecoreGenerator.setupGenModel(computeProjectPath(), genModel, ePackages);
+		}
+		try {
+			Map<Object, Object> options = new HashMap<Object, Object>();
 			options.put(XMLResource.OPTION_ENCODING, "UTF-8");
+			options.put(XMIResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
+			options.put(XMLResource.OPTION_PROCESS_DANGLING_HREF, XMLResource.OPTION_PROCESS_DANGLING_HREF_DISCARD);
 			resource.save(options);
 		} catch (IOException e) {
 			throw new CoreException(ClassMakerPlugin.createWarningStatus(e));

@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.enterprisedomain.classmaker.ClassMakerFactory;
@@ -47,31 +48,23 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getModelName
- * <em>Model Name</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getPhase
- * <em>Phase</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getLanguage
- * <em>Language</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getDomainModel
- * <em>Domain Model</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getCustomizers
- * <em>Customizers</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getParent
- * <em>Parent</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getLocale
- * <em>Locale</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getProject
- * <em>Project</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getModelName <em>Model Name</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getPhase <em>Phase</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getLanguage <em>Language</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getDomainModel <em>Domain Model</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getCustomizers <em>Customizers</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getParent <em>Parent</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getLocale <em>Locale</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getProject <em>Project</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getResource <em>Resource</em>}</li>
  * </ul>
  *
  * @generated
  */
 public abstract class ItemImpl extends EObjectImpl implements Item {
 	/**
-	 * The default value of the '{@link #getModelName() <em>Model Name</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getModelName() <em>Model Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getModelName()
 	 * @generated
 	 * @ordered
@@ -79,9 +72,8 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	protected static final String MODEL_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getModelName() <em>Model Name</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getModelName() <em>Model Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getModelName()
 	 * @generated
 	 * @ordered
@@ -119,9 +111,8 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	protected static final Version VERSION_EDEFAULT = Version.emptyVersion;
 
 	/**
-	 * The default value of the '{@link #getLanguage() <em>Language</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getLanguage() <em>Language</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getLanguage()
 	 * @generated
 	 * @ordered
@@ -131,7 +122,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	/**
 	 * The cached value of the '{@link #getLanguage() <em>Language</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getLanguage()
 	 * @generated
 	 * @ordered
@@ -139,9 +129,8 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	protected String language = LANGUAGE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getDomainModel() <em>Domain Model</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getDomainModel() <em>Domain Model</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getDomainModel()
 	 * @generated
 	 * @ordered
@@ -151,7 +140,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	/**
 	 * The default value of the '{@link #getLocale() <em>Locale</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getLocale()
 	 * @generated
 	 * @ordered
@@ -160,6 +148,15 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 			.createFromString(ClassMakerPackage.eINSTANCE.getLocale(), "");
 
 	protected Locale locale;
+
+	/**
+	 * The cached value of the '{@link #getResource() <em>Resource</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getResource()
+	 * @generated
+	 * @ordered
+	 */
+	protected Resource resource;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -173,7 +170,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -183,7 +179,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -193,7 +188,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -207,7 +201,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -217,7 +210,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -242,7 +234,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -255,7 +246,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -284,6 +274,28 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Resource getResource() {
+		return resource;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setResource(Resource newResource) {
+		Resource oldResource = resource;
+		resource = newResource;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.ITEM__RESOURCE, oldResource,
+					resource));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
 	 */
@@ -293,7 +305,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -303,7 +314,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -317,7 +327,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -327,7 +336,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetDomainModel(Models newDomainModel, NotificationChain msgs) {
@@ -346,7 +354,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -378,7 +385,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -428,7 +434,7 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	 * 
 	 * @generated NOT
 	 */
-	public String initialize(boolean commit) {
+	public String initialize() {
 		if (!eIsSet(ClassMakerPackage.Literals.ITEM__PARENT))
 			return null;
 		copyModel(getParent());
@@ -453,8 +459,10 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 			eEditObject = from.getDomainModel().getGeneratedEdit();
 			eEditorObject = from.getDomainModel().getGeneratedEditor();
 		}
-		if (eObject != null)
-			getDomainModel().setDynamic(EcoreUtil.copy(eObject));
+		if (eObject != null) {
+			EObject copy = EcoreUtil.copy(eObject);
+			getDomainModel().setDynamic(copy);
+		}
 		if (eGenObject != null)
 			getDomainModel().setGenerated(EcoreUtil.copy(eGenObject));
 		if (eEditObject != null)
@@ -465,7 +473,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -482,7 +489,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -498,7 +504,6 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -527,13 +532,14 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 			if (resolve)
 				return getProject();
 			return basicGetProject();
+		case ClassMakerPackage.ITEM__RESOURCE:
+			return getResource();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -563,13 +569,15 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 		case ClassMakerPackage.ITEM__PROJECT:
 			setProject((Project) newValue);
 			return;
+		case ClassMakerPackage.ITEM__RESOURCE:
+			setResource((Resource) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -599,13 +607,15 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 		case ClassMakerPackage.ITEM__PROJECT:
 			setProject((Project) null);
 			return;
+		case ClassMakerPackage.ITEM__RESOURCE:
+			setResource((Resource) null);
+			return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -627,13 +637,14 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 			return LOCALE_EDEFAULT == null ? locale != null : !LOCALE_EDEFAULT.equals(locale);
 		case ClassMakerPackage.ITEM__PROJECT:
 			return basicGetProject() != null;
+		case ClassMakerPackage.ITEM__RESOURCE:
+			return resource != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

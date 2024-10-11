@@ -9,12 +9,10 @@ import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.ecp.core.ECPProject;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
-import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.Revision;
@@ -33,9 +31,7 @@ public class MakeHandler extends AbstractHandler implements IHandler {
 			final Object eProject = ((IStructuredSelection) selection).getFirstElement();
 
 			if (eProject instanceof IProject)
-				doMake((String) ((IProject) eProject).getName());
-			else if (eProject instanceof ECPProject)
-				doMake((String) ((ECPProject) eProject).getName());
+				doMake((String) ((IProject) eProject).getName());			
 		}
 		return null;
 	}

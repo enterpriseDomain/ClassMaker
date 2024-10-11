@@ -3,9 +3,9 @@ Bundle-ManifestVersion: 2
 Bundle-Name: enterpriseDomain Sample App
 Bundle-SymbolicName: org.enterprisedomain.classmaker.sample;singleton:=true
 Bundle-Version: 0.0.2.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Require-Bundle: org.enterprisedomain.classmaker,
- javax.inject,
+ jakarta.inject.jakarta.inject-api,
  org.eclipse.core.runtime,
  org.eclipse.e4.core.di,
  org.eclipse.equinox.concurrent

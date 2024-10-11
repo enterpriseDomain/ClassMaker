@@ -11,13 +11,17 @@
     <booleanAttribute key="clearwslog" value="false"/>
     <stringAttribute key="configLocation" value="${workspace_loc}/.metadata/.plugins/org.eclipse.pde.core/emf"/>
     <booleanAttribute key="default" value="false"/>
-    <setAttribute key="deselected_workspace_bundles"/>
+    <setAttribute key="deselected_workspace_bundles">
+        <setEntry value="org.enterprisedomain.classmaker.load"/>
+        <setEntry value="org.enterprisedomain.classmaker.load.cdo"/>
+    </setAttribute>
     <booleanAttribute key="includeOptional" value="true"/>
-    <stringAttribute key="location" value="${workspace_loc}/../runtime-e"/>
+    <stringAttribute key="location" value="${workspace_loc}/../runtime-emf"/>
+    <booleanAttribute key="org.eclipse.debug.core.ATTR_FORCE_SYSTEM_CONSOLE_ENCODING" value="false"/>
     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_ATTR_USE_ARGFILE" value="false"/>
     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_SHOW_CODEDETAILS_IN_EXCEPTION_MESSAGES" value="true"/>
     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
-    <stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11"/>
+    <stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-21"/>
     <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl} -consoleLog"/>
     <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.pde.ui.workbenchClasspathProvider"/>
     <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dorg.eclipse.swt.graphics.Resource.reportNonDisposed=true"/>
@@ -25,36 +29,21 @@
     <stringAttribute key="product" value="org.enterprisedomain.workbench.product"/>
     <setAttribute key="selected_target_bundles"/>
     <setAttribute key="selected_workspace_bundles">
-        <setEntry value="org.eclipse.emf.cdo.examples"/>
-        <setEntry value="org.eclipse.emf.cdo.examples.company"/>
-        <setEntry value="org.eclipse.emf.cdo.examples.company.edit"/>
-        <setEntry value="org.eclipse.emf.cdo.examples.installer"/>
-        <setEntry value="org.eclipse.emf.cdo.examples.server"/>
-        <setEntry value="org.eclipse.emf.examples.library"/>
-        <setEntry value="org.eclipse.emf.examples.library.edit"/>
-        <setEntry value="org.eclipse.emf.examples.library.editor"/>
-        <setEntry value="org.eclipse.emf.query.examples.statements"/>
-        <setEntry value="org.eclipse.net4j.db"/>
-        <setEntry value="org.eclipse.qvtd.examples.qvtcore.uml2rdbms"/>
-        <setEntry value="org.eclipse.qvtd.examples.qvtrelation.hstm2fstm"/>
-        <setEntry value="org.enterprisedomain.classmaker"/>
-        <setEntry value="org.enterprisedomain.classmaker.cdo"/>
-        <setEntry value="org.enterprisedomain.classmaker.cdo.master"/>
-        <setEntry value="org.enterprisedomain.classmaker.cdo.ui"/>
-        <setEntry value="org.enterprisedomain.classmaker.edit"/>
-        <setEntry value="org.enterprisedomain.classmaker.load"/>
-        <setEntry value="org.enterprisedomain.classmaker.load.cdo"/>
-        <setEntry value="org.enterprisedomain.classmaker.osgi.systemextension"/>
-        <setEntry value="org.enterprisedomain.classmaker.query"/>
-        <setEntry value="org.enterprisedomain.classmaker.sample"/>
-        <setEntry value="org.enterprisedomain.classmaker.tests"/>
-        <setEntry value="org.enterprisedomain.ecp"/>
-        <setEntry value="org.enterprisedomain.ecp.edit"/>
-        <setEntry value="org.enterprisedomain.ecp.filter"/>
-        <setEntry value="org.enterprisedomain.ecp.ui"/>
-        <setEntry value="org.enterprisedomain.editor"/>
-        <setEntry value="org.enterprisedomain.swtbot"/>
-        <setEntry value="org.enterprisedomain.workbench"/>
+        <setEntry value="org.enterprisedomain.classmaker.cdo.server@default:default"/>
+        <setEntry value="org.enterprisedomain.classmaker.cdo.ui@default:default"/>
+        <setEntry value="org.enterprisedomain.classmaker.cdo@default:default"/>
+        <setEntry value="org.enterprisedomain.classmaker.edit@default:default"/>
+        <setEntry value="org.enterprisedomain.classmaker.images.ui.edit@default:default"/>
+        <setEntry value="org.enterprisedomain.classmaker.images.ui@default:default"/>
+        <setEntry value="org.enterprisedomain.classmaker.invoke.ui@default:default"/>
+        <setEntry value="org.enterprisedomain.classmaker.libraries@default:default"/>
+        <setEntry value="org.enterprisedomain.classmaker.osgi.systemextension@default:false"/>
+        <setEntry value="org.enterprisedomain.classmaker.parsley@default:default"/>
+        <setEntry value="org.enterprisedomain.classmaker.sample@default:default"/>
+        <setEntry value="org.enterprisedomain.classmaker.tests@default:default"/>
+        <setEntry value="org.enterprisedomain.classmaker@default:default"/>
+        <setEntry value="org.enterprisedomain.editor@default:default"/>
+        <setEntry value="org.enterprisedomain.workbench@default:default"/>
     </setAttribute>
     <booleanAttribute key="show_selected_only" value="false"/>
     <stringAttribute key="templateConfig" value="${target_home}/configuration/config.ini"/>

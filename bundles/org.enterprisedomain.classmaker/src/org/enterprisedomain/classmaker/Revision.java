@@ -29,23 +29,19 @@ import org.osgi.framework.Version;
  * <!-- begin-user-doc --> A representation of the model object
  * '<em><b>Revision</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc --> A revision of <em>Contribution</em>. Identified by
- * {@link #getVersion() <em>Version</em>}. <!-- end-model-doc -->
+ * <!-- begin-model-doc -->
+ * A revision of <em>Contribution</em>. Identified by {@link #getVersion() <em>Version</em>}.
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.Revision#getState
- * <em>State</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Revision#getTimestamp
- * <em>Timestamp</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Revision#getStateHistory <em>State
- * History</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Revision#getLatestTimestamp
- * <em>Latest Timestamp</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.Revision#getVersion
- * <em>Version</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Revision#getState <em>State</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Revision#getTimestamp <em>Timestamp</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Revision#getStateHistory <em>State History</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Revision#getLatestTimestamp <em>Latest Timestamp</em>}</li>
+ *   <li>{@link org.enterprisedomain.classmaker.Revision#getVersion <em>Version</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getRevision()
@@ -74,10 +70,8 @@ public interface Revision extends Item {
 	State getState();
 
 	/**
-	 * Sets the value of the
-	 * '{@link org.enterprisedomain.classmaker.Revision#getState <em>State</em>}'
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Revision#getState <em>State</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>State</em>' reference.
 	 * @see #getState()
 	 * @generated
@@ -102,10 +96,8 @@ public interface Revision extends Item {
 	long getTimestamp();
 
 	/**
-	 * Sets the value of the
-	 * '{@link org.enterprisedomain.classmaker.Revision#getTimestamp
-	 * <em>Timestamp</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Revision#getTimestamp <em>Timestamp</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Timestamp</em>' attribute.
 	 * @see #getTimestamp()
 	 * @generated
@@ -162,10 +154,8 @@ public interface Revision extends Item {
 	Version getVersion();
 
 	/**
-	 * Sets the value of the
-	 * '{@link org.enterprisedomain.classmaker.Revision#getVersion
-	 * <em>Version</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Revision#getVersion <em>Version</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Version</em>' attribute.
 	 * @see #getVersion()
 	 * @generated
@@ -174,16 +164,13 @@ public interface Revision extends Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
-	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	void create(IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model
 	 * @generated
 	 */
@@ -191,7 +178,6 @@ public interface Revision extends Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model
 	 * @generated
 	 */
@@ -199,7 +185,6 @@ public interface Revision extends Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model
 	 * @generated
 	 */
@@ -207,7 +192,6 @@ public interface Revision extends Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model
 	 * @generated
 	 */
@@ -215,25 +199,27 @@ public interface Revision extends Item {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model exceptions="org.enterprisedomain.classmaker.CoreException"
-	 *        monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
+	 * @model
+	 * @generated
+	 */
+	State newState(long timestamp);
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @model exceptions="org.enterprisedomain.classmaker.CoreException" monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	void delete(IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model adaptersType="org.enterprisedomain.classmaker.Adapter"
-	 *        adaptersMany="true"
+	 * @model adaptersType="org.enterprisedomain.classmaker.Adapter" adaptersMany="true"
 	 * @generated
 	 */
 	void addAdapters(EList<Adapter> adapters);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model
 	 * @generated
 	 */

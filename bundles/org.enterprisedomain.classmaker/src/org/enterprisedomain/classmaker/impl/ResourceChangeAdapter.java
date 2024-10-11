@@ -32,9 +32,10 @@ class ResourceChangeAdapter extends EContentAdapter {
 		super.notifyChanged(notification);
 		if (notification.getFeatureID(Resource.class) == Resource.RESOURCE__IS_MODIFIED
 				&& notification.getEventType() == Notification.SET && notification.getNotifier() instanceof Resource
-				&& project != null && project instanceof Project && !project.getChildren().isEmpty()
-				&& project.getChildren().get(0) instanceof Resource && ((Resource) project.getChildren().get(0))
-						.getURI().equals(((Resource) notification.getNotifier()).getURI()))
+				&& project != null && project instanceof Project && project.getModelResourceAdapter() != null
+				&& project.getModelResourceAdapter().getResource() instanceof Resource
+				&& ((Resource) project.getModelResourceAdapter().getResource()).getURI()
+						.equals(((Resource) notification.getNotifier()).getURI()))
 			try {
 				project.notifyResourceChanged(notification);
 			} catch (Exception e) {
