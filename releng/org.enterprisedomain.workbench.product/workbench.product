@@ -188,8 +188,6 @@
       <plugin id="org.eclipse.jdt.compiler.tool"/>
       <plugin id="org.eclipse.jdt.core"/>
       <plugin id="org.eclipse.jdt.debug"/>
-      <plugin id="org.eclipse.jdt.junit.core"/>
-      <plugin id="org.eclipse.jdt.junit.runtime"/>
       <plugin id="org.eclipse.jdt.launching"/>
       <plugin id="org.eclipse.jetty.continuation"/>
       <plugin id="org.eclipse.jetty.http"/>
@@ -326,8 +324,6 @@
       <feature id="org.eclipse.emf.databinding" installMode="root"/>
       <feature id="org.eclipse.emf.ecore.edit" installMode="root"/>
       <feature id="org.eclipse.emf.common.ui.source" installMode="root"/>
-      <feature id="org.eclipse.ecf.filetransfer.httpclient5.feature" installMode="root"/>
-      <feature id="org.eclipse.ecf.filetransfer.httpclientjava.feature" installMode="root"/>
    </features>
 
    <configurations>

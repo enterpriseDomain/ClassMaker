@@ -7,7 +7,7 @@
 	<artifactId>org.enterprisedomain.configuration</artifactId>
 	<version>0.8.55</version>
 	<properties>
-		<tycho.version>4.0.9</tycho.version>
+		<tycho.version>4.0.10</tycho.version>
 		<tycho.extras.version>${tycho.version}</tycho.extras.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>

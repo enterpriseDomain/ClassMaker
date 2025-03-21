@@ -1,4 +1,4 @@
-package org.enterprisedomain.workbench.handler;
+package org.enterprisedomain.classmaker.ui;
 
 import java.lang.reflect.InvocationTargetException;
 

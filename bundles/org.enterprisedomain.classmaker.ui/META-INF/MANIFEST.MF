@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: enterpriseDomain ClassMaker UI
+Bundle-SymbolicName: org.enterprisedomain.classmaker.ui;singleton:=true
+Bundle-Version: 0.8.55
+Require-Bundle: org.eclipse.ui;bundle-version="3.206.100",
+ org.eclipse.swt,
+ org.enterprisedomain.classmaker;bundle-version="0.8.55"
+Bundle-Vendor: Kyrill Zotkin
+Automatic-Module-Name: org.enterprisedomain.classmaker.ui
+Bundle-RequiredExecutionEnvironment: JavaSE-21

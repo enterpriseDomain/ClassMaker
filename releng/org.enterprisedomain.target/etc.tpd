@@ -13,25 +13,29 @@ location "https://download.eclipse.org/modeling/emf/compare/updates/releases/lat
 	org.eclipse.emf.compare.rcp.ui
 }
 
-location "https://download.eclipse.org/rt/ecf/3.15.0/site.p2" {
+location "https://download.eclipse.org/rt/ecf/3.15.5/site.p2" {
 	org.eclipse.ecf.core.feature.feature.group
 	org.eclipse.ecf.filetransfer.feature.feature.group
+	org.eclipse.ecf.core.ssl.feature.feature.group
+	org.eclipse.ecf.filetransfer.ssl.feature.feature.group
 }
 
-location "https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/release/4.33.0/" {
+location "https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/release/latest" {
 	com.ibm.icu
 	com.googlecode.javaewah.JavaEWAH
 	com.googlecode.javaewah.JavaEWAH.source
-	org.objectweb.asm [9.4.0,10.0.0)
-	org.objectweb.asm.tree [9.4.0,10.0.0)
-	org.objectweb.asm.commons [9.4.0,10.0.0)
-	org.objectweb.asm.util [9.4.0,10.0.0)
+	org.objectweb.asm [9.7.1,10.0.0)
+	org.objectweb.asm.tree [9.7.1,10.0.0)
+	org.objectweb.asm.tree.analysis [9.7.1,10.0.0)
+	org.objectweb.asm.commons [9.7.1,10.0.0)
+	org.objectweb.asm.util [9.7.1,10.0.0)
 	org.apache.sshd.sftp
 	org.apache.sshd.sftp.source
 	org.apache.log4j.source
 	org.apache.log4j
 	org.apache.logging.log4j.api
 	org.apache.commons.logging
+	org.apache.commons.jxpath
 	org.apache.lucene.core
 	org.apache.lucene.analysis-common
 	org.apache.lucene.analysis-smartcn
@@ -48,8 +52,6 @@ location "https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/rele
 	org.kohsuke.args4j.source
 	net.i2p.crypto.eddsa
 	net.i2p.crypto.eddsa.source
-	org.mockito.junit-jupiter
-	org.mockito.junit-jupiter.source
 	org.mockito.mockito-core
 	org.mockito.mockito-core.source
 	org.objenesis [3.4.0,4.0.0)
@@ -79,11 +81,11 @@ location "https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/rele
 	org.apache.xerces
 	org.apache.xml.resolver
 	org.apache.xml.serializer
-	org.apache.poi.source [5.3.0,5.3.1)
-	org.apache.poi [5.3.0,5.3.1)
-	org.apache.poi.ooxml [5.3.0,5.3.1)
-	org.apache.poi.ooxml.source [5.3.0,5.3.1)
-	org.apache.poi.ooxml.schemas [5.3.0,5.3.1)
+	org.apache.poi.source [5.4.0,5.4.1)
+	org.apache.poi [5.4.0,5.4.1)
+	org.apache.poi.ooxml [5.4.0,5.4.1)
+	org.apache.poi.ooxml.source [5.4.0,5.4.1)
+	org.apache.poi.ooxml.schemas [5.4.0,5.4.1)
 	org.apache.xmlbeans
 	org.apache.xmlbeans.source
 	org.apache.commons.collections
@@ -130,22 +132,22 @@ maven MavenDependencies scope=compile dependencyDepth=infinite missingManifest=g
 	dependency {
 		groupId="biz.aQute.bnd"
 		artifactId="biz.aQute.bnd.util"
-		version="7.0.0"
+		version="7.1.0"
 	}
 	dependency {
 		groupId="biz.aQute.bnd"
 		artifactId="biz.aQute.bndlib"
-		version="7.0.0"
-	}
+		version="7.1.0"
+	}	
 	dependency {
 		groupId="biz.aQute.bnd"
 		artifactId="biz.aQute.repository"
-		version="7.0.0"
+		version="7.1.0"
 	}
 	dependency {
 		groupId="biz.aQute.bnd"
 		artifactId="biz.aQute.resolve"
-		version="7.0.0"
+		version="7.1.0"
 	}
 	dependency {
 		groupId="com.google.guava"
@@ -175,7 +177,7 @@ maven MavenDependencies scope=compile dependencyDepth=infinite missingManifest=g
 	dependency {
 		groupId="commons-io"
 		artifactId="commons-io"
-		version="2.15.1"
+		version="2.18.0"
 	}
 	dependency {
 		groupId="org.apache.commons"
@@ -260,12 +262,12 @@ maven MavenDependencies scope=compile dependencyDepth=infinite missingManifest=g
 	dependency {
 		groupId="org.apache.xmlgraphics"
 		artifactId="batik-awt-util"
-		version="1.17"
+		version="1.18"
 	}
 	dependency {
 		groupId="org.apache.xmlgraphics"
 		artifactId="batik-svggen"
-		version="1.17"
+		version="1.18"
 	}
 	dependency {
 		groupId="de.rototor.pdfbox"
@@ -294,6 +296,11 @@ maven MavenDependencies scope=compile dependencyDepth=infinite missingManifest=g
 	}
 	dependency {
 		groupId="org.osgi"
+		artifactId="org.osgi.framework"
+		version="1.10.0"
+	}
+	dependency {
+		groupId="org.osgi"
 		artifactId="org.osgi.namespace.contract"
 		version="1.0.0"
 	}
@@ -309,17 +316,22 @@ maven MavenDependencies scope=compile dependencyDepth=infinite missingManifest=g
 	}
 	dependency {
 		groupId="org.osgi"
+		artifactId="org.osgi.resource"
+		version="1.0.1"
+	}
+	dependency {
+		groupId="org.osgi"
+		artifactId="org.osgi.dto"
+		version="1.1.1"
+	}
+	dependency {
+		groupId="org.osgi"
 		artifactId="org.osgi.service.repository"
 		version="1.1.0"
 	}
 	dependency {
 		groupId="org.osgi"
 		artifactId="org.osgi.test.common"
-		version="1.2.1"
-	}
-	dependency {
-		groupId="org.osgi"
-		artifactId="org.osgi.test.junit5"
 		version="1.2.1"
 	}
 	dependency {
@@ -344,16 +356,16 @@ maven slf4j scope=compile dependencyDepth=direct missingManifest=generate includ
 	dependency {
 		groupId="org.slf4j"
 		artifactId="slf4j-api"
-		version="2.0.16"
+		version="2.0.17"
 	}
 	dependency {
 		groupId="org.slf4j"
 		artifactId="slf4j-reload4j"
-		version="2.0.16"
+		version="2.0.17"
 	}
 	dependency {
 		groupId="org.slf4j"
 		artifactId="slf4j-nop"
-		version="2.0.16"
+		version="2.0.17"
 	}
 }
