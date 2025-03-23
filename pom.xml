@@ -19,10 +19,13 @@
 		<module>bundles/org.enterprisedomain.classmaker.osgi.systemextension</module>
 		<module>bundles/org.enterprisedomain.classmaker.cdo</module>
 		<module>bundles/org.enterprisedomain.classmaker.cdo.ui</module>
+		<module>bundles/org.enterprisedomain.classmaker.ui</module>
+		<module>bundles/org.enterprisedomain.classmaker.edit</module>
 		<module>bundles/org.enterprisedomain.workbench</module>
 		<module>features/org.enterprisedomain.classmaker.feature</module>
 		<module>
 			features/org.enterprisedomain.classmaker.osgi.resolverhooks.feature</module>
+		<module>features/org.enterprisedomain.classmaker.ui.feature</module>
 		<module>features/org.enterprisedomain.classmaker.cdo.feature</module>
 		<module>features/org.enterprisedomain.classmaker.cdo.ui.feature</module>
 		<module>features/org.enterprisedomain.ui.workbench.rcp.feature</module>

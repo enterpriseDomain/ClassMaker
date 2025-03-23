@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?artifactRepository version='1.1.0'?>
+<artifacts size='1'>
+  <artifact classifier='org.eclipse.update.feature' id='org.enterprisedomain.classmaker.ui.feature' version='0.8.55'>
+    <properties size='10'>
+      <property name='artifact.size' value='674'/>
+      <property name='download.size' value='674'/>
+      <property name='download.checksum.sha-512' value='ebf0f4a88b2907a604b4b18ff142bae9eed22661f2885250272493c2e71129444054abd9be299da09890d0e840e26765c73b10bd8fbda7f6f0b027ade6f2ef84'/>
+      <property name='download.checksum.sha-1' value='1f86b85c958673c060384d4fa2e20511629b02c0'/>
+      <property name='download.checksum.sha-256' value='0980cc31b768569706241b9f22c672e6b6644150f977ccbf7d35da6568078ea4'/>
+      <property name='maven-groupId' value='org.enterprisedomain'/>
+      <property name='maven-artifactId' value='org.enterprisedomain.classmaker.ui.feature'/>
+      <property name='maven-version' value='0.8.55'/>
+      <property name='maven-type' value='eclipse-feature'/>
+      <property name='download.contentType' value='application/zip'/>
+    </properties>
+  </artifact>
+</artifacts>

@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Kyrill Zotkin
+ * Copyright 2019 Kyrill Zotkin
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@ package org.enterprisedomain.classmaker.provider;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
@@ -34,23 +33,24 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.enterprisedomain.classmaker.ClassMakerFactory;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
+import org.enterprisedomain.classmaker.Strategy;
 
 /**
- * This is the item provider adapter for a {@link java.util.Map.Entry} object.
- * <!-- begin-user-doc --> <!-- end-user-doc -->
+ * This is the item provider adapter for a
+ * {@link org.enterprisedomain.classmaker.Strategy} object. <!-- begin-user-doc
+ * --> <!-- end-user-doc -->
  * 
  * @generated
  */
-public class StageQualifierToCustomizerMapEntryItemProvider extends ItemProviderAdapter
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider,
-		IItemLabelProvider, IItemPropertySource {
+public class StrategyItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
+		IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public StageQualifierToCustomizerMapEntryItemProvider(AdapterFactory adapterFactory) {
+	public StrategyItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -65,25 +65,24 @@ public class StageQualifierToCustomizerMapEntryItemProvider extends ItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addKeyPropertyDescriptor(object);
+			addStatePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Key feature. <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This adds a property descriptor for the State feature. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	protected void addKeyPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_StageQualifierToCustomizerMapEntry_key_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_StageQualifierToCustomizerMapEntry_key_feature",
-						"_UI_StageQualifierToCustomizerMapEntry_type"),
-				ClassMakerPackage.Literals.STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY__KEY, true, false, true, null, null,
-				null));
+	protected void addStatePropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Strategy_state_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Strategy_state_feature",
+								"_UI_Strategy_type"),
+						ClassMakerPackage.Literals.STRATEGY__STATE, true, false, true, null, null, null));
 	}
 
 	/**
@@ -99,7 +98,7 @@ public class StageQualifierToCustomizerMapEntryItemProvider extends ItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(ClassMakerPackage.Literals.STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY__VALUE);
+			childrenFeatures.add(ClassMakerPackage.Literals.STRATEGY__WORKERS);
 		}
 		return childrenFeatures;
 	}
@@ -119,14 +118,13 @@ public class StageQualifierToCustomizerMapEntryItemProvider extends ItemProvider
 	}
 
 	/**
-	 * This returns StageQualifierToCustomizerMapEntry.gif. <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This returns Strategy.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/StageQualifierToCustomizerMapEntry"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Strategy"));
 	}
 
 	/**
@@ -137,9 +135,7 @@ public class StageQualifierToCustomizerMapEntryItemProvider extends ItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		Map.Entry<?, ?> stageQualifierToCustomizerMapEntry = (Map.Entry<?, ?>) object;
-		return "" + stageQualifierToCustomizerMapEntry.getKey() + " -> "
-				+ stageQualifierToCustomizerMapEntry.getValue();
+		return getString("_UI_Strategy_type");
 	}
 
 	/**
@@ -153,8 +149,8 @@ public class StageQualifierToCustomizerMapEntryItemProvider extends ItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Map.Entry.class)) {
-		case ClassMakerPackage.STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY__VALUE:
+		switch (notification.getFeatureID(Strategy.class)) {
+		case ClassMakerPackage.STRATEGY__WORKERS:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
@@ -172,9 +168,8 @@ public class StageQualifierToCustomizerMapEntryItemProvider extends ItemProvider
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors
-				.add(createChildParameter(ClassMakerPackage.Literals.STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY__VALUE,
-						ClassMakerFactory.eINSTANCE.createCustomizer()));
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.STRATEGY__WORKERS,
+				ClassMakerFactory.eINSTANCE.create(ClassMakerPackage.Literals.STAGE_QUALIFIER_TO_WORKERS_MAP_ENTRY)));
 	}
 
 	/**

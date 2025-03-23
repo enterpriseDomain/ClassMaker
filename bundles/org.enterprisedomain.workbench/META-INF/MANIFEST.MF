@@ -31,7 +31,8 @@ Require-Bundle: org.eclipse.osgi,
  org.eclipse.jdt.ui;bundle-version="3.25.0";visibility:=reexport,
  org.enterprisedomain.classmaker;bundle-version="0.8.55",
  org.eclipse.equinox.p2.repository;bundle-version="2.7.100",
- org.enterprisedomain.classmaker.ui;bundle-version="0.8.55"
+ org.enterprisedomain.classmaker.ui;bundle-version="0.8.55",
+ org.enterprisedomain.classmaker.edit;bundle-version="0.8.55"
 Bundle-RequiredExecutionEnvironment: JavaSE-21
 Automatic-Module-Name: org.enterprisedomain.workbench
 Import-Package: jakarta.annotation;version="2.1.1",
