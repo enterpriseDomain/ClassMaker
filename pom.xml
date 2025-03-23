@@ -26,6 +26,7 @@
 		<module>
 			features/org.enterprisedomain.classmaker.osgi.resolverhooks.feature</module>
 		<module>features/org.enterprisedomain.classmaker.ui.feature</module>
+		<module>features/org.enterprisedomain.classmaker.edit.feature</module>
 		<module>features/org.enterprisedomain.classmaker.cdo.feature</module>
 		<module>features/org.enterprisedomain.classmaker.cdo.ui.feature</module>
 		<module>features/org.enterprisedomain.ui.workbench.rcp.feature</module>
