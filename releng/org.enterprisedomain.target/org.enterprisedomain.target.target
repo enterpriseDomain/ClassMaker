@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="org.enterprisedomain.target" sequenceNumber="1742275249">
+<target name="org.enterprisedomain.target" sequenceNumber="1744545517">
   <locations>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.eclipse.e4.rcp.feature.group" version="4.34.0.v20241113-2009"/>
@@ -108,7 +108,7 @@
       <repository location="https://download.eclipse.org/justj/jres/21/updates/release/latest"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
-      <unit id="org.eclipse.emf.cdo.all.feature.group" version="4.28.0.v20241127-0835"/>
+      <unit id="org.eclipse.emf.cdo.all.feature.group" version="4.29.0.v20250305-0703"/>
       <repository location="https://download.eclipse.org/modeling/emf/cdo/updates/releases/4.x/latest/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="false" includeConfigurePhase="true" type="InstallableUnit">
