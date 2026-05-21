@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <extension
-         point="org.eclipse.ui.propertyPages">
-      <page
-            class="org.enterprisedomain.classmaker.ui.ContributionPropertyPage"
-            id="org.enterprisedomain.classmaker.ui.page1"
-            name="enterpriseDomain Tooling">
-         <enabledWhen>
-            <adapt
-                  type="org.enterprisedomain.classmaker.Contribution">
-            </adapt>
-         </enabledWhen>
-      </page>
-   </extension>
-   <extension
+	<extension
+		point="org.eclipse.ui.propertyPages">
+		<page
+			class="org.enterprisedomain.classmaker.ui.ContributionPropertyPage"
+			id="org.enterprisedomain.classmaker.ui.propertyPage"
+			name="Domain Tools">
+			<enabledWhen>
+				<adapt
+					type="org.enterprisedomain.classmaker.Contribution">
+				</adapt>
+			</enabledWhen>
+		</page>
+	</extension>
+	<extension
 		point="org.eclipse.ui.commands">
 		<command
 			id="org.enterprisedomain.ui.command.make"

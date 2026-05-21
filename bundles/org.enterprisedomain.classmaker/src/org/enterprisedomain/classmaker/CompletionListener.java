@@ -21,9 +21,8 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- begin-user-doc --> A representation of the model object
  * '<em><b>Completion Listener</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc -->
- * A process completion listener.
- * <!-- end-model-doc -->
+ * <!-- begin-model-doc --> A process completion listener. <!-- end-model-doc
+ * -->
  *
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getCompletionListener()

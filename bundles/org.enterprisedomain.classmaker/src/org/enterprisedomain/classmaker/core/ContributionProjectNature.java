@@ -27,8 +27,8 @@ public class ContributionProjectNature implements IProjectNature {
 	@Override
 	public void configure() throws CoreException {
 		ResourceUtils.removeProjectNature(project, ClassMakerPlugin.NATURE_ID);
-		ResourceUtils.addProjectNature(project, ClassMakerPlugin.JAVA_NATURE);
 		ResourceUtils.addProjectNature(project, ClassMakerPlugin.PDE_PLUGIN_NATURE);
+		ResourceUtils.addProjectNature(project, ClassMakerPlugin.JAVA_NATURE);
 		ResourceUtils.addToBuildSpec(project, ClassMakerBuilder.BUILDER_ID);
 	}
 

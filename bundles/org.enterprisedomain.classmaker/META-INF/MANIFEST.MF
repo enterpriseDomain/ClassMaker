@@ -18,12 +18,11 @@ Export-Package: org.enterprisedomain.classmaker,
  org.enterprisedomain.classmaker.jobs.load,
  org.enterprisedomain.classmaker.scm,
  org.enterprisedomain.classmaker.util
-Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.26.100,4.0.0)";visibility:=reexport,
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.33.100";visibility:=reexport,
  org.eclipse.emf.ecore;bundle-version="[2.34.0,3.0.0)";visibility:=reexport,
  org.eclipse.emf.ecore.xmi;bundle-version="[2.12.0,3.0.0)";visibility:=reexport,
- org.eclipse.emf.codegen.ecore;bundle-version="[2.12.0,3.0.0)";visibility:=reexport,
- org.eclipse.osgi;bundle-version="[3.21.0,4.0.0)";visibility:=reexport,
- org.eclipse.osgi.services;bundle-version="[3.11.100,4.0.0)";visibility:=reexport,
+ org.eclipse.emf.codegen.ecore;bundle-version="2.43.0";visibility:=reexport,
+ org.eclipse.osgi;bundle-version="[3.24.0,4.0.0)";visibility:=reexport,
  org.eclipse.e4.core.contexts;bundle-version="[1.5.0,2.0.0)";visibility:=reexport,
  org.eclipse.e4.core.di;bundle-version="[1.6.1,2.0.0)";visibility:=reexport,
  org.eclipse.core.resources;bundle-version="[3.11.0,4.0.0)";visibility:=reexport,
@@ -68,7 +67,12 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.26.100,4.0.0)";visib
  org.eclipse.emf.query;bundle-version="1.7.0";visibility:=reexport,
  org.eclipse.jdt.annotation;bundle-version="2.2.700",
  org.eclipse.jdt.core.manipulation;bundle-version="1.20.0",
- jakarta.annotation-api;bundle-version="2.1.1"
+ jakarta.annotation-api;bundle-version="2.1.1",
+ com.google.guava,
+ org.eclipse.core.filesystem;bundle-version="1.11.400",
+ org.eclipse.text;bundle-version="3.14.500",
+ org.eclipse.equinox.frameworkadmin;bundle-version="[2.3.0,3.0.0)"
 Service-Component: OSGI-INF/component.xml
+DynamicImport-Package: *
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.enterprisedomain.classmaker.core.ClassMakerPlugin

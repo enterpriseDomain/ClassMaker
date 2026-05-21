@@ -24,7 +24,6 @@ import java.util.Set;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
-import org.osgi.framework.Version;
 
 public abstract class ContainerJob extends EnterpriseDomainJob {
 

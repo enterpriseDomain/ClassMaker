@@ -24,17 +24,19 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Customizer</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc -->
- * Allows to customize the process.
- * <!-- end-model-doc -->
+ * <!-- begin-model-doc --> Allows to customize the process. <!-- end-model-doc
+ * -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.Customizer#getRank <em>Rank</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Customizer#isExclusive <em>Exclusive</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Customizer#getStage <em>Stage</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Customizer#getRank
+ * <em>Rank</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Customizer#isExclusive
+ * <em>Exclusive</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Customizer#getStage
+ * <em>Stage</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getCustomizer()
@@ -70,8 +72,10 @@ public interface Customizer extends EObject {
 	int getRank();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Customizer#getRank <em>Rank</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Customizer#getRank <em>Rank</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Rank</em>' attribute.
 	 * @see #getRank()
 	 * @generated
@@ -79,9 +83,9 @@ public interface Customizer extends EObject {
 	void setRank(int value);
 
 	/**
-	 * Returns the value of the '<em><b>Exclusive</b></em>' attribute.
-	 * The default value is <code>"true"</code>.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the value of the '<em><b>Exclusive</b></em>' attribute. The default
+	 * value is <code>"true"</code>. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Exclusive</em>' attribute.
 	 * @see #setExclusive(boolean)
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getCustomizer_Exclusive()
@@ -91,8 +95,10 @@ public interface Customizer extends EObject {
 	boolean isExclusive();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Customizer#isExclusive <em>Exclusive</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Customizer#isExclusive
+	 * <em>Exclusive</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Exclusive</em>' attribute.
 	 * @see #isExclusive()
 	 * @generated
@@ -112,8 +118,10 @@ public interface Customizer extends EObject {
 	StageQualifier getStage();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Customizer#getStage <em>Stage</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Customizer#getStage <em>Stage</em>}'
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Stage</em>' reference.
 	 * @see #getStage()
 	 * @generated
@@ -131,6 +139,7 @@ public interface Customizer extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */

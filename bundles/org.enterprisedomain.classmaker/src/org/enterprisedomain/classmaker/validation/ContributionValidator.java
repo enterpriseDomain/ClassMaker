@@ -5,7 +5,6 @@
 package org.enterprisedomain.classmaker.validation;
 
 import org.eclipse.emf.common.util.EList;
-import org.osgi.framework.Version;
 
 /**
  * A sample validator interface for

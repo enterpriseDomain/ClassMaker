@@ -13,7 +13,6 @@ import org.enterprisedomain.classmaker.Revision;
 import org.enterprisedomain.classmaker.SelectRevealHandler;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
-import org.osgi.framework.Version;
 
 /**
  * A sample validator interface for

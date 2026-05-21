@@ -11,10 +11,7 @@
     <booleanAttribute key="clearwslog" value="false"/>
     <stringAttribute key="configLocation" value="${workspace_loc}/.metadata/.plugins/org.eclipse.pde.core/emf"/>
     <booleanAttribute key="default" value="false"/>
-    <setAttribute key="deselected_workspace_bundles">
-        <setEntry value="org.enterprisedomain.classmaker.load"/>
-        <setEntry value="org.enterprisedomain.classmaker.load.cdo"/>
-    </setAttribute>
+    <setAttribute key="deselected_workspace_bundles"/>
     <booleanAttribute key="includeOptional" value="true"/>
     <stringAttribute key="location" value="${workspace_loc}/../runtime-emf"/>
     <booleanAttribute key="org.eclipse.debug.core.ATTR_FORCE_SYSTEM_CONSOLE_ENCODING" value="false"/>
@@ -29,21 +26,25 @@
     <stringAttribute key="product" value="org.enterprisedomain.workbench.product"/>
     <setAttribute key="selected_target_bundles"/>
     <setAttribute key="selected_workspace_bundles">
-        <setEntry value="org.enterprisedomain.classmaker.cdo.server@default:default"/>
-        <setEntry value="org.enterprisedomain.classmaker.cdo.ui@default:default"/>
-        <setEntry value="org.enterprisedomain.classmaker.cdo@default:default"/>
-        <setEntry value="org.enterprisedomain.classmaker.edit@default:default"/>
-        <setEntry value="org.enterprisedomain.classmaker.images.ui.edit@default:default"/>
-        <setEntry value="org.enterprisedomain.classmaker.images.ui@default:default"/>
-        <setEntry value="org.enterprisedomain.classmaker.invoke.ui@default:default"/>
-        <setEntry value="org.enterprisedomain.classmaker.libraries@default:default"/>
-        <setEntry value="org.enterprisedomain.classmaker.osgi.systemextension@default:false"/>
-        <setEntry value="org.enterprisedomain.classmaker.parsley@default:default"/>
-        <setEntry value="org.enterprisedomain.classmaker.sample@default:default"/>
-        <setEntry value="org.enterprisedomain.classmaker.tests@default:default"/>
-        <setEntry value="org.enterprisedomain.classmaker@default:default"/>
-        <setEntry value="org.enterprisedomain.editor@default:default"/>
-        <setEntry value="org.enterprisedomain.workbench@default:default"/>
+        <setEntry value="org.enterpriseDomain"/>
+        <setEntry value="org.enterprisedomain.classmaker"/>
+        <setEntry value="org.enterprisedomain.classmaker.cdo"/>
+        <setEntry value="org.enterprisedomain.classmaker.cdo.server"/>
+        <setEntry value="org.enterprisedomain.classmaker.cdo.ui"/>
+        <setEntry value="org.enterprisedomain.classmaker.edit"/>
+        <setEntry value="org.enterprisedomain.classmaker.images.ui"/>
+        <setEntry value="org.enterprisedomain.classmaker.images.ui.edit"/>
+        <setEntry value="org.enterprisedomain.classmaker.invoke.ui"/>
+        <setEntry value="org.enterprisedomain.classmaker.libraries"/>
+        <setEntry value="org.enterprisedomain.classmaker.osgi.systemextension"/>
+        <setEntry value="org.enterprisedomain.classmaker.parsley"/>
+        <setEntry value="org.enterprisedomain.classmaker.sample"/>
+        <setEntry value="org.enterprisedomain.classmaker.tests"/>
+        <setEntry value="org.enterprisedomain.classmaker.ui"/>
+        <setEntry value="org.enterprisedomain.classmaker.ui.etl"/>
+        <setEntry value="org.enterprisedomain.classmaker.ui.etl.poi2cdo"/>
+        <setEntry value="org.enterprisedomain.editor"/>
+        <setEntry value="org.enterprisedomain.workbench"/>
     </setAttribute>
     <booleanAttribute key="show_selected_only" value="false"/>
     <stringAttribute key="templateConfig" value="${target_home}/configuration/config.ini"/>

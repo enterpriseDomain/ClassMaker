@@ -1,6 +1,7 @@
 package org.enterprisedomain.classmaker.impl;
 
-import org.eclipse.emf.common.notify.Notification;
+import javax.management.Notification;
+
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.enterprisedomain.classmaker.Project;

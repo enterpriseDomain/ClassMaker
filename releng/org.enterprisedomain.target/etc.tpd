@@ -21,24 +21,27 @@ location "https://download.eclipse.org/rt/ecf/3.15.5/site.p2" {
 }
 
 location "https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/release/latest" {
+	org.bndtools.headless.build.manager
+	aQute.libg
 	com.ibm.icu
 	com.googlecode.javaewah.JavaEWAH
 	com.googlecode.javaewah.JavaEWAH.source
-	org.objectweb.asm [9.7.1,10.0.0)
-	org.objectweb.asm.tree [9.7.1,10.0.0)
-	org.objectweb.asm.tree.analysis [9.7.1,10.0.0)
-	org.objectweb.asm.commons [9.7.1,10.0.0)
-	org.objectweb.asm.util [9.7.1,10.0.0)
+	org.objectweb.asm [9.8.0,10.0.0)
+	org.objectweb.asm.tree [9.8.0,10.0.0)
+	org.objectweb.asm.tree.analysis [9.8.0,10.0.0)
+	org.objectweb.asm.commons [9.8.0,10.0.0)
+	org.objectweb.asm.util [9.8.0,10.0.0)
 	org.apache.sshd.sftp
 	org.apache.sshd.sftp.source
 	org.apache.log4j.source
 	org.apache.log4j
 	org.apache.logging.log4j.api
 	org.apache.commons.logging
-	org.apache.commons.jxpath
+	org.apache.commons.commons-jxpath
 	org.apache.lucene.core
 	org.apache.lucene.analysis-common
 	org.apache.lucene.analysis-smartcn
+	com.google.guava
 	com.google.gson.source
 	com.google.gson
 	com.google.inject
@@ -50,8 +53,7 @@ location "https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/rele
 	org.hamcrest.library.source
 	org.kohsuke.args4j
 	org.kohsuke.args4j.source
-	net.i2p.crypto.eddsa
-	net.i2p.crypto.eddsa.source
+	com.github.weisj.jsvg
 	org.mockito.mockito-core
 	org.mockito.mockito-core.source
 	org.objenesis [3.4.0,4.0.0)
@@ -59,36 +61,37 @@ location "https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/rele
 	org.tukaani.xz [1.10.0,2.0.0]
 	org.tukaani.xz.source [1.10.0,2.0.0]
 	org.jdom
-	org.eclipse.orbit.xml-apis-ext
-	com.sun.jna
-	com.sun.jna.source
+	org.osgi.namespace.contract
+	org.osgi.namespace.extender
+	org.osgi.namespace.service
+	com.sun.jna [5.18.1,5.18.2)
 	com.sun.jna.platform
 	com.sun.jna.platform.source
 	org.apache.batik.bridge
 	org.apache.batik.dom
 	org.apache.batik.anim
-	org.apache.batik.css
+	org.apache.batik.css [1.19.0,2.0.0)
 	org.apache.batik.constants
 	org.apache.batik.util
 	org.apache.batik.i18n
-	org.apache.batik.xml
+	org.apache.batik.xml [1.19.0,2.0.0)
 	org.apache.batik.script
 	org.apache.batik.parser
 	org.apache.batik.gvt
-	org.apache.batik.ext
+	org.apache.batik.ext [1.19.0,2.0.0)
 	org.apache.batik.dom.svg
+	org.apache.commons.collections
 	org.apache.xalan
 	org.apache.xerces
 	org.apache.xml.resolver
 	org.apache.xml.serializer
-	org.apache.poi.source [5.4.0,5.4.1)
-	org.apache.poi [5.4.0,5.4.1)
-	org.apache.poi.ooxml [5.4.0,5.4.1)
-	org.apache.poi.ooxml.source [5.4.0,5.4.1)
-	org.apache.poi.ooxml.schemas [5.4.0,5.4.1)
+	org.apache.poi [5.4.1,6.0.0)
+	org.apache.poi.source [5.4.1,6.0.0)
+	org.apache.poi.ooxml [5.4.1,6.0.0)
+	org.apache.poi.ooxml.source [5.4.1,6.0.0)
+	org.apache.poi.ooxml.schemas [5.4.1,6.0.0)
 	org.apache.xmlbeans
 	org.apache.xmlbeans.source
-	org.apache.commons.collections
 	org.apache.commons.math3
 	org.apache.commons.math3.source
 }
@@ -104,55 +107,50 @@ maven MavenDependencies scope=compile dependencyDepth=infinite missingManifest=g
 		artifactId="org.apache.aries.spifly.dynamic.bundle"
 		version="1.3.7"
 	}
-	/*dependency {
-	 * 	groupId="javax.xml.bind"
-	 * 	artifactId="jaxb-api"
-	 * 	version="2.4.0-b180830.0359"
-	 }*/
 	dependency {
 		groupId="org.bouncycastle"
 		artifactId="bcpg-jdk18on"
-		version="1.78.1"
+		version="1.80"
 	}
 	dependency {
 		groupId="org.bouncycastle"
 		artifactId="bcprov-jdk18on"
-		version="1.78.1"
+		version="1.80"
 	}
 	dependency {
 		groupId="org.bouncycastle"
 		artifactId="bcpkix-jdk18on"
-		version="1.78.1"
+		version="1.80"
 	}
 	dependency {
 		groupId="org.bouncycastle"
 		artifactId="bcutil-jdk18on"
-		version="1.78.1"
+		version="1.80"
 	}
 	dependency {
 		groupId="biz.aQute.bnd"
 		artifactId="biz.aQute.bnd.util"
-		version="7.1.0"
+		version="7.2.3"
 	}
 	dependency {
 		groupId="biz.aQute.bnd"
 		artifactId="biz.aQute.bndlib"
-		version="7.1.0"
-	}	
+		version="7.2.3"
+	}
 	dependency {
 		groupId="biz.aQute.bnd"
 		artifactId="biz.aQute.repository"
-		version="7.1.0"
+		version="7.2.3"
 	}
 	dependency {
 		groupId="biz.aQute.bnd"
 		artifactId="biz.aQute.resolve"
-		version="7.1.0"
+		version="7.2.3"
 	}
 	dependency {
 		groupId="com.google.guava"
 		artifactId="failureaccess"
-		version="1.0.1"
+		version="1.0.3"
 	}
 	dependency {
 		groupId="com.google.guava"
@@ -172,7 +170,7 @@ maven MavenDependencies scope=compile dependencyDepth=infinite missingManifest=g
 	dependency {
 		groupId="commons-codec"
 		artifactId="commons-codec"
-		version="1.16.0"
+		version="1.20.0"
 	}
 	dependency {
 		groupId="commons-io"
@@ -190,49 +188,9 @@ maven MavenDependencies scope=compile dependencyDepth=infinite missingManifest=g
 		version="4.4"
 	}
 	dependency {
-		groupId="jakarta.inject"
-		artifactId="jakarta.inject-api"
-		version="2.0.1"
-	}
-	dependency {
-		groupId="jakarta.activation"
-		artifactId="jakarta.activation-api"
-		version="2.1.3"
-	}
-	dependency {
-		groupId="com.sun.activation"
-		artifactId="javax.activation"
-		version="1.2.0"
-	}
-	dependency {
 		groupId="jakarta.validation"
 		artifactId="jakarta.validation-api"
-		version="3.1.0"
-	}
-	dependency {
-		groupId="jakarta.xml.bind"
-		artifactId="jakarta.xml.bind-api"
-		version="4.0.2"
-	}
-	dependency {
-		groupId="jakarta.annotation"
-		artifactId="jakarta.annotation-api"
-		version="2.1.1"
-	}
-	dependency {
-		groupId="javax.servlet"
-		artifactId="javax.servlet-api"
-		version="4.0.1"
-	}
-	dependency {
-		groupId="javax.servlet.jsp"
-		artifactId="javax.servlet.jsp-api"
-		version="2.3.3"
-	}
-	dependency {
-		groupId="javax.el"
-		artifactId="javax.el-api"
-		version="3.0.0"
+		version="3.1.1"
 	}
 	dependency {
 		groupId="org.ow2.asm"
@@ -262,12 +220,17 @@ maven MavenDependencies scope=compile dependencyDepth=infinite missingManifest=g
 	dependency {
 		groupId="org.apache.xmlgraphics"
 		artifactId="batik-awt-util"
-		version="1.18"
+		version="1.19"
+	}
+	dependency {
+		groupId="org.apache.xmlgraphics"
+		artifactId="batik-all"
+		version="1.19"
 	}
 	dependency {
 		groupId="org.apache.xmlgraphics"
 		artifactId="batik-svggen"
-		version="1.18"
+		version="1.19"
 	}
 	dependency {
 		groupId="de.rototor.pdfbox"
@@ -292,7 +255,7 @@ maven MavenDependencies scope=compile dependencyDepth=infinite missingManifest=g
 	dependency {
 		groupId="com.h2database"
 		artifactId="h2"
-		version="2.1.214"
+		version="2.4.240"
 	}
 	dependency {
 		groupId="org.osgi"
@@ -349,7 +312,7 @@ maven xmlsec scope=compile dependencyDepth=direct missingManifest=generate inclu
 	dependency {
 		groupId="org.apache.santuario"
 		artifactId="xmlsec"
-		version="3.0.4"
+		version="4.0.4"
 	}
 }
 maven slf4j scope=compile dependencyDepth=direct missingManifest=generate includeSources {

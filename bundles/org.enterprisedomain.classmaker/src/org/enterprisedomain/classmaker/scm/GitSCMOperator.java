@@ -32,7 +32,6 @@ import org.enterprisedomain.classmaker.SCMRegistry;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.impl.SCMOperatorImpl;
-import org.osgi.framework.Version;
 
 public class GitSCMOperator extends SCMOperatorImpl<Git> {
 

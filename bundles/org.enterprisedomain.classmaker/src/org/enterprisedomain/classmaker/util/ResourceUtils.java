@@ -1,5 +1,5 @@
 /**
- * Copyright 2012-2018 Kyrill Zotkin
+ * Copyright 2012-2025 Kyrill Zotkin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
@@ -41,7 +43,6 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.preferences.IPreferencesService;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.pde.internal.core.ICoreConstants;
 import org.enterprisedomain.classmaker.Messages;
 import org.enterprisedomain.classmaker.State;
@@ -49,6 +50,8 @@ import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 
 @SuppressWarnings("restriction")
 public class ResourceUtils {
+
+	public static final String SOURCE_FOLDER_NAME = "src"; /// main/java"; //$NON-NLS-1$
 
 	public static List<String> PROJECT_DELETE_MASK;
 
@@ -148,19 +151,21 @@ public class ResourceUtils {
 		return ResourcesPlugin.getWorkspace().getRoot().getProject(projectName).exists();
 	}
 
-	public static String[] addElement(String[] elements, String element) {
-		String[] oldElements = elements;
-		String[] newElements = new String[oldElements.length + 1];
+	public static <T> T[] addElement(T[] elements, T element) {
+		T[] oldElements = elements;
+		@SuppressWarnings("unchecked")
+		T[] newElements = (T[]) Array.newInstance(oldElements.getClass().getComponentType(), oldElements.length + 1);
 		System.arraycopy(oldElements, 0, newElements, 0, oldElements.length);
 		newElements[oldElements.length] = element;
 		return newElements;
 	}
 
-	public static String[] removeElement(String[] elements, String element) {
-		String[] oldElements = elements;
+	public static <T> T[] removeElement(T[] elements, T element) {
+		T[] oldElements = elements;
 		if (oldElements.length == 0)
 			return oldElements;
-		String[] newNatures = new String[oldElements.length - 1];
+		@SuppressWarnings("unchecked")
+		T[] newNatures = (T[]) Array.newInstance(oldElements.getClass().getComponentType(), oldElements.length - 1);
 		int index = 0;
 		for (int i = 0; i < oldElements.length; i++)
 			if (oldElements[i].equals(element))
@@ -171,6 +176,9 @@ public class ResourceUtils {
 
 	public static void addProjectNature(IProject project, String natureId) throws CoreException {
 		IProjectDescription description = project.getDescription();
+		for (String nature : description.getNatureIds())
+			if (nature.equals(natureId))
+				return;
 		description.setNatureIds(addElement(description.getNatureIds(), natureId));
 		IProgressMonitor monitor = ClassMakerPlugin.getProgressMonitor();
 		SubMonitor pm = null;

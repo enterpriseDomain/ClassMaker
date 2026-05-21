@@ -31,11 +31,11 @@
       <requirement
           name="org.eclipse.rcp.feature.group"/>
       <requirement
-          name="enterprisedomain.feature.group"/>
+          name="org.enterprisedomain.ui.workbench.rcp.feature"/>
       <repository
           url="https://download.eclipse.org/releases/2024-09"/>
       <repository
-          url="https://github.com/enterpriseDomain/ClassMaker/releng/org.enterprisedomain.update/raw/master/"/>
+          url="https://github.com/enterpriseDomain/ClassMaker/releng/org.enterprisedomain.update/target/repository/raw/develop/"/>
     </setupTask>
     <description>enterpriseDomain for 2024-09.</description>
   </version>

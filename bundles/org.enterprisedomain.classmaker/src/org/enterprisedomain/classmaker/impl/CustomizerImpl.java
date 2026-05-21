@@ -2,7 +2,8 @@
  */
 package org.enterprisedomain.classmaker.impl;
 
-import org.eclipse.emf.common.notify.Notification;
+import javax.management.Notification;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -19,9 +20,12 @@ import org.enterprisedomain.classmaker.StageQualifier;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.impl.CustomizerImpl#getRank <em>Rank</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.CustomizerImpl#isExclusive <em>Exclusive</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.CustomizerImpl#getStage <em>Stage</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.CustomizerImpl#getRank
+ * <em>Rank</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.CustomizerImpl#isExclusive
+ * <em>Exclusive</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.CustomizerImpl#getStage
+ * <em>Stage</em>}</li>
  * </ul>
  *
  * @generated
@@ -47,16 +51,18 @@ public class CustomizerImpl extends EObjectImpl implements Customizer {
 	protected int rank = RANK_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isExclusive() <em>Exclusive</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #isExclusive() <em>Exclusive</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #isExclusive()
 	 * @generated
 	 * @ordered
 	 */
 	protected static final boolean EXCLUSIVE_EDEFAULT = true;
 	/**
-	 * The cached value of the '{@link #isExclusive() <em>Exclusive</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #isExclusive() <em>Exclusive</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #isExclusive()
 	 * @generated
 	 * @ordered
@@ -84,6 +90,7 @@ public class CustomizerImpl extends EObjectImpl implements Customizer {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -93,6 +100,7 @@ public class CustomizerImpl extends EObjectImpl implements Customizer {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -102,6 +110,7 @@ public class CustomizerImpl extends EObjectImpl implements Customizer {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -114,6 +123,7 @@ public class CustomizerImpl extends EObjectImpl implements Customizer {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -123,6 +133,7 @@ public class CustomizerImpl extends EObjectImpl implements Customizer {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -136,6 +147,7 @@ public class CustomizerImpl extends EObjectImpl implements Customizer {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -154,6 +166,7 @@ public class CustomizerImpl extends EObjectImpl implements Customizer {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public StageQualifier basicGetStage() {
@@ -162,6 +175,7 @@ public class CustomizerImpl extends EObjectImpl implements Customizer {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -195,6 +209,7 @@ public class CustomizerImpl extends EObjectImpl implements Customizer {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -214,6 +229,7 @@ public class CustomizerImpl extends EObjectImpl implements Customizer {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -234,6 +250,7 @@ public class CustomizerImpl extends EObjectImpl implements Customizer {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -254,6 +271,7 @@ public class CustomizerImpl extends EObjectImpl implements Customizer {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -271,6 +289,7 @@ public class CustomizerImpl extends EObjectImpl implements Customizer {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

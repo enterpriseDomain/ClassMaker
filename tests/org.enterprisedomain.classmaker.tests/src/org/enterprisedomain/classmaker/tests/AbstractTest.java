@@ -28,7 +28,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -46,8 +45,8 @@ import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.core.IRunnerWithProgress;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 
 public abstract class AbstractTest {
 
@@ -135,7 +134,7 @@ public abstract class AbstractTest {
 		EcoreFactory ecoreFactory = EcoreFactory.eINSTANCE;
 		EPackage ePackage = ecoreFactory.createEPackage();
 		ePackage.setName(name.toLowerCase());
-		ePackage.setNsPrefix(CodeGenUtil.capName(name));
+		ePackage.setNsPrefix(ClassMakerService.NameUtil.capName(name));
 		ePackage.setNsURI("http://" + name.toLowerCase() + "/" + version);
 		return ePackage;
 	}
@@ -253,7 +252,7 @@ public abstract class AbstractTest {
 		o.eSet(a, attributeValue);
 		assertEquals(attributeValue, o.eGet(a));
 		assertEquals(getClassName(), o.getClass().getSimpleName());
-		assertEquals(CodeGenUtil.safeName(result.getName()), o.getClass().getPackage().getName());
+		assertEquals(ClassMakerService.NameUtil.safeName(result.getName()), o.getClass().getPackage().getName());
 		return result;
 	}
 
@@ -263,6 +262,7 @@ public abstract class AbstractTest {
 		Contribution c = service.getWorkspace().getContribution(ePackage);
 		for (String dependency : dependencies)
 			c.getDependencies().add(dependency);
+//		e = (EPackage) c.getDomainModel().getGeneratedEPackage();
 		return test(e, attributeName, attributeValue);
 	}
 
@@ -296,7 +296,7 @@ public abstract class AbstractTest {
 		EStructuralFeature a = s.getEStructuralFeature(attributeName);
 		o.eSet(a, attributeValue);
 		assertEquals(attributeValue, o.eGet(a));
-		assertEquals(CodeGenUtil.safeName(ePackage.getName()), o.getClass().getPackage().getName());
+		assertEquals(ClassMakerService.NameUtil.safeName(ePackage.getName()), o.getClass().getPackage().getName());
 		return ePackage;
 	}
 

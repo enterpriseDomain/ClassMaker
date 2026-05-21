@@ -17,7 +17,8 @@ package org.enterprisedomain.classmaker.impl;
 
 import java.util.Objects;
 
-import org.eclipse.emf.common.notify.Notification;
+import javax.management.Notification;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
@@ -32,8 +33,10 @@ import org.enterprisedomain.classmaker.StageQualifier;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StageQualifierImpl#getStage <em>Stage</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StageQualifierImpl#getStep <em>Step</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StageQualifierImpl#getStage
+ * <em>Stage</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StageQualifierImpl#getStep
+ * <em>Step</em>}</li>
  * </ul>
  *
  * @generated
@@ -81,6 +84,7 @@ public class StageQualifierImpl extends EObjectImpl implements StageQualifier {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected StageQualifierImpl() {
@@ -89,6 +93,7 @@ public class StageQualifierImpl extends EObjectImpl implements StageQualifier {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -98,6 +103,7 @@ public class StageQualifierImpl extends EObjectImpl implements StageQualifier {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -107,6 +113,7 @@ public class StageQualifierImpl extends EObjectImpl implements StageQualifier {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -120,6 +127,7 @@ public class StageQualifierImpl extends EObjectImpl implements StageQualifier {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -129,6 +137,7 @@ public class StageQualifierImpl extends EObjectImpl implements StageQualifier {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -159,6 +168,7 @@ public class StageQualifierImpl extends EObjectImpl implements StageQualifier {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -174,6 +184,7 @@ public class StageQualifierImpl extends EObjectImpl implements StageQualifier {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -191,6 +202,7 @@ public class StageQualifierImpl extends EObjectImpl implements StageQualifier {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -208,6 +220,7 @@ public class StageQualifierImpl extends EObjectImpl implements StageQualifier {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -223,6 +236,7 @@ public class StageQualifierImpl extends EObjectImpl implements StageQualifier {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

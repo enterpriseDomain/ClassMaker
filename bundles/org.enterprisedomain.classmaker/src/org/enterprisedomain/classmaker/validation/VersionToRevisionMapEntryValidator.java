@@ -5,7 +5,6 @@
 package org.enterprisedomain.classmaker.validation;
 
 import org.enterprisedomain.classmaker.Revision;
-import org.osgi.framework.Version;
 
 /**
  * A sample validator interface for {@link java.util.Map.Entry}. This doesn't

@@ -23,7 +23,6 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.osgi.framework.Bundle;
-import org.osgi.framework.Version;
 
 public class CustomClassLoader extends ClassLoader {
 
@@ -94,7 +93,7 @@ public class CustomClassLoader extends ClassLoader {
 	private @Nullable Class<?> loadExplicitClass(@NonNull String qualifiedClassName, boolean resolve)
 			throws ClassNotFoundException, IOException {
 		String filePath = qualifiedClassName.replaceAll("\\.", "/") + ".class";
-		URL url = bundle.getEntry("/bin/" + filePath);
+		URL url = bundle.getResource(filePath);// bundle.getResource();
 		if (url == null)
 			return Class.forName(qualifiedClassName, true, fallBackClassLoader);
 		InputStream inputStream = FileLocator.toFileURL(url).openStream();

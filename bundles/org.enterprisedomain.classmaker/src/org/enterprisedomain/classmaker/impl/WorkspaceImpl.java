@@ -15,21 +15,19 @@
  */
 package org.enterprisedomain.classmaker.impl;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
+import java.net.URI;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.SortedSet;
+
+import javax.management.Notification;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -40,17 +38,13 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
-import org.eclipse.core.runtime.Platform;
-import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.core.runtime.jobs.MultiRule;
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
@@ -70,10 +64,7 @@ import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.xmi.XMLResource;
-import org.eclipse.osgi.internal.framework.EquinoxBundle;
-import org.eclipse.osgi.storage.BundleInfo.Generation;
 import org.eclipse.pde.core.target.ITargetDefinition;
-import org.eclipse.pde.core.target.ITargetLocation;
 import org.eclipse.pde.core.target.ITargetPlatformService;
 import org.eclipse.pde.core.target.LoadTargetDefinitionJob;
 import org.eclipse.pde.internal.core.target.TargetPlatformService;
@@ -98,7 +89,6 @@ import org.enterprisedomain.classmaker.util.ModelUtil;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
-import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -207,23 +197,24 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		@Override
 		public void resourceChanged(IResourceChangeEvent event) {
 			if (event.getResource() != null && event.getResource().getType() == IResource.PROJECT
-					&& event.getType() == IResourceChangeEvent.PRE_DELETE)
-				try {
-					Project project = getProject(event.getResource().getName());
-					if (project == null)
-						return;
-					SubMonitor pm = SubMonitor.convert(ClassMakerPlugin.getProgressMonitor());
-					SubMonitor m = pm.newChild(1, SubMonitor.SUPPRESS_ISCANCELED);
-					try {
-						if (project != null)
-							project.delete(m);
-					} finally {
-						m.done();
-						pm.done();
-					}
-				} catch (CoreException e) {
-					ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
-				}
+					&& event.getType() == IResourceChangeEvent.PRE_DELETE) {
+				// try {
+				Project project = getProject(event.getResource().getName());
+				if (project == null)
+					return;
+				// SubMonitor pm = SubMonitor.convert(ClassMakerPlugin.getProgressMonitor());
+				// SubMonitor m = pm.newChild(1, SubMonitor.SUPPRESS_ISCANCELED);
+				// try {
+				// if (project != null)
+				// project.delete(m);
+				// } finally {
+				// m.done();
+				// pm.done();
+				// }
+				// } catch (CoreException e) {
+				// ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
+				// }
+			}
 		}
 	};
 
@@ -493,7 +484,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 * @generated NOT
 	 */
 	public void initialize() {
-		ClassMakerPlugin.print("Workspace initialize");
+		ClassMakerPlugin.print("Workspace is initializing...");
 		final URI uri = URI.createFileURI(ResourceUtils.WORKSPACE_RESOURCE_PATH.toString());
 		getService().eAdapters().add(new AdapterImpl() {
 
@@ -612,42 +603,19 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 */
 	@SuppressWarnings("restriction")
 	public void provision(IProgressMonitor monitor) throws CoreException {
-		if (System.getProperty("buildingWithTycho") != null) {
-			if (targetPlatformAlreadySet) {
-				return;
-			}
-			targetPlatformAlreadySet = true;
-		} else {
-			return;
-		}
+		// if (System.getProperty("buildingWithTycho") != null) {
+		// if (targetPlatformAlreadySet) {
+		// return;
+		// }
+		// targetPlatformAlreadySet = true;
+		// } else {
+		// return;
+		// }
 		try {
 			Bundle currentBundle = FrameworkUtil.getBundle(getClass());
 			ITargetPlatformService targetPlatformService = TargetPlatformService.getDefault();
 			ITargetDefinition targetDefinition = null;
-			targetDefinition = targetPlatformService.newTarget();
-			targetDefinition.setName("Platform");
-			Bundle[] bundles = Platform.getBundle(Platform.PI_RUNTIME).getBundleContext().getBundles();
-			List<ITargetLocation> bundleContainers = new ArrayList<ITargetLocation>();
-			Set<File> dirs = new HashSet<File>();
-			for (Bundle bundle : bundles) {
-				if (bundle.equals(currentBundle)) {
-					continue;
-				}
-				EquinoxBundle bundleImpl = (EquinoxBundle) bundle;
-				Generation generation = (Generation) bundleImpl.getModule().getCurrentRevision().getRevisionInfo();
-				File file = generation.getBundleFile().getBaseFile();
-				File folder = file.getParentFile();
-				if (!dirs.contains(folder)) {
-					dirs.add(folder);
-					bundleContainers.add(targetPlatformService.newDirectoryLocation(folder.getAbsolutePath()));
-				}
-			}
-			targetDefinition.setTargetLocations(bundleContainers.toArray(new ITargetLocation[bundleContainers.size()]));
-			targetDefinition.setArch(Platform.getOSArch());
-			targetDefinition.setOS(Platform.getOS());
-			targetDefinition.setWS(Platform.getWS());
-			targetDefinition.setNL(Platform.getNL());
-			targetPlatformService.saveTargetDefinition(targetDefinition);
+			targetDefinition = targetPlatformService.getWorkspaceTargetDefinition();
 			LoadTargetDefinitionJob job = new LoadTargetDefinitionJob(targetDefinition);
 			job.schedule();
 			try {
@@ -696,7 +664,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			result.checkout(revision.getVersion());
 			result.load(true, true);
 			EObject model = EcoreUtil.copy(blueprint);
-			result.getDomainModel().setDynamic(model);
+			result.getDomainModel().setDynamicEPackage(model);
 			result.getState().saveResource();
 			return result;
 		} finally {
@@ -799,16 +767,16 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		case Stage.EXPORTED_VALUE:
 		case Stage.INSTALLED_VALUE:
 			for (Contribution c : getContributions())
-				if (c.getDomainModel() != null
-						&& ModelUtil.eObjectsAreEqual(eObject, c.getDomainModel().getDynamic(), !searchOptimistic))
+				if (c.getDomainModel() != null && ModelUtil.eObjectsAreEqual(eObject,
+						c.getDomainModel().getDynamicEPackage(), !searchOptimistic))
 					return c;
 			break;
 		case Stage.LOADED_VALUE:
 			for (Contribution c : getContributions()) {
-				if (ModelUtil.eObjectsAreEqual(eObject, c.getDomainModel().getDynamic(), false))
+				if (ModelUtil.eObjectsAreEqual(eObject, c.getDomainModel().getDynamicEPackage(), false))
 					while (c.getState().isMaking() && !c.getPhase().equals(Stage.LOADED))
 						Thread.yield();
-				if (ModelUtil.eObjectsAreEqual(eObject, c.getDomainModel().getGenerated(), !searchOptimistic))
+				if (ModelUtil.eObjectsAreEqual(eObject, c.getDomainModel().getGeneratedEPackage(), !searchOptimistic))
 					return c;
 			}
 		}
@@ -861,17 +829,17 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		case Stage.EXPORTED_VALUE:
 		case Stage.INSTALLED_VALUE:
 			for (Contribution contribution : getContributions()) {
-				if (contribution.getDomainModel().getDynamic() != null
-						&& contribution.getDomainModel().getDynamic() instanceof EPackage
-						&& ((EPackage) contribution.getDomainModel().getDynamic()).getNsURI().equals(nsURI))
+				if (contribution.getDomainModel().getDynamicEPackage() != null
+						&& contribution.getDomainModel().getDynamicEPackage() instanceof EPackage
+						&& ((EPackage) contribution.getDomainModel().getDynamicEPackage()).getNsURI().equals(nsURI))
 					return contribution;
 			}
 			break;
 		case Stage.LOADED_VALUE:
 			for (Contribution contribution : getContributions()) {
-				if (contribution.getDomainModel().getGenerated() != null
-						&& contribution.getDomainModel().getGenerated() instanceof EPackage
-						&& ((EPackage) contribution.getDomainModel().getGenerated()).getNsURI().equals(nsURI))
+				if (contribution.getDomainModel().getGeneratedEPackage() != null
+						&& contribution.getDomainModel().getGeneratedEPackage() instanceof EPackage
+						&& ((EPackage) contribution.getDomainModel().getGeneratedEPackage()).getNsURI().equals(nsURI))
 					return contribution;
 			}
 			break;
@@ -970,10 +938,10 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	public Stage contains(EObject blueprint) {
 		for (Contribution c : getContributions()) {
 			if (c.getPhase().getValue() < Stage.LOADED_VALUE) {
-				if (ModelUtil.eObjectsAreEqual(blueprint, c.getDomainModel().getDynamic(), false))
+				if (ModelUtil.eObjectsAreEqual(blueprint, c.getDomainModel().getDynamicEPackage(), false))
 					return c.getPhase();
 			} else {
-				if (ModelUtil.eObjectsAreEqual(blueprint, c.getDomainModel().getGenerated(), false))
+				if (ModelUtil.eObjectsAreEqual(blueprint, c.getDomainModel().getGeneratedEPackage(), false))
 					return c.getPhase();
 			}
 		}

@@ -179,6 +179,20 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 	}
 
 	/**
+	 * This adds a property descriptor for the Resource feature. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected void addResourcePropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Item_resource_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Item_resource_feature", "_UI_Item_type"),
+						ClassMakerPackage.Literals.ITEM__RESOURCE, false, false, false, null, null, null));
+	}
+
+	/**
 	 * This adds a property descriptor for the Name feature. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -384,20 +398,6 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 	}
 
 	/**
-	 * This adds a property descriptor for the Resource feature. <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	protected void addResourcePropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_Item_resource_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_Item_resource_feature", "_UI_Item_type"),
-						ClassMakerPackage.Literals.ITEM__RESOURCE, false, false, false, null, null, null));
-	}
-
-	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an
 	 * appropriate feature for an {@link org.eclipse.emf.edit.command.AddCommand},
 	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
@@ -412,6 +412,7 @@ public class ProjectItemProvider extends ItemProviderAdapter implements IEditing
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ClassMakerPackage.Literals.ITEM__DOMAIN_MODEL);
 			childrenFeatures.add(ClassMakerPackage.Literals.PROJECT__REVISIONS);
+			childrenFeatures.add(ClassMakerPackage.Literals.PROJECT__STATE);
 			childrenFeatures.add(ClassMakerPackage.Literals.PROJECT__MODEL_RESOURCE_ADAPTER);
 		}
 		return childrenFeatures;

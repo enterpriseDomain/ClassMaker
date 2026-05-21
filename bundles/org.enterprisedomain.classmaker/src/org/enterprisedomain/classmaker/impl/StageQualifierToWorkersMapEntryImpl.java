@@ -17,7 +17,8 @@ package org.enterprisedomain.classmaker.impl;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.Notification;
+import javax.management.Notification;
+
 import org.eclipse.emf.common.util.BasicEMap;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
@@ -38,8 +39,10 @@ import org.enterprisedomain.classmaker.jobs.Worker;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StageQualifierToWorkersMapEntryImpl#getTypedKey <em>Key</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.StageQualifierToWorkersMapEntryImpl#getTypedValue <em>Value</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StageQualifierToWorkersMapEntryImpl#getTypedKey
+ * <em>Key</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StageQualifierToWorkersMapEntryImpl#getTypedValue
+ * <em>Value</em>}</li>
  * </ul>
  *
  * @generated
@@ -57,8 +60,9 @@ public class StageQualifierToWorkersMapEntryImpl extends EObjectImpl
 	protected StageQualifier key;
 
 	/**
-	 * The cached value of the '{@link #getTypedValue() <em>Value</em>}' reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getTypedValue() <em>Value</em>}' reference
+	 * list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getTypedValue()
 	 * @generated
 	 * @ordered
@@ -67,6 +71,7 @@ public class StageQualifierToWorkersMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected StageQualifierToWorkersMapEntryImpl() {
@@ -75,6 +80,7 @@ public class StageQualifierToWorkersMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -84,6 +90,7 @@ public class StageQualifierToWorkersMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public StageQualifier getTypedKey() {
@@ -101,6 +108,7 @@ public class StageQualifierToWorkersMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public StageQualifier basicGetTypedKey() {
@@ -109,6 +117,7 @@ public class StageQualifierToWorkersMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setTypedKey(StageQualifier newKey) {
@@ -121,6 +130,7 @@ public class StageQualifierToWorkersMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EList<Worker> getTypedValue() {
@@ -133,6 +143,7 @@ public class StageQualifierToWorkersMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -150,6 +161,7 @@ public class StageQualifierToWorkersMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -169,6 +181,7 @@ public class StageQualifierToWorkersMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -186,6 +199,7 @@ public class StageQualifierToWorkersMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -201,12 +215,14 @@ public class StageQualifierToWorkersMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected int hash = -1;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -220,6 +236,7 @@ public class StageQualifierToWorkersMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -229,6 +246,7 @@ public class StageQualifierToWorkersMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -238,6 +256,7 @@ public class StageQualifierToWorkersMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -247,6 +266,7 @@ public class StageQualifierToWorkersMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -256,6 +276,7 @@ public class StageQualifierToWorkersMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -268,6 +289,7 @@ public class StageQualifierToWorkersMapEntryImpl extends EObjectImpl
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")

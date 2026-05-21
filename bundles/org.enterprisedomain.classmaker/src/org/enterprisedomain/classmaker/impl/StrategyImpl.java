@@ -19,10 +19,11 @@ import java.util.Iterator;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import javax.management.Notification;
+
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
@@ -198,7 +199,7 @@ public class StrategyImpl extends EObjectImpl implements Strategy {
 				getWorkers().get(stageQualifier) != null ? getWorkers().get(stageQualifier).size() : 0,
 				getState().getTimestamp(), getEclipseProject());
 		if (getWorkers().containsKey(stageQualifier)) {
-			EList<Worker> workers = getWorkers().get(stageQualifier);
+			EList<Worker> workers = ECollections.newBasicEList();
 			workers.add(worker);
 			getWorkers().put(stageQualifier, workers);
 		} else {

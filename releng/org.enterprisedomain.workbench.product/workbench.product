@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="enterpriseDomain Workbench" uid="workbench.product" id="org.enterprisedomain.workbench.product" application="org.eclipse.ui.ide.workbench" version="0.8.55" type="features" includeLaunchers="true" autoIncludeRequirements="true">
+<product name="Domain Shell" uid="workbench.product" id="org.enterprisedomain.workbench.product" application="org.eclipse.ui.ide.workbench" version="0.8.55" type="features" includeLaunchers="true" autoIncludeRequirements="true">
+
 
    <configIni use="default">
    </configIni>
@@ -17,15 +18,17 @@
 
    <splash
       location="org.enterprisedomain.workbench.ide" />
-   <launcher name="workbench">
+   <launcher name="shell">
       <win useIco="false">
          <bmp/>
       </win>
    </launcher>
 
+
    <vm>
       <linux include="false">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-21</linux>
    </vm>
+
 
    <plugins>
       <plugin id="com.google.gson"/>
@@ -324,6 +327,7 @@
       <feature id="org.eclipse.emf.databinding" installMode="root"/>
       <feature id="org.eclipse.emf.ecore.edit" installMode="root"/>
       <feature id="org.eclipse.emf.common.ui.source" installMode="root"/>
+      <feature id="org.enterprisedomain.classmaker.ui.feature" installMode="root"/>
    </features>
 
    <configurations>

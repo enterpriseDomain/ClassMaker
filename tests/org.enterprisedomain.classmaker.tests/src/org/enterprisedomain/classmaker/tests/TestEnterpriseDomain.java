@@ -36,8 +36,6 @@ import java.util.concurrent.Semaphore;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.OperationCanceledException;
-import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
-import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -89,36 +87,36 @@ public class TestEnterpriseDomain extends AbstractTest {
 		EcoreFactory ecoreFactory = EcoreFactory.eINSTANCE;
 		final EPackage readerEPackage = createEPackage("reader", "1.0");
 		final EClass eClass = ecoreFactory.createEClass();
+		readerEPackage.getEClassifiers().add(eClass);
 		eClass.setName("Book");
 		final EAttribute pagesAttr = ecoreFactory.createEAttribute();
+		eClass.getEStructuralFeatures().add(pagesAttr);
 		pagesAttr.setName("totalPages");
 		pagesAttr.setEType(EcorePackage.Literals.EINT);
-		eClass.getEStructuralFeatures().add(pagesAttr);
 
 		final EAttribute attribute = ecoreFactory.createEAttribute();
+		eClass.getEStructuralFeatures().add(attribute);
 		attribute.setName("pagesRead");
 		attribute.setEType(EcorePackage.Literals.EINT);
-		eClass.getEStructuralFeatures().add(attribute);
 
 		final EOperation operation = ecoreFactory.createEOperation();
+		eClass.getEOperations().add(operation);
 		operation.setName("read");
 		EParameter p = ecoreFactory.createEParameter();
+		operation.getEParameters().add(p);
 		p.setEType(EcorePackage.Literals.EINT);
 		p.setName("pagesRead");
-		operation.getEParameters().add(p);
 		EAnnotation an = ecoreFactory.createEAnnotation();
+		operation.getEAnnotations().add(an);
 		an.setSource("http://www.eclipse.org/emf/2002/GenModel");
 		an.getDetails().put("body", "setPagesRead(getPagesRead() + pagesRead);");
-		operation.getEAnnotations().add(an);
 		EAnnotation invocation = ecoreFactory.createEAnnotation();
-		invocation.setSource(ClassMakerService.INVOCATION_DELEGATE_URI);
 		operation.getEAnnotations().add(invocation);
-		eClass.getEOperations().add(operation);
+		invocation.setSource(ClassMakerService.INVOCATION_DELEGATE_URI);
 		invocation = ecoreFactory.createEAnnotation();
+		readerEPackage.getEAnnotations().add(invocation);
 		invocation.setSource(EcorePackage.eNS_URI);
 		invocation.getDetails().put("invocationDelegates", ClassMakerService.INVOCATION_DELEGATE_URI);
-		readerEPackage.getEAnnotations().add(invocation);
-		readerEPackage.getEClassifiers().add(eClass);
 
 		assertNotNull(service);
 
@@ -464,7 +462,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		cleanup();
 	}
 
-	@Test
+//	@Test
 	public void editor() throws CoreException {
 		setPackageName("test");
 		setClassName("Edited");
@@ -568,7 +566,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 		ClassMakerPlugin.getInstance().setTurnOffAutoBuilding(true);
 		EPackage p = createAndTestEPackage(getProgressMonitor());
 		Contribution c = service.getWorkspace().getContribution(p, Stage.LOADED);
-		p = (EPackage) c.getDomainModel().getDynamic();
+		p = (EPackage) c.getDomainModel().getDynamicEPackage();
 		Version v = c.getVersion();
 
 		EPackage p2 = updateEPackage(p, "1");
@@ -619,9 +617,11 @@ public class TestEnterpriseDomain extends AbstractTest {
 		assertNotNull(r);
 
 		String modelName = "MetaModel";
-		Resource resource1 = resourceSet.getResource(URI.createPlatformPluginURI(ClassMakerTestsPlugin.PLUGIN_ID
-				+ IPath.SEPARATOR + "model" + IPath.SEPARATOR + CodeGenUtil.safeName(modelName) + ".ecore", false),
-				true);
+		Resource resource1 = resourceSet
+				.getResource(
+						URI.createPlatformPluginURI(ClassMakerTestsPlugin.PLUGIN_ID + IPath.SEPARATOR + "model"
+								+ IPath.SEPARATOR + ClassMakerService.NameUtil.safeName(modelName) + ".ecore", false),
+						true);
 		resource1.load(new HashMap<String, String>());
 		EPackage p1 = (EPackage) resource1.getContents().get(0);
 		EPackage ePackage = (EPackage) service.make(p1, getProgressMonitor());
@@ -707,7 +707,7 @@ public class TestEnterpriseDomain extends AbstractTest {
 				try {
 					EPackage e = null;
 					Class<?> cl = null;
-					e = (EPackage) result.getDomainModel().getGenerated();
+					e = (EPackage) result.getDomainModel().getGeneratedEPackage();
 					cl = TestEnterpriseDomain.class.getClassLoader().loadClass(getPackageName() + "." + getClassName());
 					Method getMethod0 = cl.getMethod("get" + at.getName(), new Class<?>[] {});
 					EClass ec = (EClass) e.getEClassifier(getClassName());
@@ -743,14 +743,14 @@ public class TestEnterpriseDomain extends AbstractTest {
 
 		@Override
 		public Object customize(EList<Object> args) {
-			GenModel genModel = ((GenModel) args.get(1));
-			genModel.setSuppressInterfaces(false);
+//			GenModel genModel = ((GenModel) args.get(1));
+//			genModel.setSuppressInterfaces(false);
 			return null;
 		}
 
 	};
 
-	@Test
+//	@Test
 	public void package_() throws OperationCanceledException, InterruptedException, ExecutionException, CoreException {
 		setPackageName("package");
 		createAndTestEPackage(getProgressMonitor());

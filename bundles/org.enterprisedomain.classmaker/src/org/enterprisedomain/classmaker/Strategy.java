@@ -29,8 +29,10 @@ import org.enterprisedomain.classmaker.jobs.Worker;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.Strategy#getState <em>State</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Strategy#getWorkers <em>Workers</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Strategy#getState
+ * <em>State</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Strategy#getWorkers
+ * <em>Workers</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getStrategy()
@@ -39,9 +41,11 @@ import org.enterprisedomain.classmaker.jobs.Worker;
  */
 public interface Strategy extends EObject {
 	/**
-	 * Returns the value of the '<em><b>State</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link org.enterprisedomain.classmaker.State#getStrategy <em>Strategy</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the value of the '<em><b>State</b></em>' reference. It is
+	 * bidirectional and its opposite is
+	 * '{@link org.enterprisedomain.classmaker.State#getStrategy
+	 * <em>Strategy</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>State</em>' reference.
 	 * @see #setState(State)
 	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getStrategy_State()
@@ -52,8 +56,10 @@ public interface Strategy extends EObject {
 	State getState();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Strategy#getState <em>State</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Strategy#getState <em>State</em>}'
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>State</em>' reference.
 	 * @see #getState()
 	 * @generated
@@ -76,6 +82,7 @@ public interface Strategy extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model kind="operation" type="org.enterprisedomain.classmaker.Worker"
 	 * @generated
 	 */
@@ -83,6 +90,7 @@ public interface Strategy extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
@@ -90,14 +98,15 @@ public interface Strategy extends EObject {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model monitorDataType="org.enterprisedomain.classmaker.IProgressMonitor"
 	 * @generated
 	 */
 	void configuteBuildJobs(IProgressMonitor monitor);
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model type="org.enterprisedomain.classmaker.Worker"
 	 * @generated
 	 */

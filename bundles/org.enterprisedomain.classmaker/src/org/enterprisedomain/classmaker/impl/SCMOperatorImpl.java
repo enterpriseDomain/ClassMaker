@@ -17,7 +17,8 @@ package org.enterprisedomain.classmaker.impl;
 
 import java.io.IOException;
 
-import org.eclipse.emf.common.notify.Notification;
+import javax.management.Notification;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -26,7 +27,6 @@ import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.SCMOperator;
 import org.enterprisedomain.classmaker.SCMRegistry;
 import org.enterprisedomain.classmaker.State;
-import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>SCM
@@ -35,8 +35,10 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.impl.SCMOperatorImpl#getProjectName <em>Project Name</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.SCMOperatorImpl#getRegistry <em>Registry</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.SCMOperatorImpl#getProjectName
+ * <em>Project Name</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.SCMOperatorImpl#getRegistry
+ * <em>Registry</em>}</li>
  * </ul>
  *
  * @generated
@@ -44,16 +46,18 @@ import org.osgi.framework.Version;
 public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOperator<T> {
 
 	/**
-	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getProjectName()
 	 * @generated
 	 * @ordered
 	 */
 	protected static final String PROJECT_NAME_EDEFAULT = "";
 	/**
-	 * The cached value of the '{@link #getProjectName() <em>Project Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getProjectName() <em>Project Name</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getProjectName()
 	 * @generated
 	 * @ordered
@@ -63,6 +67,7 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 	/**
 	 * The cached value of the '{@link #getRegistry() <em>Registry</em>}' reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getRegistry()
 	 * @generated
 	 * @ordered
@@ -71,6 +76,7 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected SCMOperatorImpl() {
@@ -79,6 +85,7 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -88,6 +95,7 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -97,6 +105,7 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -110,6 +119,7 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -129,6 +139,7 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public SCMRegistry<T> basicGetRegistry() {
@@ -137,6 +148,7 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -226,6 +238,7 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -243,6 +256,7 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -261,6 +275,7 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -278,6 +293,7 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -293,6 +309,7 @@ public abstract class SCMOperatorImpl<T> extends EObjectImpl implements SCMOpera
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

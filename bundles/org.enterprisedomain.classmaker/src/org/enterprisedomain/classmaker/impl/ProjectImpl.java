@@ -17,6 +17,9 @@ package org.enterprisedomain.classmaker.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.rmi.registry.Registry;
+import java.sql.Ref;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -27,6 +30,8 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Locale;
 import java.util.Map;
+
+import javax.management.Notification;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
@@ -40,7 +45,6 @@ import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.core.runtime.jobs.MultiRule;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.notify.impl.NotificationImpl;
@@ -48,12 +52,10 @@ import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -72,7 +74,6 @@ import org.eclipse.jgit.api.ResetCommand.ResetType;
 import org.eclipse.jgit.api.errors.CheckoutConflictException;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.JGitInternalException;
-import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.ReflogEntry;
 import org.eclipse.osgi.util.NLS;
 import org.enterprisedomain.classmaker.ClassMakerFactory;
@@ -97,7 +98,6 @@ import org.enterprisedomain.classmaker.Workspace;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.util.ListUtil;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
-import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -106,32 +106,58 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getModelName <em>Model Name</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getPhase <em>Phase</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getLanguage <em>Language</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getDomainModel <em>Domain Model</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getCustomizers <em>Customizers</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getParent <em>Parent</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getLocale <em>Locale</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getProject <em>Project</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getResource <em>Resource</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getProjectName <em>Project Name</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#isDirty <em>Dirty</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getWorkspace <em>Workspace</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getResourcePath <em>Resource Path</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#isNeedCompletionNotification <em>Need Completion Notification</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getCompletionNotificationAdapter <em>Completion Notification Adapter</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getResourceReloadListener <em>Resource Reload Listener</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#isSavingResource <em>Saving Resource</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getRevision <em>Revision</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getRevisions <em>Revisions</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getProjectVersion <em>Project Version</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getSelectRevealHandler <em>Select Reveal Handler</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getVersion <em>Version</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getState <em>State</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getModelResourceAdapter <em>Model Resource Adapter</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getClassLoader <em>Class Loader</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getModelName
+ * <em>Model Name</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getPhase
+ * <em>Phase</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getLanguage
+ * <em>Language</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getDomainModel
+ * <em>Domain Model</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getCustomizers
+ * <em>Customizers</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getParent
+ * <em>Parent</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getLocale
+ * <em>Locale</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getProject
+ * <em>Project</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getResource
+ * <em>Resource</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getName
+ * <em>Name</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getProjectName
+ * <em>Project Name</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#isDirty
+ * <em>Dirty</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getWorkspace
+ * <em>Workspace</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getResourcePath
+ * <em>Resource Path</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#isNeedCompletionNotification
+ * <em>Need Completion Notification</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getCompletionNotificationAdapter
+ * <em>Completion Notification Adapter</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getResourceReloadListener
+ * <em>Resource Reload Listener</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#isSavingResource
+ * <em>Saving Resource</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getRevision
+ * <em>Revision</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getRevisions
+ * <em>Revisions</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getProjectVersion
+ * <em>Project Version</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getSelectRevealHandler
+ * <em>Select Reveal Handler</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getVersion
+ * <em>Version</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getState
+ * <em>State</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getModelResourceAdapter
+ * <em>Model Resource Adapter</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ProjectImpl#getClassLoader
+ * <em>Class Loader</em>}</li>
  * </ul>
  *
  * @generated
@@ -139,8 +165,9 @@ import org.osgi.framework.Version;
 public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
-	 * The default value of the '{@link #getModelName() <em>Model Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getModelName() <em>Model Name</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getModelName()
 	 * @generated
 	 * @ordered
@@ -148,8 +175,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	protected static final String MODEL_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getModelName() <em>Model Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getModelName() <em>Model Name</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getModelName()
 	 * @generated
 	 * @ordered
@@ -177,8 +205,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	protected Stage phase = PHASE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getLanguage() <em>Language</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getLanguage() <em>Language</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getLanguage()
 	 * @generated
 	 * @ordered
@@ -188,6 +217,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	/**
 	 * The cached value of the '{@link #getLanguage() <em>Language</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getLanguage()
 	 * @generated
 	 * @ordered
@@ -195,8 +225,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	protected String language = LANGUAGE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getDomainModel() <em>Domain Model</em>}' containment reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getDomainModel() <em>Domain Model</em>}'
+	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getDomainModel()
 	 * @generated
 	 * @ordered
@@ -206,6 +237,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	/**
 	 * The default value of the '{@link #getLocale() <em>Locale</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getLocale()
 	 * @generated
 	 * @ordered
@@ -216,6 +248,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	/**
 	 * The cached value of the '{@link #getLocale() <em>Locale</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getLocale()
 	 * @generated
 	 * @ordered
@@ -225,6 +258,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	/**
 	 * The cached value of the '{@link #getResource() <em>Resource</em>}' reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getResource()
 	 * @generated
 	 * @ordered
@@ -252,8 +286,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getProjectName()
 	 * @generated
 	 * @ordered
@@ -261,8 +296,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	protected static final String PROJECT_NAME_EDEFAULT = "";
 
 	/**
-	 * The cached value of the '{@link #getProjectName() <em>Project Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getProjectName() <em>Project Name</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getProjectName()
 	 * @generated
 	 * @ordered
@@ -290,8 +326,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	protected boolean dirty = DIRTY_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getResourcePath() <em>Resource Path</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getResourcePath() <em>Resource Path</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getResourcePath()
 	 * @generated
 	 * @ordered
@@ -299,9 +336,10 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	protected static final String RESOURCE_PATH_EDEFAULT = null;
 
 	/**
-	 * The default value of the '{@link #isNeedCompletionNotification() <em>Need Completion Notification</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
+	 * The default value of the '{@link #isNeedCompletionNotification() <em>Need
+	 * Completion Notification</em>}' attribute. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @see #isNeedCompletionNotification()
 	 * @generated
 	 * @ordered
@@ -309,9 +347,10 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	protected static final boolean NEED_COMPLETION_NOTIFICATION_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isNeedCompletionNotification() <em>Need Completion Notification</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
+	 * The cached value of the '{@link #isNeedCompletionNotification() <em>Need
+	 * Completion Notification</em>}' attribute. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @see #isNeedCompletionNotification()
 	 * @generated
 	 * @ordered
@@ -341,8 +380,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	protected ResourceChangeListener resourceReloadListener;
 
 	/**
-	 * The default value of the '{@link #isSavingResource() <em>Saving Resource</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #isSavingResource() <em>Saving
+	 * Resource</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #isSavingResource()
 	 * @generated
 	 * @ordered
@@ -350,8 +390,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	protected static final boolean SAVING_RESOURCE_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isSavingResource() <em>Saving Resource</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #isSavingResource() <em>Saving
+	 * Resource</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #isSavingResource()
 	 * @generated
 	 * @ordered
@@ -361,6 +402,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	/**
 	 * The cached value of the '{@link #getRevisions() <em>Revisions</em>}' map.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getRevisions()
 	 * @generated
 	 * @ordered
@@ -368,8 +410,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	protected EMap<Version, Revision> revisions;
 
 	/**
-	 * The default value of the '{@link #getProjectVersion() <em>Project Version</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getProjectVersion() <em>Project
+	 * Version</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getProjectVersion()
 	 * @generated
 	 * @ordered
@@ -377,8 +420,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	protected static final Version PROJECT_VERSION_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getProjectVersion() <em>Project Version</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getProjectVersion() <em>Project
+	 * Version</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getProjectVersion()
 	 * @generated
 	 * @ordered
@@ -386,8 +430,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	protected Version projectVersion = PROJECT_VERSION_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getSelectRevealHandler() <em>Select Reveal Handler</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getSelectRevealHandler() <em>Select Reveal
+	 * Handler</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getSelectRevealHandler()
 	 * @generated
 	 * @ordered
@@ -407,6 +452,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	/**
 	 * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getVersion()
 	 * @generated
 	 * @ordered
@@ -414,9 +460,10 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	protected Version version = VERSION_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getModelResourceAdapter() <em>Model Resource Adapter</em>}' containment reference.
-	 * <!-- begin-user-doc --> <!--
+	 * The cached value of the '{@link #getModelResourceAdapter() <em>Model Resource
+	 * Adapter</em>}' containment reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @see #getModelResourceAdapter()
 	 * @generated
 	 * @ordered
@@ -424,8 +471,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	protected ResourceAdapter modelResourceAdapter;
 
 	/**
-	 * The default value of the '{@link #getClassLoader() <em>Class Loader</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getClassLoader() <em>Class Loader</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getClassLoader()
 	 * @generated
 	 * @ordered
@@ -433,8 +481,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	protected static final ClassLoader CLASS_LOADER_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getClassLoader() <em>Class Loader</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getClassLoader() <em>Class Loader</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getClassLoader()
 	 * @generated
 	 * @ordered
@@ -442,9 +491,9 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	protected ClassLoader classLoader = CLASS_LOADER_EDEFAULT;
 
 	/**
-	 * This is true if the Class Loader attribute has been set.
-	 * <!-- begin-user-doc
+	 * This is true if the Class Loader attribute has been set. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -505,6 +554,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -514,6 +564,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -523,12 +574,14 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
+	 * 
+	 * @generated NOT
 	 */
 	@Override
 	public void setModelName(String newModelName) {
 		String oldModelName = modelName;
 		modelName = newModelName;
+		setName(newModelName);
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.PROJECT__MODEL_NAME, oldModelName,
 					modelName));
@@ -536,6 +589,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -545,6 +599,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -557,6 +612,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -566,6 +622,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -579,6 +636,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -588,6 +646,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetDomainModel(Models newDomainModel, NotificationChain msgs) {
@@ -606,6 +665,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -641,6 +701,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -669,6 +730,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -678,6 +740,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -691,6 +754,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -719,6 +783,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -728,6 +793,21 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public void setResource(Resource newResource) {
+		Resource oldResource = resource;
+		resource = newResource;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.PROJECT__RESOURCE, oldResource,
+					resource));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -737,6 +817,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -749,6 +830,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -771,6 +853,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -780,6 +863,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -792,6 +876,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -803,6 +888,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetWorkspace(Workspace newWorkspace, NotificationChain msgs) {
@@ -812,6 +898,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -853,6 +940,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -862,6 +950,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -876,6 +965,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -896,6 +986,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public CompletionNotificationAdapter basicGetCompletionNotificationAdapter() {
@@ -904,6 +995,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetCompletionNotificationAdapter(
@@ -924,6 +1016,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -970,9 +1063,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 						if (!theResource.isModified())
 							setResource(resource);
 						theResource = getResource();
-						// theResource.setURI(getResourceURI());
-						// theResource.unload();
-						// theResource.load(Collections.emptyMap());
 						if (ProjectImpl.this.eIsSet(ClassMakerPackage.PROJECT__SELECT_REVEAL_HANDLER))
 							getSelectRevealHandler().selectReveal(theResource);
 						loading = false;
@@ -986,6 +1076,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -995,6 +1086,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1008,6 +1100,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1039,6 +1132,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1052,6 +1146,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1061,6 +1156,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1074,6 +1170,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1093,6 +1190,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public SelectRevealHandler basicGetSelectRevealHandler() {
@@ -1101,6 +1199,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1114,6 +1213,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1123,6 +1223,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1136,6 +1237,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1155,6 +1257,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1164,6 +1267,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetModelResourceAdapter(ResourceAdapter newModelResourceAdapter,
@@ -1184,6 +1288,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1193,6 +1298,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1208,6 +1314,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1223,24 +1330,12 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean isSetClassLoader() {
 		return classLoaderESet;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setResource(Resource newResource) {
-		Resource oldResource = resource;
-		resource = newResource;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.PROJECT__RESOURCE, oldResource,
-					resource));
 	}
 
 	/**
@@ -1518,39 +1613,6 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 * 
 	 * @generated NOT
 	 */
-	public void checkout(long time) {
-		if (getRevision().getStateHistory().containsKey(time))
-			getRevision().checkout(time);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public void checkout(long time, String commitId) {
-		if (getRevision().getStateHistory().containsKey(time)) {
-			State state = getRevision().getStateHistory().get((Object) time);
-			if (state.getCommitId().equals(commitId))
-				getRevision().checkout(time, commitId);
-		}
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public void checkout(String commitId) {
-		if (getState().getCommitId().equals(commitId))
-			getState().checkout(commitId, true);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
 	@Override
 	public void initAdapters(Revision revision) {
 		revision.addAdapters(ECollections.singletonEList(stateModelAdapter));
@@ -1614,6 +1676,18 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	public void copyModel(Item from) {
 		if (isRevisionSet())
 			getRevision().copyModel(from);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public void renameProject(String oldProjectName, String newProjectName) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -1688,7 +1762,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 	 */
 	public String initialize() {
 		setName(getModelName() != null ? getModelName() : CodeGenUtil.capName(getProjectName()));
-		ClassMakerPlugin.print(NLS.bind("Project {0} initialize", getName()));
+		ClassMakerPlugin.print(NLS.bind("Project {0} is initializing...", getName()));
 		URI uri = getResourceURI();
 		Resource resource = null;
 		if (new File(uri.toFileString()).exists()) {
@@ -1795,11 +1869,11 @@ public class ProjectImpl extends EObjectImpl implements Project {
 						initAdapters(getRevision());
 					}
 					if (getPhase().equals(Stage.MODELED)) {
-						EPackage ePackage = (EPackage) getDomainModel().getDynamic();
+						EPackage ePackage = (EPackage) getDomainModel().getDynamicEPackage();
 						if (ePackage != null)
 							Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);
 					} else if (getPhase().equals(Stage.LOADED)) {
-						EPackage ePackage = (EPackage) getDomainModel().getGenerated();
+						EPackage ePackage = (EPackage) getDomainModel().getGeneratedEPackage();
 						if (ePackage != null)
 							Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);
 					}
@@ -1815,10 +1889,10 @@ public class ProjectImpl extends EObjectImpl implements Project {
 					}
 				}
 			} else {
-				createResource(uri);
+				resource = createResource(uri);
 			}
 		} else {
-			createResource(uri);
+			resource = createResource(uri);
 		}
 		if (!getWorkspace().getResourceSet().eAdapters().contains(resourceChangeAdapter))
 			getWorkspace().getResourceSet().eAdapters().add(resourceChangeAdapter);
@@ -1827,7 +1901,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 		return ""; //$NON-NLS-1$
 	}
 
-	private void createResource(URI uri) {
+	private Resource createResource(URI uri) {
 		Resource resource = getWorkspace().getResourceSet().createResource(uri);
 		setResource(resource);
 		try {
@@ -1838,6 +1912,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 		}
 		onModelResourceCreate(resource);
+		return resource;
 	}
 
 	private URI getResourceURI() {
@@ -1880,6 +1955,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1911,6 +1987,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1934,6 +2011,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1980,6 +2058,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -2061,6 +2140,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -2138,6 +2218,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -2215,6 +2296,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -2280,6 +2362,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -2313,6 +2396,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -2371,6 +2455,7 @@ public class ProjectImpl extends EObjectImpl implements Project {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

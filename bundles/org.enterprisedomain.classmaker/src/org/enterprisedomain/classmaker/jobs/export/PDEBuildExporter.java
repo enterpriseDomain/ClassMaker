@@ -22,14 +22,27 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Flow.Publisher;
 
+import org.eclipse.core.resources.ICommand;
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceChangeEvent;
+import org.eclipse.core.resources.IResourceChangeListener;
+import org.eclipse.core.resources.IResourceDelta;
+import org.eclipse.core.resources.IncrementalProjectBuilder;
+import org.eclipse.core.resources.ProjectScope;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager;
 import org.eclipse.equinox.internal.p2.artifact.repository.simple.SimpleArtifactRepositoryFactory;
 import org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager;
@@ -37,24 +50,37 @@ import org.eclipse.equinox.internal.p2.metadata.repository.SimpleMetadataReposit
 import org.eclipse.equinox.p2.core.ProvisionException;
 import org.eclipse.equinox.p2.publisher.IPublisherAction;
 import org.eclipse.equinox.p2.publisher.IPublisherInfo;
-import org.eclipse.equinox.p2.publisher.Publisher;
 import org.eclipse.equinox.p2.publisher.PublisherInfo;
 import org.eclipse.equinox.p2.publisher.eclipse.BundlesAction;
 import org.eclipse.equinox.p2.repository.artifact.IArtifactRepository;
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepository;
+import org.eclipse.jdt.core.IClasspathAttribute;
+import org.eclipse.jdt.core.IClasspathEntry;
+import org.eclipse.jdt.core.ICompilationUnit;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.IPackageFragment;
+import org.eclipse.jdt.core.IPackageFragmentRoot;
+import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.core.dom.CompilationUnit;
+import org.eclipse.jdt.core.manipulation.JavaManipulation;
+import org.eclipse.jdt.core.manipulation.OrganizeImportsOperation;
+import org.eclipse.jdt.core.manipulation.SharedASTProviderCore;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.osgi.service.resolver.BundleDescription;
 import org.eclipse.osgi.service.resolver.BundleSpecification;
 import org.eclipse.pde.core.IEditableModel;
 import org.eclipse.pde.core.IModel;
-import org.eclipse.pde.core.IModelProviderEvent;
 import org.eclipse.pde.core.build.IBuild;
 import org.eclipse.pde.core.build.IBuildEntry;
 import org.eclipse.pde.core.build.IBuildModel;
 import org.eclipse.pde.core.plugin.IPluginImport;
 import org.eclipse.pde.core.plugin.IPluginModelBase;
 import org.eclipse.pde.core.plugin.PluginRegistry;
-import org.eclipse.pde.internal.core.ModelProviderEvent;
+import org.eclipse.pde.core.project.IBundleClasspathEntry;
+import org.eclipse.pde.core.project.IBundleProjectDescription;
+import org.eclipse.pde.core.project.IBundleProjectService;
+import org.eclipse.pde.core.project.IRequiredBundleDescription;
 import org.eclipse.pde.internal.core.PDECore;
 import org.eclipse.pde.internal.core.PluginModelManager;
 import org.eclipse.pde.internal.core.bundle.BundlePluginModel;
@@ -72,6 +98,8 @@ import org.enterprisedomain.classmaker.util.ResourceUtils;
 @SuppressWarnings("restriction")
 public class PDEBuildExporter extends AbstractExporter {
 
+	private IClasspathEntry entry;
+
 	private Object lock = new Object();
 
 	public PDEBuildExporter(int depth, long stateTimestamp) {
@@ -88,32 +116,61 @@ public class PDEBuildExporter extends AbstractExporter {
 			cleanup(monitor);
 			PluginModelManager modelManager = PDECore.getDefault().getModelManager();
 			Set<IPluginModelBase> models = new HashSet<IPluginModelBase>();
-			IPluginModelBase model = modelManager.findModel(getProject());
-			if (model != null) {
-				models.add(model);
-				for (BundleSpecification required : model.getBundleDescription().getRequiredBundles()) {
-					IPluginModelBase requiredModel = modelManager.findModel(required.getName());
-					if (requiredModel instanceof BundlePluginModel)
-						if (((BundlePluginModel) requiredModel).getBundleModel() instanceof WorkspaceBundleModel)
-							models.add(requiredModel);
-				}
-				updateBuildProperties(model);
+			IBundleProjectService service = ((IBundleProjectService) ClassMakerPlugin
+					.getService(IBundleProjectService.class.getName()));
+			addOutputClasspath(service, monitor);
+			IBundleProjectDescription description = service.getDescription(getProject());
+			description.setBinIncludes(ResourceUtils.addElement(description.getBinIncludes(), new Path(".")));
+
+			for (IRequiredBundleDescription req : description.getRequiredBundles()) {
+				IPluginModelBase reqModel = modelManager.findModel(req.name());
+				models.add(reqModel.getPluginBase().getPluginModel());
 			}
+			for (IPluginModelBase m : PluginRegistry.getAllModels())
+				if (m.getPluginBase().getId().equals(getProject().getName())) {
+					updateBuildProperties(m);
+					break;
+				}
+//			IPluginModelBase model = modelManager.findModel(getProject());
+//			for (Bundle bundle : getBundles())
+//				System.out.println(bundle.adapt(BundleWiring.class));
+//			org.osgi.framework.wiring.BundleWiring;
+//			for (IPluginModelBase b : modelManager.getActiveModels())
+//				if (b.getPluginBase().getName().equals(getProject().getName()))
+//					model = b;
+//			IPluginModelBase model = modelManager.findModel(getProject().getDescription());// modelManager.findModel(getProject());
+
+//			if (model != null) {
+//				models.add(model);
+//				for (BundleSpecification required : model.getBundleDescription().getRequiredBundles()) {
+//					IPluginModelBase requiredModel = modelManager.findModel(required.getName());
+//					if (requiredModel instanceof BundlePluginModel)
+//						if (((BundlePluginModel) requiredModel).getBundleModel() instanceof WorkspaceBundleModel)
+//							models.add(requiredModel);
+//				}
+//				updateBuildProperties(model);
+//			}
 			if (getContributionState().isEdit()) {
-				IPluginModelBase edit = modelManager.findModel(getProject().getName() + ".edit"); //$NON-NLS-1$
-				if (edit != null) {
-					models.add(edit);
-					updateBuildProperties(edit);
+				IBundleProjectDescription editDescription = service.getDescription(getEditProject());
+				if (editDescription != null) {
+					for (IRequiredBundleDescription req : editDescription.getRequiredBundles()) {
+						IPluginModelBase reqModel = modelManager.findModel(req.name());
+						models.add(reqModel.getPluginBase().getPluginModel());
+					}
+					updateBuildProperties(modelManager.findModel(editDescription.getSymbolicName()));
 					IPluginModelBase emfEdit = modelManager.findModel("org.eclipse.emf.edit"); //$NON-NLS-1$
 					if (emfEdit != null)
 						models.add(emfEdit);
 				}
 			}
 			if (getContributionState().isEditor()) {
-				IPluginModelBase editor = modelManager.findModel(getProject().getName() + ".editor"); //$NON-NLS-1$
-				if (editor != null) {
-					models.add(editor);
-					updateBuildProperties(editor);
+				IBundleProjectDescription editorDescription = service.getDescription(getEditorProject());
+				if (editorDescription != null) {
+					for (IRequiredBundleDescription req : editorDescription.getRequiredBundles()) {
+						IPluginModelBase reqModel = modelManager.findModel(req.name());
+						models.add(reqModel.getPluginBase().getPluginModel());
+					}
+					updateBuildProperties(modelManager.findModel(editorDescription.getSymbolicName()));
 					IPluginModelBase emfEditor = modelManager.findModel("org.eclipse.emf.edit.ui"); //$NON-NLS-1$
 					if (emfEditor != null)
 						models.add(emfEditor);
@@ -134,15 +191,20 @@ public class PDEBuildExporter extends AbstractExporter {
 					ms.add(m);
 				IModel[] ma = ms.toArray(new IModel[ms.size()]);
 				actions = createActions(ma);
-				modelManager.modelsChanged(
-						new ModelProviderEvent(getProject(), IModelProviderEvent.MODELS_ADDED, ma, null, null));
+//				modelManager.modelsChanged(
+//						new ModelProviderEvent(getProject(), IModelProviderEvent.MODELS_ADDED, ma, null, null));
 			}
 
 			final SubMonitor pm = SubMonitor.convert(monitor);
 			pm.setTaskName(Messages.TaskNamePluginExport);
 			pm.subTask(Messages.SubTaskNamePluginExport);
 			final SubMonitor m = pm.newChild(9, SubMonitor.SUPPRESS_ISCANCELED);
-
+			description.apply(m);
+			try {
+				compile(monitor);
+			} catch (CoreException ex) {
+				return ex.getStatus();
+			}
 			Publisher publisher = new Publisher(info);
 			try {
 				return publisher.publish(actions, m);
@@ -152,6 +214,44 @@ public class PDEBuildExporter extends AbstractExporter {
 				if (pm != null)
 					pm.done();
 			}
+		}
+	}
+
+	private void addOutputClasspath(IBundleProjectService service, IProgressMonitor monitor) throws CoreException {
+		IBundleProjectDescription desc = service.getDescription(getProject());
+		IBundleClasspathEntry[] es = desc.getBundleClasspath();
+		IPath srcPath = null;
+		IPath binPath = null;
+		IPath jarPath = null;
+		for (IBundleClasspathEntry e : es) {
+			if (e.getSourcePath() != null)
+				srcPath = e.getSourcePath();
+			if (e.getBinaryPath() != null)
+				binPath = e.getBinaryPath();
+			if (e.getLibrary() != null)
+				jarPath = e.getLibrary();
+		}
+		if (binPath == null)
+			binPath = new Path("bin/");
+		if (jarPath == null || jarPath.equals(new Path(".")))
+			jarPath = new Path("bin");
+		es[0] = service.newBundleClasspathEntry(srcPath, binPath, jarPath);
+		desc.setBundleClasspath(es);
+		SubMonitor pm = null;
+		SubMonitor m = null;
+		try {
+			pm = SubMonitor.convert(monitor);
+			pm.setTaskName("Update Classpath");
+			pm.subTask("Updating Bundle Classpath...");
+			m = pm.newChild(1, SubMonitor.SUPPRESS_ISCANCELED);
+			desc.apply(m);
+		} catch (CoreException e) {
+			ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
+		} finally {
+			if (m != null)
+				m.done();
+			if (pm != null)
+				pm.done();
 		}
 	}
 
@@ -188,11 +288,8 @@ public class PDEBuildExporter extends AbstractExporter {
 				if (bundleDescription != null)
 					for (BundleSpecification requiredBundle : bundleDescription.getRequiredBundles()) {
 						IPluginModelBase requiredModel = modelManager.findModel(requiredBundle.getName());
-						if (requiredModel instanceof BundlePluginModel)
-							if (((BundlePluginModel) requiredModel).getBundleModel() instanceof WorkspaceBundleModel) {
-								bundleLocations.add(new File(requiredModel.getInstallLocation()));
-								writeVersion(model, requiredModel);
-							}
+						bundleLocations.add(new File(requiredModel.getInstallLocation()));
+						writeVersion(model, requiredModel);
 					}
 			}
 		if (getContributionState().isEdit()) {
@@ -306,6 +403,247 @@ public class PDEBuildExporter extends AbstractExporter {
 			compilerEntry.addToken("-proc:none"); //$NON-NLS-1$
 		if (buildModel instanceof IEditableModel)
 			((IEditableModel) buildModel).save();
+	}
+
+	private void compile(final IProgressMonitor monitor) throws CoreException {
+		final SubMonitor pm = SubMonitor.convert(monitor);
+		pm.setTaskName("Compile Java");
+		pm.subTask("Compiling Java");
+		final SubMonitor m = pm.newChild(5, SubMonitor.SUPPRESS_ISCANCELED);
+		try {
+			build(getProject(), m);
+			if (getContributionState().isEdit()) {
+				build(getProject().getWorkspace().getRoot().getProject(getProject().getName() + ".edit"), m);
+			}
+			if (getContributionState().isEditor()) {
+				build(getProject().getWorkspace().getRoot().getProject(getProject().getName() + ".editor"), m);
+			}
+		} catch (OperationCanceledException ex) {
+			monitor.setCanceled(true);
+		} catch (CoreException ex) {
+			ClassMakerPlugin.getInstance().getLog().log(ex.getStatus());
+			throw ex;
+		} catch (Exception ex) {
+			throw new CoreException(ClassMakerPlugin.createErrorStatus(ex));
+		} finally {
+			if (m != null)
+				m.done();
+			if (pm != null)
+				pm.done();
+		}
+		try {
+			notifyAll();
+		} catch (IllegalMonitorStateException ex) {
+		}
+	}
+
+	private void build(final IProject project, final IProgressMonitor monitor) throws CoreException {
+		ICommand command = ResourceUtils.getBuildSpec(project.getDescription(), JavaCore.BUILDER_ID);
+		project.getWorkspace().addResourceChangeListener(new IResourceChangeListener() {
+
+			@Override
+			public void resourceChanged(IResourceChangeEvent event) {
+				if (event.getDelta() != null)
+					for (IResourceDelta delta : event.getDelta().getAffectedChildren(IResourceDelta.CHANGED))
+						if (delta.getResource().equals(getProject()))
+							try {
+								project.notifyAll();
+							} catch (IllegalMonitorStateException ex) {
+							}
+			}
+		}, IResourceChangeEvent.POST_BUILD);
+		if (JavaManipulation.getPreferenceNodeId() == null)
+			JavaManipulation.setPreferenceNodeId("org.eclipse.jdt.ui");
+		IEclipsePreferences prefs = new ProjectScope(project).getNode(JavaManipulation.getPreferenceNodeId());
+		prefs.put("org.eclipse.jdt.ui.importorder", "java;javax;org;com");
+		IEclipsePreferences instancePrefs = InstanceScope.INSTANCE.getNode(JavaManipulation.getPreferenceNodeId());
+		instancePrefs.put("org.eclipse.jdt.ui.typefilter.enabled", "com.sun.*;sun.org.*;javax.swing.*;java.awt.*");
+		try {
+			prefs.flush();
+			instancePrefs.flush();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		IJavaProject javaProject = updateClassPath(monitor);
+
+		for (IPackageFragment p : javaProject.getPackageFragments())
+			if (p.getKind() == IPackageFragmentRoot.K_SOURCE)
+				for (ICompilationUnit cu : p.getCompilationUnits()) {
+					CompilationUnit astRoot = SharedASTProviderCore.getAST(cu, SharedASTProviderCore.WAIT_YES, monitor);
+					OrganizeImportsOperation op = new OrganizeImportsOperation(cu, astRoot, false, true, false, null);
+					project.getWorkspace().run(op, javaProject.getSchedulingRule(), 0, monitor);
+//					op.run(monitor);
+				}
+		project.build(IncrementalProjectBuilder.FULL_BUILD, JavaCore.BUILDER_ID, command.getArguments(), monitor);
+		for (IMarker m : project.findMarkers(IMarker.MARKER, true, IResource.DEPTH_INFINITE)) {
+			System.out.print(m.getAttribute(IMarker.MESSAGE) + " ");
+			System.out.print(m.getResource().getName() + " ");
+			System.out.println(m.getAttribute(IMarker.LINE_NUMBER));
+		}
+	}
+
+	private IJavaProject updateClassPath(IProgressMonitor monitor) throws CoreException {
+		IJavaProject javaProject = null;
+		final SubMonitor pm = SubMonitor.convert(monitor);
+		pm.setTaskName("Update Classpath");
+		pm.subTask("Setting Classpath...");
+		final SubMonitor m = pm.newChild(1, SubMonitor.SUPPRESS_ISCANCELED);
+		try {
+			IJavaProject editJavaProject = null;
+			IJavaProject editorJavaProject = null;
+			try {
+				javaProject = JavaCore
+						.create(ResourcesPlugin.getWorkspace().getRoot().getProject(getProject().getName()));
+				PDECore.getDefault().getModelManager().findEntry(getProject().getName());// findModel(getProject()).;
+				JavaCore.getClasspathContainer(PDECore.REQUIRED_PLUGINS_CONTAINER_PATH, javaProject);
+//				ITargetPlatformService s = ClassMakerPlugin.getService(ITargetPlatformService.class.getName());
+//				ITargetDefinition d = s.getWorkspaceTargetDefinition();
+//				d.resolve(monitor);
+//				for (TargetBundle b : d.getAllBundles())
+//					System.out.println(b.getBundleInfo().getSymbolicName());
+//
+//				try {
+//					java.nio.file.Path p = FileSystems.getDefault().getPath("file:" + getProject().getLocation(),
+//							"META-INF", "MANIFEST.MF");
+//					BufferedReader r = Files.newBufferedReader(p);
+//					String l = r.lines().toString();
+//					Files.writeString(p, l);
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+
+				if (getContributionState().isEdit())
+					editJavaProject = JavaCore.create(
+							ResourcesPlugin.getWorkspace().getRoot().getProject(getProject().getName() + ".edit"));
+				if (getContributionState().isEditor())
+					editorJavaProject = JavaCore.create(
+							ResourcesPlugin.getWorkspace().getRoot().getProject(getProject().getName() + ".editor"));
+
+			} catch (IllegalStateException ex) {
+				throw new CoreException(ClassMakerPlugin.createErrorStatus(ex));
+			}
+			Set<IClasspathEntry> entries = new HashSet<IClasspathEntry>();
+			Set<IClasspathEntry> editEntries = new HashSet<IClasspathEntry>();
+			Set<IClasspathEntry> editorEntries = new HashSet<IClasspathEntry>();
+			for (IClasspathEntry en : javaProject.getRawClasspath())
+				if (!en.getPath().equals(new Path(IPath.SEPARATOR + getProject().getName())))
+					entries.add(en);
+			if (editJavaProject != null)
+				for (IClasspathEntry en : editJavaProject.getRawClasspath())
+					if (!en.getPath().equals(new Path(IPath.SEPARATOR + getProject().getName() + ".edit")))
+						editEntries.add(en);
+			if (editorJavaProject != null)
+				for (IClasspathEntry en : editorJavaProject.getRawClasspath())
+					if (!en.getPath().equals(new Path(IPath.SEPARATOR + getProject().getName() + ".editor")))
+						editorEntries.add(en);
+			entry = JavaCore.newSourceEntry(
+					new Path(IPath.SEPARATOR + getProject().getName() + IPath.SEPARATOR
+							+ ResourceUtils.SOURCE_FOLDER_NAME),
+					null,
+					new Path(IPath.SEPARATOR + getProject().getName() + IPath.SEPARATOR + "bin" + IPath.SEPARATOR));
+			entries.removeIf(en -> {
+				return en.getPath().isPrefixOf(entry.getPath()) && en.getOutputLocation() == null;
+			});
+			entries.add(entry);
+			if (editJavaProject != null) {
+				entry = JavaCore.newSourceEntry(
+						new Path(IPath.SEPARATOR + getProject().getName() + ".edit" + IPath.SEPARATOR
+								+ ResourceUtils.SOURCE_FOLDER_NAME),
+						null, new Path(IPath.SEPARATOR + getProject().getName() + ".edit" + IPath.SEPARATOR + "bin"
+								+ IPath.SEPARATOR));
+				editEntries.removeIf(en -> {
+					return en.getPath().isPrefixOf(entry.getPath()) && en.getOutputLocation() == null;
+				});
+				if (!editEntries.contains(entry))
+					editEntries.add(entry);
+			}
+			if (editorJavaProject != null) {
+				entry = JavaCore.newSourceEntry(
+						new Path(IPath.SEPARATOR + getProject().getName() + ".editor" + IPath.SEPARATOR
+								+ ResourceUtils.SOURCE_FOLDER_NAME),
+						null, new Path(IPath.SEPARATOR + getProject().getName() + ".editor" + IPath.SEPARATOR + "bin"
+								+ IPath.SEPARATOR));
+				editorEntries.removeIf(en -> {
+					return en.getPath().isPrefixOf(entry.getPath()) && en.getOutputLocation() == null;
+				});
+				if (!editorEntries.contains(entry))
+					editorEntries.add(entry);
+			}
+			entry = JavaCore.newContainerEntry(new Path(
+					"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-21"),
+					null, new IClasspathAttribute[] { JavaCore.newClasspathAttribute("module", "true") }, true);
+			entries.removeIf(en -> {
+				return en.getPath().isPrefixOf(entry.getPath());
+			});
+			if (!entries.contains(entry))
+				entries.add(entry);
+			if (editJavaProject != null) {
+				entry = JavaCore.newContainerEntry(new Path(
+						"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-21"),
+						null, new IClasspathAttribute[] { JavaCore.newClasspathAttribute("module", "true") }, true);
+				editEntries.removeIf(en -> {
+					return en.getPath().isPrefixOf(entry.getPath());
+				});
+				if (!editEntries.contains(entry))
+					editEntries.add(entry);
+			}
+			if (editorJavaProject != null) {
+				entry = JavaCore.newContainerEntry(new Path(
+						"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-21"),
+						null, new IClasspathAttribute[] { JavaCore.newClasspathAttribute("module", "true") }, true);
+				if (!editorEntries.contains(entry))
+					editorEntries.add(entry);
+			}
+			entry = JavaCore.newContainerEntry(PDECore.REQUIRED_PLUGINS_CONTAINER_PATH, null, null, false);
+			entries.removeIf(en -> {
+				return en.getPath().isPrefixOf(entry.getPath());
+			});
+			if (!entries.contains(entry))
+				entries.add(entry);
+			javaProject.open(m);
+			JavaCore.getClasspathContainer(PDECore.REQUIRED_PLUGINS_CONTAINER_PATH, javaProject);
+
+			if (editJavaProject != null) {
+				entry = JavaCore.newContainerEntry(PDECore.REQUIRED_PLUGINS_CONTAINER_PATH, null, null, false);
+				if (!editEntries.contains(entry))
+					editEntries.add(entry);
+			}
+			if (editorJavaProject != null) {
+				entry = JavaCore.newContainerEntry(PDECore.REQUIRED_PLUGINS_CONTAINER_PATH, null, null, false);
+				if (!editorEntries.contains(entry))
+					editorEntries.add(entry);
+			}
+
+//			IPluginModelBase model = PluginRegistry.findModel(getProject());
+//			JavaCore.setClasspathContainer(PDECore.REQUIRED_PLUGINS_CONTAINER_PATH, new IJavaProject[] { javaProject },
+//					new IClasspathContainer[] { new RequiredPluginsClasspathContainer(model) }, m);
+
+			{
+				javaProject.setRawClasspath((IClasspathEntry[]) entries.toArray(new IClasspathEntry[entries.size()]),
+						m);
+//				JavaCore.getClasspathContainer(PDECore.REQUIRED_PLUGINS_CONTAINER_PATH, javaProject);
+//				ClasspathContainerState.requestClasspathUpdate(getProject());
+//				javaProject.getResolvedClasspath(false);
+			}
+			if (editJavaProject != null) {
+				editJavaProject.setRawClasspath(
+						(IClasspathEntry[]) editEntries.toArray(new IClasspathEntry[editEntries.size()]), m);
+//				editJavaProject.getResolvedClasspath(false);
+			}
+			if (editorJavaProject != null) {
+				editorJavaProject.setRawClasspath(
+						(IClasspathEntry[]) editorEntries.toArray(new IClasspathEntry[editorEntries.size()]), m);
+//				editorJavaProject.getResolvedClasspath(false);
+			}
+		} catch (JavaModelException mex) {
+			throw new CoreException(ClassMakerPlugin.createErrorStatus(mex));
+		} catch (OperationCanceledException ocex) {
+			monitor.setCanceled(true);
+		} finally {
+			m.done();
+			pm.done();
+		}
+		return javaProject;
 	}
 
 	@Override

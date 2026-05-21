@@ -22,6 +22,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
+import javax.management.Notification;
+
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -31,7 +33,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
@@ -57,7 +58,6 @@ import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.util.ListUtil;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
-import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -66,8 +66,10 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getDependencies <em>Dependencies</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getLatestVersion <em>Latest Version</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getDependencies
+ * <em>Dependencies</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ContributionImpl#getLatestVersion
+ * <em>Latest Version</em>}</li>
  * </ul>
  *
  * @generated
@@ -75,8 +77,9 @@ import org.osgi.framework.Version;
 public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
-	 * The default value of the '{@link #getLatestVersion() <em>Latest Version</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getLatestVersion() <em>Latest
+	 * Version</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getLatestVersion()
 	 * @generated
 	 * @ordered
@@ -93,6 +96,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected ContributionImpl() {
@@ -101,6 +105,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -444,6 +449,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -459,6 +465,7 @@ public class ContributionImpl extends ProjectImpl implements Contribution {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

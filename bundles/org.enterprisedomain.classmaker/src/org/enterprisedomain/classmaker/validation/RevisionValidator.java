@@ -6,7 +6,6 @@ package org.enterprisedomain.classmaker.validation;
 
 import org.eclipse.emf.common.util.EMap;
 import org.enterprisedomain.classmaker.State;
-import org.osgi.framework.Version;
 
 /**
  * A sample validator interface for

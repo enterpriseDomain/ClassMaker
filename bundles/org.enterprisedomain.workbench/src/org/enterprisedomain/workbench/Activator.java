@@ -75,27 +75,6 @@ public class Activator extends AbstractUIPlugin {
 						runnable.run(ClassMakerPlugin.getProgressMonitor());
 					}
 				});
-				// Display display = Display.getCurrent() != null ? Display.getCurrent() :
-				// Display.getDefault();
-//				display.asyncExec(new Runnable() {
-//		
-//					@Override
-//					public void run() {
-//						try {
-//							IWorkbenchWindow workbenchWindow = ((IWorkbench) PlatformUI.getWorkbench())
-//									.getWorkbenchWindows()[0];
-//		
-//							if (workbenchWindow != null) {
-//								workbenchWindow.run(false, true, runnable);
-//							}
-//						} catch (InvocationTargetException e) {
-//							Activator.log(e.getTargetException());
-//						} catch (InterruptedException e) {
-//							return;
-//						}
-//					}
-//				});
-
 			}
 		});
 		ClassMakerPlugin.setClientRunWrapper(new IRunWrapper() {

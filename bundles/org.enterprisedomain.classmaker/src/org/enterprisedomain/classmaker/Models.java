@@ -22,19 +22,23 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- begin-user-doc --> A representation of the model object
  * '<em><b>Models</b></em>'. <!-- end-user-doc -->
  *
- * <!-- begin-model-doc -->
- * A holder of pair of references. To blueprint dynamic model instance, and to a resulting generated one.
- * <!-- end-model-doc -->
+ * <!-- begin-model-doc --> A holder of pair of references. To blueprint dynamic
+ * model instance, and to a resulting generated one. <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.Models#getDynamic <em>Dynamic</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Models#getGenerated <em>Generated</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Models#getGeneratedEdit <em>Generated Edit</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Models#getGeneratedEditor <em>Generated Editor</em>}</li>
- *   <li>{@link org.enterprisedomain.classmaker.Models#getParent <em>Parent</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Models#getDynamicEPackage
+ * <em>Dynamic EPackage</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Models#getGeneratedEPackage
+ * <em>Generated EPackage</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Models#getGeneratedEditPlugin
+ * <em>Generated Edit Plugin</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Models#getGeneratedEditorPlugin
+ * <em>Generated Editor Plugin</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Models#getParent
+ * <em>Parent</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getModels()
@@ -43,95 +47,108 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Models extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Dynamic</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
-	 * Dynamic model {@link org.eclipse.emf.ecore.EPackage EPackage} instance, which
-	 * serves as a blueprint for {@link ClassMakerService#make() making}. <!--
+	 * Returns the value of the '<em><b>Dynamic EPackage</b></em>' containment
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc
+	 * --> Dynamic model {@link org.eclipse.emf.ecore.EPackage EPackage} instance,
+	 * which serves as a blueprint for {@link ClassMakerService#make() making}. <!--
 	 * end-model-doc -->
 	 * 
-	 * @return the value of the '<em>Dynamic</em>' containment reference.
-	 * @see #setDynamic(EObject)
-	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getModels_Dynamic()
+	 * @return the value of the '<em>Dynamic EPackage</em>' containment reference.
+	 * @see #setDynamicEPackage(EObject)
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getModels_DynamicEPackage()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EObject getDynamic();
+	EObject getDynamicEPackage();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Models#getDynamic <em>Dynamic</em>}' containment reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Dynamic</em>' containment reference.
-	 * @see #getDynamic()
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Models#getDynamicEPackage <em>Dynamic
+	 * EPackage</em>}' containment reference. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @param value the new value of the '<em>Dynamic EPackage</em>' containment
+	 *              reference.
+	 * @see #getDynamicEPackage()
 	 * @generated
 	 */
-	void setDynamic(EObject value);
+	void setDynamicEPackage(EObject value);
 
 	/**
-	 * Returns the value of the '<em><b>Generated</b></em>' reference. <!--
+	 * Returns the value of the '<em><b>Generated EPackage</b></em>' reference. <!--
 	 * begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc --> Generated
 	 * model {@link org.eclipse.emf.ecore.EPackage EPackage} instance, which appears
 	 * as a result of {@link ClassMakerService#make() making}. <!-- end-model-doc
 	 * -->
 	 * 
-	 * @return the value of the '<em>Generated</em>' reference.
-	 * @see #setGenerated(EObject)
-	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getModels_Generated()
+	 * @return the value of the '<em>Generated EPackage</em>' reference.
+	 * @see #setGeneratedEPackage(EObject)
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getModels_GeneratedEPackage()
 	 * @model
 	 * @generated
 	 */
-	EObject getGenerated();
+	EObject getGeneratedEPackage();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Models#getGenerated <em>Generated</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Generated</em>' reference.
-	 * @see #getGenerated()
-	 * @generated
-	 */
-	void setGenerated(EObject value);
-
-	/**
-	 * Returns the value of the '<em><b>Generated Edit</b></em>' reference. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Generated Edit</em>' reference.
-	 * @see #setGeneratedEdit(EMFPlugin)
-	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getModels_GeneratedEdit()
-	 * @model type="org.enterprisedomain.classmaker.EMFPlugin"
-	 * @generated
-	 */
-	EMFPlugin getGeneratedEdit();
-
-	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Models#getGeneratedEdit <em>Generated Edit</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Generated Edit</em>' attribute.
-	 * @see #getGeneratedEdit()
-	 * @generated
-	 */
-	void setGeneratedEdit(EMFPlugin value);
-
-	/**
-	 * Returns the value of the '<em><b>Generated Editor</b></em>' reference. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Generated Editor</em>' reference.
-	 * @see #setGeneratedEditor(EMFPlugin)
-	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getModels_GeneratedEditor()
-	 * @model type="org.enterprisedomain.classmaker.EMFPlugin"
-	 * @generated
-	 */
-	EMFPlugin getGeneratedEditor();
-
-	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Models#getGeneratedEditor <em>Generated Editor</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Models#getGeneratedEPackage
+	 * <em>Generated EPackage</em>}' reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * @param value the new value of the '<em>Generated Editor</em>' attribute.
-	 * @see #getGeneratedEditor()
+	 * 
+	 * @param value the new value of the '<em>Generated EPackage</em>' reference.
+	 * @see #getGeneratedEPackage()
 	 * @generated
 	 */
-	void setGeneratedEditor(EMFPlugin value);
+	void setGeneratedEPackage(EObject value);
+
+	/**
+	 * Returns the value of the '<em><b>Generated Edit Plugin</b></em>' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Generated Edit Plugin</em>' attribute.
+	 * @see #setGeneratedEditPlugin(EMFPlugin)
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getModels_GeneratedEditPlugin()
+	 * @model dataType="org.enterprisedomain.classmaker.EMFPlugin"
+	 * @generated
+	 */
+	EMFPlugin getGeneratedEditPlugin();
+
+	/**
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Models#getGeneratedEditPlugin
+	 * <em>Generated Edit Plugin</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @param value the new value of the '<em>Generated Edit Plugin</em>' attribute.
+	 * @see #getGeneratedEditPlugin()
+	 * @generated
+	 */
+	void setGeneratedEditPlugin(EMFPlugin value);
+
+	/**
+	 * Returns the value of the '<em><b>Generated Editor Plugin</b></em>' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Generated Editor Plugin</em>' attribute.
+	 * @see #setGeneratedEditorPlugin(EMFPlugin)
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getModels_GeneratedEditorPlugin()
+	 * @model dataType="org.enterprisedomain.classmaker.EMFPlugin"
+	 * @generated
+	 */
+	EMFPlugin getGeneratedEditorPlugin();
+
+	/**
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Models#getGeneratedEditorPlugin
+	 * <em>Generated Editor Plugin</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @param value the new value of the '<em>Generated Editor Plugin</em>'
+	 *              attribute.
+	 * @see #getGeneratedEditorPlugin()
+	 * @generated
+	 */
+	void setGeneratedEditorPlugin(EMFPlugin value);
 
 	/**
 	 * Returns the value of the '<em><b>Parent</b></em>' container reference. It is
@@ -151,8 +168,10 @@ public interface Models extends EObject {
 	Item getParent();
 
 	/**
-	 * Sets the value of the '{@link org.enterprisedomain.classmaker.Models#getParent <em>Parent</em>}' container reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Models#getParent <em>Parent</em>}'
+	 * container reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Parent</em>' container reference.
 	 * @see #getParent()
 	 * @generated

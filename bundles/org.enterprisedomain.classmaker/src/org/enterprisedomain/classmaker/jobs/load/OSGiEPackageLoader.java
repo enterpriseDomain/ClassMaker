@@ -15,6 +15,8 @@
  */
 package org.enterprisedomain.classmaker.jobs.load;
 
+import java.lang.reflect.Field;
+import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Semaphore;
@@ -22,12 +24,10 @@ import java.util.concurrent.Semaphore;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.osgi.util.NLS;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.Messages;
@@ -40,7 +40,6 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleEvent;
 import org.osgi.framework.BundleException;
 import org.osgi.framework.Constants;
-import org.osgi.framework.Version;
 import org.osgi.framework.startlevel.BundleStartLevel;
 import org.osgi.util.tracker.BundleTracker;
 import org.osgi.util.tracker.BundleTrackerCustomizer;
@@ -202,7 +201,7 @@ public class OSGiEPackageLoader extends ContainerJob implements BundleTrackerCus
 	public EPackage addingBundle(Bundle bundle, BundleEvent event) {
 		ePackage = null;
 		try {
-			EObject model = getContributionState().getDomainModel().getDynamic();
+			EObject model = getContributionState().getDomainModel().getDynamicEPackage();
 			String packageClassName = null;
 			if (model == null) {
 				loaded = new Semaphore(loadedCount);
@@ -240,9 +239,10 @@ public class OSGiEPackageLoader extends ContainerJob implements BundleTrackerCus
 			ClassLoader cl = Thread.currentThread().getContextClassLoader();
 			try {
 				Thread.currentThread().setContextClassLoader(getCustomClassLoader(bundle, (EPackage) model, cl));
-				ePackage = (EPackage) packageClass.getField("eINSTANCE").get(null); //$NON-NLS-1$
+				Field field = packageClass.getField("eINSTANCE"); //$NON-NLS-1$
+				ePackage = (EPackage) field.get(null);
 				if (ePackage != null) {
-					getContributionState().getDomainModel().setGenerated(ePackage);
+					getContributionState().getDomainModel().setGeneratedEPackage(ePackage);
 					registerEPackage(Registry.INSTANCE, ePackage);
 					if (getContributionState().getRevision().getProject().getWorkspace().getResourceSet() != null)
 						registerEPackage(getContributionState().getRevision().getProject().getWorkspace()
@@ -252,7 +252,7 @@ public class OSGiEPackageLoader extends ContainerJob implements BundleTrackerCus
 				e.getCause().printStackTrace();
 			} catch (ClassCastException e) {
 				if (ePackage != null) {
-					getContributionState().getDomainModel().setGenerated(ePackage);
+					getContributionState().getDomainModel().setGeneratedEPackage(ePackage);
 					registerEPackage(Registry.INSTANCE, ePackage);
 					if (getContributionState().getRevision().getProject().getWorkspace().getResourceSet() != null)
 						registerEPackage(getContributionState().getRevision().getProject().getWorkspace()
@@ -267,8 +267,8 @@ public class OSGiEPackageLoader extends ContainerJob implements BundleTrackerCus
 			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 		} finally {
 			loaded.release();
-			getContributionState().getProject().setNeedCompletionNotification(true);
 		}
+		getContributionState().getProject().setNeedCompletionNotification(true);
 		return ePackage;
 	}
 
@@ -304,23 +304,23 @@ public class OSGiEPackageLoader extends ContainerJob implements BundleTrackerCus
 	private IStatus getStatus(Bundle osgiBundle, EPackage ePackage) {
 		String ePackagesMsg = ""; //$NON-NLS-1$
 		boolean warning = false;
-		if (getContributionState().getDomainModel().getGenerated() == null) {
+		if (getContributionState().getDomainModel().getGeneratedEPackage() == null) {
 			ePackagesMsg = Messages.ObjectNo;
 			warning = true;
 		} else {
 			EMFPlugin editPlugin = null;
 			EMFPlugin editorPlugin = null;
-			if (getContributionState().getDomainModel().getGenerated() instanceof EPackage)
-				ePackage = (EPackage) getContributionState().getDomainModel().getGenerated();
+			if (getContributionState().getDomainModel().getGeneratedEPackage() instanceof EPackage)
+				ePackage = (EPackage) getContributionState().getDomainModel().getGeneratedEPackage();
 			else if (getContributionState().isEdit()
-					&& getContributionState().getDomainModel().getGeneratedEdit() instanceof EMFPlugin)
-				editPlugin = getContributionState().getDomainModel().getGeneratedEdit();
+					&& getContributionState().getDomainModel().getGeneratedEditPlugin() instanceof EMFPlugin)
+				editPlugin = getContributionState().getDomainModel().getGeneratedEditPlugin();
 			else if (getContributionState().isEditor()
-					&& getContributionState().getDomainModel().getGeneratedEditor() instanceof EMFPlugin)
-				editorPlugin = getContributionState().getDomainModel().getGeneratedEditor();
+					&& getContributionState().getDomainModel().getGeneratedEditorPlugin() instanceof EMFPlugin)
+				editorPlugin = getContributionState().getDomainModel().getGeneratedEditorPlugin();
 			else
 				return ClassMakerPlugin.createInfoStatus(NLS.bind(Messages.EObjectIsNotEPackage,
-						getContributionState().getDomainModel().getGenerated()));
+						getContributionState().getDomainModel().getGeneratedEPackage()));
 			if (ePackage != null)
 				ePackagesMsg = ePackagesMsg + ePackage.getNsURI() + ", "; //$NON-NLS-1$
 			else if (editPlugin != null)

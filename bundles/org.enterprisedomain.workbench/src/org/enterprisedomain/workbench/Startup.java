@@ -11,7 +11,7 @@ public class Startup implements IStartup {
 
 	@Override
 	public void earlyStartup() {
-		MessageConsole out = new MessageConsole("Output", null);
+		MessageConsole out = new MessageConsole("Environment", null);
 		System.setOut(new PrintStream(out.newOutputStream()));
 		ConsolePlugin.getDefault().getConsoleManager().addConsoles(new IConsole[] { out });
 		ConsolePlugin.getDefault().getConsoleManager().refresh(out);

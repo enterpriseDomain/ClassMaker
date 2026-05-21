@@ -15,7 +15,8 @@
  */
 package org.enterprisedomain.classmaker;
 
-import org.eclipse.emf.common.notify.Notification;
+import javax.management.Notification;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -30,7 +31,9 @@ import org.eclipse.emf.ecore.EObject;
 public interface ResourceChangeListener extends EObject {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @model exceptions="org.enterprisedomain.classmaker.Exception" notificationType="org.enterprisedomain.classmaker.Notification"
+	 * 
+	 * @model exceptions="org.enterprisedomain.classmaker.Exception"
+	 *        notificationType="org.enterprisedomain.classmaker.Notification"
 	 * @generated
 	 */
 	void changed(Notification notification) throws Exception;

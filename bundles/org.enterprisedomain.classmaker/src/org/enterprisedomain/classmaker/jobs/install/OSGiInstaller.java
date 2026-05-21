@@ -17,6 +17,7 @@ package org.enterprisedomain.classmaker.jobs.install;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -29,9 +30,8 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.osgi.container.namespaces.EquinoxModuleDataNamespace;
 import org.eclipse.osgi.service.resolver.BundleDescription;
 import org.eclipse.osgi.service.resolver.BundleSpecification;
 import org.eclipse.osgi.util.NLS;
@@ -55,7 +55,7 @@ import org.osgi.framework.BundleException;
 import org.osgi.framework.BundleListener;
 import org.osgi.framework.Constants;
 import org.osgi.framework.FrameworkListener;
-import org.osgi.framework.Version;
+import org.osgi.framework.wiring.BundleRevision;
 import org.osgi.framework.wiring.FrameworkWiring;
 
 public class OSGiInstaller extends ContainerJob {
@@ -207,12 +207,13 @@ public class OSGiInstaller extends ContainerJob {
 							&& revision.eIsSet(ClassMakerPackage.Literals.REVISION__STATE_HISTORY)
 							&& !revision.getStateHistory().isEmpty())
 						for (State state : revision.getStateHistory().values())
-							if (state.getDomainModel().getGenerated() != null
-									&& state.getDomainModel().getGenerated() instanceof EPackage
-									&& EPackage.Registry.INSTANCE.getEPackage(
-											((EPackage) state.getDomainModel().getGenerated()).getNsURI()) != null)
+							if (state.getDomainModel().getGeneratedEPackage() != null
+									&& state.getDomainModel().getGeneratedEPackage() instanceof EPackage
+									&& EPackage.Registry.INSTANCE
+											.getEPackage(((EPackage) state.getDomainModel().getGeneratedEPackage())
+													.getNsURI()) != null)
 								EPackage.Registry.INSTANCE
-										.remove(((EPackage) state.getDomainModel().getGenerated()).getNsURI());
+										.remove(((EPackage) state.getDomainModel().getGeneratedEPackage()).getNsURI());
 				existingBundle.uninstall();
 				refreshBundle(null, context);
 				uninstalled.acquire();
@@ -249,13 +250,17 @@ public class OSGiInstaller extends ContainerJob {
 					}
 				}
 			}
-			bundles.add(context.installBundle(uri));
+			Bundle bundle = context.installBundle(uri);
+			if (!((List<String>) ((BundleRevision) bundle.adapt(BundleRevision.class))
+					.getCapabilities(EquinoxModuleDataNamespace.MODULE_DATA_NAMESPACE).get(0).getAttributes()
+					.get(EquinoxModuleDataNamespace.CAPABILITY_CLASSPATH)).contains("bin"))
+				return ClassMakerPlugin.createErrorStatus("bin is not in bundle classpath");
+			bundles.add(bundle);
 			if (bundles.isEmpty())
 				return ClassMakerPlugin
 						.createErrorStatus(NLS.bind(Messages.BundleNotInstalled, getProject().getName()));
 			((ContainerJob) getNextJob()).getInstalledBundles().addAll(bundles);
 			refreshBundle(bundles, context);
-//			installed.acquire();
 			getContributionState().setPhase(getResultStage());
 			return getOKStatus(bundles);
 		} catch (BundleException e) {
@@ -270,7 +275,6 @@ public class OSGiInstaller extends ContainerJob {
 						return ClassMakerPlugin
 								.createErrorStatus(NLS.bind(Messages.BundleNotInstalled, getProject().getName()));
 					refreshBundle(bundles, context);
-//					installed.acquire();
 					getContributionState().setPhase(getResultStage());
 					return getOKStatus(bundles);
 				} catch (BundleException ex) {

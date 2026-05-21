@@ -18,6 +18,7 @@ package org.enterprisedomain.classmaker.impl;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URI;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +28,9 @@ import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.Semaphore;
 
+import javax.management.Notification;
+import javax.tools.Diagnostic;
+
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -34,13 +38,10 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicDiagnostic;
-import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
@@ -70,7 +71,6 @@ import org.enterprisedomain.classmaker.Workspace;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.util.ModelUtil;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
-import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object
@@ -79,15 +79,17 @@ import org.osgi.framework.Version;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.enterprisedomain.classmaker.impl.ClassMakerServiceImpl#getWorkspace <em>Workspace</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ClassMakerServiceImpl#getWorkspace
+ * <em>Workspace</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerService {
 	/**
-	 * The cached value of the '{@link #getWorkspace() <em>Workspace</em>}' containment reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getWorkspace() <em>Workspace</em>}'
+	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getWorkspace()
 	 * @generated
 	 * @ordered
@@ -170,6 +172,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -179,6 +182,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -188,6 +192,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetWorkspace(Workspace newWorkspace, NotificationChain msgs) {
@@ -206,6 +211,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -264,7 +270,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 				wait.acquire();
 			} catch (InterruptedException e) {
 			}
-			return contrib.getDomainModel().getGenerated();
+			return contrib.getDomainModel().getGeneratedEPackage();
 		} catch (CoreException e) {
 			ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
 			throw e;
@@ -359,7 +365,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 		if (contribution == null) {
 			contribution = getWorkspace().getContribution(source.getDynamicModel(), true);
 			if (contribution != null) {
-				EObject existingModel = contribution.getDomainModel().getDynamic();
+				EObject existingModel = contribution.getDomainModel().getDynamicEPackage();
 				if (ModelUtil.eObjectsAreEqual(existingModel, source.getDynamicModel(), false)) {
 					Revision revision = null;
 					if (version.compareTo(contribution.getVersion()) < 0) {
@@ -369,13 +375,13 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 						contribution.checkout(revision.getVersion());
 					} else
 						revision = contribution.createRevision(monitor);
-					revision.getDomainModel().setDynamic(EcoreUtil.copy(target.getDynamicModel()));
+					revision.getDomainModel().setDynamicEPackage(EcoreUtil.copy(target.getDynamicModel()));
 				}
 			} else {
 				return null;
 			}
 		} else {
-			EObject existingModel = contribution.getDomainModel().getDynamic();
+			EObject existingModel = contribution.getDomainModel().getDynamicEPackage();
 			if (ModelUtil.eObjectsAreEqual(existingModel, source.getDynamicModel(), true)) {
 				Revision revision = contribution.getRevision();
 				if (version.compareTo(contribution.getVersion()) > 0) {
@@ -391,30 +397,19 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 					revision = contribution.getRevisions().get(version);
 					contribution.checkout(revision.getVersion());
 				}
-				revision.getDomainModel().setDynamic(EcoreUtil.copy(target.getDynamicModel()));
+				revision.getDomainModel().setDynamicEPackage(EcoreUtil.copy(target.getDynamicModel()));
 			} else {
 				return null;
 			}
 		}
 		contribution.getDependencies().addAll(target.getDependencies());
-		final Semaphore wait = new Semaphore(0);
-		CompletionListener waitListener = new CompletionListenerImpl() {
-
-			@Override
-			public void completed(Project result) throws Exception {
-				wait.release();
-			}
-
-		};
-		target.getCompletionListeners().add(waitListener);
+		final Object lock = new Object();
 		for (CompletionListener listener : target.getCompletionListeners())
 			contribution.addCompletionListener(listener);
-		contribution.make(monitor);
-		try {
-			wait.acquire();
-		} catch (InterruptedException e) {
+		synchronized (lock) {
+			contribution.make(monitor);
 		}
-		return contribution.getDomainModel().getGenerated();
+		return contribution.getDomainModel().getGeneratedEPackage();
 	}
 
 	/**
@@ -733,6 +728,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -749,6 +745,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -762,6 +759,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -775,6 +773,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -789,6 +788,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -803,6 +803,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

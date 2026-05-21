@@ -15,7 +15,8 @@
  */
 package org.enterprisedomain.classmaker.impl;
 
-import org.eclipse.emf.common.notify.Notification;
+import javax.management.Notification;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
@@ -30,6 +31,7 @@ import org.enterprisedomain.classmaker.ResourceChangeListener;
 public class ResourceChangeListenerImpl extends EObjectImpl implements ResourceChangeListener {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected ResourceChangeListenerImpl() {
@@ -38,6 +40,7 @@ public class ResourceChangeListenerImpl extends EObjectImpl implements ResourceC
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
