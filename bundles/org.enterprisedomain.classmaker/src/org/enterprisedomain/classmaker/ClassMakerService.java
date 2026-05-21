@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Kyrill Zotkin
+ * Copyright 2017, 2022 Kyrill Zotkin
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,11 @@
 package org.enterprisedomain.classmaker;
 
 import java.lang.reflect.InvocationTargetException;
+import java.net.URI;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -28,11 +32,9 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
-import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object
@@ -61,7 +63,7 @@ public interface ClassMakerService extends EObject {
 
 		public static final String ID_PREFIX = "org.enterprisedomain.classmaker.customization.stages.";
 
-		private static final String PHASE_ATTR = "phase";
+		private static final String ROLE_ATTR = "role";
 
 		private static final String ID_ATTR = "id";
 
@@ -70,6 +72,8 @@ public interface ClassMakerService extends EObject {
 		private static final String STAGE_ATTR = "stage";
 
 		private static final String RANK_ATTR = "rank";
+
+		private static final String EXCLUSIVE_ATTR = "exclusive";
 
 		private static final String CLASS_ATTR = "class";
 
@@ -86,7 +90,7 @@ public interface ClassMakerService extends EObject {
 			IConfigurationElement[] stageElements = Platform.getExtensionRegistry()
 					.getConfigurationElementsFor(ClassMakerPlugin.STAGES_EXT_POINT);
 			for (IConfigurationElement e : stageElements) {
-				Stage phase = Stage.getByName(e.getAttribute(PHASE_ATTR).toUpperCase());
+				Stage phase = Stage.getByName(e.getAttribute(ROLE_ATTR).toUpperCase());
 				String id = e.getAttribute(ID_ATTR);
 				stages.put(id, createStageQualifier(phase, e.getAttribute(STEP_ATTR)));
 			}
@@ -94,6 +98,13 @@ public interface ClassMakerService extends EObject {
 
 		public static StageQualifier lookup(String id) {
 			return stages.get(id);
+		}
+
+		public static StageQualifier lookup(Stage stage, String step) {
+			for (StageQualifier q : stages.values())
+				if (q.getStage().equals(stage) && q.getStep().equals(step))
+					return q;
+			return null;
 		}
 
 		public static Set<String> ids() {
@@ -109,6 +120,11 @@ public interface ClassMakerService extends EObject {
 					try {
 						Customizer result = (Customizer) ce.createExecutableExtension(CLASS_ATTR);
 						result.setRank(Integer.valueOf(ce.getAttribute(RANK_ATTR)));
+						boolean e = true;
+						if (ce.getAttribute(EXCLUSIVE_ATTR) != null)
+							e = Boolean.valueOf(ce.getAttribute(EXCLUSIVE_ATTR));
+						result.setExclusive(e);
+						result.setStage(stages.get(ce.getAttribute(STAGE_ATTR)));
 						results.add(result);
 					} catch (CoreException ex) {
 						ClassMakerPlugin.getInstance().getLog().log(ex.getStatus());
@@ -118,6 +134,93 @@ public interface ClassMakerService extends EObject {
 			return results;
 		}
 
+	}
+
+	public static class NameUtil {
+
+		private static Set<String> javaReservedWords;
+
+		public static String safeName(String name) {
+			if (ClassMakerService.NameUtil.isJavaReservedWord(name))
+				return name + "_";
+			return name;
+		}
+
+		public static boolean isJavaReservedWord(String s) {
+			return getJavaReservedWords().contains(s);
+		}
+
+		public static Set<String> getJavaReservedWords() {
+			if (javaReservedWords == null) {
+				Set<String> result = new HashSet<String>(100);
+				result.add("abstract");
+				result.add("assert");
+				result.add("boolean");
+				result.add("break");
+				result.add("byte");
+				result.add("case");
+				result.add("catch");
+				result.add("char");
+				result.add("class");
+				result.add("const");
+				result.add("continue");
+				result.add("default");
+				result.add("do");
+				result.add("double");
+				result.add("else");
+				result.add("enum");
+				result.add("extends");
+				result.add("false");
+				result.add("final");
+				result.add("finally");
+				result.add("float");
+				result.add("for");
+				result.add("goto");
+				result.add("if");
+				result.add("implements");
+				result.add("import");
+				result.add("instanceof");
+				result.add("int");
+				result.add("interface");
+				result.add("long");
+				result.add("native");
+				result.add("new");
+				result.add("null");
+				result.add("package");
+				result.add("private");
+				result.add("protected");
+				result.add("public");
+				result.add("return");
+				result.add("short");
+				result.add("static");
+				result.add("strictfp");
+				result.add("super");
+				result.add("switch");
+				result.add("synchronized");
+				result.add("this");
+				result.add("throw");
+				result.add("throws");
+				result.add("transient");
+				result.add("true");
+				result.add("try");
+				result.add("void");
+				result.add("volatile");
+				result.add("while");
+				javaReservedWords = Collections.unmodifiableSet(result);
+			}
+			return javaReservedWords;
+		}
+
+		public static String capName(String name, Locale locale) {
+			if (name.length() == 0)
+				return name;
+			else
+				return name.substring(0, 1).toUpperCase(locale) + name.substring(1);
+		}
+
+		public static String capName(String name) {
+			return capName(name, Locale.getDefault());
+		}
 	}
 
 	/**

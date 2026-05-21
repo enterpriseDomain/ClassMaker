@@ -18,6 +18,7 @@ package org.enterprisedomain.classmaker.impl;
 import java.io.IOException;
 import java.io.StringReader;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URI;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
@@ -27,7 +28,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.EMFPlugin;
-import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -54,7 +55,7 @@ import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Strategy;
 import org.enterprisedomain.classmaker.Workspace;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
-import org.osgi.framework.Version;
+import org.enterprisedomain.classmaker.jobs.Worker;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
@@ -120,6 +121,8 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 			return createStageQualifier();
 		case ClassMakerPackage.STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY:
 			return (EObject) createStageQualifierToCustomizerMapEntry();
+		case ClassMakerPackage.STAGE_QUALIFIER_TO_WORKERS_MAP_ENTRY:
+			return (EObject) createStageQualifierToWorkersMapEntry();
 		case ClassMakerPackage.MODELS:
 			return createModels();
 		case ClassMakerPackage.SCM_REGISTRY:
@@ -153,6 +156,8 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 		switch (eDataType.getClassifierID()) {
 		case ClassMakerPackage.STAGE:
 			return createStageFromString(eDataType, initialValue);
+		case ClassMakerPackage.CLASS_LOADER:
+			return createClassLoaderFromString(eDataType, initialValue);
 		case ClassMakerPackage.PROPERTIES:
 			return createPropertiesFromString(eDataType, initialValue);
 		case ClassMakerPackage.IPROGRESS_MONITOR:
@@ -192,6 +197,8 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 		switch (eDataType.getClassifierID()) {
 		case ClassMakerPackage.STAGE:
 			return convertStageToString(eDataType, instanceValue);
+		case ClassMakerPackage.CLASS_LOADER:
+			return convertClassLoaderToString(eDataType, instanceValue);
 		case ClassMakerPackage.PROPERTIES:
 			return convertPropertiesToString(eDataType, instanceValue);
 		case ClassMakerPackage.IPROGRESS_MONITOR:
@@ -333,6 +340,16 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 	 * 
 	 * @generated
 	 */
+	public Map.Entry<StageQualifier, EList<Worker>> createStageQualifierToWorkersMapEntry() {
+		StageQualifierToWorkersMapEntryImpl stageQualifierToWorkersMapEntry = new StageQualifierToWorkersMapEntryImpl();
+		return stageQualifierToWorkersMapEntry;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	@Override
 	public Models createModels() {
 		ModelsImpl models = new ModelsImpl();
@@ -447,6 +464,24 @@ public class ClassMakerFactoryImpl extends EFactoryImpl implements ClassMakerFac
 	 */
 	public String convertStageToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public ClassLoader createClassLoaderFromString(EDataType eDataType, String initialValue) {
+		return (ClassLoader) super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public String convertClassLoaderToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**

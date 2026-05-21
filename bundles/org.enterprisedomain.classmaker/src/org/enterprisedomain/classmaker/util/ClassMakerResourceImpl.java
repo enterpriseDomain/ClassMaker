@@ -15,7 +15,8 @@
  */
 package org.enterprisedomain.classmaker.util;
 
-import org.eclipse.emf.common.util.URI;
+import java.net.URI;
+
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
 /**

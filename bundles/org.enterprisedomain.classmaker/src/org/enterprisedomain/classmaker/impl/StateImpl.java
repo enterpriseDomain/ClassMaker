@@ -19,17 +19,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardWatchEventKinds;
-import java.nio.file.WatchEvent;
-import java.nio.file.WatchKey;
-import java.nio.file.WatchService;
+import java.net.URI;
+import java.rmi.registry.Registry;
+import java.sql.Ref;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.management.Notification;
 
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -51,18 +49,15 @@ import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.MultiRule;
 import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -79,13 +74,13 @@ import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.LogCommand;
 import org.eclipse.jgit.api.errors.CheckoutConflictException;
 import org.eclipse.jgit.api.errors.JGitInternalException;
-import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.pde.core.project.IBundleProjectDescription;
 import org.eclipse.pde.core.project.IBundleProjectService;
 import org.enterprisedomain.classmaker.ClassMakerFactory;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
+import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.CompletionListener;
 import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.Customizer;
@@ -102,10 +97,8 @@ import org.enterprisedomain.classmaker.Strategy;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.core.WrappingProgressMonitor;
 import org.enterprisedomain.classmaker.jobs.EnterpriseDomainJob;
-import org.enterprisedomain.classmaker.util.ListUtil;
 import org.enterprisedomain.classmaker.util.ModelUtil;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
-import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -134,14 +127,12 @@ import org.osgi.framework.Version;
  * <em>Editor Deployable Unit Name</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getJobFamily
  * <em>Job Family</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getResource
- * <em>Resource</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getCommitIds
- * <em>Commit Ids</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getCommitId
  * <em>Commit Id</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getStateCustomizers
  * <em>State Customizers</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getNonExclusiveStateCustomizers
+ * <em>Non Exclusive State Customizers</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getProjectName
  * <em>Project Name</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#isMaking
@@ -152,6 +143,8 @@ import org.osgi.framework.Version;
  * <em>Editor</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getStrategy
  * <em>Strategy</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.StateImpl#getBasePackage
+ * <em>Base Package</em>}</li>
  * </ul>
  *
  * @generated
@@ -238,7 +231,15 @@ public class StateImpl extends ItemImpl implements State {
 					&& eIsSet(ClassMakerPackage.STATE__PROJECT)
 					&& getProject().eIsSet(ClassMakerPackage.Literals.PROJECT__WORKSPACE)
 					&& getProject().getWorkspace().eIsSet(ClassMakerPackage.Literals.WORKSPACE__SERVICE)) {
-				setProjectName(getProject().getWorkspace().getService().computeProjectName(msg.getNewStringValue()));
+				ClassMakerService classMaker = getProject().getWorkspace().getService();
+				if (classMaker == null)
+					classMaker = ClassMakerPlugin.getClassMaker();
+				String newProjectName = classMaker.computeProjectName(msg.getNewStringValue());
+				if (msg.getOldStringValue() != null) {
+					String oldProjectName = classMaker.computeProjectName(msg.getOldStringValue());
+					getParent().renameProject(oldProjectName, newProjectName);
+				}
+				setProjectName(newProjectName);
 			} else if (msg.getFeatureID(State.class) == ClassMakerPackage.STATE__EDIT
 					&& msg.getEventType() == Notification.SET && msg.getNewBooleanValue()) {
 				getRequiredPlugins().add("org.eclipse.emf.edit");
@@ -260,9 +261,10 @@ public class StateImpl extends ItemImpl implements State {
 				synchronized (makingLock) {
 					makingLock.notifyAll();
 				}
-				EPackage ePackage = (EPackage) getDomainModel().getGenerated();
-				if (ePackage != null)
+				EPackage ePackage = (EPackage) getDomainModel().getGeneratedEPackage();
+				if (ePackage != null) {
 					Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);
+				}
 			}
 		}
 
@@ -351,26 +353,6 @@ public class StateImpl extends ItemImpl implements State {
 	protected String jobFamily = JOB_FAMILY_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getResource() <em>Resource</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #getResource()
-	 * @generated
-	 * @ordered
-	 */
-	protected Resource resource;
-
-	/**
-	 * The cached value of the '{@link #getCommitIds() <em>Commit Ids</em>}'
-	 * attribute list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #getCommitIds()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<String> commitIds;
-
-	/**
 	 * The default value of the '{@link #getCommitId() <em>Commit Id</em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -399,6 +381,17 @@ public class StateImpl extends ItemImpl implements State {
 	 * @ordered
 	 */
 	protected EMap<StageQualifier, Customizer> stateCustomizers;
+
+	/**
+	 * The cached value of the '{@link #getNonExclusiveStateCustomizers() <em>Non
+	 * Exclusive State Customizers</em>}' map. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @see #getNonExclusiveStateCustomizers()
+	 * @generated
+	 * @ordered
+	 */
+	protected EMap<StageQualifier, Customizer> nonExclusiveStateCustomizers;
 
 	/**
 	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}'
@@ -480,13 +473,31 @@ public class StateImpl extends ItemImpl implements State {
 	 */
 	protected Strategy strategy;
 
+	/**
+	 * The default value of the '{@link #getBasePackage() <em>Base Package</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getBasePackage()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String BASE_PACKAGE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getBasePackage() <em>Base Package</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getBasePackage()
+	 * @generated
+	 * @ordered
+	 */
+	protected String basePackage = BASE_PACKAGE_EDEFAULT;
+
 	protected String language = LANGUAGE_EDEFAULT;
 
 	private boolean loading = false;
 
 	private Object makingLock = new Object();
-
-	private WatchService watch = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -511,15 +522,21 @@ public class StateImpl extends ItemImpl implements State {
 
 						@Override
 						public boolean visit(IResourceDelta delta) throws CoreException {
-							if (delta.getResource().getType() == IResource.FILE && delta.getResource().getLocation()
-									.toFile().getPath().equals(getResource().getURI().toFileString())) {
+							if (delta.getResource().getType() == IResource.FILE
+									&& delta.getResource().getLocation() != null && delta.getResource().getLocation()
+											.toFile().getPath().equals(getResource().getURI().toFileString())) {
 								if ((delta.getFlags() & IResourceDelta.CONTENT) != 0) {
 									try {
 										Resource resource = getProject().getWorkspace().getResourceSet().getResource(
 												URI.createFileURI(delta.getResource().getLocation().toString()), false);
+										EObject eObject = null;
+										if (!resource.getContents().isEmpty())
+											eObject = resource.getContents().get(0);
 										resource.unload();
 										resource.load(new FileInputStream(delta.getResource().getLocation().toFile()),
 												Collections.emptyMap());
+										if (resource.getContents().isEmpty())
+											resource.getContents().add(eObject);
 									} catch (FileNotFoundException e) {
 										e.printStackTrace();
 									} catch (IOException e) {
@@ -730,93 +747,92 @@ public class StateImpl extends ItemImpl implements State {
 	}
 
 	@Override
-	public String initialize(boolean commit) {
+	public String initialize() {
 		if (!eIsSet(ClassMakerPackage.STATE__MODEL_NAME))
-			super.initialize(commit);
+			super.initialize();
 		if (eIsSet(ClassMakerPackage.STATE__PROJECT)
 				&& getProject().eIsSet(ClassMakerPackage.Literals.PROJECT__PROJECT_NAME)
 				&& ResourceUtils.isProjectExists(getProjectName())) {
-			URI modelURI = getModelURI();
+			ClassMakerPlugin.print(NLS.bind("State {0} of {1} {2} is initializing...",
+					new Object[] { getTimestamp(), getProject().getName(), getRevision().getVersion() }));
+			URI modelURI = obtainModelURI();
 			loadResource(modelURI, !eIsSet(ClassMakerPackage.STATE__RESOURCE), true);
 			saveResource();
 			if (!getPhase().equals(Stage.LOADED))
 				setPhase(Stage.MODELED);
-			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-			if (commit)
-				try {
-					String[] segments = modelURI.deresolve(URI.createFileURI(root.getRawLocation().toString()))
-							.segments();
-					String[] path = new String[segments.length - 2];
-					System.arraycopy(segments, 2, path, 0, segments.length - 2);
-					add(URI.createHierarchicalURI(path, null, null).toString());
-					String result = commit();
-					return result;
-				} catch (Exception e) {
-					ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
-					return null;
+			@SuppressWarnings("unchecked")
+			SCMOperator<Git> operator = (SCMOperator<Git>) getProject().getWorkspace().getSCMRegistry()
+					.get(getProjectName());
+			try {
+				Git git = operator.getRepositorySCM();
+				Ref branch = git.getRepository().findRef(getRevision().getVersion().toString());
+				LogCommand log = git.log();
+				log.add(branch.getObjectId());
+				Iterable<RevCommit> commits = log.call();
+				for (RevCommit c : commits) {
+					if (operator.decodeTimestamp(c.getShortMessage()) == getTimestamp()) {
+						String id = c.getId().toString();
+						setCommitId(id);
+					}
 				}
-			else {
-				@SuppressWarnings("unchecked")
-				SCMOperator<Git> operator = (SCMOperator<Git>) getProject().getWorkspace().getSCMRegistry()
-						.get(getProjectName());
-				try {
-					Git git = operator.getRepositorySCM();
-					Ref branch = git.getRepository().findRef(getRevision().getVersion().toString());
-					LogCommand log = git.log();
-					log.add(branch.getObjectId());
-					Iterable<RevCommit> commits = log.call();
-					for (RevCommit c : commits) {
-						if (operator.decodeTimestamp(c.getShortMessage()) == getTimestamp()) {
-							String id = c.getId().toString();
-							getCommitIds().add(id);
-							setCommitId(id);
-						}
-					}
-				} catch (Exception e) {
-				} finally {
+				if (getCommitId().isEmpty()) {
+					IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 					try {
-						operator.ungetRepositorySCM();
+						String[] segments = modelURI.deresolve(URI.createFileURI(root.getRawLocation().toString()))
+								.segments();
+						String[] path = new String[segments.length - 2];
+						System.arraycopy(segments, 2, path, 0, segments.length - 2);
+						add(URI.createHierarchicalURI(path, null, null).toString());
+						String result = commit();
+						setCommitId(result);
+						return result;
 					} catch (Exception e) {
-						ClassMakerPlugin.getInstance().getLog()
-								.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+						ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
+						return null;
 					}
+				}
+			} catch (Exception e) {
+			} finally {
+				try {
+					operator.ungetRepositorySCM();
+				} catch (Exception e) {
+					ClassMakerPlugin.getInstance().getLog()
+							.log(new Status(IStatus.ERROR, ClassMakerPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 				}
 			}
 		}
-		return getCommitId(); // $NON-NLS-1$
+		return getCommitId();
 	}
 
 	private URI modelURI;
 
-	private URI getModelURI() {
-		if (modelURI == null) {
-			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-			IProject project = root.getProject(
-					eIsSet(ClassMakerPackage.STATE__PROJECT_NAME) ? getProjectName() : getModelName().toLowerCase());
-			IProgressMonitor monitor = ClassMakerPlugin.getProgressMonitor();
-			IFolder folder = project.getFolder(ResourceUtils.getModelFolderName());
+	private URI obtainModelURI() {
+		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+		IProject project = root.getProject(
+				eIsSet(ClassMakerPackage.STATE__PROJECT_NAME) ? getProjectName() : getModelName().toLowerCase());
+		IProgressMonitor monitor = ClassMakerPlugin.getProgressMonitor();
+		IFolder folder = project.getFolder(ResourceUtils.getModelFolderName());
 
-			if (!folder.exists() && getParent().getParent() instanceof Contribution) {
-				SubMonitor pm = null;
-				SubMonitor m = null;
-				try {
-					pm = SubMonitor.convert(monitor);
-					pm.setTaskName("Create Folder");
-					pm.subTask("Creating folder...");
-					m = pm.newChild(1, SubMonitor.SUPPRESS_ISCANCELED);
-					folder.create(true, true, m);
-				} catch (CoreException e) {
-					ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
-				} finally {
-					if (m != null)
-						m.done();
-					if (pm != null)
-						pm.done();
-					monitor.done();
-				}
+		if (!folder.exists() && getParent().getParent() instanceof Contribution) {
+			SubMonitor pm = null;
+			SubMonitor m = null;
+			try {
+				pm = SubMonitor.convert(monitor);
+				pm.setTaskName("Create Folder");
+				pm.subTask("Creating folder...");
+				m = pm.newChild(1, SubMonitor.SUPPRESS_ISCANCELED);
+				folder.create(true, true, m);
+			} catch (CoreException e) {
+				ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
+			} finally {
+				if (m != null)
+					m.done();
+				if (pm != null)
+					pm.done();
+				monitor.done();
 			}
-			modelURI = URI.createFileURI(root.getRawLocation().append(getProject().getResourcePath()).toString());
 		}
+		modelURI = URI.createFileURI(root.getRawLocation().append(getProject().getResourcePath()).toString());
 		return modelURI;
 	}
 
@@ -848,7 +864,7 @@ public class StateImpl extends ItemImpl implements State {
 					} catch (CoreException e1) {
 						ClassMakerPlugin.getInstance().getLog().log(e1.getStatus());
 					}
-					EObject eObject = contribution.getDomainModel().getGenerated();
+					EObject eObject = contribution.getDomainModel().getGeneratedEPackage();
 					if (eObject instanceof EPackage)
 						resourceSet.getPackageRegistry().put(((EPackage) eObject).getNsURI(), (EPackage) eObject);
 					setResource(resourceSet.getResource(modelURI, loadOnDemand));
@@ -878,12 +894,13 @@ public class StateImpl extends ItemImpl implements State {
 			return;
 		}
 		try {
+			getResource().setURI(modelURI);
 			getResource().load(Collections.emptyMap());
 		} catch (IOException e) {
 			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createWarningStatus(e));
 		}
 		if (!getResource().getContents().isEmpty()) {
-			getDomainModel().setDynamic(EcoreUtil.copy((EObject) getResource().getContents().get(0)));
+			getDomainModel().setDynamicEPackage(EcoreUtil.copy((EObject) getResource().getContents().get(0)));
 		}
 		loading = false;
 	}
@@ -896,9 +913,9 @@ public class StateImpl extends ItemImpl implements State {
 		try {
 			if (!eIsSet(ClassMakerPackage.STATE__RESOURCE))
 				return;
-			if (getPhase().getValue() >= Stage.MODELED_VALUE && getDomainModel().getDynamic() != null
-					&& getDomainModel().getDynamic().eResource() != null) {
-				Resource importSource = getDomainModel().getDynamic().eResource();
+			if (getPhase().getValue() >= Stage.MODELED_VALUE && getDomainModel().getDynamicEPackage() != null
+					&& getDomainModel().getDynamicEPackage().eResource() != null) {
+				Resource importSource = getDomainModel().getDynamicEPackage().eResource();
 				try {
 					importSource.load(Collections.emptyMap());
 					setPhase(Stage.MODELED);
@@ -913,21 +930,23 @@ public class StateImpl extends ItemImpl implements State {
 				resource.eSetDeliver(deliver);
 				ClassMakerPlugin.getInstance().getLog().log(
 						ClassMakerPlugin.createInfoStatus(NLS.bind(Messages.ResourceImported, importSource.getURI())));
-			} else if (getPhase().getValue() >= Stage.MODELED_VALUE && getDomainModel().getDynamic() != null
-					&& objectsDiffer(getDomainModel().getDynamic(), resource.getContents())
+			} else if (getPhase().getValue() >= Stage.MODELED_VALUE && getDomainModel().getDynamicEPackage() != null
+					&& objectsDiffer(getDomainModel().getDynamicEPackage(), resource.getContents())
 					&& resource.getContents().isEmpty()) {
 				boolean deliver = resource.eDeliver();
 				resource.eSetDeliver(false);
 				resource.getContents().clear();
-				resource.getContents().add(EcoreUtil.copy(getDomainModel().getDynamic()));
+				resource.getContents().add(EcoreUtil.copy(getDomainModel().getDynamicEPackage()));
 				resource.eSetDeliver(deliver);
 				setPhase(Stage.MODELED);
 			}
 			if (!resource.getContents().isEmpty()) {
-				Map<String, String> options = new HashMap<String, String>();
+				Map<Object, Object> options = new HashMap<Object, Object>();
 				options.put(XMLResource.OPTION_ENCODING, "UTF-8");
 				options.put(XMLResource.OPTION_SAVE_ONLY_IF_CHANGED,
 						XMLResource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
+				((XMLResource) resource).getDefaultSaveOptions().put(XMLResource.OPTION_PROCESS_DANGLING_HREF,
+						XMLResource.OPTION_PROCESS_DANGLING_HREF_RECORD);
 				resource.save(options);
 			}
 		} catch (IOException e) {
@@ -992,13 +1011,12 @@ public class StateImpl extends ItemImpl implements State {
 			SubMonitor m = null;
 			try {
 				if (isMaking())
-					if (!getCommitIds().isEmpty())
-						return ListUtil.getLast(getCommitIds());
+					if (!eIsSet(ClassMakerPackage.STATE__COMMIT_ID))
+						return getCommitId();
 					else
 						return ""; //$NON-NLS-1$
-				saveResource();
 				try {
-					loadResource(getModelURI(), !eIsSet(ClassMakerPackage.STATE__RESOURCE), true);
+					loadResource(obtainModelURI(), !eIsSet(ClassMakerPackage.STATE__RESOURCE), true);
 				} catch (Exception e) {
 				}
 				saveResource();
@@ -1025,7 +1043,8 @@ public class StateImpl extends ItemImpl implements State {
 					ResourceUtils.createProject(project, ClassMakerPlugin.CONTRIBUTION_NATURE_ID, wrappingMonitor);
 				}
 
-				getStrategy().configureJobs(getStrategy().getGenerators().isEmpty(), wrappingMonitor);
+				getStrategy().configureJobs(getStrategy().get(Stage.GENERATED, "project.create.generator").isEmpty(),
+						wrappingMonitor);
 
 				monitor.beginTask(Messages.Save, 4);
 
@@ -1035,23 +1054,23 @@ public class StateImpl extends ItemImpl implements State {
 					saveResource();
 					setPhase(Stage.MODELED);
 				case Stage.MODELED_VALUE:
-					job = EnterpriseDomainJob
-							.getJob(getStrategy().getGenerators().get(getStrategy().getGenerators().size() - 1));
+					job = EnterpriseDomainJob.getJob(getStrategy().get(Stage.GENERATED, "project.create.generator")
+							.get(getStrategy().get(Stage.GENERATED, "project.create.generator").size() - 1));
 					job.schedule();
 					break;
 				case Stage.GENERATED_VALUE:
-					job = EnterpriseDomainJob
-							.getJob(getStrategy().getExporters().get(getStrategy().getExporters().size() - 1));
+					job = EnterpriseDomainJob.getJob(getStrategy().get(Stage.EXPORTED, "project.create.exporter")
+							.get(getStrategy().get(Stage.EXPORTED, "project.create.exporter").size() - 1));
 					job.schedule();
 					break;
 				case Stage.EXPORTED_VALUE:
-					job = EnterpriseDomainJob
-							.getJob(getStrategy().getInstallers().get(getStrategy().getInstallers().size() - 1));
+					job = EnterpriseDomainJob.getJob(getStrategy().get(Stage.INSTALLED, "project.create.installer")
+							.get(getStrategy().get(Stage.INSTALLED, "project.create.installer").size() - 1));
 					job.schedule();
 					break;
 				case Stage.INSTALLED_VALUE:
-					job = EnterpriseDomainJob
-							.getJob(getStrategy().getLoaders().get(getStrategy().getLoaders().size() - 1));
+					job = EnterpriseDomainJob.getJob(getStrategy().get(Stage.LOADED, "project.create.loader")
+							.get(getStrategy().get(Stage.LOADED, "project.create.loader").size() - 1));
 					job.schedule();
 					break;
 				}
@@ -1085,8 +1104,8 @@ public class StateImpl extends ItemImpl implements State {
 				wrappingMonitor.done();
 			}
 			if (!monitor.isCanceled() || (!getPhase().equals(Stage.LOADED)
-					&& !getDomainModel().eIsSet(ClassMakerPackage.Literals.MODELS__GENERATED))) {
-				makingLock.wait(7000);
+					&& !getDomainModel().eIsSet(ClassMakerPackage.Literals.MODELS__GENERATED_EPACKAGE))) {
+				makingLock.wait(6000);
 				Thread.yield();
 			}
 			getProject().removeCompletionListener(completionListener);
@@ -1106,11 +1125,12 @@ public class StateImpl extends ItemImpl implements State {
 	 */
 	@Override
 	public void load(boolean create, boolean loadOnDemand) throws CoreException {
-		loadResource(getModelURI(), create, loadOnDemand);
+		loadResource(obtainModelURI(), create, loadOnDemand);
 		if (ClassMakerServiceImpl.initializing && getPhase().getValue() == Stage.LOADED_VALUE) {
-			getStrategy().configureJobs(getStrategy().getLoaders().isEmpty(), ClassMakerPlugin.getProgressMonitor());
-			Job job = EnterpriseDomainJob
-					.getJob(getStrategy().getInstallers().get(getStrategy().getInstallers().size() - 1));
+			getStrategy().configureJobs(getStrategy().get(Stage.LOADED, "project.create.loader").isEmpty(),
+					ClassMakerPlugin.getProgressMonitor());
+			Job job = EnterpriseDomainJob.getJob(getStrategy().get(Stage.INSTALLED, "project.create.installer")
+					.get(getStrategy().get(Stage.INSTALLED, "project.create.installer").size() - 1));
 			job.schedule();
 			try {
 				job.join();
@@ -1125,11 +1145,8 @@ public class StateImpl extends ItemImpl implements State {
 	 * @generated NOT
 	 */
 	public void checkout() {
-		if (getCommitIds().isEmpty()) {
-			return;
-		}
 		if (!eIsSet(ClassMakerPackage.STATE__COMMIT_ID))
-			setCommitId(ListUtil.getLast(getCommitIds()));
+			setCommitId(getCommitId());
 		checkout(getCommitId(), true);
 	}
 
@@ -1155,7 +1172,6 @@ public class StateImpl extends ItemImpl implements State {
 		} catch (Exception e) {
 			ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 		}
-
 	}
 
 	/**
@@ -1181,7 +1197,6 @@ public class StateImpl extends ItemImpl implements State {
 				.get(getProjectName());
 		String commitId = null;
 		commitId = operator.commit(operator.encodeCommitMessage(this));
-		getCommitIds().add(commitId);
 		setCommitId(commitId);
 		return commitId;
 	}
@@ -1196,6 +1211,8 @@ public class StateImpl extends ItemImpl implements State {
 		switch (featureID) {
 		case ClassMakerPackage.STATE__STATE_CUSTOMIZERS:
 			return ((InternalEList<?>) getStateCustomizers()).basicRemove(otherEnd, msgs);
+		case ClassMakerPackage.STATE__NON_EXCLUSIVE_STATE_CUSTOMIZERS:
+			return ((InternalEList<?>) getNonExclusiveStateCustomizers()).basicRemove(otherEnd, msgs);
 		case ClassMakerPackage.STATE__STRATEGY:
 			return basicSetStrategy(null, msgs);
 		}
@@ -1218,17 +1235,17 @@ public class StateImpl extends ItemImpl implements State {
 				case Notification.ADD:
 					if (msg.getNewValue() != null && msg.getNewValue() instanceof EObject) {
 						if (findExistingEObject((EObject) msg.getNewValue()) == null) {
-							getDomainModel().setDynamic(copyEObject((EObject) msg.getNewValue()));
+							getDomainModel().setDynamicEPackage(copyEObject((EObject) msg.getNewValue()));
 						}
 					}
 					break;
 				case Notification.SET:
 					if (msg.getOldValue() != null && msg.getOldValue() instanceof EObject)
-						getDomainModel().setDynamic(null);
+						getDomainModel().setDynamicEPackage(null);
 					if (msg.getNewValue() != null && msg.getNewValue() instanceof EObject
 							&& !(msg.getNewValue() instanceof Item))
 						if (findExistingEObject((EObject) msg.getNewValue()) == null) {
-							getDomainModel().setDynamic(copyEObject((EObject) msg.getNewValue()));
+							getDomainModel().setDynamicEPackage(copyEObject((EObject) msg.getNewValue()));
 						}
 
 					break;
@@ -1236,13 +1253,13 @@ public class StateImpl extends ItemImpl implements State {
 					if (msg.getOldValue() != null) {
 						for (Object object : (Iterable<?>) msg.getOldValue())
 							if (object instanceof EObject) {
-								getDomainModel().setDynamic(null);
+								getDomainModel().setDynamicEPackage(null);
 							}
 					}
 					break;
 				case Notification.REMOVE:
 					if (msg.getOldValue() != null && msg.getOldValue() instanceof EObject) {
-						getDomainModel().setDynamic(null);
+						getDomainModel().setDynamicEPackage(null);
 					}
 					break;
 				}
@@ -1256,9 +1273,9 @@ public class StateImpl extends ItemImpl implements State {
 		}
 
 		private EObject findExistingEObject(EObject query) {
-			if (!(getDomainModel().getDynamic() instanceof EObject))
+			if (!(getDomainModel().getDynamicEPackage() instanceof EObject))
 				return null;
-			EObject eObject = getDomainModel().getDynamic();
+			EObject eObject = getDomainModel().getDynamicEPackage();
 			if (ModelUtil.eObjectsAreEqual(eObject, query, true))
 				return eObject;
 			return null;
@@ -1276,7 +1293,7 @@ public class StateImpl extends ItemImpl implements State {
 			if (resourceModelsSynchronizing)
 				return;
 			if (notification.getNotifier() instanceof Models
-					&& notification.getFeatureID(Models.class) == ClassMakerPackage.MODELS__DYNAMIC) {
+					&& notification.getFeatureID(Models.class) == ClassMakerPackage.MODELS__DYNAMIC_EPACKAGE) {
 				resourceModelsSynchronizing = true;
 				boolean deliver = getResource().eDeliver();
 				getResource().eSetDeliver(false);
@@ -1309,6 +1326,8 @@ public class StateImpl extends ItemImpl implements State {
 	public void copyModel(Item from) {
 		if (from instanceof Contribution && !((ContributionImpl) from).isStateSet())
 			return;
+		if (from.getResource() != null)
+			EcoreUtil.resolveAll(from.getResource());
 		super.copyModel(from);
 	}
 
@@ -1398,43 +1417,6 @@ public class StateImpl extends ItemImpl implements State {
 	 * @generated
 	 */
 	@Override
-	public Resource getResource() {
-		return resource;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public void setResource(Resource newResource) {
-		Resource oldResource = resource;
-		resource = newResource;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.STATE__RESOURCE, oldResource,
-					resource));
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public EList<String> getCommitIds() {
-		if (commitIds == null) {
-			commitIds = new EDataTypeUniqueEList<String>(String.class, this, ClassMakerPackage.STATE__COMMIT_IDS);
-		}
-		return commitIds;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
 	public String getCommitId() {
 		return commitId;
 	}
@@ -1471,6 +1453,22 @@ public class StateImpl extends ItemImpl implements State {
 					StageQualifierToCustomizerMapEntryImpl.class, this, ClassMakerPackage.STATE__STATE_CUSTOMIZERS);
 		}
 		return stateCustomizers;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public EMap<StageQualifier, Customizer> getNonExclusiveStateCustomizers() {
+		if (nonExclusiveStateCustomizers == null) {
+			nonExclusiveStateCustomizers = new EcoreEMap<StageQualifier, Customizer>(
+					ClassMakerPackage.Literals.STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY,
+					StageQualifierToCustomizerMapEntryImpl.class, this,
+					ClassMakerPackage.STATE__NON_EXCLUSIVE_STATE_CUSTOMIZERS);
+		}
+		return nonExclusiveStateCustomizers;
 	}
 
 	/**
@@ -1636,6 +1634,30 @@ public class StateImpl extends ItemImpl implements State {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
+	 * @generated
+	 */
+	@Override
+	public String getBasePackage() {
+		return basePackage;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public void setBasePackage(String newBasePackage) {
+		String oldBasePackage = basePackage;
+		basePackage = newBasePackage;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.STATE__BASE_PACKAGE, oldBasePackage,
+					basePackage));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	public void setProjectVersion(IProgressMonitor monitor) throws CoreException {
@@ -1702,12 +1724,12 @@ public class StateImpl extends ItemImpl implements State {
 	 */
 	public EObject find(EObject eObject, Stage stage) {
 		if (stage.equals(Stage.MODELED)) {
-			EObject dynamicEObject = getDomainModel().getDynamic();
+			EObject dynamicEObject = getDomainModel().getDynamicEPackage();
 			if (ModelUtil.eObjectsAreEqual(eObject, dynamicEObject, false))
 				return dynamicEObject;
 		}
 		if (stage.equals(Stage.GENERATED)) {
-			EObject generatedEObject = getDomainModel().getGenerated();
+			EObject generatedEObject = getDomainModel().getGeneratedEPackage();
 			if (ModelUtil.eObjectsAreEqual(eObject, generatedEObject, false))
 				return generatedEObject;
 		}
@@ -1746,10 +1768,6 @@ public class StateImpl extends ItemImpl implements State {
 			return getEditorDeployableUnitName();
 		case ClassMakerPackage.STATE__JOB_FAMILY:
 			return getJobFamily();
-		case ClassMakerPackage.STATE__RESOURCE:
-			return getResource();
-		case ClassMakerPackage.STATE__COMMIT_IDS:
-			return getCommitIds();
 		case ClassMakerPackage.STATE__COMMIT_ID:
 			return getCommitId();
 		case ClassMakerPackage.STATE__STATE_CUSTOMIZERS:
@@ -1757,6 +1775,11 @@ public class StateImpl extends ItemImpl implements State {
 				return getStateCustomizers();
 			else
 				return getStateCustomizers().map();
+		case ClassMakerPackage.STATE__NON_EXCLUSIVE_STATE_CUSTOMIZERS:
+			if (coreType)
+				return getNonExclusiveStateCustomizers();
+			else
+				return getNonExclusiveStateCustomizers().map();
 		case ClassMakerPackage.STATE__PROJECT_NAME:
 			return getProjectName();
 		case ClassMakerPackage.STATE__MAKING:
@@ -1769,6 +1792,8 @@ public class StateImpl extends ItemImpl implements State {
 			if (resolve)
 				return getStrategy();
 			return basicGetStrategy();
+		case ClassMakerPackage.STATE__BASE_PACKAGE:
+			return getBasePackage();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1813,18 +1838,14 @@ public class StateImpl extends ItemImpl implements State {
 		case ClassMakerPackage.STATE__JOB_FAMILY:
 			setJobFamily((String) newValue);
 			return;
-		case ClassMakerPackage.STATE__RESOURCE:
-			setResource((Resource) newValue);
-			return;
-		case ClassMakerPackage.STATE__COMMIT_IDS:
-			getCommitIds().clear();
-			getCommitIds().addAll((Collection<? extends String>) newValue);
-			return;
 		case ClassMakerPackage.STATE__COMMIT_ID:
 			setCommitId((String) newValue);
 			return;
 		case ClassMakerPackage.STATE__STATE_CUSTOMIZERS:
 			((EStructuralFeature.Setting) getStateCustomizers()).set(newValue);
+			return;
+		case ClassMakerPackage.STATE__NON_EXCLUSIVE_STATE_CUSTOMIZERS:
+			((EStructuralFeature.Setting) getNonExclusiveStateCustomizers()).set(newValue);
 			return;
 		case ClassMakerPackage.STATE__PROJECT_NAME:
 			setProjectName((String) newValue);
@@ -1840,6 +1861,9 @@ public class StateImpl extends ItemImpl implements State {
 			return;
 		case ClassMakerPackage.STATE__STRATEGY:
 			setStrategy((Strategy) newValue);
+			return;
+		case ClassMakerPackage.STATE__BASE_PACKAGE:
+			setBasePackage((String) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -1883,17 +1907,14 @@ public class StateImpl extends ItemImpl implements State {
 		case ClassMakerPackage.STATE__JOB_FAMILY:
 			setJobFamily(JOB_FAMILY_EDEFAULT);
 			return;
-		case ClassMakerPackage.STATE__RESOURCE:
-			setResource((Resource) null);
-			return;
-		case ClassMakerPackage.STATE__COMMIT_IDS:
-			getCommitIds().clear();
-			return;
 		case ClassMakerPackage.STATE__COMMIT_ID:
 			setCommitId(COMMIT_ID_EDEFAULT);
 			return;
 		case ClassMakerPackage.STATE__STATE_CUSTOMIZERS:
 			getStateCustomizers().clear();
+			return;
+		case ClassMakerPackage.STATE__NON_EXCLUSIVE_STATE_CUSTOMIZERS:
+			getNonExclusiveStateCustomizers().clear();
 			return;
 		case ClassMakerPackage.STATE__PROJECT_NAME:
 			setProjectName(PROJECT_NAME_EDEFAULT);
@@ -1909,6 +1930,9 @@ public class StateImpl extends ItemImpl implements State {
 			return;
 		case ClassMakerPackage.STATE__STRATEGY:
 			setStrategy((Strategy) null);
+			return;
+		case ClassMakerPackage.STATE__BASE_PACKAGE:
+			setBasePackage(BASE_PACKAGE_EDEFAULT);
 			return;
 		}
 		super.eUnset(featureID);
@@ -1948,14 +1972,12 @@ public class StateImpl extends ItemImpl implements State {
 					: !EDITOR_DEPLOYABLE_UNIT_NAME_EDEFAULT.equals(getEditorDeployableUnitName());
 		case ClassMakerPackage.STATE__JOB_FAMILY:
 			return JOB_FAMILY_EDEFAULT == null ? jobFamily != null : !JOB_FAMILY_EDEFAULT.equals(jobFamily);
-		case ClassMakerPackage.STATE__RESOURCE:
-			return resource != null;
-		case ClassMakerPackage.STATE__COMMIT_IDS:
-			return commitIds != null && !commitIds.isEmpty();
 		case ClassMakerPackage.STATE__COMMIT_ID:
 			return COMMIT_ID_EDEFAULT == null ? commitId != null : !COMMIT_ID_EDEFAULT.equals(commitId);
 		case ClassMakerPackage.STATE__STATE_CUSTOMIZERS:
 			return stateCustomizers != null && !stateCustomizers.isEmpty();
+		case ClassMakerPackage.STATE__NON_EXCLUSIVE_STATE_CUSTOMIZERS:
+			return nonExclusiveStateCustomizers != null && !nonExclusiveStateCustomizers.isEmpty();
 		case ClassMakerPackage.STATE__PROJECT_NAME:
 			return PROJECT_NAME_EDEFAULT == null ? getProjectName() != null
 					: !PROJECT_NAME_EDEFAULT.equals(getProjectName());
@@ -1967,6 +1989,8 @@ public class StateImpl extends ItemImpl implements State {
 			return editor != EDITOR_EDEFAULT;
 		case ClassMakerPackage.STATE__STRATEGY:
 			return strategy != null;
+		case ClassMakerPackage.STATE__BASE_PACKAGE:
+			return BASE_PACKAGE_EDEFAULT == null ? basePackage != null : !BASE_PACKAGE_EDEFAULT.equals(basePackage);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1994,8 +2018,6 @@ public class StateImpl extends ItemImpl implements State {
 		result.append(timestamp);
 		result.append(", jobFamily: ");
 		result.append(jobFamily);
-		result.append(", commitIds: ");
-		result.append(commitIds);
 		result.append(", commitId: ");
 		result.append(commitId);
 		result.append(", making: ");
@@ -2004,6 +2026,8 @@ public class StateImpl extends ItemImpl implements State {
 		result.append(edit);
 		result.append(", editor: ");
 		result.append(editor);
+		result.append(", basePackage: ");
+		result.append(basePackage);
 		result.append(')');
 		return result.toString();
 	}
@@ -2056,22 +2080,23 @@ public class StateImpl extends ItemImpl implements State {
 			break;
 		case Stage.MODELED_VALUE:
 			saveResource();
-			generatorJob = EnterpriseDomainJob
-					.getJob(getStrategy().getGenerators().get(getStrategy().getGenerators().size() - 1));
+			generatorJob = EnterpriseDomainJob.getJob(getStrategy().get(Stage.GENERATED, "project.create.generator")
+					.get(getStrategy().get(Stage.GENERATED, "project.create.generator").size() - 1));
 			generatorJob.schedule();
 			break;
 		case Stage.GENERATED_VALUE:
-			exportJob = EnterpriseDomainJob
-					.getJob(getStrategy().getExporters().get(getStrategy().getExporters().size() - 1));
+			exportJob = EnterpriseDomainJob.getJob(getStrategy().get(Stage.EXPORTED, "project.create.exporter")
+					.get(getStrategy().get(Stage.EXPORTED, "project.create.exporter").size() - 1));
 			exportJob.schedule();
 			break;
 		case Stage.EXPORTED_VALUE:
-			installJob = EnterpriseDomainJob
-					.getJob(getStrategy().getInstallers().get(getStrategy().getInstallers().size() - 1));
+			installJob = EnterpriseDomainJob.getJob(getStrategy().get(Stage.INSTALLED, "project.create.installer")
+					.get(getStrategy().get(Stage.INSTALLED, "project.create.installer").size() - 1));
 			installJob.schedule();
 			break;
 		case Stage.INSTALLED_VALUE:
-			loadJob = EnterpriseDomainJob.getJob(getStrategy().getLoaders().get(getStrategy().getLoaders().size() - 1));
+			loadJob = EnterpriseDomainJob.getJob(getStrategy().get(Stage.LOADED, "project.create.loader")
+					.get(getStrategy().get(Stage.LOADED, "project.create.loader").size() - 1));
 			loadJob.schedule();
 			break;
 		}
@@ -2094,7 +2119,6 @@ public class StateImpl extends ItemImpl implements State {
 		} catch (Exception e) {
 			throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
 		}
-
 	}
 
 }

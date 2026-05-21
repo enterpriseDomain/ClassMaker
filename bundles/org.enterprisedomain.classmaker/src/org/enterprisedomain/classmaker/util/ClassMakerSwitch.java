@@ -24,6 +24,7 @@ import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -49,7 +50,6 @@ import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Strategy;
 import org.enterprisedomain.classmaker.Workspace;
 import org.enterprisedomain.classmaker.jobs.Worker;
-import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc --> The <b>Switch</b> for the model's inheritance
@@ -231,6 +231,14 @@ public class ClassMakerSwitch<T1> extends Switch<T1> {
 			@SuppressWarnings("unchecked")
 			Map.Entry<StageQualifier, Customizer> stageQualifierToCustomizerMapEntry = (Map.Entry<StageQualifier, Customizer>) theEObject;
 			T1 result = caseStageQualifierToCustomizerMapEntry(stageQualifierToCustomizerMapEntry);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ClassMakerPackage.STAGE_QUALIFIER_TO_WORKERS_MAP_ENTRY: {
+			@SuppressWarnings("unchecked")
+			Map.Entry<StageQualifier, EList<Worker>> stageQualifierToWorkersMapEntry = (Map.Entry<StageQualifier, EList<Worker>>) theEObject;
+			T1 result = caseStageQualifierToWorkersMapEntry(stageQualifierToWorkersMapEntry);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -600,6 +608,22 @@ public class ClassMakerSwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public T1 caseStageQualifierToCustomizerMapEntry(Map.Entry<StageQualifier, Customizer> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Stage
+	 * Qualifier To Workers Map Entry</em>'. <!-- begin-user-doc --> This
+	 * implementation returns null; returning a non-null result will terminate the
+	 * switch. <!-- end-user-doc -->
+	 * 
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Stage
+	 *         Qualifier To Workers Map Entry</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseStageQualifierToWorkersMapEntry(Map.Entry<StageQualifier, EList<Worker>> object) {
 		return null;
 	}
 

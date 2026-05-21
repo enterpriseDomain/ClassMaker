@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
 		<artifactId>org.enterprisedomain.root</artifactId>
-		<version>0.8.55-SNAPSHOT</version>
+		<version>0.8.55</version>
 		<relativePath>../../</relativePath>
 	</parent>
 	<artifactId>org.enterprisedomain.update</artifactId>

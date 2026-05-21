@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.enterprisedomain</groupId>
 		<artifactId>org.enterprisedomain.root</artifactId>
-		<version>0.8.55-SNAPSHOT</version>
+		<version>0.8.55</version>
 		<relativePath>../../</relativePath>
 	</parent>
 	<groupId>org.enterprisedomain</groupId>
 	<artifactId>org.enterprisedomain.target</artifactId>
-	<version>0.8.55-SNAPSHOT</version>
+	<version>0.8.55</version>
 	<packaging>eclipse-target-definition</packaging>
 	<build>
 		<plugins>
@@ -30,7 +32,8 @@
 						<phase>package</phase>
 						<configuration>
 							<appendAssemblyId>false</appendAssemblyId>
-							<finalName>${project.artifactId}-${baseversion}.{buildQualifier}</finalName>
+							<finalName>
+								${project.artifactId}_${project.version}</finalName>
 							<strictVersions>false</strictVersions>
 						</configuration>
 					</execution>
@@ -45,13 +48,13 @@
 						<artifact>
 							<groupId>org.enterprisedomain</groupId>
 							<artifactId>org.enterprisedomain.target</artifactId>
-							<version>0.8.55-SNAPSHOT</version>
-							<file>../releng/org.enterprisedomain.target/org.enterprisedomain.target.target</file>
+							<file>
+								../releng/org.enterprisedomain.target/org.enterprisedomain.target.target</file>
 							<type>target</type>
 						</artifact>
 					</target>
-					<executionEnvironment>org.eclipse.justj.openjdk.hotspot.jre.full-17</executionEnvironment>
-					<resolver>p2</resolver>
+					<executionEnvironment>
+						org.eclipse.justj.openjdk.hotspot.jre.full-21</executionEnvironment>
 					<dependency-resolution>
 						<profileProperties>
 							<org.eclipse.justj.buildtime>true</org.eclipse.justj.buildtime>
@@ -65,14 +68,20 @@
 							</requirement>
 							<requirement>
 								<type>eclipse-feature</type>
+								<id>
+									org.enterprisedomain.ui.workbench.rcp.feature</id>
+								<versionRange>0.8.55</versionRange>
 								<groupId>org.enterprisedomain</groupId>
-								<artifactId>org.enterprisedomain.ui.workbench.rcp.feature</artifactId>
-								<version>0.8.55-SNAPSHOT</version>
+								<artifactId>
+									org.enterprisedomain.ui.workbench.rcp.feature</artifactId>
 							</requirement>
 							<requirement>
 								<type>eclipse-plugin</type>
-								<artifactId>org.enterprisedomain.classmaker.osgi.systemextension</artifactId>
-								<version>0.8.55-SNAPSHOT</version>
+								<id>
+									org.enterprisedomain.classmaker.osgi.systemextension</id>
+								<versionRange>0.8.55</versionRange>
+								<artifactId>
+									org.enterprisedomain.classmaker.osgi.systemextension</artifactId>
 							</requirement>
 						</extraRequirements>
 					</dependency-resolution>

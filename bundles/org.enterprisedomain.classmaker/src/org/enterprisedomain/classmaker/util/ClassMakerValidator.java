@@ -16,12 +16,15 @@
 package org.enterprisedomain.classmaker.util;
 
 import java.lang.reflect.InvocationTargetException;
+import java.net.URI;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Future;
 import java.util.concurrent.Semaphore;
+
+import javax.management.Notification;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdapterFactory;
@@ -30,11 +33,9 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.ResourceLocator;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -62,7 +63,6 @@ import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Strategy;
 import org.enterprisedomain.classmaker.Workspace;
 import org.enterprisedomain.classmaker.jobs.Worker;
-import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc --> The <b>Validator</b> for the model. <!-- end-user-doc
@@ -171,6 +171,8 @@ public class ClassMakerValidator extends EObjectValidator {
 			return validateStageQualifier((StageQualifier) value, diagnostics, context);
 		case ClassMakerPackage.STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY:
 			return validateStageQualifierToCustomizerMapEntry((Map.Entry<?, ?>) value, diagnostics, context);
+		case ClassMakerPackage.STAGE_QUALIFIER_TO_WORKERS_MAP_ENTRY:
+			return validateStageQualifierToWorkersMapEntry((Map.Entry<?, ?>) value, diagnostics, context);
 		case ClassMakerPackage.MODELS:
 			return validateModels((Models) value, diagnostics, context);
 		case ClassMakerPackage.SCM_OPERATOR:
@@ -203,6 +205,8 @@ public class ClassMakerValidator extends EObjectValidator {
 			return validateSelectRevealHandler((SelectRevealHandler) value, diagnostics, context);
 		case ClassMakerPackage.STAGE:
 			return validateStage((Stage) value, diagnostics, context);
+		case ClassMakerPackage.CLASS_LOADER:
+			return validateClassLoader((ClassLoader) value, diagnostics, context);
 		case ClassMakerPackage.PROPERTIES:
 			return validateProperties((Properties) value, diagnostics, context);
 		case ClassMakerPackage.IPROGRESS_MONITOR:
@@ -388,6 +392,16 @@ public class ClassMakerValidator extends EObjectValidator {
 	 * 
 	 * @generated
 	 */
+	public boolean validateStageQualifierToWorkersMapEntry(Map.Entry<?, ?> stageQualifierToWorkersMapEntry,
+			DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint((EObject) stageQualifierToWorkersMapEntry, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	public boolean validateModels(Models models, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(models, diagnostics, context);
 	}
@@ -542,6 +556,16 @@ public class ClassMakerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateStage(Stage stage, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public boolean validateClassLoader(ClassLoader classLoader, DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
 		return true;
 	}
 

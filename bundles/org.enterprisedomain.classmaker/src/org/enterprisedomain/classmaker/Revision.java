@@ -23,7 +23,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
-import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object
@@ -203,7 +202,7 @@ public interface Revision extends Item {
 	 * @model
 	 * @generated
 	 */
-	void checkout(String commitId);
+	State newState();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -211,7 +210,7 @@ public interface Revision extends Item {
 	 * @model
 	 * @generated
 	 */
-	State newState();
+	State newState(long timestamp);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

@@ -2,37 +2,39 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: enterpriseDomain Workbench Application
 Bundle-SymbolicName: org.enterprisedomain.workbench;singleton:=true
-Bundle-Version: 0.8.55.qualifier
+Bundle-Version: 0.8.55
 Bundle-Activator: org.enterprisedomain.workbench.Activator
 Bundle-Vendor: Kyrill Zotkin
-Require-Bundle: org.eclipse.osgi,
+Require-Bundle: org.eclipse.osgi;bundle-version="[3.24.0,4.0.0)",
  org.eclipse.jface,
- org.eclipse.e4.ui.model.workbench,
+ org.eclipse.e4.ui.model.workbench;bundle-version="[2.4.700,3.0.0)",
  org.eclipse.e4.ui.di,
  org.eclipse.e4.ui.services,
  org.eclipse.e4.core.di.annotations,
- org.eclipse.core.runtime,
- org.eclipse.ui.ide;bundle-version="[3.15.0,4.0.0)",
+ org.eclipse.core.runtime;bundle-version="[3.34.100,4.0.0)",
+ org.eclipse.ui.ide;bundle-version="[3.22.800,4.0.0)",
  org.eclipse.ui.console,
  org.eclipse.emf.edit.ui;bundle-version="2.16.0",
- org.apache.batik.css;bundle-version="1.10.0",
+ org.apache.batik.css;bundle-version="[1.19.0,2.0.0)",
  org.apache.commons.logging;bundle-version="1.2.0",
- org.eclipse.ui.ide.application;bundle-version="[1.4.0,2.0.0)",
+ org.eclipse.ui.ide.application;bundle-version="[1.5.900,2.0.0)",
  org.eclipse.emf.ecore.editor;bundle-version="2.17.0",
- org.eclipse.e4.ui.workbench;bundle-version="1.11.0",
+ org.eclipse.e4.ui.workbench;bundle-version="[1.18.100,2.0.0)",
  org.eclipse.ui.forms;bundle-version="3.8.200",
- org.eclipse.pde.ds.annotations;bundle-version="1.2.200",
+ org.eclipse.pde.ds.annotations;bundle-version="[1.4.200,2.0.0)",
  org.apache.felix.scr;bundle-version="2.1.24",
  org.eclipse.equinox.event;bundle-version="1.6.0",
  org.eclipse.ui.workbench,
- org.eclipse.ui.navigator.resources;bundle-version="3.8.200",
- org.eclipse.emf.importer;bundle-version="2.12.0",
- org.eclipse.emf.importer.ecore;bundle-version="2.10.0",
+ org.eclipse.ui.navigator.resources;bundle-version="[3.9.900,4.0.0)",
+ org.eclipse.emf.importer;bundle-version="[2.14.0,3.0.0)",
+ org.eclipse.emf.importer.ecore;bundle-version="[2.12.0,3.0.0)",
  org.eclipse.jdt.ui;bundle-version="3.25.0";visibility:=reexport,
- org.enterprisedomain.classmaker;bundle-version="0.8.55"
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+ org.enterprisedomain.classmaker;bundle-version="0.8.55",
+ org.eclipse.equinox.p2.repository;bundle-version="2.7.100",
+ org.enterprisedomain.classmaker.ui;bundle-version="0.8.55"
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Automatic-Module-Name: org.enterprisedomain.workbench
-Import-Package: javax.annotation;version="1.2.0"
+Import-Package: jakarta.annotation;version="2.1.1",
+ jakarta.inject;version="2.0.1"
 Bundle-ActivationPolicy: lazy
-Export-Package: org.enterprisedomain.workbench,
- org.enterprisedomain.workbench.handler
+Export-Package: org.enterprisedomain.workbench

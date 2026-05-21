@@ -1,5 +1,5 @@
 /**
- * Copyright 2012-2018 Kyrill Zotkin
+ * Copyright 2012-2026 Kyrill Zotkin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,50 +12,54 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
+ * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
  */
 package org.enterprisedomain.classmaker.jobs.codegen;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
-import java.util.concurrent.Semaphore;
+import java.util.Map;
 
-import org.eclipse.core.resources.ICommand;
+import javax.management.monitor.Monitor;
+import javax.tools.Diagnostic;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IResourceChangeEvent;
-import org.eclipse.core.resources.IResourceChangeListener;
-import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IWorkspaceRoot;
-import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.codegen.ecore.Generator;
+import org.eclipse.emf.codegen.ecore.generator.GeneratorAdapterFactory;
 import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
+import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
+import org.eclipse.emf.codegen.ecore.genmodel.GenOSGiStyle;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
+import org.eclipse.emf.codegen.ecore.genmodel.generator.GenBaseGeneratorAdapter;
+import org.eclipse.emf.codegen.ecore.genmodel.generator.GenModelGeneratorAdapter;
+import org.eclipse.emf.codegen.ecore.genmodel.generator.GenModelGeneratorAdapterFactory;
+import org.eclipse.emf.codegen.merge.java.JControlModel;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.ECollections;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.jdt.core.ElementChangedEvent;
-import org.eclipse.jdt.core.IClasspathEntry;
-import org.eclipse.jdt.core.IElementChangedListener;
-import org.eclipse.jdt.core.IJavaElementDelta;
-import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.osgi.util.NLS;
 import org.enterprisedomain.classmaker.ClassMakerService;
@@ -74,8 +78,6 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 		super(Messages.JobNameCodeGenerator, depth, stateTimestamp);
 	}
 
-	protected static final String SOURCE_FOLDER_NAME = "src"; /// main/java"; //$NON-NLS-1$
-
 	public static final String GENMODEL_EXT = "genmodel"; //$NON-NLS-1$
 
 	private GeneratorJob genModelGeneration = new GenModelGenerationJob(getDepth(), getStateTimestamp());
@@ -88,7 +90,8 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 
 	protected static abstract class GeneratorJob extends EnterpriseDomainJob {
 
-		private org.eclipse.emf.codegen.ecore.Generator generator;
+		private org.eclipse.emf.codegen.ecore.generator.Generator generator;
+		private org.eclipse.emf.codegen.ecore.Generator generatorBackend;
 		private IPath modelPath;
 		private IPath genModelPath;
 
@@ -96,11 +99,19 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 			super(jobName, depth, stateTimestamp);
 		}
 
-		public org.eclipse.emf.codegen.ecore.Generator getGenerator() {
+		public org.eclipse.emf.codegen.ecore.Generator getGeneratorBackend() {
+			return generatorBackend;
+		}
+
+		public void setGeneratorBackend(org.eclipse.emf.codegen.ecore.Generator generatorBackend) {
+			this.generatorBackend = generatorBackend;
+		}
+
+		public org.eclipse.emf.codegen.ecore.generator.Generator getGenerator() {
 			return generator;
 		}
 
-		public void setGenerator(org.eclipse.emf.codegen.ecore.Generator generator) {
+		public void setGenerator(org.eclipse.emf.codegen.ecore.generator.Generator generator) {
 			this.generator = generator;
 		}
 
@@ -136,7 +147,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 
 	}
 
-	protected class GenModelGenerationJob extends GeneratorJob {
+	public class GenModelGenerationJob extends GeneratorJob {
 
 		public GenModelGenerationJob(int depth, long stateTimestamp) {
 			super(Messages.JobNameGenModelGeneration, depth, stateTimestamp);
@@ -147,9 +158,10 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 		public IStatus work(IProgressMonitor monitor) throws CoreException {
 			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 			final IPath modelFullPath = root.getRawLocation().append(getModelLocation());
-			ResourceUtils.delete(getGenModelResourcePath(modelFullPath).toFile(), null);
-			int result = (Integer) getGenerator().run(new String[] { "-ecore2GenModel", modelFullPath.toString(), "", //$NON-NLS-1$ //$NON-NLS-2$
-					modelName });
+			ResourceUtils.delete(obtainToGenModelResourcePath(modelFullPath).toFile(), null);
+			int result = (Integer) getGeneratorBackend()
+					.run(new String[] { "-ecore2GenModel", modelFullPath.toString(), "", //$NON-NLS-1$ //$NON-NLS-2$
+							modelName });
 			if (result == 1)
 				throw new CoreException(ClassMakerPlugin.createErrorStatus("GenModel generation failed."));
 			else {
@@ -163,237 +175,154 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 
 	}
 
-	protected class CodeGenerationJob extends GeneratorJob {
+	public class CodeGenerationJob extends GeneratorJob {
+
+		public static final GeneratorAdapterFactory.Descriptor MY_DESCRIPTOR = new GeneratorAdapterFactory.Descriptor() {
+			public GeneratorAdapterFactory createAdapterFactory() {
+				return new MyGenModelGeneratorAdapterFactory();
+			}
+		};
 
 		public CodeGenerationJob(int depth, long stateTimestamp) {
 			super(NLS.bind(Messages.JobNameCodeGeneration, "Code"), depth, stateTimestamp);
 			setChangeRule(false);
 		}
 
+		static {
+			EcorePackage.eINSTANCE.getEFactoryInstance();
+			GenModelPackage.eINSTANCE.getEFactoryInstance();
+		}
+
+		protected void registerGenModel(ResourceSet resourceSet, URI genmodelURI) throws CoreException {
+			Resource resource = resourceSet.getResource(genmodelURI, true);
+			if (resource == null)
+				throw new CoreException(
+						ClassMakerPlugin.createErrorStatus("Couldn't find resource under  " + genmodelURI));
+			for (EObject object : resource.getContents())
+				if (object instanceof GenModel)
+					registerGenModel((GenModel) object);
+		}
+
+		protected Collection<GenPackage> collectGenPackages(GenModel genModel) {
+			List<GenPackage> pkgs = new ArrayList<GenPackage>();
+			for (GenPackage pkg : genModel.getGenPackages()) {
+				pkgs.add(pkg);
+				pkgs.addAll(collectGenPackages(pkg));
+			}
+			pkgs.addAll(genModel.getUsedGenPackages());
+			return pkgs;
+		}
+
+		protected Collection<GenPackage> collectGenPackages(GenPackage genPackage) {
+			List<GenPackage> pkgs = new ArrayList<GenPackage>();
+			for (GenPackage pkg : genPackage.getNestedGenPackages()) {
+				pkgs.add(pkg);
+				pkgs.addAll(collectGenPackages(pkg));
+			}
+			return pkgs;
+		}
+
+		protected void registerGenModel(GenModel genModel) throws CoreException {
+			Map<String, URI> registry = EcorePlugin.getEPackageNsURIToGenModelLocationMap(false);
+			for (GenPackage pkg : collectGenPackages(genModel)) {
+				if (pkg.eIsProxy()) {
+					ClassMakerPlugin.print("Unresolved proxy for GenPackage " + EcoreUtil.getURI(pkg));
+					continue;
+				}
+				String nsURI = pkg.getEcorePackage().getNsURI();
+				if (nsURI != null) {
+					URI newUri = pkg.eResource().getURI();
+					if (registry.containsKey(nsURI)) {
+						URI oldURI = registry.get(nsURI);
+						if (!oldURI.equals(newUri))
+							throw new CoreException(ClassMakerPlugin.createWarningStatus(
+									"There is already a GenModel registered for NamespaceURI '" + nsURI
+											+ "'. It will be overwritten from '" + oldURI + "' to '" + newUri + "'"));
+						else
+							continue;
+					}
+					registry.put(nsURI, newUri);
+					ClassMakerPlugin.print("Registered GenModel '" + nsURI + "' from '" + newUri + "'");
+				}
+			}
+		}
+
 		@Override
 		public IStatus work(final IProgressMonitor monitor) throws CoreException {
 			try {
-				ResourceUtils.cleanupDir(getProject(), SOURCE_FOLDER_NAME);
+				ResourceUtils.cleanupDir(getProject(), ResourceUtils.SOURCE_FOLDER_NAME);
 				try {
 					getProject().refreshLocal(IResource.DEPTH_INFINITE, monitor);
-				} catch (OperationCanceledException e) {
+				} catch (OperationCanceledException ex) {
 				}
-				List<String> args = new ArrayList<String>();
-				args.add("-forceOverwrite");
-				args.add("-codeFormatting");
-				args.add("default");
-				args.add("-model");
-				if (getContributionState().isEdit())
-					args.add("-edit");
-				if (getContributionState().isEditor())
-					args.add("-editor");
-				args.add("-autoBuild");
-				args.add("false");
-				args.add("-reconcile");
-				args.add(EcorePlugin.getWorkspaceRoot().getRawLocation().append(getGenModelLocation()).toString());
-				int result = (Integer) getGenerator().run((String[]) args.toArray(new String[args.size()]));
+				IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+				URI genModelURI = URI.createFileURI(root.getRawLocation().append(getGenModelLocation()).toString());
+				final GenModel genModel = (GenModel) getResourceSet().getResource(genModelURI, true).getContents()
+						.get(0);
+				genModel.setCanGenerate(true);
+				genModel.reconcile();
+				registerGenModel(getResourceSet(), genModelURI);
+				getGenerator().setInput(genModel);
+				ClassMakerPlugin.print("Generating EMF code for " + genModel.getModelName());
+				{
+					getGenerator().getAdapterFactoryDescriptorRegistry().addDescriptor(GenModelPackage.eNS_URI,
+							MY_DESCRIPTOR);
+					Diagnostic diagnostic = getGenerator().generate(genModel,
+							GenBaseGeneratorAdapter.MODEL_PROJECT_TYPE, new BasicMonitor());
+					if (diagnostic.getSeverity() != Diagnostic.OK)
+						throw new CoreException(ClassMakerPlugin.createErrorStatus(diagnostic.getException()));
+				}
+
+				if (getContributionState().isEdit()) {
+					Diagnostic diagnostic = getGenerator().generate(genModel, GenBaseGeneratorAdapter.EDIT_PROJECT_TYPE,
+							new BasicMonitor());
+					if (diagnostic.getSeverity() != Diagnostic.OK)
+						throw new CoreException(ClassMakerPlugin.createErrorStatus(diagnostic.getException()));
+				}
+
+				if (getContributionState().isEditor()) {
+					Diagnostic diagnostic = getGenerator().generate(genModel,
+							GenBaseGeneratorAdapter.EDITOR_PROJECT_TYPE, new BasicMonitor());
+					if (diagnostic.getSeverity() != Diagnostic.OK)
+						throw new CoreException(ClassMakerPlugin.createErrorStatus(diagnostic.getException()));
+				}
 				getContributionState().setProjectVersion(monitor);
 
-				updateClassPath(monitor);
-
-				ICommand command = ResourceUtils.getBuildSpec(getProject().getDescription(), JavaCore.BUILDER_ID);
-				try {
-					getProject().getWorkspace().addResourceChangeListener(new IResourceChangeListener() {
-
-						@Override
-						public void resourceChanged(IResourceChangeEvent event) {
-							if (event.getDelta() != null)
-								for (IResourceDelta delta : event.getDelta()
-										.getAffectedChildren(IResourceDelta.CHANGED))
-									if (delta.getResource().equals(getProject()))
-										try {
-											getProject().notifyAll();
-										} catch (IllegalMonitorStateException e) {
-										}
-						}
-					}, IResourceChangeEvent.POST_BUILD);
-					getProject().build(IncrementalProjectBuilder.FULL_BUILD, JavaCore.BUILDER_ID,
-							command.getArguments(), monitor);
-				} catch (OperationCanceledException e) {
-					monitor.setCanceled(true);
-				} catch (CoreException e) {
-					ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
-					throw e;
-				} catch (Exception e) {
-					throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
-				}
-				try {
-					notifyAll();
-				} catch (IllegalMonitorStateException e) {
-				}
 				try {
 					@SuppressWarnings("unchecked")
 					SCMOperator<Git> operator = (SCMOperator<Git>) getContributionState().getProject().getWorkspace()
 							.getSCMRegistry().get(getProject().getName());
 					operator.add(".");
-				} catch (Exception e) {
-					throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
+				} catch (Exception ex) {
+					throw new CoreException(ClassMakerPlugin.createErrorStatus(ex));
 				}
-				if (result == 1)
-					throw new CoreException(ClassMakerPlugin.createErrorStatus("Code generation failed."));
-				else {
-					if (result == 0)
-						return Status.OK_STATUS;
-					else
-						return ClassMakerPlugin.createWarningStatus("Code generation returned unknown result.");
-				}
+				return Status.OK_STATUS;
 			} finally {
 				monitor.done();
 			}
 		}
 
-		private void updateClassPath(IProgressMonitor monitor) throws CoreException {
-			final SubMonitor pm = SubMonitor.convert(monitor);
-			pm.setTaskName("Update Classpath");
-			pm.subTask("Setting Classpath...");
-			final SubMonitor m = pm.newChild(1, SubMonitor.SUPPRESS_ISCANCELED);
-			try {
-				IJavaProject javaProject = null;
-				IJavaProject editJavaProject = null;
-				IJavaProject editorJavaProject = null;
-				try {
-					javaProject = JavaCore
-							.create(ResourcesPlugin.getWorkspace().getRoot().getProject(getProject().getName()));
-					if (getContributionState().isEdit())
-						editJavaProject = JavaCore.create(
-								ResourcesPlugin.getWorkspace().getRoot().getProject(getProject().getName() + ".edit"));
-					if (getContributionState().isEditor())
-						editorJavaProject = JavaCore.create(ResourcesPlugin.getWorkspace().getRoot()
-								.getProject(getProject().getName() + ".editor"));
+		private static class MyGenModelGeneratorAdapterFactory extends GenModelGeneratorAdapterFactory
+				implements GeneratorAdapterFactory {
 
-				} catch (IllegalStateException e) {
-					throw new CoreException(ClassMakerPlugin.createErrorStatus(e));
-				}
-				Set<IClasspathEntry> entries = new HashSet<IClasspathEntry>();
-				Set<IClasspathEntry> editEntries = new HashSet<IClasspathEntry>();
-				Set<IClasspathEntry> editorEntries = new HashSet<IClasspathEntry>();
-				for (IClasspathEntry e : javaProject.getRawClasspath())
-					if (!e.getPath().equals(new Path(IPath.SEPARATOR + getProject().getName())))
-						entries.add(e);
-				if (editJavaProject != null)
-					for (IClasspathEntry e : editJavaProject.getRawClasspath())
-						if (!e.getPath().equals(new Path(IPath.SEPARATOR + getProject().getName() + ".edit")))
-							editEntries.add(e);
-				if (editorJavaProject != null)
-					for (IClasspathEntry e : editorJavaProject.getRawClasspath())
-						if (!e.getPath().equals(new Path(IPath.SEPARATOR + getProject().getName() + ".editor")))
-							editorEntries.add(e);
-				entries.add(JavaCore.newSourceEntry(
-						new Path(IPath.SEPARATOR + getProject().getName() + IPath.SEPARATOR + SOURCE_FOLDER_NAME
-								+ IPath.SEPARATOR),
-						null, new Path(
-								IPath.SEPARATOR + getProject().getName() + IPath.SEPARATOR + "bin" + IPath.SEPARATOR)));
-				if (editJavaProject != null) {
-					IClasspathEntry e = JavaCore.newSourceEntry(
-							new Path(IPath.SEPARATOR + getProject().getName() + ".edit" + IPath.SEPARATOR
-									+ SOURCE_FOLDER_NAME + IPath.SEPARATOR),
-							null, new Path(IPath.SEPARATOR + getProject().getName() + ".edit" + IPath.SEPARATOR + "bin"
-									+ IPath.SEPARATOR));
-					if (!editEntries.contains(e))
-						editEntries.add(e);
-				}
-				if (editorJavaProject != null) {
-					IClasspathEntry e = JavaCore.newSourceEntry(
-							new Path(IPath.SEPARATOR + getProject().getName() + ".editor" + IPath.SEPARATOR
-									+ SOURCE_FOLDER_NAME + IPath.SEPARATOR),
-							null, new Path(IPath.SEPARATOR + getProject().getName() + ".editor" + IPath.SEPARATOR
-									+ "bin" + IPath.SEPARATOR));
-					if (!editorEntries.contains(e))
-						editorEntries.add(e);
-				}
-				entries.add(JavaCore.newContainerEntry(new Path("org.eclipse.jdt.launching.JRE_CONTAINER"), null, null,
-						false));
-				if (editJavaProject != null) {
-					IClasspathEntry e = JavaCore.newContainerEntry(new Path("org.eclipse.jdt.launching.JRE_CONTAINER"),
-							null, null, false);
-					if (!editEntries.contains(e))
-						editEntries.add(e);
-				}
-				if (editorJavaProject != null) {
-					IClasspathEntry e = JavaCore.newContainerEntry(new Path("org.eclipse.jdt.launching.JRE_CONTAINER"),
-							null, null, false);
-					if (!editorEntries.contains(e))
-						editorEntries.add(e);
-				}
-				entries.add(JavaCore.newContainerEntry(new Path("org.eclipse.pde.core.requiredPlugins"), null, null,
-						false));
-				if (editJavaProject != null) {
-					IClasspathEntry e = JavaCore.newContainerEntry(new Path("org.eclipse.pde.core.requiredPlugins"),
-							null, null, false);
-					if (!editEntries.contains(e))
-						editEntries.add(e);
-				}
-				if (editorJavaProject != null) {
-					IClasspathEntry e = JavaCore.newSourceEntry(
-							new Path(IPath.SEPARATOR + getProject().getName() + ".editor" + IPath.SEPARATOR
-									+ SOURCE_FOLDER_NAME + IPath.SEPARATOR),
-							null, new Path(IPath.SEPARATOR + getProject().getName() + ".editor" + IPath.SEPARATOR
-									+ "bin" + IPath.SEPARATOR));
-					if (!editorEntries.contains(e))
-						editorEntries.add(e);
-				}
-				Semaphore built = new Semaphore(0);
-				JavaCore.addElementChangedListener(new IElementChangedListener() {
+			@Override
+			public boolean isFactoryForType(Object type) {
+				return super.isFactoryForType(type);
+			}
 
-					private boolean isBuilt = false;
-
-					private boolean isEditBuilt = false;
-
-					private boolean isEditorBuilt = false;
+			@Override
+			public Adapter createGenModelAdapter() {
+				return new GenModelGeneratorAdapter(this) {
 
 					@Override
-					public void elementChanged(ElementChangedEvent event) {
-						IJavaElementDelta[] delta = event.getDelta().getChangedChildren();
-						if (delta != null && delta.length > 0)
-							if (delta[0].getElement().getJavaProject().getProject().equals(getProject())
-									&& event.getType() == ElementChangedEvent.POST_CHANGE)
-								isBuilt = true;
-						if ((getContributionState().isEdit() && delta.length > 0
-								&& delta[0].getElement().getJavaProject().getProject().getName()
-										.equals(getProject().getName() + ".edit")
-								&& event.getType() == ElementChangedEvent.POST_CHANGE)
-								|| !getContributionState().isEdit())
-							isEditBuilt = true;
-						if ((getContributionState().isEditor() && delta.length > 0
-								&& delta[0].getElement().getJavaProject().getProject().getName()
-										.equals(getProject().getName() + ".editor")
-								&& event.getType() == ElementChangedEvent.POST_CHANGE)
-								|| !getContributionState().isEditor())
-							isEditorBuilt = true;
-						if (isBuilt && isEditBuilt && isEditorBuilt)
-							built.release();
+					protected void generateModelManifest(GenModel genModel, Monitor monitor) {
+						super.generateModelManifest(genModel, monitor);
 					}
-				}, ElementChangedEvent.POST_CHANGE);
-				javaProject.setRawClasspath((IClasspathEntry[]) entries.toArray(new IClasspathEntry[entries.size()]),
-						m);
-				javaProject.getResolvedClasspath(false);
-				if (editJavaProject != null) {
-					editJavaProject.setRawClasspath(
-							(IClasspathEntry[]) editEntries.toArray(new IClasspathEntry[editEntries.size()]), m);
-					editJavaProject.getResolvedClasspath(false);
-				}
-				if (editorJavaProject != null) {
-					editorJavaProject.setRawClasspath(
-							(IClasspathEntry[]) editorEntries.toArray(new IClasspathEntry[editorEntries.size()]), m);
-					editorJavaProject.getResolvedClasspath(false);
-				}
-				built.acquire();
-			} catch (JavaModelException mex) {
-				throw new CoreException(ClassMakerPlugin.createErrorStatus(mex));
-			} catch (OperationCanceledException ocex) {
-			} catch (InterruptedException iex) {
-				monitor.setCanceled(true);
-			} finally {
-				m.done();
-				pm.done();
-			}
-		}
 
+				};
+			}
+
+		}
 	}
 
 	@Override
@@ -401,9 +330,52 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 		modelName = getProject().getName();
 		if (getContributionState() != null)
 			modelName = getContributionState().getModelName();
-		IPath modelPath = ensureModelResourcePathExists(getProject(), modelName, monitor);
-		IPath genModelPath = getGenModelResourcePath(modelPath);
-		final org.eclipse.emf.codegen.ecore.Generator generator = new Generator();
+		IPath modelPath = ensureExistsAndGetModelResourcePath(getProject(), modelName, monitor);
+		IPath genModelPath = obtainToGenModelResourcePath(modelPath);
+		final org.eclipse.emf.codegen.ecore.Generator generatorBackend = new Generator();
+		final org.eclipse.emf.codegen.ecore.generator.Generator generator = new org.eclipse.emf.codegen.ecore.generator.Generator() {
+
+			@Override
+			public JControlModel getJControlModel() {
+				return new JControlModel() {
+
+					@Override
+					public boolean canMerge() {
+						return false;
+					}
+				};
+			}
+
+			@Override
+			protected Collection<GeneratorAdapterFactory> getAdapterFactories(Object object) {
+				if (packageIDToAdapterFactories == null) {
+					packageIDToAdapterFactories = new HashMap<String, Collection<GeneratorAdapterFactory>>();
+				}
+				String packageID = getPackageID(object);
+				Collection<GeneratorAdapterFactory> result = packageIDToAdapterFactories.get(packageID);
+				if (result == null) {
+					Collection<GeneratorAdapterFactory.Descriptor> descriptors = getAdapterFactoryDescriptorRegistry()
+							.getDescriptors(packageID);
+					result = new ArrayList<GeneratorAdapterFactory>(descriptors.size());
+					for (GeneratorAdapterFactory.Descriptor descriptor : descriptors) {
+						GeneratorAdapterFactory adapterFactory = descriptor.createAdapterFactory();
+						adapterFactory.setGenerator(this);
+						result.add(adapterFactory);
+					}
+					packageIDToAdapterFactories.put(packageID, result);
+				} else {
+					for (GeneratorAdapterFactory factory : result) {
+						if (factory instanceof org.enterprisedomain.classmaker.jobs.codegen.EcoreGenerator.CodeGenerationJob.MyGenModelGeneratorAdapterFactory)
+							return result;
+					}
+					GeneratorAdapterFactory adapterFactory = CodeGenerationJob.MY_DESCRIPTOR.createAdapterFactory();
+					adapterFactory.setGenerator(this);
+					result.add(adapterFactory);
+					packageIDToAdapterFactories.put(packageID, result);
+				}
+				return result;
+			}
+		};
 
 		codeGeneration.setResourceSet(getResourceSet());
 		codeGeneration.setContributionState(getContributionState());
@@ -423,7 +395,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 		genModelGeneration.setResourceSet(getResourceSet());
 		genModelGeneration.setContributionState(getContributionState());
 		genModelGeneration.setProject(getProject());
-		genModelGeneration.setGenerator(generator);
+		genModelGeneration.setGeneratorBackend(generatorBackend);
 		genModelGeneration.setModelLocation(modelPath);
 		genModelGeneration.setNextJob(genModelSetup);
 
@@ -433,7 +405,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 		return Status.OK_STATUS;
 	}
 
-	private IPath ensureModelResourcePathExists(IProject project, String name, IProgressMonitor monitor)
+	private IPath ensureExistsAndGetModelResourcePath(IProject project, String name, IProgressMonitor monitor)
 			throws CoreException {
 		if (!project.exists())
 			throw new CoreException(ClassMakerPlugin.createErrorStatus(NLS.bind(Messages.ProjectNotExist, project)));
@@ -447,22 +419,33 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 		return file.getFullPath();
 	}
 
-	public IPath getGenModelResourcePath(IPath path) {
+	public IPath obtainToGenModelResourcePath(IPath path) {
 		return path.removeFileExtension().addFileExtension(GENMODEL_EXT);
 	}
 
 	protected void setupGenModel(IPath projectPath, GenModel genModel, Collection<EPackage> ePackages) {
 		for (EPackage ePackage : ePackages) {
 			GenPackage genPackage = genModel.findGenPackage(ePackage);
-			if (genPackage != null)
+			if (genPackage != null) {
 				genPackage.setEcorePackage(ePackage);
+			}
 		}
 		genModel.reconcile();
 		genModel.initialize(ePackages);
+		for (EPackage ePackage : ePackages) {
+			GenPackage genPackage = genModel.findGenPackage(ePackage);
+			if (genPackage != null) {
+				getContributionState().setBasePackage(genPackage.getBasePackage());
+			}
+		}
+		genModel.setCodeFormatting(true);
+		genModel.setImportOrganizing(true);
+		genModel.setForceOverwrite(true);
+		genModel.setCleanup(true);
 		genModel.setCanGenerate(true);
-		genModel.setComplianceLevel(GenJDKLevel.JDK110_LITERAL);
+		genModel.setComplianceLevel(GenJDKLevel.JDK210_LITERAL);
 		genModel.setUpdateClasspath(true);
-		genModel.setModelDirectory(projectPath.append(SOURCE_FOLDER_NAME).toString());
+		genModel.setModelDirectory(projectPath.append(ResourceUtils.SOURCE_FOLDER_NAME).toString());
 		genModel.setSuppressInterfaces(true);
 		for (GenPackage genPackage : genModel.getGenPackages())
 			genPackage.setPrefix(CodeGenUtil.capName(genPackage.getPrefix(), genModel.getLocale()));
@@ -475,8 +458,7 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 			genModel.setLanguage(getContributionState().getLanguage());
 			genModel.setModelPluginID(EcoreGenerator.this.getProject().getName());
 			for (StageQualifier filter : getContributionState().getCustomizers().keySet())
-				if (ClassMakerService.Stages
-						.lookup(ClassMakerService.Stages.ID_PREFIX + "project.generation.genmodel.setup")
+				if (ClassMakerService.Stages.lookup(Stage.GENERATED, "project.generation.genmodel.setup")
 						.equals(filter))
 					getContributionState().getCustomizers().get(filter)
 							.customize(ECollections.asEList(projectPath, genModel, ePackages));
@@ -484,6 +466,13 @@ public class EcoreGenerator extends EnterpriseDomainJob implements Worker {
 			getContributionState().setEditPluginClassName(genModel.getGenPackages().get(0).getEditPluginClassName());
 			getContributionState()
 					.setEditorPluginClassName(genModel.getGenPackages().get(0).getEditorPluginClassName());
+			genModel.setOSGiCompatible(true);
+			genModel.getOSGiStyle().add(GenOSGiStyle.PROVIDE_CAPABILITY_GENERATED_PACKAGE);
+			genModel.setForceOverwrite(true);
+			genModel.setPublicConstructors(true);
+			genModel.setRuntimeCompatibility(false);
+			genModel.setRuntimeJar(false);
+			genModel.setUpdateClasspath(true);
 		}
 
 		genModel.setValidateModel(true);

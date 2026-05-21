@@ -15,20 +15,19 @@
  */
 package org.enterprisedomain.classmaker.impl;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
+import java.net.URI;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
+import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.SortedSet;
+
+import javax.management.Notification;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -39,17 +38,13 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
-import org.eclipse.core.runtime.Platform;
-import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.core.runtime.jobs.MultiRule;
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
@@ -64,14 +59,12 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.xmi.XMLResource;
-import org.eclipse.osgi.internal.framework.EquinoxBundle;
-import org.eclipse.osgi.storage.BundleInfo.Generation;
 import org.eclipse.pde.core.target.ITargetDefinition;
-import org.eclipse.pde.core.target.ITargetLocation;
 import org.eclipse.pde.core.target.ITargetPlatformService;
 import org.eclipse.pde.core.target.LoadTargetDefinitionJob;
 import org.eclipse.pde.internal.core.target.TargetPlatformService;
@@ -89,12 +82,13 @@ import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Workspace;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
+import org.enterprisedomain.classmaker.jobs.EnterpriseDomainJob;
+import org.enterprisedomain.classmaker.jobs.Worker;
 import org.enterprisedomain.classmaker.util.ClassMakerSwitch;
 import org.enterprisedomain.classmaker.util.ModelUtil;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
-import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -109,10 +103,14 @@ import org.osgi.framework.Version;
  * <em>Resource Set</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl#getCustomizers
  * <em>Customizers</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl#getNonExclusiveCustomizers
+ * <em>Non Exclusive Customizers</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl#getService
  * <em>Service</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl#getSCMRegistry
  * <em>SCM Registry</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.WorkspaceImpl#getExcludedEPackages
+ * <em>Excluded EPackages</em>}</li>
  * </ul>
  *
  * @generated
@@ -163,6 +161,17 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	protected EMap<StageQualifier, Customizer> customizers;
 
 	/**
+	 * The cached value of the '{@link #getNonExclusiveCustomizers() <em>Non
+	 * Exclusive Customizers</em>}' map. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
+	 * @see #getNonExclusiveCustomizers()
+	 * @generated
+	 * @ordered
+	 */
+	protected EMap<StageQualifier, Customizer> nonExclusiveCustomizers;
+
+	/**
 	 * The cached value of the '{@link #getSCMRegistry() <em>SCM Registry</em>}'
 	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -172,28 +181,40 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 */
 	protected SCMRegistry<?> scmRegistry;
 
+	/**
+	 * The cached value of the '{@link #getExcludedEPackages() <em>Excluded
+	 * EPackages</em>}' reference list. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
+	 * @see #getExcludedEPackages()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<EPackage> excludedEPackages;
+
 	protected IResourceChangeListener resourcesListener = new IResourceChangeListener() {
 
 		@Override
 		public void resourceChanged(IResourceChangeEvent event) {
 			if (event.getResource() != null && event.getResource().getType() == IResource.PROJECT
-					&& event.getType() == IResourceChangeEvent.PRE_DELETE)
-				try {
-					Project project = getProject(event.getResource().getName());
-					if (project == null)
-						return;
-					SubMonitor pm = SubMonitor.convert(ClassMakerPlugin.getProgressMonitor());
-					SubMonitor m = pm.newChild(1, SubMonitor.SUPPRESS_ISCANCELED);
-					try {
-						if (project != null)
-							project.delete(m);
-					} finally {
-						m.done();
-						pm.done();
-					}
-				} catch (CoreException e) {
-					ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
-				}
+					&& event.getType() == IResourceChangeEvent.PRE_DELETE) {
+				// try {
+				Project project = getProject(event.getResource().getName());
+				if (project == null)
+					return;
+				// SubMonitor pm = SubMonitor.convert(ClassMakerPlugin.getProgressMonitor());
+				// SubMonitor m = pm.newChild(1, SubMonitor.SUPPRESS_ISCANCELED);
+				// try {
+				// if (project != null)
+				// project.delete(m);
+				// } finally {
+				// m.done();
+				// pm.done();
+				// }
+				// } catch (CoreException e) {
+				// ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
+				// }
+			}
 		}
 	};
 
@@ -262,20 +283,110 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 				SortedSet<Customizer> customizers = ClassMakerService.Stages.createCustomizers(id);
 				if (!customizers.isEmpty())
 					for (Customizer customizer : customizers)
-						this.customizers.put(ClassMakerService.Stages.lookup(id), customizer);
-			}
-			this.customizers.sort(new Comparator<Map.Entry<StageQualifier, Customizer>>() {
+						if (customizer.isExclusive())
+							this.customizers.put(ClassMakerService.Stages.lookup(id), customizer);
+				this.customizers.sort(new Comparator<Map.Entry<StageQualifier, Customizer>>() {
 
-				@Override
-				public int compare(Entry<StageQualifier, Customizer> o1, Entry<StageQualifier, Customizer> o2) {
-					if (o1.getKey().equals(o2.getKey())) {
-						return o1.getValue().getRank() - o2.getValue().getRank();
+					@Override
+					public int compare(Entry<StageQualifier, Customizer> o1, Entry<StageQualifier, Customizer> o2) {
+						if (o1.getKey().equals(o2.getKey())) {
+							return o1.getValue().getRank() - o2.getValue().getRank();
+						}
+						return 0;
 					}
-					return 0;
-				}
-			});
+				});
+			}
 		}
 		return customizers;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public EMap<StageQualifier, Customizer> getNonExclusiveCustomizers() {
+		if (nonExclusiveCustomizers == null) {
+			nonExclusiveCustomizers = new EcoreEMap<StageQualifier, Customizer>(
+					ClassMakerPackage.Literals.STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY,
+					StageQualifierToCustomizerMapEntryImpl.class, this,
+					ClassMakerPackage.WORKSPACE__NON_EXCLUSIVE_CUSTOMIZERS);
+			for (String id : ClassMakerService.Stages.ids()) {
+				SortedSet<Customizer> customizers = ClassMakerService.Stages.createCustomizers(id);
+				if (!customizers.isEmpty()) {
+					EList<Customizer> nonExclusive = ECollections.newBasicEList();
+					for (Customizer customizer : customizers)
+						if (!customizer.isExclusive())
+							nonExclusive.add(customizer);
+					if (!nonExclusive.isEmpty())
+						this.nonExclusiveCustomizers.put(ClassMakerService.Stages.lookup(id), new CustomizerImpl() {
+
+							private int maxRank = 0;
+							private EnterpriseDomainJob next = null;
+
+							@Override
+							public Object customize(EList<Object> args) {
+								Iterator<Customizer> it = nonExclusive.iterator();
+								Worker firstWorker = null;
+								if (it.hasNext()) {
+									Customizer c = it.next();
+									maxRank = Math.max(maxRank, c.getRank());
+									firstWorker = (Worker) c.customize(args);
+									if (it.hasNext()) {
+										next = ((Worker) it.next().customize(args))
+												.getAdapter(EnterpriseDomainJob.class);
+										(firstWorker.getAdapter(EnterpriseDomainJob.class)).setNextJob(next);
+									} else if (firstWorker != null) {
+										Iterator<Customizer> ine = nonExclusive.iterator();
+										while (ine.hasNext()) {
+											Customizer neCustomizer = ine.next();
+											Iterator<Customizer> ie = getCustomizers().values().iterator();
+											while (ie.hasNext()) {
+												Customizer eCustomizer = ie.next();
+												if (neCustomizer.isNextAfter(eCustomizer.getClass())) {
+													next = ((Worker) eCustomizer.customize(args))
+															.getAdapter(EnterpriseDomainJob.class);
+													break;
+												}
+											}
+										}
+										(firstWorker.getAdapter(EnterpriseDomainJob.class)).setNextJob(next);
+									}
+									it.forEachRemaining((customizer) -> {
+										maxRank = Math.max(maxRank, customizer.getRank());
+										EnterpriseDomainJob job = ((Worker) customizer.customize(args))
+												.getAdapter(EnterpriseDomainJob.class);
+										if (next != null)
+											next.setNextJob(job);
+										if (it.hasNext()) {
+											next = ((Worker) it.next().customize(args))
+													.getAdapter(EnterpriseDomainJob.class);
+											job.setNextJob(next);
+										}
+									});
+
+								}
+								setRank(maxRank);
+								return firstWorker;
+							}
+
+						});
+				}
+				this.nonExclusiveCustomizers.sort(new Comparator<Map.Entry<StageQualifier, Customizer>>() {
+
+					@Override
+					public int compare(Entry<StageQualifier, Customizer> o1, Entry<StageQualifier, Customizer> o2) {
+						if (o1.getKey().equals(o2.getKey())) {
+							return o1.getValue().getRank() - o2.getValue().getRank();
+						}
+						return 0;
+					}
+
+				});
+			}
+		}
+		return nonExclusiveCustomizers;
 	}
 
 	/**
@@ -356,9 +467,24 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
+	 * @generated
+	 */
+	@Override
+	public EList<EPackage> getExcludedEPackages() {
+		if (excludedEPackages == null) {
+			excludedEPackages = new EObjectResolvingEList<EPackage>(EPackage.class, this,
+					ClassMakerPackage.WORKSPACE__EXCLUDED_EPACKAGES);
+		}
+		return excludedEPackages;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	public void initialize() {
+		ClassMakerPlugin.print("Workspace is initializing...");
 		final URI uri = URI.createFileURI(ResourceUtils.WORKSPACE_RESOURCE_PATH.toString());
 		getService().eAdapters().add(new AdapterImpl() {
 
@@ -401,6 +527,9 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		if (getContributions().isEmpty()) {
 			IWorkspace workspace = ResourcesPlugin.getWorkspace();
 			for (IProject eProject : workspace.getRoot().getProjects()) {
+				if (getProjects().stream().anyMatch(p -> p.getProjectName().equals(eProject.getName()))) {
+					continue;
+				}
 				Project project = null;
 				try {
 					eProject.open(ClassMakerPlugin.getProgressMonitor());
@@ -415,7 +544,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 					}
 					project.setProjectName(eProject.getName());
 					registerProject(project);
-					project.initialize(false);
+					project.initialize();
 				} catch (CoreException e) {
 					ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
 				}
@@ -423,14 +552,14 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 
 		} else
 			for (Contribution contribution : getContributions()) {
-				contribution.initialize(false);
+				contribution.initialize();
 			}
 		if (getProjects().size() <= getContributions().size() && !edProjects.isEmpty()) {
 			for (IProject p : edProjects.keySet()) {
 				Project project = edProjects.get(p);
 				project.setProjectName(p.getName());
 				registerProject(project);
-				project.initialize(false);
+				project.initialize();
 			}
 		} else
 			for (Project project : getProjects()) {
@@ -442,8 +571,14 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			}
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(resourcesListener,
 				IResourceChangeEvent.POST_CHANGE | IResourceChangeEvent.PRE_DELETE);
+		applyCustomizers(getCustomizers());
+		applyCustomizers(getNonExclusiveCustomizers());
+	}
+
+	@SuppressWarnings("unchecked")
+	private void applyCustomizers(EMap<StageQualifier, Customizer> source) {
 		EList<Customizer> customizers = ECollections.newBasicEList();
-		ListIterator<Map.Entry<StageQualifier, Customizer>> it = getCustomizers().listIterator();
+		ListIterator<Map.Entry<StageQualifier, Customizer>> it = source.listIterator();
 		while (it.hasNext()) {
 			Map.Entry<StageQualifier, Customizer> next = it.next();
 			StageQualifier filter = next.getKey();
@@ -451,7 +586,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 				it.remove();
 				continue;
 			}
-			if (filter.equals(ClassMakerService.Stages.lookup(ClassMakerService.Stages.ID_PREFIX + "workspace.init")))
+			if (filter.equals(ClassMakerService.Stages.lookup(Stage.DEFINED, "workspace.init")))
 				customizers.add(next.getValue());
 		}
 		ECollections.sort(customizers, new Customizer.CustomizerComparator());
@@ -468,42 +603,19 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	 */
 	@SuppressWarnings("restriction")
 	public void provision(IProgressMonitor monitor) throws CoreException {
-		if (System.getProperty("buildingWithTycho") != null) {
-			if (targetPlatformAlreadySet) {
-				return;
-			}
-			targetPlatformAlreadySet = true;
-		} else {
-			return;
-		}
+		// if (System.getProperty("buildingWithTycho") != null) {
+		// if (targetPlatformAlreadySet) {
+		// return;
+		// }
+		// targetPlatformAlreadySet = true;
+		// } else {
+		// return;
+		// }
 		try {
 			Bundle currentBundle = FrameworkUtil.getBundle(getClass());
 			ITargetPlatformService targetPlatformService = TargetPlatformService.getDefault();
 			ITargetDefinition targetDefinition = null;
-			targetDefinition = targetPlatformService.newTarget();
-			targetDefinition.setName("Platform");
-			Bundle[] bundles = Platform.getBundle(Platform.PI_RUNTIME).getBundleContext().getBundles();
-			List<ITargetLocation> bundleContainers = new ArrayList<ITargetLocation>();
-			Set<File> dirs = new HashSet<File>();
-			for (Bundle bundle : bundles) {
-				if (bundle.equals(currentBundle)) {
-					continue;
-				}
-				EquinoxBundle bundleImpl = (EquinoxBundle) bundle;
-				Generation generation = (Generation) bundleImpl.getModule().getCurrentRevision().getRevisionInfo();
-				File file = generation.getBundleFile().getBaseFile();
-				File folder = file.getParentFile();
-				if (!dirs.contains(folder)) {
-					dirs.add(folder);
-					bundleContainers.add(targetPlatformService.newDirectoryLocation(folder.getAbsolutePath()));
-				}
-			}
-			targetDefinition.setTargetLocations(bundleContainers.toArray(new ITargetLocation[bundleContainers.size()]));
-			targetDefinition.setArch(Platform.getOSArch());
-			targetDefinition.setOS(Platform.getOS());
-			targetDefinition.setWS(Platform.getWS());
-			targetDefinition.setNL(Platform.getNL());
-			targetPlatformService.saveTargetDefinition(targetDefinition);
+			targetDefinition = targetPlatformService.getWorkspaceTargetDefinition();
 			LoadTargetDefinitionJob job = new LoadTargetDefinitionJob(targetDefinition);
 			job.schedule();
 			try {
@@ -530,8 +642,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			Contribution result = getContribution(blueprint, true);
 			if (result != null) {
 				if (!result.getRevisions().isEmpty()) {
-					Revision newRevision = result.newRevision(result.nextVersion());
-					result.checkout(newRevision.getVersion());
+					result.checkout(result.getVersion());
 				} else {
 					result.createRevision(monitor);
 					result.load(true, true);
@@ -553,7 +664,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			result.checkout(revision.getVersion());
 			result.load(true, true);
 			EObject model = EcoreUtil.copy(blueprint);
-			result.getDomainModel().setDynamic(model);
+			result.getDomainModel().setDynamicEPackage(model);
 			result.getState().saveResource();
 			return result;
 		} finally {
@@ -656,16 +767,16 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		case Stage.EXPORTED_VALUE:
 		case Stage.INSTALLED_VALUE:
 			for (Contribution c : getContributions())
-				if (c.getDomainModel() != null
-						&& ModelUtil.eObjectsAreEqual(eObject, c.getDomainModel().getDynamic(), !searchOptimistic))
+				if (c.getDomainModel() != null && ModelUtil.eObjectsAreEqual(eObject,
+						c.getDomainModel().getDynamicEPackage(), !searchOptimistic))
 					return c;
 			break;
 		case Stage.LOADED_VALUE:
 			for (Contribution c : getContributions()) {
-				if (ModelUtil.eObjectsAreEqual(eObject, c.getDomainModel().getDynamic(), false))
+				if (ModelUtil.eObjectsAreEqual(eObject, c.getDomainModel().getDynamicEPackage(), false))
 					while (c.getState().isMaking() && !c.getPhase().equals(Stage.LOADED))
 						Thread.yield();
-				if (ModelUtil.eObjectsAreEqual(eObject, c.getDomainModel().getGenerated(), !searchOptimistic))
+				if (ModelUtil.eObjectsAreEqual(eObject, c.getDomainModel().getGeneratedEPackage(), !searchOptimistic))
 					return c;
 			}
 		}
@@ -718,17 +829,17 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		case Stage.EXPORTED_VALUE:
 		case Stage.INSTALLED_VALUE:
 			for (Contribution contribution : getContributions()) {
-				if (contribution.getDomainModel().getDynamic() != null
-						&& contribution.getDomainModel().getDynamic() instanceof EPackage
-						&& ((EPackage) contribution.getDomainModel().getDynamic()).getNsURI().equals(nsURI))
+				if (contribution.getDomainModel().getDynamicEPackage() != null
+						&& contribution.getDomainModel().getDynamicEPackage() instanceof EPackage
+						&& ((EPackage) contribution.getDomainModel().getDynamicEPackage()).getNsURI().equals(nsURI))
 					return contribution;
 			}
 			break;
 		case Stage.LOADED_VALUE:
 			for (Contribution contribution : getContributions()) {
-				if (contribution.getDomainModel().getGenerated() != null
-						&& contribution.getDomainModel().getGenerated() instanceof EPackage
-						&& ((EPackage) contribution.getDomainModel().getGenerated()).getNsURI().equals(nsURI))
+				if (contribution.getDomainModel().getGeneratedEPackage() != null
+						&& contribution.getDomainModel().getGeneratedEPackage() instanceof EPackage
+						&& ((EPackage) contribution.getDomainModel().getGeneratedEPackage()).getNsURI().equals(nsURI))
 					return contribution;
 			}
 			break;
@@ -749,7 +860,7 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			project.create(monitor);
 			Revision revision = project.createRevision(monitor);
 			project.checkout(revision.getVersion());
-			project.initialize(true);
+			project.initialize();
 			project.load(true, true);
 			return project;
 		} finally {
@@ -799,23 +910,20 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			uriConverter = resourceSet.getURIConverter();
 		}
 		for (Project project : getProjects()) {
-			if (uriConverter != null && !project.getChildren().isEmpty()
-					&& project.getChildren().get(0) instanceof Resource) {
+			if (uriConverter != null && project.getResource() != null) {
 				if (uriConverter.normalize(resource.getURI())
-						.equals(uriConverter.normalize(((Resource) project.getChildren().get(0)).getURI())))
+						.equals(uriConverter.normalize(project.getResource().getURI())))
 					return project;
-			} else if (uriConverter != null && !project.getChildren().isEmpty()
-					&& project.getChildren().get(0) instanceof EObject) {
-				if (uriConverter.normalize(resource.getURI())
-						.equals(uriConverter.normalize(((EObject) project.getChildren().get(0)).eResource().getURI())))
+			} else if (uriConverter != null && project.getResource() != null) {
+				if (uriConverter.normalize(resource.getURI()).equals(uriConverter
+						.normalize(((EObject) project.getResource().getContents().get(0)).eResource().getURI())))
 					return project;
-			} else if (uriConverter == null && !project.getChildren().isEmpty()
-					&& project.getChildren().get(0) instanceof Resource) {
-				if (resource.getURI().equals(((Resource) project.getChildren().get(0)).getURI()))
+			} else if (uriConverter == null && project.getResource() != null) {
+				if (resource.getURI().equals(project.getResource().getURI()))
 					return project;
-			} else if (uriConverter == null && !project.getChildren().isEmpty()
-					&& project.getChildren().get(0) instanceof EObject) {
-				if (resource.getURI().equals(((EObject) project.getChildren().get(0)).eResource().getURI()))
+			} else if (uriConverter == null && project.getResource() != null) {
+				if (resource.getURI()
+						.equals(((EObject) project.getResource().getContents().get(0)).eResource().getURI()))
 					return project;
 			}
 		}
@@ -830,10 +938,10 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 	public Stage contains(EObject blueprint) {
 		for (Contribution c : getContributions()) {
 			if (c.getPhase().getValue() < Stage.LOADED_VALUE) {
-				if (ModelUtil.eObjectsAreEqual(blueprint, c.getDomainModel().getDynamic(), false))
+				if (ModelUtil.eObjectsAreEqual(blueprint, c.getDomainModel().getDynamicEPackage(), false))
 					return c.getPhase();
 			} else {
-				if (ModelUtil.eObjectsAreEqual(blueprint, c.getDomainModel().getGenerated(), false))
+				if (ModelUtil.eObjectsAreEqual(blueprint, c.getDomainModel().getGeneratedEPackage(), false))
 					return c.getPhase();
 			}
 		}
@@ -886,6 +994,8 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			return ((InternalEList<?>) getProjects()).basicRemove(otherEnd, msgs);
 		case ClassMakerPackage.WORKSPACE__CUSTOMIZERS:
 			return ((InternalEList<?>) getCustomizers()).basicRemove(otherEnd, msgs);
+		case ClassMakerPackage.WORKSPACE__NON_EXCLUSIVE_CUSTOMIZERS:
+			return ((InternalEList<?>) getNonExclusiveCustomizers()).basicRemove(otherEnd, msgs);
 		case ClassMakerPackage.WORKSPACE__SERVICE:
 			return basicSetService(null, msgs);
 		}
@@ -924,12 +1034,19 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 				return getCustomizers();
 			else
 				return getCustomizers().map();
+		case ClassMakerPackage.WORKSPACE__NON_EXCLUSIVE_CUSTOMIZERS:
+			if (coreType)
+				return getNonExclusiveCustomizers();
+			else
+				return getNonExclusiveCustomizers().map();
 		case ClassMakerPackage.WORKSPACE__SERVICE:
 			return getService();
 		case ClassMakerPackage.WORKSPACE__SCM_REGISTRY:
 			if (resolve)
 				return getSCMRegistry();
 			return basicGetSCMRegistry();
+		case ClassMakerPackage.WORKSPACE__EXCLUDED_EPACKAGES:
+			return getExcludedEPackages();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -950,8 +1067,15 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		case ClassMakerPackage.WORKSPACE__CUSTOMIZERS:
 			((EStructuralFeature.Setting) getCustomizers()).set(newValue);
 			return;
+		case ClassMakerPackage.WORKSPACE__NON_EXCLUSIVE_CUSTOMIZERS:
+			((EStructuralFeature.Setting) getNonExclusiveCustomizers()).set(newValue);
+			return;
 		case ClassMakerPackage.WORKSPACE__SERVICE:
 			setService((ClassMakerService) newValue);
+			return;
+		case ClassMakerPackage.WORKSPACE__EXCLUDED_EPACKAGES:
+			getExcludedEPackages().clear();
+			getExcludedEPackages().addAll((Collection<? extends EPackage>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -971,8 +1095,14 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 		case ClassMakerPackage.WORKSPACE__CUSTOMIZERS:
 			getCustomizers().clear();
 			return;
+		case ClassMakerPackage.WORKSPACE__NON_EXCLUSIVE_CUSTOMIZERS:
+			getNonExclusiveCustomizers().clear();
+			return;
 		case ClassMakerPackage.WORKSPACE__SERVICE:
 			setService((ClassMakerService) null);
+			return;
+		case ClassMakerPackage.WORKSPACE__EXCLUDED_EPACKAGES:
+			getExcludedEPackages().clear();
 			return;
 		}
 		super.eUnset(featureID);
@@ -992,10 +1122,14 @@ public class WorkspaceImpl extends EObjectImpl implements Workspace {
 			return RESOURCE_SET_EDEFAULT == null ? resourceSet != null : !RESOURCE_SET_EDEFAULT.equals(resourceSet);
 		case ClassMakerPackage.WORKSPACE__CUSTOMIZERS:
 			return customizers != null && !customizers.isEmpty();
+		case ClassMakerPackage.WORKSPACE__NON_EXCLUSIVE_CUSTOMIZERS:
+			return nonExclusiveCustomizers != null && !nonExclusiveCustomizers.isEmpty();
 		case ClassMakerPackage.WORKSPACE__SERVICE:
 			return getService() != null;
 		case ClassMakerPackage.WORKSPACE__SCM_REGISTRY:
 			return scmRegistry != null;
+		case ClassMakerPackage.WORKSPACE__EXCLUDED_EPACKAGES:
+			return excludedEPackages != null && !excludedEPackages.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

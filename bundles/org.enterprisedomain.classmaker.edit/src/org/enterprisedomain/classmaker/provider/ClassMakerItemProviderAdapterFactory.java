@@ -329,6 +329,29 @@ public class ClassMakerItemProviderAdapterFactory extends ClassMakerAdapterFacto
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link java.util.Map.Entry}
+	 * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected StageQualifierToWorkersMapEntryItemProvider stageQualifierToWorkersMapEntryItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link java.util.Map.Entry}. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public Adapter createStageQualifierToWorkersMapEntryAdapter() {
+		if (stageQualifierToWorkersMapEntryItemProvider == null) {
+			stageQualifierToWorkersMapEntryItemProvider = new StageQualifierToWorkersMapEntryItemProvider(this);
+		}
+
+		return stageQualifierToWorkersMapEntryItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all
 	 * {@link org.enterprisedomain.classmaker.Models} instances. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
@@ -675,6 +698,8 @@ public class ClassMakerItemProviderAdapterFactory extends ClassMakerAdapterFacto
 			stageQualifierItemProvider.dispose();
 		if (stageQualifierToCustomizerMapEntryItemProvider != null)
 			stageQualifierToCustomizerMapEntryItemProvider.dispose();
+		if (stageQualifierToWorkersMapEntryItemProvider != null)
+			stageQualifierToWorkersMapEntryItemProvider.dispose();
 		if (modelsItemProvider != null)
 			modelsItemProvider.dispose();
 		if (scmRegistryItemProvider != null)

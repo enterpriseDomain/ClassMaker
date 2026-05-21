@@ -1,7 +1,5 @@
 package org.enterprisedomain.classmaker.sample;
 
-import javax.inject.Inject;
-
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
@@ -19,7 +17,7 @@ import org.osgi.framework.FrameworkUtil;
 
 public class Worker implements Runnable {
 
-	@Inject
+	@jakarta.inject.Inject
 	private ClassMakerService m;
 
 	private EPackage ePackage;

@@ -18,7 +18,6 @@ package org.enterprisedomain.classmaker;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
-import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object

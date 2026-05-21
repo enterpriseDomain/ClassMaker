@@ -25,7 +25,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.IJobChangeListener;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
@@ -94,7 +93,8 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 					}
 					prevJob.setNextJob(getNextJob());
 				}
-				setNextJob(job);
+				if (job != null && !EnterpriseDomainJob.this.getClass().equals(job.getClass()))
+					setNextJob(job);
 			}
 			if (getNextJob() == null) {
 				if (ClassMakerPlugin.getPreviousProgressProvider() != null)
@@ -104,12 +104,17 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 				return;
 			}
 			getNextJob().setProject(getProject());
-			getNextJob().schedule();
+			if (getNextJob().isExclusive() || EnterpriseDomainJob.this.getClass() == getNextJob().getAfterJob())
+				getNextJob().schedule();
 		}
 
 	};
 
+	private Class<? extends EnterpriseDomainJob> after;
+
 	private ResourceSet resourceSet;
+
+	private boolean exclusive = true;
 
 	private long stateTimestamp = -1;
 
@@ -243,6 +248,26 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 		this.depth = depth;
 	}
 
+	public boolean isExclusive() {
+		return exclusive;
+	}
+
+	public void setExclusive(boolean exclusive) {
+		this.exclusive = exclusive;
+	}
+
+	/**
+	 * 
+	 * @return job class after which instances should execute this job
+	 */
+	public Class<? extends EnterpriseDomainJob> getAfterJob() {
+		return after;
+	}
+
+	public void setAfterJob(Class<? extends EnterpriseDomainJob> after) {
+		this.after = after;
+	}
+
 	protected boolean terminate() {
 		return false;
 	}
@@ -255,6 +280,14 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 		this.project = project;
 		if (isChangeRule() && project != null)
 			setRule(calcSchedulingRule(project));
+	}
+
+	public IProject getEditProject() {
+		return ResourcesPlugin.getWorkspace().getRoot().getProject(getProject().getName() + ".edit");
+	}
+
+	public IProject getEditorProject() {
+		return ResourcesPlugin.getWorkspace().getRoot().getProject(getProject().getName() + ".editor");
 	}
 
 	protected ISchedulingRule calcSchedulingRule(IProject project) {
@@ -282,11 +315,23 @@ public abstract class EnterpriseDomainJob extends WorkspaceJob implements Worker
 	}
 
 	public void setNextJob(EnterpriseDomainJob nextJob) {
-		this.nextJob = nextJob;
-		if (this.nextJob != null)
-			addListener();
-		else
-			removeListener();
+		if (this.nextJob != null && !this.nextJob.isExclusive() && this.nextJob != nextJob && nextJob != null
+				&& !nextJob.terminate()) {
+			EnterpriseDomainJob toCheck = this.nextJob.getNextJob();
+			EnterpriseDomainJob toSet = toCheck;
+			while (toCheck != null && toCheck != nextJob && toCheck != nextJob.getNextJob() && !toCheck.terminate()) {
+				toSet = toCheck;
+				toCheck = toCheck.getNextJob();
+			}
+			if (toSet != null)
+				toSet.setNextJob(nextJob);
+		} else {
+			this.nextJob = nextJob;
+			if (this.nextJob != null)
+				addListener();
+			else
+				removeListener();
+		}
 	}
 
 	public void removeListener() {

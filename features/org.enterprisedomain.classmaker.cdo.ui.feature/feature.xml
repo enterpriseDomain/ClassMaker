@@ -2,7 +2,7 @@
 <feature
       id="org.enterprisedomain.classmaker.cdo.ui.feature"
       label="CDO UI Feature"
-      version="0.8.55.qualifier"
+      version="0.8.55"
       provider-name="Kyrill Zotkin">
 
    <description url="http://www.example.com/description">
@@ -27,17 +27,11 @@
       <import plugin="org.eclipse.emf.cdo.ui" version="4.9.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.cdo.explorer.ui" version="4.7.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.net4j.tcp" version="4.2.1" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.ecp.view.context" version="1.26.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.ecp.ui.view" version="1.26.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.ecp.ui.view.swt" version="1.26.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.equinox.concurrent" version="1.2.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
          id="org.enterprisedomain.classmaker.cdo.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
 </feature>

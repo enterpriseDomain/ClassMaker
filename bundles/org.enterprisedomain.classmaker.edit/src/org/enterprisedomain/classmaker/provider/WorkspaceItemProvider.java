@@ -68,7 +68,9 @@ public class WorkspaceItemProvider extends ItemProviderAdapter implements IEditi
 			super.getPropertyDescriptors(object);
 
 			addResourceSetPropertyDescriptor(object);
+			addNonExclusiveCustomizersPropertyDescriptor(object);
 			addSCMRegistryPropertyDescriptor(object);
+			addExcludedEPackagesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -90,6 +92,22 @@ public class WorkspaceItemProvider extends ItemProviderAdapter implements IEditi
 	}
 
 	/**
+	 * This adds a property descriptor for the Non Exclusive Customizers feature.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected void addNonExclusiveCustomizersPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Workspace_nonExclusiveCustomizers_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Workspace_nonExclusiveCustomizers_feature",
+								"_UI_Workspace_type"),
+						ClassMakerPackage.Literals.WORKSPACE__NON_EXCLUSIVE_CUSTOMIZERS, true, false, true, null, null,
+						null));
+	}
+
+	/**
 	 * This adds a property descriptor for the SCM Registry feature. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -102,6 +120,21 @@ public class WorkspaceItemProvider extends ItemProviderAdapter implements IEditi
 						getString("_UI_PropertyDescriptor_description", "_UI_Workspace_SCMRegistry_feature",
 								"_UI_Workspace_type"),
 						ClassMakerPackage.Literals.WORKSPACE__SCM_REGISTRY, false, false, false, null, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Excluded EPackages feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected void addExcludedEPackagesPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Workspace_excludedEPackages_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Workspace_excludedEPackages_feature",
+								"_UI_Workspace_type"),
+						ClassMakerPackage.Literals.WORKSPACE__EXCLUDED_EPACKAGES, true, false, true, null, null, null));
 	}
 
 	/**

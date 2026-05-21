@@ -1,5 +1,5 @@
 /**
- * Copyright 2012-2018 Kyrill Zotkin
+ * Copyright 2012-2025 Kyrill Zotkin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
@@ -36,12 +38,11 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.preferences.IPreferencesService;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.jgit.lib.Constants;
 import org.eclipse.pde.internal.core.ICoreConstants;
 import org.enterprisedomain.classmaker.Messages;
 import org.enterprisedomain.classmaker.State;
@@ -49,6 +50,8 @@ import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 
 @SuppressWarnings("restriction")
 public class ResourceUtils {
+
+	public static final String SOURCE_FOLDER_NAME = "src"; /// main/java"; //$NON-NLS-1$
 
 	public static List<String> PROJECT_DELETE_MASK;
 
@@ -69,7 +72,6 @@ public class ResourceUtils {
 
 	static {
 		PROJECT_DELETE_MASK = new ArrayList<String>();
-		PROJECT_DELETE_MASK.add(Constants.DOT_GIT);
 		PROJECT_DELETE_MASK.add(ICoreConstants.PLUGIN_FILENAME_DESCRIPTOR);
 		PROJECT_DELETE_MASK.add(ICoreConstants.MANIFEST_FOLDER_NAME);
 		PROJECT_DELETE_MASK.add(ICoreConstants.MANIFEST_FILENAME);
@@ -83,22 +85,23 @@ public class ResourceUtils {
 		return project.getFullPath().append(getModelFolderName()).append(transformationURI.lastSegment());
 	}
 
-	public static IPath getExportDestination(IProject project) {
-		return project.getLocation().append(getTargetFolderName());
+	public static IPath getExportDestination(State state) {
+		return Platform.getStateLocation(Platform.getBundle(ClassMakerPlugin.PLUGIN_ID)).append(state.getProjectName())
+				.append(getTargetFolderName());
 	}
 
-	public static IPath getTargetResourcePath(IProject project, State state) {
-		return getExportDestination(project).append("plugins").addTrailingSeparator() //$NON-NLS-1$
+	public static IPath getTargetResourcePath(State state) {
+		return getExportDestination(state).append("plugins").addTrailingSeparator() //$NON-NLS-1$
 				.append(state.getDeployableUnitName()).addFileExtension("jar"); //$NON-NLS-1$
 	}
 
-	public static IPath getEditTargetResourcePath(IProject project, State state) {
-		return getExportDestination(project).append("plugins").addTrailingSeparator() //$NON-NLS-1$
+	public static IPath getEditTargetResourcePath(State state) {
+		return getExportDestination(state).append("plugins").addTrailingSeparator() //$NON-NLS-1$
 				.append(state.getEditDeployableUnitName()).addFileExtension("jar"); //$NON-NLS-1$
 	}
 
-	public static IPath getEditorTargetResourcePath(IProject project, State state) {
-		return getExportDestination(project).append("plugins").addTrailingSeparator() //$NON-NLS-1$
+	public static IPath getEditorTargetResourcePath(State state) {
+		return getExportDestination(state).append("plugins").addTrailingSeparator() //$NON-NLS-1$
 				.append(state.getEditorDeployableUnitName()).addFileExtension("jar"); //$NON-NLS-1$
 	}
 
@@ -148,19 +151,21 @@ public class ResourceUtils {
 		return ResourcesPlugin.getWorkspace().getRoot().getProject(projectName).exists();
 	}
 
-	public static String[] addElement(String[] elements, String element) {
-		String[] oldElements = elements;
-		String[] newElements = new String[oldElements.length + 1];
+	public static <T> T[] addElement(T[] elements, T element) {
+		T[] oldElements = elements;
+		@SuppressWarnings("unchecked")
+		T[] newElements = (T[]) Array.newInstance(oldElements.getClass().getComponentType(), oldElements.length + 1);
 		System.arraycopy(oldElements, 0, newElements, 0, oldElements.length);
 		newElements[oldElements.length] = element;
 		return newElements;
 	}
 
-	public static String[] removeElement(String[] elements, String element) {
-		String[] oldElements = elements;
+	public static <T> T[] removeElement(T[] elements, T element) {
+		T[] oldElements = elements;
 		if (oldElements.length == 0)
 			return oldElements;
-		String[] newNatures = new String[oldElements.length - 1];
+		@SuppressWarnings("unchecked")
+		T[] newNatures = (T[]) Array.newInstance(oldElements.getClass().getComponentType(), oldElements.length - 1);
 		int index = 0;
 		for (int i = 0; i < oldElements.length; i++)
 			if (oldElements[i].equals(element))
@@ -171,6 +176,9 @@ public class ResourceUtils {
 
 	public static void addProjectNature(IProject project, String natureId) throws CoreException {
 		IProjectDescription description = project.getDescription();
+		for (String nature : description.getNatureIds())
+			if (nature.equals(natureId))
+				return;
 		description.setNatureIds(addElement(description.getNatureIds(), natureId));
 		IProgressMonitor monitor = ClassMakerPlugin.getProgressMonitor();
 		SubMonitor pm = null;
@@ -309,6 +317,14 @@ public class ResourceUtils {
 		setAutoBuilding(workspace, oldAutoBuilding);
 	}
 
+	public static void cleanupDir() throws CoreException {
+		cleanupDir("");
+	}
+
+	public static void cleanupDir(String folderPath) throws CoreException {
+		cleanupDir(folderPath, new String[] {});
+	}
+
 	public static void cleanupDir(IProject project) throws CoreException {
 		cleanupDir(project, "");
 	}
@@ -325,6 +341,19 @@ public class ResourceUtils {
 			path = project.getFolder(folderPath).getFullPath();
 		}
 		path = project.getWorkspace().getRoot().getLocation().append(path);
+		File folder = path.toFile();
+		if (!folder.exists())
+			return;
+		for (String fileName : folder.list())
+			delete(new File(folder.toString() + File.separator + fileName), excluding);
+	}
+
+	public static void cleanupDir(String folderPath, String[] excluding) throws CoreException {
+		IPath path;
+		if (folderPath.isEmpty())
+			path = ResourcesPlugin.getWorkspace().getRoot().getLocation();
+		else
+			path = new Path(folderPath);
 		File folder = path.toFile();
 		if (!folder.exists())
 			return;

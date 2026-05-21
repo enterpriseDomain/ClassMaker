@@ -16,7 +16,6 @@
 package org.enterprisedomain.classmaker;
 
 import org.eclipse.emf.ecore.EObject;
-import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>SCM

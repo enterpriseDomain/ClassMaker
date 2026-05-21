@@ -33,6 +33,10 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  * <li>{@link org.enterprisedomain.classmaker.Customizer#getRank
  * <em>Rank</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Customizer#isExclusive
+ * <em>Exclusive</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Customizer#getStage
+ * <em>Stage</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getCustomizer()
@@ -79,6 +83,52 @@ public interface Customizer extends EObject {
 	void setRank(int value);
 
 	/**
+	 * Returns the value of the '<em><b>Exclusive</b></em>' attribute. The default
+	 * value is <code>"true"</code>. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Exclusive</em>' attribute.
+	 * @see #setExclusive(boolean)
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getCustomizer_Exclusive()
+	 * @model default="true"
+	 * @generated
+	 */
+	boolean isExclusive();
+
+	/**
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Customizer#isExclusive
+	 * <em>Exclusive</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value the new value of the '<em>Exclusive</em>' attribute.
+	 * @see #isExclusive()
+	 * @generated
+	 */
+	void setExclusive(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Stage</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Stage</em>' reference.
+	 * @see #setStage(StageQualifier)
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getCustomizer_Stage()
+	 * @model
+	 * @generated
+	 */
+	StageQualifier getStage();
+
+	/**
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Customizer#getStage <em>Stage</em>}'
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value the new value of the '<em>Stage</em>' reference.
+	 * @see #getStage()
+	 * @generated
+	 */
+	void setStage(StageQualifier value);
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * Provides customization in the process. <!-- end-model-doc -->
 	 * 
@@ -86,5 +136,13 @@ public interface Customizer extends EObject {
 	 * @generated
 	 */
 	Object customize(EList<Object> args);
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model
+	 * @generated
+	 */
+	boolean isNextAfter(Class<? extends Customizer> customizerClass);
 
 } // Customizer

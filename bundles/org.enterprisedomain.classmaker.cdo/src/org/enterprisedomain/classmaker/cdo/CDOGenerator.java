@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.codegen.ecore.genmodel.GenDelegationKind;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.ecore.EPackage;
+import org.enterprisedomain.classmaker.Contribution;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.jobs.codegen.EcoreGenerator;
 
@@ -32,8 +33,11 @@ public class CDOGenerator extends EcoreGenerator {
 
 	protected void setupGenModel(IPath projectPath, GenModel ecoreGenModel, Collection<EPackage> ePackages) {
 		super.setupGenModel(projectPath, ecoreGenModel, ePackages);
-		ClassMakerPlugin.getClassMaker().getWorkspace().getContribution(projectPath.lastSegment()).getDependencies()
-				.add("org.eclipse.emf.cdo");
+		Contribution contribution = ClassMakerPlugin.getClassMaker().getWorkspace()
+				.getContribution(projectPath.lastSegment());
+		contribution.getDependencies().add("org.eclipse.emf.cdo");
+		if (contribution.getState().isEdit())
+			contribution.getDependencies().add("org.eclipse.emf.cdo.edit");
 		ecoreGenModel.setSuppressInterfaces(false);
 		ecoreGenModel.setFeatureDelegation(GenDelegationKind.REFLECTIVE_LITERAL);
 		ecoreGenModel.getModelPluginVariables().add("CDO=org.eclipse.emf.cdo"); //$NON-NLS-1$

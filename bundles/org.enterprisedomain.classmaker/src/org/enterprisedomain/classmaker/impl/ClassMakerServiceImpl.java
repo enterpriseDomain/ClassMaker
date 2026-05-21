@@ -18,6 +18,7 @@ package org.enterprisedomain.classmaker.impl;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URI;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +28,9 @@ import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.Semaphore;
 
+import javax.management.Notification;
+import javax.tools.Diagnostic;
+
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -34,13 +38,10 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicDiagnostic;
-import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
@@ -56,6 +57,7 @@ import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
 import org.eclipse.m2m.qvt.oml.ExecutionDiagnostic;
 import org.eclipse.m2m.qvt.oml.ModelExtent;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
+import org.eclipse.osgi.util.NLS;
 import org.enterprisedomain.classmaker.Blueprint;
 import org.enterprisedomain.classmaker.ClassMakerFactory;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
@@ -69,7 +71,6 @@ import org.enterprisedomain.classmaker.Workspace;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.util.ModelUtil;
 import org.enterprisedomain.classmaker.util.ResourceUtils;
-import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object
@@ -269,7 +270,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 				wait.acquire();
 			} catch (InterruptedException e) {
 			}
-			return contrib.getDomainModel().getGenerated();
+			return contrib.getDomainModel().getGeneratedEPackage();
 		} catch (CoreException e) {
 			ClassMakerPlugin.getInstance().getLog().log(e.getStatus());
 			throw e;
@@ -364,7 +365,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 		if (contribution == null) {
 			contribution = getWorkspace().getContribution(source.getDynamicModel(), true);
 			if (contribution != null) {
-				EObject existingModel = contribution.getDomainModel().getDynamic();
+				EObject existingModel = contribution.getDomainModel().getDynamicEPackage();
 				if (ModelUtil.eObjectsAreEqual(existingModel, source.getDynamicModel(), false)) {
 					Revision revision = null;
 					if (version.compareTo(contribution.getVersion()) < 0) {
@@ -374,13 +375,13 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 						contribution.checkout(revision.getVersion());
 					} else
 						revision = contribution.createRevision(monitor);
-					revision.getDomainModel().setDynamic(EcoreUtil.copy(target.getDynamicModel()));
+					revision.getDomainModel().setDynamicEPackage(EcoreUtil.copy(target.getDynamicModel()));
 				}
 			} else {
 				return null;
 			}
 		} else {
-			EObject existingModel = contribution.getDomainModel().getDynamic();
+			EObject existingModel = contribution.getDomainModel().getDynamicEPackage();
 			if (ModelUtil.eObjectsAreEqual(existingModel, source.getDynamicModel(), true)) {
 				Revision revision = contribution.getRevision();
 				if (version.compareTo(contribution.getVersion()) > 0) {
@@ -388,7 +389,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 					State state = revision.getState();
 					state.copyModel(contribution.getState());
 					revision.create(monitor);
-					String commitId = state.initialize(true);
+					String commitId = state.initialize();
 					contribution.checkout(revision.getVersion(), state.getTimestamp(), commitId);
 				} else if (version.compareTo(contribution.getVersion()) < 0) {
 					if (!contribution.getRevisions().containsKey(version))
@@ -396,30 +397,19 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 					revision = contribution.getRevisions().get(version);
 					contribution.checkout(revision.getVersion());
 				}
-				revision.getDomainModel().setDynamic(EcoreUtil.copy(target.getDynamicModel()));
+				revision.getDomainModel().setDynamicEPackage(EcoreUtil.copy(target.getDynamicModel()));
 			} else {
 				return null;
 			}
 		}
 		contribution.getDependencies().addAll(target.getDependencies());
-		final Semaphore wait = new Semaphore(0);
-		CompletionListener waitListener = new CompletionListenerImpl() {
-
-			@Override
-			public void completed(Project result) throws Exception {
-				wait.release();
-			}
-
-		};
-		target.getCompletionListeners().add(waitListener);
+		final Object lock = new Object();
 		for (CompletionListener listener : target.getCompletionListeners())
 			contribution.addCompletionListener(listener);
-		contribution.make(monitor);
-		try {
-			wait.acquire();
-		} catch (InterruptedException e) {
+		synchronized (lock) {
+			contribution.make(monitor);
 		}
-		return contribution.getDomainModel().getGenerated();
+		return contribution.getDomainModel().getGeneratedEPackage();
 	}
 
 	/**
@@ -668,6 +658,14 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 	 * @generated NOT
 	 */
 	public String computeProjectName(String packageName) {
+		if (packageName.endsWith(".edit"))
+			packageName = packageName.substring(0, packageName.lastIndexOf(".edit"));
+		if (packageName.isEmpty())
+			packageName = ".edit";
+		if (packageName.endsWith(".editor"))
+			packageName = packageName.substring(0, packageName.lastIndexOf(".editor"));
+		if (packageName.isEmpty())
+			packageName = ".editor";
 		return CodeGenUtil.safeName(packageName.toLowerCase());
 	}
 
@@ -686,6 +684,7 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 	 * @generated NOT
 	 */
 	public void initialize() {
+		ClassMakerPlugin.print("Initializing service");
 		initializing = true;
 		getWorkspace().setService(this);
 		ClassMakerService.Stages.contributeStages();
@@ -694,12 +693,16 @@ public class ClassMakerServiceImpl extends EObjectImpl implements ClassMakerServ
 			try {
 				Resource workspaceResource = WorkspaceImpl.RESOURCE_SET_EDEFAULT.getResource(uri, true);
 				try {
+					ClassMakerPlugin.print("Loading workspace resource");
 					workspaceResource.load(Collections.emptyMap());
 					if (!workspaceResource.getContents().isEmpty()) {
 						setWorkspace(EcoreUtil.copy((Workspace) workspaceResource.getContents().get(0)));
 						for (Project project : getWorkspace().getProjects()) {
-							if (project.eIsSet(ClassMakerPackage.Literals.PROJECT__STATE))
+							if (project.eIsSet(ClassMakerPackage.Literals.PROJECT__STATE)) {
+								ClassMakerPlugin.print(NLS.bind("Project {0} state {1} load", project.getName(),
+										project.getState().getTimestamp()));
 								project.getState().load(false, true);
+							}
 						}
 					} else
 						getWorkspace().initialize();

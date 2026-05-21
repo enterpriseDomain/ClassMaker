@@ -15,7 +15,8 @@
  */
 package org.enterprisedomain.classmaker;
 
-import org.eclipse.emf.common.notify.Notification;
+import javax.management.Notification;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**

@@ -15,15 +15,14 @@
  */
 package org.enterprisedomain.classmaker.impl;
 
-import org.eclipse.emf.codegen.util.CodeGenUtil;
+import javax.management.Notification;
+
 import org.eclipse.emf.common.EMFPlugin;
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
@@ -32,7 +31,6 @@ import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.Item;
 import org.enterprisedomain.classmaker.Models;
 import org.enterprisedomain.classmaker.Stage;
-import org.enterprisedomain.classmaker.State;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object
@@ -41,14 +39,14 @@ import org.enterprisedomain.classmaker.State;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link org.enterprisedomain.classmaker.impl.ModelsImpl#getDynamic
- * <em>Dynamic</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ModelsImpl#getGenerated
- * <em>Generated</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ModelsImpl#getGeneratedEdit
- * <em>Generated Edit</em>}</li>
- * <li>{@link org.enterprisedomain.classmaker.impl.ModelsImpl#getGeneratedEditor
- * <em>Generated Editor</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ModelsImpl#getDynamicEPackage
+ * <em>Dynamic EPackage</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ModelsImpl#getGeneratedEPackage
+ * <em>Generated EPackage</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ModelsImpl#getGeneratedEditPlugin
+ * <em>Generated Edit Plugin</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ModelsImpl#getGeneratedEditorPlugin
+ * <em>Generated Editor Plugin</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.ModelsImpl#getParent
  * <em>Parent</em>}</li>
  * </ul>
@@ -57,28 +55,94 @@ import org.enterprisedomain.classmaker.State;
  */
 public class ModelsImpl extends EObjectImpl implements Models {
 
+	/**
+	 * The cached value of the '{@link #getDynamicEPackage() <em>Dynamic
+	 * EPackage</em>}' containment reference. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @see #getDynamicEPackage()
+	 * @generated
+	 * @ordered
+	 */
+	protected EObject dynamicEPackage;
+
+	/**
+	 * The cached value of the '{@link #getGeneratedEPackage() <em>Generated
+	 * EPackage</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getGeneratedEPackage()
+	 * @generated
+	 * @ordered
+	 */
+	protected EObject generatedEPackage;
+
+	/**
+	 * The default value of the '{@link #getGeneratedEditPlugin() <em>Generated Edit
+	 * Plugin</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getGeneratedEditPlugin()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final EMFPlugin GENERATED_EDIT_PLUGIN_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getGeneratedEditPlugin() <em>Generated Edit
+	 * Plugin</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getGeneratedEditPlugin()
+	 * @generated
+	 * @ordered
+	 */
+	protected EMFPlugin generatedEditPlugin = GENERATED_EDIT_PLUGIN_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getGeneratedEditorPlugin() <em>Generated
+	 * Editor Plugin</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getGeneratedEditorPlugin()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final EMFPlugin GENERATED_EDITOR_PLUGIN_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getGeneratedEditorPlugin() <em>Generated
+	 * Editor Plugin</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getGeneratedEditorPlugin()
+	 * @generated
+	 * @ordered
+	 */
+	protected EMFPlugin generatedEditorPlugin = GENERATED_EDITOR_PLUGIN_EDEFAULT;
+
 	public class EPackageAdapter extends AdapterImpl {
 		@Override
 		public void notifyChanged(Notification msg) {
-			if (msg.getFeatureID(State.class) == EcorePackage.EPACKAGE__NS_PREFIX)
-				switch (msg.getEventType()) {
-				case Notification.SET:
-				case Notification.ADD:
-				case Notification.ADD_MANY:
-					capNsPrefix((EPackage) msg.getNotifier());
-					break;
-				}
+			// if (msg.getFeatureID(EPackage.class) == Notification.NO_FEATURE_ID
+			// && msg.getEventType() != Notification.REMOVING_ADAPTER)
+			//// System.out.println(msg.toString());
+			// switch (msg.getEventType()) {
+			// case Notification.SET:
+			// case Notification.ADD:
+			// case Notification.ADD_MANY:
+			// capNsPrefix((EPackage) msg.getNotifier());
+			// break;
+			// }
+			if (msg.getEventType() != Notification.REMOVING_ADAPTER)
+				System.out.println(msg);
 		}
 
-		private boolean setting = false;
-
-		private void capNsPrefix(EPackage ePackage) {
-			if (!setting && ePackage != null) {
-				setting = true;
-				ePackage.setNsPrefix(CodeGenUtil.capName(ePackage.getNsPrefix(), ((Item) eContainer()).getLocale()));
-				setting = false;
-			}
-		}
+		// private boolean setting = false;
+		//
+		// private void capNsPrefix(EPackage ePackage) {
+		// if (!setting && ePackage != null) {
+		// setting = true;
+		// ePackage.setNsPrefix(CodeGenUtil.capName(ePackage.getNsPrefix(), ((Item)
+		// eContainer()).getLocale()));
+		// setting = false;
+		// }
+		// }
 	}
 
 	public class StageAdapter extends AdapterImpl {
@@ -90,14 +154,18 @@ public class ModelsImpl extends EObjectImpl implements Models {
 			if (msg.getNotifier() instanceof Models && msg.getEventType() == Notification.SET) {
 				EObject eObject = null;
 				switch (msg.getFeatureID(Models.class)) {
-				case ClassMakerPackage.MODELS__DYNAMIC:
+				case ClassMakerPackage.MODELS__DYNAMIC_EPACKAGE:
 					eObject = (EObject) msg.getNewValue();
-					if (eObject != null && !getParent().getPhase().equals(Stage.LOADED)) {
+					if (eObject != null) {
 						getParent().setPhase(Stage.MODELED);
 					}
 					onDynamicEObject((EObject) msg.getOldValue(), eObject);
+					if (eObject instanceof EPackage) {
+						String modelName = ((EPackage) eObject).getNsPrefix();
+						getParent().setModelName(modelName);
+					}
 					break;
-				case ClassMakerPackage.MODELS__GENERATED:
+				case ClassMakerPackage.MODELS__GENERATED_EPACKAGE:
 					eObject = (EPackage) msg.getNewValue();
 					if (eObject != null) {
 						getParent().setPhase(Stage.LOADED);
@@ -114,66 +182,6 @@ public class ModelsImpl extends EObjectImpl implements Models {
 				newValue.eAdapters().add(adapter);
 		}
 	}
-
-	/**
-	 * The cached value of the '{@link #getDynamic() <em>Dynamic</em>}' containment
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #getDynamic()
-	 * @generated
-	 * @ordered
-	 */
-	protected EObject dynamic;
-
-	/**
-	 * The cached value of the '{@link #getGenerated() <em>Generated</em>}'
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #getGenerated()
-	 * @generated
-	 * @ordered
-	 */
-	protected EObject generated;
-
-	/**
-	 * The default value of the '{@link #getGeneratedEdit() <em>Generated
-	 * Edit</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #getGeneratedEdit()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final EMFPlugin GENERATED_EDIT_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getGeneratedEdit() <em>Generated Edit</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #getGeneratedEdit()
-	 * @generated
-	 * @ordered
-	 */
-	protected EMFPlugin generatedEdit = GENERATED_EDIT_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getGeneratedEditor() <em>Generated
-	 * Editor</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #getGeneratedEditor()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final EMFPlugin GENERATED_EDITOR_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getGeneratedEditor() <em>Generated
-	 * Editor</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #getGeneratedEditor()
-	 * @generated
-	 * @ordered
-	 */
-	protected EMFPlugin generatedEditor = GENERATED_EDITOR_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -201,8 +209,8 @@ public class ModelsImpl extends EObjectImpl implements Models {
 	 * @generated
 	 */
 	@Override
-	public EObject getDynamic() {
-		return dynamic;
+	public EObject getDynamicEPackage() {
+		return dynamicEPackage;
 	}
 
 	/**
@@ -210,12 +218,12 @@ public class ModelsImpl extends EObjectImpl implements Models {
 	 * 
 	 * @generated
 	 */
-	public NotificationChain basicSetDynamic(EObject newDynamic, NotificationChain msgs) {
-		EObject oldDynamic = dynamic;
-		dynamic = newDynamic;
+	public NotificationChain basicSetDynamicEPackage(EObject newDynamicEPackage, NotificationChain msgs) {
+		EObject oldDynamicEPackage = dynamicEPackage;
+		dynamicEPackage = newDynamicEPackage;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-					ClassMakerPackage.MODELS__DYNAMIC, oldDynamic, newDynamic);
+					ClassMakerPackage.MODELS__DYNAMIC_EPACKAGE, oldDynamicEPackage, newDynamicEPackage);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -230,21 +238,21 @@ public class ModelsImpl extends EObjectImpl implements Models {
 	 * @generated
 	 */
 	@Override
-	public void setDynamic(EObject newDynamic) {
-		if (newDynamic != dynamic) {
+	public void setDynamicEPackage(EObject newDynamicEPackage) {
+		if (newDynamicEPackage != dynamicEPackage) {
 			NotificationChain msgs = null;
-			if (dynamic != null)
-				msgs = ((InternalEObject) dynamic).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE - ClassMakerPackage.MODELS__DYNAMIC, null, msgs);
-			if (newDynamic != null)
-				msgs = ((InternalEObject) newDynamic).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE - ClassMakerPackage.MODELS__DYNAMIC, null, msgs);
-			msgs = basicSetDynamic(newDynamic, msgs);
+			if (dynamicEPackage != null)
+				msgs = ((InternalEObject) dynamicEPackage).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - ClassMakerPackage.MODELS__DYNAMIC_EPACKAGE, null, msgs);
+			if (newDynamicEPackage != null)
+				msgs = ((InternalEObject) newDynamicEPackage).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - ClassMakerPackage.MODELS__DYNAMIC_EPACKAGE, null, msgs);
+			msgs = basicSetDynamicEPackage(newDynamicEPackage, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.MODELS__DYNAMIC, newDynamic,
-					newDynamic));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.MODELS__DYNAMIC_EPACKAGE,
+					newDynamicEPackage, newDynamicEPackage));
 	}
 
 	/**
@@ -253,17 +261,17 @@ public class ModelsImpl extends EObjectImpl implements Models {
 	 * @generated
 	 */
 	@Override
-	public EObject getGenerated() {
-		if (generated != null && generated.eIsProxy()) {
-			InternalEObject oldGenerated = (InternalEObject) generated;
-			generated = eResolveProxy(oldGenerated);
-			if (generated != oldGenerated) {
+	public EObject getGeneratedEPackage() {
+		if (generatedEPackage != null && generatedEPackage.eIsProxy()) {
+			InternalEObject oldGeneratedEPackage = (InternalEObject) generatedEPackage;
+			generatedEPackage = eResolveProxy(oldGeneratedEPackage);
+			if (generatedEPackage != oldGeneratedEPackage) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassMakerPackage.MODELS__GENERATED,
-							oldGenerated, generated));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							ClassMakerPackage.MODELS__GENERATED_EPACKAGE, oldGeneratedEPackage, generatedEPackage));
 			}
 		}
-		return generated;
+		return generatedEPackage;
 	}
 
 	/**
@@ -271,8 +279,8 @@ public class ModelsImpl extends EObjectImpl implements Models {
 	 * 
 	 * @generated
 	 */
-	public EObject basicGetGenerated() {
-		return generated;
+	public EObject basicGetGeneratedEPackage() {
+		return generatedEPackage;
 	}
 
 	/**
@@ -281,12 +289,12 @@ public class ModelsImpl extends EObjectImpl implements Models {
 	 * @generated
 	 */
 	@Override
-	public void setGenerated(EObject newGenerated) {
-		EObject oldGenerated = generated;
-		generated = newGenerated;
+	public void setGeneratedEPackage(EObject newGeneratedEPackage) {
+		EObject oldGeneratedEPackage = generatedEPackage;
+		generatedEPackage = newGeneratedEPackage;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.MODELS__GENERATED, oldGenerated,
-					generated));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.MODELS__GENERATED_EPACKAGE,
+					oldGeneratedEPackage, generatedEPackage));
 	}
 
 	/**
@@ -295,8 +303,8 @@ public class ModelsImpl extends EObjectImpl implements Models {
 	 * @generated
 	 */
 	@Override
-	public EMFPlugin getGeneratedEdit() {
-		return generatedEdit;
+	public EMFPlugin getGeneratedEditPlugin() {
+		return generatedEditPlugin;
 	}
 
 	/**
@@ -305,12 +313,12 @@ public class ModelsImpl extends EObjectImpl implements Models {
 	 * @generated
 	 */
 	@Override
-	public void setGeneratedEdit(EMFPlugin newGeneratedEdit) {
-		EMFPlugin oldGeneratedEdit = generatedEdit;
-		generatedEdit = newGeneratedEdit;
+	public void setGeneratedEditPlugin(EMFPlugin newGeneratedEditPlugin) {
+		EMFPlugin oldGeneratedEditPlugin = generatedEditPlugin;
+		generatedEditPlugin = newGeneratedEditPlugin;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.MODELS__GENERATED_EDIT,
-					oldGeneratedEdit, generatedEdit));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.MODELS__GENERATED_EDIT_PLUGIN,
+					oldGeneratedEditPlugin, generatedEditPlugin));
 	}
 
 	/**
@@ -319,8 +327,8 @@ public class ModelsImpl extends EObjectImpl implements Models {
 	 * @generated
 	 */
 	@Override
-	public EMFPlugin getGeneratedEditor() {
-		return generatedEditor;
+	public EMFPlugin getGeneratedEditorPlugin() {
+		return generatedEditorPlugin;
 	}
 
 	/**
@@ -329,12 +337,12 @@ public class ModelsImpl extends EObjectImpl implements Models {
 	 * @generated
 	 */
 	@Override
-	public void setGeneratedEditor(EMFPlugin newGeneratedEditor) {
-		EMFPlugin oldGeneratedEditor = generatedEditor;
-		generatedEditor = newGeneratedEditor;
+	public void setGeneratedEditorPlugin(EMFPlugin newGeneratedEditorPlugin) {
+		EMFPlugin oldGeneratedEditorPlugin = generatedEditorPlugin;
+		generatedEditorPlugin = newGeneratedEditorPlugin;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.MODELS__GENERATED_EDITOR,
-					oldGeneratedEditor, generatedEditor));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.MODELS__GENERATED_EDITOR_PLUGIN,
+					oldGeneratedEditorPlugin, generatedEditorPlugin));
 	}
 
 	/**
@@ -408,8 +416,8 @@ public class ModelsImpl extends EObjectImpl implements Models {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case ClassMakerPackage.MODELS__DYNAMIC:
-			return basicSetDynamic(null, msgs);
+		case ClassMakerPackage.MODELS__DYNAMIC_EPACKAGE:
+			return basicSetDynamicEPackage(null, msgs);
 		case ClassMakerPackage.MODELS__PARENT:
 			return basicSetParent(null, msgs);
 		}
@@ -438,16 +446,16 @@ public class ModelsImpl extends EObjectImpl implements Models {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case ClassMakerPackage.MODELS__DYNAMIC:
-			return getDynamic();
-		case ClassMakerPackage.MODELS__GENERATED:
+		case ClassMakerPackage.MODELS__DYNAMIC_EPACKAGE:
+			return getDynamicEPackage();
+		case ClassMakerPackage.MODELS__GENERATED_EPACKAGE:
 			if (resolve)
-				return getGenerated();
-			return basicGetGenerated();
-		case ClassMakerPackage.MODELS__GENERATED_EDIT:
-			return getGeneratedEdit();
-		case ClassMakerPackage.MODELS__GENERATED_EDITOR:
-			return getGeneratedEditor();
+				return getGeneratedEPackage();
+			return basicGetGeneratedEPackage();
+		case ClassMakerPackage.MODELS__GENERATED_EDIT_PLUGIN:
+			return getGeneratedEditPlugin();
+		case ClassMakerPackage.MODELS__GENERATED_EDITOR_PLUGIN:
+			return getGeneratedEditorPlugin();
 		case ClassMakerPackage.MODELS__PARENT:
 			return getParent();
 		}
@@ -462,17 +470,17 @@ public class ModelsImpl extends EObjectImpl implements Models {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case ClassMakerPackage.MODELS__DYNAMIC:
-			setDynamic((EObject) newValue);
+		case ClassMakerPackage.MODELS__DYNAMIC_EPACKAGE:
+			setDynamicEPackage((EObject) newValue);
 			return;
-		case ClassMakerPackage.MODELS__GENERATED:
-			setGenerated((EObject) newValue);
+		case ClassMakerPackage.MODELS__GENERATED_EPACKAGE:
+			setGeneratedEPackage((EObject) newValue);
 			return;
-		case ClassMakerPackage.MODELS__GENERATED_EDIT:
-			setGeneratedEdit((EMFPlugin) newValue);
+		case ClassMakerPackage.MODELS__GENERATED_EDIT_PLUGIN:
+			setGeneratedEditPlugin((EMFPlugin) newValue);
 			return;
-		case ClassMakerPackage.MODELS__GENERATED_EDITOR:
-			setGeneratedEditor((EMFPlugin) newValue);
+		case ClassMakerPackage.MODELS__GENERATED_EDITOR_PLUGIN:
+			setGeneratedEditorPlugin((EMFPlugin) newValue);
 			return;
 		case ClassMakerPackage.MODELS__PARENT:
 			setParent((Item) newValue);
@@ -489,17 +497,17 @@ public class ModelsImpl extends EObjectImpl implements Models {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case ClassMakerPackage.MODELS__DYNAMIC:
-			setDynamic((EObject) null);
+		case ClassMakerPackage.MODELS__DYNAMIC_EPACKAGE:
+			setDynamicEPackage((EObject) null);
 			return;
-		case ClassMakerPackage.MODELS__GENERATED:
-			setGenerated((EObject) null);
+		case ClassMakerPackage.MODELS__GENERATED_EPACKAGE:
+			setGeneratedEPackage((EObject) null);
 			return;
-		case ClassMakerPackage.MODELS__GENERATED_EDIT:
-			setGeneratedEdit(GENERATED_EDIT_EDEFAULT);
+		case ClassMakerPackage.MODELS__GENERATED_EDIT_PLUGIN:
+			setGeneratedEditPlugin(GENERATED_EDIT_PLUGIN_EDEFAULT);
 			return;
-		case ClassMakerPackage.MODELS__GENERATED_EDITOR:
-			setGeneratedEditor(GENERATED_EDITOR_EDEFAULT);
+		case ClassMakerPackage.MODELS__GENERATED_EDITOR_PLUGIN:
+			setGeneratedEditorPlugin(GENERATED_EDITOR_PLUGIN_EDEFAULT);
 			return;
 		case ClassMakerPackage.MODELS__PARENT:
 			setParent((Item) null);
@@ -516,16 +524,16 @@ public class ModelsImpl extends EObjectImpl implements Models {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case ClassMakerPackage.MODELS__DYNAMIC:
-			return dynamic != null;
-		case ClassMakerPackage.MODELS__GENERATED:
-			return generated != null;
-		case ClassMakerPackage.MODELS__GENERATED_EDIT:
-			return GENERATED_EDIT_EDEFAULT == null ? generatedEdit != null
-					: !GENERATED_EDIT_EDEFAULT.equals(generatedEdit);
-		case ClassMakerPackage.MODELS__GENERATED_EDITOR:
-			return GENERATED_EDITOR_EDEFAULT == null ? generatedEditor != null
-					: !GENERATED_EDITOR_EDEFAULT.equals(generatedEditor);
+		case ClassMakerPackage.MODELS__DYNAMIC_EPACKAGE:
+			return dynamicEPackage != null;
+		case ClassMakerPackage.MODELS__GENERATED_EPACKAGE:
+			return generatedEPackage != null;
+		case ClassMakerPackage.MODELS__GENERATED_EDIT_PLUGIN:
+			return GENERATED_EDIT_PLUGIN_EDEFAULT == null ? generatedEditPlugin != null
+					: !GENERATED_EDIT_PLUGIN_EDEFAULT.equals(generatedEditPlugin);
+		case ClassMakerPackage.MODELS__GENERATED_EDITOR_PLUGIN:
+			return GENERATED_EDITOR_PLUGIN_EDEFAULT == null ? generatedEditorPlugin != null
+					: !GENERATED_EDITOR_PLUGIN_EDEFAULT.equals(generatedEditorPlugin);
 		case ClassMakerPackage.MODELS__PARENT:
 			return getParent() != null;
 		}
@@ -543,10 +551,10 @@ public class ModelsImpl extends EObjectImpl implements Models {
 			return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (generatedEdit: ");
-		result.append(generatedEdit);
-		result.append(", generatedEditor: ");
-		result.append(generatedEditor);
+		result.append(" (generatedEditPlugin: ");
+		result.append(generatedEditPlugin);
+		result.append(", generatedEditorPlugin: ");
+		result.append(generatedEditorPlugin);
 		result.append(')');
 		return result.toString();
 	}

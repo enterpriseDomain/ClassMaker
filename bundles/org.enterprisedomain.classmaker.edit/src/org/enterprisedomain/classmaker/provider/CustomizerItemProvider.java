@@ -65,6 +65,8 @@ public class CustomizerItemProvider extends ItemProviderAdapter implements IEdit
 			super.getPropertyDescriptors(object);
 
 			addRankPropertyDescriptor(object);
+			addExclusivePropertyDescriptor(object);
+			addStagePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -83,6 +85,37 @@ public class CustomizerItemProvider extends ItemProviderAdapter implements IEdit
 								"_UI_Customizer_type"),
 						ClassMakerPackage.Literals.CUSTOMIZER__RANK, true, false, false,
 						ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Exclusive feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected void addExclusivePropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Customizer_exclusive_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Customizer_exclusive_feature",
+								"_UI_Customizer_type"),
+						ClassMakerPackage.Literals.CUSTOMIZER__EXCLUSIVE, true, false, false,
+						ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Stage feature. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected void addStagePropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Customizer_stage_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Customizer_stage_feature",
+								"_UI_Customizer_type"),
+						ClassMakerPackage.Literals.CUSTOMIZER__STAGE, true, false, false, null, null, null));
 	}
 
 	/**
@@ -120,6 +153,8 @@ public class CustomizerItemProvider extends ItemProviderAdapter implements IEdit
 
 		switch (notification.getFeatureID(Customizer.class)) {
 		case ClassMakerPackage.CUSTOMIZER__RANK:
+		case ClassMakerPackage.CUSTOMIZER__EXCLUSIVE:
+		case ClassMakerPackage.CUSTOMIZER__STAGE:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		}

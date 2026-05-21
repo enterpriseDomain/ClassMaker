@@ -69,57 +69,57 @@ public class ModelsItemProvider extends ItemProviderAdapter implements IEditingD
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addGeneratedPropertyDescriptor(object);
-			addGeneratedEditPropertyDescriptor(object);
-			addGeneratedEditorPropertyDescriptor(object);
+			addGeneratedEPackagePropertyDescriptor(object);
+			addGeneratedEditPluginPropertyDescriptor(object);
+			addGeneratedEditorPluginPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Generated feature. <!--
+	 * This adds a property descriptor for the Generated EPackage feature. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	protected void addGeneratedPropertyDescriptor(Object object) {
+	protected void addGeneratedEPackagePropertyDescriptor(Object object) {
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_Models_generated_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_Models_generated_feature",
+						getResourceLocator(), getString("_UI_Models_generatedEPackage_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Models_generatedEPackage_feature",
 								"_UI_Models_type"),
-						ClassMakerPackage.Literals.MODELS__GENERATED, true, false, true, null, null, null));
+						ClassMakerPackage.Literals.MODELS__GENERATED_EPACKAGE, true, false, true, null, null, null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Generated Edit feature. <!--
+	 * This adds a property descriptor for the Generated Edit Plugin feature. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	protected void addGeneratedEditPropertyDescriptor(Object object) {
+	protected void addGeneratedEditPluginPropertyDescriptor(Object object) {
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_Models_generatedEdit_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_Models_generatedEdit_feature",
+						getResourceLocator(), getString("_UI_Models_generatedEditPlugin_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Models_generatedEditPlugin_feature",
 								"_UI_Models_type"),
-						ClassMakerPackage.Literals.MODELS__GENERATED_EDIT, true, false, true,
+						ClassMakerPackage.Literals.MODELS__GENERATED_EDIT_PLUGIN, true, false, false,
 						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Generated Editor feature. <!--
+	 * This adds a property descriptor for the Generated Editor Plugin feature. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	protected void addGeneratedEditorPropertyDescriptor(Object object) {
+	protected void addGeneratedEditorPluginPropertyDescriptor(Object object) {
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_Models_generatedEditor_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_Models_generatedEditor_feature",
+						getResourceLocator(), getString("_UI_Models_generatedEditorPlugin_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Models_generatedEditorPlugin_feature",
 								"_UI_Models_type"),
-						ClassMakerPackage.Literals.MODELS__GENERATED_EDITOR, true, false, true,
+						ClassMakerPackage.Literals.MODELS__GENERATED_EDITOR_PLUGIN, true, false, false,
 						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
@@ -136,7 +136,7 @@ public class ModelsItemProvider extends ItemProviderAdapter implements IEditingD
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(ClassMakerPackage.Literals.MODELS__DYNAMIC);
+			childrenFeatures.add(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE);
 		}
 		return childrenFeatures;
 	}
@@ -173,7 +173,7 @@ public class ModelsItemProvider extends ItemProviderAdapter implements IEditingD
 	 */
 	@Override
 	public String getText(Object object) {
-		EMFPlugin labelValue = ((Models) object).getGeneratedEdit();
+		EMFPlugin labelValue = ((Models) object).getGeneratedEditPlugin();
 		String label = labelValue == null ? null : labelValue.toString();
 		return label == null || label.length() == 0 ? getString("_UI_Models_type")
 				: getString("_UI_Models_type") + " " + label;
@@ -191,7 +191,11 @@ public class ModelsItemProvider extends ItemProviderAdapter implements IEditingD
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Models.class)) {
-		case ClassMakerPackage.MODELS__DYNAMIC:
+		case ClassMakerPackage.MODELS__GENERATED_EDIT_PLUGIN:
+		case ClassMakerPackage.MODELS__GENERATED_EDITOR_PLUGIN:
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+			return;
+		case ClassMakerPackage.MODELS__DYNAMIC_EPACKAGE:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
@@ -209,107 +213,110 @@ public class ModelsItemProvider extends ItemProviderAdapter implements IEditingD
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
 				ClassMakerFactory.eINSTANCE.createProject()));
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
 				ClassMakerFactory.eINSTANCE.createContribution()));
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
 				ClassMakerFactory.eINSTANCE.createRevision()));
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
 				ClassMakerFactory.eINSTANCE.createState()));
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
 				ClassMakerFactory.eINSTANCE.createStrategy()));
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
 				ClassMakerFactory.eINSTANCE.createWorkspace()));
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
 				ClassMakerFactory.eINSTANCE.create(ClassMakerPackage.Literals.LONG_TO_STATE_MAP_ENTRY)));
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
 				ClassMakerFactory.eINSTANCE.create(ClassMakerPackage.Literals.VERSION_TO_REVISION_MAP_ENTRY)));
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
 				ClassMakerFactory.eINSTANCE.createCustomizer()));
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
 				ClassMakerFactory.eINSTANCE.createStageQualifier()));
 
-		newChildDescriptors
-				.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC, ClassMakerFactory.eINSTANCE
+		newChildDescriptors.add(
+				createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE, ClassMakerFactory.eINSTANCE
 						.create(ClassMakerPackage.Literals.STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY)));
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
+				ClassMakerFactory.eINSTANCE.create(ClassMakerPackage.Literals.STAGE_QUALIFIER_TO_WORKERS_MAP_ENTRY)));
+
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
 				ClassMakerFactory.eINSTANCE.createModels()));
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
 				ClassMakerFactory.eINSTANCE.createSCMRegistry()));
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
 				ClassMakerFactory.eINSTANCE.createResourceChangeListener()));
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
 				ClassMakerFactory.eINSTANCE.createResourceAdapter()));
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
 				ClassMakerFactory.eINSTANCE.createClassMakerService()));
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
 				ClassMakerFactory.eINSTANCE.createBlueprint()));
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
 				ClassMakerFactory.eINSTANCE.createCompletionNotificationAdapter()));
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
 				ClassMakerFactory.eINSTANCE.createSelectRevealHandler()));
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
 				EcoreFactory.eINSTANCE.createEAttribute()));
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
 				EcoreFactory.eINSTANCE.createEAnnotation()));
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
 				EcoreFactory.eINSTANCE.createEClass()));
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
 				EcoreFactory.eINSTANCE.createEDataType()));
 
-		newChildDescriptors.add(
-				createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC, EcoreFactory.eINSTANCE.createEEnum()));
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
+				EcoreFactory.eINSTANCE.createEEnum()));
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
 				EcoreFactory.eINSTANCE.createEEnumLiteral()));
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
 				EcoreFactory.eINSTANCE.createEFactory()));
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
 				EcoreFactory.eINSTANCE.createEObject()));
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
 				EcoreFactory.eINSTANCE.createEOperation()));
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
 				EcoreFactory.eINSTANCE.createEPackage()));
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
 				EcoreFactory.eINSTANCE.createEParameter()));
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
 				EcoreFactory.eINSTANCE.createEReference()));
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
 				EcoreFactory.eINSTANCE.create(EcorePackage.Literals.ESTRING_TO_STRING_MAP_ENTRY)));
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
 				EcoreFactory.eINSTANCE.createEGenericType()));
 
-		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC,
+		newChildDescriptors.add(createChildParameter(ClassMakerPackage.Literals.MODELS__DYNAMIC_EPACKAGE,
 				EcoreFactory.eINSTANCE.createETypeParameter()));
 	}
 

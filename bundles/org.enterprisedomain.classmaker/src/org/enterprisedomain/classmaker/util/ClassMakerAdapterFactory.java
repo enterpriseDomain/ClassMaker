@@ -19,12 +19,14 @@ import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Future;
 
+import javax.management.Notification;
+
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.enterprisedomain.classmaker.Blueprint;
@@ -48,7 +50,6 @@ import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.Strategy;
 import org.enterprisedomain.classmaker.Workspace;
 import org.enterprisedomain.classmaker.jobs.Worker;
-import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides
@@ -183,6 +184,11 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseStageQualifierToCustomizerMapEntry(Map.Entry<StageQualifier, Customizer> object) {
 			return createStageQualifierToCustomizerMapEntryAdapter();
+		}
+
+		@Override
+		public Adapter caseStageQualifierToWorkersMapEntry(Map.Entry<StageQualifier, EList<Worker>> object) {
+			return createStageQualifierToWorkersMapEntryAdapter();
 		}
 
 		@Override
@@ -516,6 +522,21 @@ public class ClassMakerAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createStageQualifierToCustomizerMapEntryAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry
+	 * <em>Stage Qualifier To Workers Map Entry</em>}'. <!-- begin-user-doc --> This
+	 * default implementation returns null so that we can easily ignore cases; it's
+	 * useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see java.util.Map.Entry
+	 * @generated
+	 */
+	public Adapter createStageQualifierToWorkersMapEntryAdapter() {
 		return null;
 	}
 

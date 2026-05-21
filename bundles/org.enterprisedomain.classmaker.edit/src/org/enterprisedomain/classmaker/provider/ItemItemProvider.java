@@ -72,6 +72,7 @@ public class ItemItemProvider extends ItemProviderAdapter implements IEditingDom
 			addParentPropertyDescriptor(object);
 			addLocalePropertyDescriptor(object);
 			addProjectPropertyDescriptor(object);
+			addResourcePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -162,6 +163,20 @@ public class ItemItemProvider extends ItemProviderAdapter implements IEditingDom
 						getResourceLocator(), getString("_UI_Item_project_feature"),
 						getString("_UI_PropertyDescriptor_description", "_UI_Item_project_feature", "_UI_Item_type"),
 						ClassMakerPackage.Literals.ITEM__PROJECT, true, false, true, null, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Resource feature. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected void addResourcePropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Item_resource_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Item_resource_feature", "_UI_Item_type"),
+						ClassMakerPackage.Literals.ITEM__RESOURCE, false, false, false, null, null, null));
 	}
 
 	/**

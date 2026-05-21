@@ -22,9 +22,6 @@ import org.eclipse.core.runtime.ISafeRunnable;
 import org.eclipse.core.runtime.SafeRunner;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.enterprisedomain.classmaker.ClassMakerService;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
@@ -35,6 +32,8 @@ import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
 
 public class Activator extends AbstractUIPlugin {
+	
+	public static final String PLUGIN_ID = "org.enterprisedomain.workbench"; //$NON-NLS-1$
 
 	private static BundleContext context;
 	private static Activator plugin;
@@ -76,27 +75,6 @@ public class Activator extends AbstractUIPlugin {
 						runnable.run(ClassMakerPlugin.getProgressMonitor());
 					}
 				});
-				// Display display = Display.getCurrent() != null ? Display.getCurrent() :
-				// Display.getDefault();
-//				display.asyncExec(new Runnable() {
-//		
-//					@Override
-//					public void run() {
-//						try {
-//							IWorkbenchWindow workbenchWindow = ((IWorkbench) PlatformUI.getWorkbench())
-//									.getWorkbenchWindows()[0];
-//		
-//							if (workbenchWindow != null) {
-//								workbenchWindow.run(false, true, runnable);
-//							}
-//						} catch (InvocationTargetException e) {
-//							Activator.log(e.getTargetException());
-//						} catch (InterruptedException e) {
-//							return;
-//						}
-//					}
-//				});
-
 			}
 		});
 		ClassMakerPlugin.setClientRunWrapper(new IRunWrapper() {

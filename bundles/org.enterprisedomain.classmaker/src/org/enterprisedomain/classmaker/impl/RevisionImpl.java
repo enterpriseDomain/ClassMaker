@@ -15,13 +15,15 @@
  */
 package org.enterprisedomain.classmaker.impl;
 
+import java.sql.Ref;
 import java.util.Calendar;
 import java.util.TimeZone;
+
+import javax.management.Notification;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
@@ -37,8 +39,8 @@ import org.eclipse.jgit.api.LogCommand;
 import org.eclipse.jgit.api.errors.JGitInternalException;
 import org.eclipse.jgit.api.errors.NoHeadException;
 import org.eclipse.jgit.api.errors.RefNotFoundException;
-import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.revwalk.RevCommit;
+import org.eclipse.osgi.util.NLS;
 import org.enterprisedomain.classmaker.ClassMakerFactory;
 import org.enterprisedomain.classmaker.ClassMakerPackage;
 import org.enterprisedomain.classmaker.Contribution;
@@ -52,7 +54,6 @@ import org.enterprisedomain.classmaker.StageQualifier;
 import org.enterprisedomain.classmaker.State;
 import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 import org.enterprisedomain.classmaker.util.ListUtil;
-import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -320,8 +321,11 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	}
 
 	@Override
-	public String initialize(boolean commit) {
-		super.initialize(commit);
+	public String initialize() {
+		super.initialize();
+		ClassMakerPlugin
+				.print(NLS.bind("Revision {0} of {1} is initializing...", getVersion(), getProject().getName()));
+		String commitId = getState().getCommitId();
 		@SuppressWarnings("unchecked")
 		SCMOperator<Git> operator = (SCMOperator<Git>) getProject().getWorkspace().getSCMRegistry()
 				.get(getProject().getProjectName());
@@ -333,31 +337,26 @@ public class RevisionImpl extends ItemImpl implements Revision {
 			if (branch != null) {
 				log.add(branch.getObjectId());
 				Iterable<RevCommit> commits = log.call();
+				long timestamp = -1;
 				for (RevCommit c : commits) {
-					long timestamp = operator.decodeTimestamp(c.getShortMessage());
-					if (timestamp == -1) {
-						timestamp = operator.decodeTimestamp(getVersion().getQualifier());
-						if (timestamp == -1)
-							continue;
+					if (extractTimestamp(operator, c) > timestamp) {
+						timestamp = extractTimestamp(operator, c);
+						commitId = c.getId().toString();
 					}
-					State state = null;
-					if (getStateHistory().containsKey(timestamp))
-						state = (State) getStateHistory().get((Object) timestamp);
-					else {
-						state = ClassMakerFactory.eINSTANCE.createState();
-						state.setTimestamp(timestamp);
-						getStateHistory().put(timestamp, state);
-						state.getProject().setVersion(getVersion());
-					}
-					String commitId = c.getId().toString();
-					state.getCommitIds().add(commitId);
-					state.setCommitId(commitId);
-					setTimestamp(timestamp);
-					state.initialize(commit);
 				}
-				if (getStateHistory().isEmpty())
-					return null;
+				State state = null;
+				if (getStateHistory().containsKey(timestamp))
+					state = (State) getStateHistory().get((Object) timestamp);
+				else {
+					state = ClassMakerFactory.eINSTANCE.createState();
+					state.setTimestamp(timestamp);
+					getStateHistory().put(timestamp, state);
+				}
+				state.setCommitId(commitId);
+				return state.initialize();
 			}
+			if (getStateHistory().isEmpty())
+				return null;
 		} catch (NoHeadException e) {
 			return null;
 		} catch (Exception e) {
@@ -370,7 +369,15 @@ public class RevisionImpl extends ItemImpl implements Revision {
 				ClassMakerPlugin.getInstance().getLog().log(ClassMakerPlugin.createErrorStatus(e));
 			}
 		}
-		return getState().getCommitId();
+		return commitId;
+	}
+
+	private long extractTimestamp(SCMOperator<Git> operator, RevCommit c) {
+		long timestamp = operator.decodeTimestamp(c.getShortMessage());
+		if (timestamp == -1) {
+			timestamp = operator.decodeTimestamp(String.valueOf(Long.valueOf(getVersion().getQualifier()) / 1000));
+		}
+		return timestamp;
 	}
 
 	/**
@@ -448,7 +455,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	 */
 	public void checkout(String commitId) {
 		for (State state : getStateHistory().values())
-			if (state.getCommitIds().contains(commitId))
+			if (state.getCommitId().equals(commitId))
 				checkout(state.getTimestamp(), commitId);
 	}
 
@@ -458,12 +465,25 @@ public class RevisionImpl extends ItemImpl implements Revision {
 	 * @generated NOT
 	 */
 	public State newState() {
+		return newState((long) (Calendar.getInstance(Revision.VERSION_QUALIFIER_FORMAT.getTimeZone()).getTimeInMillis()
+				/ 1000));
+
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public State newState(long timestamp) {
 		State newState = ClassMakerFactory.eINSTANCE.createState();
-		newState.setTimestamp(
-				(long) (Calendar.getInstance(Revision.VERSION_QUALIFIER_FORMAT.getTimeZone()).getTimeInMillis()
-						/ 1000));
+		newState.setTimestamp(timestamp);
+		if (isStateSet()) {
+			newState.setEdit(getState().isEdit());
+			newState.setEditor(getState().isEditor());
+		}
 		getStateHistory().put(newState.getTimestamp(), newState);
-		newState.getProject().setVersion(getVersion());
 		return newState;
 	}
 
@@ -480,7 +500,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 
 	@Override
 	public void load(boolean create, boolean loadOnDemand) throws CoreException {
-		initialize(false);
+		initialize();
 		if (create && isStateSet()) {
 			@SuppressWarnings("unchecked")
 			SCMOperator<Git> operator = (SCMOperator<Git>) getProject().getWorkspace().getSCMRegistry()
@@ -493,7 +513,7 @@ public class RevisionImpl extends ItemImpl implements Revision {
 					if (create) {
 						create(ClassMakerPlugin.getProgressMonitor());
 					}
-					getState().initialize(false);
+					getState().initialize();
 				}
 			} catch (Exception e) {
 				throw new CoreException(ClassMakerPlugin.createErrorStatus(e));

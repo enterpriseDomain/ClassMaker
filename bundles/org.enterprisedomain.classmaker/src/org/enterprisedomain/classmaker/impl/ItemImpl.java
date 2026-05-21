@@ -16,11 +16,17 @@ package org.enterprisedomain.classmaker.impl;
 
 import java.util.Locale;
 
+import javax.management.Notification;
+
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IProjectDescription;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.EMFPlugin;
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -28,6 +34,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.enterprisedomain.classmaker.ClassMakerFactory;
@@ -38,7 +45,7 @@ import org.enterprisedomain.classmaker.Models;
 import org.enterprisedomain.classmaker.Project;
 import org.enterprisedomain.classmaker.Stage;
 import org.enterprisedomain.classmaker.StageQualifier;
-import org.osgi.framework.Version;
+import org.enterprisedomain.classmaker.core.ClassMakerPlugin;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -63,11 +70,25 @@ import org.osgi.framework.Version;
  * <em>Locale</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getProject
  * <em>Project</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.impl.ItemImpl#getResource
+ * <em>Resource</em>}</li>
  * </ul>
  *
  * @generated
  */
 public abstract class ItemImpl extends EObjectImpl implements Item {
+
+	public class ModelNamePropagationAdapter extends AdapterImpl {
+
+		@Override
+		public void notifyChanged(Notification msg) {
+			if (msg.getFeatureID(Item.class) == ClassMakerPackage.ITEM__MODEL_NAME
+					&& msg.getEventType() == Notification.SET && msg.getNewStringValue() != null)
+				getParent().setModelName(msg.getNewStringValue());
+		}
+
+	}
+
 	/**
 	 * The default value of the '{@link #getModelName() <em>Model Name</em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -162,6 +183,16 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	protected Locale locale;
 
 	/**
+	 * The cached value of the '{@link #getResource() <em>Resource</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getResource()
+	 * @generated
+	 * @ordered
+	 */
+	protected Resource resource;
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
@@ -169,6 +200,7 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	protected ItemImpl() {
 		super();
 		ClassMakerFactory.eINSTANCE.createModels().setParent(this);
+		eAdapters().add(new ModelNamePropagationAdapter());
 	}
 
 	/**
@@ -234,7 +266,7 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 			if (language == null) {
 				return Locale.getDefault();
 			} else {
-				locale = new Locale(language);
+				locale = Locale.forLanguageTag(getLanguage());
 			}
 		}
 		return locale;
@@ -280,6 +312,30 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	public void setProject(Project newProject) {
 		// not supported in base class
 		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public Resource getResource() {
+		return resource;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public void setResource(Resource newResource) {
+		Resource oldResource = resource;
+		resource = newResource;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassMakerPackage.ITEM__RESOURCE, oldResource,
+					resource));
 	}
 
 	/**
@@ -428,7 +484,7 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 	 * 
 	 * @generated NOT
 	 */
-	public String initialize(boolean commit) {
+	public String initialize() {
 		if (!eIsSet(ClassMakerPackage.Literals.ITEM__PARENT))
 			return null;
 		copyModel(getParent());
@@ -448,19 +504,45 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 		EMFPlugin eEditObject = null;
 		EMFPlugin eEditorObject = null;
 		if (from.getDomainModel() != null) {
-			eObject = from.getDomainModel().getDynamic();
-			eGenObject = from.getDomainModel().getGenerated();
-			eEditObject = from.getDomainModel().getGeneratedEdit();
-			eEditorObject = from.getDomainModel().getGeneratedEditor();
+			eObject = from.getDomainModel().getDynamicEPackage();
+			eGenObject = from.getDomainModel().getGeneratedEPackage();
+			eEditObject = from.getDomainModel().getGeneratedEditPlugin();
+			eEditorObject = from.getDomainModel().getGeneratedEditorPlugin();
 		}
-		if (eObject != null)
-			getDomainModel().setDynamic(EcoreUtil.copy(eObject));
+		if (eObject != null) {
+			EObject copy = EcoreUtil.copy(eObject);
+			getDomainModel().setDynamicEPackage(copy);
+		}
 		if (eGenObject != null)
-			getDomainModel().setGenerated(EcoreUtil.copy(eGenObject));
+			getDomainModel().setGeneratedEPackage(EcoreUtil.copy(eGenObject));
 		if (eEditObject != null)
-			getDomainModel().setGeneratedEdit(eEditObject);
+			getDomainModel().setGeneratedEditPlugin(eEditObject);
 		if (eEditorObject != null)
-			getDomainModel().setGeneratedEditor(eEditorObject);
+			getDomainModel().setGeneratedEditorPlugin(eEditorObject);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public void renameProject(String oldProjectName, String newProjectName) {
+		if (newProjectName.equals(oldProjectName))
+			return;
+		if (!oldProjectName.isBlank())
+			try {
+				IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(oldProjectName);
+				if (project.exists()) {
+					IProjectDescription desc = project.getDescription();
+					desc.setName(newProjectName);
+					desc.setLocation(project.getLocation().removeLastSegments(1).append(newProjectName));
+					project.move(desc, IResource.FORCE, ClassMakerPlugin.getProgressMonitor());
+				}
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
+
 	}
 
 	/**
@@ -527,6 +609,8 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 			if (resolve)
 				return getProject();
 			return basicGetProject();
+		case ClassMakerPackage.ITEM__RESOURCE:
+			return getResource();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -562,6 +646,9 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 			return;
 		case ClassMakerPackage.ITEM__PROJECT:
 			setProject((Project) newValue);
+			return;
+		case ClassMakerPackage.ITEM__RESOURCE:
+			setResource((Resource) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -599,6 +686,9 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 		case ClassMakerPackage.ITEM__PROJECT:
 			setProject((Project) null);
 			return;
+		case ClassMakerPackage.ITEM__RESOURCE:
+			setResource((Resource) null);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -627,6 +717,8 @@ public abstract class ItemImpl extends EObjectImpl implements Item {
 			return LOCALE_EDEFAULT == null ? locale != null : !LOCALE_EDEFAULT.equals(locale);
 		case ClassMakerPackage.ITEM__PROJECT:
 			return basicGetProject() != null;
+		case ClassMakerPackage.ITEM__RESOURCE:
+			return resource != null;
 		}
 		return super.eIsSet(featureID);
 	}

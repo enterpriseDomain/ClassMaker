@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object
@@ -48,6 +49,8 @@ import org.eclipse.emf.ecore.EObject;
  * <em>Locale</em>}</li>
  * <li>{@link org.enterprisedomain.classmaker.Item#getProject
  * <em>Project</em>}</li>
+ * <li>{@link org.enterprisedomain.classmaker.Item#getResource
+ * <em>Resource</em>}</li>
  * </ul>
  *
  * @see org.enterprisedomain.classmaker.ClassMakerPackage#getItem()
@@ -249,7 +252,7 @@ public interface Item extends EObject {
 	 * @model
 	 * @generated
 	 */
-	String initialize(boolean commit);
+	String initialize();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -258,6 +261,14 @@ public interface Item extends EObject {
 	 * @generated
 	 */
 	void copyModel(Item from);
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model
+	 * @generated
+	 */
+	void renameProject(String oldProjectName, String newProjectName);
 
 	/**
 	 * Returns the value of the '<em><b>Locale</b></em>' attribute. The default
@@ -305,6 +316,29 @@ public interface Item extends EObject {
 	 * @generated
 	 */
 	void setProject(Project value);
+
+	/**
+	 * Returns the value of the '<em><b>Resource</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Resource</em>' reference.
+	 * @see org.enterprisedomain.classmaker.ClassMakerPackage#getItem_Resource()
+	 * @model type="org.enterprisedomain.classmaker.Resource" resolveProxies="false"
+	 *        changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	Resource getResource();
+
+	/**
+	 * Sets the value of the
+	 * '{@link org.enterprisedomain.classmaker.Item#getResource <em>Resource</em>}'
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value the new value of the '<em>Resource</em>' reference.
+	 * @see #getResource()
+	 * @generated
+	 */
+	void setResource(Resource value);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

@@ -15,9 +15,6 @@
  */
 package org.enterprisedomain.classmaker.impl;
 
-import static org.enterprisedomain.classmaker.ClassMakerPackage.ADAPTER;
-import static org.enterprisedomain.classmaker.ClassMakerPackage.RESOURCE;
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.Locale;
 import java.util.Map;
@@ -26,6 +23,8 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Future;
 import java.util.concurrent.Semaphore;
 
+import javax.management.Notification;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -33,7 +32,6 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -72,7 +70,6 @@ import org.enterprisedomain.classmaker.Strategy;
 import org.enterprisedomain.classmaker.Workspace;
 import org.enterprisedomain.classmaker.jobs.Worker;
 import org.enterprisedomain.classmaker.util.ClassMakerValidator;
-import org.osgi.framework.Version;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Package</b>. <!--
@@ -198,6 +195,13 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * 
 	 * @generated
 	 */
+	private EClass stageQualifierToWorkersMapEntryEClass = null;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	private EClass modelsEClass = null;
 
 	/**
@@ -304,6 +308,13 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	private EEnum stageEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private EDataType classLoaderEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -673,28 +684,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
-	public EReference getState_Resource() {
-		return (EReference) stateEClass.getEStructuralFeatures().get(10);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public EAttribute getState_CommitIds() {
-		return (EAttribute) stateEClass.getEStructuralFeatures().get(11);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
 	public EAttribute getState_CommitId() {
-		return (EAttribute) stateEClass.getEStructuralFeatures().get(12);
+		return (EAttribute) stateEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -704,7 +695,17 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EReference getState_StateCustomizers() {
-		return (EReference) stateEClass.getEStructuralFeatures().get(13);
+		return (EReference) stateEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public EReference getState_NonExclusiveStateCustomizers() {
+		return (EReference) stateEClass.getEStructuralFeatures().get(12);
 	}
 
 	/**
@@ -714,7 +715,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EAttribute getState_ProjectName() {
-		return (EAttribute) stateEClass.getEStructuralFeatures().get(14);
+		return (EAttribute) stateEClass.getEStructuralFeatures().get(13);
 	}
 
 	/**
@@ -724,7 +725,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EAttribute getState_Making() {
-		return (EAttribute) stateEClass.getEStructuralFeatures().get(15);
+		return (EAttribute) stateEClass.getEStructuralFeatures().get(14);
 	}
 
 	/**
@@ -734,7 +735,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EAttribute getState_Edit() {
-		return (EAttribute) stateEClass.getEStructuralFeatures().get(16);
+		return (EAttribute) stateEClass.getEStructuralFeatures().get(15);
 	}
 
 	/**
@@ -744,7 +745,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EAttribute getState_Editor() {
-		return (EAttribute) stateEClass.getEStructuralFeatures().get(17);
+		return (EAttribute) stateEClass.getEStructuralFeatures().get(16);
 	}
 
 	/**
@@ -754,7 +755,17 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EReference getState_Strategy() {
-		return (EReference) stateEClass.getEStructuralFeatures().get(18);
+		return (EReference) stateEClass.getEStructuralFeatures().get(17);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public EAttribute getState_BasePackage() {
+		return (EAttribute) stateEClass.getEStructuralFeatures().get(18);
 	}
 
 	/**
@@ -773,7 +784,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
-	public EReference getStrategy_Generators() {
+	public EReference getStrategy_State() {
 		return (EReference) strategyEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -783,38 +794,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
-	public EReference getStrategy_Exporters() {
+	public EReference getStrategy_Workers() {
 		return (EReference) strategyEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public EReference getStrategy_Installers() {
-		return (EReference) strategyEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public EReference getStrategy_Loaders() {
-		return (EReference) strategyEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public EReference getStrategy_State() {
-		return (EReference) strategyEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -913,6 +894,16 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
+	public EReference getItem_Resource() {
+		return (EReference) itemEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
 	public EClass getAdapter() {
 		return adapterEClass;
 	}
@@ -963,7 +954,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
-	public EReference getWorkspace_Service() {
+	public EReference getWorkspace_NonExclusiveCustomizers() {
 		return (EReference) workspaceEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -973,8 +964,28 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
-	public EReference getWorkspace_SCMRegistry() {
+	public EReference getWorkspace_Service() {
 		return (EReference) workspaceEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public EReference getWorkspace_SCMRegistry() {
+		return (EReference) workspaceEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public EReference getWorkspace_ExcludedEPackages() {
+		return (EReference) workspaceEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -1103,6 +1114,26 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
+	public EAttribute getCustomizer_Exclusive() {
+		return (EAttribute) customizerEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public EReference getCustomizer_Stage() {
+		return (EReference) customizerEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
 	public EClass getStageQualifier() {
 		return stageQualifierEClass;
 	}
@@ -1163,6 +1194,36 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
+	public EClass getStageQualifierToWorkersMapEntry() {
+		return stageQualifierToWorkersMapEntryEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public EReference getStageQualifierToWorkersMapEntry_Key() {
+		return (EReference) stageQualifierToWorkersMapEntryEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public EReference getStageQualifierToWorkersMapEntry_Value() {
+		return (EReference) stageQualifierToWorkersMapEntryEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
 	public EClass getModels() {
 		return modelsEClass;
 	}
@@ -1173,7 +1234,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
-	public EReference getModels_Dynamic() {
+	public EReference getModels_DynamicEPackage() {
 		return (EReference) modelsEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1183,7 +1244,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
-	public EReference getModels_Generated() {
+	public EReference getModels_GeneratedEPackage() {
 		return (EReference) modelsEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -1193,7 +1254,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
-	public EAttribute getModels_GeneratedEdit() {
+	public EAttribute getModels_GeneratedEditPlugin() {
 		return (EAttribute) modelsEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -1203,7 +1264,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
-	public EAttribute getModels_GeneratedEditor() {
+	public EAttribute getModels_GeneratedEditorPlugin() {
 		return (EAttribute) modelsEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -1263,7 +1324,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
-	public EAttribute getProject_Children() {
+	public EAttribute getProject_Dirty() {
 		return (EAttribute) projectEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -1273,18 +1334,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
-	public EAttribute getProject_Dirty() {
-		return (EAttribute) projectEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
 	public EReference getProject_Workspace() {
-		return (EReference) projectEClass.getEStructuralFeatures().get(4);
+		return (EReference) projectEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1294,7 +1345,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EAttribute getProject_ResourcePath() {
-		return (EAttribute) projectEClass.getEStructuralFeatures().get(5);
+		return (EAttribute) projectEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1304,7 +1355,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EAttribute getProject_NeedCompletionNotification() {
-		return (EAttribute) projectEClass.getEStructuralFeatures().get(6);
+		return (EAttribute) projectEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -1314,7 +1365,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EReference getProject_CompletionNotificationAdapter() {
-		return (EReference) projectEClass.getEStructuralFeatures().get(7);
+		return (EReference) projectEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -1324,7 +1375,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EReference getProject_ResourceReloadListener() {
-		return (EReference) projectEClass.getEStructuralFeatures().get(8);
+		return (EReference) projectEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -1334,7 +1385,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EAttribute getProject_SavingResource() {
-		return (EAttribute) projectEClass.getEStructuralFeatures().get(9);
+		return (EAttribute) projectEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -1344,7 +1395,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EReference getProject_Revision() {
-		return (EReference) projectEClass.getEStructuralFeatures().get(10);
+		return (EReference) projectEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -1354,7 +1405,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EReference getProject_Revisions() {
-		return (EReference) projectEClass.getEStructuralFeatures().get(11);
+		return (EReference) projectEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -1364,7 +1415,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EAttribute getProject_ProjectVersion() {
-		return (EAttribute) projectEClass.getEStructuralFeatures().get(12);
+		return (EAttribute) projectEClass.getEStructuralFeatures().get(11);
 	}
 
 	/**
@@ -1374,7 +1425,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EReference getProject_SelectRevealHandler() {
-		return (EReference) projectEClass.getEStructuralFeatures().get(13);
+		return (EReference) projectEClass.getEStructuralFeatures().get(12);
 	}
 
 	/**
@@ -1384,7 +1435,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EAttribute getProject_Version() {
-		return (EAttribute) projectEClass.getEStructuralFeatures().get(14);
+		return (EAttribute) projectEClass.getEStructuralFeatures().get(13);
 	}
 
 	/**
@@ -1394,7 +1445,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EReference getProject_State() {
-		return (EReference) projectEClass.getEStructuralFeatures().get(15);
+		return (EReference) projectEClass.getEStructuralFeatures().get(14);
 	}
 
 	/**
@@ -1404,7 +1455,17 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 */
 	@Override
 	public EReference getProject_ModelResourceAdapter() {
-		return (EReference) projectEClass.getEStructuralFeatures().get(16);
+		return (EReference) projectEClass.getEStructuralFeatures().get(15);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public EAttribute getProject_ClassLoader() {
+		return (EAttribute) projectEClass.getEStructuralFeatures().get(16);
 	}
 
 	/**
@@ -1693,6 +1754,16 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 	 * @generated
 	 */
 	@Override
+	public EDataType getClassLoader() {
+		return classLoaderEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
 	public EDataType getProperties() {
 		return propertiesEDataType;
 	}
@@ -1839,22 +1910,19 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		createEAttribute(stateEClass, STATE__EDIT_DEPLOYABLE_UNIT_NAME);
 		createEAttribute(stateEClass, STATE__EDITOR_DEPLOYABLE_UNIT_NAME);
 		createEAttribute(stateEClass, STATE__JOB_FAMILY);
-		createEReference(stateEClass, STATE__RESOURCE);
-		createEAttribute(stateEClass, STATE__COMMIT_IDS);
 		createEAttribute(stateEClass, STATE__COMMIT_ID);
 		createEReference(stateEClass, STATE__STATE_CUSTOMIZERS);
+		createEReference(stateEClass, STATE__NON_EXCLUSIVE_STATE_CUSTOMIZERS);
 		createEAttribute(stateEClass, STATE__PROJECT_NAME);
 		createEAttribute(stateEClass, STATE__MAKING);
 		createEAttribute(stateEClass, STATE__EDIT);
 		createEAttribute(stateEClass, STATE__EDITOR);
 		createEReference(stateEClass, STATE__STRATEGY);
+		createEAttribute(stateEClass, STATE__BASE_PACKAGE);
 
 		strategyEClass = createEClass(STRATEGY);
-		createEReference(strategyEClass, STRATEGY__GENERATORS);
-		createEReference(strategyEClass, STRATEGY__EXPORTERS);
-		createEReference(strategyEClass, STRATEGY__INSTALLERS);
-		createEReference(strategyEClass, STRATEGY__LOADERS);
 		createEReference(strategyEClass, STRATEGY__STATE);
+		createEReference(strategyEClass, STRATEGY__WORKERS);
 
 		itemEClass = createEClass(ITEM);
 		createEAttribute(itemEClass, ITEM__MODEL_NAME);
@@ -1865,6 +1933,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		createEReference(itemEClass, ITEM__PARENT);
 		createEAttribute(itemEClass, ITEM__LOCALE);
 		createEReference(itemEClass, ITEM__PROJECT);
+		createEReference(itemEClass, ITEM__RESOURCE);
 
 		adapterEClass = createEClass(ADAPTER);
 
@@ -1872,8 +1941,10 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		createEReference(workspaceEClass, WORKSPACE__PROJECTS);
 		createEAttribute(workspaceEClass, WORKSPACE__RESOURCE_SET);
 		createEReference(workspaceEClass, WORKSPACE__CUSTOMIZERS);
+		createEReference(workspaceEClass, WORKSPACE__NON_EXCLUSIVE_CUSTOMIZERS);
 		createEReference(workspaceEClass, WORKSPACE__SERVICE);
 		createEReference(workspaceEClass, WORKSPACE__SCM_REGISTRY);
+		createEReference(workspaceEClass, WORKSPACE__EXCLUDED_EPACKAGES);
 
 		longToStateMapEntryEClass = createEClass(LONG_TO_STATE_MAP_ENTRY);
 		createEAttribute(longToStateMapEntryEClass, LONG_TO_STATE_MAP_ENTRY__KEY);
@@ -1893,6 +1964,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 		customizerEClass = createEClass(CUSTOMIZER);
 		createEAttribute(customizerEClass, CUSTOMIZER__RANK);
+		createEAttribute(customizerEClass, CUSTOMIZER__EXCLUSIVE);
+		createEReference(customizerEClass, CUSTOMIZER__STAGE);
 
 		stageQualifierEClass = createEClass(STAGE_QUALIFIER);
 		createEAttribute(stageQualifierEClass, STAGE_QUALIFIER__STAGE);
@@ -1902,11 +1975,15 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		createEReference(stageQualifierToCustomizerMapEntryEClass, STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY__KEY);
 		createEReference(stageQualifierToCustomizerMapEntryEClass, STAGE_QUALIFIER_TO_CUSTOMIZER_MAP_ENTRY__VALUE);
 
+		stageQualifierToWorkersMapEntryEClass = createEClass(STAGE_QUALIFIER_TO_WORKERS_MAP_ENTRY);
+		createEReference(stageQualifierToWorkersMapEntryEClass, STAGE_QUALIFIER_TO_WORKERS_MAP_ENTRY__KEY);
+		createEReference(stageQualifierToWorkersMapEntryEClass, STAGE_QUALIFIER_TO_WORKERS_MAP_ENTRY__VALUE);
+
 		modelsEClass = createEClass(MODELS);
-		createEReference(modelsEClass, MODELS__DYNAMIC);
-		createEReference(modelsEClass, MODELS__GENERATED);
-		createEAttribute(modelsEClass, MODELS__GENERATED_EDIT);
-		createEAttribute(modelsEClass, MODELS__GENERATED_EDITOR);
+		createEReference(modelsEClass, MODELS__DYNAMIC_EPACKAGE);
+		createEReference(modelsEClass, MODELS__GENERATED_EPACKAGE);
+		createEAttribute(modelsEClass, MODELS__GENERATED_EDIT_PLUGIN);
+		createEAttribute(modelsEClass, MODELS__GENERATED_EDITOR_PLUGIN);
 		createEReference(modelsEClass, MODELS__PARENT);
 
 		scmOperatorEClass = createEClass(SCM_OPERATOR);
@@ -1918,7 +1995,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		projectEClass = createEClass(PROJECT);
 		createEAttribute(projectEClass, PROJECT__NAME);
 		createEAttribute(projectEClass, PROJECT__PROJECT_NAME);
-		createEAttribute(projectEClass, PROJECT__CHILDREN);
 		createEAttribute(projectEClass, PROJECT__DIRTY);
 		createEReference(projectEClass, PROJECT__WORKSPACE);
 		createEAttribute(projectEClass, PROJECT__RESOURCE_PATH);
@@ -1933,6 +2009,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		createEAttribute(projectEClass, PROJECT__VERSION);
 		createEReference(projectEClass, PROJECT__STATE);
 		createEReference(projectEClass, PROJECT__MODEL_RESOURCE_ADAPTER);
+		createEAttribute(projectEClass, PROJECT__CLASS_LOADER);
 
 		resourceEClass = createEClass(RESOURCE);
 
@@ -1971,6 +2048,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		stageEEnum = createEEnum(STAGE);
 
 		// Create data types
+		classLoaderEDataType = createEDataType(CLASS_LOADER);
 		propertiesEDataType = createEDataType(PROPERTIES);
 		iProgressMonitorEDataType = createEDataType(IPROGRESS_MONITOR);
 		osGiVersionEDataType = createEDataType(OS_GI_VERSION);
@@ -2076,10 +2154,10 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		op = addEOperation(revisionEClass, null, "checkout", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getELong(), "timestamp", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(revisionEClass, null, "checkout", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "commitId", 0, 1, IS_UNIQUE, IS_ORDERED);
-
 		addEOperation(revisionEClass, this.getState(), "newState", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(revisionEClass, this.getState(), "newState", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getELong(), "timestamp", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(revisionEClass, null, "delete", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -2120,16 +2198,14 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 				IS_DERIVED, IS_ORDERED);
 		initEAttribute(getState_JobFamily(), ecorePackage.getEString(), "jobFamily", null, 0, 1, State.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getState_Resource(), this.getResource(), null, "resource", null, 0, 1, State.class, IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEAttribute(getState_CommitIds(), ecorePackage.getEString(), "commitIds", null, 0, -1, State.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getState_CommitId(), ecorePackage.getEString(), "commitId", null, 0, 1, State.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getState_StateCustomizers(), this.getStageQualifierToCustomizerMapEntry(), null,
 				"stateCustomizers", null, 0, -1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getState_NonExclusiveStateCustomizers(), this.getStageQualifierToCustomizerMapEntry(), null,
+				"nonExclusiveStateCustomizers", null, 0, -1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getState_ProjectName(), ecorePackage.getEString(), "projectName", null, 0, 1, State.class,
 				IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getState_Making(), ecorePackage.getEBoolean(), "making", "false", 0, 1, State.class,
@@ -2141,6 +2217,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEReference(getState_Strategy(), this.getStrategy(), this.getStrategy_State(), "strategy", null, 0, 1,
 				State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getState_BasePackage(), ecorePackage.getEString(), "basePackage", null, 0, 1, State.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(stateEClass, null, "setProjectVersion", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -2171,29 +2249,12 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 		initEClass(strategyEClass, Strategy.class, "Strategy", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getStrategy_Generators(), this.getWorker(), null, "generators", null, 0, -1, Strategy.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getStrategy_Exporters(), this.getWorker(), null, "exporters", null, 0, -1, Strategy.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getStrategy_Installers(), this.getWorker(), null, "installers", null, 0, -1, Strategy.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getStrategy_Loaders(), this.getWorker(), null, "loaders", null, 0, -1, Strategy.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStrategy_State(), this.getState(), this.getState_Strategy(), "state", null, 0, 1,
 				Strategy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		addEOperation(strategyEClass, this.getWorker(), "createGenerator", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(strategyEClass, this.getWorker(), "createExporter", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(strategyEClass, this.getWorker(), "createInstaller", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(strategyEClass, this.getWorker(), "createModelLoader", 0, 1, IS_UNIQUE, IS_ORDERED);
+		initEReference(getStrategy_Workers(), this.getStageQualifierToWorkersMapEntry(), null, "workers", null, 0, -1,
+				Strategy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(strategyEClass, this.getWorker(), "getReturnWorker", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -2203,6 +2264,10 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 
 		op = addEOperation(strategyEClass, null, "configuteBuildJobs", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(strategyEClass, this.getWorker(), "get", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getStage(), "stage", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "step", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(itemEClass, Item.class, "Item", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getItem_ModelName(), ecorePackage.getEString(), "modelName", null, 0, 1, Item.class,
@@ -2225,6 +2290,9 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEReference(getItem_Project(), this.getProject(), null, "project", null, 0, 1, Item.class, IS_TRANSIENT,
 				IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED,
 				IS_ORDERED);
+		initEReference(getItem_Resource(), this.getResource(), null, "resource", null, 0, 1, Item.class, IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
 
 		op = addEOperation(itemEClass, null, "load", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEBoolean(), "create", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -2239,11 +2307,14 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEException(op, this.getCoreException());
 
-		op = addEOperation(itemEClass, ecorePackage.getEString(), "initialize", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEBoolean(), "commit", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(itemEClass, ecorePackage.getEString(), "initialize", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(itemEClass, null, "copyModel", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getItem(), "from", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(itemEClass, null, "renameProject", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "oldProjectName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "newProjectName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(adapterEClass, Adapter.class, "Adapter", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 
@@ -2258,6 +2329,9 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEReference(getWorkspace_Customizers(), this.getStageQualifierToCustomizerMapEntry(), null, "customizers",
 				null, 0, -1, Workspace.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getWorkspace_NonExclusiveCustomizers(), this.getStageQualifierToCustomizerMapEntry(), null,
+				"nonExclusiveCustomizers", null, 0, -1, Workspace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getWorkspace_Service(), this.getClassMakerService(), this.getClassMakerService_Workspace(),
 				"service", null, 0, 1, Workspace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
 				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2267,6 +2341,9 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEReference(getWorkspace_SCMRegistry(), g1, null, "SCMRegistry", null, 0, 1, Workspace.class, !IS_TRANSIENT,
 				!IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
+		initEReference(getWorkspace_ExcludedEPackages(), ecorePackage.getEPackage(), null, "excludedEPackages", null, 0,
+				-1, Workspace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(workspaceEClass, null, "initialize", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -2360,9 +2437,23 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 				IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCustomizer_Rank(), ecorePackage.getEInt(), "rank", null, 0, 1, Customizer.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCustomizer_Exclusive(), ecorePackage.getEBoolean(), "exclusive", "true", 0, 1,
+				Customizer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEReference(getCustomizer_Stage(), this.getStageQualifier(), null, "stage", null, 0, 1, Customizer.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(customizerEClass, ecorePackage.getEJavaObject(), "customize", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEJavaObject(), "args", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(customizerEClass, ecorePackage.getEBoolean(), "isNextAfter", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEJavaClass());
+		g2 = createEGenericType();
+		g1.getETypeArguments().add(g2);
+		EGenericType g3 = createEGenericType(this.getCustomizer());
+		g2.setEUpperBound(g3);
+		addEParameter(op, g1, "customizerClass", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(stageQualifierEClass, StageQualifier.class, "StageQualifier", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
@@ -2380,17 +2471,28 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 				Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(stageQualifierToWorkersMapEntryEClass, Map.Entry.class, "StageQualifierToWorkersMapEntry",
+				!IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getStageQualifierToWorkersMapEntry_Key(), this.getStageQualifier(), null, "key", null, 0, 1,
+				Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStageQualifierToWorkersMapEntry_Value(), this.getWorker(), null, "value", null, 0, -1,
+				Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(modelsEClass, Models.class, "Models", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getModels_Dynamic(), ecorePackage.getEObject(), null, "dynamic", null, 0, 1, Models.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getModels_Generated(), ecorePackage.getEObject(), null, "generated", null, 0, 1, Models.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getModels_GeneratedEdit(), this.getEMFPlugin(), "generatedEdit", null, 0, 1, Models.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getModels_GeneratedEditor(), this.getEMFPlugin(), "generatedEditor", null, 0, 1, Models.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModels_DynamicEPackage(), ecorePackage.getEObject(), null, "dynamicEPackage", null, 0, 1,
+				Models.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModels_GeneratedEPackage(), ecorePackage.getEObject(), null, "generatedEPackage", null, 0, 1,
+				Models.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getModels_GeneratedEditPlugin(), this.getEMFPlugin(), "generatedEditPlugin", null, 0, 1,
+				Models.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEAttribute(getModels_GeneratedEditorPlugin(), this.getEMFPlugin(), "generatedEditorPlugin", null, 0, 1,
+				Models.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
 		initEReference(getModels_Parent(), this.getItem(), this.getItem_DomainModel(), "parent", null, 0, 1,
 				Models.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2494,8 +2596,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getProject_ProjectName(), ecorePackage.getEString(), "projectName", "", 0, 1, Project.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getProject_Children(), ecorePackage.getEJavaObject(), "children", null, 0, -1, Project.class,
-				IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getProject_Dirty(), ecorePackage.getEBoolean(), "dirty", null, 0, 1, Project.class, IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getProject_Workspace(), this.getWorkspace(), this.getWorkspace_Projects(), "workspace", null, 0,
@@ -2535,6 +2635,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		initEReference(getProject_ModelResourceAdapter(), this.getResourceAdapter(), this.getResourceAdapter_Project(),
 				"modelResourceAdapter", null, 0, 1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE,
 				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProject_ClassLoader(), this.getClassLoader(), "classLoader", null, 0, 1, Project.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(projectEClass, null, "create", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -2563,8 +2665,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEException(op, this.getCoreException());
 
-		op = addEOperation(projectEClass, ecorePackage.getEString(), "initialize", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEBoolean(), "commit", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(projectEClass, ecorePackage.getEString(), "initialize", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(projectEClass, null, "addCompletionListener", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getCompletionListener(), "resultListener", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -2620,16 +2721,6 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		op = addEOperation(projectEClass, null, "checkout", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getOSGiVersion(), "version", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getELong(), "timestamp", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "commitId", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(projectEClass, null, "checkout", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getELong(), "timestamp", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(projectEClass, null, "checkout", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getELong(), "timestamp", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "commitId", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(projectEClass, null, "checkout", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "commitId", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(projectEClass, null, "initAdapters", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -2732,7 +2823,7 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		g1 = createEGenericType(this.getFuture());
 		g2 = createEGenericType();
 		g1.getETypeArguments().add(g2);
-		EGenericType g3 = createEGenericType(ecorePackage.getEObject());
+		g3 = createEGenericType(ecorePackage.getEObject());
 		g2.setEUpperBound(g3);
 		initEOperation(op, g1);
 
@@ -2925,6 +3016,8 @@ public class ClassMakerPackageImpl extends EPackageImpl implements ClassMakerPac
 		addEEnumLiteral(stageEEnum, Stage.LOADED);
 
 		// Initialize data types
+		initEDataType(classLoaderEDataType, ClassLoader.class, "ClassLoader", IS_SERIALIZABLE,
+				!IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(propertiesEDataType, Properties.class, "Properties", IS_SERIALIZABLE,
 				!IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(iProgressMonitorEDataType, IProgressMonitor.class, "IProgressMonitor", IS_SERIALIZABLE,
